@@ -1,0 +1,427 @@
+[
+  {
+    "order": 1888,
+    "id": "local-asymptotic-normality-contiguity-and-efficiency",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "LAN, Contiguity and Efficiency",
+    "companion": "local-asymptotic-normality-contiguity-and-efficiency-examples",
+    "requires": [
+      "likelihood-asymptotics-wald-score-and-likelihood-ratio",
+      "minimax-lower-bounds-and-information-theoretic-methods",
+      "central-limit-theorems",
+      "inner-product-spaces-and-orthogonality"
+    ],
+    "items": [
+      {
+        "id": "def-contiguous-sequences-of-measures",
+        "kind": "definition",
+        "title": "Contiguous sequences of probability measures",
+        "deps": [
+          "def-probability-measure"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $(\\mathcal X,\\mathcal A)$ be one measurable space and let $P_n,Q_n$ be\nprobability measures on it ([[def-probability-measure]]). The sequence\n$(Q_n)$ is **contiguous with respect to** $(P_n)$, written $Q_n\\triangleleft\nP_n$, if for every sequence $A_n\\in\\mathcal A$,\n$$P_n(A_n)\\longrightarrow0\\quad\\Longrightarrow\\quad Q_n(A_n)\\longrightarrow0.$$\nThe sequences are **mutually contiguous**, written $Q_n\\triangleleft\\triangleright\nP_n$, if both $Q_n\\triangleleft P_n$ and $P_n\\triangleleft Q_n$.\n\nContiguity is a relation between sequences of laws, not absolute continuity at\neach finite $n$. It says that events negligible under one sequence remain\nnegligible under the other in the indicated direction."
+      },
+      {
+        "id": "lem-boundary-of-convex-set-is-lebesgue-null",
+        "kind": "lemma",
+        "title": "The boundary of a convex set is Lebesgue null",
+        "deps": [
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-euclidean-inner-product",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "def-geometric-simplex-spanned-by-affinely-independent-vertices",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "cor-finite-dimensional-subspaces-are-closed",
+          "prop-measure-of-a-set-difference",
+          "prop-measure-monotonicity",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-heine-borel-rn",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume countable choice. For every convex set $C\\subseteq\\mathbb R^d$, its\ntopological boundary $\\partial C=\\overline C\\setminus C^\\circ$ has\n$d$-dimensional Lebesgue measure zero. If $C$ has empty interior, then $C$\nitself is contained in a proper affine subspace and is Lebesgue null."
+      },
+      {
+        "id": "def-lan-experiment",
+        "kind": "definition",
+        "title": "Local asymptotic normality for local experiments",
+        "deps": [
+          "def-contiguous-sequences-of-measures",
+          "def-convergence-in-distribution-of-random-elements",
+          "def-multivariate-normal-law",
+          "def-total-variation-distance-for-probability-laws"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $P_{n,h}$ be probability laws on a common measurable space for each\ninteger $n\\ge1$ and local parameter $h\\in\\mathbb R^d$, where $d<\\infty$ and\n$P_{n,0}$ is the base law. Suppose that for every fixed $h$ we are supplied a\nnonnegative measurable function $L_{n,h}$ with\n$$\\int L_{n,h}\\,dP_{n,0}=1.$$\nIt defines an absolutely continuous proxy\n$$\\bar P_{n,h}(A):=\\int_A L_{n,h}\\,dP_{n,0}.$$\nThe actual local law is allowed to have a singular part; the approximation\ncondition below is what connects it to this proxy.\n\nThe experiments are **locally asymptotically normal (LAN)** at $h=0$ with\ninformation matrix $K$ and central sequence $\\Delta_n$ if $K$ is a symmetric\npositive semidefinite $d\\times d$ matrix, $\\Delta_n$ is an $\\mathbb R^d$-valued\nstatistic,\n$$\\Delta_n\\Rightarrow N_d(0,K)\\quad\\text{under }P_{n,0},$$\nand for every fixed $h\\in\\mathbb R^d$,\n$$\\|P_{n,h}-\\bar P_{n,h}\\|_{\\rm TV}\\to0,\\qquad \\log L_{n,h}=h^T\\Delta_n-\\tfrac12h^TKh+o_{P_{n,0}}(1),$$\nwhere $\\|\\cdot\\|_{\\rm TV}$ is the event-supremum total variation distance\n([[def-total-variation-distance-for-probability-laws]]) and\n$o_{P_{n,0}}(1)$ means convergence to zero in $P_{n,0}$-probability. We set\n$\\log0=-\\infty$; the finite-valued expansion entails\n$P_{n,0}(L_{n,h}=0)\\to0$. Convergence in distribution is as in\n[[def-convergence-in-distribution-of-random-elements]], and $N_d(0,K)$ allows\nsingular $K$ ([[def-multivariate-normal-law]]).\n\nIf $P_{n,h}=\\bar P_{n,h}$, this is the usual dominated LAN comparison. The\nproxy formulation also covers QMD paths whose local alternatives are not\nabsolutely continuous with respect to the base law, provided the singular\nproduct mass tends to zero in total variation. This definition is pointwise\nin each fixed $h$; it does not assert uniformity over bounded sets of $h$."
+      },
+      {
+        "id": "thm-brunn-minkowski-for-compact-convex-sets",
+        "kind": "theorem",
+        "title": "Brunn–Minkowski inequality for compact convex sets",
+        "deps": [
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-euclidean-inner-product",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "prop-measure-monotonicity",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-weighted-am-gm-real",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-ftc-first-part",
+          "thm-derivative-of-an-inverse",
+          "thm-heine-borel-rn",
+          "def-countable-choice",
+          "lem-boundary-of-convex-set-is-lebesgue-null"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume countable choice. Let $d\\ge1$ and let $A,B\\subseteq\\mathbb R^d$ be\nnonempty compact convex sets. With $A+B=\\{a+b:a\\in A,b\\in B\\}$ and\n$\\lambda_d$ denoting Lebesgue measure,\n$$\\lambda_d(A+B)^{1/d}\\ge \\lambda_d(A)^{1/d}+\\lambda_d(B)^{1/d}.$$\nZero-volume and lower-dimensional sets are included."
+      },
+      {
+        "id": "thm-mean-one-likelihood-ratio-limit-implies-contiguity",
+        "kind": "theorem",
+        "title": "A mean-one likelihood-ratio limit implies contiguity",
+        "deps": [
+          "def-contiguous-sequences-of-measures",
+          "def-convergence-in-distribution-of-random-elements"
+        ],
+        "dependency_level": 1,
+        "statement": "For each $n$, let $P_n,Q_n$ be probability measures on one measurable space,\nand let $L_n\\ge0$ satisfy $Q_n(A)=\\int_A L_n\\,dP_n$ for every measurable\n$A$. Suppose $E_{P_n}L_n=1$, $L_n\\Rightarrow L$ under $P_n$, $L\\ge0$, and\n$E L=1$. Then $(Q_n)$ is contiguous with respect to $(P_n)$."
+      },
+      {
+        "id": "def-regular-estimator-under-local-alternatives",
+        "kind": "definition",
+        "title": "Regular estimator under local alternatives",
+        "deps": [
+          "def-lan-experiment",
+          "def-convergence-in-distribution-of-random-elements"
+        ],
+        "dependency_level": 2,
+        "statement": "In a local experiment $\\{P_{n,h}:h\\in\\mathbb R^d\\}$ at $h=0$\n([[def-lan-experiment]]), let $T_n$ be an $\\mathbb R^d$-valued statistic.\nIt is **regular at zero with limit law $W$** if, for every fixed\n$h\\in\\mathbb R^d$,\n$$T_n-h\\Rightarrow W\\quad\\text{under }P_{n,h},$$\nwhere the same probability law $W$ works for all $h$. In a parametric model\nwith true parameter $\\theta_0$, this is the definition for\n$T_n=\\sqrt n(\\widehat\\theta_n-\\theta_0)$ and local laws at\n$\\theta_0+h/\\sqrt n$; equivalently the centered error\n$\\sqrt n(\\widehat\\theta_n-\\theta_0-h/\\sqrt n)$ has a limit independent of\nthe fixed local displacement $h$."
+      },
+      {
+        "id": "lem-compact-uniform-lan-posterior-approximation",
+        "kind": "lemma",
+        "title": "Compact-uniform LAN approximates compact-prior posteriors",
+        "deps": [
+          "def-lan-experiment",
+          "def-convergence-in-distribution-of-random-elements",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-measurability-of-integration-against-a-kernel",
+          "cor-markov-inequality-for-random-variables",
+          "thm-continuous-mapping-theorem",
+          "def-total-variation-distance-for-probability-laws",
+          "def-axiom-of-choice",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "cor-weakly-convergent-sequences-are-tight",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume AC.\n\nLet $H\\subset\\mathbb R^d$ be compact, let $\\pi$ be a probability measure on\n$H$, and let $P_{n,0}$ be base laws. Suppose $L_n(h,x)$ is jointly measurable\nin $(h,x)$, nonnegative, and satisfies\n$\\int L_n(h,x)P_{n,0}(dx)=1$ for every $h\\in H$. Let\n$\\Delta_n\\Rightarrow Z\\sim N_d(0,K)$ under $P_{n,0}$, where $K$ is positive\nsemidefinite, and put\n$$g_h(z)=\\exp(h^Tz-\\tfrac12h^TKh).$$\nAssume the random variable\n$$a_n(x):=\\sup_{h\\in H}|L_n(h,x)-g_h(\\Delta_n(x))|$$\nis measurable and $E_{P_{n,0}}a_n\\to0$. Let the prior-predictive law be\n$M_n(dx)=m_n(x)P_{n,0}(dx)$ with\n$m_n(x)=\\int_HL_n(h,x)\\pi(dh)$, and define posteriors\n$$\\Pi_n(dh\\mid x)=\\frac{L_n(h,x)\\pi(dh)}{m_n(x)},\\qquad \\Pi^G(dh\\mid z)=\\frac{g_h(z)\\pi(dh)}{m(z)},\\quad m(z)=\\int_Hg_h(z)\\pi(dh),$$\nwhere an arbitrary probability measure is assigned if a denominator is zero.\nThen\n$$E_{M_n}\\int_H\\left| \\frac{L_n(h,X)}{m_n(X)}- \\frac{g_h(\\Delta_n(X))}{m(\\Delta_n(X))} \\right|\\pi(dh)\\longrightarrow0.$$\nIn particular the posterior laws converge in expected total variation,\nbecause their event-probability differences are bounded by this $L^1(\\pi)$\ndistance. The convention for total variation is\n[[def-total-variation-distance-for-probability-laws]].\n\nThis lemma assumes an $L^1$ uniform likelihood-field approximation. Pointwise\nLAN alone does not supply that hypothesis."
+      },
+      {
+        "id": "lem-gaussian-centering-for-bounded-symmetric-quasiconvex-loss",
+        "kind": "lemma",
+        "title": "A centered Gaussian minimizes bounded symmetric quasi-convex loss",
+        "deps": [
+          "thm-brunn-minkowski-for-compact-convex-sets",
+          "lem-boundary-of-convex-set-is-lebesgue-null",
+          "def-multivariate-normal-law",
+          "def-euclidean-inner-product",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-heine-borel-rn",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume AC. Let $X\\sim N_d(m,\\Sigma)$ with positive-definite covariance\n$\\Sigma$. Let $L:\\mathbb R^d\\to[0,M]$ be Borel measurable and symmetric,\n$L(-x)=L(x)$, and quasi-convex, meaning each sublevel set\n$\\{x:L(x)\\le t\\}$ is convex. Then for every $a\\in\\mathbb R^d$,\n$$E L(X-a)\\ge E L(X-m).$$\nThus the Gaussian center $m$ minimizes expected loss. The result includes\nquasi-convex losses whose sublevel sets are not closed."
+      },
+      {
+        "id": "thm-le-cam-third-lemma",
+        "kind": "theorem",
+        "title": "Le Cam's third lemma for a Gaussian likelihood-ratio limit",
+        "deps": [
+          "def-contiguous-sequences-of-measures",
+          "thm-mean-one-likelihood-ratio-limit-implies-contiguity",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "def-axiom-of-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-convergence-in-distribution-of-random-elements",
+          "thm-dominated-convergence",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume AC.\n\nLet $P_n$ be probability measures and let $Q_n=L_nP_n$, where $L_n\\ge0$ and\n$E_{P_n}L_n=1$. Let $T_n$ take values in $\\mathbb R^k$. Suppose under $P_n$\nthat $(T_n,L_n)\\Rightarrow(T,e^Z)$, where $Z$ is normal with mean\n$-\\sigma^2/2$ and variance $\\sigma^2$; the joint law of $(T,Z)$ need not be\nGaussian. Then under $Q_n$, $T_n$ converges in distribution to the probability\nlaw determined by\n$$E[f(T^{(Q)})]=E[e^Zf(T)]$$\nfor every bounded continuous $f$. In particular, $Q_n$ is contiguous with\nrespect to $P_n$. If $(T,Z)$ is jointly Gaussian with\n$T\\sim N_k(\\mu,\\Sigma)$ and $\\operatorname{Cov}(T,Z)=\\tau$, this tilted\nlaw is $N_k(\\mu+\\tau,\\Sigma)$, including singular $\\Sigma$."
+      },
+      {
+        "id": "lem-bowl-shaped-loss-has-centered-lipschitz-minorants",
+        "kind": "lemma",
+        "title": "Bounded bowl-shaped losses have Gaussian-centered Lipschitz minorants",
+        "statement": "Assume AC. Let $L:\\mathbb R^d\\to[0,M]$ be Borel measurable, symmetric and quasi-convex, with $M>0$. For integers $N\\ge2$ and $m\\ge1$, put $\\delta=M/N$, $C_k=\\overline{\\{x:L(x)\\le k\\delta\\}}$ and\n$$g_{N,m}(x)=\\delta\\sum_{k=1}^{N-1}\\min(1,m\\,d(x,C_k)).$$\nFor $C_k=\\varnothing$ the corresponding summand is defined to be one, and for $C_k=\\mathbb R^d$ it is zero. Then $0\\le g_{N,m}\\le L$, and $g_{N,m}$ is bounded and Lipschitz. For every nondegenerate Gaussian $H\\sim N_d(b,S)$,\n$$\\inf_a E g_{N,m}(a-H)=E g_{N,m}(H-b),\\qquad \\lim_{N\\to\\infty}\\lim_{m\\to\\infty}E g_{N,m}(H-b)=E L(H-b).$$\nEach summand is symmetric and quasi-convex; no quasi-convexity of their sum is asserted.",
+        "deps": [
+          "lem-distance-to-set-is-lipschitz",
+          "def-metric-bounded-diameter",
+          "def-infimum",
+          "thm-infimum-property",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "def-euclidean-inner-product",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "lem-convex-set-and-closure-have-same-interior-and-boundary",
+          "thm-metric-sequential-closure",
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "lem-boundary-of-convex-set-is-lebesgue-null",
+          "lem-gaussian-centering-for-bounded-symmetric-quasiconvex-loss",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-dominated-convergence",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-qmd-score-centered-and-finite-information",
+        "kind": "lemma",
+        "title": "A QMD score is centered and has finite information",
+        "deps": [
+          "def-qmd-path",
+          "def-likelihood-density",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume AC and a parametric model QMD at $\\theta_0$ with score $s_{\\theta_0}$.\nThen\n$$E_{\\theta_0}s_{\\theta_0}=0,$$\nand the information matrix\n$I_{\\theta_0}=E_{\\theta_0}[s_{\\theta_0}s_{\\theta_0}^T]$ has finite entries\nand is positive semidefinite. The QMD convention and square-integrability of\nthe score are those of [[def-qmd-path]]."
+      },
+      {
+        "id": "thm-convolution-bound-for-regular-estimators",
+        "kind": "theorem",
+        "title": "Convolution bound for regular estimators",
+        "deps": [
+          "def-lan-experiment",
+          "def-regular-estimator-under-local-alternatives",
+          "thm-le-cam-third-lemma",
+          "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "cor-weakly-convergent-sequences-are-tight",
+          "thm-vector-slutsky",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-identity-theorem-holomorphic-functions",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-continuous-mapping-theorem",
+          "thm-cramer-wold-device",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume AC. Let $\\{P_{n,h}:h\\in\\mathbb R^d\\}$ be LAN at $h=0$ with\npositive-definite information matrix $K$ and central sequence $\\Delta_n$.\nLet $T_n=\\sqrt n(\\widehat\\theta_n-\\theta_0)$ be regular under every fixed\nlocal alternative, with common limit law $W$ as in\n[[def-regular-estimator-under-local-alternatives]]. Then there is a\nprobability law $\\nu$ on $\\mathbb R^d$ such that\n$$\\mathcal L(W)=N_d(0,K^{-1})*\\nu.$$\nHere $*$ is convolution, the law of the sum of independent random vectors\nwith the two indicated laws. In particular, the efficient Gaussian component\nwith covariance $K^{-1}$ is a convolution factor of every regular limit."
+      },
+      {
+        "id": "lem-qmd-singular-and-zero-overlap-masses",
+        "kind": "lemma",
+        "title": "QMD controls singular and zero-overlap masses",
+        "deps": [
+          "def-qmd-path",
+          "def-likelihood-density",
+          "def-axiom-of-choice",
+          "lem-qmd-score-centered-and-finite-information",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-absolute-continuity-of-the-integral"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume AC and the hypotheses of [[def-qmd-path]]. Write $p_0=p_{\\theta_0}$,\n$p_u=p_{\\theta_0+u}$, and $P_0=P_{\\theta_0}$. Let\n$$\\alpha(u):=P_{\\theta_0+u}(p_0=0),\\qquad \\beta(u):=P_0(p_u=0).$$\nThen $\\alpha(u)=o(\\|u\\|_2^2)$ and $\\beta(u)=o(\\|u\\|_2^2)$ as $u\\to0$."
+      },
+      {
+        "id": "lem-finite-prior-lan-bayes-envelope-convergence",
+        "kind": "lemma",
+        "title": "Finite-prior Bayes envelopes converge under pointwise LAN",
+        "statement": "Assume AC. In a pointwise LAN experiment [[def-lan-experiment]] with $K\\succ0$, fix $h_1,\\ldots,h_s\\in\\mathbb R^d$ and weights $w_i>0$ summing to one. Let $g:\\mathbb R^d\\to[0,M]$ be Lipschitz. The Bayes values for estimating $h$ with loss $g(a-h)$ and this finite prior, allowing all measurable randomized rules, converge to the corresponding Bayes value in the Gaussian shift $Y\\mid h\\sim N_d(h,K^{-1})$. No likelihood-field uniformity or measurable-selection hypothesis is required.",
+        "deps": [
+          "def-lan-experiment",
+          "thm-vector-slutsky",
+          "thm-continuous-mapping-theorem",
+          "thm-mean-one-likelihood-ratio-limit-implies-contiguity",
+          "def-bayes-and-minimax-risk",
+          "def-measure-kernel-and-probability-kernel",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-q-and-irrationals-dense-r",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-finite-priors-approximate-gaussian-shift-bayes-risk",
+        "kind": "lemma",
+        "title": "Finite priors approximate Gaussian-shift Bayes values",
+        "statement": "Assume AC. Let $Q_h=N_d(h,S)$ with $S\\succ0$ and let $g:\\mathbb R^d\\to[0,M]$ have Lipschitz constant $B<\\infty$. For every Borel probability prior $\\pi$ on $\\mathbb R^d$ and $\\epsilon>0$, there is a finite-support prior $\\pi_f$ whose Bayes value for loss $g(a-h)$ differs from that of $\\pi$ by less than $\\epsilon$. The comparison is uniform over all measurable randomized rules. In particular this applies to every diffuse Gaussian prior; no posterior selector assumption is needed.",
+        "deps": [
+          "def-bayes-and-minimax-risk",
+          "def-measure-kernel-and-probability-kernel",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-dominated-convergence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-heine-borel-rn",
+          "thm-continuity-from-below-for-measures",
+          "def-euclidean-inner-product",
+          "thm-measurability-of-integration-against-a-kernel",
+          "lem-definite-quadratic-forms-have-a-uniform-sphere-bound",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-qmd-normalized-product-likelihood-expansion",
+        "kind": "lemma",
+        "title": "Normalized product likelihood expansion under QMD",
+        "deps": [
+          "def-qmd-path",
+          "def-likelihood-density",
+          "def-axiom-of-choice",
+          "lem-qmd-score-centered-and-finite-information",
+          "lem-qmd-singular-and-zero-overlap-masses",
+          "thm-khinchin-weak-law-for-iid-integrable-variables",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-l1-convergence-implies-uniform-integrability",
+          "cor-markov-inequality-for-random-variables",
+          "cor-taylor-lagrange-and-cauchy-remainders",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume AC and [[def-qmd-path]] at $\\theta_0$ with score $s$ and information $I$.\nLet $h_n\\to h$ in $\\mathbb R^d$, put $u_n=h_n/\\sqrt n$, and write\n$P_0=P_{\\theta_0}$ and $P_{u_n}=P_{\\theta_0+u_n}$. On\n$S=\\{p_{\\theta_0}>0\\}$ define, for all sufficiently large $n$,\n$$q_n(x)=\\frac{\\mathbf1_S(x)p_{\\theta_0+u_n}(x)} {(1-\\alpha_n)p_{\\theta_0}(x)},\\qquad \\alpha_n=P_{u_n}(S^c).$$\nThen $q_n$ is a probability density relative to $P_0$. For IID\n$X_1,\\ldots,X_n\\sim P_0$, let $L_n=\\prod_{i=1}^nq_n(X_i)$ and\n$\\Delta_n=n^{-1/2}\\sum_{i=1}^ns(X_i)$. Under $P_0^{\\otimes n}$,\n$$\\log L_n=h_n^T\\Delta_n-\\tfrac12h^TIh+o_P(1),\\qquad P_0^{\\otimes n}(L_n=0)\\to0.$$\nMoreover, if $\\bar P_n=q_nP_0$ is the normalized absolutely continuous\ncomponent of $P_{u_n}$ relative to $P_0$, then\n$$\\|P_{u_n}^{\\otimes n}-\\bar P_n^{\\otimes n}\\|_{\\rm TV}\\to0.$$\nNo full likelihood ratio for $P_{u_n}^{\\otimes n}$ is asserted."
+      },
+      {
+        "id": "thm-local-asymptotic-minimax-bound",
+        "kind": "theorem",
+        "title": "Local asymptotic minimax bound",
+        "deps": [
+          "def-lan-experiment",
+          "def-euclidean-inner-product",
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "def-loss-function-and-risk",
+          "def-bayes-and-minimax-risk",
+          "lem-bowl-shaped-loss-has-centered-lipschitz-minorants",
+          "lem-finite-prior-lan-bayes-envelope-convergence",
+          "lem-finite-priors-approximate-gaussian-shift-bayes-risk",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume AC and let $d\\ge1$ be finite. Let $\\{P_{n,h}:h\\in\\mathbb R^d\\}$ be a finite-dimensional\nexperiment that is LAN at $h=0$ with positive-definite information $K$ and\ncentral sequence $\\Delta_n\\Rightarrow N_d(0,K)$ as in\n[[def-lan-experiment]]. Let $M\\ge0$ be finite and\n$L:\\mathbb R^d\\to[0,M]$ be Borel measurable,\nsymmetric ($L(-x)=L(x)$), and quasi-convex (each sublevel set is convex).\nThen\n$$ \\liminf_{c\\to\\infty}\\liminf_{n\\to\\infty} \\inf_{\\widehat h_n}\\sup_{\\|h\\|_2\\le c} E_{P_{n,h}}L(\\widehat h_n-h) \\ge E L(Z),\\qquad Z\\sim N_d(0,K^{-1}). $$\nThe infimum ranges over measurable, possibly randomized estimators. The\nexperiment is pointwise LAN in each fixed $h$; no uniform likelihood-field\nassumption is added."
+      },
+      {
+        "id": "thm-qmd-implies-lan-for-iid",
+        "kind": "theorem",
+        "title": "Quadratic-mean differentiability implies iid LAN",
+        "deps": [
+          "def-qmd-path",
+          "def-likelihood-density",
+          "lem-qmd-score-centered-and-finite-information",
+          "def-lan-experiment",
+          "lem-qmd-normalized-product-likelihood-expansion",
+          "thm-multivariate-iid-central-limit-theorem",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume the Axiom of Choice. Let $\\{P_\\theta:\\theta\\in\\Theta\\subseteq\n\\mathbb R^d\\}$ be dominated by a common sigma-finite measure, with $\\Theta$\nopen, and suppose the model is QMD at an interior $\\theta_0$ with score $s$\nand information $I=E_{\\theta_0}[ss^T]$. Let $X_1,\\ldots,X_n$ be IID\n$P_{\\theta_0}$, and for each fixed local sequence $h_n\\to h$ set\n$u_n=h_n/\\sqrt n$. Then the local product laws\n$P_{\\theta_0+u_n}^{\\otimes n}$ admit mean-one likelihood-ratio proxies\n$L_n$ relative to $P_{\\theta_0}^{\\otimes n}$ such that\n$$\\left\\|P_{\\theta_0+u_n}^{\\otimes n}-L_nP_{\\theta_0}^{\\otimes n}\\right\\|_{\\rm TV} \\to0,$$\nand under $P_{\\theta_0}^{\\otimes n}$,\n$$\\log L_n=h_n^T\\Delta_n-\\tfrac12h^TIh+o_P(1),\\qquad \\Delta_n=n^{-1/2}\\sum_{i=1}^ns(X_i)\\Rightarrow N_d(0,I).$$\nThus the IID QMD experiment is LAN in the proxy sense of\n[[def-lan-experiment]]. This assertion does not claim that the full local\nproduct law has a Radon–Nikodym derivative relative to the base law."
+      }
+    ]
+  },
+  {
+    "order": 1889,
+    "id": "local-asymptotic-normality-contiguity-and-efficiency-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "LAN, Contiguity and Efficiency — Examples",
+    "companion": "local-asymptotic-normality-contiguity-and-efficiency",
+    "requires": [
+      "local-asymptotic-normality-contiguity-and-efficiency"
+    ],
+    "items": [
+      {
+        "id": "cex-noncontiguous-binary-sequences",
+        "kind": "counterexample",
+        "title": "Binary laws with a rare event are not contiguous",
+        "deps": [
+          "def-contiguous-sequences-of-measures",
+          "thm-mean-one-likelihood-ratio-limit-implies-contiguity"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-gaussian-shift-lan-and-regular-sample-mean",
+        "kind": "example",
+        "title": "Gaussian shift LAN and the regular sample mean",
+        "deps": [
+          "def-qmd-path",
+          "def-likelihood-density",
+          "thm-qmd-implies-lan-for-iid",
+          "def-lan-experiment",
+          "def-regular-estimator-under-local-alternatives",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-dominated-convergence",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-ftc-first-part",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  }
+]

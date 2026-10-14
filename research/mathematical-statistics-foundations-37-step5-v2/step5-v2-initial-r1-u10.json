@@ -1,0 +1,183 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "10",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "def-student-t-and-f-laws",
+      "model": "gpt-6-luna",
+      "context_sha256": "d6a5fb04631b4aa8fa2305849062064313c5164e2c284750c6815c3d11037ae1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The product probability measures are on R squared, but the two branches omit negative denominator coordinates. Thus the asserted Borel maps are not total. Replacing the zero branch by the nonpositive branch completes both maps without changing their pushforward laws, since positive-degree chi-square denominators are positive almost surely.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f",
+      "model": "gpt-6-luna",
+      "context_sha256": "0e193729fe9f175f24feb672c5bc61bcd872e623476e01adcd8c86d3d99300ea",
+      "outcome": "confirmed_nonfatal",
+      "reason": "A1 incorrectly confines imported AC use to definitions, although F1 invokes a chi-square lemma whose Statement expressly assumes AC. AC is already assumed in Given and declared in deps, so no proof hypothesis is missing and the finite witness remains valid. Corrected A1 to identify both the ratio definitions and the denominator-positivity lemma.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-student-t-and-f-laws",
+      "disposition": "repaired",
+      "post_sha256": "1c9b8668f985dd3569e3c08cfddae5c9182c06c733795ab168163d1a3253b070",
+      "review_context_sha256": "c1e2e36008f9234ea220ad34400a35a2b6a0d3b7517b1d5b2b0d03a3a67f31e3",
+      "reason": "Reviewed the normal and chi-square definitions, positive-denominator lemma, law definition, Borel measurability and finite product-law suppliers. The two branches now partition R squared into Borel sets, with a continuous quotient on the positive region and constant zero on its complement; independence determines the product pushforward uniquely. Positive integer degrees and AC remain explicit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f",
+      "disposition": "repaired",
+      "post_sha256": "d9e84dface29c85fca0cea11c7d3190d6e33e692a86419558d37c926d425d07b",
+      "review_context_sha256": "61cd10d914ab25f474c1ef8afeaf312d41f44125d48b850a9cc113b1b0827c54",
+      "reason": "Checked the uniform eight-point product space and all three witness steps. The orthogonal Hadamard matrix yields disjoint magnitude events each of probability 1/2, contradicting independence; all-equal triples have probability 1/4 and zero sample variance; equal pairs have probability 1/2, RSS_U=0 and RSS_R=2 under the reduced-space null. These undefined usual ratios cannot be almost surely finite Gaussian ratio variables. A1 now faithfully carries the positivity lemma AC assumption. The refuted Statement and all proof steps are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+    "thm-normal-mean-residual-independence-and-exact-t-pivot",
+    "thm-gaussian-linear-model-qr-and-exact-t-f-pivots",
+    "cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f"
+  ],
+  "ledger_updates": [
+    {
+      "target": "research/defect-ledger.jsonl",
+      "id": "def-student-t-and-f-laws",
+      "action": "record_fixed_defect",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "locus": "definition",
+      "finding": "The branch conditions Q>0 and Q=0 omit Q<0 on the real product space, so the claimed Borel maps were not total.",
+      "repair": "Use Q<=0 for the constant branch in both maps; their defining input laws assign this region probability zero.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "target": "research/defect-ledger.jsonl",
+      "id": "cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f",
+      "action": "record_fixed_defect",
+      "outcome": "confirmed_nonfatal",
+      "locus": "facts-block",
+      "finding": "A1 says imported AC use is confined to definitions, but F1 also uses a lemma explicitly assuming AC. The proof already assumes AC.",
+      "repair": "Name the t/F definitions and positive-degree chi-square positivity lemma in A1, preserving the choice-free finite calculation caveat.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "target": "research/defect-ledger.jsonl",
+      "id": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+      "action": "route_to_frontier_owner",
+      "locus": "statement",
+      "finding": "The digest concern is confirmed: for k=1 the factor x^(k/2-1) is undefined at zero and on negative x; multiplication by an indicator does not define it there. Proof steps 2.1-4.1 establish the intended density on positive x and zero extension.",
+      "minimality": "Give the density as the displayed expression for x>0 and zero for x<=0. Its a.s. positivity and CDF consequences used by both assigned items are sound. This unassigned supplier was not edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "target": "research/published-consumer-supplier-ledger.md",
+      "id": "thm-dominated-convergence",
+      "action": "record_existing_repair_observation",
+      "finding": "The current Statement explicitly begins with an arbitrary measure space (X,A,mu) and domain X; the current Given repeats that scope. The batch digest alert describes a prior carrier.",
+      "affected_use": "The t/F CDF lemma uses dominated convergence for bounded CDF integrands on a chi-square probability space with integrable majorant 1.",
+      "invalidated_claim": "None in the current local supplier or these applications.",
+      "minimality": "No edit needed; retain the existing mathematical-statistics-foundations-37-stage4-owner-s4-published-thm-dominated-convergence-v2 ledger entry. This observation adds no whole-item audit or independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Supplier Definition changed only by completing its maps at negative denominator inputs. Its degrees, product inputs and laws are preserved. Existing dependencies suffice; no prerequisite creation needed.",
+    "Both assigned mathematical reviews are complete. Native item and review-context hashes were copied immediately after each review and are preserved. The supplier manifest Definition mirror, assigned contract boundary/axiom descriptions, and counterexample A1/F1 citation mirrors were reconciled under acquire/reread/edit/check/release locking; no other contract rows were edited.",
+    "Actually read local supplier items; no external source consultation was needed for these familiar finite probability and Borel partition arguments. No independent review of this repair is claimed.",
+    "The first post-edit strict contract check failed because the new zero-boundary evidence omitted an explicit section anchor. Added the word Definition to anchor the existing evidence and reran successfully; no mathematics or item carrier changed during this metadata correction. No unresolved mathematical obligation remains in this assignment. The outside-scope density notation concern is routed to its frontier owner, and the already-repaired published DCT alert is recorded without editing either supplier.",
+    "Final read-only consistency validation confirmed both preserved native review guards and contexts still match current carriers, the supplier manifest Definition mirror is exact, and both consumer citation quotes exactly match the repaired supplier Definition. No review hash was refreshed."
+  ],
+  "downstream_evidence": [
+    {
+      "id": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+      "path": "items/lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing.md",
+      "affected_use": "F4 and proof steps 1.2 and 2.1 use the product ratio laws to integrate CDFs over q in (0,infinity).",
+      "disposition": "unchanged_sound",
+      "reason": "The added branch is outside these integration domains and has probability zero under every defining positive-degree chi-square input."
+    },
+    {
+      "id": "thm-normal-mean-residual-independence-and-exact-t-pivot",
+      "path": "items/thm-normal-mean-residual-independence-and-exact-t-pivot.md",
+      "affected_use": "F5 and proof step 5.1 identify the studentized mean with the ratio map, including its value zero at Q=0.",
+      "disposition": "unchanged_sound",
+      "reason": "Q is a squared residual norm, hence never negative, and the repaired map retains both the positive quotient and the value at zero."
+    },
+    {
+      "id": "thm-gaussian-linear-model-qr-and-exact-t-f-pivots",
+      "path": "items/thm-gaussian-linear-model-qr-and-exact-t-f-pivots.md",
+      "affected_use": "F6 and proof steps 3.1 and 4.1 identify contrast t and nested-model F pivots with zero-extended Gaussian product ratios.",
+      "disposition": "unchanged_sound",
+      "reason": "The denominator variables are squared norms of Gaussian coordinate blocks; they are nonnegative everywhere. Both existing pointwise identities and resulting laws are unchanged."
+    },
+    {
+      "id": "cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f",
+      "path": "items/cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f.md",
+      "affected_use": "A1, F1 and proof steps 1.2 and 2.1 compare finite Rademacher ratios with almost surely finite Gaussian t and F laws.",
+      "disposition": "supplier_change_sound_separate_A1_repair",
+      "reason": "The t and F laws and almost sure denominator positivity are unchanged. A1 is separately repaired for its inaccurate description of the imported chi-square lemma AC assumption."
+    }
+  ],
+  "page_evidence": [
+    {
+      "path": "library/mathematical-statistics/gaussian-orthogonal-decomposition-and-quadratic-forms.md",
+      "affected_use": "The page defines positive-degree Student and Fisher laws and states that their denominators have positive degrees.",
+      "disposition": "unchanged_sound",
+      "reason": "The null-set map completion does not change the positive-degree law interface or the page description."
+    },
+    {
+      "path": "library/mathematical-statistics/gaussian-orthogonal-decomposition-and-quadratic-forms-examples.md",
+      "affected_use": "The page describes the Rademacher witness against general independence preservation and exact normal-theory calibration.",
+      "disposition": "unchanged_sound",
+      "reason": "A1 is an assumption-description repair; the refuted assertion and all finite witness calculations remain unchanged."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-student-t-and-f-laws.md items/cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f.md --json",
+      "exit_code": 0,
+      "result": "2 files; definition not applicable, counterexample pass; 1 checked proof, 0 failures."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-student-t-and-f-laws.md items/cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f.md --json",
+      "exit_code": 0,
+      "result": "2 checked; no errors or warnings."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-student-t-and-f-laws.md items/cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f.md",
+      "exit_code": 0,
+      "result": "2 items, 3 steps, 0 defects; run after final item edits."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-10.proof-contracts.json --items def-student-t-and-f-laws,cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f --strict --json",
+      "exit_code": 0,
+      "result": "Both assigned contracts checked; no errors or warnings. Initial boundary-evidence-unanchored failure corrected and the successful result obtained on the final metadata."
+    }
+  ]
+}

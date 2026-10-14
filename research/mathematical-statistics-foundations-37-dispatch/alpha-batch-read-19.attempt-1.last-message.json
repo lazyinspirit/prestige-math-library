@@ -1,0 +1,503 @@
+{
+  "group": "g",
+  "batches": ["19"],
+  "pages_read": [
+    "sparse-high-dimensional-estimation-and-covariance",
+    "sparse-high-dimensional-estimation-and-covariance-examples"
+  ],
+  "items_read": [
+    "def-gaussian-sequence-sparse-means-model",
+    "def-subgaussian-fixed-design-regression-model",
+    "def-fixed-design-incoherence-condition",
+    "def-restricted-eigenvalue-condition",
+    "def-lasso-estimator",
+    "lem-lasso-objective-has-minimizer",
+    "thm-lasso-basic-inequality",
+    "lem-incoherence-implies-restricted-eigenvalue",
+    "lem-fixed-design-subgaussian-score-concentration",
+    "thm-lasso-prediction-and-l1-error-under-incoherence",
+    "def-sample-covariance-and-operator-norm-loss",
+    "def-weak-lq-sparse-covariance-class",
+    "def-minimax-squared-operator-risk",
+    "def-soft-thresholding-function",
+    "lem-products-of-subgaussian-coordinates-are-subexponential",
+    "lem-epsilon-net-controls-symmetric-operator-norm",
+    "lem-symmetric-matrix-operator-norm-rayleigh",
+    "thm-centered-subgaussian-sample-covariance-bound",
+    "alg-entrywise-thresholded-sample-covariance",
+    "lem-weak-lq-thresholded-covariance-row-sum",
+    "lem-directional-tail-implies-subgaussian-mgf",
+    "lem-directional-tail-products-are-subexponential",
+    "thm-weak-lq-sample-covariance-entrywise-deviation",
+    "thm-thresholded-sparse-covariance-high-probability-bound",
+    "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension",
+    "lem-gaussian-sparse-covariance-mixture-lower-bound",
+    "lem-weak-lq-thresholded-covariance-expected-risk",
+    "lem-gaussian-kullback-leibler-covariance-formula",
+    "lem-diagonal-covariance-minimax-lower-bound",
+    "thm-thresholded-sparse-covariance-minimax-rate",
+    "ex-orthogonal-design-lasso-is-soft-thresholding",
+    "cex-collinear-design-fails-re-and-incoherence",
+    "ex-sample-covariance-rank-deficiency-when-p-exceeds-n"
+  ],
+  "conventions": [
+    {
+      "convention": "The fixed-design noise proxy bounds every directional MGF by exp(σ²λ²‖u‖₂²/2); coordinate independence is not assumed.",
+      "fixed_by": "def-subgaussian-fixed-design-regression-model",
+      "matters_for": [
+        "lem-fixed-design-subgaussian-score-concentration",
+        "thm-lasso-prediction-and-l1-error-under-incoherence"
+      ]
+    },
+    {
+      "convention": "The Lasso objective is ‖y−Xθ‖₂²/n + 2τ‖θ‖₁, with τ strictly positive. The definition specifies the entire minimizer set and selects no measurable minimizer.",
+      "fixed_by": "def-lasso-estimator",
+      "matters_for": [
+        "lem-lasso-objective-has-minimizer",
+        "thm-lasso-basic-inequality",
+        "thm-lasso-prediction-and-l1-error-under-incoherence",
+        "ex-orthogonal-design-lasso-is-soft-thresholding"
+      ]
+    },
+    {
+      "convention": "Incoherence means max-entry deviation of XᵀX/n from I at most 1/(14s), including diagonal deviations.",
+      "fixed_by": "def-fixed-design-incoherence-condition",
+      "matters_for": [
+        "lem-incoherence-implies-restricted-eigenvalue",
+        "lem-fixed-design-subgaussian-score-concentration",
+        "thm-lasso-prediction-and-l1-error-under-incoherence",
+        "cex-collinear-design-fails-re-and-incoherence"
+      ]
+    },
+    {
+      "convention": "The cone is ‖v outside S‖₁ ≤ 3‖v on S‖₁; the restricted eigenvalue lower bound uses ‖v on S‖₂², for every support of size at most s.",
+      "fixed_by": "def-restricted-eigenvalue-condition",
+      "matters_for": [
+        "thm-lasso-basic-inequality",
+        "lem-incoherence-implies-restricted-eigenvalue",
+        "thm-lasso-prediction-and-l1-error-under-incoherence",
+        "cex-collinear-design-fails-re-and-incoherence"
+      ]
+    },
+    {
+      "convention": "Both covariance estimators use divisor n. Oracle centering uses the population mean; sample centering uses the empirical mean. Loss is squared operator norm.",
+      "fixed_by": "def-sample-covariance-and-operator-norm-loss",
+      "matters_for": [
+        "thm-centered-subgaussian-sample-covariance-bound",
+        "alg-entrywise-thresholded-sample-covariance",
+        "thm-weak-lq-sample-covariance-entrywise-deviation",
+        "lem-weak-lq-thresholded-covariance-expected-risk",
+        "ex-sample-covariance-rank-deficiency-when-p-exceeds-n"
+      ]
+    },
+    {
+      "convention": "Weak-lq sparsity concerns off-diagonal columns only. For 0<q<1, k times the qth power of the kth ordered magnitude is at most c; q=0 instead counts nonzero off-diagonal entries. The directional tail has prefactor 1: P(|vᵀ(X−EX)|>t) ≤ exp(−t²/(2τ)).",
+      "fixed_by": "def-weak-lq-sparse-covariance-class",
+      "matters_for": [
+        "lem-weak-lq-thresholded-covariance-row-sum",
+        "thm-weak-lq-sample-covariance-entrywise-deviation",
+        "lem-gaussian-sparse-covariance-mixture-lower-bound",
+        "lem-diagonal-covariance-minimax-lower-bound",
+        "thm-thresholded-sparse-covariance-minimax-rate"
+      ]
+    },
+    {
+      "convention": "Thresholding preserves every diagonal entry and retains an off-diagonal entry at threshold equality. Its output is symmetric but need not be positive semidefinite.",
+      "fixed_by": "alg-entrywise-thresholded-sample-covariance",
+      "matters_for": [
+        "lem-weak-lq-thresholded-covariance-row-sum",
+        "thm-thresholded-sparse-covariance-high-probability-bound",
+        "lem-weak-lq-thresholded-covariance-expected-risk",
+        "thm-thresholded-sparse-covariance-minimax-rate"
+      ]
+    },
+    {
+      "convention": "Minimax risk ranges over measurable maps into the full Euclidean Borel matrix space, including nonsymmetric outputs, under the n-fold product sample law. Infinite risk is permitted; the supremum over an empty law class is zero.",
+      "fixed_by": "def-minimax-squared-operator-risk",
+      "matters_for": [
+        "lem-gaussian-sparse-covariance-mixture-lower-bound",
+        "lem-diagonal-covariance-minimax-lower-bound",
+        "thm-thresholded-sparse-covariance-minimax-rate"
+      ]
+    },
+    {
+      "convention": "Gaussian covariance KL is directional, with Σ₁ inverse multiplying Σ₀ and log(det Σ₁/det Σ₀); both matrices must be positive definite. AC is inherited through the Gaussian and KL conventions.",
+      "fixed_by": "lem-gaussian-kullback-leibler-covariance-formula",
+      "matters_for": [
+        "lem-diagonal-covariance-minimax-lower-bound"
+      ]
+    },
+    {
+      "convention": "The minimax equivalence is capped at min{1,c²(log p/n)^(1−q)+log p/n}. Raw thresholding has its stated expected-risk guarantee when log p/n≤1; the globally capped upper bound uses a threshold-or-zero switch.",
+      "fixed_by": "thm-thresholded-sparse-covariance-minimax-rate",
+      "matters_for": [
+        "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-weak-lq-sparse-covariance-class",
+      "statement": "For p≥2, 0≤q<1, c≥0 and τ>0, the law class consists of laws with the stated off-diagonal weak-lq covariance constraint and P(|vᵀ(X−EX)|>t)≤exp(−t²/(2τ)) for every unit v and t>0; q=0 counts nonzero off-diagonal entries.",
+      "used_by": [
+        "lem-weak-lq-thresholded-covariance-row-sum",
+        "thm-weak-lq-sample-covariance-entrywise-deviation",
+        "thm-thresholded-sparse-covariance-high-probability-bound",
+        "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension",
+        "lem-gaussian-sparse-covariance-mixture-lower-bound",
+        "lem-weak-lq-thresholded-covariance-expected-risk",
+        "lem-diagonal-covariance-minimax-lower-bound",
+        "thm-thresholded-sparse-covariance-minimax-rate"
+      ]
+    },
+    {
+      "id": "lem-symmetric-matrix-operator-norm-rayleigh",
+      "statement": "For a symmetric real p×p matrix with p≥1, its operator norm equals the maximum absolute unit-vector Rayleigh quotient and the largest absolute eigenvalue.",
+      "used_by": [
+        "lem-epsilon-net-controls-symmetric-operator-norm",
+        "lem-weak-lq-thresholded-covariance-row-sum",
+        "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension",
+        "lem-weak-lq-thresholded-covariance-expected-risk",
+        "thm-thresholded-sparse-covariance-minimax-rate"
+      ]
+    },
+    {
+      "id": "thm-weak-lq-sample-covariance-entrywise-deviation",
+      "statement": "For iid observations from the specified class, n≥1, p≥2 and u>0, sample-centered covariance has maximum entrywise error at most 192τ(√(u/n)+u/n) with probability at least 1−2p exp(−u)−2p² exp(−2u).",
+      "used_by": [
+        "thm-thresholded-sparse-covariance-high-probability-bound",
+        "lem-weak-lq-thresholded-covariance-expected-risk"
+      ]
+    },
+    {
+      "id": "lem-weak-lq-thresholded-covariance-row-sum",
+      "statement": "If Σ belongs to Gq(c), threshold λ>0 is used, and every sample-centered covariance entry has error at most λ/2, then operator error is at most Cq(cλ^(1−q)+λ); C0=2 is admissible.",
+      "used_by": [
+        "thm-thresholded-sparse-covariance-high-probability-bound",
+        "lem-weak-lq-thresholded-covariance-expected-risk"
+      ]
+    },
+    {
+      "id": "lem-gaussian-sparse-covariance-mixture-lower-bound",
+      "statement": "Assume AC and fix τ,M>0, β>1 and 0≤q<1. There exist v,b>0 and finite P0 depending only on these parameters such that, for p≥P0, n≥1, p≥n^β and 0≤c≤M n^((1−q)/2)(log p)^(-(3−q)/2), setting a=log p/n, s=τ/4 and ε=v√a, the condition c/[2(sε)^q]≥2 implies minimax risk at least b c²a^(1−q). For q=0, (sε)^q=1.",
+      "used_by": [
+        "thm-thresholded-sparse-covariance-minimax-rate"
+      ]
+    },
+    {
+      "id": "lem-weak-lq-thresholded-covariance-expected-risk",
+      "statement": "Fix τ>0, 0≤q<1 and β>1. For n≥1, p≥2, p≥n^β and a=log p/n≤1, the unmodified sample-centered threshold estimator with λ=8192τ√a has supremum expected squared operator error at most C(q,τ)(c²a^(1−q)+a).",
+      "used_by": [
+        "thm-thresholded-sparse-covariance-minimax-rate"
+      ]
+    },
+    {
+      "id": "lem-diagonal-covariance-minimax-lower-bound",
+      "statement": "Assume AC. For every n≥1, p≥2, τ>0, 0≤q<1 and c≥0, minimax squared operator risk over the specified law class is at least bτ² min{1,log p/n}, for an absolute b>0.",
+      "used_by": [
+        "thm-thresholded-sparse-covariance-minimax-rate"
+      ]
+    },
+    {
+      "id": "lem-gaussian-kullback-leibler-covariance-formula",
+      "statement": "For positive-definite real symmetric p×p matrices, p≥1, under the Gaussian and directional KL conventions, D(Np(0,Σ₀)‖Np(0,Σ₁)) = [tr(Σ₁⁻¹Σ₀)−p+log(det Σ₁/det Σ₀)]/2.",
+      "used_by": [
+        "lem-diagonal-covariance-minimax-lower-bound",
+        "lem-clean-block-sparse-gaussian-covariance-minimax-lower-bound",
+        "lem-clean-dense-gaussian-covariance-minimax-lower-bound",
+        "lem-huber-covariance-contamination-modulus-lower-bound"
+      ]
+    },
+    {
+      "id": "thm-lasso-basic-inequality",
+      "statement": "For any Lasso minimizer with τ>0, support S of θ*, and Δ=θ̂−θ*, the score condition ‖Xᵀε/n‖∞≤τ/2 implies ‖XΔ‖₂²/n+τ‖Δ outside S‖₁≤3τ‖Δ on S‖₁, hence the cone constraint.",
+      "used_by": [
+        "thm-lasso-prediction-and-l1-error-under-incoherence"
+      ]
+    },
+    {
+      "id": "lem-incoherence-implies-restricted-eigenvalue",
+      "statement": "For n≥1 and 1≤s≤d, the stated incoherence condition implies ‖Xv‖₂²/n≥‖v on S‖₂²/2 for every support of size at most s and every v in its Lasso cone.",
+      "used_by": [
+        "thm-lasso-prediction-and-l1-error-under-incoherence"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Choice assumptions in Gaussian constructions and covariance lower bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The hypothesis required by Borel Euclidean change of variables and product-Lebesgue identification.",
+      "opened": true
+    },
+    {
+      "id": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+      "used_for": "Obtaining Countable Choice from the explicitly assumed AC.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Gaussian sequence observations, standard-normal densities, and affine Gaussian laws.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian covariance targets, directional normal projections, and square-root realizations.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Mutual independence of sample vectors and Gaussian coordinates.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "IID sample conventions without within-vector coordinate independence.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-spheres-and-closed-balls",
+      "used_for": "Unit directions, Euclidean norms, cones, and finite-net arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-p-norms-on-rn",
+      "used_for": "The Lasso ℓ1 and Euclidean norm conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+      "used_for": "Attainment and compactness of the Lasso minimizer set.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-finite",
+      "used_for": "Supported ℓ1 bounds, quadratic-form estimates, and matrix moment bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Operator/Frobenius metric comparison and Euclidean triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-holder-finite",
+      "used_for": "Bounding fourth powers of empirical averages in the expected-risk proof, using rational conjugate exponents 4 and 4/3.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "Bad-event expected loss, covariance-entry bounds, and mixture total-variation control.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Population mean and covariance entries.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Matrix losses, Rayleigh reductions, separation, and norm comparisons.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Symmetric eigenbases, absolute Rayleigh maxima, and Gaussian whitening.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Positive covariance square roots in Gaussian mixture whitening.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Attainment of matrix operator norms in the diagonal lower bound.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Euclidean entry-list topology and its equivalence with the operator-norm topology.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-space",
+      "used_for": "Verifying the full matrix action space used in Fano's inequality.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Estimator measurability and finite nearest-target decisions.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Common sample-law and product-law conventions in minimax risk.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Measurable n-observation sample spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-product-measure-on-sigma-finite-spaces",
+      "used_for": "The finite-product sample measure.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Existence of sample product laws and independent copies in the tail-to-MGF proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Identifying IID and independent-Gaussian joint laws with finite product measures.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independence across sample indices after taking projections or coordinate products.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Sample-mean MGFs and independent-copy symmetrization in the tail-to-MGF lemma.",
+      "opened": true
+    },
+    {
+      "id": "lem-probability-measure-basic-identities",
+      "used_for": "Union bounds, intersections of good events, and zero-proxy countable-union arguments.",
+      "opened": true
+    },
+    {
+      "id": "cor-layer-cake-formulas-for-random-variables",
+      "used_for": "Tail-derived moments, exponential integrability, and the uniform covariance norm cap.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Centering products and integrating finite exponential-series partial sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Integrating nonnegative exponential and hyperbolic-cosine power series.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Passing signed exponential-series partial sums through expectation after proving an integrable exponential majorant.",
+      "opened": true
+    },
+    {
+      "id": "thm-jensen-inequality-for-expectation",
+      "used_for": "The lower bound E exp(−λX)≥1 for centered X.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Gaussian product densities and factoring nonnegative sample cross-moment integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "used_for": "Identifying coordinate Gaussian density products with Euclidean Lebesgue densities under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+      "used_for": "Extending Gaussian density identities from Borel rectangles.",
+      "opened": true
+    },
+    {
+      "id": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+      "used_for": "Invertible linear Gaussian density transformations and whitening; applications use Borel functions and inherit Countable Choice from AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Integrating the Gaussian log-density ratio against its law.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Expanding expectations of Gaussian quadratic forms.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Gaussian density normalization and covariance determinant ratios.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-is-product-of-eigenvalues",
+      "used_for": "Determinants of positive-definite covariance square roots.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "The Gaussian mixture cross-integral determinant identity.",
+      "opened": true
+    },
+    {
+      "id": "def-total-variation-distance-for-probability-laws",
+      "used_for": "Event-supremum TV and the locally derived density-affinity identity.",
+      "opened": true
+    },
+    {
+      "id": "cor-matrix-rank-nullity",
+      "used_for": "The sample-centered covariance rank bound, including n=1.",
+      "opened": true
+    },
+    {
+      "id": "def-row-space-column-space-nullspace-and-matrix-ranks",
+      "used_for": "Images, nullspaces, and matrix ranks in the singularity example.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension",
+      "concern": "The final Remark says, “The current planned theorem uses only the lower dimension condition” and says a cap “is needed before a minimax equivalence of this form can hold.” The current thm-thresholded-sparse-covariance-minimax-rate already states and proves the capped equivalence. Update this historical wording to identify the uncapped claim being refuted; the counterexample itself remains valid.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-dominated-convergence",
+      "finding": "The Statement begins “Let f and (f_n) be measurable complex-valued functions” and subsequently uses integrals against μ, but neither Statement nor Given binds a domain, sigma-algebra, or measure μ. Proof 1.1 also uses X without introducing it. Bind an arbitrary measure space (X,A,μ). The batch-19 applications supply their probability space and prove an integrable majorant before applying the result, so this declaration omission does not invalidate those uses.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "sparse-high-dimensional-estimation-and-covariance",
+      "to": "concentration-inequalities-and-tail-bounds",
+      "faithful": true,
+      "note": "The all-directions MGF proxy, finite-maximum tail without coordinate independence, zero-proxy clause, restricted-range sub-exponential sum bound, and sphere-net cardinality match the actual local uses. Independence is imposed across observations where sum concentration requires it."
+    },
+    {
+      "from": "sparse-high-dimensional-estimation-and-covariance",
+      "to": "symmetrization-rademacher-complexity-and-covering-entropy",
+      "faithful": true,
+      "note": "This is contextual page preparation. No assigned item imports a symmetrization, contraction, or entropy result from that page, and no stronger proposition is attributed to it."
+    },
+    {
+      "from": "sparse-high-dimensional-estimation-and-covariance",
+      "to": "minimax-lower-bounds-and-information-theoretic-methods",
+      "faithful": true,
+      "note": "The Gaussian KL derivation preserves the directional density-ratio convention. The diagonal lower bound supplies measurable full-matrix actions, p+1 separated Gaussian targets, finite-product KL, and the reference-law average KL required by Fano. The sparse-mixture lemma proves its affinity and bit-testing argument locally rather than attributing them to generic Fano or Assouad."
+    },
+    {
+      "from": "robust-covariance-and-high-dimensional-stability",
+      "to": "sparse-high-dimensional-estimation-and-covariance",
+      "faithful": true,
+      "note": "The clean dense, clean single-block sparse, and contamination-modulus lower-bound consumers quote the positive-definite Gaussian trace-determinant KL formula with the correct direction. Their actual KL calculations use positive-definite covariance pairs; they do not extend that formula to singular pairs or identify the single-block class with weak row sparsity."
+    }
+  ]
+}

@@ -1,0 +1,2036 @@
+{
+  "version": 1,
+  "scope": [
+    "def-chi-square-law",
+    "thm-orthogonal-transform-preserves-standard-normal-product-law",
+    "lem-positive-df-chi-square-has-density-and-regular-cdf",
+    "thm-orthogonal-projection-has-independent-chi-square-sums",
+    "def-student-t-and-f-laws",
+    "cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f",
+    "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+    "thm-gaussian-linear-model-qr-and-exact-t-f-pivots",
+    "thm-normal-mean-residual-independence-and-exact-t-pivot",
+    "ex-fixed-design-regression-contrast-and-f-test",
+    "ex-one-sample-unknown-variance-t-interval"
+  ],
+  "contracts": {
+    "def-chi-square-law": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empty sum at k=0 is the constant zero and has law δ₀."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: χ²₀=δ₀ and it is expressly excluded from ratio denominators."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits k=1 and gives Q₁=G₁²."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the zero-degree law is the point mass at zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes AC for the normal construction; independence of realization follows from the cited normal-law characteristic-function result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition sets χ_k² to the pushforward law of ||G||² for standard product-normal G, with a separate δ0 rule at k=0. It does not characterize arbitrary vectors whose squared norm has that law."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition independence of realization follows from the specified Gaussian law; it asserts no reverse inference that a χ-square squared norm forces independent normal coordinates."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-and-one-degrees",
+          "claim": "At k=0 the sum is empty and equals 0; at k=1 it is G₁².",
+          "result": "The definition assigns δ₀ to k=0 and the usual squared-normal law to k=1."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "Assumed to use the standard multivariate normal law in the definition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Reviewed Definition and actual normal-law, normal characteristic-function, measurability and Dirac suppliers. For finite k>=1 the fixed N_k(0,I_k) law uniquely determines the continuous squared-norm pushforward. At k=0 the separate Dirac-zero rule is well-defined; no zero-degree denominator is allowed. AC is explicitly inherited from normal construction/uniqueness. No reverse Gaussian characterization is asserted. No defect."
+      }
+    },
+    "thm-orthogonal-transform-preserves-standard-normal-product-law": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-transform-of-a-finite-complex-measure",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $\\mu$ be a complex Borel measure on $\\mathbb R^n$, $n\\ge1$, with finite total variation. Then\n$$\\widehat\\mu(\\xi):=\\int e^{-2\\pi ix\\cdot\\xi}\\,d\\mu(x)$$\nis a bounded uniformly continuous function and $\\sup|\\widehat\\mu|\\le|\\mu|(\\mathbb R^n)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms",
+          "source_section": "Statement",
+          "quote": "Assume AC. Finite complex Borel measures $\\mu,\\nu$ on $\\mathbb R^n$ with $\\widehat\\mu=\\widehat\\nu$ are equal. Here finite means finite total variation, and $n\\ge1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $U^TU=I_n$ and $U$ is square, $U$ is invertible with inverse $U^T$, so $UU^T=I_n$. By [A2], Countable Choice holds. The continuous map $x\\mapsto Ux$ is Borel measurable by [F5], so $(UZ)^{-1}(B)=Z^{-1}(U^{-1}(B))$ is measurable for every Borel $B\\subseteq\\mathbb R^n$. Thus $UZ$ is a Borel random vector and has a law by [F5]. For each $t\\in\\mathbb R^n$, [F1]–[F2] give $\\mathbb E e^{i t^T UZ}=\\exp(-\\|U^Tt\\|^2/2)=\\exp(-\\|t\\|^2/2)=\\mathbb E e^{i t^TZ}$; the middle equality follows from $UU^T=I_n$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A2] and [F3], the equality in step 1.1 at every $t$ is equality of the finite Borel Fourier transforms of the laws of $UZ$ and $Z$. Both are probability measures, hence have finite total variation; [F4] therefore gives $\\mathcal L(UZ)=\\mathcal L(Z)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1], the coordinates of $Z$ are independent standard normals. Equality of joint laws in step 2.1 makes the coordinate law of $UZ$ the same product law, so its coordinates are again independent $N(0,1)$. This use of orthogonality depends on the Gaussian product law; no claim is made for arbitrary independent coordinates.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n≥1, so the zero-dimensional vector space is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes t=0: both characteristic functions equal one. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The hypothesis permits n=1 and U=−1; the characteristic-function proof in steps 1.1–3.1 applies. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The input law is fixed as N_n(0,I_n), which is nondegenerate for n≥1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes AC; steps 1.1–2.1 use the characteristic-function and finite-Borel uniqueness results under that axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way invariance assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way invariance assertion, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "Used by the multivariate-normal characteristic-function and finite-Borel Fourier uniqueness suppliers in steps 1.1–2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Reviewed all three proof steps and exact supplier statements. Square U^T U=I implies UU^T=I; Borel measurability follows with AC=>countable choice. Characteristic functions agree for all t; substitution xi=-t/(2pi) matches the stated Fourier convention. The two laws are finite Borel probability measures, satisfying uniqueness hypotheses. Equality with the original joint law preserves product-normal coordinates, including n=1. No assertion for arbitrary independent coordinates. No defect."
+      }
+    },
+    "lem-positive-df-chi-square-has-density-and-regular-cdf": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\nthe product measure $\\lambda_m \\times \\lambda_n$ and the Euclidean Lebesgue\nmeasure $\\lambda_{m+n}$ agree on every Borel subset of $\\mathbb R^{m+n}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-polar-surface-measure-on-the-unit-sphere",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix $n \\ge 1$\nand write\n$$S^{n-1}:=\\{\\omega \\in \\mathbb R^n : |\\omega|=1\\}.$$\nLet\n$$\\Phi:\\mathbb R^n\\setminus\\{0\\}\\longrightarrow(0,\\infty)\\times S^{n-1},\\qquad \\Phi(x)=(|x|,x/|x|).$$\nThis map is continuous. If $E\\subseteq S^{n-1}$ is Borel, then\n$(0,1]\\times E$ is Borel and\n$$\\{r\\omega:\\omega\\in E,\\ 0<r\\le1\\}=\\Phi^{-1}((0,1]\\times E)$$\nis Borel in $\\mathbb R^n\\setminus\\{0\\}$ by\n[[thm-continuous-preimages-of-borel-sets-are-borel]], hence Borel in\n$\\mathbb R^n$ by [[thm-borel-sigma-algebra-of-a-subspace-is-the-trace]]. It is\ntherefore Lebesgue measurable by [[thm-borel-sets-are-lebesgue-measurable]].\nDefine\n$$\\sigma(E):=n\\,\\lambda_n(\\{r\\omega : \\omega \\in E,\\ 0<r\\le 1\\}).$$\n\nThe next theorem proves that this is a Borel measure on $S^{n-1}$ and that it\nis exactly the surface measure needed for polar coordinates.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1]–[F3], the joint law of $G$ is the finite product of the standard-normal coordinate laws. On every measurable rectangle, Tonelli and [F4] show that this product has density $\\prod_{j=1}^k\\phi(z_j)=(2\\pi)^{-k/2}e^{-\\|z\\|^2/2}$ relative to $\\lambda_k$; uniqueness of the finite product law extends the identity from rectangles to every Borel set.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $t>0$, [F1], step 1.1 and [F5] give $\\mathbb P(Q_k\\le t)=(2\\pi)^{-k/2}\\sigma_{k-1}(S^{k-1})\\int_0^{\\sqrt t}e^{-r^2/2}r^{k-1}\\,dr=c_k\\int_0^t x^{k/2-1}e^{-x/2}\\,dx$ by the substitution $x=r^2$. The radial integral is finite near zero because $k/2-1>-1$, and the polar measure is finite by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The random variable $Q_k=\\|G\\|^2$ is finite everywhere, so the events $\\{Q_k\\le m\\}$ increase to the whole probability space as $m\\to\\infty$. By [F6], their probabilities tend to $1$. If $\\sigma_{k-1}(S^{k-1})$ were zero, step 2.1 would give zero probability for every finite $t$, a contradiction. Thus $c_k>0$. Step 2.1 then gives the density on $(0,\\infty)$, and as $t\\downarrow0$ its integral tends to zero; hence $\\mathbb P(Q_k=0)\\le\\mathbb P(Q_k\\le t)\\to0$. Thus $Q_k>0$ almost surely.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The density in step 3.1 is locally integrable at zero and continuous and positive for $x>0$. Its integral over any interval $(a,b)\\subset(0,\\infty)$ is therefore positive, and its integral over a shrinking interval tends to zero. Thus the CDF is strictly increasing on $(0,\\infty)$ and continuous at every positive $x$; step 2.1 also gives continuity at zero and no atom there. It is zero on $(-\\infty,0]$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma assumes positive integer k, so the zero-dimensional sum is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves P(Q_k=0)=0 by taking t down to zero. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At k=1 the radial exponent is −1/2, still integrable near zero because it is greater than −1; steps 2.1–4.1 apply. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For k≥1 the density coefficient is positive and step 3.1 proves Q_k>0 almost surely."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1–4.1 handle x=0 and every positive x, with no atom at zero. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states AC and its derived Countable Choice; step 2.1 uses the polar-coordinate theorem under that hypothesis. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a direct density and CDF result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a direct density and CDF result, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-degree-integrability",
+          "claim": "For k=1 the density power at zero is x^(−1/2).",
+          "result": "The exponent −1/2 is greater than −1, so the density is integrable near zero as used in step 2.1."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "A1 derives Countable Choice for the polar-coordinate supplier used in step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Reviewed steps 1.1--4.1 and product-law, Tonelli, Euclidean Lebesgue product, polar-measure and continuity-from-below statements. Finite product normal density follows on rectangles then by uniqueness. Polar substitution x=r^2 gives exactly sigma(S)/(2(2pi)^(k/2)) and exponent k/2-1>-1, including k=1. Increasing finite-radius events have mass tending to 1, so the finite polar constant is positive; shrinking-radius mass tends to zero, excluding an atom at 0. The positive integrable density gives global CDF continuity and strict increase only on (0,infinity). AC supplies countable choice for the polar/product suppliers. No defect."
+      }
+    },
+    "thm-orthogonal-projection-has-independent-chi-square-sums": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+          "source_section": "Statement",
+          "quote": "An endomorphism $P$ of a finite-dimensional inner product space is the orthogonal projection onto some subspace if and only if\n\n$$P^2=P\\qquad\\text{and}\\qquad P^*=P.$$\n\nIn that case it is the orthogonal projection onto $\\operatorname{im}P$, along $\\ker P=(\\operatorname{im}P)^\\perp$. The cases $P=0$ and $P=I$ are included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$ have independent standard-normal coordinates, and let $U\\in\\mathbb R^{n\\times n}$ satisfy $U^TU=I_n$. Then $UZ$ also has independent $N(0,1)$ coordinates. Here $I_n$ is the identity matrix and $U$ is orthogonal.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard $P$ as a self-adjoint idempotent by [F2]. By [F1] it has an orthonormal eigenbasis. If $v$ is an eigenvector with eigenvalue $\\lambda$, then $P^2v=Pv$ gives $\\lambda^2=\\lambda$, so $\\lambda\\in\\{0,1\\}$. Exactly $r$ eigenvalues are $1$, since the image of $P$ is spanned by precisely those eigenvectors. Reorder the basis so its first $r$ vectors have eigenvalue $1$, and let $U$ be the orthogonal matrix with these eigenvectors as columns. Then $P=U\\operatorname{diag}(I_r,0)U^T$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A2], the continuous-map measurability corollary applies. The maps $x\\mapsto U^Tx$, the two coordinate-block maps with zero-padding, and $x\\mapsto Ux$ are continuous and therefore Borel measurable. Their compositions with the Borel random vector $Z$ are Borel random vectors; in particular, $W=U^TZ$, $PZ=U(W_1,\\ldots,W_r,0,\\ldots,0)^T$, and $(I_n-P)Z=U(0,\\ldots,0,W_{r+1},\\ldots,W_n)^T$ are random vectors. By [F3], $W_1,\\ldots,W_n$ are independent standard normals. The first $r$ coordinates and the last $n-r$ coordinates generate independent sigma-algebras by [F5]; applying their measurable coordinate-block maps and then $U$ preserves independence. Thus $PZ$ and $(I_n-P)Z$ are independent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Orthogonality of $U$ preserves Euclidean norm. Therefore $\\|PZ\\|^2=\\sum_{j=1}^r W_j^2$ and $\\|(I_n-P)Z\\|^2=\\sum_{j=r+1}^n W_j^2$. The squared-norm maps are continuous, hence Borel measurable by [A2]. By [F4] their laws are $\\chi_r^2$ and $\\chi_{n-r}^2$, and their independence follows from step 2.1 because measurable functions of independent random vectors remain independent by [F5]. When a block is empty its sum is $0$, so its law is $\\chi_0^2=\\delta_0$; the constant zero vector is independent of every random vector by [F5].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "A2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n≥1, so the empty coordinate space is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 cover r=0 and identify the empty sum as χ²₀=δ₀. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the permitted ranks r=0 and r=1 are both included by the same decomposition. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rank-zero and rank-n projections are covered explicitly in steps 1.1–3.1. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The rank endpoints r=0 and r=n are stated and handled in step 3.1. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records the AC used by orthogonal Gaussian invariance in step 2.1. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way decomposition result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way decomposition result, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "projection-rank-endpoints",
+          "claim": "For r=0 the first squared norm is 0 and for r=n the complementary squared norm is 0.",
+          "result": "Step 3.1 identifies each empty coordinate sum as χ²₀=δ₀; the constant zero vector is independent of every random vector."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "Inherited from standard-normal construction and finite-Borel uniqueness in the orthogonal-invariance supplier, used in step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Reviewed steps 1.1--3.1 and exact spectral, self-adjoint idempotent, grouping-independence and measurable-function suppliers. Eigenvalues are 0/1, with exactly r ones. U^T Z has independent normal coordinates by the already reviewed invariance result; zero-padded blocks are measurable and depend on disjoint coordinate sigma-algebras. Norms are their independent sums of squares. Both r=0 and r=n use empty sums and trivial constant-block sigma-algebras, giving Dirac-zero laws without ratio denominators. AC=>countable choice covers all Borel maps. No defect."
+      }
+    },
+    "def-student-t-and-f-laws": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both ratio definitions require positive integer degrees of freedom."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition excludes zero degrees; both maps assign zero to every nonpositive denominator input, making them total on R squared. Positive-degree chi-square inputs lie in the positive region almost surely."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definitions permit each numerator and denominator degree to equal one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Positive-degree chi-square variables are positive almost surely, so the ratio denominators do not degenerate at zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in the definitions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes AC for the normal construction; positive denominators are supplied by the positive-degree chi-square lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition constructs t_k and F_{r,s} by independent normal/χ-square ratios and explicit zero-denominator versions. There is no characterization of numerator and denominator laws from the resulting ratio."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition excludes zero degrees and uses positive denominators almost surely; possessing a t or F output law is not asserted to recover the independent input product law."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "minimum-degrees",
+          "claim": "The smallest permitted t degree and either smallest permitted F degree is one.",
+          "result": "All denominators then have χ²₁ laws and are positive almost surely by the preceding lemma."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "Assumed through the imported normal and chi-square constructions, Borel measurability prerequisites, and positive-degree chi-square denominator-positivity lemma."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Reviewed Definition and its already reviewed chi-square supplier plus exact product-measure/product-joint-law and Borel-map statements. Positive integer degrees give product probability realizations; the quotient maps are continuous on their positive-denominator domains with constant Borel extension at zero. Chi-square positivity makes these versions equal to the usual ratios almost surely and independent of realizations. Neither degree-zero denominators nor arbitrary dependent pairs are admitted. AC is explicit. No defect."
+      }
+    },
+    "cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $k\\ge1$, the law $\\chi_k^2$ has density\n$$\nf_k(x)=c_k x^{k/2-1}e^{-x/2}\\mathbf 1_{\\{x>0\\}},\\qquad c_k=\\frac{\\sigma_{k-1}(S^{k-1})}{2(2\\pi)^{k/2}}>0,\n$$\nwhere $\\sigma_{k-1}$ is the polar surface measure on the unit sphere in $\\mathbb R^k$. Consequently, $Q_k>0$ almost surely, and its cumulative distribution function is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $k\\ge1$, the law $\\chi_k^2$ has density\n$$\nf_k(x)=c_k x^{k/2-1}e^{-x/2}\\mathbf 1_{\\{x>0\\}},\\qquad c_k=\\frac{\\sigma_{k-1}(S^{k-1})}{2(2\\pi)^{k/2}}>0,\n$$\nwhere $\\sigma_{k-1}$ is the polar surface measure on the unit sphere in $\\mathbb R^k$. Consequently, $Q_k>0$ almost surely, and its cumulative distribution function is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For two coordinates, apply $U=2^{-1/2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$ to $(R_1,R_2)^T$. The events $A=\\{|(UR)_1|=\\sqrt2\\}$ and $B=\\{|(UR)_2|=\\sqrt2\\}$ each have probability $1/2$, while $A\\cap B=\\varnothing$: $A$ occurs exactly when $R_1=R_2$ and $B$ exactly when $R_1=-R_2$. If the transformed coordinates were independent, $P(A\\cap B)$ would be $1/4$, contradicting its actual value $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For three independent Rademacher observations, the event $E=\\{R_1=R_2=R_3\\}$ has probability $2/8=1/4$. On $E$, $\\bar R=\\pm1$ and $S^2=\\frac12\\sum_{i=1}^3(R_i-\\bar R)^2=0$, so the usual studentized mean $\\bar R/(S/\\sqrt3)$ is not a real-valued statistic on an event of positive probability. It therefore cannot have the $t_2$ law, which is a probability law on $\\mathbb R$ with a positive chi-square denominator almost surely by [A1, F1].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $n=2$, take the full fixed design with one intercept column $(1,1)^T$ and the reduced zero-dimensional design whose mean space is $\\{0\\}$. Under the null intercept $0$, the errors are $(R_1,R_2)^T$. On $E_+=\\{R_1=R_2\\}$, which has probability $1/2$, the full-model residual sum is $RSS_U=0$ while the reduced residual sum is $RSS_R=2$. Thus the nested F ratio has positive numerator and zero denominator (or is $+\\infty$ under extended-value convention), so it is not an almost surely finite $F_{1,1}$ variable.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite Rademacher sample space is nonempty and all random variables are defined on it. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 exhibit positive-probability events on which studentized/F denominators are zero. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-coordinate rotation is the smallest nontrivial orthogonal example in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 show zero residual denominators with probabilities 1/4 and 1/2. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint parameter occurs in the counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite Rademacher computations require no choice; A1 uses AC only for comparison t/F laws. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal assertion by counterexample; it is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal assertion by counterexample; it is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "hadamard-rademacher-table",
+          "claim": "Under U=2^(−1/2)[[1,1],[1,−1]], |(UR)₁|=√2 iff R₁=R₂ and |(UR)₂|=√2 iff R₁=−R₂.",
+          "result": "Each event has probability 1/2 and they are disjoint, so the transformed coordinates cannot be independent."
+        },
+        {
+          "id": "three-point-zero-variance",
+          "claim": "For three independent Rademachers, P(R₁=R₂=R₃)=1/4.",
+          "result": "On this event the sample variance is zero and the t ratio is not a real-valued statistic."
+        },
+        {
+          "id": "two-point-f-denominator",
+          "claim": "For two independent Rademachers, P(R₁=R₂)=1/2.",
+          "result": "On this event the full intercept model has zero residual sum and the nested F ratio is not finite."
+        },
+        {
+          "id": "finite-rademacher-product-space",
+          "claim": "The finite witness uses Ω={−1,1}³ with uniform mass 1/8 and coordinate maps R_i.",
+          "result": "There are eight sign triples, each of probability (1/2)³; hence the three coordinate maps are independent and each is a fair Rademacher variable."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "Assumed for the imported t/F definitions and positive-degree chi-square denominator-positivity lemma in A1; finite Rademacher calculations use no choice."
+        }
+      ]
+    },
+    "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $k\\ge1$, the law $\\chi_k^2$ has density\n$$\nf_k(x)=c_k x^{k/2-1}e^{-x/2}\\mathbf 1_{\\{x>0\\}},\\qquad c_k=\\frac{\\sigma_{k-1}(S^{k-1})}{2(2\\pi)^{k/2}}>0,\n$$\nwhere $\\sigma_{k-1}$ is the polar surface measure on the unit sphere in $\\mathbb R^k$. Consequently, $Q_k>0$ almost surely, and its cumulative distribution function is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\Phi$ be the standard-normal CDF. For $x<y$, [F1]–[F2] give $\\Phi(y)-\\Phi(x)=\\int_x^y\\phi(z)\\,dz>0$. On every bounded interval $\\phi$ is bounded, so $|\\Phi(y)-\\Phi(x)|\\le M|y-x|$ there and $\\Phi$ is continuous. The events $\\{G\\le m\\}$ and $\\{G>-m\\}$ increase to the whole space as integer $m\\to\\infty$; [F7] and total mass one give the CDF limits $1$ and $0$. Thus $\\Phi$ is continuous and strictly increasing on $\\mathbb R$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $x\\le0$, $F_{r,s}(x)=0$ because its ratio is positive almost surely. For $x>0$, conditioning on $Q_s=q>0$ gives $F_{F_{r,s}}(x)=\\int_{(0,\\infty)}F_{\\chi_r^2}(xrq/s)\\,d\\chi_s^2(q)$. If $x_j\\to x>0$, continuity of the inner chi-square CDF and [F5] give continuity of this integral. If $0<x<y$, strict increase of the inner CDF on $(0,\\infty)$ and positivity of $Q_s$ give a strict inequality between the two integrals. Dominated convergence as $x\\downarrow0$ and $x\\to\\infty$ gives limits $0$ and $1$. Hence the F CDF is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the product space defining $t_k$, condition on $Q_k=q>0$. Independence and [F6] give $F_{t_k}(x)=\\int_{(0,\\infty)}\\Phi(x\\sqrt{q/k})\\,d\\chi_k^2(q)$. If $x_j\\to x$, the integrands converge pointwise and are bounded by $1$, so [F5] makes $F_{t_k}(x_j)\\to F_{t_k}(x)$. If $x<y$, then $\\Phi(y\\sqrt{q/k})>\\Phi(x\\sqrt{q/k})$ for every $q>0$ by step 1.1, and [F3] says this is a full-measure set; integrating gives $F_{t_k}(y)>F_{t_k}(x)$. Dominated convergence as $x\\to\\pm\\infty$ gives limits $1$ and $0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The law $t_k$ is symmetric: replacing $G$ by $-G$ preserves the product law in [F4] and sends $T_k$ to $-T_k$. Continuity from step 2.1 therefore gives $F_{t_k}(0)=1/2$ and $F_{t_k}(-x)=1-F_{t_k}(x)$. For either law and any $u\\in(0,1)$, the CDF limits and continuity give points $a<b$ in its support with $F(a)<u<F(b)$; [F8] applied on $[a,b]$ gives a point with CDF value $u$, and strict increase gives uniqueness. These unique points are the stated quantiles. In particular, for $0<\\alpha<1$, $q_{1-\\alpha/2}>0$ because $F_{t_k}(0)=1/2<1-\\alpha/2$ and the CDF is strictly increasing.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Degrees of freedom are assumed positive integers."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 proves the F CDF is zero on (−∞,0], and step 3.1 gives F_t(0)=1/2. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Every argument in steps 1.1–3.1 allows k=r=s=1. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Positive degrees and the density lemma rule out degenerate ratio components."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.2, 2.1, and 3.1 prove the tail limits, continuity, existence and uniqueness of quantiles. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records AC and derived Countable Choice for the density and product-law suppliers. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma establishes regularity and quantile existence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma establishes regularity and quantile existence, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "central-t-quantile",
+          "claim": "For 0<α<1, q_(1−α/2)>0.",
+          "result": "Step 4.1 uses F_t(0)=1/2<1−α/2 and strict increase to establish positivity."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "A1 supplies Countable Choice for the normal-density result; the standard-normal product laws use AC."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Reviewed steps 1.1, 1.2, 2.1 and 3.1 with the exact normal-density, chi-square, product-law, Tonelli, DCT, increasing-union and IVT statements. F scaling is xrq/s, and t scaling is x sqrt(q/k), both derived from the defining inequalities with q>0. Majorant 1 is integrable under each denominator probability law, including at the F zero endpoint and both infinity limits. Strict inequalities hold on the full positive-denominator set and integrate strictly. Symmetry uses the even normal density and independence, then absence of atoms gives F_t(-x)=1-F_t(x). IVT is applied on finite closed intervals within the strictly increasing domains for u in (0,1); endpoints u=0,1 are excluded. Positive degrees are the integer degrees of the preceding definition. No defect."
+      }
+    },
+    "thm-gaussian-linear-model-qr-and-exact-t-f-pivots": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gram-schmidt-orthonormalisation",
+          "source_section": "Statement",
+          "quote": "Let $(v_0,\\ldots,v_{r-1})$ be a finite linearly independent list in a real or complex inner product space. There is an orthonormal list $(e_0,\\ldots,e_{r-1})$ such that, for every $k\\le r$,\n\n$$\\operatorname{span}(e_0,\\ldots,e_{k-1})=\\operatorname{span}(v_0,\\ldots,v_{k-1}).$$\n\nIt is obtained recursively from\n\n$$u_k=v_k-\\sum_{j<k}\\langle v_k,e_j\\rangle e_j,\\qquad e_k=\\frac{u_k}{\\lVert u_k\\rVert}.$$\n\nFor $r=0$, both lists are empty.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$ have independent standard-normal coordinates, and let $U\\in\\mathbb R^{n\\times n}$ satisfy $U^TU=I_n$. Then $UZ$ also has independent $N(0,1)$ coordinates. Here $I_n$ is the identity matrix and $U$ is orthogonal.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $k\\ge1$, the law $\\chi_k^2$ has density\n$$\nf_k(x)=c_k x^{k/2-1}e^{-x/2}\\mathbf 1_{\\{x>0\\}},\\qquad c_k=\\frac{\\sigma_{k-1}(S^{k-1})}{2(2\\pi)^{k/2}}>0,\n$$\nwhere $\\sigma_{k-1}$ is the polar surface measure on the unit sphere in $\\mathbb R^k$. Consequently, $Q_k>0$ almost surely, and its cumulative distribution function is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every $k\\ge1$, the CDF of $t_k$ is continuous and strictly increasing on $\\mathbb R$, is symmetric about zero, and has limits $0$ and $1$ at $-\\infty$ and $+\\infty$. For every $r,s\\ge1$, the CDF of $F_{r,s}$ is continuous on $\\mathbb R$, is zero on $(-\\infty,0]$, and is strictly increasing on $(0,\\infty)$ with limit $1$ at $+\\infty$. Consequently, for each $u\\in(0,1)$ each law has exactly one $u$-quantile on its support.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-orthogonal-projection-formula-and-linearity",
+          "source_section": "Statement",
+          "quote": "Let $(e_0,\\ldots,e_{r-1})$ be an orthonormal basis of a subspace $W$ of a finite-dimensional inner product space $V$. Then\n\n$$P_Wv=\\sum_{i<r}\\langle v,e_i\\rangle e_i.$$\n\nThe map $P_W$ is linear, with image $W$, kernel $W^\\perp$, and $P_W^2=P_W$. Moreover, regarding both projections as endomorphisms of $V$,\n\n$$I-P_W=P_{W^\\perp}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in an inner product space:\n\n1. if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;\n2. $\\lVert u+v\\rVert^2+\\lVert u-v\\rVert^2=2\\lVert u\\rVert^2+2\\lVert v\\rVert^2$;\n3. over $\\mathbb R$, $\\langle u,v\\rangle=\\frac14(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2)$;\n4. over $\\mathbb C$ with the linear-first convention,\n$$\\langle u,v\\rangle=\\frac14\\bigl(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2+i\\lVert u+iv\\rVert^2-i\\lVert u-iv\\rVert^2\\bigr).$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By full column rank, the columns of $X$ are linearly independent. Apply [F2] to obtain orthonormal columns of $Q\\in\\mathbb R^{n\\times p}$ with the same successive spans. Expressing each column of $X$ in this basis gives $X=QR$, where $R$ is upper triangular; its diagonal entries are the nonzero Gram–Schmidt residual norms, so $R$ is invertible. By [F3], extend the columns of $Q$ to an orthonormal basis $[Q\\ Q_0]$ of $\\mathbb R^n$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $U=[Q\\ Q_0]$. Then $U$ is orthogonal. Standardizing the independent errors gives $\\eta=\\varepsilon/\\sigma$ with independent standard-normal coordinates, so [F4] makes $U^T\\eta=(Z_Q,Z_0)$ a standard-normal product vector with independent coordinate blocks. Since $X=QR$ and $X^TX=R^TR$, the normal-equation solution in [F1] is $\\widehat\\beta=R^{-1}Q^TY=\\beta+\\sigma R^{-1}Z_Q$. Substituting $X=QR$ and $(R^TR)^{-1}=R^{-1}R^{-T}$ gives $P_X=Q R(R^TR)^{-1}R^TQ^T=Q[RR^{-1}R^{-T}R^T]Q^T=QQ^T$, because $RR^{-1}=I_p$ and $R^{-T}R^T=I_p$. Since $U$ is orthogonal, $I_n-P_X=Q_0Q_0^T$. Thus $(I_n-P_X)Y=\\sigma Q_0Z_0$, so $RSS_X/\\sigma^2=\\|Z_0\\|^2\\sim\\chi_{n-p}^2$ by [F5]. By [A2] and [F7], the linear maps defining $\\widehat\\beta$ and $Q_0Z_0$, and the squared-norm map defining $RSS_X$, are Borel; hence these quantities are measurable functions of the independent coordinate blocks and $\\widehat\\beta$ is independent of $RSS_X$ by [F4]. The map defining $\\widehat\\beta$ is linear and Borel, so it is a statistic for the stated experiment. The residual map and squared norm are continuous, so $RSS_X$ and $S$ are continuous. The piecewise t version in the Statement is Borel: its quotient is continuous on the Borel set $S>0$ and its value on $S=0$ is constant. Its denominator has positive degree $n-p$, hence $S>0$ almost surely by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $c\\ne0$, put $v=R^{-T}c$. Invertibility of $R$ gives $v\\ne0$. Complete $v/\\|v\\|$ to an orthonormal basis of $\\mathbb R^p$ by [F3]; applying [F4] to the resulting orthogonal matrix shows $G_c=v^TZ_Q/\\|v\\|\\sim N(0,1)$. Under [A2], the continuous linear map defining $G_c$ is Borel. It is independent of $Q_0:=\\|Z_0\\|^2\\sim\\chi_{n-p}^2$, because $Z_Q$ and $Z_0$ are independent blocks and $G_c$ and the squared-norm map are measurable functions of those blocks. Since $X^TX=R^TR$, $\\|v\\|^2=c^TR^{-1}R^{-T}c=c^T(X^TX)^{-1}c$. Thus on $Q_0>0$ the displayed contrast ratio is $G_c/\\sqrt{Q_0/(n-p)}$; on $Q_0=0$ its version $\\widetilde T_c$ is zero. This is exactly the extension in the definition of $t_{n-p}$, so [F5]–[F6] give $\\widetilde T_c\\sim t_{n-p}$.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the nested models, let $W_D=W_U\\cap W_R^\\perp$. The finite-dimensional orthogonal decompositions in [F3] give $\\mathbb R^n=W_R\\oplus W_D\\oplus W_U^\\perp$, with dimensions $p-q,q,n-p$. Choose orthonormal bases in these three spaces and concatenate them into an orthogonal matrix $V$. By [F4], the coordinates of $V^T\\varepsilon/\\sigma$ in the three blocks are independent standard normals. Under the null, $P_R(X\\beta)=P_U(X\\beta)=X\\beta$, so $(I-P_R)Y=(I-P_R)\\varepsilon=P_{W_D}\\varepsilon+P_{W_U^\\perp}\\varepsilon$ and $(I-P_U)Y=(I-P_U)\\varepsilon=P_{W_U^\\perp}\\varepsilon$: here [F8] identifies $I-P_R=P_{W_R^\\perp}$ and $I-P_U=P_{W_U^\\perp}$, while the direct sum in [F3] splits the first projection into the two orthogonal components. The coordinate-block maps and the linear projections are continuous, and squared norms are continuous, so [A2] and [F7] make all these random vectors and real variables measurable. Orthogonality and [F9] give $RSS_R-RSS_U=\\sigma^2\\sum_{j=1}^{q}G_j^2$ and $RSS_U=\\sigma^2\\sum_{j=1}^{n-p}H_j^2$, where the $G$ and $H$ coordinate blocks are independent standard-normal blocks. By [F5] these sums are independent $\\sigma^2\\chi_q^2$ and $\\sigma^2\\chi_{n-p}^2$ variables; both degrees are positive. The piecewise ratio $\\widetilde F$ is Borel, since it is continuous on the Borel set $RSS_U>0$ and constant on $RSS_U=0$. Its value is the scaled ratio on $Q_H:=\\sum_{j=1}^{n-p}H_j^2>0$ and $0$ when $Q_H=0$; by [F6] this is exactly the defined $F_{q,n-p}$ version. The F denominator is positive almost surely by [F5], so $\\widetilde F\\sim F_{q,n-p}$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires n>p≥1 and 1≤q≤p; no empty full design/sample is allowed. It permits the reduced subspace dimension p−q=0 when q=p; step 4.1 includes the zero-dimensional reduced block."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement assumes σ²>0 and c≠0. Step 3.1 gives cᵀ(XᵀX)^−1c=||R^−Tc||²>0; step 2.1 gives S>0 almost surely and the piecewise definition sets the zero-denominator event to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows p=q=1,n=2: numerator and residual degrees both equal one. Steps 3.1 and 4.1 use only their positivity, so this smallest design case is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes rank-deficient X by linearly independent columns and excludes σ²=0. Steps 2.1/4.1 nevertheless define measurable zero-denominator versions on the corresponding probability-zero residual events."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement permits q=p but excludes q=0 and p=n; step 4.1 yields q and n−p positive chi-square degrees at those allowed dimension endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 obtains QR from a finite Gram–Schmidt list and completes a finite basis; A1/A2 carry AC and its Countable Choice consequence through normal and Borel-measurability suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem supplies independent residual sums and exact t/F laws under a fixed full-rank Gaussian design, not a characterization of all error laws."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exact ratio law is not asserted to imply Gaussian errors or full rank for an arbitrary regression experiment."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "minimum-positive-degrees",
+          "claim": "For p=1,n=2,q=1, the t/F denominator degree n−p=1 and F numerator degree q=1.",
+          "result": "Both chi-square components have positive degree and are positive almost surely."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "Inherited by the Gaussian construction and orthogonal-invariance result, used in steps 2.1–4.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Reviewed all four proof steps with the actual full-rank least-squares, Gram--Schmidt, orthogonal-decomposition/basis, projection/Pythagoras and statistic supplier statements. X=QR yields invertible R and P_X=QQ^T; standardizing with sigma>0 gives independent Q and residual blocks. The coefficient statistic is linear/Borel and its residual sum has sigma^2 chi-square(n-p) law. For fixed nonzero c, v=R^{-T}c is nonzero and ||v||^2=c^T(X^TX)^{-1}c>0; the rotated standard-normal contrast is independent of the positive residual chi-square. Under the nested-model null, W_R, W_U intersect W_R-perp and W_U-perp form orthogonal blocks of dimensions p-q, q and n-p, so RSS_R-RSS_U and RSS_U are the independent scaled chi-square contributions. q=p includes the zero-dimensional reduced space; q>=1 and n>p ensure positive ratio degrees. Piecewise-zero extensions are Borel and agree almost surely with the finite ratios. AC/countable-choice assumptions are preserved. No defect."
+      }
+    },
+    "thm-normal-mean-residual-independence-and-exact-t-pivot": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-orthogonal-projection-has-independent-chi-square-sums",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$, and let $P\\in\\mathbb R^{n\\times n}$ be an orthogonal projection of rank $r$, where $0\\le r\\le n$. Then the random vectors $PZ$ and $(I_n-P)Z$ are independent, and\n$$\n\\|PZ\\|^2\\sim\\chi_r^2,\\qquad \\|(I_n-P)Z\\|^2\\sim\\chi_{n-r}^2.\n$$\nThe two squared norms are independent. The cases $r=0$ and $r=n$ are included, with $\\chi_0^2=\\delta_0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $k\\ge1$, the law $\\chi_k^2$ has density\n$$\nf_k(x)=c_k x^{k/2-1}e^{-x/2}\\mathbf 1_{\\{x>0\\}},\\qquad c_k=\\frac{\\sigma_{k-1}(S^{k-1})}{2(2\\pi)^{k/2}}>0,\n$$\nwhere $\\sigma_{k-1}$ is the polar surface measure on the unit sphere in $\\mathbb R^k$. Consequently, $Q_k>0$ almost surely, and its cumulative distribution function is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every $k\\ge1$, the CDF of $t_k$ is continuous and strictly increasing on $\\mathbb R$, is symmetric about zero, and has limits $0$ and $1$ at $-\\infty$ and $+\\infty$. For every $r,s\\ge1$, the CDF of $F_{r,s}$ is continuous on $\\mathbb R$, is zero on $(-\\infty,0]$, and is strictly increasing on $(0,\\infty)$ with limit $1$ at $+\\infty$. Consequently, for each $u\\in(0,1)$ each law has exactly one $u$-quantile on its support.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A2], Countable Choice holds, so [F2] applies to the linear continuous map $x\\mapsto\\bar x$; hence it is a statistic on the stated Borel data space. Put $Z_i=(X_i-\\mu)/\\sigma$. The affine pushforward definition in [F1] gives each $Z_i\\sim N(0,1)$, and [F1] preserves their independence. Thus $Z=(Z_1,\\ldots,Z_n)\\sim N_n(0,I_n)$ by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Define $\\bar Z=n^{-1}\\sum_{i=1}^nZ_i$, $u=n^{-1/2}(1,\\ldots,1)^T$, and $P=uu^T$. Since $u^Tu=1$, $P$ is a rank-one orthogonal projection. We have $u^TZ=\\sqrt n\\,\\bar Z$ and $X-\\bar X(1,\\ldots,1)^T=\\sigma(I_n-P)Z$. Therefore $\\bar X=\\mu+\\sigma u^TZ/\\sqrt n$ and $S^2=\\sigma^2\\|(I_n-P)Z\\|^2/(n-1)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], $PZ$ and $(I_n-P)Z$ are independent and $Q:=\\|(I_n-P)Z\\|^2\\sim\\chi_{n-1}^2$. The continuous linear map $z\\mapsto u^Tz$ is Borel by [A2] and [F2], and $u^TZ=u^TPZ$; the continuous squared-norm map on the complementary vector is likewise Borel. Thus $G:=u^TZ$ and $Q$ are measurable functions of the independent vectors in [F3], so they are independent by [F1]. By [F4], $G\\sim N(0,1)$.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The formulas in step 2.1 express $\\bar X$ as an affine function of $G$ and $S^2$ as $\\sigma^2 Q/(n-1)$. Hence $\\bar X$ and $S^2$ are independent, $(n-1)S^2/\\sigma^2=Q\\sim\\chi_{n-1}^2$, and $S>0$ almost surely by [F5].",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The set $\\{S>0\\}$ is Borel and the displayed quotient is continuous there; assigning $0$ on $\\{S=0\\}$ therefore makes $\\widetilde T$ measurable. Since $S=0$ exactly when $Q=0$, step 2.1 gives $\\widetilde T=G/\\sqrt{Q/(n-1)}$ on $\\{Q>0\\}$ and both versions are $0$ on $\\{Q=0\\}$. The variables $G$ and $Q$ are independent with laws $N(0,1)$ and $\\chi_{n-1}^2$, so [F5] gives $\\widetilde T\\sim t_{n-1}$.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $q=q_{n-1}(1-\\alpha/2)$. By [F5], the $t_{n-1}$ CDF is continuous and symmetric, so $F_{t_{n-1}}(0)=1/2<1-\\alpha/2$ and strict increase gives $q>0$; symmetry then gives $F_{t_{n-1}}(-q)=\\alpha/2$. Step 5.1 therefore gives $\\mathbb P(-q\\le\\widetilde T\\le q)=1-\\alpha$. On the full-probability event $\\{S>0\\}$ from step 4.1, this event is exactly $\\{\\mu\\text{ lies in the displayed interval}\\}$ by multiplying by $S/\\sqrt n$ and rearranging. The events agree almost surely, so the interval has exact coverage $1-\\alpha$.",
+          "step": "6.1",
+          "inputs": [
+            "F5",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes n≥2, so the sample is nonempty and the divisor n−1 in S² is positive; no n=0 or n=1 t-pivot is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement assumes σ>0; step 4.1 gives S>0 almost surely from positive degree n−1. Step 5.1 uses the explicitly defined zero value when S=0, avoiding an undefined denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement minimum n=2 gives residual degree n−1=1. Steps 3.1–5.1 require only this positive degree and therefore cover that smallest sample."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes σ=0 but retains a measurable pivot on the null event S=0 by its piecewise value zero; step 5.1 checks the two versions agree there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement restricts 0<α<1; step 6.1 uses 1−α/2>1/2 to obtain a finite positive quantile and the central coverage probability. α=0,1 quantile endpoints are not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use A1/A2 for AC-backed normal laws and Countable Choice-backed continuous Borel maps; the rank-one projection u uᵀ in step 2.1 is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves normal mean/residual independence and an exact pivot, not a characterization of distributions by sample independence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Exact t coverage is not claimed to imply an IID Gaussian model; the hypotheses are only used in the stated forward construction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "minimum-sample-size",
+          "claim": "At n=2 the residual degrees of freedom are n−1=1.",
+          "result": "The positive-degree chi-square lemma still gives S>0 almost surely, so the t pivot is well-defined."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "Inherited from standard-normal construction, characteristic-function uniqueness and orthogonal invariance in steps 1.1–2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-10",
+        "notes": "Reviewed all six proof steps and exact normal affine-pushforward, multivariate projection, statistic, independence and local chi-square/t/CDF suppliers. With n>=2 and sigma>0 the standardized sample is product-normal, u=n^(-1/2)1 is unit and P=uu^T has rank 1. Mean and residual are measurable functions of independent projection blocks; u^T Z is standard normal and residual norm-squared is chi-square(n-1). S>0 almost surely, and the Borel zero-extension of the studentized mean is exactly the defining independent t ratio. For 0<alpha<1 the unique central quantile is positive, symmetry and continuity give central mass 1-alpha, and multiplication by S/sqrt(n)>0 identifies the interval event almost surely. n=2 and arbitrarily small positive sigma are admitted; n=1, sigma=0 and endpoint alpha values are excluded. The statistic supplier is used only for Borel data-map typing. AC/countable choice are explicit. No defect."
+      }
+    },
+    "ex-fixed-design-regression-contrast-and-f-test": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-linear-model-qr-and-exact-t-f-pivots",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix a deterministic matrix $X\\in\\mathbb R^{n\\times p}$ with $n>p\\ge1$ whose $p$ columns are linearly independent. Use the experiment on $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ indexed by $(\\beta,\\sigma^2)\\in\\mathbb R^p\\times(0,\\infty)$, with observation $Y=X\\beta+\\varepsilon$ and independent errors $\\varepsilon_i\\sim N(0,\\sigma^2)$. Define the least-squares statistic and residual sum of squares by\n$$\\widehat\\beta=(X^TX)^{-1}X^TY,\\qquad P_X=X(X^TX)^{-1}X^T,\\qquad RSS_X=\\|(I_n-P_X)Y\\|^2,\\qquad S^2=\\frac{RSS_X}{n-p},\\qquad S=\\sqrt{S^2}.$$\nFor every nonzero $c\\in\\mathbb R^p$,\n$$\\widetilde T_c:=\\begin{cases} \\dfrac{c^T\\widehat\\beta-c^T\\beta}{S\\sqrt{c^T(X^TX)^{-1}c}},&S>0,\\\\ 0,&S=0 \\end{cases} \\sim t_{n-p},\\qquad \\frac{RSS_X}{\\sigma^2}\\sim\\chi_{n-p}^2,$$\nand $\\widehat\\beta$ is independent of $RSS_X$, with $S>0$ almost surely.\n\nFor nested deterministic full and reduced design spaces $W_R\\subset W_U\\subseteq\\mathbb R^n$ of dimensions $p-q$ and $p$, where $q$ is an integer and $1\\le q\\le p<n$, let $P_R,P_U$ be the orthogonal projections onto these spaces and define $RSS_R=\\|(I-P_R)Y\\|^2$ and $RSS_U=\\|(I-P_U)Y\\|^2$. Under the null hypothesis that the mean vector belongs to $W_R$,\n$$\\widetilde F:=\\begin{cases} \\dfrac{(RSS_R-RSS_U)/q}{RSS_U/(n-p)},&RSS_U>0,\\\\ 0,&RSS_U=0 \\end{cases} \\sim F_{q,n-p}.$$\nThe numerator and denominator chi-square contributions are independent. All t and F denominator degrees of freedom in the statement are positive.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1-1",
+          "claim": "The two design columns are orthogonal: their inner product is $1(-1)+1(-1)+1(1)+1(1)=0$, and each has squared norm $4$. Hence $X^TX=4I_2$. The displayed least-squares coefficients are $\\widehat\\beta_0=(1+2+4+5)/4=3$ and $\\widehat\\beta_1=(-1-2+4+5)/4=3/2$. The full fitted values are $(3/2,3/2,9/2,9/2)$, so the residuals are $(-1/2,1/2,-1/2,1/2)$ and $RSS_U=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The reduced fit is the sample mean $3$, with residuals $(-2,-1,1,2)$ and $RSS_R=10$. For $c=(0,1)^T$, $c^T(X^TX)^{-1}c=1/4$ and $S^2=RSS_U/(4-2)=1/2$, so the observed null t statistic is $(3/2)/\\sqrt{(1/2)(1/4)}=3\\sqrt2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The rank difference is one and the denominator degrees of freedom are $4-2=2$. Therefore $F=((RSS_R-RSS_U)/1)/(RSS_U/2)=18$. Under the normal model and the null $\\beta_1=0$, [F1] gives the exact $F_{1,2}$ law; the t contrast has the exact $t_2$ law and its square agrees with $F$ here.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed design and response each have four coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 give positive full residual sum RSS_U=1, so the observed t/F denominators are positive. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The design has two columns and one tested contrast; the nested-model numerator degree is q=1. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The design columns are linearly independent and the observed residual sum is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The model has n=4,p=2,q=1, so both F degrees and the t residual degree are positive. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Exact-law comparison follows from the AC-assuming regression theorem; finite matrix arithmetic uses none. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example computes βhat=(3,3/2), RSS_U=1, RSS_R=10 and observed t=3√2,F=18 for one design/data set. Its t²=F numerical equality is not an iff characterization of fixed-design normal models."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example imports exact null laws from the Gaussian QR theorem. Neither F=18 nor t=3√2 is claimed to imply Gaussian errors or the slope-null premise; they are observed values."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "design-crossproduct",
+          "claim": "For the two displayed columns, XᵀX=4I₂.",
+          "result": "The columns each have squared norm 4 and their inner product is 0, as computed in step 1.1."
+        },
+        {
+          "id": "residual-sums-and-pivots",
+          "claim": "RSS_U=1, RSS_R=10, t=3√2 and F=18.",
+          "result": "Steps 1.1–3.1 compute these values;  (3√2)²=18, matching the one-degree nested F statistic."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "Inherited for the normal-theory law statements from the regression theorem; calculations for the fixed y are choice-free."
+        }
+      ]
+    },
+    "ex-one-sample-unknown-variance-t-interval": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-normal-mean-residual-independence-and-exact-t-pivot",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Use the experiment with data space $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$, parameter set $\\mathbb R\\times(0,\\infty)$, and sampling law $P_{\\mu,\\sigma^2}=N(\\mu,\\sigma^2)^{\\otimes n}$. Let $n\\ge2$, $\\sigma>0$, and let $X_1,\\ldots,X_n$ be the independent coordinates of the observation. Define\n$$\\bar X=\\frac1n\\sum_{i=1}^nX_i,\\qquad S^2=\\frac1{n-1}\\sum_{i=1}^n(X_i-\\bar X)^2,\\qquad S=\\sqrt{S^2}.$$\nThe map $x\\mapsto\\bar x$ is a statistic. The sample mean $\\bar X$ and residual sum $S^2$ are independent,\n$$\\frac{(n-1)S^2}{\\sigma^2}\\sim\\chi_{n-1}^2,\\qquad S>0\\ \\text{almost surely},\\qquad \\widetilde T:=\\begin{cases} \\dfrac{\\bar X-\\mu}{S/\\sqrt n},&S>0,\\\\ 0,&S=0 \\end{cases} \\sim t_{n-1}.$$\nFor every $0<\\alpha<1$, the interval\n$$\\left[\\bar X-q_{n-1}(1-\\alpha/2)\\frac{S}{\\sqrt n},\\ \\bar X+q_{n-1}(1-\\alpha/2)\\frac{S}{\\sqrt n}\\right]$$\nhas exact coverage $1-\\alpha$, where $q_{n-1}(u)$ is the unique $u$-quantile of $t_{n-1}$ established in [[lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every $k\\ge1$, the CDF of $t_k$ is continuous and strictly increasing on $\\mathbb R$, is symmetric about zero, and has limits $0$ and $1$ at $-\\infty$ and $+\\infty$. For every $r,s\\ge1$, the CDF of $F_{r,s}$ is continuous on $\\mathbb R$, is zero on $(-\\infty,0]$, and is strictly increasing on $(0,\\infty)$ with limit $1$ at $+\\infty$. Consequently, for each $u\\in(0,1)$ each law has exactly one $u$-quantile on its support.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1-1",
+          "claim": "The arithmetic mean is $(1+2+4+5)/4=3$. The deviations from $3$ are $-2,-1,1,2$, whose squared sum is $4+1+1+4=10$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Dividing this sum by $n-1=3$ gives $s^2=10/3$, hence $s=\\sqrt{10/3}$. Substituting $n=4$, $\\alpha=5/100$, and the observed sample into [F1] yields the displayed interval with the unique quantile $t_{3,39/40}$ from [F2]; its repeated-sampling coverage is $1-\\alpha=95/100$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has a specified sample of four real observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes s²=10/3>0, so the observed interval has finite nonzero scale. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked sample size is fixed at n=4; the general n=2 edge belongs to the supplier theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The observed values are not all equal; the computed sample variance is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses α=5/100 strictly between zero and one, so the two-sided central quantile is defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The comparison law is supplied by the AC-assuming exact-t theorem; the arithmetic itself is choice-free. The item statement fixes these hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example substitutes observed mean3 and s²=10/3 into the normal t-interval procedure at level95%; it asserts repeated-sampling coverage, not an equivalence with the observed arithmetic values."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example explicitly distinguishes procedure coverage from probability assigned to a fixed parameter after observing data; no reverse inference of a normal model or coverage from this one realized interval is made."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "sample-mean-and-variance",
+          "claim": "For (1,2,4,5), x̄=3 and the squared-deviation sum is 10.",
+          "result": "The unbiased variance is 10/3 and s=√(10/3), as computed in steps 1.1–2.1."
+        },
+        {
+          "id": "coverage-level",
+          "claim": "At α=5/100, the central coverage is 1−α=95/100.",
+          "result": "The exact pivot theorem gives this repeated-sampling coverage; it is not a posterior probability."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "use": "Inherited for the normal-theory coverage statement from the exact-t supplier; finite sample arithmetic uses none."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1402 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qmd-path",
+    "lem-parametric-qmd-score-has-mean-zero",
+    "def-wald-score-likelihood-ratio-statistics",
+    "thm-regular-mle-asymptotic-linearity-and-normality",
+    "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+    "cor-wald-score-lr-asymptotic-equivalence",
+    "ex-normal-mean-exact-likelihood-calibration",
+    "cex-boundary-null-has-nonstandard-lr-limit"
+  ],
+  "contracts": {
+    "def-qmd-path": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition says ‘At an interior point $\\theta_0$’ after fixing the supplied parametric density family, each integrating to one. This QMD instance requires θ0∈Θ, so Θ cannot be empty; its L² expression compares two probability densities, not an empty-family supremum.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_manifest_serialization/gate3_boundaries_19_22",
+            "reason": "Definition says ‘At an interior point $\\theta_0$’ after fixing the supplied parametric density family, each integrating to one. This QMD instance requires θ0∈Θ, so Θ cannot be empty; its L² expression compares two probability densities, not an empty-family supremum."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows score s=0 and information I=0; QMD only requires the squared remainder o(||h||²)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition in dimension d=1 has a scalar score and scalar second-moment information, with the same square-root expansion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly allows singular information and densities zero on measurable sets; score values on {pθ0=0} do not affect the condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition requires θ0 interior to the full open parameter set; boundary-only QMD is not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition now supplies density versions as input rather than selecting them from domination; it explicitly asserts no choice principle or joint parameter measurability."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition fixes supplied densities and defines QMD by the displayed square-root-density L² remainder o(||h||²), with an L² score at an interior θ0; it does not derive this condition from domination."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition expressly says QMD does not assert pointwise differentiability or local mutual absolute continuity; neither a singular/nonsingular information value nor domination alone is asserted to imply QMD."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-wald-score-likelihood-ratio-statistics": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition d=q sets nuisance products to zero and C to the empty q×0 matrix; positive information remains required for the tested coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition assigns W_n=0 when the full maximizer is outside V, S_n=0 when the constrained maximizer is outside V, and either statistic zero when its estimated inverse does not exist. Consistency makes the off-chart events vanish under the calibration hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition q=1 yields one tested coordinate and scalar quadratic form; it gives no finite-sample distribution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition requires positive-definite I but permits singular estimated covariance/information at finite n by its explicit zero fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition uses a chart on an open neighborhood V of the interior true point. Global full/null maximizers are retained for LR, while W_n and S_n have explicit off-chart zero extensions without evaluating undefined coordinates or scores."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC supports the density representatives; maximizers and consistent matrix estimates are supplied as hypotheses and are not constructed by the definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition supplies L_n from two existing likelihood maxima, and W_n,S_n from a regular equality null and supplied consistent matrix estimates; its last paragraph assigns zero when an estimated inverse fails."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition ends by asserting no finite-sample or asymptotic distribution. Equality or χ² calibration of the named statistics is not claimed to characterize regularity, positive information, or existence of maxima."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Reviewed complete Definition and exact parametric-model, QMD, pointwise-score and AC suppliers. Full and null maximizers are global over Θ and Θ0, agreeing with LR suprema; local chart is for equality-null coordinates only. QMD/pointwise score compatibility is explicit. Schur-complement positivity follows from evaluating I on (z,-Iηη^{-1}Iηψ z); d=q empty blocks are specified. Consistent estimated inverse failures get zero fallback, with no distribution assertion. AC covers density representatives. Reader clarification is sound; consumers will be checked at their ordered positions. No reader/refuter finding."
+      }
+    },
+    "thm-regular-mle-asymptotic-linearity-and-normality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qmd-path",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\Theta$ be open in $\\mathbb R^d$, and let a supplied sigma-finite\nmeasure $\\mu$ dominate every $P_\\theta$\n([[def-parametric-statistical-model]], [[def-dominated-statistical-experiment]]).\nSupply as part of the setup a family of nonnegative finite-valued measurable\nfunctions $p_\\theta:\\mathcal X\\to[0,\\infty)$ satisfying\n$P_\\theta(A)=\\int_Ap_\\theta\\,d\\mu$ for every $A\\in\\mathcal A$\n([[def-measure-with-density]]). Thus each $p_\\theta$ integrates to one.\nThe density family is supplied, rather than selected from domination alone;\nno choice principle, joint measurability in $(\\theta,x)$, or common\nexceptional null set is asserted. A supplied extended-valued probability\ndensity can be made finite-valued by setting it to zero on its measurable\ninfinite-value set, which has measure zero because its integral is one.\nThe QMD condition is unchanged by replacing any supplied density by an\nalmost-everywhere equal version: for each fixed $h$, the norm in the\ncondition below changes only on the union of two null sets.\nAt an interior point $\\theta_0$, the model is\n**quadratic-mean differentiable (QMD)** with score $s_{\\theta_0}$ if\n$s_{\\theta_0}:\\mathcal X\\to\\mathbb R^d$ is measurable,\n$\\mathbb E_{\\theta_0}\\|s_{\\theta_0}(X)\\|^2<\\infty$, and\n$$\n\\int\\left(\\sqrt{p_{\\theta_0+h}}-\\sqrt{p_{\\theta_0}}- \\tfrac12 h^Ts_{\\theta_0}\\sqrt{p_{\\theta_0}}\\right)^2d\\mu=o(\\|h\\|^2)\n$$\nas $h\\to0$ with $\\theta_0+h\\in\\Theta$. Values of the score on\n$\\{p_{\\theta_0}=0\\}$ do not affect this condition. The Fisher information\nassociated with this QMD score is\n$I_{\\theta_0}=\\mathbb E_{\\theta_0}[s_{\\theta_0}s_{\\theta_0}^T]$; it may be\nsingular. QMD is an $L^2(\\mu)$ condition and does not assert pointwise\ndifferentiability of $p_\\theta$ or local mutual absolute continuity of\n$P_\\theta$ and $P_{\\theta_0}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. Assume in each application that $B(U_n,V_n)$ is a random vector on the same probability space as $U_n,V_n$, for every $n$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "Let $d,k,m\\ge1$ be fixed. For each $n$, let $X_n\\in\\mathbb R^d$ and $Y_n\\in\\mathbb R^k$ be random vectors on one probability space; the probability space may vary with $n$. Let $X\\in\\mathbb R^d$ be a random vector on any probability space, and let $c\\in\\mathbb R^k$ be constant. If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then\n$$ (X_n,Y_n)\\Rightarrow(X,c). $$\nConsequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$. No independence between $X_n$ and $Y_n$ is required.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then\n$$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-parametric-qmd-score-has-mean-zero",
+          "source_section": "Statement",
+          "quote": "Let a dominated finite-dimensional parametric model be quadratic-mean\ndifferentiable, with the supplied density family of [[def-qmd-path]], at an interior point $\\theta_0\\in\\mathbb R^d$, with score\n$s_{\\theta_0}\\in L^2(P_{\\theta_0};\\mathbb R^d)$. Then\n$\\mathbb E_{\\theta_0}s_{\\theta_0}=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $P_0=P_{\\theta_0}$, $S_0=\\{p_{\\theta_0}>0\\}$, and $r_t=\\sqrt{p_{\\theta_0+t}}-\\sqrt{p_{\\theta_0}}- \\tfrac12t^Ts_{\\theta_0}\\sqrt{p_{\\theta_0}}$. By [F3], $\\|r_t\\|_{L^2(\\mu)}=o(\\|t\\|)$, and [F12] gives $\\mathbb E_0s_{\\theta_0}=0$. On $S_0^c$ both $\\sqrt{p_{\\theta_0}}$ and $s_{\\theta_0}\\sqrt{p_{\\theta_0}}$ vanish, so the probability mass $\\alpha_t=\\int_{S_0^c}p_{\\theta_0+t}\\,d\\mu$ is $o(\\|t\\|^2)$. Expanding the QMD approximation in [F3] and applying [F9] to its cross term gives $\\|\\sqrt{p_{\\theta_0+t}}-\\sqrt{p_{\\theta_0}}\\|_2^2= \\tfrac14t^TIt+o(\\|t\\|^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Normalize the absolutely continuous part on $S_0$ by $q_t=p_{\\theta_0+t}\\mathbf1_{S_0}/(1-\\alpha_t)$, and put $a_t=\\sqrt{q_t/p_{\\theta_0}}-1$ on $S_0$. Since $\\alpha_t=o(\\|t\\|^2)$, [F3] gives $a_t=\\tfrac12t^Ts_{\\theta_0}+o_{L^2(P_0)}(\\|t\\|)$, so $\\mathbb E_0a_t^2=\\tfrac14t^TIt+o(\\|t\\|^2)$ and $2\\mathbb E_0a_t+\\mathbb E_0a_t^2=0$ from $\\mathbb E_0(1+a_t)^2=1$. The local envelope makes $f_t=\\log(p_{\\theta_0+t}/p_{\\theta_0})$ square-integrable on $S_0$ and $\\|f_t\\|_2=O(\\|t\\|)$. Along every sequence $t\\to0$ with $t/\\|t\\|\\to u$, the $L^2$ convergence of $a_t/\\|t\\|$ has an almost-everywhere convergent subsequence. On it, $2\\log(1+a_t)/\\|t\\|\\to u^Ts_{\\theta_0}$ pointwise. Since $|f_t|/\\|t\\|\\le L$ and $s_{\\theta_0}\\in L^2(P_0)$, $|f_t/\\|t\\|-u^Ts_{\\theta_0}|^2\\le2L^2+2\\|s_{\\theta_0}\\|^2$; dominated convergence [F10] gives convergence in $L^2$ along that subsequence. Every subsequence has such a subsubsequence, so convergence holds for the full sequence. Sequential compactness of the unit sphere therefore yields $f_t=t^Ts_{\\theta_0}+o_{L^2(P_0)}(\\|t\\|)$. Moreover, the squares $a_t^2/\\|t\\|^2$ are uniformly integrable because $a_t/\\|t\\|$ converges in $L^2$ along every convergent direction. Taking the logarithm expansion in expectation requires a tail check. Fix $\\varepsilon>0$. On $|a_t|\\le\\varepsilon$, the Taylor remainder $2\\log(1+a_t)-2a_t+a_t^2$ is bounded by $\\omega(\\varepsilon)a_t^2$, where $\\omega(\\varepsilon)\\to0$. Uniform integrability gives $\\mathbb E_0[a_t^2\\mathbf1_{|a_t|>\\varepsilon}] =o(\\|t\\|^2)$ and therefore $P_0(|a_t|>\\varepsilon)=o(\\|t\\|^2)$. On this tail, $|2\\log(1+a_t)|\\le |f_t|+|\\log(1-\\alpha_t)|$; its expectation is $o(\\|t\\|^2)$ by the envelope, Cauchy–Schwarz [F9], and the tail probability. The tail expectations of $|a_t|$ and $a_t^2$ are also $o(\\|t\\|^2)$ by [F9] and uniform integrability. Letting $\\varepsilon\\downarrow0$ proves that the expected Taylor remainder is $o(\\|t\\|^2)$. Taking expectations then gives $\\mathbb E_0 f_t=2\\mathbb E_0a_t-\\mathbb E_0a_t^2+o(\\|t\\|^2) =-\\tfrac12t^TIt+o(\\|t\\|^2);$ the normalization term $\\log(1-\\alpha_t)$ is $o(\\|t\\|^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "A3",
+            "F2",
+            "F3",
+            "F9",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The squared Hellinger distance $H^2(P_{\\theta_0+t},P_0)=\\int(\\sqrt{p_{\\theta_0+t}}-\\sqrt{p_{\\theta_0}})^2d\\mu$ equals $\\tfrac14t^TIt+o(\\|t\\|^2)$ by step 1.1. The affinity $\\rho_t=\\int\\sqrt{p_{\\theta_0+t}p_{\\theta_0}}d\\mu=1-H^2/2$. On $S_0$ let $Y=\\sqrt{p_{\\theta_0+t}/p_{\\theta_0}}$, so $\\mathbb E_0Y=\\rho_t$. For $y>0$, $\\log y\\le\\log\\rho_t+(y-\\rho_t)/\\rho_t$ follows from $z-1-\\log z\\ge0$ for $z=y/\\rho_t$, since this function has derivative $1-1/z$ and its minimum is $0$ at $z=1$; integrating gives $P_0f_t=2\\mathbb E_0\\log Y\\le2\\log\\rho_t$. Since $\\log(1-x)\\le-x$ for $0\\le x<1$ because $-x-\\log(1-x)$ has derivative $x/(1-x)\\ge0$ and value $0$ at $x=0$. Thus $2\\log\\rho_t\\le-H^2$, so for some $c,\\delta>0$, $P_0f_t\\le-c\\|t\\|^2$ whenever $\\|t\\|\\le\\delta_0$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $\\mathbb G_n f=\\sqrt n(P_nf-P_0f)$ for the empirical measure $P_n$. The pointwise Lipschitz envelope gives $\\|f_t-f_v\\|_{L^2(P_0)}\\le\\|L\\|_2\\|t-v\\|$. The sample and mean processes are continuous in $t$ on compact local balls, so their suprema equal suprema over countable dense subsets and are measurable. To bound the local supremum, take an independent ghost sample $X'_1,\\ldots,X'_n$. For each fixed original sample, the supremum of absolute values is convex in the ghost sample vector, so Jensen's inequality replaces $P_0f$ by $n^{-1}\\sum_i f(X'_i)$ in the expected supremum. Swapping each pair $(X_i,X'_i)$ with an independent sign and then using the triangle inequality bounds that supremum by twice the expected conditional Rademacher supremum. Condition on the observations for the latter. For the conditional Rademacher process $R_n(f)=n^{-1/2}\\sum_i\\epsilon_i f(X_i)$, Hoeffding's exponential bound $\\mathbb E_\\epsilon e^{\\lambda(R_n(f)-R_n(g))}= \\prod_i\\cosh(\\lambda(f-g)(X_i)/\\sqrt n)\\le \\exp\\{\\lambda^2P_n(f-g)^2/2\\}$, since $\\log\\cosh u\\le u^2/2$ (integrate $\\tanh u\\le u$ for $u\\ge0$ and use evenness), makes each increment sub-Gaussian with variance proxy $P_n(f-g)^2\\le P_nL^2\\|t-v\\|^2$. Choose successively finer dyadic Euclidean nets of the radius-$r$ parameter ball. At level $k$ the net has at most $(C2^k)^d$ points, each increment from its level-$(k-1)$ parent has scale at most $Cr2^{-k}(P_nL^2)^{1/2}$, and the expected maximum of $N$ centered sub-Gaussian variables of scale $\\sigma$ is at most $\\sigma\\sqrt{2\\log(2N)}$, by the exponential-moment bound and optimizing $\\lambda$. Summing the resulting bounds uses the convergent series $\\sum_{k\\ge1}2^{-k}\\sqrt{k}$ and gives $\\mathbb E_\\epsilon\\sup_{\\|t\\|\\le r}|R_n(f_t-f_0)|\\le C_dr(P_nL^2)^{1/2}$. Symmetrization and $\\mathbb E(P_nL^2)^{1/2}\\le(P_0L^2)^{1/2}$ therefore give $\\mathbb E\\sup_{\\|t\\|\\le r}|\\mathbb G_n(f_t-f_0)|\\le C_d r\\|L\\|_2.$ For $r_t=f_t-t^Ts_{\\theta_0}$, step 2.1 gives $\\sup_{\\|t\\|\\le M/\\sqrt n}P_0r_t^2=o(n^{-1})$, and increments have the square-integrable pointwise envelope $L+\\|s_{\\theta_0}\\|$. Fix a mesh $\\varepsilon>0$ and cover the bounded $h$-ball by finitely many mesh-$\\varepsilon$ points. At each center $h_j$, the variance of $\\sqrt n\\mathbb G_nr_{h_j/\\sqrt n}$ is $n\\operatorname{Var}_0(r_{h_j/\\sqrt n})\\le nP_0r_{h_j/\\sqrt n}^2=o(1)$, so Chebyshev and finiteness of the net make the maximum over centers $o_P(1)$. For increments within cells, form $g_h=r_{h/\\sqrt n}-r_{h_j/\\sqrt n}$, where $h_j$ is the center of the cell containing $h$. Each $g_h$ is pointwise bounded by $\\varepsilon(L+\\|s_{\\theta_0}\\|)/\\sqrt n$. Apply conditional Rademacher chaining to the union of cell classes: at dyadic level $k$ there are at most $C_M\\varepsilon^{-d}2^{kd}$ links, each with conditional scale at most $C\\varepsilon2^{-k}(P_n(L+\\|s_{\\theta_0}\\|)^2)^{1/2}$ after the $\\sqrt n$ normalization. The exponential maximum bound and summation of $\\sum_{k\\ge0}2^{-k}\\sqrt{\\log(C_M\\varepsilon^{-d})+C_dk}$ give an expected supremum at most $C_M\\varepsilon\\sqrt{\\log(C_M/\\varepsilon)}$ after symmetrization and $\\mathbb E(P_n(L+\\|s_{\\theta_0}\\|)^2)^{1/2}\\le \\|L+\\|s_{\\theta_0}\\|\\|_2$. Markov's inequality then shows that these cell increments vanish in probability as $\\varepsilon\\downarrow0$. Letting $n\\to\\infty$ and then $\\varepsilon\\downarrow0$ proves $\\sup_{\\|h\\|\\le M}|\\sqrt n\\mathbb G_nr_{h/\\sqrt n}|=o_P(1)$. Thus, for each fixed $M$, uniformly over $\\|h\\|\\le M$, $$\\ell_n(\\theta_0+h/\\sqrt n)-\\ell_n(\\theta_0)=h^T\\Delta_n-\\tfrac12h^TIh+o_{P_0}(1),\\qquad\\Delta_n=n^{-1/2}\\sum_{i=1}^ns_{\\theta_0}(X_i).$$ The expectation term is step 2.1; the centered term follows by writing $f_t=t^Ts_{\\theta_0}+(f_t-t^Ts_{\\theta_0})$ and using the two net bounds.",
+          "step": "3.1",
+          "inputs": [
+            "A3",
+            "F3",
+            "F4",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Reduce $\\delta_0$ if needed so the log envelope holds on the radius $2\\delta_0$ ball, and put $\\delta=\\delta_0/2$. Consistency makes $\\hat\\theta_n$ lie within $\\delta$ of $\\theta_0$ with probability tending to one. On the dyadic shells $r_j\\le\\|t\\|\\le2r_j$ with $r_j=2^jM/\\sqrt n$, exact maximization and $\\ell_n(\\hat\\theta_n)\\ge\\ell_n(\\theta_0)$ require $\\sqrt n\\sup_{\\|t\\|\\le2r_j}|\\mathbb G_nf_t|\\ge c n r_j^2$. The expectation bound in step 3.1 and Markov's inequality [F11] bound the probability of this event by $C/(\\sqrt n r_j)=C/(2^jM)$. Summing the geometric series and then letting $M\\to\\infty$ proves $\\sqrt n(\\hat\\theta_n-\\theta_0)=O_{P_0}(1)$ using [F4]. The argument used only consistency, feasibility of $\\theta_0$, and the maximizing inequality; it therefore proves the same bound for any exact maximizer over a subset containing $\\theta_0$.",
+          "step": "4.1",
+          "inputs": [
+            "A3",
+            "F4",
+            "F11",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Put $\\hat h_n=\\sqrt n(\\hat\\theta_n-\\theta_0)$ and $h_n^*=I^{-1}\\Delta_n$. The multivariate CLT [F7] and [F5] make $h_n^*=O_{P_0}(1)$; step 4.1 makes $\\hat h_n=O_{P_0}(1)$. For $Q_n(h)=h^T\\Delta_n-\\tfrac12h^TIh$, $Q_n(h_n^*)-Q_n(h)=\\tfrac12(h-h_n^*)^TI(h-h_n^*) \\ge\\tfrac12\\lambda_{\\min}(I)\\|h-h_n^*\\|^2.$ Uniform convergence on bounded balls in step 3.1, feasibility of bounded local $h$ because $\\theta_0$ is interior, and exact MLE maximization therefore force $\\hat h_n-h_n^*=o_{P_0}(1)$.",
+          "step": "5.1",
+          "inputs": [
+            "A3",
+            "F4",
+            "F5",
+            "F7",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The CLT [F7] gives $\\Delta_n\\Rightarrow N_d(0,I)$; the limiting law exists by [F8]. Since $I$ is invertible, $h_n^*=I^{-1}\\Delta_n\\Rightarrow N_d(0,I^{-1})$ by the continuous linear map. Combining this with step 5.1 by [F6] proves both the asymptotic linear representation and the stated normal limit. AC is used only through [F7]–[F8].",
+          "step": "6.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires ‘$d\\ge1$, and $\\theta_0\\in\\Theta$’ and assumes a measurable exact MLE exists. Empty Θ contradicts the fixed point and supplied maximizer. Proof step 4.1 uses feasibility of θ0 in the likelihood comparison; Δ_n=n^(-1/2)∑_{i=1}^n s_θ0(X_i) in step 3.1 uses positive sample indices.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_manifest_serialization/gate3_boundaries_19_22",
+            "reason": "Statement requires ‘$d\\ge1$, and $\\theta_0\\in\\Theta$’ and assumes a measurable exact MLE exists. Empty Θ contradicts the fixed point and supplied maximizer. Proof step 4.1 uses feasibility of θ0 in the likelihood comparison; Δ_n=n^(-1/2)∑_{i=1}^n s_θ0(X_i) in step 3.1 uses positive sample indices."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement requires positive-definite information I, hence excludes zero information; it does not assert a zero-dimensional model."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes d=1; final step 6.1 gives variance I^{-1} for the scalar score sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement positive-definite I excludes nonidentifiable local zero-information directions; the inverse-information conclusion is not asserted there."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement requires θ0 interior to Θ and local log-Lipschitz envelope; boundary MLEs lacking this interior localization are outside the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes measurable consistent exact MLE exists rather than constructing a selector; A1 and final CLT step retain AC for Gaussian/CLT suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement; Proof steps 1.1–6.1 use QMD, positive information, the square-integrable local log envelope and a consistent exact MLE to derive root-n linearity and N_d(0,I^(-1))."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Asymptotic normality is not asserted to imply QMD, the common log envelope or MLE existence; the Statement assumes them and explicitly denies an exact finite-sample normal-law claim."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read all seven steps and all thirteen cited suppliers. QMD bounds off-support mass by o(||t||²); normalization and the log-Lipschitz L² envelope justify the L² log expansion and tail-controlled expectation expansion. Directional L² convergence gives uniform integrability; on |a|>ε the log tail is bounded by ||t|| ||L||2 sqrt(o(||t||²)), hence o(||t||²). Hellinger affinity gives negative quadratic drift. Ghost-sample symmetrization and dyadic Euclidean nets yield the local expected-supremum bound; finite-cell variances plus ε sqrt(log(C/ε)) increment control give uniform bounded-h LAN. Suprema are measurable by sample continuity and countable dense subsets. Shell probabilities C/(2^j M) yield root-n tightness for any consistent feasible restricted exact maximizer. Positive quadratic gap gives linearity; centered L² score satisfies iid CLT, then Slutsky. AC is inherited through CLT/Gaussian suppliers. Interior, exactness, consistency, common full-set envelope and positive information are essential and stated. Bartlett Lecture 23 PDF p.15 and Chen Chapter 3 Theorem 14 match hypotheses; no source supplies a missing proof. No defect; minor δ versus δ0 notation in 2.2 is immediately resolved by reducing the radius."
+      }
+    },
+    "thm-wald-score-likelihood-ratio-asymptotic-chi-square": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qmd-path",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\Theta$ be open in $\\mathbb R^d$, and let a supplied sigma-finite\nmeasure $\\mu$ dominate every $P_\\theta$\n([[def-parametric-statistical-model]], [[def-dominated-statistical-experiment]]).\nSupply as part of the setup a family of nonnegative finite-valued measurable\nfunctions $p_\\theta:\\mathcal X\\to[0,\\infty)$ satisfying\n$P_\\theta(A)=\\int_Ap_\\theta\\,d\\mu$ for every $A\\in\\mathcal A$\n([[def-measure-with-density]]). Thus each $p_\\theta$ integrates to one.\nThe density family is supplied, rather than selected from domination alone;\nno choice principle, joint measurability in $(\\theta,x)$, or common\nexceptional null set is asserted. A supplied extended-valued probability\ndensity can be made finite-valued by setting it to zero on its measurable\ninfinite-value set, which has measure zero because its integral is one.\nThe QMD condition is unchanged by replacing any supplied density by an\nalmost-everywhere equal version: for each fixed $h$, the norm in the\ncondition below changes only on the union of two null sets.\nAt an interior point $\\theta_0$, the model is\n**quadratic-mean differentiable (QMD)** with score $s_{\\theta_0}$ if\n$s_{\\theta_0}:\\mathcal X\\to\\mathbb R^d$ is measurable,\n$\\mathbb E_{\\theta_0}\\|s_{\\theta_0}(X)\\|^2<\\infty$, and\n$$\n\\int\\left(\\sqrt{p_{\\theta_0+h}}-\\sqrt{p_{\\theta_0}}- \\tfrac12 h^Ts_{\\theta_0}\\sqrt{p_{\\theta_0}}\\right)^2d\\mu=o(\\|h\\|^2)\n$$\nas $h\\to0$ with $\\theta_0+h\\in\\Theta$. Values of the score on\n$\\{p_{\\theta_0}=0\\}$ do not affect this condition. The Fisher information\nassociated with this QMD score is\n$I_{\\theta_0}=\\mathbb E_{\\theta_0}[s_{\\theta_0}s_{\\theta_0}^T]$; it may be\nsingular. QMD is an $L^2(\\mu)$ condition and does not assert pointwise\ndifferentiability of $p_\\theta$ or local mutual absolute continuity of\n$P_\\theta$ and $P_{\\theta_0}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wald-score-likelihood-ratio-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied density representatives in\n[[def-score-and-fisher-information]] and [[def-axiom-of-choice]]. Let\n$X_1,\\ldots,X_n$ be iid from a dominated parametric model on an open\n$\\Theta\\subset\\mathbb R^d$, and let $\\ell_n(\\theta)=\\sum_{i=1}^n\\log\np_\\theta(X_i)$. For any nested null $\\Theta_0\\subseteq\\Theta$ for which the\nmaxima exist, the **likelihood-ratio statistic** is\n$$L_n=2\\left\\{\\sup_{\\theta\\in\\Theta}\\ell_n(\\theta)-\\sup_{\\theta\\in\\Theta_0}\\ell_n(\\theta)\\right\\}.$$\n\nFor the Wald and score statistics, specialize to a **regular equality null of\ncodimension $q$** at an interior point $\\theta_0$: this is a null set which,\nin a $C^1$ local parameter chart on an open neighborhood $V$ of $\\theta_0$,\n$\\theta=(\\psi,\\eta)\\in\\mathbb R^q\\times\\mathbb R^{d-q}$, is $\\psi=0$ near\n$\\theta_0=(0,\\eta_0)$. Its local tangent is the $\\eta$-coordinate subspace.\nAssume the QMD information $I(\\theta_0)$ is positive definite. Let\n$\\hat\\theta_n$ maximize $\\ell_n$ over the full parameter space $\\Theta$ and\n$\\tilde\\theta_n$ maximize it over the null $\\Theta_0$, so the general\nlikelihood-ratio definition is\n$L_n=2\\{\\ell_n(\\hat\\theta_n)-\\ell_n(\\tilde\\theta_n)\\}$.\n\nFor the score statistic, assume $\\log p_\\theta(x)$ is differentiable in the\nlocal chart at the parameter values where it is evaluated, and write\n$s_\\theta(x)=\\nabla_\\theta\\log p_\\theta(x)$. Require explicitly that this\npointwise derivative at $\\theta_0$ agrees $P_{\\theta_0}$-almost surely with\nthe QMD score; this compatibility is an assumption, not a consequence of QMD\nalone. The pointwise score and its information-matrix convention are those in\n[[def-score-and-fisher-information]].\n\nPartition the score and information in $(\\psi,\\eta)$ coordinates:\n$s=(s_\\psi,s_\\eta)$ and\n$$I=\\begin{pmatrix}I_{\\psi\\psi}&I_{\\psi\\eta}\\\\I_{\\eta\\psi}&I_{\\eta\\eta}\\end{pmatrix},\\qquad I_{\\mathrm{eff}}=I_{\\psi\\psi}-I_{\\psi\\eta}I_{\\eta\\eta}^{-1}I_{\\eta\\psi}.$$\nThe matrix $I_{\\mathrm{eff}}$ is the information for the tested coordinates\nafter accounting for the nuisance coordinates. If $d=q$, interpret empty-block\nproducts as zero, so $I_{\\mathrm{eff}}=I_{\\psi\\psi}=I$ and $C$ below is the\nempty $q\\times0$ matrix. If $d>q$, then $I_{\\eta\\eta}$ is positive definite;\nfor $z\\ne0$, the quadratic form of $I$ at\n$(z,-I_{\\eta\\eta}^{-1}I_{\\eta\\psi}z)$ equals\n$z^TI_{\\mathrm{eff}}z>0$. Thus $I_{\\mathrm{eff}}$ is positive definite in\neither case. Put\n$$\nU_n(\\theta)=n^{-1/2}\\sum_{i=1}^n s_\\theta(X_i).\n$$\nFor a consistent estimator $\\widehat I_{\\mathrm{eff},n}$ of\n$I_{\\mathrm{eff}}$ and a consistent estimator $\\widehat C_n$ of\n$C=I_{\\psi\\eta}I_{\\eta\\eta}^{-1}$, when $\\tilde\\theta_n\\in V$ set\n$U_{\\mathrm{eff},n}=U_{\\psi,n}(\\tilde\\theta_n)-\n\\widehat C_nU_{\\eta,n}(\\tilde\\theta_n)$. The **score statistic** is\n$S_n=U_{\\mathrm{eff},n}^T\\widehat I_{\\mathrm{eff},n}^{-1}U_{\\mathrm{eff},n}$.\nFor a consistent covariance estimator $\\widehat V_{\\psi,n}$ of the\n$\\psi$-block of $I^{-1}$, when $\\hat\\theta_n\\in V$ the **Wald statistic** is\n$W_n=n\\hat\\psi_n^T\\widehat V_{\\psi,n}^{-1}\\hat\\psi_n$, where\n$\\hat\\psi_n$ is the tested coordinate of $\\hat\\theta_n$. Set $W_n=0$ when\n$\\hat\\theta_n\\notin V$ and $S_n=0$ when $\\tilde\\theta_n\\notin V$, without\nevaluating coordinates or scores outside the chart. When a displayed\ninverse does not exist, set that statistic to zero. Under the regularity\nconditions used in the later calibration theorem, consistency places both\nmaximizers in $V$ and the estimated inverses exist with probability tending\nto one. This definition gives the statistics and their\nnormalizations; it asserts no finite-sample or asymptotic distribution.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-regular-mle-asymptotic-linearity-and-normality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X_1,X_2,\\ldots$ be iid with law\n$P_{\\theta_0}$ in a dominated parametric model\n$\\{P_\\theta:\\theta\\in\\Theta\\}$, where $\\Theta$ is open in $\\mathbb R^d$,\n$d\\ge1$, and $\\theta_0\\in\\Theta$. Let $p_\\theta$ be densities with respect\nto one supplied sigma-finite measure. Suppose the model is QMD at $\\theta_0$\nwith score $s_{\\theta_0}$ and positive-definite information\n$I=\\mathbb E_{\\theta_0}[s_{\\theta_0}s_{\\theta_0}^T]$. Assume there are a\nneighborhood $V$ of $\\theta_0$ and a nonnegative measurable $L$ with\n$\\mathbb E_{\\theta_0}L^2<\\infty$ such that, on one $P_{\\theta_0}$-full set,\n$$\n|\\log p_{\\theta_1}(x)-\\log p_{\\theta_2}(x)|\\le L(x)\\|\\theta_1-\\theta_2\\| \\qquad(\\theta_1,\\theta_2\\in V).\n$$\nSuppose a measurable exact MLE $\\hat\\theta_n$ exists and is consistent, in\nthe sense that $P_{\\theta_0}(\\|\\hat\\theta_n-\\theta_0\\|>\\varepsilon)\\to0$\nfor every $\\varepsilon>0$. Then\n$$\\sqrt n(\\hat\\theta_n-\\theta_0)=I^{-1}\\frac1{\\sqrt n}\\sum_{i=1}^n s_{\\theta_0}(X_i)+o_{P_{\\theta_0}}(1)\\ \\Rightarrow\\ N_d(0,I^{-1}).$$\nUnder the same local hypotheses, every consistent measurable exact likelihood\nmaximizer over a possibly $n$-dependent subset that contains $\\theta_0$ is\nalso root-$n$ bounded in probability.\nThe conclusion is asymptotic; it gives no exact finite-sample normal law.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. Assume in each application that $B(U_n,V_n)$ is a random vector on the same probability space as $U_n,V_n$, for every $n$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "Let $d,k,m\\ge1$ be fixed. For each $n$, let $X_n\\in\\mathbb R^d$ and $Y_n\\in\\mathbb R^k$ be random vectors on one probability space; the probability space may vary with $n$. Let $X\\in\\mathbb R^d$ be a random vector on any probability space, and let $c\\in\\mathbb R^k$ be constant. If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then\n$$ (X_n,Y_n)\\Rightarrow(X,c). $$\nConsequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$. No independence between $X_n$ and $Y_n$ is required.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $d=q$, then $I_{\\mathrm{eff}}=I$ is positive definite. If $d>q$, $I_{\\eta\\eta}$ is a positive-definite principal block. For nonzero $v\\in\\mathbb R^q$, evaluate the quadratic form of $I$ at $(v,-I_{\\eta\\eta}^{-1}I_{\\eta\\psi}v)$; the result is $v^TI_{\\mathrm{eff}}v>0$, so $I_{\\mathrm{eff}}$ is positive definite in either case. Normalizing $p_{\\theta_0+h}$ in the QMD expansion [F1], write $\\sqrt{p_{\\theta_0+h}}=\\sqrt{p_{\\theta_0}}+ \\tfrac12h^Ts_{\\theta_0}\\sqrt{p_{\\theta_0}}+e_h$ with $\\|e_h\\|_{L^2(\\mu)}=o(\\|h\\|)$. Expanding the squared norm, whose value is $\\int p_{\\theta_0+h}d\\mu=1$, gives $h^T\\mathbb E_{\\theta_0}s_{\\theta_0}+O(\\|h\\|^2)+o(\\|h\\|)=0$. Taking $h=te_j$ and dividing by $t$ proves each score coordinate has mean zero. Since $s_{\\theta_0}$ is square integrable by [F1], the iid CLT [F7] gives $\\Delta_n\\Rightarrow N_d(0,I)$ under AC. Define $r_n=\\Delta_{\\psi,n}-I_{\\psi\\eta}I_{\\eta\\eta}^{-1}\\Delta_{\\eta,n}$. Its covariance, by block multiplication, is $$\\operatorname{Var}(r_n)=I_{\\psi\\psi}-I_{\\psi\\eta}I_{\\eta\\eta}^{-1}I_{\\eta\\psi}-I_{\\psi\\eta}I_{\\eta\\eta}^{-1}I_{\\eta\\psi}+I_{\\psi\\eta}I_{\\eta\\eta}^{-1}I_{\\eta\\eta}I_{\\eta\\eta}^{-1}I_{\\eta\\psi}=I_{\\mathrm{eff}}.$$ Thus the linear-map case of Slutsky [F6] gives $r_n\\Rightarrow N_q(0,I_{\\mathrm{eff}})$; its covariance is the block calculation above.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "A3",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], the full MLE satisfies $\\sqrt n(\\hat\\theta_n-\\theta_0)=I^{-1}\\Delta_n+o_P(1)$. Solving the block system $I(a,b)^T=(\\Delta_{\\psi,n},\\Delta_{\\eta,n})^T$ shows its tested block is $a=I_{\\mathrm{eff}}^{-1}r_n$, including the empty-nuisance case. If $d=q$, the local null contains only $\\theta_0$, so consistency makes the constrained MLE equal to $\\theta_0$ with probability tending to one and there is no nuisance expansion to prove. Otherwise, [F3] makes the constrained root-$n$ error bounded. In local coordinates $h=(u,v)$ for $(\\eta,\\psi)$, the limiting quadratic log likelihood is $Q_n(u,v)=u^T\\Delta_{\\eta,n}+v^T\\Delta_{\\psi,n} -\\tfrac12\\{u^TI_{\\eta\\eta}u+2u^TI_{\\eta\\psi}v+v^TI_{\\psi\\psi}v\\}.$ For general $v$, completing the square in $u$ gives the unique maximizer $u=I_{\\eta\\eta}^{-1}(\\Delta_{\\eta,n}-I_{\\eta\\psi}v)$ and the profile $v^Tr_n-\\tfrac12v^TI_{\\mathrm{eff}}v$ up to a term independent of $v$. At the null $v=0$ this gives the unique nuisance maximizer $u_0=I_{\\eta\\eta}^{-1}\\Delta_{\\eta,n}$. On every distance-$\\varepsilon$ set from $u_0$, strict positive definiteness of $I_{\\eta\\eta}$ makes the quadratic log likelihood at least $\\tfrac12\\lambda_{\\min}(I_{\\eta\\eta})\\varepsilon^2$ below its maximum. Uniformity of the likelihood expansion [A1], constrained root-$n$ tightness [F3], and this gap therefore give $\\sqrt n(\\tilde\\eta_n-\\eta_0)=I_{\\eta\\eta}^{-1}\\Delta_{\\eta,n}+o_P(1)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Consistency places both maximizers in the open chart neighborhood with probability tending to one; the off-chart zero conventions in [F2] therefore do not affect the expansions below. The upper-left block of $I^{-1}$ is $I_{\\mathrm{eff}}^{-1}$ by solving the block system $I(x,y)^T=(a,0)^T$. The differentiable local chart has tested coordinate $\\psi$, so the Wald statistic in [F2], the expansion in step 2.1, and covariance consistency give $W_n=(I_{\\mathrm{eff}}^{-1}r_n)^TI_{\\mathrm{eff}} (I_{\\mathrm{eff}}^{-1}r_n)+o_P(1) =r_n^TI_{\\mathrm{eff}}^{-1}r_n+o_P(1).$",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $d=q$, the nuisance score is empty and the score expansion [A1] at $h=0$ gives $U_{\\mathrm{eff},n}=U_{\\psi,n}(\\theta_0)=\\Delta_n+o_P(1)=r_n+o_P(1)$. If $d>q$, the score expansion [A1] at the constrained MLE and $\\sqrt n(\\tilde\\eta_n-\\eta_0)=I_{\\eta\\eta}^{-1}\\Delta_{\\eta,n}+o_P(1)$ give $U_{\\psi,n}(\\tilde\\theta_n)=r_n+o_P(1)$ and $U_{\\eta,n}(\\tilde\\theta_n)=o_P(1)$. The estimated projection coefficient is bounded in probability by consistency, so the efficient score in [F2] is $r_n+o_P(1)$. Efficient-information consistency and [F5] imply $S_n=r_n^TI_{\\mathrm{eff}}^{-1}r_n+o_P(1)$.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "The likelihood expansion in [A1] makes $L_n$ equal, up to $o_P(1)$, twice the maximum of $Q_n(u,v)$ over all local $(u,v)$ minus twice its maximum over the null $v=0$. The unrestricted and restricted quadratic maximizers are linear functions of $\\Delta_n$, hence are $O_P(1)$ by step 1.1 and [F5]. Taking a bounded local ball large enough with probability arbitrarily close to one justifies using the uniform expansions for both maxima. The profile formula in step 2.1 reduces this difference to $2\\sup_v\\{v^Tr_n-\\tfrac12v^TI_{\\mathrm{eff}}v\\} =r_n^TI_{\\mathrm{eff}}^{-1}r_n.$ The identity follows by completing the square at $v=I_{\\mathrm{eff}}^{-1}r_n$. Hence $L_n=r_n^TI_{\\mathrm{eff}}^{-1}r_n+o_P(1)$.",
+          "step": "3.3",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $r_n\\Rightarrow N_q(0,I_{\\mathrm{eff}})$ and $I_{\\mathrm{eff}}$ is positive definite, its transformed vector $I_{\\mathrm{eff}}^{-1/2}r_n$ converges to $N_q(0,I_q)$. The squared Euclidean norm of that limit is $\\chi_q^2$ by [F9]. Combining this with steps 3.1–3.3 and [F4]–[F5] proves all three limits and their common first-order approximation. AC is inherited through [F2], [F3], and [F7]–[F9], as recorded in [A3].",
+          "step": "4.1",
+          "inputs": [
+            "A3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 3.1",
+            "step 3.2",
+            "step 3.3",
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "θ0 belongs to the null and q≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "q=0 is excluded; the theorem calibrates at least one equality restriction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For q=1 the efficient score is scalar and the squared standardized normal has χ²1 law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Positive-definite I implies positive-definite Iηη and Ieff, so the nuisance and tested quadratic forms are nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The full-model point is interior, while the null must be locally ψ=0; one-sided boundary nulls are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The local chart, maximizers, and consistent matrix estimators are hypotheses; no arbitrary representative is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Reviewed all six steps and exact suppliers. Global exact full/null maximizers agree with the clarified statistics definition. Assumed bounded-h likelihood and score expansions, consistent full/restricted maximizers and localization justify evaluating at random tight coordinates. Schur-complement positivity and block inversion give tested covariance Ieff^{-1}; completing the nuisance square gives residual r and the LR profile. Restricted score has nuisance oP(1), tested part r+oP(1); consistent projection/information estimates preserve the quadratic approximation, including finite-sample inverse-failure fallback. q=d has empty nuisance and an isolated local null; consistency places restricted MLE at θ0 with high probability. Centered QMD score and iid CLT give r⇒N(0,Ieff), whitening gives χq², q≥1. AC inherited from CLT/Gaussian/χ² suppliers; no finite-sample general law or boundary-null conclusion. Bartlett Lecture 26 PDF pp.12–17 and Chen Chapter 4 Wald/score sections checked; Chen line38 has a Hessian identity error which is not imported. Reader only synchronized the definition quotation: no mathematical repair needed."
+      }
+    },
+    "cor-wald-score-lr-asymptotic-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X_1,\\ldots,X_n$ be iid from $P_{\\theta_0}$ in a correctly\nspecified dominated model, with $\\theta_0=(0,\\eta_0)$ an interior point of\nthe full open parameter set $\\Theta\\subset\\mathbb R^q\\times\\mathbb R^{d-q}$.\nIn a local $C^1$ parameter chart, suppose the null is $\\psi=0$, so its local\nnull set is a linear subspace of codimension $q\\ge1$; all score and\ninformation coordinates below use this chart. Assume QMD at\n$\\theta_0$ with positive-definite information\n$$\nI=\\begin{pmatrix}I_{\\psi\\psi}&I_{\\psi\\eta}\\\\I_{\\eta\\psi}&I_{\\eta\\eta}\\end{pmatrix},\n$$\nand write $I_{\\mathrm{eff}}=I_{\\psi\\psi}-\nI_{\\psi\\eta}I_{\\eta\\eta}^{-1}I_{\\eta\\psi}$. If $d=q$, interpret nuisance\nblocks as empty, so $I_{\\mathrm{eff}}=I_{\\psi\\psi}=I$ and products involving\n$\\eta$ are zero. Let\n$\\Delta_n=n^{-1/2}\\sum_i s_{\\theta_0}(X_i)$. Assume the hypotheses of\n[[thm-regular-mle-asymptotic-linearity-and-normality]] hold for the full model.\nAssume the constrained MLE is measurable, exact, consistent, and maximizes\nover a set containing $\\theta_0$; it is root-$n$ bounded by that theorem's\nlocalization conclusion. For every finite $M$ the\nfollowing likelihood and score expansions hold uniformly over $\\|h\\|\\le M$:\n$$\n\\ell_n(\\theta_0+h/\\sqrt n)-\\ell_n(\\theta_0) =h^T\\Delta_n-\\tfrac12h^TIh+o_P(1),\n$$\n$$\nn^{-1/2}\\nabla\\ell_n(\\theta_0+h/\\sqrt n) =\\Delta_n-Ih+o_P(1).\n$$\nAssume the covariance, score-projection, and efficient-information estimators in\n[[def-wald-score-likelihood-ratio-statistics]] converge in probability to\ntheir stated limits. Partition $\\Delta_n=(\\Delta_{\\psi,n},\\Delta_{\\eta,n})$,\nput $r_n=\\Delta_{\\psi,n}-I_{\\psi\\eta}I_{\\eta\\eta}^{-1}\\Delta_{\\eta,n}$,\nand set $T_n=r_n^TI_{\\mathrm{eff}}^{-1}r_n$. Then, under the null,\n$$\nW_n=T_n+o_P(1),\\quad S_n=T_n+o_P(1),\\quad L_n=T_n+o_P(1),\\qquad W_n\\Rightarrow\\chi_q^2,\\quad S_n\\Rightarrow\\chi_q^2,\\quad L_n\\Rightarrow\\chi_q^2.\n$$\nHere $\\chi_q^2$ is the law defined in [[def-chi-square-law]]. This is an\nasymptotic calibration; no exact finite-sample\nchi-square law is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], there is a common random quadratic form $T_n$ with $W_n=T_n+o_P(1)$, $S_n=T_n+o_P(1)$, and $L_n=T_n+o_P(1)$. Subtracting the first two equalities and applying the triangle inequality gives $W_n-S_n=o_P(1)$; subtracting the second and third gives $S_n-L_n=o_P(1)$; subtracting the third and first gives $L_n-W_n=o_P(1)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Theorem [F1] states $T_n\\Rightarrow\\chi_q^2$ and each statistic has that same limit under the theorem's hypotheses. The differences proved in step 1.1 therefore express first-order equivalence, not exact finite-sample equality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary inherits the nonempty regular-null setup from its theorem."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The codimension satisfies q≥1 in the cited theorem."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The pairwise oP(1) differences hold for q=1 as for every q≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The cited theorem assumes positive-definite information and hence nondegenerate efficient information."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The inherited interior and linear-local-null hypotheses exclude boundary-null mixtures."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The result only subtracts already-defined statistics and selects no estimator."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read both proof steps, exact common-quadratic-form supplier Statement and AC definition. All full-model interior, equality-null codimension, uniform likelihood/score expansion, positive-information and consistent maximizer/estimator hypotheses are inherited explicitly. Subtracting each pair of common T_n+oP(1) expansions and a triangle/union-bound argument gives oP(1) differences; identical χq² limits alone would not suffice, and that inference is not used. q=d is included by supplier empty-block convention; q=0 and boundary inequalities are outside hypotheses. AC inherited from supplier CLT/Gaussian laws. Chen Chapter4 lines73–76 states first-order equivalence, but its displayed LR ratio normalization at line75 is erroneous and is not imported. No finite-sample equality or defect."
+      }
+    },
+    "ex-normal-mean-exact-likelihood-calibration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qmd-path",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\Theta$ be open in $\\mathbb R^d$, and let a supplied sigma-finite\nmeasure $\\mu$ dominate every $P_\\theta$\n([[def-parametric-statistical-model]], [[def-dominated-statistical-experiment]]).\nSupply as part of the setup a family of nonnegative finite-valued measurable\nfunctions $p_\\theta:\\mathcal X\\to[0,\\infty)$ satisfying\n$P_\\theta(A)=\\int_Ap_\\theta\\,d\\mu$ for every $A\\in\\mathcal A$\n([[def-measure-with-density]]). Thus each $p_\\theta$ integrates to one.\nThe density family is supplied, rather than selected from domination alone;\nno choice principle, joint measurability in $(\\theta,x)$, or common\nexceptional null set is asserted. A supplied extended-valued probability\ndensity can be made finite-valued by setting it to zero on its measurable\ninfinite-value set, which has measure zero because its integral is one.\nThe QMD condition is unchanged by replacing any supplied density by an\nalmost-everywhere equal version: for each fixed $h$, the norm in the\ncondition below changes only on the union of two null sets.\nAt an interior point $\\theta_0$, the model is\n**quadratic-mean differentiable (QMD)** with score $s_{\\theta_0}$ if\n$s_{\\theta_0}:\\mathcal X\\to\\mathbb R^d$ is measurable,\n$\\mathbb E_{\\theta_0}\\|s_{\\theta_0}(X)\\|^2<\\infty$, and\n$$\n\\int\\left(\\sqrt{p_{\\theta_0+h}}-\\sqrt{p_{\\theta_0}}- \\tfrac12 h^Ts_{\\theta_0}\\sqrt{p_{\\theta_0}}\\right)^2d\\mu=o(\\|h\\|^2)\n$$\nas $h\\to0$ with $\\theta_0+h\\in\\Theta$. Values of the score on\n$\\{p_{\\theta_0}=0\\}$ do not affect this condition. The Fisher information\nassociated with this QMD score is\n$I_{\\theta_0}=\\mathbb E_{\\theta_0}[s_{\\theta_0}s_{\\theta_0}^T]$; it may be\nsingular. QMD is an $L^2(\\mu)$ condition and does not assert pointwise\ndifferentiability of $p_\\theta$ or local mutual absolute continuity of\n$P_\\theta$ and $P_{\\theta_0}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-wald-score-likelihood-ratio-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied density representatives in\n[[def-score-and-fisher-information]] and [[def-axiom-of-choice]]. Let\n$X_1,\\ldots,X_n$ be iid from a dominated parametric model on an open\n$\\Theta\\subset\\mathbb R^d$, and let $\\ell_n(\\theta)=\\sum_{i=1}^n\\log\np_\\theta(X_i)$. For any nested null $\\Theta_0\\subseteq\\Theta$ for which the\nmaxima exist, the **likelihood-ratio statistic** is\n$$L_n=2\\left\\{\\sup_{\\theta\\in\\Theta}\\ell_n(\\theta)-\\sup_{\\theta\\in\\Theta_0}\\ell_n(\\theta)\\right\\}.$$\n\nFor the Wald and score statistics, specialize to a **regular equality null of\ncodimension $q$** at an interior point $\\theta_0$: this is a null set which,\nin a $C^1$ local parameter chart on an open neighborhood $V$ of $\\theta_0$,\n$\\theta=(\\psi,\\eta)\\in\\mathbb R^q\\times\\mathbb R^{d-q}$, is $\\psi=0$ near\n$\\theta_0=(0,\\eta_0)$. Its local tangent is the $\\eta$-coordinate subspace.\nAssume the QMD information $I(\\theta_0)$ is positive definite. Let\n$\\hat\\theta_n$ maximize $\\ell_n$ over the full parameter space $\\Theta$ and\n$\\tilde\\theta_n$ maximize it over the null $\\Theta_0$, so the general\nlikelihood-ratio definition is\n$L_n=2\\{\\ell_n(\\hat\\theta_n)-\\ell_n(\\tilde\\theta_n)\\}$.\n\nFor the score statistic, assume $\\log p_\\theta(x)$ is differentiable in the\nlocal chart at the parameter values where it is evaluated, and write\n$s_\\theta(x)=\\nabla_\\theta\\log p_\\theta(x)$. Require explicitly that this\npointwise derivative at $\\theta_0$ agrees $P_{\\theta_0}$-almost surely with\nthe QMD score; this compatibility is an assumption, not a consequence of QMD\nalone. The pointwise score and its information-matrix convention are those in\n[[def-score-and-fisher-information]].\n\nPartition the score and information in $(\\psi,\\eta)$ coordinates:\n$s=(s_\\psi,s_\\eta)$ and\n$$I=\\begin{pmatrix}I_{\\psi\\psi}&I_{\\psi\\eta}\\\\I_{\\eta\\psi}&I_{\\eta\\eta}\\end{pmatrix},\\qquad I_{\\mathrm{eff}}=I_{\\psi\\psi}-I_{\\psi\\eta}I_{\\eta\\eta}^{-1}I_{\\eta\\psi}.$$\nThe matrix $I_{\\mathrm{eff}}$ is the information for the tested coordinates\nafter accounting for the nuisance coordinates. If $d=q$, interpret empty-block\nproducts as zero, so $I_{\\mathrm{eff}}=I_{\\psi\\psi}=I$ and $C$ below is the\nempty $q\\times0$ matrix. If $d>q$, then $I_{\\eta\\eta}$ is positive definite;\nfor $z\\ne0$, the quadratic form of $I$ at\n$(z,-I_{\\eta\\eta}^{-1}I_{\\eta\\psi}z)$ equals\n$z^TI_{\\mathrm{eff}}z>0$. Thus $I_{\\mathrm{eff}}$ is positive definite in\neither case. Put\n$$\nU_n(\\theta)=n^{-1/2}\\sum_{i=1}^n s_\\theta(X_i).\n$$\nFor a consistent estimator $\\widehat I_{\\mathrm{eff},n}$ of\n$I_{\\mathrm{eff}}$ and a consistent estimator $\\widehat C_n$ of\n$C=I_{\\psi\\eta}I_{\\eta\\eta}^{-1}$, when $\\tilde\\theta_n\\in V$ set\n$U_{\\mathrm{eff},n}=U_{\\psi,n}(\\tilde\\theta_n)-\n\\widehat C_nU_{\\eta,n}(\\tilde\\theta_n)$. The **score statistic** is\n$S_n=U_{\\mathrm{eff},n}^T\\widehat I_{\\mathrm{eff},n}^{-1}U_{\\mathrm{eff},n}$.\nFor a consistent covariance estimator $\\widehat V_{\\psi,n}$ of the\n$\\psi$-block of $I^{-1}$, when $\\hat\\theta_n\\in V$ the **Wald statistic** is\n$W_n=n\\hat\\psi_n^T\\widehat V_{\\psi,n}^{-1}\\hat\\psi_n$, where\n$\\hat\\psi_n$ is the tested coordinate of $\\hat\\theta_n$. Set $W_n=0$ when\n$\\hat\\theta_n\\notin V$ and $S_n=0$ when $\\tilde\\theta_n\\notin V$, without\nevaluating coordinates or scores outside the chart. When a displayed\ninverse does not exist, set that statistic to zero. Under the regularity\nconditions used in the later calibration theorem, consistency places both\nmaximizers in $V$ and the estimated inverses exist with probability tending\nto one. This definition gives the statistics and their\nnormalizations; it asserts no finite-sample or asymptotic distribution.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $0\\le s,t$ and a real random variable\n$X_t-X_s$ has law $N(0,|t-s|)$, then, for every integer $m\\ge1$,\n$$E|X_t-X_s|^{2m}=c_m|t-s|^m,$$\nwhere\n$$c_m=E|Z|^{2m}=(2m-1)!!=1\\cdot3\\cdots(2m-1)<\\infty$$\nfor $Z\\sim N(0,1)$. In particular, when $m\\ge2$, this is the moment hypothesis\nof the one-parameter Kolmogorov criterion with\n$\\alpha=2m$, $\\beta=m-1$, and $C_T=c_m$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $q_\\mu(x)=(2\\pi\\sigma^2)^{-1/4}e^{-(x-\\mu)^2/(4\\sigma^2)}$. Direct differentiation gives $q'_\\mu=(x-\\mu)q_\\mu/(2\\sigma^2)$ and $q''_\\mu=((x-\\mu)^2/(4\\sigma^4)-1/(2\\sigma^2))q_\\mu$. Its square is a polynomial times $p_\\mu=q_\\mu^2$. By [F11] and [F12], $\\int (x-\\mu)^2p_\\mu\\,dx=\\sigma^2$ and $\\int (x-\\mu)^4p_\\mu\\,dx=3\\sigma^4$, so $\\|q''_\\mu\\|_2^2=3/(16\\sigma^4)<\\infty$. Also $s_\\mu=2q'_\\mu/q_\\mu=(x-\\mu)/\\sigma^2$ has second moment $1/\\sigma^2$. The identity $q''_a(x)=q''_0(x-a)$ and [F15] give the same norm for every real shift $a$. The two-variable functions $(x,v)\\mapsto q''_{\\mu+v}(x)$ and $(x,u)\\mapsto q'_{\\mu+u}(x)-q'_\\mu(x)$ are continuous. To verify the needed product measurability locally, the rectangles $(a,b)\\times(c,d)$ with rational endpoints form a countable base of $\\mathbb R^2$: inside any open ball about a point, density of the rationals gives a rational rectangle containing that point and contained in the ball. Every open subset is therefore the union of the subfamily of these rectangles contained in it, hence a countable union of measurable product rectangles. Thus preimages of open subsets under these continuous functions belong to $\\mathcal B(\\mathbb R)\\otimes\\mathcal B(\\mathbb R)$, and also to the product of the Lebesgue sigma-algebras. Their squares and restrictions to compact parameter intervals are consequently product measurable, as required by Tonelli below.",
+          "step": "1.1",
+          "inputs": [
+            "F11",
+            "F12",
+            "F15",
+            "given",
+            "algebra",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For fixed $x$, the functions $v\\mapsto q''_{\\mu+v}(x)$ and $u\\mapsto q'_{\\mu+u}(x)-q'_\\mu(x)$ are continuous on each compact interval. By [F13] they are Riemann integrable, by [F9] their integrals are respectively $q'_{\\mu+u}(x)-q'_\\mu(x)$ and $q_{\\mu+t}(x)-q_\\mu(x)-tq'_\\mu(x)$, and [F14] identifies these with their Lebesgue integrals under the assumed AC. Reversed endpoints give the same identities for negative $u,t$.",
+          "step": "2.1",
+          "inputs": [
+            "F13",
+            "F9",
+            "F14",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Cauchy–Schwarz [F7] on the interval between $0$ and $u$, then Tonelli [F8] and step 1.1, gives $\\|q'_{\\mu+u}-q'_\\mu\\|_2^2\\le u^2\\|q''_0\\|_2^2$. The second identity of step 2.1 and another Cauchy–Schwarz/Tonelli application give $\\|q_{\\mu+t}-q_\\mu-tq'_\\mu\\|_2^2\\le |t|\\int_0^{|t|}u^2\\|q''_0\\|_2^2du=|t|^4\\|q''_0\\|_2^2/3=o(t^2)$. For negative $t$ use $q'_{\\mu-u}$ on the length-$|t|$ interval; the same first bound holds. This proves QMD with the explicitly supplied normal densities, score $s_\\mu$, and positive information $1/\\sigma^2$ by [F5].",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use the global chart $V=\\mathbb R$ with tested coordinate $\\psi=\\mu-\\mu_0$, so both maximizers always lie in the chart and the off-chart conventions in [F6] never apply. The log likelihood is a constant minus $(2\\sigma^2)^{-1}\\sum_i(X_i-\\mu)^2$. The identity $\\sum_i(X_i-\\mu)^2=\\sum_i(X_i-\\bar X)^2+n(\\mu-\\bar X)^2$ proves $\\hat\\mu=\\bar X$. Since $\\sigma^2$ is known, take the exact covariance and information estimates $\\widehat V=\\sigma^2$ and $\\widehat I_{\\mathrm{eff}}=1/\\sigma^2$; the Wald statistic is $W_n=n(\\bar X-\\mu_0)^2/\\sigma^2$. At the point null the efficient score is $n^{-1/2}\\sum_i(X_i-\\mu_0)/\\sigma^2$, with information $1/\\sigma^2$; [F6] gives $S_n=n(\\bar X-\\mu_0)^2/\\sigma^2$. The constrained MLE is $\\mu_0$, so twice the log-likelihood difference gives $L_n=n(\\bar X-\\mu_0)^2/\\sigma^2$.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under $H_0$, put $Z_n=\\sqrt n(\\bar X-\\mu_0)/\\sigma$. The affine and independent-sum characteristic-function identities [F3], together with [F2], give $\\mathbb E e^{itZ_n}=\\prod_i\\mathbb E e^{it(X_i-\\mu_0)/(\\sigma\\sqrt n)} =[e^{-t^2/(2n)}]^n=e^{-t^2/2}$. By [F4], $Z_n\\sim N(0,1)$, so $W_n=S_n=L_n=Z_n^2$ has the $\\chi_1^2$ law by [F10]. The use of AC is exactly that recorded in [A1].",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F10",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes n≥1 and a nonempty real parameter space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: σ>0 is required; at σ=0 the information model is degenerate and outside the example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The tested coordinate and codimension are both one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: I=1/σ²>0 and the sample-mean law has positive variance for finite n."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter set is Θ=R, with no endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The MLE is the explicit unique sample mean; the normal law construction carries AC as stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example; Verification steps 4.1–5.1 compute the unique normal-location MLE and W_n=S_n=L_n=n(Xbar−μ0)²/σ², then prove its exact χ1² null law by characteristic functions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example expressly calls this a special finite-sample identity and does not make general calibration exact; equality or a χ1² law for statistics is not claimed to imply a Gaussian location model with known positive σ."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "all-sample-sizes-normal-identities",
+          "claim": "For every integer n≥1, W_n=S_n=L_n=n(\\bar X−μ0)^2/σ² in the known-variance normal location model.",
+          "result": "Symbolic completion-of-squares derivation in step 4.1; no numeric finite-sample computation is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read all five verification steps and sixteen exact supplier statements. q′=(x−μ)q/(2σ²) and q″ yield 3/(16σ⁴) squared L² norm via Gaussian second/fourth moments; rational rectangles establish product measurability, FTC plus AC Riemann–Lebesgue bridge and Tonelli justify two integrated derivative bounds for positive and negative shifts. QMD score is (x−μ)/σ² with information 1/σ². Completion of squares gives unique global Xbar, null μ0; specified exact known-variance covariance σ² and information 1/σ² make all three statistics exactly n(Xbar−μ0)²/σ². Characteristic functions and uniqueness under AC prove standardized mean normal for every n≥1, hence exact χ1²; σ=0 and n=0 are excluded. No nuisance inversion or asymptotic approximation is substituted. Reader contract step-locator and supplier-quotation enrichments agree with steps4.1/5.1; item bytes unchanged. Bartlett Lecture22 PDF pp.2–3 supports the normal-location computation; unavailable Stanford PDF not relied on. No defect."
+      }
+    },
+    "cex-boundary-null-has-nonstandard-lr-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-wald-score-likelihood-ratio-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied density representatives in\n[[def-score-and-fisher-information]] and [[def-axiom-of-choice]]. Let\n$X_1,\\ldots,X_n$ be iid from a dominated parametric model on an open\n$\\Theta\\subset\\mathbb R^d$, and let $\\ell_n(\\theta)=\\sum_{i=1}^n\\log\np_\\theta(X_i)$. For any nested null $\\Theta_0\\subseteq\\Theta$ for which the\nmaxima exist, the **likelihood-ratio statistic** is\n$$L_n=2\\left\\{\\sup_{\\theta\\in\\Theta}\\ell_n(\\theta)-\\sup_{\\theta\\in\\Theta_0}\\ell_n(\\theta)\\right\\}.$$\n\nFor the Wald and score statistics, specialize to a **regular equality null of\ncodimension $q$** at an interior point $\\theta_0$: this is a null set which,\nin a $C^1$ local parameter chart on an open neighborhood $V$ of $\\theta_0$,\n$\\theta=(\\psi,\\eta)\\in\\mathbb R^q\\times\\mathbb R^{d-q}$, is $\\psi=0$ near\n$\\theta_0=(0,\\eta_0)$. Its local tangent is the $\\eta$-coordinate subspace.\nAssume the QMD information $I(\\theta_0)$ is positive definite. Let\n$\\hat\\theta_n$ maximize $\\ell_n$ over the full parameter space $\\Theta$ and\n$\\tilde\\theta_n$ maximize it over the null $\\Theta_0$, so the general\nlikelihood-ratio definition is\n$L_n=2\\{\\ell_n(\\hat\\theta_n)-\\ell_n(\\tilde\\theta_n)\\}$.\n\nFor the score statistic, assume $\\log p_\\theta(x)$ is differentiable in the\nlocal chart at the parameter values where it is evaluated, and write\n$s_\\theta(x)=\\nabla_\\theta\\log p_\\theta(x)$. Require explicitly that this\npointwise derivative at $\\theta_0$ agrees $P_{\\theta_0}$-almost surely with\nthe QMD score; this compatibility is an assumption, not a consequence of QMD\nalone. The pointwise score and its information-matrix convention are those in\n[[def-score-and-fisher-information]].\n\nPartition the score and information in $(\\psi,\\eta)$ coordinates:\n$s=(s_\\psi,s_\\eta)$ and\n$$I=\\begin{pmatrix}I_{\\psi\\psi}&I_{\\psi\\eta}\\\\I_{\\eta\\psi}&I_{\\eta\\eta}\\end{pmatrix},\\qquad I_{\\mathrm{eff}}=I_{\\psi\\psi}-I_{\\psi\\eta}I_{\\eta\\eta}^{-1}I_{\\eta\\psi}.$$\nThe matrix $I_{\\mathrm{eff}}$ is the information for the tested coordinates\nafter accounting for the nuisance coordinates. If $d=q$, interpret empty-block\nproducts as zero, so $I_{\\mathrm{eff}}=I_{\\psi\\psi}=I$ and $C$ below is the\nempty $q\\times0$ matrix. If $d>q$, then $I_{\\eta\\eta}$ is positive definite;\nfor $z\\ne0$, the quadratic form of $I$ at\n$(z,-I_{\\eta\\eta}^{-1}I_{\\eta\\psi}z)$ equals\n$z^TI_{\\mathrm{eff}}z>0$. Thus $I_{\\mathrm{eff}}$ is positive definite in\neither case. Put\n$$\nU_n(\\theta)=n^{-1/2}\\sum_{i=1}^n s_\\theta(X_i).\n$$\nFor a consistent estimator $\\widehat I_{\\mathrm{eff},n}$ of\n$I_{\\mathrm{eff}}$ and a consistent estimator $\\widehat C_n$ of\n$C=I_{\\psi\\eta}I_{\\eta\\eta}^{-1}$, when $\\tilde\\theta_n\\in V$ set\n$U_{\\mathrm{eff},n}=U_{\\psi,n}(\\tilde\\theta_n)-\n\\widehat C_nU_{\\eta,n}(\\tilde\\theta_n)$. The **score statistic** is\n$S_n=U_{\\mathrm{eff},n}^T\\widehat I_{\\mathrm{eff},n}^{-1}U_{\\mathrm{eff},n}$.\nFor a consistent covariance estimator $\\widehat V_{\\psi,n}$ of the\n$\\psi$-block of $I^{-1}$, when $\\hat\\theta_n\\in V$ the **Wald statistic** is\n$W_n=n\\hat\\psi_n^T\\widehat V_{\\psi,n}^{-1}\\hat\\psi_n$, where\n$\\hat\\psi_n$ is the tested coordinate of $\\hat\\theta_n$. Set $W_n=0$ when\n$\\hat\\theta_n\\notin V$ and $S_n=0$ when $\\tilde\\theta_n\\notin V$, without\nevaluating coordinates or scores outside the chart. When a displayed\ninverse does not exist, set that statistic to zero. Under the regularity\nconditions used in the later calibration theorem, consistency places both\nmaximizers in $V$ and the estimated inverses exist with probability tending\nto one. This definition gives the statistics and their\nnormalizations; it asserts no finite-sample or asymptotic distribution.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qmd-path",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\Theta$ be open in $\\mathbb R^d$, and let a supplied sigma-finite\nmeasure $\\mu$ dominate every $P_\\theta$\n([[def-parametric-statistical-model]], [[def-dominated-statistical-experiment]]).\nSupply as part of the setup a family of nonnegative finite-valued measurable\nfunctions $p_\\theta:\\mathcal X\\to[0,\\infty)$ satisfying\n$P_\\theta(A)=\\int_Ap_\\theta\\,d\\mu$ for every $A\\in\\mathcal A$\n([[def-measure-with-density]]). Thus each $p_\\theta$ integrates to one.\nThe density family is supplied, rather than selected from domination alone;\nno choice principle, joint measurability in $(\\theta,x)$, or common\nexceptional null set is asserted. A supplied extended-valued probability\ndensity can be made finite-valued by setting it to zero on its measurable\ninfinite-value set, which has measure zero because its integral is one.\nThe QMD condition is unchanged by replacing any supplied density by an\nalmost-everywhere equal version: for each fixed $h$, the norm in the\ncondition below changes only on the union of two null sets.\nAt an interior point $\\theta_0$, the model is\n**quadratic-mean differentiable (QMD)** with score $s_{\\theta_0}$ if\n$s_{\\theta_0}:\\mathcal X\\to\\mathbb R^d$ is measurable,\n$\\mathbb E_{\\theta_0}\\|s_{\\theta_0}(X)\\|^2<\\infty$, and\n$$\n\\int\\left(\\sqrt{p_{\\theta_0+h}}-\\sqrt{p_{\\theta_0}}- \\tfrac12 h^Ts_{\\theta_0}\\sqrt{p_{\\theta_0}}\\right)^2d\\mu=o(\\|h\\|^2)\n$$\nas $h\\to0$ with $\\theta_0+h\\in\\Theta$. Values of the score on\n$\\{p_{\\theta_0}=0\\}$ do not affect this condition. The Fisher information\nassociated with this QMD score is\n$I_{\\theta_0}=\\mathbb E_{\\theta_0}[s_{\\theta_0}s_{\\theta_0}^T]$; it may be\nsingular. QMD is an $L^2(\\mu)$ condition and does not assert pointwise\ndifferentiability of $p_\\theta$ or local mutual absolute continuity of\n$P_\\theta$ and $P_{\\theta_0}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $0\\le s,t$ and a real random variable\n$X_t-X_s$ has law $N(0,|t-s|)$, then, for every integer $m\\ge1$,\n$$E|X_t-X_s|^{2m}=c_m|t-s|^m,$$\nwhere\n$$c_m=E|Z|^{2m}=(2m-1)!!=1\\cdot3\\cdots(2m-1)<\\infty$$\nfor $Z\\sim N(0,1)$. In particular, when $m\\ge2$, this is the moment hypothesis\nof the one-parameter Kolmogorov criterion with\n$\\alpha=2m$, $\\beta=m-1$, and $C_T=c_m$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $q_\\mu(x)=(2\\pi\\sigma^2)^{-1/4}e^{-(x-\\mu)^2/(4\\sigma^2)}$. Direct differentiation gives $q'_\\mu=(x-\\mu)q_\\mu/(2\\sigma^2)$ and $q''_\\mu=((x-\\mu)^2/(4\\sigma^4)-1/(2\\sigma^2))q_\\mu$. Its square is a polynomial times $p_\\mu=q_\\mu^2$. By [F11] and [F12], $\\int (x-\\mu)^2p_\\mu\\,dx=\\sigma^2$ and $\\int (x-\\mu)^4p_\\mu\\,dx=3\\sigma^4$, so $\\|q''_\\mu\\|_2^2=3/(16\\sigma^4)<\\infty$. Also $s_\\mu=2q'_\\mu/q_\\mu=(x-\\mu)/\\sigma^2$ has second moment $1/\\sigma^2$. The identity $q''_a(x)=q''_0(x-a)$ and [F15] give the same norm for every real shift $a$. The two-variable functions $(x,v)\\mapsto q''_{\\mu+v}(x)$ and $(x,u)\\mapsto q'_{\\mu+u}(x)-q'_\\mu(x)$ are continuous. To verify the needed product measurability locally, the rectangles $(a,b)\\times(c,d)$ with rational endpoints form a countable base of $\\mathbb R^2$: inside any open ball about a point, density of the rationals gives a rational rectangle containing that point and contained in the ball. Every open subset is therefore the union of the subfamily of these rectangles contained in it, hence a countable union of measurable product rectangles. Thus preimages of open subsets under these continuous functions belong to $\\mathcal B(\\mathbb R)\\otimes\\mathcal B(\\mathbb R)$, and also to the product of the Lebesgue sigma-algebras. Their squares and restrictions to compact parameter intervals are consequently product measurable, as required by Tonelli below.",
+          "step": "1.1",
+          "inputs": [
+            "F11",
+            "F12",
+            "F15",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The log likelihood is a constant minus $(2\\sigma^2)^{-1}\\sum_i(X_i-\\mu)^2$. Completing the square shows that the unrestricted MLE is $\\hat\\mu=\\bar X$ and the constrained MLE is $\\tilde\\mu=\\min(0,\\bar X)$: when $\\bar X\\le0$ the unrestricted maximum is feasible, and when $\\bar X>0$ the closest feasible point is $0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $x$, the functions $v\\mapsto q''_{\\mu+v}(x)$ and $u\\mapsto q'_{\\mu+u}(x)-q'_\\mu(x)$ are continuous on each compact interval. By [F13] they are Riemann integrable, by [F10] their integrals are respectively $q'_{\\mu+u}(x)-q'_\\mu(x)$ and $q_{\\mu+t}(x)-q_\\mu(x)-tq'_\\mu(x)$, and [F14] identifies these with their Lebesgue integrals under the assumed AC. Reversed endpoints give the same identities for negative $u,t$.",
+          "step": "2.1",
+          "inputs": [
+            "F13",
+            "F10",
+            "F14",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Substituting these maximizers into [F1] gives $$L_n=2\\{\\ell_n(\\hat\\mu)-\\ell_n(\\tilde\\mu)\\}=\\frac{n(\\bar X_+)^2}{\\sigma^2},\\qquad \\bar X_+=\\max(\\bar X,0).$$ This follows from $\\sum_i(X_i-\\mu)^2=\\sum_i(X_i-\\bar X)^2+n(\\mu-\\bar X)^2$: the difference is zero for $\\bar X\\le0$, and otherwise it is $n\\bar X^2/\\sigma^2$ after multiplication by $2$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Cauchy–Schwarz [F8] on the interval between $0$ and $u$, then Tonelli [F9] and step 1.1, gives $\\|q'_{\\mu+u}-q'_\\mu\\|_2^2\\le u^2\\|q''_0\\|_2^2$. The second identity of step 2.1 and another Cauchy–Schwarz/Tonelli application give $\\|q_{\\mu+t}-q_\\mu-tq'_\\mu\\|_2^2\\le |t|\\int_0^{|t|}u^2\\|q''_0\\|_2^2du=|t|^4\\|q''_0\\|_2^2/3=o(t^2)$. For negative $t$ use $q'_{\\mu-u}$ on the length-$|t|$ interval; the same first bound holds. This proves QMD with the explicitly supplied normal densities, score $s_\\mu$, and positive information $1/\\sigma^2$ by [F2].",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "F9",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Under $\\mu=0$, put $Z=\\sqrt n\\bar X/\\sigma$. By [F4] and [F5], $\\mathbb E e^{itZ}=\\prod_{i=1}^n e^{-t^2/(2n)}=e^{-t^2/2}$; uniqueness [F6] gives $Z\\sim N(0,1)$ exactly. Its even density [F3] gives $\\mathbb P(Z\\le0)=1/2$, and for $t\\ge0$ the distribution function of $L_n=(Z_+)^2$ is $\\mathbb P(Z\\le\\sqrt t)=\\Phi(\\sqrt t)$, where $\\Phi(x):=\\mathbb P(Z\\le x)$. Thus its law is $\\tfrac12\\delta_0+\\tfrac12\\chi_1^2$, by [F7]. Since [F3] gives $\\mathbb P(Z=0)=0$, $\\chi_1^2$ has no atom at zero, so this mixture is not the ordinary $\\chi_1^2$ law. The failure comes from the null's half-line local tangent, not a boundary of the full parameter space.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The null contains μ=0 and the full parameter set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The LR statistic has an atom at zero of mass one half; this degenerate component is part of the stated mixture."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The false χ² calibration has one active one-sided boundary restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The full model has positive information 1/σ²; the nonstandard law is caused by the null cone, not singular information."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: μ=0 is interior to Θ=R and is the boundary of Θ0=(-∞,0]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The full and restricted MLEs are explicit functions of the sample mean."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a counterexample, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a counterexample, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "boundary-lr-law-for-every-n",
+          "claim": "For each n≥1 under μ=0, P(L_n=0)=1/2 and P(L_n≤t)=Φ(√t) for t≥0.",
+          "result": "Step 2.2 gives L_n=(Z_n)_+^2, and step 4.1 derives the exact standard-normal law and distribution function."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Reviewed all six steps and sixteen exact suppliers, including the Gaussian even-moment supplier instantiated with X_s=0 and X_t=Y, compact FTC/Riemann–Lebesgue bridge under AC, product-measurable continuous derivatives for Tonelli and translation-invariant norms. Direct calculation gives ||q″||²=3/(16σ⁴); two integrated derivative estimates give O(t⁴)=o(t²) squared QMD remainder and score (x−μ)/σ². Positive σ and n≥1 are required. Global maximizers are Xbar and min(0,Xbar), hence L=n(Xbar_+)²/σ². Characteristic functions give Z exactly standard normal; CDF Φ(√t), t≥0, yields half mass at zero plus half χ1², distinct from χ1². At Xbar=0 LR is zero; full parameter interior does not remove the null boundary. Corrected false Facts F2 citation (density denominator) to the exact one-dimensional QMD condition; proof already uses s=2q′/q. Reader finite-check step-locator enrichment retained. AC is carried for normal/uniqueness/χ² and compact bridge suppliers. Bartlett Lecture 26 PDF p.20 (printed slide19) agrees. Repair complete, confidence 1."
+      },
+      "repair_confidence": 1
+    },
+    "lem-parametric-qmd-score-has-mean-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qmd-path",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\Theta$ be open in $\\mathbb R^d$, and let a supplied sigma-finite\nmeasure $\\mu$ dominate every $P_\\theta$\n([[def-parametric-statistical-model]], [[def-dominated-statistical-experiment]]).\nSupply as part of the setup a family of nonnegative finite-valued measurable\nfunctions $p_\\theta:\\mathcal X\\to[0,\\infty)$ satisfying\n$P_\\theta(A)=\\int_Ap_\\theta\\,d\\mu$ for every $A\\in\\mathcal A$\n([[def-measure-with-density]]). Thus each $p_\\theta$ integrates to one.\nThe density family is supplied, rather than selected from domination alone;\nno choice principle, joint measurability in $(\\theta,x)$, or common\nexceptional null set is asserted. A supplied extended-valued probability\ndensity can be made finite-valued by setting it to zero on its measurable\ninfinite-value set, which has measure zero because its integral is one.\nThe QMD condition is unchanged by replacing any supplied density by an\nalmost-everywhere equal version: for each fixed $h$, the norm in the\ncondition below changes only on the union of two null sets.\nAt an interior point $\\theta_0$, the model is\n**quadratic-mean differentiable (QMD)** with score $s_{\\theta_0}$ if\n$s_{\\theta_0}:\\mathcal X\\to\\mathbb R^d$ is measurable,\n$\\mathbb E_{\\theta_0}\\|s_{\\theta_0}(X)\\|^2<\\infty$, and\n$$\n\\int\\left(\\sqrt{p_{\\theta_0+h}}-\\sqrt{p_{\\theta_0}}- \\tfrac12 h^Ts_{\\theta_0}\\sqrt{p_{\\theta_0}}\\right)^2d\\mu=o(\\|h\\|^2)\n$$\nas $h\\to0$ with $\\theta_0+h\\in\\Theta$. Values of the score on\n$\\{p_{\\theta_0}=0\\}$ do not affect this condition. The Fisher information\nassociated with this QMD score is\n$I_{\\theta_0}=\\mathbb E_{\\theta_0}[s_{\\theta_0}s_{\\theta_0}^T]$; it may be\nsingular. QMD is an $L^2(\\mu)$ condition and does not assert pointwise\ndifferentiability of $p_\\theta$ or local mutual absolute continuity of\n$P_\\theta$ and $P_{\\theta_0}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $q=\\sqrt{p_{\\theta_0}}$ and $r_h=\\sqrt{p_{\\theta_0+h}}-q-\\tfrac12h^Ts_{\\theta_0}q$. By [F1], $\\|r_h\\|_2=o(\\|h\\|)$. By [F3], each $q_h=\\sqrt{p_{\\theta_0+h}}$ is a probability square-root density, so $\\|q_h\\|_2^2=\\|q\\|_2^2=1$. Since $P_{\\theta_0}$ is a probability and the score is square-integrable, [F2] with the constant function $1$ shows its coordinates are integrable. All products in the following norm expansion are integrable by [F2], since $q$, $r_h$, and $h^Ts_{\\theta_0}q$ belong to $L^2(\\mu)$. Thus [F4] permits integrating the finite expansion term by term, and [F3] transfers the score term to expectation under $P_{\\theta_0}$. Expanding $q_h=q+\\tfrac12h^Ts_{\\theta_0}q+r_h$ gives $0=h^T\\mathbb E_{\\theta_0}s_{\\theta_0}+2\\langle q,r_h\\rangle+ \\|\\tfrac12h^Ts_{\\theta_0}q+r_h\\|_2^2$. Cauchy–Schwarz [F2] bounds the inner product by $o(\\|h\\|)$; square-integrability of the score and $\\|r_h\\|_2=o(\\|h\\|)$ make the last term $O(\\|h\\|^2)$. Thus $h^T\\mathbb E_{\\theta_0}s_{\\theta_0}=o(\\|h\\|)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each coordinate vector $e_j$, set $h=te_j$ with $t>0$ small enough that $\\theta_0+te_j\\in\\Theta$. Divide the relation from step 1.1 by $t$ and let $t\\downarrow0$ to obtain $\\mathbb E_{\\theta_0}s_{\\theta_0,j}=0$. This holds for all $j=1,\\ldots,d$, hence the score vector has mean zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes QMD ‘at an interior point $\\theta_0\\in\\mathbb R^d$’ with supplied densities. Proof step 1.1 has ||q_h||₂²=||q||₂²=1, so the model contains θ0 and has probability densities; an empty model cannot furnish these premises.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_manifest_serialization/gate3_boundaries_19_22",
+            "reason": "Statement fixes QMD ‘at an interior point $\\theta_0\\in\\mathbb R^d$’ with supplied densities. Proof step 1.1 has ||q_h||₂²=||q||₂²=1, so the model contains θ0 and has probability densities; an empty model cannot furnish these premises."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement allows zero score; step 1.1 finite norm identity and step 2.1 coordinate division give mean zero without inverting information."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 in d=1 takes the sole direction e1 and proves the scalar score mean zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes only square-integrable score, not nonsingular information; the norm expansion in step 1.1 applies to redundant zero-information directions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Step 2.1 takes positive t small enough that θ0+te_j stays in Θ, using the explicitly interior QMD point; endpoint-only paths are not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement supplies density family and score; steps 1.1–2.1 make no density selection, consistent with the revised choice-free QMD Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement; Proof step 1.1 uses unit L² norms of the supplied square-root probability densities, then step 2.1 uses interior coordinate perturbations to derive E_θ0 s=0 from QMD."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Mean-zero scores alone do not supply the square-root-density expansion; the Statement is a consequence of QMD with an L² score, not a characterization of QMD by centering."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read both steps, def-qmd-path and exact Cauchy–Schwarz, density integration and L1 linearity suppliers. Normalization gives 0=h^T E s+2<q,r_h>+||h^T s q/2+r_h||²; terms are integrable, the last two are o(||h||) and O(||h||²). Interior coordinate rays yield each mean zero. Singular/zero information and density zeros cause no division; no choice needed. Bartlett Lecture 22 PDF pp. 9–11 confirms QMD and centering; no reader/refuter findings. No defect."
+      }
+    }
+  }
+}

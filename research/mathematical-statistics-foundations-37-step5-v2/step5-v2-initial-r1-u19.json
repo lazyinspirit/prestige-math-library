@@ -1,0 +1,305 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "19",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "def-minimax-squared-operator-risk",
+      "model": "gpt-6-luna",
+      "context_sha256": "12bcd04b6981a911400bbc223d5b7c9d73c32863e6735e8ddd37d8420631a23f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The second experiment introduces a distinct family P but only the first family Q has a specified matrix parameter. Its Sigma(P) and hence R_n,P are unbound. Explicitly specifying a matrix parameter for every P repairs this definition-binding defect without changing the loss, estimator class, product sample law, or empty-class convention.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-lasso-basic-inequality",
+      "model": "gpt-6-luna",
+      "context_sha256": "69fc934ade2ac5c176795c9a1a7cff5fce1b965ffc6e83cfd218dcc34ef85155",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 misattributes the coordinate norm formula and reverse triangle inequality to the Lasso objective definition. The formula is explicitly supplied by the already declared restricted-eigenvalue definition, and the required inequality follows from |theta*_j| <= |hat theta_j|+|Delta_j| on S and theta*_j=0 off S. Corrected the citation and supplied this coordinate derivation. The theorem and its constants were sound; this routine citation/presentation defect was nonfatal.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-lasso-prediction-and-l1-error-under-incoherence",
+      "model": "gpt-6-luna",
+      "context_sha256": "731cde953d83a28c5f5c19a204db8d9246769b6eb417eccd7cc368b7127fc71a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Statement's literal necessity claim for its incoherence premise is false. With n=2,d=s=1, zero noise and Gram 4/5, incoherence fails since 1/5>1/14, but the basic inequality gives |Delta|<=15tau/4 and prediction loss<=45tau²/4, yielding both displayed bounds. Replaced the false claim with sufficiency and the precise unrestricted-design coefficient caveat, and proved both using this scalar witness and X=0. The original sufficient-condition rates, constants and probability claim remain intact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-minimax-squared-operator-risk",
+      "disposition": "repaired",
+      "post_sha256": "68390950b1c23e99d0b10329e1298224537d838ab784ea31bc2db9c493174de2",
+      "review_context_sha256": "1b2ae580e97c90c61e4348588e21376f3c5720e44aae3efc49c2b038b1271a8d",
+      "reason": "Specified the previously missing parameter map on the one-observation law family. Checked all nine supplier interfaces: probability measures are sigma-finite, finite products exist and give the IID joint law. Matrix loss is Borel measurable since the operator norm is continuous (bounded by the Frobenius norm); targets need no measurability across the law family. Infinite risk, zero estimator, empty classes, and n=1 remain valid; no choice principle or attainment is asserted. This is a repair review, not an independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-lasso-basic-inequality",
+      "disposition": "repaired",
+      "post_sha256": "357eef44dfe26ef549c3991544fcaa8e1676784bc7df53ce97cc1d73df5e312d",
+      "review_context_sha256": "033773dbbee2375502c25ea2d08d430a32c4df5fad33933dd472d2792e73ba18",
+      "reason": "Reviewed all four supplier interfaces and the complete two-step argument. Objective comparison gives a²+2tau(norm difference)<=2<score,Delta>; the score premise bounds the right side by tau||Delta||1, and the corrected coordinate split yields a²+tau||Delta_Sc||1<=3tau||Delta_S||1. Division uses tau>0. Empty support forces Delta=0; singular designs and n=d=1 are allowed. Reconciled the F3 citation/step in the owning contract and corrected its empty-support, one-dimensional and degenerate-design boundary entries. Statement and deps are unchanged; no propagation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-lasso-prediction-and-l1-error-under-incoherence",
+      "disposition": "repaired",
+      "post_sha256": "2d2f192ac2a7ebb7f6a745c0ec423d07eef1379cc255282a86c6d9d7c95419a4",
+      "review_context_sha256": "ef63cd41a9958b4974bca7be7e764f3745c06a8c841688dd9de0df4baabbfa09",
+      "reason": "Checked the actual supplier interfaces and full argument: the basic inequality supplies the cone before restricted eigenvalue 1/2 is applied; finite Cauchy-Schwarz gives a²<=18s tau² and l1 error<=24s tau, including a=0 and empty support. Substitution yields 576 and 96sqrt(2) on one measurable event for every minimizer, with no selection or AC. Step 4.1 proves the corrected design caveats. Reconciled the new proof step in the owning contract. Exhaustive current ID dependency/reference search found no direct item consumers; owning-page prose remains sound. This is a repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension",
+    "lem-gaussian-sparse-covariance-mixture-lower-bound",
+    "lem-weak-lq-thresholded-covariance-expected-risk",
+    "lem-diagonal-covariance-minimax-lower-bound",
+    "thm-thresholded-sparse-covariance-minimax-rate"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "msf37-step5-initial-r1-u19-minimax-map",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T12:31:52.212Z",
+        "class": "accuracy",
+        "subclass": "undefined-notation",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "def-minimax-squared-operator-risk",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "19",
+        "source": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u19.json",
+        "model": "gpt-6-luna",
+        "context_sha256": "12bcd04b6981a911400bbc223d5b7c9d73c32863e6735e8ddd37d8420631a23f",
+        "post_sha256": "68390950b1c23e99d0b10329e1298224537d838ab784ea31bc2db9c493174de2",
+        "reason": "The second experiment introduces a distinct family P but only the first family Q has a specified matrix parameter. Its Sigma(P) and hence R_n,P are unbound. Explicitly specifying a matrix parameter for every P repairs this definition-binding defect without changing the loss, estimator class, product sample law, or empty-class convention.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "msf37-step5-initial-r1-u19-lasso-norm-citation",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T12:31:52.212Z",
+        "class": "accuracy",
+        "subclass": "citation-misattributed",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "thm-lasso-basic-inequality",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "19",
+        "source": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u19.json",
+        "model": "gpt-6-luna",
+        "context_sha256": "69fc934ade2ac5c176795c9a1a7cff5fce1b965ffc6e83cfd218dcc34ef85155",
+        "post_sha256": "357eef44dfe26ef549c3991544fcaa8e1676784bc7df53ce97cc1d73df5e312d",
+        "reason": "F3 misattributes the coordinate norm formula and reverse triangle inequality to the Lasso objective definition. The formula is explicitly supplied by the already declared restricted-eigenvalue definition, and the required inequality follows from |theta*_j| <= |hat theta_j|+|Delta_j| on S and theta*_j=0 off S. Corrected the citation and supplied this coordinate derivation. The theorem and its constants were sound; this routine citation/presentation defect was nonfatal.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "msf37-step5-initial-r1-u19-incoherence-necessity",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T12:31:52.212Z",
+        "class": "accuracy",
+        "subclass": "false-or-overstrong-statement",
+        "severity": "fatal",
+        "location": "statement",
+        "subject": "thm-lasso-prediction-and-l1-error-under-incoherence",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "19",
+        "source": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u19.json",
+        "model": "gpt-6-luna",
+        "context_sha256": "731cde953d83a28c5f5c19a204db8d9246769b6eb417eccd7cc368b7127fc71a",
+        "post_sha256": "2d2f192ac2a7ebb7f6a745c0ec423d07eef1379cc255282a86c6d9d7c95419a4",
+        "reason": "The Statement's literal necessity claim for its incoherence premise is false. With n=2,d=s=1, zero noise and Gram 4/5, incoherence fails since 1/5>1/14, but the basic inequality gives |Delta|<=15tau/4 and prediction loss<=45tau²/4, yielding both displayed bounds. Replaced the false claim with sufficiency and the precise unrestricted-design coefficient caveat, and proved both using this scalar witness and X=0. The original sufficient-condition rates, constants and probability claim remain intact.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "route-existing-step4-concern",
+      "row": {
+        "defect_id": "msf37-step5-initial-r1-u19-stale-covariance-remark",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T12:31:52.212Z",
+        "class": "accuracy",
+        "subclass": "false-or-overstrong-statement",
+        "severity": "nonfatal",
+        "location": "remark",
+        "subject": "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "open",
+        "batch": "19",
+        "source": "research/mathematical-statistics-foundations-37-batch-19-step5-context.json",
+        "snippet": "The current planned theorem uses only the lower dimension condition",
+        "reason": "Confirmed the digest's presentation concern against the current final Remark. The current thm-thresholded-sparse-covariance-minimax-rate already has a capped equivalence; the counterexample's uncapped claim and proof remain sound. Route the minimal historical-wording correction to this frontier item's owner; it is outside this assignment and was not edited.",
+        "route": "frontier owner for batch 19; separate presentation repair, not a defect propagated by the minimax map clarification",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "retain-existing-owner-route",
+      "item": "thm-dominated-convergence",
+      "status": "already-repaired-by-owner",
+      "affected_use": "Batch-19 Step-4 alert 0 concerned the unbound ambient measure in the published theorem's Statement, Given and proof 1.1; its consumers explicitly supply probability spaces.",
+      "invalidated_claim": "No currently invalidated assigned claim: current Statement now binds an arbitrary measure space (X,A,mu), and Given binds the same space.",
+      "minimality": "Retain the existing owner repair route; no published edit, independent acceptance, Step-5 judgment, rejudge or gate is added.",
+      "evidence": "research/mathematical-statistics-foundations-37-step4-published-alert-routes.json, source_batch 19, alert_index 0, disposition repaired-published-supplier; current items/thm-dominated-convergence.md Statement and Given explicitly bind (X,A,mu).",
+      "reason": "Read the exact current binding and the batch-19 owner-route entry. The digest's published declaration alert is already repaired and routed; this observation is limited to that correction and is not a whole-item audit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Reviewed and repaired all three assigned draft frontier items in increasing dependency order. Each review-context command ran immediately after the corresponding completed mathematical review and before another supplier edit; the captured hashes are preserved.",
+    "Definition change: specified Sigma(P) on the one-observation law family. The five direct dependency/reference consumers are inventoried in downstream_reviews; each already uses population covariance and remains sound. No consumer item was edited and no second hop was expanded.",
+    "Basic-inequality repair changes only F3 citation and proof 2.1; its Statement and dependencies are unchanged. The existing restricted-eigenvalue definition supplies the exact coordinate formula, so no new prerequisite is needed.",
+    "Higher-level theorem Statement changes only the false design-necessity caveat. All rates, constants, dimensions, probability and estimator quantifiers are retained; a new final proof step verifies both caveats. No direct item consumers were found; the two page summaries remain accurate.",
+    "Only the two assigned theorem contract entries were reconciled under the shared-write lock (acquire/reread/edit/focused strict check/release). No judge or audit stamp was written. No new items, independent rejudgment, gates, certification, or round transitions were performed. Final batched proof-layout and all focused checks passed; no mathematical uncertainty or assigned repair obligation remains. The separately routed stale counterexample Remark is outside this assignment; the published DCT alert is already owner-repaired."
+  ],
+  "downstream_reviews": [
+    {
+      "id": "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension",
+      "supplier": "def-minimax-squared-operator-risk",
+      "path": "items/cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension.md",
+      "affected_use": "F5 and proof 2.1 use the n-sample minimax convention to bound risk of the constant zero matrix estimator at the population covariance Sigma(P).",
+      "disposition": "unaffected",
+      "reason": "Proof 1.1 explicitly identifies Sigma(P) as covariance via F3. The added map declaration is satisfied; the estimator class, n-fold sample law and loss stay unchanged. The stale Remark is a separate presentation finding routed to the item's owner, not a consequence of this interface repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-gaussian-sparse-covariance-mixture-lower-bound",
+      "supplier": "def-minimax-squared-operator-risk",
+      "path": "items/lem-gaussian-sparse-covariance-mixture-lower-bound.md",
+      "affected_use": "F3 and proof 8.1 infimize maximal matrix-estimation risk at the finite covariance targets Sigma_(gamma,lambda) constructed in proof 1.1 under their Gaussian n-sample product laws.",
+      "disposition": "unaffected",
+      "reason": "The family already specifies population covariance; proof 1.1 constructs laws with those targets, and proofs 2.1 and 8.1 use their sample laws and measurable full-matrix estimators. Adding the missing parameter-map declaration changes none of these uses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-weak-lq-thresholded-covariance-expected-risk",
+      "supplier": "def-minimax-squared-operator-risk",
+      "path": "items/lem-weak-lq-thresholded-covariance-expected-risk.md",
+      "affected_use": "The Statement uses sup_(P in P_q) E_(P^tensor n)||Sigmahat-Sigma(P)||op^2; F5 supplies the population covariance convention and sample-centered estimator.",
+      "disposition": "unaffected",
+      "reason": "The target is the law's population covariance, as fixed by def-sample-covariance-and-operator-norm-loss. The clarified definition agrees with this map and preserves the displayed expected-risk expression.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-diagonal-covariance-minimax-lower-bound",
+      "supplier": "def-minimax-squared-operator-risk",
+      "path": "items/lem-diagonal-covariance-minimax-lower-bound.md",
+      "affected_use": "The Statement and proof 2.2 use the full Borel matrix action space; proofs 1.1 and 4.1 lower-bound R_n(P_q) using p+1 Gaussian laws with specified diagonal covariance targets.",
+      "disposition": "unaffected",
+      "reason": "Proof 1.1 assigns each Gaussian law its displayed covariance and proof 2.2 matches exactly the minimax definition's matrix Borel space. Those are the newly explicit parameter map's values, so no consumer repair is necessary.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-thresholded-sparse-covariance-minimax-rate",
+      "supplier": "def-minimax-squared-operator-risk",
+      "path": "items/thm-thresholded-sparse-covariance-minimax-rate.md",
+      "affected_use": "The Statement and F1 identify R_n(P_q) with covariance loss under P^tensor n; proof 1.1 compares the threshold-or-zero estimator's maximal covariance risk to this infimum.",
+      "disposition": "unaffected",
+      "reason": "F5 fixes Sigma as the population covariance. Proof 1.1's zero-estimator and threshold-estimator bounds use that same map. The new binding neither changes these losses nor restricts the matrix estimator class.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/mathematical-statistics/sparse-high-dimensional-estimation-and-covariance.md",
+      "suppliers": [
+        "def-minimax-squared-operator-risk",
+        "thm-lasso-prediction-and-l1-error-under-incoherence"
+      ],
+      "affected_use": "The items list embeds both suppliers; page prose describes Lasso bounds with an explicit incoherence condition and clean covariance minimax estimation.",
+      "disposition": "unaffected",
+      "reason": "The page makes no necessity claim for incoherence, and its covariance target remains population covariance. Both clarified interfaces support its summary."
+    },
+    {
+      "path": "library/mathematical-statistics/sparse-high-dimensional-estimation-and-covariance-examples.md",
+      "affected_use": "Page prose says a collinear design shows sparsity alone does not imply coefficient identifiability or a fast coefficient-error bound.",
+      "disposition": "unaffected",
+      "reason": "This agrees with the corrected Lasso caveat and claims no necessity of the specific incoherence threshold."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-19.proof-contracts.json --strict --items def-minimax-squared-operator-risk,thm-lasso-basic-inequality,thm-lasso-prediction-and-l1-error-under-incoherence --json",
+      "exit_code": 0,
+      "result": "All three assigned entries checked; no errors or warnings."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-minimax-squared-operator-risk.md items/thm-lasso-basic-inequality.md items/thm-lasso-prediction-and-l1-error-under-incoherence.md library/mathematical-statistics/sparse-high-dimensional-estimation-and-covariance.md library/mathematical-statistics/sparse-high-dimensional-estimation-and-covariance-examples.md --json",
+      "exit_code": 0,
+      "result": "Five files checked; no errors or warnings."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-minimax-squared-operator-risk.md items/thm-lasso-basic-inequality.md items/thm-lasso-prediction-and-l1-error-under-incoherence.md --json",
+      "exit_code": 0,
+      "result": "Two proofs pass, zero failures; the definition is not-applicable."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-minimax-squared-operator-risk.md items/thm-lasso-basic-inequality.md items/thm-lasso-prediction-and-l1-error-under-incoherence.md",
+      "exit_code": 0,
+      "result": "proof-layout: 3 items, 6 steps, 0 defects"
+    }
+  ]
+}

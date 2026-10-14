@@ -1,0 +1,1445 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-dirac-integral-evaluation",
+    "lem-statistic-induces-deterministic-procedure",
+    "def-bias-and-mean-squared-error",
+    "thm-bias-variance-decomposition",
+    "def-unbiased-estimator-and-umvu",
+    "thm-rao-blackwell",
+    "thm-lehmann-scheffe",
+    "ex-binomial-sample-proportion",
+    "ex-biased-estimator-lower-mse",
+    "ex-rao-blackwell-bernoulli-observation"
+  ],
+  "contracts": {
+    "lem-dirac-integral-evaluation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nonnegative-simple-measurable-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A measurable function\n$s:X\\to[0,+\\infty)\\subseteq\\overline{\\mathbb R}$\n([[def-extended-real-valued-measurable-function]]) is a\n**nonnegative simple measurable function** when it has finite range.\n\nEquivalently, there are pairwise disjoint measurable sets\n$E_1,\\dots,E_m\\in\\mathcal A$ and coefficients $c_1,\\dots,c_m\\in[0,+\\infty)$\nsuch that\n$$s=\\sum_{j=1}^m c_j\\chi_{E_j}.$$\nAny such display is a **simple representation** of $s$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $s=\\sum_{j=1}^m c_j\\mathbf 1_{A_j}$ is a nonnegative simple function with pairwise disjoint $A_j\\in\\mathcal A$, then [F1] and [F2] give $\\int s\\,d\\delta_{x_0}=\\sum_jc_j\\delta_{x_0}(A_j)=\\sum_jc_j\\mathbf 1_{A_j}(x_0)=s(x_0)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose the increasing simple approximation $s_n\\uparrow f$ from [F3]. By [F4] and step 1.1, $\\int f\\,d\\delta_{x_0}=\\lim_n\\int s_n\\,d\\delta_{x_0}=\\lim_ns_n(x_0)=f(x_0)$, including when the value is $+\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses include a point x0 in X, so X is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For f=0 the identity is step 1.1–2.1 and both sides are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For f=1 the Dirac mass has total mass one by step 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The point mass is the degenerate measure; step 1.1 evaluates every simple function at x0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "If f(x0)=+infinity, the monotone limit in step 2.1 retains +infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The explicit simple approximation in step 2.1 uses no arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a given Dirac measure and nonnegative measurable f, then concludes integral f d(delta_x0)=f(x0); Proof 1.1 verifies simple functions and 2.1 passes to an increasing limit, including infinity. This evaluation identity is a conclusion under fixed hypotheses, rather than one direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not characterize Dirac measures from an integration identity or infer measurability from an equality. Proof 2.1 already assumes measurable f through F3 and the given measure through F1; no reverse implication from integral f=f(x0) to those hypotheses is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-integrand",
+          "claim": "For f=0 the integral equals f(x0)=0.",
+          "result": "Steps 1.1 and 2.1 give zero."
+        },
+        {
+          "id": "infinite-point-value",
+          "claim": "A nonnegative measurable f may satisfy f(x0)=+infinity.",
+          "result": "Step 2.1 retains +infinity under monotone convergence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "Independent continuation: complete current proof and six supplier bodies read. Simple evaluation then monotone convergence is valid including infinite point values; x0 excludes empty space, zero/constants work. No choice or infinity cancellation. Reader and refuter have no finding."
+      }
+    },
+    "lem-statistic-induces-deterministic-procedure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $x\\in\\mathcal X$, the section $B\\mapsto K_T(x,B)=\\delta_{T(x)}(B)$ is the probability measure $\\delta_{T(x)}$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $B\\in\\mathcal G$, $x\\mapsto K_T(x,B)=\\mathbf 1_B(T(x))=\\mathbf 1_{T^{-1}(B)}(x)$ is $\\mathcal A$-measurable by [F1]. Thus both clauses of the kernel definition [F3] hold, so $K_T$ is a probability kernel, hence a deterministic randomized procedure.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The section condition is vacuous on an empty data domain; otherwise every section is checked in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For B=empty, every event evaluation is zero by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For B equal to the action space, every section has mass one by step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant statistic gives a constant Dirac kernel; steps 1.1 and 2.1 still apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No scalar parameter endpoints occur in the kernel statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The kernel is explicitly constructed from T in steps 1.1 and 2.1 and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement starts with a measurable statistic T and constructs K_T(x,B)=1_B(T(x)); Proof 1.1 establishes probability-measure sections and 2.1 establishes measurable event evaluations. It asserts this construction, rather than an iff characterization of procedures."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert that every probability kernel is induced by a statistic: randomized kernels need not be Dirac sections. Proof 2.1 checks the event evaluations of the already supplied T using F1; it does not recover T from an arbitrary kernel."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "empty-and-whole-events",
+          "claim": "Evaluate the section on the empty and whole action events.",
+          "result": "The probability-measure property in step 1.1 checks both."
+        }
+      ]
+    },
+    "def-bias-and-mean-squared-error": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-bias-variance-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bias-and-mean-squared-error",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment: a measurable data space, a parameter-label set,\nand a family of probability measures on the data space. Let\n$\\psi:\\Theta\\to\\mathbb R$ be its real-valued target function (estimand). An estimator\n$T:\\mathcal X\\to\\mathbb R$ is a measurable statistic\nwith the real Borel target ([[def-statistic-and-estimator]]). At a parameter\n$\\theta$ for which $T$ is integrable under $P_\\theta$, its **bias** is\n$$\\operatorname{Bias}_\\theta(T):=\\mathbb E_\\theta[T]-\\psi(\\theta).$$\n\nIts **mean squared error** (MSE) is the extended nonnegative number\n$$\\operatorname{MSE}_\\theta(T):=\\mathbb E_\\theta[(T-\\psi(\\theta))^2]\\in[0,+\\infty].$$\nThis is the risk of the deterministic rule induced by $T$ under squared-error\nloss $L(\\theta,a)=(a-\\psi(\\theta))^2$: its Dirac kernel is constructed in\n[[lem-statistic-induces-deterministic-procedure]], and the risk supplier's\nintegral formula reduces to the displayed expectation when the action is\n$T(x)$ by [[lem-dirac-integral-evaluation]]\n([[def-loss-function-and-risk]]). For each fixed $\\theta$, this loss is Borel\nin the real action $a$; no measurable structure on $\\Theta$ or measurability\nof $\\psi$ is required. The expectation convention is\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. If $T$ is\nsquare-integrable under $P_\\theta$, then its variance is defined by\n[[def-moments-variance-and-covariance]] and this MSE is finite. Bias is not\ndefined at parameters where $T$ is not integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\theta$. Since $P_\\theta$ is a probability measure, the constant $1$ has $L^2(P_\\theta)$ norm $1$. Applying [F4] to $T$ and $1$ gives $\\mathbb E_\\theta|T|\\leq(\\mathbb E_\\theta[T^2])^{1/2}<\\infty$. Put $\\mu=\\mathbb E_\\theta[T]$ and $b=\\mu-\\psi(\\theta)$. Then [F1] gives $b=\\operatorname{Bias}_\\theta(T)$ and $T-\\psi(\\theta)=(T-\\mu)+b$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $T,\\mu\\in L^1(P_\\theta)$ by step 1.1 and $P_\\theta(\\mathcal X)=1$, [F3] gives $\\mathbb E_\\theta[T-\\mu]=\\mathbb E_\\theta[T]-\\mu\\mathbb E_\\theta[1]=0$. For every finite $c$, $(T-c)^2\\leq2T^2+2c^2$, so the centered square and squared error are integrable. Expanding $(T-\\psi(\\theta))^2=((T-\\mu)+b)^2$ now gives $\\operatorname{MSE}_\\theta(T)=\\mathbb E_\\theta[(T-\\mu)^2]+b^2=\\operatorname{Var}_\\theta(T)+\\operatorname{Bias}_\\theta(T)^2$ by [F1] and [F2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the conclusion is pointwise in theta and vacuous if the parameter set is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When bias is zero, step 2.1 reduces MSE to variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a constant estimator, step 2.1 gives zero variance and MSE equal to squared bias."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If T is almost surely constant, the centered term in step 2.1 vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint restriction is imposed on the parameter space."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The expansion in steps 1.1 and 2.1 is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement assumes E_theta[T^2]<infinity and gives the additive identity MSE_theta(T)=Var_theta(T)+Bias_theta(T)^2. Proof 1.1 defines the finite mean and bias, and 2.1 expands the square and cancels the centered expectation. The equality is not a biconditional predicate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not infer square-integrability from a displayed MSE/variance equality, and does not assert that unbiasedness is necessary for the decomposition: Proof 1.1 allows b=E_theta T-psi(theta) to be nonzero and Proof 2.1 retains b^2. Thus no reverse characterization is present."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-bias",
+          "claim": "If Bias_theta(T)=0, MSE_theta(T)=Var_theta(T).",
+          "result": "Set b=0 in step 2.1."
+        },
+        {
+          "id": "constant-estimator",
+          "claim": "For T=c almost surely, variance is zero.",
+          "result": "The centered-square term in step 2.1 vanishes."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "Independent continuation: complete current proof and four actual suppliers read. Probability L2 bound gives L1, finite real psi and mean license integrable centered squares and zero cross term; zero variance and biased constants included. Current content is sound under owner authorization; historical byte delta remains unknown. Reader integrability concern addressed, refuter has no finding."
+      }
+    },
+    "def-unbiased-estimator-and-umvu": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: the stated domain and hypotheses determine this case."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-rao-blackwell": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-unbiased-estimator-and-umvu",
+          "source_section": "Definition",
+          "quote": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-procedure-action-law-is-measurable",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a randomized procedure for the experiment\n$\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nwith action space $(\\mathsf D,\\mathcal G)$. Give $[0,+\\infty]$ its Borel\nsigma-algebra. For every nonnegative $\\mathcal G/\\mathcal B([0,+\\infty])$-\nmeasurable function $g:\\mathsf D\\to[0,+\\infty]$, the function\n$$h_g(x)=\\int_{\\mathsf D}g(a)\\,K(x,da)$$\nis $\\mathcal A$-measurable. In particular, $x\\mapsto K(x,B)$ is measurable\nfor every action event $B\\in\\mathcal G$. For each $\\theta\\in\\Theta$, the\nset function\n$$Q_\\theta(B)=\\int_{\\mathcal X}K(x,B)\\,P_\\theta(dx),\\qquad B\\in\\mathcal G,$$\nis a probability measure on $(\\mathsf D,\\mathcal G)$, and for every such $g$,\n$$\\int_{\\mathsf D}g\\,dQ_\\theta=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}g(a)\\,K(x,da)\\right)P_\\theta(dx).$$\nwith nonnegative extended values allowed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sigma-algebra-generated-by-a-function",
+          "source_section": "Definition",
+          "quote": "Let $f : X \\to Y$ be a function and assume the target $Y$ carries a Borel\nsigma-algebra $\\mathcal{B}(Y)$.\n\nThe **sigma-algebra generated by $f$** is\n\n$$\\sigma(f) := \\{\\, f^{-1}(B) : B \\in \\mathcal{B}(Y) \\,\\}.$$\n\nBecause preimages preserve complements and countable unions, this is a\nsigma-algebra on $X$. It is the smallest sigma-algebra on $X$ that makes $f$\nmeasurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-conditional-lp-contraction",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $1\\le p\\le\\infty$, conditional expectation is a linear map from real $L^p(P)$ to real $L^p(P|_{\\mathcal G})$ satisfying $\\|E[X\\mid\\mathcal G]\\|_p\\le\\|X\\|_p$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+          "source_section": "Statement",
+          "quote": "Assume AC. Real $L^2(\\Omega,\\mathcal G,P|_{\\mathcal G})$ embeds isometrically as a closed subspace of real $L^2(\\Omega,\\mathcal F,P)$. For $X\\in L^2(P)$, $U=E[X\\mid\\mathcal G]$ is its orthogonal projection onto this subspace. It uniquely minimizes $E[(X-Z)^2]$ over $Z\\in L^2(\\mathcal G)$ as an almost-sure class.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "A **randomized procedure** (or randomized decision rule) is a probability kernel $K$ from $(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense of [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a probability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$, and $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$. The kernel is specified without reference to the unknown parameter.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $u$ for the measurable function defining $U$. For each $\\theta$, $P_\\theta^S$ is a probability measure: preimages under the measurable map $S$ preserve the empty set, disjoint countable unions, and the whole space. By [L1], $K$ is a parameter-independent probability kernel from the statistic space to the data space, so it is a randomized procedure for the pushforward experiment by [F15]. Thus [F2] and [F3] show that $h_+(s)=\\int u^+dK(s,\\cdot)$, $h_-(s)=\\int u^-dK(s,\\cdot)$, and $r(s)=\\int|u|dK(s,\\cdot)$ are Borel. Let $g=h_+-h_-$ where $r<\\infty$ and $g=0$ elsewhere; [F6] makes both terms finite on this Borel set, and [F3] makes $g$ Borel.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "F2",
+            "F3",
+            "F6",
+            "F15",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $\\theta$ and a Borel statistic event $B$. For nonnegative simple functions of the data, [L1] and finite linearity give $\\int_B\\int s(x)K(t,dx)P_\\theta^S(dt)=\\mathbb E_\\theta[\\mathbf1_{\\{S\\in B\\}}s(X)]$. Approximate $u^+$ and $u^-$ increasingly by simple functions using [F4]; [F5] passes each equality to the limit. Applying the same identity to $|u|$ with $B=\\mathsf S$ gives $\\mathbb E_\\theta r(S)=\\mathbb E_\\theta|U|<\\infty$. If $N=\\{r(S)=+\\infty\\}$ had positive probability, then $m\\mathbf1_N\\leq r(S)$ for every positive integer $m$, so [F6] would give $mP_\\theta(N)\\leq\\mathbb E_\\theta r(S)$ for all $m$, a contradiction; thus $r(S)<\\infty$ almost surely. By [F6], $h_+(S),h_-(S)\\leq r(S)$, so $|g(S)|\\leq2r(S)$ and $g(S)$ is integrable. The two finite event-integral identities may therefore be subtracted, giving $\\mathbb E_\\theta[\\mathbf1_{\\{S\\in B\\}}g(S)]=\\mathbb E_\\theta[\\mathbf1_{\\{S\\in B\\}}U]$. By [F7], [F8], and [F9], $g(S)$ is a version of $\\mathbb E_\\theta[U\\mid\\sigma(S)]$ as an almost-sure class for every $\\theta$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "L1",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F13",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F10], $g(S)$ is square-integrable under each $P_\\theta$. By [F11], $\\mathbb E_\\theta[g(S)]=\\mathbb E_\\theta[U]=\\psi(\\theta)$; hence it is an unbiased finite-variance estimator.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F10",
+            "F11",
+            "F13",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $\\theta$. The residual $U-g(S)$ is orthogonal in $L^2(P_\\theta)$ to every square-integrable $\\sigma(S)$-measurable function by [F12]. By step 3.1 and $\\psi(\\theta)\\in\\mathbb R$, $g(S)-\\psi(\\theta)$ is such a function. Expanding the centered square gives $\\operatorname{Var}_\\theta(U)=\\mathbb E_\\theta[(U-g(S))^2]+\\operatorname{Var}_\\theta(g(S))$. The first term is nonnegative, proving the variance inequality.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F12",
+            "F13",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F14], equality in step 4.1 holds exactly when $U=g(S)$ $P_\\theta$-almost surely. Since $g(S)$ is $\\sigma(S)$-measurable, this is precisely almost-sure $\\sigma(S)$-measurability: if $U$ has such a representative, its $L^2$ class lies in the projection subspace and [F12] fixes it.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F12",
+            "F14"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: all conclusions are quantified over theta and are vacuous for an empty parameter set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For U=0 and psi=0, the construction in step 1.1 gives g=0 and step 4.1 has zero residual."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a constant-one estimator with target one, the conditional mean is one and step 5.1 gives equality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For degenerate sampling laws, the event identities in step 2.1 and L2 equality in step 4.1 remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No scalar endpoint restriction is imposed; Bernoulli endpoints are checked on the B page."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated and used through the conditional-expectation/L2 suppliers in steps 1.1–5.1; the common kernel is supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Equality of variances implies U=g(S) almost surely by step 5.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "If U is sigma(S)-measurable, the projection property in step 5.1 fixes its L2 class and gives equality."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ],
+          "reason": "Conditional-expectation existence and L2 projection assume AC; the common RCD is supplied as a sufficiency hypothesis, and finite Bernoulli arithmetic is choice-free."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "Independent continuation: complete five-step current proof and 17 direct supplier bodies read. Common supplied K makes h+/h-/r Borel; finite expectation of r(S) makes its infinite set null under each parameter separately. g is a single real Borel function, not a common-null-set claim. Event identity follows from simple approximation/MCT; L2 contraction and orthogonality give positive residual-square variance identity, and both equality directions follow from zero-square a.s. and projection fixing the conditioning subspace. AC is expressly inherited for RN and L2 completeness; constants/zero residual included. Reader explicit kernel/integrability additions are present; refuter has no finding. Historical pre-reader bytes remain unknown."
+      }
+    },
+    "thm-lehmann-scheffe": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-unbiased-estimator-and-umvu",
+          "source_section": "Definition",
+          "quote": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rao-blackwell",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as in the library conditional-expectation\nconvention. Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ have\nstandard-Borel data space, let $\\mathsf S$ be standard Borel, and let\n$S:\\mathcal X\\to\\mathsf S$ be a sufficient statistic. Here sufficiency uses\na **supplied common kernel** $K(s,\\cdot)$ that is a regular conditional law of\nthe data given $S=s$ under every $P_\\theta$ and does not depend on $\\theta$\n([[def-sufficient-statistic]]). For Borel $B\\subseteq\\mathsf S$, write $P_\\theta^S(B):=P_\\theta(S^{-1}(B))$ for the pushforward law of $S$. Let $\\psi:\\Theta\\to\\mathbb R$ and let $U$ be\na measurable real estimator with $\\mathbb E_\\theta[U]=\\psi(\\theta)$ and\n$\\mathbb E_\\theta[U^2]<\\infty$ for every $\\theta$.\n\nThere is a single Borel function $g:\\mathsf S\\to\\mathbb R$, independent of\n$\\theta$, such that $g(S)$ is a version of\n$\\mathbb E_\\theta[U\\mid\\sigma(S)]$ for every $\\theta$. It is unbiased,\nfinite-variance, and\n$$\\operatorname{Var}_\\theta(g(S))\\leq\\operatorname{Var}_\\theta(U)\\qquad(\\theta\\in\\Theta).$$\nFor each $\\theta$, equality holds exactly when $U$ is\n$\\sigma(S)$-measurable $P_\\theta$-almost surely.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-complete-statistic",
+          "source_section": "Definition",
+          "quote": "A statistic $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ is **complete** for $(P_\\theta)_{\\theta\\in\\Theta}$ if, for every measurable real-valued $g$ such that $E_\\theta|g(T)|<\\infty$ for every $\\theta$, the conditions $E_\\theta[g(T)]=0$ for every $\\theta$ imply $P_\\theta(g(T)=0)=1$ for every $\\theta$. Integrability is part of the premise; completeness is a property of the statistic relative to the specified family.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $U$ be any finite-variance unbiased estimator of $\\psi$. The sufficient-statistic hypothesis [L1] permits applying [F2]. Under the stated AC branch [F3], there is one Borel function $u_S:\\mathsf S\\to\\mathbb R$, independent of $\\theta$, such that $u_S(S)$ is a version of $\\mathbb E_\\theta[U\\mid\\sigma(S)]$ for every $\\theta$. Rao–Blackwell [F2] makes it unbiased and finite-variance and gives $\\operatorname{Var}_\\theta(u_S(S))\\leq\\operatorname{Var}_\\theta(U)$ for every $\\theta$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The difference $u_S(S)-g(S)$ is integrable, is a function of $S$, and has expectation zero for every $\\theta$. Completeness [L2] therefore gives $u_S(S)=g(S)$ $P_\\theta$-almost surely for every $\\theta$. Substitution into step 1.1 proves $\\operatorname{Var}_\\theta(g(S))\\leq\\operatorname{Var}_\\theta(U)$ for every $\\theta$, so $g(S)$ is UMVU.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $V$ is another UMVU estimator, applying steps 1.1 and 2.1 to $V$ gives its Rao–Blackwellized function $v_S(S)=g(S)$ almost surely for each $\\theta$. Since both $V$ and $g(S)$ are UMVU, their variances agree at each $\\theta$. The equality condition in [F2] makes $V$ $\\sigma(S)$-measurable $P_\\theta$-almost surely; by [F4], such a representative is its own conditional expectation, so uniqueness gives $V=v_S(S)=g(S)$ almost surely.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the conclusions are quantified over theta and are vacuous for an empty parameter set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero estimand and g(S)=0, step 2.1 uses completeness on every zero-mean competitor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof in steps 1.1, 2.1 and 3.1 apply unchanged to a one-point parameter set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The uniqueness conclusion in step 2.1 is relative to each P_theta and includes degenerate laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter restriction is imposed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The AC branch is used when applying Rao–Blackwell in step 1.1; completeness is used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives sufficient conditions—AC, standard-Borel spaces, complete sufficient S, and finite-variance unbiased g(S)—for g(S) to be the unique UMVU estimator. Proof 1.1 applies Rao–Blackwell, 2.1 applies completeness, and 3.1 proves uniqueness; the theorem is not an iff characterization of UMVU."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not infer completeness or sufficiency of S from existence of a unique UMVU g(S). The Rao–Blackwell equality criterion in F2 is a separate supplier fact used in Proof 3.1 to identify another UMVU estimator almost surely, not a reverse direction of the Lehmann–Scheffe hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "reason": "Conditional-expectation existence and L2 projection assume AC; the common RCD is supplied as a sufficiency hypothesis, and finite Bernoulli arithmetic is choice-free."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "Independent continuation: complete current three-step proof and seven direct supplier bodies read. Rao-Blackwell supplies one Borel representative for each competitor; difference from g(S) is integrable under every parameter and has all-parameter zero means, exactly matching completeness. Variance comparison proves UMVU; equality for another UMVU and uniqueness of conditional versions prove parameterwise a.s. uniqueness. No universal null set or existence without the given unbiased g is claimed. AC carried explicitly. Reader uniqueness clarification present; refuter no finding; historical pre-reader byte delta unknown."
+      }
+    },
+    "ex-binomial-sample-proportion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-unbiased-estimator-and-umvu",
+          "source_section": "Definition",
+          "quote": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-bias-and-mean-squared-error",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment: a measurable data space, a parameter-label set,\nand a family of probability measures on the data space. Let\n$\\psi:\\Theta\\to\\mathbb R$ be its real-valued target function (estimand). An estimator\n$T:\\mathcal X\\to\\mathbb R$ is a measurable statistic\nwith the real Borel target ([[def-statistic-and-estimator]]). At a parameter\n$\\theta$ for which $T$ is integrable under $P_\\theta$, its **bias** is\n$$\\operatorname{Bias}_\\theta(T):=\\mathbb E_\\theta[T]-\\psi(\\theta).$$\n\nIts **mean squared error** (MSE) is the extended nonnegative number\n$$\\operatorname{MSE}_\\theta(T):=\\mathbb E_\\theta[(T-\\psi(\\theta))^2]\\in[0,+\\infty].$$\nThis is the risk of the deterministic rule induced by $T$ under squared-error\nloss $L(\\theta,a)=(a-\\psi(\\theta))^2$: its Dirac kernel is constructed in\n[[lem-statistic-induces-deterministic-procedure]], and the risk supplier's\nintegral formula reduces to the displayed expectation when the action is\n$T(x)$ by [[lem-dirac-integral-evaluation]]\n([[def-loss-function-and-risk]]). For each fixed $\\theta$, this loss is Borel\nin the real action $a$; no measurable structure on $\\Theta$ or measurability\nof $\\psi$ is required. The expectation convention is\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. If $T$ is\nsquare-integrable under $P_\\theta$, then its variance is defined by\n[[def-moments-variance-and-covariance]] and this MSE is finite. Bias is not\ndefined at parameters where $T$ is not integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-variance-of-a-finite-sum",
+          "source_section": "Statement",
+          "quote": "For a finite family $(X_i)_{i\\in I}$ of square-integrable real random variables on one common probability space,\n$$\\operatorname{Var}\\!\\left(\\sum_{i\\in I}X_i\\right)=\\sum_{i\\in I}\\operatorname{Var}(X_i)+2\\sum_{\\{i,j\\}\\subseteq I}\\operatorname{Cov}(X_i,X_j).$$\nEquivalently, it is $\\sum_{i,j\\in I}\\operatorname{Cov}(X_i,X_j)$. The empty sum has variance zero, and the singleton formula is the identity.\nThe original finite-probability-space case is included, since every real random variable there is square-integrable and the covariance/variance definitions agree with the finite centered-product/square formulas.\nIn the first display, the second sum is over two-element subsets of $I$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-covariance-vanishes-under-independence",
+          "source_section": "Statement",
+          "quote": "If $X$ and $Y$ are independent square-integrable real random variables, then\n$$\\operatorname{Cov}(X,Y)=0.$$\n\nThus independence implies zero covariance. The converse is false in general.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-bias-variance-decomposition",
+          "source_section": "Statement",
+          "quote": "In a statistical experiment, let $\\psi:\\Theta\\to\\mathbb R$ and let $T$ be a\nreal estimator with $\\mathbb E_\\theta[T^2]<\\infty$. For every $\\theta$,\n$$\\operatorname{MSE}_\\theta(T)=\\operatorname{Var}_\\theta(T)+\\operatorname{Bias}_\\theta(T)^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-independence-of-finite-random-variables",
+          "source_section": "Definition",
+          "quote": "A finite family of finite-valued random variables $(X_i)_{i\\in I}$ is **mutually independent** when for every nonempty $J\\subseteq I$ and every selection $x_j\\in X_j(\\Omega)$,\n$$\\mathbb P(X_j=x_j\\text{ for every }j\\in J)=\\prod_{j\\in J}\\mathbb P(X_j=x_j).$$\nIt is **pairwise independent** when this identity is required only for two distinct indices. The empty family is mutually independent vacuously, and a one-member family is mutually independent.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $X_i$ and $\\overline X$ is measurable on the finite product space, hence an estimator by [F7]. The Bernoulli law [F8] gives $P_p(X_i=1)=p$ and $P_p(X_i=0)=1-p$; summing these two values gives $\\mathbb E_pX_i=p$ and $\\operatorname{Var}_p(X_i)=(1-p)p^2+p(1-p)^2=p(1-p)$, including $p=0,1$. Thus [F5] gives $\\mathbb E_p\\overline X=p$, so $\\overline X$ is unbiased by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The independent $X_i$ are square-integrable, so [F3] makes every off-diagonal covariance zero. Applying [F2] gives $\\operatorname{Var}_p(\\sum_iX_i)=np(1-p)$ and hence $\\operatorname{Var}_p(\\overline X)=p(1-p)/n$. Since the bias is zero, [F6] gives the same value for MSE.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes n>=1 and does not include an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At p=0 every observation is zero; steps 1.1 and 2.1 give zero mean, variance and MSE."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At p=1 every observation is one; steps 1.1 and 2.1 give zero variance and MSE."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The endpoint Bernoulli laws are degenerate and are computed in steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The parameters p=0 and p=1 are explicitly covered in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite-sum calculations in step 1.1 and step 2.1 are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example fixes independent Bernoulli(p) observations with n>=1 and computes E_p[Xbar]=p and Var_p(Xbar)=MSE_p(Xbar)=p(1-p)/n. Verification 1.1 computes the coordinate moments and 2.1 removes cross covariances; these equalities are computations in the specified experiment, not an iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example does not claim that those moment or MSE values force observations to be independent Bernoulli(p). Verification 2.1 uses independence as the premise that makes off-diagonal covariances zero, rather than deriving independence from the resulting variance formula."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "n-one",
+          "claim": "For n=1, the sample proportion is one Bernoulli observation.",
+          "result": "Steps 1.1 and 2.1 give MSE p(1-p)."
+        },
+        {
+          "id": "p-endpoints",
+          "claim": "At p=0 and p=1 the law is degenerate.",
+          "result": "Steps 1.1 and 2.1 give zero variance and MSE."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "Independent continuation: both steps and eleven actual suppliers read. Common finite product with bounded independent coordinates satisfies corrected general L2 covariance/variance interfaces and finite/general convention agreement. Coordinate two-point sums give p and p(1-p); independence kills off-diagonal covariances; scaling by n^-1 yields p(1-p)/n. n>=1 prevents division by zero; n=1 and p=0,1 work. Unbiased bias-variance consequence applies. Historical reader1/2 fatal scope defects and reader3 nonfatal locator defect are separate from this valid use; actual owner corrections read. Refuter has no finding."
+      }
+    },
+    "ex-biased-estimator-lower-mse": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bias-and-mean-squared-error",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment: a measurable data space, a parameter-label set,\nand a family of probability measures on the data space. Let\n$\\psi:\\Theta\\to\\mathbb R$ be its real-valued target function (estimand). An estimator\n$T:\\mathcal X\\to\\mathbb R$ is a measurable statistic\nwith the real Borel target ([[def-statistic-and-estimator]]). At a parameter\n$\\theta$ for which $T$ is integrable under $P_\\theta$, its **bias** is\n$$\\operatorname{Bias}_\\theta(T):=\\mathbb E_\\theta[T]-\\psi(\\theta).$$\n\nIts **mean squared error** (MSE) is the extended nonnegative number\n$$\\operatorname{MSE}_\\theta(T):=\\mathbb E_\\theta[(T-\\psi(\\theta))^2]\\in[0,+\\infty].$$\nThis is the risk of the deterministic rule induced by $T$ under squared-error\nloss $L(\\theta,a)=(a-\\psi(\\theta))^2$: its Dirac kernel is constructed in\n[[lem-statistic-induces-deterministic-procedure]], and the risk supplier's\nintegral formula reduces to the displayed expectation when the action is\n$T(x)$ by [[lem-dirac-integral-evaluation]]\n([[def-loss-function-and-risk]]). For each fixed $\\theta$, this loss is Borel\nin the real action $a$; no measurable structure on $\\Theta$ or measurability\nof $\\psi$ is required. The expectation convention is\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. If $T$ is\nsquare-integrable under $P_\\theta$, then its variance is defined by\n[[def-moments-variance-and-covariance]] and this MSE is finite. Bias is not\ndefined at parameters where $T$ is not integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-unbiased-estimator-and-umvu",
+          "source_section": "Definition",
+          "quote": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bernoulli-and-binomial-mean-and-variance",
+          "source_section": "Statement",
+          "quote": "If $X$ is Bernoulli$(p)$, then $\\mathbb E[X]=p$ and $\\operatorname{Var}(X)=p(1-p)$. If $S$ is binomial$(n,p)$, then\n$$\\mathbb E[S]=np,\\qquad \\operatorname{Var}(S)=np(1-p).$$\nThese formulas include $p=0$, $p=1$, and $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both $T_1=X$ and the constant $T_0=0$ are measurable estimators by [F4]. The two-point law gives $\\mathbb E_pX=p$ and $\\operatorname{Var}_p(X)=p(1-p)$, so [F2] makes $T_1=X$ unbiased and [F1] gives $\\operatorname{MSE}_p(T_1)=p(1-p)$. For $T_0=0$, [F1] gives bias $-p$ and MSE $p^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $p=1/5$, the MSEs are $1/25$ and $(1/5)(4/5)=4/25$, respectively, so the biased rule has strictly smaller MSE there. At $p=1$, they are $1$ and $0$, so the inequality is not uniform in $p$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one observation and does not use an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At p=0 both estimators have MSE zero by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At p=1 the constant estimator has MSE 1 and X has MSE 0 by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The endpoint law p=1 is degenerate and reverses the pointwise inequality in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoints p=0 and p=1 are checked in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two-point Bernoulli risk calculations in steps 1.1 and 2.1 are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example computes the risks of X and the constant zero estimator under one Bernoulli(p) observation and exhibits 1/25<4/25 at p=1/5. Verification 1.1 derives p(1-p) and p^2, and 2.1 evaluates them; a pointwise witness of lower MSE is not an iff claim about biased estimators."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts neither that bias guarantees lower MSE nor that lower MSE implies bias in general. Verification 2.1 supplies p=1 where the constant biased rule has MSE 1 while X has MSE 0, so the sole comparison at p=1/5 is not a converse or a uniform characterization."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "p-one-fifth",
+          "claim": "At p=1/5, the constant estimator has smaller MSE.",
+          "result": "Step 2.1 gives 1/25<4/25."
+        },
+        {
+          "id": "p-one",
+          "claim": "At p=1 the comparison reverses.",
+          "result": "Step 2.1 gives MSE 1 for T0 and 0 for T1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "Independent continuation: both steps and six actual suppliers read. Bernoulli two-point law yields mean p, variance p(1-p), and squared-error risks p(1-p) versus p^2. At p=1/5 the exact risks are 4/25 and 1/25; p=1 reverses the comparison and p=0 gives equality. Repaired published Bernoulli source retains precisely this sound subclaim, with general L1/indicator suppliers. No uniform domination is asserted; reader4 remains historically nonfatal. Refuter has no finding."
+      }
+    },
+    "ex-rao-blackwell-bernoulli-observation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rao-blackwell",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as in the library conditional-expectation\nconvention. Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ have\nstandard-Borel data space, let $\\mathsf S$ be standard Borel, and let\n$S:\\mathcal X\\to\\mathsf S$ be a sufficient statistic. Here sufficiency uses\na **supplied common kernel** $K(s,\\cdot)$ that is a regular conditional law of\nthe data given $S=s$ under every $P_\\theta$ and does not depend on $\\theta$\n([[def-sufficient-statistic]]). For Borel $B\\subseteq\\mathsf S$, write $P_\\theta^S(B):=P_\\theta(S^{-1}(B))$ for the pushforward law of $S$. Let $\\psi:\\Theta\\to\\mathbb R$ and let $U$ be\na measurable real estimator with $\\mathbb E_\\theta[U]=\\psi(\\theta)$ and\n$\\mathbb E_\\theta[U^2]<\\infty$ for every $\\theta$.\n\nThere is a single Borel function $g:\\mathsf S\\to\\mathbb R$, independent of\n$\\theta$, such that $g(S)$ is a version of\n$\\mathbb E_\\theta[U\\mid\\sigma(S)]$ for every $\\theta$. It is unbiased,\nfinite-variance, and\n$$\\operatorname{Var}_\\theta(g(S))\\leq\\operatorname{Var}_\\theta(U)\\qquad(\\theta\\in\\Theta).$$\nFor each $\\theta$, equality holds exactly when $U$ is\n$\\sigma(S)$-measurable $P_\\theta$-almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-unbiased-estimator-and-umvu",
+          "source_section": "Definition",
+          "quote": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independence-of-finite-random-variables",
+          "source_section": "Definition",
+          "quote": "A finite family of finite-valued random variables $(X_i)_{i\\in I}$ is **mutually independent** when for every nonempty $J\\subseteq I$ and every selection $x_j\\in X_j(\\Omega)$,\n$$\\mathbb P(X_j=x_j\\text{ for every }j\\in J)=\\prod_{j\\in J}\\mathbb P(X_j=x_j).$$\nIt is **pairwise independent** when this identity is required only for two distinct indices. The empty family is mutually independent vacuously, and a one-member family is mutually independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $s\\in\\{0,\\ldots,n\\}$ let $F_s=\\{x\\in\\{0,1\\}^n:\\sum_i x_i=s\\}$; it has $\\binom ns\\geq1$ elements. Define $K(s,A)=|A\\cap F_s|/\\binom ns$ for every data event $A$. Each section is the uniform probability measure on $F_s$, and every event evaluation is measurable because the statistic space is finite and discrete; thus $K$ is a probability kernel independent of $p$. By [F4], independence makes the joint law the product of the Bernoulli coordinate masses. For $0<p<1$, each vector in $F_s$ has mass $p^s(1-p)^{n-s}$ and $P_p(S=s)>0$, so $K(s,\\cdot)$ is the conditional law given $S=s$. At $p=0$ or $p=1$, only $s=0$ or $s=n$ is supported, respectively, and that fiber is a singleton on which the same kernel is the conditional law. Hence $K$ is a common regular conditional law and proves sufficiency by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<p<1$, the uniform fiber law is invariant under coordinate permutations, so the $n$ conditional means $\\mathbb E_p[X_i\\mid S=s]$ agree. Their sum is $s$, hence each is $s/n$. At $p=0,1$, $X_1=S/n$ almost surely, so the same formula holds on the support. Since $0\\leq X_1\\leq1$, $U=X_1$ is square-integrable; its Bernoulli law gives $\\mathbb E_pX_1=p\\cdot1+(1-p)\\cdot0=p$ by [F4]. Both spaces are standard Borel by [F5] and $S$ is sufficient by step 1.1, so [F2] and [F1] identify $S/n$ as the Rao–Blackwellized unbiased estimator; [F3] records its conditional-expectation class convention.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes n>=1, so it does not use an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At p=0, S=0 and X1=S/n=0 almost surely by step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At p=1, S=n and X1=S/n=1 almost surely by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both endpoint laws are degenerate; the common kernel and formula are checked in steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The parameter endpoints p=0 and p=1 are checked explicitly in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite fiber calculation in step 1.1 is choice-free; the cited general theorem retains AC in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example assumes the finite iid Bernoulli model and S=sum_i X_i, constructs a common conditional law, and computes E_p[X_1|S]=S/n. Verification 1.1 uses the uniform fibers with binomial(n,s) points and 2.1 uses coordinate symmetry, including endpoint supports. This proves the specified sufficient statistic and conditional mean, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example does not infer the iid Bernoulli model or sufficiency merely from the single conditional-mean identity E_p[X_1|S]=S/n. Sufficiency is separately verified in 1.1 using K(s,A)=|A intersect F_s|/binomial(n,s) for every data event; the one-observation expectation computation in 2.1 is not its converse."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "n-one",
+          "claim": "For n=1, S=X1.",
+          "result": "Step 2.1 gives E[X1|S]=S=X1."
+        },
+        {
+          "id": "p-endpoints",
+          "claim": "At p=0 and p=1 the supported statistic values are 0 and n.",
+          "result": "Step 2.1 verifies X1=S/n on each endpoint support."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "2.1"
+          ],
+          "reason": "Conditional-expectation existence and L2 projection assume AC; the common RCD is supplied as a sufficiency hypothesis, and finite Bernoulli arithmetic is choice-free."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6",
+        "notes": "Independent continuation: complete current two-step argument and nine direct supplier bodies read. Every fiber is nonempty for 0<=s<=n; uniform finite-fiber kernel is measurable on the discrete statistic space and independent of p. Product masses give the RCD identity at interior p; only singleton supported fibers matter at p=0,1. Permutation symmetry and sum constraint yield s/n; bounded X1 is unbiased L2, finite discrete spaces are standard Borel. n=1 gives identity; n>=1 prevents division by zero. AC retained. Reader endpoint/kernel enrichment present; refuter no finding; historical pre-reader byte delta unknown."
+      }
+    }
+  }
+}

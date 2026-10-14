@@ -22,6 +22,8 @@ items: [lem-probability-measure-basic-identities,
         cor-expectation-linearity-monotonicity-and-modulus-bound,
         def-moments-variance-and-covariance,
         lem-variance-and-covariance-identities-for-random-variables,
+        thm-covariance-bilinearity-and-symmetry,
+        thm-variance-of-a-finite-sum,
         thm-jensen-inequality-for-expectation,
         cor-markov-inequality-for-random-variables,
         cor-chebyshev-inequality-for-random-variables,
@@ -44,5 +46,6 @@ the earlier finite page exactly.
 Expectation is defined as the ambient Lebesgue integral, so change of variables,
 layer-cake formulas, Jensen, Markov, Chebyshev, Holder, and Cauchy-Schwarz all
 become probability-space corollaries of the measure-theory backbone. The page
-closes with moments, variance, covariance, and the normal equations for best
+develops moments, covariance bilinearity and finite-sum variance on a common
+probability space, then closes with the normal equations for best
 affine $L^2$ prediction.

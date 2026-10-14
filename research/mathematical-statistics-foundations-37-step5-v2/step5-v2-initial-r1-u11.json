@@ -1,0 +1,174 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "11",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "def-pivot",
+      "model": "gpt-6-luna",
+      "context_sha256": "c3a8216f20e70392f0f91b5c6b7e1a118108edcdfb3e5e88695d1d0f8d79f1a7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The formal family-of-measurable-sections definition is sound, but the final real-valued gloss incorrectly identifies a pivot with a statistic. In the discrete location experiment, q_theta(x)=x-theta has common masses 1/3 at -1, 0, 1 under P_theta, yet depends on theta and is not one parameter-independent data map. This is a nonfatal terminology defect: the formal definition and inversion arguments already use parameter-indexed sections. Replaced only the gloss to allow parameter dependence explicitly; no claim was weakened.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_14_slides_annotated.pdf",
+        "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/6a7fdee0c759b8ac985bf28a553acb24_MIT14_381F18_lec11.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-pivot",
+      "disposition": "repaired",
+      "post_sha256": "b40e260b03e17069804fba7a9121fc290c2af87c6d48a6b1639d68aecd4838cf",
+      "review_context_sha256": "1df2c033f9c2638a0d8469f17a4975a11d272648455ca37624d2328a0b89d26c",
+      "reason": "Checked all five actual prerequisites: each measurable section is a random element under its corresponding sampling probability, so its pushforward is a probability measure; equality of those laws defines the pivot without any theta sigma-algebra or AC selection. The repaired gloss agrees with that definition and preserves noninvertibility and noninterval caveats. The boundary contract remains accurate and passed strict checking; the owning manifest now mirrors the complete Definition. This is my repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_14_slides_annotated.pdf",
+        "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/6a7fdee0c759b8ac985bf28a553acb24_MIT14_381F18_lec11.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-pivot-inversion-exact-coverage",
+    "ex-discrete-pivot-inversion-is-conservative",
+    "ex-known-variance-normal-mean-interval",
+    "ex-exact-unknown-variance-normal-t-interval",
+    "ex-uniform-maximum-pivot-confidence-interval"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_record",
+      "item": "def-pivot",
+      "run": "mathematical-statistics-foundations-37",
+      "class": "accuracy",
+      "subclass": "false-or-overstrong-statement",
+      "severity": "nonfatal",
+      "location": "definition",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "disposition": "fixed",
+      "reason": "The formal family-of-measurable-sections definition is sound, but the final real-valued gloss incorrectly identifies a pivot with a statistic. In the discrete location experiment, q_theta(x)=x-theta has common masses 1/3 at -1, 0, 1 under P_theta, yet depends on theta and is not one parameter-independent data map. This is a nonfatal terminology defect: the formal definition and inversion arguments already use parameter-indexed sections. Replaced only the gloss to allow parameter dependence explicitly; no claim was weakened.",
+      "evidence": "items/def-pivot.md, final Definition paragraph; owning batch-11 manifest statement synchronized. Common-law formal interface preserved.",
+      "adjudication_ref": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u11.json"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update_required",
+      "item": "def-pivot",
+      "reason": "All five direct item consumers are draft frozen-frontier items and remain sound under the corrected interface. Exact-ID dependency/reference searches found no published or outside-frontier item consumers, so there is no published maintenance finding."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/def-pivot.md",
+      "research/mathematical-statistics-foundations-37-batch-11.pages.json"
+    ],
+    "exact_interface_change": {
+      "before": "For $S=\\mathbb R$, a pivot is a real-valued statistic whose sampling\ndistribution is parameter-free.",
+      "after": "For $S=\\mathbb R$, a pivot is a parameter-indexed family of measurable\nreal-valued quantities with a common sampling law. The maps $q_\\theta$\nmay depend on the unknown parameter."
+    },
+    "source_reading": [
+      {
+        "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_14_slides_annotated.pdf",
+        "locator": "Slide 6, PDF page 6, pivotal-quantity definition and inversion theorem",
+        "establishes": "Q(X;theta) may depend on the parameter while its distribution under P_theta is common. The event-identity proof was checked locally, not assumed from the slide."
+      },
+      {
+        "url": "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/6a7fdee0c759b8ac985bf28a553acb24_MIT14_381F18_lec11.pdf",
+        "locator": "Section 2, final paragraph of PDF page 2 continuing to page 3",
+        "establishes": "The pivot is q(X_1,...,X_n,theta_0) under the corresponding null law; candidate parameters are inverted. The text qualifies interval inversion by monotonicity and invertibility."
+      }
+    ],
+    "contract_review": "Read the complete def-pivot boundary contract. It describes families and equality of laws, including constant sections and the absence of choice or parameter measurability. No contract edit is necessary.",
+    "consumer_examinations": [
+      {
+        "id": "thm-pivot-inversion-exact-coverage",
+        "path": "items/thm-pivot-inversion-exact-coverage.md",
+        "affected_use": "[F1] each section q_theta is measurable and has pushforward law nu; steps 1.1 and 2.1 use C_eta=q_eta^{-1}(B) and P_theta(q_theta^{-1}(B))=nu(B).",
+        "disposition": "unaffected",
+        "reason": "The unchanged formal section interface supplies precisely these event identities; no parameter-independent statistic or joint parameter measurability is required."
+      },
+      {
+        "id": "ex-discrete-pivot-inversion-is-conservative",
+        "path": "items/ex-discrete-pivot-inversion-is-conservative.md",
+        "affected_use": "[F2] a pivot has a parameter-free sampling law; Verification 1.1 uses Q(X;theta)=X-theta with masses 1/3 at -1, 0, 1 under P_theta.",
+        "disposition": "unaffected",
+        "reason": "Every section is measurable on the full-power-set observation space and its displayed three-point law is common. The correction explicitly permits this existing parameter dependence."
+      },
+      {
+        "id": "ex-known-variance-normal-mean-interval",
+        "path": "items/ex-known-variance-normal-mean-interval.md",
+        "affected_use": "[F2] a measurable statistic with parameter-free law is a pivot; Verification 3.1 uses q_eta(y)=(y-eta)/sigma under P_eta for every candidate mean eta.",
+        "disposition": "unaffected",
+        "reason": "F2 remains a valid sufficient special case, using the same data map for all parameters. Step 3.1 directly checks the more general definition: measurable affine sections with the common standard-normal law. Its full def-pivot citation supports that family, and the argument never infers that eta can be omitted."
+      },
+      {
+        "id": "ex-exact-unknown-variance-normal-t-interval",
+        "path": "items/ex-exact-unknown-variance-normal-t-interval.md",
+        "affected_use": "[F4] a family of measurable maps with the same pushforward law is a pivot; Verification 1.3 uses q_eta(x)=(bar x-eta)/(s(x)/sqrt n) on D_n.",
+        "disposition": "unaffected",
+        "reason": "The family is already explicitly parameter-indexed, and the section is continuous on D_n where s>0; the supplied t law is common for each fixed positive nuisance variance. No hypothesis changed."
+      },
+      {
+        "id": "ex-uniform-maximum-pivot-confidence-interval",
+        "path": "items/ex-uniform-maximum-pivot-confidence-interval.md",
+        "affected_use": "[F3] a pivot has parameter-free pushforward law; Verification 1.1-1.2 checks continuity of m/theta for theta>0 and the common CDF u^n on [0,1].",
+        "disposition": "unaffected",
+        "reason": "The section m(x)/theta is measurable for each positive theta and the computed common law is precisely the unchanged defining condition. Its parameter dependence is now described correctly."
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/mathematical-statistics/confidence-sets-pivots-and-test-inversion.md",
+        "affected_use": "Page lists def-pivot and describes inverting a parameter-free pivot over a calibrated measurable set.",
+        "disposition": "unaffected",
+        "reason": "Parameter-free refers to the law, exactly as in the defining common-law condition; the summary requires no parameter-independent data map."
+      },
+      {
+        "path": "library/mathematical-statistics/confidence-sets-pivots-and-test-inversion-examples.md",
+        "affected_use": "Page describes exact normal and uniform-maximum pivot intervals and conservative discrete inversion.",
+        "disposition": "unaffected",
+        "reason": "All listed pivot examples use parameter-indexed sections as permitted by the preserved formal definition."
+      }
+    ],
+    "integration": "Acquired the shared-write lock, reread the current owning manifest, replaced only the exact def-pivot statement string, checked equality with the repaired Definition and preserved all other bytes, then released the lock. No shared ledgers edited.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-pivot.md --json",
+        "exit_code": 0,
+        "result": "1 file; not-applicable; 0 checked proofs; 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-pivot.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; errors=[]; warnings=[]"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-11.proof-contracts.json --strict --items def-pivot --json",
+        "exit_code": 0,
+        "result": "ok=true; def-pivot checked; errors=[]; warnings=[]"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-pivot.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects"
+      },
+      {
+        "command": "Local read-only report validation against parsed frozen initial-1.json and itemHashGuard",
+        "exit_code": 0,
+        "result": "Exact input digest, assigned tuple identity/count and current item guard all match."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and routes the five frontier consumer context effects; no additional item repair or maintenance discovery is required from this unit."
+  }
+}

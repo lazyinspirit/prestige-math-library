@@ -1,0 +1,1549 @@
+{
+  "version": 1,
+  "scope": [
+    "def-score-and-fisher-information",
+    "thm-score-mean-zero-and-information-identity",
+    "thm-cramer-rao-lower-bound",
+    "thm-multivariate-cramer-rao-bound",
+    "ex-bernoulli-score-fisher-information-and-cramer-rao-attainment",
+    "ex-normal-location-score-information-and-cramer-rao-attainment",
+    "cex-uniform-moving-support-invalidates-naive-cramer-rao-bound"
+  ],
+  "contracts": {
+    "def-score-and-fisher-information": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the score is defined at a fixed θ∈Θ where selected densities are differentiable; Θ=∅ supplies no such θ, so it defines no score or information value there."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Sθ=0 is explicitly assigned on {pθ=0}, a Pθ-null set; a score zero almost surely has I(θ)=Eθ[Sθ²]=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: d=1 is explicitly the scalar derivative ∂θ log pθ; the displayed scalar second moment includes an information value one when that second moment equals one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: parameter-constant differentiable density representatives have zero derivatives on {pθ>0}, and the explicit extension elsewhere gives score zero and information zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Θ is open in Rd and derivatives are required at a specified θ∈Θ, so boundary labels outside Θ are not assigned scores; scalar I lies in [0,+∞], allowing zero and infinite information."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: simultaneous selection of the arbitrary-index RN density family explicitly uses AC and is relative to specified differentiable representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Score and Fisher information are defined by derivatives and expectations, not by a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse theorem deriving parameter differentiability from the existence of a second-moment matrix is asserted."
+        }
+      ]
+    },
+    "thm-score-mean-zero-and-information-identity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-score-and-fisher-information",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment dominated by a fixed sigma-finite positive measure\n$\\mu$, and let $p_\\theta$ be selected finite-valued measurable\nRadon–Nikodym density representatives as in\n[[def-likelihood-density]]. The simultaneous selection of this arbitrary-index\nfamily uses the Axiom of Choice. No measurability of $\\theta\\mapsto P_\\theta$\nor common exceptional null set for an arbitrary uncountable $\\Theta$ is\nimplied.\n\nLet $\\Theta$ be open in $\\mathbb R^d$, and fix a parameter $\\theta$ at\nwhich the selected family $\\eta\\mapsto p_\\eta(x)$ is differentiable for\n$\\mu$-almost every $x$, with measurable coordinate derivatives. On\n$\\{x:p_\\theta(x)>0\\}$, define the log-likelihood\n$\\ell_\\theta(x)=\\log p_\\theta(x)$ and the **score**\n$$S_\\theta(x):=\\nabla_\\theta\\ell_\\theta(x) =\\left(\\frac{\\partial}{\\partial\\theta_j}\\log p_\\theta(x)\\right)_{j=1}^d.$$\nSet $S_\\theta(x)=0$ where $p_\\theta(x)=0$, which is $P_\\theta$-null.\nFor $d=1$, this is $S_\\theta=\\partial_\\theta\\log p_\\theta$.\n\nThe scalar **Fisher information** is\n$$I(\\theta):=\\mathbb E_\\theta[S_\\theta(X)^2]\\in[0,+\\infty].$$\nWhen $d>1$ and $S_\\theta$ is square-integrable, the **Fisher information\nmatrix** is $I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T]$;\nits $i,j$ entry is $\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}]$.\nThe information matrix is a second-moment matrix by definition; it equals the\nscore covariance matrix when the score has mean zero.\n\nThe derivatives, score and information are defined relative to the specified\ndifferentiable representative family. The Radon–Nikodym definition alone\ndoes not supply parameter differentiability or a canonical score version.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2]–[F4], every selected density has $\\int p_\\eta\\,d\\mu=P_\\eta(\\mathcal X)=1$. Fix a coordinate $j$ and a sequence $h_n\\to0$ with $\\theta+h_ne_j\\in U$. For almost every $x\\in S$, the mean value theorem [F6] bounds $\\left|(p_{\\theta+h_ne_j}(x)-p_\\theta(x))/h_n\\right|$ by $g_1(x)$, and the quotient converges to $\\partial_jp_\\theta(x)$. Dominated convergence [F7] therefore gives convergence of the quotient integrals. Their values are $0$ by the normalization just established, so $\\int\\partial_jp_\\theta\\,d\\mu=0$. On $S$, [F5] and [F8] identify $\\mathbb E_\\theta S_{\\theta,j}$ with this integral; outside $S$ the law is zero. Thus every score coordinate has mean zero.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any coordinates $i,j$, apply the same sequence argument to $\\partial_i p_{\\theta+h_ne_j}$. The mean value theorem bounds its difference quotient by $g_2$, so [F7] interchanges this derivative and the integral. Step 1.1 holds at every parameter in $U$, hence $\\int\\partial_i p_\\eta\\,d\\mu=0$ throughout $U$; differentiating this constant-zero function gives $\\int\\partial_{ij}p_\\theta\\,d\\mu=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $S\\setminus N$, differentiate $\\ell_\\theta=\\log p_\\theta$ using [F9]. Multiplying the Hessian formula by $p_\\theta$, integrating, and using step 2.1 yields $\\mathbb E_\\theta[\\partial_{ij}\\ell_\\theta] =\\int\\partial_{ij}p_\\theta\\,d\\mu-\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}] =-\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}]$. The terms are integrable: $\\int|\\partial_{ij}p_\\theta|\\,d\\mu\\le\\int g_2\\,d\\mu$, and $2|S_{\\theta,i}S_{\\theta,j}|\\le S_{\\theta,i}^2+S_{\\theta,j}^2$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The coordinate identities in step 3.1 give the asserted matrix identity; when $d=1$ they give the scalar identity. Step 1.1 supplies the score mean-zero claim in both cases.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a parameter value and a probability model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the score may vanish, and its mean-zero identity still holds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the scalar case d=1 is included and gives the usual information identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1: a parameter-constant density has zero derivatives and both sides of the identity vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: the parameter lies in an open set, so endpoint parameters are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: AC supplies the selected density representatives used by the score."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an equivalence."
+        }
+      ]
+    },
+    "thm-cramer-rao-lower-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-score-and-fisher-information",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment dominated by a fixed sigma-finite positive measure\n$\\mu$, and let $p_\\theta$ be selected finite-valued measurable\nRadon–Nikodym density representatives as in\n[[def-likelihood-density]]. The simultaneous selection of this arbitrary-index\nfamily uses the Axiom of Choice. No measurability of $\\theta\\mapsto P_\\theta$\nor common exceptional null set for an arbitrary uncountable $\\Theta$ is\nimplied.\n\nLet $\\Theta$ be open in $\\mathbb R^d$, and fix a parameter $\\theta$ at\nwhich the selected family $\\eta\\mapsto p_\\eta(x)$ is differentiable for\n$\\mu$-almost every $x$, with measurable coordinate derivatives. On\n$\\{x:p_\\theta(x)>0\\}$, define the log-likelihood\n$\\ell_\\theta(x)=\\log p_\\theta(x)$ and the **score**\n$$S_\\theta(x):=\\nabla_\\theta\\ell_\\theta(x) =\\left(\\frac{\\partial}{\\partial\\theta_j}\\log p_\\theta(x)\\right)_{j=1}^d.$$\nSet $S_\\theta(x)=0$ where $p_\\theta(x)=0$, which is $P_\\theta$-null.\nFor $d=1$, this is $S_\\theta=\\partial_\\theta\\log p_\\theta$.\n\nThe scalar **Fisher information** is\n$$I(\\theta):=\\mathbb E_\\theta[S_\\theta(X)^2]\\in[0,+\\infty].$$\nWhen $d>1$ and $S_\\theta$ is square-integrable, the **Fisher information\nmatrix** is $I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T]$;\nits $i,j$ entry is $\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}]$.\nThe information matrix is a second-moment matrix by definition; it equals the\nscore covariance matrix when the score has mean zero.\n\nThe derivatives, score and information are defined relative to the specified\ndifferentiable representative family. The Radon–Nikodym definition alone\ndoes not supply parameter differentiability or a canonical score version.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-score-mean-zero-and-information-identity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the selected density representatives. Let\n$\\Theta$ be open in $\\mathbb R^d$, let $\\mu$ be a fixed sigma-finite\ndominating measure, and let $p_\\eta$ be the selected densities of a\nstatistical model. Fix $\\theta\\in\\Theta$. Suppose that on a neighborhood\n$U$ of $\\theta$ there are a fixed measurable support $S$ and a\n$\\mu$-null set $N$ such that, for every $x\\in S\\setminus N$,\n$p_\\eta(x)>0$ and $\\eta\\mapsto p_\\eta(x)$ has continuous first and second\npartial derivatives on $U$; outside $S\\cup N$, $p_\\eta(x)=0$ for all\n$\\eta\\in U$. Suppose there are nonnegative $g_1,g_2\\in L^1(\\mu)$ that\nuniformly dominate every first partial derivative and every second partial\nderivative, respectively, on $U$. Also assume\n$\\mathbb E_\\theta\\|S_\\theta(X)\\|^2<\\infty$.\n\nThen $\\mathbb E_\\theta S_\\theta(X)=0$, and, entrywise,\n$$I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T] =-\\mathbb E_\\theta[\\nabla_\\theta^2\\ell_\\theta(X)].$$\nFor a scalar parameter this reads\n$\\mathbb E_\\theta S_\\theta=0$ and\n$I(\\theta)=\\mathbb E_\\theta S_\\theta^2\n=-\\mathbb E_\\theta[\\ell_\\theta''(X)]$.\n\nThis common-support, integrable-envelope setup is sufficient, not necessary:\nthe theorem does not claim that every model with valid score identities must\nhave common support or these envelopes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used; under its stated choice hypothesis, the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure-null-set-and-almost-everywhere",
+          "source_section": "Definition",
+          "quote": "In a measure space $(X,\\mathcal A,\\mu)$ ([[def-measure-space]]), a measurable set $N\\in\\mathcal A$ is **$\\mu$-null** if $\\mu(N)=0$.\n\nA property $P(x)$ holds **$\\mu$-almost everywhere**, or **for $\\mu$-almost every $x$**, if its exceptional set is contained in a measurable $\\mu$-null set: there is $N\\in\\mathcal A$ with $\\mu(N)=0$ such that $P(x)$ holds for every $x\\in X\\setminus N$. Both notions are relative to the named measure $\\mu$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-unbiased-estimator-and-umvu",
+          "source_section": "Definition",
+          "quote": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every globally finite-variance unbiased estimator in [F13] satisfies the theorem's local mean and second-moment hypotheses. For the stated broader class, if the score-covariance identity is assumed directly, it is already available. Under the sufficient density route, for any sequence $h_n\\to0$, the mean value theorem [F9] bounds $T(x)(p_{\\theta+h_n}(x)-p_\\theta(x))/h_n$ by the integrable envelope; its pointwise limit is $T(x)\\partial_\\theta p_\\theta(x)$. Dominated convergence [F9] therefore gives $\\psi'(\\theta)=\\int T\\,\\partial_\\theta p_\\theta\\,d\\mu$. On the common positive support, [F1] gives $\\partial_\\theta p_\\theta=p_\\theta S_\\theta$. By [F10] and [F11], $P_\\theta=p_\\theta\\,d\\mu$, and [F12] converts this integral to $\\mathbb E_\\theta[T S_\\theta]$. Since $\\mathbb E_\\theta S_\\theta=0$ by [F2] and $\\mathbb E_\\theta T=\\psi(\\theta)$, [F4] identifies this with $\\operatorname{Cov}_\\theta(T,S_\\theta)$. Thus either allowed route supplies the covariance identity.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $U=T-\\psi(\\theta)$. The $P_\\theta$-almost-everywhere classes of $U$ and $S_\\theta$ lie in $L^2(P_\\theta)$ by [F4]–[F5]. Their product is integrable since $2|US_\\theta|\\le U^2+S_\\theta^2$. Expectation linearity [F6] and $\\mathbb E_\\theta S_\\theta=0$ give $\\langle U,S_\\theta\\rangle:=\\mathbb E_\\theta[US_\\theta] =\\operatorname{Cov}_\\theta(T,S_\\theta)=\\psi'(\\theta)$. The pairing $\\langle V,W\\rangle=\\mathbb E_\\theta[VW]$ is an inner product on these classes: symmetry and bilinearity follow from [F6], and positive definiteness follows from [F6].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By Cauchy–Schwarz [F8] in this real inner product space, $\\psi'(\\theta)^2=|\\langle U,S_\\theta\\rangle|^2 \\le\\langle U,U\\rangle\\langle S_\\theta,S_\\theta\\rangle =\\operatorname{Var}_\\theta(T)I(\\theta)$. Divide by $I(\\theta)>0$ to obtain the stated lower bound.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F8",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $I(\\theta)>0$, equality in step 3.1 holds exactly when the $L^2(P_\\theta)$ classes of $U$ and $S_\\theta$ are linearly dependent [F8]. Taking their inner product with $S_\\theta$ and using step 2.1 fixes the coefficient as $\\psi'(\\theta)/I(\\theta)$; conversely that relation gives equality by direct substitution. This is precisely the asserted almost-sure equality condition.",
+          "step": "4.1",
+          "inputs": [
+            "F8",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a probability model and parameter value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1: when ψ′(θ)=0, the lower bound is zero and equality requires T=ψ(θ) almost surely."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No parameter or information value equal to one is distinguished."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: I(θ)=0 is excluded by the hypothesis I(θ)>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: θ lies in an open parameter interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the density-based route inherits AC from the selected RN representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves that equality implies the stated score relation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 proves that the stated score relation implies equality."
+        }
+      ]
+    },
+    "thm-multivariate-cramer-rao-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-score-and-fisher-information",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment dominated by a fixed sigma-finite positive measure\n$\\mu$, and let $p_\\theta$ be selected finite-valued measurable\nRadon–Nikodym density representatives as in\n[[def-likelihood-density]]. The simultaneous selection of this arbitrary-index\nfamily uses the Axiom of Choice. No measurability of $\\theta\\mapsto P_\\theta$\nor common exceptional null set for an arbitrary uncountable $\\Theta$ is\nimplied.\n\nLet $\\Theta$ be open in $\\mathbb R^d$, and fix a parameter $\\theta$ at\nwhich the selected family $\\eta\\mapsto p_\\eta(x)$ is differentiable for\n$\\mu$-almost every $x$, with measurable coordinate derivatives. On\n$\\{x:p_\\theta(x)>0\\}$, define the log-likelihood\n$\\ell_\\theta(x)=\\log p_\\theta(x)$ and the **score**\n$$S_\\theta(x):=\\nabla_\\theta\\ell_\\theta(x) =\\left(\\frac{\\partial}{\\partial\\theta_j}\\log p_\\theta(x)\\right)_{j=1}^d.$$\nSet $S_\\theta(x)=0$ where $p_\\theta(x)=0$, which is $P_\\theta$-null.\nFor $d=1$, this is $S_\\theta=\\partial_\\theta\\log p_\\theta$.\n\nThe scalar **Fisher information** is\n$$I(\\theta):=\\mathbb E_\\theta[S_\\theta(X)^2]\\in[0,+\\infty].$$\nWhen $d>1$ and $S_\\theta$ is square-integrable, the **Fisher information\nmatrix** is $I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T]$;\nits $i,j$ entry is $\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}]$.\nThe information matrix is a second-moment matrix by definition; it equals the\nscore covariance matrix when the score has mean zero.\n\nThe derivatives, score and information are defined relative to the specified\ndifferentiable representative family. The Radon–Nikodym definition alone\ndoes not supply parameter differentiability or a canonical score version.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-score-mean-zero-and-information-identity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the selected density representatives. Let\n$\\Theta$ be open in $\\mathbb R^d$, let $\\mu$ be a fixed sigma-finite\ndominating measure, and let $p_\\eta$ be the selected densities of a\nstatistical model. Fix $\\theta\\in\\Theta$. Suppose that on a neighborhood\n$U$ of $\\theta$ there are a fixed measurable support $S$ and a\n$\\mu$-null set $N$ such that, for every $x\\in S\\setminus N$,\n$p_\\eta(x)>0$ and $\\eta\\mapsto p_\\eta(x)$ has continuous first and second\npartial derivatives on $U$; outside $S\\cup N$, $p_\\eta(x)=0$ for all\n$\\eta\\in U$. Suppose there are nonnegative $g_1,g_2\\in L^1(\\mu)$ that\nuniformly dominate every first partial derivative and every second partial\nderivative, respectively, on $U$. Also assume\n$\\mathbb E_\\theta\\|S_\\theta(X)\\|^2<\\infty$.\n\nThen $\\mathbb E_\\theta S_\\theta(X)=0$, and, entrywise,\n$$I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T] =-\\mathbb E_\\theta[\\nabla_\\theta^2\\ell_\\theta(X)].$$\nFor a scalar parameter this reads\n$\\mathbb E_\\theta S_\\theta=0$ and\n$I(\\theta)=\\mathbb E_\\theta S_\\theta^2\n=-\\mathbb E_\\theta[\\ell_\\theta''(X)]$.\n\nThis common-support, integrable-envelope setup is sufficient, not necessary:\nthe theorem does not claim that every model with valid score identities must\nhave common support or these envelopes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-unbiased-estimator-and-umvu",
+          "source_section": "Definition",
+          "quote": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A globally finite-variance unbiased estimator in [F6] satisfies the theorem's pointwise mean and moment premises; the score-derivative identity is separately assumed. Define $R:=T-\\psi(\\theta)-D\\psi(\\theta)I(\\theta)^{-1}S_\\theta$. The stated mean assumptions give $\\mathbb E_\\theta R=0$, so $\\operatorname{Cov}_\\theta(R)=\\mathbb E_\\theta[RR^\\mathsf T]$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expand the residual covariance using $\\mathbb E_\\theta[(T-\\psi)S_\\theta^\\mathsf T]=D\\psi$, $\\mathbb E_\\theta[S_\\theta(T-\\psi)^\\mathsf T]=D\\psi^\\mathsf T$, and $\\mathbb E_\\theta[S_\\theta S_\\theta^\\mathsf T]=I$. Since $I$ is symmetric and nonsingular, $I^{-1}$ is symmetric, and matrix multiplication yields $$\\operatorname{Cov}_\\theta(R) =\\operatorname{Cov}_\\theta(T)-D\\psi(\\theta)I(\\theta)^{-1}D\\psi(\\theta)^\\mathsf T.$$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $a\\in\\mathbb R^k$, $a^\\mathsf T\\operatorname{Cov}_\\theta(R)a =\\mathbb E_\\theta[(a^\\mathsf T R)^2]\\ge0$. By the definition of $\\succeq$ in the Statement and step 2.1, this is exactly $\\operatorname{Cov}_\\theta(T)\\succeq D\\psi(\\theta)I(\\theta)^{-1}D\\psi(\\theta)^\\mathsf T$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a probability model and parameter value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: a zero residual covariance still satisfies the quadratic-form order."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: k=d=1 reduces to the scalar covariance-order convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: a singular information matrix is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: θ lies in an open parameter set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the score supplier uses the AC-selected density representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an inequality, not an equivalence."
+        }
+      ]
+    },
+    "ex-bernoulli-score-fisher-information-and-cramer-rao-attainment": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and let $X:\\Omega\\to\\mathbb R$.\nAfter identifying $(\\Omega,w)$ with the full-power-set probability space of\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],\nthe expectation defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with\nthe published finite formulas:\n$$\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-score-and-fisher-information",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment dominated by a fixed sigma-finite positive measure\n$\\mu$, and let $p_\\theta$ be selected finite-valued measurable\nRadon–Nikodym density representatives as in\n[[def-likelihood-density]]. The simultaneous selection of this arbitrary-index\nfamily uses the Axiom of Choice. No measurability of $\\theta\\mapsto P_\\theta$\nor common exceptional null set for an arbitrary uncountable $\\Theta$ is\nimplied.\n\nLet $\\Theta$ be open in $\\mathbb R^d$, and fix a parameter $\\theta$ at\nwhich the selected family $\\eta\\mapsto p_\\eta(x)$ is differentiable for\n$\\mu$-almost every $x$, with measurable coordinate derivatives. On\n$\\{x:p_\\theta(x)>0\\}$, define the log-likelihood\n$\\ell_\\theta(x)=\\log p_\\theta(x)$ and the **score**\n$$S_\\theta(x):=\\nabla_\\theta\\ell_\\theta(x) =\\left(\\frac{\\partial}{\\partial\\theta_j}\\log p_\\theta(x)\\right)_{j=1}^d.$$\nSet $S_\\theta(x)=0$ where $p_\\theta(x)=0$, which is $P_\\theta$-null.\nFor $d=1$, this is $S_\\theta=\\partial_\\theta\\log p_\\theta$.\n\nThe scalar **Fisher information** is\n$$I(\\theta):=\\mathbb E_\\theta[S_\\theta(X)^2]\\in[0,+\\infty].$$\nWhen $d>1$ and $S_\\theta$ is square-integrable, the **Fisher information\nmatrix** is $I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T]$;\nits $i,j$ entry is $\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}]$.\nThe information matrix is a second-moment matrix by definition; it equals the\nscore covariance matrix when the score has mean zero.\n\nThe derivatives, score and information are defined relative to the specified\ndifferentiable representative family. The Radon–Nikodym definition alone\ndoes not supply parameter differentiability or a canonical score version.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-score-mean-zero-and-information-identity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the selected density representatives. Let\n$\\Theta$ be open in $\\mathbb R^d$, let $\\mu$ be a fixed sigma-finite\ndominating measure, and let $p_\\eta$ be the selected densities of a\nstatistical model. Fix $\\theta\\in\\Theta$. Suppose that on a neighborhood\n$U$ of $\\theta$ there are a fixed measurable support $S$ and a\n$\\mu$-null set $N$ such that, for every $x\\in S\\setminus N$,\n$p_\\eta(x)>0$ and $\\eta\\mapsto p_\\eta(x)$ has continuous first and second\npartial derivatives on $U$; outside $S\\cup N$, $p_\\eta(x)=0$ for all\n$\\eta\\in U$. Suppose there are nonnegative $g_1,g_2\\in L^1(\\mu)$ that\nuniformly dominate every first partial derivative and every second partial\nderivative, respectively, on $U$. Also assume\n$\\mathbb E_\\theta\\|S_\\theta(X)\\|^2<\\infty$.\n\nThen $\\mathbb E_\\theta S_\\theta(X)=0$, and, entrywise,\n$$I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T] =-\\mathbb E_\\theta[\\nabla_\\theta^2\\ell_\\theta(X)].$$\nFor a scalar parameter this reads\n$\\mathbb E_\\theta S_\\theta=0$ and\n$I(\\theta)=\\mathbb E_\\theta S_\\theta^2\n=-\\mathbb E_\\theta[\\ell_\\theta''(X)]$.\n\nThis common-support, integrable-envelope setup is sufficient, not necessary:\nthe theorem does not claim that every model with valid score identities must\nhave common support or these envelopes.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cramer-rao-lower-bound",
+          "source_section": "Statement",
+          "quote": "Assume AC for the selected density representatives. Let $\\Theta$ be an open\ninterval, fix $\\theta\\in\\Theta$, and let $\\psi:\\Theta\\to\\mathbb R$ be\ndifferentiable at $\\theta$. Let $T$ be a real-valued estimator\n([[def-statistic-and-estimator]]) with\n$\\mathbb E_\\eta T=\\psi(\\eta)$ on a neighborhood of $\\theta$ and\n$\\mathbb E_\\theta[T^2]<\\infty$. Let the score $S_\\theta$ have\n$\\mathbb E_\\theta S_\\theta=0$ and Fisher information\n$I(\\theta)=\\mathbb E_\\theta S_\\theta^2\\in(0,\\infty)$. If\n$$\\operatorname{Cov}_\\theta(T,S_\\theta)=\\psi'(\\theta),$$\nthen\n$$\\operatorname{Var}_\\theta(T)\\ge\\frac{\\psi'(\\theta)^2}{I(\\theta)}.$$\nEquality holds exactly when\n$$T-\\psi(\\theta)=\\frac{\\psi'(\\theta)}{I(\\theta)}S_\\theta \\quad P_\\theta\\text{-almost surely}.$$\n\nThe covariance identity is an explicit hypothesis. One sufficient way to\nestablish it is to assume the regularity hypotheses of\n[[thm-score-mean-zero-and-information-identity]] on a neighborhood, together\nwith a neighborhood $V$ of $\\theta$ and an integrable $H$ such that\n$|T(x)\\partial_\\eta p_\\eta(x)|\\leq H(x)$ for every $\\eta\\in V$ and\n$\\mu$-almost every $x$. The mean value theorem and dominated convergence\nthen differentiate $\\mathbb E_\\eta T=\\int T p_\\eta\\,d\\mu$ and give the\ncovariance identity. This is only one sufficient regularity route; the bound\nitself does not require common support if its score and covariance identities\nhave been established by another valid argument. The theorem's hypotheses\nalso include every finite-variance unbiased estimator in the sense of\n[[def-unbiased-estimator-and-umvu]] whenever its score-covariance identity\nholds.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\varepsilon:=\\tfrac12\\min\\{p,1-p\\}>0$, the open neighborhood $U:=(p-\\varepsilon,p+\\varepsilon)$, and its compact closure $K:=[p-\\varepsilon,p+\\varepsilon]\\subset(0,1)$. For $q\\in K$, the masses $p_q(1)=q$ and $p_q(0)=1-q$ are positive and twice continuously differentiable on the fixed support $S=\\{0,1\\}$, with common exceptional set $N=\\varnothing$. With counting measure $\\#$, their first derivatives are $1$ and $-1$, and their second derivatives are $0$. Thus the common envelopes $g_1(0)=g_1(1)=1$ and $g_2\\equiv0$ dominate all first and second derivatives on $U$; they are integrable because $\\int g_1\\,d\\#=2$ and $\\int g_2\\,d\\#=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Both masses sum to $1$, so by [F2], $\\mathbb E_pX=p$ and $\\mathbb E_pX^2=p$; hence $T=X$ is unbiased for $\\psi(p)=p$ and $\\operatorname{Var}_p(T)=p(1-p)$. The log density is $\\ell_p(x)=x\\log p+(1-x)\\log(1-p)$. Differentiating gives $S_p(x)=x/p-(1-x)/(1-p)=(x-p)/(p(1-p))$ and $\\ell_p''(x)=-x/p^2-(1-x)/(1-p)^2$. Since the two score values are finite, its second moment is finite. Finite summation yields $\\mathbb E_pS_p=0$ and $I(p)=\\mathbb E_pS_p^2=1/[p(1-p)]=-\\mathbb E_p\\ell_p''$, agreeing with [F4].",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $S_p=(X-p)/(p(1-p))$, [F5] gives $\\operatorname{Cov}_p(X,S_p)=\\operatorname{Var}_p(X)/[p(1-p)]=1$. On the open parameter interval $(0,1)$, $\\psi(p)=p$ has difference quotient $1$ at every $x\\ne p$, so [F8] gives $\\psi'(p)=1$; the score-covariance identity required by [F6] holds.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The bound from [F6] is $\\operatorname{Var}_p(T)\\ge1/I(p)=p(1-p)$, and step 1.2 gives equality. Moreover $T-\\psi(p)=X-p=p(1-p)S_p=(\\psi'(p)/I(p))S_p$, exactly its equality condition.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the sample space is the fixed nonempty set {0,1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: p=0 is excluded; the displayed masses stay positive for p∈(0,1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: p=1 is excluded; the displayed masses stay positive for p∈(0,1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: p=1/2 gives finite positive information and the same variance identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the parameter range is the open interval (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the two finite masses and their density values are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one model and proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one model and proves no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "mass-table",
+          "claim": "Pp(X=1)=p and Pp(X=0)=1−p for 0<p<1.",
+          "result": "Both masses are positive and sum to one."
+        },
+        {
+          "id": "score-information",
+          "claim": "Sp=(X−p)/(p(1−p)) and Ip=1/(p(1−p)).",
+          "result": "The two-point weighted sums give ESp=0 and ESp²=1/(p(1−p))."
+        },
+        {
+          "id": "attainment",
+          "claim": "T=X has variance p(1−p).",
+          "result": "The variance equals 1/Ip and X−p=(ψ′/Ip)Sp."
+        },
+        {
+          "id": "bernoulli-target-derivative",
+          "claim": "For ψ(p)=p, ψ′(p)=1.",
+          "result": "The difference quotient is identically one off the parameter, so its limit is one."
+        }
+      ]
+    },
+    "ex-normal-location-score-information-and-cramer-rao-attainment": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $0\\le s,t$ and a real random variable\n$X_t-X_s$ has law $N(0,|t-s|)$, then, for every integer $m\\ge1$,\n$$E|X_t-X_s|^{2m}=c_m|t-s|^m,$$\nwhere\n$$c_m=E|Z|^{2m}=(2m-1)!!=1\\cdot3\\cdots(2m-1)<\\infty$$\nfor $Z\\sim N(0,1)$. In particular, when $m\\ge2$, this is the moment hypothesis\nof the one-parameter Kolmogorov criterion with\n$\\alpha=2m$, $\\beta=m-1$, and $C_T=c_m$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-score-and-fisher-information",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment dominated by a fixed sigma-finite positive measure\n$\\mu$, and let $p_\\theta$ be selected finite-valued measurable\nRadon–Nikodym density representatives as in\n[[def-likelihood-density]]. The simultaneous selection of this arbitrary-index\nfamily uses the Axiom of Choice. No measurability of $\\theta\\mapsto P_\\theta$\nor common exceptional null set for an arbitrary uncountable $\\Theta$ is\nimplied.\n\nLet $\\Theta$ be open in $\\mathbb R^d$, and fix a parameter $\\theta$ at\nwhich the selected family $\\eta\\mapsto p_\\eta(x)$ is differentiable for\n$\\mu$-almost every $x$, with measurable coordinate derivatives. On\n$\\{x:p_\\theta(x)>0\\}$, define the log-likelihood\n$\\ell_\\theta(x)=\\log p_\\theta(x)$ and the **score**\n$$S_\\theta(x):=\\nabla_\\theta\\ell_\\theta(x) =\\left(\\frac{\\partial}{\\partial\\theta_j}\\log p_\\theta(x)\\right)_{j=1}^d.$$\nSet $S_\\theta(x)=0$ where $p_\\theta(x)=0$, which is $P_\\theta$-null.\nFor $d=1$, this is $S_\\theta=\\partial_\\theta\\log p_\\theta$.\n\nThe scalar **Fisher information** is\n$$I(\\theta):=\\mathbb E_\\theta[S_\\theta(X)^2]\\in[0,+\\infty].$$\nWhen $d>1$ and $S_\\theta$ is square-integrable, the **Fisher information\nmatrix** is $I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T]$;\nits $i,j$ entry is $\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}]$.\nThe information matrix is a second-moment matrix by definition; it equals the\nscore covariance matrix when the score has mean zero.\n\nThe derivatives, score and information are defined relative to the specified\ndifferentiable representative family. The Radon–Nikodym definition alone\ndoes not supply parameter differentiability or a canonical score version.",
+          "uses": [
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-score-mean-zero-and-information-identity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the selected density representatives. Let\n$\\Theta$ be open in $\\mathbb R^d$, let $\\mu$ be a fixed sigma-finite\ndominating measure, and let $p_\\eta$ be the selected densities of a\nstatistical model. Fix $\\theta\\in\\Theta$. Suppose that on a neighborhood\n$U$ of $\\theta$ there are a fixed measurable support $S$ and a\n$\\mu$-null set $N$ such that, for every $x\\in S\\setminus N$,\n$p_\\eta(x)>0$ and $\\eta\\mapsto p_\\eta(x)$ has continuous first and second\npartial derivatives on $U$; outside $S\\cup N$, $p_\\eta(x)=0$ for all\n$\\eta\\in U$. Suppose there are nonnegative $g_1,g_2\\in L^1(\\mu)$ that\nuniformly dominate every first partial derivative and every second partial\nderivative, respectively, on $U$. Also assume\n$\\mathbb E_\\theta\\|S_\\theta(X)\\|^2<\\infty$.\n\nThen $\\mathbb E_\\theta S_\\theta(X)=0$, and, entrywise,\n$$I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T] =-\\mathbb E_\\theta[\\nabla_\\theta^2\\ell_\\theta(X)].$$\nFor a scalar parameter this reads\n$\\mathbb E_\\theta S_\\theta=0$ and\n$I(\\theta)=\\mathbb E_\\theta S_\\theta^2\n=-\\mathbb E_\\theta[\\ell_\\theta''(X)]$.\n\nThis common-support, integrable-envelope setup is sufficient, not necessary:\nthe theorem does not claim that every model with valid score identities must\nhave common support or these envelopes.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "6.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cramer-rao-lower-bound",
+          "source_section": "Statement",
+          "quote": "Assume AC for the selected density representatives. Let $\\Theta$ be an open\ninterval, fix $\\theta\\in\\Theta$, and let $\\psi:\\Theta\\to\\mathbb R$ be\ndifferentiable at $\\theta$. Let $T$ be a real-valued estimator\n([[def-statistic-and-estimator]]) with\n$\\mathbb E_\\eta T=\\psi(\\eta)$ on a neighborhood of $\\theta$ and\n$\\mathbb E_\\theta[T^2]<\\infty$. Let the score $S_\\theta$ have\n$\\mathbb E_\\theta S_\\theta=0$ and Fisher information\n$I(\\theta)=\\mathbb E_\\theta S_\\theta^2\\in(0,\\infty)$. If\n$$\\operatorname{Cov}_\\theta(T,S_\\theta)=\\psi'(\\theta),$$\nthen\n$$\\operatorname{Var}_\\theta(T)\\ge\\frac{\\psi'(\\theta)^2}{I(\\theta)}.$$\nEquality holds exactly when\n$$T-\\psi(\\theta)=\\frac{\\psi'(\\theta)}{I(\\theta)}S_\\theta \\quad P_\\theta\\text{-almost surely}.$$\n\nThe covariance identity is an explicit hypothesis. One sufficient way to\nestablish it is to assume the regularity hypotheses of\n[[thm-score-mean-zero-and-information-identity]] on a neighborhood, together\nwith a neighborhood $V$ of $\\theta$ and an integrable $H$ such that\n$|T(x)\\partial_\\eta p_\\eta(x)|\\leq H(x)$ for every $\\eta\\in V$ and\n$\\mu$-almost every $x$. The mean value theorem and dominated convergence\nthen differentiate $\\mathbb E_\\eta T=\\int T p_\\eta\\,d\\mu$ and give the\ncovariance identity. This is only one sufficient regularity route; the bound\nitself does not require common support if its score and covariance identities\nhave been established by another valid argument. The theorem's hypotheses\nalso include every finite-variance unbiased estimator in the sense of\n[[def-unbiased-estimator-and-umvu]] whenever its score-covariance identity\nholds.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-definition-equivalence",
+          "source_section": "Statement",
+          "quote": "The following descriptions give the same function $\\mathbb R\\to(0,\\infty)$: the power series $\\sum x^n/\\iota(n!)$; the product limit $\\lim_n(1+x/\\iota(n))^n$; the normalized solution of $y'=y,\\ y(0)=1$; the normalized continuous multiplicative function; and the compact-uniform limit of the Picard iterates.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ ([[def-linear-map]],\n[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which [[def-extended-reals]]\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $Z\\sim N(0,1)$ have density $\\phi$, and put $G(z):=z\\phi(z)$. By [F9], $\\phi'(z)=-z\\phi(z)$ and $G'(z)=\\phi(z)-z^2\\phi(z)$. These functions are smooth.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each integer $n\\ge1$, $G'$ is continuous on $[-n,n]$, hence integrable there by [F10]. Applying the second FTC and then the Riemann–Lebesgue integral identity in [F10] gives $\\int_{[-n,n]}(\\phi-z^2\\phi)\\,d\\lambda=G(n)-G(-n)=2n\\phi(n)$. Linearity [F3] therefore yields $\\int_{[-n,n]}z^2\\phi\\,d\\lambda=\\int_{[-n,n]}\\phi\\,d\\lambda-2n\\phi(n)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By the power-series representation in [F9], $e^{n^2/2}\\ge(n^2/2)^2/2!=n^4/8$, so $0\\le n\\phi(n)\\le8/(\\sqrt{2\\pi}n^3)\\to0$. Also $\\phi\\mathbf1_{[-n,n]}\\uparrow\\phi$ and $z^2\\phi\\mathbf1_{[-n,n]}\\uparrow z^2\\phi$. Monotone convergence [F11], normalization [F2], and the compact calculation in step 2.1 give $\\mathbb E Z^2=\\int z^2\\phi\\,d\\lambda=\\lim_n\\int_{[-n,n]}z^2\\phi\\,d\\lambda=1<\\infty$, also the second moment supplied in [F2].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F9",
+            "F11",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating the displayed normal density gives $\\partial_\\eta p_\\eta=(x-\\eta)p_\\eta/\\sigma^2$, $\\partial_{\\eta\\eta}p_\\eta=((x-\\eta)^2/\\sigma^4-1/\\sigma^2)p_\\eta$, $S_\\mu=(X-\\mu)/\\sigma^2$, and $\\ell_\\mu''=-1/\\sigma^2$. The support is all of $\\mathbb R$, and step 3.1 with $X=\\mu+\\sigma Z$ gives $\\mathbb E_\\mu S_\\mu^2=1/\\sigma^2<\\infty$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $\\mu_0\\in\\mathbb R$ and $\\delta>0$, put $y=x-\\mu_0$, and take $|\\eta-\\mu_0|<\\delta$. Then $|x-\\eta|\\le|y|+\\delta$ and $(x-\\eta)^2\\ge y^2/2-\\delta^2$, so both first and second density derivatives are bounded by $C(1+y^2)e^{-y^2/(4\\sigma^2)}$ for a finite $C$ independent of $\\eta,x$. To justify the density transformation, put $a=\\sqrt2\\sigma>0$ and $q(y)=(4\\pi\\sigma^2)^{-1/2}e^{-y^2/(4\\sigma^2)}$. For every Borel set $A$, [F12] applied to $f=\\mathbf1_Aq$ gives $\\int_A q(y)\\,dy=a\\int\\mathbf1_A(az)q(az)\\,dz=\\int\\mathbf1_A(az)\\phi(z)\\,dz$, since $a q(az)=\\phi(z)$. By [F1] and [F3], the last integral equals $P(aZ\\in A)$; thus $q$ is indeed a density of the affine law $Y=aZ\\sim N(0,2\\sigma^2)$. The envelope is a constant multiple of $(1+y^2)q(y)$. By [F3] and step 3.1, its integral in $y$ is finite, since $E(1+Y^2)=1+a^2 E Z^2=1+2\\sigma^2$. Translation invariance in [F12] transfers this finite integral from $y$ to $x=y+\\mu_0$, proving integrability of the displayed envelope on the original data space. Thus the fixed-support, continuous-derivative, envelope, and score-moment hypotheses of [F5] hold, so $\\mathbb E_\\mu S_\\mu=0$ and $I(\\mu)=-\\mathbb E_\\mu\\ell_\\mu''=1/\\sigma^2$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F12",
+            "step 3.1",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "From $X-\\mu=\\sigma^2S_\\mu$ and step 5.1, $\\mathbb E_\\mu X=\\mu$. Also $\\mathbb E_\\mu[(X-\\mu)^2]=\\sigma^2\\mathbb E Z^2=\\sigma^2$, so $T=X$ has variance $\\sigma^2$.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The pointwise identity $X-\\mu=\\sigma^2S_\\mu$ and [F6] give $\\operatorname{Cov}_\\mu(X,S_\\mu)=\\sigma^2I(\\mu)=1$. On $\\mathbb R$, $\\psi(\\mu)=\\mu$ has difference quotient $1$ at every $x\\ne\\mu$, so [F8] gives $\\psi'(\\mu)=1$; the score-covariance identity required by [F7] holds.",
+          "step": "7.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "step 5.1",
+            "step 6.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The bound [F7] is $\\operatorname{Var}_\\mu(X)\\ge1/I(\\mu)=\\sigma^2$, and step 6.1 gives equality. Also $X-\\mu=\\sigma^2S_\\mu=(\\psi'(\\mu)/I(\\mu))S_\\mu$, so the stated equality condition holds.",
+          "step": "8.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 6.1",
+            "step 7.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the normal law is a probability law on the nonempty space R."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the score may equal zero at x=μ; the information remains positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 4.1–7.1: σ²=1 is allowed and gives information and variance one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: σ²=0 is excluded; the scale is strictly positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The location parameter ranges over all of R."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the normal law and its affine representation are explicitly supplied under AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies attainment, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies attainment, not an equivalence theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "normal-score",
+          "claim": "Sμ=(X−μ)/σ² and ℓμ″=−1/σ².",
+          "result": "Direct differentiation of the normal log density."
+        },
+        {
+          "id": "normal-information",
+          "claim": "I(μ)=1/σ².",
+          "result": "The regular information identity gives −Eℓμ″=1/σ²."
+        },
+        {
+          "id": "normal-attainment",
+          "claim": "T=X has variance σ² and attains the bound.",
+          "result": "The affine normal law gives Var(X)=σ²=1/I and X−μ=σ²Sμ."
+        },
+        {
+          "id": "normal-target-derivative",
+          "claim": "For ψ(μ)=μ, ψ′(μ)=1.",
+          "result": "The difference quotient is identically one off the parameter, so its limit is one."
+        }
+      ]
+    },
+    "cex-uniform-moving-support-invalidates-naive-cramer-rao-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-score-and-fisher-information",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment dominated by a fixed sigma-finite positive measure\n$\\mu$, and let $p_\\theta$ be selected finite-valued measurable\nRadon–Nikodym density representatives as in\n[[def-likelihood-density]]. The simultaneous selection of this arbitrary-index\nfamily uses the Axiom of Choice. No measurability of $\\theta\\mapsto P_\\theta$\nor common exceptional null set for an arbitrary uncountable $\\Theta$ is\nimplied.\n\nLet $\\Theta$ be open in $\\mathbb R^d$, and fix a parameter $\\theta$ at\nwhich the selected family $\\eta\\mapsto p_\\eta(x)$ is differentiable for\n$\\mu$-almost every $x$, with measurable coordinate derivatives. On\n$\\{x:p_\\theta(x)>0\\}$, define the log-likelihood\n$\\ell_\\theta(x)=\\log p_\\theta(x)$ and the **score**\n$$S_\\theta(x):=\\nabla_\\theta\\ell_\\theta(x) =\\left(\\frac{\\partial}{\\partial\\theta_j}\\log p_\\theta(x)\\right)_{j=1}^d.$$\nSet $S_\\theta(x)=0$ where $p_\\theta(x)=0$, which is $P_\\theta$-null.\nFor $d=1$, this is $S_\\theta=\\partial_\\theta\\log p_\\theta$.\n\nThe scalar **Fisher information** is\n$$I(\\theta):=\\mathbb E_\\theta[S_\\theta(X)^2]\\in[0,+\\infty].$$\nWhen $d>1$ and $S_\\theta$ is square-integrable, the **Fisher information\nmatrix** is $I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T]$;\nits $i,j$ entry is $\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}]$.\nThe information matrix is a second-moment matrix by definition; it equals the\nscore covariance matrix when the score has mean zero.\n\nThe derivatives, score and information are defined relative to the specified\ndifferentiable representative family. The Radon–Nikodym definition alone\ndoes not supply parameter differentiability or a canonical score version.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cramer-rao-lower-bound",
+          "source_section": "Statement",
+          "quote": "Assume AC for the selected density representatives. Let $\\Theta$ be an open\ninterval, fix $\\theta\\in\\Theta$, and let $\\psi:\\Theta\\to\\mathbb R$ be\ndifferentiable at $\\theta$. Let $T$ be a real-valued estimator\n([[def-statistic-and-estimator]]) with\n$\\mathbb E_\\eta T=\\psi(\\eta)$ on a neighborhood of $\\theta$ and\n$\\mathbb E_\\theta[T^2]<\\infty$. Let the score $S_\\theta$ have\n$\\mathbb E_\\theta S_\\theta=0$ and Fisher information\n$I(\\theta)=\\mathbb E_\\theta S_\\theta^2\\in(0,\\infty)$. If\n$$\\operatorname{Cov}_\\theta(T,S_\\theta)=\\psi'(\\theta),$$\nthen\n$$\\operatorname{Var}_\\theta(T)\\ge\\frac{\\psi'(\\theta)^2}{I(\\theta)}.$$\nEquality holds exactly when\n$$T-\\psi(\\theta)=\\frac{\\psi'(\\theta)}{I(\\theta)}S_\\theta \\quad P_\\theta\\text{-almost surely}.$$\n\nThe covariance identity is an explicit hypothesis. One sufficient way to\nestablish it is to assume the regularity hypotheses of\n[[thm-score-mean-zero-and-information-identity]] on a neighborhood, together\nwith a neighborhood $V$ of $\\theta$ and an integrable $H$ such that\n$|T(x)\\partial_\\eta p_\\eta(x)|\\leq H(x)$ for every $\\eta\\in V$ and\n$\\mu$-almost every $x$. The mean value theorem and dominated convergence\nthen differentiate $\\mathbb E_\\eta T=\\int T p_\\eta\\,d\\mu$ and give the\ncovariance identity. This is only one sufficient regularity route; the bound\nitself does not require common support if its score and covariance identities\nhave been established by another valid argument. The theorem's hypotheses\nalso include every finite-variance unbiased estimator in the sense of\n[[def-unbiased-estimator-and-umvu]] whenever its score-covariance identity\nholds.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], the endpoint singletons have measure zero and $\\lambda((0,\\theta))=\\theta$, so this density version gives the law $\\mathrm{Unif}[0,\\theta]$ and has total mass one. Using [F2] for $x$ and $x^2$, then [F4] to evaluate the integrals, gives $\\mathbb E_\\theta X=\\theta^{-1}\\int_0^\\theta x\\,dx=\\theta/2$ and $\\mathbb E_\\theta X^2=\\theta^{-1}\\int_0^\\theta x^2\\,dx=\\theta^2/3$. Thus $\\mathbb E_\\theta T=\\theta=\\psi(\\theta)$ and $\\operatorname{Var}_\\theta(T)=4(\\theta^2/3-\\theta^2/4)=\\theta^2/3$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<x<\\theta$, $\\ell_\\theta(x)=-\\log\\theta$, so $S_\\theta(x)=-1/\\theta$. Therefore $I(\\theta)=\\mathbb E_\\theta S_\\theta^2=1/\\theta^2$ but $\\mathbb E_\\theta S_\\theta=-1/\\theta\\ne0$. Since the score is constant $P_\\theta$-almost surely, $\\operatorname{Cov}_\\theta(T,S_\\theta)=0$. On $\\Theta=(0,\\infty)$, $\\psi(\\theta)=\\theta$ has difference quotient $1$ at every $x\\ne\\theta$, so [F8] gives $\\psi'(\\theta)=1$. Both score identities needed for [F7] fail here.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The formula obtained by ignoring those failures would give $\\psi'(\\theta)^2/I(\\theta)=\\theta^2$, contradicting the actual $\\operatorname{Var}_\\theta(T)=\\theta^2/3$ from step 1.1. This does not contradict [F7]: the moving support violates its regularity route, and the score-mean and covariance-derivative hypotheses fail explicitly in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter is restricted to θ>0, so the interval [0,θ] is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: θ=0 is excluded, so the density and score are defined only for θ>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: at θ=1 the same strict variance contradiction holds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The model is nondegenerate for every admitted θ>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: θ=0 is a boundary excluded from the open parameter interval (0,∞)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the density is explicit; AC is used only by the general analytic suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes an implication; it is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes an implication; it is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "uniform-mass",
+          "claim": "pθ(x)=θ−1 1(0,θ)(x) integrates to one.",
+          "result": "The interval has Lebesgue measure θ."
+        },
+        {
+          "id": "uniform-moments",
+          "claim": "E X=θ/2, E X²=θ²/3, Var(2X)=θ²/3.",
+          "result": "The polynomial integrals evaluate to θ²/2 and θ³/3 before division by θ."
+        },
+        {
+          "id": "uniform-score",
+          "claim": "Sθ=−1/θ, E Sθ=−1/θ, I=1/θ², Cov(2X,Sθ)=0.",
+          "result": "The score is constant on the positive support and ψ′=1."
+        },
+        {
+          "id": "uniform-endpoint-version",
+          "claim": "The density version on (0,θ) gives the same law as Unif[0,θ].",
+          "result": "The singleton endpoints have Lebesgue measure zero, and the interval length is θ by the box-volume result."
+        },
+        {
+          "id": "uniform-target-derivative",
+          "claim": "For ψ(θ)=θ, ψ′(θ)=1.",
+          "result": "The difference quotient is identically one off the parameter, so its limit is one."
+        }
+      ]
+    }
+  }
+}

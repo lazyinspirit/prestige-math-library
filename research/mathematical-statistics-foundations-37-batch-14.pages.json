@@ -1,0 +1,293 @@
+[
+  {
+    "order": 1870,
+    "id": "concentration-inequalities-and-tail-bounds",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Concentration",
+    "companion": "concentration-inequalities-and-tail-bounds-examples",
+    "requires": [
+      "probability-spaces-random-variables-and-expectation",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "martingale-inequalities-and-convergence"
+    ],
+    "items": [
+      {
+        "id": "def-subgaussian-variable-and-vector",
+        "kind": "definition",
+        "title": "Sub-Gaussian variables and vectors, and sub-exponential variables",
+        "deps": [
+          "def-euclidean-spheres-and-closed-balls",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-borel-sigma-algebra",
+          "def-real-exponential-function-and-e",
+          "def-random-element-and-real-random-variable",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "dependency_level": 0,
+        "statement": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates."
+      },
+      {
+        "id": "thm-hoeffding-independent-bounded-sums",
+        "kind": "theorem",
+        "title": "Hoeffding inequality for independent bounded sums",
+        "deps": [
+          "cor-boundedness-theorem-r",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-markov-inequality-for-random-variables",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-axiom-of-choice",
+          "def-borel-sigma-algebra",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-interval",
+          "def-independent-random-elements",
+          "def-real-exponential-function-and-e",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "lem-probability-measure-basic-identities",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-heine-borel-r",
+          "thm-taking-out-what-is-known"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume AC. Let $n\\ge1$ and let $X_1,\\ldots,X_n$ be independent integrable real random variables on one probability space. Suppose finite real numbers $a_i\\le b_i$ satisfy $a_i\\le X_i\\le b_i$ almost surely for every $i$. Put $V=\\sum_{i=1}^n(b_i-a_i)^2$ and $S=\\sum_{i=1}^n(X_i-\\mathbb E X_i)$. For every $t>0$, if $V>0$ then\n$$\\mathbb P(|S|\\ge t)\\le 2\\exp\\!\\left(-\\frac{2t^2}{V}\\right),$$\nand if $V=0$ then $\\mathbb P(|S|\\ge t)=0$. The two one-sided tails are each bounded by $\\exp(-2t^2/V)$ when $V>0$."
+      },
+      {
+        "id": "thm-bernstein-independent-sums",
+        "kind": "theorem",
+        "title": "Bernstein inequality for bounded independent sums",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-borel-sigma-algebra",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements",
+          "def-moments-variance-and-covariance",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-dominates-one-plus-x",
+          "lem-exponential-series-has-infinite-radius",
+          "lem-probability-measure-basic-identities",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $n\\ge1$ and let $X_1,\\ldots,X_n$ be independent centered square-integrable real random variables. Suppose $b\\ge0$ is finite and $|X_i|\\le b$ almost surely for each $i$. Put $v=\\sum_{i=1}^n\\operatorname{Var}(X_i)$. For $t>0$, if $v>0$ then\n$$\\mathbb P\\left(\\left|\\sum_{i=1}^nX_i\\right|\\ge t\\right)\\le 2\\exp\\!\\left(-\\frac{t^2}{2(v+bt/3)}\\right),$$\nand if $v=0$ then this probability is $0$."
+      },
+      {
+        "id": "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+        "kind": "lemma",
+        "title": "Finite epsilon nets of the Euclidean sphere",
+        "deps": [
+          "cor-jordan-content-finite-additivity",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-jordan-inner-and-outer-content",
+          "def-multidimensional-darboux-integral",
+          "def-rational-power",
+          "lem-finite-set-has-max",
+          "lem-metrics-on-rn",
+          "lem-rational-power-monotone",
+          "thm-jordan-content-is-translation-invariant",
+          "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "thm-multidimensional-integral-properties",
+          "thm-of-archimedean",
+          "thm-volume-recursion-for-closed-euclidean-balls"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $d\\ge1$ be an integer and $0<\\epsilon<1$. There is a finite set $\\mathcal N\\subseteq S^{d-1}$ such that every $u\\in S^{d-1}$ has some $v\\in\\mathcal N$ with $\\|u-v\\|_2\\le\\epsilon$, and\n$$|\\mathcal N|\\le(1+2/\\epsilon)^d.$$\nHere $S^{d-1}=\\{u\\in\\mathbb R^d:\\|u\\|_2=1\\}$ by [[def-euclidean-spheres-and-closed-balls]]. Such a set is called an $\\epsilon$-net of the sphere."
+      },
+      {
+        "id": "lem-doob-martingale-differences-inherit-coordinate-oscillations",
+        "kind": "lemma",
+        "title": "Doob differences inherit coordinate oscillation widths",
+        "deps": [
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements",
+          "def-law-or-distribution-of-a-random-element",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-change-of-variables-for-expectation",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $n\\ge1$, let $Z_1,\\ldots,Z_n$ be independent random elements with laws $\\mu_i$ on measurable spaces $(S_i,\\Sigma_i)$, and let $\\mu=\\bigotimes_{i=1}^n\\mu_i$. Let $f:\\prod_{i=1}^nS_i\\to\\mathbb R$ be measurable with $\\int|f|\\,d\\mu<\\infty$. Suppose finite deterministic $c_i\\ge0$ satisfy\n$$|f(x_1,\\ldots,x_{i-1},x_i,x_{i+1},\\ldots,x_n)-f(x_1,\\ldots,x_{i-1},x_i',x_{i+1},\\ldots,x_n)|\\le c_i$$\nfor every $i$, every fixed choice of the other coordinates, and every $x_i,x_i'\\in S_i$. For each $i$, define $M_i$ by integrating $f$ over the unrevealed product coordinates, using the measurable finite versions given by Fubini; set $M_0=\\int f\\,d\\mu$ and $M_n=f(Z_1,\\ldots,Z_n)$. Put $\\mathcal F_i=\\sigma(Z_1,\\ldots,Z_i)$ and $D_i=M_i-M_{i-1}$. Then $M_i$ is integrable and $\\mathcal F_i$-measurable, and for every $A\\in\\mathcal F_{i-1}$,\n$$\\int_A D_i\\,d\\mathbb P=0.$$\nMoreover, there are finite $\\mathcal F_{i-1}$-measurable endpoints $A_i,B_i$ such that $A_i\\le0\\le B_i$, $A_i\\le D_i\\le B_i$ almost surely, and $B_i-A_i\\le c_i$ almost surely. No choice axiom is used in this product-integral construction."
+      },
+      {
+        "id": "thm-subexponential-independent-sums",
+        "kind": "theorem",
+        "title": "Sub-exponential concentration for independent sums",
+        "deps": [
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-markov-inequality-for-random-variables",
+          "def-borel-sigma-algebra",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements",
+          "def-max-min",
+          "def-real-exponential-function-and-e",
+          "def-subgaussian-variable-and-vector",
+          "lem-finite-set-has-max",
+          "lem-probability-measure-basic-identities",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $X_1,\\ldots,X_n$ be independent centered real random variables, with $X_i$ sub-exponential with parameters $(\\nu_i^2,b_i)$ as defined in [[def-subgaussian-variable-and-vector]], where $n\\ge1$ and $b_i>0$. Put $v=\\sum_{i=1}^n\\nu_i^2$, $b=\\max_{1\\le i\\le n}b_i$, and $S=\\sum_{i=1}^nX_i$. For $t>0$, if $v>0$ then\n$$\\mathbb P(|S|\\ge t)\\le2\\exp\\!\\left(-\\frac12\\min\\!\\left\\{\\frac{t^2}{v},\\frac{t}{b}\\right\\}\\right),$$\nand if $v=0$ then $\\mathbb P(|S|\\ge t)=0$."
+      },
+      {
+        "id": "thm-finite-subgaussian-maximum-and-epsilon-net",
+        "kind": "theorem",
+        "title": "Finite sub-Gaussian maxima and epsilon-net reduction",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-borel-sigma-algebra",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-max-min",
+          "def-real-exponential-function-and-e",
+          "def-subgaussian-variable-and-vector",
+          "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+          "lem-finite-set-has-max",
+          "lem-probability-measure-basic-identities",
+          "thm-cauchy-schwarz-finite",
+          "thm-exponential-addition-formula",
+          "thm-exponential-beats-every-polynomial",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $Y_1,\\ldots,Y_m$ be centered sub-Gaussian real random variables with a common proxy $\\sigma^2\\ge0$, where $m\\ge1$. No independence is assumed. For $t>0$, if $\\sigma^2>0$ then\n$$\\mathbb P\\left(\\max_{1\\le j\\le m}|Y_j|\\ge t\\right)\\le2m\\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ the probability is $0$.\n\nLet $Z$ be a centered sub-Gaussian vector in $\\mathbb R^d$ with proxy $\\sigma^2$, where $d\\ge1$. For $0<\\epsilon<1$, let $\\mathcal N$ be the sphere net supplied by [[lem-epsilon-net-of-unit-sphere-has-cardinality-bound]]. Then for $t>0$, if $\\sigma^2>0$,\n$$\\mathbb P(\\|Z\\|_2\\ge t)\\le2(1+2/\\epsilon)^d\\exp\\!\\left(-\\frac{(1-\\epsilon)^2t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ this probability is $0$. The deterministic reduction is $\\|z\\|_2\\le(1-\\epsilon)^{-1}\\max_{u\\in\\mathcal N}|\\langle u,z\\rangle|$ for every $z\\in\\mathbb R^d$."
+      },
+      {
+        "id": "thm-mcdiarmid-bounded-differences",
+        "kind": "theorem",
+        "title": "McDiarmid bounded-differences inequality",
+        "deps": [
+          "cor-boundedness-theorem-r",
+          "cor-markov-inequality-for-random-variables",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-borel-sigma-algebra",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice",
+          "def-interval",
+          "def-law-or-distribution-of-a-random-element",
+          "def-martingale-submartingale-and-supermartingale",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-random-element-and-real-random-variable",
+          "def-real-exponential-function-and-e",
+          "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "lem-doob-martingale-differences-inherit-coordinate-oscillations",
+          "lem-probability-measure-basic-identities",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-change-of-variables-for-expectation",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-heine-borel-r",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-taking-out-what-is-known"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume AC. Let $n\\ge1$, let $Z_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be independent random elements, meaning measurable maps ([[def-random-element-and-real-random-variable]]), with laws $\\mu_i$ given by pushforward ([[def-law-or-distribution-of-a-random-element]]). Put $\\mu=\\bigotimes_{i=1}^n\\mu_i$ on the finite product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). Let $f:\\prod_{i=1}^nS_i\\to\\mathbb R$ be product-measurable with $\\int|f|\\,d\\mu<\\infty$. Suppose finite deterministic constants $c_i\\ge0$ satisfy\n$$|f(z_1,\\ldots,z_i,\\ldots,z_n)-f(z_1,\\ldots,z_i',\\ldots,z_n)|\\le c_i$$\nfor every fixed setting of the other coordinates and every $z_i,z_i'$. The independent product-law theorem identifies the law of $Z=(Z_1,\\ldots,Z_n)$ as $\\mu$. Applying change of variables for expectation first to $|f|$ and then to $f$ makes $f(Z)$ integrable and gives $\\mathbb E f(Z)=\\int f\\,d\\mu$. Put $V=\\sum_{i=1}^n c_i^2$. For $t>0$, if $V>0$ then\n$$\\mathbb P\\bigl(f(Z_1,\\ldots,Z_n)-\\mathbb E f(Z_1,\\ldots,Z_n)\\ge t\\bigr)\\le\\exp\\!\\left(-\\frac{2t^2}{V}\\right),$$\nand if $V=0$ this probability is $0$. The same bound holds for the lower tail, so the two-sided probability is at most $2e^{-2t^2/V}$ when $V>0$."
+      }
+    ]
+  },
+  {
+    "order": 1871,
+    "id": "concentration-inequalities-and-tail-bounds-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Concentration \u2014 Examples",
+    "companion": "concentration-inequalities-and-tail-bounds",
+    "requires": [
+      "concentration-inequalities-and-tail-bounds"
+    ],
+    "items": [
+      {
+        "id": "ex-rademacher-sum-concentration",
+        "kind": "example",
+        "title": "A Rademacher sum",
+        "deps": [
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-axiom-of-choice",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements",
+          "def-random-element-and-real-random-variable",
+          "thm-hoeffding-independent-bounded-sums"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume AC. Let $n\\ge1$ and let $X_1,\\ldots,X_n$ be independent Rademacher variables, meaning $\\mathbb P(X_i=1)=\\mathbb P(X_i=-1)=1/2$, and put $S_n=\\sum_{i=1}^nX_i$. For every $t>0$,\n$$\\mathbb P(|S_n|\\ge t)\\le2e^{-t^2/(2n)}.$$"
+      },
+      {
+        "id": "ex-gaussian-maximum-concentration",
+        "kind": "example",
+        "title": "A Gaussian maximum without independence",
+        "deps": [
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-continuous-functions-are-borel-measurable",
+          "def-axiom-of-choice",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-real-exponential-function-and-e",
+          "def-standard-normal-and-normal-laws",
+          "def-subgaussian-variable-and-vector",
+          "lem-derivative-of-a-power",
+          "lem-normal-density-has-total-mass-one",
+          "thm-change-of-variables-for-expectation",
+          "thm-chain-rule",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-continuous-implies-integrable",
+          "thm-derivative-of-exponential",
+          "thm-exponential-addition-formula",
+          "thm-finite-subgaussian-maximum-and-epsilon-net",
+          "thm-ftc-second-part",
+          "thm-integration-against-a-density",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-substitution"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume AC. Let $\\sigma>0$, let $G\\sim N(0,1)$, and set $Z_j=\\sigma G$ for every $1\\le j\\le m$, where $m\\ge1$. These variables are perfectly dependent. For every $t>0$,\n$$\\mathbb P\\left(\\max_{1\\le j\\le m}|Z_j|\\ge t\\right)\\le2m\\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right).$$"
+      },
+      {
+        "id": "ex-subgaussian-vector-norm-via-net",
+        "kind": "example",
+        "title": "A sub-Gaussian vector norm bound",
+        "deps": [
+          "def-subgaussian-variable-and-vector",
+          "thm-finite-subgaussian-maximum-and-epsilon-net"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $d\\ge1$ and let $Z\\in\\mathbb R^d$ be a centered sub-Gaussian vector with proxy $\\sigma^2>0$. Choosing $\\epsilon=1/2$ in the net reduction gives, for every $t>0$,\n$$\\mathbb P(\\|Z\\|_2\\ge t)\\le2\\cdot5^d e^{-t^2/(8\\sigma^2)}.$$\nIf $\\sigma^2=0$, the same probability is $0$."
+      },
+      {
+        "id": "cex-finite-variance-does-not-imply-subgaussian-tail",
+        "kind": "counterexample",
+        "title": "Finite variance does not imply a sub-Gaussian tail",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-integer-power",
+          "def-measure",
+          "def-moments-variance-and-covariance",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "def-series",
+          "def-subgaussian-variable-and-vector",
+          "thm-exponential-beats-every-polynomial",
+          "thm-finite-subgaussian-maximum-and-epsilon-net",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-nonnegative-series-bounded-partial-sums"
+        ],
+        "dependency_level": 2,
+        "statement": "Every centered real random variable with finite variance is sub-Gaussian with some finite proxy."
+      }
+    ]
+  }
+]

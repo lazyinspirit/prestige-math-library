@@ -1,0 +1,1363 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-positive-lebesgue-components-of-a-positive-measure",
+    "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+    "def-dominated-statistical-experiment",
+    "def-likelihood-ratio-as-rn-derivative",
+    "def-likelihood-density",
+    "thm-likelihood-ratio-change-of-measure",
+    "thm-equivalent-dominators-give-equivalent-likelihood-ratios",
+    "cex-singular-pair-has-no-full-likelihood-ratio",
+    "ex-bernoulli-likelihood-ratio-and-change-of-measure"
+  ],
+  "contracts": {
+    "lem-positive-lebesgue-components-of-a-positive-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-mutually-singular-measures",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be signed measures or complex measures on the same\nmeasurable space $(X,\\mathcal A)$. They are **mutually singular**, written\n$$\\mu\\perp \\nu,$$\nwhen there are measurable sets $P,N\\in\\mathcal A$ with\n$$P\\cap N=\\varnothing,\\qquad P\\cup N=X,$$\nsuch that:\n\n1. every measurable subset of $N$ has $\\mu$-value $0$;\n2. every measurable subset of $P$ has $\\nu$-value $0$.\n\nFor positive measures this is equivalent to the usual condition\n$\\mu(N)=0$ and $\\nu(P)=0$, because positivity turns vanishing on the ambient set\ninto vanishing on all measurable subsets.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure or a complex measure on the same measurable space $(X,\\mathcal A)$. We say that $\\nu$ is **absolutely continuous with respect to $\\mu$**, and write\n$$\\nu\\ll\\mu,$$\nif every measurable $\\mu$-null set is also $\\nu$-null:\n$$\\mu(E)=0\\qquad\\Longrightarrow\\qquad \\nu(E)=0\\qquad(E\\in\\mathcal A).$$\nBecause every measurable subset of a $\\mu$-null set is again $\\mu$-null, this is equivalent to requiring $\\nu(F)=0$ for every measurable $F\\subseteq E$ whenever $\\mu(E)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the singular carrier $N$ from [F1]. For any measurable $E$, the singular part vanishes on $E\\setminus N$, so the decomposition gives $\\nu_{\\mathrm{ac}}(E\\setminus N)=\\nu(E\\setminus N)\\ge0$. Also $\\nu_{\\mathrm{ac}}(E\\cap N)=0$ by [F1] and [F2]. Additivity therefore gives $\\nu_{\\mathrm{ac}}(E)=\\nu_{\\mathrm{ac}}(E\\setminus N)\\ge0$. All displayed component values are finite because the sum is the finite value $\\nu$ and the other component is zero on the set being evaluated.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $E\\cap N$, [F2] gives $\\nu_{\\mathrm{ac}}(E\\cap N)=0$, so the decomposition yields $\\nu_{\\mathrm{s}}(E\\cap N)=\\nu(E\\cap N)\\ge0$. The singular part vanishes on $E\\setminus N$ by [F1]; hence $\\nu_{\\mathrm{s}}(E)=\\nu_{\\mathrm{s}}(E\\cap N)\\ge0$. Since $E$ was arbitrary, both components are positive measures.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: if the measurable space is empty, its only measurable set has zero value under both components."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: when either component is zero, the same carrier argument gives nonnegative values on every measurable set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: the argument applies unchanged when the positive finite measure has total mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: zero absolutely continuous or singular components are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no interval parameter or endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses one carrier witnessing singularity; it uses no arbitrary-family choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed Statement, F1–F3, and both proof steps against the current singularity, absolute-continuity, measure and finiteness definitions. On the singular carrier N the ac component is zero and the singular component equals the positive finite restriction of nu; on its complement the roles reverse. Additivity yields positivity and finiteness on every measurable E, including the empty set, zero measure and zero components. No sigma-finiteness of mu or AC is required; selecting one existing carrier is existential instantiation. Reader/refuter have no findings. No mathematical repair needed."
+      }
+    },
+    "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-total-variation-of-a-signed-or-complex-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\nu$ be a signed measure or a complex measure on $(X,\\mathcal A)$. For\n$E\\in\\mathcal A$, define its **total variation on $E$** by\n$$|\\nu|(E):=\\sup\\left\\{\\sum_{n=0}^\\infty |\\nu(E_n)|:\\ (E_n)_{n\\in\\mathbb N}\\text{ is a countable measurable partition of }E\\right\\},$$\nwhere, for a signed measure, the term $|\\nu(E_n)|$ means the ordinary absolute\nvalue when $\\nu(E_n)\\in\\mathbb R$ and means $+\\infty$ when\n$\\nu(E_n)\\in\\{+\\infty,-\\infty\\}$; for a complex measure it is the usual complex\nmodulus. A countable measurable partition of $E$ means:\n\n1. each $E_n$ lies in $\\mathcal A$;\n2. the sets $E_n$ are pairwise disjoint;\n3. $E=\\bigcup_{n\\in\\mathbb N}E_n$.\n\nThe sum on the right is a nonnegative extended series, so it is always defined\nin $[0,+\\infty] \\subseteq \\overline{\\mathbb R}$.\n\nFor signed measures, a later proposition shows that finite partitions already\nsuffice. For complex measures, that finite-partition shortcut is not built into\nthe definition here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-radon-nikodym-derivative",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure.\n\n1. If $\\nu$ is a signed measure satisfying the hypothesis of [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]] and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of measurable real-valued functions $f$ satisfying the measurable-set integral formula in that theorem.\n2. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $\\nu$ is a finite complex measure and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of complex $L^1(\\mu)$ functions $h$ satisfying\n   $$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A),$$\n   as given by [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]].\n\nIn both cases the derivative is not a distinguished pointwise function: it is determined only up to $\\mu$-almost-everywhere equality in the sense of [[def-measure-null-set-and-almost-everywhere]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure or a complex measure on the same measurable space $(X,\\mathcal A)$. We say that $\\nu$ is **absolutely continuous with respect to $\\mu$**, and write\n$$\\nu\\ll\\mu,$$\nif every measurable $\\mu$-null set is also $\\nu$-null:\n$$\\mu(E)=0\\qquad\\Longrightarrow\\qquad \\nu(E)=0\\qquad(E\\in\\mathcal A).$$\nBecause every measurable subset of a $\\mu$-null set is again $\\mu$-null, this is equivalent to requiring $\\nu(F)=0$ for every measurable $F\\subseteq E$ whenever $\\mu(E)=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-extended-real-valued-measurable-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]). Equip\n$\\overline{\\mathbb R}$ ([[def-extended-reals]]) with its order topology and let\n$\\mathcal B(\\overline{\\mathbb R})$ be the corresponding Borel sigma-algebra\n([[def-borel-sigma-algebra]]).\n\nA function $f:X\\to\\overline{\\mathbb R}$ is **measurable** when\n$f^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B(\\overline{\\mathbb R})$.\n\nEquivalently, it is enough to require\n$$\\{x\\in X:f(x)>a\\}\\in\\mathcal A \\qquad \\text{for every } a\\in\\mathbb R,$$\nbecause the rays $(a,+\\infty]$ generate $\\mathcal B(\\overline{\\mathbb R})$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose increasing countable finite-measure covers $(A_i)$ for $\\mu$ and $(B_j)$ for $\\nu$, using [F1]. Set $X_n=\\bigcup_{i,j\\le n}(A_i\\cap B_j)$. Then $X_n\\uparrow X$ and both $\\mu(X_n)$ and $\\nu(X_n)$ are finite, since each finite union is contained in finite unions of sets from the corresponding cover. By [F2], $|\\nu|(X_n)=\\nu(X_n)<\\infty$. Thus [F3] applies. Fix any finite-valued representative $f$ of the nonempty class; it satisfies $\\nu(E)=\\int_E f\\,d\\mu$ for every measurable $E$ and $\\int_{X_n}|f|\\,d\\mu<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $n,m\\ge1$, let $E_{n,m}=X_n\\cap\\{f\\le-1/m\\}$, which is measurable by [F5]. On $E_{n,m}$, $-f\\ge1/m$; because $f$ is integrable on $X_n$, [F6] and [F7] give $\\int_{E_{n,m}}f\\,d\\mu\\le-\\mu(E_{n,m})/m$. If $\\mu(E_{n,m})>0$, the representation in step 1.1 would give $\\nu(E_{n,m})<0$, contradicting positivity of $\\nu$. Hence every $E_{n,m}$ is $\\mu$-null.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The countable union $N=\\bigcup_{n,m\\ge1}E_{n,m}$ is measurable and $\\mu$-null by [F5]. Since the sets $X_n$ cover $X$, $N=\\{f<0\\}$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Define $\\widetilde f=\\max\\{f,0\\}$. By [F7], $\\widetilde f$ is measurable; it is nonnegative, equals $f$ off $N$, and is zero on $N$. For every measurable $E$, absolute continuity gives $\\nu(E)=\\nu(E\\setminus N)$ by [F4], while step 1.1 gives $\\nu(E\\setminus N)=\\int_{E\\setminus N}f\\,d\\mu=\\int_E\\widetilde f\\,d\\mu$. Thus $\\widetilde f$ represents the Radon–Nikodym class. The argument also shows that any finite-valued representative is nonnegative outside a null set.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F7",
+            "step 1.1",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: on X=∅ the common exhaustion is empty and the zero function is a nonnegative representative."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1: if ν=0, the resulting density class is zero almost everywhere."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical value one is distinguished for general measures."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1: a representative already nonnegative is unchanged, while any negative values are confined to a null set."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement and steps2.1–4.1 concern the sign of density representatives on measurable sets, not a confidence or parameter interval; the thresholds −1/m are a countable test of f<0 and are not endpoints of an admissible parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 1.1: AC is stated for the RN selection; the empty density family is vacuous."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is not an equivalence theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Independently checked all four proof steps and F1–F7 against the current published RN existence/uniqueness proof, RN-class definition, variation, measurability, integrability and order suppliers. Intersecting increasing finite covers gives a common finite exhaustion with |nu|=nu. Any class representative is integrable there, since its setwise integral over each finite piece is finite. On E_nm={f<=-1/m} intersect X_n, monotonicity makes a positive-measure negative level set contradict nu>=0. Their countable union is exactly {f<0}; positive-part replacement is measurable, finite-valued and represents the same measure even globally. Empty space, nu=0, mu=0 (forcing nu=0), infinite total masses and arbitrary measurable E checked. AC inherited from the RN construction (countable selections), not from choosing a single existing representative. Hunter Theorem 6.27 and proof, printed pp.75–77, independently consulted. No reader/refuter finding or defect."
+      }
+    },
+    "def-dominated-statistical-experiment": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the item has no claim when its required objects are absent."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: zero is not a distinguished numeric input."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: one is not a distinguished numeric input."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: no degenerate numerical parameter case is part of this definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: there is no interval parameter or endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: the definition does not make a nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the definition is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the definition is not an equivalence theorem."
+        }
+      ]
+    },
+    "def-likelihood-ratio-as-rn-derivative": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No probability measure exists on an empty sample space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the absolutely continuous component and its derivative may be zero; the singular part remains separate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: if P₁=P₀, the RN class is the constant-one class."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition includes singular pairs and requires the singular component to be retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The likelihood-ratio object is an almost-everywhere RN class of the absolutely continuous Lebesgue component; its Definition separates singular mass rather than ranging over an ordered confidence interval with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition explicitly assumes AC for Lebesgue decomposition and representative selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed the entire Definition and each actual supplier. Probabilities are positive signed measures of finite variation; X itself is the common finite exhaustion for Lebesgue decomposition relative to P0. Current decomposition existence/uniqueness proofs and the two level-0 lemmas supply unique positive finite components and a nonnegative finite-valued density class. AC is explicitly assumed for supplier construction. Under P1<<P0, (P1,0) is the unique decomposition; conversely a full density forces absolute continuity by null-set integration. Purely singular and mixed cases retain the singular component separately; no canonical pointwise version or parameter measurability is claimed. Hunter Theorem 6.27 and proof, printed pp.75–77, checked. No reader/refuter findings and no defect."
+      }
+    },
+    "def-likelihood-density": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: if Θ=∅, simultaneous representative selection is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits pθ(x)=0 and does not assign a ratio value where a denominator vanishes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical parameter value one is distinguished."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: identical laws may use different representatives on their parameter-specific null sets; no pointwise canonical version is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Likelihood is the function Lx(θ)=pθ(x) on arbitrary parameter labels, with no sigma-algebra or order on Θ implied; zero density values are allowed but no numerical endpoint label is distinguished."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition explicitly assumes AC to select an arbitrary-index family of representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed entire Definition against dominated/statistical-experiment definitions, AC, RN class/existence and the reviewed nonnegative-version lemma. Each probability is finite on a sigma-finite exhaustion of mu; hence the local RN hypotheses hold individually. AC selects a family from nonempty sets of finite-valued nonnegative measurable versions, including arbitrary parameter sets. Fixed x then gives a function on labels; there is no parameter sigma-algebra or asserted measurability, normalization over Theta, canonical version or simultaneous exceptional null set. Empty Theta is vacuous; empty X cannot support a probability unless Theta is empty, where the stated likelihood-at-x construction has no observed x. Martin section 3.2, Definition 3.1, printed pp.53–54, checked directly for the density-to-likelihood convention. No reader/refuter findings or defect."
+      }
+    },
+    "thm-likelihood-ratio-change-of-measure": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-likelihood-ratio-as-rn-derivative",
+          "source_section": "Definition",
+          "quote": "Let $P_0$ and $P_1$ be probability measures on the same measurable space.\nAssume AC. Their Lebesgue decomposition relative to $P_0$ is the unique\ndecomposition\n$P_1=P_{1,\\mathrm{ac}}+P_{1,\\mathrm{s}}$ with\n$P_{1,\\mathrm{ac}}\\ll P_0$ and $P_{1,\\mathrm{s}}\\perp P_0$\n([[thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]],\n[[thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures]]).\nBoth components are positive by\n[[lem-positive-lebesgue-components-of-a-positive-measure]], and\n$P_{1,\\mathrm{ac}}$ is finite because their sum has mass one. Define the\n**likelihood-ratio density** of $P_1$ against $P_0$ to be the\n$P_0$-almost-everywhere class\n$$\n\\frac{dP_{1,\\mathrm{ac}}}{dP_0}\n$$\nof [[def-radon-nikodym-derivative]]. Under AC this class has a nonnegative\nmeasurable representative by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nThis is a full density of $P_1$ with respect to $P_0$ only in the\nabsolutely continuous case $P_1\\ll P_0$. If that condition fails, the\nsingular component remains separate. A displayed representative is not a\ncanonical pointwise function: its values are determined only\n$P_0$-almost everywhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on the same measurable space. No choice or sigma-finiteness assumption is needed for uniqueness. If\n$$\\nu=\\nu_a+\\nu_s=\\widetilde\\nu_a+\\widetilde\\nu_s,$$\nwith $\\nu_a,\\widetilde\\nu_a\\ll\\mu$ and $\\nu_s,\\widetilde\\nu_s\\perp\\mu$, then\n$$\\nu_a=\\widetilde\\nu_a,\\qquad \\nu_s=\\widetilde\\nu_s.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-positive-lebesgue-components-of-a-positive-measure",
+          "source_section": "Statement",
+          "quote": "Let $\\nu$ be a finite positive measure and $\\mu$ a positive measure on the same\nmeasurable space. If $\\nu=\\nu_{\\mathrm{ac}}+\\nu_{\\mathrm{s}}$ with\n$\\nu_{\\mathrm{ac}}\\ll\\mu$ and $\\nu_{\\mathrm{s}}\\perp\\mu$, then\n$\\nu_{\\mathrm{ac}}$ and $\\nu_{\\mathrm{s}}$ are positive measures.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-total-variation-of-a-signed-or-complex-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\nu$ be a signed measure or a complex measure on $(X,\\mathcal A)$. For\n$E\\in\\mathcal A$, define its **total variation on $E$** by\n$$|\\nu|(E):=\\sup\\left\\{\\sum_{n=0}^\\infty |\\nu(E_n)|:\\ (E_n)_{n\\in\\mathbb N}\\text{ is a countable measurable partition of }E\\right\\},$$\nwhere, for a signed measure, the term $|\\nu(E_n)|$ means the ordinary absolute\nvalue when $\\nu(E_n)\\in\\mathbb R$ and means $+\\infty$ when\n$\\nu(E_n)\\in\\{+\\infty,-\\infty\\}$; for a complex measure it is the usual complex\nmodulus. A countable measurable partition of $E$ means:\n\n1. each $E_n$ lies in $\\mathcal A$;\n2. the sets $E_n$ are pairwise disjoint;\n3. $E=\\bigcup_{n\\in\\mathbb N}E_n$.\n\nThe sum on the right is a nonnegative extended series, so it is always defined\nin $[0,+\\infty] \\subseteq \\overline{\\mathbb R}$.\n\nFor signed measures, a later proposition shows that finite partitions already\nsuffice. For complex measures, that finite-partition shortcut is not built into\nthe definition here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $\\mu$ and $\\nu$ are sigma-finite positive measures on the same\nmeasurable space and $\\nu\\ll\\mu$, then the Radon–Nikodym class\n$d\\nu/d\\mu$ has a finite-valued nonnegative measurable representative. Every\nfinite-valued representative of that class is nonnegative\n$\\mu$-almost everywhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-positive-and-negative-parts-of-a-function",
+          "source_section": "Definition",
+          "quote": "Let $f : X \\to \\overline{\\mathbb{R}}$ with $\\overline{\\mathbb{R}}$ as in\n[[def-extended-reals]]. Its **positive part** and **negative part** are\n\n$$f^+ := \\max\\{f,0\\},\\qquad f^- := \\max\\{-f,0\\}.$$\n\nPointwise, both functions take values in $[0,+\\infty]$, and one has\n\n$$f = f^+ - f^-,\\qquad |f| = f^+ + f^-.$$\n\nAt each point at least one of $f^+$ and $f^-$ is zero.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The decomposition $P_1=P_1+0$ has absolutely continuous part $P_1$ and singular part $0$, because the hypothesis gives $P_1\\ll P_0$. Comparing it with the decomposition in [F1], uniqueness [F2] gives $P_{1,\\mathrm{ac}}=P_1$ and $P_{1,\\mathrm{s}}=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], $P_{1,\\mathrm{ac}}$ is positive and finite, and $P_0$ is a finite positive measure. Choose a nonnegative representative $\\widehat r$ supplied by [F4], so $P_{1,\\mathrm{ac}}(A)=\\int_A\\widehat r\\,dP_0$ for every $A\\in\\mathcal A$. By step 1.1, $P_{1,\\mathrm{ac}}=P_1$. The representative $r$ in the statement belongs to this same Radon–Nikodym class, so [F4] gives a measurable $P_0$-null set $N$ outside which $r=\\widehat r$. By [F5], both $r\\,dP_0$ and $\\widehat r\\,dP_0$ are measures; their values on $A\\cap N$ are zero by [F8], and their values on $A\\setminus N$ agree because the densities agree there. Measure additivity therefore gives $\\int_A r\\,dP_0=\\int_A\\widehat r\\,dP_0=P_1(A)$ for every measurable $A$. Thus the density measure $r\\,dP_0$ in [F5] equals $P_1$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "step 1.1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For nonnegative measurable $g$, equality of these measures and [F6] give $\\int g\\,dP_1=\\int g\\,d(r\\,dP_0)=\\int gr\\,dP_0$. This is the asserted expectation identity in the nonnegative case.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Now let $g$ be real-valued and integrable under $P_1$. By [F7], $g^+$ and $g^-$ are measurable and integrable. Applying step 3.1 to each gives $\\int g^\\pm r\\,dP_0=\\int g^\\pm\\,dP_1<\\infty$; applying it to $|g|$ also shows $\\int |g|r\\,dP_0=\\int |g|\\,dP_1<\\infty$. Thus $gr\\in L^1(P_0)$, and linearity from [F7] yields $\\int gr\\,dP_0=\\int g^+r\\,dP_0-\\int g^-r\\,dP_0=\\int g\\,dP_1$.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability measure cannot exist on an empty sample space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the identity includes g=0 and integrands vanishing outside the P₁ support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: taking g=1 gives ∫r dP₀=P₁(X)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1: if P₁=P₀, uniqueness gives r=1 P₀-a.e. and the identity reduces to equality of expectations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The expectation identity is quantified over nonnegative g or P1-integrable real g; absolute continuity P1≪P0, not an interval endpoint condition, governs its applicability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 2.1: AC is explicit in the RN existence and representative-selection branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Read Statement, F1–F8 and all four steps against current decomposition uniqueness, density-class, integration-against-density, null-integral, positive-parts, measurability and L1-linearity suppliers. Under P1<<P0 uniqueness identifies (P1,0); null-set integration transfers the setwise formula to the given representative r. Density integration applies to all nonnegative measurable g, with the supplier convention 0 times infinity equals 0. For real P1-integrable g the positive and negative weighted integrals are both finite and |gr|=|g|r, so subtraction is legitimate. Checked g=0, g=1 (mean r=1), r=0 on subsets, identical laws and failure without absolute continuity. AC is inherited from RN/decomposition construction; no singular mass is discarded without the hypothesis. No reader/refuter findings or defect."
+      }
+    },
+    "thm-equivalent-dominators-give-equivalent-likelihood-ratios": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-radon-nikodym-derivative",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure.\n\n1. If $\\nu$ is a signed measure satisfying the hypothesis of [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]] and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of measurable real-valued functions $f$ satisfying the measurable-set integral formula in that theorem.\n2. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $\\nu$ is a finite complex measure and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of complex $L^1(\\mu)$ functions $h$ satisfying\n   $$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A),$$\n   as given by [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]].\n\nIn both cases the derivative is not a distinguished pointwise function: it is determined only up to $\\mu$-almost-everywhere equality in the sense of [[def-measure-null-set-and-almost-everywhere]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $\\mu$ and $\\nu$ are sigma-finite positive measures on the same\nmeasurable space and $\\nu\\ll\\mu$, then the Radon–Nikodym class\n$d\\nu/d\\mu$ has a finite-valued nonnegative measurable representative. Every\nfinite-valued representative of that class is nonnegative\n$\\mu$-almost everywhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-radon-nikodym-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\lambda$ and $\\mu$ be sigma-finite positive measures and let $\\nu$ be a\nsigned measure or a finite complex measure on the same measurable space.\nAssume there is an increasing measurable exhaustion $(X_n)_{n\\in\\mathbb N}$\nwith $\\bigcup_nX_n=X$, $\\lambda(X_n)<+\\infty$, $\\mu(X_n)<+\\infty$, and\n$|\\nu|(X_n)<+\\infty$ for every $n$, and assume $\\nu\\ll\\mu\\ll\\lambda$. Then\n$$\\frac{d\\nu}{d\\lambda}=\\frac{d\\nu}{d\\mu}\\frac{d\\mu}{d\\lambda}\\qquad\\lambda\\text{-almost everywhere.}$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure or a complex measure on the same measurable space $(X,\\mathcal A)$. We say that $\\nu$ is **absolutely continuous with respect to $\\mu$**, and write\n$$\\nu\\ll\\mu,$$\nif every measurable $\\mu$-null set is also $\\nu$-null:\n$$\\mu(E)=0\\qquad\\Longrightarrow\\qquad \\nu(E)=0\\qquad(E\\in\\mathcal A).$$\nBecause every measurable subset of a $\\mu$-null set is again $\\mu$-null, this is equivalent to requiring $\\nu(F)=0$ for every measurable $F\\subseteq E$ whenever $\\mu(E)=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-total-variation-of-a-signed-or-complex-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\nu$ be a signed measure or a complex measure on $(X,\\mathcal A)$. For\n$E\\in\\mathcal A$, define its **total variation on $E$** by\n$$|\\nu|(E):=\\sup\\left\\{\\sum_{n=0}^\\infty |\\nu(E_n)|:\\ (E_n)_{n\\in\\mathbb N}\\text{ is a countable measurable partition of }E\\right\\},$$\nwhere, for a signed measure, the term $|\\nu(E_n)|$ means the ordinary absolute\nvalue when $\\nu(E_n)\\in\\mathbb R$ and means $+\\infty$ when\n$\\nu(E_n)\\in\\{+\\infty,-\\infty\\}$; for a complex measure it is the usual complex\nmodulus. A countable measurable partition of $E$ means:\n\n1. each $E_n$ lies in $\\mathcal A$;\n2. the sets $E_n$ are pairwise disjoint;\n3. $E=\\bigcup_{n\\in\\mathbb N}E_n$.\n\nThe sum on the right is a nonnegative extended series, so it is always defined\nin $[0,+\\infty] \\subseteq \\overline{\\mathbb R}$.\n\nFor signed measures, a later proposition shows that finite partitions already\nsuffice. For complex measures, that finite-partition shortcut is not built into\nthe definition here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose increasing finite-measure covers $(A_i)$ for $\\mu$ and $(B_j)$ for $\\nu$ by [F1], and set $X_n=\\bigcup_{i,j\\le n}(A_i\\cap B_j)$. Then $X_n\\uparrow\\mathcal X$, $\\mu(X_n)<\\infty$, and $\\nu(X_n)<\\infty$. Since $P_\\theta$ is a probability measure, [F8] gives $|P_\\theta|(X_n)\\le1$. This is a common finite exhaustion for $\\mu,\\nu,P_\\theta$, so the hypotheses in [F5] hold for every $\\theta$, with $(\\lambda,\\rho,\\sigma)=(\\mu,\\nu,P_\\theta)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F8",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [A1], [F3], and [F4], choose nonnegative representatives $h=d\\nu/d\\mu$ and $p_\\theta^\\mu,p_\\theta^\\nu$ for the stated classes. The measurable set $H=\\{x:h(x)=0\\}$ satisfies $\\nu(H)=\\int_Hh\\,d\\mu=0$ by [F3]; then $\\mu(H)=0$ by [F6]. Hence $h>0$ $\\mu$-almost everywhere.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F6",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $\\theta$. Applying [F5] on the common exhaustion from step 1.1 gives $p_\\theta^\\mu=h\\,p_\\theta^\\nu$ $\\mu$-almost everywhere. For a fixed pair $\\theta,\\eta$, remove the union of their two exceptional null sets and the null set $H$ from step 1.2. On the remaining set, both density identities hold and $h>0$, so division by the positive common factor gives $p_\\theta^\\mu/p_\\eta^\\mu=p_\\theta^\\nu/p_\\eta^\\nu$ wherever the denominators are positive. The exceptional set may depend on the pair, which proves the stated scope.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No probability family exists on an empty sample space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: ratios are asserted only where the denominator is positive; zero denominators receive no value."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical parameter value one is distinguished."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: if μ=ν, then h=1 μ-a.e. and the likelihood ratios agree."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem compares fixed pairs of density ratios on their positive-denominator sets; no ordered parameter domain or boundary label is assumed, and it explicitly specifies no ratio value at a zero denominator."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 1.2: AC is used to select the simultaneous density representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked Statement, F1–F8 and all three steps against current local chain-rule Statement/proof and RN suppliers. The intersections of finite covers give the required common exhaustion; probabilities have variation at most one on it. Finite-valued nonnegative representatives exist under AC. For H={h=0}, nu(H)=0 and mu<<nu forces mu(H)=0, including mutually zero dominators in the vacuous empty-parameter case. The chain rule applies individually to each P_theta; removing only the two fixed density exceptional sets and H permits cancellation of finite positive h exactly where denominators are positive. No zero-denominator value, canonical version, or uncountable simultaneous null-set claim is made. AC is used in density selections and inherited RN construction. Reader/refuter findings empty; no defect."
+      }
+    },
+    "cex-singular-pair-has-no-full-likelihood-ratio": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-counting-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. The **counting set function** on $\\mathcal P(X)$ is\n\n$$\\#_X(E):=\\begin{cases}|E|,&E\\text{ is finite},\\\\+\\infty,&E\\text{ is infinite},\\end{cases}$$\n\nwhere finite means equinumerous with a natural number ([[def-countable]]) and $+\\infty$ belongs to the extended real line ([[def-extended-reals]]). The two branches are exhaustive and disjoint. The fact that this set function is a measure, and hence deserves the name **counting measure**, is proved in [[prop-counting-measure-is-a-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-counting-measure-is-a-measure",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the counting set function $\\#_X$ of [[def-counting-measure]] is a measure on $(X,\\mathcal P(X))$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure or a complex measure on the same measurable space $(X,\\mathcal A)$. We say that $\\nu$ is **absolutely continuous with respect to $\\mu$**, and write\n$$\\nu\\ll\\mu,$$\nif every measurable $\\mu$-null set is also $\\nu$-null:\n$$\\mu(E)=0\\qquad\\Longrightarrow\\qquad \\nu(E)=0\\qquad(E\\in\\mathcal A).$$\nBecause every measurable subset of a $\\mu$-null set is again $\\mu$-null, this is equivalent to requiring $\\nu(F)=0$ for every measurable $F\\subseteq E$ whenever $\\mu(E)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-mutually-singular-measures",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be signed measures or complex measures on the same\nmeasurable space $(X,\\mathcal A)$. They are **mutually singular**, written\n$$\\mu\\perp \\nu,$$\nwhen there are measurable sets $P,N\\in\\mathcal A$ with\n$$P\\cap N=\\varnothing,\\qquad P\\cup N=X,$$\nsuch that:\n\n1. every measurable subset of $N$ has $\\mu$-value $0$;\n2. every measurable subset of $P$ has $\\nu$-value $0$.\n\nFor positive measures this is equivalent to the usual condition\n$\\mu(N)=0$ and $\\nu(P)=0$, because positivity turns vanishing on the ambient set\ninto vanishing on all measurable subsets.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-likelihood-ratio-as-rn-derivative",
+          "source_section": "Definition",
+          "quote": "Let $P_0$ and $P_1$ be probability measures on the same measurable space.\nAssume AC. Their Lebesgue decomposition relative to $P_0$ is the unique\ndecomposition\n$P_1=P_{1,\\mathrm{ac}}+P_{1,\\mathrm{s}}$ with\n$P_{1,\\mathrm{ac}}\\ll P_0$ and $P_{1,\\mathrm{s}}\\perp P_0$\n([[thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]],\n[[thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures]]).\nBoth components are positive by\n[[lem-positive-lebesgue-components-of-a-positive-measure]], and\n$P_{1,\\mathrm{ac}}$ is finite because their sum has mass one. Define the\n**likelihood-ratio density** of $P_1$ against $P_0$ to be the\n$P_0$-almost-everywhere class\n$$\n\\frac{dP_{1,\\mathrm{ac}}}{dP_0}\n$$\nof [[def-radon-nikodym-derivative]]. Under AC this class has a nonnegative\nmeasurable representative by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nThis is a full density of $P_1$ with respect to $P_0$ only in the\nabsolutely continuous case $P_1\\ll P_0$. If that condition fails, the\nsingular component remains separate. A displayed representative is not a\ncanonical pointwise function: its values are determined only\n$P_0$-almost everywhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on the same measurable space. No choice or sigma-finiteness assumption is needed for uniqueness. If\n$$\\nu=\\nu_a+\\nu_s=\\widetilde\\nu_a+\\widetilde\\nu_s,$$\nwith $\\nu_a,\\widetilde\\nu_a\\ll\\mu$ and $\\nu_s,\\widetilde\\nu_s\\perp\\mu$, then\n$$\\nu_a=\\widetilde\\nu_a,\\qquad \\nu_s=\\widetilde\\nu_s.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-likelihood-ratio-change-of-measure",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $P_0,P_1$ be probability measures on one measurable space.\nLet $r$ be a nonnegative measurable representative of the likelihood-ratio\nclass for $P_1$ versus $P_0$. If $P_1\\ll P_0$, then\n$$\nE_{P_0}[g r]=E_{P_1}[g]\n$$\nfor every nonnegative measurable $g$, and also for every real-valued\n$P_1$-integrable measurable $g$. Here $E_{P_i}[h]$ means\n$\\int h\\,dP_i$. Without $P_1\\ll P_0$, this identity need not hold because the\nsingular component may be nonzero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The full power set is a sigma-algebra by [F1]. Each $\\delta_i$ has total mass $1$ and is countably additive: in a disjoint sequence, at most one set contains $i$, so the sum of its values equals its value on the union. Thus $P_0,P_1$ are probability measures by [F2]. The set $\\{1\\}$ is $P_0$-null and has $P_1$-mass $1$, so $P_1\\not\\ll P_0$ by [F4]. The singleton carriers show $P_0\\perp P_1$ by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The decomposition relative to $P_0$ is $P_1=0+P_1$: the zero measure is absolutely continuous with respect to $P_0$, and $P_1$ is singular to $P_0$ by step 1.1. By uniqueness [F9], this is the decomposition in [F6], so the likelihood-ratio class is zero $P_0$-almost everywhere. At $x=1$, the point-mass quotient has denominator $p_0(1)=0$ and is undefined.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F6",
+            "F9",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If a nonnegative density $q$ represented all of $P_1$ with respect to $P_0$, then $P_1(\\{1\\})=\\int_{\\{1\\}}q\\,dP_0=0$ by [F8], contradicting $P_1(\\{1\\})=1$. Thus no full density exists. The hypothesis of [F7] fails, so this does not contradict the dominated change-of-measure theorem.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F7",
+            "F8",
+            "step 1.1",
+            "given",
+            "contradiction: algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample requires the nonempty sample space {0,1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1: the denominator density is zero at x=1 and the absolutely continuous component is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: P₁({1})=1 supplies the contradiction to any full density."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the two laws have disjoint singleton carriers."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample and steps 1.1–2.1: the two carriers and point-mass formulas are explicit; no arbitrary-family choice is used in this finite construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal assertion; it proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal assertion; it proves no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "point-mass-table",
+          "claim": "P₀({0})=1, P₀({1})=0, P₁({0})=0, and P₁({1})=1.",
+          "result": "Each law is a probability measure; {1} is P₀-null and has P₁-mass one."
+        },
+        {
+          "id": "full-density-contradiction",
+          "claim": "If P₁=q dP₀, then P₁({1})=∫_{ {1} }q dP₀.",
+          "result": "The right-hand side is zero by null-set integration, contradicting P₁({1})=1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed false universal Statement and all three counterexample steps with current finite counting-measure, probability, singularity, absolute-continuity, uniqueness, null-integral and likelihood suppliers. The disjoint unit atoms are countably additive probability laws; {1} has P0 mass zero and P1 mass one. Uniqueness identifies decomposition (0,P1), so the ac-density class is zero while the counting-density quotient is undefined at 1. Any proposed full nonnegative density integrates to zero over {1}, contradicting P1 mass one. Empty-event and zero-component checks included; the failure is exactly missing absolute continuity, not a failure of the conditional change-of-measure theorem. The finite construction itself is choice-free; AC is explicitly inherited for general likelihood machinery. No reader/refuter finding or defect."
+      }
+    },
+    "ex-bernoulli-likelihood-ratio-and-change-of-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-counting-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. The **counting set function** on $\\mathcal P(X)$ is\n\n$$\\#_X(E):=\\begin{cases}|E|,&E\\text{ is finite},\\\\+\\infty,&E\\text{ is infinite},\\end{cases}$$\n\nwhere finite means equinumerous with a natural number ([[def-countable]]) and $+\\infty$ belongs to the extended real line ([[def-extended-reals]]). The two branches are exhaustive and disjoint. The fact that this set function is a measure, and hence deserves the name **counting measure**, is proved in [[prop-counting-measure-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-counting-measure-is-a-measure",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the counting set function $\\#_X$ of [[def-counting-measure]] is a measure on $(X,\\mathcal P(X))$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-likelihood-ratio-as-rn-derivative",
+          "source_section": "Definition",
+          "quote": "Let $P_0$ and $P_1$ be probability measures on the same measurable space.\nAssume AC. Their Lebesgue decomposition relative to $P_0$ is the unique\ndecomposition\n$P_1=P_{1,\\mathrm{ac}}+P_{1,\\mathrm{s}}$ with\n$P_{1,\\mathrm{ac}}\\ll P_0$ and $P_{1,\\mathrm{s}}\\perp P_0$\n([[thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]],\n[[thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures]]).\nBoth components are positive by\n[[lem-positive-lebesgue-components-of-a-positive-measure]], and\n$P_{1,\\mathrm{ac}}$ is finite because their sum has mass one. Define the\n**likelihood-ratio density** of $P_1$ against $P_0$ to be the\n$P_0$-almost-everywhere class\n$$\n\\frac{dP_{1,\\mathrm{ac}}}{dP_0}\n$$\nof [[def-radon-nikodym-derivative]]. Under AC this class has a nonnegative\nmeasurable representative by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nThis is a full density of $P_1$ with respect to $P_0$ only in the\nabsolutely continuous case $P_1\\ll P_0$. If that condition fails, the\nsingular component remains separate. A displayed representative is not a\ncanonical pointwise function: its values are determined only\n$P_0$-almost everywhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-likelihood-ratio-change-of-measure",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $P_0,P_1$ be probability measures on one measurable space.\nLet $r$ be a nonnegative measurable representative of the likelihood-ratio\nclass for $P_1$ versus $P_0$. If $P_1\\ll P_0$, then\n$$\nE_{P_0}[g r]=E_{P_1}[g]\n$$\nfor every nonnegative measurable $g$, and also for every real-valued\n$P_1$-integrable measurable $g$. Here $E_{P_i}[h]$ means\n$\\int h\\,dP_i$. Without $P_1\\ll P_0$, this identity need not hold because the\nsingular component may be nonzero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The full power set is a sigma-algebra by [F1], so [F2] gives a measurable space. The counting measure is finite with $\\mu(\\mathcal X)=2$ by [F3], hence sigma-finite. Each displayed mass is nonnegative and the two masses for each $P_i$ sum to $1$. For any disjoint sequence of events, each point belongs to at most one event, so the mass formula is countably additive; each $P_i$ is therefore a probability measure by [F4]. Since counting measure assigns positive mass to every nonempty subset, $P_i\\ll\\mu$, and the family is a dominated experiment by [F5]–[F6].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $p_i(x):=P_i(\\{x\\})$ for $i\\in\\{0,1\\}$. For every $A\\subseteq\\mathcal X$, $\\int_A p_i\\,d\\mu=\\sum_{x\\in A}p_i(x)=P_i(A)$, so these are density representatives as in [F7]. Since $p_0$ is positive at both points, $P_1\\ll P_0$; define $r(x)=p_1(x)/p_0(x)$. For every $A\\subseteq\\mathcal X$, $\\int_A r\\,dP_0=\\sum_{x\\in A}r(x)p_0(x)=\\sum_{x\\in A}p_1(x)=P_1(A)$; thus $r$ represents the likelihood-ratio derivative [F8], with $r(0)=(1/3)/(2/3)=1/2$ and $r(1)=(2/3)/(1/3)=2$. [A1, F7, F8, given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any real-valued $g$ on $\\mathcal X$, $E_{P_0}[gr]=\\frac23g(0)\\frac12+\\frac13g(1)2=\\frac13g(0)+\\frac23g(1)=E_{P_1}[g]$. Thus the change-of-measure identity holds directly, in agreement with [A1, F9].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty event has mass zero under both displayed probability laws."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: all four masses are positive, while the empty event has zero mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: each law has total mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: both denominator masses are strictly positive, so the likelihood ratio is finite at both points."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Bernoulli probabilities are fixed interior values 1/3 and 2/3; no endpoint parameter is varied."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: the laws and density representatives are explicitly displayed; AC is only inherited for the linked general theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one finite model and proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one finite model and proves no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "mass-table",
+          "claim": "P₀({0})=2/3, P₀({1})=1/3, P₁({0})=1/3, P₁({1})=2/3.",
+          "result": "All masses are positive and each law totals one; counting densities are these masses."
+        },
+        {
+          "id": "ratio-and-identity",
+          "claim": "r(0)=1/2 and r(1)=2; E₀[gr]=E₁[g] for arbitrary real g.",
+          "result": "Both sides equal (1/3)g(0)+(2/3)g(1)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Independently checked the Example, F1–F9/A1, and Verification 1.1–2.1 against every current cited dependency. The two positive mass pairs sum to one; finite-space disjoint additivity and counting domination are explicit. Step 1.2 now verifies the counting-density integral identity and the P0-density identity for every subset, so r is the full RN representative, with r(0)=1/2 and r(1)=2. Step 2.1 evaluates the expectation for arbitrary real g; finite support implies integrability, and both sides equal g(0)/3+2g(1)/3. Checked empty/full events, both singleton indicators, zero g, g=1, positive denominators and parameter labels distinct from observations. AC is inherited only from the linked general theory; the explicit calculation requires no choice. Reader-post source raw hash matches current exactly; accept its local proof clarification as nonfatal polish, not a false formula or statement. No refuter finding or remaining defect."
+      }
+    }
+  }
+}

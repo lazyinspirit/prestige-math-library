@@ -1,0 +1,273 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "17",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "lem-sparse-hamming-packing",
+      "model": "gpt-6-luna",
+      "context_sha256": "d516fac2c7be7f8446a1c293e97854a40d98643f50c06a4e8cc8660967eb2bc7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly says the division theorem states the natural-to-integer embedding. Its proof 1.2 does establish integer discreteness and its L3 cites the existing embedding lemma, so the quotient argument is valid, but the dependency attribution needs correction. Added explicit lem-nat-embeds-int, lem-nat-discrete and thm-int-ordered-ring citations and derived positivity before transferring the division identities.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-fano-packing",
+      "model": "gpt-6-luna",
+      "context_sha256": "949641ccafc8857379b49df2d7187cba367563d564d126c1145a3a190bc85465",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F6 incorrectly attributes joint loss measurability to def-loss-function-and-risk, which requires only measurable action sections. The actual squared-metric loss has continuous sections, and on the finite parameter set with its power-set sigma-algebra joint measurability follows by a finite union of measurable rectangles. Corrected F6 and supplied this argument in F7. The entropy, reference-KL and nearest-target arguments remain valid; AC already required in A1 is now explicit in the Statement and Given.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-sparse-hamming-packing",
+      "disposition": "repaired",
+      "post_sha256": "54120efe6cfd3ee54e215385ad069d4fb0b5e2ad7a4ab7ae4a9eaf7227c5ba18",
+      "review_context_sha256": "893bd027af092e59cc08e50a476fab4d8fac7504cef1bfdbaca05f7990de6479",
+      "reason": "Verified the natural and real embedding bridges, nonnegative division quotients, finite greedy covering bound |C|B>=m^k, binomial-weight entropy estimate, m=2 integral constants, m>=3 derivative comparison, and squared distance 2s>k/2. Existing supplier statements justify the repaired F1; the Statement is unchanged and the finite construction uses no AC. The focused strict proof contract passes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-fano-packing",
+      "disposition": "repaired",
+      "post_sha256": "d0f121c458d21d418b5faf29525c3bb819f0bf6ea0ef479bc2e0f3050a588c93",
+      "review_context_sha256": "3e092ff8ab28b8a068ad44302681b36493f367714105a9b16d89aa394ad49101",
+      "reason": "Verified bounded posterior normalization and entropy integrability, conditional Jensen only at positive output mass, the finite-reference identity K_Q=I+D(mixture||Q), the finite conditional-entropy error decomposition, and the measurable nearest-target decoder with squared loss at least Delta^2/4 on errors. Corrected the risk citation and proved finite-product loss measurability. AC is now explicit in Statement/Given without changing constants or domains; all five direct consumers were examined. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-sparse-gaussian-sequence-fano-lower-bound",
+    "thm-gaussian-sparse-sequence-minimax-lower-bound",
+    "lem-diagonal-covariance-minimax-lower-bound",
+    "lem-clean-block-sparse-gaussian-covariance-minimax-lower-bound",
+    "lem-clean-dense-gaussian-covariance-minimax-lower-bound"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-sparse-hamming-packing",
+      "locus": "facts-block",
+      "location": "F1",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "Division with remainder does not itself state the embedding interface. The embedding and discreteness are true and available locally; explicit supplier citations now justify transfer to natural quotients.",
+      "repair": "Added three published suppliers to item and owning manifest deps and exact F1 citations to the contract. No Statement change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-fano-packing",
+      "locus": "facts-block",
+      "location": "F6, F7; Statement and Given AC disclosure",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "Risk supplier requires measurable action sections, whereas F6 incorrectly attributed joint measurability to it. Finite discrete parameters and continuous distance sections establish the extra product measurability required by the Bayes/minimax supplier.",
+      "repair": "Corrected F6, proved finite-product measurability in F7 and made the already recorded A1 AC assumption explicit in Statement/Given. Existing msf37-batch17-3a-06 evidence remains unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-sparse-gaussian-sequence-fano-lower-bound",
+      "locus": "statement",
+      "location": "Example and Given; F4; Proof 4.1",
+      "severity": "nonfatal",
+      "status": "owner-routing-required",
+      "finding": "The actual Fano use and Gaussian constants are sound under inherited AC, already listed in deps, but Example/Given omit the assumption. This repeats the rejection-blind Step-4 presentation concern.",
+      "repair": "Propose an owner clarification adding AC to Example/Given; the carrier is an unassigned frontier item and was left unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "operation": "no_update_required",
+      "supplier": "thm-fano-packing",
+      "reason": "All five direct dependency/reference consumers are current-run draft frontier items. No published or outside-frontier consumer was found, no published item was edited, and no published mathematical finding requires a maintenance entry.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "lem-sparse-hamming-packing",
+      "claim": "For natural 1<=k<=d/2, a block Hamming packing has log|C| >= (k/1024)log(ed/k) and squared vector separation >k/2. Natural counts in real expressions use the canonical embedding.",
+      "sources_consulted": [
+        "items/thm-division-algorithm-in-z.md: Statement, L3, proof 1.2",
+        "items/lem-nat-embeds-int.md: complete item",
+        "items/lem-nat-discrete.md: complete item",
+        "items/thm-int-ordered-ring.md: Statement",
+        "items/lem-nat-finite-sum-laws-and-the-canonical-embedding.md: clauses 0, 6, 7",
+        "items/thm-binomial-theorem.md: Statement",
+        "items/thm-cardinality-of-a-set-of-functions.md: Statement",
+        "items/def-nat-power.md: Definition"
+      ],
+      "checks": [
+        {
+          "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-17.proof-contracts.json --strict --items lem-sparse-hamming-packing",
+          "exit_code": 0,
+          "result": "0 errors, 0 warnings, 1/1 item checked"
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Complete; no Statement change and no downstream propagation."
+    },
+    {
+      "id": "thm-fano-packing",
+      "claim": "For finite M>=2 separated Borel metric targets, arbitrary estimator kernels have average, maximum and minimax squared-loss risks >= (Delta^2/4)(1-(K_Q+log2)/log M), vacuous for infinite reference KL. AC is explicitly inherited from RN/KL suppliers.",
+      "sources_consulted": [
+        "items/def-loss-function-and-risk.md: Definition",
+        "items/def-bayes-and-minimax-risk.md: Definition",
+        "items/def-mutual-information-for-finite-hypothesis-testing.md: complete Definition",
+        "items/thm-likelihood-ratio-change-of-measure.md: complete item",
+        "items/thm-jensens-integral-inequality.md: Statement",
+        "items/def-radon-nikodym-derivative.md: Definition",
+        "research/mathematical-statistics-foundations-37-batch-17.proof-contracts.json: F1, F2, F6, F7 exact source quotes and boundary worksheet"
+      ],
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-sparse-hamming-packing.md items/thm-fano-packing.md",
+          "exit_code": 0,
+          "result": "2 checked, 0 failing"
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/lem-sparse-hamming-packing.md items/thm-fano-packing.md",
+          "exit_code": 0,
+          "result": "2 files pass actual KaTeX and YAML checks"
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-17.proof-contracts.json --strict --items lem-sparse-hamming-packing,thm-fano-packing",
+          "exit_code": 0,
+          "result": "0 errors, 0 warnings, 2/2 items checked"
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/lem-sparse-hamming-packing.md items/thm-fano-packing.md",
+          "exit_code": 0,
+          "result": "2 items, 12 steps, 0 defects"
+        },
+        {
+          "command": "Locked reread/edit/check of research/mathematical-statistics-foundations-37-batch-17.pages.json",
+          "exit_code": 0,
+          "result": "Fano Statement exactly mirrored; dependency array matches the item; lock released."
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Complete assigned review; controller routes the sparse-example presentation proposal to its frontier owner and retains independent rejudgment/certification duties."
+    },
+    {
+      "interface_comparison": "The complete packing Statement remains identical. Fano Statement differs only by its initial Assume AC sentence; the loss-measurability correction is confined to Facts.",
+      "direct_consumer_inventory": "Searched item/library references to thm-fano-packing and other Fano mentions. The five listed items are its direct consumers; cor-matching-minimax-rate invokes the unchanged thm-gaussian-sparse-sequence-minimax-lower-bound interface and therefore starts no additional hop.",
+      "review_scope": "These are direct-use checks for the supplier AC clarification, not independent reviews of these consumers or independent acceptance of the authored repairs.",
+      "outside_findings": "Only the sparse example presentation clarification is routed to its ordinary frontier owner. The Step-4 digest separately records analogous AC presentation concerns in the two other Gaussian examples; they are not assigned or affected by this interface edit and were not edited or adjudicated."
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "id": "ex-sparse-gaussian-sequence-fano-lower-bound",
+      "supplier": "thm-fano-packing",
+      "path": "items/ex-sparse-gaussian-sequence-fano-lower-bound.md",
+      "location": "F4; Proof 4.1",
+      "snippet": "Apply [F4] with separation $\\Delta=a\\sqrt{k/2}$ and reference $P_0$.",
+      "affected_use": "Fano with the Euclidean Borel action space, Gaussian reference P_0, M>=3, and squared separation a^2 k/2. The reference KL ratio remains 1/8 and the Fano factor exceeds 1/5.",
+      "disposition": "owner_clarification_requested",
+      "reason": "The Fano use remains valid with inherited AC; however the Example and Given omit that assumption despite def-axiom-of-choice in deps and AC-dependent F3/F4/F6.",
+      "invalidated_claim": "No mathematical conclusion is invalidated under the recorded inherited AC convention.",
+      "minimality": "Add the existing AC assumption to the Example and Given; no change to Gaussian construction, separation, reference direction, constants, or proof steps is required.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-gaussian-sparse-sequence-minimax-lower-bound",
+      "supplier": "thm-fano-packing",
+      "path": "items/thm-gaussian-sparse-sequence-minimax-lower-bound.md",
+      "location": "F3; Proof 3.1",
+      "snippet": "With separation $\\Delta=a\\sqrt{s/2}$, [F3] gives uniform average risk greater than",
+      "affected_use": "Fano at Euclidean targets a u^omega with average KL log(M)/8 and separation a sqrt(s/2).",
+      "disposition": "unaffected",
+      "reason": "Its Statement, Given and A1 already assume AC explicitly; its Borel estimator supplies an admissible kernel.",
+      "invalidated_claim": "No mathematical conclusion is invalidated under the recorded inherited AC convention.",
+      "minimality": "No repair: all Fano hypotheses, including AC, are already discharged.",
+      "route": "none",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-diagonal-covariance-minimax-lower-bound",
+      "supplier": "thm-fano-packing",
+      "path": "items/lem-diagonal-covariance-minimax-lower-bound.md",
+      "location": "Statement; F3; Proof 4.1",
+      "snippet": "Apply [F3] to these $p+1$ targets, with the base sample law as reference.",
+      "affected_use": "Fano for p+1 covariance targets in the operator-norm metric, sample laws P_j tensor n and base reference P_0 tensor n. Proof 2.2 verifies metric Borel compatibility; 2.1 bounds average reference KL by log(p+1)/16.",
+      "disposition": "unaffected",
+      "reason": "The Statement begins Assume AC, as inherited through thm-fano-packing; metric separation and Borel actions remain valid.",
+      "invalidated_claim": "No mathematical conclusion is invalidated under the recorded inherited AC convention.",
+      "minimality": "No repair: explicit AC and all reference-KL and action-space conditions remain satisfied.",
+      "route": "none",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-clean-block-sparse-gaussian-covariance-minimax-lower-bound",
+      "supplier": "thm-fano-packing",
+      "path": "items/lem-clean-block-sparse-gaussian-covariance-minimax-lower-bound.md",
+      "location": "F4; Proof 2.1 and 5.1",
+      "snippet": "The Fano factor obeys",
+      "affected_use": "Fano on a finite discrete classifier action space at the diagonal packing (2.1) and block packing (5.1), with reference Q_0 tensor n and KL at most (1/10) log N. With discrete separation 1, squared risk is classification error, so bracket >1/4 yields error >1/16.",
+      "disposition": "unaffected",
+      "reason": "The existing axiom_use and def-axiom-of-choice dependency already carry AC; finite nearest-covariance classifiers are Borel by F7. The implication to operator-error tails uses the half-separation triangle inequality.",
+      "invalidated_claim": "No mathematical conclusion is invalidated under the recorded inherited AC convention.",
+      "minimality": "No repair: the explicit inherited AC convention and finite classifier Fano applications remain sound.",
+      "route": "none",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-clean-dense-gaussian-covariance-minimax-lower-bound",
+      "supplier": "thm-fano-packing",
+      "path": "items/lem-clean-dense-gaussian-covariance-minimax-lower-bound.md",
+      "location": "F5; Proof 4.1",
+      "snippet": "Thus every classifier of the uniform index has error probability greater than $1/8$.",
+      "affected_use": "Fano for the uniform sign-matrix code as a finite discrete classifier experiment, with base reference Q_0 tensor n and KL at most (1/10) log|W|. The bracket exceeds 1/2, giving discrete squared risk/error >1/8.",
+      "disposition": "unaffected",
+      "reason": "The existing axiom_use and def-axiom-of-choice dependency already carry AC. F10 gives Borel nearest-code classifier kernels; errors force operator distance at least a/4.",
+      "invalidated_claim": "No mathematical conclusion is invalidated under the recorded inherited AC convention.",
+      "minimality": "No repair: AC, finite metric-Borel classifier actions and directional reference KL remain available.",
+      "route": "none",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/mathematical-statistics/minimax-lower-bounds-and-information-theoretic-methods.md",
+      "affected_use": "Page items lists thm-fano-packing; prose already states AC at Radon\u2013Nikodym and Gaussian construction steps.",
+      "disposition": "unaffected",
+      "reason": "Making the existing AC assumption explicit in the theorem agrees with the owning page convention."
+    }
+  ]
+}

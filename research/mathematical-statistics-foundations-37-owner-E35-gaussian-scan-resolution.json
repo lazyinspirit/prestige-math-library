@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "run": "mathematical-statistics-foundations-37",
+  "escalation": "E35",
+  "batch": "18",
+  "reviewer": "msf_gaussian_scan_resolution",
+  "decision": "resolved",
+  "basis": "Actual current source and native review-0/repair-1 read; no native report or run state modified.",
+  "native_reports": [
+    "research/mathematical-statistics-foundations-37-scope-review/batch-18/review-0.json",
+    "research/mathematical-statistics-foundations-37-scope-review/batch-18/repair-1.json"
+  ],
+  "diagnosis": {
+    "omitted_consumers": [
+      "alg-bic-penalized-least-squares",
+      "alg-constrained-l0-least-squares"
+    ],
+    "explanation": "Only the two risk theorem Statements differ from native before_interfaces. Native consumer traversal includes justified_by edges, so both algorithm consumers were required but omitted by repair-1.",
+    "gaussian_supplier_cycle": "Absent on actual disk: def-multivariate-normal-law deps do not include the multivariate characteristic-function lemma. No published supplier edit was needed.",
+    "smallest_missing_prerequisite": "thm-orthogonal-projection-is-the-unique-nearest-point supplies the residual comparison for the sparse true-support candidate."
+  },
+  "source_changes": [
+    {
+      "path": "items/thm-sparse-subset-risk-upper-bound.md",
+      "correction": "Added nearest-point supplier deps and F10; replaced false assertion that true mean is a candidate fitted vector by true-support projection candidate and nearest-point comparison in 1.2; made its use explicit in 2.1. Statement preserved."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-bic-penalized-least-squares",
+      "decision": "accept",
+      "reason": "Its justified_by theorem now explicitly proves termination, minimization and earliest-tie selection for every admissible input. Its Definition remains the same finite ordered strict-update scan; no consumer change needed."
+    },
+    {
+      "id": "alg-constrained-l0-least-squares",
+      "decision": "accept",
+      "reason": "Its justified_by theorem explicitly proves termination, minimization and earliest-tie selection for every admissible input, including s=0. Its Definition remains the same finite ordered strict-update scan; no consumer change needed."
+    },
+    {
+      "id": "cor-matching-minimax-rate",
+      "decision": "accept",
+      "reason": "Read entire corollary. Upper bound uses the preserved sparse risk bound at n=d, X=sqrt(n)I and 1<=s<=n/2. F4 now cites Gaussian characteristic-function uniqueness, identifying the independent standard-normal realization with the stated law; affine coordinate transforms give independent N(theta_j,sigma^2/n). Risk scaling and Borel estimator transformation are valid."
+    },
+    {
+      "id": "ex-orthogonal-sequence-sparse-regression",
+      "decision": "accept",
+      "reason": "Read entire example. Sparse theorem now separately supplies finite-scan minimization; its dependency is already declared. The three candidates yield residual minimizer with squared fitted norm max(epsilon_1^2,epsilon_2^2), even ties and all-zero input. Expected-error calculation and theorem specialization are valid."
+    },
+    {
+      "id": "thm-bic-fitted-risk-bound",
+      "decision": "accept",
+      "reason": "Read entire theorem. Finite scan invariant proves earliest minimizer; nearest-point comparison is explicitly supplied. Subsequent risk argument and zero-proxy branch use that invariant consistently."
+    },
+    {
+      "id": "thm-sparse-subset-risk-upper-bound",
+      "decision": "accept",
+      "reason": "Read entire theorem after focused repair. Finite scan invariant proves earliest minimizer independently of risk hypotheses. Correct true-support projection comparison now yields the basic inequality; subsequent 2s-support union bound, high-probability and expected bounds remain supported."
+    },
+    {
+      "id": "decision-theoretic-upper-bounds-and-oracle-risk",
+      "decision": "accept",
+      "reason": "Read entire page; preserved fixed-design, fitted-value, nonempty BIC support and Gaussian-submodel summaries agree with repaired theorems."
+    },
+    {
+      "id": "decision-theoretic-upper-bounds-and-oracle-risk-examples",
+      "decision": "accept",
+      "reason": "Read entire companion; sparse example behavior and noise/design qualifications remain consistent."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-sparse-subset-risk-upper-bound.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects"
+    }
+  ],
+  "remaining_obligations": [
+    "Root must project added sparse theorem dependency into current manifest and recertify native carriers before acceptance. No native acceptance, hashes, contracts or gates performed."
+  ]
+}

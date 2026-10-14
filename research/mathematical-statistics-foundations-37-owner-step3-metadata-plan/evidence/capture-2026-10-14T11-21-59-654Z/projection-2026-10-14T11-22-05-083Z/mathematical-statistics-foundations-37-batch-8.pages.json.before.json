@@ -1,0 +1,540 @@
+[
+  {
+    "order": 1858,
+    "id": "finite-sample-tests-neyman-pearson-and-valid-p-values",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Tests, Neyman–Pearson and Valid P-values",
+    "companion": "finite-sample-tests-neyman-pearson-and-valid-p-values-examples",
+    "requires": [
+      "estimators-and-randomized-procedures",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "losses-risk-and-decision-rules"
+    ],
+    "items": [
+      {
+        "id": "lem-integrable-signed-function-integration-against-density",
+        "kind": "lemma",
+        "title": "Bounded signed integrals obey the density formula",
+        "statement": "Let $\\mu$ be a positive measure, let $p:X\\to[0,\\infty)$ be finite-valued\nand measurable, and suppose $P(A)=\\int_Ap\\,d\\mu$ is a probability measure.\nIf $f:X\\to\\mathbb R$ is measurable and $|f|\\le M$ for some finite\n$M\\ge0$, then $f$ is integrable under $P$, $fp$ is integrable under $\\mu$,\nand\n$$\\int_X f\\,dP=\\int_X fp\\,d\\mu.$$",
+        "deps": [
+          "def-measure-with-density",
+          "thm-integration-against-a-density",
+          "def-probability-measure",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "strategy": "Apply the nonnegative density formula to positive and negative parts and subtract their finite integrals.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald B. Folland, Real Analysis, 2nd ed., §§2.2–2.3, PDF pp. 49–54",
+              "url": "https://djvu.online/file/NPF4BEtSuqdFA"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-likelihood-ratio-threshold-exists",
+        "kind": "lemma",
+        "title": "A likelihood-ratio threshold with boundary randomization exists",
+        "statement": "Let $Q$ be a probability measure on $(X,\\mathcal A)$, and let\n$T:X\\to[0,\\infty)$ be a finite-valued measurable function. For every\n$\\alpha\\in(0,1]$, there exist $c\\in[0,\\infty)$ and\n$\\gamma\\in[0,1]$ such that\n$$Q(T>c)+\\gamma Q(T=c)=\\alpha.$$",
+        "deps": [
+          "def-measurable-function-between-measurable-spaces",
+          "def-probability-measure",
+          "prop-measure-monotonicity",
+          "thm-continuity-from-below-for-measures",
+          "thm-continuity-from-above-for-measures",
+          "def-infimum",
+          "thm-infimum-property",
+          "cor-archimedean-reciprocal"
+        ],
+        "strategy": "Use the upper-tail distribution q(t)=Q(T>t). Continuity from above makes the threshold set nonempty; its infimum gives Q(T>c)≤α≤Q(T≥c). Randomize at the boundary atom, and use γ=0 when the atom is absent.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 13, §§13.1.1–13.1.2, PDF pp. 76–77",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, USC STAT 713 Lecture 11: Neyman–Pearson and Karlin–Rubin, PDF pp. 7–9",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_11_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-common-support-likelihood-ratio-is-measurable",
+        "kind": "lemma",
+        "title": "The common-support likelihood ratio is measurable",
+        "statement": "Let $p_0,p_1:X\\to[0,\\infty)$ be finite-valued measurable functions on a\nmeasurable space $(X,\\mathcal A)$. Define\n$$R(x)=\\begin{cases}p_1(x)/p_0(x),&p_0(x)>0,\\\\0,&p_0(x)=0.\\end{cases}$$\nThen $R$ is finite-valued, nonnegative, and measurable.",
+        "deps": [
+          "def-likelihood-density",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "strategy": "Define a truncated reciprocal using measurable superlevel sets, then multiply by the alternative density.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 13, §13.1.2, PDF p. 77",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Anna Mikusheva, MIT 14.381 Lecture 9: Uniformly Most Powerful Tests, PDF pp. 2–3",
+              "url": "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/0427ff2a36e01927fa4b692a6d60a81a_MIT14_381F18_lec9.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-p-value",
+        "kind": "definition",
+        "title": "Valid p-values",
+        "statement": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+        "deps": [
+          "def-statistical-experiment",
+          "def-statistic-and-estimator",
+          "def-measurable-function-between-measurable-spaces",
+          "def-probability-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl B. Gregory, USC STAT 713 Lecture 10: Tests of Hypotheses, Size, Power, and p-values, PDF pp. 17–20",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_10_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-measurable-rejection-function-defines-randomized-test",
+        "kind": "lemma",
+        "title": "Every measurable rejection function defines a randomized test",
+        "statement": "Let $\\mathsf E=((X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment ([[def-statistical-experiment]]) and let\n$\\varphi:X\\to[0,1]$ be measurable, where $[0,1]$ has its Borel sigma-algebra.\nOn the binary action space $\\{0,1\\}$ with its full sigma-algebra, define\n$$K(x,B)=\\varphi(x)\\mathbf 1_B(1)+(1-\\varphi(x))\\mathbf 1_B(0)\\qquad (B\\subseteq\\{0,1\\}).$$\nThen $K$ is a probability kernel and hence a randomized procedure; its\nrandomized-test function under the convention $1=\\mathrm{reject}$ is\n$\\varphi$.",
+        "deps": [
+          "def-statistical-experiment",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure-kernel-and-probability-kernel",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-randomized-test",
+          "def-sigma-algebra",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral"
+        ],
+        "strategy": "Assign the action probabilities φ(x) and 1−φ(x) to the two singleton actions. Check that each section is a probability measure on the finite action space and that its four evaluations are measurable.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.1, PDF pp. 100–102",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§2–4.2, PDF pp. 2–8",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-test-zero-one-loss-risk-identities",
+        "kind": "lemma",
+        "title": "Binary zero-one loss risks are the testing error probabilities",
+        "statement": "Let $\\Theta_0,\\Theta_1$ be disjoint subsets of a parameter set $\\Theta$ in\na statistical experiment. Let $K$ be a randomized test on the binary action\nspace $\\{0,1\\}$, with $1$ meaning reject, and write\n$\\varphi(x)=K(x,\\{1\\})$. Define the zero-one error loss by\n$$L(\\theta,a)=\\mathbf 1_{\\Theta_0}(\\theta)a+\\mathbf 1_{\\Theta_1}(\\theta)(1-a),$$\nso $L$ is zero when $\\theta\\notin\\Theta_0\\cup\\Theta_1$. For\n$\\beta_\\varphi(\\theta)=E_\\theta[\\varphi(X)]$ and the risk\n$R(\\theta,K)$ of [[def-loss-function-and-risk]],\n$$R(\\theta,K)=\\beta_\\varphi(\\theta)\\quad(\\theta\\in\\Theta_0),\\qquad R(\\theta,K)=1-\\beta_\\varphi(\\theta)\\quad(\\theta\\in\\Theta_1).$$",
+        "deps": [
+          "def-statistical-experiment",
+          "def-randomized-test",
+          "def-loss-function-and-risk",
+          "def-probability-measure",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "strategy": "Evaluate the finite action integral at each data point, then integrate it under the parameter law.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.1, PDF pp. 100–102",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4.1–4.2, PDF pp. 7–8",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-test-size-and-power",
+        "kind": "definition",
+        "title": "Test size and power",
+        "statement": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$, and $\\mathbb R$ has the least-upper-bound property\n([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+        "deps": [
+          "def-statistical-experiment",
+          "def-randomized-test",
+          "def-loss-function-and-risk",
+          "lem-test-zero-one-loss-risk-identities",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-probability-measure",
+          "def-complete-ordered-field"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 13, §§13.1.1–13.1.2, PDF pp. 76–77",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, USC STAT 713 Lecture 10: Tests of Hypotheses, Size, Power, and p-values, PDF pp. 2–7",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_10_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "def-likelihood-ratio-test-with-boundary-randomization",
+        "kind": "definition",
+        "title": "Likelihood-ratio tests with boundary randomization",
+        "statement": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\{0,1\\},(P_0,P_1))$ be the\ntwo-law statistical experiment ([[def-statistical-experiment]]). Assume\n$P_0,P_1$ are both absolutely continuous with respect to a supplied\nsigma-finite measure $\\mu$ on $(\\mathcal X,\\mathcal A)$\n([[def-dominated-statistical-experiment]]) and specify finite-valued,\nnonnegative measurable RN density representatives $p_0=dP_0/d\\mu$ and\n$p_1=dP_1/d\\mu$ ([[def-likelihood-density]]). Under the Axiom of Choice\n([[def-axiom-of-choice]]),\n[[def-likelihood-density]] supplies such representatives for arbitrary\ndominated laws. If the representatives are given as part of the setup, the\nconstruction below requires no choice.\n\nDefine the common-support likelihood ratio\n$$R(x)=\\begin{cases}p_1(x)/p_0(x),&p_0(x)>0,\\\\0,&p_0(x)=0.\\end{cases}$$\nThe result [[lem-common-support-likelihood-ratio-is-measurable]] shows that\n$R$ is finite-valued, nonnegative, and measurable. The set\n$\\{p_0=0<p_1\\}$ is kept separate from the ratio region.\n\nFor $\\alpha=0$, define the rejection function\n$$\\varphi^*_0(x)=\\mathbf 1_{\\{p_0=0<p_1\\}}(x).$$\nFor $0<\\alpha\\le1$, choose $c\\ge0$ and $\\gamma\\in[0,1]$ satisfying\n$$P_0(R>c)+\\gamma P_0(R=c)=\\alpha,$$\nwhose existence follows from\n[[lem-likelihood-ratio-threshold-exists]] applied to $Q=P_0$ and $T=R$.\nDefine\n$$\n\\varphi^*_\\alpha(x)=\\begin{cases}1,&p_0(x)=0<p_1(x),\\\\1,&p_0(x)>0\\text{ and }R(x)>c,\\\\\\gamma,&p_0(x)>0\\text{ and }R(x)=c,\\\\0,&\\text{otherwise}.\\end{cases}\n$$\nThis specifies the candidate likelihood-ratio rejection function.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-statistical-experiment",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-randomized-test",
+          "def-test-size-and-power",
+          "lem-likelihood-ratio-threshold-exists",
+          "lem-common-support-likelihood-ratio-is-measurable"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 13, §13.1.2, PDF p. 77",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Anna Mikusheva, MIT 14.381 Lecture 9: Uniformly Most Powerful Tests, PDF pp. 2–3",
+              "url": "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/0427ff2a36e01927fa4b692a6d60a81a_MIT14_381F18_lec9.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, USC STAT 713 Lecture 11: Neyman–Pearson and Karlin–Rubin, PDF pp. 7–9",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_11_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-p-value-superuniformity",
+        "kind": "theorem",
+        "title": "Valid p-values yield level tests for nonempty disjoint alternatives",
+        "statement": "Let $p$ be a valid p-value for a nonempty null hypothesis $\\Theta_0$ in a\nstatistical experiment. For every $\\alpha\\in[0,1]$, the deterministic test\nwith rejection function\n$$\\varphi_\\alpha(x)=\\mathbf 1_{\\{p(x)\\le\\alpha\\}}$$\nhas size at most $\\alpha$, and therefore has level $\\alpha$.",
+        "deps": [
+          "def-p-value",
+          "def-test-size-and-power",
+          "def-randomized-test",
+          "def-measurable-function-between-measurable-spaces",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-of-an-indicator-is-probability",
+          "def-probability-measure",
+          "lem-measurable-rejection-function-defines-randomized-test"
+        ],
+        "strategy": "Use measurability of the sublevel set and identify the rejection probability under each null parameter with the p-value tail probability.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karl B. Gregory, USC STAT 713 Lecture 10: Tests of Hypotheses, Size, Power, and p-values, PDF pp. 17–20",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_10_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-likelihood-ratio-test-is-measurable-and-exact-size",
+        "kind": "lemma",
+        "title": "The likelihood-ratio rule is a measurable test of exact size",
+        "statement": "In the setup of [[def-likelihood-ratio-test-with-boundary-randomization]],\nfor every $\\alpha\\in[0,1]$ the candidate rejection function\n$\\varphi^*_\\alpha$ is measurable into $[0,1]$, defines a randomized test,\nand has size exactly $\\alpha$ for the simple null $P_0$.",
+        "deps": [
+          "def-likelihood-ratio-test-with-boundary-randomization",
+          "def-likelihood-density",
+          "def-radon-nikodym-derivative",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "lem-common-support-likelihood-ratio-is-measurable",
+          "lem-measurable-rejection-function-defines-randomized-test",
+          "def-measurable-function-between-measurable-spaces",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "prop-measure-monotonicity",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-test-size-and-power",
+          "def-probability-measure"
+        ],
+        "strategy": "Show the candidate is a finite sum of measurable indicators and compute its null expectation from the threshold equation.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 13, §13.1.2, PDF p. 77",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Anna Mikusheva, MIT 14.381 Lecture 9: Uniformly Most Powerful Tests, PDF pp. 2–3",
+              "url": "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/0427ff2a36e01927fa4b692a6d60a81a_MIT14_381F18_lec9.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-neyman-pearson-lemma",
+        "kind": "theorem",
+        "title": "Neyman–Pearson lemma with singular alternative mass",
+        "statement": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\{0,1\\},(P_0,P_1))$ be the\ntwo-law experiment with simple null $P_0$ and simple alternative $P_1$.\nAssume both laws are dominated by a common sigma-finite measure $\\mu$ and\nassume the Axiom of Choice, so finite nonnegative density representatives\n$p_0,p_1$ are supplied by [[def-likelihood-density]]. For every\n$\\alpha\\in[0,1]$, let $\\varphi_\\alpha^*$ be the likelihood-ratio test with\nboundary randomization from\n[[def-likelihood-ratio-test-with-boundary-randomization]]. Then every\nrandomized test $\\varphi$ satisfying\n$E_{P_0}[\\varphi(X)]\\le\\alpha$ also satisfies\n$$E_{P_1}[\\varphi(X)]\\le E_{P_1}[\\varphi_\\alpha^*(X)].$$\nNo absolute-continuity assumption $P_1\\ll P_0$ is imposed; the test rejects\non $\\{p_0=0<p_1\\}$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-statistical-experiment",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-randomized-test",
+          "def-test-size-and-power",
+          "def-likelihood-ratio-test-with-boundary-randomization",
+          "lem-likelihood-ratio-test-is-measurable-and-exact-size",
+          "lem-likelihood-ratio-threshold-exists",
+          "lem-integrable-signed-function-integration-against-density",
+          "def-measure",
+          "def-probability-measure",
+          "prop-measure-monotonicity",
+          "def-measure-with-density",
+          "thm-integration-against-a-density",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-measurable-function-between-measurable-spaces",
+          "def-sigma-algebra",
+          "thm-well-ordering-principle",
+          "cor-archimedean-reciprocal"
+        ],
+        "strategy": "On the common-density support, the sign of (φ*−φ)(p1−cp0) is nonnegative. The P0-null set {p0=0<p1} contributes nonnegative power separately. Integrate and use exact size α; handle α=0 by showing a level-zero competitor vanishes P1-a.e. on {p0>0}.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 13, §13.1.2, PDF p. 77",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Anna Mikusheva, MIT 14.381 Lecture 9: Uniformly Most Powerful Tests, PDF pp. 2–3",
+              "url": "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/0427ff2a36e01927fa4b692a6d60a81a_MIT14_381F18_lec9.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, USC STAT 713 Lecture 11: Neyman–Pearson and Karlin–Rubin, PDF pp. 7–9",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_11_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 1859,
+    "id": "finite-sample-tests-neyman-pearson-and-valid-p-values-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Tests, Neyman–Pearson and Valid P-values — Examples",
+    "companion": "finite-sample-tests-neyman-pearson-and-valid-p-values",
+    "requires": [
+      "finite-sample-tests-neyman-pearson-and-valid-p-values"
+    ],
+    "items": [
+      {
+        "id": "cex-uniform-null-p-value-is-anti-conservative",
+        "kind": "counterexample",
+        "title": "A measurable [0,1]-valued statistic need not be a valid p-value",
+        "statement": "Every measurable statistic $p:\\mathcal X\\to[0,1]$ is a valid p-value for a\ngiven null hypothesis.",
+        "deps": [
+          "def-statistical-experiment",
+          "def-p-value",
+          "def-test-size-and-power",
+          "def-measurable-function-between-measurable-spaces",
+          "def-probability-measure",
+          "cor-expectation-of-an-indicator-is-probability",
+          "lem-measurable-rejection-function-defines-randomized-test"
+        ],
+        "strategy": "Use a two-point null law and a statistic that is zero on an event of probability one half. Its rejection probability at α=1/4 is one half.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": []
+        }
+      },
+      {
+        "id": "ex-discrete-neyman-pearson-randomized-boundary",
+        "kind": "example",
+        "title": "Randomize at a discrete likelihood-ratio boundary",
+        "statement": "On $\\mathcal X=\\{0,1\\}$ with its full sigma-algebra and counting measure\n$\\mu$, let the simple null and alternative laws be\n$P_0(\\{0\\})=P_0(\\{1\\})=1/2$ and\n$P_1(\\{0\\})=1/4$, $P_1(\\{1\\})=3/4$. At level $\\alpha=1/4$, the\nNeyman–Pearson test randomizes with probability $1/2$ at $x=1$ and rejects\nwith probability $0$ at $x=0$. Its size is $1/4$ and its power is $3/8$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-statistical-experiment",
+          "def-likelihood-ratio-test-with-boundary-randomization",
+          "lem-likelihood-ratio-test-is-measurable-and-exact-size",
+          "def-test-size-and-power",
+          "thm-neyman-pearson-lemma",
+          "def-counting-measure",
+          "prop-counting-measure-is-a-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-measurable-function-between-measurable-spaces",
+          "def-probability-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral"
+        ],
+        "strategy": "Compute the two likelihood ratios, solve the boundary equation, and integrate the rejection function under P0 and P1.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": []
+        }
+      },
+      {
+        "id": "ex-continuous-neyman-pearson-likelihood-ratio-test",
+        "kind": "example",
+        "title": "A continuous likelihood-ratio test",
+        "statement": "On $[0,1]$ with restricted Lebesgue measure, let $P_0$ have density\n$p_0(x)=1$ and let $P_1$ have density $p_1(x)=2x$. At level\n$\\alpha=1/4$, the likelihood-ratio test rejects for $x>3/4$, has size\n$1/4$, and has power $7/16$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-statistical-experiment",
+          "def-likelihood-ratio-test-with-boundary-randomization",
+          "lem-likelihood-ratio-test-is-measurable-and-exact-size",
+          "def-test-size-and-power",
+          "thm-neyman-pearson-lemma",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-measure-with-density",
+          "thm-integration-against-a-density",
+          "def-probability-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-measurable-function-between-measurable-spaces",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "def-darboux-integral",
+          "thm-darboux-equals-riemann",
+          "def-darboux-sums",
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-induction-principle",
+          "def-canonical-natural",
+          "cor-archimedean-reciprocal",
+          "cor-expectation-of-an-indicator-is-probability",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral"
+        ],
+        "strategy": "Verify both densities, calculate p1/p0=2x, and integrate over the upper-tail rejection region.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": []
+        }
+      }
+    ]
+  }
+]

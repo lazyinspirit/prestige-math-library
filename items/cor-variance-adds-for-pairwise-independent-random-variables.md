@@ -7,14 +7,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-expectation-of-products-of-independent-random-variables, thm-variance-of-a-finite-sum]
+deps: [thm-expectation-of-products-of-independent-random-variables, lem-variance-and-covariance-identities-for-random-variables]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-13
+  repair: research/mathematical-statistics-foundations-37-owner-e28-cor-variance-adds-for-pairwise-independent-random-variables-repair.json
 sources:
   scraped: []
   references:
@@ -27,22 +26,22 @@ pipeline_run: null
 
 ## Statement
 
-If $(X_i)_{i\in I}$ is a finite pairwise-independent family, then
+If $(X_i)_{i\in I}$ is a finite pairwise-independent family of square-integrable real random variables on a common probability space, then
 $$\operatorname{Var}\!\left(\sum_{i\in I}X_i\right)=\sum_{i\in I}\operatorname{Var}(X_i).$$
-Pairwise independence, rather than mutual independence, is sufficient.
+Pairwise independence, rather than mutual independence, is sufficient. In particular, the original finite-probability-space case is included, with pairwise atom independence as in the finite-valued convention. The empty sum has variance zero.
 
 ## Facts & Assumptions
 
-**Given:** A finite pairwise-independent family $(X_i)_{i\in I}$.
+**Given:** A finite pairwise-independent family $(X_i)_{i\in I}$ of square-integrable real random variables on one probability space.
 
-[L1] For two independent random variables, expectation of their product is the product of their expectations ([[thm-expectation-of-products-of-independent-random-variables]]).
+[L1] Expectations of products of independent integrable real random variables factor; the finite-valued atom-independence convention is included. ([[thm-expectation-of-products-of-independent-random-variables]])
 
-[L2] Variance of a finite sum is the sum of variances and twice all pairwise covariances ([[thm-variance-of-a-finite-sum]]).
+[L2] For square-integrable real random variables, covariance equals $\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]$, is symmetric and bilinear on finite linear combinations, and variance equals the self-covariance. These identities agree with the original finite-space definitions. ([[lem-variance-and-covariance-identities-for-random-variables]])
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For distinct $i,j$, pairwise independence and [L1] give $\mathbb E[X_iX_j]=\mathbb E[X_i]\mathbb E[X_j]$, so $\operatorname{Cov}(X_i,X_j)=0$. [L1, algebra]
+1.1 Each $X_i$ is integrable because $2|X_i|\le1+X_i^2$ and the measure has total mass one. For distinct $i,j$, pairwise independence and [L1] give $\mathbb E[X_iX_j]=\mathbb E[X_i]\mathbb E[X_j]$, so [L2] gives $\operatorname{Cov}(X_i,X_j)=0$. [given, L1, L2, algebra]
 
-2.1 Substitute step 1.1 into [L2]; every off-diagonal term vanishes, leaving the displayed formula. The empty and singleton cases are included. [step 1.1, L2, algebra] ∎
+2.1 The finite sum $S=\sum_{i\in I}X_i$ is square-integrable: repeated use of $(a+b)^2\le2a^2+2b^2$ gives an integrable bound for $S^2$. By [L2], $$\operatorname{Var}(S)=\operatorname{Cov}(S,S)=\sum_{i,j\in I}\operatorname{Cov}(X_i,X_j)=\sum_{i\in I}\operatorname{Var}(X_i),$$ where step 1.1 removes all off-diagonal terms. The empty sum is the constant zero, and the singleton case is the identity. [step 1.1, L2, algebra] ∎

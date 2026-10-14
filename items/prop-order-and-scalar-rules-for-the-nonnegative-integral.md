@@ -10,8 +10,8 @@ provenance:
 deps: [def-nonnegative-lebesgue-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-basic-properties-of-the-nonnegative-simple-integral]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
+  repair: research/mathematical-statistics-foundations-37-owner-s4-published-prop-order-and-scalar-rules-for-the-nonnegative-integral-repair.json
 sources:
   scraped: []
   references:
@@ -21,7 +21,7 @@ sources:
 
 ## Statement
 
-Let $f,g:X\to[0,+\infty]$ be measurable and let $c\ge0$.
+Let $(X,\mathcal A,\mu)$ be an arbitrary measure space. Let $f,g:X\to[0,+\infty]$ be measurable and let $c\ge0$.
 
 1. If $f\le g$, then $\int f\,d\mu\le\int g\,d\mu$.
 2. If $c>0$, then $\int cf\,d\mu=c\int f\,d\mu$. For $c=0$,
@@ -30,7 +30,7 @@ Let $f,g:X\to[0,+\infty]$ be measurable and let $c\ge0$.
 
 ## Facts & Assumptions
 
-**Given:** Nonnegative measurable functions $f,g$ and a scalar $c\ge0$.
+**Given:** An arbitrary measure space $(X,\mathcal A,\mu)$; nonnegative measurable functions $f,g$ and a scalar $c\ge0$.
 
 [L1] The nonnegative integral is the supremum of simple minorants ([[def-nonnegative-lebesgue-integral]]).
 

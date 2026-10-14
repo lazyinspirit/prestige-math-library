@@ -1,0 +1,476 @@
+[
+  {
+    "order": 1892,
+    "id": "nonparametric-density-estimation-and-kernels",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Density Estimation",
+    "companion": "nonparametric-density-estimation-and-kernels-examples",
+    "requires": [
+      "statistical-experiments-models-and-identifiability",
+      "estimators-and-randomized-procedures",
+      "probability-spaces-random-variables-and-expectation",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "weak-derivatives-and-sobolev-spaces",
+      "smooth-approximation-and-sobolev-extension"
+    ],
+    "items": [
+      {
+        "id": "def-density-target-and-kernel-density-estimator",
+        "kind": "definition",
+        "title": "Density targets and the kernel density estimator",
+        "statement": "For a Borel probability density version f on R^d and iid X_1,...,X_n with law f dλ_d, define the pointwise target ψ_x(f)=f(x) and, for a Borel K∈L^1(R^d) with ∫K=1 and h>0, the indexed estimator fhat_h(x)=(nh^d)^−1 Σ_i K((x−X_i)/h). Pointwise targets depend on the selected density version; no law-identifiability is asserted without regularity.",
+        "deps": [
+          "def-statistical-experiment",
+          "def-parametric-statistical-model",
+          "def-estimand-on-a-statistical-model",
+          "def-statistic-and-estimator",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-measure-with-density",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 1–3",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2, PDF pp. 6–7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-kde-evaluation-is-a-measurable-statistic",
+        "kind": "lemma",
+        "title": "Each fixed-point KDE evaluation is a statistic",
+        "statement": "For fixed x∈R^d, a Borel kernel K, h>0 and n≥1, the map from the Borel sample space (R^d)^n to R given by (z_1,...,z_n)↦(nh^d)^−1 Σ_i K((x−z_i)/h) is Borel measurable.",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "def-statistic-and-estimator",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 1–3",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2, PDF pp. 6–7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-kde-jointly-measurable-in-sample-and-evaluation-point",
+        "kind": "lemma",
+        "title": "The KDE is jointly measurable in sample and evaluation point",
+        "statement": "For Borel K, the map ((z_1,...,z_n),x)↦(nh^d)^−1Σ_i K((x−z_i)/h) is Borel on (R^d)^n×R^d.",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 1–3",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2, PDF pp. 6–7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-nonnegative-kde-integrates-to-one",
+        "kind": "lemma",
+        "title": "A nonnegative normalized kernel estimate integrates to one",
+        "statement": "If K is pointwise nonnegative and has Lebesgue integral one, then for every finite sample and h>0 the kernel estimate is nonnegative and its integral over R^d equals one.",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 1–3",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2, PDF pp. 6–7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-c2-density-with-bounded-hessian-is-bounded",
+        "kind": "lemma",
+        "title": "An integrable C² density with bounded Hessian is bounded",
+        "statement": "If f:R^d→[0,∞) is twice continuously differentiable, ∫f dλ_d=1, and sup_x ||D²f(x)||_op<∞, then f is bounded on R^d.",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-countable-choice"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 2–3",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2, PDF pp. 6–7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-second-order-kernel-convolution-l2-bias-bound",
+        "kind": "lemma",
+        "title": "Second-order kernel convolution has an L² bias bound",
+        "statement": "Assume ACω, f∈W^{2,2}(R^d), K∈L^1(R^d), ∫K=1, ∫u_jK(u)du=0 for every j, and M₂(K)=∫|K(u)| ||u||²du<∞. Define S_hf=∫K(u)f(·−hu)du as an L² class. Then ||S_hf−f||_2≤(h²/2)M₂(K)||D²f||_{2,F}, where ||D²f||_{2,F}²=Σ_{j,k}||∂_{jk}f||_2².",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-holder-inequality-for-integrals",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part",
+          "def-countable-choice",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 2–7",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2, PDF pp. 6–7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-kde-pointwise-second-order-bias",
+        "kind": "theorem",
+        "title": "Pointwise second-order bias of the KDE",
+        "statement": "Assume ACω; X_1,...,X_n are iid with nonnegative Borel density version f on R^d; K:R^d→R is Borel, K∈L^1∩L^2, ∫K=1, ∫u_jK(u)du=0 and ∫|K(u)| ||u||²du<∞; f is C² with bounded continuous Hessian; x is fixed; and h↓0. With μ_jk=∫u_ju_kK(u)du, E[fhat_h(x)]−f(x)=(h²/2)Σ_{j,k}μ_jk ∂_{jk}f(x)+o(h²).",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "lem-kde-evaluation-is-a-measurable-statistic",
+          "lem-c2-density-with-bounded-hessian-is-bounded",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-change-of-variables-for-expectation",
+          "thm-integration-against-a-density",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part",
+          "def-countable-choice",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-dominated-convergence"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, Proposition 1, PDF p. 3",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2.1, PDF p. 7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-kde-pointwise-variance",
+        "kind": "theorem",
+        "title": "Pointwise variance of the KDE",
+        "statement": "Assume ACω; X_1,...,X_n are iid with bounded continuous density f on R^d; K:R^d→R is Borel with K∈L^1∩L^2 and ∫K=1; x is fixed; h↓0; and n h^d→∞. Then Var(fhat_h(x))=f(x)||K||_2²/(n h^d)+o((n h^d)^−1).",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "lem-kde-evaluation-is-a-measurable-statistic",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-moments-variance-and-covariance",
+          "thm-change-of-variables-for-expectation",
+          "thm-integration-against-a-density",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-dominated-convergence"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, Proposition 2, PDF p. 4",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2.1, PDF p. 7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-kde-global-mise-upper-rate",
+        "kind": "theorem",
+        "title": "Global MISE upper bound for the KDE",
+        "statement": "Assume ACω; iid observations with density f∈W^{2,2}(R^d); K∈L^1∩L^2, ∫K=1, zero first moments and M₂(K)<∞. For every h>0, MISE(fhat_h)=E∫(fhat_h−f)²dλ_d≤(h⁴/4)M₂(K)²||D²f||_{2,F}²+||K||_2²/(n h^d). Hence h_n=n^−1/(d+4) gives MISE=O(n^−4/(d+4)); this is an upper rate only.",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "lem-kde-jointly-measurable-in-sample-and-evaluation-point",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "lem-second-order-kernel-convolution-l2-bias-bound",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-moments-variance-and-covariance",
+          "thm-change-of-variables-for-expectation",
+          "thm-integration-against-a-density",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-countable-choice",
+          "def-product-measure-on-sigma-finite-spaces",
+          "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, integrated MSE calculation and multivariate rate, PDF pp. 5–7",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2.1, PDF p. 7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 1893,
+    "id": "nonparametric-density-estimation-and-kernels-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Density Estimation — Examples",
+    "companion": "nonparametric-density-estimation-and-kernels",
+    "requires": [
+      "nonparametric-density-estimation-and-kernels"
+    ],
+    "items": [
+      {
+        "id": "ex-gaussian-kernel-pointwise-bias-variance",
+        "kind": "example",
+        "title": "Gaussian-kernel moments and pointwise constants",
+        "statement": "For the d-dimensional standard Gaussian kernel, μ_jk=δ_jk and ||K||_2²=(4π)^−d/2, so the pointwise bias and variance leading constants reduce to h²Δf(x)/2 and f(x)(4π)^−d/2/(n h^d).",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "lem-nonnegative-kde-integrates-to-one",
+          "thm-kde-pointwise-second-order-bias",
+          "thm-kde-pointwise-variance",
+          "lem-plane-gaussian-integral-in-polar-coordinates",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-chain-rule",
+          "thm-derivative-of-exponential",
+          "thm-exponential-beats-every-polynomial",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part",
+          "thm-monotone-convergence-for-the-integral",
+          "def-countable-choice"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 2–4",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels, Advanced Topics in Statistical Learning, Spring 2024, §3, PDF p. 4",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-finite-bandwidth-kde-smoothing",
+        "kind": "example",
+        "title": "Finite-bandwidth Gaussian smoothing",
+        "statement": "If f is N_d(0,τ²I_d) and K is the standard Gaussian kernel, then E[fhat_h] is N_d(0,(τ²+h²)I_d); at every fixed h>0 this differs from f.",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "lem-kde-evaluation-is-a-measurable-statistic",
+          "thm-change-of-variables-for-expectation",
+          "thm-integration-against-a-density",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "lem-plane-gaussian-integral-in-polar-coordinates",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 2–3",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Adrian Bowman and Ludger Evers, Nonparametric Smoothing, APTS 2013–14 course notes, §1.2.1, PDF pp. 6–7",
+              "url": "https://warwick.ac.uk/fac/sci/statistics/apts/students/resources-1314/ns_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-kde-boundary-bias",
+        "kind": "example",
+        "title": "Gaussian KDE boundary bias for a uniform density",
+        "statement": "For the chosen density version f=1_[0,1], a standard Gaussian kernel and x=0, E[fhat_h(0)]→1/2 while f(0)=1 as h↓0, so the uncorrected estimator has nonvanishing boundary bias.",
+        "deps": [
+          "def-density-target-and-kernel-density-estimator",
+          "lem-kde-evaluation-is-a-measurable-statistic",
+          "thm-change-of-variables-for-expectation",
+          "thm-integration-against-a-density",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "lem-plane-gaussian-integral-in-polar-coordinates",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-countable-choice"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OpenCourseWare 14.385, Fall 2007, PDF pp. 2–3",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels, Advanced Topics in Statistical Learning, Spring 2024, §3.1, PDF pp. 5–7",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  }
+]

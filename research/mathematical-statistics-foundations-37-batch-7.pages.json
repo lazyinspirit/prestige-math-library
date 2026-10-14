@@ -1,0 +1,328 @@
+[
+  {
+    "order": 1856,
+    "id": "fisher-information-and-finite-sample-information-bounds",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Scores and Information Bounds",
+    "companion": "fisher-information-and-finite-sample-information-bounds-examples",
+    "requires": [
+      "dominated-experiments-likelihood-and-sufficiency",
+      "finite-sample-point-estimation-and-unbiased-optimality",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "inner-product-spaces-and-orthogonality"
+    ],
+    "items": [
+      {
+        "id": "def-score-and-fisher-information",
+        "kind": "definition",
+        "title": "Score and Fisher information",
+        "statement": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment dominated by a fixed sigma-finite positive measure\n$\\mu$, and let $p_\\theta$ be selected finite-valued measurable\nRadon–Nikodym density representatives as in\n[[def-likelihood-density]]. The simultaneous selection of this arbitrary-index\nfamily uses the Axiom of Choice. No measurability of $\\theta\\mapsto P_\\theta$\nor common exceptional null set for an arbitrary uncountable $\\Theta$ is\nimplied.\n\nLet $\\Theta$ be open in $\\mathbb R^d$, and fix a parameter $\\theta$ at\nwhich the selected family $\\eta\\mapsto p_\\eta(x)$ is differentiable for\n$\\mu$-almost every $x$, with measurable coordinate derivatives. On\n$\\{x:p_\\theta(x)>0\\}$, define the log-likelihood\n$\\ell_\\theta(x)=\\log p_\\theta(x)$ and the **score**\n$$S_\\theta(x):=\\nabla_\\theta\\ell_\\theta(x) =\\left(\\frac{\\partial}{\\partial\\theta_j}\\log p_\\theta(x)\\right)_{j=1}^d.$$\nSet $S_\\theta(x)=0$ where $p_\\theta(x)=0$, which is $P_\\theta$-null.\nFor $d=1$, this is $S_\\theta=\\partial_\\theta\\log p_\\theta$.\n\nFor $d=1$, the scalar **Fisher information** is\n$$I(\\theta):=\\mathbb E_\\theta[S_\\theta(X)^2]\\in[0,+\\infty].$$\nWhen $d>1$ and $S_\\theta$ is square-integrable, the **Fisher information\nmatrix** is $I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T]$;\nits $i,j$ entry is $\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}]$. No scalar\ninformation is defined here for a vector parameter.\nThe information matrix is a second-moment matrix by definition; it equals the\nscore covariance matrix when the score has mean zero.\n\nThe derivatives, score and information are defined relative to the specified\ndifferentiable representative family. The Radon–Nikodym definition alone\ndoes not supply parameter differentiability or a canonical score version.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-random-element-and-real-random-variable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-derivative",
+          "def-higher-derivatives-and-smoothness",
+          "def-natural-logarithm",
+          "thm-chain-rule",
+          "thm-logarithm-derivative-and-integral",
+          "def-inner-product-space"
+        ],
+        "proof_strategy": null,
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, §3.1–3.2, PDF pp. 21–24",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Peter Kempthorne, MIT 18.655 Lecture 13: Unbiased Estimation and Risk Inequalities, PDF pp. 6–8, 16–17",
+              "url": "https://ocw.mit.edu/courses/18-655-mathematical-statistics-spring-2016/9e3152248b9f79ea4d5cfaae9f31c21b_MIT18_655S16_LecNote13.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-score-mean-zero-and-information-identity",
+        "kind": "theorem",
+        "title": "Mean-zero score and the information identity",
+        "statement": "Assume the Axiom of Choice for the selected density representatives. Let\n$\\Theta$ be open in $\\mathbb R^d$, let $\\mu$ be a fixed sigma-finite\ndominating measure, and let $p_\\eta$ be the selected densities of a\nstatistical model. Fix $\\theta\\in\\Theta$. Suppose that on a neighborhood\n$U$ of $\\theta$ there are a fixed measurable support $S$ and a\n$\\mu$-null set $N$ such that, for every $x\\in S\\setminus N$,\n$p_\\eta(x)>0$ and $\\eta\\mapsto p_\\eta(x)$ has continuous first and second\npartial derivatives on $U$; outside $S\\cup N$, $p_\\eta(x)=0$ for all\n$\\eta\\in U$. Suppose there are nonnegative $g_1,g_2\\in L^1(\\mu)$ that\nuniformly dominate every first partial derivative and every second partial\nderivative, respectively, on $U$. Also assume\n$\\mathbb E_\\theta\\|S_\\theta(X)\\|^2<\\infty$.\n\nThen $\\mathbb E_\\theta S_\\theta(X)=0$, and, entrywise,\n$$I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T] =-\\mathbb E_\\theta[\\nabla_\\theta^2\\ell_\\theta(X)].$$\nFor a scalar parameter this reads\n$\\mathbb E_\\theta S_\\theta=0$ and\n$I(\\theta)=\\mathbb E_\\theta S_\\theta^2\n=-\\mathbb E_\\theta[\\ell_\\theta''(X)]$.\n\nThis common-support, integrable-envelope setup is sufficient, not necessary:\nthe theorem does not claim that every model with valid score identities must\nhave common support or these envelopes.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-score-and-fisher-information",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-probability-measure",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "def-measure-with-density",
+          "thm-integration-against-a-density",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-higher-derivatives-and-smoothness",
+          "cor-mean-value-theorem",
+          "thm-dominated-convergence",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, §3.1–3.2, PDF pp. 21–24",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Peter Kempthorne, MIT 18.655 Lecture 13: Unbiased Estimation and Risk Inequalities, PDF pp. 6–8, 16–17",
+              "url": "https://ocw.mit.edu/courses/18-655-mathematical-statistics-spring-2016/9e3152248b9f79ea4d5cfaae9f31c21b_MIT18_655S16_LecNote13.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cramer-rao-lower-bound",
+        "kind": "theorem",
+        "title": "Scalar Cramér–Rao lower bound",
+        "statement": "Assume AC for the selected density representatives. Let $\\Theta$ be an open\ninterval, fix $\\theta\\in\\Theta$, and let $\\psi:\\Theta\\to\\mathbb R$ be\ndifferentiable at $\\theta$. Let $T$ be a real-valued estimator\n([[def-statistic-and-estimator]]) with\n$\\mathbb E_\\eta T=\\psi(\\eta)$ on a neighborhood of $\\theta$ and\n$\\mathbb E_\\theta[T^2]<\\infty$. Let the score $S_\\theta$ have\n$\\mathbb E_\\theta S_\\theta=0$ and Fisher information\n$I(\\theta)=\\mathbb E_\\theta S_\\theta^2\\in(0,\\infty)$. If\n$$\\operatorname{Cov}_\\theta(T,S_\\theta)=\\psi'(\\theta),$$\nthen\n$$\\operatorname{Var}_\\theta(T)\\ge\\frac{\\psi'(\\theta)^2}{I(\\theta)}.$$\nEquality holds exactly when\n$$T-\\psi(\\theta)=\\frac{\\psi'(\\theta)}{I(\\theta)}S_\\theta \\quad P_\\theta\\text{-almost surely}.$$\n\nThe covariance identity is an explicit hypothesis. One sufficient way to\nestablish it is to assume the regularity hypotheses of\n[[thm-score-mean-zero-and-information-identity]] on a neighborhood, together\nwith a neighborhood $V$ of $\\theta$, a nonnegative integrable $H$, and one $\\mu$-null\nset $N_H$ such that $|T(x)\\partial_\\eta p_\\eta(x)|\\leq H(x)$ for every\n$x\\notin N_H$ and every $\\eta\\in V$. The mean value theorem and dominated\nconvergence then differentiate $\\mathbb E_\\eta T=\\int T p_\\eta\\,d\\mu$ and\ngive the covariance identity. This is only one sufficient regularity route; the bound\nitself does not require common support if its score and covariance identities\nhave been established by another valid argument. The theorem's hypotheses\nalso include every finite-variance unbiased estimator in the sense of\n[[def-unbiased-estimator-and-umvu]] whenever its score-covariance identity\nholds.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-score-and-fisher-information",
+          "thm-score-mean-zero-and-information-identity",
+          "def-unbiased-estimator-and-umvu",
+          "def-statistic-and-estimator",
+          "def-likelihood-density",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "def-measure-with-density",
+          "thm-integration-against-a-density",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "cor-mean-value-theorem",
+          "thm-dominated-convergence"
+        ],
+        "proof_strategy": "direct",
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Theorem 5.3 and proof, PDF pp. 29–31",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Peter Kempthorne, MIT 18.655 Lecture 13: Unbiased Estimation and Risk Inequalities, Theorem 3.4.1 and proof, PDF pp. 10–11",
+              "url": "https://ocw.mit.edu/courses/18-655-mathematical-statistics-spring-2016/9e3152248b9f79ea4d5cfaae9f31c21b_MIT18_655S16_LecNote13.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-multivariate-cramer-rao-bound",
+        "kind": "theorem",
+        "title": "Multivariate Cramér–Rao bound",
+        "statement": "Assume AC for the selected density representatives. Let\n$\\Theta\\subseteq\\mathbb R^d$ be open and fix $\\theta\\in\\Theta$. Let\n$T:\\mathcal X\\to\\mathbb R^k$ be a measurable estimator\n([[def-statistic-and-estimator]]) with finite second moments and\n$\\mathbb E_\\theta T=\\psi(\\theta)$ coordinatewise (this is the meaning of\nunbiasedness here), where\n$\\psi:\\Theta\\to\\mathbb R^k$ is differentiable at $\\theta$. Let the score\nvector $S_\\theta$ be square-integrable, have mean zero, and have nonsingular\ninformation matrix $I(\\theta)=\\mathbb E_\\theta[S_\\theta S_\\theta^\\mathsf T]$.\nAssume the vector score-derivative identity\n$$\\mathbb E_\\theta[(T-\\psi(\\theta))S_\\theta^\\mathsf T]=D\\psi(\\theta),$$\nwhere $D\\psi(\\theta)$ is the $k\\times d$ Jacobian matrix with entries\n$\\partial\\psi_a/\\partial\\theta_j$. Then\n$$\\operatorname{Cov}_\\theta(T)\\succeq D\\psi(\\theta)I(\\theta)^{-1}D\\psi(\\theta)^\\mathsf T.$$\nHere $A\\succeq B$ means $a^\\mathsf T(A-B)a\\ge0$ for every\n$a\\in\\mathbb R^k$, and $\\operatorname{Cov}_\\theta(T)$ is the matrix whose\n$a,b$ entry is $\\operatorname{Cov}_\\theta(T_a,T_b)$. The mean-zero and\nscore-derivative identities are\nexplicit hypotheses; common support with suitable derivative-interchange\nconditions is one sufficient regular route, not the only possible route. If each coordinate $T_a$ is a finite-variance unbiased estimator of the real\nestimand $\\psi_a$ in the sense of [[def-unbiased-estimator-and-umvu]],\nthen $T$ satisfies the pointwise mean and moment premises; the score-derivative identity remains a separate condition.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-score-and-fisher-information",
+          "thm-score-mean-zero-and-information-identity",
+          "def-unbiased-estimator-and-umvu",
+          "def-statistic-and-estimator",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "proof_strategy": "direct",
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Theorem 5.9 and proof sketch, PDF pp. 32–33",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Peter Kempthorne, MIT 18.655 Lecture 13: Unbiased Estimation and Risk Inequalities, Theorems 3.4.3–3.4.4, PDF pp. 18–19",
+              "url": "https://ocw.mit.edu/courses/18-655-mathematical-statistics-spring-2016/9e3152248b9f79ea4d5cfaae9f31c21b_MIT18_655S16_LecNote13.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 1857,
+    "id": "fisher-information-and-finite-sample-information-bounds-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Scores and Information Bounds — Examples",
+    "companion": "fisher-information-and-finite-sample-information-bounds",
+    "requires": [
+      "fisher-information-and-finite-sample-information-bounds",
+      "brownian-motion-construction-and-continuity"
+    ],
+    "items": [
+      {
+        "id": "ex-bernoulli-score-fisher-information-and-cramer-rao-attainment",
+        "kind": "example",
+        "title": "Bernoulli score, information, and attainment of the scalar bound",
+        "statement": "Assume AC. Let $X$ take values in $\\{0,1\\}$, with\n$P_p(X=1)=p$, $P_p(X=0)=1-p$, and $p\\in(0,1)$. With counting measure as\ndominator, this is a one-parameter common-support model. The statistic $T=X$\nis unbiased for $\\psi(p)=p$, and it attains the scalar Cramér–Rao bound.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-score-and-fisher-information",
+          "thm-score-mean-zero-and-information-identity",
+          "thm-cramer-rao-lower-bound",
+          "def-statistic-and-estimator",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "def-derivative"
+        ],
+        "proof_strategy": "direct",
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, §3.1 and Bernoulli information calculation, PDF pp. 21–23",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Anna Mikusheva, MIT 14.381 Lecture 6: Efficient Estimators, Rao-Cramer Bound, PDF pp. 4–6",
+              "url": "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/15224973dfc1c2b4287804c8712681f7_MIT14_381F18_lec6.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-normal-location-score-information-and-cramer-rao-attainment",
+        "kind": "example",
+        "title": "Normal location score, information, and attainment",
+        "statement": "Assume AC. Let $X\\sim N(\\mu,\\sigma^2)$, where $\\mu\\in\\mathbb R$ is the\nparameter and $\\sigma^2>0$ is fixed. With Lebesgue measure as dominator, the\ndensity is\n$$p_\\mu(x)=\\frac{1}{\\sqrt{2\\pi\\sigma^2}} \\exp\\!\\left(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\right).$$\nThe estimator $T=X$ is unbiased for $\\psi(\\mu)=\\mu$, and it attains the\nscalar Cramér–Rao bound.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-score-and-fisher-information",
+          "thm-score-mean-zero-and-information-identity",
+          "thm-cramer-rao-lower-bound",
+          "def-statistic-and-estimator",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "thm-integration-against-a-density",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-derivative-of-exponential",
+          "thm-exponential-definition-equivalence",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-change-of-variables-for-expectation",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-derivative"
+        ],
+        "proof_strategy": "direct",
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, §3.1, PDF pp. 21–24",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Anna Mikusheva, MIT 14.381 Lecture 6: Efficient Estimators, Rao-Cramer Bound, PDF pp. 2–5",
+              "url": "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/15224973dfc1c2b4287804c8712681f7_MIT14_381F18_lec6.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-uniform-moving-support-invalidates-naive-cramer-rao-bound",
+        "kind": "counterexample",
+        "title": "Uniform moving support invalidates the naive score bound",
+        "statement": "For every differentiable one-parameter density family, the formal score\n$S_\\theta=\\partial_\\theta\\log p_\\theta(X)$ and its finite positive second\nmoment $I(\\theta)=\\mathbb E_\\theta S_\\theta^2$ automatically give the\nCramér–Rao inequality\n$\\operatorname{Var}_\\theta(T)\\ge\\psi'(\\theta)^2/I(\\theta)$ for every\nunbiased finite-variance estimator $T$, even when the support depends on\n$\\theta$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-derivative",
+          "def-score-and-fisher-information",
+          "thm-score-mean-zero-and-information-identity",
+          "thm-cramer-rao-lower-bound",
+          "def-statistic-and-estimator",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-measure-with-density",
+          "thm-integration-against-a-density",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power"
+        ],
+        "proof_strategy": "direct",
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, §3.1 and support discussion, PDF pp. 21–24",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Anna Mikusheva, MIT 14.381 Lecture 6: Efficient Estimators, Rao-Cramer Bound, PDF pp. 2, 5–6",
+              "url": "https://ocw.mit.edu/courses/14-381-statistical-method-in-economics-fall-2018/15224973dfc1c2b4287804c8712681f7_MIT14_381F18_lec6.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -10,7 +10,7 @@ provenance:
 deps: [def-borel-and-lebesgue-measurable-function-on-rn, thm-continuous-preimages-of-borel-sets-are-borel]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
+  repair: research/mathematical-statistics-foundations-37-owner-s3-polish-cor-continuous-functions-are-borel-measurable-repair.json
   precheck: pass
 sources:
   references:
@@ -34,6 +34,6 @@ the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].
 
 **Proof technique:** direct.
 
-1.1 Let $B \subseteq \mathbb{R}^m$ be Borel. By [L1], the preimage [L1] $f^{-1}(B)$ is a Borel subset of $\mathbb{R}^n$. [L1]
+1.1 Let $B \subseteq \mathbb{R}^m$ be Borel. By [L1], the preimage $f^{-1}(B)$ is a Borel subset of $\mathbb{R}^n$. [L1]
 
 2.1 By the definition of Borel measurability on Euclidean spaces, step 1.1 says [step 1.1] exactly that $f$ is Borel measurable. [step 1.1] ∎ 

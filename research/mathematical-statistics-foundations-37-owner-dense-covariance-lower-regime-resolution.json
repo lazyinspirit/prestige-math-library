@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "run": "mathematical-statistics-foundations-37",
+  "escalation": "E25",
+  "round": 1,
+  "recorded_at": "2026-10-14T05:47:27.864538+00:00",
+  "status": "resolved",
+  "resolved": true,
+  "reviewer": "owner-delegated Codex msf_qmd_tangent_resolution",
+  "confirmed_defect": {
+    "controlling_path": "research/plan-mathematical-statistics-track.md MSF33 dense lower clause",
+    "finding": "Uncapped c_M[(p/n)∨epsilon²] all-p,n lower scale is false on bounded-spectrum classes. The current local dense theorem limits p/n to a small regime, which is valid but does not preserve the entire planned dimension/sample regime.",
+    "counterexample": "For every target Sigma in F_p(M), the constant zero matrix estimator is Borel and has squared operator loss ||Sigma||²<=M² deterministically under every Huber contaminant. Fix any proposed positive threshold coefficient C_M and choose n=1 and integer p>M²/C_M; then the proposed lower event is empty, contradicting any positive probability lower bound."
+  },
+  "smallest_repair": {
+    "preserve": "Keep the complete existing small-p/n clean proof and all upper/sparse claims.",
+    "new_clean_scope": "Append all-p,n clean lower scale a_M min{1,p/n} with fixed positive probability; do not substitute a citation or restrict to large samples.",
+    "new_Huber_scope": "Use existing ambient-action tail reduction to obtain all-p,n capped dense scale min{1,(p/n)∨epsilon²}; retain every original valid small-ratio clause.",
+    "new_counterexample_item": "cex-bounded-spectrum-covariance-lower-rate-must-be-capped",
+    "source_integration_pending_writer_isolation": true
+  },
+  "complete_extension_argument": {
+    "constants": "Let b=b_M>0 and0<c<=1/16 be the threshold/probability/small-ratio constants already proved locally. Put a_M=min{bc/2,M²c/64}.",
+    "small_ratio": "If p/n<=c, the existing clean lower bound at b p/n dominates the new threshold a_M min{1,p/n}.",
+    "large_sample_large_ratio": "If p/n>c and n>=2/c, set k=floor(cn), so1<=k<=p andc/2<=k/n<=c. For zero-padding isometry J:R^k→R^p, each Θ∈F_k(M) embeds as JΘJᵀ∈F_p(M), and the centered Gaussian sample is J times the k-dimensional sample. For arbitrary Borel ambient matrix estimator A, the map B(y)=Jᵀ A(Jy_1,...,Jy_n)J is Borel, including nonsymmetric actions. The norm definition gives ||Jᵀ(A-JΘJᵀ)J||op<=||A-JΘJᵀ||op. Apply the already established small-ratio lower bound in dimensionk to B: ambient tail probability>=c at thresholdbk/n>=bc/2>=a_M min{1,p/n}.",
+    "remaining_small_samples": "If p/n>c andn<2/c, take Σ0=(M/2)I_p and Σ1=Σ0+h e1e1ᵀ, h=M√c/4. They are positive definite in F_p(M), with separationh. For t=2h/M, the actual Gaussian KL supplier gives KL(P0||P1)=1/2[log(1+t)+(1+t)^-1-1]<=t²/4=h²/M²; integrating derivative t/(1+t)²<=t proves the inequality. ProductKL<=nh²/M²<1/8, so actual Pinsker gives TV<=1/4. Classify any estimator by nearest covariance, fixed-index ties. This Borel binary rule, with scalar targets0,1, has squared risks equal to error probabilities. Actual expected-risk LeCam theorem therefore gives maxerror>=(1-TV)/8>=3/32>=c. A wrong classification forces operator error>=h/2, giving squared tail thresholdh²/4=M²c/64>=a_M min{1,p/n}.",
+    "contamination": "The existing covariance modulus is >=d_M epsilon² and finite. The ambient-action lemma withM0=a_M min{1,p/n} yields threshold1/16 max(M0,omega) and probabilitymin(c,1/2). This threshold dominates a fixed positive constant times max(min{1,p/n},epsilon²)=min{1,max(p/n,epsilon²)} for0<=epsilon<=1. It covers all Borel ambient matrix actions.",
+    "axioms": "Existing AC for Gaussian construction is retained; compression, explicit pairs and finite classifiers add no choice principle."
+  },
+  "actual_consumer_closure": {
+    "roots": [
+      "lem-clean-dense-gaussian-covariance-minimax-lower-bound",
+      "thm-huber-covariance-upper-and-lower-risk"
+    ],
+    "consumer_layers": [],
+    "disposition": "The clean supplier Statement retains its old assertion and adds the complete all-regime extension. Its sole actual direct consumer is the dense Huber theorem, whose lower proof now uses the capped all-p,n bound. No outside/direct/transitive consumer of that theorem exists; sparse upper/lower conclusions unchanged.",
+    "direct_edges": [
+      {
+        "supplier": "lem-clean-dense-gaussian-covariance-minimax-lower-bound",
+        "consumer": "thm-huber-covariance-upper-and-lower-risk",
+        "disposition": "Same reviewer changed lower proof/Statement to use all-regime clean cap; full E23 global/bounded upper assertion preserved."
+      }
+    ],
+    "outside_consumers": [],
+    "new_counterexample_logical_consumers": []
+  },
+  "plan_row_proposal": {
+    "path": "research/plan-mathematical-statistics-track.md",
+    "before": "| **MSF-33** `robust-covariance-and-high-dimensional-stability` — Robust Covariance and Sparse Robust Estimation | MSF-21; MSF-30; MSF-32; `linear-algebra/the-spectral-theorem-and-singular-value-decomposition` | Keep clean heavy tails and Huber contamination as different models. `def-huber-covariance-model`: iid $P_{\\epsilon,\\Sigma,Q}=(1-\\epsilon)N(0,\\Sigma)+\\epsilon Q$, with arbitrary contaminating law $Q$. `def-matrix-depth-covariance-estimator`: define $D_U(\\Gamma,P)=\\inf_{u\\in U}\\min\\{P(|u^TX|^2\\le u^T\\Gamma u),P(|u^TX|^2\\ge u^T\\Gamma u)\\}$. For $U=S^{p-1}$, choose any deepest $\\hat\\Gamma\\succeq0$ under empirical $P_n$ and set $\\hat\\Sigma=\\hat\\Gamma/\\beta$, where $\\Phi(\\sqrt\\beta)=3/4$; in the sparse variant with $1\\le s\\le p/2$, restrict depth directions to $U_s=\\bigcup_{|S|=2s}V_S$ and maximize over $F_s$. For $F(M)=\\{\\Sigma\\succeq0:\\lambda_{max}(\\Sigma)\\le M\\}$, `thm-huber-covariance-upper-and-lower-risk` gives squared operator loss upper bound $C[((p/n)\\vee\\epsilon^2)+\\log(1/\\delta)/n]$ with probability at least $1-2\\delta$ when $\\epsilon<1/5$, $\\delta\\in(0,1/2)$ and $C_1(p+\\log(1/\\delta))/n<1$; the lower bound states $\\inf_{\\hat\\Sigma}\\sup_{\\Sigma\\in F(M),Q}P_{\\epsilon,\\Sigma,Q}\\{\\|\\hat\\Sigma-\\Sigma\\|_{op}^2\\ge C[(p/n)\\vee\\epsilon^2]\\}\\ge c$ for universal $C,c>0$ and $\\epsilon\\in[0,1]$. For Chen–Gao–Ren’s distinct sparse class, define $G(s)=\\bigcup_{|S|\\le s}\\{A:A_{ij}=0\\text{ if }i\\notin S\\text{ or }j\\notin S\\}$ and $F_s(M)=\\{\\Sigma\\succeq0:\\Sigma-\\operatorname{diag}(\\Sigma)\\in G(s),\\lambda_{max}(\\Sigma)\\le M\\}$; this is one correlated block of at most $s$ variables. `thm-huber-sparse-covariance-upper-and-lower-risk` under $\\epsilon<1/5$, $\\delta\\in(0,1/2)$ and $C_1(s\\log(ep/s)+\\log(1/\\delta))/n<1$ gives upper squared-op error $C[((s\\log(ep/s)/n)\\vee\\epsilon^2)+\\log(1/\\delta)/n]$ at probability $1-2\\delta$; its lower bound is $\\inf_{\\hat\\Sigma}\\sup_{\\Sigma\\in F_s(M),Q}P_{\\epsilon,\\Sigma,Q}\\{\\|\\hat\\Sigma-\\Sigma\\|_{op}^2\\ge C[(s\\log(ep/s)/n)\\vee\\epsilon^2]\\}\\ge c$ when $s\\log(ep/s)/n\\le C_1$. Proofs use matrix-depth deviation bounds for the upper results and finite packing/two-directional testing for the lower bounds; preserve the block-sparse class, not a row-sparsity class. `alg-adaptive-truncated-covariance-estimator`: for iid clean data, use the matrix truncation $\\hat\\Sigma_{m,j}=(m\\theta_j)^{-1}\\sum_i\\psi(\\theta_j(X_i-\\hat\\mu)(X_i-\\hat\\mu)^T)$, where $\\psi(x)=\\operatorname{sign}(x)(|x|\\wedge1)$ is extended to symmetric matrices by spectral calculus. Use the median-of-means pilot $\\hat\\mu$, grid $\\sigma_j=2^j\\sigma_{min}$, $\\theta_j=\\sigma_j^{-1}\\sqrt{\\beta/m}$, on $\\mathcal J=\\{j\\in\\mathbb Z:\\sigma_{min}\\le\\sigma_j<2\\sigma_{max}\\}$, and Lepski selection of the smallest index whose estimates agree with all larger-scale candidates within $6\\sigma_k\\sqrt{\\beta/m}$. Under finite matrix variance $\\sigma_0^2=\\|E[\\|X-\\mu\\|^2(X-\\mu)(X-\\mu)^T]\\|>0$, $d=\\sigma_0^2/\\|\\Sigma_0\\|^2$, $m\\ge C d\\beta$ for $\\beta>1$, and preliminary bracket $0<\\sigma_{min}\\le\\sigma_0\\le\\sigma_{max}$, `thm-heavy-tailed-covariance-bound` gives $\\|\\hat\\Sigma^*-\\Sigma_0\\|_{op}\\le18\\sigma_0\\sqrt{\\beta/m}$ with probability at least $1-5d\\log_2(2\\sigma_{max}/\\sigma_{min})e^{-\\beta}$; its proof combines the matrix truncation deviation, median-of-means pilot and Lepski selection. No arbitrary-contamination guarantee follows from finite matrix variance. B: dense Huber, block-sparse Huber and clean finite-matrix-variance examples. | F06 complete. Chen–Gao–Ren Theorems 3.1–3.7 and 5.1, pp.8–11,16 and proofs/supplement pp.23–53; Minsker–Wei Lemma 2.1, Theorem 2.1 and Corollary 2.2, pp.4–6, proofs §§4–5. Do not merge the block-sparse class, Cai–Zhou weak-$\\ell_q$ class and clean heavy-tail model; computation of matrix depth is not claimed. |",
+    "after": "| **MSF-33** `robust-covariance-and-high-dimensional-stability` — Robust Covariance and Sparse Robust Estimation | MSF-21; MSF-30; MSF-32; `linear-algebra/the-spectral-theorem-and-singular-value-decomposition` | Keep clean heavy tails and Huber contamination as different models. `def-huber-covariance-model`: iid $P_{\\epsilon,\\Sigma,Q}=(1-\\epsilon)N(0,\\Sigma)+\\epsilon Q$, with arbitrary contaminating law $Q$. `def-matrix-depth-covariance-estimator`: define $D_U(\\Gamma,P)=\\inf_{u\\in U}\\min\\{P(|u^TX|^2\\le u^T\\Gamma u),P(|u^TX|^2\\ge u^T\\Gamma u)\\}$. For $U=S^{p-1}$, choose any deepest $\\hat\\Gamma\\succeq0$ under empirical $P_n$ and set $\\hat\\Sigma=\\hat\\Gamma/\\beta$, where $\\Phi(\\sqrt\\beta)=3/4$; in the sparse variant with $1\\le s\\le p/2$, restrict depth directions to $U_s=\\bigcup_{|S|=2s}V_S$ and maximize over $F_s$. For $F(M)=\\{\\Sigma\\succeq0:\\lambda_{max}(\\Sigma)\\le M\\}$, `thm-huber-covariance-upper-and-lower-risk` gives squared operator loss upper bound $C[((p/n)\\vee\\epsilon^2)+\\log(1/\\delta)/n]$ with probability at least $1-2\\delta$ when $\\epsilon<1/5$, $\\delta\\in(0,1/2)$ and $C_1(p+\\log(1/\\delta))/n<1$; the lower bound holds for every $p,n\\ge1$ and $\\epsilon\\in[0,1]$ in capped form $\\inf_{\\hat\\Sigma}\\sup_{\\Sigma\\in F(M),Q}P_{\\epsilon,\\Sigma,Q}^{\\otimes n}\\{\\|\\hat\\Sigma-\\Sigma\\|_{op}^2\\ge c_M\\min\\{1,(p/n)\\vee\\epsilon^2\\}\\}\\ge c_0$, where positive constants may depend on the fixed $M$ but not on $p,n,\\epsilon$. This retains the original uncapped rate whenever $p/n\\le1$; the cap is necessary because the zero estimator has squared operator loss at most $M^2$. Prove the all-regime clean lower bound by the existing small-$p/n$ packing/testing argument, zero-padded covariance-block embedding for large $n$ and large $p/n$, and an explicit rank-one two-point Gaussian comparison for the remaining bounded sample sizes; then use the ambient-action contamination-modulus reduction. The upper bound retains its stated sample-size and confidence conditions. For Chen–Gao–Ren’s distinct sparse class, define $G(s)=\\bigcup_{|S|\\le s}\\{A:A_{ij}=0\\text{ if }i\\notin S\\text{ or }j\\notin S\\}$ and $F_s(M)=\\{\\Sigma\\succeq0:\\Sigma-\\operatorname{diag}(\\Sigma)\\in G(s),\\lambda_{max}(\\Sigma)\\le M\\}$; this is one correlated block of at most $s$ variables. `thm-huber-sparse-covariance-upper-and-lower-risk` under $\\epsilon<1/5$, $\\delta\\in(0,1/2)$ and $C_1(s\\log(ep/s)+\\log(1/\\delta))/n<1$ gives upper squared-op error $C[((s\\log(ep/s)/n)\\vee\\epsilon^2)+\\log(1/\\delta)/n]$ at probability $1-2\\delta$; its lower bound is $\\inf_{\\hat\\Sigma}\\sup_{\\Sigma\\in F_s(M),Q}P_{\\epsilon,\\Sigma,Q}\\{\\|\\hat\\Sigma-\\Sigma\\|_{op}^2\\ge C[(s\\log(ep/s)/n)\\vee\\epsilon^2]\\}\\ge c$ when $s\\log(ep/s)/n\\le C_1$. Proofs use matrix-depth deviation bounds for the upper results and finite packing/two-directional testing for the lower bounds; preserve the block-sparse class, not a row-sparsity class. `alg-adaptive-truncated-covariance-estimator`: for iid clean data, use the matrix truncation $\\hat\\Sigma_{m,j}=(m\\theta_j)^{-1}\\sum_i\\psi(\\theta_j(X_i-\\hat\\mu)(X_i-\\hat\\mu)^T)$, where $\\psi(x)=\\operatorname{sign}(x)(|x|\\wedge1)$ is extended to symmetric matrices by spectral calculus. Use the median-of-means pilot $\\hat\\mu$, grid $\\sigma_j=2^j\\sigma_{min}$, $\\theta_j=\\sigma_j^{-1}\\sqrt{\\beta/m}$, on $\\mathcal J=\\{j\\in\\mathbb Z:\\sigma_{min}\\le\\sigma_j<2\\sigma_{max}\\}$, and Lepski selection of the smallest index whose estimates agree with all larger-scale candidates within $6\\sigma_k\\sqrt{\\beta/m}$. Under finite matrix variance $\\sigma_0^2=\\|E[\\|X-\\mu\\|^2(X-\\mu)(X-\\mu)^T]\\|>0$, $d=\\sigma_0^2/\\|\\Sigma_0\\|^2$, $m\\ge C d\\beta$ for $\\beta>1$, and preliminary bracket $0<\\sigma_{min}\\le\\sigma_0\\le\\sigma_{max}$, `thm-heavy-tailed-covariance-bound` gives $\\|\\hat\\Sigma^*-\\Sigma_0\\|_{op}\\le18\\sigma_0\\sqrt{\\beta/m}$ with probability at least $1-5d\\log_2(2\\sigma_{max}/\\sigma_{min})e^{-\\beta}$; its proof combines the matrix truncation deviation, median-of-means pilot and Lepski selection. No arbitrary-contamination guarantee follows from finite matrix variance. B: dense Huber, block-sparse Huber and clean finite-matrix-variance examples. | F06 complete. Chen–Gao–Ren Theorems 3.1–3.7 and 5.1, pp.8–11,16 and proofs/supplement pp.23–53; Minsker–Wei Lemma 2.1, Theorem 2.1 and Corollary 2.2, pp.4–6, proofs §§4–5. Do not merge the block-sparse class, Cai–Zhou weak-$\\ell_q$ class and clean heavy-tail model; computation of matrix depth is not claimed. |",
+    "dense_clause_before": "the lower bound states $\\inf_{\\hat\\Sigma}\\sup_{\\Sigma\\in F(M),Q}P_{\\epsilon,\\Sigma,Q}\\{\\|\\hat\\Sigma-\\Sigma\\|_{op}^2\\ge C[(p/n)\\vee\\epsilon^2]\\}\\ge c$ for universal $C,c>0$ and $\\epsilon\\in[0,1]$.",
+    "dense_clause_after": "the lower bound holds for every $p,n\\ge1$ and $\\epsilon\\in[0,1]$ in capped form $\\inf_{\\hat\\Sigma}\\sup_{\\Sigma\\in F(M),Q}P_{\\epsilon,\\Sigma,Q}^{\\otimes n}\\{\\|\\hat\\Sigma-\\Sigma\\|_{op}^2\\ge c_M\\min\\{1,(p/n)\\vee\\epsilon^2\\}\\}\\ge c_0$, where positive constants may depend on the fixed $M$ but not on $p,n,\\epsilon$. This retains the original uncapped rate whenever $p/n\\le1$; the cap is necessary because the zero estimator has squared operator loss at most $M^2$. Prove the all-regime clean lower bound by the existing small-$p/n$ packing/testing argument, zero-padded covariance-block embedding for large $n$ and large $p/n$, and an explicit rank-one two-point Gaussian comparison for the remaining bounded sample sizes; then use the ambient-action contamination-modulus reduction. The upper bound retains its stated sample-size and confidence conditions.",
+    "owner_application_only": true,
+    "other_rows_unchanged": true,
+    "coordination": "Root applies atomically; E24 heavy-tail owner must derive any subsequent shared-row proposal from that fresh row.",
+    "root_applied": true,
+    "actual_row_matches_proposed_after_at_observation": true,
+    "observed_at": "2026-10-14T05:37:29.533375+00:00"
+  },
+  "proposed_changed_paths": [
+    "items/lem-clean-dense-gaussian-covariance-minimax-lower-bound.md",
+    "items/thm-huber-covariance-upper-and-lower-risk.md",
+    "items/cex-bounded-spectrum-covariance-lower-rate-must-be-capped.md",
+    "library/mathematical-statistics/robust-covariance-and-high-dimensional-stability-examples.md",
+    "research/mathematical-statistics-foundations-37-batch-34.pages.json",
+    "research/mathematical-statistics-foundations-37-batch-34.proof-contracts.json",
+    "research/mathematical-statistics-foundations-37-batch-34.notes.md",
+    "research/mathematical-statistics-foundations-37-owner-dense-covariance-lower-regime-resolution.json"
+  ],
+  "changed_paths": [
+    "items/lem-clean-dense-gaussian-covariance-minimax-lower-bound.md",
+    "items/thm-huber-covariance-upper-and-lower-risk.md",
+    "items/cex-bounded-spectrum-covariance-lower-rate-must-be-capped.md",
+    "items/lem-measurable-matrix-depth-maximizer-selection.md",
+    "library/mathematical-statistics/robust-covariance-and-high-dimensional-stability-examples.md",
+    "research/mathematical-statistics-foundations-37-batch-34.pages.json",
+    "research/mathematical-statistics-foundations-37-batch-34.proof-contracts.json",
+    "research/mathematical-statistics-foundations-37-batch-34.notes.md",
+    "research/mathematical-statistics-foundations-37-owner-dense-covariance-lower-regime-resolution.json"
+  ],
+  "source_edits": [
+    "items/lem-clean-dense-gaussian-covariance-minimax-lower-bound.md",
+    "items/thm-huber-covariance-upper-and-lower-risk.md",
+    "items/cex-bounded-spectrum-covariance-lower-rate-must-be-capped.md",
+    "items/lem-measurable-matrix-depth-maximizer-selection.md"
+  ],
+  "checks": {
+    "optional_tests_run": false,
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/lem-clean-dense-gaussian-covariance-minimax-lower-bound.md items/thm-huber-covariance-upper-and-lower-risk.md items/cex-bounded-spectrum-covariance-lower-rate-must-be-capped.md items/lem-measurable-matrix-depth-maximizer-selection.md",
+      "exit_code": 0,
+      "output": "proof-layout: 4 items, 24 steps, 0 defects",
+      "after_final_item_edit": true
+    },
+    "hashes_readiness_state_shared_plan": "untouched",
+    "source_reading": "Actual controlling dense row, current clean lower proof and dense theorem, ambient-action lemma, Gaussian KL supplier and exact scalar expected-risk testing convention inspected. One authorized read-only Sol/medium child independently verified constants/three-case proof. No new external full-text reading claimed."
+  },
+  "next_action": "Root may resume native34 after shared-file handoff; all E25 shared writes complete. Root owns fresh readiness/hash/metadata and ordinary independent gates.",
+  "writer_isolation": "Root authorized serialized E25 integration under existing native34 STOP after E24 declared shared writes complete; all manifests/contracts/page/notes were fresh-loaded to preserve E23/E24 additions.",
+  "remaining_owner_work": [
+    "Fresh recertification/readiness/hashes and ordinary independent reviews/gates after native writer drain."
+  ],
+  "root_acceptance": "Root independently read the actual integrated old clean proof plus steps6.1–7.1, the full dense theorem and full new counterexample, verified all three cases/constants/embedding/testing/cap argument, and accepted round1 before final layout. This does not replace ordinary native independent review/gates.",
+  "minor_selector_prose_correction": "Current phase-normalized selector step6.1 now correctly refers to construction steps1.1–5.1; its dependency tag was already correct. Matching proof-contract derivation refreshed."
+}

@@ -1,0 +1,2030 @@
+{
+  "version": 1,
+  "scope": [
+    "def-asymptotic-distribution",
+    "def-op-and-little-op-stochastic-bounds",
+    "thm-vector-stochastic-order-calculus",
+    "thm-vector-slutsky",
+    "def-estimator-sequence-in-iid-experiments",
+    "def-consistency-in-probability",
+    "thm-iid-sample-mean-consistency",
+    "thm-nonidentifiability-precludes-simultaneous-consistency",
+    "ex-degenerate-asymptotic-distribution-with-rare-outliers",
+    "ex-tightness-times-smallness-and-root-n-rate",
+    "ex-bernoulli-sample-mean-consistency",
+    "ex-nonidentifiable-targets-preclude-consistency"
+  ],
+  "contracts": {
+    "def-asymptotic-distribution": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes d≥1, makes each Z_n measurable into the Euclidean Borel space R^d, and requires a Borel probability law ν; an empty observation carrier is not an instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a point mass at zero is an allowed weak limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows d=1 and ν=δ1: taking every Z_n identically1 gives equal probability laws, hence weak convergence and an asymptotic distribution at one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: degenerate Borel probability limits are permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition uses weak convergence of Borel laws in R^d, not a probability-level quantile. It permits point-mass limiting laws and explicitly imposes no moment-convergence conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only laws are compared; no common-space coupling is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition equivalently clause: weak convergence of the laws of Z_n to ν is exactly Z_n⇒Z whenever the random vector Z has law ν, by the stated law-based convergence convention."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition equivalently clause: Z_n⇒Z for a vector of law ν means its laws converge weakly to law(Z)=ν, recovering the displayed asymptotic-distribution condition."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "def-op-and-little-op-stochastic-bounds": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For every positive n the definition supplies a probability space and a measurable random vector into Euclidean Borel R^d, with fixed d≥1; it admits neither an empty probability carrier nor n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero-vector sequence satisfies both norm-tail criteria."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits scalar dimension d=1 and X_n≡1. Its tails vanish above M=1, so it is O_P(1), whereas the tail at ε=1/2 equals one and excludes o_P(1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: constant sequences are covered directly by the tail formulas."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition uses strict tail events ||X_n||>ε or >M, with positive thresholds. At ||X_n||=M the boundedness event is excluded; ε=0 is not among the vanishing-tail requirements."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the probability spaces may vary with n; no coupling or representative selection is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition gives separate formulas for o_P(1) and O_P(1). It does not state they are equivalent: the constant-one sequence satisfies the latter but not the former."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition independence is explicitly not implicit in either notation; the two tail formulas assert no converse that boundedness in probability forces convergence to zero."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Reviewed Definition and all four cited suppliers. Fixed positive finite dimension, Euclidean Borel measurability and positive thresholds make every norm tail an event. Varying probability spaces are allowed; no joint law or independence is asserted. Zero sequence satisfies both bounds; constant one satisfies O_P but not o_P. The limsup quantifier is eventual boundedness, sufficient for later union bounds. No choice use."
+      }
+    },
+    "thm-vector-stochastic-order-calculus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-convergence-in-distribution-of-random-elements",
+          "source_section": "Definition",
+          "quote": "Random elements $X_n,X$ with values in the same metric space **converge in distribution**, written $X_n\\Rightarrow X$, if their laws from [[def-law-or-distribution-of-a-random-element]] satisfy $P_{X_n}\\Rightarrow P_X$ in [[def-weak-convergence-of-borel-probability-measures]]. They may be defined on different probability spaces. The definition specifies only their marginal laws.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-portmanteau-theorem",
+          "source_section": "Statement",
+          "quote": "For Borel probabilities $\\mu_n,\\mu$ on a metric space S, the following are equivalent: (i) $\\mu_n\\Rightarrow\\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\\limsup_n\\mu_n(F)\\le\\mu(F)$ for every closed F; (iv) $\\liminf_n\\mu_n(G)\\ge\\mu(G)$ for every open G; (v) $\\mu_n(A)\\to\\mu(A)$ for every Borel A with $\\mu(\\partial A)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuity-from-above-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\\mu$. If $\\mu(E_{n_0})<+\\infty$ for some $n_0$, then\n\n$$\\mu\\left(\\bigcap_{n\\in\\mathbb N}E_n\\right)=\\inf_{n\\in\\mathbb N}\\mu(E_n).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-metric-open-set-algebra",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open and closed sets\nas in [[def-metric-topology]] and balls as in [[def-metric-ball]]. Then:\n\n1. **Balls are open.** $B(x,r)$ is open, for every $x \\in X$ and every $r > 0$.\n2. **Arbitrary unions.** If $\\mathcal{U}$ is any collection of open subsets of\n   $X$, then $\\bigcup \\mathcal{U}$ is open.\n3. **Finite intersections.** If $n \\ge 1$ and $U_0, \\dots, U_{n-1}$ are open,\n   then $U_0 \\cap \\dots \\cap U_{n-1}$ is open.\n4. **Closed balls are closed.** $\\bar B(x,r)$ is closed, for every $x \\in X$ and\n   every $r > 0$.\n\nTogether with the fact that $\\emptyset$ and $X$ are open, recorded already in\n[[def-metric-topology]], claims 2 and 3 say that $\\mathcal{T}_d$ has exactly the\nclosure properties that the word *topology* names.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $X_n\\Rightarrow X$ in $\\mathbb R^d$. For positive integers $m$, set $F_m=\\mathbb R^d\\setminus B(0,m)=\\{x:\\|x\\|_2\\ge m\\}$, where [F5] identifies the Euclidean distance with the norm and [F6] gives the metric-ball definition. By [F7] each ball is open, so [F8] makes $F_m$ closed. The sets decrease to the empty set because every vector has finite norm, and their probabilities are at most one. By [F4], $P_X(F_m)\\to0$. For each $m$, [F2] and [F3] give $\\limsup_nP_n(\\|X_n\\|_2\\ge m)\\le P_X(F_m)$. Choosing $m$ with right side below any prescribed $\\eta>0$ proves $X_n=O_P(1)$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $U_n=o_P(1)$ and $V_n=o_P(1)$ in one Euclidean space, the triangle inequality gives $\\{\\|U_n+V_n\\|_2>\\varepsilon\\}\\subseteq\\{\\|U_n\\|_2>\\varepsilon/2\\}\\cup\\{\\|V_n\\|_2>\\varepsilon/2\\}$. The union bound and [F1] show that the left event has probability tending to zero.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $U_n=O_P(1)$ and $V_n=O_P(1)$, choose $M_U,M_V>0$ using [F1]. The event $\\{\\|U_n+V_n\\|_2>M_U+M_V\\}$ is contained in $\\{\\|U_n\\|_2>M_U\\}\\cup\\{\\|V_n\\|_2>M_V\\}$, so its limiting upper probability is at most the sum of the two chosen tail bounds. Since the bounds can be arbitrarily small, $U_n+V_n=O_P(1)$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "If $C=0$, then $B(U_n,V_n)=0$ for all $n$. Suppose $C>0$, $U_n=o_P(1)$, and $V_n=O_P(1)$. For any $\\eta>0$, choose $M>0$ with $\\limsup_nP_n(\\|V_n\\|_2>M)\\le\\eta$. The norm bound for $B$ gives $\\{\\|B(U_n,V_n)\\|_2>\\varepsilon\\}\\subseteq\\{\\|V_n\\|_2>M\\}\\cup\\{\\|U_n\\|_2>\\varepsilon/(CM)\\}$. By [F1], the second event has probability tending to zero, so the limiting upper probability of the left event is at most $\\eta$; arbitrariness of $\\eta$ proves $B(U_n,V_n)=o_P(1)$. The same argument applies when the small factor is in the second coordinate.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If both inputs to $B$ are $O_P(1)$, choose $M_U,M_V>0$ so that the limiting upper probability of either input exceeding its bound is at most an arbitrary $\\eta>0$. Outside the union of these two tail events, $\\|B(U_n,V_n)\\|_2\\le C M_U M_V$. The union bound makes the limiting upper probability above this fixed bound at most $2\\eta$. Letting $\\eta$ decrease to zero proves $B(U_n,V_n)=O_P(1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement supplies random vectors on normalized probability spaces for each n; part2 explicitly uses positive integers p,q,r, excluding an empty-dimensional product-map input. No empty indexed-sum convention enters the union-bound proof."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.4 handles the bilinear norm constant C=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes p=q=r=1 and B(u,v)=uv with C=1; proof part2 uses |uv|≤|u||v|. Constant scalar inputs1 are O_P(1), so their product is covered without claiming it vanishes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.4 include zero and constant sequences."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.4 explicitly separates C=0, where the norm bound makes B(U_n,V_n)=0, from C>0 before dividing by CM. The positive ε and η tail tolerances remain those in the Statement stochastic-order conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 choose only finite tail radii from the given hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement proves addition, norm-bounded-map and weak-convergence⇒boundedness rules. The words “or conversely” in part2 swap which input is o_P and which is O_P; they do not assert that a small output forces either input small."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement does not characterize weak convergence by O_P boundedness or input rates by an output product rate. Proof union bounds establish the listed sufficient implications only."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all five proof steps and eight cited suppliers. Closed exteriors F_m decrease to empty; probability continuity from above and Portmanteau closed-set limsup give the claimed eventual O_P bound. Sum events use the triangle inequality and union bound with arbitrary small budgets. Product estimates handle C=0 separately and C>0 using positive M and epsilon/(CM); reverse small-factor placement and two bounded factors both work. Composite measurability is explicitly assumed for arbitrary B, and the conditional non-Borel-set remark correctly demonstrates why a norm bound alone is insufficient. No independence, coupling across n, or AC used."
+      }
+    },
+    "thm-vector-slutsky": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. Assume in each application that $B(U_n,V_n)$ is a random vector on the same probability space as $U_n,V_n$, for every $n$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-mapping-theorem",
+          "source_section": "Statement",
+          "quote": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$. Consequently $X_n\\Rightarrow X$ implies $g(X_n)\\Rightarrow g(X)$ whenever $P_X(D_g)=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-convergence-in-distribution-of-random-elements",
+          "source_section": "Definition",
+          "quote": "Random elements $X_n,X$ with values in the same metric space **converge in distribution**, written $X_n\\Rightarrow X$, if their laws from [[def-law-or-distribution-of-a-random-element]] satisfy $P_{X_n}\\Rightarrow P_X$ in [[def-weak-convergence-of-borel-probability-measures]]. They may be defined on different probability spaces. The definition specifies only their marginal laws.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-metric-open-set-algebra",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open and closed sets\nas in [[def-metric-topology]] and balls as in [[def-metric-ball]]. Then:\n\n1. **Balls are open.** $B(x,r)$ is open, for every $x \\in X$ and every $r > 0$.\n2. **Arbitrary unions.** If $\\mathcal{U}$ is any collection of open subsets of\n   $X$, then $\\bigcup \\mathcal{U}$ is open.\n3. **Finite intersections.** If $n \\ge 1$ and $U_0, \\dots, U_{n-1}$ are open,\n   then $U_0 \\cap \\dots \\cap U_{n-1}$ is open.\n4. **Closed balls are closed.** $\\bar B(x,r)$ is closed, for every $x \\in X$ and\n   every $r > 0$.\n\nTogether with the fact that $\\emptyset$ and $X$ are open, recorded already in\n[[def-metric-topology]], claims 2 and 3 say that $\\mathcal{T}_d$ has exactly the\nclosure properties that the word *topology* names.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $X_n=O_P(1)$. Fix a bounded continuous $f:\\mathbb R^{d+k}\\to\\mathbb R$, and let $\\eta>0$. The definition of $O_P(1)$ gives $R>0$ with $\\limsup_nP_n(\\|X_n\\|_2>R)\\le\\eta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $K=\\overline B_2(0,R)\\times\\overline B_2(c,1)\\subseteq\\mathbb R^{d+k}$. The factor balls are closed by [F11]. The coordinate projections are continuous because [F9] gives $d_2(x,x')\\le d_2((x,y),(x',y'))$ and the analogous inequality for $y$, so $K$ is closed. For $(x,y)\\in K$, [F9] and [F10] give $d_2((x,y),(0,0))^2=\\|x\\|_2^2+\\|y\\|_2^2\\le R^2+(\\|c\\|_2+1)^2$, so $K$ is bounded. By [F4], $K$ is compact. By [F5], $f|_K$ is uniformly continuous. For any $\\gamma>0$, choose $0<\\delta\\le1$ such that points of $K$ at distance less than $\\delta$ have $f$-values differing by less than $\\gamma$. By [F8], on $\\{\\|X_n\\|_2\\le R,\\ \\|Y_n-c\\|_2\\le\\delta/2\\}$ both pair values lie in $K$, and their Euclidean distance is at most $\\delta/2$. Therefore\n$$|E_nf(X_n,Y_n)-E_nf(X_n,c)|\\le\\gamma+2\\|f\\|_\\infty\\bigl(P_n(\\|X_n\\|_2>R)+P_n(\\|Y_n-c\\|_2>\\delta/2)\\bigr).$$\nBy [F2], the second tail tends to zero. Taking the limiting upper bound, then letting $\\gamma$ and $\\eta$ decrease to zero, proves that the expectation difference tends to zero.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F7], $X_n\\Rightarrow X$ means weak convergence of its laws. The function $x\\mapsto f(x,c)$ is bounded and continuous, so [F3] gives $E_nf(X_n,c)\\to E f(X,c)$. Together with step 1.2, bounded-continuous-test convergence gives $(X_n,Y_n)\\Rightarrow(X,c)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F7",
+            "given",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The map $h$ is continuous everywhere, hence measurable with empty discontinuity set. Apply [F6] to step 2.1 to obtain $h(X_n,Y_n)\\Rightarrow h(X,c)$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires d,k,m≥1 and X_n,Y_n on a probability space for each n; the input pair and constant c are supplied, so neither an empty Euclidean output dimension nor absent probability law is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Step 2.1 allow c=0 and use no division by c."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes d=k=m=1 and any scalar c, including1. Taking X_n≡1 and Y_n≡c gives the constant joint limiting vector (1,c), within the same bounded-continuous-test proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits the exact case Y_n=c."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.2 uses the closed region ||Y_n−c||≤δ/2 with 0<δ≤1; that boundary still has distance below δ. Statement imposes no open parameter region and permits degenerate constant limit coordinates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 2.1 choose a radius and continuity tolerance for one fixed function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement deduces joint convergence from X_n⇒X and Y_n−c=o_P(1), then continuous-image convergence. It is stated as a sufficient Slutsky rule, not as a characterization of all joint weak limits."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no reverse implication from h(X_n,Y_n)⇒h(X,c) to the input convergences; a continuous map h can discard coordinates, so such a converse is not claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all five proof steps and eleven direct cited dependencies, including the continuous-mapping, Heine-Borel and Heine-Cantor proofs. Positive finite dimensions ensure Euclidean compactness. K is closed by continuous coordinate projections and bounded by R^2+(||c||+1)^2. Restriction of bounded continuous f is uniformly continuous; delta/2 avoids the strict-distance endpoint. The limsup expectation difference is bounded by gamma+2||f|| eta and vanishes as the independently arbitrary budgets vanish. x↦f(x,c) tests marginal weak convergence; continuous h is Borel and has no discontinuities. No independence or common space across n or choice is needed."
+      }
+    },
+    "def-estimator-sequence-in-iid-experiments": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires n≥1 and defines the target Borel sigma-algebra from the d-open sets. It does not impose Θ nonempty: estimator maps are supplied, but no existence is asserted when their domain or target prevents such maps."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero is not a distinguished numerical input in this item’s stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes n=1 with data space X and law Pθ. A singleton metric target {a} permits the constant measurable estimator T_n≡a for every n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: constant models and constant target maps are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition fixes finite positive sample sizes and a metric target, with no ordered significance interval. Boundary parameter labels are allowed because no parameter-map measurability or open-domain premise is imposed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: each measurable estimator map is supplied as data; no global selection is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition names sequences of measurable maps on recursively constructed finite IID products; it does not equate this construction with consistency or asymptotic distribution."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition fixes nonrandomized estimators and explicitly leaves parameter-map and estimand measurability unspecified, so it makes no converse recovering IID sampling from arbitrary estimator laws."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read the full definition and all eight direct dependencies. Probability factors are sigma-finite; iterating the binary product theorem gives total mass one, rectangle law and uniqueness for every positive n. The estimator target is the Borel sigma-algebra generated by the stated metric; estimators are assumed measurable rather than claimed to exist in every possible target. No parameter measurability, infinite-product realization, selection of an estimator, or AC is asserted. n=1 is the original experiment; n=0 is excluded; empty parameter sets make pointwise claims vacuous."
+      }
+    },
+    "def-consistency-in-probability": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes θ and ψ(θ), and its metric-distance error set is Borel, so the estimator preimage is measurable. An empty Θ has no consistency instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a zero target is tested by the same error-tail criterion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits target {a} with T_n≡a, making every positive-tolerance error event empty. With scalar target R, T_n≡1 is consistent whenever ψ(θ)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: an estimator equal to its target almost surely satisfies the criterion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires every ε>0 and the strict error event d(T_n,ψ(θ))>ε. It does not demand probability zero at ε=0, and a fixed endpoint parameter is allowed because θ is chosen before taking the limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the parameter is fixed before the limit and no sequence is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition labels the displayed positive-tolerance error-probability limit as pointwise consistency. It explicitly distinguishes this from uniform convergence over Θ rather than proving a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition does not assert a converse from uniform or weak-distribution statements: its only required property is the metric-error limit at the fixed θ, with no moment claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "thm-iid-sample-mean-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-partial-sums-and-sample-means",
+          "source_section": "Definition",
+          "quote": "For real random variables $X_1,X_2,\\ldots$ on one probability space, define\n$$S_0=0,\\qquad S_n=\\sum_{k=1}^nX_k,\\qquad \\overline X_n=S_n/n\\quad(n\\ge1).$$\nFor a triangular array with finite row length $r_n\\ge0$, write $S_n=\\sum_{k=1}^{r_n}X_{n,k}$. An empty row has sum zero. These are finite sums in [[def-finite-sum]], with its index shifted by one. Each sum and each sample mean is a real random variable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]] and [[def-random-element-and-real-random-variable]]. No independence, common law, or integrability is implicit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-khinchin-weak-law-for-iid-integrable-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_k)_{k\\ge1}$ are IID real random variables and $\\mathbb E|X_1|<\\infty$, then, with $S_n=\\sum_{k=1}^nX_k$ and $\\mu=\\mathbb EX_1$,\n$$\\mathbb E|S_n/n-\\mu|\\longrightarrow0.$$\nConsequently $S_n/n\\to\\mu$ in probability.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-estimator-sequence-in-iid-experiments",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric model on a statistical experiment, and let $\\psi:\\Theta\\to\\mathcal T$ be an estimand whose target set $\\mathcal T$ is equipped with a metric $d$ ([[def-statistical-experiment]], [[def-parametric-statistical-model]], [[def-estimand-on-a-statistical-model]], [[def-metric-space]]). For $n\\ge1$, the IID sample-size-$n$ experiment has sample space $\\mathcal X^n$, product sigma-algebra $\\mathcal A^{\\otimes n}$, and sampling law $P_\\theta^{\\otimes n}$ at parameter $\\theta$ ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product law is defined recursively from $P_\\theta$; each factor is a probability measure and hence sigma-finite, so the finite product theorem supplies its existence, rectangle formula, and uniqueness ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\n\nA **nonrandomized estimator sequence** of $\\psi$ is a sequence of measurable maps, in the sense of [[def-measurable-function-between-measurable-spaces]],\n$$T_n:(\\mathcal X^n,\\mathcal A^{\\otimes n})\\to(\\mathcal T,\\mathcal B(\\mathcal T)),\\qquad n\\ge1,$$\nwhere $\\mathcal B(\\mathcal T)$ is the sigma-algebra generated by the open sets of the metric $d$, that is, the Borel sigma-algebra of its metric topology ([[def-borel-sigma-algebra]]). Its sampling distribution at $\\theta$ and sample size $n$ is the pushforward of $P_\\theta^{\\otimes n}$ by $T_n$.\n\nThis definition fixes IID repeated sampling and data-measurable estimators. It imposes no measurability on the parameter map $\\theta\\mapsto P_\\theta$ or on $\\psi$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-consistency-in-probability",
+          "source_section": "Definition",
+          "quote": "Let $(T_n)$ be an estimator sequence of an estimand $\\psi$ with metric target $(\\mathcal T,d)$, and fix $\\theta\\in\\Theta$. The sequence is **consistent in probability at $\\theta$** if for every $\\varepsilon>0$,\n$$P_\\theta^{\\otimes n}\\bigl(\\{x\\in\\mathcal X^n:d(T_n(x),\\psi(\\theta))>\\varepsilon\\}\\bigr)\\longrightarrow0.$$\n\nThe error event is measurable: by the triangle inequality, $t\\mapsto d(t,\\psi(\\theta))$ is continuous, so its strict superlevel set at $\\varepsilon$ is open in the target metric topology and hence Borel; its preimage under $T_n$ is measurable.\n\nThe consistency is **pointwise** because $\\theta$ is fixed before the limit. It does not assert uniform convergence over $\\Theta$ ([[def-estimator-sequence-in-iid-experiments]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The experiment and model specify P_θ. Each coordinate projection on R^n is measurable because its inverse image of a Borel set is a product cylinder in the product sigma-algebra; arithmetic measurability then makes T_n measurable into the Borel target. T_n is the sample mean of F2. IID and the joint-law theorem identify the law of (X_1,...,X_n) with P_θ^⊗n. Change of variables gives E_θX_1=∫x dP_θ=μ(θ), the estimand.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The hypotheses of [F4] hold for this IID sequence, so $\\overline X_n\\to\\mathbb E_\\theta X_1=\\mu(\\theta)$ in probability on its given common probability space.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $n$, step 1.1 identifies the joint data law with $P_\\theta^{\\otimes n}$; applying the same measurable sample-mean map therefore gives exactly the error probabilities in [F6] for the absolute-value metric [F14]. Step 1.2 makes those probabilities tend to zero for every $\\varepsilon>0$, which is consistency at $\\theta$. No infinite-product extension is constructed or needed.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F14",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement defines Tn=n^−1∑_{i=1}^n xi on positive IID sample sizes; n=0 is outside the stated sequence. A fixed θ and its law are supplied, so an empty parameter family has no instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement allows mean zero and constant-zero observations; step 1.2 Khinchin convergence then gives Tn=0 exactly, without a positive-variance requirement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 defines T1(x1)=x1 and identifies its one-coordinate law Pθ; consistency is the sequence limit, not an assertion of zero error at n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement includes every point-mass Pθ=δa with finite a; step 1.1 gives E X1=a and every finite average equals a."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement is pointwise at any fixed θ satisfying Eθ|X1|<∞ and assumes no open parameter set; step 2.1 works for any such θ including a model endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement explicitly supplies the IID sequence on a common probability space; step 2.1 uses its finite product joint laws and does not construct an infinite product or select parameter-dependent sequences."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is consistency from IID integrability; it does not assert an iff involving the mean moment premise."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem does not infer IID sampling or integrability from consistency of a sequence of sample means."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all three proof steps and fourteen original direct suppliers, plus the replacement real-line metric lemma Statement and proof steps 1.1–1.3 and 2.1. Fixed-theta IID infinite sequence is explicitly supplied, absolute first moment is finite, and expectation change of variables identifies its mean. Coordinate cylinder preimages and finite arithmetic give estimator measurability. Khinchin gives convergence on the supplied common space and product joint laws transfer the exact error probabilities to each finite experiment. Zero variance, n=1 and point-mass laws work; no infinite-product construction or AC. Refuter:13:1 is confirmed: F14 attributed a concrete metric theorem to an abstract definition; replaced with the proved lemma and synchronized manifest and contract. Repair confidence 1."
+      }
+    },
+    "thm-nonidentifiability-precludes-simultaneous-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-observational-equivalence",
+          "source_section": "Definition",
+          "quote": "In a parametric model $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$,\ntwo parameter values $\\theta,\\eta\\in\\Theta$ are **observationally\nequivalent**, written $\\theta\\sim\\eta$, if and only if\n$$\nP_\\theta=P_\\eta,\n$$\nthat is, $P_\\theta(A)=P_\\eta(A)$ for every $A\\in\\mathcal A$\n([[def-parametric-statistical-model]]). Equivalent parameter values therefore\ngive exactly the same sampling law. No distinctness of $\\theta$ and $\\eta$ is\nrequired.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-estimator-sequence-in-iid-experiments",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric model on a statistical experiment, and let $\\psi:\\Theta\\to\\mathcal T$ be an estimand whose target set $\\mathcal T$ is equipped with a metric $d$ ([[def-statistical-experiment]], [[def-parametric-statistical-model]], [[def-estimand-on-a-statistical-model]], [[def-metric-space]]). For $n\\ge1$, the IID sample-size-$n$ experiment has sample space $\\mathcal X^n$, product sigma-algebra $\\mathcal A^{\\otimes n}$, and sampling law $P_\\theta^{\\otimes n}$ at parameter $\\theta$ ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product law is defined recursively from $P_\\theta$; each factor is a probability measure and hence sigma-finite, so the finite product theorem supplies its existence, rectangle formula, and uniqueness ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\n\nA **nonrandomized estimator sequence** of $\\psi$ is a sequence of measurable maps, in the sense of [[def-measurable-function-between-measurable-spaces]],\n$$T_n:(\\mathcal X^n,\\mathcal A^{\\otimes n})\\to(\\mathcal T,\\mathcal B(\\mathcal T)),\\qquad n\\ge1,$$\nwhere $\\mathcal B(\\mathcal T)$ is the sigma-algebra generated by the open sets of the metric $d$, that is, the Borel sigma-algebra of its metric topology ([[def-borel-sigma-algebra]]). Its sampling distribution at $\\theta$ and sample size $n$ is the pushforward of $P_\\theta^{\\otimes n}$ by $T_n$.\n\nThis definition fixes IID repeated sampling and data-measurable estimators. It imposes no measurability on the parameter map $\\theta\\mapsto P_\\theta$ or on $\\psi$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-consistency-in-probability",
+          "source_section": "Definition",
+          "quote": "Let $(T_n)$ be an estimator sequence of an estimand $\\psi$ with metric target $(\\mathcal T,d)$, and fix $\\theta\\in\\Theta$. The sequence is **consistent in probability at $\\theta$** if for every $\\varepsilon>0$,\n$$P_\\theta^{\\otimes n}\\bigl(\\{x\\in\\mathcal X^n:d(T_n(x),\\psi(\\theta))>\\varepsilon\\}\\bigr)\\longrightarrow0.$$\n\nThe error event is measurable: by the triangle inequality, $t\\mapsto d(t,\\psi(\\theta))$ is continuous, so its strict superlevel set at $\\varepsilon$ is open in the target metric topology and hence Borel; its preimage under $T_n$ is measurable.\n\nThe consistency is **pointwise** because $\\theta$ is fixed before the limit. It does not assert uniform convergence over $\\Theta$ ([[def-estimator-sequence-in-iid-experiments]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$ generating $\\mathcal A$, and let $\\mu,\\nu$ be measures on $(X,\\mathcal A)$ that agree on $\\mathcal P$. Suppose there is an increasing sequence $(P_n)$ in $\\mathcal P$ with\n\n$$X=\\bigcup_nP_n,\\qquad \\mu(P_n)=\\nu(P_n)<+\\infty\\quad(n\\in\\mathbb N).$$\n\nThen $\\mu=\\nu$ on $\\mathcal A$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-metric-open-set-algebra",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open and closed sets\nas in [[def-metric-topology]] and balls as in [[def-metric-ball]]. Then:\n\n1. **Balls are open.** $B(x,r)$ is open, for every $x \\in X$ and every $r > 0$.\n2. **Arbitrary unions.** If $\\mathcal{U}$ is any collection of open subsets of\n   $X$, then $\\bigcup \\mathcal{U}$ is open.\n3. **Finite intersections.** If $n \\ge 1$ and $U_0, \\dots, U_{n-1}$ are open,\n   then $U_0 \\cap \\dots \\cap U_{n-1}$ is open.\n4. **Closed balls are closed.** $\\bar B(x,r)$ is closed, for every $x \\in X$ and\n   every $r > 0$.\n\nTogether with the fact that $\\emptyset$ and $X$ are open, recorded already in\n[[def-metric-topology]], claims 2 and 3 say that $\\mathcal{T}_d$ has exactly the\nclosure properties that the word *topology* names.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], nonidentifiability supplies $\\theta_0,\\theta_1\\in\\Theta$ with $\\theta_0\\sim\\theta_1$ and $\\psi(\\theta_0)\\ne\\psi(\\theta_1)$. Fix this pair.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $n\\ge1$. By [F1], the observation laws in the model are $P_\\theta$. Measurable rectangles in $\\mathcal X^n$ form a $\\pi$-system generating $\\mathcal A^{\\otimes n}$ by [F7]. For every rectangle $A_1\\times\\cdots\\times A_n$, [F8] and [F2] give $P_{\\theta_0}^{\\otimes n}(A_1\\times\\cdots\\times A_n)=\\prod_{j=1}^nP_{\\theta_0}(A_j)=\\prod_{j=1}^nP_{\\theta_1}(A_j)=P_{\\theta_1}^{\\otimes n}(A_1\\times\\cdots\\times A_n)$. The full space is itself a rectangle and is an increasing exhaustion of finite mass one. Applying [F9] shows $P_{\\theta_0}^{\\otimes n}=P_{\\theta_1}^{\\otimes n}$ on all of $\\mathcal A^{\\otimes n}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "F8",
+            "F9",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $\\Delta=d(\\psi(\\theta_0),\\psi(\\theta_1))>0$ and $r=\\Delta/3$. The two closed target balls $C_i=\\{t\\in\\mathcal T:d(t,\\psi(\\theta_i))\\le r\\}$ are disjoint: a point in both would give $\\Delta\\le2r<\\Delta$ by [F10].",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F10",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose, for contradiction, that the estimator sequence is consistent at both parameters. For $i\\in\\{0,1\\}$ let $E_{i,n}=T_n^{-1}(C_i)$. These events are measurable because each $C_i$ is closed by [F13] and Borel by [F12], while $T_n$ is measurable by [F5] and preimages of Borel sets are measurable by [F11]. By [F6], $P_{\\theta_i}^{\\otimes n}(E_{i,n})\\to1$ for each $i$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F11",
+            "F12",
+            "F13",
+            "given",
+            "step 1.1",
+            "step 2.2",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each $n$, step 2.1 gives one common sample law for both probabilities, and step 2.2 gives disjoint events, so their probabilities sum to at most one. Step 3.1 says both probabilities tend to one, so their sum tends to two, a contradiction. Therefore the estimator sequence cannot be consistent at both parameters.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra",
+            "discharge-contradiction: step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement nonidentifiability premise supplies an actual pair θ0,θ1 with distinct target values, fixed in step 1.1. An empty parameter set cannot satisfy that premise; every positive finite sample law used in step 2.1 is a probability law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.2–3.1 require only positive distance between distinct targets, including if one target is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement cannot have the nonidentifiability premise with only one parameter, because a parameter is observationally equivalent to itself and has one target value. A one-dimensional metric target R with two different values is allowed by the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The identical-law pair is the central hypothesis in the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.2 uses closed balls of radius Δ/3 including their boundaries; 2Δ/3<Δ keeps them disjoint. Step 3.1 consistency uses their complements as strict error events at this positive radius."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes one existential witness pair and makes no family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement supplies a necessary obstruction: nonidentifiability produces a pair where simultaneous consistency is impossible. It does not assert that this pairwise impossibility characterizes nonidentifiability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives no converse that identifiability guarantees a consistent estimator sequence; its proof only contradicts two disjoint high-probability target events under equal data laws."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all six proof steps and fourteen direct dependencies. Negating identifiability supplies one equivalent pair with unequal targets, requiring only finite existential instantiation. Product measures agree on generating rectangles with full-space finite exhaustion, so all finite laws coincide. The metric axioms imply nonnegativity immediately (0=d(x,x)≤2d(x,y)), and separation gives Delta>0. Closed balls of radius Delta/3 are Borel and disjoint; consistency for strict >r tails gives each complementary event probability tending to one under the same law, contradicting a sum ≤1. Empty or singleton parameter sets cannot meet nonidentifiability; no converse or AC asserted."
+      }
+    },
+    "ex-degenerate-asymptotic-distribution-with-rare-outliers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-convergence-in-distribution-of-random-elements",
+          "source_section": "Definition",
+          "quote": "Random elements $X_n,X$ with values in the same metric space **converge in distribution**, written $X_n\\Rightarrow X$, if their laws from [[def-law-or-distribution-of-a-random-element]] satisfy $P_{X_n}\\Rightarrow P_X$ in [[def-weak-convergence-of-borel-probability-measures]]. They may be defined on different probability spaces. The definition specifies only their marginal laws.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-asymptotic-distribution",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be fixed, and equip $\\mathbb R^d$ with the Borel sigma-algebra generated by its Euclidean open sets. Let $Z_n$ be measurable random elements of this Borel space, not necessarily defined on a common probability space, and let $\\nu$ be a Borel probability measure on $\\mathbb R^d$. The sequence $(Z_n)$ has **asymptotic distribution** $\\nu$ if its laws converge weakly to $\\nu$; equivalently, $Z_n\\Rightarrow Z$ for any random vector $Z$ with law $\\nu$ ([[def-convergence-in-distribution-of-random-elements]], [[def-weak-convergence-of-borel-probability-measures]]).\n\nFor an estimator, any centering or scaling, such as $r_n(T_n-\\psi(\\theta))$, is part of the sequence whose asymptotic distribution is being specified; it is not implicit in the term. Weak convergence alone does not assert convergence of moments.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $\\Omega_n=\\{0,1\\}$, $\\mathcal A_n=\\mathcal P(\\Omega_n)$, $P_n(\\{1\\})=1/n$, and $P_n(\\{0\\})=1-1/n$. These masses are nonnegative and sum to one. Since the space has two points, every disjoint sequence of subsets has at most two nonempty members; the mass formula is countably additive and gives zero to the empty set by [F3]. Thus [F1], [F2], and [F4] make this a probability space for each $n$. The map $X_n(0)=0$, $X_n(1)=n$ is measurable by [F5], hence a real random variable by [F6].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any fixed $\\varepsilon>0$, once $n>\\varepsilon$ the event $\\{|X_n|>\\varepsilon\\}$ is exactly $\\{1\\}$, so $P_n(|X_n|>\\varepsilon)=1/n\\to0$. Therefore $X_n=o_P(1)$ by [F7].",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "given",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For bounded continuous f, put M=||f||∞ and g=f+M. The pushforward law P_{X_n} and δ_0 are probabilities. Since |f|≤M and 0≤g≤2M, every nonnegative simple minorant has simple integral at most the corresponding constant times the total mass by F3, F4 and F12; taking the nonnegative-integral suprema gives finite absolute integrals. Linearity therefore applies. Change of variables and finite simple integrals compute the shifted test-integral difference as |g(n)-g(0)|/n≤2M/n, proving weak convergence and the asymptotic-distribution claim.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The nonnegative simple-integral formula [F11]–[F12] gives $\\mathbb E X_n=(1/n)n+(1-1/n)0=1$ for every $n$, while the limit variable $0$ has expectation $0$. For the finite check $n=2$, $P_2(X_2=2)=1/2$ and $\\mathbb E X_2=1$, confirming the stated mass and expectation formulas.",
+          "step": "3.1",
+          "inputs": [
+            "F11",
+            "F12",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example has n≥1 and proof step 1.1 constructs Ω_n={0,1}, a nonempty two-point sample space with normalized weights. Probability-zero singleton mass at n=1 does not remove the outcome from that fixed carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 show convergence to the constant zero and its point-mass law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example at n=1 gives mass1 to X_1=1 and mass0 to X_1=0; proof step 3.1 still gives E X_1=1. Degeneracy of this first marginal does not change the n→∞ limit at zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and Step 2.2 identify the limit law as δ₀."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 computes strict tail |X_n|>ε once n>ε; at ε=n the outlier is excluded by strictness. The endpoint weight1−1/n=0 at n=1 remains a normalized law in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the finite two-point spaces explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example directly computes X_n=o_P(1), weak limitδ0 and constant expectations1 to refute expectation convergence from weak convergence. It is not a forward characterization of all rare-outlier sequences."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example does not assert every failure of moment convergence has these masses or that the absence of moment convergence implies a δ0 weak limit; it supplies one explicit witness."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=2",
+          "calculation": "P(X₂=2)=1/2 and E[X₂]=(1/2)·2=1.",
+          "result": "The expectation remains one although the limiting law is δ₀."
+        }
+      ],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all four verification steps and fifteen direct suppliers. Two-point masses are nonnegative, sum to one, and give countable additivity, including n=1 with a zero-mass point. Measurability follows from the power set. For fixed epsilon the strict tail is 1/n eventually. Bounded continuous f is integrable by bounded simple minorants on probability laws; shifting by M permits nonnegative change of variables and L1 linearity after integrability is established. Difference of test integrals is at most 2M/n, including M=0. E X_n=1 and E 0=0 are exact simple-integral computations. No common probability space or choice needed."
+      }
+    },
+    "ex-tightness-times-smallness-and-root-n-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. Assume in each application that $B(U_n,V_n)$ is a random vector on the same probability space as $U_n,V_n$, for every $n$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The power set on $\\Omega$ is a sigma-algebra by [F1], hence gives a measurable space by [F2]. Assigning mass $1/2$ to each singleton defines a measure: any pairwise disjoint sequence contains at most two nonempty sets, and the mass of their union is the sum of their masses. Its total mass is one, so it is a probability measure by [F3]–[F4]. The identity map $Z$ is measurable because every preimage of a Borel set is a subset of $\\Omega$; thus it is a real random variable by [F5]–[F6].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every $n$, $|Z_n|=1$ everywhere, so choosing $M=1$ makes $P(|Z_n|>M)=0$ and proves $Z_n=O_P(1)$ by [F7]. For each $\\varepsilon>0$, $n^{-1/2}\\le\\varepsilon$ for all sufficiently large $n$, so $P(|a_n|>\\varepsilon)=0$ eventually; hence $a_n=o_P(1)$ by [F7].",
+          "step": "1.2",
+          "inputs": [
+            "F7",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The multiplication map B(u,v)=uv satisfies the global product norm bound. Each R_n is measurable because every preimage in the finite power-set domain is measurable, so the composite-random-vector condition of F8 holds. Apply F8 to a_n=o_P(1) and Z_n=O_P(1) to obtain R_n=o_P(1); the identity √nR_n=Z_n then gives root-n boundedness from step 1.2. The n=4 finite values are ±1/2 and ±1.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes Ω={−1,1} with two weights1/2 and positive n. Proof step 1.1 verifies total mass one; the finite product rule is applied to the explicitly supplied scalar sequences, not an empty function class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 prove R_n=o_P(1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.2 uses |Z_n|=1 and the exact bound M=1, making P(|Z_n|>1)=0. At n=1, a_1=1 and R_1=Z; the eventual vanishing-rate assertion is not a claim that this first value is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item does not assume a nondegenerate law or a nonconstant target."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example rate a_n=n^−1/2 is defined for n≥1. Proof step 1.2 allows equality n^−1/2=ε in the no-tail event and uses the strict bound |Z_n|>1 to handle the threshold endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 specifies one finite space and uses the same random variable for each n."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example proves the rate statements for R_n=n^−1/2 Z through a specific bounded scalar multiplication. It asserts no equivalence between root-n boundedness and this two-point representation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example does not infer tightness of arbitrary factors from a vanishing product; its exact identity √n R_n=Z_n is a calculation for the supplied sequence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=4",
+          "calculation": "R₄=Z/2 takes values ±1/2, while √4 R₄=Z takes values ±1.",
+          "result": "The root-n boundedness identity holds pointwise."
+        }
+      ],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all three verification steps and eight direct cited dependencies. Two-point power-set probability gives measurable Z, deterministic a_n and each R_n. Strict tail above M=1 vanishes; for fixed epsilon, n^(-1/2)≤epsilon eventually, including equality. Product map has C=1 and its actual composite is a random variable, meeting the current supplier premise. Exact identity sqrt(n)R_n=Z proves boundedness, not a stronger vanishing scaled limit; n=4 gives ±1/2 and ±1. No independence or AC use."
+      }
+    },
+    "ex-bernoulli-sample-mean-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-estimator-sequence-in-iid-experiments",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric model on a statistical experiment, and let $\\psi:\\Theta\\to\\mathcal T$ be an estimand whose target set $\\mathcal T$ is equipped with a metric $d$ ([[def-statistical-experiment]], [[def-parametric-statistical-model]], [[def-estimand-on-a-statistical-model]], [[def-metric-space]]). For $n\\ge1$, the IID sample-size-$n$ experiment has sample space $\\mathcal X^n$, product sigma-algebra $\\mathcal A^{\\otimes n}$, and sampling law $P_\\theta^{\\otimes n}$ at parameter $\\theta$ ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product law is defined recursively from $P_\\theta$; each factor is a probability measure and hence sigma-finite, so the finite product theorem supplies its existence, rectangle formula, and uniqueness ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\n\nA **nonrandomized estimator sequence** of $\\psi$ is a sequence of measurable maps, in the sense of [[def-measurable-function-between-measurable-spaces]],\n$$T_n:(\\mathcal X^n,\\mathcal A^{\\otimes n})\\to(\\mathcal T,\\mathcal B(\\mathcal T)),\\qquad n\\ge1,$$\nwhere $\\mathcal B(\\mathcal T)$ is the sigma-algebra generated by the open sets of the metric $d$, that is, the Borel sigma-algebra of its metric topology ([[def-borel-sigma-algebra]]). Its sampling distribution at $\\theta$ and sample size $n$ is the pushforward of $P_\\theta^{\\otimes n}$ by $T_n$.\n\nThis definition fixes IID repeated sampling and data-measurable estimators. It imposes no measurability on the parameter map $\\theta\\mapsto P_\\theta$ or on $\\psi$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-partial-sums-and-sample-means",
+          "source_section": "Definition",
+          "quote": "For real random variables $X_1,X_2,\\ldots$ on one probability space, define\n$$S_0=0,\\qquad S_n=\\sum_{k=1}^nX_k,\\qquad \\overline X_n=S_n/n\\quad(n\\ge1).$$\nFor a triangular array with finite row length $r_n\\ge0$, write $S_n=\\sum_{k=1}^{r_n}X_{n,k}$. An empty row has sum zero. These are finite sums in [[def-finite-sum]], with its index shifted by one. Each sum and each sample mean is a real random variable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]] and [[def-random-element-and-real-random-variable]]. No independence, common law, or integrability is implicit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-iid-finite-variance-weak-law",
+          "source_section": "Statement",
+          "quote": "Let $(X_k)_{k\\ge1}$ be IID square-integrable real random variables, with $\\mu=\\mathbb EX_1$ and $\\sigma^2=\\operatorname{Var}(X_1)$. For $S_n=\\sum_{k=1}^nX_k$,\n$$\\mathbb E|S_n/n-\\mu|^2=\\sigma^2/n,$$\nand $S_n/n\\to\\mu$ in $L^2$ and in probability. Also $\\mathbb P(|S_n/n-\\mu|\\ge\\varepsilon)\\le\\sigma^2/(n\\varepsilon^2)$ for $\\varepsilon>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-iid-sample-mean-consistency",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X=\\mathbb R$ with its Borel sigma-algebra, and let $\\mathsf P$ be a parametric statistical experiment on $\\mathcal X$. Define the mean estimand by $\\mu(\\theta)=\\int x\\,P_\\theta(dx)$ and suppose it is finite for every $\\theta$. For a fixed $\\theta$, suppose an IID sequence $(X_i)_{i\\ge1}$ with one-observation law $P_\\theta$ is given and $\\mathbb E_\\theta|X_1|<\\infty$. The sample-mean estimator $T_n(x_1,\\ldots,x_n)=n^{-1}\\sum_{i=1}^n x_i$ is consistent in probability for $\\mu$ at $\\theta$ in the IID sample-size experiments.\n\nThe assertion is pointwise in $\\theta$. The existence of a common probability space carrying the IID sequence is part of the hypothesis.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-consistency-in-probability",
+          "source_section": "Definition",
+          "quote": "Let $(T_n)$ be an estimator sequence of an estimand $\\psi$ with metric target $(\\mathcal T,d)$, and fix $\\theta\\in\\Theta$. The sequence is **consistent in probability at $\\theta$** if for every $\\varepsilon>0$,\n$$P_\\theta^{\\otimes n}\\bigl(\\{x\\in\\mathcal X^n:d(T_n(x),\\psi(\\theta))>\\varepsilon\\}\\bigr)\\longrightarrow0.$$\n\nThe error event is measurable: by the triangle inequality, $t\\mapsto d(t,\\psi(\\theta))$ is continuous, so its strict superlevel set at $\\varepsilon$ is open in the target metric topology and hence Borel; its preimage under $T_n$ is measurable.\n\nThe consistency is **pointwise** because $\\theta$ is fixed before the limit. It does not assert uniform convergence over $\\Theta$ ([[def-estimator-sequence-in-iid-experiments]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The power set of $\\{0,1\\}$ is a sigma-algebra by [F1], so it defines a measurable space by [F2]. Because $0\\le p\\le1$, the two singleton masses are nonnegative and sum to one. For any pairwise disjoint sequence of subsets, each of $0$ and $1$ occurs in at most one set, so the mass formula is countably additive and gives zero to the empty set by [F3]. Thus $P_p$ is a probability measure by [F4], and the family is a statistical experiment with model map $p\\mapsto P_p$ and target $\\psi(p)=p$ by [F5, F6, F7].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $X\\sim P_p$, $X=1_{\\{1\\}}$ and $X^2=X$, so [F12] gives $\\mathbb E_pX=p$ and $\\mathbb E_pX^2=p$. By [F13], $\\operatorname{Var}_p(X)=p-p^2=p(1-p)$, which is finite for all $p\\in[0,1]$.",
+          "step": "1.2",
+          "inputs": [
+            "F12",
+            "F13",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The coordinate projections are measurable by F17 and arithmetic measurability makes T_n measurable by F18. The supplied common sequence is IID, and F11 identifies its first-n joint law with P_p^⊗n. Applying F14 with variance p(1-p) from step 1.2 and transferring through this joint-law identity gives the finite-sample bound; p(1-p)=1/4-(p-1/2)^2≤1/4 yields the uniform bound.",
+          "step": "2.1",
+          "inputs": [
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F14",
+            "F17",
+            "F18",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The bound in step 2.1 tends to zero, so F16 gives consistency; it also agrees with F15. By the product rectangle formula in F8 and the joint-law identity F11, the endpoint product laws are concentrated on the all-zero or all-one sample. For n=2 and p=1/2 the same formula gives mass 1/4 to each ordered pair, so the error probability at ε=1/2 is 1/2, attaining the bound.",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "F11",
+            "F15",
+            "F16",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes X={0,1} and uses n≥1 finite product samples; proof step 2.1 divides by the positive sample size. The endpoint laws have one zero-weight outcome but remain measures on the same two-point carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the p=0 endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the p=1 endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: at p=0 and p=1 the sample and estimator are constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 treats both endpoints explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement explicitly supplies a common probability space carrying an IID sequence with law P_p; its finite joint laws match the sample-size product laws by the rectangle formula. No sequence selection or extra choice is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example derives a finite Bernoulli error bound and consistency from the IID mean/variance calculation. It does not characterize Bernoulli sampling by consistency of an estimator."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example does not claim that a consistent sample mean implies IID inputs or the stated p(1−p) variance; those are premises used to obtain the quantitative bound."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=2, p=1/2, ε=1/2",
+          "calculation": "Samples 00 and 11 have total probability 1/2 and error 1/2; the bound is (1/4)/(2·(1/2)²)=1/2.",
+          "result": "The finite-sample deviation inequality is attained."
+        }
+      ],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read four verification steps and all nineteen dependencies, including finite-variance weak law. Bernoulli nonnegative masses sum to one for p in [0,1], including endpoints. Simple integration gives E X=E X²=p and variance p(1-p) (also directly p(1-p)²+(1-p)p²). Coordinate measurability and arithmetic define T_n. The explicitly supplied common IID sequence meets the weak-law hypothesis; finite joint-law identity transfers its ≥epsilon Chebyshev bound to product experiments. p(1-p)≤1/4 and strict >epsilon consistency follow. At p=0,1 the unique constant sample has mass one; at n=2,p=1/2 the three sample-mean masses and error 1/2 exactly match the bound. No infinite-product existence or AC claimed."
+      }
+    },
+    "ex-nonidentifiable-targets-preclude-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-observational-equivalence",
+          "source_section": "Definition",
+          "quote": "In a parametric model $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$,\ntwo parameter values $\\theta,\\eta\\in\\Theta$ are **observationally\nequivalent**, written $\\theta\\sim\\eta$, if and only if\n$$\nP_\\theta=P_\\eta,\n$$\nthat is, $P_\\theta(A)=P_\\eta(A)$ for every $A\\in\\mathcal A$\n([[def-parametric-statistical-model]]). Equivalent parameter values therefore\ngive exactly the same sampling law. No distinctness of $\\theta$ and $\\eta$ is\nrequired.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-estimator-sequence-in-iid-experiments",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric model on a statistical experiment, and let $\\psi:\\Theta\\to\\mathcal T$ be an estimand whose target set $\\mathcal T$ is equipped with a metric $d$ ([[def-statistical-experiment]], [[def-parametric-statistical-model]], [[def-estimand-on-a-statistical-model]], [[def-metric-space]]). For $n\\ge1$, the IID sample-size-$n$ experiment has sample space $\\mathcal X^n$, product sigma-algebra $\\mathcal A^{\\otimes n}$, and sampling law $P_\\theta^{\\otimes n}$ at parameter $\\theta$ ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product law is defined recursively from $P_\\theta$; each factor is a probability measure and hence sigma-finite, so the finite product theorem supplies its existence, rectangle formula, and uniqueness ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\n\nA **nonrandomized estimator sequence** of $\\psi$ is a sequence of measurable maps, in the sense of [[def-measurable-function-between-measurable-spaces]],\n$$T_n:(\\mathcal X^n,\\mathcal A^{\\otimes n})\\to(\\mathcal T,\\mathcal B(\\mathcal T)),\\qquad n\\ge1,$$\nwhere $\\mathcal B(\\mathcal T)$ is the sigma-algebra generated by the open sets of the metric $d$, that is, the Borel sigma-algebra of its metric topology ([[def-borel-sigma-algebra]]). Its sampling distribution at $\\theta$ and sample size $n$ is the pushforward of $P_\\theta^{\\otimes n}$ by $T_n$.\n\nThis definition fixes IID repeated sampling and data-measurable estimators. It imposes no measurability on the parameter map $\\theta\\mapsto P_\\theta$ or on $\\psi$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-consistency-in-probability",
+          "source_section": "Definition",
+          "quote": "Let $(T_n)$ be an estimator sequence of an estimand $\\psi$ with metric target $(\\mathcal T,d)$, and fix $\\theta\\in\\Theta$. The sequence is **consistent in probability at $\\theta$** if for every $\\varepsilon>0$,\n$$P_\\theta^{\\otimes n}\\bigl(\\{x\\in\\mathcal X^n:d(T_n(x),\\psi(\\theta))>\\varepsilon\\}\\bigr)\\longrightarrow0.$$\n\nThe error event is measurable: by the triangle inequality, $t\\mapsto d(t,\\psi(\\theta))$ is continuous, so its strict superlevel set at $\\varepsilon$ is open in the target metric topology and hence Borel; its preimage under $T_n$ is measurable.\n\nThe consistency is **pointwise** because $\\theta$ is fixed before the limit. It does not assert uniform convergence over $\\Theta$ ([[def-estimator-sequence-in-iid-experiments]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-nonidentifiability-precludes-simultaneous-consistency",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric statistical model, let $\\psi:\\Theta\\to(\\mathcal T,d)$ be a metric-valued estimand, and let $(T_n)$ be a nonrandomized estimator sequence for IID samples from this model. If $\\psi$ is not identifiable, then there is a pair of observationally equivalent parameters with distinct target values, and no estimator sequence is consistent in probability at both parameters.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The power set on $\\mathcal X$ is a sigma-algebra by [F1], so $(\\mathcal X,\\mathcal P(\\mathcal X))$ is a measurable space by [F2]. For every $u\\in[0,1]$, the two singleton masses $u$ and $1-u$ are nonnegative and sum to one. Any disjoint sequence of subsets of $\\mathcal X$ has at most two nonempty members, so the assignment is countably additive and gives zero to the empty set by [F3]; hence each $P_{(u,v)}$ is a probability measure by [F4]. This defines the experiment and model in [F5]–[F6], and $\\psi$ is the target in [F7].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At $\\theta_0=(1/2,0)$ and $\\theta_1=(1/2,1)$, both laws assign probability $1/2$ to each singleton and therefore are equal as measures on the power set. The target values are $0$ and $1$, whose distance is $1>0$. Thus [F8] makes the parameters observationally equivalent, while [F7] and [F9] show the target is not identifiable.",
+          "step": "1.2",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F11]–[F12], estimators are measurable maps on the IID sample spaces and consistency is pointwise under those sample laws. Apply [F13] to the pair from step 1.2: no estimator sequence is consistent in probability at both $\\theta_0$ and $\\theta_1$. For the finite check at sample size $n=2$, [F14] gives mass $(1/2)^2=1/4$ to each ordered pair under both product laws, confirming that the observation distributions remain identical.",
+          "step": "2.1",
+          "inputs": [
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "given",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes the nonempty two-point data carrier and Θ=[0,1]²; its two witness parameters (1/2,0),(1/2,1) exist explicitly and both have normalized Bernoulli laws, as verified in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 uses target value zero at θ₀."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 uses target value one at θ₁."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example gives two distinct parameters with the same Bernoulli law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2: target coordinates 0 and 1 are the explicit parameter-square endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 use a specified finite pair and finite product masses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example shows these two parameter labels have equal data laws and target values0,1, then invokes the obstruction theorem. It does not characterize all nonidentifiable targets by this Bernoulli parametrization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example does not infer a redundant second Bernoulli parameter from an arbitrary consistency failure; the witness model is explicitly prescribed before the conclusion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=2",
+          "calculation": "Both parameters give mass 1/4 to each ordered binary sample.",
+          "result": "The two IID sample laws coincide at the finite check."
+        }
+      ],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all three verification steps and fourteen original dependencies plus the real-line metric lemma. The model depends only on u, while target v differs at (1/2,0),(1/2,1). Finite two-point masses define probability laws even at u=0,1. The selected parameters have equal law on every power-set event and target distance exactly 1; the reviewed nonidentifiability theorem applies to every estimator sequence. At n=2 each ordered pair has mass 1/4 under either product law. Corrected F10: the abstract metric definition does not establish the usual real metric; cite the proved real-line lemma instead and synchronize deps/manifest/contract. Claim unchanged; no extra routed decision added for this previously untouched risk-only carrier. No choice use.",
+        "defect_ids": [
+          "mathematical-statistics-foundations-37-3a-batch-13-example-usual-metric-citation"
+        ],
+        "repair_confidence": 1,
+        "owner_routing_required": true
+      }
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "28",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "thm-tangent-space-is-closed-linear-subspace",
+      "model": "gpt-6-luna",
+      "context_sha256": "7c593f10e8eb95e15b7dd0bec4925322180bc2e91cfd7deca19159d0181894da",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 omits zero inclusion, so the empty subset satisfies its stated closure conditions but is not a linear subspace. This is nonfatal: step 1.1 already explicitly includes zero as the empty sum, and step 2.1 preserves it in the closure. Repaired F3 to state all three conditions; the theorem Statement and proof remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-nuisance-tangent-space",
+      "model": "gpt-6-luna",
+      "context_sha256": "5299c76220c5f20f9ba060b74682ba1b1d63f06692a52e3f2401d579a59b5049",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The Definition invokes def-tangent-space and thm-tangent-space-is-closed-linear-subspace, both explicitly conditional on Countable Choice, without carrying that assumption. Added Countable Choice explicitly and its dependency, preserving all designated paths, zero right target derivatives and the closed finite real span. This is a missing supplier hypothesis, not a claim that closed linearity itself requires choice.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-tangent-space-is-closed-linear-subspace",
+      "disposition": "repaired",
+      "post_sha256": "38a98c91c4ecadbc74a1af66bee8feea66bf61dc17ed2905426c6b1469d8b280",
+      "review_context_sha256": "d005390e4fdeea4e3fbb74c5a5b2ecf511bcff41969aa94346454e713edde1f7",
+      "reason": "Checked the entire finite-span, ball-closure, addition, scalar-multiplication and completeness argument. Zero is the empty sum even for an empty tangent set; two approximants require only finite choices; ambient completeness is invoked under explicit Countable Choice. Corrected only F3, matching W1-W3 in def-linear-subspace.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-nuisance-tangent-space",
+      "disposition": "repaired",
+      "post_sha256": "a50d53a07b0d4152a7b4e381d3bd06c25de93bb719cf49c88780262bd74d2b74",
+      "review_context_sha256": "62880fcf234e322badf2d3beeb722f13b750dff9857651dd8fb8b1962b8f6d2c",
+      "reason": "Added the Countable Choice hypothesis required by both cited tangent-space suppliers and listed def-countable-choice in deps. Nuisance scores are a subset of the designated tangent set, so the closed finite real span theorem applies, including the empty span {0}. Kept zero right target derivative distinct from exact constancy and from automatic designation. Synchronized the owning manifest, choice boundary evidence and page summary. Both direct consumers already declare Countable Choice.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-nuisance-tangent-orthogonal-complement",
+    "def-efficient-score"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-tangent-space-is-closed-linear-subspace",
+      "locus": "facts-block",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "F3 omitted zero inclusion from the linear-subspace definition; the empty subset exposes the inaccurate restatement. Step 1.1 already supplied zero, so the actual proof inference was sound.",
+      "repair": "Added containing the zero vector to F3; Statement, numbered proof and exact contract citations unchanged.",
+      "source_rejection": {
+        "model": "gpt-6-luna",
+        "context_sha256": "7c593f10e8eb95e15b7dd0bec4925322180bc2e91cfd7deca19159d0181894da"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-nuisance-tangent-space",
+      "locus": "statement",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "finding": "Unconditional nuisance closed-space claim cited tangent-space interfaces requiring Countable Choice.",
+      "repair": "Explicitly assumed Countable Choice, added its dependency, and synchronized owning metadata while preserving the designated-path and derivative conventions.",
+      "source_rejection": {
+        "model": "gpt-6-luna",
+        "context_sha256": "5299c76220c5f20f9ba060b74682ba1b1d63f06692a52e3f2401d579a59b5049"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "semiparametric-models-and-tangent-spaces",
+      "locus": "page-summary",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "Page summary described nuisance paths as holding the target fixed, whereas the Definition requires zero right derivative, compatible with t^2 variation.",
+      "repair": "Replaced exact-constancy wording with designated paths with zero right derivative of the target.",
+      "source_evidence": "research/mathematical-statistics-foundations-37-batch-28-step5-context.json concerns[0] verified against the current nuisance Definition."
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "record-interface-examination",
+      "id": "def-nuisance-tangent-space",
+      "finding": "Countable Choice interface restoration has exactly two direct item consumers, both draft original-frontier items already carrying the hypothesis; both uses remain sound. No published direct consumer or maintenance repair identified.",
+      "consumers": [
+        "def-nuisance-tangent-orthogonal-complement",
+        "def-efficient-score"
+      ],
+      "status": "no-published-consumer-repair-required"
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Reviewed and repaired in assigned dependency order: theorem, then nuisance definition. Read current full item arguments, def-linear-subspace W1-W3, def-countable-choice, def-tangent-set, def-tangent-space, and the mean-zero Hilbert proof; no external source reading claimed. First review hashes captured before the consumer edit; second captured immediately after final integration. Neither item had a verification.judge record to invalidate.",
+    "The theorem Statement is unchanged; only its F3 gains zero inclusion. The nuisance Definition changes only by adding the required Countable Choice convention; the designated-path rule, zero right derivative and closed finite real span remain intact. This restores the supplier prerequisites without asserting that closed linearity intrinsically requires choice. No new items or mathematical uncertainty.",
+    "Shared metadata lock acquired, files reread, nuisance manifest Definition/deps and contract choice boundary synchronized, page summary corrected from exact target constancy to zero right derivative, focused checks passed, and lock released. The page concern was independently verified against the actual Definition: a target varying as t^2 can have zero derivative.",
+    "Direct consumer inventory: def-nuisance-tangent-orthogonal-complement and def-efficient-score. Both are draft original-frontier consumers, remain sound and need no repair. No published or outside-frontier direct consumer was found; no further propagation is triggered.",
+    "Validation: precheck exit 0 (one theorem proof passes; nuisance definition not applicable); rendercheck exit 0 (both items and owning page, no errors or warnings); strict proof-contract check exit 0 for both assigned items; manifest-deps exit 0 for 12 owning-batch entries; exact nuisance manifest Definition/deps mirrors pass; final single batched proof-layout exit 0 (2 items, 4 steps, 0 defects); content-policy exit 0 (12 owning-batch items, 0 errors, 0 warnings)."
+  ],
+  "downstream_evidence": [
+    {
+      "supplier": "def-nuisance-tangent-space",
+      "id": "def-nuisance-tangent-orthogonal-complement",
+      "path": "items/def-nuisance-tangent-orthogonal-complement.md",
+      "affected_use": "Definition: the set of h in L2_0(P) orthogonal to every g in T_eta(P), with T_eta(P) supplied by the nuisance-space dependency.",
+      "invalidated_claim": "None: the first Definition paragraph already explicitly assumes Countable Choice.",
+      "minimality": "The supplied space and all designation/derivative conventions are unchanged; no consumer edit is necessary.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-nuisance-tangent-space",
+      "id": "def-efficient-score",
+      "path": "items/def-efficient-score.md",
+      "affected_use": "Definition: Let T_eta be the closed nuisance tangent space; S_eff = S_theta - Pi_T_eta S_theta uses its closed linearity for coordinatewise orthogonal projection.",
+      "invalidated_claim": "None: its Definition already states that Hilbert projection uses Countable Choice and cites def-countable-choice.",
+      "minimality": "The consumer carries the added supplier hypothesis and projects onto the same space, so no repair or additional propagation is necessary.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    }
+  ]
+}

@@ -1,0 +1,343 @@
+[
+  {
+    "order": 1878,
+    "id": "decision-theoretic-upper-bounds-and-oracle-risk",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Decision-Theoretic Upper Bounds",
+    "companion": "decision-theoretic-upper-bounds-and-oracle-risk-examples",
+    "requires": [
+      "losses-risk-and-decision-rules",
+      "finite-sample-point-estimation-and-unbiased-optimality",
+      "concentration-inequalities-and-tail-bounds",
+      "minimax-lower-bounds-and-information-theoretic-methods",
+      "hilbert-space-geometry-and-riesz-representation"
+    ],
+    "items": [
+      {
+        "id": "def-fixed-design-projection-estimator",
+        "kind": "definition",
+        "title": "Fixed-design least squares as orthogonal projection",
+        "deps": [
+          "def-natural-numbers",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-orthogonal-projection",
+          "thm-orthogonal-projection-is-the-unique-nearest-point"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $n,d\\in\\mathbb N$ with $n,d\\ge1$, and let $X\\in\\mathbb R^{n\\times d}$ be a fixed design\nmatrix, and write $V_X:=\\{X\\theta:\\theta\\in\\mathbb R^d\\}\\subseteq\\mathbb R^n$\nfor its column space. For an observed vector $y\\in\\mathbb R^n$, the **fixed-design\nleast-squares fitted vector** is\n\n$$\\widehat\\mu_X(y):=P_{V_X}y,$$\n\nwhere $P_{V_X}$ is the orthogonal projection onto $V_X$, as defined in\n[[def-orthogonal-projection]]. It is uniquely defined even when $X$ is rank\ndeficient. The nearest-point characterization in\n[[thm-orthogonal-projection-is-the-unique-nearest-point]] says that\n$\\widehat\\mu_X(y)$ minimizes $\\|y-v\\|_2$ over $v\\in V_X$. This item defines the\nfitted vector; it does not select a coefficient representation $\\widehat\\theta$."
+      },
+      {
+        "id": "lem-binomial-support-count-bound",
+        "kind": "lemma",
+        "title": "A binomial support-count bound",
+        "deps": [
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "def-factorial-and-falling-factorial",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-ftc-second-part",
+          "thm-monotonicity-of-the-integral",
+          "thm-continuous-implies-integrable",
+          "lem-integral-elementary-bounds",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "def-integer-power",
+          "lem-power-laws"
+        ],
+        "dependency_level": 0,
+        "statement": "For $d,m\\in\\mathbb N$ with $1\\le m\\le d$,\n\n$$\\binom{d}{m}\\le\\left(\\frac{ed}{m}\\right)^m.$$\n\nHere $\\binom{d}{m}$ is the number of $m$-element subsets of a $d$-element set,\n$m!$ is the factorial, $e=\\exp(1)$, and integer powers have the convention of\n[[def-integer-power]]."
+      },
+      {
+        "id": "lem-finite-dimensional-projection-is-linear-and-contractive",
+        "kind": "lemma",
+        "title": "Finite-dimensional orthogonal projections are linear and contractive",
+        "deps": [
+          "def-orthogonal-projection",
+          "def-linear-subspace",
+          "def-orthogonality-and-orthogonal-complement",
+          "prop-pythagorean-parallelogram-and-polarisation-identities"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $V$ be a finite-dimensional real inner-product space, let $W\\subseteq V$ be a\nlinear subspace, and let $P_W:V\\to W$ be the orthogonal projection. Then $P_W$\nis linear and satisfies $\\|P_Wx\\|\\le \\|x\\|$ for every $x\\in V$. In particular,\n$P_W$ is continuous."
+      },
+      {
+        "id": "lem-finite-support-projection-selection-is-borel",
+        "kind": "lemma",
+        "title": "Finite tie-broken projection searches are Borel measurable",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-topological-space",
+          "thm-continuity-characterisations-top",
+          "def-measurable-function-between-measurable-spaces",
+          "def-max-min",
+          "lem-finite-set-has-max",
+          "thm-cauchy-schwarz-finite",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "lem-finite-dimensional-projection-is-linear-and-contractive"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $n,N\\ge1$ and let $P_1,\\ldots,P_N$ be orthogonal projections in\n$\\mathbb R^n$ onto fixed finite-dimensional subspaces $V_1,\\ldots,V_N$. Let\n$c_1,\\ldots,c_N\\in\\mathbb R$ be fixed. For $y\\in\\mathbb R^n$, define\n$q_i(y):=n^{-1}\\|y-P_i y\\|_2^2+c_i$, choose the least index attaining\n$\\min_{1\\le i\\le N}q_i(y)$, and return its fitted vector $P_i y$. The resulting\nmap $\\widehat m:\\mathbb R^n\\to\\mathbb R^n$ is Borel measurable. The index map\nis Borel measurable when $\\{1,\\ldots,N\\}$ has its discrete sigma-algebra."
+      },
+      {
+        "id": "lem-isotropic-gaussian-noise-is-subgaussian",
+        "kind": "lemma",
+        "title": "Isotropic Gaussian noise has the matching sub-Gaussian proxy",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-subgaussian-variable-and-vector",
+          "lem-normal-density-has-total-mass-one",
+          "thm-integration-against-a-density",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume the Axiom of Choice. Let $n\\ge1$, $\\sigma\\ge0$, and let\n$\\varepsilon\\sim N_n(0,\\sigma^2I_n)$ be a centered multivariate normal vector.\nThen for every $u\\in\\mathbb R^n$ and $\\lambda\\in\\mathbb R$,\n$$\\mathbb E\\exp(\\lambda\\langle u,\\varepsilon\\rangle) =\\exp\\!\\left(\\frac{\\sigma^2\\lambda^2\\|u\\|_2^2}{2}\\right).$$\nIn particular, $\\varepsilon$ is sub-Gaussian with proxy $\\sigma^2$ in the\nlinear-functional sense of [[def-subgaussian-variable-and-vector]]."
+      },
+      {
+        "id": "alg-bic-penalized-least-squares",
+        "kind": "algorithm",
+        "title": "Penalized support-search least squares",
+        "deps": [
+          "def-natural-numbers",
+          "def-finite-cardinality",
+          "def-fixed-design-projection-estimator",
+          "lem-finite-support-projection-selection-is-borel",
+          "cor-cardinality-of-the-power-set"
+        ],
+        "dependency_level": 2,
+        "statement": "**Input:** naturals $n,d\\ge1$, a fixed design $X\\in\\mathbb R^{n\\times d}$, a data\nvector $y\\in\\mathbb R^n$, and a penalty $\\tau^2\\ge0$.\n\nList all supports $S\\subseteq\\{1,\\ldots,d\\}$ in lexicographic order of their\nlength-$d$ indicator vectors, using $0<1$. For each $S$, let $V_S$ be the span\nof the corresponding columns of $X$, compute $\\widehat\\mu_S=P_{V_S}y$, and\nscore\n\n$$q_S:=n^{-1}\\|y-\\widehat\\mu_S\\|_2^2+\\tau^2|S|.$$\n\nInitialize the incumbent at the first support and scan the rest in order,\nreplacing it exactly when a strictly smaller score is found; on a tie retain the\nearlier support. Return the selected support $\\widehat S$ and fitted vector\n$\\widehat\\mu_{\\mathrm{BIC}}=\\widehat\\mu_{\\widehat S}$. The candidate family is\nfinite by [[cor-cardinality-of-the-power-set]], and the fitted-vector selection\nis Borel measurable by [[lem-finite-support-projection-selection-is-borel]].\nThis is an exhaustive combinatorial procedure, not an efficiency guarantee."
+      },
+      {
+        "id": "alg-constrained-l0-least-squares",
+        "kind": "algorithm",
+        "title": "Constrained support-search least squares",
+        "deps": [
+          "def-natural-numbers",
+          "def-finite-cardinality",
+          "def-fixed-design-projection-estimator",
+          "lem-finite-support-projection-selection-is-borel",
+          "cor-cardinality-of-the-power-set"
+        ],
+        "dependency_level": 2,
+        "statement": "**Input:** naturals $n,d\\ge1$, a fixed design $X\\in\\mathbb R^{n\\times d}$, a data\nvector $y\\in\\mathbb R^n$, and a natural $s$ with $0\\le s\\le d$.\n\n**Candidate supports:** list all subsets $S\\subseteq\\{1,\\ldots,d\\}$ with\n$|S|\\le s$ in lexicographic order of their length-$d$ indicator vectors,\nusing $0<1$. This is a finite nonempty list because it contains $\\varnothing$\nand is contained in the finite power set of $\\{1,\\ldots,d\\}$.\n\n**Procedure:** for each candidate $S$, let $V_S$ be the span of the columns of\n$X$ indexed by $S$ and compute $\\widehat\\mu_S=P_{V_S}y$. Compute its residual\nscore $q_S=\\|y-\\widehat\\mu_S\\|_2^2$. Initialize the incumbent at the first\ncandidate. Scan the remaining candidates in the stated order, replacing the\nincumbent exactly when a strictly smaller score is found; retain the earlier\ncandidate on a tie. Return the selected support and its fitted vector\n$\\widehat\\mu_s$.\n\nEach $V_S$ is finite-dimensional, so the projections are defined by\n[[def-fixed-design-projection-estimator]]. The fitted-vector selection is Borel\nmeasurable by [[lem-finite-support-projection-selection-is-borel]]. The procedure\nperforms a finite exhaustive support search; no computational-efficiency claim is\nmade."
+      },
+      {
+        "id": "thm-gaussian-projection-risk",
+        "kind": "theorem",
+        "title": "Exact squared-error risk of an isotropic projection fit",
+        "deps": [
+          "def-fixed-design-projection-estimator",
+          "def-orthogonal-projection",
+          "lem-finite-dimensional-projection-is-linear-and-contractive",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-moments-variance-and-covariance",
+          "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-loss-function-and-risk"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $n,d\\ge1$, let $X\\in\\mathbb R^{n\\times d}$ be fixed, and put\n$V=\\operatorname{col}(X)$ and $r=\\dim V$. Let $P_V$ be the orthogonal\nprojection and let $\\mu\\in\\mathbb R^n$ be fixed. Let\n$\\varepsilon=(\\varepsilon_1,\\ldots,\\varepsilon_n)$ be a centered random vector\nwith square-integrable coordinates satisfying\n$\\mathbb E[\\varepsilon_i\\varepsilon_j]=\\sigma^2\\mathbf 1_{i=j}$ for\n$\\sigma^2\\ge0$. For $Y=\\mu+\\varepsilon$ and\n$\\widehat\\mu=\\widehat\\mu_X(Y)$ as in\n[[def-fixed-design-projection-estimator]],\n\n$$\\mathbb E\\|\\widehat\\mu-\\mu\\|_2^2=\\|P_V\\mu-\\mu\\|_2^2+r\\sigma^2.$$\n\nIn particular, when $\\mu\\in V$, the expected squared fitted-value error is\nexactly $r\\sigma^2$. The moment assumptions hold for centered Gaussian noise\nwith covariance matrix $\\sigma^2 I_n$; Gaussianity is not otherwise needed."
+      },
+      {
+        "id": "thm-subgaussian-projection-risk",
+        "kind": "theorem",
+        "title": "Sub-Gaussian projection risk bounds",
+        "deps": [
+          "def-fixed-design-projection-estimator",
+          "def-orthogonal-projection",
+          "lem-finite-dimensional-projection-is-linear-and-contractive",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-subgaussian-variable-and-vector",
+          "thm-finite-subgaussian-maximum-and-epsilon-net",
+          "lem-probability-measure-basic-identities",
+          "def-loss-function-and-risk",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-addition-formula",
+          "def-integer-power",
+          "thm-geometric-series",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-of-archimedean"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $n\\ge1$, let $V\\subseteq\\mathbb R^n$ be a fixed subspace of dimension\n$r$, and let $\\mu\\in V$. Suppose $Y=\\mu+\\varepsilon$, where\n$\\varepsilon\\in\\mathbb R^n$ is centered sub-Gaussian with proxy $\\sigma^2\\ge0$\nin the linear-functional sense of\n[[def-subgaussian-variable-and-vector]]. Put $\\widehat\\mu=P_VY$. Then\n$\\widehat\\mu-\\mu=P_V\\varepsilon$.\nIf $r=0$ or $\\sigma^2=0$, this error is zero almost surely. If $r\\ge1$ and\n$\\sigma^2>0$, for every $t>0$,\n\n$$\\mathbb P\\bigl(\\|\\widehat\\mu-\\mu\\|_2^2>t\\bigr)\\le 2\\cdot6^r\\exp\\!\\left(-\\frac{t}{8\\sigma^2}\\right).$$\n\nConsequently, for every $0<\\delta<1$,\n\n$$\\mathbb P\\!\\left(\\frac1n\\|\\widehat\\mu-\\mu\\|_2^2\\le\\frac{8\\sigma^2}{n}\\left[r\\log6+\\log\\!\\left(\\frac2\\delta\\right)\\right]\\right)\\ge1-\\delta,$$\n\nand\n\n$$\\mathbb E\\left[\\frac1n\\|\\widehat\\mu-\\mu\\|_2^2\\right]\\le\\frac{8\\sigma^2}{n}\\left(r\\log6+\\log2+\\frac{13}{10}\\right).$$\nFor $r\\ge1$, both bounds are at most\n$C\\sigma^2(r+\\log(1/\\delta))/n$ and $C\\sigma^2r/n$, respectively, for a\nuniversal constant $C$. In the fixed-design model $Y=X\\theta^*+\\varepsilon$\nwith $\\mu=X\\theta^*\\in\\operatorname{col}(X)$, this is the fitted vector of\n[[def-fixed-design-projection-estimator]]."
+      },
+      {
+        "id": "thm-bic-fitted-risk-bound",
+        "kind": "theorem",
+        "title": "BIC fitted-value risk bound",
+        "deps": [
+          "alg-bic-penalized-least-squares",
+          "cor-cardinality-of-the-power-set",
+          "lem-finite-support-projection-selection-is-borel",
+          "thm-subgaussian-projection-risk",
+          "lem-binomial-support-count-bound",
+          "def-subgaussian-variable-and-vector",
+          "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "thm-cauchy-schwarz-finite",
+          "def-orthogonal-projection",
+          "lem-probability-measure-basic-identities",
+          "def-loss-function-and-risk",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $n,d\\ge1$, let $X\\in\\mathbb R^{n\\times d}$ be fixed, and let\n$\\theta^*\\in\\mathbb R^d$ have a nonempty support\n$S^*:=\\{j:\\theta_j^*\\ne0\\}$ of size $s:=|S^*|\\ge1$. Suppose\n$Y=X\\theta^*+\\varepsilon$, where $\\varepsilon\\in\\mathbb R^n$ is centered\nsub-Gaussian with proxy $\\sigma^2\\ge0$ in the linear-functional sense of\n[[def-subgaussian-variable-and-vector]]. Run\n[[alg-bic-penalized-least-squares]] with\n\n$$\\tau^2=16\\log(6)\\frac{\\sigma^2}{n}+32\\frac{\\sigma^2\\log(ed)}{n}.$$\n\nFor every admissible input to [[alg-bic-penalized-least-squares]], its finite\nscan terminates and returns a support minimizing\n$n^{-1}\\|y-P_{V_S}y\\|_2^2+\\tau^2|S|$ over all supports. Among tied minimizers,\nit returns the earliest support in the prescribed order.\n\nMoreover, there is a universal constant\n$C_0:=64+64\\log6+32\\log4$ such that, for every $0<\\delta<1$,\n\n$$\\mathbb P\\!\\left(\\frac1n\\|\\widehat\\mu_{\\mathrm{BIC}}-X\\theta^*\\|_2^2 \\le C_0\\frac{\\sigma^2[s\\log(ed)+\\log(1/\\delta)]}{n}\\right)\\ge1-\\delta.$$\n\nSince $s\\ge1$, this also gives\n$C_0\\sigma^2s\\log(ed/\\delta)/n$. The theorem makes no design-rank,\nincoherence, or column-normalization assumption. It asserts no zero right-hand\nside when $s=0$."
+      },
+      {
+        "id": "thm-sparse-subset-risk-upper-bound",
+        "kind": "theorem",
+        "title": "Sparse constrained least-squares risk bound",
+        "deps": [
+          "alg-constrained-l0-least-squares",
+          "cor-cardinality-of-the-power-set",
+          "lem-finite-support-projection-selection-is-borel",
+          "thm-subgaussian-projection-risk",
+          "lem-binomial-support-count-bound",
+          "def-subgaussian-variable-and-vector",
+          "thm-cauchy-schwarz-finite",
+          "def-orthogonal-projection",
+          "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "lem-probability-measure-basic-identities",
+          "def-loss-function-and-risk",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-addition-formula",
+          "def-integer-power",
+          "thm-geometric-series",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-of-archimedean",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 5,
+        "statement": "For every admissible input to [[alg-constrained-l0-least-squares]], its finite\nscan terminates and returns a support minimizing $\\|y-P_{V_S}y\\|_2^2$ over all\nsupports of size at most $s$. Among tied minimizers, it returns the earliest\nsupport in the prescribed order.\n\nMoreover, let $n,d$ be positive integers, let $X\\in\\mathbb R^{n\\times d}$ be fixed, and\nlet $\\theta^*\\in\\mathbb R^d$ have at most $s$ nonzero coordinates, where\n$1\\le s\\le d/2$. Suppose $Y=X\\theta^*+\\varepsilon$ and $\\varepsilon$ is centered\nsub-Gaussian with proxy $\\sigma^2\\ge0$ in the linear-functional sense of\n[[def-subgaussian-variable-and-vector]]. Let $\\widehat\\mu_s$ be the fitted vector\nreturned by [[alg-constrained-l0-least-squares]]. For $0<\\delta<1$, with\n$C:=32(4+2\\log6)$,\n\n$$\\mathbb E\\left[\\frac1n\\|\\widehat\\mu_s-X\\theta^*\\|_2^2\\right] \\le C\\frac{\\sigma^2s\\log(ed/s)}{n},$$\n\nand\n\n$$\\mathbb P\\!\\left(\\frac1n\\|\\widehat\\mu_s-X\\theta^*\\|_2^2 \\le C\\frac{\\sigma^2\\left[s\\log(ed/s)+\\log(1/\\delta)\\right]}{n}\\right) \\ge1-\\delta.$$\nNo design-rank, incoherence, or column-normalization condition is assumed. The\nclaim concerns fitted values; it gives no coefficient-error bound."
+      },
+      {
+        "id": "thm-gaussian-sparse-sequence-minimax-lower-bound",
+        "kind": "theorem",
+        "title": "Gaussian sparse-sequence minimax lower bound",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-loss-function-and-risk",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "lem-statistic-induces-deterministic-procedure",
+          "lem-sparse-hamming-packing",
+          "lem-gaussian-location-kl-formula",
+          "thm-product-kl-additivity",
+          "thm-fano-packing",
+          "thm-pinsker",
+          "thm-two-point-le-cam-risk-bound",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "def-integral-logarithm",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "thm-monotonicity-of-the-integral",
+          "lem-of-square-monotone",
+          "thm-of-square-roots",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume the Axiom of Choice. Let $n,d\\ge1$, $\\sigma>0$, and let\n$1\\le s\\le d/2$ be integers. Observe $Z\\in\\mathbb R^d$ with independent\ncoordinates $Z_j\\sim N(\\theta_j,\\sigma^2/n)$ for a parameter\n$$\\Theta_{s,d}:=\\{\\theta\\in\\mathbb R^d: |\\{j\\in\\{1,\\ldots,d\\}:\\theta_j\\ne0\\}|\\le s\\}.$$\nFor every Borel estimator $T:\\mathbb R^d\\to\\mathbb R^d$,\n$$\\sup_{\\theta\\in\\Theta_{s,d}} \\mathbb E_\\theta\\|T(Z)-\\theta\\|_2^2 \\ge \\frac{\\sigma^2s\\log(ed/s)}{200000n}.$$"
+      },
+      {
+        "id": "cor-matching-minimax-rate",
+        "kind": "corollary",
+        "title": "Matching minimax rate in a Gaussian orthogonal sequence model",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-loss-function-and-risk",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-measurable-functions-preserve-independence",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "lem-isotropic-gaussian-noise-is-subgaussian",
+          "thm-sparse-subset-risk-upper-bound",
+          "lem-finite-support-projection-selection-is-borel",
+          "thm-gaussian-sparse-sequence-minimax-lower-bound"
+        ],
+        "dependency_level": 7,
+        "statement": "Assume the Axiom of Choice. Let $n=d\\ge2$, let $1\\le s\\le n/2$, and take\nthe fixed design $X=\\sqrt n\\,I_n$. For\n$$\\Theta_s:=\\{\\theta\\in\\mathbb R^n: |\\{j\\in\\{1,\\ldots,n\\}:\\theta_j\\ne0\\}|\\le s\\},$$\nobserve $Y=X\\theta+\\varepsilon$ with one common noise law\n$\\varepsilon\\sim N_n(0,\\sigma^2I_n)$, where $\\sigma>0$. For Borel fitted-vector\nestimators $T:\\mathbb R^n\\to\\mathbb R^n$, define\n$$R^*_{n,s}:=\\inf_{T\\ \\mathrm{Borel}}\\ \\sup_{\\theta\\in\\Theta_s} \\mathbb E_\\theta\\left[\\frac1n\\|T(Y)-X\\theta\\|_2^2\\right].$$\nThen for $C=32(4+2\\log6)$,\n$$\\frac{\\sigma^2s\\log(en/s)}{200000n} \\le R^*_{n,s} \\le\\sup_{\\theta\\in\\Theta_s}\\mathbb E_\\theta\\left[ \\frac1n\\|\\widehat\\mu_s(Y)-X\\theta\\|_2^2\\right] \\le C\\frac{\\sigma^2s\\log(en/s)}n,$$\nwhere $\\widehat\\mu_s$ is the constrained support-search fitted vector. Thus\nthis Gaussian orthogonal-sequence model has a matching minimax rate up to\nuniversal constants. The sparse upper-bound theorem itself is choice-free; this corollary\nassumes AC for its Gaussian law and Fano lower-bound suppliers."
+      }
+    ]
+  },
+  {
+    "order": 1879,
+    "id": "decision-theoretic-upper-bounds-and-oracle-risk-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Decision-Theoretic Upper Bounds \u2014 Examples",
+    "companion": "decision-theoretic-upper-bounds-and-oracle-risk",
+    "requires": [
+      "decision-theoretic-upper-bounds-and-oracle-risk"
+    ],
+    "items": [
+      {
+        "id": "cex-collinear-design-coefficient-risk-unidentifiable",
+        "kind": "counterexample",
+        "title": "Collinear columns identify a fitted mean, not its coefficients",
+        "deps": [
+          "def-fixed-design-projection-estimator",
+          "thm-gaussian-projection-risk",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-loss-function-and-risk"
+        ],
+        "dependency_level": 5,
+        "statement": "For every fixed-design matrix $X$, the map $\\theta\\mapsto X\\theta$ is injective;\ntherefore the coefficient vector is determined by its fitted mean."
+      },
+      {
+        "id": "ex-orthogonal-sequence-sparse-regression",
+        "kind": "example",
+        "title": "Constrained least squares in a two-coordinate orthogonal sequence model",
+        "deps": [
+          "alg-constrained-l0-least-squares",
+          "thm-sparse-subset-risk-upper-bound",
+          "thm-gaussian-projection-risk",
+          "def-subgaussian-variable-and-vector",
+          "def-moments-variance-and-covariance",
+          "def-loss-function-and-risk",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $n=d=2$, $X=I_2$, $\\theta^*=0$, and impose sparsity $s=1$. Observe\n$Y=X\\theta^*+\\varepsilon=\\varepsilon$. Assume the\ncentered noise vector is sub-Gaussian with proxy $\\sigma^2>0$ and has covariance\n$\\sigma^2 I_2$. The constrained support search retains the coordinate with the\nlarger squared observation. Its expected fitted-value error per observation is\nbetween $\\sigma^2/2$ and $\\sigma^2$, and the general theorem gives the upper\nbound $C\\sigma^2\\log(2e)/2$."
+      },
+      {
+        "id": "ex-training-risk-versus-test-risk",
+        "kind": "example",
+        "title": "Zero training residual and positive test error",
+        "deps": [
+          "def-fixed-design-projection-estimator",
+          "thm-gaussian-projection-risk",
+          "def-moments-variance-and-covariance",
+          "def-independent-random-elements",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-bias-and-mean-squared-error",
+          "def-loss-function-and-risk"
+        ],
+        "dependency_level": 6,
+        "statement": "Take one fixed-design observation with $X=[1]$, true fitted mean $\\mu=0$, and\ntraining response $Y=\\varepsilon$. Let $\\varepsilon'$ be an independent fresh\nresponse error with the same mean-zero, variance-$\\sigma^2$ law, where\n$\\sigma^2>0$. Least squares fits the one-dimensional column space exactly: its\ntraining residual is zero, its expected error for estimating the mean is\n$\\sigma^2$, and its expected squared error for predicting the fresh response is\n$2\\sigma^2$."
+      }
+    ]
+  }
+]

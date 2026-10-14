@@ -1,0 +1,65 @@
+# Batch 4 Step 3a adjudication
+
+Run: `mathematical-statistics-foundations-37`; group: `batch-4`; scope: batch 4 only.
+
+The scope routes one touched obligation (the Bernoulli example), no reader/refuter findings and no page obligations. All eight HIGH/CRITICAL risk reviews were completed in generated dependency order.
+
+## Completed review checkpoints
+
+- Level 0, `lem-positive-lebesgue-components-of-a-positive-measure`: Statement and Proof 1.1–2.1 checked against the current singularity, absolute-continuity, measure and finiteness definitions. Each component is the corresponding restriction of the positive finite measure on the singular carrier or its complement. Empty/zero cases and lack of an AC requirement checked. No defect. Contract risk review complete.
+
+
+- Level 0, `lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative`: all four steps and actual suppliers checked. Common finite exhaustion and negative-level argument are valid, including infinite total masses and zero measures; measurable positive-part replacement retains the setwise representation. AC is inherited from RN construction. Hunter Theorem 6.27, printed pp.75–77 ([source](https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf)), supports the decomposition/density context; current local RN theorem explicitly supplies finite real values and finite-piece integrability. No defect; risk review complete.
+
+- Level 1, `def-likelihood-ratio-as-rn-derivative`: finite probability variation permits the decomposition theorem with exhaustion X. Current existence/uniqueness proofs and both reviewed lemmas justify positive finite components and the RN class. A full density is possible exactly in the absolutely continuous case; purely singular and mixed cases remain separated. AC and almost-everywhere caveats are explicit. No defect; risk review complete.
+
+- Level 2, `def-likelihood-density`: Reviewed entire Definition against dominated/statistical-experiment definitions, AC, RN class/existence and the reviewed nonnegative-version lemma. Each probability is finite on a sigma-finite exhaustion of mu; hence the local RN hypotheses hold individually. AC selects a family from nonempty sets of finite-valued nonnegative measurable versions, including arbitrary parameter sets. Fixed x then gives a function on labels; there is no parameter sigma-algebra or asserted measurability, normalization over Theta, canonical version or simultaneous exceptional null set. Empty Theta is vacuous; empty X cannot support a probability unless Theta is empty, where the stated likelihood-at-x construction has no observed x. Martin section 3.2, Definition 3.1, printed pp.53–54, checked directly for the density-to-likelihood convention. No reader/refuter findings or defect. Contract risk review complete.
+
+- Level 2, `thm-likelihood-ratio-change-of-measure`: Read Statement, F1–F8 and all four steps against current decomposition uniqueness, density-class, integration-against-density, null-integral, positive-parts, measurability and L1-linearity suppliers. Under P1<<P0 uniqueness identifies (P1,0); null-set integration transfers the setwise formula to the given representative r. Density integration applies to all nonnegative measurable g, with the supplier convention 0 times infinity equals 0. For real P1-integrable g the positive and negative weighted integrals are both finite and |gr|=|g|r, so subtraction is legitimate. Checked g=0, g=1 (mean r=1), r=0 on subsets, identical laws and failure without absolute continuity. AC is inherited from RN/decomposition construction; no singular mass is discarded without the hypothesis. No reader/refuter findings or defect. Contract risk review complete.
+
+- Level 3, `thm-equivalent-dominators-give-equivalent-likelihood-ratios`: Checked Statement, F1–F8 and all three steps against current local chain-rule Statement/proof and RN suppliers. The intersections of finite covers give the required common exhaustion; probabilities have variation at most one on it. Finite-valued nonnegative representatives exist under AC. For H={h=0}, nu(H)=0 and mu<<nu forces mu(H)=0, including mutually zero dominators in the vacuous empty-parameter case. The chain rule applies individually to each P_theta; removing only the two fixed density exceptional sets and H permits cancellation of finite positive h exactly where denominators are positive. No zero-denominator value, canonical version, or uncountable simultaneous null-set claim is made. AC is used in density selections and inherited RN construction. Reader/refuter findings empty; no defect. Contract risk review complete.
+
+- Level 3, `cex-singular-pair-has-no-full-likelihood-ratio`: Reviewed false universal Statement and all three counterexample steps with current finite counting-measure, probability, singularity, absolute-continuity, uniqueness, null-integral and likelihood suppliers. The disjoint unit atoms are countably additive probability laws; {1} has P0 mass zero and P1 mass one. Uniqueness identifies decomposition (0,P1), so the ac-density class is zero while the counting-density quotient is undefined at 1. Any proposed full nonnegative density integrates to zero over {1}, contradicting P1 mass one. Empty-event and zero-component checks included; the failure is exactly missing absolute continuity, not a failure of the conditional change-of-measure theorem. The finite construction itself is choice-free; AC is explicitly inherited for general likelihood machinery. No reader/refuter finding or defect. Contract risk review complete.
+
+- Level 3, `ex-bernoulli-likelihood-ratio-and-change-of-measure`: Independently checked the Example, F1–F9/A1, and Verification 1.1–2.1 against every current cited dependency. The two positive mass pairs sum to one; finite-space disjoint additivity and counting domination are explicit. Step 1.2 now verifies the counting-density integral identity and the P0-density identity for every subset, so r is the full RN representative, with r(0)=1/2 and r(1)=2. Step 2.1 evaluates the expectation for arbitrary real g; finite support implies integrability, and both sides equal g(0)/3+2g(1)/3. Checked empty/full events, both singleton indicators, zero g, g=1, positive denominators and parameter labels distinct from observations. AC is inherited only from the linked general theory; the explicit calculation requires no choice. Reader-post source raw hash matches current exactly; accept its local proof clarification as nonfatal polish, not a false formula or statement. No refuter finding or remaining defect. Contract risk review complete.
+
+## Routed decision and historical comparison
+
+Exactly one decision is owed and written: `touched:4:ex-bernoulli-likelihood-ratio-and-change-of-measure`, `accepted_repair`, `repair_confidence: 1`. No extra decision is issued for risk-only or page-context reviews.
+
+The pre/post snapshots differ only in the Bernoulli item and its proof contract. All nine current item raw hashes match the post-reader snapshot. For the Bernoulli item:
+
+- Pre-reader item: `67e67ac779b31289e502a2da1c9448cdba26b4504b78f0477e34593d3da3bc0d`.
+- Reader-post/current item: `95c3d425aad63411e1d3ac5dc7e3dc36db6631dea4f7ff7bf3023f422a7ddb39`.
+- Pre-reader contract: `8f92461880fd7efcd274cbac3938ac332588d7b044297c52ce253e1286650926`.
+- Reader-post contract, also current after excluding only the new risk_review: `d9afabd366c4dc49feb7a5ce99a3ab2a7a78d18d9ec1e8ee0e8a1ed8acebf638`.
+
+The archived batch-4 contract in `research/mathematical-statistics-foundations-37-owner-gate3-contract-preimages-3f38f518-679c-4861-be52-fd36feee2588/` matches the immutable pre-reader contract fingerprint. Its step-1-2 records the original finite mass-sum argument and quotient calculation. The unchanged reader report identifies the added density identities; the current proof supplies them explicitly for every subset. The omitted finite-space inference was immediately recoverable, and the mathematical formulas and claim were already sound. This is accepted polish, not a fatal defect. No claim is made to have recovered a complete pre-reader source file from a digest.
+
+Closed ledger row: `msf37-batch4-3a-bernoulli-density-identity`, severity `polish`, disposition `fixed`, owned at `3a-adjudicate`, linked from the touched decision. No mechanical-failure row was created. The reader edit is retained exactly; this adjudication changed no item, Statement, Definition, manifest or provenance. The only contract additions are the eight completed risk_review records. No judge stamp was present in the retained example, and none was added.
+
+## Dependency and source evidence
+
+Opened all nine current batch items, both page summaries, the batch-4 manifest and cross-batch input. The ordinary-risk domination definition was checked as an actual prerequisite: supplied sigma-finite positive measure, one measurable sample space, each sampling law absolutely continuous, no parameter measurability. The batch-1 statistical-experiment definition and its page supply precisely the family-of-laws interface used by domination and the Bernoulli example. The three existing consumer-owned cross-batch records remain valid; their disposition is recorded in `briefs/tasks/frontier-dependency-ledger.md`. No interface changed, so no downstream repair propagation is required. Stable IDs and existing withdrawal proposals are preserved.
+
+Every direct cited dependency needed by these arguments was opened: measure, probability, sigma-algebra, measurable space, sigma-finiteness, signed measure, total variation, AC, absolute continuity, mutual singularity, RN class, RN existence/uniqueness, Lebesgue-decomposition existence/uniqueness, chain rule, counting measure and its measure proof, measurable-function closure, integrable functions and positive/negative parts, nonnegative-integral order/scalar rules, density measure/integration, null-set integral and L1 linearity. Read the actual supplier proofs where used to establish the measure-theory inferences; no wholesale audit of their transitive prerequisite closure is claimed. Existing contract citation evidence was checked against the current statements; the strict checker confirms exact quoted sections remain synchronized.
+
+External sources consulted directly:
+
+- [Hunter, Measure Theory](https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf), Definition 6.22 and Theorem 6.27 with its proof, printed pp.74–77 (PDF pp.77–80): sigma-finite signed/positive hypotheses, decomposition, density representation and almost-everywhere uniqueness. The local finite-exhaustion supplier was independently checked rather than inferred solely from the book title.
+- [Martin, Advanced Statistical Theory](https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf), §3.2 and Definition 3.1, printed pp.53–54: densities with respect to a sigma-finite dominator and likelihood as the density evaluated at fixed data. The local definitions explicitly add version and choice caveats.
+- [Geyer, Exponential Families](https://www.stat.umn.edu/geyer/5421/notes/expfam.pdf), §§3.1 and 3.7, current printed pp.3–5: data-only terms in a log likelihood and mass-density form. This supplies context only; the general equivalent-dominator identity is justified by the current local chain rule, not by an exponential-family special case.
+
+No defective published supplier was found; published carriers stayed read-only. No published-ledger entry or lock was needed. No outside-scope mathematical repair or owner escalation is pending.
+
+## Local checks and handoff
+
+- Initial `node tools/risk-report.mjs research/mathematical-statistics-foundations-37-batch-4.proof-contracts.json`: eight HIGH/CRITICAL items, one ORDINARY, zero errors.
+- Final same command with `--require-reviewed`: zero errors; all eight required reviews complete.
+- `node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-4.proof-contracts.json --strict`: 9/9 checked, zero errors or warnings.
+- `node tools/tsx-run.mjs tools/precheck.mts items/ex-bernoulli-likelihood-ratio-and-change-of-measure.md`: one checked, zero failing.
+- `node tools/proof-layout.mjs items/ex-bernoulli-likelihood-ratio-and-change-of-measure.md`: one item, three steps, zero defects. No item was edited after this check.
+- Exact integer arithmetic independently checks the weighted-density identity on all four subsets in units of 1/6; the displayed arbitrary-g identity follows from the two singleton coefficients.
+- Ledger append succeeded and regenerated its view. JSON decisions contain exactly the one scoped obligation. Live status was recomputed from `.autopilot/mathematical-statistics-foundations-37`; this dispatch does not control stage transitions.
+
+No unresolved defect, uncertainty or blocker remains in this dispatch. This is a local adjudication report; no judging, stamping, self-certification or gate cycle was performed. The engine owns decision hashes and the final gate battery.

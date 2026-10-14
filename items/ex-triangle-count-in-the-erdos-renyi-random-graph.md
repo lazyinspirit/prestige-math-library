@@ -7,14 +7,14 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-erdos-renyi-random-graph, lem-random-graph-fixed-pattern-probability, lem-indicator-expectation-and-products, thm-linearity-of-expectation, def-binomial-coefficient, def-variance-and-covariance, thm-variance-of-a-finite-sum]
+deps: [def-erdos-renyi-random-graph, lem-random-graph-fixed-pattern-probability, lem-indicator-expectation-and-products, thm-linearity-of-expectation, def-binomial-coefficient, def-variance-and-covariance]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-13
+  repair: research/mathematical-statistics-foundations-37-owner-r6-variance-ex-triangle-count-in-the-erdos-renyi-random-graph-repair.json
 sources:
   scraped: []
   references:
@@ -42,7 +42,7 @@ $$\operatorname{Var}(T)=\binom n3(p^3-p^6)+2\binom n2\binom{n-2}2(p^5-p^6).$$
 
 [L4] There are $\binom n3$ vertex triples and $\binom n2$ vertex pairs ([[def-binomial-coefficient]]).
 
-[L5] Variance and covariance obey their centred-product definitions, and the variance of a finite sum is the sum of individual variances plus twice the unordered pairwise covariances ([[def-variance-and-covariance]], [[thm-variance-of-a-finite-sum]]).
+[L5] On the finite random-graph probability space, variance and covariance are the expectations of the centered square and centered product. ([[def-variance-and-covariance]])
 
 ## Verification
 
@@ -54,4 +54,6 @@ $$\operatorname{Var}(T)=\binom n3(p^3-p^6)+2\binom n2\binom{n-2}2(p^5-p^6).$$
 
 1.3 An unordered pair of triangles sharing an edge is determined by the common edge and the two distinct extra vertices, so there are $\binom n2\binom{n-2}2$ such pairs. [L4]
 
-2.1 Sum the individual variances and twice the unordered covariances to obtain the formula. For $n<3$ all relevant binomial coefficients vanish; for $p=0,1$ the variance is zero. [step 1.1, step 1.2, step 1.3, L5] ∎
+1.4 Put $Y_Q=I_Q-\mathbb E I_Q$. By finite linearity [L3], $T-\mathbb ET=\sum_QY_Q$. Expanding this finite square and applying [L3] gives
+$$\operatorname{Var}(T)=\mathbb E\left(\sum_QY_Q\right)^2=\sum_Q\mathbb EY_Q^2+2\sum_{\{Q,R\}:Q\ne R}\mathbb E[Y_QY_R],$$
+where the second sum is over unordered pairs of distinct triangles. By [L5] these terms are respectively the individual variances and pairwise covariances. Substituting their values from step 1.2 and their counts from steps 1.1 and 1.3 proves the displayed variance formula. For $n<3$ the triangle family and the relevant pair counts are empty, so the expectation and variance are zero; for $p=0,1$ each variance contribution is zero. [step 1.1, step 1.2, step 1.3, L3, L5, algebra] ∎

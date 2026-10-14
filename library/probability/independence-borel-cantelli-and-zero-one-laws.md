@@ -15,7 +15,11 @@ items: [def-independent-families-of-event-classes,
         lem-measurable-functions-preserve-independence,
         thm-independent-random-elements-have-product-joint-law,
         thm-factorization-of-expectations-for-independent-variables,
+        thm-expectation-of-products-of-independent-random-variables,
+        lem-mgf-of-independent-finite-sum,
         cor-covariance-vanishes-under-independence,
+        cor-variance-adds-for-pairwise-independent-random-variables,
+        lem-bernoulli-and-binomial-mean-and-variance,
         def-limsup-and-infinitely-often-event,
         cor-first-borel-cantelli-lemma-for-events,
         thm-pairwise-independent-borel-cantelli-frequency-law,
@@ -30,7 +34,8 @@ examples: []
 This page develops independence beyond the earlier finite models. It starts
 with independent event classes and sigma-algebras, passes to random elements
 through rectangle criteria and product laws, and then derives the standard
-factorization consequence for expectations and covariance.
+factorization consequence for expectations and covariance, followed by Bernoulli
+and binomial moments on a common probability space.
 
 The second half records the two Borel-Cantelli directions needed here and then
 uses independence again at the level of tail events. That route ends with

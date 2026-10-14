@@ -1,0 +1,2492 @@
+{
+  "version": 1,
+  "scope": [
+    "def-subgaussian-variable-and-vector",
+    "thm-hoeffding-independent-bounded-sums",
+    "thm-bernstein-independent-sums",
+    "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+    "lem-doob-martingale-differences-inherit-coordinate-oscillations",
+    "thm-subexponential-independent-sums",
+    "thm-finite-subgaussian-maximum-and-epsilon-net",
+    "thm-mcdiarmid-bounded-differences",
+    "ex-rademacher-sum-concentration",
+    "ex-gaussian-maximum-concentration",
+    "ex-subgaussian-vector-norm-via-net",
+    "cex-finite-variance-does-not-imply-subgaussian-tail"
+  ],
+  "contracts": {
+    "def-subgaussian-variable-and-vector": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For def subgaussian variable and vector, the Definition now states the vector dimension condition $d\\ge1$, so there is no empty-dimensional clause."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For def subgaussian variable and vector, the definition states the relevant boundary convention; the cited clause is explicit in that section."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For def subgaussian variable and vector, This item has no free finite-list size, dimension, or iteration count whose one-element boundary changes the claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For def subgaussian variable and vector, the definition states the relevant boundary convention; the cited clause is explicit in that section."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For def subgaussian variable and vector, the definition states the relevant boundary convention; the cited clause is explicit in that section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For def subgaussian variable and vector, The proof uses only its stated hypotheses and finite constructions; it does not select from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For def subgaussian variable and vector, The def subgaussian variable and vector assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For def subgaussian variable and vector, For def subgaussian variable and vector, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "supplier_excerpts": [
+        {
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here."
+        },
+        {
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts."
+        },
+        {
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**."
+        }
+      ]
+    },
+    "thm-hoeffding-independent-bounded-sums": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $D\\in L^1$ satisfy $\\mathbb E[D\\mid\\mathcal G]=0$ almost surely. Let $A,B$ be finite $\\mathcal G$-measurable random variables such that $A\\le D\\le B$ and $B-A\\le c$ almost surely for a deterministic $c\\ge0$. Then for every $\\lambda\\in\\mathbb R$,\n$$\\mathbb E[e^{\\lambda D}\\mid\\mathcal G]\\le e^{\\lambda^2c^2/8}\\quad\\text{a.s.}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$. Then the closed bounded interval\n$[a,b]$ ([[def-interval]]) is compact ([[def-open-cover-r]]): every family of\nopen subsets of $\\mathbb{R}$ whose union contains $[a,b]$ has a finite subfamily\nwhose union already contains $[a,b]$.\n\nThe proof is by repeated bisection. Supposing some open cover admits no finite\nsubcover, one halves the interval, keeps a half that still admits none, and\niterates; the halves shrink to a point, which the cover does reach, and a single\nmember of the cover then swallows a whole late-stage half. **The halving rule is\ncanonical**, taking the left half whenever the left half works, so the recursion\nuses [[thm-recursion]] and no choice principle.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-boundedness-theorem-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be compact\n([[def-open-cover-r]]). Then $f$ is **bounded on $K$**: there is a real\n$M \\ge 0$ with\n\n$$|f(x)| \\le M \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, $f[K]$ is a bounded subset of $\\mathbb{R}$\n([[def-bounded-set]]).\n\n**The hypothesis is compactness of $K$, not of $A$**, and it cannot be relaxed\nto boundedness of $K$ or to closedness of $K$ alone: the identity is unbounded\non the closed set $[0,\\infty)$, and $x \\mapsto 1/x$ is unbounded on the bounded\nset $(0,1)$. The general statement of that is\n[[thm-compactness-is-necessary-for-evt-and-uniform-continuity]], later on this\npage.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $\\mathcal F_0=\\{\\varnothing,\\Omega\\}$, $\\mathcal F_i=\\sigma(X_1,\\ldots,X_i)$, $D_i=X_i-\\mathbb E X_i$, and $c_i=b_i-a_i$. By [F13], $D_i$ is $\\mathcal F_i$-measurable. By [F1] and [F2], $X_i$ is independent of $\\mathcal F_{i-1}$; [F3] gives $\\mathbb E[X_i\\mid\\mathcal F_{i-1}]=\\mathbb E X_i$, and conditional linearity and preservation of constants in [F6] therefore give $\\mathbb E[D_i\\mid\\mathcal F_{i-1}]=0$ almost surely.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F13"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F4], $a_i\\le\\mathbb E X_i\\le b_i$. Therefore $D_i$ lies almost surely in the finite interval $[a_i-\\mathbb E X_i,b_i-\\mathbb E X_i]$, whose endpoints are $\\mathcal F_{i-1}$-measurable, contain $0$, and have width $c_i$; in particular $|D_i|\\le c_i$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F5] to each $D_i$ and the filtration $\\mathcal F_{i-1}$ from step 1.1. For every real $\\lambda$, $\\mathbb E[e^{\\lambda D_i}\\mid\\mathcal F_{i-1}]\\le e^{\\lambda^2c_i^2/8}$ almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $S_k=\\sum_{i=1}^kD_i$ and $S_0=0$. Step 1.2 gives $|D_i|\\le c_i$, hence $S_{k-1}\\in[-C,C]$ for $C:=\\sum_{i<k}c_i$. This closed bounded interval is compact by [F11], and $x\\mapsto e^{\\lambda x}$ is continuous by [F10] and continuity of scalar multiplication, so [F12] makes $e^{\\lambda S_{k-1}}$ bounded. Also $x\\mapsto e^{\\lambda x}$ is Borel: its open-set preimages are open, and the class of Borel sets whose preimages are Borel is a sigma-algebra containing the opens, hence contains the Borel sigma-algebra ([[def-borel-sigma-algebra]]). For each Borel $B$, the preimage of $B$ under $e^{\\lambda S_{k-1}}$ is $S_{k-1}^{-1}( (x\\mapsto e^{\\lambda x})^{-1}(B))$, so this bounded factor is $\\mathcal F_{k-1}$-measurable. By the addition formula in [F10], $e^{\\lambda S_k}=e^{\\lambda S_{k-1}}e^{\\lambda D_k}$; conditional expectation preservation [F6], taking out the known factor [F7], and step 2.1 give $\\mathbb E e^{\\lambda S_k}\\le e^{\\lambda^2c_k^2/8}\\mathbb E e^{\\lambda S_{k-1}}$. Finite induction gives $\\mathbb E e^{\\lambda S_n}\\le e^{\\lambda^2V/8}$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "step 1.2",
+            "step 2.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $V=0$, every $c_i=0$, so each $X_i=a_i=b_i$ almost surely and $S=0$ almost surely. If $V>0$ and $\\lambda>0$, then $e^{\\lambda S}$ is nonnegative and $S\\ge t$ implies $e^{\\lambda S}\\ge e^{\\lambda t}>0$ by [F10]. Markov [F8] and step 3.1 give $\\mathbb P(S\\ge t)\\le e^{\\lambda^2V/8}/e^{\\lambda t}=\\exp(-\\lambda t+\\lambda^2V/8)$, using the reciprocal and addition formulas in [F10]. Choosing $\\lambda=4t/V$ gives $\\mathbb P(S\\ge t)\\le e^{-2t^2/V}$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F8",
+            "F10",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $V>0$, substitute $-\\lambda$ in the all-real MGF bound from step 3.1. Since $e^{-\\lambda S}$ is nonnegative and $S\\le-t$ implies $e^{-\\lambda S}\\ge e^{\\lambda t}>0$ by [F10], Markov [F8] gives $\\mathbb P(S\\le-t)\\le e^{\\lambda^2V/8}/e^{\\lambda t}$; choosing $\\lambda=4t/V$ yields $e^{-2t^2/V}$. The finite union bound [F9] combines the two tails; step 4.1 already handles $V=0$. This lower-tail argument uses the same original variables and does not assert independence of their negatives.",
+          "step": "5.1",
+          "inputs": [
+            "F8",
+            "F9",
+            "F10",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For thm hoeffding independent bounded sums, the Statement explicitly requires $n\\ge1$; the empty finite family is checked and excluded from its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For thm hoeffding independent bounded sums, step 4.1, step 5.1 prove the zero-parameter branch separately, including the almost-sure zero conclusion or transfer to the tail statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm hoeffding independent bounded sums, step 1.1, step 4.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For thm hoeffding independent bounded sums, step 4.1 handle the collapsed-variance, zero-width, or explicitly degenerate case before using a positive-parameter optimization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm hoeffding independent bounded sums, step 1.2, step 2.1, step 4.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm hoeffding independent bounded sums, step 1.1 work under the separately recorded AC assumption; A1 identifies its use, and no additional choice from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm hoeffding independent bounded sums, The thm hoeffding independent bounded sums assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm hoeffding independent bounded sums, For thm hoeffding independent bounded sums, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Proof 1.1\u20135.1, all 20 actual supplier Statements/Definitions, and the full conditional-Hoeffding supplier proof. Disjoint-group independence gives conditional centering; monotonicity places deterministic centered endpoints around zero with width c_i. Supplier proof bounds |D| by c, handles zero width, controls the divided difference, and proves the two-point log-MGF curvature <=1/4. Known exponential factors are bounded a.s. and measurable, so conditional iteration yields exp(lambda^2 V/8). Both sign optimizations use lambda=4t/V and union bound, giving -2t^2/V. Checked n=1, singleton intervals, V=0 before division, t>0, a.s. versus pointwise support and finite intersections of full-measure events. AC is explicitly assumed and inherited only through conditional-expectation suppliers. No reader/refuter finding or defect."
+      }
+    },
+    "thm-bernstein-independent-sums": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exponential-series-has-infinite-radius",
+          "source_section": "Statement",
+          "quote": "For every real $x$, the series $\\sum_{n\\ge0}x^n/\\iota(n!)$ converges absolutely. Its power-series radius is therefore $+\\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$1+x\\le\\exp(x).$$\nConsequently, if $0\\le p\\le1$ and $m\\in\\mathbb N$, then\n$$ (1-p)^m\\le\\exp(-mp). $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $v_i=\\mathbb E[X_i^2]$. If $v=0$, then every $v_i=0$ because $v_i\\ge0$. By [F6], $X_i^2=0$ almost surely for every $i$, so the finite sum is $0$ almost surely and the stated tail probability is $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $v>0$. If $b=0$, every $X_i=0$ almost surely and $v=0$, a contradiction; hence $b>0$. For each fixed real $\\theta$, $g_\\theta(x)=e^{\\theta x}$ is continuous: when $\\theta\\ne0$, continuity of $x\\mapsto\\theta x$ follows from $|\\theta x-\\theta y|=|\\theta||x-y|$, and continuity of its composition with $e^x$ follows from [F10]; when $\\theta=0$ it is constant. Thus $g_\\theta$ is Borel: the Borel sets whose inverse images under $g_\\theta$ are Borel form a sigma-algebra containing every open set, hence contain the sigma-algebra generated by opens ([[def-borel-sigma-algebra]]). For each Borel $B$, $\\{g_\\theta(X_i)\\in B\\}=X_i^{-1}(g_\\theta^{-1}(B))$ is measurable. Now fix $i$ and $\\lambda$ with $0<|\\lambda|<3/b$. For $N\\ge2$, the exponential series tail on $[-b,b]$ is uniformly bounded by $r_N=\\sum_{k>N}(|\\lambda|b)^k/k!\\to0$. Each partial sum at $X_i$ is integrable; the uniform bound and [F9] give $|\\mathbb E[e^{\\lambda X_i}]-\\mathbb E[\\sum_{k=0}^N(\\lambda X_i)^k/k!]|\\le r_N$, so expectation passes to the series limit. Centering removes the linear term, and for every $k\\ge2$, $|\\mathbb E[X_i^k]|\\le b^{k-2}v_i$ by [F1] and monotonicity. Also $k!\\ge2\\cdot3^{k-2}$ for $k\\ge2$: equality holds at $k=2,3$, and each subsequent factorial factor is at least $3$. Hence the geometric-series bound and $1+x\\le e^x$ from [F5] give $\\mathbb E e^{\\lambda X_i}\\le1+\\lambda^2v_i/[2(1-|\\lambda|b/3)]\\le\\exp(\\lambda^2v_i/[2(1-|\\lambda|b/3)])$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F9",
+            "F10",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $S=\\sum_{i=1}^nX_i$, a measurable real random variable by [F11]. By the addition formula [F10], $e^{\\lambda S}=\\prod_i e^{\\lambda X_i}$; independence [F8] and factorization [F2], applied to the nonnegative Borel functions established in step 1.2, give $\\mathbb E e^{\\lambda S}\\le\\exp(\\lambda^2v/[2(1-\\lambda b/3)])$ for $0<\\lambda<3/b$. Since $e^x$ is positive and increasing [F10], $S\\ge t$ implies $e^{\\lambda S}\\ge e^{\\lambda t}>0$, so [F3] and the reciprocal and addition formulas in [F10] give $\\mathbb P(S\\ge t)\\le\\exp(-\\lambda t+\\lambda^2v/[2(1-\\lambda b/3)])$. Choose $\\lambda=t/(v+bt/3)$; then $\\lambda b/3<1$ and direct simplification gives $\\mathbb P(S\\ge t)\\le\\exp(-t^2/[2(v+bt/3)])$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F8",
+            "F10",
+            "F11",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0<\\lambda<3/b$, the bound in step 1.2 also holds at parameter $-\\lambda$. By [F10], $e^{-\\lambda S}=\\prod_i e^{-\\lambda X_i}$; the original variables remain independent by [F8], and [F2] factors these nonnegative Borel functions, giving $\\mathbb E e^{-\\lambda S}\\le\\exp(\\lambda^2v/[2(1-\\lambda b/3)])$. Since $S\\le-t$ implies $e^{-\\lambda S}\\ge e^{\\lambda t}>0$, Markov [F3] and the same optimizing choice as in step 2.1 yield $\\mathbb P(S\\le-t)\\le\\exp(-t^2/[2(v+bt/3)])$. By [F7], the two one-sided bounds imply the displayed two-sided bound without asserting independence of the transformed variables $-X_i$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "F10",
+            "F11",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For thm bernstein independent sums, the Statement explicitly requires $n\\ge1$; the empty finite family is checked and excluded from its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For thm bernstein independent sums, step 1.1 prove the zero-parameter branch separately, including the almost-sure zero conclusion or transfer to the tail statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm bernstein independent sums, step 1.1, step 2.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For thm bernstein independent sums, step 1.1 handle the collapsed-variance, zero-width, or explicitly degenerate case before using a positive-parameter optimization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm bernstein independent sums, step 1.2, step 2.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm bernstein independent sums, step 1.2, step 2.1 use only the stated finite indexing and explicit supplier results; no arbitrary choice function is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm bernstein independent sums, The thm bernstein independent sums assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm bernstein independent sums, For thm bernstein independent sums, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Proof 1.1\u20133.1 and actual Statements/Definitions of all 16 suppliers. Centering removes the linear exponential term; boundedness gives |E X_i^k| <= b^(k-2) v_i and a uniform absolutely convergent exponential tail justifies expectation/series passage. k! >= 2*3^(k-2) gives the geometric MGF bound for 0<|lambda|<3/b. Factorization applies to nonnegative Borel exponentials of the original independent variables in both signs. lambda=t/(v+bt/3) lies strictly inside the domain and gives exactly the stated exponent. Checked n=1, t>0, v=0, b=0, a.s. support bounds, inclusive tail events and both directions of the zero-integral supplier. No AC and no finding or defect."
+      }
+    },
+    "lem-epsilon-net-of-unit-sphere-has-cardinality-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-volume-recursion-for-closed-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "For every integer $n\\ge1$ and every $r\\ge0$, put $\\overline B_n(0,r):=\\{x\\in\\mathbb R^n:\\lVert x\\rVert_2\\le r\\}$, extending the positive-radius notation of [[def-euclidean-spheres-and-closed-balls]] to $r=0$. This closed Euclidean ball is Jordan measurable; write its content as $V_n(r)$. One has $V_1(r)=2r$. For $n\\ge2$ and $r\\ge0$, $V_n(r)=V_{n-1}(1)\\int_{-r}^{r}(r^2-t^2)^{(n-1)/2}\\,dt$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $T:\\mathbb R^n\\to\\mathbb R^n$ be linear, with standard matrix $A$. For every bounded Jordan set $E$, the image $T(E)$ is a bounded Jordan set and\n$$\\operatorname{cont}(T(E))=|\\det A|\\operatorname{cont}(E).$$\nIn particular, a singular linear image has content zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-jordan-content-is-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. For every bounded $E\\subseteq\\mathbb R^n$ and every $a\\in\\mathbb R^n$, the translates $E+a$ and $E$ have equal Jordan inner and outer contents. Consequently, $E$ is Jordan measurable if and only if $E+a$ is Jordan measurable, and in that case\n\n$$\\operatorname{cont}(E+a)=\\operatorname{cont}(E).$$\n\nHere translation is as in [[def-translation-of-a-set-in-rn]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-jordan-content-finite-additivity",
+          "source_section": "Statement",
+          "quote": "If bounded Jordan measurable sets $E,F$ have $E\\cap F$ of content zero, then\n$$\\operatorname{cont}(E\\cup F)=\\operatorname{cont}(E)+\\operatorname{cont}(F).$$\nIn particular Jordan content is additive on disjoint finite families.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-jordan-inner-and-outer-content",
+          "source_section": "Definition",
+          "quote": "For bounded $E\\subseteq\\mathbb R^m$, in the metric sense of [[def-metric-bounded-diameter]], its **Jordan outer content** is the infimum of $\\sum_{r<q}\\operatorname{vol}(R_r)$ over finite axis-parallel rectangle covers of $E$. Its **Jordan inner content** is the supremum of the same sums over finite families of rectangles contained in $E$ whose interiors are pairwise disjoint.\n\nMetric boundedness always supplies a nondegenerate bounding rectangle. For\nnonempty $E$, choose $x_0\\in\\mathbb R^m$ and $r>0$ with\n$E\\subseteq B(x_0,r)$. Since\n$|x_j-(x_0)_j|\\le d_\\infty(x,x_0)\\le d_2(x,x_0)<r$ for every coordinate\n([[lem-metrics-on-rn]], [[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]] clause 3, [[def-metric-ball]]), the nondegenerate box\n$\\prod_{j<m}[(x_0)_j-r,(x_0)_j+r]$ contains $E$. The empty set lies in\nany fixed nondegenerate rectangle.\n\nThus the outer family is nonempty and the same bounding rectangle bounds the\ninner sums; the empty family gives inner sum $0$. Refining all listed\nendpoints into one grid and splitting the nested finite sums shows every\ninscribed sum is at most every covering sum\n([[def-multidimensional-grid-partition]], [[lem-finite-sum-laws]]).\nCompleteness therefore supplies finite real extrema\n([[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]],\n[[lem-sup-unique]]).\n\nThe set is **Jordan measurable** when the contents agree, and their common value is its **Jordan content**. The empty set and every degenerate rectangle have content $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-rational-power-monotone",
+          "source_section": "Statement",
+          "quote": "Let $a \\in \\mathbb{R}$ with $a > 0$ and let $r, s \\in \\mathbb{Q}$ with $r < s$\n([[def-rat-order]]), with rational powers as in [[def-rational-power]].\n\n1. **In the exponent.** If $a > 1$ then $a^{r} < a^{s}$; if $a = 1$ then $a^{r} = a^{s} = 1$; if $0 < a < 1$ then $a^{r} > a^{s}$.\n2. **In the base.** If $r \\in \\mathbb{Q}$ with $r > 0$ and $0 < a < b$, then $a^{r} < b^{r}$; so $a \\mapsto a^{r}$ is strictly increasing on $\\{a \\in \\mathbb{R} : a > 0\\}$.\n3. **Comparison with $1$.** For rational $t > 0$: $a > 1$ implies $a^{t} > 1$, and $0 < a < 1$ implies $a^{t} < 1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-rational-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$ with $a > 0$ and let $r \\in \\mathbb{Q}$ ([[def-rationals]]).\n\nEvery rational has a representative with positive denominator\n([[lem-rat-positive-denominator]]), so write $r = m/n$ with $m \\in \\mathbb{Z}$\nand $n$ a positive integer; a positive integer is the image of a unique natural\n$\\ge 1$ ([[lem-nat-embeds-int]]), and we write $n$ for that natural too. Define\n\n$$a^{r} := \\big(a^{1/n}\\big)^{m},$$\n\nwhere $a^{1/n}$ is the unique nonnegative $n$-th root of $a$\n([[thm-nth-roots-exist]]) and the outer exponent is an integer power\n([[def-integer-power]]). The outer power is legitimate because $a^{1/n} > 0$ when\n$a > 0$, so it has an inverse and negative integer exponents are allowed.\n\n**Well-definedness.** The right-hand side must not depend on which representative\n$m/n$ of $r$ was chosen. It does not: that is [[lem-rational-power-well-defined]],\nwhich is recorded in this item's `justified_by` rather than in its `deps`, since\nit is a statement *about* the operation defined here and therefore depends on\nthis definition.\n\n**The base must be positive.** For $a < 0$ the same formula is not a definition\nat all, because different representatives of the same rational give different\nanswers, or no answer: see [[fs-rational-power-of-negative-base]], which is\nexactly the item that justifies the restriction.\n\n**Supplementary clause for the base $0$.** For $a = 0$ and rational $r > 0$\n([[def-rat-order]]) the displayed formula still makes sense and still does not\ndepend on the representative: $r > 0$ forces $m \\ge 1$, and\n$\\big(0^{1/n}\\big)^{m} = 0^{m} = 0$ ([[thm-nth-roots-exist]] applies to every\n$a \\ge 0$). So we set $0^{r} = 0$ for rational $r > 0$. For $r < 0$ the\nexpression $0^{r}$ is left undefined, since $0$ has no inverse. This clause is\nwhat lets the inequalities later on this page be stated for nonnegative entries\nrather than for positive ones only.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-multidimensional-darboux-integral",
+          "source_section": "Definition",
+          "quote": "For a bounded function $f:Q\\to\\mathbb R$ on a nondegenerate rectangle\n$Q\\subseteq\\mathbb R^m$, define\n$$\\underline{\\int_Q}f:=\\sup_P L(f,P),\\qquad \\overline{\\int_Q}f:=\\inf_P U(f,P),$$\nover all grid partitions $P$ of $Q$. The grid family is nonempty, since the endpoints in each coordinate give a one-cell grid. Every lower sum is at most every upper sum by a common refinement and [[lem-multidimensional-refinement-inequalities]], so the two sets of sums are nonempty and bounded and the extrema exist ([[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[lem-sup-unique]]).\n\nThe function is **Riemann integrable over $Q$** when the two values agree.\nTheir unique common real is $\\int_Q f$. No integral is defined here for a\ndegenerate rectangle, because the grid definition requires every coordinate\ninterval to have distinct endpoints. This is the multidimensional Darboux\ndefinition; its agreement with the published one-dimensional definition is\nproved separately.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $V_d=\\operatorname{cont}(\\overline B_2(0,1))$. This number is finite by [F3] and positive by induction on $d$: $V_1=2$, and for $d\\ge2$ set $\\alpha=(d-1)/2>0$. On $[-1/2,1/2]$, $1-t^2\\ge3/4$, so [F10] gives $(1-t^2)^\\alpha\\ge(3/4)^\\alpha>0$; on all of $[-1,1]$ this integrand is nonnegative. By [F11], splitting the integral at $-1/2$ and $1/2$ and comparing the middle part with the constant $(3/4)^\\alpha$ shows $\\int_{-1}^{1}(1-t^2)^\\alpha\\,dt\\ge(3/4)^\\alpha>0$. The volume recursion [F3] then gives $V_d>0$ from $V_{d-1}>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $E=\\{x_1,\\ldots,x_N\\}\\subseteq S^{d-1}$ have pairwise distances greater than $\\epsilon$, and put $r=\\epsilon/2$. The closed balls $\\overline B_2(x_j,r)$ are pairwise disjoint: a point in two of them would, by the triangle inequality [F2], put the corresponding centers at distance at most $2r=\\epsilon$, contrary to the separation. Each small ball lies in $\\overline B_2(0,1+r)$, since $\\|x_j\\|_2=1$ and [F2] gives $\\|y\\|_2\\le\\|y-x_j\\|_2+\\|x_j\\|_2\\le r+1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By scaling and translation invariance [F4, F5], every small ball in step 1.2 has content $r^dV_d$ and the large ball has content $(1+r)^dV_d$. Finite additivity [F6] and monotonicity of outer content from [F7] give $Nr^dV_d\\le(1+r)^dV_d$. Step 1.1 gives $V_d>0$, so cancellation and $r=\\epsilon/2$ yield $N\\le((1+r)/r)^d=(1+2/\\epsilon)^d$. This also holds when $E$ is empty, for which $N=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Choose an integer $M>(1+2/\\epsilon)^d$ using [F8]. Let $K$ be the set of cardinalities of finite subsets of $S^{d-1}$ whose distinct points are more than $\\epsilon$ apart. The first coordinate unit vector shows $K$ is nonempty, and step 2.1 shows every member of $K$ is at most $(1+2/\\epsilon)^d<M$. Thus $K$ is a nonempty subset of $\\{0,1,\\ldots,M\\}$; [F9] gives a largest member $k\\in K$, attained by a finite set $\\mathcal N$ by the definition of $K$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F8",
+            "F9",
+            "step 2.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If some $u\\in S^{d-1}$ were farther than $\\epsilon$ from every point of $\\mathcal N$, adjoining $u$ would produce a finite set with pairwise distances greater than $\\epsilon$ and cardinality $k+1$, contradicting maximality in step 3.1. Thus $\\mathcal N$ is an $\\epsilon$-net; step 2.1 gives its stated cardinality bound. This construction uses only a maximum in a finite set of possible cardinalities, not an axiom of choice.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 establishes that the maximal packing is nonempty because the sphere contains a coordinate unit vector; the empty packing cannot be maximal."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For lem epsilon net of unit sphere has cardinality bound, The radius is constrained by $0<\\epsilon<1$; a zero-radius net is outside the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For lem epsilon net of unit sphere has cardinality bound, step 1.1, step 3.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For lem epsilon net of unit sphere has cardinality bound, step 1.1 handle the collapsed-variance, zero-width, or explicitly degenerate case before using a positive-parameter optimization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For lem epsilon net of unit sphere has cardinality bound, step 1.2, step 2.1, step 4.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For lem epsilon net of unit sphere has cardinality bound, step 3.1, step 4.1 obtain a largest packing cardinality from a finite set of possible integers and use a single finite witness; the proof explicitly avoids a choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem epsilon net of unit sphere has cardinality bound, The lem epsilon net of unit sphere has cardinality bound assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem epsilon net of unit sphere has cardinality bound, For lem epsilon net of unit sphere has cardinality bound, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Proof 1.1\u20134.1 and all 13 actual suppliers. Closed balls at radius epsilon/2 are disjoint because separation is strict; finite additivity, translation, dilation, and outer-content monotonicity give N <= (1+2/epsilon)^d after proving unit-ball content positive from the volume recursion. The bounded set of attainable finite cardinalities has an attained maximum, hence gives a net without an infinite greedy choice. Checked d=1, empty separated sets, nonempty unit sphere, epsilon approaching 0 or 1 within its open domain, positive radius/content cancellation, rational-power endpoint 0, and no AC. No reader/refuter findings; no defect."
+      }
+    },
+    "lem-doob-martingale-differences-inherit-coordinate-oscillations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F2], the joint law of $(Z_1,\\ldots,Z_n)$ is $\\mu$. For $1\\le i<n$, repeated application of [F4] gives a measurable version $H_i$ of the integral over the unrevealed coordinates; clause 3 of [F4] makes each such section-integral function integrable after assigning $0$ on its exceptional set. Set $H_0=\\int f\\,d\\mu$ and $H_n=f$, which are integrable by the hypothesis. Let $M_i=H_i(Z_1,\\ldots,Z_i)$. Then $M_i$ is integrable and $\\mathcal F_i$-measurable by [F3], [F5], and the product-integral construction; [F6] identifies the expectation of each integrable $M_i$ with its Lebesgue integral.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $i$. Fubini applied to $|f|$ gives a full-measure set of prefixes $p=(x_1,\\ldots,x_{i-1})$ for which the integral of $|f(p,x_i,y)|$ over $\\mu_i\\otimes\\mu_{i+1:n}$ is finite. For such a prefix there is a coordinate value $x_i^0$ whose future-section integral is finite. The coordinate oscillation assumption gives $|f(p,x_i,y)|\\le|f(p,x_i^0,y)|+c_i$ for every $x_i,y$, so every future section is integrable and $g_p(x_i):=\\int f(p,x_i,y)\\,d\\mu_{i+1:n}(y)$ is finite. Integrating the same pointwise oscillation bound shows $|g_p(x_i)-g_p(x_i')|\\le c_i$ for all $x_i,x_i'$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $A\\in\\mathcal F_{i-1}$, the definition of the sigma-algebra generated by the prefix writes $A=\\{(Z_1,\\ldots,Z_{i-1})\\in C\\}$ for a product-measurable $C$. By [F2], [F3], and [F4], integrating $H_i$ first over coordinate $i$ gives the same integral over $A$ as integrating $H_{i-1}$. Hence $\\int_A(M_i-M_{i-1})\\,d\\mathbb P=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On the full-measure prefix set from step 1.2, define $u_i(p):=\\inf\\{r\\in\\mathbb R:\\mu_i(g_p>r)=0\\}$ and $\\ell_i(p):=\\sup\\{r\\in\\mathbb R:\\mu_i(g_p<r)=0\\}$. They are finite because $g_p$ has finite range diameter at most $c_i$. The definitions and [F7] imply $g_p\\le u_i(p)$ and $g_p\\ge\\ell_i(p)$ almost everywhere: choose almost-everywhere bounds within $1/m$ of each infimum or supremum; the countable union of their null exceptional sets is null, by disjointifying the union and using countable additivity of $\\mu_i$. Also $u_i(p)-\\ell_i(p)\\le c_i$: otherwise choose $\\delta>0$ with $u_i(p)-\\ell_i(p)>c_i+2\\delta$. The sets $\\{g_p>u_i(p)-\\delta\\}$ and $\\{g_p<\\ell_i(p)+\\delta\\}$ then both have positive $\\mu_i$-measure by the definitions, so a point from each would violate the oscillation bound in step 1.2. For each $q\\in\\mathbb R$, $u_i(p)>q$ iff $\\mu_i(g_p>q)>0$: if the latter holds, $\\{g_p>q\\}=\\bigcup_{m\\ge1}\\{g_p>q+1/m\\}$ and [F7] give a positive-measure higher level, while $q<u_i(p)$ means $q$ is not an almost-everywhere upper bound. Similarly, $\\ell_i(p)<q$ iff $\\mu_i(g_p<q)>0$, using $\\{g_p<q\\}=\\bigcup_{m\\ge1}\\{g_p<q-1/m\\}$ and [F7]. Repeated Fubini in [F4] makes $(p,x_i)\\mapsto g_p(x_i)$ measurable on this set; applying [F4] to the indicators of these level sets makes $p\\mapsto\\mu_i(g_p>q)$ and $p\\mapsto\\mu_i(g_p<q)$ measurable. Thus both endpoints are measurable.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fubini gives $H_{i-1}(p)=\\int g_p(x_i)\\,d\\mu_i(x_i)$ for almost every prefix, so $\\ell_i(p)\\le H_{i-1}(p)\\le u_i(p)$. Set $A_i(p)=\\ell_i(p)-H_{i-1}(p)$ and $B_i(p)=u_i(p)-H_{i-1}(p)$ there, and set both to $0$ on the exceptional prefix set. These are finite measurable endpoints, contain $0$, and have width at most $c_i$. For $\\mu_i$-almost every $x_i$, $g_p(x_i)-H_{i-1}(p)$ lies between them; by the product law this is $D_i$ almost surely. Together with step 2.1 this proves the asserted endpoint and event-integral properties for every $i$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "given",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For lem doob martingale differences inherit coordinate oscillations, the Statement explicitly requires $n\\ge1$; the empty finite family is checked and excluded from its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For lem doob martingale differences inherit coordinate oscillations, step 2.1, step 3.1 prove the zero-parameter branch separately, including the almost-sure zero conclusion or transfer to the tail statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For lem doob martingale differences inherit coordinate oscillations, step 1.1, step 3.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For lem doob martingale differences inherit coordinate oscillations, step 2.1, step 3.1 handle the collapsed-variance, zero-width, or explicitly degenerate case before using a positive-parameter optimization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For lem doob martingale differences inherit coordinate oscillations, step 2.1, step 2.2, step 3.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For lem doob martingale differences inherit coordinate oscillations, step 1.1, step 2.1, step 3.1 use the fixed finite product and measurable Fubini versions; the Statement explicitly records that this construction uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem doob martingale differences inherit coordinate oscillations, The lem doob martingale differences inherit coordinate oscillations assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem doob martingale differences inherit coordinate oscillations, For lem doob martingale differences inherit coordinate oscillations, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Proof 1.1\u20133.1 and all seven actual supplier Statements/Definitions. Fubini applies to probability products and the L1 hypothesis; clause 3 supplies integrable measurable versions. The full-measure measurable prefix set permits all coordinate sections to be integrable by pointwise oscillation. Essential extrema are finite, attained a.e., measurable via positive level-set integrals, and have width <= c_i. Integrating centers them around H_(i-1); joint law transfers the endpoint and event-integral assertions. Checked n=1 (singleton empty products), c_i=0, exceptional sets, arbitrary measurable coordinate spaces, and both level-set equivalences. No AC is needed: for endpoint attainment one can use the explicit bounds u+1/m and ell-1/m, so the written approximation selection has a canonical choice-free implementation. Reader/refuter have no findings. Reader additions explain elementary valid inferences without changing Statement or deps; audit enrichment, no confirmed defect."
+      }
+    },
+    "thm-subexponential-independent-sums": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.\n\n- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$\n  for every $s \\in S$.\n- $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$\n  for every $s \\in S$.\n\nA set has at most one maximum: if $m_1$ and $m_2$ are both maxima then\n$m_1 \\in S$ gives $m_1 \\le m_2$ and $m_2 \\in S$ gives $m_2 \\le m_1$, so\n$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy\naxiom of an ordered field ([[def-ordered-field]], [[def-complete-ordered-field]]).\nThe same argument applies to minima, so we may write $\\max S$ and $\\min S$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $v=0$, then every $\\nu_i^2=0$. Fix $i$ and choose $\\lambda_i=1/(2b_i)>0$. By [F1], both $\\mathbb E e^{\\lambda_iX_i}$ and $\\mathbb E e^{-\\lambda_iX_i}$ are at most $1$. The nonnegative random variable $Q_i=e^{\\lambda_iX_i}+e^{-\\lambda_iX_i}-2$ therefore has expectation at most $0$ by [F9]. By [F5], $Q_i=0$ only when $X_i=0$; [F6] gives $X_i=0$ almost surely. The finite sum $S$ is consequently $0$ almost surely by [F7].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $v>0$. By [F8], $b=\\max_i b_i$ exists and is positive. For each real $\\theta$, the map $g_\\theta(x)=e^{\\theta x}$ is continuous: scalar multiplication is continuous since $|\\theta x-\\theta y|=|\\theta||x-y|$, and the exponential is continuous by [F5]. Its inverse images of open sets are open, so the collection of Borel sets with Borel preimage is a sigma-algebra containing the opens; hence $g_\\theta$ is Borel by [[def-borel-sigma-algebra]], For each Borel $B$, $\\{g_\\theta(X_i)\\in B\\}=X_i^{-1}(g_\\theta^{-1}(B))$ is measurable. For $0\\le\\lambda\\le1/b$, [F1] applies to every $X_i$. By [F5], $e^{\\lambda S}=\\prod_i e^{\\lambda X_i}$; independence [F2] and factorization [F3] give $\\mathbb E e^{\\lambda S}=\\prod_i\\mathbb E e^{\\lambda X_i}\\le e^{\\lambda^2v/2}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F8",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $t>0$ and $0<\\lambda\\le1/b$, [F10] makes $S$ a measurable real random variable, and $S\\ge t$ implies $e^{\\lambda S}\\ge e^{\\lambda t}>0$ by [F5]. Markov [F4], step 1.2, and the reciprocal and addition formulas in [F5] yield $\\mathbb P(S\\ge t)\\le\\exp(-\\lambda t+\\lambda^2v/2)$. Choose $\\lambda=\\min\\{t/v,1/b\\}$. If $t\\le v/b$, the exponent is $-t^2/(2v)$. If $t>v/b$, it is $-t/b+v/(2b^2)\\le-t/(2b)$. Hence $\\mathbb P(S\\ge t)\\le\\exp[-\\tfrac12\\min\\{t^2/v,t/b\\}]$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F10",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0<\\lambda\\le1/b$, [F1] applies at parameter $-\\lambda$ to every original $X_i$. By [F5], $e^{-\\lambda S}=\\prod_i e^{-\\lambda X_i}$; the original variables are independent by [F2], the functions $x\\mapsto e^{-\\lambda x}$ are nonnegative Borel by step 1.2, and factorization [F3] gives $\\mathbb E e^{-\\lambda S}\\le e^{\\lambda^2v/2}$. Markov [F4] and the same optimizing choice as in step 2.1 yield the stated lower-tail bound. The finite union bound [F7] combines the tails; step 1.1 handles $v=0$. No independence assertion about the transformed variables is needed.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For thm subexponential independent sums, the Statement explicitly requires $n\\ge1$; the empty finite family is checked and excluded from its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For thm subexponential independent sums, step 1.1, step 3.1 prove the zero-parameter branch separately, including the almost-sure zero conclusion or transfer to the tail statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm subexponential independent sums, step 2.1, step 3.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For thm subexponential independent sums, step 1.1 handle the collapsed-variance, zero-width, or explicitly degenerate case before using a positive-parameter optimization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm subexponential independent sums, step 1.2, step 2.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm subexponential independent sums, step 2.1, step 3.1 use only the stated finite indexing and explicit supplier results; no arbitrary choice function is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm subexponential independent sums, The thm subexponential independent sums assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm subexponential independent sums, For thm subexponential independent sums, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Proof 1.1\u20133.1 against all 16 previously read actual supplier Statements/Definitions. The local definition includes |lambda|=1/b_i, so b=max b_i permits the optimizing endpoint lambda=1/b. Independent MGF factorization gives exp(lambda^2 v/2), and the branches t<=v/b and t>v/b give respectively -t^2/(2v) and at most -t/(2b); both agree at t=v/b. For v=0, each two-sign MGF is <=1 at positive lambda_i=1/(2b_i); the nonnegative expression e^(lambda_i X_i)+e^(-lambda_i X_i)-2 has zero expectation and vanishes only at X_i=0. Checked n=1, positive b_i, zero proxies, integrability of both exponentials, negative sign factorization and inclusive tails. No AC, reader/refuter finding, or defect."
+      }
+    },
+    "thm-finite-subgaussian-maximum-and-epsilon-net": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ be an integer and $0<\\epsilon<1$. There is a finite set $\\mathcal N\\subseteq S^{d-1}$ such that every $u\\in S^{d-1}$ has some $v\\in\\mathcal N$ with $\\|u-v\\|_2\\le\\epsilon$, and\n$$|\\mathcal N|\\le(1+2/\\epsilon)^d.$$\nHere $S^{d-1}=\\{u\\in\\mathbb R^d:\\|u\\|_2=1\\}$ by [[def-euclidean-spheres-and-closed-balls]]. Such a set is called an $\\epsilon$-net of the sphere.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $a_0, \\dots, a_{n-1}$ and $b_0, \\dots, b_{n-1}$ be\nreals, with finite sums as in [[def-finite-sum]]. Then\n\n$$\\Big(\\sum_{k<n} a_k b_k\\Big)^{2} \\;\\le\\; \\Big(\\sum_{k<n} a_k^{2}\\Big)\\Big(\\sum_{k<n} b_k^{2}\\Big),$$\n\nand, in root form ([[thm-of-square-roots]]),\n\n$$\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}.$$\n\nEquality holds in the first display if and only if the two lists are\nproportional, in the symmetric sense that there is a pair\n$(\\lambda, \\mu) \\ne (0,0)$ of reals with $\\lambda a_k = \\mu b_k$ for every\n$k < n$.\n\n**No root is used in the proof of the squared form.** That form is an identity\nplus a sign argument in the ordered field, and the root form is only a\nrestatement of it through the monotonicity of squaring on the nonnegatives\n([[lem-of-square-monotone]]); the root enters nowhere but the last step, where\nthat restatement is made and [[thm-of-square-roots]] is what supplies the\nsquare-root symbol. This matters here, because it makes the squared\ninequality independent of the existence theorem for roots.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.\n\n- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$\n  for every $s \\in S$.\n- $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$\n  for every $s \\in S$.\n\nA set has at most one maximum: if $m_1$ and $m_2$ are both maxima then\n$m_1 \\in S$ gives $m_1 \\le m_2$ and $m_2 \\in S$ gives $m_2 \\le m_1$, so\n$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy\naxiom of an ordered field ([[def-ordered-field]], [[def-complete-ordered-field]]).\nThe same argument applies to minima, so we may write $\\max S$ and $\\min S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $\\lambda>0$, $h_\\lambda(x)=e^{\\lambda x}$ is continuous by [F8] and continuity of scalar multiplication, hence Borel: the Borel sets with Borel preimage form a sigma-algebra containing all opens, so contain the sigma-algebra generated by opens ([[def-borel-sigma-algebra]]). For each Borel $B$, $\\{h_\\lambda(Y_j)\\in B\\}=Y_j^{-1}(h_\\lambda^{-1}(B))$ is measurable, and $h_\\lambda(Y_j)\\ge0$ by [F8]. If $\\sigma^2>0$, then $Y_j\\ge t$ implies $e^{\\lambda Y_j}\\ge e^{\\lambda t}>0$ by [F8]; Markov [F2], the MGF bound [F1], and the reciprocal and addition formulas in [F8] give $\\mathbb P(Y_j\\ge t)\\le\\exp(-\\lambda t+\\lambda^2\\sigma^2/2)$. Choosing $\\lambda=t/\\sigma^2$ gives $\\mathbb P(Y_j\\ge t)\\le e^{-t^2/(2\\sigma^2)}$; Using parameter $-\\lambda$, $Y_j\\le-t$ implies $e^{-\\lambda Y_j}\\ge e^{\\lambda t}>0$; the same Markov calculation gives $\\mathbb P(Y_j\\le-t)\\le\\exp(-\\lambda t+\\lambda^2\\sigma^2/2)$, and $\\lambda=t/\\sigma^2$ gives the same lower-tail bound. If $\\sigma^2=0$, Markov gives $\\mathbb P(Y_j\\ge t)\\le1/e^{\\lambda t}=e^{-\\lambda t}$ for every $\\lambda>0$. By [F9] with $m=0$ and $a=t$, the right side tends to $0$ as $\\lambda\\to\\infty$, so the tail is zero, and at parameter $-\\lambda$ the same calculation gives $\\mathbb P(Y_j\\le-t)\\le e^{-\\lambda t}\\to0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "F9",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $z\\ne0$ and put $u=z/\\|z\\|_2\\in S^{d-1}$ by [F5]. By [F4], some $v\\in\\mathcal N$ satisfies $\\|u-v\\|_2\\le\\epsilon$. Then [F6] gives $|\\langle v,z\\rangle|\\ge\\langle u,z\\rangle-|\\langle u-v,z\\rangle|\\ge(1-\\epsilon)\\|z\\|_2$. For $z=0$ the claimed reduction is immediate. Thus the deterministic net inequality holds.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the finite maximum convention in [F7], the event $\\{\\max_j|Y_j|\\ge t\\}$ is the union of the $2m$ upper- and lower-tail events from step 1.1. Applying [F3] gives the stated finite-maximum bounds, without any independence assumption.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply step 1.2 to $Z$. If $\\|Z\\|_2\\ge t$, then at least one of the $|\\mathcal N|$ projections has absolute value at least $(1-\\epsilon)t$. Each projection is centered sub-Gaussian with proxy $\\sigma^2$ by [F1] because its direction is a unit vector. Step 2.1 and [F4] therefore give the displayed vector tail bound; when $\\sigma^2=0$, step 2.1 gives probability zero.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For thm finite subgaussian maximum and epsilon net, The statement requires a positive index, dimension, or finite family size, so an empty instance is outside its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For thm finite subgaussian maximum and epsilon net, step 1.1, step 2.1, step 3.1 prove the zero-parameter branch separately, including the almost-sure zero conclusion or transfer to the tail statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm finite subgaussian maximum and epsilon net, step 1.2, step 2.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For thm finite subgaussian maximum and epsilon net, step 1.1, step 3.1 handle the collapsed-variance, zero-width, or explicitly degenerate case before using a positive-parameter optimization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm finite subgaussian maximum and epsilon net, step 1.1, step 1.2, step 2.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm finite subgaussian maximum and epsilon net, step 1.2, step 2.1 use only the stated finite indexing and explicit supplier results; no arbitrary choice function is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm finite subgaussian maximum and epsilon net, The thm finite subgaussian maximum and epsilon net assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm finite subgaussian maximum and epsilon net, For thm finite subgaussian maximum and epsilon net, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Proof 1.1\u20133.1, all 14 actual supplier Statements/Definitions, and the scalar/vector proxy definition. Markov optimization yields exp(-t^2/(2 sigma^2)) in either sign; a finite union gives 2m without independence. The zero proxy branch takes lambda to infinity with t>0. For z!=0 choose u=z/||z|| and a net point v; Cauchy\u2013Schwarz gives |<v,z>| >= (1-epsilon)||z||. Finite nonempty net cardinality and unit-direction MGF bounds then give the vector constant. Checked m=1, d=1, z=0, sigma^2=0, inclusive tails, epsilon strictly between 0 and 1, measurable finite maxima/projections/norms, and no AC. No reader/refuter finding or defect."
+      }
+    },
+    "thm-mcdiarmid-bounded-differences": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-doob-martingale-differences-inherit-coordinate-oscillations",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $Z_1,\\ldots,Z_n$ be independent random elements with laws $\\mu_i$ on measurable spaces $(S_i,\\Sigma_i)$, and let $\\mu=\\bigotimes_{i=1}^n\\mu_i$. Let $f:\\prod_{i=1}^nS_i\\to\\mathbb R$ be measurable with $\\int|f|\\,d\\mu<\\infty$. Suppose finite deterministic $c_i\\ge0$ satisfy\n$$|f(x_1,\\ldots,x_{i-1},x_i,x_{i+1},\\ldots,x_n)-f(x_1,\\ldots,x_{i-1},x_i',x_{i+1},\\ldots,x_n)|\\le c_i$$\nfor every $i$, every fixed choice of the other coordinates, and every $x_i,x_i'\\in S_i$. For each $i$, define $M_i$ by integrating $f$ over the unrevealed product coordinates, using the measurable finite versions given by Fubini; set $M_0=\\int f\\,d\\mu$ and $M_n=f(Z_1,\\ldots,Z_n)$. Put $\\mathcal F_i=\\sigma(Z_1,\\ldots,Z_i)$ and $D_i=M_i-M_{i-1}$. Then $M_i$ is integrable and $\\mathcal F_i$-measurable, and for every $A\\in\\mathcal F_{i-1}$,\n$$\\int_A D_i\\,d\\mathbb P=0.$$\nMoreover, there are finite $\\mathcal F_{i-1}$-measurable endpoints $A_i,B_i$ such that $A_i\\le0\\le B_i$, $A_i\\le D_i\\le B_i$ almost surely, and $B_i-A_i\\le c_i$ almost surely. No choice axiom is used in this product-integral construction.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-martingale-submartingale-and-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]]. An integrable adapted real process $X$ [[def-adapted-and-integrable-stochastic-process]] is a **martingale**, **submartingale**, or **supermartingale** when, respectively, for every $n\\ge0$,\n$$E[X_{n+1}\\mid\\mathcal F_n]=X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\ge X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\le X_n\\quad\\text{almost surely}.$$\nThese are three separate conditions, with the convention that a submartingale has conditional future mean at least its present value. The conditional expectations are the almost-sure classes of [[def-conditional-expectation-as-an-ae-class]]; that supplier inherits AC from its Radon\u2013Nikodym existence proof. The definition itself selects no representative and assumes no completed filtration.\n\nThe condition is imposed at each adjacent pair of times. An all-pairs formulation requires a proof. No boundedness or independence is part of this definition, and no trivial or deterministic initial value is imposed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $D\\in L^1$ satisfy $\\mathbb E[D\\mid\\mathcal G]=0$ almost surely. Let $A,B$ be finite $\\mathcal G$-measurable random variables such that $A\\le D\\le B$ and $B-A\\le c$ almost surely for a deterministic $c\\ge0$. Then for every $\\lambda\\in\\mathbb R$,\n$$\\mathbb E[e^{\\lambda D}\\mid\\mathcal G]\\le e^{\\lambda^2c^2/8}\\quad\\text{a.s.}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$. Then the closed bounded interval\n$[a,b]$ ([[def-interval]]) is compact ([[def-open-cover-r]]): every family of\nopen subsets of $\\mathbb{R}$ whose union contains $[a,b]$ has a finite subfamily\nwhose union already contains $[a,b]$.\n\nThe proof is by repeated bisection. Supposing some open cover admits no finite\nsubcover, one halves the interval, keeps a half that still admits none, and\niterates; the halves shrink to a point, which the cover does reach, and a single\nmember of the cover then swallows a whole late-stage half. **The halving rule is\ncanonical**, taking the left half whenever the left half works, so the recursion\nuses [[thm-recursion]] and no choice principle.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-boundedness-theorem-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be compact\n([[def-open-cover-r]]). Then $f$ is **bounded on $K$**: there is a real\n$M \\ge 0$ with\n\n$$|f(x)| \\le M \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, $f[K]$ is a bounded subset of $\\mathbb{R}$\n([[def-bounded-set]]).\n\n**The hypothesis is compactness of $K$, not of $A$**, and it cannot be relaxed\nto boundedness of $K$ or to closedness of $K$ alone: the identity is unbounded\non the closed set $[0,\\infty)$, and $x \\mapsto 1/x$ is unbounded on the bounded\nset $(0,1)$. The general statement of that is\n[[thm-compactness-is-necessary-for-evt-and-uniform-continuity]], later on this\npage.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F9], the joint law of $Z=(Z_1,\\ldots,Z_n)$ is $\\mu$, so the product integral in the statement is $\\mathbb E f(Z)$. By [F1], take the product-integral sequence $M_i$ and its differences $D_i=M_i-M_{i-1}$. For every $A\\in\\mathcal F_{i-1}$, [F1] gives $\\int_A M_i\\,d\\mathbb P=\\int_A M_{i-1}\\,d\\mathbb P$. By [F2] and AC, $M_{i-1}$ is a version of $\\mathbb E[M_i\\mid\\mathcal F_{i-1}]$, so [F3] makes $(M_i,\\mathcal F_i)$ a martingale. The same lemma gives finite predictable endpoints $A_i\\le D_i\\le B_i$ with $A_i\\le0\\le B_i$ and $B_i-A_i\\le c_i$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The event-integral identity of [F1] and [F2] give $\\mathbb E[D_i\\mid\\mathcal F_{i-1}]=0$. Applying [F4] to these martingale differences and their endpoints gives $\\mathbb E[e^{\\lambda D_i}\\mid\\mathcal F_{i-1}]\\le e^{\\lambda^2c_i^2/8}$ for every real $\\lambda$. Since the endpoints contain zero and have width at most $c_i$, $|D_i|\\le c_i$ almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $S_k=M_k-M_0=\\sum_{i=1}^kD_i$ and $S_0=0$. Step 2.1 bounds each difference by $c_i$, hence $S_{k-1}\\in[-C,C]$ for $C:=\\sum_{i<k}c_i$. This closed bounded interval is compact by [F11], and $x\\mapsto e^{\\lambda x}$ is continuous by [F10] and continuity of scalar multiplication, so [F12] makes $e^{\\lambda S_{k-1}}$ bounded. Also $x\\mapsto e^{\\lambda x}$ is Borel: its open-set preimages are open, and the class of Borel sets whose preimages are Borel is a sigma-algebra containing the opens, hence contains the Borel sigma-algebra ([[def-borel-sigma-algebra]]). For each Borel $B$, the preimage of $B$ under $e^{\\lambda S_{k-1}}$ is $S_{k-1}^{-1}((x\\mapsto e^{\\lambda x})^{-1}(B))$, so this factor is $\\mathcal F_{k-1}$-measurable. By the addition formula in [F10], $e^{\\lambda S_k}=e^{\\lambda S_{k-1}}e^{\\lambda D_k}$; conditional expectation preservation [F5] and taking out the known factor [F6] give $\\mathbb E e^{\\lambda S_k}\\le e^{\\lambda^2c_k^2/8}\\mathbb E e^{\\lambda S_{k-1}}$. Finite induction yields $\\mathbb E e^{\\lambda S_n}\\le e^{\\lambda^2V/8}$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F10",
+            "F11",
+            "F12",
+            "step 2.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $V=0$, all $c_i=0$, so step 2.1 gives $D_i=0$ almost surely and $S_n=0$. If $V>0$ and $\\lambda>0$, then $e^{\\lambda S_n}$ is nonnegative and $S_n\\ge t$ implies $e^{\\lambda S_n}\\ge e^{\\lambda t}>0$ by [F10]. Markov [F7] and step 3.1 give $\\mathbb P(S_n\\ge t)\\le e^{\\lambda^2V/8}/e^{\\lambda t}=e^{-\\lambda t+\\lambda^2V/8}$ by the reciprocal and addition formulas in [F10]. Choosing $\\lambda=4t/V$ gives the stated upper-tail bound.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "F10",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Apply the same argument to $-f$ for the lower-tail bound. For $V>0$, [F8] combines the two tails; step 4.1 handles $V=0$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F8",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For thm mcdiarmid bounded differences, the Statement explicitly requires $n\\ge1$; the empty finite family is checked and excluded from its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For thm mcdiarmid bounded differences, step 2.1, step 4.1, step 5.1 prove the zero-parameter branch separately, including the almost-sure zero conclusion or transfer to the tail statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm mcdiarmid bounded differences, step 1.1, step 3.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For thm mcdiarmid bounded differences, step 2.1, step 4.1 handle the collapsed-variance, zero-width, or explicitly degenerate case before using a positive-parameter optimization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm mcdiarmid bounded differences, step 2.1, step 4.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm mcdiarmid bounded differences, step 1.1 work under the separately recorded AC assumption; A1 identifies its use, and no additional choice from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm mcdiarmid bounded differences, The thm mcdiarmid bounded differences assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm mcdiarmid bounded differences, For thm mcdiarmid bounded differences, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Proof 1.1\u20135.1 and all 22 supplier Statements/Definitions (Doob and conditional-Hoeffding proofs already independently reviewed). Product law plus change of variables applies first to |f| to establish integrability, then to f. Doob event identities supply zero conditional differences and predictable finite endpoints containing zero; |D_i|<=c_i gives bounded known exponential factors. Conditional iteration yields exp(lambda^2 sum c_i^2/8), and lambda=4t/V yields the upper tail. Negating f preserves product measurability, L1, and the same oscillations, giving the lower tail. Checked n=1, arbitrary measurable coordinate spaces, V=0, zero widths, exceptional sets, inclusive t>0 events and AC inheritance from conditional expectations. The Doob proof enrichment does not alter its interface or this valid use. No reader/refuter finding or defect."
+      }
+    },
+    "ex-rademacher-sum-concentration": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-hoeffding-independent-bounded-sums",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$ and let $X_1,\\ldots,X_n$ be independent integrable real random variables on one probability space. Suppose finite real numbers $a_i\\le b_i$ satisfy $a_i\\le X_i\\le b_i$ almost surely for every $i$. Put $V=\\sum_{i=1}^n(b_i-a_i)^2$ and $S=\\sum_{i=1}^n(X_i-\\mathbb E X_i)$. For every $t>0$, if $V>0$ then\n$$\\mathbb P(|S|\\ge t)\\le 2\\exp\\!\\left(-\\frac{2t^2}{V}\\right),$$\nand if $V=0$ then $\\mathbb P(|S|\\ge t)=0$. The two one-sided tails are each bounded by $\\exp(-2t^2/V)$ when $V>0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $X_i$ is a real random variable by [F1], and their given independence is understood by [F2]. Their two-point laws make them integrable with mean $(1/2)\\cdot1+(1/2)\\cdot(-1)=0$ by [F3], and they lie in $[-1,1]$ almost surely. Thus the Hoeffding width sum is $\\sum_i(1-(-1))^2=4n$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F4] with those endpoints. The exponent is $-2t^2/(4n)=-t^2/(2n)$, yielding the stated bound.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For ex rademacher sum concentration, The statement requires a positive index, dimension, or finite family size, so an empty instance is outside its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For ex rademacher sum concentration, All summands have the fixed Rademacher scale one, so this worked bound has no proxy or variance parameter allowed to vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For ex rademacher sum concentration, step 1.1, step 2.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For ex rademacher sum concentration, The stated hypotheses have no separate degenerate regime beyond the cases classified in the zero and endpoints worksheets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For ex rademacher sum concentration, step 1.1, step 2.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For ex rademacher sum concentration, step 1.1 work under the separately recorded AC assumption; A1 identifies its use, and no additional choice from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex rademacher sum concentration, The ex rademacher sum concentration assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex rademacher sum concentration, For ex rademacher sum concentration, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Verification 1.1\u20132.1 against all six actual suppliers. The disjoint atoms +/-1 each have probability 1/2, so their union has mass one; direct integration gives integrability and mean zero. Independent intervals [-1,1] have squared widths 4n, so Hoeffding yields exponent -t^2/(2n). Checked n=1, t>0, atoms/inclusive thresholds, nonzero denominator and explicit AC inherited from Hoeffding. No reader/refuter finding or defect."
+      }
+    },
+    "ex-gaussian-maximum-concentration": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-substitution",
+          "source_section": "Statement",
+          "quote": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ ([[def-derivative]]), with\n$\\varphi'$ integrable on $[c,d]$ ([[def-darboux-integral]]). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ ([[def-continuity-real]]).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of [[def-oriented-integral]].\n\n**Neither injectivity nor monotonicity of $\\varphi$ is assumed**, and that is\nexactly why the left-hand side is written with oriented limits: $\\varphi(d)$ may\nlie below $\\varphi(c)$, and $\\varphi$ may return to the same value many times.\nThe proof runs through a primitive of $f$ and the chain rule, and no inverse\nfunction is ever formed.\n\n**Continuity of $f$ is a hypothesis and cannot be weakened to integrability.**\nWith $f$ merely integrable the composite $f \\circ \\varphi$ need not be\nintegrable at all, so the right-hand side need not exist; that is\nthe false statement that weakens it on the companion page.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-finite-subgaussian-maximum-and-epsilon-net",
+          "source_section": "Statement",
+          "quote": "Let $Y_1,\\ldots,Y_m$ be centered sub-Gaussian real random variables with a common proxy $\\sigma^2\\ge0$, where $m\\ge1$. No independence is assumed. For $t>0$, if $\\sigma^2>0$ then\n$$\\mathbb P\\left(\\max_{1\\le j\\le m}|Y_j|\\ge t\\right)\\le2m\\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ the probability is $0$.\n\nLet $Z$ be a centered sub-Gaussian vector in $\\mathbb R^d$ with proxy $\\sigma^2$, where $d\\ge1$. For $0<\\epsilon<1$, let $\\mathcal N$ be the sphere net supplied by [[lem-epsilon-net-of-unit-sphere-has-cardinality-bound]]. Then for $t>0$, if $\\sigma^2>0$,\n$$\\mathbb P(\\|Z\\|_2\\ge t)\\le2(1+2/\\epsilon)^d\\exp\\!\\left(-\\frac{(1-\\epsilon)^2t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ this probability is $0$. The deterministic reduction is $\\|z\\|_2\\le(1-\\epsilon)^{-1}\\max_{u\\in\\mathcal N}|\\langle u,z\\rangle|$ for every $z\\in\\mathbb R^d$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$. By [F7] and composition, $u\\mapsto e^{-u}$ is continuous and integrable on compact intervals by [F8]. The map $x\\mapsto x^2/2$ is differentiable with derivative $x$ by [F7]; the identity $x$ is continuous because $|x-y|<\\eta$ whenever $|x-y|<\\delta$ with $\\delta=\\eta$, so it is integrable on $[0,R]$ by [F8]. Thus [F4] applies. By [F7], $(-e^{-u})'=e^{-u}$, so [F8] evaluates the resulting integral: $\\int_0^R x\\phi(x)\\,dx=(1-e^{-R^2/2})/\\sqrt{2\\pi}\\le1/\\sqrt{2\\pi}$. Letting integer $R$ increase to infinity, [F2], [F3] for nonnegative functions, and [F5] give $\\mathbb E|G|=2\\int_0^\\infty x\\phi(x)\\,dx<\\infty$. Since $\\phi$ is even, the positive and negative parts of $x\\phi(x)$ have equal integrals, so [F3] for integrable functions gives $\\mathbb E G=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $a=\\lambda\\sigma$. The function $x\\mapsto e^{ax}$ is continuous and Borel measurable by [F7] and [F9], so [F3] and completing the square, using [F6], give $\\mathbb E e^{\\lambda\\sigma G}=\\frac1{\\sqrt{2\\pi}}\\int_{\\mathbb R}e^{ax-x^2/2}\\,dx=e^{a^2/2}\\frac1{\\sqrt{2\\pi}}\\int_{\\mathbb R}e^{-(x-a)^2/2}\\,dx$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every positive integer $R$, [F4] with translation by $a$ gives $\\int_{-R}^{R}e^{-(x-a)^2/2}\\,dx=\\int_{-R-a}^{R-a}e^{-y^2/2}\\,dy$. Both interval families increase to $\\mathbb R$, so [F5] passes these equal integrals to the whole-line limit; [F2] identifies that limit as $\\sqrt{2\\pi}$. Step 1.2 then yields $\\mathbb E e^{\\lambda\\sigma G}=e^{a^2/2}=e^{\\lambda^2\\sigma^2/2}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F12] and step 1.1, $\\mathbb E Z_j=\\sigma\\mathbb E G=0$; step 2.1 gives its moment generating function. Thus each $Z_j$ is centered sub-Gaussian with proxy $\\sigma^2$ by [F10]. Apply [F11] to the $m$ variables. They are all equal, but the bound requires no independence.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For ex gaussian maximum concentration, The statement requires a positive index, dimension, or finite family size, so an empty instance is outside its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For ex gaussian maximum concentration, The worked Gaussian example assumes $\\sigma>0$; a zero-scale variable is excluded from its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For ex gaussian maximum concentration, step 3.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For ex gaussian maximum concentration, the example states the relevant boundary convention; the cited clause is explicit in that section."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For ex gaussian maximum concentration, step 1.2, step 2.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For ex gaussian maximum concentration, step 1.1 work under the separately recorded AC assumption; A1 identifies its use, and no additional choice from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex gaussian maximum concentration, The ex gaussian maximum concentration assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex gaussian maximum concentration, For ex gaussian maximum concentration, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Verification 1.1\u20133.1 and all 18 actual supplier Statements/Definitions. The substitution x^2/2 and FTC on [0,R], R positive integer, give integral x phi(x) <=1/sqrt(2pi); evenness and MCT prove absolute integrability before EG=0. Completing the square with a=lambda sigma is valid for every real lambda. Translation identifies the truncated Gaussian integrals; both [-R,R] and [-R-a,R-a] are increasing and exhaust R, so MCT and normalization give the exact MGF exp(lambda^2 sigma^2/2). Applying the finite-maximum supplier to identical variables requires no independence. Checked lambda=0, either sign of a, m=1, t>0, sigma>0 (zero excluded), endpoints and explicit AC. For the routine change from continuous compact-interval Riemann computations to Lebesgue integrals, independently checked the published Statement of thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral: bounded continuous integrands are Riemann integrable and AC implies its Countable Choice assumption. Integration against the density follows first for simple functions from the law Definition and then by MCT. These standard identifications close the terse calculus/integration inferences; no substantive missing prerequisite or false computation. No reader/refuter finding or confirmed defect."
+      }
+    },
+    "ex-subgaussian-vector-norm-via-net": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-subgaussian-maximum-and-epsilon-net",
+          "source_section": "Statement",
+          "quote": "Let $Y_1,\\ldots,Y_m$ be centered sub-Gaussian real random variables with a common proxy $\\sigma^2\\ge0$, where $m\\ge1$. No independence is assumed. For $t>0$, if $\\sigma^2>0$ then\n$$\\mathbb P\\left(\\max_{1\\le j\\le m}|Y_j|\\ge t\\right)\\le2m\\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ the probability is $0$.\n\nLet $Z$ be a centered sub-Gaussian vector in $\\mathbb R^d$ with proxy $\\sigma^2$, where $d\\ge1$. For $0<\\epsilon<1$, let $\\mathcal N$ be the sphere net supplied by [[lem-epsilon-net-of-unit-sphere-has-cardinality-bound]]. Then for $t>0$, if $\\sigma^2>0$,\n$$\\mathbb P(\\|Z\\|_2\\ge t)\\le2(1+2/\\epsilon)^d\\exp\\!\\left(-\\frac{(1-\\epsilon)^2t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ this probability is $0$. The deterministic reduction is $\\|z\\|_2\\le(1-\\epsilon)^{-1}\\max_{u\\in\\mathcal N}|\\langle u,z\\rangle|$ for every $z\\in\\mathbb R^d$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The choice $\\epsilon=1/2$ is in $(0,1)$ and gives the finite-net factor $(1+2/\\epsilon)^d=5^d$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $Z$ satisfies the centered projection condition required by [F2]. Apply [F2] with the value from step 1.1. Since $(1-1/2)^2/(2\\sigma^2)=1/(8\\sigma^2)$, the stated positive-proxy bound follows; the zero-proxy clause of [F2] gives the boundary case.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For ex subgaussian vector norm via net, The statement requires a positive index, dimension, or finite family size, so an empty instance is outside its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For ex subgaussian vector norm via net, step 2.1 prove the zero-parameter branch separately, including the almost-sure zero conclusion or transfer to the tail statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For ex subgaussian vector norm via net, step 1.1, step 2.1 apply with the least permitted positive index or dimension; the finite products, sums, and base case remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For ex subgaussian vector norm via net, step 2.1 handle the collapsed-variance, zero-width, or explicitly degenerate case before using a positive-parameter optimization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For ex subgaussian vector norm via net, step 1.1, step 2.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For ex subgaussian vector norm via net, step 1.1, step 2.1 use only the stated finite indexing and explicit supplier results; no arbitrary choice function is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex subgaussian vector norm via net, The ex subgaussian vector norm via net assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex subgaussian vector norm via net, For ex subgaussian vector norm via net, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-finite-variance-does-not-imply-subgaussian-tail": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-real-numbers]]) and\na **sequence of reals** is a function $a : \\mathbb{N} \\to \\mathbb{R}$\n([[def-sequence]]), written $(a_k)$; recall that $\\mathbb{N}$ contains $0$.\n\n**Partial sums.** Let $(a_k)$ be a sequence of reals. Its **sequence of partial\nsums** is\n\n$$s_n \\;:=\\; \\sum_{k < n} a_k \\qquad (n \\in \\mathbb{N}),$$\n\nthe finite sum of [[def-finite-sum]]. In particular $s_0 = 0$, the empty sum, and\n$s_{n+1} = s_n + a_n$ for every $n$, those being exactly the two recursion clauses\nthat define the finite sum. Note that $s_n$ is the sum of the $n$ terms\n$a_0, \\dots, a_{n-1}$, so the index $n$ counts terms rather than naming the last\none.\n\n**Convergence, the sum, divergence.** The **series** of $(a_k)$, written\n$\\sum a_k$, **converges** when the sequence $(s_n)$ of partial sums converges\n([[def-real-limit]]), and then the **sum of the series** is\n\n$$\\sum_{k=0}^{\\infty} a_k \\;:=\\; \\lim_{n} s_n .$$\n\nThe series **diverges** when $(s_n)$ does not converge. A convergent sequence of\nreals has exactly one limit ([[lem-limit-unique]]), so the displayed symbol names\na single real number and nothing further has to be checked for it to be\nwell defined.\n\n**Series with a general starting index.** Let $m \\in \\mathbb{N}$ and let $a$ be a\nfunction on $\\{\\, k \\in \\mathbb{N} : k \\ge m \\,\\}$, which we call a **family from\n$m$** and write $(a_k)_{k \\ge m}$. The series\n\n$$\\sum_{k \\ge m} a_k$$\n\nis by definition the series of the sequence $b_j := a_{j + m}$,\n$j \\in \\mathbb{N}$, which is a genuine sequence of reals; it converges exactly\nwhen that series converges, and its sum is then written\n$\\sum_{k = m}^{\\infty} a_k$. Its partial sums are\n\n$$\\sum_{k=m}^{n-1} a_k \\;=\\; \\sum_{j < n-m} a_{m+j} \\qquad (n \\ge m),$$\n\nin the notation of [[def-finite-sum]], the value at $n = m$ being the empty sum\n$0$. A sequence on $\\mathbb{N}$ is the case $m = 0$, and the two readings of\n$\\sum a_k$ agree there, since $b_j = a_j$.\n\n**This clause is not a convenience.** Sequences in this library are functions on\n$\\mathbb{N}$ and $\\mathbb{N}$ contains $0$ ([[def-sequence]]), while many of the\nclassical series are built from expressions that are undefined at the index $0$:\n$1/k$, $1/k^{p}$ and $|a_k|^{1/k}$ all require $k \\ge 1$. Writing such a series as\n$\\sum_{k \\ge 1} a_k$ names an honest object, whereas writing it as a sequence on\n$\\mathbb{N}$ would require a value at an index where the defining expression has\nnone. Every statement on this page says which starting index it uses.\n\n**Tail series.** For $N \\in \\mathbb{N}$, the **$N$-th tail series** of\n$\\sum a_k$ is $\\sum_{k \\ge N} a_k$, that is the series of the $N$-th tail\n$a^{(N)}$ of [[def-sequence]], whose terms are $a^{(N)}_j = a_{j+N}$. The\n$0$-th tail series is the series itself.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nonnegative-series-bounded-partial-sums",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ be a sequence of reals with $a_k \\ge 0$ for every $k \\in \\mathbb{N}$,\nlet $s_n = \\sum_{k<n} a_k$ be its partial sums and let\n$S = \\{\\, s_n : n \\in \\mathbb{N} \\,\\}$ be the range of $(s_n)$ ([[def-series]]).\nThen:\n\n1. $(s_n)$ is nondecreasing ([[def-monotone-sequence]]) and $s_n \\ge 0$ for every\n   $n$;\n2. $\\sum a_k$ converges **if and only if** $S$ is bounded above\n   ([[def-bounded-set]]), and in that case\n   $$\\sum_{k=0}^{\\infty} a_k \\;=\\; \\sup S ,$$\n   so in particular $s_n \\le \\sum_{k=0}^{\\infty} a_k$ for every $n$;\n3. if $S$ is not bounded above then $s_n \\to +\\infty$\n   ([[def-divergence-to-infinity]]) and $\\sum a_k$ diverges.\n\nThis is the theorem that makes the nonnegative theory work: for terms of one\nsign, convergence is a boundedness question and no candidate limit is ever\nneeded. Every comparison test on this page is an application of it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-subgaussian-maximum-and-epsilon-net",
+          "source_section": "Statement",
+          "quote": "Let $Y_1,\\ldots,Y_m$ be centered sub-Gaussian real random variables with a common proxy $\\sigma^2\\ge0$, where $m\\ge1$. No independence is assumed. For $t>0$, if $\\sigma^2>0$ then\n$$\\mathbb P\\left(\\max_{1\\le j\\le m}|Y_j|\\ge t\\right)\\le2m\\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ the probability is $0$.\n\nLet $Z$ be a centered sub-Gaussian vector in $\\mathbb R^d$ with proxy $\\sigma^2$, where $d\\ge1$. For $0<\\epsilon<1$, let $\\mathcal N$ be the sphere net supplied by [[lem-epsilon-net-of-unit-sphere-has-cardinality-bound]]. Then for $t>0$, if $\\sigma^2>0$,\n$$\\mathbb P(\\|Z\\|_2\\ge t)\\le2(1+2/\\epsilon)^d\\exp\\!\\left(-\\frac{(1-\\epsilon)^2t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ this probability is $0$. The deterministic reduction is $\\|z\\|_2\\le(1-\\epsilon)^{-1}\\max_{u\\in\\mathcal N}|\\langle u,z\\rangle|$ for every $z\\in\\mathbb R^d$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S=\\sum_{k=1}^{\\infty}k^{-4}$. Its partial sums are increasing, and for $k\\ge2$, $k^{-4}\\le k^{-2}\\le1/[k(k-1)]=1/(k-1)-1/k$; hence $1\\le S\\le2$ and $S$ is finite by [F4]. Set $c=(2S)^{-1}>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Enumerate $\\Omega=\\{(k,s):k\\ge1,\\ s\\in\\{-1,1\\}\\}$ by $\\omega_{2k-1}=(k,1)$, $\\omega_{2k}=(k,-1)$, and assign each atom weight $w_{2k-1}=w_{2k}=ck^{-4}$. Define $\\mathbb P(A)=\\sum_{j\\ge1}w_j\\mathbf1_A(\\omega_j)$ for $A\\subseteq\\Omega$. The weights are nonnegative and sum to $2cS=1$, so all subseries converge by [F4]. For pairwise disjoint $A_r$, put $a_{rj}=w_j\\mathbf1_{A_r}(\\omega_j)$ and $q_j=\\sum_r a_{rj}$; at most one term in each $q_j$ is nonzero. For every finite atom prefix $J$, only finitely many $A_r$ meet that prefix, so finite regrouping gives $\\sum_{j=1}^Jq_j=\\sum_r\\sum_{j=1}^Ja_{rj}\\le\\sum_r\\mathbb P(A_r)$. Taking the supremum over $J$ yields $\\mathbb P(\\bigcup_rA_r)\\le\\sum_r\\mathbb P(A_r)$. Conversely, for each finite event prefix $R$ and each $\\delta>0$, convergence of the finitely many subseries lets us choose one atom prefix $J$ for which $\\sum_{r=1}^R\\mathbb P(A_r)-\\delta\\le\\sum_{r=1}^R\\sum_{j=1}^Ja_{rj}\\le\\sum_{j=1}^Jq_j\\le\\mathbb P(\\bigcup_rA_r)$. Letting $\\delta\\downarrow0$ and then taking the supremum over $R$ proves the reverse inequality. Thus [F1] makes $\\mathbb P$ a probability measure.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Define $X(k,s)=sk$ on $(\\Omega,\\mathcal P(\\Omega),\\mathbb P)$. It is a real random variable by [F2], since every preimage is a subset of the full-power-set sample space.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "By [F5] applied to finite atom prefixes, $\\mathbb E|X|=2c\\sum_{k\\ge1}k^{-3}$ and $\\mathbb E X^2=2c\\sum_{k\\ge1}k^{-2}$. For $k\\ge2$, $k^{-3}\\le k^{-2}\\le1/[k(k-1)]$, whose partial sums telescope to at most $1$; hence both moments are finite, so $X$ is integrable and square-integrable. The two atoms at each $k$ have equal mass and opposite values; since $\\mathbb E|X|<\\infty$, their absolutely convergent contributions cancel and $\\mathbb E X=0$. By [F3], $X$ is centered with finite variance $\\operatorname{Var}(X)=\\mathbb E X^2$.",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every integer $n\\ge1$, the atoms $(n,1)$ and $(n,-1)$ give $\\mathbb P(|X|\\ge n)\\ge2cn^{-4}>0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose for contradiction that $X$ has a finite sub-Gaussian proxy $\\sigma^2$. If $\\sigma^2=0$, [F6] contradicts the positive tail in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $\\sigma^2>0$, [F6] gives $2cn^{-4}\\le\\mathbb P(|X|\\ge n)\\le2e^{-n^2/(2\\sigma^2)}$. By [F8], $n^4e^{-n^2/(2\\sigma^2)}=(n^2)^2/e^{n^2/(2\\sigma^2)}$, which tends to $0$ by [F7] with $x=n^2$, $m=2$, and $a=1/(2\\sigma^2)$. It is eventually smaller than $c$, so the upper tail is eventually smaller than $2cn^{-4}$, contradicting step 2.1. Thus this centered finite-variance variable is not sub-Gaussian for any finite proxy.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "assume-contra",
+            "algebra",
+            "discharge-contradiction: no finite proxy can satisfy the assumed bound"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 defines the empty event by the atomic probability sum and proves countable additivity; the constructed sample space itself is explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For cex finite variance does not imply subgaussian tail, step 3.1 prove the zero-parameter branch separately, including the almost-sure zero conclusion or transfer to the tail statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For cex finite variance does not imply subgaussian tail, There is no finite-list size in this counterexample; its atom index ranges over all positive integers."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For cex finite variance does not imply subgaussian tail, The witness is deliberately nondegenerate: each positive integer magnitude has two atoms of positive probability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For cex finite variance does not imply subgaussian tail, step 1.2, step 2.1, step 4.1 retain the inclusive support, MGF, or probability endpoint stated in the hypotheses and pass to the indicated limiting bound where needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For cex finite variance does not imply subgaussian tail, step 1.2, step 2.1 use only the stated finite indexing and explicit supplier results; no arbitrary choice function is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For cex finite variance does not imply subgaussian tail, The cex finite variance does not imply subgaussian tail assertion is a one-way definition, bound, example, or counterexample; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For cex finite variance does not imply subgaussian tail, For cex finite variance does not imply subgaussian tail, no converse to the stated definition, bound, example, or counterexample is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "notes": "Read Counterexample 1.1\u20134.1 and all 13 actual supplier Statements/Definitions. Telescoping comparisons give 1<=S<=2 and c=1/(2S)>0. The explicit enumeration and finite-prefix estimates establish countable additivity of the atom measure without rearranging conditionally convergent sums. MCT on finite atom truncations gives E|X|=2c sum k^-3 and EX^2=2c sum k^-2, both finite; absolute convergence licenses cancellation and mean zero. The two atoms at n give tail >=2c n^-4. Zero proxy contradicts this; positive proxy contradicts n^4 exp(-n^2/(2 sigma^2))->0 with x=n^2 and polynomial degree 2. Checked n=1, total mass one, empty events, measurable full-power-set construction, strictly positive variance and every finite proxy. No AC. Reader/refuter findings empty. Reader reordered a valid complete single-step moment argument to put integrability before cancellation; retained as audit enrichment, no confirmed mathematical defect."
+      }
+    }
+  }
+}

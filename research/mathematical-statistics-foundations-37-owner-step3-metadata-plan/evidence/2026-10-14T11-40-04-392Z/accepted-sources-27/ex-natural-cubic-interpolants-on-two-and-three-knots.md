@@ -1,0 +1,45 @@
+---
+id: ex-natural-cubic-interpolants-on-two-and-three-knots
+kind: example
+title: Natural cubic interpolation with two and three knots
+status: draft
+origin: pipeline
+pipeline_run: mathematical-statistics-foundations-37
+dependency_level: 2
+deps: [def-natural-cubic-spline, thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots]
+proof_strategy: direct
+generation:
+  role: example
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+sources:
+  references:
+    - title: "P. J. Green and B. W. Silverman, Nonparametric Regression and Generalized Linear Models: A Roughness Penalty Approach, §2.2.1, Theorem 2.2, printed p. 15"
+      url: https://ndl.ethernet.edu.et/handle/123456789/32883
+---
+
+## Example
+
+With two knots, the natural cubic interpolant is the line joining the two values. With knots $0,1,2$ and values $0,1,0$, the middle second derivative is $-3$, and the interpolant is
+$$s(x)=\begin{cases}\frac32x-\frac12x^3,&0\le x\le1,\\[2pt]\frac32(2-x)-\frac12(2-x)^3,&1\le x\le2.\end{cases}$$
+
+## Facts & Assumptions
+
+**Given:** The natural cubic convention and distinct-knot interpolation theorem.
+
+[F1] Natural cubic splines are $C^2$, piecewise cubic, have zero second derivative at the extreme knots, and have linear tails ([[def-natural-cubic-spline]]).
+
+[F2] At two or more distinct ordered knots, arbitrary interpolation values determine a unique natural cubic spline via the tridiagonal second-derivative system ([[thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots]]).
+
+[A1] The first data set has two distinct knots; the second has knots $0,1,2$ and values $0,1,0$.
+
+## Verification
+
+**Given:** The data sets $(0,y_1),(1,y_2)$ and $(0,0),(1,1),(2,0)$.
+
+1.1 For two knots, there are no interior second derivatives in the system of [F2]. The endpoint second derivatives are both zero, so the cubic segment has affine second derivative vanishing at both ends, hence second derivative identically zero. The segment is the unique line through the two values, and its linear extension on any data-free tail is the same line. [A1, F1, F2, algebra]
+
+1.2 For the three-knot data, $h_1=h_2=1$ and the secant slopes are $d_1=1$, $d_2=-1$. The one interior system equation is $4M_2=6(d_2-d_1)=-12$, so $M_2=-3$ while $M_1=M_3=0$. [A1, F2, algebra]
+
+2.1 Substitution in the interval formula gives the displayed pieces. They interpolate $0,1,0$; their first derivatives at $1$ are both $0$, their second derivatives at $1$ are both $-3$, and the second derivatives at $0,2$ are $0$. Thus they join to a natural cubic spline, which is unique by [F2]. [A1, F1, F2, step 1.2, algebra] ∎

@@ -1,0 +1,543 @@
+{
+  "group": "f",
+  "batches": ["18"],
+  "pages_read": [
+    "decision-theoretic-upper-bounds-and-oracle-risk",
+    "decision-theoretic-upper-bounds-and-oracle-risk-examples"
+  ],
+  "items_read": [
+    "def-fixed-design-projection-estimator",
+    "lem-binomial-support-count-bound",
+    "lem-finite-dimensional-projection-is-linear-and-contractive",
+    "lem-finite-support-projection-selection-is-borel",
+    "lem-isotropic-gaussian-noise-is-subgaussian",
+    "alg-bic-penalized-least-squares",
+    "alg-constrained-l0-least-squares",
+    "thm-gaussian-projection-risk",
+    "thm-subgaussian-projection-risk",
+    "thm-bic-fitted-risk-bound",
+    "thm-sparse-subset-risk-upper-bound",
+    "thm-gaussian-sparse-sequence-minimax-lower-bound",
+    "cor-matching-minimax-rate",
+    "cex-collinear-design-coefficient-risk-unidentifiable",
+    "ex-orthogonal-sequence-sparse-regression",
+    "ex-training-risk-versus-test-risk"
+  ],
+  "conventions": [
+    {
+      "convention": "Fixed-design least squares returns the unique orthogonal fitted vector, without selecting a coefficient representation; rank-deficient designs are allowed.",
+      "fixed_by": "def-fixed-design-projection-estimator",
+      "matters_for": [
+        "alg-bic-penalized-least-squares",
+        "alg-constrained-l0-least-squares",
+        "thm-gaussian-projection-risk",
+        "cex-collinear-design-coefficient-risk-unidentifiable"
+      ]
+    },
+    {
+      "convention": "Support searches order length-d indicator vectors lexicographically with 0<1, replace the incumbent only for a strictly smaller score, and retain the earliest support on ties.",
+      "fixed_by": "alg-bic-penalized-least-squares",
+      "matters_for": ["thm-bic-fitted-risk-bound"]
+    },
+    {
+      "convention": "Constrained support search includes the empty support and allows input sparsity 0≤s≤d; its risk theorem separately requires 1≤s≤d/2.",
+      "fixed_by": "alg-constrained-l0-least-squares",
+      "matters_for": [
+        "thm-sparse-subset-risk-upper-bound",
+        "ex-orthogonal-sequence-sparse-regression",
+        "cor-matching-minimax-rate"
+      ]
+    },
+    {
+      "convention": "The sub-Gaussian proxy bounds the MGF of every linear functional for every real parameter; centeredness is required, coordinate independence is not, and proxy zero is permitted.",
+      "fixed_by": "def-subgaussian-variable-and-vector",
+      "matters_for": [
+        "lem-isotropic-gaussian-noise-is-subgaussian",
+        "thm-subgaussian-projection-risk",
+        "thm-bic-fitted-risk-bound",
+        "thm-sparse-subset-risk-upper-bound",
+        "ex-orthogonal-sequence-sparse-regression"
+      ]
+    },
+    {
+      "convention": "BIC uses penalty τ²=16 log(6)σ²/n+32σ²log(ed)/n; its statistical bound requires a nonempty true support.",
+      "fixed_by": "thm-bic-fitted-risk-bound",
+      "matters_for": ["thm-bic-fitted-risk-bound"]
+    },
+    {
+      "convention": "The sparse upper bounds concern normalized squared fitted-value loss, not coefficient loss, and require no design-rank, incoherence, or column-normalization condition.",
+      "fixed_by": "thm-sparse-subset-risk-upper-bound",
+      "matters_for": [
+        "cor-matching-minimax-rate",
+        "ex-orthogonal-sequence-sparse-regression",
+        "cex-collinear-design-coefficient-risk-unidentifiable"
+      ]
+    },
+    {
+      "convention": "The Gaussian sparse-sequence lower bound assumes AC, independent coordinates of variance σ²/n, σ>0, and integer sparsity 1≤s≤d/2; it quantifies over Borel vector estimators.",
+      "fixed_by": "thm-gaussian-sparse-sequence-minimax-lower-bound",
+      "matters_for": ["cor-matching-minimax-rate"]
+    },
+    {
+      "convention": "The matching minimax comparison is restricted to n=d≥2 and X=√n I_n, with a common isotropic Gaussian noise law; its estimator class consists of Borel fitted-vector maps.",
+      "fixed_by": "cor-matching-minimax-rate",
+      "matters_for": ["cor-matching-minimax-rate"]
+    },
+    {
+      "convention": "Total variation is sup_A |P(A)−Q(A)|, and the cited Le Cam theorem has scalar actions; vector lower-bound applications must first project the estimator.",
+      "fixed_by": "thm-two-point-le-cam-risk-bound",
+      "matters_for": ["thm-gaussian-sparse-sequence-minimax-lower-bound"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-subgaussian-projection-risk",
+      "statement": "For a fixed subspace V⊆R^n of dimension r, μ∈V, and centered sub-Gaussian noise with proxy σ²≥0, the projection error is P_Vε. It is zero almost surely if r=0 or σ²=0. Otherwise P(‖P_Vε‖²>t)≤2·6^r exp(−t/(8σ²)) for every t>0, with the stated probability and expectation consequences.",
+      "used_by": [
+        "thm-bic-fitted-risk-bound",
+        "thm-sparse-subset-risk-upper-bound"
+      ]
+    },
+    {
+      "id": "thm-sparse-subset-risk-upper-bound",
+      "statement": "The constrained scan terminates and returns the earliest residual minimizer for every admissible input. For fixed X, truths with at most s nonzero coordinates, 1≤s≤d/2, and centered sub-Gaussian noise of proxy σ²≥0, expected normalized fitted-value error is at most Cσ²s log(ed/s)/n, and its 1−δ bound is Cσ²[s log(ed/s)+log(1/δ)]/n, where C=32(4+2log6).",
+      "used_by": [
+        "cor-matching-minimax-rate",
+        "ex-orthogonal-sequence-sparse-regression"
+      ]
+    },
+    {
+      "id": "lem-finite-support-projection-selection-is-borel",
+      "statement": "For a finite ordered list of fixed orthogonal projections and fixed real penalties, choosing the least index minimizing n⁻¹‖y−P_i y‖²+c_i gives a Borel fitted-vector map and a measurable discrete index map.",
+      "used_by": [
+        "alg-bic-penalized-least-squares",
+        "alg-constrained-l0-least-squares",
+        "thm-bic-fitted-risk-bound",
+        "thm-sparse-subset-risk-upper-bound",
+        "cor-matching-minimax-rate"
+      ]
+    },
+    {
+      "id": "def-fixed-design-projection-estimator",
+      "statement": "For n,d≥1 and fixed X∈R^(n×d), the least-squares fitted vector at y is P_VX y, where V_X is the column space of X. It is uniquely defined even when X is rank deficient and does not select a coefficient representation.",
+      "used_by": [
+        "alg-bic-penalized-least-squares",
+        "alg-constrained-l0-least-squares",
+        "thm-gaussian-projection-risk",
+        "thm-subgaussian-projection-risk",
+        "cex-collinear-design-coefficient-risk-unidentifiable",
+        "ex-training-risk-versus-test-risk",
+        "def-series-spline-least-squares",
+        "thm-series-training-risk"
+      ]
+    },
+    {
+      "id": "lem-finite-dimensional-projection-is-linear-and-contractive",
+      "statement": "For a subspace W of a finite-dimensional real inner-product space V, P_W is linear and ‖P_Wx‖≤‖x‖ for every x∈V; in particular, it is continuous.",
+      "used_by": [
+        "lem-finite-support-projection-selection-is-borel",
+        "thm-gaussian-projection-risk",
+        "thm-subgaussian-projection-risk"
+      ]
+    },
+    {
+      "id": "lem-binomial-support-count-bound",
+      "statement": "For d,m∈N with 1≤m≤d, binomial(d,m)≤(ed/m)^m.",
+      "used_by": [
+        "thm-bic-fitted-risk-bound",
+        "thm-sparse-subset-risk-upper-bound"
+      ]
+    },
+    {
+      "id": "thm-gaussian-sparse-sequence-minimax-lower-bound",
+      "statement": "Assume AC. For independent observations Z_j∼N(θ_j,σ²/n), n,d≥1, σ>0, and integers 1≤s≤d/2, every Borel T:R^d→R^d has supremum squared-error risk over at-most-s-sparse θ at least σ²s log(ed/s)/(200000n).",
+      "used_by": ["cor-matching-minimax-rate"]
+    },
+    {
+      "id": "thm-gaussian-projection-risk",
+      "statement": "For fixed X with column-space dimension r, fixed μ, and centered square-integrable coordinate noise with E[ε_iε_j]=σ²1_(i=j), E‖P_VY−μ‖²=‖P_Vμ−μ‖²+rσ². Gaussianity is not needed.",
+      "used_by": [
+        "cex-collinear-design-coefficient-risk-unidentifiable",
+        "ex-training-risk-versus-test-risk"
+      ]
+    },
+    {
+      "id": "lem-isotropic-gaussian-noise-is-subgaussian",
+      "statement": "Assume AC. For ε∼N_n(0,σ²I_n), n≥1 and σ≥0, E exp(λ⟨u,ε⟩)=exp(σ²λ²‖u‖²/2) for every u∈R^n and λ∈R.",
+      "used_by": ["cor-matching-minimax-rate"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Natural-number input and support-size domains, including zero.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-spheres-and-closed-balls",
+      "used_for": "Euclidean norm and sphere conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonal-projection",
+      "used_for": "Unique orthogonal components and residual orthogonality.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-orthogonal-decomposition",
+      "used_for": "Existence and uniqueness underlying the projection definition, including trivial subspaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-orthogonal-projection-is-the-unique-nearest-point",
+      "used_for": "Least-squares minimization and comparison with the true mean.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-subspace",
+      "used_for": "Closure of subspaces under sums and scalar multiplication.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonality-and-orthogonal-complement",
+      "used_for": "Orthogonality and linearity of orthogonal complements.",
+      "opened": true
+    },
+    {
+      "id": "prop-pythagorean-parallelogram-and-polarisation-identities",
+      "used_for": "Orthogonal risk decomposition and squared-norm identities.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Projection coordinates, with the empty basis at rank zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-finite",
+      "used_for": "Projection domination and continuity estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Continuity of finite residual score functions.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel selection and continuous-map measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-topological-space",
+      "used_for": "Open and closed sets used in tie-breaking regions.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-characterisations-top",
+      "used_for": "Open and closed inverse images of continuous score comparisons.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability of the selected fitted vector and index.",
+      "opened": true
+    },
+    {
+      "id": "def-max-min",
+      "used_for": "Finite score minima and tie-breaking.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Existence of finite score minima.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-cardinality",
+      "used_for": "Support cardinality and finite candidate lists.",
+      "opened": true
+    },
+    {
+      "id": "cor-cardinality-of-the-power-set",
+      "used_for": "Finiteness of exhaustive support searches.",
+      "opened": true
+    },
+    {
+      "id": "def-binomial-coefficient",
+      "used_for": "Counting fixed-size support families.",
+      "opened": true
+    },
+    {
+      "id": "thm-binomial-closed-formula",
+      "used_for": "Falling-factorial expression for binomial support counts.",
+      "opened": true
+    },
+    {
+      "id": "def-factorial-and-falling-factorial",
+      "used_for": "Positive factorials and the product used in the support-count proof.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite sum and product conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Finite product splitting and sum arithmetic.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Integer powers in support counts and geometric bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-laws",
+      "used_for": "Rearrangement of integer powers in the binomial bound.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Natural logarithms as inverse exponentials.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Monotonicity and product, quotient, reciprocal, and derived integer-power identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Logarithmic factorial integral estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Derivative of t log(t)−t.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Evaluation of the logarithm integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Riemann integral comparisons in support counts and elementary logarithm bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Integrability on nondegenerate compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "lem-integral-elementary-bounds",
+      "used_for": "Constant-function integral comparisons.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-logarithm",
+      "used_for": "Integral representation used in the sparse lower-bound constants.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-logarithm-agrees-with-natural-logarithm",
+      "used_for": "Identification of the integral logarithm with log.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "e=exp(1), exponential series lower bounds, and tail calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Exponential tail arithmetic and geometric-series reduction.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Positivity of logarithmic thresholds and e>1.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Geometric ratio exp(−1/2)=1/exp(1/2).",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Bounding the tail-probability sum starting at index zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Divergence of truncation thresholds in expectation bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passage from truncated losses to extended expectations.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Extended nonnegative expectations and Gaussian exponential moments.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Finite integrable expectation calculations; its narrower integrability domain is relevant to the counterexample concern.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Coordinate second moments, covariance, and scalar test-error calculations.",
+      "opened": true
+    },
+    {
+      "id": "lem-probability-measure-basic-identities",
+      "used_for": "Finite and countable union bounds, including zero-proxy conclusions.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit Gaussian-construction and lower-bound assumptions.",
+      "opened": true
+    },
+    {
+      "id": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+      "used_for": "Countable choice required by Gaussian change of variables.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Affine normal laws and the degenerate variance-zero law.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Normal projection laws, covariance, and independent-coordinate realization.",
+      "opened": true
+    },
+    {
+      "id": "lem-normal-density-has-total-mass-one",
+      "used_for": "Normalizing the completed-square Gaussian MGF.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Gaussian expectations as density integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Translation in the Gaussian MGF calculation under countable choice supplied by AC.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+      "used_for": "Uniqueness identifying isotropic Gaussian noise with its independent-coordinate realization.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independent coordinates after rescaling to the Gaussian sequence experiment.",
+      "opened": true
+    },
+    {
+      "id": "cor-continuous-functions-are-borel-measurable",
+      "used_for": "Borel affine rescaling in the minimax reduction; AC supplies its countable-choice hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-with-borel-functions-preserves-measurability",
+      "used_for": "Borel transformed estimators in the minimax comparison.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence of training and fresh-response errors.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Vanishing cross term in the fresh-response error.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "used_for": "Elementary square and logarithm comparisons in the lower-bound constants.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Positive scales and separations in the sparse Gaussian lower bound.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "cex-collinear-design-coefficient-risk-unidentifiable",
+      "concern": "F3 says 'Expectation preserves inequalities between nonnegative random variables' and cites cor-expectation-linearity-monotonicity-and-modulus-bound. That supplier starts 'Let X,Y be integrable real or complex random variables'. Step 1.2 quantifies over every measurable coefficient estimator, whose squared losses need not be integrable, and also separates their sum into two possibly infinite risks. The conclusion remains sound: if either risk is infinite it is immediate; otherwise the cited integrable rules apply. Alternatively, cite extended nonnegative-integral monotonicity and additivity. The current citation states its supplier more strongly than its Statement permits.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-integration-against-a-density",
+      "finding": "The Statement reads 'Let f,g:X→[0,+∞] be measurable. Then ∫g d(f dμ)=∫gf dμ'; Given lists only the functions. Neither binds the ambient sigma-algebra or μ as a measure on X. The proof is the standard sound argument on an arbitrary measure space, and the Gaussian consumers supply Lebesgue measure, but the standalone Statement should bind (X,A,μ).",
+      "severity": "presentation"
+    },
+    {
+      "item": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "finding": "The Statement starts 'Let f,g:X→[0,+∞] be measurable and let c≥0' and then uses integrals with respect to μ. Given likewise does not bind an ambient measure space. The simple-minorant proof supports the usual result on arbitrary (X,A,μ); the missing ambient declaration is wording rather than a defect in that argument.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+      "finding": "The Statement reads 'If f,g:X→[0,+∞] are measurable, then ∫(f+g)dμ=∫f dμ+∫g dμ'. Given mentions only f and g, leaving μ and the ambient sigma-algebra unbound. The increasing-simple-approximation proof is sound with an arbitrary measure space explicitly supplied.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-fano-packing",
+      "finding": "The Statement and Given do not explicitly assume AC, but A1 says 'AC supplies the Radon–Nikodym derivatives in the directional KL definition', and Proof 1.1 and 2.2 invoke A1. Its KL supplier explicitly assumes AC in the absolutely continuous case. Carry that qualification into the Statement. The assigned sparse lower-bound consumer already assumes AC, so this does not invalidate that application.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "decision-theoretic-upper-bounds-and-oracle-risk",
+      "to": "losses-risk-and-decision-rules",
+      "faithful": true,
+      "note": "The general definition permits nonnegative, possibly infinite risk and deterministic point-mass rules. Assigned claims specify Borel squared fitted-value or coefficient losses. The counterexample's separate integrability citation gap is recorded in concerns."
+    },
+    {
+      "from": "decision-theoretic-upper-bounds-and-oracle-risk",
+      "to": "finite-sample-point-estimation-and-unbiased-optimality",
+      "faithful": true,
+      "note": "The scalar bias/MSE definition is used for the one-point training/test example. Vector projection and sparse risks are stated directly; no scalar bias–variance identity is transferred to them."
+    },
+    {
+      "from": "decision-theoretic-upper-bounds-and-oracle-risk",
+      "to": "concentration-inequalities-and-tail-bounds",
+      "faithful": true,
+      "note": "The centered all-directions vector proxy is preserved without adding coordinate independence. Projection coordinates retain the proxy; the sphere-net theorem at epsilon=1/2 supplies 5^r, safely enlarged to 6^r. Zero-proxy cases are addressed."
+    },
+    {
+      "from": "decision-theoretic-upper-bounds-and-oracle-risk",
+      "to": "minimax-lower-bounds-and-information-theoretic-methods",
+      "faithful": true,
+      "note": "Packing supplies exactly-s-sparse vectors with squared separation greater than s/2 and log-cardinality at least (s/1024)log(ed/s). Gaussian KL and finite-product additivity apply under independence and AC. Fano is used for M≥3; for M=2 the consumer first projects T to scalar T_1 before Le Cam. TV constants agree. The consumer explicitly supplies AC despite the Fano Statement's wording omission."
+    },
+    {
+      "from": "splines-series-and-approximation-rates",
+      "to": "decision-theoretic-upper-bounds-and-oracle-risk",
+      "faithful": true,
+      "note": "def-series-spline-least-squares and thm-series-training-risk F8 use the fixed-design projection definition at each realized design, including rank deficiency. The downstream theorem independently proves its product conditional kernel and conditional variance bound; it does not apply the fixed-design unconditional noise identity to a random design or infer independent test-risk control."
+    }
+  ]
+}

@@ -1,0 +1,2603 @@
+{
+  "version": 1,
+  "scope": [
+    "def-fixed-design-projection-estimator",
+    "lem-binomial-support-count-bound",
+    "lem-finite-dimensional-projection-is-linear-and-contractive",
+    "lem-finite-support-projection-selection-is-borel",
+    "lem-isotropic-gaussian-noise-is-subgaussian",
+    "alg-bic-penalized-least-squares",
+    "alg-constrained-l0-least-squares",
+    "thm-gaussian-projection-risk",
+    "thm-subgaussian-projection-risk",
+    "thm-bic-fitted-risk-bound",
+    "thm-sparse-subset-risk-upper-bound",
+    "thm-gaussian-sparse-sequence-minimax-lower-bound",
+    "cor-matching-minimax-rate",
+    "cex-collinear-design-coefficient-risk-unidentifiable",
+    "ex-orthogonal-sequence-sparse-regression",
+    "ex-training-risk-versus-test-risk"
+  ],
+  "contracts": {
+    "def-fixed-design-projection-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For def-fixed-design-projection-estimator, The zero/rank-deficient column span still has a unique fitted vector (Definition)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For def-fixed-design-projection-estimator, Projection of the zero observation is zero by uniqueness in the cited projection definition (Definition)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For def-fixed-design-projection-estimator, The defining conditions n,d≥1 include their one-dimensional endpoints (Definition)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For def-fixed-design-projection-estimator, Rank deficiency is explicitly allowed and no coefficient representative is selected (Definition)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For def-fixed-design-projection-estimator, The stated design dimensions include n=d=1 (Definition)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For def-fixed-design-projection-estimator, The stated design dimensions include n=d=1 (Definition)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For def-fixed-design-projection-estimator, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For def-fixed-design-projection-estimator, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-binomial-support-count-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-binomial-closed-formula",
+          "source_section": "Statement",
+          "quote": "Let $n, k \\in \\mathbb{N}$ with $k \\le n$. Then, in $\\mathbb{N}$,\n\n$$\\binom{n}{k}\\cdot k!\\cdot (n-k)! = n! ,$$\n\nand consequently:\n\n1. $\\binom{n}{k}\\cdot k! = n^{\\underline{k}}$\n   ([[def-factorial-and-falling-factorial]]);\n2. **integrality**: in $\\mathbb{R}$,\n   $\\iota\\binom{n}{k} = \\dfrac{\\iota(n!)}{\\iota(k!)\\,\\iota((n-k)!)}$, so the\n   familiar quotient $n!/(k!\\,(n-k)!)$ is the canonical natural of a natural\n   number, namely of the count $\\binom{n}{k}$;\n3. **symmetry**: $\\binom{n}{k} = \\binom{n}{n-k}$.\n\nHere $\\iota$ is the canonical natural of [[def-canonical-natural]] and $n-k$ the\ntruncated difference, which for $k \\le n$ is the ordinary one.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\n[[def-nat-finite-sum-and-product]]: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\n[[def-nat-finite-sum-and-product]]. Induction ([[thm-induction-principle]]): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-system]]) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n([[lem-nat-mult-identity]]) and cancellation gives $x = 0$\n([[lem-nat-mult-cancellative]]). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ ([[lem-nat-nonzero-is-successor]]), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ ([[lem-nat-add-cancellative]]). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional ([[def-nat-multiplication]]), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\n[[def-nat-finite-sum-and-product]]: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\n[[def-nat-finite-sum-and-product]]. Induction ([[thm-induction-principle]]): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-system]]) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n([[lem-nat-mult-identity]]) and cancellation gives $x = 0$\n([[lem-nat-mult-cancellative]]). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ ([[lem-nat-nonzero-is-successor]]), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ ([[lem-nat-add-cancellative]]). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional ([[def-nat-multiplication]]), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, writing $d = n + 1 - m$\nfor the number of terms,\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $\\binom{d}{m}=d^{\\underline m}/m!$. Every factor in $d^{\\underline m}=\\prod_{j=0}^{m-1}(d-j)$ lies between $0$ and $d$, so $d^{\\underline m}\\le d^m$; since $m!>0$ by [F2], $\\binom{d}{m}\\le d^m/m!$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $m=1$, then $\\log(m!)=0\\ge-1=m\\log m-m$ by [F2]. If $m\\ge2$, monotonicity of $\\log$ in [F2] gives $\\log t\\le\\log(j+1)$ on each interval $[j,j+1]$ for $1\\le j<m$. Summing with [F4] yields $\\int_1^m\\log t\\,dt\\le\\sum_{j=2}^{m}\\log j=\\log(m!)$. The antiderivative $t\\log t-t$ has derivative $\\log t$ by the product rule and [F3], so [F3] evaluates the integral as $m\\log m-m+1$. Therefore $\\log(m!)\\ge m\\log m-m+1\\ge m\\log m-m$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $\\log((m/e)^m)=m(\\log m-\\log e)=m\\log m-m$; the power identity follows by induction from the logarithm product law. Step 1.2 and monotonicity of $\\log$ therefore imply $(m/e)^m\\le m!$. Combining this with step 1.1 gives $\\binom{d}{m}\\le d^m(m/e)^{-m}=(ed/m)^m$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For lem-binomial-support-count-bound, The theorem assumes 1≤m≤d, so the m=0 empty-set count is outside its quantified range."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For lem-binomial-support-count-bound, The statement has positive integer parameters and no zero-proxy or zero-rank clause."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For lem-binomial-support-count-bound, Step 1.2 treats m=1 separately, and step 2.1 uses the same bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For lem-binomial-support-count-bound, Steps 1.1–2.1 include m=d and the falling factorial has no zero factor."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For lem-binomial-support-count-bound, Steps 1.1–2.1 retain both inclusive integer bounds 1≤m≤d."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For lem-binomial-support-count-bound, Steps 1.1–2.1 retain both inclusive integer bounds 1≤m≤d."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem-binomial-support-count-bound, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem-binomial-support-count-bound, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-dimensional-projection-is-linear-and-contractive": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nassociates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). A subset\n$W \\subseteq V$ is a **linear subspace** of $V$ when\n\n- **(W1)** $0_V \\in W$;\n- **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies\n  $u + v \\in W$;\n- **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and\n  $v \\in W$ imply $\\lambda v \\in W$.\n\nEvery vector space $V$ has the two **trivial linear subspaces** $\\{0_V\\}$ and $V$\nitself; a linear subspace $W$ with $W \\ne V$ is called **proper**.\n\n**The restricted operations are the required data, and $W$ is a vector space.**\nBy (W2) the vector addition of $V$ restricts to a binary operation\n$W \\times W \\to W$, and by (W3) the scalar multiplication restricts to a map\n$F \\times W \\to W$. With these and the element $0_V$, the set $W$ is a vector\nspace over $F$:\n\n- axioms (V2)–(V5) are equations required of elements of $W$, which are in\n  particular elements of $V$, so they are inherited from $V$; likewise\n  associativity and commutativity of the restricted addition;\n- $0_V$ lies in $W$ by (W1) and is a two-sided identity for the restricted\n  addition, since it is one in $V$;\n- for $v \\in W$ the vector $(-1_F)v$ lies in $W$ by (W3), and\n  $(-1_F)v = -v$ ([[lem-vector-space-elementary-consequences]]), so $-v \\in W$\n  and $v + (-v) = 0_V$ holds in $W$.\n\nSo $(W,+,0_V)$ is an abelian group, which is axiom (V1), and $W$ is a vector\nspace over $F$ **whose zero vector and whose additive inverses are those of\n$V$**. In the language of [[def-subgroup]], the three displayed conditions\n(S1) $0_V \\in W$, (S2) closure under addition and (S3) closure under additive\ninverses all hold, so $W$ is a subgroup of the abelian group $(V,+,0_V)$\n([[def-group]]); that reading, and its converse, are recorded as\n[[lem-linear-subspace-is-a-subgroup]] and are cited from there rather than\nre-argued below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in an inner product space:\n\n1. if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;\n2. $\\lVert u+v\\rVert^2+\\lVert u-v\\rVert^2=2\\lVert u\\rVert^2+2\\lVert v\\rVert^2$;\n3. over $\\mathbb R$, $\\langle u,v\\rangle=\\frac14(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2)$;\n4. over $\\mathbb C$ with the linear-first convention,\n$$\\langle u,v\\rangle=\\frac14\\bigl(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2+i\\lVert u+iv\\rVert^2-i\\lVert u-iv\\rVert^2\\bigr).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vectors $P_Wx+P_Wy\\in W$ and $(x+y)-(P_Wx+P_Wy)=(x-P_Wx)+(y-P_Wy)\\in W^\\perp$ form a decomposition of $x+y$ of the type in [F1] by [F2]. Uniqueness in [F1] therefore gives $P_W(x+y)=P_Wx+P_Wy$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any scalar $a\\in\\mathbb R$, $aP_Wx\\in W$ and $ax-aP_Wx=a(x-P_Wx)\\in W^\\perp$ by [F2]. Uniqueness in [F1] gives $P_W(ax)=aP_Wx$. Together with step 1.1 this proves linearity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The decomposition $x=P_Wx+(x-P_Wx)$ is orthogonal by [F1]. Pythagoras [F3] yields $\\|x\\|^2=\\|P_Wx\\|^2+\\|x-P_Wx\\|^2\\ge\\|P_Wx\\|^2$, hence $\\|P_Wx\\|\\le\\|x\\|$. By linearity, $\\|P_Wx-P_Wy\\|=\\|P_W(x-y)\\|\\le\\|x-y\\|$, so $P_W$ is continuous.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For lem-finite-dimensional-projection-is-linear-and-contractive, Steps 1.1–3.1 include the zero subspace through the unique decomposition and Pythagoras."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For lem-finite-dimensional-projection-is-linear-and-contractive, Steps 1.1–2.1 apply to scalar zero and the zero vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For lem-finite-dimensional-projection-is-linear-and-contractive, Step 3.1 holds in finite dimension one as in every finite dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For lem-finite-dimensional-projection-is-linear-and-contractive, Step 3.1 remains valid for W={0} and W=V."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For lem-finite-dimensional-projection-is-linear-and-contractive, Steps 1.1–3.1 impose no strict dimension endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For lem-finite-dimensional-projection-is-linear-and-contractive, Steps 1.1–3.1 impose no strict dimension endpoint."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem-finite-dimensional-projection-is-linear-and-contractive, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem-finite-dimensional-projection-is-linear-and-contractive, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-support-projection-selection-is-borel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-dimensional-projection-is-linear-and-contractive",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner-product space, let $W\\subseteq V$ be a\nlinear subspace, and let $P_W:V\\to W$ be the orthogonal projection. Then $P_W$\nis linear and satisfies $\\|P_Wx\\|\\le \\|x\\|$ for every $x\\in V$. In particular,\n$P_W$ is continuous.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and write $\\mathcal{P}(X)$ for its power set. A **topology** on\n$X$ is a family $\\mathcal{T} \\subseteq \\mathcal{P}(X)$ such that\n\n- **(T1)** $\\varnothing \\in \\mathcal{T}$ and $X \\in \\mathcal{T}$;\n- **(T2)** $\\bigcup \\mathcal{S} \\in \\mathcal{T}$ for every $\\mathcal{S} \\subseteq \\mathcal{T}$;\n- **(T3)** $U \\cap V \\in \\mathcal{T}$ for all $U, V \\in \\mathcal{T}$.\n\nA **topological space** is a pair $(X, \\mathcal{T})$ consisting of a set $X$ and\na topology $\\mathcal{T}$ on it; the elements of $X$ are its **points**. When only\none topology is in play we write $X$ for the pair; when several are, the topology\nis always named.\n\nThe members of $\\mathcal{T}$ are the **open** sets of $(X,\\mathcal{T})$. A subset\n$F \\subseteq X$ is **closed** when its complement $X \\setminus F$ is open, and\n**clopen** when it is both open and closed. By (T1) both $\\varnothing$ and $X$\nare clopen. *Open and closed are not opposites*: a set may be neither, and it may\nbe both, so \"not open\" is never a synonym for \"closed\".\n\n**Finite intersections, and the empty one.** Axiom (T3) is stated for two sets\nbecause that is all that is ever needed: if $n \\ge 1$ and\n$U_1, \\dots, U_n \\in \\mathcal{T}$, then $U_1 \\cap \\dots \\cap U_n \\in \\mathcal{T}$\nfollows by iterating (T3) $n-1$ times. The intersection of the **empty** family\nof subsets of $X$ is $X$, since the condition \"lies in every member of the empty\nfamily\" is vacuous; that case is covered by (T1) rather than by (T3), which is\none of the two reasons $X \\in \\mathcal{T}$ is demanded outright. The other is\nthat (T2) alone gives only $\\bigcup \\varnothing = \\varnothing$.\n\n**The closed sets, and the dual axiomatisation.** Put\n$\\mathcal{C} := \\{\\, X \\setminus U : U \\in \\mathcal{T} \\,\\}$, the family of closed\nsets. Then\n\n- **(C1)** $\\varnothing \\in \\mathcal{C}$ and $X \\in \\mathcal{C}$;\n- **(C2)** $\\bigcap \\mathcal{D} \\in \\mathcal{C}$ for every **nonempty**\n  $\\mathcal{D} \\subseteq \\mathcal{C}$;\n- **(C3)** $C \\cup D \\in \\mathcal{C}$ for all $C, D \\in \\mathcal{C}$.\n\nConversely, if a family $\\mathcal{C} \\subseteq \\mathcal{P}(X)$ satisfies (C1),\n(C2) and (C3), then $\\mathcal{T} := \\{\\, X \\setminus C : C \\in \\mathcal{C} \\,\\}$\nis a topology on $X$ whose closed sets are exactly the members of $\\mathcal{C}$.\nSo a topology may be presented equally well by its open sets or by its closed\nsets, and this library uses whichever is shorter.\n\n*Both directions are one computation, and it is carried out here rather than\nassumed.* The map $U \\mapsto X \\setminus U$ is an involution of\n$\\mathcal{P}(X)$, hence a bijection, and it carries the two De Morgan identities\n\n$$X \\setminus \\bigcup_{i \\in I} A_i = \\bigcap_{i \\in I} (X \\setminus A_i) \\quad (I \\ne \\varnothing), \\qquad X \\setminus \\bigcap_{i \\in I} A_i = \\bigcup_{i \\in I} (X \\setminus A_i) \\quad (I \\ne \\varnothing)$$\n\nterm by term into each other. Given (T1)–(T3): $\\varnothing = X \\setminus X$ and\n$X = X \\setminus \\varnothing$ lie in $\\mathcal{C}$, which is (C1); for nonempty\n$\\mathcal{D} \\subseteq \\mathcal{C}$ the family\n$\\mathcal{S} = \\{\\, X \\setminus C : C \\in \\mathcal{D} \\,\\}$ lies in $\\mathcal{T}$\nand $\\bigcap \\mathcal{D} = X \\setminus \\bigcup \\mathcal{S}$ is closed by (T2),\nwhich is (C2); and $C \\cup D = X \\setminus ((X \\setminus C) \\cap (X \\setminus D))$\nis closed by (T3), which is (C3). Given (C1)–(C3) the same three lines run\nbackwards, the empty-union case $\\bigcup \\varnothing = \\varnothing$ being supplied\nby (C1) rather than by (C2); and $\\{\\, X \\setminus C : C \\in \\mathcal{C} \\,\\}$ has\n$\\mathcal{C}$ as its family of complements because complementation is an\ninvolution.\n\n**Comparison of topologies.** If $\\mathcal{T}_1$ and $\\mathcal{T}_2$ are\ntopologies on the same set $X$ and $\\mathcal{T}_1 \\subseteq \\mathcal{T}_2$, then\n$\\mathcal{T}_1$ is **coarser** than $\\mathcal{T}_2$ and $\\mathcal{T}_2$ is\n**finer** than $\\mathcal{T}_1$; the comparison is **strict** when the inclusion\nis. Inclusion is a partial order on the set of topologies on $X$\n([[def-partial-order]]), and it is not a total one: two topologies on the same\nset may be incomparable.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.\n\n- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$\n  for every $s \\in S$.\n- $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$\n  for every $s \\in S$.\n\nA set has at most one maximum: if $m_1$ and $m_2$ are both maxima then\n$m_1 \\in S$ gives $m_1 \\le m_2$ and $m_2 \\in S$ gives $m_2 \\le m_1$, so\n$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy\naxiom of an ordered field ([[def-ordered-field]], [[def-complete-ordered-field]]).\nThe same argument applies to minima, so we may write $\\max S$ and $\\min S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuity-characterisations-top",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces, let\n$f : X \\to Y$ be a function, and let $\\mathcal{S}$ be a subbasis for\n$\\mathcal{T}_Y$ ([[def-topology-basis-subbasis]]). The following five conditions\nare equivalent.\n\n- **(a)** $f$ is continuous at every point of $X$ ([[def-continuous-map-top]]).\n- **(b)** $f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$.\n- **(c)** $f^{-1}[F]$ is closed in $X$ for every closed $F \\subseteq Y$.\n- **(d)** $f^{-1}[S]$ is open in $X$ for every $S \\in \\mathcal{S}$.\n- **(e)** $f[\\overline{A}] \\subseteq \\overline{f[A]}$ for every $A \\subseteq X$,\n  closures being taken in $X$ and in $Y$ respectively\n  ([[def-interior-closure-boundary-top]]).\n\nCondition (d) is what makes continuity checkable against a generating family\nrather than against every open set, and it holds for a *basis* as well, a basis\nbeing in particular a subbasis for the topology it generates.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $a_0, \\dots, a_{n-1}$ and $b_0, \\dots, b_{n-1}$ be\nreals, with finite sums as in [[def-finite-sum]]. Then\n\n$$\\Big(\\sum_{k<n} a_k b_k\\Big)^{2} \\;\\le\\; \\Big(\\sum_{k<n} a_k^{2}\\Big)\\Big(\\sum_{k<n} b_k^{2}\\Big),$$\n\nand, in root form ([[thm-of-square-roots]]),\n\n$$\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}.$$\n\nEquality holds in the first display if and only if the two lists are\nproportional, in the symmetric sense that there is a pair\n$(\\lambda, \\mu) \\ne (0,0)$ of reals with $\\lambda a_k = \\mu b_k$ for every\n$k < n$.\n\n**No root is used in the proof of the squared form.** That form is an identity\nplus a sign argument in the ordered field, and the root form is only a\nrestatement of it through the monotonicity of squaring on the nonnegatives\n([[lem-of-square-monotone]]); the root enters nowhere but the last step, where\nthat restatement is made and [[thm-of-square-roots]] is what supplies the\nsquare-root symbol. This matters here, because it makes the squared\ninequality independent of the existence theorem for roots.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in an inner product space:\n\n1. if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;\n2. $\\lVert u+v\\rVert^2+\\lVert u-v\\rVert^2=2\\lVert u\\rVert^2+2\\lVert v\\rVert^2$;\n3. over $\\mathbb R$, $\\langle u,v\\rangle=\\frac14(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2)$;\n4. over $\\mathbb C$ with the linear-first convention,\n$$\\langle u,v\\rangle=\\frac14\\bigl(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2+i\\lVert u+iv\\rVert^2-i\\lVert u-iv\\rVert^2\\bigr).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $R_i=I-P_i$. By [F1] and [F7], $R_i$ is linear and $\\|R_i z\\|_2\\le2\\|z\\|_2$. For $y,z\\in\\mathbb R^n$, [F6] and [F7] give $$|\\|R_i y\\|_2^2-\\|R_i z\\|_2^2| \\le\\|R_i(y-z)\\|_2\\,\\|R_i(y+z)\\|_2 \\le4\\|y-z\\|_2\\,\\|y+z\\|_2.$$ For fixed $z$, the last factor is bounded when $y$ is near $z$, so the squared residual and hence $q_i$ are continuous.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], a minimum score exists. Its least minimizing index is $i$ exactly on the set $$A_i=\\bigcap_{j<i}\\{y:q_i(y)<q_j(y)\\}\\cap\\bigcap_{j>i}\\{y:q_i(y)\\le q_j(y)\\}.$$ Each strict comparison is open and each non-strict comparison is closed because the score differences are continuous and [F5] applies to open and closed sets. Thus every $A_i$ is Borel by [F2]; the sets are disjoint and cover $\\mathbb R^n$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any open $O\\subseteq\\mathbb R^n$, $\\widehat m^{-1}(O)=\\bigcup_{i=1}^N(A_i\\cap P_i^{-1}(O))$. Each $P_i^{-1}(O)$ is open by [F1, F5], so this finite union is Borel. If $B$ ranges over subsets of $\\mathbb R^n$ whose inverse images under $\\widehat m$ are Borel, those subsets form a sigma-algebra containing every open set; [F2] therefore puts every Borel $B$ in this family. By [F3], $\\widehat m$ is Borel measurable. The index-map preimage of any set of indices is a finite union of the corresponding $A_i$, so the index map is measurable as well.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For lem-finite-support-projection-selection-is-borel, The statement requires N≥1; for N=1 step 2.1 has empty comparison intersections and step 3.1 gives one continuous projection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For lem-finite-support-projection-selection-is-borel, Steps 1.1–3.1 allow zero data and equal scores; step 2.1 resolves ties by the least index."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For lem-finite-support-projection-selection-is-borel, For N=1, step 2.1 gives the entire domain as A₁ and step 3.1 is a single projection."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For lem-finite-support-projection-selection-is-borel, Step 2.1 explicitly assigns equal scores to the earliest index, including identical projections."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For lem-finite-support-projection-selection-is-borel, The penalties are arbitrary reals and step 2.1 retains non-strict comparison endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For lem-finite-support-projection-selection-is-borel, The penalties are arbitrary reals and step 2.1 retains non-strict comparison endpoints."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem-finite-support-projection-selection-is-borel, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem-finite-support-projection-selection-is-borel, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-isotropic-gaussian-noise-is-subgaussian": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $u\\in\\mathbb R^n$ and $\\lambda\\in\\mathbb R$, and put $a=\\sigma\\|u\\|_2$. By [F1], $W=\\langle u,\\varepsilon\\rangle$ has law $N(0,a^2)$. If $a=0$, then $W=0$ almost surely by the degenerate-normal clause of [F2], and its exponential moment is $1$. If $a>0$, [F2]–[F4] give $$\\mathbb E e^{\\lambda W} =\\frac1{\\sqrt{2\\pi}}\\int_{\\mathbb R} e^{\\lambda ax-x^2/2}\\,dx =e^{\\lambda^2a^2/2}\\frac1{\\sqrt{2\\pi}}\\int_{\\mathbb R} e^{-(x-\\lambda a)^2/2}\\,dx.$$ Use [F5] for the translation $x\\mapsto x-\\lambda a$ and [F6] for its countable-choice hypothesis; the last integral equals the standard normal normalizing integral in [F4]. Thus $\\mathbb E e^{\\lambda W} =e^{\\lambda^2a^2/2}$ in both cases.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $a^2=\\sigma^2\\|u\\|_2^2$, step 1.1 is the claimed identity for the arbitrary $u$ and $\\lambda$. The mean-zero clause follows from [F1]; hence [F7] gives the stated centered sub-Gaussian property.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For lem-isotropic-gaussian-noise-is-subgaussian, The statement requires n≥1, so there is no zero-dimensional Gaussian vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For lem-isotropic-gaussian-noise-is-subgaussian, Step 1.1 handles σ=0 and u=0 by the degenerate-normal branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For lem-isotropic-gaussian-noise-is-subgaussian, Step 1.1 applies for n=1 and scalar directions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For lem-isotropic-gaussian-noise-is-subgaussian, Step 1.1 separately handles the degenerate projected variance a=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For lem-isotropic-gaussian-noise-is-subgaussian, The parameter range includes σ=0 and every real λ in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For lem-isotropic-gaussian-noise-is-subgaussian, The parameter range includes σ=0 and every real λ in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For lem-isotropic-gaussian-noise-is-subgaussian, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For lem-isotropic-gaussian-noise-is-subgaussian, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-bic-penalized-least-squares": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For alg-bic-penalized-least-squares, The Definition includes the empty support and starts the scan at the first candidate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For alg-bic-penalized-least-squares, The Definition retains the first support whenever scores tie, including zero residual."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For alg-bic-penalized-least-squares, The support family is finite and nonempty for d=1 (Definition)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For alg-bic-penalized-least-squares, Each model fit is a unique subspace projection without any design-rank condition (Definition)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For alg-bic-penalized-least-squares, The penalty allows τ²=0 and support sizes range from 0 through d (Definition)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For alg-bic-penalized-least-squares, The penalty allows τ²=0 and support sizes range from 0 through d (Definition)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For alg-bic-penalized-least-squares, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For alg-bic-penalized-least-squares, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-constrained-l0-least-squares": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For alg-constrained-l0-least-squares, The Definition includes the empty support for every input, including s=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For alg-constrained-l0-least-squares, The Definition retains the first candidate on tied zero residual scores."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For alg-constrained-l0-least-squares, When d=1 the finite support family remains nonempty (Definition)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For alg-constrained-l0-least-squares, Each candidate fit is a unique projection even when its columns are dependent (Definition)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For alg-constrained-l0-least-squares, The input range 0≤s≤d includes both endpoints (Definition)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For alg-constrained-l0-least-squares, The input range 0≤s≤d includes both endpoints (Definition)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For alg-constrained-l0-least-squares, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For alg-constrained-l0-least-squares, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-gaussian-projection-risk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fixed-design-projection-estimator",
+          "source_section": "Definition",
+          "quote": "Let $n,d\\in\\mathbb N$ with $n,d\\ge1$, and let $X\\in\\mathbb R^{n\\times d}$ be a fixed design\nmatrix, and write $V_X:=\\{X\\theta:\\theta\\in\\mathbb R^d\\}\\subseteq\\mathbb R^n$\nfor its column space. For an observed vector $y\\in\\mathbb R^n$, the **fixed-design\nleast-squares fitted vector** is\n\n$$\\widehat\\mu_X(y):=P_{V_X}y,$$\n\nwhere $P_{V_X}$ is the orthogonal projection onto $V_X$, as defined in\n[[def-orthogonal-projection]]. It is uniquely defined even when $X$ is rank\ndeficient. The nearest-point characterization in\n[[thm-orthogonal-projection-is-the-unique-nearest-point]] says that\n$\\widehat\\mu_X(y)$ minimizes $\\|y-v\\|_2$ over $v\\in V_X$. This item defines the\nfitted vector; it does not select a coefficient representation $\\widehat\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nassociates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-dimensional-projection-is-linear-and-contractive",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner-product space, let $W\\subseteq V$ be a\nlinear subspace, and let $P_W:V\\to W$ be the orthogonal projection. Then $P_W$\nis linear and satisfies $\\|P_Wx\\|\\le \\|x\\|$ for every $x\\in V$. In particular,\n$P_W$ is continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in an inner product space:\n\n1. if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;\n2. $\\lVert u+v\\rVert^2+\\lVert u-v\\rVert^2=2\\lVert u\\rVert^2+2\\lVert v\\rVert^2$;\n3. over $\\mathbb R$, $\\langle u,v\\rangle=\\frac14(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2)$;\n4. over $\\mathbb C$ with the linear-first convention,\n$$\\langle u,v\\rangle=\\frac14\\bigl(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2+i\\lVert u+iv\\rVert^2-i\\lVert u-iv\\rVert^2\\bigr).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $b=P_V\\mu-\\mu$ and $z=P_V\\varepsilon$. By [F2], $b\\in V^\\perp$ and $z\\in V$. Linearity [F3] gives $\\widehat\\mu-\\mu=b+z$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose an orthonormal basis $\\phi_1,\\ldots,\\phi_r$ of $V$ by [F4]. The vector $\\sum_{j=1}^r\\langle\\varepsilon,\\phi_j\\rangle\\phi_j$ lies in $V$ and its residual from $\\varepsilon$ is orthogonal to every basis vector, hence to $V$; uniqueness in [F2] identifies it with $P_V\\varepsilon$. Orthonormality therefore gives $\\|P_V\\varepsilon\\|_2^2=\\sum_{j=1}^r\\langle\\varepsilon,\\phi_j\\rangle^2$, with the empty sum equal to zero when $r=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Write $\\phi_j=(\\phi_{1j},\\ldots,\\phi_{nj})$. By [F6] and the given coordinate second moments, $\\mathbb E\\langle\\varepsilon,\\phi_j\\rangle^2 =\\sum_{a,b=1}^n\\phi_{aj}\\phi_{bj}\\mathbb E[\\varepsilon_a\\varepsilon_b] =\\sigma^2\\sum_{a=1}^n\\phi_{aj}^2=\\sigma^2$ for each $j$. Summing with [F7] shows $\\mathbb E\\|P_V\\varepsilon\\|_2^2=r\\sigma^2$.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two summands in step 1.1 are orthogonal, so [F5] gives $\\|\\widehat\\mu-\\mu\\|_2^2=\\|P_V\\mu-\\mu\\|_2^2+\\|P_V\\varepsilon\\|_2^2$ pointwise. Taking expectations and using [F7] separates the fixed first term from the noise term.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute step 1.3 into step 2.1 to obtain the displayed identity. If $\\mu\\in V$, then $P_V\\mu=\\mu$ by [F2], giving the stated special case. By [F8], its left side is the risk under squared fitted-value loss.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.3",
+            "F2",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For thm-gaussian-projection-risk, Steps 1.2–1.3 use the empty orthonormal basis and empty sum when r=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For thm-gaussian-projection-risk, Steps 1.2–3.1 give zero noise contribution when σ²=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm-gaussian-projection-risk, Steps 1.2–1.3 compute the r=1 case as one basis-coordinate contribution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For thm-gaussian-projection-risk, The statement allows rank-deficient X, and steps 1.2–1.3 use rank only, including r=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm-gaussian-projection-risk, Step 1.3 retains the equality case σ²=0 in the coordinate second moments."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm-gaussian-projection-risk, Step 1.3 retains the equality case σ²=0 in the coordinate second moments."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm-gaussian-projection-risk, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm-gaussian-projection-risk, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-subgaussian-projection-risk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-subgaussian-maximum-and-epsilon-net",
+          "source_section": "Statement",
+          "quote": "Let $Y_1,\\ldots,Y_m$ be centered sub-Gaussian real random variables with a common proxy $\\sigma^2\\ge0$, where $m\\ge1$. No independence is assumed. For $t>0$, if $\\sigma^2>0$ then\n$$\\mathbb P\\left(\\max_{1\\le j\\le m}|Y_j|\\ge t\\right)\\le2m\\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ the probability is $0$.\n\nLet $Z$ be a centered sub-Gaussian vector in $\\mathbb R^d$ with proxy $\\sigma^2$, where $d\\ge1$. For $0<\\epsilon<1$, let $\\mathcal N$ be the sphere net supplied by [[lem-epsilon-net-of-unit-sphere-has-cardinality-bound]]. Then for $t>0$, if $\\sigma^2>0$,\n$$\\mathbb P(\\|Z\\|_2\\ge t)\\le2(1+2/\\epsilon)^d\\exp\\!\\left(-\\frac{(1-\\epsilon)^2t^2}{2\\sigma^2}\\right),$$\nand if $\\sigma^2=0$ this probability is $0$. The deterministic reduction is $\\|z\\|_2\\le(1-\\epsilon)^{-1}\\max_{u\\in\\mathcal N}|\\langle u,z\\rangle|$ for every $z\\in\\mathbb R^d$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nassociates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-dimensional-projection-is-linear-and-contractive",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner-product space, let $W\\subseteq V$ be a\nlinear subspace, and let $P_W:V\\to W$ be the orthogonal projection. Then $P_W$\nis linear and satisfies $\\|P_Wx\\|\\le \\|x\\|$ for every $x\\in V$. In particular,\n$P_W$ is continuous.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-layer-cake-formulas-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n1. If $X:\\Omega\\to[0,+\\infty]$ is measurable, then\n   $$\\mathbb E[X]=\\int_0^\\infty \\mathbb P(X>t)\\,dt,$$\n   where the right-hand side may be $+\\infty$.\n2. If $X$ is an integrable real random variable, then\n   $$\\mathbb E[X]=\\int_0^\\infty \\mathbb P(X>t)\\,dt-\\int_0^\\infty \\mathbb P(X<-t)\\,dt.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-fixed-design-projection-estimator",
+          "source_section": "Definition",
+          "quote": "Let $n,d\\in\\mathbb N$ with $n,d\\ge1$, and let $X\\in\\mathbb R^{n\\times d}$ be a fixed design\nmatrix, and write $V_X:=\\{X\\theta:\\theta\\in\\mathbb R^d\\}\\subseteq\\mathbb R^n$\nfor its column space. For an observed vector $y\\in\\mathbb R^n$, the **fixed-design\nleast-squares fitted vector** is\n\n$$\\widehat\\mu_X(y):=P_{V_X}y,$$\n\nwhere $P_{V_X}$ is the orthogonal projection onto $V_X$, as defined in\n[[def-orthogonal-projection]]. It is uniquely defined even when $X$ is rank\ndeficient. The nearest-point characterization in\n[[thm-orthogonal-projection-is-the-unique-nearest-point]] says that\n$\\widehat\\mu_X(y)$ minimizes $\\|y-v\\|_2$ over $v\\in V_X$. This item defines the\nfitted vector; it does not select a coefficient representation $\\widehat\\theta$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $r\\ge1$, choose an orthonormal basis $\\phi_1,\\ldots,\\phi_r$ of $V$ by [F4] and form the coordinate vector $Z=(\\langle\\varepsilon,\\phi_j\\rangle)_{j=1}^r$. For any $u\\in\\mathbb R^r$ and $\\lambda\\in\\mathbb R$, $\\mathbb E e^{\\lambda\\langle u,Z\\rangle} =\\mathbb E e^{\\lambda\\langle\\sum_j u_j\\phi_j,\\varepsilon\\rangle} \\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}$ by [F1], since the basis is orthonormal. Thus $Z$ is a centered sub-Gaussian vector with the same proxy.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\sigma^2>0$, apply [F2] with $\\epsilon=1/2$ to $Z$. Since $(1+2/\\epsilon)^r=5^r\\le6^r$ and $(1-\\epsilon)^2/2=1/8$, this gives $\\mathbb P(\\|Z\\|_2^2>t)\\le2\\cdot6^r e^{-t/(8\\sigma^2)}$. The basis coordinates identify $\\|Z\\|_2=\\|P_V\\varepsilon\\|_2$ by [F3] and uniqueness of projection. If $\\sigma^2=0$, [F2] gives zero probability that this norm exceeds any positive threshold.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5], $\\widehat\\mu-\\mu=P_V(\\mu+\\varepsilon)-\\mu =P_V\\varepsilon$, because $P_V\\mu=\\mu$. If $r=0$, then $V=\\{0\\}$ and $\\mu=0$, so the error is zero; if $\\sigma^2=0$, step 2.1 gives the same conclusion. For $\\sigma^2=0$, the zero tail in step 2.1 gives $\\mathbb P(\\|P_V\\varepsilon\\|_2^2>1/j)=0$ for each integer $j\\ge1$; this positive-norm event is their countable union, so [F8] gives probability zero. The positive-rank, positive-proxy tail is step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F8",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For $r\\ge1$ and $\\sigma^2>0$, use step 2.1 with $t=8\\sigma^2[r\\log6+\\log(2/\\delta)]$; the right side is $\\delta$, proving the probability bound after division by $n$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $A=2\\cdot6^r$ and $T=\\|\\widehat\\mu-\\mu\\|_2^2$. By [F6], step 2.1, and splitting the tail integral at $t_0=8\\sigma^2\\log A$, $\\mathbb E T\\le t_0+\\int_{t_0}^{\\infty}Ae^{-t/(8\\sigma^2)}dt =8\\sigma^2(\\log A+1)$. Substitution of $\\log A=\\log2+r\\log6$ and division by $n$ gives the expected-error bound. By [F9], it is the expected risk under the squared fitted-value loss. The zero-error cases in step 3.1 also satisfy it.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F9",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For a fixed-design model with $\\mu=X\\theta^*\\in\\operatorname{col}(X)$, take $V=\\operatorname{col}(X)$. [F7] identifies $\\widehat\\mu$ with the estimator in [[def-fixed-design-projection-estimator]], so the displayed bounds apply to that fitted vector.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For thm-subgaussian-projection-risk, Step 3.1 handles rank r=0 directly with V={0}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For thm-subgaussian-projection-risk, Steps 2.1 and 3.1 establish the σ²=0 case by countable subadditivity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm-subgaussian-projection-risk, Steps 1.1–2.1 handle r=1 and the fixed net choice ε=1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For thm-subgaussian-projection-risk, Step 3.1 covers r=0 and the zero proxy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm-subgaussian-projection-risk, The proof uses t>0, ε=1/2∈(0,1), and 0<δ<1. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm-subgaussian-projection-risk, The proof uses t>0, ε=1/2∈(0,1), and 0<δ<1. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm-subgaussian-projection-risk, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm-subgaussian-projection-risk, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-bic-fitted-risk-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-cardinality-of-the-power-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set and $n := \\lvert A\\rvert$. Then the power set\n$\\mathcal{P}(A)$ is finite and\n\n$$\\lvert\\mathcal{P}(A)\\rvert = 2^{\\,n},$$\n\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\nMoreover $n < 2^{\\,n}$.\n\nThe last inequality is the quantitative form, for finite $A$, of Cantor's\ntheorem $A \\prec \\mathcal{P}(A)$ ([[thm-cantor-powerset]]), which holds for every\nset whatsoever. The two statements are consistent and the proof below derives the\ninequality from Cantor's theorem rather than leaving them side by side.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-bic-penalized-least-squares",
+          "source_section": "Definition",
+          "quote": "**Input:** naturals $n,d\\ge1$, a fixed design $X\\in\\mathbb R^{n\\times d}$, a data\nvector $y\\in\\mathbb R^n$, and a penalty $\\tau^2\\ge0$.\n\nList all supports $S\\subseteq\\{1,\\ldots,d\\}$ in lexicographic order of their\nlength-$d$ indicator vectors, using $0<1$. For each $S$, let $V_S$ be the span\nof the corresponding columns of $X$, compute $\\widehat\\mu_S=P_{V_S}y$, and\nscore\n\n$$q_S:=n^{-1}\\|y-\\widehat\\mu_S\\|_2^2+\\tau^2|S|.$$\n\nInitialize the incumbent at the first support and scan the rest in order,\nreplacing it exactly when a strictly smaller score is found; on a tie retain the\nearlier support. Return the selected support $\\widehat S$ and fitted vector\n$\\widehat\\mu_{\\mathrm{BIC}}=\\widehat\\mu_{\\widehat S}$. The candidate family is\nfinite by [[cor-cardinality-of-the-power-set]], and the fitted-vector selection\nis Borel measurable by [[lem-finite-support-projection-selection-is-borel]].\nThis is an exhaustive combinatorial procedure, not an efficiency guarantee.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-subgaussian-projection-risk",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $V\\subseteq\\mathbb R^n$ be a fixed subspace of dimension\n$r$, and let $\\mu\\in V$. Suppose $Y=\\mu+\\varepsilon$, where\n$\\varepsilon\\in\\mathbb R^n$ is centered sub-Gaussian with proxy $\\sigma^2\\ge0$\nin the linear-functional sense of\n[[def-subgaussian-variable-and-vector]]. Put $\\widehat\\mu=P_VY$. Then\n$\\widehat\\mu-\\mu=P_V\\varepsilon$.\nIf $r=0$ or $\\sigma^2=0$, this error is zero almost surely. If $r\\ge1$ and\n$\\sigma^2>0$, for every $t>0$,\n\n$$\\mathbb P\\bigl(\\|\\widehat\\mu-\\mu\\|_2^2>t\\bigr)\\le 2\\cdot6^r\\exp\\!\\left(-\\frac{t}{8\\sigma^2}\\right).$$\n\nConsequently, for every $0<\\delta<1$,\n\n$$\\mathbb P\\!\\left(\\frac1n\\|\\widehat\\mu-\\mu\\|_2^2\\le\\frac{8\\sigma^2}{n}\\left[r\\log6+\\log\\!\\left(\\frac2\\delta\\right)\\right]\\right)\\ge1-\\delta,$$\n\nand\n\n$$\\mathbb E\\left[\\frac1n\\|\\widehat\\mu-\\mu\\|_2^2\\right]\\le\\frac{8\\sigma^2}{n}\\left(r\\log6+\\log2+1\\right).$$\nFor $r\\ge1$, both bounds are at most\n$C\\sigma^2(r+\\log(1/\\delta))/n$ and $C\\sigma^2r/n$, respectively, for a\nuniversal constant $C$. In the fixed-design model $Y=X\\theta^*+\\varepsilon$\nwith $\\mu=X\\theta^*\\in\\operatorname{col}(X)$, this is the fitted vector of\n[[def-fixed-design-projection-estimator]].",
+          "uses": [
+            "3.1",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-binomial-support-count-bound",
+          "source_section": "Statement",
+          "quote": "For integers $d,m$ with $1\\le m\\le d$,\n\n$$\\binom{d}{m}\\le\\left(\\frac{ed}{m}\\right)^m.$$\n\nHere $\\binom{d}{m}$ is the number of $m$-element subsets of a $d$-element set,\n$m!$ is the factorial, $e=\\exp(1)$, and integer powers have the convention of\n[[def-integer-power]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. For every $v\\in V$, the vector $P_Wv$ is the unique point of $W$ nearest to $v$: for every $w\\in W$,\n\n$$\\lVert v-P_Wv\\rVert\\le\\lVert v-w\\rVert,$$\n\nwith equality if and only if $w=P_Wv$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $a_0, \\dots, a_{n-1}$ and $b_0, \\dots, b_{n-1}$ be\nreals, with finite sums as in [[def-finite-sum]]. Then\n\n$$\\Big(\\sum_{k<n} a_k b_k\\Big)^{2} \\;\\le\\; \\Big(\\sum_{k<n} a_k^{2}\\Big)\\Big(\\sum_{k<n} b_k^{2}\\Big),$$\n\nand, in root form ([[thm-of-square-roots]]),\n\n$$\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}.$$\n\nEquality holds in the first display if and only if the two lists are\nproportional, in the symmetric sense that there is a pair\n$(\\lambda, \\mu) \\ne (0,0)$ of reals with $\\lambda a_k = \\mu b_k$ for every\n$k < n$.\n\n**No root is used in the proof of the squared form.** That form is an identity\nplus a sign argument in the ordered field, and the root form is only a\nrestatement of it through the monotonicity of squaring on the nonnegatives\n([[lem-of-square-monotone]]); the root enters nowhere but the last step, where\nthat restatement is made and [[thm-of-square-roots]] is what supplies the\nsquare-root symbol. This matters here, because it makes the squared\ninequality independent of the existence theorem for roots.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nassociates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-finite-support-projection-selection-is-borel",
+          "source_section": "Statement",
+          "quote": "Let $n,N\\ge1$ and let $P_1,\\ldots,P_N$ be orthogonal projections in\n$\\mathbb R^n$ onto fixed finite-dimensional subspaces $V_1,\\ldots,V_N$. Let\n$c_1,\\ldots,c_N\\in\\mathbb R$ be fixed. For $y\\in\\mathbb R^n$, define\n$q_i(y):=n^{-1}\\|y-P_i y\\|_2^2+c_i$, choose the least index attaining\n$\\min_{1\\le i\\le N}q_i(y)$, and return its fitted vector $P_i y$. The resulting\nmap $\\widehat m:\\mathbb R^n\\to\\mathbb R^n$ is Borel measurable. The index map\nis Borel measurable when $\\{1,\\ldots,N\\}$ has its discrete sigma-algebra.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S_1,\\ldots,S_M$ be the finite ordered support list from [F1]. After the first support is processed, the incumbent has least score and earliest index among minimizers in the first one-element list. If this is true after $j<M$ supports, then the next score either is strictly smaller, in which case replacing the incumbent gives the new least score, or is at least the incumbent score, in which case retaining it preserves the minimum and keeps the earlier index in a tie. Induction proves the invariant through $M$, so the scan terminates and returns the least-scoring support with the stated tie rule.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\widehat S$ be the selected support, $k=|\\widehat S|$, $\\widehat\\mu=\\widehat\\mu_{\\mathrm{BIC}}$, and $\\Delta=\\widehat\\mu-X\\theta^*$. The support $S^*$ is a candidate, and $X\\theta^*\\in V_{S^*}$. By step 1.1 and [F4], the selected penalized score is no larger than the score of the projection onto $V_{S^*}$, whose residual is no larger than $\\|\\varepsilon\\|_2^2$. Thus $$\\|Y-\\widehat\\mu\\|_2^2+n\\tau^2 k \\le\\|\\varepsilon\\|_2^2+n\\tau^2s.$$ Expanding $Y=X\\theta^*+\\varepsilon$ gives $\\|\\Delta\\|_2^2\\le2\\langle\\varepsilon,\\Delta\\rangle+n\\tau^2(s-k)$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the event $\\|\\Delta\\|_2>0$, set $v=\\Delta/\\|\\Delta\\|_2$. Then $v\\in W_{\\widehat S}:=\\operatorname{span}\\{X_j:j\\in\\widehat S\\cup S^*\\}$, whose dimension is at most $k+s$. Young's inequality $2ab\\le2a^2+b^2/2$ applied to $a=|\\langle\\varepsilon,v\\rangle|$ and $b=\\|\\Delta\\|_2$ yields $$\\|\\Delta\\|_2^2\\le2n\\tau^2s+4\\langle\\varepsilon,v\\rangle^2-2n\\tau^2k.$$ If $\\Delta=0$, no tail event with a positive threshold can occur.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "First consider $k=0$. On the event $\\|\\Delta\\|_2^2>2n\\tau^2s+t$, step 2.1 implies $\\langle\\varepsilon,v\\rangle^2>t/4$ for a unit vector in $V_{S^*}$. By [F6] and [F8], this forces $\\|P_{V_{S^*}}\\varepsilon\\|_2^2>t/4$. Since $\\dim V_{S^*}\\le s$, [F2] gives, for $\\sigma^2>0$, $$\\mathbb P(k=0,\\ \\|\\Delta\\|_2^2>2n\\tau^2s+t) \\le2\\cdot6^s e^{-t/(32\\sigma^2)}.$$",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F8",
+            "F11",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Now fix $1\\le k\\le d$ and a candidate support $S$ of size $k$. If this support is selected and the event in step 3.1's probability occurs, step 2.1 forces $\\langle\\varepsilon,v\\rangle^2>t/4+n\\tau^2k/2$ for a unit vector in $W_S=\\operatorname{span}\\{X_j:j\\in S\\cup S^*\\}$, whose dimension is at most $k+s$. By [F6] and [F8], this implies $\\|P_{W_S}\\varepsilon\\|_2^2>t/4+n\\tau^2k/2$. By [F2], the probability for this support is at most $$2\\cdot6^{k+s}\\exp\\!\\left(-\\frac{t}{32\\sigma^2} -\\frac{n\\tau^2k}{16\\sigma^2}\\right).$$",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F8",
+            "F11",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Union bound over the $\\binom dk$ supports, use [F3], and substitute the specified $\\tau^2$. Since $n\\tau^2/(16\\sigma^2)=\\log6+2\\log(ed)$, the sum over all $k\\ge1$ is at most $$2e^{s\\log6-t/(32\\sigma^2)} \\sum_{k=1}^d(ed)^{-k}\\le2e^{s\\log6-t/(32\\sigma^2)}.$$ The last inequality follows because each summand is at most $(ed)^{-1}$, there are $d$ terms, and $d(ed)^{-1}=1/e<1$ by [F5].",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F11",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Take $t=32\\sigma^2[s\\log6+\\log(4/\\delta)]$ in steps 3.1 and 5.1. Each branch has probability at most $\\delta/2$, so with probability at least $1-\\delta$, $$\\|\\Delta\\|_2^2\\le2n\\tau^2s+t =\\sigma^2\\left[64s\\log(ed)+64s\\log6+32\\log4+32\\log(1/\\delta)\\right].$$ Because $\\log(ed)\\ge1$ and $s\\ge1$, the right side is at most $C_0\\sigma^2[s\\log(ed)+\\log(1/\\delta)]$. Dividing by $n$ proves the positive-proxy bound. The probability event is for the squared fitted-value loss identified by [F10].",
+          "step": "6.1",
+          "inputs": [
+            "F10",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "The centered vector proxy assumption is [F7], so [F2] applies to the identity subspace. If $\\sigma^2=0$, for every integer $j\\ge1$, $\\mathbb P(\\|\\varepsilon\\|_2^2>1/j)=0$. Since $\\{\\|\\varepsilon\\|_2^2>0\\}=\\bigcup_{j\\ge1}\\{\\|\\varepsilon\\|_2^2>1/j\\}$, [F9] gives $\\varepsilon=0$ almost surely. Then $Y=X\\theta^*$; the true support has zero residual, and step 1.1 shows that the selected support also has zero residual because $\\tau^2=0$. Its fitted vector therefore equals $Y=X\\theta^*$. Thus the bound also holds in the zero-proxy case.",
+          "step": "7.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "F9",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For thm-bic-fitted-risk-bound, Step 3.1 handles selected support size k=0 separately; true support is assumed s≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For thm-bic-fitted-risk-bound, Step 7.1 proves the zero-proxy case through countably many positive thresholds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm-bic-fitted-risk-bound, The n=d=s=1 endpoint is covered by the k=0 branch and the one-support union. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For thm-bic-fitted-risk-bound, Steps 3.1–5.1 use only ranks bounded by k+s, so repeated columns are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm-bic-fitted-risk-bound, Step 5.1 includes k=d and the theorem explicitly excludes true sparsity s=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm-bic-fitted-risk-bound, Step 5.1 includes k=d and the theorem explicitly excludes true sparsity s=0."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm-bic-fitted-risk-bound, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm-bic-fitted-risk-bound, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-sparse-subset-risk-upper-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-constrained-l0-least-squares",
+          "source_section": "Definition",
+          "quote": "**Input:** naturals $n,d\\ge1$, a fixed design $X\\in\\mathbb R^{n\\times d}$, a data\nvector $y\\in\\mathbb R^n$, and a natural $s$ with $0\\le s\\le d$.\n\n**Candidate supports:** list all subsets $S\\subseteq\\{1,\\ldots,d\\}$ with\n$|S|\\le s$ in lexicographic order of their length-$d$ indicator vectors,\nusing $0<1$. This is a finite nonempty list because it contains $\\varnothing$\nand is contained in the finite power set of $\\{1,\\ldots,d\\}$.\n\n**Procedure:** for each candidate $S$, let $V_S$ be the span of the columns of\n$X$ indexed by $S$ and compute $\\widehat\\mu_S=P_{V_S}y$. Compute its residual\nscore $q_S=\\|y-\\widehat\\mu_S\\|_2^2$. Initialize the incumbent at the first\ncandidate. Scan the remaining candidates in the stated order, replacing the\nincumbent exactly when a strictly smaller score is found; retain the earlier\ncandidate on a tie. Return the selected support and its fitted vector\n$\\widehat\\mu_s$.\n\nEach $V_S$ is finite-dimensional, so the projections are defined by\n[[def-fixed-design-projection-estimator]]. The fitted-vector selection is Borel\nmeasurable by [[lem-finite-support-projection-selection-is-borel]]. The procedure\nperforms a finite exhaustive support search; no computational-efficiency claim is\nmade.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-cardinality-of-the-power-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set and $n := \\lvert A\\rvert$. Then the power set\n$\\mathcal{P}(A)$ is finite and\n\n$$\\lvert\\mathcal{P}(A)\\rvert = 2^{\\,n},$$\n\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\nMoreover $n < 2^{\\,n}$.\n\nThe last inequality is the quantitative form, for finite $A$, of Cantor's\ntheorem $A \\prec \\mathcal{P}(A)$ ([[thm-cantor-powerset]]), which holds for every\nset whatsoever. The two statements are consistent and the proof below derives the\ninequality from Cantor's theorem rather than leaving them side by side.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-subgaussian-projection-risk",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $V\\subseteq\\mathbb R^n$ be a fixed subspace of dimension\n$r$, and let $\\mu\\in V$. Suppose $Y=\\mu+\\varepsilon$, where\n$\\varepsilon\\in\\mathbb R^n$ is centered sub-Gaussian with proxy $\\sigma^2\\ge0$\nin the linear-functional sense of\n[[def-subgaussian-variable-and-vector]]. Put $\\widehat\\mu=P_VY$. Then\n$\\widehat\\mu-\\mu=P_V\\varepsilon$.\nIf $r=0$ or $\\sigma^2=0$, this error is zero almost surely. If $r\\ge1$ and\n$\\sigma^2>0$, for every $t>0$,\n\n$$\\mathbb P\\bigl(\\|\\widehat\\mu-\\mu\\|_2^2>t\\bigr)\\le 2\\cdot6^r\\exp\\!\\left(-\\frac{t}{8\\sigma^2}\\right).$$\n\nConsequently, for every $0<\\delta<1$,\n\n$$\\mathbb P\\!\\left(\\frac1n\\|\\widehat\\mu-\\mu\\|_2^2\\le\\frac{8\\sigma^2}{n}\\left[r\\log6+\\log\\!\\left(\\frac2\\delta\\right)\\right]\\right)\\ge1-\\delta,$$\n\nand\n\n$$\\mathbb E\\left[\\frac1n\\|\\widehat\\mu-\\mu\\|_2^2\\right]\\le\\frac{8\\sigma^2}{n}\\left(r\\log6+\\log2+1\\right).$$\nFor $r\\ge1$, both bounds are at most\n$C\\sigma^2(r+\\log(1/\\delta))/n$ and $C\\sigma^2r/n$, respectively, for a\nuniversal constant $C$. In the fixed-design model $Y=X\\theta^*+\\varepsilon$\nwith $\\mu=X\\theta^*\\in\\operatorname{col}(X)$, this is the fitted vector of\n[[def-fixed-design-projection-estimator]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-binomial-support-count-bound",
+          "source_section": "Statement",
+          "quote": "For integers $d,m$ with $1\\le m\\le d$,\n\n$$\\binom{d}{m}\\le\\left(\\frac{ed}{m}\\right)^m.$$\n\nHere $\\binom{d}{m}$ is the number of $m$-element subsets of a $d$-element set,\n$m!$ is the factorial, $e=\\exp(1)$, and integer powers have the convention of\n[[def-integer-power]].",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-layer-cake-formulas-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n1. If $X:\\Omega\\to[0,+\\infty]$ is measurable, then\n   $$\\mathbb E[X]=\\int_0^\\infty \\mathbb P(X>t)\\,dt,$$\n   where the right-hand side may be $+\\infty$.\n2. If $X$ is an integrable real random variable, then\n   $$\\mathbb E[X]=\\int_0^\\infty \\mathbb P(X>t)\\,dt-\\int_0^\\infty \\mathbb P(X<-t)\\,dt.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $a_0, \\dots, a_{n-1}$ and $b_0, \\dots, b_{n-1}$ be\nreals, with finite sums as in [[def-finite-sum]]. Then\n\n$$\\Big(\\sum_{k<n} a_k b_k\\Big)^{2} \\;\\le\\; \\Big(\\sum_{k<n} a_k^{2}\\Big)\\Big(\\sum_{k<n} b_k^{2}\\Big),$$\n\nand, in root form ([[thm-of-square-roots]]),\n\n$$\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}.$$\n\nEquality holds in the first display if and only if the two lists are\nproportional, in the symmetric sense that there is a pair\n$(\\lambda, \\mu) \\ne (0,0)$ of reals with $\\lambda a_k = \\mu b_k$ for every\n$k < n$.\n\n**No root is used in the proof of the squared form.** That form is an identity\nplus a sign argument in the ordered field, and the root form is only a\nrestatement of it through the monotonicity of squaring on the nonnegatives\n([[lem-of-square-monotone]]); the root enters nowhere but the last step, where\nthat restatement is made and [[thm-of-square-roots]] is what supplies the\nsquare-root symbol. This matters here, because it makes the squared\ninequality independent of the existence theorem for roots.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nassociates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-support-projection-selection-is-borel",
+          "source_section": "Statement",
+          "quote": "Let $n,N\\ge1$ and let $P_1,\\ldots,P_N$ be orthogonal projections in\n$\\mathbb R^n$ onto fixed finite-dimensional subspaces $V_1,\\ldots,V_N$. Let\n$c_1,\\ldots,c_N\\in\\mathbb R$ be fixed. For $y\\in\\mathbb R^n$, define\n$q_i(y):=n^{-1}\\|y-P_i y\\|_2^2+c_i$, choose the least index attaining\n$\\min_{1\\le i\\le N}q_i(y)$, and return its fitted vector $P_i y$. The resulting\nmap $\\widehat m:\\mathbb R^n\\to\\mathbb R^n$ is Borel measurable. The index map\nis Borel measurable when $\\{1,\\ldots,N\\}$ has its discrete sigma-algebra.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. For every $v\\in V$, the vector $P_Wv$ is the unique point of $W$ nearest to $v$: for every $w\\in W$,\n\n$$\\lVert v-P_Wv\\rVert\\le\\lVert v-w\\rVert,$$\n\nwith equality if and only if $w=P_Wv$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S_1,\\ldots,S_M$ be the finite nonempty ordered candidate list from [F1]. After the first support is processed, the incumbent has least residual and earliest index among minimizers in the first one-element list. If this is true after $j<M$ supports, then the next residual either is strictly smaller, in which case replacing the incumbent gives the new least residual, or is at least the incumbent residual, in which case retaining it preserves the minimum and keeps the earlier index in a tie. Induction proves the invariant through $M$, so the scan terminates and returns a least-residual support with the stated tie rule.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $\\mu=X\\theta^*$, let $S^*=\\{j:\\theta_j^*\\ne0\\}$, and put $\\Delta=\\widehat\\mu_s-\\mu$. Since $|S^*|\\le s$, $S^*$ is a candidate support and $\\mu\\in V_{S^*}$. Its candidate fitted vector is $P_{V_{S^*}}Y$. By [F10], $\\|Y-P_{V_{S^*}}Y\\|_2^2\\le\\|Y-\\mu\\|_2^2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the scan-minimizer result in step 1.1, the selected residual is no larger than that of $P_{V_{S^*}}Y$, which step 1.2 bounds by the residual at $\\mu$: $\\|Y-\\widehat\\mu_s\\|_2^2\\le\\|Y-\\mu\\|_2^2=\\|\\varepsilon\\|_2^2$. Expanding $Y=\\mu+\\varepsilon$ gives $\\|\\Delta\\|_2^2\\le2\\langle\\varepsilon,\\Delta\\rangle$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\Delta\\ne0$, its support difference lies in the span of columns indexed by $S^*\\cup\\widehat S$, whose size is at most $2s$. Since $2s\\le d$, that set is contained in some $T\\subseteq\\{1,\\ldots,d\\}$ with $|T|=2s$. Thus $\\Delta\\in V_T$, and orthogonality of the projection gives $\\langle\\varepsilon,\\Delta\\rangle=\\langle P_{V_T}\\varepsilon,\\Delta\\rangle$ by [F6]. By [F5] and step 2.1, $\\|\\Delta\\|_2^2\\le2\\|P_{V_T}\\varepsilon\\|_2\\|\\Delta\\|_2$, hence $\\|\\Delta\\|_2^2\\le4\\|P_{V_T}\\varepsilon\\|_2^2$. If $\\Delta=0$, the last inequality holds for every such $T$ as well.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "There are $\\binom d{2s}$ possible sets $T$. For each, its projection rank is at most $2s$, so [F2] and the finite union bound give, for $t>0$ and $\\sigma^2>0$, $$\\mathbb P(\\|\\Delta\\|_2^2>4t) \\le2\\binom d{2s}6^{2s}e^{-t/(8\\sigma^2)}=:A e^{-t/(8\\sigma^2)}.$$ If $\\sigma^2=0$, apply [F2] to the identity subspace: for every integer $j\\ge1$, $\\mathbb P(\\|\\varepsilon\\|_2^2>1/j)=0$. Since $\\{\\|\\varepsilon\\|_2^2>0\\}=\\bigcup_{j\\ge1}\\{\\|\\varepsilon\\|_2^2>1/j\\}$, [F7] gives $\\varepsilon=0$ almost surely. Then [F1] and the scan result in step 1.1 show that the selected residual is zero, so its fitted vector equals $Y=\\mu$; both claims hold with zero error.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $\\sigma^2>0$, take $t=8\\sigma^2[\\log A+\\log(1/\\delta)]$ in step 4.1. The resulting tail is at most $\\delta$, and $\\log A=\\log2+2s\\log6+\\log\\binom d{2s}$. By [F3], $\\log\\binom d{2s}\\le2s\\log(ed/(2s))\\le2s\\log(ed/s)$. Since $\\log(ed/s)\\ge1$ and $s\\ge1$, $\\log A\\le(3+2\\log6)s\\log(ed/s)$. Dividing the threshold $4t$ by $n$ and using $C=32(4+2\\log6)$ proves the stated high-probability bound.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F9",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Put $Z=\\|\\Delta\\|_2^2$. Replacing $t$ by $x/4$ in step 4.1 gives $\\mathbb P(Z>x)\\le A e^{-x/(32\\sigma^2)}$. By [F4], split the tail integral at $x_0=32\\sigma^2\\log A$ to obtain $\\mathbb E Z\\le x_0+\\int_{x_0}^{\\infty}Ae^{-x/(32\\sigma^2)}dx =32\\sigma^2(\\log A+1)$. The same bound on $\\log A$ from step 5.1 and $1\\le s\\log(ed/s)$ show $\\mathbb E Z/n\\le C\\sigma^2s\\log(ed/s)/n$. By [F8], this is the expected risk under squared fitted-value loss. The zero-proxy case was settled in step 4.1.",
+          "step": "6.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For thm-sparse-subset-risk-upper-bound, Step 1.1 permits an empty true support because the model is at most s-sparse."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For thm-sparse-subset-risk-upper-bound, Step 4.1 handles σ²=0 with identity-subspace tails and countable subadditivity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm-sparse-subset-risk-upper-bound, The theorem allows s=1 for d≥2 and steps 3.1–6.1 remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For thm-sparse-subset-risk-upper-bound, The statement imposes no rank or column conditions and step 3.1 uses only spans."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm-sparse-subset-risk-upper-bound, The range includes s=d/2 and the probability parameter remains 0<δ<1. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm-sparse-subset-risk-upper-bound, The range includes s=d/2 and the probability parameter remains 0<δ<1. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm-sparse-subset-risk-upper-bound, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm-sparse-subset-risk-upper-bound, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-gaussian-sparse-sequence-minimax-lower-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-sparse-hamming-packing",
+          "source_section": "Statement",
+          "quote": "Let $d,k$ be natural numbers with $1\\le k\\le d/2$. Let $m$ and $r$ be the\nnatural quotients determined by\n$$mk\\le d<(m+1)k,\\qquad 4r\\le k<4(r+1).$$\nThus $m\\ge2$. Write $[m]=\\{0,1,\\ldots,m-1\\}$ and give $[m]^k$ the Hamming\ndistance $d_H(\\omega,\\omega')=\\#\\{j<k:\\omega_j\\ne\\omega'_j\\}$. There is a\nset $\\mathcal C\\subseteq[m]^k$ such that distinct $\\omega,\\omega'\\in\\mathcal C$\nsatisfy $d_H(\\omega,\\omega')>r$ and\n$$\\log|\\mathcal C|\\ge \\frac{k}{1024}\\log\\!\\left(\\frac{ed}{k}\\right).$$\nFor each $\\omega\\in\\mathcal C$, place one $1$ in each of the first $k$ disjoint\ncoordinate blocks of size $m$, at position $\\omega_j$ in block $j$, and put\n$0$ in all remaining coordinates of $\\mathbb R^d$. The resulting vectors\n$u^\\omega\\in\\{0,1\\}^d$ have exactly $k$ nonzero coordinates and satisfy\n$$\\|u^\\omega-u^{\\omega'}\\|_2^2>k/2\\qquad(\\omega\\ne\\omega').$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-location-kl-formula",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $a,b\\in\\mathbb R$ and $\\tau>0$. For the normal location\nlaws with common variance $\\tau^2$,\n$$D\\bigl(N(a,\\tau^2)\\|N(b,\\tau^2)\\bigr)=\\frac{(a-b)^2}{2\\tau^2}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-product-kl-additivity",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$ be finite. For each $i\\le n$, let\n$(X_i,\\mathcal A_i)$ be a measurable space and let $P_i,Q_i$ be probability\nmeasures on it. On the finite product measurable space set\n$$P=\\bigotimes_{i=1}^nP_i,\\qquad Q=\\bigotimes_{i=1}^nQ_i.$$\nWith the KL convention of [[def-kullback-leibler-divergence]],\n$$D(P\\|Q)=\\sum_{i=1}^nD(P_i\\|Q_i),$$\nwhere a sum with an infinite term is $+\\infty$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fano-packing",
+          "source_section": "Statement",
+          "quote": "Let $M\\ge2$ be finite, let $P_1,\\ldots,P_M$ be sample laws on one\nmeasurable space, and let $t_1,\\ldots,t_M$ lie in a metric space\n$(\\mathcal T,\\rho)$ with its Borel sigma-algebra. Suppose\n$\\rho(t_j,t_l)\\ge\\Delta>0$ whenever $j\\ne l$. Let $J$ be uniform on\n$[M]=\\{1,\\ldots,M\\}$, with conditional observation law $P_j$ given $J=j$.\nFor any probability reference law $Q$, define\n$$K_Q:=\\frac1M\\sum_{j=1}^M D(P_j\\|Q)\\in[0,+\\infty].$$\nFor every randomized estimator kernel from the observation to $\\mathcal T$,\nwith squared metric loss $\\rho(a,t_j)^2$, its uniform average risk and its\nmaximum risk are each at least\n$$\\frac{\\Delta^2}{4} \\left(1-\\frac{K_Q+\\log2}{\\log M}\\right).$$\nThe minimax risk over all randomized estimators obeys this bound as well.\nWhen $K_Q=+\\infty$, the displayed lower bound is interpreted as $-\\infty$\nand is vacuous. Logarithms are natural.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pinsker",
+          "source_section": "Statement",
+          "quote": "Assume AC. For probability measures $P,Q$ on one measurable space, with\n$$\\|P-Q\\|_{\\rm TV}:=\\sup_{A}|P(A)-Q(A)|,$$\nthe event-supremum convention without a factor $1/2$,\n$$\\|P-Q\\|_{\\rm TV}\\le\\sqrt{\\frac12D(P\\|Q)}.$$\nIf $P\\not\\ll Q$, the right side is $+\\infty$ by the definition of KL\ndivergence.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-two-point-le-cam-risk-bound",
+          "source_section": "Statement",
+          "quote": "Let an experiment have parameter set $\\{0,1\\}$, sample space $(\\mathcal X,\\mathcal A)$,\nand laws $P_0,P_1$. Let the scalar targets satisfy $t_0<t_1$ and put\n$\\Delta=t_1-t_0>0$. An arbitrary randomized estimator is a probability\nkernel $K$ from $\\mathcal X$ to $\\mathbb R$ with its Borel sigma-algebra, and\nits loss at parameter $j$ is squared error $(a-t_j)^2$. For every such $K$,\n$$\\max_{j\\in\\{0,1\\}} R_j(K)\\ge \\frac{\\Delta^2}{8}\\bigl(1-\\|P_0-P_1\\|_{\\rm TV}\\bigr),$$\nwhere $\\|P_0-P_1\\|_{\\rm TV}=\\sup_{A\\in\\mathcal A}|P_0(A)-P_1(A)|$.\nConsequently the minimax risk over all randomized estimators obeys the same\nlower bound.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-statistic-induces-deterministic-procedure",
+          "source_section": "Statement",
+          "quote": "Let $T:(\\mathcal X,\\mathcal A)\\to(\\mathsf D,\\mathcal G)$ be a measurable\nstatistic, where $\\mathcal G$ is a sigma-algebra on the action set\n([[def-statistic-and-estimator]]). Then\n$$K_T(x,B):=\\delta_{T(x)}(B)=\\mathbf 1_B(T(x)),\\qquad x\\in\\mathcal X,\\ B\\in\\mathcal G,$$\nis a probability kernel and therefore a deterministic randomized procedure.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integral-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define the **integral logarithm**\n\n$$L(x):=\\int_1^x\\frac{dt}{t},$$\n\nusing the oriented integral when $x<1$\n([[def-oriented-integral]]).\n\nThis is well defined. The function $t\\mapsto1/t$ is continuous wherever\n$t\\neq0$ by the quotient clause of\n[[thm-algebra-of-continuous-functions]]. For $x\\neq1$ it is therefore continuous on the nondegenerate compact interval\nwith endpoints $1$ and $x$, hence Riemann integrable there by\n[[thm-continuous-implies-integrable]], whose hypothesis is $a<b$. At $x=1$ the\ninterval is degenerate and that theorem does not apply; there\n[[def-oriented-integral]] stipulates $\\int_1^1f=0$, so $L(1)=0$ directly.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "source_section": "Statement",
+          "quote": "For every $x>0$,\n\n$$L(x)=\\log x.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the code $\\mathcal C$ from [F1], with cardinality $M$. Since $ed/s\\ge2e>1$ by [F9], [F8] gives $\\log(ed/s)>0$; hence $M\\ge2$. Put $$a:=\\sqrt{\\frac{\\sigma^2\\log M}{4ns}}>0,\\qquad \\theta^\\omega=a u^\\omega \\quad(\\omega\\in\\mathcal C).$$ Every $\\theta^\\omega$ belongs to $\\Theta_{s,d}$, and distinct code targets have squared distance greater than $a^2s/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Now suppose $M=2$. By [F8], $\\log2=\\int_1^2dt/t\\le1$, because $1/t\\le1$ on $[1,2]$. Hence [F1] gives $s\\log(ed/s)\\le1024$. Consider the two parameters $0$ and $b e_1$, where $b=\\sigma/(2\\sqrt n)$; both belong to $\\Theta_{s,d}$. By [F2], their sequence laws have KL divergence $nb^2/(2\\sigma^2)=1/8$, so [F4] gives total variation at most $1/4$. For the Borel vector estimator $T$, its first coordinate $T_1$ is Borel, and [F7] makes it an admissible scalar kernel. Pointwise, $$\\|T(z)-\\theta\\|_2^2\\ge|T_1(z)-\\theta_1|^2$$ for both parameters. Applying [F5] to this scalar kernel shows the maximum vector risk is at least $$\\frac{b^2}{8}\\left(1-\\frac14\\right) =\\frac{3\\sigma^2}{128n} >\\frac{1024\\sigma^2}{200000n} \\ge\\frac{\\sigma^2s\\log(ed/s)}{200000n}.$$",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Take the reference law $Q=P_0$ of the zero-mean sequence. By [F2], $$D(P_{\\theta^\\omega}\\|P_0) =\\frac{n}{2\\sigma^2}\\|a u^\\omega\\|_2^2 =\\frac{na^2s}{2\\sigma^2}=\\frac{\\log M}{8}$$ for every $\\omega$, since $u^\\omega$ has exactly $s$ ones.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "First suppose $M\\ge3$. Since $3>2\\sqrt2$ (squaring gives $9>8$), [F8] implies $\\log3>\\log(2\\sqrt2)=\\frac32\\log2$. Thus $\\log2/\\log M<2/3$. The average reference KL ratio in [F3] is $1/8$ by step 2.1, so the Fano factor is greater than $1-1/8-2/3=5/24>1/5$. With separation $\\Delta=a\\sqrt{s/2}$, [F3] gives uniform average risk greater than $$\\frac{\\Delta^2}{20}=\\frac{a^2s}{40} =\\frac{\\sigma^2\\log M}{160n} \\ge\\frac{\\sigma^2s\\log(ed/s)}{163840n} >\\frac{\\sigma^2s\\log(ed/s)}{200000n}.$$ The maximum risk dominates this finite-code average; the Borel estimator is an admissible kernel by [F7]. Thus its supremum risk satisfies the same lower bound.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The cases $M\\ge3$ and $M=2$ exhaust the possibilities by step 1.1. Step 3.1 proves the $M\\ge3$ case, and step 1.2 proves the $M=2$ case. Thus the claimed lower bound holds for the arbitrary Borel estimator $T$, with risk understood as in [F6].",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For thm-gaussian-sparse-sequence-minimax-lower-bound, The parameter class includes the zero vector even though the packing uses exactly s nonzero coordinates (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For thm-gaussian-sparse-sequence-minimax-lower-bound, The statement assumes σ>0 and uses no zero-variance branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For thm-gaussian-sparse-sequence-minimax-lower-bound, The allowed endpoint s=1 occurs for d≥2 and the packing/two-point cases in steps 3.1–1.2 apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For thm-gaussian-sparse-sequence-minimax-lower-bound, The experiment has full positive coordinate variance σ²/n and no singular covariance case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For thm-gaussian-sparse-sequence-minimax-lower-bound, Step 1.2 retains the upper endpoint s=d/2 required by the packing supplier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For thm-gaussian-sparse-sequence-minimax-lower-bound, Step 1.2 retains the upper endpoint s=d/2 required by the packing supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm-gaussian-sparse-sequence-minimax-lower-bound, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm-gaussian-sparse-sequence-minimax-lower-bound, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-matching-minimax-rate": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-sparse-subset-risk-upper-bound",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-constrained-l0-least-squares]], its finite\nscan terminates and returns a support minimizing $\\|y-P_{V_S}y\\|_2^2$ over all\nsupports of size at most $s$. Among tied minimizers, it returns the earliest\nsupport in the prescribed order.\n\nMoreover, let $n,d$ be positive integers, let $X\\in\\mathbb R^{n\\times d}$ be fixed, and\nlet $\\theta^*\\in\\mathbb R^d$ have at most $s$ nonzero coordinates, where\n$1\\le s\\le d/2$. Suppose $Y=X\\theta^*+\\varepsilon$ and $\\varepsilon$ is centered\nsub-Gaussian with proxy $\\sigma^2\\ge0$ in the linear-functional sense of\n[[def-subgaussian-variable-and-vector]]. Let $\\widehat\\mu_s$ be the fitted vector\nreturned by [[alg-constrained-l0-least-squares]]. For $0<\\delta<1$, with\n$C:=32(4+2\\log6)$,\n\n$$\\mathbb E\\left[\\frac1n\\|\\widehat\\mu_s-X\\theta^*\\|_2^2\\right] \\le C\\frac{\\sigma^2s\\log(ed/s)}{n},$$\n\nand\n\n$$\\mathbb P\\!\\left(\\frac1n\\|\\widehat\\mu_s-X\\theta^*\\|_2^2 \\le C\\frac{\\sigma^2\\left[s\\log(ed/s)+\\log(1/\\delta)\\right]}{n}\\right) \\ge1-\\delta.$$\nNo design-rank, incoherence, or column-normalization condition is assumed. The\nclaim concerns fitted values; it gives no coefficient-error bound.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-support-projection-selection-is-borel",
+          "source_section": "Statement",
+          "quote": "Let $n,N\\ge1$ and let $P_1,\\ldots,P_N$ be orthogonal projections in\n$\\mathbb R^n$ onto fixed finite-dimensional subspaces $V_1,\\ldots,V_N$. Let\n$c_1,\\ldots,c_N\\in\\mathbb R$ be fixed. For $y\\in\\mathbb R^n$, define\n$q_i(y):=n^{-1}\\|y-P_i y\\|_2^2+c_i$, choose the least index attaining\n$\\min_{1\\le i\\le N}q_i(y)$, and return its fitted vector $P_i y$. The resulting\nmap $\\widehat m:\\mathbb R^n\\to\\mathbb R^n$ is Borel measurable. The index map\nis Borel measurable when $\\{1,\\ldots,N\\}$ has its discrete sigma-algebra.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-isotropic-gaussian-noise-is-subgaussian",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, $\\sigma\\ge0$, and let\n$\\varepsilon\\sim N_n(0,\\sigma^2I_n)$ be a centered multivariate normal vector.\nThen for every $u\\in\\mathbb R^n$ and $\\lambda\\in\\mathbb R$,\n$$\\mathbb E\\exp(\\lambda\\langle u,\\varepsilon\\rangle) =\\exp\\!\\left(\\frac{\\sigma^2\\lambda^2\\|u\\|_2^2}{2}\\right).$$\nIn particular, $\\varepsilon$ is sub-Gaussian with proxy $\\sigma^2$ in the\nlinear-functional sense of [[def-subgaussian-variable-and-vector]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gaussian-sparse-sequence-minimax-lower-bound",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n,d\\ge1$, $\\sigma>0$, and let\n$1\\le s\\le d/2$ be integers. Observe $Z\\in\\mathbb R^d$ with independent\ncoordinates $Z_j\\sim N(\\theta_j,\\sigma^2/n)$ for a parameter\n$$\\Theta_{s,d}:=\\{\\theta\\in\\mathbb R^d: |\\{j\\in\\{1,\\ldots,d\\}:\\theta_j\\ne0\\}|\\le s\\}.$$\nFor every Borel estimator $T:\\mathbb R^d\\to\\mathbb R^d$,\n$$\\sup_{\\theta\\in\\Theta_{s,d}} \\mathbb E_\\theta\\|T(Z)-\\theta\\|_2^2 \\ge \\frac{\\sigma^2s\\log(ed/s)}{200000n}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], the noise satisfies the centered vector proxy condition required by [F1]. The support-search fitted vector is Borel by [F2], so it is an admissible estimator for [F6]. Applying [F1] at each $\\theta\\in\\Theta_s$ and taking the supremum and then the infimum gives the upper bound.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix any Borel fitted-vector estimator $T$. Put $Z=Y/\\sqrt n$ and $S(z)=T(\\sqrt n z)/\\sqrt n$, which is Borel by [F8]. Under the independent realization in [F4], the coordinates of $Z$ are coordinatewise measurable affine transforms of independent standard normals. By [F7], they remain independent and have laws $N(\\theta_j,\\sigma^2/n)$, exactly the sequence experiment in [F5]. Applying [F5] to the Borel estimator $S$ gives $$\\sup_{\\theta\\in\\Theta_s}\\mathbb E_\\theta\\|S(Z)-\\theta\\|_2^2 \\ge\\frac{\\sigma^2s\\log(en/s)}{200000n}.$$",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $X=\\sqrt n I_n$, pointwise $$\\frac1n\\|T(Y)-X\\theta\\|_2^2 =\\left\\|\\frac{T(Y)}{\\sqrt n}-\\theta\\right\\|_2^2 =\\|S(Z)-\\theta\\|_2^2.$$ By [F6] these pointwise losses define the respective risks. Thus every Borel $T$ has supremum fitted-value risk at least the lower bound in step 1.2. Taking the infimum over $T$ proves the minimax lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The upper bound in step 1.1 and the lower bound in step 2.1 give the displayed comparison, with universal constants $1/200000$ and $C$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For cor-matching-minimax-rate, The sparse parameter set includes the zero vector and step 1.1 applies to every vector with at most s nonzeros."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For cor-matching-minimax-rate, The statement assumes σ>0 because the Gaussian lower-bound theorem uses positive variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For cor-matching-minimax-rate, The range allows s=1 when n=d≥2; steps 1.2–2.1 remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For cor-matching-minimax-rate, The statement fixes X=√n I_n, a full-rank design, and makes no rank-deficient minimax claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For cor-matching-minimax-rate, The permitted endpoint s=n/2 is retained in both upper and lower supplier hypotheses. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For cor-matching-minimax-rate, The permitted endpoint s=n/2 is retained in both upper and lower supplier hypotheses. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For cor-matching-minimax-rate, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For cor-matching-minimax-rate, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-collinear-design-coefficient-risk-unidentifiable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fixed-design-projection-estimator",
+          "source_section": "Definition",
+          "quote": "Let $n,d\\in\\mathbb N$ with $n,d\\ge1$, and let $X\\in\\mathbb R^{n\\times d}$ be a fixed design\nmatrix, and write $V_X:=\\{X\\theta:\\theta\\in\\mathbb R^d\\}\\subseteq\\mathbb R^n$\nfor its column space. For an observed vector $y\\in\\mathbb R^n$, the **fixed-design\nleast-squares fitted vector** is\n\n$$\\widehat\\mu_X(y):=P_{V_X}y,$$\n\nwhere $P_{V_X}$ is the orthogonal projection onto $V_X$, as defined in\n[[def-orthogonal-projection]]. It is uniquely defined even when $X$ is rank\ndeficient. The nearest-point characterization in\n[[thm-orthogonal-projection-is-the-unique-nearest-point]] says that\n$\\widehat\\mu_X(y)$ minimizes $\\|y-v\\|_2$ over $v\\in V_X$. This item defines the\nfitted vector; it does not select a coefficient representation $\\widehat\\theta$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-projection-risk",
+          "source_section": "Statement",
+          "quote": "Let $n,d\\ge1$, let $X\\in\\mathbb R^{n\\times d}$ be fixed, and put\n$V=\\operatorname{col}(X)$ and $r=\\dim V$. Let $P_V$ be the orthogonal\nprojection and let $\\mu\\in\\mathbb R^n$ be fixed. Let\n$\\varepsilon=(\\varepsilon_1,\\ldots,\\varepsilon_n)$ be a centered random vector\nwith square-integrable coordinates satisfying\n$\\mathbb E[\\varepsilon_i\\varepsilon_j]=\\sigma^2\\mathbf 1_{i=j}$ for\n$\\sigma^2\\ge0$. For $Y=\\mu+\\varepsilon$ and\n$\\widehat\\mu=\\widehat\\mu_X(Y)$ as in\n[[def-fixed-design-projection-estimator]],\n\n$$\\mathbb E\\|\\widehat\\mu-\\mu\\|_2^2=\\|P_V\\mu-\\mu\\|_2^2+r\\sigma^2.$$\n\nIn particular, when $\\mu\\in V$, the expected squared fitted-value error is\nexactly $r\\sigma^2$. The moment assumptions hold for centered Gaussian noise\nwith covariance matrix $\\sigma^2 I_n$; Gaussianity is not otherwise needed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both coefficient vectors are distinct, but $X_n\\theta_1=\\mathbf 1_n=X_n\\theta_2$. Thus the asserted injectivity fails, and the observation distributions under $\\theta_1$ and $\\theta_2$ are identical because the additive noise law is common.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $T(Y)\\in\\mathbb R^2$ be any measurable coefficient estimator. For every $a\\in\\mathbb R^2$, completing squares gives $$\\|a-\\theta_1\\|_2^2+\\|a-\\theta_2\\|_2^2 =2\\left\\|a-\\left(\\frac12,\\frac12\\right)\\right\\|_2^2+1\\ge1.$$ Integrating under the common observation law and using [F3] shows that the sum of the two coefficient risks is at least $1$, so their maximum is at least $1/2$ for every $n$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The common fitted mean $\\mu=\\mathbf 1_n$ lies in $\\operatorname{col}(X_n)$, which has rank $1$. By [F2], its projected least-squares fit has expected squared fitted-value risk $\\sigma^2$, or $\\sigma^2/n$ per observation by [F4]. This vanishes as $n$ grows while the coefficient-risk lower bound in step 1.2 stays at least $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For cex-collinear-design-coefficient-risk-unidentifiable, The witness uses two distinct coefficient targets and a nonempty n-point sample."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For cex-collinear-design-coefficient-risk-unidentifiable, The example assumes σ²>0 so the fitted risk is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For cex-collinear-design-coefficient-risk-unidentifiable, The construction is defined for every n≥1, including one observation (step 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For cex-collinear-design-coefficient-risk-unidentifiable, Step 2.1 uses the rank-one span of two identical columns."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For cex-collinear-design-coefficient-risk-unidentifiable, Step 1.2 gives a lower bound 1/2 for every n≥1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For cex-collinear-design-coefficient-risk-unidentifiable, Step 1.2 gives a lower bound 1/2 for every n≥1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For cex-collinear-design-coefficient-risk-unidentifiable, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For cex-collinear-design-coefficient-risk-unidentifiable, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-orthogonal-sequence-sparse-regression": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-constrained-l0-least-squares",
+          "source_section": "Definition",
+          "quote": "**Input:** naturals $n,d\\ge1$, a fixed design $X\\in\\mathbb R^{n\\times d}$, a data\nvector $y\\in\\mathbb R^n$, and a natural $s$ with $0\\le s\\le d$.\n\n**Candidate supports:** list all subsets $S\\subseteq\\{1,\\ldots,d\\}$ with\n$|S|\\le s$ in lexicographic order of their length-$d$ indicator vectors,\nusing $0<1$. This is a finite nonempty list because it contains $\\varnothing$\nand is contained in the finite power set of $\\{1,\\ldots,d\\}$.\n\n**Procedure:** for each candidate $S$, let $V_S$ be the span of the columns of\n$X$ indexed by $S$ and compute $\\widehat\\mu_S=P_{V_S}y$. Compute its residual\nscore $q_S=\\|y-\\widehat\\mu_S\\|_2^2$. Initialize the incumbent at the first\ncandidate. Scan the remaining candidates in the stated order, replacing the\nincumbent exactly when a strictly smaller score is found; retain the earlier\ncandidate on a tie. Return the selected support and its fitted vector\n$\\widehat\\mu_s$.\n\nEach $V_S$ is finite-dimensional, so the projections are defined by\n[[def-fixed-design-projection-estimator]]. The fitted-vector selection is Borel\nmeasurable by [[lem-finite-support-projection-selection-is-borel]]. The procedure\nperforms a finite exhaustive support search; no computational-efficiency claim is\nmade.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sparse-subset-risk-upper-bound",
+          "source_section": "Statement",
+          "quote": "For every admissible input to [[alg-constrained-l0-least-squares]], its finite\nscan terminates and returns a support minimizing $\\|y-P_{V_S}y\\|_2^2$ over all\nsupports of size at most $s$. Among tied minimizers, it returns the earliest\nsupport in the prescribed order.\n\nMoreover, let $n,d$ be positive integers, let $X\\in\\mathbb R^{n\\times d}$ be fixed, and\nlet $\\theta^*\\in\\mathbb R^d$ have at most $s$ nonzero coordinates, where\n$1\\le s\\le d/2$. Suppose $Y=X\\theta^*+\\varepsilon$ and $\\varepsilon$ is centered\nsub-Gaussian with proxy $\\sigma^2\\ge0$ in the linear-functional sense of\n[[def-subgaussian-variable-and-vector]]. Let $\\widehat\\mu_s$ be the fitted vector\nreturned by [[alg-constrained-l0-least-squares]]. For $0<\\delta<1$, with\n$C:=32(4+2\\log6)$,\n\n$$\\mathbb E\\left[\\frac1n\\|\\widehat\\mu_s-X\\theta^*\\|_2^2\\right] \\le C\\frac{\\sigma^2s\\log(ed/s)}{n},$$\n\nand\n\n$$\\mathbb P\\!\\left(\\frac1n\\|\\widehat\\mu_s-X\\theta^*\\|_2^2 \\le C\\frac{\\sigma^2\\left[s\\log(ed/s)+\\log(1/\\delta)\\right]}{n}\\right) \\ge1-\\delta.$$\nNo design-rank, incoherence, or column-normalization condition is assumed. The\nclaim concerns fitted values; it gives no coefficient-error bound.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The three candidate supports are $\\varnothing,\\{1\\},\\{2\\}$. Their fitted vectors are $0$, $(\\varepsilon_1,0)$, and $(0,\\varepsilon_2)$, with residual squares $\\varepsilon_1^2+\\varepsilon_2^2$, $\\varepsilon_2^2$, and $\\varepsilon_1^2$, respectively. Hence the chosen fitted vector has squared norm $\\max(\\varepsilon_1^2,\\varepsilon_2^2)$, including a tie.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Pointwise, $\\varepsilon_1^2\\le\\max(\\varepsilon_1^2,\\varepsilon_2^2) \\le\\varepsilon_1^2+\\varepsilon_2^2$. Taking expectations and using [F4] gives $\\sigma^2\\le\\mathbb E\\|\\widehat\\mu_s\\|_2^2\\le2\\sigma^2$. Division by $n=2$ proves the stated interval for fitted-value error.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Here $s=1$, $d=2$, and $n=2$, and the noise satisfies [F3], so [F2] gives expected error at most $C\\sigma^2\\log(2e)/2$. This is consistent with the direct calculation; the example makes no separate minimax lower-bound claim. By [F5], this expectation is the squared fitted-value risk.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For ex-orthogonal-sequence-sparse-regression, Step 1.1 lists the empty support as one of the three candidates."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For ex-orthogonal-sequence-sparse-regression, The example assumes σ²>0 and makes no zero-noise claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For ex-orthogonal-sequence-sparse-regression, The support budget is s=1 and step 1.1 enumerates the three candidates."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For ex-orthogonal-sequence-sparse-regression, The design is X=I₂ and is full rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For ex-orthogonal-sequence-sparse-regression, The example uses n=d=2 and the endpoint s=d/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For ex-orthogonal-sequence-sparse-regression, The example uses n=d=2 and the endpoint s=d/2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex-orthogonal-sequence-sparse-regression, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex-orthogonal-sequence-sparse-regression, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-training-risk-versus-test-risk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fixed-design-projection-estimator",
+          "source_section": "Definition",
+          "quote": "Let $n,d\\in\\mathbb N$ with $n,d\\ge1$, and let $X\\in\\mathbb R^{n\\times d}$ be a fixed design\nmatrix, and write $V_X:=\\{X\\theta:\\theta\\in\\mathbb R^d\\}\\subseteq\\mathbb R^n$\nfor its column space. For an observed vector $y\\in\\mathbb R^n$, the **fixed-design\nleast-squares fitted vector** is\n\n$$\\widehat\\mu_X(y):=P_{V_X}y,$$\n\nwhere $P_{V_X}$ is the orthogonal projection onto $V_X$, as defined in\n[[def-orthogonal-projection]]. It is uniquely defined even when $X$ is rank\ndeficient. The nearest-point characterization in\n[[thm-orthogonal-projection-is-the-unique-nearest-point]] says that\n$\\widehat\\mu_X(y)$ minimizes $\\|y-v\\|_2$ over $v\\in V_X$. This item defines the\nfitted vector; it does not select a coefficient representation $\\widehat\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-projection-risk",
+          "source_section": "Statement",
+          "quote": "Let $n,d\\ge1$, let $X\\in\\mathbb R^{n\\times d}$ be fixed, and put\n$V=\\operatorname{col}(X)$ and $r=\\dim V$. Let $P_V$ be the orthogonal\nprojection and let $\\mu\\in\\mathbb R^n$ be fixed. Let\n$\\varepsilon=(\\varepsilon_1,\\ldots,\\varepsilon_n)$ be a centered random vector\nwith square-integrable coordinates satisfying\n$\\mathbb E[\\varepsilon_i\\varepsilon_j]=\\sigma^2\\mathbf 1_{i=j}$ for\n$\\sigma^2\\ge0$. For $Y=\\mu+\\varepsilon$ and\n$\\widehat\\mu=\\widehat\\mu_X(Y)$ as in\n[[def-fixed-design-projection-estimator]],\n\n$$\\mathbb E\\|\\widehat\\mu-\\mu\\|_2^2=\\|P_V\\mu-\\mu\\|_2^2+r\\sigma^2.$$\n\nIn particular, when $\\mu\\in V$, the expected squared fitted-value error is\nexactly $r\\sigma^2$. The moment assumptions hold for centered Gaussian noise\nwith covariance matrix $\\sigma^2 I_n$; Gaussianity is not otherwise needed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bias-and-mean-squared-error",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment: a measurable data space, a parameter-label set,\nand a family of probability measures on the data space. Let\n$\\psi:\\Theta\\to\\mathbb R$ be its real-valued target function (estimand). An estimator\n$T:\\mathcal X\\to\\mathbb R$ is a measurable statistic\nwith the real Borel target ([[def-statistic-and-estimator]]). At a parameter\n$\\theta$ for which $T$ is integrable under $P_\\theta$, its **bias** is\n$$\\operatorname{Bias}_\\theta(T):=\\mathbb E_\\theta[T]-\\psi(\\theta).$$\n\nIts **mean squared error** (MSE) is the extended nonnegative number\n$$\\operatorname{MSE}_\\theta(T):=\\mathbb E_\\theta[(T-\\psi(\\theta))^2]\\in[0,+\\infty].$$\nThis is the risk of the deterministic rule induced by $T$ under squared-error\nloss $L(\\theta,a)=(a-\\psi(\\theta))^2$: its Dirac kernel is constructed in\n[[lem-statistic-induces-deterministic-procedure]], and the risk supplier's\nintegral formula reduces to the displayed expectation when the action is\n$T(x)$ by [[lem-dirac-integral-evaluation]]\n([[def-loss-function-and-risk]]). For each fixed $\\theta$, this loss is Borel\nin the real action $a$; no measurable structure on $\\Theta$ or measurability\nof $\\psi$ is required. The expectation convention is\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. If $T$ is\nsquare-integrable under $P_\\theta$, then its variance is defined by\n[[def-moments-variance-and-covariance]] and this MSE is finite. Bias is not\ndefined at parameters where $T$ is not integrable.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\operatorname{col}(X)=\\mathbb R$, [F1] gives $\\widehat\\mu=Y=\\varepsilon$. Therefore the training residual $|Y-\\widehat\\mu|^2$ is zero for every outcome.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2], the expected squared error for estimating the true mean is $\\mathbb E|\\widehat\\mu-\\mu|^2=\\sigma^2$. This is the scalar MSE and squared-loss risk by [F5].",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The test-response error is $Y'-\\widehat\\mu=\\varepsilon'-\\varepsilon$. Expanding its square and using [F3] and [F4], $\\mathbb E|\\varepsilon'-\\varepsilon|^2 =\\mathbb E[(\\varepsilon')^2]+\\mathbb E[\\varepsilon^2] -2\\mathbb E[\\varepsilon']\\mathbb E[\\varepsilon] =2\\sigma^2$.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The training residual, mean-estimation error, and fresh-response test error are respectively $0$, $\\sigma^2$, and $2\\sigma^2$ in this model, so these quantities are distinct.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For ex-training-risk-versus-test-risk, The example has one training observation and one fresh response, never an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For ex-training-risk-versus-test-risk, The variance is assumed strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For ex-training-risk-versus-test-risk, The example is the one-observation, one-dimensional endpoint (steps 1.1–1.3)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For ex-training-risk-versus-test-risk, Step 1.1 verifies that X=[1] spans the full observation space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For ex-training-risk-versus-test-risk, The finite positive variance condition is retained in steps 1.2 and 1.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For ex-training-risk-versus-test-risk, The finite positive variance condition is retained in steps 1.2 and 1.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex-training-risk-versus-test-risk, the claim is one-way and asserts no equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex-training-risk-versus-test-risk, the claim is one-way and asserts no equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

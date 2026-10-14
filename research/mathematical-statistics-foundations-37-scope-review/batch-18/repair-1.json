@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "run": "mathematical-statistics-foundations-37",
+  "batch": "18",
+  "round": 1,
+  "reviewed_items": [
+    "def-fixed-design-projection-estimator",
+    "lem-binomial-support-count-bound",
+    "lem-finite-dimensional-projection-is-linear-and-contractive",
+    "lem-finite-support-projection-selection-is-borel",
+    "lem-isotropic-gaussian-noise-is-subgaussian",
+    "alg-bic-penalized-least-squares",
+    "alg-constrained-l0-least-squares",
+    "thm-gaussian-projection-risk",
+    "thm-subgaussian-projection-risk",
+    "thm-bic-fitted-risk-bound",
+    "thm-sparse-subset-risk-upper-bound",
+    "thm-gaussian-sparse-sequence-minimax-lower-bound",
+    "cor-matching-minimax-rate",
+    "cex-collinear-design-coefficient-risk-unidentifiable",
+    "ex-orthogonal-sequence-sparse-regression",
+    "ex-training-risk-versus-test-risk"
+  ],
+  "reviewed_pages": [
+    "decision-theoretic-upper-bounds-and-oracle-risk",
+    "decision-theoretic-upper-bounds-and-oracle-risk-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Repaired the Gaussian coordinate-law justification and proved termination, least-score selection, and tie behavior for both scans in separate theorem results, linked through justified_by. Checked affected consumers. Escalation is for an unresolved cycle in the published Gaussian supplier dependencies.",
+  "findings": [
+    {
+      "id": "def-multivariate-normal-law",
+      "type": "outside-batch",
+      "reason": "Its deps include lem-characteristic-function-of-a-multivariate-normal-law, while that lemma's deps include this definition, forming a supplier-graph cycle. cor-matching-minimax-rate proof step 1.2/F4 consumes this pair. The owner must reconcile the published edge, for example by representing the uniqueness result as justified_by on the definition."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-bic-fitted-risk-bound",
+      "decision": "accept",
+      "reason": "The scan's termination, minimizer property, and tie rule are now stated and proved before the risk argument uses them."
+    },
+    {
+      "id": "thm-sparse-subset-risk-upper-bound",
+      "decision": "accept",
+      "reason": "The constrained scan's termination, residual minimizer property, and tie rule are now stated and proved before the risk argument uses them."
+    },
+    {
+      "id": "ex-orthogonal-sequence-sparse-regression",
+      "decision": "accept",
+      "reason": "Its selection and fitted-vector calculations are supported by the proved constrained-scan result."
+    },
+    {
+      "id": "cor-matching-minimax-rate",
+      "decision": "escalate",
+      "reason": "Its upper-bound use is supported; its Gaussian coordinate-law proof still has the published supplier-graph cycle described above."
+    },
+    {
+      "id": "decision-theoretic-upper-bounds-and-oracle-risk",
+      "decision": "accept",
+      "reason": "Its summary remains supported by the retained risk claims."
+    },
+    {
+      "id": "decision-theoretic-upper-bounds-and-oracle-risk-examples",
+      "decision": "accept",
+      "reason": "Its example summary is consistent with the now-proved constrained-search behavior."
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "16",
+  "input_sha256": "e1bc7bf50568b2cd1a1248d66ba06d7d99e221f8ff4c41515c5feff1d8a3175c",
+  "decisions": [
+    {
+      "id": "ex-uniform-empirical-cdf-converges-to-brownian-bridge",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "77874f6570d8e8670882fb201b0be64714b5ce08407caee5216485a295033642",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The repository defines sequences on the zero-based natural numbers (items/def-sequence.md, Definition; items/lem-subset-of-countable.md, Given). The original interval in step 1.1 contains 1/k and is undefined at k=0. This is a nonfatal initial-index defect: replacing 1/k by 1/(k+1) leaves the positive shrinking radii and the pointwise approximation argument intact. The repaired intervals are nonempty for every k>=0 and t<1; the constant sequence q_k=1 covers t=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-uniform-empirical-cdf-converges-to-brownian-bridge",
+      "disposition": "repaired",
+      "post_sha256": "4f9fad1bdb9295feed381f339c7e5a94358f592954970c51784116748b568f37",
+      "review_context_sha256": "c685a23b1da98df1d4b718f33429e3dcc3db37236101071fda5682ba97a0a341",
+      "reason": "Reviewed all four verification steps, the eight direct prerequisite interfaces, the owning contract, and both page interfaces. For t<1 and k>=0 the upper endpoint min(1,t+1/(k+1)) exceeds t, so rational density and the stated AC premise give a sequence with 0<q_k-t<1/(k+1); its closed-threshold indicators converge at every x, including x=t. At t=1 the constant rational sequence suffices. The m grid brackets cover all thresholds and have squared L2 width 1/m; m=ceil(epsilon^(-2)) gives widths at most epsilon, and the stated square-root entropy majorant is integrable. The envelope norm is one, and all functional-CLT hypotheses, including AC, hold. The bijection t -> f_t identifies the two sup-norm index spaces, and covariance is min(s,t)-st, including zero endpoint variances. Only step 1.1 and its contract mirror/repair notes changed; the Example claim and all Statement/Definition sections are unchanged. No new prerequisite, downstream propagation, or published-consumer repair was identified. This is an adjudicator repair review, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "mathematical-statistics-foundations-37-repeat-r1-u16-rational-approximant-initial-index",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T13:17:17Z",
+        "class": "accuracy",
+        "subclass": "ill-typed-construction",
+        "severity": "nonfatal",
+        "location": "proof-step",
+        "subject": "ex-uniform-empirical-cdf-converges-to-brownian-bridge",
+        "caught_at_stage": "5-rejudge",
+        "caught_by_role": "judge-sol",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "note": "The repository defines sequences on the zero-based natural numbers (items/def-sequence.md, Definition; items/lem-subset-of-countable.md, Given). The original interval in step 1.1 contains 1/k and is undefined at k=0. This is a nonfatal initial-index defect: replacing 1/k by 1/(k+1) leaves the positive shrinking radii and the pointwise approximation argument intact. The repaired intervals are nonempty for every k>=0 and t<1; the constant sequence q_k=1 covers t=1.",
+        "adjudication_ref": [
+          {
+            "id": "ex-uniform-empirical-cdf-converges-to-brownian-bridge",
+            "model": "gpt-6.1-sol",
+            "context_sha256": "77874f6570d8e8670882fb201b0be64714b5ce08407caee5216485a295033642",
+            "item_sha256": "35cd8ebbaf4eab0a9d7196dc78ce937784061ada83b4b0fda26fbe93ba34ae07",
+            "path": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-repeat-r1-u16.json"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "items/ex-uniform-empirical-cdf-converges-to-brownian-bridge.md",
+            "locator": "Verification step 1.1"
+          },
+          {
+            "path": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-repeat-r1-u16.json",
+            "locator": "decisions[0], reviews[0], repair_notes"
+          }
+        ],
+        "prevention": {
+          "kind": "process",
+          "ref": "Review all initial indices and endpoint approximation sequences before applying pointwise-measurability hypotheses."
+        }
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/ex-uniform-empirical-cdf-converges-to-brownian-bridge.md",
+      "research/mathematical-statistics-foundations-37-batch-16.proof-contracts.json"
+    ],
+    "contract_integration": "Acquired the step5 shared-write lock, reread the current batch contract, synchronized only the assigned step-1-1 derivation and its repair notes, ran the focused strict contract check, then released the lock.",
+    "interface_comparison": "The Example text is preserved byte for byte; the item has no Statement or Definition sections. No direct-consumer examination is triggered by this proof-only repair.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-uniform-empirical-cdf-converges-to-brownian-bridge.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing; direct proof passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-uniform-empirical-cdf-converges-to-brownian-bridge.md --json",
+        "exit_code": 0,
+        "result": "1 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-uniform-empirical-cdf-converges-to-brownian-bridge.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects; run once after the final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-16.proof-contracts.json --strict --items ex-uniform-empirical-cdf-converges-to-brownian-bridge --json",
+        "exit_code": 0,
+        "result": "Assigned item checked; ok:true, no errors or warnings."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run mathematical-statistics-foundations-37 --items ex-uniform-empirical-cdf-converges-to-brownian-bridge",
+        "exit_code": 0,
+        "result": "Captured post_sha256 and review_context_sha256 immediately after completing the item review and contract integration."
+      }
+    ],
+    "sources_consulted": "Local prerequisite interfaces and sequence conventions only; no external source reading claimed. The rejected construction and entropy/covariance checks are familiar mathematics.",
+    "published_ledger_updates": [],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent rejudgment; no worker-launched judges, stamps, certificates, or round transitions."
+  }
+}

@@ -1,0 +1,1534 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-finite-dimensional-integral-jensen-for-convex-loss",
+    "lem-prior-and-model-kernel-define-joint-law",
+    "def-loss-function-and-risk",
+    "def-risk-domination-and-admissibility",
+    "def-bayes-and-minimax-risk",
+    "thm-bayes-rule-minimizes-prior-risk",
+    "thm-randomization-does-not-improve-convex-action-loss",
+    "ex-squared-error-risk-for-bernoulli-observation",
+    "ex-zero-one-loss-randomization-minimax",
+    "ex-data-rule-dominates-constant-rule",
+    "cex-open-action-set-no-minimizer"
+  ],
+  "contracts": {
+    "lem-finite-dimensional-integral-jensen-for-convex-loss": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $x\\notin C$. Then there are $a\\ne0$ and $b\\in\\mathbb R$ such that $\\langle a,z\\rangle\\le b<\\langle a,x\\rangle$ for every $z\\in C$. Thus a hyperplane strictly separates $x$ from $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty and convex, and let $a\\in C\\cap\\partial C$. Then there is a nonzero vector $u$ such that $\\langle u,z-a\\rangle\\le0$ for every $z\\in C$. Thus the hyperplane through $a$ normal to $u$ supports $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-convex-set-and-closure-have-same-interior-and-boundary",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$ and let $C\\subseteq\\mathbb R^n$ be nonempty and convex. The closure $\\overline C$ is convex, $\\operatorname{int}(C)=\\operatorname{int}(\\overline C)$, and $\\partial C=\\partial\\overline C$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-convex-functions-have-subgradients-at-interior-points",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $C\\subseteq\\mathbb R^n$ be convex and let $f:C\\to\\mathbb R$ be convex. Then $\\partial f(a)$ is nonempty for every $a\\in\\operatorname{int}C$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-subgradient-and-subdifferential",
+          "source_section": "Definition",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex on a convex set $C\\subseteq\\mathbb R^n$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), and let $a\\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.\n\nThe **subdifferential** is the set\n\n$$\\partial f(a):=\\{v\\in\\mathbb R^n:f(y)\\ge f(a)+\\langle v,y-a\\rangle\\text{ for every }y\\in C\\},$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]]. The definition permits $\\partial f(a)$ to be empty or to contain more than one vector.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\int f\\,d\\mu=+\\infty$, the conclusion holds because $f(b)\\in[0,+\\infty]$. Otherwise let $A:=\\{a\\in C:f(a)=+\\infty\\}$. For every integer $n\\geq1$, the simple function $n\\mathbf1_A$ is bounded above by $f$, so [F7] gives $n\\mu(A)=\\int n\\mathbf1_A\\,d\\mu\\leq\\int f\\,d\\mu<\\infty$. If $\\mu(A)>0$, these lower bounds are unbounded as $n\\to\\infty$ (and are already infinite if $\\mu(A)=+\\infty$), a contradiction. Thus $E:=C\\setminus A=\\{a:f(a)<\\infty\\}$ has full $\\mu$-measure. Let $S$ be the support of $\\mu$, the set of points every relative open neighbourhood of which has positive measure. Since $C$ has a countable base inherited from rational balls in $\\mathbb R^d$, the complement of $S$ is a countable union of open null basic sets, so $\\mu(S)=1$. Every neighbourhood of a point of $S$ meets $E$, hence $E\\cap S$ is dense in $S$.",
+          "step": "1.1",
+          "inputs": [
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $C_0$ be the closure of the set of finite convex combinations of points of $S$. Then $C_0\\subseteq C$. If $b\\notin C_0$, [F1] gives a linear functional $u$ and a real $\\alpha$ with $\\langle u,y\\rangle\\leq\\alpha<\\langle u,b\\rangle$ for all $y\\in C_0$. The function $\\psi(a)=\\alpha-\\langle u,a\\rangle$ is integrable by the first-moment assumption and is nonnegative on the full-measure support $S$. Hence $\\psi^-=0$ almost everywhere, so [F5] gives $\\int\\psi^-\\,d\\mu=0$ and $\\int\\psi\\,d\\mu=\\int\\psi^+\\,d\\mu\\geq0$. By [F6] and the coordinate definition of $b$, this says $\\alpha-\\langle u,b\\rangle\\geq0$, contradicting the strict separation. Thus $b\\in C_0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $b$ were on the relative boundary of $C_0$, [F2], applied in its affine hull, would give a nonzero supporting normal $v$ there with $\\langle v,y-b\\rangle\\leq0$ for all $y\\in C_0$. Set $u(a)=\\langle v,b-a\\rangle$. The first-moment assumption makes $u$ integrable, and [F6] gives $\\int u\\,d\\mu=0$. Since $u\\geq0$ on the full-measure support $S$, its negative part $u^-$ vanishes almost everywhere; [F5] gives $\\int u^-\\,d\\mu=0$. The signed-integral definition in [F6] then gives $\\int u^+\\,d\\mu=0$, so [F5] implies $u^+=0$ almost everywhere and therefore $u=0$ almost everywhere. By continuity of $u$ and the definition of support, every point of $S$ must lie in the hyperplane $\\langle v,y-b\\rangle=0$: otherwise a neighborhood of a support point outside it would have positive measure on which $u\\ne0$. Its closed convex hull $C_0$ would lie in that hyperplane, contradicting that $v$ is nonzero in the direction space of its affine hull. Hence $b$ is in the relative interior of $C_0$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $C_1=\\operatorname{conv}(E\\cap S)$, where $\\operatorname{conv}$ denotes finite convex combinations. The extended-functional convexity inequality makes $f$ finite on $C_1$; on these finite values it is the real-valued Euclidean convexity of [[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. Density from step 1.1 gives $\\overline{C_1}=C_0$. By [F3], $b$ is in the relative interior of $C_1$. If this affine hull has dimension zero, then $\\mu$ is concentrated at $b$ and the claim is equality. Otherwise identify the affine hull isometrically with $\\mathbb R^k$; [F4] applied to $f|_{C_1}$ gives a subgradient $v$ at $b$, so $f(y)\\geq f(b)+\\langle v,y-b\\rangle$ for every $y\\in C_1$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $\\ell(a)=f(b)+\\langle v,a-b\\rangle$ and $w=(f-\\ell)\\mathbf1_E$, defining $w=0$ on $E^c$. The function $w$ is integrable because $f\\mathbf1_E$ has finite nonnegative integral and $\\ell$ is integrable by the first-moment assumption. The supporting inequality gives $w\\geq0$ on $E\\cap S$, a full-measure set; thus $w^-=0$ almost everywhere. By [F5], $\\int w^-\\,d\\mu=0$, so [F6] gives $\\int w\\,d\\mu=\\int w^+\\,d\\mu\\geq0$. Linearity [F6] now yields $\\int f\\mathbf1_E\\,d\\mu\\geq\\int\\ell\\mathbf1_E\\,d\\mu$. Also $f=f\\mathbf1_E+f\\mathbf1_{E^c}$, with $f\\mathbf1_{E^c}=0$ almost everywhere; [F5] and additivity [F8] give $\\int f\\,d\\mu=\\int f\\mathbf1_E\\,d\\mu$. The integrable function $\\ell\\mathbf1_{E^c}$ is likewise zero almost everywhere, so [F5] applied to its positive and negative parts and linearity [F6] give $\\int\\ell\\,d\\mu=\\int\\ell\\mathbf1_E\\,d\\mu$. Finally [F6] and the barycenter definition yield $\\int\\ell\\,d\\mu=f(b)+\\langle v,b-b\\rangle=f(b)$. This proves the claim in the finite-integral case; the infinite-integral case was handled in step 1.1.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability measure on C is part of the hypotheses, so C cannot be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Actions lie in a general vector space; no distinguished scalar zero is used."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Actions lie in a general vector space; no distinguished scalar one is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: if the support has affine dimension zero, the measure is concentrated at its sole barycenter and equality holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "C has no interval order or distinguished endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Assumption A1 is used only for the supporting-hyperplane and subgradient suppliers in steps 3.1 and 4.1; no action is selected from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an inequality, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is an inequality, not an if-and-only-if result."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all five steps and all 17 direct prerequisites, including supporting-hyperplane proof, closure lemma steps 2.1\u20133.1 (relative interior), and finite-valued subgradient proof. Finite integral forces full-measure finite domain; second-countability gives full-measure support. Separation places the barycenter in its closed convex hull; a supporting normal at a relative boundary would vanish on all support, contradicting its affine hull. The zero-dimensional case is equality; otherwise the finite convex restriction has a subgradient at b. Integrable affine minorant and null-set positive/negative parts yield Jensen without lower semicontinuity. Infinite loss integral is immediate. AC/countable choice explicitly carry supplier assumptions. Reader and refuter report no defects; independent review found none."
+      }
+    },
+    "lem-prior-and-model-kernel-define-joint-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Suppose an experiment on $(\\mathcal X,\\mathcal A)$ also has a measurable\nparameter space $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A\n**Markov kernel** (or **probability kernel**) representation is a function\n$$\nK:\\Theta\\times\\mathcal A\\to[0,1]\n$$\nsuch that, for every $\\theta\\in\\Theta$, the set function\n$A\\mapsto K(\\theta,A)$ is a probability measure on $(\\mathcal X,\\mathcal A)$,\nand, for every $A\\in\\mathcal A$ and every Borel set $C\\subseteq[0,1]$,\n$$\n\\{\\theta\\in\\Theta:K(\\theta,A)\\in C\\}\\in\\mathcal T.\n$$\nHere the Borel sigma-algebra on $[0,1]$ is generated by its relatively open\nsubsets $U\\cap[0,1]$, where $U$ is open in $\\mathbb R$. Thus the second\ncondition says that each event-probability map $\\theta\\mapsto K(\\theta,A)$ is\nmeasurable. The kernel represents the given experiment exactly when\n$K(\\theta,A)=P_\\theta(A)$ for every $\\theta$ and $A$\n([[def-statistical-experiment]], [[def-probability-measure]]).\n\nThis is an optional parameter-measurable version of a model. An arbitrary\nexperiment does not include a measurable structure on $\\Theta$ or imply this\nkernel condition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sections-of-product-measurable-functions-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces, and let\n$$f : X \\times Y \\to \\overline{\\mathbb R}$$\nbe $(\\mathcal A \\otimes \\mathcal B,\\mathcal B(\\overline{\\mathbb R}))$-measurable.\nThen $f_x : Y \\to \\overline{\\mathbb R}$ is $\\mathcal B$-measurable for every\n$x \\in X$, and $f^y : X \\to \\overline{\\mathbb R}$ is $\\mathcal A$-measurable\nfor every $y \\in Y$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $C\\in\\mathcal T\\otimes\\mathcal A$, [F2] makes $C_\\theta$ measurable and [F3], applied to $1_C$, makes $\\theta\\mapsto K(\\theta,C_\\theta)$ measurable. Thus $J(C)$ is defined. The empty set has $J$-mass zero, while $(\\Theta\\times\\mathcal X)_\\theta=\\mathcal X$ and [F1], [F5] give $J(\\Theta\\times\\mathcal X)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $(C_n)_{n\\geq0}$ are pairwise disjoint product-measurable sets, their sections are pairwise disjoint. Countable additivity of each $K(\\theta,\\cdot)$ gives $K(\\theta,(\\bigcup_n C_n)_\\theta)=\\lim_N\\sum_{n=0}^N K(\\theta,(C_n)_\\theta)$. The partial sums increase; [F4] passes this limit through the $\\pi$-integral and yields $J(\\bigcup_nC_n)=\\sum_nJ(C_n)$. Therefore $J$ is a probability measure.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a rectangle $A\\times B$, its section is $B$ on $A$ and empty off $A$, so the definition gives $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$. For a nonnegative simple function $h=\\sum_{i=1}^m c_i1_{C_i}$ with disjoint measurable sets and $c_i\\geq0$, the set formula for $J$ and [F6] give the displayed iterated-integral identity by finite addition and homogeneity.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For general nonnegative product-measurable $h$, take the increasing simple approximants of [F4]. Apply monotone convergence first under $J$, then sectionwise under each $K(\\theta,\\cdot)$, and finally under $\\pi$. The identity for the simple functions from step 3.1 passes to the limit, including when either side is $+\\infty$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A prior probability and probability kernel are supplied, so their spaces carry probability mass."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numerical parameter or action is distinguished."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical parameter or action is distinguished."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 remain valid for point-mass priors and kernels; the joint law is then the corresponding point mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The measurable spaces have no interval endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20134.1 use the supplied kernel, prior, and increasing simple approximants; no choice axiom or family of representatives is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a construction theorem, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a construction theorem, not an if-and-only-if result."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed steps 1.1\u20134.1 and all nine prerequisites. Kernel integration theorem applies to probability (finite) kernels; the section theorem applied to indicators gives measurable sections. J(empty)=0 and J(total)=1; disjoint sections and increasing finite sums prove countable additivity. Indicator identity extends by finite simple sums and three monotone-convergence applications to all nonnegative h, including infinite integrals. Empty prior/data spaces cannot satisfy the stated probability hypotheses. No standard-Borel or AC assumption is needed. Reader/refuter findings are empty; no defect found."
+      }
+    },
+    "def-loss-function-and-risk": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: if the parameter set is empty there are no risk values to assign; the section condition is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Parameter labels and actions need not be numeric."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Parameter labels and actions need not be numeric."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: equal sampling laws and loss identically zero are permitted; risk is still the specified nonnegative integral."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint structure is imposed on the parameter set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the experiment laws and action kernel are supplied pointwise; no representatives or minimizers are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Risk is the iterated nonnegative integral of section-measurable loss L against \u03b4 and P\u03b8; the definition asserts no characterization of risk-minimizing rules."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Including deterministic rules as point-mass kernels does not assert a converse reduction of all randomized rules to deterministic ones; no such risk-comparison theorem is supplied here."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-risk-domination-and-admissibility": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: if the parameter set is empty there is no parameter witnessing strict improvement, so no rule is dominated."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Risk values need not be parameter or action values."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Risk values need not be parameter or action values."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: rules with identical risk functions do not satisfy the required strict inequality at any parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter set need not be an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: domination quantifies over supplied rules and parameters; it selects no minimizer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Domination is the specified all-parameter weak risk inequality with strict inequality for at least one \u03b8; this gives no implication that a dominating rule minimizes risk globally."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Admissibility means absence of a dominating competitor; the final sentence denies any assertion of minimizing risk at a particular \u03b8 or under a global criterion, so no converse minimization characterization is claimed."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-bayes-and-minimax-risk": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A prior probability on Theta is required, so Theta cannot be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The parameter space need not have a numeric zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The parameter space need not have a numeric one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: for a one-point parameter space the prior risk and worst-case risk equal that single risk value."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter space need not be an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the prior and nonempty action space are supplied, so a constant point-mass rule exists; the infimum need not be attained and no minimizer is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Bayes integral, worst-case supremum and minimax infimum are definitions in the extended nonnegative order, not a theorem equating Bayes-optimal and minimax rules."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item expressly makes no assertion that the infimum is attained; there is no converse theorem recovering a minimizing rule from the existence of the numerical minimax value."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed full Definition and all eleven direct prerequisite statements, with kernel-integration and extended-order completeness proofs. Lift delta to Theta \u00d7 X by ignoring theta; integrate L(theta,a) first against delta, then K lifted to retain theta. Rectangle preimages verify both lifted kernels, so risk is parameter-measurable. Nonempty Theta and action space give nonempty risks and a constant Dirac rule; extended-order completeness puts infimum/supremum in [0,infinity], even if all risks are infinite. No attainment is claimed and no arbitrary family is selected. No reader/refuter finding or independently identified defect."
+      }
+    },
+    "thm-bayes-rule-minimizes-prior-risk": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Suppose an experiment on $(\\mathcal X,\\mathcal A)$ also has a measurable\nparameter space $(\\Theta,\\mathcal T)$ ([[def-measurable-space]]). A\n**Markov kernel** (or **probability kernel**) representation is a function\n$$\nK:\\Theta\\times\\mathcal A\\to[0,1]\n$$\nsuch that, for every $\\theta\\in\\Theta$, the set function\n$A\\mapsto K(\\theta,A)$ is a probability measure on $(\\mathcal X,\\mathcal A)$,\nand, for every $A\\in\\mathcal A$ and every Borel set $C\\subseteq[0,1]$,\n$$\n\\{\\theta\\in\\Theta:K(\\theta,A)\\in C\\}\\in\\mathcal T.\n$$\nHere the Borel sigma-algebra on $[0,1]$ is generated by its relatively open\nsubsets $U\\cap[0,1]$, where $U$ is open in $\\mathbb R$. Thus the second\ncondition says that each event-probability map $\\theta\\mapsto K(\\theta,A)$ is\nmeasurable. The kernel represents the given experiment exactly when\n$K(\\theta,A)=P_\\theta(A)$ for every $\\theta$ and $A$\n([[def-statistical-experiment]], [[def-probability-measure]]).\n\nThis is an optional parameter-measurable version of a model. An arbitrary\nexperiment does not include a measurable structure on $\\Theta$ or imply this\nkernel condition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-prior-and-model-kernel-define-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-regular-conditional-distribution",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(T,\\Tau)$ be a measurable random element and $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra. A **regular conditional distribution of X given $\\mathcal G$** is a probability kernel $K:(\\Omega,\\mathcal G)\\to(T,\\Tau)$ satisfying\n$$\\int_H K(\\omega,A)\\,P(d\\omega)=P(H\\cap\\{X\\in A\\})\\qquad(H\\in\\mathcal G,\\ A\\in\\Tau).$$\n\n\u201cProbability kernel\u201d has the pointwise meaning of [[def-measure-kernel-and-probability-kernel]]: every $K(\\omega,\\cdot)$ is a probability measure, and every evaluation is $\\mathcal G$-measurable. Its evaluations lie in $[0,1]$ and are integrable. Thus the testing identity says exactly that $K(\\cdot,A)$ is a conditional-expectation version of $1_{\\{X\\in A\\}}$ in [[def-conditional-expectation-given-a-sigma-algebra]]. Conversely, a probability kernel with these version identities satisfies the displayed definition.\n\nThe kernel requirement holds at every sample point. Separate eventwise choices of conditional-expectation versions do not imply it and do not by themselves provide one exceptional set valid for all A. When A is empty the testing identity is zero on both sides, and when A=T it is P(H) on both sides. This defines a property of a supplied kernel and makes no existence or AC assertion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\lambda$ be a probability on $(E\\times T,\\mathcal S\\otimes\\mathcal T)$, where E and T are standard-Borel spaces, and let $\\beta(B)=\\lambda(E\\times B)$ be its second marginal. There is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that\n\n$$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy)\\quad(A\\in\\mathcal S,\\ B\\in\\mathcal T).$$\n\nIt is unique as a kernel outside a single measurable $\\beta$-null set. For every nonnegative product-measurable $f:E\\times T\\to[0,\\infty]$,\n\n$$\\int f(x,y)\\,\\lambda(d(x,y))=\\int_T\\left(\\int_E f(x,y)K(y,dx)\\right)\\beta(dy).$$\n\nIn particular this applies to the joint law of random elements $(X,Y)$, with $\\beta=P_Y$; the direction is the law of X given Y.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-bayes-and-minimax-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable\nparameter and data spaces, with $\\Theta$ nonempty, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel, writing\n$P_\\theta=K(\\theta,\\cdot)$ for the sampling law\n([[def-parameter-measurable-statistical-model-as-markov-kernel]]). Let\n$(\\mathsf D,\\mathcal G)$ be a nonempty measurable action space\n([[def-measurable-space]]). Let $L:\\Theta\\times\\mathsf D\\to\\overline{\\mathbb R}$\nbe measurable from the product measurable space with sigma-algebra\n$\\mathcal T\\otimes\\mathcal G$ to the extended real line with its Borel\nsigma-algebra, and assume $L(\\theta,a)\\geq0$ for all $(\\theta,a)$\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]],\n[[def-measurable-function-between-measurable-spaces]], [[def-extended-reals]],\n[[def-borel-sigma-algebra-on-the-extended-real-line]]). A **prior** $\\pi$ is a\nprobability measure on $\\Theta$. The risk function $\\theta\\mapsto R(\\theta,\\delta)$ is measurable\nunder these hypotheses by kernel integration\n([[def-parameter-measurable-statistical-model-as-markov-kernel]],\n[[thm-measurability-of-integration-against-a-kernel]]). The **Bayes risk** of\n$\\delta$ under $\\pi$ is\n$$r_\\pi(\\delta)=\\int_\\Theta R(\\theta,\\delta)\\,\\pi(d\\theta)\\in[0,+\\infty].$$\nIts **worst-case risk** is\n$$R^*(\\delta)=\\sup_{\\theta\\in\\Theta}R(\\theta,\\delta)\\in[0,+\\infty],$$\nand the **minimax value** is\n$$V_{\\rm mm}=\\inf\\{R^*(\\delta):\\delta\\text{ is a measurable randomized rule from data to actions}\\}\\in[0,+\\infty].$$\nThese suprema and infima are taken in the extended order on $\\overline{\\mathbb R}$\n([[def-extended-reals]]); they exist by\n[[lem-extended-reals-complete]]. The parameter set is nonempty and the rule\nclass is nonempty under the action-space hypothesis, so these are suprema and\ninfima of nonempty sets of nonnegative extended risks.\nA rule is minimax if its worst-case risk equals this infimum. These definitions\nmake no assertion that a minimizer exists. Nonemptiness of $\\mathsf D$ ensures\nthe rule class is nonempty: fixing any $a_0\\in\\mathsf D$ gives the constant\npoint-mass rule $x\\mapsto\\delta_{a_0}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a randomized rule $\\delta$ and put $h_\\delta(\\theta,x)=\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)$. The lifted kernel $((\\theta,x),B)\\mapsto\\delta(x,B)$ is a probability kernel because the coordinate projection $(\\theta,x)\\mapsto x$ is measurable by [F12]. The lifted integrand $(\\theta,x,a)\\mapsto L(\\theta,a)$ is product-measurable because the pairing map $((\\theta,x),a)\\mapsto(\\theta,a)$ is measurable by [F12]. By [F5], $h_\\delta$ is product-measurable. The risk definition [F2], prior-risk definition [F11], and joint-law identity [F3] therefore give $r_\\pi(\\delta)=\\int h_\\delta\\,dJ$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F11",
+            "F12"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the posterior disintegration identity [F4] to $h_\\delta\\geq0$. If $M$ is the second marginal of $J$, then $r_\\pi(\\delta)=\\int_{\\mathcal X}\\left(\\int_\\Theta h_\\delta(\\theta,x)\\,\\Pi_x(d\\theta)\\right)M(dx)$. Every integral is an extended nonnegative integral, so no integrability beyond the stated measurability is needed.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Lift $\\Pi$ to the kernel $((x,a),B)\\mapsto\\Pi_x(B)$ from $\\mathcal X\\times\\mathsf D$ to $\\Theta$. The pairing map $((x,a),\\theta)\\mapsto(\\theta,a)$ is measurable by [F12], so [F5] makes $q(x,a)$ product-measurable. For each fixed $x$, [F6] applied to the product probability $\\Pi_x\\times\\delta(x,\\cdot)$ and $L(\\theta,a)$ gives $\\int_\\Theta h_\\delta(\\theta,x)\\,\\Pi_x(d\\theta)=\\int_{\\mathsf D}q(x,a)\\,\\delta(x,da)$. The right side is measurable in $x$ by [F5]. Thus step 2.1 yields $r_\\pi(\\delta)=\\int_{\\mathcal X}\\int_{\\mathsf D}q(x,a)\\,\\delta(x,da)\\,M(dx)$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F12",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The point-mass kernel $\\delta^*(x,B)=1_B(d^*(x))$ is measurable because $d^*$ is measurable by [F10]; applying step 3.1 gives $r_\\pi(d^*)=\\int g\\,dM$ for $g(x)=q(x,d^*(x))$. The pairing map $x\\mapsto(x,d^*(x))$ is measurable by [F10, F12], so $g$ is measurable. Put $h(x)=\\int q(x,a)\\,\\delta(x,da)$, which is measurable by [F5]. On the measurable full-measure set $E$ from the statement, $g1_E\\leq h1_E$, so [F8] gives $\\int g1_E\\,dM\\leq\\int h1_E\\,dM$. The complementary integrals vanish by [F7]; additivity [F9] gives $\\int g\\,dM\\leq\\int h\\,dM=r_\\pi(\\delta)$ by step 3.1. The rule $\\delta$ was arbitrary.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F12",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A prior probability on Theta is part of the hypotheses, so Theta is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numeric parameter value is distinguished."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numeric parameter value is distinguished."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20134.1 remain valid for a one-point prior; the posterior risk is then the loss at that parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter space need not be an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Assumption A1 is used in step 2.1 for standard-Borel disintegration; the posterior minimizer is supplied as a hypothesis, not selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a sufficient optimality theorem, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a sufficient optimality theorem, not an if-and-only-if result."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed steps 1.1\u20134.1 and all sixteen direct prerequisites, including disintegration and Tonelli proofs. Standard-Borel parameter/data hypotheses and AC satisfy the disintegration interface in the correct direction (parameter given data). Lifted kernels remain probability kernels and coordinate-pairing rectangle preimages give product measurability of h_delta and q. For each fixed x, posterior and action laws are finite probabilities, hence sigma-finite; Tonelli applies to nonnegative jointly measurable L even for arbitrary measurable action spaces and infinite risks. The measurable minimizing d* gives a Dirac kernel and measurable q(x,d*(x)). The hypothesis supplies a single measurable full-measure E valid for all actions, so averaging its inequality against any delta is legitimate. Complementary integrals vanish, yielding the claimed prior-risk inequality without asserting existence of a minimizer. No defect found; reader/refuter findings empty."
+      }
+    },
+    "thm-randomization-does-not-improve-convex-action-loss": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-dimensional-integral-jensen-for-convex-loss",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Let $d\\geq1$ and let $C$ be a\nnonempty closed convex subset of $\\mathbb R^d$, with closedness in the Euclidean\ntopology ([[def-metric-interior-closure-boundary]]) and convexity as in\n[[def-convex-subset-of-euclidean-space]]. Let $\\mu$ be a probability measure on\nits Borel sets, and assume $\\int_C\\|a\\|_2\\,\\mu(da)<\\infty$, where $\\|\\cdot\\|_2$\nis the Euclidean norm from [[def-euclidean-inner-product]]. Define the barycenter\n$b=\\int_Ca\\,\\mu(da)$ coordinatewise and assume $b\\in C$. If\n$f:C\\to[0,+\\infty]$ is Borel measurable and convex, then\n$$f(b)\\leq\\int_C f(a)\\,\\mu(da).$$\nConvexity for this possibly extended-valued $f$ uses the extended-functional\nconvention of\n[[def-convex-and-strictly-convex-functionals-on-a-banach-space]], including its\nendpoint convention for $0\\cdot(+\\infty)$. On a convex restriction where\n$f$ is finite, this inequality reduces to the real-valued Euclidean convention of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]], as used in the\nsubgradient step of the proof. The barycenter is the vector of coordinate\nintegrals.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $m(x)=\\int_\\mathsf D\\|a\\|_2\\,\\delta(x,da)$. By [F2], $m$ is measurable. For each coordinate $j$, $|a_j|\\leq\\|a\\|_2$, so the signed integral $b_j(x)=\\int a_j\\,\\delta(x,da)$ is measurable on $E_0=\\{x:m(x)<\\infty\\}$ by [F2]; hence $b=(b_1,\\ldots,b_d)$ is measurable on $E_0$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The set $E=\\{x\\in E_0:b(x)\\in\\mathsf D\\}$ is measurable because $\\mathsf D$ is closed and therefore Borel. Fix one $a_0\\in\\mathsf D$ and define $d(x)=b(x)$ on $E$ and $d(x)=a_0$ off $E$. This is a measurable map into $\\mathsf D$; the hypotheses give $P_\\theta(E)=1$ for every $\\theta$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $\\theta$ and every $x\\in E$, the section $a\\mapsto L(\\theta,a)$ is nonnegative Borel convex, $\\delta(x,\\cdot)$ is a probability measure with finite first moment, and its barycenter $b(x)$ belongs to $\\mathsf D$. Applying [F3] gives $L(\\theta,d(x))=L(\\theta,b(x))\\leq\\int_\\mathsf D L(\\theta,a)\\,\\delta(x,da)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $g_\\theta(x)=L(\\theta,d(x))$ and $h_\\theta(x)=\\int_\\mathsf D L(\\theta,a)\\,\\delta(x,da)$. Both are nonnegative measurable functions by [F1], [F2], and measurability of $d$. Step 2.1 gives $g_\\theta1_E\\leq h_\\theta1_E$, so monotonicity [F5] gives $\\int g_\\theta1_E\\,dP_\\theta\\leq\\int h_\\theta1_E\\,dP_\\theta$. Since $P_\\theta(E^c)=0$, [F4] gives zero integrals on $E^c$; additivity [F5] then yields $\\int g_\\theta\\,dP_\\theta\\leq\\int h_\\theta\\,dP_\\theta$. This is $R(\\theta,d)\\leq R(\\theta,\\delta)$, and it holds for every $\\theta$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability kernel to the nonempty action space is supplied."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Actions lie in a general finite-dimensional vector space; no scalar zero is distinguished."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Actions lie in a general finite-dimensional vector space; no scalar one is distinguished."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: if the action set is a singleton, every action law is the same point mass and the replacement has equal risk."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The action set is not required to be an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Assumption A1 is inherited from the integral-Jensen supplier and used in step 2.1; the only fallback action is one fixed element of the nonempty action set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way risk comparison, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way risk comparison, not an if-and-only-if result."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed all four steps and sixteen direct prerequisites. Kernel theorem makes norm moment and signed coordinates measurable on E0; finite vector coordinates yield a measurable barycenter. Closed action set makes E measurable, and a single fixed action gives a measurable extension independent of theta. The same E has full P_theta measure separately for each theta, so no uncountable intersection of exceptional sets is taken. Jensen hypotheses, including AC/countable choice, finite norm moment, convex extended loss and membership of barycenter, hold at every x in E. Null-set integration and monotonicity compare risks even when infinite. No defect found; no reader/refuter finding."
+      }
+    },
+    "ex-squared-error-risk-for-bernoulli-observation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and let $X:\\Omega\\to\\mathbb R$.\nAfter identifying $(\\Omega,w)$ with the full-power-set probability space of\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],\nthe expectation defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with\nthe published finite formulas:\n$$\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $\\theta\\in[0,1]$, define $P_\\theta(A)=\\theta 1_{\\{1\\in A\\}}+(1-\\theta)1_{\\{0\\in A\\}}$ for $A\\subseteq\\{0,1\\}$. Its singleton masses are nonnegative and sum to one; any disjoint sequence of subsets has at most two nonempty terms, and their masses add to the union mass. Thus $P_\\theta$ is a probability measure by [F1]. The identity rule $d(x)=x$ is measurable on the finite full-power-set spaces and estimates the target $\\psi(\\theta)=\\theta$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The finite expectation formula [F4] and risk definition [F3] give $R(\\theta,d)=(1-\\theta)(0-\\theta)^2+\\theta(1-\\theta)^2=\\theta(1-\\theta)$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\theta(1-\\theta)=\\frac14-(\\theta-\\frac12)^2$, the risk is at most $1/4$, with equality at $\\theta=1/2$; substitution gives risk zero at $\\theta=0$ and $\\theta=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty parameter set [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 verify theta=0 gives a point-mass law and risk zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 verify theta=1 gives a point-mass law and risk zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1: at either endpoint the law is deterministic and the rule has zero loss."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include both closed-interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the Bernoulli masses and identity estimator are explicit; no selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example computes one risk; it proves no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example computes one risk; it proves no iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "bernoulli-mass-table",
+          "claim": "For every theta in [0,1], the two masses are nonnegative and sum to one.",
+          "result": "At theta=0 the masses are 1 and 0; at theta=1 they are 0 and 1; throughout the interval they sum to 1."
+        },
+        {
+          "id": "risk-maximum",
+          "claim": "R(theta,d)=theta(1-theta) has maximum 1/4.",
+          "result": "The identity theta(1-theta)=1/4-(theta-1/2)^2 gives equality only at theta=1/2 and risk zero at both endpoints."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed three verification steps and all four direct suppliers. Full-power-set Bernoulli masses theta and 1-theta are nonnegative and sum to one even at endpoints; identity estimator is measurable. Finite weighted-sum risk simplifies to (1-theta)theta^2+theta(1-theta)^2=theta(1-theta). Completing the square gives maximum 1/4 uniquely at 1/2 and zero at both endpoints. No integrability, choice or zero-times-infinity issue occurs. No defect found; reader/refuter findings empty."
+      }
+    },
+    "ex-zero-one-loss-randomization-minimax": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bayes-and-minimax-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable\nparameter and data spaces, with $\\Theta$ nonempty, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel, writing\n$P_\\theta=K(\\theta,\\cdot)$ for the sampling law\n([[def-parameter-measurable-statistical-model-as-markov-kernel]]). Let\n$(\\mathsf D,\\mathcal G)$ be a nonempty measurable action space\n([[def-measurable-space]]). Let $L:\\Theta\\times\\mathsf D\\to\\overline{\\mathbb R}$\nbe measurable from the product measurable space with sigma-algebra\n$\\mathcal T\\otimes\\mathcal G$ to the extended real line with its Borel\nsigma-algebra, and assume $L(\\theta,a)\\geq0$ for all $(\\theta,a)$\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]],\n[[def-measurable-function-between-measurable-spaces]], [[def-extended-reals]],\n[[def-borel-sigma-algebra-on-the-extended-real-line]]). A **prior** $\\pi$ is a\nprobability measure on $\\Theta$. The risk function $\\theta\\mapsto R(\\theta,\\delta)$ is measurable\nunder these hypotheses by kernel integration\n([[def-parameter-measurable-statistical-model-as-markov-kernel]],\n[[thm-measurability-of-integration-against-a-kernel]]). The **Bayes risk** of\n$\\delta$ under $\\pi$ is\n$$r_\\pi(\\delta)=\\int_\\Theta R(\\theta,\\delta)\\,\\pi(d\\theta)\\in[0,+\\infty].$$\nIts **worst-case risk** is\n$$R^*(\\delta)=\\sup_{\\theta\\in\\Theta}R(\\theta,\\delta)\\in[0,+\\infty],$$\nand the **minimax value** is\n$$V_{\\rm mm}=\\inf\\{R^*(\\delta):\\delta\\text{ is a measurable randomized rule from data to actions}\\}\\in[0,+\\infty].$$\nThese suprema and infima are taken in the extended order on $\\overline{\\mathbb R}$\n([[def-extended-reals]]); they exist by\n[[lem-extended-reals-complete]]. The parameter set is nonempty and the rule\nclass is nonempty under the action-space hypothesis, so these are suprema and\ninfima of nonempty sets of nonnegative extended risks.\nA rule is minimax if its worst-case risk equals this infimum. These definitions\nmake no assertion that a minimizer exists. Nonemptiness of $\\mathsf D$ ensures\nthe rule class is nonempty: fixing any $a_0\\in\\mathsf D$ gives the constant\npoint-mass rule $x\\mapsto\\delta_{a_0}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and let $X:\\Omega\\to\\mathbb R$.\nAfter identifying $(\\Omega,w)$ with the full-power-set probability space of\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],\nthe expectation defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with\nthe published finite formulas:\n$$\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The one-point data law assigns mass one to its only point under either parameter, so it is a probability measure by [F1]. For each $q\\in[0,1]$, define $\\delta_q(*,B)=q1_{\\{1\\in B\\}}+(1-q)1_{\\{0\\in B\\}}$ for $B\\subseteq\\{0,1\\}$; its two singleton masses are nonnegative and sum to one, hence it is a probability measure. Evaluations are measurable on the one-point data space, so $\\delta_q$ is a probability kernel by [F2]. Deterministic rules are the cases $q=0$ and $q=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By the finite expectation formula [F4] and the loss-risk definition [F3], the rule with probability $q$ of action $1$ has risks $R(0)=q$ and $R(1)=1-q$. Its worst-case risk is therefore $\\max(q,1-q)\\geq(q+1-q)/2=1/2$, with equality at $q=1/2$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two deterministic rules have $q=0$ or $q=1$, so each has worst-case risk $1$. The fair randomized rule has worst-case risk $1/2$, and step 1.2 shows no rule can do better. Thus the minimax value is $1/2$ and randomization strictly improves worst-case risk over every deterministic rule.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the two-point parameter set {0,1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: at q=0 the risks are 0 and 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2: at q=1 the risks are 1 and 0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two parameters have the same data law; step 1.2 shows the worst-case risk still distinguishes their losses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite parameter set is not an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the rule probabilities and finite action laws are explicit; no selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a finite minimax calculation, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a finite minimax calculation, not an iff theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "risk-curve",
+          "claim": "A rule choosing action 1 with probability q has risk vector (q,1-q).",
+          "result": "The risks are q at parameter 0 and 1-q at parameter 1 by the zero-one loss table."
+        },
+        {
+          "id": "minimax-bound",
+          "claim": "The minimum worst-case risk over q in [0,1] is one half.",
+          "result": "max(q,1-q) is at least their average 1/2, with equality at q=1/2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed all three steps and five direct suppliers. Every probability on the two-point full-power-set action space is uniquely determined by q=delta(*,{1}) in [0,1], so the calculation covers every randomized rule. Finite risk sums give q and 1-q, whose maximum is at least 1/2 with equality exactly at q=1/2. Both deterministic endpoints have worst-case risk one. Thus minimax value and strict benefit of randomization are correct; this nonconvex action set does not satisfy the convex-action theorem. No defect found."
+      }
+    },
+    "ex-data-rule-dominates-constant-rule": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-risk-domination-and-admissibility",
+          "source_section": "Definition",
+          "quote": "For two decision rules $\\delta_0,\\delta_1$ in one decision problem,\n$\\delta_1$ **dominates** $\\delta_0$ if\n$R(\\theta,\\delta_1)\\leq R(\\theta,\\delta_0)$ for every parameter $\\theta$,\nwith strict inequality for at least one $\\theta$. A rule is **admissible** if\nno decision rule dominates it; otherwise it is inadmissible. Risk is the\nextended-valued function of [[def-loss-function-and-risk]]. Admissibility is\na pointwise comparison across the whole parameter set; it does not assert that\nthe rule minimizes risk at any particular parameter or under a global\ncriterion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and let $X:\\Omega\\to\\mathbb R$.\nAfter identifying $(\\Omega,w)$ with the full-power-set probability space of\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],\nthe expectation defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with\nthe published finite formulas:\n$$\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $\\theta\\in\\{0,1\\}$, let $P_\\theta$ be the point mass at $\\theta$. In any disjoint sequence of events at most one event contains $\\theta$, so this law is countably additive and has total mass one; it is a probability measure by [F1]. Both maps $d_0(x)=0$ and $d_1(x)=x$ are measurable on the finite full-power-set spaces by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Under squared-error loss, the only data value with positive $P_\\theta$-mass is $x=\\theta$. The finite-sum formula [F5] and risk definition [F3] therefore give $R(\\theta,d_0)=\\theta^2=\\theta$ and $R(\\theta,d_1)=(\\theta-\\theta)^2=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The risks satisfy $R(\\theta,d_1)\\leq R(\\theta,d_0)$ at both parameters, and the inequality is strict at $\\theta=1$. Thus $d_1$ dominates the constant rule $d_0$ by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the parameter set {0,1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20132.1 give equal zero risks at theta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20132.1 give data-rule risk zero and constant-rule risk one at theta=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1\u20132.1: the two point-mass laws are distinct and the risk comparison is checked at both parameters."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter set is finite and has no interval endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both rules and point-mass laws are explicitly defined on finite sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example verifies a domination relation, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example verifies a domination relation, not an iff theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "risk-vectors",
+          "claim": "The constant rule has risk vector (0,1), and the data rule has risk vector (0,0).",
+          "result": "The risk formulas in step 1.2 give these values at theta=0 and theta=1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed all three verification steps and five direct suppliers. Dirac sampling laws are normalized/countably additive; both finite maps are measurable. Loss at the only sampled value gives R(theta,d0)=theta^2=theta on {0,1}, R(theta,d1)=0. Weak comparison holds at both points and strict comparison at theta=1, exactly as domination requires. No choice or infinite-risk issue; no defect found."
+      }
+    },
+    "cex-open-action-set-no-minimizer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-regular-conditional-distribution",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(T,\\Tau)$ be a measurable random element and $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra. A **regular conditional distribution of X given $\\mathcal G$** is a probability kernel $K:(\\Omega,\\mathcal G)\\to(T,\\Tau)$ satisfying\n$$\\int_H K(\\omega,A)\\,P(d\\omega)=P(H\\cap\\{X\\in A\\})\\qquad(H\\in\\mathcal G,\\ A\\in\\Tau).$$\n\n\u201cProbability kernel\u201d has the pointwise meaning of [[def-measure-kernel-and-probability-kernel]]: every $K(\\omega,\\cdot)$ is a probability measure, and every evaluation is $\\mathcal G$-measurable. Its evaluations lie in $[0,1]$ and are integrable. Thus the testing identity says exactly that $K(\\cdot,A)$ is a conditional-expectation version of $1_{\\{X\\in A\\}}$ in [[def-conditional-expectation-given-a-sigma-algebra]]. Conversely, a probability kernel with these version identities satisfies the displayed definition.\n\nThe kernel requirement holds at every sample point. Separate eventwise choices of conditional-expectation versions do not imply it and do not by themselves provide one exceptional set valid for all A. When A is empty the testing identity is zero on both sides, and when A=T it is P(H) on both sides. This defines a property of a supplied kernel and makes no existence or AC assertion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bayes-rule-minimizes-prior-risk",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a probability\nkernel from a standard-Borel parameter space $(\\Theta,\\mathcal T)$ to a\nstandard-Borel data space $(\\mathcal X,\\mathcal A)$, where standard Borel means\nmeasurably isomorphic to a Polish space\n([[def-standard-borel-space]]). Let $\\pi$ be a prior,\nand let $L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be jointly measurable for a\nmeasurable action space $(\\mathsf D,\\mathcal G)$. Let $J$ be the joint prior-data\nlaw of [[lem-prior-and-model-kernel-define-joint-law]], let $M$ be its data\nmarginal, and let $\\Pi_x(d\\theta)$ be a regular posterior distribution of\n$\\theta$ given $x$ (the disintegration is supplied by\n[[thm-disintegration-of-a-joint-law-on-standard-borel-spaces]]).\nDefine posterior risk\n$$q(x,a)=\\int_\\Theta L(\\theta,a)\\,\\Pi_x(d\\theta).$$\nSuppose a measurable deterministic rule $d^*:\\mathcal X\\to\\mathsf D$\nattains the posterior minimum for $M$-almost every $x$; that is,\n$q(x,d^*(x))\\leq q(x,a)$ for every $a\\in\\mathsf D$ on one measurable\n$M$-full-measure set. Then $d^*$ minimizes prior-integrated risk among all randomized decision\nrules $\\delta$:\n$$r_\\pi(d^*)\\leq r_\\pi(\\delta).$$\nNo conclusion is asserted when a measurable posterior minimizer does not\nexist. All risks may be $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The prior and data law are point masses on singleton standard-Borel spaces by [F1]; their joint law is the point mass on the singleton pair. Define the posterior to be the point mass at $0$. The only conditioning events are empty or the whole singleton, and the conditional-law identity holds for both, so this is a regular conditional law by [F3]. Integrating $L(0,a)=a$ against it gives posterior risk $q(a)=a$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $a\\in(0,1)$, $q(a)=a>0$, while the sequence $a_n=1/(n+1)$ lies in $(0,1)$ and has $q(a_n)\\to0$. Thus $\\inf_{a\\in(0,1)}q(a)=0$ and the infimum is not attained. The claimed universal minimizer does not exist, which refutes the statement and illustrates the explicit existence premise in [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes singleton parameter and observation spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use parameter zero and show the loss infimum is zero but unattained."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The parameter set contains no parameter one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the posterior is a point mass at the single parameter and still has no minimizing action."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the action set is the open interval (0,1), so neither endpoint is allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the posterior, loss, and sequence are explicit; no selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This counterexample refutes unconditional attainment, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This counterexample refutes unconditional attainment, not an iff theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "unattained-infimum",
+          "claim": "The posterior risk on (0,1) has infimum zero and no minimizer.",
+          "result": "q(a)=a is positive for every allowed a, while q(1/(n+1)) tends to zero."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed both counterexample steps and six direct prerequisites. Singleton parameter/data spaces with full sigma-algebras are standard Borel; the joint law and posterior are Dirac probabilities and satisfy both possible conditioning-event identities. On the nonempty Borel open action interval (0,1), measurable nonnegative loss L(0,a)=a has posterior risk a>0. Taking n>=1 in a_n=1/(n+1) gives admissible actions tending to zero; hence infimum zero is unattained. This refutes universal attainment and does not contradict the Bayes theorem, whose measurable-attainment premise fails. No defect found."
+      }
+    }
+  }
+}

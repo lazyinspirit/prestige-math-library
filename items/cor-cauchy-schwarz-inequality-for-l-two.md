@@ -10,12 +10,8 @@ provenance:
 deps: [thm-holder-inequality-for-integrals, thm-equality-case-in-holder-inequality]
 proof_strategy: "Specialize Holder to p = q = 2, and inherit the equality clause from the strict-exponent equality theorem."
 verification:
-  audited: 2026-08-31
+  repair: research/mathematical-statistics-foundations-37-owner-s3-polish-cor-cauchy-schwarz-inequality-for-l-two-repair.json
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -48,7 +44,7 @@ $$|f|^2=c\,|g|^2\qquad\mu\text{-almost everywhere}.$$
 
 **Proof technique:** Specialize Holder to $p=q=2$, and inherit the equality clause from the strict-exponent equality theorem.
 
-1.1 The exponent $2$ is conjugate to itself, so [L1] with $p=q=2$ gives [L1] $$\int |fg|\,d\mu\le\|f\|_2\|g\|_2.$$ [L1]
+1.1 The exponent $2$ is conjugate to itself, so Holder’s inequality with $p=q=2$ gives $$\int |fg|\,d\mu\le\|f\|_2\|g\|_2.$$ [L1]
 
-2.1 Because $2>1$, the equality clause is exactly the specialization of [L2] to [L2, step 1.1] $p=q=2$. [L2, step 1.1] ∎
+2.1 Because $2>1$, the strict-exponent equality criterion at $p=q=2$ says that equality in step 1.1 holds exactly when at least one of $f,g$ is zero almost everywhere, or $|f|^2=c|g|^2$ almost everywhere for some constant $c>0$. These are precisely the alternatives in the Statement. [L2, step 1.1] ∎
 

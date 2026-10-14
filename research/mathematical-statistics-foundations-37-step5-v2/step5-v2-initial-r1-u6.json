@@ -1,0 +1,112 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "6",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "lem-dirac-integral-evaluation",
+      "model": "gpt-6-luna",
+      "context_sha256": "b68d866948690290fa782fdf7539a0ce204891217d8a1d3ab3817f783dda39ec",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The definition supplies a set function and points to its separate probability-measure justification; this supplier was omitted from deps and F1. The proof is sound under the Statement's explicit given probability-measure premise, so this is a nonfatal dependency omission. Added prop-dirac-measure-is-a-probability-measure to deps and F1. Its disjoint-union proof establishes precisely the measure hypothesis required for simple integration and monotone convergence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-lehmann-scheffe",
+      "model": "gpt-6-luna",
+      "context_sha256": "95227c4d5869a1baa69f052ecd0f599e20adcaf4bc0030d10db634c6cd3828dc",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 as written is false for ambient-measurable integrable functions: on a fair two-point space, the nonconstant indicator X has conditional expectation 1/2 given the trivial sigma-algebra. Step 3.1 already obtains a sigma(S)-measurable representative, so the actual inference and theorem remain valid; the defect is a nonfatal overstatement of the auxiliary fact. Restricted F4 to conditioning-measurable functions and explicitly covered almost-sure replacement of the input.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-dirac-integral-evaluation",
+      "disposition": "repaired",
+      "post_sha256": "d059662def4e45f435d1a2b0d28afa9cc893c2dc580a12c95052139fce610ee4",
+      "review_context_sha256": "06acf507a0325368fdade83e35cae476fa76ec19dbcac6c5fffe1800bea9c18f",
+      "reason": "Checked the complete Dirac probability supplier and the six original supplier interfaces and arguments: disjoint simple evaluation is exact, then the increasing approximation and monotone convergence retain infinite point values. Added only the missing measure supplier to deps and F1; no Statement change, choice assumption, or new item. Precheck and rendercheck each passed on this item.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-lehmann-scheffe",
+      "disposition": "repaired",
+      "post_sha256": "b944114f8f6c71bc1647b9d8bce461cf4e13746096e92ba01147419ac5261a88",
+      "review_context_sha256": "60a6331d041a0123f5b491f31fdcf0380fe3a9a0a222036c65fa3bbd2f74a68a",
+      "reason": "Checked the common-kernel, standard-Borel and inherited AC hypotheses against Rao–Blackwell, and applied completeness only to the Borel integrable difference u_S-g with zero expectation under every parameter. Two UMVU estimators have equal variances parameterwise; Rao–Blackwell equality yields a sigma(S)-measurable representative of V. Corrected F4 then identifies its conditional class with V and v_S(S), proving parameterwise almost-sure uniqueness without a common null set. Only F4 changed; the original Statement and all numbered proof steps are intact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "msf37-step5-initial-r1-u6-lem-dirac-integral-evaluation",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T12:29:52.557202+00:00",
+        "class": "accuracy",
+        "subclass": "citation-missing",
+        "severity": "nonfatal",
+        "location": "frontmatter",
+        "subject": "lem-dirac-integral-evaluation",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "6",
+        "source": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u6.json",
+        "evidence": "The Statement explicitly assumes a Dirac probability measure, but deps and F1 did not cite the separate proved supplier that establishes this set function is a probability measure. Added that existing supplier; the simple-function calculation and monotone limit remain unchanged.",
+        "item_sha256": "d059662def4e45f435d1a2b0d28afa9cc893c2dc580a12c95052139fce610ee4"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "msf37-step5-initial-r1-u6-thm-lehmann-scheffe",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T12:29:52.557202+00:00",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "thm-lehmann-scheffe",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "6",
+        "source": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u6.json",
+        "evidence": "F4 lacked conditioning-sigma-algebra measurability. A fair-coin indicator and trivial conditioning algebra refute its ambient-measurable formulation. Step 3.1 already supplies a sigma(S)-measurable representative; correcting F4 and stating invariance under almost-sure replacement completes the cited interface without changing the proof or theorem.",
+        "item_sha256": "b944114f8f6c71bc1647b9d8bce461cf4e13746096e92ba01147419ac5261a88"
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "none",
+      "reason": "No published carrier was changed or found defective. The published Dirac probability proposition has the required disjoint-countable-additivity argument, and the conditional-expectation definitions explicitly require conditioning measurability. These supplier checks support the assigned draft repairs; they are not new published audits."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Both assigned items were reviewed in the task order. The rejection-blind batch-6 digest had no concerns or alerts. Both decisions are nonfatal for the concrete reasons in decisions, and both defects were repaired. Familiar mathematics was checked directly against current local suppliers; no external reading or independent review of these repairs is claimed.",
+    "Dirac: only deps and F1 changed. Under step5-shared-write-lock, reread and synchronized its owning dependency mirror in research/mathematical-statistics-foundations-37-batch-6.pages.json and regenerated only its citation/derivation entry in research/mathematical-statistics-foundations-37-batch-6.proof-contracts.json. Historical risk-review evidence was preserved. Lehmann–Scheffe: only F4 changed; numbered steps and contract source quotes are unchanged, so no contract rewrite was needed.",
+    "Immediately after each mathematical review, ran node tools/step5-workflow.mjs review-contexts --run mathematical-statistics-foundations-37 --items ID before editing the next item and copied the two hashes into reviews. Final itemHashGuard comparisons confirm both recorded post hashes still match.",
+    "Direct comparison to the unchanged owning manifest Statement text and the frozen original Statement hashes confirms both Statement sections are identical. No new prerequisite interface or item was created; downstream is empty and no maintenance route is required. Foundations and choice conventions are unchanged; no unresolved mathematics remains in this assignment.",
+    "Focused checks: node tools/tsx-run.mjs tools/precheck.mts items/lem-dirac-integral-evaluation.md --json and the separate thm-lehmann-scheffe command each exited 0 with one checked proof and zero failures. node tools/rendercheck.mjs ITEM --json for each item exited 0 with one file checked and no errors or warnings.",
+    "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-6.proof-contracts.json --strict --items lem-dirac-integral-evaluation,thm-lehmann-scheffe --json exited 0: both items checked, ok:true, zero errors/warnings. node tools/manifest-deps.mjs research/mathematical-statistics-foundations-37-batch-6.pages.json exited 0: 10 items, zero normalized, zero errors. Explicit item/manifest comparisons confirmed matching statements and dependency arrays.",
+    "After final item edits and contract regeneration, ran the required single batched command node tools/proof-layout.mjs items/lem-dirac-integral-evaluation.md items/thm-lehmann-scheffe.md; exit 0, 2 items, 5 steps, 0 defects. No judge, gate cycle, stamp, certificate, central ledger, or round-state write was performed; engine closure remains separate."
+  ]
+}

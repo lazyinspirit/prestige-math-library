@@ -1,0 +1,96 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "19",
+  "input_sha256": "e1bc7bf50568b2cd1a1248d66ba06d7d99e221f8ff4c41515c5feff1d8a3175c",
+  "decisions": [
+    {
+      "id": "thm-lasso-prediction-and-l1-error-under-incoherence",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "41a6ac4f7b78ded4160b030430032c0b3be5b7a91def84ec96edd45cce5110ee",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 omitted the cone hypothesis required by lem-incoherence-implies-restricted-eigenvalue. This is nonfatal because step 1.1 already works on the score event, where F2 and a^2>=0, tau>0 imply ||Delta outside S||_1<=3||Delta on S||_1 for every minimizer. F3 now includes that hypothesis, and step 1.1 establishes it before invoking F3; the original theorem and constants remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-lasso-prediction-and-l1-error-under-incoherence",
+      "disposition": "repaired",
+      "post_sha256": "7c8cc0e1f79f0091ea6200386211f7b6bae1d8f5b8dbe795ad23d8eb72afb98f",
+      "review_context_sha256": "4e66f1a2df2a162f8a4b43724a96e72c23e80a97abb3174b25e90da2cb3ef6c5",
+      "reason": "Checked the score lemma, basic inequality, incoherence-to-RE proof, model, objective, attainment proof and owning page/contract. On the common measurable score event, F2 establishes the cone and F3 bounds the supported norm, including empty S and a=0. Cauchy-Schwarz gives a^2<=18s tau^2 and ||Delta||_1<=24s tau; tau^2<=32 sigma^2 log(2d/delta)/n yields constants 576 and 96sqrt(2). The Gram 4/5 and zero-design caveats remain sound. Only F3 and step 1.1 changed, with the corresponding contract derivation synchronized; no Statement/Definition change, new dependency, measurable selection or AC is required. This is a repair review, not independent acceptance of my own repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "mathematical-statistics-foundations-37-step5-repeat-r1-u19-lasso-cone-hypothesis",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T13:17:44.333194+00:00",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "thm-lasso-prediction-and-l1-error-under-incoherence",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "19",
+        "item_sha256": "7c8cc0e1f79f0091ea6200386211f7b6bae1d8f5b8dbe795ad23d8eb72afb98f",
+        "evidence": "F3 omitted the cone restriction in the supplier lemma. On the score event already used in step 1.1, F2 with a^2>=0 and tau>0 establishes that restriction. F3 now states it and step 1.1 verifies it before applying RE; the original Statement and constants are unchanged.",
+        "source": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-repeat-r1-u19.json"
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "item": "thm-lasso-prediction-and-l1-error-under-incoherence",
+    "conventions": "Objective ||Y-X theta||_2^2/n+2 tau||theta||_1; tau>0; cone ||Delta outside S||_1<=3||Delta on S||_1; RE constant squared 1/2.",
+    "source_evidence": [
+      "items/thm-lasso-basic-inequality.md: Statement and Proof 2.1",
+      "items/lem-incoherence-implies-restricted-eigenvalue.md: Statement and complete Proof",
+      "items/lem-fixed-design-subgaussian-score-concentration.md: Statement and complete Proof",
+      "items/lem-lasso-objective-has-minimizer.md: Statement and complete Proof",
+      "research/mathematical-statistics-foundations-37-batch-19.proof-contracts.json: assigned contract",
+      "library/mathematical-statistics/sparse-high-dimensional-estimation-and-covariance.md: Lasso page interface"
+    ],
+    "sources_consulted_online": false,
+    "statement_comparison": "The original Statement is byte-for-byte unchanged; no consumer propagation is triggered.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-19.proof-contracts.json --strict --items thm-lasso-prediction-and-l1-error-under-incoherence --json",
+        "exit_code": 0,
+        "result": "One scoped contract checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-lasso-prediction-and-l1-error-under-incoherence.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures; direct strategy passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-lasso-prediction-and-l1-error-under-incoherence.md --json",
+        "exit_code": 0,
+        "result": "1 item checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-lasso-prediction-and-l1-error-under-incoherence.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "next_action": "Handoff to the controller for evidence collection and independent rejudgment; no worker, stamp, certification or round transition launched.",
+    "published_ledger_updates": "None: this assigned draft repair changes no Statement/Definition and reveals no new potentially defective published consumer."
+  }
+}

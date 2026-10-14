@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "run": "mathematical-statistics-foundations-37",
+  "batch": "14",
+  "round": 0,
+  "reviewed_items": [
+    "def-subgaussian-variable-and-vector",
+    "thm-hoeffding-independent-bounded-sums",
+    "thm-bernstein-independent-sums",
+    "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+    "lem-doob-martingale-differences-inherit-coordinate-oscillations",
+    "thm-subexponential-independent-sums",
+    "thm-finite-subgaussian-maximum-and-epsilon-net",
+    "thm-mcdiarmid-bounded-differences",
+    "ex-rademacher-sum-concentration",
+    "ex-gaussian-maximum-concentration",
+    "ex-subgaussian-vector-norm-via-net",
+    "cex-finite-variance-does-not-imply-subgaussian-tail"
+  ],
+  "reviewed_pages": [
+    "concentration-inequalities-and-tail-bounds",
+    "concentration-inequalities-and-tail-bounds-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete assigned batch and its actual suppliers were reviewed against the approved MSF-18 scope. Six locally resolvable prerequisite or proof-clarity issues remain; no Statement or Definition changes are requested.",
+  "findings": [
+    {
+      "id": "def-subgaussian-variable-and-vector",
+      "type": "prerequisite",
+      "reason": "The Definition uses e^x in its proxy bounds, but its deps omit the library definition of the real exponential. Add def-real-exponential-function-and-e as the source for this notation."
+    },
+    {
+      "id": "thm-hoeffding-independent-bounded-sums",
+      "type": "local",
+      "reason": "Proof step 1.1 applies the conditional-independence result to D_i after establishing independence only for X_i; step 5.1 also uses independence of -X_i without stating why it is preserved. Justify the measurable transforms locally or cite lem-measurable-functions-preserve-independence."
+    },
+    {
+      "id": "thm-bernstein-independent-sums",
+      "type": "local",
+      "reason": "Proof step 3.1 applies the upper-tail argument to -X_i and asserts they remain independent without justification. Establish preservation under measurable transforms, or use the existing factorization supplier directly on the negative exponential of each X_i."
+    },
+    {
+      "id": "thm-subexponential-independent-sums",
+      "type": "local",
+      "reason": "Proof step 3.1 attributes independence of -X_i to F1, which supplies only the sub-exponential MGF condition. Justify independence under measurable transforms or use the existing factorization supplier with negative MGF parameters."
+    },
+    {
+      "id": "thm-mcdiarmid-bounded-differences",
+      "type": "prerequisite",
+      "reason": "The Statement and proof step 1.1/F9 infer integrability and E f(Z)=∫f dμ from product-law equality alone, which identifies the law but does not establish the expectation identity. Add and cite thm-change-of-variables-for-expectation, or derive the identity by telescoping the event-integral conclusions of lem-doob-martingale-differences-inherit-coordinate-oscillations."
+    },
+    {
+      "id": "ex-rademacher-sum-concentration",
+      "type": "local",
+      "reason": "The Example leaves n's lower bound implicit, while proof step 2.1 invokes Hoeffding, whose supplier requires n≥1. State that convention explicitly or handle n=0 separately using the empty sum."
+    }
+  ],
+  "consumer_checks": []
+}

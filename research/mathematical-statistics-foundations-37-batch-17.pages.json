@@ -1,0 +1,309 @@
+[
+  {
+    "order": 1876,
+    "id": "minimax-lower-bounds-and-information-theoretic-methods",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Minimax Lower Bounds",
+    "companion": "minimax-lower-bounds-and-information-theoretic-methods-examples",
+    "requires": [
+      "losses-risk-and-decision-rules",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "concentration-inequalities-and-tail-bounds",
+      "stationary-markov-chains-and-ergodic-limits"
+    ],
+    "items": [
+      {
+        "id": "lem-sparse-hamming-packing",
+        "kind": "lemma",
+        "title": "A sparse Hamming packing for every $1\\le k\\le d/2$",
+        "deps": [
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "cor-integral-logarithm-is-strictly-increasing",
+          "cor-integral-logarithm-reciprocals-and-integer-powers",
+          "def-binomial-coefficient",
+          "def-finite-cardinality",
+          "def-integral-logarithm",
+          "def-natural-logarithm",
+          "def-natural-numbers",
+          "def-nat-order",
+          "def-nat-power",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "lem-nat-embeds-int",
+          "lem-nat-discrete",
+          "def-real-exponential-function-and-e",
+          "def-higher-derivatives-and-smoothness",
+          "thm-binomial-theorem",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-cardinality-of-a-set-of-functions",
+          "cor-mean-value-theorem",
+          "thm-division-algorithm-in-z",
+          "thm-int-ordered-ring",
+          "thm-exponential-is-strictly-increasing",
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "thm-integral-logarithm-product-law",
+          "thm-natural-logarithm-laws",
+          "thm-product-rule",
+          "thm-sum-rule"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $d,k$ be natural numbers with $1\\le k\\le d/2$. Let $m$ and $r$ be the\nnatural quotients determined by\n$$mk\\le d<(m+1)k,\\qquad 4r\\le k<4(r+1).$$\nThus $m\\ge2$. Write $[m]=\\{0,1,\\ldots,m-1\\}$ and give $[m]^k$ the Hamming\ndistance $d_H(\\omega,\\omega')=\\#\\{j<k:\\omega_j\\ne\\omega'_j\\}$. There is a\nset $\\mathcal C\\subseteq[m]^k$ such that distinct $\\omega,\\omega'\\in\\mathcal C$\nsatisfy $d_H(\\omega,\\omega')>r$ and\n$$\\log|\\mathcal C|\\ge \\frac{k}{1024}\\log\\!\\left(\\frac{ed}{k}\\right).$$\nFor each $\\omega\\in\\mathcal C$, place one $1$ in each of the first $k$ disjoint\ncoordinate blocks of size $m$, at position $\\omega_j$ in block $j$, and put\n$0$ in all remaining coordinates of $\\mathbb R^d$. The resulting vectors\n$u^\\omega\\in\\{0,1\\}^d$ have exactly $k$ nonzero coordinates and satisfy\n$$\\|u^\\omega-u^{\\omega'}\\|_2^2>k/2\\qquad(\\omega\\ne\\omega').$$"
+      },
+      {
+        "id": "def-kullback-leibler-divergence",
+        "kind": "definition",
+        "title": "Kullback–Leibler divergence",
+        "deps": [
+          "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "def-axiom-of-choice",
+          "def-likelihood-ratio-as-rn-derivative",
+          "def-natural-logarithm",
+          "def-nonnegative-lebesgue-integral",
+          "def-positive-and-negative-parts-of-a-function",
+          "def-probability-measure",
+          "def-real-exponential-function-and-e",
+          "def-extended-real-valued-measurable-function",
+          "def-integral-logarithm",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-mean-value-theorem",
+          "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "thm-algebra-of-continuous-functions",
+          "thm-algebra-of-derivatives",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "thm-likelihood-ratio-change-of-measure"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply."
+      },
+      {
+        "id": "def-mutual-information-for-finite-hypothesis-testing",
+        "kind": "definition",
+        "title": "Mutual information for a finite uniform hypothesis experiment",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-finite-cardinality",
+          "def-kullback-leibler-divergence",
+          "def-natural-logarithm",
+          "def-probability-measure",
+          "def-measure",
+          "def-radon-nikodym-derivative",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-likelihood-ratio-change-of-measure",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $M\\ge2$ be an integer, let $P_1,\\ldots,P_M$ be probability measures on\none measurable sample space, and let $J$ be uniform on $[M]=\\{1,\\ldots,M\\}$.\nConditional on $J=j$, let the observation $X$ have law $P_j$. Define the\nmixture law\n$$\\bar P:=\\frac1M\\sum_{j=1}^M P_j$$\nand the **mutual information** of this finite experiment by\n$$I(J;X):=\\frac1M\\sum_{j=1}^M D(P_j\\|\\bar P).$$\nThe set function $\\bar P$ is a probability measure: for disjoint measurable\nsets $(A_m)$, countable additivity of the $P_j$ gives\n$$\\bar P\\!\\left(\\bigcup_m A_m\\right)=\\frac1M\\sum_{j=1}^M\\sum_mP_j(A_m).$$\nThe finite sum commutes with the increasing partial-sum limits of these\nnonnegative series, so\n$$\\frac1M\\sum_{j=1}^M\\sum_mP_j(A_m)=\\sum_m\\frac1M\\sum_{j=1}^MP_j(A_m)=\\sum_m\\bar P(A_m),$$\nso $\\bar P$ is countably additive; also $\\bar P(\\varnothing)=0$ and\n$\\bar P(X)=1$. Here $D$ is the directional KL\ndivergence of [[def-kullback-leibler-divergence]], and logarithms are natural.\nFor every measurable $A$, $P_j(A)\\le M\\bar P(A)$, so $P_j\\ll\\bar P$. Let\n$r_j=dP_j/d\\bar P$ be a finite-valued nonnegative density representative\nprovided by [[def-kullback-leibler-divergence]]. If\n$\\bar P(\\{r_j>M\\})>0$, then for some integer $q\\ge1$ the set\n$E_q:=\\{r_j\\ge M+1/q\\}$ has positive $\\bar P$-measure. The change-of-measure\nidentity [[thm-likelihood-ratio-change-of-measure]] would give\n$$P_j(E_q)=\\int_{E_q}r_j\\,d\\bar P\\ge(M+1/q)\\bar P(E_q)>M\\bar P(E_q),$$\ncontradicting $P_j(E_q)\\le M\\bar P(E_q)$. Hence $r_j\\le M$ almost everywhere.\nThe densities also satisfy $M^{-1}\\sum_{j=1}^M r_j=1$ $\\bar P$-almost\neverywhere: for each measurable $A$,\n$$\\bar P(A)=\\frac1M\\sum_{j=1}^MP_j(A)=\\int_A\\frac1M\\sum_{j=1}^Mr_j\\,d\\bar P,$$\nso $M^{-1}\\sum_jr_j$ and the constant function $1$ are both densities of\n$\\bar P$ with respect to itself. They agree almost everywhere by\n[[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]].\nFor $0\\le t\\le M$, the positive part of $t\\log t$ is at most $M\\log M$,\nwhile its negative part is bounded by $1/e$ in\n[[def-kullback-leibler-divergence]]. Thus every term in the finite sum is\nwell-defined and finite.\n\nThe uniform prior is part of this definition. A nonuniform prior requires its\nown weights in the mixture and in the KL average."
+      },
+      {
+        "id": "thm-pinsker",
+        "kind": "theorem",
+        "title": "Pinsker’s inequality with event-supremum total variation",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-higher-derivatives-and-smoothness",
+          "def-kullback-leibler-divergence",
+          "def-natural-logarithm",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "cor-mean-value-theorem",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "def-integral-logarithm",
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "thm-natural-logarithm-laws",
+          "thm-likelihood-ratio-change-of-measure",
+          "thm-jensens-integral-inequality"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume AC. For probability measures $P,Q$ on one measurable space, with\n$$\\|P-Q\\|_{\\rm TV}:=\\sup_{A}|P(A)-Q(A)|,$$\nthe event-supremum convention without a factor $1/2$,\n$$\\|P-Q\\|_{\\rm TV}\\le\\sqrt{\\frac12D(P\\|Q)}.$$\nIf $P\\not\\ll Q$, the right side is $+\\infty$ by the definition of KL\ndivergence."
+      },
+      {
+        "id": "thm-product-kl-additivity",
+        "kind": "theorem",
+        "title": "Additivity of KL divergence for finite product laws",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-kullback-leibler-divergence",
+          "def-measure-with-density",
+          "def-probability-measure",
+          "def-product-measure-on-sigma-finite-spaces",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-radon-nikodym-derivative",
+          "thm-natural-logarithm-laws",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume AC. Let $n\\in\\mathbb N$ with $n\\ge1$. For each $i<n$, let\n$(X_i,\\mathcal A_i)$ be a measurable space and let $P_i,Q_i$ be probability\nmeasures on it. On the finite product measurable space set\n$$P=\\bigotimes_{i<n}P_i,\\qquad Q=\\bigotimes_{i<n}Q_i.$$\nWith the KL convention of [[def-kullback-leibler-divergence]],\n$$D(P\\|Q)=\\sum_{i<n}D(P_i\\|Q_i),$$\nwhere a sum with an infinite term is $+\\infty$."
+      },
+      {
+        "id": "lem-gaussian-location-kl-formula",
+        "kind": "lemma",
+        "title": "KL divergence between equal-variance Gaussian location laws",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-kullback-leibler-divergence",
+          "def-multivariate-normal-law",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "def-standard-normal-and-normal-laws",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "lem-normal-density-has-total-mass-one",
+          "thm-integration-against-a-density",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume AC and let $a,b\\in\\mathbb R$ and $\\tau>0$. For the normal location\nlaws with common variance $\\tau^2$,\n$$D\\bigl(N(a,\\tau^2)\\|N(b,\\tau^2)\\bigr)=\\frac{(a-b)^2}{2\\tau^2}.$$"
+      },
+      {
+        "id": "thm-two-point-le-cam-risk-bound",
+        "kind": "theorem",
+        "title": "Two-point Le Cam lower bound for squared-error risk",
+        "deps": [
+          "def-bayes-and-minimax-risk",
+          "def-loss-function-and-risk",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-statistical-experiment",
+          "def-total-variation-distance-for-probability-laws"
+        ],
+        "dependency_level": 5,
+        "statement": "Let an experiment have parameter set $\\{0,1\\}$, sample space $(\\mathcal X,\\mathcal A)$,\nand laws $P_0,P_1$. Let the scalar targets satisfy $t_0<t_1$ and put\n$\\Delta=t_1-t_0>0$. An arbitrary randomized estimator is a probability\nkernel $K$ from $\\mathcal X$ to $\\mathbb R$ with its Borel sigma-algebra, and\nits loss at parameter $j$ is squared error $(a-t_j)^2$. For every such $K$,\n$$\\max_{j\\in\\{0,1\\}} R_j(K)\\ge \\frac{\\Delta^2}{8}\\bigl(1-\\|P_0-P_1\\|_{\\rm TV}\\bigr),$$\nwhere $\\|P_0-P_1\\|_{\\rm TV}=\\sup_{A\\in\\mathcal A}|P_0(A)-P_1(A)|$.\nConsequently the minimax risk over all randomized estimators obeys the same\nlower bound."
+      },
+      {
+        "id": "thm-assouad-hypercube",
+        "kind": "theorem",
+        "title": "Assouad lower bound for a squared-error hypercube",
+        "deps": [
+          "def-bayes-and-minimax-risk",
+          "def-loss-function-and-risk",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-statistical-experiment",
+          "def-total-variation-distance-for-probability-laws"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $d\\ge1$, $a>0$, and consider the finite experiment indexed by\n$\\omega\\in\\{0,1\\}^d$ with sample laws $P_\\omega$. The target is\n$t_\\omega=a\\omega\\in\\mathbb R^d$, the action is in $\\mathbb R^d$, and loss\nis squared Euclidean distance. For each coordinate $i$, let $\\omega^{(i)}$\ndenote the vector with bit $i$ flipped, and set\n$$v:=\\max_{\\omega\\in\\{0,1\\}^d,\\ 1\\le i\\le d} \\|P_\\omega-P_{\\omega^{(i)}}\\|_{\\rm TV}.$$\nFor every randomized estimator kernel $K$,\n$$\\max_{\\omega}R_\\omega(K)\\ge\\frac{a^2d}{8}(1-v),$$\nand the same lower bound holds for the minimax risk. The total variation\nconvention is $\\|P-Q\\|_{\\rm TV}=\\sup_A|P(A)-Q(A)|$."
+      },
+      {
+        "id": "thm-fano-packing",
+        "kind": "theorem",
+        "title": "Fano’s packing bound with a reference-distribution KL bound",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bayes-and-minimax-risk",
+          "def-finite-cardinality",
+          "def-higher-derivatives-and-smoothness",
+          "def-kullback-leibler-divergence",
+          "def-loss-function-and-risk",
+          "def-mutual-information-for-finite-hypothesis-testing",
+          "def-natural-logarithm",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-probability-measure",
+          "def-radon-nikodym-derivative",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "cor-mean-value-theorem",
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "def-integral-logarithm",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-likelihood-ratio-change-of-measure",
+          "thm-jensens-integral-inequality"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume AC. Let $M\\ge2$ be finite, let $P_1,\\ldots,P_M$ be sample laws on one\nmeasurable space, and let $t_1,\\ldots,t_M$ lie in a metric space\n$(\\mathcal T,\\rho)$ with its Borel sigma-algebra. Suppose\n$\\rho(t_j,t_l)\\ge\\Delta>0$ whenever $j\\ne l$. Let $J$ be uniform on\n$[M]=\\{1,\\ldots,M\\}$, with conditional observation law $P_j$ given $J=j$.\nFor any probability reference law $Q$, define\n$$K_Q:=\\frac1M\\sum_{j=1}^M D(P_j\\|Q)\\in[0,+\\infty].$$\nFor every randomized estimator kernel from the observation to $\\mathcal T$,\nwith squared metric loss $\\rho(a,t_j)^2$, its uniform average risk and its\nmaximum risk are each at least\n$$\\frac{\\Delta^2}{4} \\left(1-\\frac{K_Q+\\log2}{\\log M}\\right).$$\nThe minimax risk over all randomized estimators obeys this bound as well.\nWhen $K_Q=+\\infty$, the displayed lower bound is interpreted as $-\\infty$\nand is vacuous. Logarithms are natural.\n\n"
+      }
+    ]
+  },
+  {
+    "order": 1877,
+    "id": "minimax-lower-bounds-and-information-theoretic-methods-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Minimax Lower Bounds — Examples",
+    "companion": "minimax-lower-bounds-and-information-theoretic-methods",
+    "requires": [
+      "minimax-lower-bounds-and-information-theoretic-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-gaussian-two-point-le-cam-lower-bound",
+        "kind": "example",
+        "title": "A Gaussian two-point lower bound",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bayes-and-minimax-risk",
+          "def-loss-function-and-risk",
+          "def-multivariate-normal-law",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-standard-normal-and-normal-laws",
+          "def-statistical-experiment",
+          "lem-gaussian-location-kl-formula",
+          "thm-pinsker",
+          "thm-product-kl-additivity",
+          "thm-two-point-le-cam-risk-bound"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $n\\ge1$ and $\\sigma>0$. Observe independent\n$X_1,\\ldots,X_n\\sim N(\\theta,\\sigma^2)$, and estimate the scalar mean\n$\\theta$ under squared-error loss. Restrict the parameter set to\n$$\\theta_0=-\\frac{\\sigma}{4\\sqrt n},\\qquad \\theta_1=\\frac{\\sigma}{4\\sqrt n}.$$\nThe minimax risk over this two-point experiment is at least\n$$\\frac{3\\sigma^2}{128n}.$$"
+      },
+      {
+        "id": "ex-sparse-gaussian-sequence-fano-lower-bound",
+        "kind": "example",
+        "title": "A sparse Gaussian sequence lower bound by Fano’s method",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-loss-function-and-risk",
+          "def-multivariate-normal-law",
+          "def-natural-logarithm",
+          "def-integral-logarithm",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "def-real-exponential-function-and-e",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-standard-normal-and-normal-laws",
+          "lem-gaussian-location-kl-formula",
+          "lem-sparse-hamming-packing",
+          "thm-fano-packing",
+          "thm-pinsker",
+          "thm-natural-logarithm-laws",
+          "thm-product-kl-additivity",
+          "thm-two-point-le-cam-risk-bound"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume AC. Let $d,n\\ge1$, $\\sigma>0$, and $1\\le k\\le d/2$ be integers. Observe\n$Y\\in\\mathbb R^d$ with independent coordinates\n$Y_j\\sim N(\\mu_j,\\sigma^2/n)$, and estimate $\\mu$ under squared Euclidean\nloss over\n$$\\Theta_{k,d}=\\{\\mu\\in\\mathbb R^d:\\#\\{j:\\mu_j\\ne0\\}\\le k\\}.$$\nFor a randomized kernel $K$ to $\\mathbb R^d$, set\n$$R_\\mu(K)=\\int_{\\mathbb R^d}\\int_{\\mathbb R^d} \\|a-\\mu\\|_2^2K(y,da)P_\\mu(dy),$$\nand define the minimax value here as $\\inf_K\\sup_{\\mu\\in\\Theta_{k,d}}R_\\mu(K)$.\nThere is a universal lower bound\n$$\\inf_K\\sup_{\\mu\\in\\Theta_{k,d}}R_\\mu(K) \\ge\\frac{\\sigma^2}{200000n}\\,k\\log\\!\\left(\\frac{ed}{k}\\right),$$\nwhere $K$ ranges over randomized estimators. The range $1\\le k\\le d/2$\nuses the local packing lemma proved on the A page."
+      },
+      {
+        "id": "ex-gaussian-hypercube-assouad-lower-bound",
+        "kind": "example",
+        "title": "A dense Gaussian mean lower bound by Assouad’s method",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bayes-and-minimax-risk",
+          "def-loss-function-and-risk",
+          "def-multivariate-normal-law",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-standard-normal-and-normal-laws",
+          "def-statistical-experiment",
+          "lem-gaussian-location-kl-formula",
+          "thm-assouad-hypercube",
+          "thm-pinsker",
+          "thm-product-kl-additivity"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $d,n\\ge1$, $\\sigma>0$, and observe\n$Y\\in\\mathbb R^d$ with independent coordinates\n$Y_i\\sim N(\\theta_i,\\sigma^2/n)$. Estimate $\\theta$ under squared Euclidean\nloss over the dense hypercube $\\Theta=\\{0,\\sigma/\\sqrt n\\}^d$. Then the\nminimax risk satisfies\n$$\\inf_K\\sup_{\\theta\\in\\Theta}R_\\theta(K) \\ge\\frac{\\sigma^2d}{16n}.$$"
+      }
+    ]
+  }
+]

@@ -12,11 +12,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-15
-  audited: 2026-08-16
+  repair: research/mathematical-statistics-foundations-37-owner-s3-polish-def-orthogonal-projection-repair.json
 sources:
   scraped: []
   references:
@@ -33,7 +29,7 @@ Let $W$ be a subspace of a finite-dimensional inner product space $V$. The ortho
 
 $$V=W\oplus W^\perp$$
 
-associates to every $v\in V$ unique vectors $w\in W$ and $z\in W^\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function
+and associates to every $v\in V$ unique vectors $w\in W$ and $z\in W^\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function
 
 $$P_W:V\longrightarrow W,\qquad P_Wv=w.$$
 

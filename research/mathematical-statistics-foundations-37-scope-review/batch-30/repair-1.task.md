@@ -1,0 +1,15 @@
+# Batch 30: repair 1
+
+Run: mathematical-statistics-foundations-37
+Batch: 30
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: semiparametric-efficiency-and-regular-estimation, semiparametric-efficiency-and-regular-estimation-examples
+Items: thm-asymptotic-linearity-implies-normality, lem-finite-dimensional-functional-convolution-bound, lem-one-sided-dqm-implies-iid-lan, thm-semiparametric-information-bound-for-regular-al-estimators, thm-general-regular-estimator-convolution-bound, cex-finite-mean-functional-without-l2-influence-curve, ex-sample-mean-attains-unrestricted-mean-bound
+Consolidated findings: [{"id":"lem-one-sided-dqm-implies-iid-lan","type":"local","reason":"Step 5.1 infers uniform integrability of V_n^2 from V_n converging to h s in L2 without giving the square-to-L1 estimate or citing a supplier. Add the Cauchy-Schwarz estimate for convergence of the squares in L1 and cite/add thm-l1-convergence-implies-uniform-integrability. In step 6.1, the union-bound probability of a singular-coordinate draw does not alone establish the total-variation bound; show the product-mixture decomposition or conditioning that yields 1-(1-alpha_t)^n <= n alpha_t. Both gaps are repairable within this item without changing its statement."}]
+Authorized source files: ["items/thm-asymptotic-linearity-implies-normality.md","items/lem-finite-dimensional-functional-convolution-bound.md","items/lem-one-sided-dqm-implies-iid-lan.md","items/thm-semiparametric-information-bound-for-regular-al-estimators.md","items/thm-general-regular-estimator-convolution-bound.md","items/cex-finite-mean-functional-without-l2-influence-curve.md","items/ex-sample-mean-attains-unrestricted-mean-bound.md","library/mathematical-statistics/semiparametric-efficiency-and-regular-estimation.md","library/mathematical-statistics/semiparametric-efficiency-and-regular-estimation-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

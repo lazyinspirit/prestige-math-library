@@ -1,0 +1,1260 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-influence-curve-representers",
+    "def-asymptotically-linear-estimator-and-influence-function",
+    "def-pathwise-differentiable-functional",
+    "def-efficient-score",
+    "thm-efficient-score-canonical-gradient",
+    "ex-pathwise-derivative-not-continuous-in-tangent-norm",
+    "ex-mean-functional-and-sample-mean-influence-curve",
+    "ex-efficient-score-nuisance-projection"
+  ],
+  "contracts": {
+    "thm-influence-curve-representers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness \u2014 the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition\n\n$$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$\n\nso that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\phi\\in H^k$ is any other representer, then for every $s\\in\\mathcal T$ and coordinate $j$, $\\langle\\phi_j-\\phi_{0,j},s\\rangle_H=0$, so $\\phi_j-\\phi_{0,j}\\in\\mathcal T^\\perp$ by [F3]. Thus every representer lies in $\\phi_0+(\\mathcal T^\\perp)^k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F2] coordinatewise to write $\\phi_0=\\Pi_{\\mathcal T}\\phi_0+h$ with $\\Pi_{\\mathcal T}\\phi_0\\in\\mathcal T^k$ and $h\\in(\\mathcal T^\\perp)^k$. Countable Choice is used only in this projection step through [F2] and [A1].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, if $h\\in(\\mathcal T^\\perp)^k$, then $\\langle\\phi_0+h,s\\rangle_H=\\langle\\phi_0,s\\rangle_H+\\langle h,s\\rangle_H=\\dot\\psi(s)$ for every $s\\in\\mathcal T$, so $\\phi_0+h$ is a representer. Hence the full representer set is exactly the stated affine class.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 1.2, $\\Pi_{\\mathcal T}\\phi_0$ is a representer. If two representers lie in $\\mathcal T^k$, step 1.1 places their difference in $(\\mathcal T^\\perp)^k$ as well; each coordinate then lies in $\\mathcal T\\cap\\mathcal T^\\perp$ and has squared norm zero by positive definiteness in [F1], so the difference is zero. This proves existence and uniqueness of the canonical representer.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: a linear subspace contains zero, so the empty set cannot be the stated subspace."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.2 cover the zero derivative by taking the ambient representer to be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: k is any finite positive integer, including k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20133.1 apply when the tangent subspace is {0}; its unique tangent representer is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: no parameter interval or endpoint is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses Countable Choice through the closed-subspace decomposition [F2]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this is a representer-class theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this is a representer-class theorem, not an equivalence."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Countable Choice",
+          "source": "def-countable-choice",
+          "use": "Step 1.2, through the closed-subspace decomposition."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Independently read all four steps and F1-F3/A1 suppliers. Differences of representers annihilate T coordinatewise; conversely adding T-perp preserves all pairings. Closed-subspace decomposition under Countable Choice supplies the tangent representative; T intersection T-perp is zero, giving uniqueness. T={0}, T=H, zero derivative and finite scalar/vector targets are covered. Reader A1 correction from F3 to F2 is exact; no additional mathematical defect."
+      }
+    },
+    "def-asymptotically-linear-estimator-and-influence-function": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empirical expression is for positive sample indices n and a fixed probability P; n=0 would make n^-1 undefined and is not an estimator-sequence index."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: phi=0 and remainder=0 give the constant estimator psi(P), satisfying the required centered square-integrable expansion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a scalar target uses k=1 and the same L2_0(P) expansion; the assertion concerns the sequence as n tends to infinity, not an n=1 limiting theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: P may be a point mass; centering then makes phi=0 P-almost surely, and the expansion still has its stated meaning."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: the asymptotically-linear expansion has no confidence or path-interval endpoint; its only limit is sqrt(n)R_n tending to zero in probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: a measurable phi and estimator sequence are supplied; this item proves no existence or choice-dependent construction of either."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the centered square-integrable estimator expansion with o_P remainder is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the centered square-integrable estimator expansion with o_P remainder has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "axioms_used": [],
+      "finite_checks": []
+    },
+    "def-pathwise-differentiable-functional": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the law P belongs to the model by hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if the tangent space is {0}, its unique representer is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the target dimension k is any finite positive integer, including one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a proper or zero tangent subspace is allowed; the canonical gradient is taken within that subspace."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the derivative is explicitly the right derivative at the path endpoint t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: selected density versions use AC, while the Hilbert and Riesz representation uses CC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "source": "def-axiom-of-choice",
+          "use": "Selected density versions along a dominated path."
+        },
+        {
+          "axiom": "Countable Choice",
+          "source": "def-countable-choice",
+          "use": "Hilbert completeness, tangent-space closure and Riesz representation."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read full Definition and all direct suppliers. One-sided common-dominated DQM convention matches Definition 1.6 and Lemma 1.8 of van der Vaart (PDF p.10); score mean-zero/uniqueness are proved locally. Allowed-path derivatives must depend only on score and extend continuously linearly to the closed span; this precludes silently claiming differentiability along arbitrary paths. Closed mean-zero L2 and tangent subspace supply coordinatewise real Riesz representation under Countable Choice. AC only selects density versions. Empty allowed collection gives T={0}, zero derivative is allowed, and finite vector coordinates and a.e. quotient pairing are consistent. No mathematical defect."
+      }
+    },
+    "def-efficient-score": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: a closed linear nuisance tangent subspace is supplied and contains zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero interest scores give zero efficient score and zero information."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: p may equal one, giving the scalar efficient score."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Remark: singular efficient information is allowed in the definition; the inverse formula is then not asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: no parameter interval endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the score-density convention uses AC and the Hilbert projection uses CC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "source": "def-axiom-of-choice",
+          "use": "The general score-density representative convention."
+        },
+        {
+          "axiom": "Countable Choice",
+          "source": "def-countable-choice",
+          "use": "Orthogonal projection onto the closed nuisance tangent space."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read Definition, score/nuisance definitions, tangent closure and projection suppliers. Square-integrable centered score is explicitly assumed rather than inferred from pointwise density differentiability. Closed nuisance span in real L2_0 admits unique projection under Countable Choice; residual is centered and orthogonal and finite score second moments give every information entry. Zero nuisance space and score lying entirely in nuisance space are covered; singular information is expressly allowed with no inverse claim. AC density versions and CC projection are distinct uses. Kennedy section 4 PDF pp.5-6 corroborates residual-score formula. No defect."
+      }
+    },
+    "thm-efficient-score-canonical-gradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-efficient-score",
+          "source_section": "Definition",
+          "quote": "Let $\\theta\\in\\mathbb R^p$, $p\\ge1$ finite, be a parameter of interest at a law $P$. Assume its score vector $S_\\theta=(S_{\\theta,1},\\ldots,S_{\\theta,p})^T$ has components in $L^2_0(P)$; under a dominated differentiable parametric submodel these are the coordinate log-density scores of [[def-score-and-fisher-information]]. Let $\\mathcal T_\\eta\\subseteq L^2_0(P)$ be the closed nuisance tangent space of [[def-nuisance-tangent-space]]. The ambient $L^2_0(P)$ is as in [[def-mean-zero-square-integrable-space]]. The score-density convention uses the Axiom of Choice, while Hilbert projection uses Countable Choice; both dependencies are retained separately.\n\nThe Hilbert decomposition [[thm-orthogonal-decomposition-by-a-closed-subspace]] defines $\\Pi_{\\mathcal T_\\eta}f$ as the unique $g\\in\\mathcal T_\\eta$ with $f-g\\in\\mathcal T_\\eta^\\perp$, where orthogonality and $\\mathcal T_\\eta^\\perp$ have the meanings in [[def-orthogonality-and-orthogonal-complement]]. The **efficient score vector** and **efficient information matrix** are\n\n$$S_{\\mathrm{eff}}=S_\\theta-\\Pi_{\\mathcal T_\\eta}S_\\theta,\\qquad I_{\\mathrm{eff}}=E_P[S_{\\mathrm{eff}}S_{\\mathrm{eff}}^T],$$\n\nwhere $\\Pi_{\\mathcal T_\\eta}$ is the Hilbert-space orthogonal projection applied coordinatewise. This projection exists and is unique because $\\mathcal T_\\eta$ is a closed linear subspace; the projection theorem used by [[thm-orthogonal-decomposition-by-a-closed-subspace]] assumes Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pathwise-differentiable-functional",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability law for one observation, let $\\mathcal P$ be a model of laws containing $P$, and let $\\psi:\\mathcal P\\to\\mathbb R^k$ be a target functional, where $k\\ge1$ is finite. A one-sided path $t\\mapsto P_t$, $0\\le t<\\epsilon$, through $P=P_0$ is **differentiable in quadratic mean (DQM)** with score $s\\in L^2(P)$ when its densities $p_t,p$ relative to one common sigma-finite measure $\\mu$ satisfy\n\n$$\\left\\|\\sqrt{p_t}-\\sqrt p-\\frac{t}{2}s\\sqrt p\\right\\|_{L^2(\\mu)}=o(t)\\qquad(t\\downarrow0).$$\n\nThe score initially belongs to $L^2(P)$; [[thm-dqm-score-mean-zero]] proves it is unique modulo $P$-almost-sure equality and has mean zero, so it lies in $L^2_0(P)$ as defined by [[def-mean-zero-square-integrable-space]]. The allowed scores form the **tangent set** of the designated paths ([[def-tangent-set]]); their **tangent space** $\\mathcal T$ is the closure of their real linear span in $L^2_0(P)$ ([[def-tangent-space]]). It is a closed linear subspace by [[thm-tangent-space-is-closed-linear-subspace]], and hence a Hilbert space under Countable Choice ([[thm-mean-zero-square-integrable-space-is-hilbert]]).\n\nThe functional $\\psi$ is **pathwise differentiable at $P$ relative to $\\mathcal T$** if the right derivative $\\dot\\psi_P(s):=\\lim_{t\\downarrow0}(\\psi(P_t)-\\psi(P))/t$ exists for every allowed path, depends only on its score, and extends to a continuous linear map $\\dot\\psi_P:\\mathcal T\\to\\mathbb R^k$. A vector $\\phi\\in L^2_0(P)^k$ is a **parameter influence curve** (or representer) when\n\n$$\\dot\\psi_P(s)=E_P[\\phi s]\\qquad(s\\in\\mathcal T),$$\n\nwith the expectation interpreted coordinatewise. The Hilbert-space Riesz theorem gives a unique representer in $\\mathcal T^k$; it is the **canonical gradient**. This representation requires Countable Choice, as in [[thm-riesz-representation-for-hilbert-space]] and [[def-countable-choice]]. The supplied density versions along a path use the separate Axiom of Choice in [[def-dqm-submodel-through-a-law]] and [[def-axiom-of-choice]]. The full set of ambient representers and its projection characterization are proved in [[thm-influence-curve-representers]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-influence-curve-representers",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a real Hilbert space, let $\\mathcal T\\subseteq H$ be a closed linear subspace, and let $\\dot\\psi:\\mathcal T\\to\\mathbb R^k$ be continuous linear with an ambient representer $\\phi_0\\in H^k$, meaning $\\dot\\psi(s)=\\langle\\phi_0,s\\rangle_H$ coordinatewise for all $s\\in\\mathcal T$. Assume Countable Choice. Then all ambient representers are exactly\n\n$$\\phi_0+(\\mathcal T^\\perp)^k.$$\n\nThe unique representer in $\\mathcal T^k$ is $\\phi_{\\mathrm{can}}=\\Pi_{\\mathcal T}\\phi_0$; when $\\dot\\psi$ is a statistical path derivative, this is its canonical gradient. Projection is applied coordinatewise.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-mean-zero-square-integrable-space",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on $(\\mathcal X,\\mathcal A)$. Here $L^2(P)$ is the real space of square-integrable measurable functions modulo equality $P$-almost surely, with its usual quotient norm ([[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]). For $f\\in L^2(P)$, the integral $Pf:=\\int f\\,dP$ is finite and independent of the representative: Cauchy\u2013Schwarz on the probability space gives $\\int|f|\\,dP\\le\\|f\\|_2$, and the expectation of integrable representatives is invariant under almost-sure equality ([[cor-cauchy-schwarz-inequality-for-l-two]], [[lem-expectation-is-independent-of-the-ae-representative]]).\n\nDefine the **mean-zero square-integrable space** by\n\n$$L^2_0(P):=\\{f\\in L^2(P):Pf=0\\}.$$\n\nIt carries the norm inherited from $L^2(P)$. Countable Choice is not needed for this definition; a later local Hilbert-space argument uses it only to inherit completeness from the library's general $L^2$ Hilbert-space result.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-mean-zero-square-integrable-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). For any probability measure $P$, the space $L^2_0(P)$ of [[def-mean-zero-square-integrable-space]] is a closed real linear subspace of real $L^2(P)$ with pairing $\\langle f,g\\rangle_P:=\\int fg\\,dP$; consequently it is a real Hilbert space ([[def-hilbert-space]]). The only choice use is the Countable Choice assumption already required by the general $L^2(P)$ completeness supplier.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tangent-space-is-closed-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\dot{\\mathcal M}(P)$ be any tangent set in the real Hilbert space $L^2_0(P)$. Its tangent space $\\mathcal T(P)$, defined as the norm closure of its finite real linear span ([[def-tangent-space]]), is a closed linear subspace of $L^2_0(P)$ ([[def-linear-subspace]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition\n\n$$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$\n\nso that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By the orthogonal-projection definition in [F1] and [F7], $R\\in\\mathcal T_\\eta^p$ and each coordinate of $S_{\\mathrm{eff}}$ is orthogonal to every element of $\\mathcal T_\\eta$ by [F8]. Since $\\mathcal T_\\eta\\subseteq\\mathcal T$, both $S_\\theta$ and $R$ belong to $\\mathcal T^p$, hence $S_{\\mathrm{eff}}\\in\\mathcal T^p$. The projection exists by the Hilbert and closed-subspace hypotheses [F5] and [F6] under [A2]; [A1] is carried through the selected score definition.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $S_\\theta=S_{\\mathrm{eff}}+R$ and $R$ is nuisance-tangent-valued, orthogonality [F8] gives $E_P[S_{\\mathrm{eff}}S_\\theta^T]=E_P[S_{\\mathrm{eff}}S_{\\mathrm{eff}}^T]=I_{\\mathrm{eff}}$. Therefore for every $a\\in\\mathbb R^p$ and $t\\in\\mathcal T_\\eta$, $E_P[S_{\\mathrm{eff}}(a^TS_\\theta+t)]=I_{\\mathrm{eff}}a$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $a^TS_\\theta+t=a'^TS_\\theta+t'$ for $t,t'\\in\\mathcal T_\\eta$, step 2.1 applied to the difference gives $I_{\\mathrm{eff}}(a-a')=0$. Nonsingularity forces $a=a'$, so the target derivative assigned to a score in the allowed score set is well-defined.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set $\\phi=I_{\\mathrm{eff}}^{-1}S_{\\mathrm{eff}}$. For a score $s=a^TS_\\theta+t$, step 2.1 gives $E_P[\\phi s]=a$. Moreover $\\phi\\in\\mathcal T^p$ by step 1.1 and [F4]. The map $s\\mapsto E_P[\\phi s]$ is continuous in $L^2(P)$ by [F9], so it extends uniquely from the dense allowed score set to $\\mathcal T$ and agrees there with the path derivative. Thus $\\phi$ is a representer in the full tangent space.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "F2",
+            "F4",
+            "F5",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F3], a representer in $\\mathcal T^p$ is the unique canonical gradient, so $\\phi_{\\mathrm{can}}=I_{\\mathrm{eff}}^{-1}S_{\\mathrm{eff}}$. The second-moment matrix $I_{\\mathrm{eff}}$ is symmetric, hence so is its inverse. Direct multiplication gives $E_P[\\phi\\phi^T]=I_{\\mathrm{eff}}^{-1}I_{\\mathrm{eff}}I_{\\mathrm{eff}}^{-1}=I_{\\mathrm{eff}}^{-1}$. No existence of an estimator is used.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the full tangent space is a linear subspace and contains zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero or singular efficient information is excluded by the nonsingularity hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: p is finite and positive, so the scalar case p=1 is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: degenerate information is excluded; the inverse-information formula requires nonsingularity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the derivative convention is one-sided at t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 4.1 carry AC for score representatives and CC for Hilbert projection/Riesz."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this is a sufficient-conditions theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this is a sufficient-conditions theorem, not an equivalence."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "source": "def-axiom-of-choice",
+          "use": "The score-density convention carried by the efficient-score definition."
+        },
+        {
+          "axiom": "Countable Choice",
+          "source": "def-countable-choice",
+          "use": "Hilbert projections and the canonical representer."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all five steps and exact F1-F9/A1-A2 suppliers. Exact allowed score set and right derivatives are hypotheses, not inferred from an arbitrary tangent-space decomposition. Taking a=e_j,t=0 puts every interest score in T. Projection residuals stay in T and annihilate nuisance directions; pairing with S_theta gives I_eff. Nonsingularity proves score coefficients a unique, then inverse residual represents all designated derivatives and defines a bounded linear extension on closure by CS. Finite real matrix mixing preserves T. Symmetric Gram information and its inverse give covariance identity. p=1 and zero nuisance space valid; singular/zero information is excluded expressly. AC versions and CC Hilbert projection inherited; no attainable-estimator claim. No defect."
+      }
+    },
+    "ex-pathwise-derivative-not-continuous-in-tangent-norm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pathwise-differentiable-functional",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability law for one observation, let $\\mathcal P$ be a model of laws containing $P$, and let $\\psi:\\mathcal P\\to\\mathbb R^k$ be a target functional, where $k\\ge1$ is finite. A one-sided path $t\\mapsto P_t$, $0\\le t<\\epsilon$, through $P=P_0$ is **differentiable in quadratic mean (DQM)** with score $s\\in L^2(P)$ when its densities $p_t,p$ relative to one common sigma-finite measure $\\mu$ satisfy\n\n$$\\left\\|\\sqrt{p_t}-\\sqrt p-\\frac{t}{2}s\\sqrt p\\right\\|_{L^2(\\mu)}=o(t)\\qquad(t\\downarrow0).$$\n\nThe score initially belongs to $L^2(P)$; [[thm-dqm-score-mean-zero]] proves it is unique modulo $P$-almost-sure equality and has mean zero, so it lies in $L^2_0(P)$ as defined by [[def-mean-zero-square-integrable-space]]. The allowed scores form the **tangent set** of the designated paths ([[def-tangent-set]]); their **tangent space** $\\mathcal T$ is the closure of their real linear span in $L^2_0(P)$ ([[def-tangent-space]]). It is a closed linear subspace by [[thm-tangent-space-is-closed-linear-subspace]], and hence a Hilbert space under Countable Choice ([[thm-mean-zero-square-integrable-space-is-hilbert]]).\n\nThe functional $\\psi$ is **pathwise differentiable at $P$ relative to $\\mathcal T$** if the right derivative $\\dot\\psi_P(s):=\\lim_{t\\downarrow0}(\\psi(P_t)-\\psi(P))/t$ exists for every allowed path, depends only on its score, and extends to a continuous linear map $\\dot\\psi_P:\\mathcal T\\to\\mathbb R^k$. A vector $\\phi\\in L^2_0(P)^k$ is a **parameter influence curve** (or representer) when\n\n$$\\dot\\psi_P(s)=E_P[\\phi s]\\qquad(s\\in\\mathcal T),$$\n\nwith the expectation interpreted coordinatewise. The Hilbert-space Riesz theorem gives a unique representer in $\\mathcal T^k$; it is the **canonical gradient**. This representation requires Countable Choice, as in [[thm-riesz-representation-for-hilbert-space]] and [[def-countable-choice]]. The supplied density versions along a path use the separate Axiom of Choice in [[def-dqm-submodel-through-a-law]] and [[def-axiom-of-choice]]. The full set of ambient representers and its projection characterization are proved in [[thm-influence-curve-representers]].",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-mean-zero-square-integrable-space",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on $(\\mathcal X,\\mathcal A)$. Here $L^2(P)$ is the real space of square-integrable measurable functions modulo equality $P$-almost surely, with its usual quotient norm ([[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]). For $f\\in L^2(P)$, the integral $Pf:=\\int f\\,dP$ is finite and independent of the representative: Cauchy\u2013Schwarz on the probability space gives $\\int|f|\\,dP\\le\\|f\\|_2$, and the expectation of integrable representatives is invariant under almost-sure equality ([[cor-cauchy-schwarz-inequality-for-l-two]], [[lem-expectation-is-independent-of-the-ae-representative]]).\n\nDefine the **mean-zero square-integrable space** by\n\n$$L^2_0(P):=\\{f\\in L^2(P):Pf=0\\}.$$\n\nIt carries the norm inherited from $L^2(P)$. Countable Choice is not needed for this definition; a later local Hilbert-space argument uses it only to inherit completeness from the library's general $L^2$ Hilbert-space result.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $r>1$ and $k\\ge2$, monotonicity gives $k^{-r}\\le\\int_{k-1}^k x^{-r}dx$, so $\\sum_{k\\ge1}k^{-r}\\le1+\\int_1^\\infty x^{-r}dx<\\infty$. Taking $r=3$ shows $c$ is well-defined and the displayed masses sum to one; taking $r=2$ gives $\\mu=c\\sum_{k\\ge1}k^{-2}<\\infty$, so $P\\in\\mathcal M_X$. But $E_PX^2=c\\sum_{k\\ge1}k^{-1}=\\infty$, because each dyadic block $2^{j-1}<k\\le2^j$ contributes at least $1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For bounded centered $s$, choose $t\\ge0$ small enough that $1+ts\\ge0$. By [F7], $E_P(1+ts)=1$, so [F9] gives a probability law $P_{t,s}$ with density $1+ts$. The identity $\\sqrt{1+u}-1-u/2=-u^2/[2(1+\\sqrt{1+u})^2]$ bounds the square-root remainder for $u=ts$ in $L^2(P)$ by $t^2\\|s^2\\|_2/2=o(t)$, since $s$ is bounded. Thus these paths are DQM with score $s$ under [F1]. To see their scores are dense in $L^2_0(P)$, take $g\\in L^2_0(P)$ and truncate to $g_m=\\max(-m,\\min(g,m))$. Dominated convergence gives $g_m\\to g$ in $L^2(P)$ because $|g_m-g|^2\\le g^2$ and the difference tends pointwise to zero. Cauchy--Schwarz and $\\|1\\|_2=1$ give $E_Pg_m\\to0$, so $g_m-E_Pg_m$ are bounded centered scores converging to $g$. Hence the tangent space is $L^2_0(P)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Step 1.1 gives $P\\in\\mathcal M_X$ and $E_PX<\\infty$; since $s$ is bounded, [F8] gives the finite expectation $E_{P_{t,s}}X=E_P[X(1+ts)]$, so every designated path lies in $\\mathcal M_X$. Linearity [F7] then gives $\\psi(P_{t,s})=E_{P_{t,s}}X=\\mu+tE_P[Xs]$, so the right derivative on each allowed score is $\\dot\\psi_P(s)=E_P[Xs]$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For $m\\ge2$ let $s_m=(X\\wedge m)-E_P[X\\wedge m]$. These are bounded centered scores. Their norms are positive because $X\\wedge m$ takes the distinct values $1$ and $2$ on the positive-mass points $k=1$ and $k=2$. Direct summation gives $E_P[Xs_m]=cH_m+cm\\sum_{k>m}k^{-2}-\\mu E_P[X\\wedge m]\\ge cH_m-\\mu^2$, since $0\\le X\\wedge m\\le X$. Also $$\\|s_m\\|_2^2=E_P[(X\\wedge m)^2]-(E_P[X\\wedge m])^2\\le cH_m+cm^2\\sum_{k>m}k^{-3}\\le cH_m+c/2,$$ where the last bound follows from $\\sum_{k>m}k^{-3}\\le\\int_m^\\infty x^{-3}dx=1/(2m^2)$. The dyadic-block argument in step 1.1 shows $H_m\\to\\infty$, so $|E_P[Xs_m]|/\\|s_m\\|_2\\to\\infty$. The derivative on the dense score set is therefore unbounded in the tangent norm and cannot extend continuously, contrary to the requirement in [F1].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If a finite-variance influence curve $\\phi\\in L^2_0(P)$ represented this derivative, then for every $m\\ge2$ Cauchy--Schwarz would give $|E_P[Xs_m]|=|E_P[\\phi s_m]|\\le\\|\\phi\\|_2\\|s_m\\|_2$, contradicting step 3.1. Thus no such influence curve exists.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the support is the nonempty set of positive integers and c is finite and positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20132.1: the zero score gives the zero path derivative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: no unit-score or unit-information exception is needed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: every integer has positive mass and the law is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20132.1 use the right derivative along t\u22650 at t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.2 specify the law and path densities explicitly, without a choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: it proves failure of continuity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: it proves failure of continuity, not an equivalence."
+        }
+      ],
+      "axioms_used": [],
+      "finite_checks": [
+        {
+          "id": "power-law-moments",
+          "claim": "E X=c\u2211k\u207b\u00b2 is finite while E X\u00b2=c\u2211k\u207b\u00b9 diverges.",
+          "result": "Integral comparison proves the first series converges; dyadic blocks contribute at least 1/2 each to the harmonic series."
+        },
+        {
+          "id": "unbounded-derivative-ratio",
+          "claim": "|E[Xs_m]|/||s_m||\u2082\u2192\u221e.",
+          "result": "The numerator is at least cH_m\u2212\u03bc\u00b2 and the squared denominator is at most cH_m+c/2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all five steps and exact F1-F9 suppliers. Summation/integral comparison normalizes ck^-3 and gives finite first/infinite second moment. Bounded scores give normalized positive small-t DQM paths in finite-mean model; centered truncations are dense. For m>=2 truncated X has positive variance; derivative numerator >=c H_m-mu^2 and norm squared <=c H_m+c/2 imply ratio diverges once lower bound is positive. Thus no bounded linear extension and no L2 representer by CS, without applying L2 CS to non-L2 X. Zero score, t=0 and exclusion of m=1 division checked. Reader integral CS and triangle repair sound; manifest dependency mirror reconciled."
+      }
+    },
+    "ex-mean-functional-and-sample-mean-influence-curve": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-mean-zero-square-integrable-space",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on $(\\mathcal X,\\mathcal A)$. Here $L^2(P)$ is the real space of square-integrable measurable functions modulo equality $P$-almost surely, with its usual quotient norm ([[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]). For $f\\in L^2(P)$, the integral $Pf:=\\int f\\,dP$ is finite and independent of the representative: Cauchy\u2013Schwarz on the probability space gives $\\int|f|\\,dP\\le\\|f\\|_2$, and the expectation of integrable representatives is invariant under almost-sure equality ([[cor-cauchy-schwarz-inequality-for-l-two]], [[lem-expectation-is-independent-of-the-ae-representative]]).\n\nDefine the **mean-zero square-integrable space** by\n\n$$L^2_0(P):=\\{f\\in L^2(P):Pf=0\\}.$$\n\nIt carries the norm inherited from $L^2(P)$. Countable Choice is not needed for this definition; a later local Hilbert-space argument uses it only to inherit completeness from the library's general $L^2$ Hilbert-space result.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-asymptotically-linear-estimator-and-influence-function",
+          "source_section": "Definition",
+          "quote": "Fix a law $P$ and an iid sample $X_1,\\ldots,X_n\\sim P$. For a measurable vector function $\\varphi:\\mathcal X\\to\\mathbb R^k$, write $P\\varphi=E_P[\\varphi(X)]$ and $P_n\\varphi=n^{-1}\\sum_{i=1}^n\\varphi(X_i)$, where $P_n=n^{-1}\\sum_{i=1}^n\\delta_{X_i}$ is the empirical measure. For a vector remainder $R_n$, $R_n=o_P(n^{-1/2})$ means $\\sqrt n R_n\\to0$ in $P$-probability.\n\nA measurable estimator sequence $\\widehat\\psi_n$ of $\\psi(P)\\in\\mathbb R^k$ is **asymptotically linear at $P$** with **estimator influence function** $\\varphi$ if\n\n$$\\widehat\\psi_n-\\psi(P)=(P_n-P)\\varphi+o_P(n^{-1/2}),$$\n\nwhere $\\varphi\\in L^2_0(P)^k$: $E_P\\varphi=0$ and $E_P\\|\\varphi\\|^2<\\infty$. The space $L^2_0(P)$ and its almost-sure equivalence convention are as in [[def-mean-zero-square-integrable-space]]. This definition alone does not assert regularity under local alternatives, pathwise differentiability of $\\psi$, or asymptotic normality.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-pathwise-differentiable-functional",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability law for one observation, let $\\mathcal P$ be a model of laws containing $P$, and let $\\psi:\\mathcal P\\to\\mathbb R^k$ be a target functional, where $k\\ge1$ is finite. A one-sided path $t\\mapsto P_t$, $0\\le t<\\epsilon$, through $P=P_0$ is **differentiable in quadratic mean (DQM)** with score $s\\in L^2(P)$ when its densities $p_t,p$ relative to one common sigma-finite measure $\\mu$ satisfy\n\n$$\\left\\|\\sqrt{p_t}-\\sqrt p-\\frac{t}{2}s\\sqrt p\\right\\|_{L^2(\\mu)}=o(t)\\qquad(t\\downarrow0).$$\n\nThe score initially belongs to $L^2(P)$; [[thm-dqm-score-mean-zero]] proves it is unique modulo $P$-almost-sure equality and has mean zero, so it lies in $L^2_0(P)$ as defined by [[def-mean-zero-square-integrable-space]]. The allowed scores form the **tangent set** of the designated paths ([[def-tangent-set]]); their **tangent space** $\\mathcal T$ is the closure of their real linear span in $L^2_0(P)$ ([[def-tangent-space]]). It is a closed linear subspace by [[thm-tangent-space-is-closed-linear-subspace]], and hence a Hilbert space under Countable Choice ([[thm-mean-zero-square-integrable-space-is-hilbert]]).\n\nThe functional $\\psi$ is **pathwise differentiable at $P$ relative to $\\mathcal T$** if the right derivative $\\dot\\psi_P(s):=\\lim_{t\\downarrow0}(\\psi(P_t)-\\psi(P))/t$ exists for every allowed path, depends only on its score, and extends to a continuous linear map $\\dot\\psi_P:\\mathcal T\\to\\mathbb R^k$. A vector $\\phi\\in L^2_0(P)^k$ is a **parameter influence curve** (or representer) when\n\n$$\\dot\\psi_P(s)=E_P[\\phi s]\\qquad(s\\in\\mathcal T),$$\n\nwith the expectation interpreted coordinatewise. The Hilbert-space Riesz theorem gives a unique representer in $\\mathcal T^k$; it is the **canonical gradient**. This representation requires Countable Choice, as in [[thm-riesz-representation-for-hilbert-space]] and [[def-countable-choice]]. The supplied density versions along a path use the separate Axiom of Choice in [[def-dqm-submodel-through-a-law]] and [[def-axiom-of-choice]]. The full set of ambient representers and its projection characterization are proved in [[thm-influence-curve-representers]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $X\\in L^2(P)$ and $P$ is a probability, Cauchy--Schwarz [F5] gives $\\mu=E_PX<\\infty$. For bounded centered $s$ and sufficiently small $t\\ge0$, $1+ts\\ge0$ and $E_P(1+ts)=1+tE_Ps=1$, so $P_{t,s}$ is a probability law with density $1+ts$ by [F9]. Direct rationalization gives $\\sqrt{1+u}-1-u/2=-u^2/[2(1+\\sqrt{1+u})^2]$; for $u=ts$ the $L^2(P)$ norm of the DQM remainder in [F10] is at most $t^2\\|s^2\\|_2/2=o(t)$ because $s$ is bounded. Thus the score is $s$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Every bounded mean-zero $s$ is an allowed score. If $g\\in L^2_0(P)$, truncate it to $g_m=\\max(-m,\\min(g,m))$. Then $g_m\\to g$ in $L^2(P)$ by [F6], since $|g_m-g|^2\\le g^2$ and the difference tends pointwise to zero. Also $E_Pg_m\\to E_Pg=0$ by Cauchy\u2013Schwarz and [F3], [F5]. Hence $s_m=g_m-E_Pg_m$ is bounded and mean-zero, and $s_m\\to g$ in $L^2(P)$. Thus the score closure is exactly $L^2_0(P)$ by the tangent-space convention [F10].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Since $P\\in\\mathcal M_X$, $E_PX<\\infty$; with bounded $s$, [F8] gives the finite expectation $E_{P_{t,s}}X=E_P[X(1+ts)]$, so every designated path lies in $\\mathcal M_X$. Linearity [F7] then yields $\\psi(P_{t,s})=E_{P_{t,s}}X=\\mu+tE_P[Xs]$. Since $E_Ps=0$, the right derivative is $E_P[(X-\\mu)s]$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Cauchy\u2013Schwarz gives $|E_P[(X-\\mu)s]|\\le\\|X-\\mu\\|_2\\|s\\|_2$, so the derivative extends continuously to $\\mathcal T$. The vector $X-\\mu$ is mean-zero and square-integrable, hence belongs to $\\mathcal T$. If another $\\tilde\\varphi\\in\\mathcal T$ represents the same derivative, then $h=\\tilde\\varphi-(X-\\mu)\\in\\mathcal T$ is orthogonal to every bounded mean-zero score; by density and continuity it is orthogonal to itself, so $E_Ph^2=0$ and $h=0$. By [F10], $X-\\mu$ is the unique representer in $\\mathcal T$ and therefore the canonical gradient.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 1.3",
+            "F1",
+            "F3",
+            "F5",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For iid observations, $(P_n-P)(X-\\mu)=n^{-1}\\sum_{i=1}^n(X_i-\\mu)=\\overline X_n-\\mu$ exactly. The remainder is zero, so the sample mean is asymptotically linear with estimator influence function $X-\\mu$ under [F2]. This algebraic identity invokes no central limit theorem.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: a probability law P and iid sample are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.1 allow X=0, with derivative and canonical gradient zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.1 allow a constant unit observation, with zero derivative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.1 remain valid for a degenerate law; the canonical gradient is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses one-sided paths beginning at t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 gives explicit path densities, so the construction needs no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no equivalence is asserted."
+        }
+      ],
+      "axioms_used": [],
+      "finite_checks": [
+        {
+          "id": "bounded-tilt-score",
+          "claim": "dP_{t,s}=(1+ts)dP is DQM with score s for bounded centered s.",
+          "result": "The exact square-root remainder is bounded in L\u00b2(P) by t\u00b2||s\u00b2||\u2082/2."
+        },
+        {
+          "id": "sample-mean-expansion",
+          "claim": "P_n(X\u2212\u03bc)=\bar X_n\u2212\u03bc.",
+          "result": "The identity holds exactly for every iid sample; the remainder is zero."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all five verification steps and exact F1-F10 suppliers. Bounded centered s makes density nonnegative for small t and normalized; rationalization gives O(t^2) DQM remainder. Finite X expectation persists under bounded likelihood ratio. Centered truncations converge in L2 by domination by g^2 and CS with 1; mean-zero space is closed. Derivative is E[(X-mu)s], bounded by the repaired integral CS and triangle citations; density/positive definiteness prove unique canonical gradient without invoking extra Riesz existence. Sample mean expansion has exactly zero remainder. Constant/zero X and zero scores covered; only specified paths asserted. Reader citation repair sound; manifest dependency mirror reconciled."
+      }
+    },
+    "ex-efficient-score-nuisance-projection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-efficient-score",
+          "source_section": "Definition",
+          "quote": "Let $\\theta\\in\\mathbb R^p$, $p\\ge1$ finite, be a parameter of interest at a law $P$. Assume its score vector $S_\\theta=(S_{\\theta,1},\\ldots,S_{\\theta,p})^T$ has components in $L^2_0(P)$; under a dominated differentiable parametric submodel these are the coordinate log-density scores of [[def-score-and-fisher-information]]. Let $\\mathcal T_\\eta\\subseteq L^2_0(P)$ be the closed nuisance tangent space of [[def-nuisance-tangent-space]]. The ambient $L^2_0(P)$ is as in [[def-mean-zero-square-integrable-space]]. The score-density convention uses the Axiom of Choice, while Hilbert projection uses Countable Choice; both dependencies are retained separately.\n\nThe Hilbert decomposition [[thm-orthogonal-decomposition-by-a-closed-subspace]] defines $\\Pi_{\\mathcal T_\\eta}f$ as the unique $g\\in\\mathcal T_\\eta$ with $f-g\\in\\mathcal T_\\eta^\\perp$, where orthogonality and $\\mathcal T_\\eta^\\perp$ have the meanings in [[def-orthogonality-and-orthogonal-complement]]. The **efficient score vector** and **efficient information matrix** are\n\n$$S_{\\mathrm{eff}}=S_\\theta-\\Pi_{\\mathcal T_\\eta}S_\\theta,\\qquad I_{\\mathrm{eff}}=E_P[S_{\\mathrm{eff}}S_{\\mathrm{eff}}^T],$$\n\nwhere $\\Pi_{\\mathcal T_\\eta}$ is the Hilbert-space orthogonal projection applied coordinatewise. This projection exists and is unique because $\\mathcal T_\\eta$ is a closed linear subspace; the projection theorem used by [[thm-orthogonal-decomposition-by-a-closed-subspace]] assumes Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pathwise-differentiable-functional",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability law for one observation, let $\\mathcal P$ be a model of laws containing $P$, and let $\\psi:\\mathcal P\\to\\mathbb R^k$ be a target functional, where $k\\ge1$ is finite. A one-sided path $t\\mapsto P_t$, $0\\le t<\\epsilon$, through $P=P_0$ is **differentiable in quadratic mean (DQM)** with score $s\\in L^2(P)$ when its densities $p_t,p$ relative to one common sigma-finite measure $\\mu$ satisfy\n\n$$\\left\\|\\sqrt{p_t}-\\sqrt p-\\frac{t}{2}s\\sqrt p\\right\\|_{L^2(\\mu)}=o(t)\\qquad(t\\downarrow0).$$\n\nThe score initially belongs to $L^2(P)$; [[thm-dqm-score-mean-zero]] proves it is unique modulo $P$-almost-sure equality and has mean zero, so it lies in $L^2_0(P)$ as defined by [[def-mean-zero-square-integrable-space]]. The allowed scores form the **tangent set** of the designated paths ([[def-tangent-set]]); their **tangent space** $\\mathcal T$ is the closure of their real linear span in $L^2_0(P)$ ([[def-tangent-space]]). It is a closed linear subspace by [[thm-tangent-space-is-closed-linear-subspace]], and hence a Hilbert space under Countable Choice ([[thm-mean-zero-square-integrable-space-is-hilbert]]).\n\nThe functional $\\psi$ is **pathwise differentiable at $P$ relative to $\\mathcal T$** if the right derivative $\\dot\\psi_P(s):=\\lim_{t\\downarrow0}(\\psi(P_t)-\\psi(P))/t$ exists for every allowed path, depends only on its score, and extends to a continuous linear map $\\dot\\psi_P:\\mathcal T\\to\\mathbb R^k$. A vector $\\phi\\in L^2_0(P)^k$ is a **parameter influence curve** (or representer) when\n\n$$\\dot\\psi_P(s)=E_P[\\phi s]\\qquad(s\\in\\mathcal T),$$\n\nwith the expectation interpreted coordinatewise. The Hilbert-space Riesz theorem gives a unique representer in $\\mathcal T^k$; it is the **canonical gradient**. This representation requires Countable Choice, as in [[thm-riesz-representation-for-hilbert-space]] and [[def-countable-choice]]. The supplied density versions along a path use the separate Axiom of Choice in [[def-dqm-submodel-through-a-law]] and [[def-axiom-of-choice]]. The full set of ambient representers and its projection characterization are proved in [[thm-influence-curve-representers]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-score-and-fisher-information",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment dominated by a fixed sigma-finite positive measure\n$\\mu$, and let $p_\\theta$ be selected finite-valued measurable\nRadon\u2013Nikodym density representatives as in\n[[def-likelihood-density]]. The simultaneous selection of this arbitrary-index\nfamily uses the Axiom of Choice. No measurability of $\\theta\\mapsto P_\\theta$\nor common exceptional null set for an arbitrary uncountable $\\Theta$ is\nimplied.\n\nLet $\\Theta$ be open in $\\mathbb R^d$, and fix a parameter $\\theta$ at\nwhich the selected family $\\eta\\mapsto p_\\eta(x)$ is differentiable for\n$\\mu$-almost every $x$, with measurable coordinate derivatives. On\n$\\{x:p_\\theta(x)>0\\}$, define the log-likelihood\n$\\ell_\\theta(x)=\\log p_\\theta(x)$ and the **score**\n$$S_\\theta(x):=\\nabla_\\theta\\ell_\\theta(x) =\\left(\\frac{\\partial}{\\partial\\theta_j}\\log p_\\theta(x)\\right)_{j=1}^d.$$\nSet $S_\\theta(x)=0$ where $p_\\theta(x)=0$, which is $P_\\theta$-null.\nFor $d=1$, this is $S_\\theta=\\partial_\\theta\\log p_\\theta$.\n\nFor $d=1$, the scalar **Fisher information** is\n$$I(\\theta):=\\mathbb E_\\theta[S_\\theta(X)^2]\\in[0,+\\infty].$$\nWhen $d>1$ and $S_\\theta$ is square-integrable, the **Fisher information\nmatrix** is $I(\\theta)=\\mathbb E_\\theta[S_\\theta(X)S_\\theta(X)^\\mathsf T]$;\nits $i,j$ entry is $\\mathbb E_\\theta[S_{\\theta,i}S_{\\theta,j}]$. No scalar\ninformation is defined here for a vector parameter.\nThe information matrix is a second-moment matrix by definition; it equals the\nscore covariance matrix when the score has mean zero.\n\nThe derivatives, score and information are defined relative to the specified\ndifferentiable representative family. The Radon\u2013Nikodym definition alone\ndoes not supply parameter differentiability or a canonical score version.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-efficient-score-canonical-gradient",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice.\n\nLet $H=L^2_0(P)$, let $S_\\theta\\in H^p$ be a finite-dimensional interest-score vector, and let $\\mathcal T_\\eta\\subseteq\\mathcal T\\subseteq H$ be closed linear nuisance and full tangent spaces, with $\\mathcal T_\\eta$ a subspace of $\\mathcal T$. Assume the designated allowed score set is exactly\n\n$$\\mathcal S=\\{a^TS_\\theta+t:a\\in\\mathbb R^p,\\ t\\in\\mathcal T_\\eta\\},\\qquad \\mathcal T=\\overline{\\mathcal S}^{\\,L^2(P)},$$\n\nand every allowed one-sided path with score $a^TS_\\theta+t\\in\\mathcal S$ has right target derivative $a$ for the parameter $\\theta$. If $I_{\\mathrm{eff}}=E_P[S_{\\mathrm{eff}}S_{\\mathrm{eff}}^T]$ is nonsingular, then $\\theta$ is pathwise differentiable and its canonical gradient is\n\n$$\\phi_{\\mathrm{can}}=I_{\\mathrm{eff}}^{-1}S_{\\mathrm{eff}}.$$\n\nIts covariance matrix is $E_P[\\phi_{\\mathrm{can}}\\phi_{\\mathrm{can}}^T]=I_{\\mathrm{eff}}^{-1}$. This theorem does not assert that an estimator attaining the covariance bound exists.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each parameter in the stated domain, $|\\theta(u+v)+\\eta u|\\le2|\\theta|+|\\eta|<1$, so each mass is positive. Their sum is one because $\\sum_{u,v}(u+v)=\\sum_{u,v}u=0$ and the four constant terms sum to four. Thus the family consists of probability laws by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Finite averaging, using [F6], gives $E_PU=E_PV=0$, $E_PU^2=E_PV^2=1$, and $E_PUV=0$. Thus $w=a(U+V)+bU$ is bounded and centered. Along $(\\theta_t,\\eta_t)=(at,bt)$ the likelihood ratio is $1+tw$, which is nonnegative and integrates to one for sufficiently small $t\\ge0$. The square-root identity $\\sqrt{1+z}-1-z/2=-z^2/[2(1+\\sqrt{1+z})^2]$ gives an $L^2(P)$ remainder bounded by $t^2\\|w^2\\|_2/2=o(t)$, so the path is DQM with score $w$ by [F2]. Direct differentiation of the log density gives interest score $U+V$ and nuisance score $U$ by [F3]. Thus the designated nuisance scores span $\\{U\\}$, which is closed since $\\|cU\\|_2=|c|$, and all designated scores $a(U+V)+bU$ span $\\{U,V\\}$, which is closed because $\\|aU+bV\\|_2^2=a^2+b^2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $U\\in\\mathcal T_\\eta$ and $E_P[(U+V-U)U]=E_P[VU]=0$, $U$ is the orthogonal projection of $S_\\theta=U+V$ onto $\\mathcal T_\\eta$. Hence $S_{\\mathrm{eff}}=V$ and $I_{\\mathrm{eff}}=E_PV^2=1$ by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Along each direction $(at,bt)$, the target parameter is $\\theta_t=at$, so its right derivative is $a$. Step 1.2 gives the full score-space decomposition $\\mathcal T=\\overline{\\{aS_\\theta+bU:a,b\\in\\mathbb R\\}}$; step 2.1 gives nonsingular $I_{\\mathrm{eff}}=1$. The finite densities are explicit, and the theorem's stated axiom inputs are Axiom of Choice [A1] and Countable Choice [A2]. Therefore the hypotheses of [F4] apply, and the canonical gradient is $I_{\\mathrm{eff}}^{-1}S_{\\mathrm{eff}}=V$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the finite sample space has four explicitly listed points."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 include the base values \u03b8=\u03b7=0 and compute the scores there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: efficient information equals one and is nonsingular."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 show the score pair is nondegenerate and efficient information is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the strict domain excludes the boundary 2|\u03b8|+|\u03b7|=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 applies the theorem with its stated AC and CC assumptions to explicit finite densities."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: it verifies one model and proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: it verifies one model and proves no equivalence."
+        }
+      ],
+      "axioms_used": [
+        {
+          "axiom": "Axiom of Choice",
+          "source": "def-axiom-of-choice",
+          "use": "The stated hypothesis of the canonical-gradient theorem; finite densities are explicit."
+        },
+        {
+          "axiom": "Countable Choice",
+          "source": "def-countable-choice",
+          "use": "The stated Hilbert projection and canonical-gradient hypothesis."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "mass-table",
+          "claim": "All four masses are positive and sum to one when 2|\u03b8|+|\u03b7|<1.",
+          "result": "Each perturbation has absolute value at most 2|\u03b8|+|\u03b7|, while the sums of U and V over the four points are zero."
+        },
+        {
+          "id": "score-inner-products",
+          "claim": "E U=E V=0, E U\u00b2=E V\u00b2=1, E UV=0.",
+          "result": "Direct averaging over the four equally weighted sign pairs gives these values."
+        },
+        {
+          "id": "efficient-projection",
+          "claim": "S_eff=V and I_eff=1.",
+          "result": "U is the projection of U+V onto span{U}; V is orthogonal to U and has second moment one."
+        },
+        {
+          "id": "canonical-gradient",
+          "claim": "The canonical gradient for \u03b8 is V.",
+          "result": "The local score space has the interest-plus-nuisance decomposition and the target derivative is a, so the theorem gives I_eff\u207b\u00b9S_eff=V."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all four steps and exact F1-F6/A1-A2 suppliers. Domain 2|theta|+|eta|<1 makes all four masses positive and normalized. At origin U,V centered orthonormal by direct averaging; every real direction (a,b) admits a sufficiently small one-sided interval and bounded-score DQM identity. Scores a(U+V)+bU give exactly full two-dimensional span, nuisance exactly span U; both closed by explicit coefficient norm formulas. Projection of U+V onto nuisance is U, residual V has information 1. Target is identifiable since E_theta,eta V=theta, and target derivative on each designated path equals a. Canonical-gradient theorem therefore applies with stated AC/CC assumptions. Zero directions and origin checked; excluded parameter boundary is not used. No defect."
+      }
+    }
+  }
+}

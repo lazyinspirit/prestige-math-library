@@ -1,0 +1,958 @@
+{
+  "version": 1,
+  "scope": [
+    "def-m-estimator",
+    "def-z-estimator",
+    "thm-m-estimator-consistency",
+    "thm-z-estimator-consistency",
+    "ex-quadratic-criterion-sample-mean",
+    "ex-absolute-criterion-sample-median",
+    "ex-finite-class-m-estimator-consistency",
+    "cex-unseparated-m-estimator-is-inconsistent"
+  ],
+  "contracts": {
+    "def-m-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition supplies ‘A measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$’ on a probability experiment. Such a map into empty Θ cannot exist: probability mass one excludes an empty sample space. The empirical average 1/n uses the estimator sequence's positive sample indices; it is not an empty sum instance.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_manifest_serialization/gate3_boundaries_19_22",
+            "reason": "Definition supplies ‘A measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$’ on a probability experiment. Such a map into empty Θ cannot exist: probability mass one excludes an empty sample space. The empirical average 1/n uses the estimator sequence's positive sample indices; it is not an empty sum instance."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits m_θ identically zero; every supplied measurable estimator then has exact empirical gap zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits a singleton Θ; the sole supplied estimator has optimization gap zero for every n≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly does not assert existence or uniqueness of a maximizer; ties and constant criteria do not license an unprovided selector."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition target is an arbitrary metric space, not a fixed numeric interval; maximizing/minimizing forms are both supplied, with finite measurable approximate gap."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies the measurable estimator and explicitly does not assert a maximizer exists. It performs no selection to create one."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition assigns exactness by attainment of the empirical supremum and approximation by a finite measurable o_P(1) gap for a supplied measurable estimator; it does not prove an optimization-existence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition explicitly does not assert that a maximizer exists or that Pm_θ has a unique maximizer. The exact/approximate gap conventions do not imply consistency, population uniqueness, or existence of a measurable selector."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Read complete current Definition and all six direct supplier definitions. Fixed-law IID sampling, pointwise L1 integrability, Borel measurable estimator, finite measurable random evaluations and finite measurable approximate gap are explicit. Supremum attainment/selector existence and population uniqueness are not asserted. Sign reversal handles minimization. Empty target admits no estimator from probability mass one; singleton/zero criterion gives gap zero. No choice or unjustified joint-measurability implication is used. Bartlett Lecture15 pp2–8 and van der Vaart §5.3 supply the terminology; reader/refuter report no in-scope defect."
+      }
+    },
+    "def-z-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition supplies ‘A measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$’ and ‘a finite integer $q\\ge1$’. Empty Θ admits no such map from a probability experiment; the 1/n empirical equation uses positive estimator-sequence indices, not n=0.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_manifest_serialization/gate3_boundaries_19_22",
+            "reason": "Definition supplies ‘A measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$’ and ‘a finite integer $q\\ge1$’. Empty Θ admits no such map from a probability experiment; the 1/n empirical equation uses positive estimator-sequence indices, not n=0."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition exact root Ψ_n(θhat)=0 is included; no division by this residual is performed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits q=1; all-norm equivalence relates its scalar norm to the same Euclidean o_P(1) convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition does not assert a root exists; a singleton Θ gives a Z-estimator only if its supplied exact/approximate residual condition holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition candidate space is an arbitrary metric space rather than a numerical interval; it imposes no parameter-endpoint classification."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition estimator and measurable evaluation are supplied; it does not select a root or infer a root from an M-criterion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition calls a supplied measurable estimator an exact or approximate Z-estimator according to Ψ_n(θhat_n)=0 or ||Ψ_n(θhat_n)||=o_P(1), with q≥1 finite; it supplies terminology rather than existence of roots."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition explicitly does not infer a Z-equation from an M-criterion: a residual condition does not conversely supply differentiability, an interior optimum, or an M-estimator interpretation."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Read complete current Definition and all seven direct suppliers, including the full published norm-equivalence proof and absolute-value suppliers relevant to reader20:1. q is fixed finite and >=1; norm-integrability implies finite coordinate expectations. Evaluations are explicitly measurable, estimators supplied rather than selected. Norm constants convert both probability tails: {N(v)>e} subset {||v||2>e/C}, and {||v||2>e} subset {N(v)>ce}. Exact zero residual included; empty target provides no estimator; singleton need not supply a root. No score equation is inferred for nonsmooth criteria, and no choice is used. Published proof1.1 historical citation omission was nonfatal and has now been corrected in owner L9/deps; it does not invalidate this norm interface. Bartlett pp2–4,9 and van der Vaart §5.3 checked; no in-scope defect."
+      }
+    },
+    "thm-m-estimator-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-m-estimator",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on a measurable observation space $(\\mathcal X,\\mathcal A)$, and let $X_1,X_2,\\ldots$ be IID with law $P$; IID means a common law and mutual independence of the whole family ([[def-probability-measure]], [[def-identically-distributed-and-iid-random-variables]]). Let $(\\Theta,d)$ be a metric candidate space with its Borel sigma-algebra ([[def-metric-space]], [[def-borel-sigma-algebra]]). For each $\\theta\\in\\Theta$, let $m_\\theta:\\mathcal X\\to\\mathbb R$ be measurable and assume $P|m_\\theta|<\\infty$. Define\n$$P_nm_\\theta=\\frac1n\\sum_{i=1}^n m_\\theta(X_i),\\qquad Pm_\\theta=\\int m_\\theta\\,dP.$$\n\nA measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$ is an **M-estimator** if it maximizes or minimizes $\\theta\\mapsto P_nm_\\theta$; measurability is as in [[def-estimator-sequence-in-iid-experiments]]. It is an exact maximizer when $P_nm_{\\hat\\theta_n}=\\sup_{\\theta\\in\\Theta}P_nm_\\theta$, and an $o_P(1)$-approximate maximizer when the finite measurable gap $\\sup_{\\theta\\in\\Theta}P_nm_\\theta-P_nm_{\\hat\\theta_n}$ is $o_P(1)$. For minimization use the gap $P_nm_{\\hat\\theta_n}-\\inf_{\\theta\\in\\Theta}P_nm_\\theta$. The notation $o_P(1)$ is that of [[def-op-and-little-op-stochastic-bounds]].\n\nThe maximizing and minimizing forms are both included; replacing $m_\\theta$ by $-m_\\theta$ converts one to the other. This definition does not assert that a maximizer exists, nor that the population criterion $Pm_\\theta$ has a unique maximizer. Whenever a random candidate is substituted into the empirical or population criterion, assume that evaluation is measurable and finite.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-consistency-in-probability",
+          "source_section": "Definition",
+          "quote": "Let $(T_n)$ be an estimator sequence of an estimand $\\psi$ with metric target $(\\mathcal T,d)$, and fix $\\theta\\in\\Theta$. The sequence is **consistent in probability at $\\theta$** if for every $\\varepsilon>0$,\n$$P_\\theta^{\\otimes n}\\bigl(\\{x\\in\\mathcal X^n:d(T_n(x),\\psi(\\theta))>\\varepsilon\\}\\bigr)\\longrightarrow0.$$\n\nThe error event is measurable: by the triangle inequality, $t\\mapsto d(t,\\psi(\\theta))$ is continuous, so its strict superlevel set at $\\varepsilon$ is open in the target metric topology and hence Borel; its preimage under $T_n$ is measurable.\n\nThe consistency is **pointwise** because $\\theta$ is fixed before the limit. It does not assert uniform convergence over $\\Theta$ ([[def-estimator-sequence-in-iid-experiments]]).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\varepsilon>0$. If $\\{\\theta:d(\\theta,\\theta_0)\\ge\\varepsilon\\}$ is empty, the corresponding metric-error event is empty and its probability is zero for every $n$. Otherwise write $\\gamma=\\gamma_\\varepsilon$, which is finite and positive because the nonempty set contains a point with finite population criterion and [A3] bounds its supremum strictly below the finite $M(\\theta_0)$. On the event $d(\\hat\\theta_n,\\theta_0)\\ge\\varepsilon$, separation gives $M(\\hat\\theta_n)\\le M(\\theta_0)-\\gamma$. The remaining steps treat this nonempty case.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On that event, [A2] gives $M_n(\\hat\\theta_n)\\le M(\\theta_0)-\\gamma+U_n$ and $M_n(\\theta_0)\\ge M(\\theta_0)-U_n$. The approximate-maximization inequality [A4] also gives $M_n(\\hat\\theta_n)\\ge M_n(\\theta_0)-\\rho_n$. Combining them yields $\\gamma\\le2U_n+\\rho_n$.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "A3",
+            "A4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $U_n=o_P(1)$ and $\\rho_n=o_P(1)$, the probability of $2U_n+\\rho_n\\ge\\gamma$ tends to zero. Step 2.1 therefore gives $P^{\\otimes n}\\{d(\\hat\\theta_n,\\theta_0)\\ge\\varepsilon\\}\\to0$, which implies the strict-error probability in [F3] tends to zero. Thus $\\hat\\theta_n$ is consistent.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "A2",
+            "A4",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the minimizing case, set $\\widetilde M_n=-M_n$ and $\\widetilde M=-M$. By [A5], the separated-minimum condition becomes separated maximization of $\\widetilde M$, and $\\widetilde M_n(\\hat\\theta_n)\\ge\\widetilde M_n(\\theta_0)-\\sigma_n$. By [A2], $\\sup_\\theta|\\widetilde M_n(\\theta)-\\widetilde M(\\theta)|=U_n=o_P(1)$. Thus the maximizing hypotheses in steps 1.1–3.1 hold for the transformed criterion, proving consistency in the minimizing case as well.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For an exact or approximate global M-estimator, [F1] and [A6] give $M_n(\\hat\\theta_n)\\ge\\sup_{\\theta\\in\\Theta}M_n(\\theta)-\\tau_n$. Since $M_n(\\theta_0)\\le\\sup_{\\theta\\in\\Theta}M_n(\\theta)$, this implies $M_n(\\hat\\theta_n)\\ge M_n(\\theta_0)-\\tau_n$, which is the relative maximization condition [A4] with $\\rho_n=\\tau_n$. Thus the theorem applies.",
+          "step": "5.1",
+          "inputs": [
+            "A4",
+            "A6",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes $\\theta_0\\in\\Theta$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem is invariant under the numeric value of the target; zero is not a distinguished boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem is invariant under the numeric value of the target; one is not a distinguished boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement sets the supremum over an empty error set to $-\\infty$; for $\\Theta=\\{\\theta_0\\}$ the conclusion is immediate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the metric separation gap and does not require $\\theta_0$ to be an interior point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 choose only an arbitrary positive $\\varepsilon$; no axiom of choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement; Proof steps 1.1–3.1 use positive separation γ_ε, uniform error U_n=o_P(1) and relative empirical gap ρ_n=o_P(1) to prove consistency; steps 4.1–5.1 handle minimization and global gap specialization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Consistency is not asserted to imply the uniform law or separated population criterion. The Statement explicitly keeps uniform convergence as a hypothesis, and step 2.1 only bounds the error event by γ_ε≤2U_n+ρ_n."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Complete current Statement, Facts and all five proof steps reviewed against all three direct supplier definitions and reader/refuter evidence. Nonempty outside-neighborhood set gives finite positive gamma; empty set gives zero error without arithmetic with infinity. On error, gamma<=2U_n+rho_n; {2U_n+rho_n>=gamma} subset {U_n>gamma/4} union {rho_n>gamma/4}, so the tail tends to zero using the stated scalar o_P convention. Negation preserves the uniform error and converts separated minimization; global finite gap tau_n implies the relative gap since theta0 is available. Strict consistency follows from the stronger >= error bound. Singleton, ties without separation, and boundary targets checked; no compactness, independence of errors, selector existence or choice is inferred. Bartlett pp7–8 and van der Vaart Theorem5.8/proof checked; the latter uses stronger GC/exact-maximization premises and its text-extracted inf appears to be a source typo, not used by the local proof."
+      }
+    },
+    "thm-z-estimator-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-z-estimator",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on $(\\mathcal X,\\mathcal A)$, let $X_1,X_2,\\ldots$ be IID with law $P$ ([[def-probability-measure]], [[def-identically-distributed-and-iid-random-variables]]), and let $(\\Theta,d)$ be a metric candidate space with its Borel sigma-algebra ([[def-metric-space]], [[def-borel-sigma-algebra]]). Fix a finite integer $q\\ge1$ and a norm on $\\mathbb R^q$. For each $\\theta\\in\\Theta$, let $\\psi_\\theta:\\mathcal X\\to\\mathbb R^q$ be measurable with $P\\|\\psi_\\theta\\|<\\infty$. Define\n$$\\Psi_n(\\theta)=P_n\\psi_\\theta=\\frac1n\\sum_{i=1}^n\\psi_\\theta(X_i),\\qquad \\Psi(\\theta)=P\\psi_\\theta.$$\n\nA measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$ is a **Z-estimator** if it is an exact or $o_P(1)$-approximate root: $\\Psi_n(\\hat\\theta_n)=0$ for every $n$, or $\\|\\Psi_n(\\hat\\theta_n)\\|=o_P(1)$. Measurability is as in [[def-estimator-sequence-in-iid-experiments]], and $o_P(1)$ has the convention of [[def-op-and-little-op-stochastic-bounds]]. Whenever a random candidate is substituted into an estimating equation, assume the evaluation is measurable.\n\nBecause $q\\ge1$ is finite, [[thm-all-norms-on-rn-are-equivalent]] gives constants $c,C>0$ with $c\\|v\\|_2\\le\\|v\\|\\le C\\|v\\|_2$ for every $v\\in\\mathbb R^q$. Thus for every $\\mathbb R^q$-valued sequence, convergence of the chosen-norm tails to zero is equivalent to the Euclidean $o_P(1)$ convention in [[def-op-and-little-op-stochastic-bounds]].\n\nThis definition does not infer a Z-estimating equation from an M-criterion. Differentiating an M-criterion is justified only under additional differentiability and interior-point hypotheses; a nonsmooth criterion need not have a score equation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-consistency-in-probability",
+          "source_section": "Definition",
+          "quote": "Let $(T_n)$ be an estimator sequence of an estimand $\\psi$ with metric target $(\\mathcal T,d)$, and fix $\\theta\\in\\Theta$. The sequence is **consistent in probability at $\\theta$** if for every $\\varepsilon>0$,\n$$P_\\theta^{\\otimes n}\\bigl(\\{x\\in\\mathcal X^n:d(T_n(x),\\psi(\\theta))>\\varepsilon\\}\\bigr)\\longrightarrow0.$$\n\nThe error event is measurable: by the triangle inequality, $t\\mapsto d(t,\\psi(\\theta))$ is continuous, so its strict superlevel set at $\\varepsilon$ is open in the target metric topology and hence Borel; its preimage under $T_n$ is measurable.\n\nThe consistency is **pointwise** because $\\theta$ is fixed before the limit. It does not assert uniform convergence over $\\Theta$ ([[def-estimator-sequence-in-iid-experiments]]).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\varepsilon>0$. If $\\{\\theta:d(\\theta,\\theta_0)\\ge\\varepsilon\\}$ is empty, the corresponding metric-error event is empty and its probability is zero for every $n$. Otherwise $b=b_\\varepsilon$ is finite and positive: [A3] gives positivity, and any point in this nonempty set has a finite population equation norm by integrability in [A1]. Put $V_n=\\sup_\\theta\\|\\Psi_n(\\theta)-\\Psi(\\theta)\\|$ and $R_n=\\|\\Psi_n(\\hat\\theta_n)\\|$. Both are measurable, and $V_n=o_P(1)$ and $R_n=o_P(1)$ by [A2] and [A4]. The remaining steps treat this nonempty case.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "F2",
+            "choose",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the event $d(\\hat\\theta_n,\\theta_0)\\ge\\varepsilon$, separation and the triangle inequality give $$b\\le\\|\\Psi(\\hat\\theta_n)\\|\\le\\|\\Psi(\\hat\\theta_n)-\\Psi_n(\\hat\\theta_n)\\|+\\|\\Psi_n(\\hat\\theta_n)\\|\\le V_n+R_n.$$ Thus the metric-error event is contained in $\\{V_n+R_n\\ge b\\}$. This uses the equation error itself, with no representation of the nonlinear quantity $-\\|P_n\\psi_\\theta\\|$ as an empirical average of a fixed criterion.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $b>0$, the union bound gives $P^{\\otimes n}(V_n+R_n\\ge b)\\le P^{\\otimes n}(V_n>b/3)+P^{\\otimes n}(R_n>b/3)\\to0$ by [F2] and step 1.1. Step 2.1 therefore implies $P^{\\otimes n}\\{d(\\hat\\theta_n,\\theta_0)\\ge\\varepsilon\\}\\to0$, and hence the same holds with strict inequality. Together with the empty case of step 1.1, this proves consistency for every $\\varepsilon>0$ by [F4].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes $\\theta_0\\in\\Theta$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem is invariant under the numeric value of the target; zero is not a distinguished boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem is invariant under the numeric value of the target; one is not a distinguished boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles every empty outside-neighborhood set explicitly, including a singleton parameter space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses metric separation and requires no interior point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use no choice from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement; Proof steps 1.1–3.1 use the uniform equation error, positive population separation b_ε and o_P(1) empirical residual to bound the metric-error event and prove consistency."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Consistency is not asserted to imply the uniform equation law, separated population root or small empirical residual; step 2.1 proves only the error-event inclusion in {V_n+R_n≥b_ε} under those hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Complete current Statement, Facts and all three proof steps reviewed against all three direct supplier definitions and reader/refuter evidence. q>=1 is finite with chosen norm; integrability makes every population equation finite. Outside-neighborhood infimum is finite positive when nonempty; empty sets give zero metric error. Triangle inequality bounds population residual by V_n+R_n, then {V_n+R_n>=b} subset {V_n>b/3} union {R_n>b/3}. Measurability and both o_P errors are explicit. Zero empirical residual and singleton target checked; no differentiability/interior assumption or choice is needed. No invalid empirical-average representation of -||Pn psi|| is made. Bartlett p9 and van der Vaart Theorem5.10/proof checked; local probability/approximate-root variant follows directly from its authored inequality."
+      }
+    },
+    "ex-quadratic-criterion-sample-mean": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-m-estimator",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on a measurable observation space $(\\mathcal X,\\mathcal A)$, and let $X_1,X_2,\\ldots$ be IID with law $P$; IID means a common law and mutual independence of the whole family ([[def-probability-measure]], [[def-identically-distributed-and-iid-random-variables]]). Let $(\\Theta,d)$ be a metric candidate space with its Borel sigma-algebra ([[def-metric-space]], [[def-borel-sigma-algebra]]). For each $\\theta\\in\\Theta$, let $m_\\theta:\\mathcal X\\to\\mathbb R$ be measurable and assume $P|m_\\theta|<\\infty$. Define\n$$P_nm_\\theta=\\frac1n\\sum_{i=1}^n m_\\theta(X_i),\\qquad Pm_\\theta=\\int m_\\theta\\,dP.$$\n\nA measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$ is an **M-estimator** if it maximizes or minimizes $\\theta\\mapsto P_nm_\\theta$; measurability is as in [[def-estimator-sequence-in-iid-experiments]]. It is an exact maximizer when $P_nm_{\\hat\\theta_n}=\\sup_{\\theta\\in\\Theta}P_nm_\\theta$, and an $o_P(1)$-approximate maximizer when the finite measurable gap $\\sup_{\\theta\\in\\Theta}P_nm_\\theta-P_nm_{\\hat\\theta_n}$ is $o_P(1)$. For minimization use the gap $P_nm_{\\hat\\theta_n}-\\inf_{\\theta\\in\\Theta}P_nm_\\theta$. The notation $o_P(1)$ is that of [[def-op-and-little-op-stochastic-bounds]].\n\nThe maximizing and minimizing forms are both included; replacing $m_\\theta$ by $-m_\\theta$ converts one to the other. This definition does not assert that a maximizer exists, nor that the population criterion $Pm_\\theta$ has a unique maximizer. Whenever a random candidate is substituted into the empirical or population criterion, assume that evaluation is measurable and finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-estimator-sequence-in-iid-experiments",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric model on a statistical experiment, and let $\\psi:\\Theta\\to\\mathcal T$ be an estimand whose target set $\\mathcal T$ is equipped with a metric $d$ ([[def-statistical-experiment]], [[def-parametric-statistical-model]], [[def-estimand-on-a-statistical-model]], [[def-metric-space]]). For $n\\ge1$, the IID sample-size-$n$ experiment has sample space $\\mathcal X^n$, product sigma-algebra $\\mathcal A^{\\otimes n}$, and sampling law $P_\\theta^{\\otimes n}$ at parameter $\\theta$ ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product law is defined recursively from $P_\\theta$; each factor is a probability measure and hence sigma-finite, so the finite product theorem supplies its existence, rectangle formula, and uniqueness ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\n\nA **nonrandomized estimator sequence** of $\\psi$ is a sequence of measurable maps, in the sense of [[def-measurable-function-between-measurable-spaces]],\n$$T_n:(\\mathcal X^n,\\mathcal A^{\\otimes n})\\to(\\mathcal T,\\mathcal B(\\mathcal T)),\\qquad n\\ge1,$$\nwhere $\\mathcal B(\\mathcal T)$ is the sigma-algebra generated by the open sets of the metric $d$, that is, the Borel sigma-algebra of its metric topology ([[def-borel-sigma-algebra]]). Its sampling distribution at $\\theta$ and sample size $n$ is the pushforward of $P_\\theta^{\\otimes n}$ by $T_n$.\n\nThis definition fixes IID repeated sampling and data-measurable estimators. It imposes no measurability on the parameter map $\\theta\\mapsto P_\\theta$ or on $\\psi$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\bar x_n=n^{-1}\\sum_i x_i$. Expanding both sides gives $\\sum_i(x_i-\\theta)^2=\\sum_i(x_i-\\bar x_n)^2+n(\\theta-\\bar x_n)^2$, because $\\sum_i(x_i-\\bar x_n)=0$. Thus $P_nm_\\theta=P_nm_{\\bar x_n}-(\\theta-\\bar x_n)^2$, which is uniquely maximized at $\\bar x_n$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\mu=PX$. Expanding $X-\\theta=(X-\\mu)+(\\mu-\\theta)$ and using $P(X-\\mu)=0$ gives $Pm_\\theta=-P[(X-\\mu)^2]-(\\theta-\\mu)^2$. The moment assumptions make the mean and centered second moment finite, so this is uniquely maximized at $\\mu$.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The IID sequence in [F4] gives the repeated-sampling context. If every coordinate of $x,y\\in\\mathbb R^n$ differs by less than $\\delta$, then $|\\bar x_n(x)-\\bar x_n(y)|\\le n^{-1}\\sum_i|x_i-y_i|<\\delta$. Hence the sample-mean map is continuous for the product topology. Inverse images of open sets are open, so the map is Borel measurable under [A1]; it is an estimator sequence by [F2] and is an exact M-estimator by [F1] and step 1.1. The target metric is the usual metric in [F3]. [A1, F1, F2, F3, F4, step 1.1, given, algebra] ∎\n\nThis example identifies the finite-sample and population criteria. It does not claim the global uniform-convergence premise on the noncompact set $\\mathbb R$; that premise must be checked separately before applying the consistency theorem.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "A1",
+            "F2",
+            "F1",
+            "step 1.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes $n\\ge1$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 remain valid when all data and the population mean equal zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 remain valid for data equal to one and a point-mass population at one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 gives the unique maximizer at the point mass value when variance is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The candidate space is $\\mathbb R$ and has no endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the sample mean is explicitly defined and measurable; no optimizer selection is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Example; Verification step 1.1 gives P_n m_θ=P_n m_Xbar−(θ−Xbar)², so θ=Xbar attains the maximum; step 1.2 proves the analogous population claim at μ."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The same square identities in Verification steps 1.1–1.2 force every empirical maximizer to equal Xbar and every population maximizer to equal μ. These local optimizer characterizations are checked; the Example expressly does not claim a global uniform law on R."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "single-observation",
+          "claim": "For $n=1$, $P_nm_\\theta=-(x_1-\\theta)^2$.",
+          "result": "The unique maximizer is $\\theta=x_1=\\bar x_1$, as in step 1.1."
+        },
+        {
+          "id": "point-mass-population",
+          "claim": "For $P=\\delta_c$, $PX=c$ and $\\operatorname{Var}_P(X)=0$.",
+          "result": "Step 1.2 gives $Pm_\\theta=-(\\theta-c)^2$, uniquely maximized at $c$."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Complete three-step Verification, Example and all five direct suppliers read with reader/refuter evidence. Empirical square completion leaves n(theta-Xbar)^2; population expansion is justified by finite first/second moments and zero centered first moment, yielding unique maximizers in both directions. Fixed-theta criterion is integrable since (X-theta)^2<=2X^2+2theta^2. Coordinate delta bound proves sample-mean continuity; finite rational-box basis identifies product and topological Borel sigma-algebras in both directions. n1, all-equal/zero/one samples and zero-variance point masses checked; no selection or AC used. Example explicitly does not claim a global uniform law over R. Reader A1 clarification and corrected Chen nonlinear-regression locator accepted, amended locally to correct Bartlett mean-criterion PDF locator from p4 to p5 (slide4). Source supports the claim; no mathematical Statement or proof body changed. Published real-line Proof1.5 nonstrict absolute-value equivalence follows from def-abs-value and order by cases, so the metric/topology used here is sound; citation polish now corrected by the independently reviewed owner L1/Proof1.5 repair."
+      }
+    },
+    "ex-absolute-criterion-sample-median": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-m-estimator",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on a measurable observation space $(\\mathcal X,\\mathcal A)$, and let $X_1,X_2,\\ldots$ be IID with law $P$; IID means a common law and mutual independence of the whole family ([[def-probability-measure]], [[def-identically-distributed-and-iid-random-variables]]). Let $(\\Theta,d)$ be a metric candidate space with its Borel sigma-algebra ([[def-metric-space]], [[def-borel-sigma-algebra]]). For each $\\theta\\in\\Theta$, let $m_\\theta:\\mathcal X\\to\\mathbb R$ be measurable and assume $P|m_\\theta|<\\infty$. Define\n$$P_nm_\\theta=\\frac1n\\sum_{i=1}^n m_\\theta(X_i),\\qquad Pm_\\theta=\\int m_\\theta\\,dP.$$\n\nA measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$ is an **M-estimator** if it maximizes or minimizes $\\theta\\mapsto P_nm_\\theta$; measurability is as in [[def-estimator-sequence-in-iid-experiments]]. It is an exact maximizer when $P_nm_{\\hat\\theta_n}=\\sup_{\\theta\\in\\Theta}P_nm_\\theta$, and an $o_P(1)$-approximate maximizer when the finite measurable gap $\\sup_{\\theta\\in\\Theta}P_nm_\\theta-P_nm_{\\hat\\theta_n}$ is $o_P(1)$. For minimization use the gap $P_nm_{\\hat\\theta_n}-\\inf_{\\theta\\in\\Theta}P_nm_\\theta$. The notation $o_P(1)$ is that of [[def-op-and-little-op-stochastic-bounds]].\n\nThe maximizing and minimizing forms are both included; replacing $m_\\theta$ by $-m_\\theta$ converts one to the other. This definition does not assert that a maximizer exists, nor that the population criterion $Pm_\\theta$ has a unique maximizer. Whenever a random candidate is substituted into the empirical or population criterion, assume that evaluation is measurable and finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-estimator-sequence-in-iid-experiments",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric model on a statistical experiment, and let $\\psi:\\Theta\\to\\mathcal T$ be an estimand whose target set $\\mathcal T$ is equipped with a metric $d$ ([[def-statistical-experiment]], [[def-parametric-statistical-model]], [[def-estimand-on-a-statistical-model]], [[def-metric-space]]). For $n\\ge1$, the IID sample-size-$n$ experiment has sample space $\\mathcal X^n$, product sigma-algebra $\\mathcal A^{\\otimes n}$, and sampling law $P_\\theta^{\\otimes n}$ at parameter $\\theta$ ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product law is defined recursively from $P_\\theta$; each factor is a probability measure and hence sigma-finite, so the finite product theorem supplies its existence, rectangle formula, and uniqueness ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\n\nA **nonrandomized estimator sequence** of $\\psi$ is a sequence of measurable maps, in the sense of [[def-measurable-function-between-measurable-spaces]],\n$$T_n:(\\mathcal X^n,\\mathcal A^{\\otimes n})\\to(\\mathcal T,\\mathcal B(\\mathcal T)),\\qquad n\\ge1,$$\nwhere $\\mathcal B(\\mathcal T)$ is the sigma-algebra generated by the open sets of the metric $d$, that is, the Borel sigma-algebra of its metric topology ([[def-borel-sigma-algebra]]). Its sampling distribution at $\\theta$ and sample size $n$ is the pushforward of $P_\\theta^{\\otimes n}$ by $T_n$.\n\nThis definition fixes IID repeated sampling and data-measurable estimators. It imposes no measurability on the parameter map $\\theta\\mapsto P_\\theta$ or on $\\psi$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The IID data context is as in [F4], and the candidate set is a metric space by [F3]. Each order statistic has the finite min-max representation $x_{(j)}=\\min_{S\\subseteq\\{1,\\ldots,n\\},\\,|S|=j}\\max_{i\\in S}x_i$: every j-element subset contains a value at least $x_{(j)}$, while the subset of the first j ordered entries has maximum $x_{(j)}$. Coordinate projections are continuous. For finite vectors $a,b$, the maxima differ by at most $\\max_i|a_i-b_i|$: each $a_i\\le b_i+\\delta$ for $\\delta=\\max_i|a_i-b_i|$, and the reverse inequality follows by swapping $a,b$; minima satisfy the same bound by negating the vectors. Thus finite maxima and minima, each order statistic, and the stated middle-point selection are continuous, hence Borel measurable under [A1]. The selection is an estimator sequence by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $Q(\\theta)=\\sum_i|x_i-\\theta|$. For $n=2k+1$ and $\\theta<x_{(k+1)}$, let $\\delta=x_{(k+1)}-\\theta>0$. Moving to $x_{(k+1)}$ decreases each of the k+1 distances for indices $i\\ge k+1$ by exactly $\\delta$; each of the other k distances can increase by at most $\\delta$ by the triangle inequality. Therefore $Q(x_{(k+1)})-Q(\\theta)\\le k\\delta-(k+1)\\delta=-\\delta<0$. For $\\theta>x_{(k+1)}$, the k+1 distances for indices $i\\le k+1$ decrease by $\\delta=\\theta-x_{(k+1)}$, while each of the other k distances can increase by at most $\\delta$, giving the same strict inequality. Thus the odd-sample median uniquely minimizes $Q$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $n=2k$ and $\\theta\\in[x_{(k)},x_{(k+1)}]$, the first k observations lie at or below $\\theta$ and the last k lie at or above it, so $Q(\\theta)=k\\theta-\\sum_{i=1}^k x_{(i)}+\\sum_{i=k+1}^{2k}x_{(i)}-k\\theta$ is constant on this interval. If $\\theta<x_{(k)}$, moving to $x_{(k)}$ decreases the k+1 distances for $i\\ge k$ by $\\delta=x_{(k)}-\\theta$, while the other k-1 distances can increase by at most $\\delta$; hence $Q(x_{(k)})-Q(\\theta)\\le(k-1)\\delta-(k+1)\\delta=-2\\delta<0$. If $\\theta>x_{(k+1)}$, moving to $x_{(k+1)}$ decreases the k+1 distances for $i\\le k+1$ by $\\delta=\\theta-x_{(k+1)}$, while the other k-1 distances can increase by at most $\\delta$, so $Q(x_{(k+1)})-Q(\\theta)\\le-2\\delta<0$. Therefore the interval is exactly the minimizing set of $Q$ and the maximizing set of $P_nm_\\theta$ by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a finite nonempty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: the order-statistic proof includes samples containing zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: the order-statistic proof includes samples containing one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: when all observations coincide, the maximizing interval is that singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The candidate space is $\\mathbb R$ and has no endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 gives an explicit measurable midpoint selection; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Example; Verification steps 1.2 and 2.1 establish the complete maximizing set of the negative absolute criterion: the middle observation for odd n and the closed middle interval for even n. Inside that set the criterion attains its maximum."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Example; Verification steps 1.2 and 2.1 show strict improvement when θ lies outside the displayed middle point/interval. Thus every maximizer belongs to that set; this reverse set characterization is proved locally, not an inference from M-estimator consistency."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-observation",
+          "claim": "For $n=1$, $Q(\\theta)=|x_1-\\theta|$.",
+          "result": "The unique minimizer is the single order statistic $x_{(1)}$."
+        },
+        {
+          "id": "two-observations",
+          "claim": "For $n=2$ and $x_1\\le x_2$, $Q(\\theta)=|x_1-\\theta|+|x_2-\\theta|$.",
+          "result": "It equals $x_2-x_1$ on $[x_1,x_2]$ and is larger outside, matching step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Complete three-step Verification, Example and all five cited suppliers reviewed. Finite min over j-subsets of coordinate maxima is the jth order statistic; maxima/minima are 1-Lipschitz in sup distance, so midpoint selection is continuous and product-Borel measurable. Finite rational-box basis gives product Borel equality: cylinders are Borel by continuous projections and every open is countable union of rational boxes in the product sigma-algebra. For odd n strict improvement is at least delta toward the middle value; for even n the middle closed interval has constant Q and exterior improvement >=2delta. Both directions of minimizing-set characterization, ties, n1, n2, all-equal/zero/negative observations checked. P|X|<infinity makes every absolute criterion integrable via |X-theta|<=|X|+|theta|. No arbitrary measurable-selection or AC theorem used. Bartlett p5 and Chen lines132–133 support negative absolute criterion; later Chen derivative/sign formulas are not used. Reader Borel clarification accepted; no further edit needed."
+      }
+    },
+    "ex-finite-class-m-estimator-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-m-estimator",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on a measurable observation space $(\\mathcal X,\\mathcal A)$, and let $X_1,X_2,\\ldots$ be IID with law $P$; IID means a common law and mutual independence of the whole family ([[def-probability-measure]], [[def-identically-distributed-and-iid-random-variables]]). Let $(\\Theta,d)$ be a metric candidate space with its Borel sigma-algebra ([[def-metric-space]], [[def-borel-sigma-algebra]]). For each $\\theta\\in\\Theta$, let $m_\\theta:\\mathcal X\\to\\mathbb R$ be measurable and assume $P|m_\\theta|<\\infty$. Define\n$$P_nm_\\theta=\\frac1n\\sum_{i=1}^n m_\\theta(X_i),\\qquad Pm_\\theta=\\int m_\\theta\\,dP.$$\n\nA measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$ is an **M-estimator** if it maximizes or minimizes $\\theta\\mapsto P_nm_\\theta$; measurability is as in [[def-estimator-sequence-in-iid-experiments]]. It is an exact maximizer when $P_nm_{\\hat\\theta_n}=\\sup_{\\theta\\in\\Theta}P_nm_\\theta$, and an $o_P(1)$-approximate maximizer when the finite measurable gap $\\sup_{\\theta\\in\\Theta}P_nm_\\theta-P_nm_{\\hat\\theta_n}$ is $o_P(1)$. For minimization use the gap $P_nm_{\\hat\\theta_n}-\\inf_{\\theta\\in\\Theta}P_nm_\\theta$. The notation $o_P(1)$ is that of [[def-op-and-little-op-stochastic-bounds]].\n\nThe maximizing and minimizing forms are both included; replacing $m_\\theta$ by $-m_\\theta$ converts one to the other. This definition does not assert that a maximizer exists, nor that the population criterion $Pm_\\theta$ has a unique maximizer. Whenever a random candidate is substituted into the empirical or population criterion, assume that evaluation is measurable and finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-consistency-in-probability",
+          "source_section": "Definition",
+          "quote": "Let $(T_n)$ be an estimator sequence of an estimand $\\psi$ with metric target $(\\mathcal T,d)$, and fix $\\theta\\in\\Theta$. The sequence is **consistent in probability at $\\theta$** if for every $\\varepsilon>0$,\n$$P_\\theta^{\\otimes n}\\bigl(\\{x\\in\\mathcal X^n:d(T_n(x),\\psi(\\theta))>\\varepsilon\\}\\bigr)\\longrightarrow0.$$\n\nThe error event is measurable: by the triangle inequality, $t\\mapsto d(t,\\psi(\\theta))$ is continuous, so its strict superlevel set at $\\varepsilon$ is open in the target metric topology and hence Borel; its preimage under $T_n$ is measurable.\n\nThe consistency is **pointwise** because $\\theta$ is fixed before the limit. It does not assert uniform convergence over $\\Theta$ ([[def-estimator-sequence-in-iid-experiments]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-estimator-sequence-in-iid-experiments",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric model on a statistical experiment, and let $\\psi:\\Theta\\to\\mathcal T$ be an estimand whose target set $\\mathcal T$ is equipped with a metric $d$ ([[def-statistical-experiment]], [[def-parametric-statistical-model]], [[def-estimand-on-a-statistical-model]], [[def-metric-space]]). For $n\\ge1$, the IID sample-size-$n$ experiment has sample space $\\mathcal X^n$, product sigma-algebra $\\mathcal A^{\\otimes n}$, and sampling law $P_\\theta^{\\otimes n}$ at parameter $\\theta$ ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product law is defined recursively from $P_\\theta$; each factor is a probability measure and hence sigma-finite, so the finite product theorem supplies its existence, rectangle formula, and uniqueness ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\n\nA **nonrandomized estimator sequence** of $\\psi$ is a sequence of measurable maps, in the sense of [[def-measurable-function-between-measurable-spaces]],\n$$T_n:(\\mathcal X^n,\\mathcal A^{\\otimes n})\\to(\\mathcal T,\\mathcal B(\\mathcal T)),\\qquad n\\ge1,$$\nwhere $\\mathcal B(\\mathcal T)$ is the sigma-algebra generated by the open sets of the metric $d$, that is, the Borel sigma-algebra of its metric topology ([[def-borel-sigma-algebra]]). Its sampling distribution at $\\theta$ and sample size $n$ is the pushforward of $P_\\theta^{\\otimes n}$ by $T_n$.\n\nThis definition fixes IID repeated sampling and data-measurable estimators. It imposes no measurability on the parameter map $\\theta\\mapsto P_\\theta$ or on $\\psi$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The population criterion is $M(0)=0$ and $M(1)=EX_1=p>0$, so its unique maximum is $\\theta_0=1$. The empirical criteria are $M_n(0)=0$ and $M_n(1)=\\bar X_n\\ge0$; the displayed selection therefore attains their maximum for every sample. By [F5], the sample space is $\\{0,1\\}^n$ with its product sigma-algebra. Each singleton vector is a measurable rectangle, and every subset is a finite union of singletons, so every data map is measurable. The estimator is exact by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Independence and the Bernoulli finite sample law imply that expectations of products of functions of distinct coordinates factor: the joint mass at each $(x_1,\\ldots,x_n)\\in\\{0,1\\}^n$ is $\\prod_iP(X_i=x_i)$, and summing this product over the finite sample space factors. Expanding $(\\sum_iY_i)^4$, every term with an index occurring once has expectation zero by $EY_i=0$ and this factorization; the remaining terms are $\\sum_iEY_i^4+6\\sum_{i<j}EY_i^2EY_j^2\\le n+6\\binom n2\\le3n^2$. For $Z\\ge0$ and $t>0$, $t\\mathbf1_{\\{Z>t\\}}\\le Z$, so integrating gives $P(Z>t)\\le EZ/t$. Applying this to $Z=(\\sum_iY_i)^4$ gives $P(|\\bar X_n-p|>\\varepsilon)\\le3/(n^2\\varepsilon^4)$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $\\varepsilon>0$, the bound in step 1.2 is summable in $n$. By the union bound, $P(\\bigcup_{n\\ge N}\\{|\\bar X_n-p|>\\varepsilon\\})\\le\\sum_{n\\ge N}3/(n^2\\varepsilon^4)\\to0$; hence only finitely many such deviations occur almost surely. Applying this to $\\varepsilon=1/j$ for every positive integer $j$ gives $\\bar X_n\\to p$ almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0<\\varepsilon<1$, the metric-error event is $\\{\\hat\\theta_n=0\\}=\\{\\bar X_n=0\\}$, which is contained in $\\{|\\bar X_n-p|>p/2\\}$. Step 1.2 bounds its probability by $3/(n^2(p/2)^4)\\to0$; for $\\varepsilon\\ge1$ the error event is empty. Hence $\\hat\\theta_n$ is consistent by [F3] in the metric of [F4]. Also, since $p>0$, step 2.1 implies that $\\hat\\theta_n=1$ eventually almost surely, and $\\sup_{\\theta\\in\\Theta}|M_n(\\theta)-M(\\theta)|=|\\bar X_n-p|\\to0$ almost surely, displaying the finite-class uniform law.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes $0<p\\le1$ and a nonempty sample-size experiment."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The case $p=0$ is excluded because the population maximum would not be unique."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: at p=1, the estimator is identically the unique maximizer."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: the degenerate Bernoulli law at p=1 has zero uniform error."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: the included endpoint p=1 is checked and p=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the estimator is an explicit threshold function with no selection step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example; Verification steps 1.1–3.1 use Bernoulli p>0, criteria 0 and x, and the positive-sample-mean selector to prove exactness, the finite-class uniform law and consistency for 1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example does not claim consistency characterizes all Bernoulli selectors or implies a uniform law for arbitrary criteria; the population gap is explicitly p>0 in step 1.1 and the direct fourth-moment proof is specific to this two-function class."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "p-one",
+          "claim": "For $p=1$, every $X_i=1$ almost surely.",
+          "result": "Then $M_n(1)=1>M_n(0)=0$ and $\\hat\\theta_n=1$ for every $n$."
+        },
+        {
+          "id": "criterion-values",
+          "claim": "For each sample, $M_n(0)=0$ and $M_n(1)=\\bar X_n\\ge0$.",
+          "result": "The selection in the example attains the maximum, including the tie case $\\bar X_n=0$."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Complete four-step Verification and all six direct suppliers read with reader/refuter evidence. Mutual independence makes finite Bernoulli sums factor; fourth-moment expansion keeps all-equal and two-pair indices with coefficient6, bounded by n+6binom(n,2)=3n^2-2n<=3n^2. Indicator Markov derivation is correct for strict tails. Summable tail union bounds imply eventual small deviations at countably many deterministic thresholds1/j; no AC or independent-event Borel–Cantelli branch required. Uniform two-function error equals |Xbar-p|. Exact threshold selector is measurable on the full finite product sigma-algebra, including the empirical tie at0. Fixed0<p<=1 makes unique target1, and the direct probability bound3/[n^2(p/2)^4] proves consistency for0<epsilon<1; epsilon>=1 gives empty strict event. p1 degeneracy checked, p0 excluded since target uniqueness fails. Reader Markov and direct consistency elaborations accepted; no additional edit needed."
+      }
+    },
+    "cex-unseparated-m-estimator-is-inconsistent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-m-estimator",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on a measurable observation space $(\\mathcal X,\\mathcal A)$, and let $X_1,X_2,\\ldots$ be IID with law $P$; IID means a common law and mutual independence of the whole family ([[def-probability-measure]], [[def-identically-distributed-and-iid-random-variables]]). Let $(\\Theta,d)$ be a metric candidate space with its Borel sigma-algebra ([[def-metric-space]], [[def-borel-sigma-algebra]]). For each $\\theta\\in\\Theta$, let $m_\\theta:\\mathcal X\\to\\mathbb R$ be measurable and assume $P|m_\\theta|<\\infty$. Define\n$$P_nm_\\theta=\\frac1n\\sum_{i=1}^n m_\\theta(X_i),\\qquad Pm_\\theta=\\int m_\\theta\\,dP.$$\n\nA measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$ is an **M-estimator** if it maximizes or minimizes $\\theta\\mapsto P_nm_\\theta$; measurability is as in [[def-estimator-sequence-in-iid-experiments]]. It is an exact maximizer when $P_nm_{\\hat\\theta_n}=\\sup_{\\theta\\in\\Theta}P_nm_\\theta$, and an $o_P(1)$-approximate maximizer when the finite measurable gap $\\sup_{\\theta\\in\\Theta}P_nm_\\theta-P_nm_{\\hat\\theta_n}$ is $o_P(1)$. For minimization use the gap $P_nm_{\\hat\\theta_n}-\\inf_{\\theta\\in\\Theta}P_nm_\\theta$. The notation $o_P(1)$ is that of [[def-op-and-little-op-stochastic-bounds]].\n\nThe maximizing and minimizing forms are both included; replacing $m_\\theta$ by $-m_\\theta$ converts one to the other. This definition does not assert that a maximizer exists, nor that the population criterion $Pm_\\theta$ has a unique maximizer. Whenever a random candidate is substituted into the empirical or population criterion, assume that evaluation is measurable and finite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-consistency-in-probability",
+          "source_section": "Definition",
+          "quote": "Let $(T_n)$ be an estimator sequence of an estimand $\\psi$ with metric target $(\\mathcal T,d)$, and fix $\\theta\\in\\Theta$. The sequence is **consistent in probability at $\\theta$** if for every $\\varepsilon>0$,\n$$P_\\theta^{\\otimes n}\\bigl(\\{x\\in\\mathcal X^n:d(T_n(x),\\psi(\\theta))>\\varepsilon\\}\\bigr)\\longrightarrow0.$$\n\nThe error event is measurable: by the triangle inequality, $t\\mapsto d(t,\\psi(\\theta))$ is continuous, so its strict superlevel set at $\\varepsilon$ is open in the target metric topology and hence Borel; its preimage under $T_n$ is measurable.\n\nThe consistency is **pointwise** because $\\theta$ is fixed before the limit. It does not assert uniform convergence over $\\Theta$ ([[def-estimator-sequence-in-iid-experiments]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1] and [F4], every observation equals $0$ almost surely and the sequence is IID. Thus $P_nm_0=P_nm_1=Pm_0=Pm_1=0$ for every $n$. Both parameters are population maximizers, and every data-measurable choice is an exact M-estimator by [F1]. The uniform error is identically zero, but the population maximum is not separated from the other parameter.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose the deterministic estimator $\\hat\\theta_n=1$ for odd $n$ and $\\hat\\theta_n=0$ for even $n$. For each $n$ it is a constant function of the data, so every inverse image is empty or the full sample space and it is measurable; by step 1.1 it is exact. For the fixed population maximizer $\\theta_0=0$ and $\\varepsilon=1/2$, $P\\{d(\\hat\\theta_n,\\theta_0)>\\varepsilon\\}$ equals $1$ for odd $n$ and $0$ for even $n$, so the error probability has no zero limit.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This exact M-estimator is not consistent for $\\theta_0=0$ by [F2]. Thus the unseparated population maximum does not guarantee consistency, even when the empirical criterion equals its population version exactly.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has $\\Theta=\\{0,1\\}$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The fixed target is $0$; step 2.1 computes its error probability exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: one is the other population maximizer while the chosen fixed target is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the constant criterion is the degenerate case producing nonuniqueness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite parameter set is not an interval with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample and step 2.1: the alternating estimator is explicitly defined with no selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted; Counterexample steps 1.1–3.1 use Θ={0,1}, m_θ=0 and an odd/even exact selector to refute consistency for θ0=0 despite zero uniform criterion error."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Counterexample step 2.1 gives error probabilities alternating between 1 and 0; it does not assert that every unseparated criterion is inconsistent or that inconsistency forces this two-point construction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "parity-error-table",
+          "claim": "For target zero and threshold $\\varepsilon=1/2$, use step 2.1 to compute the error at n even and n odd.",
+          "result": "Step 2.1 gives error probability zero for even n and one for odd n, so it has no limit zero."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Read complete current three-step counterexample and all five cited suppliers, plus reader/refuter evidence. On IID point-mass data the two constant-zero criterion values coincide empirically and in population, every constant selection is measurable and exact, and U_n=0. Restriction of the real metric is still a metric by its axioms. Fixed target0 and epsilon1/2 produce probabilities1 on odd n and0 on even n. Thus the universal assertion is false despite a perfect uniform law. n>=1, both parameter points, no separation, both parities and fixed target quantifiers checked. No selector choice or AC used. Bartlett separation theorem is context, not a proof substitute. Published real-line historical closed-ball citation polish, now corrected by owner sign-case derivation, is irrelevant to the metric restriction used here."
+      }
+    }
+  }
+}

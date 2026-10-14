@@ -1,0 +1,756 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "kind": "staged-owner-step3-gate1-contract-mapping-repair",
+  "status": "ready-for-owner-integration",
+  "canonical_edits_made": false,
+  "new_tests_gates_or_hashes": false,
+  "native_failure_events_read": [
+    {
+      "at": "2026-10-14T11:26:32.006Z",
+      "type": "gate",
+      "id": "proof-contract",
+      "code": 1,
+      "output": "proof-contract: 11 error(s), 4 warning(s), 486/486 item(s) checked\nERROR citation-use-not-supported [thm-bias-variance-decomposition]: F2 is not cited by declared use 1.1\nERROR citation-use-unmapped [thm-rao-blackwell]: F1 is cited by 2.1 but the contract omits it\nERROR citation-use-unmapped [ex-rao-blackwell-bernoulli-observation]: F4 is cited by 2.1 but the contract omits it\nERROR citation-use-unmapped [ex-rao-blackwell-bernoulli-observation]: F4 is cited by 2.1 but the contract omits it\nERROR citation-use-not-supported [lem-bounded-variable-hoeffding-mgf]: F7 is not cited by declared use 2.1\nERROR citation-use-not-supported [lem-bounded-variable-hoeffding-mgf]: F7 is not cited by declared use 2.1\nERROR citation-use-not-supported [lem-bounded-variable-hoeffding-mgf]: F7 is not cited by declared use 2.1\nERROR citation-use-not-supported [lem-bounded-variable-hoeffding-mgf]: F7 is not cited by declared use 2.1\nERROR citation-source-not-in-fact [lem-bounded-variable-hoeffding-mgf]: F9 does not link [[def-nonnegative-lebesgue-integral]]\nERROR citation-use-unmapped [cex-uncountable-class-has-nonmeasurable-empirical-supremum]: F1 is cited by 3.1 but the contract omits it\nERROR step-entry-input-omitted [cex-uncountable-class-has-nonmeasurable-empirical-supremum]: step-3-1 omits F1, cited by 3.1\nWARN shotgun-bracket [lem-gaussian-sparse-covariance-mixture-lower-bound]: 3.1 cites 5 of 10 declared facts while 3 other step(s) cite none \u2014 cite each fact at the step that uses it\nWARN shotgun-bracket [lem-clean-block-sparse-gaussian-covariance-minimax-lower-bound]: 1.2 cites 5 of 7 declared facts while 2 other step(s) cite none \u2014 cite each fact at the step that uses it\nWARN shotgun-bracket [lem-clean-dense-gaussian-covariance-minimax-lower-bound]: 7.2 cites 6 of 11 declared facts while 3 other step(s) cite none \u2014 cite each fact at the step that uses it\nWARN shotgun-bracket [lem-projection-slab-uniform-deviation]: 1.1 cites 4 of 8 declared facts while 4 other step(s) cite none \u2014 cite each fact at the step that uses it\n",
+      "ok": false,
+      "why": "ERROR citation-use-not-supported [thm-bias-variance-decomposition]: F2 is not cited by declared use 1.1"
+    }
+  ],
+  "findings": [
+    {
+      "id": "thm-bias-variance-decomposition",
+      "actual_home_batch": 6,
+      "source_read": "Full current carrier including frontmatter, Statement/Example, Facts and complete proof opened.",
+      "actual_step_source": {
+        "1.1": "1.1 Fix $\\theta$. Since $P_\\theta$ is a probability measure, the constant $1$ has $L^2(P_\\theta)$ norm $1$. Applying [F4] to $T$ and $1$ gives $\\mathbb E_\\theta|T|\\leq(\\mathbb E_\\theta[T^2])^{1/2}<\\infty$. Put $\\mu=\\mathbb E_\\theta[T]$ and $b=\\mu-\\psi(\\theta)$. Then [F1] gives $b=\\operatorname{Bias}_\\theta(T)$ and $T-\\psi(\\theta)=(T-\\mu)+b$. [given, F1, F4]",
+        "2.1": "2.1 Since $T,\\mu\\in L^1(P_\\theta)$ by step 1.1 and $P_\\theta(\\mathcal X)=1$, [F3] gives $\\mathbb E_\\theta[T-\\mu]=\\mathbb E_\\theta[T]-\\mu\\mathbb E_\\theta[1]=0$. For every finite $c$, $(T-c)^2\\leq2T^2+2c^2$, so the centered square and squared error are integrable. Expanding $(T-\\psi(\\theta))^2=((T-\\mu)+b)^2$ now gives $\\operatorname{MSE}_\\theta(T)=\\mathbb E_\\theta[(T-\\mu)^2]+b^2=\\operatorname{Var}_\\theta(T)+\\operatorname{Bias}_\\theta(T)^2$ by [F1] and [F2]. [step 1.1, F1, F2, F3, algebra] \u220e"
+      },
+      "relevant_facts": {
+        "F1": "[F1] Bias is $\\mathbb E_\\theta[T]-\\psi(\\theta)$ and MSE is $\\mathbb E_\\theta[(T-\\psi(\\theta))^2]$. ([[def-bias-and-mean-squared-error]])",
+        "F2": "[F2] For square-integrable real $T$, $\\operatorname{Var}_\\theta(T)=\\mathbb E_\\theta[(T-\\mathbb E_\\theta T)^2]$. ([[def-moments-variance-and-covariance]])",
+        "F4": "[F4] Cauchy\u2013Schwarz gives $\\int |fg|\\,d\\mu\\leq\\|f\\|_2\\|g\\|_2$ for square-integrable $f,g$. ([[cor-cauchy-schwarz-inequality-for-l-two]])"
+      },
+      "disposition": "Proposed exact contract metadata corrections only; no source or mathematical change and no new proof acceptance."
+    },
+    {
+      "id": "thm-rao-blackwell",
+      "actual_home_batch": 6,
+      "source_read": "Full current carrier including frontmatter, Statement/Example, Facts and complete proof opened.",
+      "actual_step_source": {
+        "1.1": "1.1 Write $u$ for the measurable function defining $U$. For each $\\theta$, $P_\\theta^S$ is a probability measure: preimages under the measurable map $S$ preserve the empty set, disjoint countable unions, and the whole space. By [L1], $K$ is a parameter-independent probability kernel from the statistic space to the data space, so it is a randomized procedure for the pushforward experiment by [F15]. Thus [F2] and [F3] show that $h_+(s)=\\int u^+dK(s,\\cdot)$, $h_-(s)=\\int u^-dK(s,\\cdot)$, and $r(s)=\\int|u|dK(s,\\cdot)$ are Borel. Let $g=h_+-h_-$ where $r<\\infty$ and $g=0$ elsewhere; [F6] makes both terms finite on this Borel set, and [F3] makes $g$ Borel. [given, L1, F2, F3, F6, F15, construct]",
+        "2.1": "2.1 Fix $\\theta$ and a Borel statistic event $B$. For nonnegative simple functions of the data, [L1] and finite linearity give $\\int_B\\int s(x)K(t,dx)P_\\theta^S(dt)=\\mathbb E_\\theta[\\mathbf1_{\\{S\\in B\\}}s(X)]$. Approximate $u^+$ and $u^-$ increasingly by simple functions using [F4]; [F5] passes each equality to the limit. Applying the same identity to $|u|$ with $B=\\mathsf S$ gives $\\mathbb E_\\theta r(S)=\\mathbb E_\\theta|U|<\\infty$. If $N=\\{r(S)=+\\infty\\}$ had positive probability, then $m\\mathbf1_N\\leq r(S)$ for every positive integer $m$, so [F6] would give $mP_\\theta(N)\\leq\\mathbb E_\\theta r(S)$ for all $m$, a contradiction; thus $r(S)<\\infty$ almost surely. By [F6], $h_+(S),h_-(S)\\leq r(S)$, so $|g(S)|\\leq2r(S)$ and $g(S)$ is integrable. The two finite event-integral identities may therefore be subtracted, giving $\\mathbb E_\\theta[\\mathbf1_{\\{S\\in B\\}}g(S)]=\\mathbb E_\\theta[\\mathbf1_{\\{S\\in B\\}}U]$. By [F7], [F8], and [F9], $g(S)$ is a version of $\\mathbb E_\\theta[U\\mid\\sigma(S)]$ as an almost-sure class for every $\\theta$. [given, L1, F1, F4, F5, F6, F7, F8, F9, F13, step 1.1]",
+        "3.1": "3.1 By [F10], $g(S)$ is square-integrable under each $P_\\theta$. By [F11], $\\mathbb E_\\theta[g(S)]=\\mathbb E_\\theta[U]=\\psi(\\theta)$; hence it is an unbiased finite-variance estimator. [F1, F10, F11, F13, step 2.1]",
+        "4.1": "4.1 Fix $\\theta$. The residual $U-g(S)$ is orthogonal in $L^2(P_\\theta)$ to every square-integrable $\\sigma(S)$-measurable function by [F12]. By step 3.1 and $\\psi(\\theta)\\in\\mathbb R$, $g(S)-\\psi(\\theta)$ is such a function. Expanding the centered square gives $\\operatorname{Var}_\\theta(U)=\\mathbb E_\\theta[(U-g(S))^2]+\\operatorname{Var}_\\theta(g(S))$. The first term is nonnegative, proving the variance inequality. [F1, F12, F13, step 3.1, algebra]",
+        "5.1": "5.1 By [F14], equality in step 4.1 holds exactly when $U=g(S)$ $P_\\theta$-almost surely. Since $g(S)$ is $\\sigma(S)$-measurable, this is precisely almost-sure $\\sigma(S)$-measurability: if $U$ has such a representative, its $L^2$ class lies in the projection subspace and [F12] fixes it. [step 4.1, F12, F14] \u220e"
+      },
+      "relevant_facts": {
+        "F1": "[F1] A finite-variance unbiased estimator is integrable, has expectation $\\psi(\\theta)$ at every parameter, and has the variance convention stated in the UMVU definition. ([[def-unbiased-estimator-and-umvu]])",
+        "F2": "[F2] For a probability kernel, integrating a nonnegative measurable function gives a measurable function of the input, with the corresponding iterated-integral identity. ([[lem-procedure-action-law-is-measurable]])",
+        "F4": "[F4] Nonnegative measurable functions admit increasing simple approximations. ([[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]])",
+        "F7": "[F7] Every event in $\\sigma(S)$ is $S^{-1}(B)$ for a Borel statistic-space event $B$. ([[def-sigma-algebra-generated-by-a-function]])",
+        "F9": "[F9] Under AC, versions with the same event integrals determine one almost-sure class. ([[def-conditional-expectation-as-an-ae-class]])"
+      },
+      "disposition": "Proposed exact contract metadata corrections only; no source or mathematical change and no new proof acceptance."
+    },
+    {
+      "id": "ex-rao-blackwell-bernoulli-observation",
+      "actual_home_batch": 6,
+      "source_read": "Full current carrier including frontmatter, Statement/Example, Facts and complete proof opened.",
+      "actual_step_source": {
+        "1.1": "1.1 For $s\\in\\{0,\\ldots,n\\}$ let $F_s=\\{x\\in\\{0,1\\}^n:\\sum_i x_i=s\\}$; it has $\\binom ns\\geq1$ elements. Define $K(s,A)=|A\\cap F_s|/\\binom ns$ for every data event $A$. Each section is the uniform probability measure on $F_s$, and every event evaluation is measurable because the statistic space is finite and discrete; thus $K$ is a probability kernel independent of $p$. By [F4], independence makes the joint law the product of the Bernoulli coordinate masses. For $0<p<1$, each vector in $F_s$ has mass $p^s(1-p)^{n-s}$ and $P_p(S=s)>0$, so $K(s,\\cdot)$ is the conditional law given $S=s$. At $p=0$ or $p=1$, only $s=0$ or $s=n$ is supported, respectively, and that fiber is a singleton on which the same kernel is the conditional law. Hence $K$ is a common regular conditional law and proves sufficiency by [L1]. [given, F4, L1, construct]",
+        "2.1": "2.1 For $0<p<1$, the uniform fiber law is invariant under coordinate permutations, so the $n$ conditional means $\\mathbb E_p[X_i\\mid S=s]$ agree. Their sum is $s$, hence each is $s/n$. At $p=0,1$, $X_1=S/n$ almost surely, so the same formula holds on the support. Since $0\\leq X_1\\leq1$, $U=X_1$ is square-integrable; its Bernoulli law gives $\\mathbb E_pX_1=p\\cdot1+(1-p)\\cdot0=p$ by [F4]. Both spaces are standard Borel by [F5] and $S$ is sufficient by step 1.1, so [F2] and [F1] identify $S/n$ as the Rao\u2013Blackwellized unbiased estimator; [F3] records its conditional-expectation class convention. [F1, F2, F3, F4, F5, step 1.1, algebra] \u220e"
+      },
+      "relevant_facts": {
+        "F1": "[F1] Rao\u2013Blackwellization of an unbiased finite-variance estimator is its conditional expectation given a sufficient statistic. ([[thm-rao-blackwell]])",
+        "F2": "[F2] $X_1$ is a measurable estimator of $p$, and it is unbiased when its expectation is $p$. ([[def-statistic-and-estimator]], [[def-unbiased-estimator-and-umvu]])",
+        "F4": "[F4] A Bernoulli$(p)$ variable takes values $1$ and $0$ with probabilities $p$ and $1-p$, and mutual independence of finite-valued variables means their joint cell probabilities factor. ([[def-bernoulli-and-binomial-random-variables]], [[def-independence-of-finite-random-variables]])"
+      },
+      "disposition": "Proposed exact contract metadata corrections only; no source or mathematical change and no new proof acceptance."
+    },
+    {
+      "id": "lem-bounded-variable-hoeffding-mgf",
+      "actual_home_batch": 15,
+      "source_read": "Full current carrier including frontmatter, Statement/Example, Facts and complete proof opened.",
+      "actual_step_source": {
+        "1.1": "1.1 Let $X$ be any measurable real random variable. For $a<0$, $\\{e^{\\lambda X}>a\\}$ is the whole probability space by [F6]. For $a\\ge0$ and $\\lambda=0$, this set is the whole space if $a<1$ and empty if $a\\ge1$. For $a\\ge0$ and $\\lambda\\ne0$, it is the whole space when $a=0$; when $a>0$, strict increase of the exponential and the inverse relation with $\\log$ give $$\\{e^{\\lambda X}>a\\}=\\begin{cases}\\{X>(\\log a)/\\lambda\\},&\\lambda>0,\\\\\\{X<(\\log a)/\\lambda\\},&\\lambda<0.\\end{cases}$$ Every set on the right is measurable by [F7]. Thus $e^{\\lambda X}$ is measurable by the threshold characterization, with no appeal to a continuous-map Borel measurability result qualified by Countable Choice. [F6, F7, given, algebra]",
+        "2.1": "2.1 Let $A:=\\{|Y|\\le1\\}$, measurable by [F9], so $P(A)=1$. Define $\\nu(B):=\\int_B|Y|\\,dP$; by [F9] this is a measure. Since $|Y|\\mathbf1_A\\le\\mathbf1_A$, [F9] gives $\\nu(A)\\le P(A)=1$, while $P(A^c)=0$ gives $\\nu(A^c)=0$. Therefore $\\mathbb E|Y|=\\nu(\\Omega)=\\nu(A)+\\nu(A^c)\\le1$, so $Y$ is integrable by [F9]. Put $p:=\\mathbb EY$; then [F1] gives $p\\in[0,1]$. The shifted variable $Y-p$ is measurable because $\\{Y-p>a\\}=\\{Y>a+p\\}$ for every real $a$. Applying step 1.1 to $X=Y$ and $X=Y-p$ establishes measurability of both exponentials. Applying [F2] with endpoints $0,\\lambda$ gives $e^{\\lambda y}\\le1-y+ye^\\lambda$ for every $y\\in[0,1]$; taking expectations yields $\\mathbb E e^{\\lambda Y}\\le1-p+pe^\\lambda$. [F1, F2, F9, step 1.1, given]",
+        "3.1": "3.1 Define $g(\\lambda):=1-p+pe^\\lambda>0$ and $\\psi(\\lambda):=\\log g(\\lambda)-p\\lambda$. Positivity follows from [F6] and $p\\in[0,1]$. With $q(\\lambda):=pe^\\lambda/g(\\lambda)\\in[0,1]$, [F3]\u2013[F4] give $\\psi(0)=\\psi'(0)=0$ and $\\psi''(\\lambda)=q(\\lambda)(1-q(\\lambda))\\in[0,1/4]$. The formula also covers $p=0$ or $p=1$, since then $g$ remains positive. [given, F3, F4, F6, step 2.1, algebra]",
+        "4.1": "4.1 The function $\\psi''$ in step 3.1 is continuous. For $\\lambda\\ge0$, integrating twice by [F5] gives $\\psi(\\lambda)=\\int_0^\\lambda(\\lambda-s)\\psi''(s)\\,ds\\le\\lambda^2/8$. For $\\lambda<0$, the same endpoint formula written from $\\lambda$ to $0$ gives $\\psi(\\lambda)=\\int_\\lambda^0(s-\\lambda)\\psi''(s)\\,ds\\le\\lambda^2/8$. [F5, step 3.1, algebra]",
+        "5.1": "5.1 By step 2.1 and the exponential addition formula [F8], $\\mathbb E e^{\\lambda(Y-p)}=e^{-\\lambda p}\\mathbb E e^{\\lambda Y}\\le e^{-\\lambda p}g(\\lambda)=e^{\\psi(\\lambda)}$; step 4.1 bounds this by $e^{\\lambda^2/8}$. This proves the claim for every real $\\lambda$, including $\\lambda=0$. [F8, step 2.1, step 4.1, algebra] \u220e"
+      },
+      "relevant_facts": {
+        "F1": "[F1] If $X\\le W$ almost surely for integrable real variables, then $\\mathbb EX\\le\\mathbb EW$ ([[cor-expectation-linearity-monotonicity-and-modulus-bound]]).",
+        "F2": "[F2] For $0\\le t\\le1$ and real $x,y$, $\\exp((1-t)x+ty)\\le(1-t)\\exp(x)+t\\exp(y)$ ([[thm-exponential-two-point-convexity]]).",
+        "F4": "[F4] Sums, scalar multiples, products, quotients with nonzero denominator, and compositions obey the usual derivative and continuity rules ([[thm-algebra-of-derivatives]], [[thm-chain-rule]], [[thm-algebra-of-continuous-functions]]).",
+        "F7": "[F7] A real-valued function is measurable when all strict upper or all strict lower threshold sets are measurable; the exponential is strictly increasing, positive, and inverse to the natural logarithm on positive inputs ([[thm-threshold-characterisations-of-real-and-extended-real-measurability]], [[thm-exponential-is-strictly-increasing]], [[cor-exponential-reciprocal-and-positivity]], [[def-natural-logarithm]]).",
+        "F9": "[F9] Absolute values of measurable real functions are measurable. A statement holding almost surely has a measurable null exceptional set. The probability measure satisfies $P(\\Omega)=1$. For nonnegative measurable $g$, the set function $B\\mapsto\\int_B g\\,dP$ is a measure; the nonnegative integral is monotone under pointwise order, indicators integrate to their measures, and integrals over null sets vanish. A real measurable function is integrable exactly when its absolute-value integral is finite ([[thm-arithmetic-and-lattice-operations-preserve-measurability]], [[def-measure-null-set-and-almost-everywhere]], [[def-probability-measure]], [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], [[def-integral-over-a-measurable-set]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]], [[def-integral-of-a-nonnegative-simple-function]], [[cor-integral-over-a-null-set-vanishes]], [[def-integrable-real-and-complex-functions-and-their-integrals]])."
+      },
+      "disposition": "Proposed exact contract metadata corrections only; no source or mathematical change and no new proof acceptance."
+    },
+    {
+      "id": "cex-uncountable-class-has-nonmeasurable-empirical-supremum",
+      "actual_home_batch": 15,
+      "source_read": "Full current carrier including frontmatter, Statement/Example, Facts and complete proof opened.",
+      "actual_step_source": {
+        "1.1": "1.1 By [F1], $\\Omega$ is uncountable. The empty set is at most countable, and complementation exchanges the countable and cocountable alternatives, so $\\mathcal A$ contains the empty set and is complement-closed. For a sequence $(A_n)$ in $\\mathcal A$, if every $A_n$ is countable then [A1] makes their union countable; otherwise some $A_j$ is cocountable, and $\\Omega\\setminus\\bigcup_n A_n\\subseteq\\Omega\\setminus A_j$ is countable by [F2]. Thus the union lies in $\\mathcal A$ in either case, proving all sigma-algebra axioms in [F5]. The assignment $P$ is well-defined: a set and its complement cannot both be countable, since their union would make $\\Omega$ countable. [A1, F1, F2, F5, given]",
+        "2.1": "2.1 Let $(A_n)$ be pairwise disjoint members of $\\mathcal A$. If every $A_n$ is countable, [A1] makes their union countable; then $P(\\bigcup_nA_n)=0=\\sum_nP(A_n)$. Otherwise choose $j$ with $A_j$ cocountable. For $n\\ne j$, disjointness gives $A_n\\subseteq\\Omega\\setminus A_j$, a countable set, so [F2] makes $A_n$ countable. The union is cocountable and its measure is $1=P(A_j)+\\sum_{n\\ne j}P(A_n)$. Also $P(\\Omega)=1$ and $P$ is nonnegative, so [F3] shows that $P$ is a probability measure. [A1, F2, F3, step 1.1, given, choose]",
+        "3.1": "3.1 Regard $(\\Omega,\\mathcal A,P)$ as the observation space and let $Z$ be its identity random element, which has law $P$. For each $t\\in U$, the singleton $\\{t\\}$ is in $\\mathcal A$ by [F2], so $f_t=\\mathbf1_{\\{t\\}}$ is measurable and $Pf_t=P(\\{t\\})=0$. If $s\\ne t$, then $f_s(s)=1$ and $f_t(s)=0$, so $t\\mapsto f_t$ is injective; since $U$ is uncountable by [F1], $\\mathcal F$ is uncountable. [F1, F2, F3, F4, given, step 2.1]",
+        "4.1": "4.1 For any $\\omega\\in\\Omega$, if $\\omega\\in U$ then the index $t=\\omega$ gives $f_t(\\omega)=1$, while if $\\omega\\notin U$ every $t\\in U$ differs from $\\omega$ and all the function values are zero. Hence the displayed supremum equals $\\mathbf1_U(\\omega)$. Both $U$ and $\\Omega\\setminus U$ contain a nondegenerate interval and are uncountable by [F1]; therefore $U\\notin\\mathcal A$, so the supremum is nonmeasurable. [F1, step 3.1, given] \u220e"
+      },
+      "relevant_facts": {
+        "F1": "[F1] Every nondegenerate real interval is uncountable ([[cor-interval-uncountable]]).",
+        "F2": "[F2] Every singleton is countable and every subset of a countable set is countable ([[def-countable]], [[lem-subset-of-countable]]).",
+        "F4": "[F4] For one observation, the empirical average is $P_1f=f(Z)$ and $Pf$ is the integral of $f$ ([[def-empirical-process-and-rademacher-process]])."
+      },
+      "disposition": "Proposed exact contract metadata corrections only; no source or mathematical change and no new proof acceptance."
+    }
+  ],
+  "operations": [
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-6.proof-contracts.json",
+      "subject": "thm-bias-variance-decomposition",
+      "array": "citations",
+      "selector": {
+        "fact": "F2",
+        "source": "def-moments-variance-and-covariance"
+      },
+      "expected_complete_row": {
+        "fact": "F2",
+        "source": "def-moments-variance-and-covariance",
+        "source_section": "Definition",
+        "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 uses F1 and F4; variance definition F2 is used in step 2.1 only.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "2.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "thm-bias-variance-decomposition",
+      "array": "citations",
+      "selector": {
+        "fact": "F2",
+        "source": "def-moments-variance-and-covariance"
+      },
+      "expected_complete_row": {
+        "fact": "F2",
+        "source": "def-moments-variance-and-covariance",
+        "source_section": "Definition",
+        "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 uses F1 and F4; variance definition F2 is used in step 2.1 only.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "2.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-6.proof-contracts.json",
+      "subject": "thm-rao-blackwell",
+      "array": "citations",
+      "selector": {
+        "fact": "F1",
+        "source": "def-unbiased-estimator-and-umvu"
+      },
+      "expected_complete_row": {
+        "fact": "F1",
+        "source": "def-unbiased-estimator-and-umvu",
+        "source_section": "Definition",
+        "quote": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+        "uses": [
+          "3.1",
+          "4.1"
+        ]
+      },
+      "reason": "Actual step 2.1 cites F1 for integrability of the finite-variance unbiased input U, permitting the finite event integrals.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "3.1",
+        "4.1"
+      ],
+      "proposed_after": [
+        "2.1",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "thm-rao-blackwell",
+      "array": "citations",
+      "selector": {
+        "fact": "F1",
+        "source": "def-unbiased-estimator-and-umvu"
+      },
+      "expected_complete_row": {
+        "fact": "F1",
+        "source": "def-unbiased-estimator-and-umvu",
+        "source_section": "Definition",
+        "quote": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+        "uses": [
+          "3.1",
+          "4.1"
+        ]
+      },
+      "reason": "Actual step 2.1 cites F1 for integrability of the finite-variance unbiased input U, permitting the finite event integrals.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "3.1",
+        "4.1"
+      ],
+      "proposed_after": [
+        "2.1",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-6.proof-contracts.json",
+      "subject": "ex-rao-blackwell-bernoulli-observation",
+      "array": "citations",
+      "selector": {
+        "fact": "F4",
+        "source": "def-bernoulli-and-binomial-random-variables"
+      },
+      "expected_complete_row": {
+        "fact": "F4",
+        "source": "def-bernoulli-and-binomial-random-variables",
+        "source_section": "Definition",
+        "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      "reason": "Actual step 2.1 explicitly cites composite F4 when using the Bernoulli law to compute E_p X_1=p. Both supplier rows for F4 map to this actual citation.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1"
+      ],
+      "proposed_after": [
+        "1.1",
+        "2.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-6.proof-contracts.json",
+      "subject": "ex-rao-blackwell-bernoulli-observation",
+      "array": "citations",
+      "selector": {
+        "fact": "F4",
+        "source": "def-independence-of-finite-random-variables"
+      },
+      "expected_complete_row": {
+        "fact": "F4",
+        "source": "def-independence-of-finite-random-variables",
+        "source_section": "Definition",
+        "quote": "A finite family of finite-valued random variables $(X_i)_{i\\in I}$ is **mutually independent** when for every nonempty $J\\subseteq I$ and every selection $x_j\\in X_j(\\Omega)$,\n$$\\mathbb P(X_j=x_j\\text{ for every }j\\in J)=\\prod_{j\\in J}\\mathbb P(X_j=x_j).$$\nIt is **pairwise independent** when this identity is required only for two distinct indices. The empty family is mutually independent vacuously, and a one-member family is mutually independent.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      "reason": "Actual step 2.1 explicitly cites composite F4 when using the Bernoulli law to compute E_p X_1=p. Both supplier rows for F4 map to this actual citation.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1"
+      ],
+      "proposed_after": [
+        "1.1",
+        "2.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "ex-rao-blackwell-bernoulli-observation",
+      "array": "citations",
+      "selector": {
+        "fact": "F4",
+        "source": "def-bernoulli-and-binomial-random-variables"
+      },
+      "expected_complete_row": {
+        "fact": "F4",
+        "source": "def-bernoulli-and-binomial-random-variables",
+        "source_section": "Definition",
+        "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      "reason": "Actual step 2.1 explicitly cites composite F4 when using the Bernoulli law to compute E_p X_1=p. Both supplier rows for F4 map to this actual citation.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1"
+      ],
+      "proposed_after": [
+        "1.1",
+        "2.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "ex-rao-blackwell-bernoulli-observation",
+      "array": "citations",
+      "selector": {
+        "fact": "F4",
+        "source": "def-independence-of-finite-random-variables"
+      },
+      "expected_complete_row": {
+        "fact": "F4",
+        "source": "def-independence-of-finite-random-variables",
+        "source_section": "Definition",
+        "quote": "A finite family of finite-valued random variables $(X_i)_{i\\in I}$ is **mutually independent** when for every nonempty $J\\subseteq I$ and every selection $x_j\\in X_j(\\Omega)$,\n$$\\mathbb P(X_j=x_j\\text{ for every }j\\in J)=\\prod_{j\\in J}\\mathbb P(X_j=x_j).$$\nIt is **pairwise independent** when this identity is required only for two distinct indices. The empty family is mutually independent vacuously, and a one-member family is mutually independent.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      "reason": "Actual step 2.1 explicitly cites composite F4 when using the Bernoulli law to compute E_p X_1=p. Both supplier rows for F4 map to this actual citation.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1"
+      ],
+      "proposed_after": [
+        "1.1",
+        "2.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-15.proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F7",
+        "source": "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+      },
+      "expected_complete_row": {
+        "fact": "F7",
+        "source": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+        "source_section": "Statement",
+        "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f : X \\to \\overline{\\mathbb{R}}$. The following are equivalent:\n\n1. $f$ is measurable;\n2. $\\{x : f(x) > a\\} \\in \\mathcal{A}$ for every real $a$;\n3. $\\{x : f(x) \\ge a\\} \\in \\mathcal{A}$ for every real $a$;\n4. $\\{x : f(x) < a\\} \\in \\mathcal{A}$ for every real $a$;\n5. $\\{x : f(x) \\le a\\} \\in \\mathcal{A}$ for every real $a$.\n\nMoreover, in any one of conditions 2 through 5 it is enough to test only\nrational thresholds $a \\in \\mathbb{Q}$.",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 proves exponential measurability using F7; step 2.1 invokes that established step and does not cite F7 directly. Remove only the unsupported direct use.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "1.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-15.proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F7",
+        "source": "thm-exponential-is-strictly-increasing"
+      },
+      "expected_complete_row": {
+        "fact": "F7",
+        "source": "thm-exponential-is-strictly-increasing",
+        "source_section": "Statement",
+        "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 proves exponential measurability using F7; step 2.1 invokes that established step and does not cite F7 directly. Remove only the unsupported direct use.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "1.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-15.proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F7",
+        "source": "cor-exponential-reciprocal-and-positivity"
+      },
+      "expected_complete_row": {
+        "fact": "F7",
+        "source": "cor-exponential-reciprocal-and-positivity",
+        "source_section": "Statement",
+        "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 proves exponential measurability using F7; step 2.1 invokes that established step and does not cite F7 directly. Remove only the unsupported direct use.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "1.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-15.proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F7",
+        "source": "def-natural-logarithm"
+      },
+      "expected_complete_row": {
+        "fact": "F7",
+        "source": "def-natural-logarithm",
+        "source_section": "Definition",
+        "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 proves exponential measurability using F7; step 2.1 invokes that established step and does not cite F7 directly. Remove only the unsupported direct use.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "1.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-15.proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F9",
+        "source": "def-nonnegative-lebesgue-integral"
+      },
+      "expected_complete_row": {
+        "fact": "F9",
+        "source": "def-nonnegative-lebesgue-integral",
+        "source_section": "Definition",
+        "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+        "uses": [
+          "2.1"
+        ]
+      },
+      "reason": "This source is a declared dependency/context behind the set-integral definition, but current F9 does not link it directly. Its redundant direct-citation row is spurious; archive the complete row here and retain every actual F9 supplier row unchanged.",
+      "operation": "remove-exact-row",
+      "removed_row_retained_in_evidence": true
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F7",
+        "source": "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+      },
+      "expected_complete_row": {
+        "fact": "F7",
+        "source": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+        "source_section": "Statement",
+        "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f : X \\to \\overline{\\mathbb{R}}$. The following are equivalent:\n\n1. $f$ is measurable;\n2. $\\{x : f(x) > a\\} \\in \\mathcal{A}$ for every real $a$;\n3. $\\{x : f(x) \\ge a\\} \\in \\mathcal{A}$ for every real $a$;\n4. $\\{x : f(x) < a\\} \\in \\mathcal{A}$ for every real $a$;\n5. $\\{x : f(x) \\le a\\} \\in \\mathcal{A}$ for every real $a$.\n\nMoreover, in any one of conditions 2 through 5 it is enough to test only\nrational thresholds $a \\in \\mathbb{Q}$.",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 proves exponential measurability using F7; step 2.1 invokes that established step and does not cite F7 directly. Remove only the unsupported direct use.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "1.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F7",
+        "source": "thm-exponential-is-strictly-increasing"
+      },
+      "expected_complete_row": {
+        "fact": "F7",
+        "source": "thm-exponential-is-strictly-increasing",
+        "source_section": "Statement",
+        "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 proves exponential measurability using F7; step 2.1 invokes that established step and does not cite F7 directly. Remove only the unsupported direct use.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "1.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F7",
+        "source": "cor-exponential-reciprocal-and-positivity"
+      },
+      "expected_complete_row": {
+        "fact": "F7",
+        "source": "cor-exponential-reciprocal-and-positivity",
+        "source_section": "Statement",
+        "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 proves exponential measurability using F7; step 2.1 invokes that established step and does not cite F7 directly. Remove only the unsupported direct use.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "1.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F7",
+        "source": "def-natural-logarithm"
+      },
+      "expected_complete_row": {
+        "fact": "F7",
+        "source": "def-natural-logarithm",
+        "source_section": "Definition",
+        "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "reason": "Actual step 1.1 proves exponential measurability using F7; step 2.1 invokes that established step and does not cite F7 directly. Remove only the unsupported direct use.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "2.1"
+      ],
+      "proposed_after": [
+        "1.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "lem-bounded-variable-hoeffding-mgf",
+      "array": "citations",
+      "selector": {
+        "fact": "F9",
+        "source": "def-nonnegative-lebesgue-integral"
+      },
+      "expected_complete_row": {
+        "fact": "F9",
+        "source": "def-nonnegative-lebesgue-integral",
+        "source_section": "Definition",
+        "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+        "uses": [
+          "2.1"
+        ]
+      },
+      "reason": "This source is a declared dependency/context behind the set-integral definition, but current F9 does not link it directly. Its redundant direct-citation row is spurious; archive the complete row here and retain every actual F9 supplier row unchanged.",
+      "operation": "remove-exact-row",
+      "removed_row_retained_in_evidence": true
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-15.proof-contracts.json",
+      "subject": "cex-uncountable-class-has-nonmeasurable-empirical-supremum",
+      "array": "citations",
+      "selector": {
+        "fact": "F1",
+        "source": "cor-interval-uncountable"
+      },
+      "expected_complete_row": {
+        "fact": "F1",
+        "source": "cor-interval-uncountable",
+        "source_section": "Statement",
+        "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]) and\nlet $a, b \\in \\mathbb{R}$ with $a < b$. Then both\n\n1. the closed interval $[a,b] = \\{\\, x \\in \\mathbb{R} : a \\le x \\le b \\,\\}$, and\n2. the open interval $(a,b) = \\{\\, x \\in \\mathbb{R} : a < x < b \\,\\}$\n\nare uncountable ([[def-countable]]).\n\n**What this adds to [[thm-r-uncountable]], and what it does not inherit from it.**\nThat theorem states exactly one thing: $\\mathbb{R}$ is uncountable. Its statement\nsays nothing about any interval, so the present result cannot be read off it. Its\n*proof*, on the other hand, is general in every part but its seed: the trisection\nrule of its step 2.1 is constructed there for an arbitrary $(a,b) \\in I$, and its\nsteps 4.1, 5.1 and 6.1, together with the interval reasoning of its step 7.1, use\nnothing about the starting interval beyond the nesting and the strictness\n$a_n < b_n$ that the rule delivers. Only three places are special to $\\mathbb{R}$\nand to $(0,1)$: the surjection of its step 1.1 is onto $\\mathbb{R}$, the recursion\nof its step 3.1 is seeded at $(0,(0,1))$, and the conclusion drawn in its step 7.1\nis about $\\mathbb{R}$. So the construction is re-run below, seeded\ninstead at the **middle third** of $(a,b)$, against a surjection onto $(a,b)$; the\nremarks record why that seed and not $(a,b)$ itself.",
+        "uses": [
+          "1.1",
+          "4.1"
+        ]
+      },
+      "reason": "Actual step 3.1 cites F1 to establish U uncountable before injectivity establishes F uncountable.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "4.1"
+      ],
+      "proposed_after": [
+        "1.1",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-batch-15.proof-contracts.json",
+      "subject": "cex-uncountable-class-has-nonmeasurable-empirical-supremum",
+      "array": "derivations",
+      "selector": {
+        "id": "step-3-1"
+      },
+      "operation": "replace-field",
+      "field": "inputs",
+      "expected_before": [
+        "F2",
+        "F3",
+        "F4",
+        "given",
+        "step 2.1"
+      ],
+      "proposed_after": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "given",
+        "step 2.1"
+      ],
+      "expected_complete_row": {
+        "id": "step-3-1",
+        "claim": "Regard $(\\Omega,\\mathcal A,P)$ as the observation space and let $Z$ be its identity random element, which has law $P$. For each $t\\in U$, the singleton $\\{t\\}$ is in $\\mathcal A$ by [F2], so $f_t=\\mathbf1_{\\{t\\}}$ is measurable and $Pf_t=P(\\{t\\})=0$. If $s\\ne t$, then $f_s(s)=1$ and $f_t(s)=0$, so $t\\mapsto f_t$ is injective; since $U$ is uncountable by [F1], $\\mathcal F$ is uncountable.",
+        "step": "3.1",
+        "inputs": [
+          "F2",
+          "F3",
+          "F4",
+          "given",
+          "step 2.1"
+        ]
+      },
+      "reason": "Record actual trailing F1 premise at source step 3.1, preserving the complete existing claim and all other inputs."
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "cex-uncountable-class-has-nonmeasurable-empirical-supremum",
+      "array": "citations",
+      "selector": {
+        "fact": "F1",
+        "source": "cor-interval-uncountable"
+      },
+      "expected_complete_row": {
+        "fact": "F1",
+        "source": "cor-interval-uncountable",
+        "source_section": "Statement",
+        "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]) and\nlet $a, b \\in \\mathbb{R}$ with $a < b$. Then both\n\n1. the closed interval $[a,b] = \\{\\, x \\in \\mathbb{R} : a \\le x \\le b \\,\\}$, and\n2. the open interval $(a,b) = \\{\\, x \\in \\mathbb{R} : a < x < b \\,\\}$\n\nare uncountable ([[def-countable]]).\n\n**What this adds to [[thm-r-uncountable]], and what it does not inherit from it.**\nThat theorem states exactly one thing: $\\mathbb{R}$ is uncountable. Its statement\nsays nothing about any interval, so the present result cannot be read off it. Its\n*proof*, on the other hand, is general in every part but its seed: the trisection\nrule of its step 2.1 is constructed there for an arbitrary $(a,b) \\in I$, and its\nsteps 4.1, 5.1 and 6.1, together with the interval reasoning of its step 7.1, use\nnothing about the starting interval beyond the nesting and the strictness\n$a_n < b_n$ that the rule delivers. Only three places are special to $\\mathbb{R}$\nand to $(0,1)$: the surjection of its step 1.1 is onto $\\mathbb{R}$, the recursion\nof its step 3.1 is seeded at $(0,(0,1))$, and the conclusion drawn in its step 7.1\nis about $\\mathbb{R}$. So the construction is re-run below, seeded\ninstead at the **middle third** of $(a,b)$, against a surjection onto $(a,b)$; the\nremarks record why that seed and not $(a,b)$ itself.",
+        "uses": [
+          "1.1",
+          "4.1"
+        ]
+      },
+      "reason": "Actual step 3.1 cites F1 to establish U uncountable before injectivity establishes F uncountable.",
+      "operation": "replace-field",
+      "field": "uses",
+      "expected_before": [
+        "1.1",
+        "4.1"
+      ],
+      "proposed_after": [
+        "1.1",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "carrier": "research/mathematical-statistics-foundations-37-proof-contracts.json",
+      "subject": "cex-uncountable-class-has-nonmeasurable-empirical-supremum",
+      "array": "derivations",
+      "selector": {
+        "id": "step-3-1"
+      },
+      "operation": "replace-field",
+      "field": "inputs",
+      "expected_before": [
+        "F2",
+        "F3",
+        "F4",
+        "given",
+        "step 2.1"
+      ],
+      "proposed_after": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "given",
+        "step 2.1"
+      ],
+      "expected_complete_row": {
+        "id": "step-3-1",
+        "claim": "Regard $(\\Omega,\\mathcal A,P)$ as the observation space and let $Z$ be its identity random element, which has law $P$. For each $t\\in U$, the singleton $\\{t\\}$ is in $\\mathcal A$ by [F2], so $f_t=\\mathbf1_{\\{t\\}}$ is measurable and $Pf_t=P(\\{t\\})=0$. If $s\\ne t$, then $f_s(s)=1$ and $f_t(s)=0$, so $t\\mapsto f_t$ is injective; since $U$ is uncountable by [F1], $\\mathcal F$ is uncountable.",
+        "step": "3.1",
+        "inputs": [
+          "F2",
+          "F3",
+          "F4",
+          "given",
+          "step 2.1"
+        ]
+      },
+      "reason": "Record actual trailing F1 premise at source step 3.1, preserving the complete existing claim and all other inputs."
+    }
+  ],
+  "preservation": "Change only selected citation uses arrays, remove one unsupported direct-citation row per carrier (full exact row archived in expected_complete_row), and add the actual F1 derivation input at step-3-1. Preserve all source carriers, all retained citation source/section/quote fields, every derivation claim, every other input, and every risk/boundary/routine/finite-check/axiom field. Do not regenerate complete contracts.",
+  "integration_guard": "Locate subjects by current manifest ownership; match exact complete selected rows before applying each operation, using semantic fact/source selectors so deletion cannot shift later row targets. Joined and home contracts are separate listed carriers. This proposal confers no gate pass or adjudication verdict.",
+  "batch15_continuation_obligation": "The accepted ordinary risk-only batch15 disposition needs a genuine native continuation 15 after contract mapping repair. Its noncanonical heading does not qualify for the existing source-identical acceptance guard. Do not fabricate a verdict or historical coverage."
+}

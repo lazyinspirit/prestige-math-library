@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "run": "mathematical-statistics-foundations-37",
+  "batch": "22",
+  "round": 0,
+  "reviewed_items": [
+    "def-qmd-path",
+    "lem-parametric-qmd-score-has-mean-zero",
+    "def-wald-score-likelihood-ratio-statistics",
+    "thm-regular-mle-asymptotic-linearity-and-normality",
+    "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+    "cor-wald-score-lr-asymptotic-equivalence",
+    "ex-normal-mean-exact-likelihood-calibration",
+    "cex-boundary-null-has-nonstandard-lr-limit"
+  ],
+  "reviewed_pages": [
+    "likelihood-asymptotics-wald-score-and-likelihood-ratio",
+    "likelihood-asymptotics-wald-score-and-likelihood-ratio-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The claims and regular-null proof route match the controlling design. The QMD definition lacks its RN-density prerequisite and AC premise; making that interface explicit affects an outside-batch consumer. Both normal examples also have local gaps in their QMD verifications.",
+  "findings": [
+    {
+      "id": "def-qmd-path",
+      "type": "prerequisite",
+      "reason": "The Definition writes pθ=dPθ/dμ from domination alone, but its deps omit the actual density supplier. The library’s def-likelihood-density selects finite-valued RN representatives under AC, and its RN existence supplier also assumes AC. Add that supplier and premise, or make a density family explicit in the setup."
+    },
+    {
+      "id": "lem-parametric-qmd-score-has-mean-zero",
+      "type": "prerequisite",
+      "reason": "This consumer uses the QMD densities in its proof but its Statement and deps do not carry AC or def-likelihood-density. It needs an explicit disposition when the QMD density contract is reconciled."
+    },
+    {
+      "id": "ex-normal-mean-exact-likelihood-calibration",
+      "type": "local",
+      "reason": "Verification 1.1 asserts q''₀∈L² without proving polynomial-Gaussian integrability. Its FTC use needs integrability of q'' in the parameter (thm-continuous-implies-integrable supplies this for the continuous integrand), and the translated L² norm needs a translation-invariance justification. It also attributes Eμ[s²]=1/σ² to F1, while F2 supplies the normal variance."
+    },
+    {
+      "id": "cex-boundary-null-has-nonstandard-lr-limit",
+      "type": "local",
+      "reason": "Counterexample 1.1 repeats the unsupported q''₀∈L² assertion and does not establish the FTC integrability or translated L² norm identity. The exact mixture conclusion is sound conditional on completing this QMD verification."
+    },
+    {
+      "id": "cex-uniform-maximum-has-n-rate-not-root-n",
+      "type": "outside-batch",
+      "reason": "If QMD is corrected to use the library’s AC-backed RN-density supplier, this outside-batch consumer must carry that premise: its Facts [F2] and Counterexample 1.2 use QMD without AC. Owner reconciliation is required because this item is outside batch 22."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "likelihood-asymptotics-wald-score-and-likelihood-ratio",
+      "decision": "accept",
+      "reason": "The page is an overview of formal items whose theorem hypotheses carry AC."
+    },
+    {
+      "id": "likelihood-asymptotics-wald-score-and-likelihood-ratio-examples",
+      "decision": "accept",
+      "reason": "The page summarizes the two examples, both of which state AC."
+    },
+    {
+      "id": "lem-parametric-qmd-score-has-mean-zero",
+      "decision": "repair",
+      "reason": "Carry the density supplier and AC premise required by the reconciled QMD definition."
+    },
+    {
+      "id": "def-wald-score-likelihood-ratio-statistics",
+      "decision": "accept",
+      "reason": "Its Definition states AC and explicitly assumes compatibility between the pointwise and QMD scores."
+    },
+    {
+      "id": "thm-regular-mle-asymptotic-linearity-and-normality",
+      "decision": "accept",
+      "reason": "Its Statement explicitly assumes AC and uses the QMD score under that premise."
+    },
+    {
+      "id": "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+      "decision": "accept",
+      "reason": "Its Statement explicitly assumes AC and states the local likelihood and score expansions separately."
+    },
+    {
+      "id": "cor-wald-score-lr-asymptotic-equivalence",
+      "decision": "accept",
+      "reason": "It explicitly inherits AC and the hypotheses of the chi-square theorem."
+    },
+    {
+      "id": "ex-normal-mean-exact-likelihood-calibration",
+      "decision": "accept",
+      "reason": "It states AC and supplies the normal density explicitly; its separate local QMD proof gaps are recorded above."
+    },
+    {
+      "id": "cex-boundary-null-has-nonstandard-lr-limit",
+      "decision": "accept",
+      "reason": "It states AC and supplies the normal density explicitly; its separate local QMD proof gaps are recorded above."
+    },
+    {
+      "id": "lem-qmd-singular-and-zero-overlap-masses",
+      "decision": "accept",
+      "reason": "It states AC and directly depends on def-likelihood-density."
+    },
+    {
+      "id": "ex-one-sided-normal-likelihood-ratio-at-boundary",
+      "decision": "accept",
+      "reason": "It states AC and gives the normal density explicitly."
+    },
+    {
+      "id": "lem-qmd-score-centered-and-finite-information",
+      "decision": "accept",
+      "reason": "It states AC and directly depends on def-likelihood-density."
+    },
+    {
+      "id": "lem-qmd-normalized-product-likelihood-expansion",
+      "decision": "accept",
+      "reason": "It states AC and directly depends on def-likelihood-density."
+    },
+    {
+      "id": "thm-general-regular-estimator-convolution-bound",
+      "decision": "accept",
+      "reason": "It explicitly assumes AC for its QMD submodels."
+    },
+    {
+      "id": "thm-likelihood-ratio-limit-for-local-cones-in-a-qmd-model",
+      "decision": "accept",
+      "reason": "It explicitly assumes AC for its QMD model."
+    },
+    {
+      "id": "cex-uniform-maximum-has-n-rate-not-root-n",
+      "decision": "escalate",
+      "reason": "Its QMD use has no AC premise; updating this outside-batch consumer requires owner routing."
+    },
+    {
+      "id": "thm-qmd-implies-lan-for-iid",
+      "decision": "accept",
+      "reason": "It states AC and directly depends on def-likelihood-density."
+    },
+    {
+      "id": "ex-gaussian-shift-lan-and-regular-sample-mean",
+      "decision": "accept",
+      "reason": "It states AC and directly depends on def-likelihood-density."
+    }
+  ]
+}

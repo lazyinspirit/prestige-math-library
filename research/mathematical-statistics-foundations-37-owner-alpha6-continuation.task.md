@@ -1,0 +1,35 @@
+# Step 3a adjudication — adjudicator G, run `mathematical-statistics-foundations-37`
+
+- Set `G` to the suffix of your dispatch label: `3a-batch-13` means `G` is `batch-13`; a retained legacy dispatch `3a-b` means `G` is `b`. Use that suffix in every path and in the decisions file's `group` field below. The scope file's original assignment group stays unchanged.
+- Work only on your `covers:` batches. New dispatches cover exactly one batch. For each batch, read `research/mathematical-statistics-foundations-37-step3-scope-6.json`, its reader report and findings, refuter report, current carriers, and every cited dependency.
+- Follow `research/mathematical-statistics-foundations-37-alpha-G-3a-order.task.md` within your dispatched batches. Adjudicate routed items from lowest to highest in-run dependency level, complete each item's risk review before moving higher, and keep all findings for one item together. Page-only obligations retain their own scope. Escalate affected consumers outside your dispatched batches to the owner for supplier-first repair rather than editing another adjudicator's files.
+- Decide exactly the routed obligations: `touched:BATCH:ID` and `page:BATCH:ID` for a changed carrier; `reader:BATCH:K` and `refuter:BATCH:K` for the K-th finding in that batch's reader or refuter artifact. `BATCH` is the batch ID, `ID` the carrier ID, and `K` a 1-based position. An untouched, unflagged item owes no decision.
+- Apply `briefs/alpha-step3.md` for review, verdict, repair, risk, ledger, and evidence rules.
+- Compare current carriers with `research/mathematical-statistics-foundations-37-step3-hash-6-pre.json` and `research/mathematical-statistics-foundations-37-step3-hash-6-post.json` to decide whether reader repairs were accepted, amended, or reverted.
+- Write `research/mathematical-statistics-foundations-37-alpha-G-3a.md` with evidence, verdicts, repairs, sources, published findings, checks, and blockers.
+- Write `research/mathematical-statistics-foundations-37-alpha-G-3a-decisions.json` as `{version:1,run,group,decisions}`. Include one entry per owed obligation with `obligation`, `id`, `route`, `verdict`, nonempty `evidence`, and `defect_ids`. Write both files even when `decisions` is empty.
+- Set `repair_confidence: 1` on every completed repair. Each `reader` and `flagged` decision must reference exactly one closed defect-ledger row.
+- An `in-run-dependency` finding retains its original consumer-batch obligation and exact `producer_batch`, `consumer_id`, dependency path, immutable producer pre-reader fingerprint and producer carrier at routing. Open and independently review the current producer proof, contract and manifest; retain `producer_batch` and `consumer_id` in your decision. The producer is outside your edit scope. A current unresolved producer defect must be escalated for its owning batch; source file presence, owner approval of a proposed correction or a pre-reader inventory does not certify the repaired proof.
+- Distinguish the original finding from the current source. `observation_basis: "unbound"` means no exact original observed-byte binding is available: keep `historical_delta_unknown: true` and a concrete `owner_resolution` of at least 40 characters explaining the authorized historical disposition, available source evidence and missing-byte limit. Still decide the finding with the normal verdict and exact closed ledger row after independent current proof review. Never mark a true historical finding false-positive merely because the current source was repaired, and never claim that the historical counterexample refutes the corrected current bytes.
+- Keep a proposed withdrawal present for the owner; do not delete it.
+- Before closing, run `node tools/risk-report.mjs research/mathematical-statistics-foundations-37-batch-6.proof-contracts.json` for each owned batch. Record a complete `risk_review` for every HIGH or CRITICAL item it reports, then rerun each owned contract with `--require-reviewed`.
+- If a substantial unmet prerequisite blocks sound local repair, use `verdict: "escalated"`. Evidence must name the missing result, attempted local closure, sources consulted, and required owner decision.
+- Do not judge, stamp, or self-certify. The engine stamps decision hashes and runs the gate battery after this dispatch.
+
+**Algorithms.** Use `kind: algorithm`, an `alg-` ID and `## Definition`; algorithms function identically to definitions. Specify inputs, outputs, admissible conditions and exact instructions, including branches, calls and loops. A larger algorithm may compose or repeatedly invoke earlier smaller algorithms/procedures: put those supplier IDs in the larger algorithm's `deps`. Repetition in an execution does not create a self-edge or permit a prerequisite cycle. State correctness, termination, complexity and other properties in separate proved lemmas, theorems, propositions or corollaries; use `justified_by` for results establishing well-definedness under the ordinary definition rule. Procedure instructions are not a phase proof. Review the defining procedure and its actual prerequisites; changes to its Definition trigger the ordinary direct/indirect consumer checks.
+
+
+
+## Explicit owner continuation
+
+Read research/mathematical-statistics-foundations-37-owner-alpha6-continuation-authorization.json and its exact original archives. This is a genuine independent native continuation preserving all eight obligations and historical evidence. Four touched obligations have explicit authorization for current-content review only, per Alpha brief. No historical byte reconstruction is claimed. Preserve missing-byte uncertainty and original escalations in report; record actual current-source independent review and owner_resolution.
+
+The four reader findings now have actual owner-authored published repairs. Read current full sources/prerequisites and these exact evidence files:
+- research/mathematical-statistics-foundations-37-owner-step3-reader6-variance-source-resolution.json
+- research/mathematical-statistics-foundations-37-owner-r6-variance-thm-covariance-bilinearity-and-symmetry-repair.json
+- research/mathematical-statistics-foundations-37-owner-r6-variance-thm-variance-of-a-finite-sum-repair.json
+- research/mathematical-statistics-foundations-37-owner-e28-lem-bernoulli-and-binomial-mean-and-variance-stage3-v2-repair.json
+- research/mathematical-statistics-foundations-37-owner-step3-r6-placement-resolution.json
+- research/mathematical-statistics-foundations-37-owner-step3-reader6-early-b-source-resolution.json
+
+Preserve original confirmed findings/severity, independently assess current corrections, and record normal closed defect-ledger evidence/status supported by exact repair receipts. Keep published content read-only. Do not mistake true historical defects for false positives. Root owns rehash/recertification; perform only your native scoped review duties and mandatory checks. No optional tests or whole-corpus validations. Never edit frozen snapshots, native original archives or another batch source.

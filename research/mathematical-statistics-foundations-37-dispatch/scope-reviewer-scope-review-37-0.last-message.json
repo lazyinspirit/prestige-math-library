@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "run": "mathematical-statistics-foundations-37",
+  "batch": "37",
+  "round": 0,
+  "reviewed_items": [
+    "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+    "lem-regular-conditional-kernels-push-forward-under-measurable-random-maps",
+    "def-exchangeable-random-elements",
+    "def-conformal-nonconformity-score-and-rank-pvalue",
+    "lem-finite-order-statistic-and-rank-maps-are-measurable",
+    "lem-permutation-equivariant-score-map-preserves-exchangeability",
+    "alg-split-conformal-prediction-set",
+    "alg-full-conformal-prediction-set",
+    "thm-conformal-rank-superuniformity-under-exchangeability",
+    "thm-split-conformal-marginal-coverage",
+    "thm-full-conformal-marginal-coverage",
+    "ex-split-conformal-conservative-ties",
+    "ex-full-conformal-candidate-ranking",
+    "cex-conformal-rare-subgroup-poor-conditional-coverage",
+    "cex-conformal-coverage-under-distribution-shift"
+  ],
+  "reviewed_pages": [
+    "conformal-prediction-and-exchangeable-ranks",
+    "conformal-prediction-and-exchangeable-ranks-examples"
+  ],
+  "decision": "repair",
+  "reason": "The substantive claims match the approved scope, and the split coverage argument aligns with Lei et al., §2.2, Theorem 2.2 and Appendix A.1 ([source](https://arxiv.org/pdf/1604.04173)). Three local proof/setup clarifications are needed; no unresolved outside-scope prerequisite gap was found.",
+  "findings": [
+    {
+      "id": "lem-regular-conditional-kernels-push-forward-under-measurable-random-maps",
+      "type": "local",
+      "reason": "Step 3.1 applies the conditional identity to g(ω,X(ω)) without establishing that ω↦(ω,X(ω)) is measurable from (Ω,F) into (Ω×S,G⊗Σ). Add the coordinate-map argument, using G⊆F and measurability of X, so the composite and its events are measurable."
+    },
+    {
+      "id": "thm-split-conformal-marginal-coverage",
+      "type": "local",
+      "reason": "Step 1.1 establishes measurability only for each fixed ω, while the push-forward supplier requires the score map to be jointly measurable in (ω,z). Show this from T-measurability of H and joint measurability of s. In Step 3.1, use the product conditional kernel from [F2] when marginalizing the randomized event involving U."
+    },
+    {
+      "id": "thm-full-conformal-marginal-coverage",
+      "type": "local",
+      "reason": "The statement uses X_{m+1} and Y_{m+1} without specifying that each example is a feature-response pair in the measurable product space. State Z_i=(X_i,Y_i) in the product example space (and m≥0) to make the theorem’s domain explicit."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-split-conformal-marginal-coverage",
+      "decision": "repair",
+      "reason": "Its conditional push-forward and randomized marginalization arguments need the local clarifications identified above."
+    },
+    {
+      "id": "ex-split-conformal-conservative-ties",
+      "decision": "accept",
+      "reason": "The tied-score calculation gives q=0 and p_U=U; it remains valid with the split theorem’s proof clarified."
+    },
+    {
+      "id": "cex-conformal-rare-subgroup-poor-conditional-coverage",
+      "decision": "accept",
+      "reason": "The independent rare-group calculation is correct and exhibits poor subgroup coverage with marginal coverage above 0.9."
+    },
+    {
+      "id": "cex-conformal-coverage-under-distribution-shift",
+      "decision": "accept",
+      "reason": "The stated nonexchangeable calibration/test pair yields q=0 and zero test coverage."
+    },
+    {
+      "id": "ex-full-conformal-candidate-ranking",
+      "decision": "accept",
+      "reason": "Its singleton-feature and finite-response setup supplies the feature-response decomposition; the rank and 2/3 coverage calculation are correct."
+    },
+    {
+      "id": "conformal-prediction-and-exchangeable-ranks",
+      "decision": "accept",
+      "reason": "The page’s feature-response framing and marginal-coverage summary remain within the clarified theorem setup."
+    },
+    {
+      "id": "conformal-prediction-and-exchangeable-ranks-examples",
+      "decision": "accept",
+      "reason": "Its examples summary remains accurate under the clarification."
+    }
+  ]
+}

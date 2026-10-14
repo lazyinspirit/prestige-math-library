@@ -1,0 +1,953 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-first-and-second-order-delta-method-for-random-vectors",
+    "thm-z-estimator-asymptotic-linearity-and-normality",
+    "ex-log-transformation-delta-method",
+    "ex-ratio-delta-method",
+    "ex-second-order-delta-method-quadratic",
+    "cex-continuity-alone-does-not-give-delta-method",
+    "ex-sample-variance-delta-method"
+  ],
+  "contracts": {
+    "thm-first-and-second-order-delta-method-for-random-vectors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be a random vector, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "Let $d,k,m\\ge1$ be fixed. For each $n$, let $X_n\\in\\mathbb R^d$ and $Y_n\\in\\mathbb R^k$ be random vectors on one probability space; the probability space may vary with $n$. Let $X\\in\\mathbb R^d$ be a random vector on any probability space, and let $c\\in\\mathbb R^k$ be constant. If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then\n$$ (X_n,Y_n)\\Rightarrow(X,c). $$\nConsequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$. No independence between $X_n$ and $Y_n$ is required.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "source_section": "Definition",
+          "quote": "Let $U$ be an open subset of a real matrix space $\\mathbb R^{m\\times n}$ or of\na complex matrix space $\\mathbb C^{m\\times n}$ viewed as a real vector space,\nand let $F:U\\to W$ take values in a finite-dimensional real normed vector\nspace $(W,\\|\\,\\cdot\\,\\|_W)$.\nWe say that $F$ is **real Fr\\'echet differentiable** at $A\\in U$ if there is a\nreal-linear map $L$ such that\n\n$$\\frac{\\|F(A+H)-F(A)-L[H]\\|_W}{\\|H\\|_F}\\longrightarrow0\\qquad(H\\to0,\\ H\\ne0).$$\n\nThat map $L$ is the **real Fr\\'echet derivative** of $F$ at $A$ and is denoted\n$DF(A)$.",
+          "uses": []
+        },
+        {
+          "fact": "F6",
+          "source": "def-convergence-in-distribution-of-random-elements",
+          "source_section": "Definition",
+          "quote": "Random elements $X_n,X$ with values in the same metric space **converge in distribution**, written $X_n\\Rightarrow X$, if their laws from [[def-law-or-distribution-of-a-random-element]] satisfy $P_{X_n}\\Rightarrow P_X$ in [[def-weak-convergence-of-borel-probability-measures]]. They may be defined on different probability spaces. The definition specifies only their marginal laws.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F6], $Z_n\\Rightarrow Z$ is weak convergence in $\\mathbb R^d$. By [F2], this implies $Z_n=O_P(1)$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $r_n^{-1}\\to0$, the deterministic sequence $r_n^{-1}$ is $o_P(1)$. Applying the bilinear product rule in [F3] to scalar multiplication gives $T_n-\\theta=r_n^{-1}Z_n=o_P(1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $\\varepsilon,\\eta>0$. By [F2] choose $M>0$ with $\\limsup_nP(\\|Z_n\\|>M)\\le\\eta$. The first-order remainder limit in the statement gives $\\delta>0$ such that $\\|\\rho_1(h)\\|\\le(\\varepsilon/M)\\|h\\|$ when $0<\\|h\\|<\\delta$. Step 2.1 gives $P(\\|T_n-\\theta\\|\\ge\\delta)\\to0$, so the limiting upper probability that $r_n\\|\\rho_1(T_n-\\theta)\\|>\\varepsilon$ is at most $\\eta$. Letting $\\eta\\downarrow0$ proves $r_n\\rho_1(T_n-\\theta)=o_P(1)$. Substitution in the first expansion yields $r_n\\{g(T_n)-g(\\theta)\\}=AZ_n+o_P(1)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Fix $\\varepsilon,\\eta>0$. By [F2] choose $M>0$ with $\\limsup_nP(\\|Z_n\\|>M)\\le\\eta$. The second-order remainder limit in the statement gives $\\delta>0$ such that $\\|\\rho_2(h)\\|\\le(\\varepsilon/M^2)\\|h\\|^2$ for $0<\\|h\\|<\\delta$. Step 2.1 puts $T_n-\\theta$ inside this neighborhood with probability tending to one. Outside the two tail events, $r_n^2\\|\\rho_2(T_n-\\theta)\\|\\le\\varepsilon$ because $r_n\\|T_n-\\theta\\|=\\|Z_n\\|$. Thus $r_n^2\\rho_2(T_n-\\theta)=o_P(1)$; since $A=0$, substitution in the second expansion gives $r_n^2\\{g(T_n)-g(\\theta)\\}=\\frac12H[Z_n,Z_n]+o_P(1)$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The map $(x,e)\\mapsto Ax+e$ is continuous. Apply [F4] to $Z_n\\Rightarrow Z$ and the $o_P(1)$ error in step 3.1 to obtain the first-order limit $AZ$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "given",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The quadratic map $z\\mapsto\\frac12H[z,z]$ is continuous. Apply [F4] to its value at $Z_n$ and the error in step 3.2 to obtain the second-order limit $\\frac12H[Z,Z]$.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "given",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires positive finite dimensions d and k and makes no zero-dimensional claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 3.2 include the zero-first-derivative branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits d=k=1 without a separate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 5.1 permit AZ or H[Z,Z] to have a degenerate law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "g is defined on R^d and the theorem imposes no parameter-space endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 choose numerical bounds only; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states implications and no if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states implications and no if-and-only-if characterization."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "thm-z-estimator-asymptotic-linearity-and-normality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be a random vector, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "Let $d,k,m\\ge1$ be fixed. For each $n$, let $X_n\\in\\mathbb R^d$ and $Y_n\\in\\mathbb R^k$ be random vectors on one probability space; the probability space may vary with $n$. Let $X\\in\\mathbb R^d$ be a random vector on any probability space, and let $c\\in\\mathbb R^k$ be constant. If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then\n$$ (X_n,Y_n)\\Rightarrow(X,c). $$\nConsequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$. No independence between $X_n$ and $Y_n$ is required.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-convergence-in-distribution-of-random-elements",
+          "source_section": "Definition",
+          "quote": "Random elements $X_n,X$ with values in the same metric space **converge in distribution**, written $X_n\\Rightarrow X$, if their laws from [[def-law-or-distribution-of-a-random-element]] satisfy $P_{X_n}\\Rightarrow P_X$ in [[def-weak-convergence-of-borel-probability-measures]]. They may be defined on different probability spaces. The definition specifies only their marginal laws.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "source_section": "Definition",
+          "quote": "Let $U$ be an open subset of a real matrix space $\\mathbb R^{m\\times n}$ or of\na complex matrix space $\\mathbb C^{m\\times n}$ viewed as a real vector space,\nand let $F:U\\to W$ take values in a finite-dimensional real normed vector\nspace $(W,\\|\\,\\cdot\\,\\|_W)$.\nWe say that $F$ is **real Fr\\'echet differentiable** at $A\\in U$ if there is a\nreal-linear map $L$ such that\n\n$$\\frac{\\|F(A+H)-F(A)-L[H]\\|_W}{\\|H\\|_F}\\longrightarrow0\\qquad(H\\to0,\\ H\\ne0).$$\n\nThat map $L$ is the **real Fr\\'echet derivative** of $F$ at $A$ and is denoted\n$DF(A)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-z-estimator",
+          "source_section": "Definition",
+          "quote": "Let $P$ be a probability measure on $(\\mathcal X,\\mathcal A)$, let $X_1,X_2,\\ldots$ be IID with law $P$ ([[def-probability-measure]], [[def-identically-distributed-and-iid-random-variables]]), and let $(\\Theta,d)$ be a metric candidate space with its Borel sigma-algebra ([[def-metric-space]], [[def-borel-sigma-algebra]]). Fix a finite integer $q\\ge1$ and a norm on $\\mathbb R^q$. For each $\\theta\\in\\Theta$, let $\\psi_\\theta:\\mathcal X\\to\\mathbb R^q$ be measurable with $P\\|\\psi_\\theta\\|<\\infty$. Define\n$$\\Psi_n(\\theta)=P_n\\psi_\\theta=\\frac1n\\sum_{i=1}^n\\psi_\\theta(X_i),\\qquad \\Psi(\\theta)=P\\psi_\\theta.$$\n\nA measurable estimator sequence $\\hat\\theta_n$ into the Borel target $\\Theta$ is a **Z-estimator** if it is an exact or $o_P(1)$-approximate root: $\\Psi_n(\\hat\\theta_n)=0$ for every $n$, or $\\|\\Psi_n(\\hat\\theta_n)\\|=o_P(1)$. Measurability is as in [[def-estimator-sequence-in-iid-experiments]], and $o_P(1)$ has the convention of [[def-op-and-little-op-stochastic-bounds]]. Whenever a random candidate is substituted into an estimating equation, assume the evaluation is measurable.\n\nBecause $q\\ge1$ is finite, [[thm-all-norms-on-rn-are-equivalent]] gives constants $c,C>0$ with $c\\|v\\|_2\\le\\|v\\|\\le C\\|v\\|_2$ for every $v\\in\\mathbb R^q$. Thus for every $\\mathbb R^q$-valued sequence, convergence of the chosen-norm tails to zero is equivalent to the Euclidean $o_P(1)$ convention in [[def-op-and-little-op-stochastic-bounds]].\n\nThis definition does not infer a Z-estimating equation from an M-criterion. Differentiating an M-criterion is justified only under additional differentiability and interior-point hypotheses; a nonsmooth criterion need not have a score equation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-estimator-sequence-in-iid-experiments",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric model on a statistical experiment, and let $\\psi:\\Theta\\to\\mathcal T$ be an estimand whose target set $\\mathcal T$ is equipped with a metric $d$ ([[def-statistical-experiment]], [[def-parametric-statistical-model]], [[def-estimand-on-a-statistical-model]], [[def-metric-space]]). For $n\\ge1$, the IID sample-size-$n$ experiment has sample space $\\mathcal X^n$, product sigma-algebra $\\mathcal A^{\\otimes n}$, and sampling law $P_\\theta^{\\otimes n}$ at parameter $\\theta$ ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). The product law is defined recursively from $P_\\theta$; each factor is a probability measure and hence sigma-finite, so the finite product theorem supplies its existence, rectangle formula, and uniqueness ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\n\nA **nonrandomized estimator sequence** of $\\psi$ is a sequence of measurable maps, in the sense of [[def-measurable-function-between-measurable-spaces]],\n$$T_n:(\\mathcal X^n,\\mathcal A^{\\otimes n})\\to(\\mathcal T,\\mathcal B(\\mathcal T)),\\qquad n\\ge1,$$\nwhere $\\mathcal B(\\mathcal T)$ is the Borel sigma-algebra ([[def-borel-sigma-algebra]]). Its sampling distribution at $\\theta$ and sample size $n$ is the pushforward of $P_\\theta^{\\otimes n}$ by $T_n$.\n\nThis definition fixes IID repeated sampling and data-measurable estimators. It imposes no measurability on the parameter map $\\theta\\mapsto P_\\theta$ or on $\\psi$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\varepsilon,\\eta>0$. By [A2] choose $\\delta>0$ such that the limiting upper probability of the displayed supremum exceeding $\\varepsilon$ is at most $\\eta$. By [A1], $P^n(\\|\\hat\\theta_n-\\theta_0\\|\\ge\\delta)\\to0$. On the complementary event, $\\|\\mathbb G_n(\\psi_{\\hat\\theta_n}-\\psi_{\\theta_0})\\|$ is bounded by that supremum. Hence its limiting upper tail probability is at most $\\eta$; letting $\\eta\\downarrow0$ proves $\\mathbb G_n(\\psi_{\\hat\\theta_n}-\\psi_{\\theta_0})=o_P(1)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F12], applying the same measurable map $\\psi_{\\theta_0}$ to the iid observations preserves independence; identical distribution follows because every $X_i$ has the same law. By [A4] and [F5], $\\mathbb G_n\\psi_{\\theta_0}=n^{-1/2}\\sum_{i=1}^n\\psi_{\\theta_0}(X_i)$ is a centered iid sum with finite covariance $\\Sigma$. AC is available by [F9], so [F7] gives $\\mathbb G_n\\psi_{\\theta_0}\\Rightarrow N_d(0,\\Sigma)$, where convergence in distribution is weak convergence of laws by [F4]. In particular $\\mathbb G_n\\psi_{\\theta_0}=O_P(1)$ by [F2].",
+          "step": "1.2",
+          "inputs": [
+            "A4",
+            "F2",
+            "F4",
+            "F5",
+            "F7",
+            "F9",
+            "F12"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $h_n=\\hat\\theta_n-\\theta_0$ and $W_n=\\sqrt n\\,h_n$. By [F10]–[F11], the estimator and root have the stated Z-estimator and data-measurability conventions; [A1] imposes the stronger root-rate residual, which is also $o_P(1)$ since $n^{-1/2}\\le1$. The identity $\\sqrt nP_n\\psi_{\\hat\\theta_n}=\\mathbb G_n\\psi_{\\hat\\theta_n}+\\sqrt n\\Psi(\\hat\\theta_n)$, [A1], step 1.1 and the derivative expansion in [A3], as specified by [F6], give $VW_n+\\sqrt n\\,\\rho(h_n)=-\\mathbb G_n\\psi_{\\theta_0}+o_P(1)$. Moreover $\\|\\rho(h_n)\\|/\\|h_n\\|=o_P(1)$ by [A1] and [A3], with the ratio set to zero when $h_n=0$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "F6",
+            "F10",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $V$ is nonsingular, [A3] and step 2.1 imply $\\|W_n\\|\\le\\|V^{-1}\\|(\\|\\mathbb G_n\\psi_{\\theta_0}\\|+e_n+a_n\\|W_n\\|)$, where $e_n=o_P(1)$ and $a_n=\\|\\rho(h_n)\\|/\\|h_n\\|=o_P(1)$ (set $a_n=0$ if $h_n=0$). With probability tending to one, $\\|V^{-1}\\|a_n\\le1/2$. Absorbing that term and using $\\mathbb G_n\\psi_{\\theta_0}=O_P(1)$ from step 1.2 proves $W_n=O_P(1)$.",
+          "step": "3.1",
+          "inputs": [
+            "A3",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Now $\\sqrt n\\,\\rho(h_n)=o_P(1)$ because it is the product of $\\|W_n\\|=O_P(1)$ and $\\|\\rho(h_n)\\|/\\|h_n\\|=o_P(1)$. Substituting into step 2.1 gives $W_n=-V^{-1}\\mathbb G_n\\psi_{\\theta_0}+o_P(1)$.",
+          "step": "4.1",
+          "inputs": [
+            "A3",
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F4], [F7], and [F8], the continuous linear image $-V^{-1}\\mathbb G_n\\psi_{\\theta_0}$ converges to a centered Gaussian with covariance $V^{-1}\\Sigma V^{-T}$: for every $u\\in\\mathbb R^d$, the projection of $N_d(0,\\Sigma)$ along $-V^{-T}u$ is centered normal with variance $u^TV^{-1}\\Sigma V^{-T}u$. Applying [F3] to the $o_P(1)$ remainder in step 4.1 proves the asserted normal limit. AC is used in the multivariate iid CLT and the normal-law supplier, not in the stochastic-order or Taylor steps.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires positive finite dimensions and an infinite iid observation sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 5.1 allow Sigma=0 and other singular score covariances."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits d=1; the proof uses finite-dimensional vector operations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The multivariate normal supplier permits singular covariance, and step 5.1 preserves it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Theta_0 is required to lie in an open neighborhood; boundary estimators are outside the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated in the theorem and its use is identified in steps 1.2 and 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way asymptotic implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way asymptotic implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "ex-log-transformation-delta-method": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], $Z\\in\\{-1,1\\}$. For $n\\ge4$, $1+Z/\\sqrt n\\ge1-1/2=1/2$, so $T_n=1+Z/\\sqrt n$ and $\\sqrt n(T_n-1)=Z$ exactly. Hence $\\sqrt n(T_n-1)\\Rightarrow Z$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The map $g$ is differentiable at $1$ with derivative $1$. Apply [F1] to obtain $\\sqrt n\\{\\log T_n-\\log1\\}\\Rightarrow Z$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty two-point probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 have g(1)=0 and a finite derivative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the logarithm derivative at the target one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The displayed input has a nondegenerate two-point law and asserts no degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the floor boundary T_n=1/2 at n=4 and Z=-1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement gives the two atoms and their probabilities explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This worked example proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This worked example proves no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "floor-boundary",
+          "claim": "At n=4 and Z=-1 the floor gives T_n=1/2; for every n>=4 and both atoms the root-n identity in step 1.1 holds.",
+          "result": "The transformed input stays positive and the root-n identity holds."
+        }
+      ],
+      "axioms_used": []
+    },
+    "ex-ratio-delta-method": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], $Z_2\\in\\{-1,1\\}$, so $T_{n,2}=2+Z_2/\\sqrt n\\ge1$ for every $n\\ge1$. For $|v|<1$, the exact remainder after subtracting the linear map is $g(1+u,2+v)-\\frac12-(u/2-v/4)=-(2u-v)v/[2(4+2v)]$, whose absolute value is bounded by a constant times $u^2+v^2$. Thus the derivative at $(1,2)$ is $(u,v)\\mapsto u/2-v/4$. Also $\\sqrt n(T_n-\\theta)=Z$ exactly.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F1] with this derivative to obtain the stated limit.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [A1], the four equiprobable values of $\\frac12Z_1-\\frac14Z_2$ are $1/4,3/4,-3/4,-1/4$. Their mean is zero and their second moment is $(1+9+9+1)/64=5/16$, which is the stated variance.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty four-point probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 show the denominator is at least one, never zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: at n=1 and Z_2=-1 the denominator equals one and the ratio remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The finite vector law has independent nondegenerate coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the smallest denominator value one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement lists all four atoms and their equal probabilities explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This worked example proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This worked example proves no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "four-ratio-values",
+          "claim": "The four limit values are 1/4, 3/4, -3/4, and -1/4.",
+          "result": "Their average is zero and their average square is (1+9+9+1)/64=5/16."
+        }
+      ],
+      "axioms_used": []
+    },
+    "ex-second-order-delta-method-quadratic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], $Z$ has the stated three-point law. We have $\\sqrt n(T_n-0)=Z$ exactly and $g(h)-g(0)=h^2=\\frac12(2)h^2$ for every $h$, so the first derivative is zero, the second derivative is $2$, and the second-order remainder vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F1] to obtain $nT_n^2\\Rightarrow Z^2$. By [A1], $Z^2=0$ at $\\omega=0$ and $Z^2=2$ at $\\omega=\\pm\\sqrt2$, so each value has probability $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty three-point probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use the zero first derivative at theta zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The parameter is fixed at zero and no value-one boundary is part of this example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the nondegenerate limit with masses at zero and two."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The real parameter domain has no endpoint restriction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement lists the three atoms and their probabilities explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This worked example proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This worked example proves no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "quadratic-masses",
+          "claim": "Z^2 is zero at omega=0 and two at omega=±sqrt(2).",
+          "result": "The probabilities are 1/2 at zero and 1/2 at two, and nT_n^2=Z^2 exactly."
+        }
+      ],
+      "axioms_used": []
+    },
+    "cex-continuity-alone-does-not-give-delta-method": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], we have $\\sqrt n(T_n-0)=Z$ and $\\sqrt n\\{|T_n|-|0|\\}=|Z|=1$ for every $n$. Thus the transformed sequence has the constant limit $1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1], $Z$ takes both signs. For any linear map $A:\\mathbb R\\to\\mathbb R$, $AZ=aZ$ for some $a\\in\\mathbb R$; if $a=0$ its law is concentrated at $0$, and if $a\\ne0$ its law has the two distinct values $\\pm a$. Neither law is the constant $1$. Also the right and left difference quotients of $g$ at zero are $1$ and $-1$, so no derivative exists. Therefore the proposed conclusion fails, consistently with the differentiability hypothesis in [F1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a nonempty two-point probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 exhibit the failure at target zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the transformed value is the constant one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 contrast a constant transformed law with every linear image law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The target lies in the interior of the real line."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement lists both atoms and their equal probabilities explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item refutes an implication and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item refutes an implication and states no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-linear-image",
+          "claim": "For Z=±1 equally likely, |Z|=1 while aZ takes ±a if a is nonzero and zero if a=0.",
+          "result": "No linear map has the transformed constant-one law."
+        }
+      ],
+      "axioms_used": []
+    },
+    "ex-sample-variance-delta-method": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $Y_i=(X_i,X_i^2)$. The map $x\\mapsto(x,x^2)$ is Borel, so [F1]–[F2] show that $(Y_i)$ is iid. By [A2], $\\mathbb E\\|Y_1\\|^2=\\mu_2+\\mu_4<\\infty$, with mean $(\\mu_1,\\mu_2)$ and covariance $$C=\\begin{pmatrix}\\mu_2-\\mu_1^2&\\mu_3-\\mu_1\\mu_2\\\\\\mu_3-\\mu_1\\mu_2&\\mu_4-\\mu_2^2\\end{pmatrix}.$$ By [A1] and [F3], $\\sqrt n\\{(\\bar X_n,Q_n)-(\\mu_1,\\mu_2)\\}\\Rightarrow Z\\sim N_2(0,C)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The map $g(x,y)=y-x^2$ has $g(\\mu_1,\\mu_2)=\\sigma^2$ and derivative $(u,v)\\mapsto-2\\mu_1u+v$. Apply [F5] to step 1.1 to get $\\sqrt n(S_n^2-\\sigma^2)\\Rightarrow-2\\mu_1Z_1+Z_2$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], the limit is centered normal with variance $(-2\\mu_1,1)C(-2\\mu_1,1)^T=4\\mu_1^2(\\mu_2-\\mu_1^2)-4\\mu_1(\\mu_3-\\mu_1\\mu_2)+\\mu_4-\\mu_2^2=\\mu_4-4\\mu_1\\mu_3+8\\mu_1^2\\mu_2-4\\mu_1^4-\\mu_2^2$. Expanding $\\mathbb E[(X_1-\\mu_1)^4]-(\\mu_2-\\mu_1^2)^2$ gives the same expression. By [F7], it is $\\operatorname{Var}((X_1-\\mu_1)^2)$, so the displayed $\\tau^2$ is exactly the limit variance.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes an infinite iid sequence of real observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 3.1 allow tau squared to be zero and give the corresponding degenerate Gaussian limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement is the one-dimensional scalar sample-variance case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 and the finite check include the zero-variance influence case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The data law is arbitrary subject to its fourth moment; no interval parameter endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC; step 1.1 uses it through the multivariate iid CLT."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This worked example proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This worked example proves no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-nonzero-mean-correction",
+          "claim": "For P(X=0)=P(X=2)=1/2, mu_1=1, mu_2=2, mu_3=4, mu_4=8, sigma squared is 1, and tau squared is 0.",
+          "result": "The corrected polynomial is 8−16+16−4−4=0; the source's printed mu_4−mu_2^2 would give 4, so it is wrong for this nonzero-mean law."
+        }
+      ],
+      "axioms_used": [
+        "AC"
+      ]
+    }
+  }
+}

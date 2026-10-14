@@ -1,0 +1,1174 @@
+{
+  "version": 1,
+  "scope": [
+    "def-confidence-set-and-coverage",
+    "def-pivot",
+    "thm-pivot-inversion-exact-coverage",
+    "thm-test-inversion-coverage",
+    "ex-discrete-pivot-inversion-is-conservative",
+    "ex-known-variance-normal-mean-interval",
+    "ex-exact-unknown-variance-normal-t-interval",
+    "ex-uniform-maximum-pivot-confidence-interval",
+    "ex-binomial-tail-test-inversion"
+  ],
+  "contracts": {
+    "def-confidence-set-and-coverage": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition explicitly assumes a nonempty parameter set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition permits alpha=1, giving the valid lower coverage bound zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition permits alpha=0, requiring coverage one for every parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A singleton parameter set has one measurable membership section and one coverage value by Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter set is arbitrary and need not be an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses the given map C and chooses no parameter representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-pivot": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a nonempty parameter set so that a common probability law is specified."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The pivot target space need not be ordered or numeric."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The pivot target space need not be ordered or numeric."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant statistic with the same point-mass law under every parameter satisfies the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval structure on the parameter set or pivot target is assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies the full family of measurable sections and selects no representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-pivot-inversion-exact-coverage": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pivot",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment with $\\Theta\\ne\\varnothing$, and let\n$(S,\\mathcal S)$ be a measurable space. A\nfamily of measurable maps $q_\\theta:\\mathcal X\\to S$, one for each\n$\\theta\\in\\Theta$, is a **pivot** if the pushforward law\n$$\\nu_\\theta(B):=P_\\theta(q_\\theta^{-1}(B)),\\qquad B\\in\\mathcal S$$\nis the same probability measure $\\nu$ for every $\\theta\\in\\Theta$.\nEach section is a random element on $(\\mathcal X,\\mathcal A,P_\\theta)$, so\nits pushforward is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\nNo measurability in $\\theta$ is asserted or needed.\n\nFor $S=\\mathbb R$, a pivot is a real-valued statistic whose sampling\ndistribution is parameter-free. A pivot need not be invertible in the\nparameter, and its inversion need not be an interval.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $\\eta\\in\\Theta$, the membership section of $C$ is $\\{x:\\eta\\in C(x)\\}=q_\\eta^{-1}(B)$. It is in $\\mathcal A$ because $q_\\eta$ is measurable and $B\\in\\mathcal S$. Thus $C$ is a confidence-set procedure by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $\\theta\\in\\Theta$, $P_\\theta\\{\\theta\\in C(X)\\}=P_\\theta(q_\\theta^{-1}(B))=\\nu(B)\\ge1-\\alpha$. Equality holds for every $\\theta$ when $\\nu(B)=1-\\alpha$; measurability was established in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes Theta is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid at alpha=1, when the required lower bound is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives coverage one when alpha=0 and nu(B)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 applies unchanged when Theta is a singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem does not assume interval-valued parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use only supplied sections and a preimage; no choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is an implication, not an equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-test-inversion-coverage": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $\\eta\\in\\Theta$, the membership section of $C$ is $\\{y:\\eta\\in C(y)\\}=A_\\eta$, which belongs to $\\mathcal G$ by [A1]. Therefore $C$ is a confidence-set procedure by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $\\theta\\in\\Theta$, $Q_\\theta\\{\\theta\\in C(Y)\\}=Q_\\theta(A_\\theta)\\ge1-\\alpha$. Taking the infimum over the nonempty $\\Theta$ proves the asserted coverage level.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonempty parameter set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives coverage one when alpha=0 and every acceptance event has probability one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the valid lower bound zero when alpha=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For a singleton Theta, the sole acceptance event is the sole membership section in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval structure on Theta is assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use supplied acceptance events and make no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is an implication, not an equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-discrete-pivot-inversion-is-conservative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pivot",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment with $\\Theta\\ne\\varnothing$, and let\n$(S,\\mathcal S)$ be a measurable space. A\nfamily of measurable maps $q_\\theta:\\mathcal X\\to S$, one for each\n$\\theta\\in\\Theta$, is a **pivot** if the pushforward law\n$$\\nu_\\theta(B):=P_\\theta(q_\\theta^{-1}(B)),\\qquad B\\in\\mathcal S$$\nis the same probability measure $\\nu$ for every $\\theta\\in\\Theta$.\nEach section is a random element on $(\\mathcal X,\\mathcal A,P_\\theta)$, so\nits pushforward is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\nNo measurability in $\\theta$ is asserted or needed.\n\nFor $S=\\mathbb R$, a pivot is a real-valued statistic whose sampling\ndistribution is parameter-free. A pivot need not be invertible in the\nparameter, and its inversion need not be an interval.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pivot-inversion-exact-coverage",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be an\nexperiment with nonempty $\\Theta$. Let $q_\\theta:\\mathcal X\\to S$ be a\npivot with common law $\\nu$, and let $B\\in\\mathcal S$. Define\n$$C(x):=\\{\\theta\\in\\Theta:q_\\theta(x)\\in B\\}$$\nIf $\\nu(B)\\ge1-\\alpha$, then $C$ is a confidence set with coverage at\nleast $1-\\alpha$. If $\\nu(B)=1-\\alpha$, its coverage is exactly\n$1-\\alpha$ for every parameter value. For an interval $B=[a,b]$ in\n$\\mathbb R$, exactness requires calibration of the actual probability\n$\\nu([a,b])$; quantile labels alone do not remove endpoint atoms.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The full power set $2^{\\mathbb Z}$ is an algebra of subsets closed under countable unions, so it is a sigma-algebra by [F5]. Explicitly set $P_\\theta(A)=\\frac13(\\mathbf1_A(\\theta-1)+\\mathbf1_A(\\theta)+\\mathbf1_A(\\theta+1))$ for every $A\\subseteq\\mathbb Z$. These values are nonnegative and have total mass $1$. For a pairwise disjoint sequence $A_m$, $\\sum_mP_\\theta(A_m)=\\frac13\\sum_{z\\in\\{-1,0,1\\}}\\sum_m\\mathbf1_{A_m}(\\theta+z) =\\frac13\\sum_{z\\in\\{-1,0,1\\}}\\mathbf1_{\\cup_mA_m}(\\theta+z) =P_\\theta(\\cup_mA_m)$. Thus it is countably additive, hence a probability measure, and specifies the experiment family in [F6]. Under $P_\\theta$, $Q(X;\\theta)$ assigns mass $1/3$ to each of $-1,0,1$, independently of $\\theta$; hence $Q$ is a pivot with $P_\\theta(Q\\in B)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $F_Q(t):=P_\\theta(Q\\le t)$ and the generalized quantile $q_r:=\\inf\\{t\\in\\mathbb R:F_Q(t)\\ge r\\}$. By the definition of $C$, the event $\\{\\theta\\in C(X)\\}$ is $\\{|X-\\theta|\\le1\\}$, which occurs for all three possible observations. Thus its probability and coverage equal $1$; this exceeds $4/5$, while [F4] also applies since $P_\\theta(Q\\in B)=1\\ge4/5$. The pivot cdf is $0$ below $-1$, $1/3$ on $[-1,0)$, $2/3$ on $[0,1)$, and $1$ from $1$ onward. Thus the generalized $1/10$ and $9/10$ quantiles are $-1$ and $1$, and their closed interval contains all atoms.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes Theta=Z, which is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The nominal alpha is fixed at 1/5."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The nominal alpha is fixed at 1/5."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the three-atom law, including its central atom."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes both endpoint atoms -1 and 1 in B."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example uses an explicit three-point law and selects no representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an example, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is an example, not an equivalence theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "three-atom-law",
+          "claim": "The probabilities at -1, 0, and 1 each equal 1/3.",
+          "result": "They are nonnegative and sum to one."
+        },
+        {
+          "id": "eighty-percent-central-interval",
+          "claim": "The equal-tail 0.1 and 0.9 quantiles are -1 and 1.",
+          "result": "The resulting closed interval contains all three atoms, so its mass is 1 rather than 4/5."
+        }
+      ]
+    },
+    "ex-known-variance-normal-mean-interval": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pivot",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment with $\\Theta\\ne\\varnothing$, and let\n$(S,\\mathcal S)$ be a measurable space. A\nfamily of measurable maps $q_\\theta:\\mathcal X\\to S$, one for each\n$\\theta\\in\\Theta$, is a **pivot** if the pushforward law\n$$\\nu_\\theta(B):=P_\\theta(q_\\theta^{-1}(B)),\\qquad B\\in\\mathcal S$$\nis the same probability measure $\\nu$ for every $\\theta\\in\\Theta$.\nEach section is a random element on $(\\mathcal X,\\mathcal A,P_\\theta)$, so\nits pushforward is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\nNo measurability in $\\theta$ is asserted or needed.\n\nFor $S=\\mathbb R$, a pivot is a real-valued statistic whose sampling\ndistribution is parameter-free. A pivot need not be invertible in the\nparameter, and its inversion need not be an interval.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pivot-inversion-exact-coverage",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be an\nexperiment with nonempty $\\Theta$. Let $q_\\theta:\\mathcal X\\to S$ be a\npivot with common law $\\nu$, and let $B\\in\\mathcal S$. Define\n$$C(x):=\\{\\theta\\in\\Theta:q_\\theta(x)\\in B\\}$$\nIf $\\nu(B)\\ge1-\\alpha$, then $C$ is a confidence set with coverage at\nleast $1-\\alpha$. If $\\nu(B)=1-\\alpha$, its coverage is exactly\n$1-\\alpha$ for every parameter value. For an interval $B=[a,b]$ in\n$\\mathbb R$, exactness requires calibration of the actual probability\n$\\nu([a,b])$; quantile labels alone do not remove endpoint atoms.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $G$ have the standard normal law. Its density is $\\phi(u)=e^{-u^2/2}/\\sqrt{2\\pi}$, positive everywhere and bounded above by $1/\\sqrt{2\\pi}$, with total mass one by [F1]. Thus $\\Phi(t)=P(G\\le t)$ satisfies $0<\\Phi(b)-\\Phi(a)=\\int_a^b\\phi(u)\\,du\\le(b-a)/\\sqrt{2\\pi}$ for every $a<b$, proving strict increase and continuity. The events $\\{G\\le m\\}$ and $\\{G>-m\\}$ increase to the whole space as integer $m\\to\\infty$; [F6] gives $\\Phi(m)\\to1$ and $P(G>-m)\\to1$, hence $\\Phi(-m)\\to0$. Choose finite endpoints bracketing $1-\\alpha/2$; [F5] gives a quantile between them, and strict increase gives uniqueness.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The standard normal density is symmetric and has no atoms. Therefore $\\Phi(-z_{1-\\alpha/2})=\\alpha/2$, and the probability of $[-z_{1-\\alpha/2},z_{1-\\alpha/2}]$ is $1-\\alpha$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every candidate mean $\\eta$, $q_\\eta(y)=(y-\\eta)/\\sigma$ is measurable and has standard normal law under $P_\\eta$, so it is a pivot. The event $\\eta\\in[y-z\\sigma,y+z\\sigma]$ is exactly $-z\\le q_\\eta(y)\\le z$; applying [F4] and [F3] gives exact coverage $1-\\alpha$ for every $\\eta$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty parameter set R."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes 0<alpha<1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example assumes 0<alpha<1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The known standard deviation is assumed positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The mean parameter set is all of R."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: AC is carried explicitly and quantile uniqueness makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an example, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is an example, not an equivalence theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "central-mass",
+          "claim": "The standard normal quantiles satisfy Phi(-z)=alpha/2 and Phi(z)=1-alpha/2.",
+          "result": "Symmetry and zero endpoint masses give central acceptance probability 1-alpha."
+        }
+      ]
+    },
+    "ex-exact-unknown-variance-normal-t-interval": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-normal-mean-residual-independence-and-exact-t-pivot",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Use the experiment with data space $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$, parameter set $\\mathbb R\\times(0,\\infty)$, and sampling law $P_{\\mu,\\sigma^2}=N(\\mu,\\sigma^2)^{\\otimes n}$. Let $n\\ge2$, $\\sigma>0$, and let $X_1,\\ldots,X_n$ be the independent coordinates of the observation. Define\n$$\n\\bar X=\\frac1n\\sum_{i=1}^nX_i,\\qquad S^2=\\frac1{n-1}\\sum_{i=1}^n(X_i-\\bar X)^2,\\qquad S=\\sqrt{S^2}.\n$$\nThe map $x\\mapsto\\bar x$ is a statistic. The sample mean $\\bar X$ and residual sum $S^2$ are independent,\n$$\n\\frac{(n-1)S^2}{\\sigma^2}\\sim\\chi_{n-1}^2,\\qquad S>0\\ \\text{almost surely},\\qquad\n\\widetilde T:=\\begin{cases}\n\\dfrac{\\bar X-\\mu}{S/\\sqrt n},&S>0,\\\\\n0,&S=0\n\\end{cases}\n\\sim t_{n-1}.\n$$\nFor every $0<\\alpha<1$, the interval\n$$\n\\left[\\bar X-q_{n-1}(1-\\alpha/2)\\frac{S}{\\sqrt n},\\ \\bar X+q_{n-1}(1-\\alpha/2)\\frac{S}{\\sqrt n}\\right]\n$$\nhas exact coverage $1-\\alpha$, where $q_{n-1}(u)$ is the unique $u$-quantile of $t_{n-1}$ established in [[lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing]].",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every $k\\ge1$, the CDF of $t_k$ is continuous and strictly increasing on $\\mathbb R$, is symmetric about zero, and has limits $0$ and $1$ at $-\\infty$ and $+\\infty$. For every $r,s\\ge1$, the CDF of $F_{r,s}$ is continuous on $\\mathbb R$, is zero on $(-\\infty,0]$, and is strictly increasing on $(0,\\infty)$ with limit $1$ at $+\\infty$. Consequently, for each $u\\in(0,1)$ each law has exactly one $u$-quantile on its support.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-pivot",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment with $\\Theta\\ne\\varnothing$, and let\n$(S,\\mathcal S)$ be a measurable space. A\nfamily of measurable maps $q_\\theta:\\mathcal X\\to S$, one for each\n$\\theta\\in\\Theta$, is a **pivot** if the pushforward law\n$$\\nu_\\theta(B):=P_\\theta(q_\\theta^{-1}(B)),\\qquad B\\in\\mathcal S$$\nis the same probability measure $\\nu$ for every $\\theta\\in\\Theta$.\nEach section is a random element on $(\\mathcal X,\\mathcal A,P_\\theta)$, so\nits pushforward is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\nNo measurability in $\\theta$ is asserted or needed.\n\nFor $S=\\mathbb R$, a pivot is a real-valued statistic whose sampling\ndistribution is parameter-free. A pivot need not be invertible in the\nparameter, and its inversion need not be an interval.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pivot-inversion-exact-coverage",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be an\nexperiment with nonempty $\\Theta$. Let $q_\\theta:\\mathcal X\\to S$ be a\npivot with common law $\\nu$, and let $B\\in\\mathcal S$. Define\n$$C(x):=\\{\\theta\\in\\Theta:q_\\theta(x)\\in B\\}$$\nIf $\\nu(B)\\ge1-\\alpha$, then $C$ is a confidence set with coverage at\nleast $1-\\alpha$. If $\\nu(B)=1-\\alpha$, its coverage is exactly\n$1-\\alpha$ for every parameter value. For an interval $B=[a,b]$ in\n$\\mathbb R$, exactness requires calibration of the actual probability\n$\\nu([a,b])$; quantile labels alone do not remove endpoint atoms.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For all $x,y\\in\\mathbb R^n$, $|\\bar x-\\bar y|\\le\\max_i|x_i-y_i|\\le\\|x-y\\|_2$. The residual map $r(x)=x-\\bar x\\mathbf1$ is linear and orthogonal to $\\mathbf1$, so Pythagoras gives $\\|r(x-y)\\|_2\\le\\|x-y\\|_2$; the reverse triangle inequality then gives $|s(x)-s(y)|\\le\\|x-y\\|_2/\\sqrt{n-1}$. Hence $s$ is continuous, $D_n=\\{x:s(x)>0\\}$ is open, and its trace Borel sets form a sigma-algebra by [F6]. By [F1], every full law $\\widetilde P_{\\mu,\\lambda}$ gives $D_n$ probability one, so its restriction $P_{\\mu,\\lambda}$ remains a probability measure; [F7] therefore gives the stated experiment for each fixed $\\lambda>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $c=t_{\\nu,1-\\alpha/2}$, which exists uniquely by [F2]. Symmetry and continuity give $F_{t_\\nu}(0)=1/2$; strict increase and $1-\\alpha/2>1/2$ imply $c>0$. Since $F_{t_\\nu}(c)=1-\\alpha/2$, symmetry gives $F_{t_\\nu}(-c)=\\alpha/2$; continuity means neither endpoint is an atom, so $P(-c\\le T_\\nu\\le c)=1-\\alpha$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For each candidate mean $\\eta\\in\\mathbb R$, define $q_\\eta(x)=(\\bar x-\\eta)/(s(x)/\\sqrt n)$ on $D_n$. Its denominator is positive there, so it is continuous and hence measurable on the subspace $D_n$ by the open-set definition of its trace Borel sigma-algebra [F6]. For every Borel $B\\subseteq\\mathbb R$, the restricted probability satisfies $P_{\\eta,\\lambda}\\{q_\\eta\\in B\\}=\\widetilde P_{\\eta,\\lambda}\\{x\\in D_n:q_\\eta(x)\\in B\\}$, and [F1] gives this value as the common $t_\\nu$ probability because the full law assigns probability one to $D_n$. Thus $(q_\\eta)_{\\eta\\in\\mathbb R}$ is a pivot by [F4].",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Inverting $B=[-c,c]$ gives $\\{\\eta:q_\\eta(x)\\in B\\}=[\\bar x-cs(x)/\\sqrt n,\\bar x+cs(x)/\\sqrt n]=I(x)$ by solving the two inequalities, and each membership section is measurable because $q_\\eta$ is measurable. Step 1.2 gives the pivot mass $\\nu(B)=1-\\alpha$; the pivot-inversion theorem [F5] and confidence-set definition [F3] therefore give exact coverage $1-\\alpha$ for every mean and every fixed variance.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter set is Theta=R and is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes 0<alpha<1, so alpha=0 is outside its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example assumes 0<alpha<1, so alpha=1 is outside its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 apply at the minimum allowed sample size n=2, where nu=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes both endpoints and uses continuity to show neither has an atom."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 carry AC explicitly; the t quantile is unique by [F2], so no representative is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example is not an equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example is not an equivalence claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "minimum-degrees-of-freedom",
+          "claim": "The smallest allowed sample size n=2 gives nu=1>0.",
+          "result": "The planned t law and its two quantiles use a positive degree of freedom."
+        }
+      ],
+      "unresolved_suppliers": [
+        {
+          "id": "def-chi-square-law",
+          "status": "missing-carrier",
+          "required_hypotheses": [
+            "chi-square degree nu is a positive integer",
+            "chi-square variable is a sum of nu independent squared standard normals"
+          ],
+          "affected_steps": [
+            "1.1"
+          ],
+          "evidence": "The exact ID is named in the MSF-35 design, but the batch-10 manifest and item carrier are absent; no supplier quote was fabricated."
+        },
+        {
+          "id": "def-student-t-and-f-laws",
+          "status": "missing-carrier",
+          "required_hypotheses": [
+            "nu is a positive integer",
+            "t_nu is G/sqrt(Q_nu/nu)",
+            "G and Q_nu are independent",
+            "the t cdf is continuous and strictly increasing on R"
+          ],
+          "affected_steps": [
+            "1.1",
+            "2.1"
+          ],
+          "evidence": "The exact ID is named in the MSF-35 design, but the batch-10 manifest and item carrier are absent; no supplier quote was fabricated."
+        },
+        {
+          "id": "thm-normal-mean-residual-independence-and-exact-t-pivot",
+          "status": "missing-carrier",
+          "required_hypotheses": [
+            "iid N(mu,sigma^2)",
+            "sigma>0",
+            "n>=2",
+            "S>0 almost surely",
+            "(Xbar-mu)/(S/sqrt(n)) has the t_(n-1) law",
+            "AC as declared by the MSF-35 design"
+          ],
+          "affected_steps": [
+            "3.1"
+          ],
+          "evidence": "The exact supplier ID and its planned interface are named in MSF-35, but the batch-10 manifest and item carrier are absent; no excerpt was fabricated."
+        }
+      ]
+    },
+    "ex-uniform-maximum-pivot-confidence-interval": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-pivot",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment with $\\Theta\\ne\\varnothing$, and let\n$(S,\\mathcal S)$ be a measurable space. A\nfamily of measurable maps $q_\\theta:\\mathcal X\\to S$, one for each\n$\\theta\\in\\Theta$, is a **pivot** if the pushforward law\n$$\\nu_\\theta(B):=P_\\theta(q_\\theta^{-1}(B)),\\qquad B\\in\\mathcal S$$\nis the same probability measure $\\nu$ for every $\\theta\\in\\Theta$.\nEach section is a random element on $(\\mathcal X,\\mathcal A,P_\\theta)$, so\nits pushforward is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\nNo measurability in $\\theta$ is asserted or needed.\n\nFor $S=\\mathbb R$, a pivot is a real-valued statistic whose sampling\ndistribution is parameter-free. A pivot need not be invertible in the\nparameter, and its inversion need not be an interval.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pivot-inversion-exact-coverage",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be an\nexperiment with nonempty $\\Theta$. Let $q_\\theta:\\mathcal X\\to S$ be a\npivot with common law $\\nu$, and let $B\\in\\mathcal S$. Define\n$$C(x):=\\{\\theta\\in\\Theta:q_\\theta(x)\\in B\\}$$\nIf $\\nu(B)\\ge1-\\alpha$, then $C$ is a confidence set with coverage at\nleast $1-\\alpha$. If $\\nu(B)=1-\\alpha$, its coverage is exactly\n$1-\\alpha$ for every parameter value. For an interval $B=[a,b]$ in\n$\\mathbb R$, exactness requires calibration of the actual probability\n$\\nu([a,b])$; quantile labels alone do not remove endpoint atoms.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sample sigma-algebra is the Borel sigma-algebra of $\\mathbb R^n$ by [F7]. The maximum map $m(x)=\\max_i x_i$ satisfies $|m(x)-m(y)|\\le\\max_i|x_i-y_i|$, so it is continuous. The preimages of open sets are therefore open; since the Borel sigma-algebra is generated by open sets, preimages of every Borel set are Borel and $M=m(X)$ is measurable. Also $m/\\theta$ is continuous because $\\theta>0$. The coordinate variables are independent by [F1], and [F2] gives their product joint law.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $0\\le u\\le1$, then $P_\\theta(M/\\theta\\le u)=P_\\theta(X_1\\le u\\theta,\\ldots,X_n\\le u\\theta)=\\prod_{i=1}^n u=u^n$. For $u<0$ the probability is $0$, and for $u\\ge1$ it is $1$. This law does not depend on $\\theta$, so $M/\\theta$ is a pivot by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The distribution function $u^n$ established in step 1.2 is continuous. Therefore $P_\\theta(\\alpha^{1/n}\\le M/\\theta\\le1)=1-(\\alpha^{1/n})^n=1-\\alpha$. By [F5], pivot inversion gives exact coverage.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\theta>0$, the inequality $\\alpha^{1/n}\\le M/\\theta\\le1$ is equivalent to $M\\le\\theta\\le M/\\alpha^{1/n}$. Thus the inverted set is $[M,M/\\alpha^{1/n}]\\cap(0,\\infty)$, and [F4] identifies its coverage with the probability computed in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes n>=1 and theta>0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The model excludes theta=0 and alpha=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 gives cdf one at and above u=1, with no atom at the endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At n=1, step 1.2 reduces to the uniform pivot cdf u."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 explicitly include u=0, u=1, and v=alpha^(1/n)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and step 1.1: the maximum is over a finite nonempty coordinate set and no choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an example, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is an example, not an equivalence theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "n-one",
+          "claim": "For n=1 the pivot cdf is u and the interval is [X,X/alpha].",
+          "result": "The coverage is P(X/theta>=alpha)=1-alpha."
+        }
+      ]
+    },
+    "ex-binomial-tail-test-inversion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-binomial-theorem-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring. For all $x,y\\in R$ and $n\\in\\mathbb N$,\n\n$$ (x+y)^n=\\sum_{k=0}^n\\binom nkx^ky^{n-k}.$$\n\nThe natural-number coefficients act by repeated addition. The formula includes $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-test-inversion-coverage",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((\\mathcal Y,\\mathcal G),(Q_\\theta)_{\\theta\\in\\Theta})$ be an\nexperiment with nonempty $\\Theta$, and let $0\\le\\alpha\\le1$. For each\n$\\eta\\in\\Theta$, let $A_\\eta\\in\\mathcal G$ be the acceptance event of a\ntest of the point null $\\theta=\\eta$, on the full observation space,\nincluding any auxiliary randomization. Suppose\n$Q_\\eta(A_\\eta)\\ge1-\\alpha$ for every $\\eta\\in\\Theta$.\nThen $C(y):=\\{\\eta\\in\\Theta:y\\in A_\\eta\\}$\nis a confidence set with coverage at least $1-\\alpha$.\n\nThe probability bound is the point-null level condition written in terms of\nacceptance events. For a randomized test, a rejection-probability function on\nthe original data space is not itself an acceptance event; the auxiliary\nrandomization must be part of the observation before applying this statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "For a finite set $A$ and $k \\in \\mathbb{N}$ put\n\n$$[A]^{k} := \\{\\, S \\subseteq A \\ :\\ \\lvert S\\rvert = k \\,\\},$$\n\nthe set of $k$-element subsets of $A$. Every $S \\subseteq A$ is finite\n([[thm-subset-of-a-finite-set]]), so the condition $\\lvert S\\rvert = k$ makes\nsense for every subset.\n\n**$[A]^{k}$ is finite.** It is a subset of $\\mathcal{P}(A)$, which is finite by\n[[cor-cardinality-of-the-power-set]], so [[thm-subset-of-a-finite-set]] applies.\n\n**$\\lvert [A]^{k}\\rvert$ depends only on $\\lvert A\\rvert$.** Let $h : A \\to A'$ be\na bijection of finite sets. The direct image map $S \\mapsto h[S]$ carries\n$[A]^{k}$ into $[A']^{k}$, because $h$ restricted to $S$ is a bijection of $S$\nonto $h[S]$ and so $\\lvert h[S]\\rvert = \\lvert S\\rvert = k$ by the transport\nclause of [[def-finite-cardinality]]; the map $T \\mapsto h^{-1}[T]$ is its\ntwo-sided inverse, since $h^{-1}[h[S]] = S$ and $h[h^{-1}[T]] = T$ for a\nbijection $h$. So $[A]^{k} \\approx [A']^{k}$ and the two have the same\ncardinality.\n\n**Definition.** For $n, k \\in \\mathbb{N}$ set\n\n$$\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N},$$\n\nthe **binomial coefficient**. By the previous paragraph and $\\lvert n\\rvert = n$,\n\n$$\\big\\lvert [A]^{k}\\big\\rvert = \\binom{\\lvert A\\rvert}{k} \\qquad \\text{for every finite } A .$$\n\n**$\\binom{n}{k}$ is a count, so it is a natural number by construction.** It is\n*not* defined as $n!/(k!\\,(n-k)!)$: that expression involves a division, hence\nlives in $\\mathbb{R}$, and the assertion that its value is a natural number is a\ntheorem, proved in [[thm-binomial-closed-formula]]. Defining the coefficient as a\ncount makes integrality free and leaves the closed formula something to prove.\n\n**Boundary values, read off the definition and not stipulated.**\n\n- $\\binom{n}{0} = 1$ **for every $n$, including $n = 0$**: the subsets of $n$ of\n  cardinality $0$ are exactly the subsets equal to $\\varnothing$\n  ([[def-finite-cardinality]], clause (b)), so $[n]^{0} = \\{\\varnothing\\}$, a\n  one-element set. No empty-product convention is involved.\n- $\\binom{n}{n} = 1$: if $S \\subseteq n$ has $\\lvert S\\rvert = n = \\lvert n\\rvert$\n  then $S = n$ by clause 3 of [[thm-subset-of-a-finite-set]], so\n  $[n]^{n} = \\{n\\}$.\n- $\\binom{n}{k} = 0$ for $k > n$: a subset $S \\subseteq n$ has\n  $\\lvert S\\rvert \\le n$ by clause 2 of [[thm-subset-of-a-finite-set]], so\n  $\\lvert S\\rvert = k > n$ is impossible and $[n]^{k} = \\varnothing$\n  ([[lem-nat-trichotomy]]).\n- $\\binom{n}{1} = n$: a subset of cardinality $1$ is $\\{x\\}$ for exactly one\n  $x \\in n$, since $\\lvert S\\rvert = 1$ means $S \\approx \\{0\\}$; so\n  $S \\mapsto$ its unique element is a bijection $[n]^{1} \\to n$.\n- $\\binom{0}{0} = 1$ and $\\binom{0}{k} = 0$ for $k \\ge 1$, both instances of the\n  above.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$, and $\\mathbb R$ has the least-upper-bound property\n([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-monotonicity-from-the-derivative",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]), let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]). The words\n*nondecreasing*, *increasing*, *nonincreasing* and *decreasing* are those of\n[[def-monotone-function]], in which *increasing* is the strict notion.\n\n1. If $f'(x) \\ge 0$ at every interior point $x$ of $I$, then $f$ is\n   nondecreasing on $I$.\n2. If $f'(x) > 0$ at every interior point $x$ of $I$, then $f$ is increasing on\n   $I$.\n3. If $f'(x) \\le 0$ at every interior point $x$ of $I$, then $f$ is\n   nonincreasing on $I$.\n4. If $f'(x) < 0$ at every interior point $x$ of $I$, then $f$ is decreasing on\n   $I$.\n\nConversely, with no continuity hypothesis and no hypothesis at any other point:\n\n5. If $f : I \\to \\mathbb{R}$ is nondecreasing on $I$ and differentiable at a\n   point $c \\in I$ that is a limit point of $I$, then $f'(c) \\ge 0$; if $f$ is\n   nonincreasing and differentiable at such a $c$, then $f'(c) \\le 0$.\n\n**No strict converse is claimed here, and none is true.** Claim 5 gives the\nweak inequality only, and it cannot be improved: an increasing function may have\na vanishing derivative at a point. That failure is recorded separately, as a\nfalse statement later on this page, with its witness worked out on the companion\npage. Reading claim 2 backwards is the single most common misuse of this\ntheorem, and this statement does not license it.\n\n**Claims 1 to 4 need the interval; claim 5 does not.** The forward direction\nruns through the mean value theorem on a segment joining two points of $I$, so\norder-convexity is essential. Claim 5 is a statement about one point and uses\nonly that the difference quotients have a constant sign.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The full power set of $\\{0,\\ldots,n\\}$ is an algebra closed under countable unions, hence a sigma-algebra by [F5]. The binomial theorem [F1] gives $\\sum_{j=0}^n\\binom njp^j(1-p)^{n-j}=(p+1-p)^n=1$; all terms are nonnegative for $p\\in[0,1]$, so [F6] makes the displayed masses a probability measure, including $p=0,1$. These laws form an experiment as in [F7].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $k<n$, count pairs consisting of a $j$-element subset of an $n$-element set and a distinguished element inside it. Counting in the two orders gives $j\\binom nj=n\\binom{n-1}{j-1}$ for $1\\le j\\le k$. Counting instead a distinguished element outside the subset gives $(n-j)\\binom nj=n\\binom{n-1}j$ for $0\\le j\\le k$, by [F4]. The first identity is not used at $j=0$: in differentiating $p^j$, that boundary term is zero, so the first derivative sum starts at $j=1$, while the second identity includes $j=0$. Since $F_p(k)$ is a polynomial, it is continuous on $[0,1]$, and for $0<p<1$ termwise differentiation and the two identities give\n$$\n\\frac{d}{dp}F_p(k)\n=\\sum_{j=1}^k j\\binom njp^{j-1}(1-p)^{n-j}\n-\\sum_{j=0}^k(n-j)\\binom njp^j(1-p)^{n-j-1}\n=-n\\binom{n-1}k p^k(1-p)^{n-k-1}<0.\n$$\nWhen $k=0$, the first sum is empty and the $j=0$ term of the second sum gives the same formula. By [F9], $F_p(k)$ is strictly decreasing on $[0,1]$. Also $F_0(k)=1$ and $F_1(k)=0$ because $k<n$. Applying [F10] to this continuous polynomial on $[0,1]$ gives a point $U_k\\in(0,1)$ with $F_{U_k}(k)=\\alpha$; strict decrease makes it unique.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each fixed candidate $p_0$, $F_{p_0}(k)$ is nondecreasing in integer $k$. Let $k_0$ be the least $k\\in\\{0,\\ldots,n\\}$ with $F_{p_0}(k)\\ge\\alpha$, which exists because $F_{p_0}(n)=1$. The deterministic test function is $\\varphi_{p_0}(x)=\\mathbf1_{\\{F_{p_0}(x)<\\alpha\\}}$; it is measurable on this finite space. Its rejection event is $\\{X<k_0\\}$, whose probability is $0$ if $k_0=0$, and otherwise is $F_{p_0}(k_0-1)<\\alpha$. The null is $\\{p_0\\}$, and the alternative $[0,1]\\setminus\\{p_0\\}$ is nonempty; by [F8] the test size equals this rejection probability and is at most $\\alpha$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For an observed $x<n$, strict decrease of $F_p(x)$ in $p$ makes $\\{p_0:F_{p_0}(x)\\ge\\alpha\\}=[0,U_x]$; for $x=n$, the set is $[0,1]=[0,U_n]$. Thus $C(X)$ is precisely the inversion of those acceptance events. The level calculation in step 2.1 and [F3] imply its coverage is at least $1-\\alpha$, in the sense of [F2].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n>=1 and the parameter set [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include p=0, whose law is concentrated at X=0 and whose endpoint is accepted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include p=1, whose law is concentrated at X=n and whose endpoint U_n=1 is accepted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include the degenerate endpoint laws p=0 and p=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 explicitly define the pmf and interval at p=0 and p=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each U_k is unique by strict monotonicity in step 1.2; no arbitrary selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an example, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is an example, not an equivalence theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "n-one-endpoint",
+          "claim": "For n=1, U_0=1-alpha and U_1=1.",
+          "result": "At p=0 and p=1 the observed X is deterministic and both endpoint values are covered."
+        },
+        {
+          "id": "zero-success-boundary",
+          "claim": "For k=0, F_p(0)=(1-p)^n.",
+          "result": "The unique root is U_0=1-alpha^(1/n), including n=1."
+        }
+      ]
+    }
+  }
+}

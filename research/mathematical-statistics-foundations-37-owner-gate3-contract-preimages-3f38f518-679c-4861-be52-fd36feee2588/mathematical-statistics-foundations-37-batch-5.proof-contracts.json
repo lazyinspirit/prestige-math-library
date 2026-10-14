@@ -1,0 +1,2817 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-uniqueness-of-a-multivariate-exponential-transform",
+    "def-likelihood-ratio-equivalence-on-common-discrete-support",
+    "thm-countable-mixture-dominates-sigmafinite-dominated-family",
+    "def-ancillary-statistic",
+    "def-complete-statistic",
+    "def-exponential-family",
+    "def-sufficient-statistic",
+    "def-minimal-sufficient-sigma-field",
+    "thm-basu-independence",
+    "thm-common-reference-factorization-criterion",
+    "thm-completeness-of-full-exponential-family",
+    "thm-countable-factorization-criterion-for-sufficiency",
+    "def-minimal-sufficient-statistic",
+    "thm-full-rank-exponential-family-sufficiency",
+    "thm-standard-borel-dominated-factorization-criterion",
+    "thm-countable-mixture-likelihood-ratio-vector-is-minimal-sufficient",
+    "thm-discrete-likelihood-ratio-classes-are-minimal-sufficient",
+    "ex-countable-mixture-dominates-bernoulli-scale-family",
+    "cex-arbitrary-dominator-factorization-fails",
+    "cex-curved-normal-family-statistic-incomplete",
+    "ex-normal-sample-mean-residual-independent-by-basu",
+    "ex-bernoulli-count-is-minimal-sufficient",
+    "ex-countable-likelihood-ratio-vector-on-point-mass-model"
+  ],
+  "contracts": {
+    "lem-uniqueness-of-a-multivariate-exponential-transform": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-complex-measure",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space. A **complex measure** on\n$(X,\\mathcal A)$ is a function\n$$\\nu:\\mathcal A\\longrightarrow\\mathbb C$$\nsuch that:\n\n1. $\\nu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_n)_{n\\in\\mathbb N}$ in\n   $\\mathcal A$,\n   $$\\nu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sum_{n=0}^\\infty \\nu(E_n)$$\n   in $\\mathbb C$.\n\nThe codomain is the field $\\mathbb C$\n([[thm-complex-numbers-form-a-field]]), so a complex measure is finite-valued by\ndefinition: there is no complex number called $+\\infty$ or $-\\infty$ to allow.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-total-variation-of-a-signed-or-complex-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\nu$ be a signed measure or a complex measure on $(X,\\mathcal A)$. For\n$E\\in\\mathcal A$, define its **total variation on $E$** by\n$$|\\nu|(E):=\\sup\\left\\{\\sum_{n=0}^\\infty |\\nu(E_n)|:\\ (E_n)_{n\\in\\mathbb N}\\text{ is a countable measurable partition of }E\\right\\},$$\nwhere, for a signed measure, the term $|\\nu(E_n)|$ means the ordinary absolute\nvalue when $\\nu(E_n)\\in\\mathbb R$ and means $+\\infty$ when\n$\\nu(E_n)\\in\\{+\\infty,-\\infty\\}$; for a complex measure it is the usual complex\nmodulus. A countable measurable partition of $E$ means:\n\n1. each $E_n$ lies in $\\mathcal A$;\n2. the sets $E_n$ are pairwise disjoint;\n3. $E=\\bigcup_{n\\in\\mathbb N}E_n$.\n\nThe sum on the right is a nonnegative extended series, so it is always defined\nin $[0,+\\infty] \\subseteq \\overline{\\mathbb R}$.\n\nFor signed measures, a later proposition shows that finite partitions already\nsuffice. For complex measures, that finite-partition shortcut is not built into\nthe definition here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-identity-theorem-holomorphic-functions",
+          "source_section": "Statement",
+          "quote": "If two holomorphic functions on a complex domain agree on a set with an accumulation point in the domain, then they agree everywhere on the domain.\n\nPrecisely, let $\\Omega\\subseteq\\mathbb C$ be a complex domain ([[def-complex-domain]]), let $f,g:\\Omega\\to\\mathbb C$ be holomorphic, and suppose that some $a\\in\\Omega$ is an accumulation point of $\\{z\\in\\Omega:f(z)=g(z)\\}$. Then $f=g$ on $\\Omega$. The requirement $a\\in\\Omega$ is essential.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms",
+          "source_section": "Statement",
+          "quote": "Assume AC. Finite complex Borel measures $\\mu,\\nu$ on $\\mathbb R^n$ with $\\widehat\\mu=\\widehat\\nu$ are equal. Here finite means finite total variation, and $n\\ge1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the product strip $D=\\{z\\in\\mathbb C^k:|\\operatorname{Re}z_j|<\\delta/2\\text{ for all }j\\}$, the integrand has absolute value at most $e^{(\\delta/2)\\|x\\|_1}$. On every smaller closed strip, its coordinate difference quotients are bounded by $C(1+|x_j|)e^{(3\\delta/4)\\|x\\|_1}\\le C'e^{\\delta\\|x\\|_1}$ for constants independent of $x$. The exponential-moment assumption and dominated convergence therefore make $L$ holomorphic in each coordinate on $D$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The real neighborhood contains a product of real intervals around zero. Fix real values of coordinates $2,\\ldots,k$ in those intervals. As a function of $z_1$, $L$ is holomorphic on the connected strip and vanishes on a real interval; [F2] makes it zero for every $z_1$ in that strip. Now fix such a complex $z_1$ and real coordinates $3,\\ldots,k$ in their intervals and apply [F2] to coordinate $z_2$. Repeating this finite process for coordinates $1$ through $k$ proves $L(z)=0$ for every $z\\in D$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $\\xi\\in\\mathbb R^k$, the library Fourier transform is $\\widehat\\nu(\\xi)=\\int e^{-2\\pi i\\xi\\cdot x}\\nu(dx)=L(-2\\pi i\\xi)=0$, since $-2\\pi i\\xi\\in D$. The Fourier uniqueness result [F3] then gives $\\nu=0$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement covers the zero measure, whose transform vanishes and whose conclusion is immediate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses Fourier uniqueness when the transform vanishes identically."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinguished unit-valued boundary changes the claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and The finite complex measure may be supported on a lower-dimensional set; the transform argument does not require full-dimensional support."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stated parameter set has no interval endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 records the axiom branch used by the Fourier uniqueness supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "def-likelihood-ratio-equivalence-on-common-discrete-support": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the term is applied only after its carrier objects and family are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: zero is not a distinguished numeric input to this definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: one is not a distinguished numeric input to this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: no separate degeneracy claim is asserted beyond the stated objects."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: no interval parameter or endpoint is part of the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: the definition itself makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence theorem."
+        }
+      ]
+    },
+    "thm-countable-mixture-dominates-sigmafinite-dominated-family": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a countable measurable partition $(E_n)$ of $\\mathcal X$ with $\\mu(E_n)<\\infty$ by disjointifying a sigma-finite cover [F2]. Put $c_n=2^{-n}/(1+\\mu(E_n))$ and $\\lambda(A)=\\sum_nc_n\\mu(A\\cap E_n)$. Then $\\lambda(\\mathcal X)\\le1$, and $\\lambda(A)=0$ iff every $\\mu(A\\cap E_n)=0$, iff $\\mu(A)=0$. Thus $\\lambda$ is finite and equivalent to $\\mu$, so every $P_\\theta\\ll\\lambda$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $\\theta$, choose the RN density $p_\\theta=dP_\\theta/d\\lambda$ from [F3], finite outside a $\\lambda$-null set, and let $A_\\theta=\\{p_\\theta>0\\}$. Define $s=\\sup_{F\\subseteq\\Theta,\\,F\\text{ finite}}\\lambda(\\bigcup_{\\theta\\in F}A_\\theta)$. By [A1], choose finite $F_n$ with union measure greater than $s-1/n$. Set $A=\\bigcup_n\\bigcup_{\\theta\\in F_n}A_\\theta$. Finite unions from the selected sets have measure at most $s$, so continuity from below gives $\\lambda(A)\\le s$; the approximations give $\\lambda(A)\\ge s$. Hence $\\lambda(A)=s$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $\\theta$. If $\\lambda(A_\\theta\\setminus A)>0$, the increasing finite unions $(\\bigcup_{n\\le N}\\bigcup_{\\phi\\in F_n}A_\\phi)\\cup A_\\theta$ converge to $A\\cup A_\\theta$, whose measure is greater than $s$. Some finite union would then exceed $s$, contradicting its definition. Therefore $p_\\theta=0$ $\\lambda$-almost everywhere on $A^c$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Enumerate the countable collection of selected indices $\\bigcup_nF_n$ as $(\\theta_j)$, allowing repetitions if needed, and choose positive weights summing to one. The mixture $Q=\\sum_jw_jP_{\\theta_j}$ has density $q=\\sum_jw_jp_{\\theta_j}$ by monotone convergence, so $q>0$ exactly on $A$ up to a $\\lambda$-null set. If $Q(C)=0$, then $\\lambda(C\\cap A)=0$; also every $p_\\theta$ vanishes on $A^c$ by step 3.1. Thus $P_\\theta(C)=\\int_Cp_\\theta d\\lambda=0$. Since $\\theta$ was arbitrary, $P_\\theta\\ll Q$ for all $\\theta$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes the family is nonempty; step 2.1 selects finite subfamilies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 handle zero density supports and show no model density remains off their union."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and If the family has one law, a one-term positive mixture is that law; the support-maximization proof still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1–4.1 include supports of zero density and finite/one-member mixtures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stated parameter set has no interval endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and steps 2.1 and 4.1 mark the finite-subfamily and RN-version selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "def-ancillary-statistic": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the term is applied only after its carrier objects and family are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: zero is not a distinguished numeric input to this definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: one is not a distinguished numeric input to this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: no separate degeneracy claim is asserted beyond the stated objects."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: no interval parameter or endpoint is part of the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: the definition itself makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence theorem."
+        }
+      ]
+    },
+    "def-complete-statistic": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: both expectation and almost-sure conclusion quantify over every θ; when Θ is empty both are vacuous, so the completeness condition holds for any supplied statistic."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: g=0 satisfies integrability, zero expectation and the almost-sure conclusion under every member; no division by an expectation occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for a singleton parameter family the same implication still ranges over every integrable g; singleton family does not automatically imply completeness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: when T is constant under every law, zero expectation of the constant g(T) forces its almost-sure zero value; only the stated integrability implication is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Completeness quantifies over arbitrary parameter labels and integrable functions, not an ordered interval with boundary points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The complete-statistic condition evaluates a supplied measurable T and every eligible g; it selects neither a parameter nor a representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Completeness is introduced by a one-direction zero-mean implication, not a separate biconditional proposition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse of the defining completeness implication is asserted as an additional result."
+        }
+      ]
+    },
+    "def-exponential-family": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Ω is an arbitrary subset of H, so Ω=∅ gives an empty associated family; the separate full-rank condition requires a nonempty open subset and then fails."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: H={η:0<Z(η)<∞} excludes Z=0 before A=log Z is used; h may vanish pointwise and those density values are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: pη=h exp(η·T−A(η)) with A=log Z integrates to Z/Z=1 for each η∈Ω; Ω may also be a singleton without being full-rank in positive dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the condition that no b≠0 has b·T=c on {h>0} expressly excludes redundant displayed coordinates from full rank, while the exponential-family density itself permits them."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Z=0 and Z=∞ are excluded by the strict conditions defining H; no density or log-normalizer at either integral endpoint is promised."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: full rank expressly requires Ω to contain a nonempty open subset, whereas the family construction uses supplied h,T,μ and Ω and chooses no η."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The density representation and the separate full-rank convention are definitions; the item asserts no equivalence theorem to prove forward."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse theorem recovering an exponential-family representation from a statistic property appears in this definition."
+        }
+      ]
+    },
+    "def-sufficient-statistic": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the term is applied only after its carrier objects and family are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: zero is not a distinguished numeric input to this definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: one is not a distinguished numeric input to this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: no separate degeneracy claim is asserted beyond the stated objects."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: no interval parameter or endpoint is part of the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: the definition itself makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence theorem."
+        }
+      ]
+    },
+    "def-minimal-sufficient-sigma-field": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: for Θ=∅ the integral identities are vacuous, and the bounded common witness vu=0 exists for every bounded u. Then the family-null ideal is all A; A△∅ belongs to it, so containment modulo that ideal is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the test function u=0 admits vu=0 in every candidate sigma-field; zero family probabilities enter only the explicitly defined family-null ideal."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: u=1 admits vu=1 and preserves the displayed integral identities; no normalization by a possibly zero event probability is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: family-null differences are handled by A△B∈N, so null-set degeneracy changes equality only modulo the explicitly specified ideal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Minimal sufficient sigma-field containment is a relation between sigma-fields modulo an ideal, with no numerical interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition requires an existing sufficient Gstar and quantified bounded witnesses vu; it proves no existence or selection of a minimal field."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The integral identity characterizes sufficiency by definition, and minimality is a universal containment requirement; no iff theorem is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not assert a converse construction of Gstar from containment alone without its stated sufficiency requirement."
+        }
+      ]
+    },
+    "thm-basu-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complete-statistic",
+          "source_section": "Definition",
+          "quote": "A statistic $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ is **complete** for $(P_\\theta)_{\\theta\\in\\Theta}$ if, for every measurable real-valued $g$ such that $E_\\theta|g(T)|<\\infty$ for every $\\theta$, the conditions $E_\\theta[g(T)]=0$ for every $\\theta$ imply $P_\\theta(g(T)=0)=1$ for every $\\theta$. Integrability is part of the premise; completeness is a property of the statistic relative to the specified family.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ancillary-statistic",
+          "source_section": "Definition",
+          "quote": "A statistic $U:(\\mathcal X,\\mathcal A)\\to(\\mathcal Z,\\mathcal C)$ is **ancillary** for $(P_\\theta)$ if its pushforward probability $P_\\theta\\circ U^{-1}$ does not depend on $\\theta$. Equivalently, for every $C\\in\\mathcal C$, $P_\\theta(U\\in C)$ is constant in $\\theta$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a Borel set $C$ in the target of $U$. The function $q_C(y)=K(y,U^{-1}(C))$ is Borel by [F4]. For every $\\theta$, the conditional-law identity [F1] shows $q_C(T)$ is a version of $P_\\theta(U\\in C\\mid T)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By ancillarity [F3], $p_C=P_\\theta(U\\in C)$ is constant in $\\theta$. Hence the bounded function $g_C(y)=q_C(y)-p_C$ satisfies $E_\\theta g_C(T)=0$ for every $\\theta$. Completeness [F2] implies $q_C(T)=p_C$ $P_\\theta$-almost surely for each $\\theta$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any Borel $D$ in the target of $T$, $P_\\theta(T\\in D,U\\in C)=E_\\theta[1_{\\{T\\in D\\}}q_C(T)]=p_C P_\\theta(T\\in D)=P_\\theta(U\\in C)P_\\theta(T\\in D)$. This holds for every pair of Borel sets $D,C$, which is the definition of independence.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: independence is asserted under every Pθ, so with an empty parameter family there is no law requiring verification. With a nonempty family, steps 1.1–3.1 apply separately under each supplied law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: gC=qC−pC is bounded even when the ancillary probability pC=0; completeness makes qC(T)=0 almost surely and step 3.1 factors the joint probability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the identical bounded-function argument allows pC=1, and step 3.1 gives joint probability Pθ(T∈D) when the ancillary event has probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1: if U is constant, each pC is zero or one and the same conditional event calculation proves independence; no nondegeneracy hypothesis is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Basu Statement imposes no interval structure on parameter labels; the only probability endpoints are covered in the zero and one rows."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: C is an arbitrary supplied Borel event; the kernel K already exists by sufficiency F1. Step 2.1 uses the common ancillary probability under each law, not a new family of selected versions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Basu Statement is the implication complete sufficient T and ancillary U implies independence, not an equivalence with those hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Independence is not asserted to imply completeness, sufficiency, or ancillarity; the theorem has no reverse claim."
+        }
+      ]
+    },
+    "thm-common-reference-factorization-criterion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ be a measurable random element with standard-Borel target, and let $\\mathcal G\\subseteq\\mathcal F$ be any sub-sigma-algebra. There exists a regular conditional distribution of $X$ given $\\mathcal G$. Every section is a probability measure, including at exceptional sample points, and no countable-generation or completeness assumption on $\\mathcal G$ is required.\n\nFor this necessarily nonempty target, the construction also supplies a bimeasurable bijection $c:E\\to B$ onto a Borel set $B\\subseteq[0,1]$, and a countable algebra $\\mathcal A$ which generates $\\mathcal S$, separates points, and determines finite measures.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-likelihood-ratio-change-of-measure",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $P_0,P_1$ be probability measures on one measurable space.\nLet $r$ be a nonnegative measurable representative of the likelihood-ratio\nclass for $P_1$ versus $P_0$. If $P_1\\ll P_0$, then\n$$\nE_{P_0}[g r]=E_{P_1}[g]\n$$\nfor every nonnegative measurable $g$, and also for every real-valued\n$P_1$-integrable measurable $g$. Here $E_{P_i}[h]$ means\n$\\int h\\,dP_i$. Without $P_1\\ll P_0$, this identity need not hold because the\nsingular component may be nonzero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-doob-dynkin-lemma",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $f : X \\to \\mathbb{R}$ and $g : X \\to \\overline{\\mathbb{R}}$. Then $g$ is\n$\\sigma(f)$-measurable if and only if there is a Borel measurable function\n$h : \\mathbb{R} \\to \\overline{\\mathbb{R}}$ such that\n\n$$g = h \\circ f.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-standard-borel-spaces-admit-bimeasurable-real-codings",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every standard-Borel space $(E,\\mathcal S)$ is measurably isomorphic to a Borel subset of $[0,1]$, including $E=\\varnothing$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $T$ is sufficient, and let $K$ be its common kernel. Fix $\\theta$. Disintegrating $P_\\theta$ and $P_0$ with this same kernel gives $P_\\theta(A)=\\int K(y,A)P_\\theta^T(dy)$ and $P_0(A)=\\int K(y,A)P_0^T(dy)$ for every $A$. Since $P_\\theta\\ll P_0$, also $P_\\theta^T\\ll P_0^T$; let $r_\\theta=dP_\\theta^T/dP_0^T$. Then $P_\\theta(A)=\\int K(y,A)r_\\theta(y)P_0^T(dy)$. The disintegration identity under $P_0$ makes this $\\int_A r_\\theta(T)\\,dP_0$. Uniqueness in [F4] gives $dP_\\theta/dP_0=r_\\theta(T)$ $P_0$-almost surely.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F8",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "This proves that the derivative has a $\\sigma(T)$-measurable version. By [F6, F7] it has a Borel factor $g_\\theta(T)$ on the standard Borel target; equivalently one may apply Doob–Dynkin to its real-valued version after modifying it on a $P_0$-null set.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely suppose $dP_\\theta/dP_0=g_\\theta(T)$ $P_0$-almost surely for every $\\theta$. Let $K_0$ be a regular conditional distribution under $P_0$, which exists by [F3]. Change of measure [F5] shows $P_\\theta^T(C)=\\int_Cg_\\theta(y)P_0^T(dy)$. For every $A$ and Borel $C$, $P_\\theta(A\\cap T^{-1}C)=\\int 1_A1_C(T)g_\\theta(T)dP_0=\\int_Cg_\\theta(y)K_0(y,A)P_0^T(dy)=\\int_CK_0(y,A)P_\\theta^T(dy)$. Thus the same $K_0$ is a conditional law for every parameter, and [F1] gives sufficiency.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires Θ nonempty and fixes θ₀ in it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 permits zero values of gθ and the RN derivative on T-fibers."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For θ=θ₀ the derivative is the constant one, as covered by step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires a reference member; the external-reference failure is checked in the B counterexample."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stated parameter set has no interval endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC for RN versions; steps 1.1 and 3.1 use the RN suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 prove sufficiency implies a T-measurable derivative."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves a T-measurable derivative gives a common conditional law."
+        }
+      ]
+    },
+    "thm-completeness-of-full-exponential-family": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-exponential-family",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ be standard Borel, let $\\mu$ be a $\\sigma$-finite positive measure, let $h:\\mathcal X\\to[0,\\infty)$ be measurable, and let $T:\\mathcal X\\to\\mathbb R^k$ be a measurable statistic. For $\\eta\\in\\mathbb R^k$ put\n\n$$Z(\\eta)=\\int h(x)e^{\\eta\\cdot T(x)}\\,\\mu(dx),\\qquad H=\\{\\eta:0<Z(\\eta)<\\infty\\},\\qquad A(\\eta)=\\log Z(\\eta).$$\n\nFor a parameter set $\\Omega\\subseteq H$, the associated **exponential family** has laws $P_\\eta$ with density\n\n$$p_\\eta(x)=h(x)\\exp\\{\\eta\\cdot T(x)-A(\\eta)\\}\\quad(\\eta\\in\\Omega).$$\n\nThe normalization $A(\\eta)=\\log Z(\\eta)$ makes each density integrate to one. In this item **full-rank** means that $\\Omega$ contains a nonempty open subset of $\\mathbb R^k$ and there do not exist $b\\ne0$ and $c\\in\\mathbb R$ with $b\\cdot T=c$ $\\mu$-almost everywhere on $\\{h>0\\}$. A parameter set containing an open subset is also called regular in some sources; terminology varies, so this definition controls here. The condition is stronger than needed for the completeness theorem below but rules out redundant displayed coordinates.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complete-statistic",
+          "source_section": "Definition",
+          "quote": "A statistic $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ is **complete** for $(P_\\theta)_{\\theta\\in\\Theta}$ if, for every measurable real-valued $g$ such that $E_\\theta|g(T)|<\\infty$ for every $\\theta$, the conditions $E_\\theta[g(T)]=0$ for every $\\theta$ imply $P_\\theta(g(T)=0)=1$ for every $\\theta$. Integrability is part of the premise; completeness is a property of the statistic relative to the specified family.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-uniqueness-of-a-multivariate-exponential-transform",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\nu$ be a finite complex Borel measure on $\\mathbb R^k$. Suppose there is $\\delta>0$ such that $\\int e^{\\delta\\|x\\|_1}\\,|\\nu|(dx)<\\infty$. If the Laplace transform $L(z)=\\int e^{z\\cdot x}\\,\\nu(dx)$ is zero for every real $z$ in an open neighborhood of $0$, then $\\nu=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-a-real-l-one-density-defines-a-finite-signed-measure-with-its-canonical-hahn-and-jordan-data",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $f\\in L^1(\\mu)$ be\nreal-valued. Define\n$$\\nu(E):=\\int_E f\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nThen $\\nu$ is a finite signed measure. Its canonical Hahn sets are\n$$P:=\\{f>0\\},\\qquad N:=\\{f\\le0\\},$$\nits Jordan parts are\n$$\\nu^+(E)=\\int_E f^+\\,d\\mu,\\qquad \\nu^-(E)=\\int_E f^-\\,d\\mu,$$\nand its total variation is\n$$|\\nu|(E)=\\int_E |f|\\,d\\mu.$$\n\nThese explicit constructions require no choice axiom. Hahn partitions are\nunique only up to signed-null sets; the Jordan measures are unique.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-total-variation-of-a-signed-or-complex-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\nu$ be a signed measure or a complex measure on $(X,\\mathcal A)$. For\n$E\\in\\mathcal A$, define its **total variation on $E$** by\n$$|\\nu|(E):=\\sup\\left\\{\\sum_{n=0}^\\infty |\\nu(E_n)|:\\ (E_n)_{n\\in\\mathbb N}\\text{ is a countable measurable partition of }E\\right\\},$$\nwhere, for a signed measure, the term $|\\nu(E_n)|$ means the ordinary absolute\nvalue when $\\nu(E_n)\\in\\mathbb R$ and means $+\\infty$ when\n$\\nu(E_n)\\in\\{+\\infty,-\\infty\\}$; for a complex measure it is the usual complex\nmodulus. A countable measurable partition of $E$ means:\n\n1. each $E_n$ lies in $\\mathcal A$;\n2. the sets $E_n$ are pairwise disjoint;\n3. $E=\\bigcup_{n\\in\\mathbb N}E_n$.\n\nThe sum on the right is a nonnegative extended series, so it is always defined\nin $[0,+\\infty] \\subseteq \\overline{\\mathbb R}$.\n\nFor signed measures, a later proposition shows that finite partitions already\nsuffice. For complex measures, that finite-partition shortcut is not built into\nthe definition here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $\\eta_0$ in the open subset and $\\epsilon>0$ so the closed cube $\\eta_0+[-\\epsilon,\\epsilon]^k$ lies in $\\Omega$. Define the finite signed measure $\\rho(A)=\\int_Ag(T(x))\\,P_{\\eta_0}(dx)$ by [F4], and set $\\nu=T_\\#\\rho$, so $\\nu(B)=\\rho(T^{-1}B)$. The preimages of a countable partition form a countable partition, giving $|\\nu|\\le T_\\#|\\rho|$ by [F4]. Hence $|\\nu|(\\mathbb R^k)\\le E_{\\eta_0}|g(T)|<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose $0<\\delta<\\epsilon$. Since $e^{\\delta\\|s\\|_1}\\le\\sum_{\\sigma\\in\\{-1,1\\}^k}e^{\\delta\\sigma\\cdot s}$ and $|\\nu|\\le T_\\#|\\rho|$ by step 1.1, the weighted-integral bound follows first for nonnegative simple functions from that setwise domination and then for $e^{\\delta\\|s\\|_1}$ by [F5]. For each sign vector, changing from $P_{\\eta_0}$ to $P_{\\eta_0+\\delta\\sigma}$ contributes the factor $Z(\\eta_0+\\delta\\sigma)/Z(\\eta_0)$, so $\\int e^{\\delta\\|s\\|_1}|\\nu|(ds)\\le\\sum_\\sigma \\frac{Z(\\eta_0+\\delta\\sigma)}{Z(\\eta_0)}E_{\\eta_0+\\delta\\sigma}|g(T)|<\\infty$, the exponential moment required by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every real $t$ with $\\|t\\|_\\infty<\\delta$, its Laplace transform is $\\int e^{t\\cdot s}\\nu(ds)=\\frac{Z(\\eta_0+t)}{Z(\\eta_0)}E_{\\eta_0+t}g(T)=0$ by the mean-zero premise. The transform-uniqueness result [F3], under axiom branch [A1], gives $\\nu=0$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For every Borel $B$, $0=\\nu(B)=\\rho(T^{-1}B)=\\int_Bg(s)P_{\\eta_0}^T(ds)$ by the definition of the pushforward measure and $\\rho$. Taking $B=\\{g>0\\}$ and $B=\\{g<0\\}$ shows both positive and negative parts have zero integral, so $g(T)=0$ $P_{\\eta_0}$-almost surely. Every family density is strictly positive on $\\{h>0\\}$, so all $P_\\eta$ are equivalent to $P_{\\eta_0}$ and the same vanishing holds for every $\\eta$. By [F2], $T$ is complete.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes a nonempty open parameter subset; step 1.1 selects a point and cube inside it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1–4.1 handle a zero mean function and show its positive and negative parts vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinguished unit-valued boundary changes the claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and The proof allows g(T) to be zero almost surely; that is the conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a closed cube strictly inside the open set, so boundary points remain admissible."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 is used when step 3.1 applies the transform-uniqueness lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "thm-countable-factorization-criterion-for-sufficiency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $T$ is sufficient and fix a common kernel $K$ from [F1]. For $t\\in T(\\mathcal X)$ set $m_\\theta(t)=P_\\theta(T=t)$ and $M(t)=\\sup_\\theta m_\\theta(t)$. The image is countable by countability of $\\mathcal X$, hence Borel by [F3]; every function on this image extended by zero is Borel. Define $h(x)=M(Tx)K(Tx,\\{x\\})$ and define $g_\\theta(t)=m_\\theta(t)/M(t)$ when $M(t)>0$, and zero when $M(t)=0$. Then $g_\\theta$ is Borel and nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $M(Tx)>0$, choose $\\theta_0$ with $m_{\\theta_0}(Tx)>0$. The conditional identity in [F1] gives $K(Tx,T^{-1}\\{Tx\\})=1$ and $p_\\theta(x)=m_\\theta(Tx)K(Tx,\\{x\\})$ for every $\\theta$; if $m_\\theta(Tx)=0$, both sides vanish by the same identity. Thus $p_\\theta(x)=g_\\theta(Tx)h(x)$. If $M(Tx)=0$, every law gives that fiber probability zero, so $p_\\theta(x)=h(x)=g_\\theta(Tx)=0$. This proves the forward implication pointwise.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely suppose the factorization holds. For each $t\\in T(\\mathcal X)$ let $F_t=T^{-1}\\{t\\}$ and $H(t)=\\sum_{x\\in F_t}h(x)$. If some $m_\\theta(t)>0$, then $g_\\theta(t)>0$ and $0<H(t)=m_\\theta(t)/g_\\theta(t)<\\infty$, since the sum of the probabilities on the fiber is at most one. In that case put $K(t,\\{x\\})=h(x)/H(t)$ on $F_t$ and zero off $F_t$. If all $m_\\theta(t)=0$, choose the first point of $F_t$ in a fixed enumeration and let $K(t,\\cdot)$ be its point mass. For $t\\notin T(\\mathcal X)$ choose one fixed $x_0\\in\\mathcal X$ and set $K(t,\\cdot)=\\delta_{x_0}$. The countable image and enumeration make every coordinate $t\\mapsto K(t,\\{x\\})$ Borel. For each $A\\subseteq\\mathcal X$, $K(t,A)=\\sum_{x\\in A}K(t,\\{x\\})$ is a countable sum of Borel functions, so it is Borel; the point-mass assignments are countably additive probability measures.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "choose",
+            "construct",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On an active fiber, for every $A\\subseteq\\mathcal X$, $P_\\theta(A\\cap F_t)=g_\\theta(t)\\sum_{x\\in A\\cap F_t}h(x)=m_\\theta(t)K(t,A)$. On an inactive fiber both sides are zero. Summing over the countably many $t\\in C\\cap T(\\mathcal X)$ gives the conditional-law identity for every Borel $C\\subseteq\\mathcal Y$. Thus [F1] holds and $T$ is sufficient.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes nonempty X and Θ; step 2.2 fixes x₀ for the off-image filler."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats M(Tx)=0, and step 2.2 assigns an inactive fiber a probability filler."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.2–3.1 normalize each active fiber to a probability law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 handles an inactive fiber separately from an active fiber."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stated parameter set has no interval endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 use Θ nonempty and the fixed enumeration to choose representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 prove sufficiency implies factorization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.2–3.1 prove factorization implies sufficiency."
+        }
+      ]
+    },
+    "def-minimal-sufficient-statistic": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the term is applied only after its carrier objects and family are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: zero is not a distinguished numeric input to this definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: one is not a distinguished numeric input to this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: no separate degeneracy claim is asserted beyond the stated objects."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: no interval parameter or endpoint is part of the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: the definition itself makes no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence theorem."
+        }
+      ]
+    },
+    "thm-full-rank-exponential-family-sufficiency": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-exponential-family",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ be standard Borel, let $\\mu$ be a $\\sigma$-finite positive measure, let $h:\\mathcal X\\to[0,\\infty)$ be measurable, and let $T:\\mathcal X\\to\\mathbb R^k$ be a measurable statistic. For $\\eta\\in\\mathbb R^k$ put\n\n$$Z(\\eta)=\\int h(x)e^{\\eta\\cdot T(x)}\\,\\mu(dx),\\qquad H=\\{\\eta:0<Z(\\eta)<\\infty\\},\\qquad A(\\eta)=\\log Z(\\eta).$$\n\nFor a parameter set $\\Omega\\subseteq H$, the associated **exponential family** has laws $P_\\eta$ with density\n\n$$p_\\eta(x)=h(x)\\exp\\{\\eta\\cdot T(x)-A(\\eta)\\}\\quad(\\eta\\in\\Omega).$$\n\nThe normalization $A(\\eta)=\\log Z(\\eta)$ makes each density integrate to one. In this item **full-rank** means that $\\Omega$ contains a nonempty open subset of $\\mathbb R^k$ and there do not exist $b\\ne0$ and $c\\in\\mathbb R$ with $b\\cdot T=c$ $\\mu$-almost everywhere on $\\{h>0\\}$. A parameter set containing an open subset is also called regular in some sources; terminology varies, so this definition controls here. The condition is stronger than needed for the completeness theorem below but rules out redundant displayed coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-common-reference-factorization-criterion",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ and $(\\mathcal Y,\\mathcal B)$ be standard Borel, let $\\Theta\\ne\\varnothing$, and let $T:\\mathcal X\\to\\mathcal Y$ be a statistic. Fix $\\theta_0\\in\\Theta$ and set $P_0=P_{\\theta_0}$. Assume $P_\\theta\\ll P_0$ for every $\\theta$. Then $T$ is sufficient if and only if for every $\\theta$ the Radon–Nikodym derivative $dP_\\theta/dP_0$ has a $\\sigma(T)$-measurable version. Equivalently, for each $\\theta$ there is a Borel $g_\\theta:\\mathcal Y\\to[0,\\infty)$ with $dP_\\theta/dP_0=g_\\theta(T)$ $P_0$-almost surely. The null exceptional set may depend on $\\theta$. The requirement $P_0\\in\\{P_\\theta\\}$ is essential; an arbitrary external dominating probability is not covered.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix any $\\eta_0\\in\\Omega$; nonemptiness is part of the family being considered. The density in [F1] is positive exactly on $\\{h>0\\}$ for every parameter. For $\\eta\\in\\Omega$, dividing the densities there gives $dP_\\eta/dP_{\\eta_0}=\\exp\\{(\\eta-\\eta_0)\\cdot T-(A(\\eta)-A(\\eta_0))\\}$ $P_{\\eta_0}$-almost surely. The right side is a Borel function of $T$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The reference $P_{\\eta_0}$ is a member of the model and dominates every other member because the densities have the common support $\\{h>0\\}$. Apply [F3] to the derivative in step 1.1; its criterion yields a common conditional law of $X$ given $T$. By [F2], $T$ is sufficient.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Ω≠∅ is an explicit hypothesis; step 1.1 fixes η0∈Ω. Thus an empty parameter family is excluded before forming the reference probability."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: every density is positive exactly on {h>0}; the RN density ratio is asserted only Pη0-almost surely, so h=0 points require no zero-over-zero division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: at η=η0 the exponential RN ratio is exp(0)=1; step 2.1 then still applies the common-reference criterion, including a singleton Ω."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: sufficiency requires no rank or nonredundancy condition beyond the density representation; even constant canonical coordinates yield a Borel exponential RN ratio and step 2.1 establishes sufficiency."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "F1 and Definition of exponential family: η∈Ω⊆H requires 0<Z(η)<∞, so neither normalization endpoint Z=0 nor Z=∞ occurs; step 1.1 uses the finite A(η) differences."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: Fix any η0∈Ω is justified by explicit nonemptiness and is one reference selection. A1 and step 2.1 record AC through the common-reference factorization supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts exponential-family canonical-statistic sufficiency only; it does not state an iff characterization of all sufficient statistics."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse representation of a family as exponential from sufficiency of T is claimed in this theorem."
+        }
+      ]
+    },
+    "thm-standard-borel-dominated-factorization-criterion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ be a measurable random element with standard-Borel target, and let $\\mathcal G\\subseteq\\mathcal F$ be any sub-sigma-algebra. There exists a regular conditional distribution of $X$ given $\\mathcal G$. Every section is a probability measure, including at exceptional sample points, and no countable-generation or completeness assumption on $\\mathcal G$ is required.\n\nFor this necessarily nonempty target, the construction also supplies a bimeasurable bijection $c:E\\to B$ onto a Borel set $B\\subseteq[0,1]$, and a countable algebra $\\mathcal A$ which generates $\\mathcal S$, separates points, and determines finite measures.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-countable-mixture-dominates-sigmafinite-dominated-family",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(P_\\theta)_{\\theta\\in\\Theta}$ be a nonempty family of probability measures dominated by a $\\sigma$-finite positive measure $\\mu$ on $(\\mathcal X,\\mathcal A)$. There are a finite or countable sequence $(\\theta_j)$ from $\\Theta$ and weights $w_j>0$ summing to one such that $Q=\\sum_jw_jP_{\\theta_j}$ satisfies $P_\\theta\\ll Q$ for every $\\theta$. Repetitions are permitted if $\\Theta$ is finite.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-common-reference-factorization-criterion",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ and $(\\mathcal Y,\\mathcal B)$ be standard Borel, let $\\Theta\\ne\\varnothing$, and let $T:\\mathcal X\\to\\mathcal Y$ be a statistic. Fix $\\theta_0\\in\\Theta$ and set $P_0=P_{\\theta_0}$. Assume $P_\\theta\\ll P_0$ for every $\\theta$. Then $T$ is sufficient if and only if for every $\\theta$ the Radon–Nikodym derivative $dP_\\theta/dP_0$ has a $\\sigma(T)$-measurable version. Equivalently, for each $\\theta$ there is a Borel $g_\\theta:\\mathcal Y\\to[0,\\infty)$ with $dP_\\theta/dP_0=g_\\theta(T)$ $P_0$-almost surely. The null exceptional set may depend on $\\theta$. The requirement $P_0\\in\\{P_\\theta\\}$ is essential; an arbitrary external dominating probability is not covered.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-radon-nikodym-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\lambda$ and $\\mu$ be sigma-finite positive measures and let $\\nu$ be a\nsigned measure or a finite complex measure on the same measurable space.\nAssume there is an increasing measurable exhaustion $(X_n)_{n\\in\\mathbb N}$\nwith $\\bigcup_nX_n=X$, $\\lambda(X_n)<+\\infty$, $\\mu(X_n)<+\\infty$, and\n$|\\nu|(X_n)<+\\infty$ for every $n$, and assume $\\nu\\ll\\mu\\ll\\lambda$. Then\n$$\\frac{d\\nu}{d\\lambda}=\\frac{d\\nu}{d\\mu}\\frac{d\\mu}{d\\lambda}\\qquad\\lambda\\text{-almost everywhere.}$$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], choose a positive-weight countable mixture $Q=\\sum_jw_jP_{\\theta_j}$ dominating the family, and let $h=dQ/d\\mu$. This RN derivative exists under AC because $Q$ is a probability and $Q\\ll\\mu$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F7",
+            "F8",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $T$ is sufficient. Let $K$ be the common conditional law from [F1]. For each $A,C$, sum the conditional-law identity under $P_{\\theta_j}$ with weights $w_j$; countable additivity of the integral shows the same $K$ is a conditional law under $Q$. Thus it is common for the augmented family $\\{Q\\}\\cup\\{P_\\theta\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely suppose the factorization holds. By [F4], $P_\\theta\\ll Q$ for every $\\theta$. The finite measures $P_\\theta,Q$ and sigma-finite $\\mu$ have a common finite exhaustion, so the RN chain rule [F6] identifies $dP_\\theta/dQ=p_\\theta/h$ on the $Q$-full set $\\{h>0\\}$. There the assumed equality gives $dP_\\theta/dQ=g_\\theta(T)$.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In this augmented family $Q$ is a member and dominates all laws. Apply [F5] to obtain Borel $g_\\theta$ with $dP_\\theta/dQ=g_\\theta(T)$ $Q$-almost surely. A sigma-finite cover for $\\mu$ is a common finite-measure exhaustion for $P_\\theta,Q,\\mu$, since the first two are finite; the chain rule [F6] and density identities [F3, F7] then give $p_\\theta=h g_\\theta(T)$ $\\mu$-almost everywhere. The exceptional set may depend on the fixed $\\theta$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Also $dQ/dQ=1$ is a function of $T$. In the augmented family $\\{Q\\}\\cup\\{P_\\theta\\}$, $Q$ is a member reference and all laws are dominated by it; apply [F5] to these T-measurable derivatives. The criterion gives a common conditional law, so $T$ is sufficient.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a nonempty family; step 1.1 constructs its mixture reference."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 restricts division by h to {h>0}, which is Q-full."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and A one-law family is allowed; the mixture theorem and common-reference criterion still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 augments the family by Q, and step 4.1 includes its unit derivative."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stated parameter set has no interval endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 is used in step 1.1 for the countable mixture and in step 3.1 for RN versions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove sufficiency implies factorization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.2–4.1 prove factorization implies sufficiency."
+        }
+      ]
+    },
+    "thm-countable-mixture-likelihood-ratio-vector-is-minimal-sufficient": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-minimal-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "A statistic $T$ into a standard Borel space is **minimal sufficient** for $(P_\\theta)$ if $\\sigma(T)$ is a minimal sufficient $\\sigma$-field in the preceding sense. Minimality is modulo sets null under every model law. It does not assert literal pointwise equality with any other minimal sufficient statistic.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-countable-products-of-completely-metrizable-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every countable product of completely metrizable spaces is completely metrizable, including the empty product.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-countable-products-of-second-countable-spaces",
+          "source_section": "Statement",
+          "quote": "Assuming $\\mathrm{AC}_\\omega$, a countable product of second countable spaces is second countable.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ be a measurable random element with standard-Borel target, and let $\\mathcal G\\subseteq\\mathcal F$ be any sub-sigma-algebra. There exists a regular conditional distribution of $X$ given $\\mathcal G$. Every section is a probability measure, including at exceptional sample points, and no countable-generation or completeness assumption on $\\mathcal G$ is required.\n\nFor this necessarily nonempty target, the construction also supplies a bimeasurable bijection $c:E\\to B$ onto a Borel set $B\\subseteq[0,1]$, and a countable algebra $\\mathcal A$ which generates $\\mathcal S$, separates points, and determines finite measures.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-doob-dynkin-lemma",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $f : X \\to \\mathbb{R}$ and $g : X \\to \\overline{\\mathbb{R}}$. Then $g$ is\n$\\sigma(f)$-measurable if and only if there is a Borel measurable function\n$h : \\mathbb{R} \\to \\overline{\\mathbb{R}}$ such that\n\n$$g = h \\circ f.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-standard-borel-spaces-admit-bimeasurable-real-codings",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every standard-Borel space $(E,\\mathcal S)$ is measurably isomorphic to a Borel subset of $[0,1]$, including $E=\\varnothing$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $P_k\\ll Q$, [F5] gives finite-valued nonnegative Borel densities $f_k$ after changing each on its null set. Their exceptional sets have countable union $N$ with $Q(N)=0$; reset all $f_k$ to zero on $N$. By [F6], $[0,\\infty)^{\\mathbb N}$ is standard Borel. The coordinate maps are Borel, hence $T$ is Borel.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every Borel $C\\subseteq[0,\\infty)^{\\mathbb N}$, $P_k(T\\in C)=\\int 1_{\\{T\\in C\\}}f_k\\,dQ$. Thus the conditional law of $X$ given $T$ under the reference $Q$ can be reweighted by the $T$-measurable factor $f_k$ without changing its conditional kernel. More explicitly, if $K$ is a regular conditional law under $Q$, then for $A\\in\\mathcal A$ and Borel $C$, $P_k(A\\cap T^{-1}C)=\\int_C K(t,A)t_kQ^T(dt)$ and $P_k^T(dt)=t_kQ^T(dt)$, since $T_k=f_k$. Hence $K$ works under every $P_k$, so [F1] gives sufficiency.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $S$ be any other standard Borel sufficient statistic with common kernel $L$. The same kernel is a conditional law under $Q$: its conditional identity follows by multiplying the identity under $P_k$ by $w_k$ and summing the nonnegative integrals. It is also the common conditional law under each $P_k$. Let $Q^S$ and $P_k^S$ be the image laws. The identity $P_k^S\\ll Q^S$ follows from $P_k\\ll Q$; write $r_k=dP_k^S/dQ^S$. Disintegrating with $L$ gives, for every $A$, $P_k(A)=\\int L(s,A)r_k(s)Q^S(ds)=\\int_A r_k(S(x))Q(dx)$. RN uniqueness yields $f_k=r_k(S)$ $Q$-almost surely.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "given",
+            "construct",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Apply [F5] to each coordinate to obtain Borel $r_k$ (modified on $Q^S$-null sets if necessary). The map $\\varphi(s)=(r_k(s))_{k\\ge1}$ is Borel because its coordinate maps are Borel; step 2.2 gives $T=\\varphi(S)$ $Q$-almost surely. Since every weight is positive, $Q(C)=0$ iff $P_k(C)=0$ for every $k$. For every Borel $D$ in the target of $T$, the sets $T^{-1}(D)$ and $S^{-1}(\\varphi^{-1}(D))$ differ only on $\\{T\\ne\\varphi(S)\\}$, which is $Q$-null by step 2.2. Therefore $\\sigma(T)\\subseteq\\sigma(S)$ modulo the family-null ideal, and [F2] proves minimal sufficiency.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F8",
+            "step 2.2",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement indexes the countable family by k≥1 and uses positive weights summing to one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 resets all coordinate densities to zero on one common Q-null set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-member family gives the constant-one likelihood-ratio coordinate; steps 1.1–3.1 remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 explicitly allow zero coordinates and show singleton/constant information is covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stated parameter set has no interval endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 1.1 select countably many RN versions and combine their exceptional sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "thm-discrete-likelihood-ratio-classes-are-minimal-sufficient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-likelihood-ratio-equivalence-on-common-discrete-support",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be countable with its full $\\sigma$-field, so it is standard Borel under the discrete metric. Let $\\Theta\\ne\\varnothing$, and let $(P_\\theta)_{\\theta\\in\\Theta}$ be dominated by a fixed $\\sigma$-finite positive measure $\\mu$. Choose the finite-valued densities $p_\\theta=dP_\\theta/d\\mu$ as in [[def-likelihood-density]]. Let $X_0\\subseteq\\mathcal X$ satisfy $P_\\theta(X_0)=1$ and $P_\\theta(\\{x\\})>0$ for every $x\\in X_0$ and every $\\theta$. Write $m_\\theta(x)=P_\\theta(\\{x\\})$. For each $x\\in X_0$, $0<\\mu(\\{x\\})<\\infty$ and $p_\\theta(x)=m_\\theta(x)/\\mu(\\{x\\})$: positivity follows from $m_\\theta(x)>0$, finiteness from sigma-finiteness, and the value is fixed by the density integral on the positive-measure singleton. Consequently\n\n$$\\frac{p_\\theta(x)}{p_\\theta(y)}=\\frac{m_\\theta(x)}{m_\\theta(y)}\\frac{\\mu(\\{y\\})}{\\mu(\\{x\\})}.$$\n\nFor $x,y\\in X_0$, define $x\\sim y$ if there is a constant $c(x,y)>0$ such that $m_\\theta(x)/m_\\theta(y)=c(x,y)$ for every $\\theta$. The displayed fixed singleton factor shows this is equivalent to constancy of the common-reference density ratio. This is an equivalence relation: the constants for $(x,x)$, $(y,x)$ and $(x,z)$ are respectively $1$, $c(x,y)^{-1}$ and $c(x,y)c(y,z)$. Its equivalence classes form a countable quotient. Equip that quotient with its discrete $\\sigma$-field; it is standard Borel because the discrete metric is complete and the countable space itself is dense. Since $\\Theta\\ne\\varnothing$ and $P_\\theta(X_0)=1$, $X_0$ is nonempty; define the class statistic by mapping each point of $X_0$ to its class and every point off $X_0$ to any fixed class. It is measurable because $\\mathcal X$ has the full $\\sigma$-field, and values off $X_0$ are null under every law.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-minimal-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "A statistic $T$ into a standard Borel space is **minimal sufficient** for $(P_\\theta)$ if $\\sigma(T)$ is a minimal sufficient $\\sigma$-field in the preceding sense. Minimality is modulo sets null under every model law. It does not assert literal pointwise equality with any other minimal sufficient statistic.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a class $D\\subseteq X_0$ and its first point $r_D$ in a fixed enumeration. By [F1], $w_D(x)=P_\\theta(\\{x\\})/P_\\theta(\\{r_D\\})$ for $x\\in D$ is positive and independent of $\\theta$. The sum $W_D=\\sum_{x\\in D}w_D(x)=P_\\theta(D)/P_\\theta(\\{r_D\\})$ is finite and positive. Hence $K(D,\\{x\\})=w_D(x)/W_D$ on $D$, zero off $D$, is a probability law independent of $\\theta$. Give the common-null complement any fixed point-mass conditional law. The quotient is countable discrete standard Borel, so this is a measurable probability kernel.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $S$ be any other sufficient statistic into a standard Borel space, with common kernel $L$. If $x,y\\in X_0$ and $S(x)=S(y)=s$, then $\\{s\\}$ is Borel and $P_\\theta(S=s)>0$ for every $\\theta$. The conditional identity forces $L(s,\\{x\\})=P_\\theta(\\{x\\})/P_\\theta(S=s)$ and $L(s,\\{y\\})=P_\\theta(\\{y\\})/P_\\theta(S=s)$. The common kernel has no parameter index, so their ratio is constant in $\\theta$; [F1] yields $x\\sim y$. Therefore $S$ is constant only within one class on $X_0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every $\\theta$, class $D$, and $A\\subseteq\\mathcal X$, the point-mass ratio definition gives $P_\\theta(A\\cap D)=P_\\theta(D)K(D,A)$. Summing over classes proves the conditional-law identity in [F2]; thus $T$ is sufficient.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $X_0$ is countable, its image under $S$ is countable and Borel in the standard Borel target. Step 1.2 defines a function from that image to the countable quotient with $T=\\varphi\\circ S$ on $X_0$; extend $\\varphi$ by one fixed class off the image. This extension is Borel because its nonconstant domain is countable. Since every model law is concentrated on $X_0$, $T=\\varphi(S)$ almost surely under every parameter. By [F3], $T$ is minimal sufficient.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement inherits Θ nonempty and a common positive support from the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement confines ratios to X₀ where every point mass is positive; the common-null complement is handled in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives ratio one when comparing a point with itself."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes singleton likelihood classes; step 1.2 proves any sufficient fiber stays in one class."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stated parameter set has no interval endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the fixed enumeration to select the first representative of each countable class."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "ex-countable-mixture-dominates-bernoulli-scale-family": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The endpoint laws are $P_0=\\delta_0$ and $P_1=\\delta_1$, so $Q=\\tfrac12\\delta_0+\\tfrac12\\delta_1$ assigns mass $1/2$ to each point. This is a probability measure.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every $A\\subseteq\\{0,1\\}$, if $Q(A)=0$ then $A=\\varnothing$, so $P_\\theta(A)=0$; hence $P_\\theta\\ll Q$. Define $q_\\theta(0)=2(1-\\theta)$ and $q_\\theta(1)=2\\theta$. For each subset $A$, $\\int_Aq_\\theta\\,dQ=1_{\\{0\\in A\\}}(1-\\theta)+1_{\\{1\\in A\\}}\\theta=P_\\theta(A)$. Thus $q_\\theta=dP_\\theta/dQ$, including its zero values at endpoints, and the displayed finite mixture directly dominates every member.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement has the nonempty two-point sample space and parameter set [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the empty set as the only Q-null subset."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives each endpoint atom mass 1/2 under Q."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The endpoint laws are point masses; step 2.1 checks they still dominate every family member."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The parameter endpoints θ=0 and θ=1 are the two mixture components in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection beyond the hypotheses stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "cex-arbitrary-dominator-factorization-fails": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "Let $((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ be a statistical experiment, where $(\\mathcal X,\\mathcal A)$ is standard Borel, and let $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ be a statistic with standard Borel target. Write $P_\\theta^T=P_\\theta\\circ T^{-1}$. The statistic $T$ is **sufficient** if there is one probability kernel $K$ from $(\\mathcal Y,\\mathcal B)$ to $(\\mathcal X,\\mathcal A)$ such that, for every $\\theta\\in\\Theta$, $A\\in\\mathcal A$, and $C\\in\\mathcal B$,\n\n$$P_\\theta(A\\cap T^{-1}(C))=\\int_C K(y,A)\\,P_\\theta^T(dy).$$\n\nThus $K(T(x),A)$ is a common version of the conditional probability of $A$ given $T$, under every parameter. The kernel is fixed independently of $\\theta$. Standard Borelness ensures individual regular conditional distributions exist by [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]]; sufficiency additionally asks that versions agree across parameters.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $K(t,A)=1_A((t,0))$. By [F5] each section is a point-mass probability, and all evaluations are measurable on the finite target, so [F6] makes $K$ a probability kernel independent of $\\theta$. Every $P_\\theta$ is concentrated on points $(t,0)$, so conditioning on $T=t$ gives this kernel. Hence $T$ is sufficient by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Every atom of $R$ has mass $1/4$, so $P_\\theta\\ll R$. The density values are $dP_\\theta/dR(t,u)=4P_\\theta(t,0)$ if $u=0$ and zero if $u=1$. For fixed $t$, the two points $(t,0)$ and $(t,1)$ have the same $T$ value but different derivative values. Every atom has positive $R$-mass, so no modification on an $R$-null set can change them; the derivative has no $\\sigma(T)$-measurable version.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This refutes the implication with an arbitrary external reference. Taking the reference to be a member $P_{\\theta_0}$ restores the common conditional law needed for the criterion: the conditional kernel at the reference is then the model’s shared kernel. The counterexample’s $R$ has conditional second coordinate uniform given $T$, while each model law has second coordinate zero, identifying the precise missing hypothesis.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement uses the four-point sample space and nonempty interval Θ=(0,1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives zero density on u=1 while the same T-fiber has positive model mass at u=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the factor 4 from the uniform reference atom mass 1/4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the deterministic conditional second coordinate; step 1.2 shows the external reference has a different conditional law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and The parameter set Θ=(0,1) excludes its endpoints; the failure holds throughout the interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection beyond the hypotheses stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "cex-curved-normal-family-statistic-incomplete": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-exponential-family",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ be standard Borel, let $\\mu$ be a $\\sigma$-finite positive measure, let $h:\\mathcal X\\to[0,\\infty)$ be measurable, and let $T:\\mathcal X\\to\\mathbb R^k$ be a measurable statistic. For $\\eta\\in\\mathbb R^k$ put\n\n$$Z(\\eta)=\\int h(x)e^{\\eta\\cdot T(x)}\\,\\mu(dx),\\qquad H=\\{\\eta:0<Z(\\eta)<\\infty\\},\\qquad A(\\eta)=\\log Z(\\eta).$$\n\nFor a parameter set $\\Omega\\subseteq H$, the associated **exponential family** has laws $P_\\eta$ with density\n\n$$p_\\eta(x)=h(x)\\exp\\{\\eta\\cdot T(x)-A(\\eta)\\}\\quad(\\eta\\in\\Omega).$$\n\nThe normalization $A(\\eta)=\\log Z(\\eta)$ makes each density integrate to one. In this item **full-rank** means that $\\Omega$ contains a nonempty open subset of $\\mathbb R^k$ and there do not exist $b\\ne0$ and $c\\in\\mathbb R$ with $b\\cdot T=c$ $\\mu$-almost everywhere on $\\{h>0\\}$. A parameter set containing an open subset is also called regular in some sources; terminology varies, so this definition controls here. The condition is stronger than needed for the completeness theorem below but rules out redundant displayed coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complete-statistic",
+          "source_section": "Definition",
+          "quote": "A statistic $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$ is **complete** for $(P_\\theta)_{\\theta\\in\\Theta}$ if, for every measurable real-valued $g$ such that $E_\\theta|g(T)|<\\infty$ for every $\\theta$, the conditions $E_\\theta[g(T)]=0$ for every $\\theta$ imply $P_\\theta(g(T)=0)=1$ for every $\\theta$. Integrability is part of the premise; completeness is a property of the statistic relative to the specified family.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $0\\le s,t$ and a real random variable\n$X_t-X_s$ has law $N(0,|t-s|)$, then, for every integer $m\\ge1$,\n$$E|X_t-X_s|^{2m}=c_m|t-s|^m,$$\nwhere\n$$c_m=E|Z|^{2m}=(2m-1)!!=1\\cdot3\\cdots(2m-1)<\\infty$$\nfor $Z\\sim N(0,1)$. In particular, when $m\\ge2$, this is the moment hypothesis\nof the one-parameter Kolmogorov criterion with\n$\\alpha=2m$, $\\beta=m-1$, and $C_T=c_m$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarathéodory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lebesgue-measure-under-dilations-and-reflections",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), let $c$ be a nonzero real and write\n$cE := \\{\\, cx : x \\in E \\,\\}$ for $E \\subseteq \\mathbb{R}^n$, where\n$(cx)_i := cx_i$. Then:\n\n1. $\\lambda_n^*(cE) = |c|^{\\,n}\\,\\lambda_n^*(E)$ for every subset $E$, the\n   product being defined in $\\overline{\\mathbb{R}}$ because $|c|^{\\,n} > 0$;\n2. $E$ is Lebesgue measurable if and only if $cE$ is;\n3. $\\lambda_n(cE) = |c|^{\\,n}\\lambda_n(E)$ for every Lebesgue measurable $E$.\n\nAt $c = -1$ the map is reflection in the origin and $|c|^{\\,n} = 1$, so it\npreserves outer measure, measurability and measure. The value $c = 0$ is\nexcluded because $0E$ is $\\{0\\}$ or $\\varnothing$ and carries no information\nabout $E$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-common-reference-factorization-criterion",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ and $(\\mathcal Y,\\mathcal B)$ be standard Borel, let $\\Theta\\ne\\varnothing$, and let $T:\\mathcal X\\to\\mathcal Y$ be a statistic. Fix $\\theta_0\\in\\Theta$ and set $P_0=P_{\\theta_0}$. Assume $P_\\theta\\ll P_0$ for every $\\theta$. Then $T$ is sufficient if and only if for every $\\theta$ the Radon–Nikodym derivative $dP_\\theta/dP_0$ has a $\\sigma(T)$-measurable version. Equivalently, for each $\\theta$ there is a Borel $g_\\theta:\\mathcal Y\\to[0,\\infty)$ with $dP_\\theta/dP_0=g_\\theta(T)$ $P_0$-almost surely. The null exceptional set may depend on $\\theta$. The requirement $P_0\\in\\{P_\\theta\\}$ is essential; an arbitrary external dominating probability is not covered.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $T$ is polynomial and hence a statistic by [F2]. Let $\\lambda_B$ be one-dimensional Lebesgue measure restricted to $\\mathcal B(\\mathbb R)$; the Borel half-open intervals $(-k,k]$ give it a sigma-finite cover of finite measure by [F5]. By [F4] and the translation and dilation rules [F5], each $X_i$ has Borel density $q_\\theta(x_i)=(\\sqrt{2\\pi}\\theta)^{-1}e^{-(x_i-\\theta)^2/(2\\theta^2)}$ relative to $\\lambda_B$. Independence [F5] gives the joint law $P_\\theta^{X_1}\\times P_\\theta^{X_2}$. The measure with density $q_\\theta(x_1)q_\\theta(x_2)$ relative to $\\lambda_B\\times\\lambda_B$ exists by [F9]; Tonelli [F6] shows that it has total mass one and agrees with this product law on every measurable rectangle, so the product-measure uniqueness clause [F9] identifies it with the joint law. Expanding its density gives $p_\\theta(x_1,x_2)=(2\\pi)^{-1}\\theta^{-2}\\exp\\left(-S_2/(2\\theta^2)+S_1/\\theta-1\\right)$. Put $u=1/\\theta$, $h(x_1,x_2)=(2\\pi)^{-1}$, $\\Omega=\\{(u,-u^2/2):u>0\\}$, and $A(u,-u^2/2)=1-2\\log u$. Then $p_\\theta=h\\exp\\{uS_1-u^2S_2/2-A(u,-u^2/2)\\}$, with normalizer $Z(u,-u^2/2)=e^{A}=e/u^2$; the normalization follows from the product normal density just derived. Thus the canonical statistic is $(S_1,S_2)$, and the natural parameter set lies on $\\eta_2=-\\eta_1^2/2$, so it contains no open subset of $\\mathbb R^2$. Both densities are strictly positive, so $P_\\theta\\ll P_{\\theta_0}$ for any fixed $\\theta_0>0$. Their ratio is a Borel function of $T$; since $P_{\\theta_0}$ is a model member, [F7] proves sufficiency.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "From $X_i=\\theta+\\theta Z_i$ and [F4], $E_\\theta X_i=\\theta$ and $E_\\theta X_i^2=2\\theta^2$. The bound $|z|\\le1+z^2$ gives $E|Z_i|\\le1+E Z_i^2=2$, hence $E_\\theta|X_i|<\\infty$. Let $q_\\theta$ be the one-dimensional normal density from step 1.1 and write $x^+=\\max(x,0)$, $x^- =\\max(-x,0)$. Independence [F5] identifies the joint law with the product of the two marginal laws, each having density $q_\\theta$. Tonelli [F6] therefore gives, for every $a,b\\in\\{+,-\\}$, $E_\\theta[X_1^aX_2^b]=\\left(\\int_{\\mathbb R}x^a q_\\theta(x)\\,dx\\right)\\left(\\int_{\\mathbb R}x^b q_\\theta(x)\\,dx\\right)$, where all four factors are finite by $E_\\theta|X_i|<\\infty$. Subtracting the four finite identities yields $E_\\theta[X_1X_2]=(E_\\theta X_1)(E_\\theta X_2)$; linearity [F8] now gives $E_\\theta S_1^2=E X_1^2+E X_2^2+2E X_1E X_2=6\\theta^2$, while $E_\\theta S_2=4\\theta^2$. Hence $E_\\theta g(T)=6\\theta^2-\\tfrac32(4\\theta^2)=0$ for every $\\theta>0$. Also $|g(T)|\\le S_1^2+\\tfrac32S_2$, whose expectation is finite, so $g(T)$ is integrable.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $(x_1,x_2)=(1,0)$, $g(T)=-1/2$. By continuity it is nonzero on a neighborhood. The density in step 1.1 is continuous and strictly positive at this point, so there is a smaller nondegenerate rectangle inside that neighborhood on which the density is bounded below by half its value at $(1,0)$. The rectangle has positive $\\lambda_B\\times\\lambda_B$ measure by the one-dimensional box formula and the product rectangle formula [F5, F9], hence it has positive probability under every $\\theta>0$. Therefore $g(T)$ is not zero almost surely, contradicting completeness [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F9",
+            "step 2.1",
+            "given",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement uses θ>0, so the normal laws are nondegenerate probabilities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs a nonzero function with zero expectation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinguished unit-valued boundary changes the claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 notes the natural parameter set lies on a curve with no open subset."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and The endpoint θ=0 is excluded; all arguments hold for each θ>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 is used in step 1.1 for the normal laws and RN criterion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "ex-normal-sample-mean-residual-independent-by-basu": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $0\\le s,t$ and a real random variable\n$X_t-X_s$ has law $N(0,|t-s|)$, then, for every integer $m\\ge1$,\n$$E|X_t-X_s|^{2m}=c_m|t-s|^m,$$\nwhere\n$$c_m=E|Z|^{2m}=(2m-1)!!=1\\cdot3\\cdots(2m-1)<\\infty$$\nfor $Z\\sim N(0,1)$. In particular, when $m\\ge2$, this is the moment hypothesis\nof the one-parameter Kolmogorov criterion with\n$\\alpha=2m$, $\\beta=m-1$, and $C_T=c_m$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarathéodory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. For every $u \\in \\mathbb{R}^n$ with $u \\ne 0$ and every real $c$, the affine\n   hyperplane\n   $$H_{u,c} \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : \\langle u,x\\rangle = c \\,\\}$$\n   ([[def-euclidean-inner-product]]) is Lebesgue measurable with\n   $\\lambda_n(H_{u,c}) = 0$, and so is every subset of it.\n2. Every proper linear subspace $W \\subsetneq \\mathbb{R}^n$\n   ([[def-linear-subspace]]) is Lebesgue measurable with $\\lambda_n(W) = 0$.\n\nAt $n = 1$ a hyperplane is the singleton $\\{c/u_0\\}$ and the only proper linear\nsubspace is $\\{0\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-exponential-family",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ be standard Borel, let $\\mu$ be a $\\sigma$-finite positive measure, let $h:\\mathcal X\\to[0,\\infty)$ be measurable, and let $T:\\mathcal X\\to\\mathbb R^k$ be a measurable statistic. For $\\eta\\in\\mathbb R^k$ put\n\n$$Z(\\eta)=\\int h(x)e^{\\eta\\cdot T(x)}\\,\\mu(dx),\\qquad H=\\{\\eta:0<Z(\\eta)<\\infty\\},\\qquad A(\\eta)=\\log Z(\\eta).$$\n\nFor a parameter set $\\Omega\\subseteq H$, the associated **exponential family** has laws $P_\\eta$ with density\n\n$$p_\\eta(x)=h(x)\\exp\\{\\eta\\cdot T(x)-A(\\eta)\\}\\quad(\\eta\\in\\Omega).$$\n\nThe normalization $A(\\eta)=\\log Z(\\eta)$ makes each density integrate to one. In this item **full-rank** means that $\\Omega$ contains a nonempty open subset of $\\mathbb R^k$ and there do not exist $b\\ne0$ and $c\\in\\mathbb R$ with $b\\cdot T=c$ $\\mu$-almost everywhere on $\\{h>0\\}$. A parameter set containing an open subset is also called regular in some sources; terminology varies, so this definition controls here. The condition is stronger than needed for the completeness theorem below but rules out redundant displayed coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-full-rank-exponential-family-sufficiency",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(P_\\eta)_{\\eta\\in\\Omega}$ be the exponential family of [[def-exponential-family]] on a standard Borel sample space, with $\\Omega\\ne\\varnothing$, and let $T$ be its canonical statistic. Then $T$ is sufficient.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-completeness-of-full-exponential-family",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $(P_\\eta)_{\\eta\\in\\Omega}$ be a full-rank exponential family as in [[def-exponential-family]], with $\\Omega$ containing a nonempty open subset of $\\mathbb R^k$. Then its canonical statistic $T$ is complete.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ancillary-statistic",
+          "source_section": "Definition",
+          "quote": "A statistic $U:(\\mathcal X,\\mathcal A)\\to(\\mathcal Z,\\mathcal C)$ is **ancillary** for $(P_\\theta)$ if its pushforward probability $P_\\theta\\circ U^{-1}$ does not depend on $\\theta$. Equivalently, for every $C\\in\\mathcal C$, $P_\\theta(U\\in C)$ is constant in $\\theta$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-basu-independence",
+          "source_section": "Statement",
+          "quote": "Let $T$ and $U$ be statistics into standard Borel spaces for a family $(P_\\theta)$. If $T$ is complete and sufficient and $U$ is ancillary, then $T$ and $U$ are independent under every $P_\\theta$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The mean map is continuous, hence Borel by [F2] and a statistic. Use $n$-dimensional Lebesgue measure $dx$ as base measure; it is sigma-finite by [F3]. By [F1] and translation invariance [F3], each coordinate has density $\\phi(x_i-\\mu)$. Independence [F4] gives the product joint law, and Tonelli [F4] shows the product of these densities has the same integrals as that law on every measurable rectangle; rectangles generate the Borel sigma-algebra. Thus $p_\\mu(x)=(2\\pi)^{-n/2}\\exp(-\\tfrac12\\sum_i x_i^2+\\mu\\sum_i x_i-\\tfrac n2\\mu^2)$. Setting $T=\\bar X$, $\\eta=n\\mu$, and $h(x)=(2\\pi)^{-n/2}e^{-\\sum_i x_i^2/2}$ writes it as $h(x)e^{\\eta T(x)-A(\\eta)}$ with $A(\\eta)=\\eta^2/(2n)$. Completing the square and using Tonelli gives $\\int h e^{\\eta T}dx=e^{\\eta^2/(2n)}$. The natural parameter set is all $\\mathbb R$, hence open. For $b\\ne0$, the level set $b\\bar x=c$ is a proper affine hyperplane, null by [F3], so $T$ has no affine constraint; it is full rank by [F5]. Thus [F6] and [F7] make $\\bar X$ sufficient and complete.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The residual map $x\\mapsto x-\\bar x\\mathbf1$ is continuous, hence a statistic by [F2]. Write $X_i=\\mu+Z_i$ with iid $Z_i\\sim N(0,1)$ by [F1]. Then $R_i=Z_i-\\bar Z$, so the law of $R$ does not depend on $\\mu$; it is ancillary by [F8]. Apply [F9] to conclude $\\bar X$ and $R$ are independent under every $P_\\mu$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "F9",
+            "given",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes n≥1; for n=1 the residual vector is identically zero and remains ancillary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For n=1 the residual is zero, so the degenerate ancillary boundary is included in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case n=1 is explicitly permitted in the Statement and yields the zero residual."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the constant residual vector when n=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stated parameter set has no interval endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states the AC hypothesis used by the normal-law suppliers in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "ex-bernoulli-count-is-minimal-sufficient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-likelihood-ratio-equivalence-on-common-discrete-support",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be countable with its full $\\sigma$-field, so it is standard Borel under the discrete metric. Let $\\Theta\\ne\\varnothing$, and let $(P_\\theta)_{\\theta\\in\\Theta}$ be dominated by a fixed $\\sigma$-finite positive measure $\\mu$. Choose the finite-valued densities $p_\\theta=dP_\\theta/d\\mu$ as in [[def-likelihood-density]]. Let $X_0\\subseteq\\mathcal X$ satisfy $P_\\theta(X_0)=1$ and $P_\\theta(\\{x\\})>0$ for every $x\\in X_0$ and every $\\theta$. Write $m_\\theta(x)=P_\\theta(\\{x\\})$. For each $x\\in X_0$, $0<\\mu(\\{x\\})<\\infty$ and $p_\\theta(x)=m_\\theta(x)/\\mu(\\{x\\})$: positivity follows from $m_\\theta(x)>0$, finiteness from sigma-finiteness, and the value is fixed by the density integral on the positive-measure singleton. Consequently\n\n$$\\frac{p_\\theta(x)}{p_\\theta(y)}=\\frac{m_\\theta(x)}{m_\\theta(y)}\\frac{\\mu(\\{y\\})}{\\mu(\\{x\\})}.$$\n\nFor $x,y\\in X_0$, define $x\\sim y$ if there is a constant $c(x,y)>0$ such that $m_\\theta(x)/m_\\theta(y)=c(x,y)$ for every $\\theta$. The displayed fixed singleton factor shows this is equivalent to constancy of the common-reference density ratio. This is an equivalence relation: the constants for $(x,x)$, $(y,x)$ and $(x,z)$ are respectively $1$, $c(x,y)^{-1}$ and $c(x,y)c(y,z)$. Its equivalence classes form a countable quotient. Equip that quotient with its discrete $\\sigma$-field; it is standard Borel because the discrete metric is complete and the countable space itself is dense. Since $\\Theta\\ne\\varnothing$ and $P_\\theta(X_0)=1$, $X_0$ is nonempty; define the class statistic by mapping each point of $X_0$ to its class and every point off $X_0$ to any fixed class. It is measurable because $\\mathcal X$ has the full $\\sigma$-field, and values off $X_0$ are null under every law.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-discrete-likelihood-ratio-classes-are-minimal-sufficient",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[def-likelihood-ratio-equivalence-on-common-discrete-support]], let $T(x)=[x]_{\\sim}$ on $X_0$, as a statistic into the countable quotient with its discrete standard-Borel structure, and assign one arbitrary class off $X_0$. Then $T$ is minimal sufficient for $(P_\\theta)$, modulo $\\mathcal X\\setminus X_0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every sample point has probability $m_p(x)=p^{t(x)}(1-p)^{n-t(x)}>0$, so the common support is the whole finite sample space. Counting measure assigns mass one to each point, so the densities equal these point masses; for $x,y$, their ratio is $m_p(x)/m_p(y)=[p/(1-p)]^{t(x)-t(y)}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $t(x)=t(y)$, this ratio is one for all $p$. If $d=t(x)-t(y)\\ne0$, its values at $p=1/2$ and $p=1/3$ are respectively $1$ and $(1/2)^d$, which differ. Thus equivalence classes are exactly the level sets of $T$. By [F2], $T$ is minimal sufficient.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes n≥1 and p∈(0,1), so every sample point belongs to the common support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks every point has positive probability for the open parameter range."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses p=1/2 to distinguish unequal counts."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The fibers include count 0 and count n; the likelihood-ratio comparison in step 2.1 covers both."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement deliberately restricts p to (0,1); p=0 and p=1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection beyond the hypotheses stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    },
+    "ex-countable-likelihood-ratio-vector-on-point-mass-model": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-countable-mixture-likelihood-ratio-vector-is-minimal-sufficient",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(P_k)_{k\\ge1}$ be a countable family of probability measures on a standard Borel space $(\\mathcal X,\\mathcal A)$, let $w_k>0$ with $\\sum_kw_k=1$, and put $Q=\\sum_kw_kP_k$. Choose finite-valued Borel versions $f_k=dP_k/dQ$, changed to zero on one common $Q$-null set. Then $T(x)=(f_k(x))_{k\\ge1}$ is a Borel statistic into $[0,\\infty)^{\\mathbb N}$ and is minimal sufficient. For every standard Borel sufficient statistic $S$, there is a Borel $\\varphi$ with $T=\\varphi(S)$ $Q$-almost surely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-minimal-sufficient-statistic",
+          "source_section": "Definition",
+          "quote": "A statistic $T$ into a standard Borel space is **minimal sufficient** for $(P_\\theta)$ if $\\sigma(T)$ is a minimal sufficient $\\sigma$-field in the preceding sense. Minimality is modulo sets null under every model law. It does not assert literal pointwise equality with any other minimal sufficient statistic.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $Q(\\{j\\})=2^{-j}$ and $P_k(\\{j\\})=1$ exactly when $j=k$, the density is $f_k(j)=2^k1_{\\{j=k\\}}$. Therefore $T(j)$ has coordinate $j$ equal to $2^j$ and all other coordinates zero.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "These vectors are distinct for distinct $j$, so $T$ is injective and its fibers are singletons. The family-null ideal is trivial because every $j$ has positive mass under $P_j$; hence the generated partition cannot be made coarser modulo a common null set. The theorem [F1] gives minimal sufficiency, also directly visible from the singleton fibers.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement indexes the sample space by positive integers and the family by k≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies all zero coordinates and the single positive coordinate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the positive coordinate value 2^j for each sample point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The model laws are point masses; step 2.1 verifies that their singleton fibers are minimal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The stated parameter set has no interval endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no nonempty-set selection beyond the hypotheses stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff theorem."
+        }
+      ]
+    }
+  }
+}

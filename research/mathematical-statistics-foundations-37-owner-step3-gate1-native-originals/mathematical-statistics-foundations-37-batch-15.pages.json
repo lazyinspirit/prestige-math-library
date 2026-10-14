@@ -1,0 +1,360 @@
+[
+  {
+    "order": 1872,
+    "id": "symmetrization-rademacher-complexity-and-covering-entropy",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Empirical-Process Complexity",
+    "companion": "symmetrization-rademacher-complexity-and-covering-entropy-examples",
+    "requires": [
+      "concentration-inequalities-and-tail-bounds",
+      "asymptotic-convergence-consistency-and-identification",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "linear-algebra-methods-in-combinatorics"
+    ],
+    "items": [
+      {
+        "id": "def-empirical-process-and-rademacher-process",
+        "kind": "definition",
+        "title": "Empirical, centered, and Rademacher processes",
+        "deps": [
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable."
+      },
+      {
+        "id": "def-vc-class-of-sets-and-index",
+        "kind": "definition",
+        "title": "Shattering, VC dimension, and first-unshattered index for set classes",
+        "deps": [
+          "def-shattering-and-vc-dimension"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $\\mathcal C\\subseteq\\mathcal P(X)$ be a family of subsets of an arbitrary set $X$. For a finite $T\\subseteq X$, its trace is\n\n$$\\mathcal C|_T:=\\{C\\cap T:C\\in\\mathcal C\\}.$$\n\nThe family $\\mathcal C$ **shatters** $T$ when $\\mathcal C|_T=\\mathcal P(T)$. This extends the finite-ground-set trace convention of [[def-shattering-and-vc-dimension]]: any finite $T$ can be relabeled by $[|T|]$, and relabeling preserves all traces and their cardinalities.\n\nFor a nonempty class, its **VC dimension** $d(\\mathcal C)$ is the greatest size of a finite shattered set if those sizes are bounded, is $0$ if no singleton is shattered, and is $+\\infty$ if finite shattered sets have unbounded size. When the dimension is finite, its **VC index** is\n\n$$V(\\mathcal C):=d(\\mathcal C)+1,$$\n\nequivalently the least positive integer $V$ such that no $V$-point subset is shattered. The empty class is assigned $V=0$ by convention and is treated separately in the entropy theorem."
+      },
+      {
+        "id": "lem-bounded-variable-hoeffding-mgf",
+        "kind": "lemma",
+        "title": "The Hoeffding MGF bound for a variable in a unit interval",
+        "deps": [
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-integral-over-a-measurable-set",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-probability-measure",
+          "def-natural-logarithm",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-real-exponential-function-and-e",
+          "thm-algebra-of-continuous-functions",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-derivative-of-exponential",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-exponential-two-point-convexity",
+          "thm-ftc-second-part",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "cor-integral-over-a-null-set-vanishes",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $Y$ be a measurable real random variable on a probability space with $0\\le Y\\le1$ almost surely. Then, for every $\\lambda\\in\\mathbb R$,\n\n$$\\mathbb E\\exp\\{\\lambda(Y-\\mathbb EY)\\}\\le \\exp(\\lambda^2/8).$$\n\nThis proof uses only finite product and scalar integral arguments; it does not assume the Axiom of Choice."
+      },
+      {
+        "id": "lem-finite-grid-interval-discrepancy",
+        "kind": "lemma",
+        "title": "A finite uniform grid approximates interval length",
+        "deps": [
+          "def-finite-sum",
+          "def-measure",
+          "def-natural-numbers",
+          "def-ordered-field",
+          "def-probability-measure",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $J\\ge1$ be an integer, put $u_j=-1+2j/J$ for $j=0,\\ldots,J$, and give the finite set $U_J=\\{u_0,\\ldots,u_J\\}$ the probability weights\n\n$$\\nu_J(\\{u_0\\})=\\nu_J(\\{u_J\\})=\\frac1{2J},\\qquad \\nu_J(\\{u_j\\})=\\frac1J\\quad(1\\le j<J).$$\n\nFor all $-1\\le a\\le b\\le1$,\n\n$$\\left|\\nu_J([a,b)) - \\frac{b-a}{2}\\right|\\le\\frac1J.$$"
+      },
+      {
+        "id": "lem-real-power-preserves-measurability",
+        "kind": "lemma",
+        "title": "Positive real powers preserve measurability",
+        "deps": [
+          "cor-mean-value-theorem",
+          "def-measurable-function-between-measurable-spaces",
+          "def-real-power",
+          "thm-real-power-laws",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $r>0$. The map $t\\mapsto t^r$ is strictly increasing on $[0,\\infty)$. Consequently, if $(X,\\mathcal A)$ is a measurable space and $h:X\\to[0,\\infty)$ is measurable, then $h^r$ is measurable."
+      },
+      {
+        "id": "def-covering-packing-bracketing-number-and-metric-entropy",
+        "kind": "definition",
+        "title": "Covering, packing, bracketing numbers, and metric entropy",
+        "deps": [
+          "def-probability-measure",
+          "def-real-power",
+          "lem-real-power-preserves-measurability",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-real-power-laws"
+        ],
+        "dependency_level": 1,
+        "statement": "A pseudometric $d$ on a set $T$ is a nonnegative symmetric function $d:T\\times T\\to[0,\\infty)$ with $d(t,t)=0$ and $d(s,t)\\le d(s,u)+d(u,t)$; distinct points may have distance zero. For a nonempty subset $\\mathcal F\\subseteq T$ and $\\epsilon>0$, the covering number $N(\\epsilon,\\mathcal F,d)$ is the least finite $k$ for which there are centers $f_1,\\ldots,f_k\\in\\mathcal F$ such that every $f\\in\\mathcal F$ satisfies $d(f,f_j)\\le\\epsilon$ for some $j$. It is $+\\infty$ if no finite cover exists. Set $N(\\epsilon,\\varnothing,d)=1$.\n\nThe packing number $D(\\epsilon,\\mathcal F,d)$ is the largest size of a finite subset $\\{f_1,\\ldots,f_k\\}\\subseteq\\mathcal F$ whose distinct members have pairwise distance strictly greater than $\\epsilon$. If the sizes of such finite subsets are unbounded, put $D=+\\infty$; put $D(\\epsilon,\\varnothing,d)=0$. These conventions give the radius comparison proved in [[lem-packing-covering-number-comparison]]. The metric entropy is $H(\\epsilon,\\mathcal F,d):=\\log N(\\epsilon,\\mathcal F,d)$ for nonempty classes, with $\\log(+\\infty)=+\\infty$.\n\nFor a probability measure $Q$ on $(\\mathcal X,\\mathcal A)$ and a measurable real function $g$, set $\\|g\\|_{Q,r}:=(\\int |g|^r\\,dQ)^{1/r}$ for $1\\le r<\\infty$, using the positive-base real-power convention of [[def-real-power]]. The function $|g|$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and [[lem-real-power-preserves-measurability]] makes $|g|^r$ measurable, so this integral is well-defined. On a class of functions with finite such norms, $d_{Q,r}(f,g):=\\|f-g\\|_{Q,r}$ is a pseudometric: nonnegativity, symmetry, and zero diagonal follow from the absolute value, and the triangle inequality is [[thm-minkowski-inequality-for-integrals]]. Functions that agree $Q$-almost everywhere have distance zero. We write $N(\\epsilon,\\mathcal F,L^r(Q))$ for this covering number.\n\nFor measurable real endpoints $\\ell\\le u$ $Q$-almost everywhere, the bracket $[\\ell,u]$ is the set of measurable functions $f$ satisfying $\\ell\\le f\\le u$ $Q$-almost everywhere. Its $L^r(Q)$ width is $\\|u-\\ell\\|_{Q,r}$. The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F$, or $+\\infty$ if no finite cover exists; for the empty class set it equal to $1$. Centers of metric covers are in $\\mathcal F$; bracket endpoints need not be."
+      },
+      {
+        "id": "def-one-sided-empirical-rademacher-complexity",
+        "kind": "definition",
+        "title": "One-sided empirical Rademacher complexity",
+        "deps": [
+          "def-empirical-process-and-rademacher-process"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $m\\ge1$, let $S=(z_1,\\ldots,z_m)$ be a fixed sample in a measurable space $\\mathcal X$, and let $\\mathcal F$ be a nonempty finite or countable class of measurable real functions such that the displayed supremum is finite and measurable on the finite sign space. Let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs. The **one-sided empirical Rademacher complexity** is\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal F):=\\frac1m\\,\\mathbb E_\\sigma\\sup_{f\\in\\mathcal F}\\sum_{i=1}^m\\sigma_i f(z_i).$$\n\nThere is no absolute value in this definition and $0$ need not belong to $\\mathcal F$. It differs from the absolute-value complexity $m^{-1}\\mathbb E_\\sigma\\sup_{f\\in\\mathcal F}|\\sum_i\\sigma_i f(z_i)|$."
+      },
+      {
+        "id": "def-vc-subgraph-class-and-index",
+        "kind": "definition",
+        "title": "VC-subgraph classes, envelopes, and the first-unshattered index",
+        "deps": [
+          "def-measurable-function-between-measurable-spaces",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-vc-class-of-sets-and-index",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $(\\mathcal X,\\mathcal A)$ be a measurable space and let $\\mathcal F$ be a class of measurable real-valued functions on it. The **subgraph** of $f\\in\\mathcal F$ is\n\n$$C_f:=\\{(x,t)\\in\\mathcal X\\times\\mathbb R:t<f(x)\\}.$$\n\nIt is measurable in $\\mathcal A\\otimes\\mathcal B(\\mathbb R)$: the coordinate lifts are measurable by [[def-product-sigma-algebra-and-finite-product-sigma-algebras]], their difference is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and its strict negative set is measurable by [[thm-threshold-characterisations-of-real-and-extended-real-measurability]]. The class $\\mathcal F$ is a **VC-subgraph class** when the set family $\\mathcal C_{\\mathcal F}:=\\{C_f:f\\in\\mathcal F\\}$ has finite VC index as defined in [[def-vc-class-of-sets-and-index]]. For nonempty $\\mathcal F$, write $d(\\mathcal F)$ for the greatest size of a finite shattered set (zero if none is shattered) and\n\n$$V(\\mathcal F):=d(\\mathcal F)+1,$$\n\nequivalently the least positive integer $V$ for which no $V$-point set is shattered. If no finite such integer exists, set $V=+\\infty$. The empty class is treated separately and assigned index $V=0$ by convention. Thus for every nonempty finite-index class, the VC dimension is exactly $V-1$.\n\nA **measurable envelope** of $\\mathcal F$ is a nonnegative measurable function $F$ on $\\mathcal X$ such that $|f(x)|\\le F(x)$ for every $f\\in\\mathcal F$ and $x\\in\\mathcal X$. In an $L^r(Q)$ assertion, changing $F$ on a $Q$-null set does not change its norm or the distances in that assertion."
+      },
+      {
+        "id": "thm-finite-class-uniform-deviation",
+        "kind": "theorem",
+        "title": "Uniform deviation bound for a finite unit-range class",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-markov-inequality-for-random-variables",
+          "def-natural-logarithm",
+          "def-empirical-process-and-rademacher-process",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-law-or-distribution-of-a-random-element",
+          "def-real-exponential-function-and-e",
+          "lem-bounded-variable-hoeffding-mgf",
+          "lem-measurable-functions-preserve-independence",
+          "lem-probability-measure-basic-identities",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-change-of-variables-for-expectation",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $n\\ge1$, let $Z_1,\\ldots,Z_n$ be IID observations with law $P$, and let $\\mathcal F$ be a finite nonempty class of measurable functions $f:\\mathcal X\\to[0,1]$. For every $\\epsilon>0$,\n\n$$P\\left(\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\ge\\epsilon\\right)\\le2|\\mathcal F|e^{-2n\\epsilon^2}.$$\n\nHere $P_nf=n^{-1}\\sum_i f(Z_i)$ and $Pf=\\int f\\,dP$. The proof uses only scalar exponential moments and finite independence; it does not assume the Axiom of Choice."
+      },
+      {
+        "id": "thm-independent-process-symmetrization",
+        "kind": "theorem",
+        "title": "Independent-process symmetrization for convex moments",
+        "deps": [
+          "def-empirical-process-and-rademacher-process",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-jensen-inequality-for-expectation",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $n\\ge1$, let $Z_1,\\ldots,Z_n$ be IID observations with law $P$, and let $Z_1',\\ldots,Z_n'$ be an independent IID copy. Let $\\sigma_1,\\ldots,\\sigma_n$ be independent uniform signs, independent of both samples. Let $\\mathcal F$ be a nonempty countable class of measurable $P$-integrable real functions. Assume the two suprema below are finite almost surely. If $\\Phi:[0,\\infty)\\to[0,\\infty)$ is finite, convex, and nondecreasing, then\n\n$$\\mathbb E\\Phi\\!\\left(\\sup_{f\\in\\mathcal F}\\left|\\sum_{i=1}^n(f(Z_i)-Pf)\\right|\\right)\\le \\mathbb E\\Phi\\!\\left(2\\sup_{f\\in\\mathcal F}\\left|\\sum_{i=1}^n\\sigma_i f(Z_i)\\right|\\right).$$\n\nThe same statement holds for an uncountable class when a specified countable subclass gives the same three displayed suprema almost surely for the data, copy, and signs. This is an expectation inequality only; a tail form requires separate assumptions."
+      },
+      {
+        "id": "lem-packing-covering-number-comparison",
+        "kind": "lemma",
+        "title": "Packing and covering numbers with explicit radius conventions",
+        "deps": [
+          "def-covering-packing-bracketing-number-and-metric-entropy"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $\\mathcal F$ be a nonempty subset of a pseudometric space $(T,d)$, with covering and packing numbers as in [[def-covering-packing-bracketing-number-and-metric-entropy]]. For every $\\epsilon>0$,\n\n$$N(\\epsilon,\\mathcal F,d)\\le D(\\epsilon,\\mathcal F,d)\\le N(\\epsilon/2,\\mathcal F,d).$$\n\nThe packing convention is strict separation $d(f,g)>\\epsilon$; covers use closed balls of radius at most $\\epsilon$ centered in $\\mathcal F$."
+      },
+      {
+        "id": "thm-one-sided-coordinate-rademacher-contraction",
+        "kind": "theorem",
+        "title": "One-sided coordinate Rademacher contraction",
+        "deps": [
+          "def-one-sided-empirical-rademacher-complexity"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $m\\ge1$, let $z_1,\\ldots,z_m$ be fixed, and let $\\mathcal F$ be a nonempty finite class of real-valued functions on their domain. For each $i$, let $\\Phi_i:\\mathbb R\\to\\mathbb R$ satisfy $|\\Phi_i(x)-\\Phi_i(y)|\\le L|x-y|$ for all $x,y\\in\\mathbb R$, with a common $L\\ge0$. Then\n\n$$\\frac1m\\,\\mathbb E_\\sigma\\sup_{f\\in\\mathcal F}\\sum_{i=1}^m\\sigma_i\\Phi_i(f(z_i))\\le L\\,\\widehat{\\mathfrak R}_S(\\mathcal F).$$\n\nEquivalently, the unnormalized left expectation is at most $L$ times the unnormalized one-sided supremum on the right.\n\nThe same holds for a countable class when both suprema are finite for every sign vector. No condition $\\Phi_i(0)=0$ is required; additive constants cancel because the proof compares coordinate differences."
+      },
+      {
+        "id": "lem-vc-set-covering-entropy",
+        "kind": "lemma",
+        "title": "Logarithmic L-r covering bound for VC classes of sets",
+        "deps": [
+          "def-binomial-coefficient",
+          "def-canonical-natural",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-integer-power",
+          "def-natural-logarithm",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-probability-measure",
+          "def-real-exponential-function-and-e",
+          "def-real-power",
+          "def-vc-class-of-sets-and-index",
+          "lem-exponential-dominates-one-plus-x",
+          "lem-integer-part",
+          "lem-packing-covering-number-comparison",
+          "lem-power-monotone",
+          "lem-probability-measure-basic-identities",
+          "lem-real-power-preserves-measurability",
+          "thm-algebra-of-derivatives",
+          "thm-binomial-theorem",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "thm-real-power-laws",
+          "thm-sauer-shelah",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $\\mathcal C$ be a nonempty class of measurable subsets of a measurable space, with finite VC index $V$ as in [[def-vc-class-of-sets-and-index]]. Let $Q$ be a probability measure, $1\\le r<\\infty$, and $0<\\delta<1$. Put $K:=3e^2/(e-1)$. Then\n\n$$N(\\delta,\\mathcal C,L^r(Q))\\le\\left[K\\delta^{-r}\\log\\left(\\frac{3e}{\\delta^r}\\right)\\right]^{V-1}.$$\n\nFor sets, $\\|\\mathbf1_C-\\mathbf1_D\\|_{Q,r}=Q(C\\triangle D)^{1/r}$. In the case $V=1$, the exponent is zero and the class consists of one set modulo equality, so the bound is $N=1$."
+      },
+      {
+        "id": "thm-absolute-rademacher-contraction",
+        "kind": "theorem",
+        "title": "Absolute-value Rademacher contraction",
+        "deps": [
+          "def-one-sided-empirical-rademacher-complexity",
+          "thm-one-sided-coordinate-rademacher-contraction"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $m\\ge1$, let $z_1,\\ldots,z_m$ be fixed, and let $\\mathcal F$ be a nonempty finite class of real-valued functions on their domain. For each $i$, suppose $|\\Phi_i(x)-\\Phi_i(y)|\\le L|x-y|$ for all $x,y\\in\\mathbb R$, with a common $L\\ge0$, and $\\Phi_i(0)=0$. Then\n\n$$\\mathbb E_\\sigma\\sup_{f\\in\\mathcal F}\\left|\\sum_{i=1}^m\\sigma_i\\Phi_i(f(z_i))\\right|\\le2L\\,\\mathbb E_\\sigma\\sup_{f\\in\\mathcal F}\\left|\\sum_{i=1}^m\\sigma_i f(z_i)\\right|.$$\n\nThe same holds for a countable class when the two suprema are finite for every sign vector. This is the absolute-value theorem; its factor $2$ is separate from the factor $2$ in independent-process symmetrization."
+      },
+      {
+        "id": "thm-vc-covering-entropy",
+        "kind": "theorem",
+        "title": "VC-subgraph covering entropy with its finite-r logarithmic bound",
+        "deps": [
+          "cor-archimedean-reciprocal",
+          "cor-mean-value-theorem",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-measure-with-density",
+          "def-natural-logarithm",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-probability-measure",
+          "def-real-exponential-function-and-e",
+          "def-real-power",
+          "def-vc-subgraph-class-and-index",
+          "lem-finite-grid-interval-discrepancy",
+          "lem-real-power-preserves-measurability",
+          "lem-vc-set-covering-entropy",
+          "thm-algebra-of-derivatives",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-exponential-is-strictly-increasing",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "thm-real-power-laws",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $(\\mathcal X,\\mathcal A,Q)$ be a probability space, let $1\\le r<\\infty$, and let $\\mathcal F$ be a nonempty VC-subgraph class of measurable real functions with finite VC index $V$. Suppose a measurable envelope $F$ satisfies $|f(x)|\\le F(x)$ for every $f\\in\\mathcal F$ and $x\\in\\mathcal X$, and\n\n$$0<\\|F\\|_{Q,r}:=\\left(\\int F^r\\,dQ\\right)^{1/r}<\\infty.$$\n\nFor every $0<\\epsilon<1$, put $K_0:=3e^2/(e-1)$ and $K:=4K_0$. Then\n\n$$N\\!\\left(\\epsilon\\|F\\|_{Q,r},\\mathcal F,L^r(Q)\\right)\\le\\left[K(2/\\epsilon)^r\\log\\!\\left(3e(2/\\epsilon)^r\\right)\\right]^{V-1}\\le\\left(\\frac{A}{\\epsilon}\\right)^{ArV},\\qquad A:=12eK+2.$$\n\nThe exponent in the first bound is the finite-r logarithmic form. No Axiom of Choice or Countable Choice is used in this proof."
+      }
+    ]
+  },
+  {
+    "order": 1873,
+    "id": "symmetrization-rademacher-complexity-and-covering-entropy-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Empirical-Process Complexity — Examples",
+    "companion": "symmetrization-rademacher-complexity-and-covering-entropy",
+    "requires": [
+      "symmetrization-rademacher-complexity-and-covering-entropy"
+    ],
+    "items": [
+      {
+        "id": "cex-uncountable-class-has-nonmeasurable-empirical-supremum",
+        "kind": "counterexample",
+        "title": "An uncountable class can have a nonmeasurable empirical supremum",
+        "deps": [
+          "cor-interval-uncountable",
+          "def-countable",
+          "def-countable-choice",
+          "def-empirical-process-and-rademacher-process",
+          "def-measure",
+          "def-probability-measure",
+          "def-sigma-algebra",
+          "lem-subset-of-countable",
+          "thm-countable-union-of-countable"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-vc-entropy-exponent-cannot-be-uniform-in-r",
+        "kind": "counterexample",
+        "title": "Finite thresholds rule out an r-independent VC covering bound",
+        "deps": [
+          "cor-archimedean-reciprocal",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-binomial-coefficient",
+          "def-canonical-natural",
+          "def-integer-power",
+          "def-natural-numbers",
+          "def-probability-measure",
+          "def-rational-power",
+          "def-real-power",
+          "def-vc-class-of-sets-and-index",
+          "def-vc-subgraph-class-and-index",
+          "lem-rational-power-laws",
+          "thm-real-power-agrees-with-rational-exponent",
+          "thm-real-power-laws",
+          "thm-of-archimedean",
+          "thm-binomial-theorem",
+          "thm-induction-principle",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-finite-class-rademacher-and-uniform-deviation",
+        "kind": "example",
+        "title": "A two-function class on a Bernoulli sample",
+        "deps": [
+          "def-empirical-process-and-rademacher-process",
+          "def-one-sided-empirical-rademacher-complexity",
+          "thm-finite-class-uniform-deviation"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $\\mathcal X=\\{0,1\\}$ with $P(\\{0\\})=P(\\{1\\})=1/2$. Let $Z\\sim P$, and take the two-function class $\\mathcal F=\\{f_0,f_1\\}$ with $f_0(x)=0$ and $f_1(x)=x$."
+      }
+    ]
+  }
+]

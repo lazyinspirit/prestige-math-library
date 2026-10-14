@@ -1,0 +1,227 @@
+[
+  {
+    "order": 1874,
+    "id": "chaining-uniform-laws-and-empirical-process-limits",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Chaining and Uniform Limits",
+    "companion": "chaining-uniform-laws-and-empirical-process-limits-examples",
+    "requires": [
+      "symmetrization-rademacher-complexity-and-covering-entropy",
+      "concentration-inequalities-and-tail-bounds",
+      "asymptotic-convergence-consistency-and-identification"
+    ],
+    "items": [
+      {
+        "id": "def-glivenko-cantelli-class",
+        "kind": "definition",
+        "title": "Glivenko\u2013Cantelli classes",
+        "deps": [
+          "def-empirical-process-and-rademacher-process",
+          "thm-dominated-convergence",
+          "thm-almost-sure-convergence-implies-convergence-in-probability"
+        ],
+        "dependency_level": 1,
+        "statement": "Use the empirical-measure convention of [[def-empirical-process-and-rademacher-process]]: for iid observations $X_1,X_2,\\ldots$ with common law $P$, $P_nf=n^{-1}\\sum_{i=1}^n f(X_i)$ and $Pf=\\int f\\,dP$. Let $\\mathcal F$ be a nonempty class of measurable real-valued functions with a nonnegative measurable integrable envelope $F$, meaning $|f|\\le F$ $P$-almost surely for every $f\\in\\mathcal F$ and $PF<\\infty$. It is **pointwise measurable** if there is a countable subclass $\\mathcal F_0$ such that every $f\\in\\mathcal F$ is the pointwise limit of a sequence from $\\mathcal F_0$. For a pointwise-measurable class, dominated convergence [[thm-dominated-convergence]] gives $Pf_k\\to Pf$ along the approximating sequence, and finite empirical averages converge pointwise, so the supremum defining the uniform law is determined by $\\mathcal F_0$. The class is **$P$-Glivenko\u2013Cantelli** if\n\n$$\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\longrightarrow0$$\n\nin probability. It is **strongly $P$-Glivenko\u2013Cantelli** if the same convergence holds almost surely. For an uncountable class with a countable pointwise-dense subclass, the supremum is interpreted using outer probability unless the chosen version makes it measurable. For a pointwise-measurable class the supremum is determined by the countable subclass and is measurable. That subclass has a common conull envelope bound, so the supremum is finite almost surely; after choosing a real-valued version, almost-sure convergence implies convergence in probability by [[thm-almost-sure-convergence-implies-convergence-in-probability]]."
+      },
+      {
+        "id": "thm-empirical-risk-oracle-bound",
+        "kind": "theorem",
+        "title": "Empirical-risk oracle bound under uniform deviation",
+        "deps": [
+          "def-empirical-process-and-rademacher-process"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $X_1,\\ldots,X_n$ be iid with law $P$, and let $\\mathcal L$ be a nonempty class of measurable integrable loss functions $\\ell$ such that $\\inf_{\\ell\\in\\mathcal L}P\\ell$ is finite. Define population risk $R(\\ell)=P\\ell$ and empirical risk $R_n(\\ell)=P_n\\ell$. Suppose $\\widehat\\ell\\in\\mathcal L$ satisfies the approximate-minimization inequality\n\n$$R_n(\\widehat\\ell)\\le \\inf_{\\ell\\in\\mathcal L}R_n(\\ell)+\\eta$$\n\nfor some $\\eta\\ge0$. On the event\n\n$$\\sup_{\\ell\\in\\mathcal L}|R_n(\\ell)-R(\\ell)|\\le\\epsilon,$$\n\none has\n\n$$R(\\widehat\\ell)\\le\\inf_{\\ell\\in\\mathcal L}R(\\ell)+2\\epsilon+\\eta.$$\n\nNo existence of an exact empirical minimizer is required. The empirical averages use [[def-empirical-process-and-rademacher-process]]."
+      },
+      {
+        "id": "lem-empirical-process-bracketing-maximal-inequality",
+        "kind": "lemma",
+        "title": "Bracketing maximal inequality for the empirical process",
+        "deps": [
+          "def-empirical-process-and-rademacher-process",
+          "lem-probability-measure-basic-identities",
+          "thm-dominated-convergence",
+          "thm-bernstein-independent-sums",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "thm-monotone-convergence-for-the-integral",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal G$ be a nonempty countable class of measurable real functions with a nonnegative measurable envelope $H$, so $|g|\\le H$ $P$-almost everywhere for every $g\\in\\mathcal G$, and $0<\\|H\\|_{P,2}<\\infty$. Use $\\mathbb G_n(g)=\\sqrt n(P_ng-Pg)$ as in [[def-empirical-process-and-rademacher-process]]. Suppose that for some integer $q_0\\ge1$ there are nested finite partitions $\\Pi_q$ of $\\mathcal G$, for all $q\\ge q_0$, with $m_q$ nonempty cells. For each cell $C\\in\\Pi_q$ choose a representative $\\pi_q(C)\\in C$ and define its pointwise oscillation\n\n$$\\Delta_{q,C}(x)=\\sup_{g,h\\in C}|g(x)-h(x)|.$$\n\nAssume $\\Delta_{q,C}$ is measurable, $0\\le\\Delta_{q,C}\\le2H$ $P$-almost everywhere, and $\\|\\Delta_{q,C}\\|_{P,2}\\le2^{-q}\\|H\\|_{P,2}$. If $C'\\in\\Pi_{q+1}$ is contained in $C\\in\\Pi_q$, then $\\Delta_{q+1,C'}\\le\\Delta_{q,C}$ pointwise by definition. Put\n\n$$L_q=1+\\log(2m_q),\\qquad a_q=\\frac{2^{-q}\\|H\\|_{P,2}}{\\sqrt{L_{q+1}}},\\qquad M_{\\mathcal G}=\\sup_{g\\in\\mathcal G}\\|g\\|_{P,2}.$$\n\nThe refinement property gives $m_{q+1}\\ge m_q$, so $a_q$ is nonincreasing.\n\nThere is a universal constant $C<\\infty$ such that\n\n$$\\mathbb E\\sup_{g\\in\\mathcal G}|\\mathbb G_n(g)|\\le C\\left[(M_{\\mathcal G}+2^{-q_0}\\|H\\|_{P,2})\\sqrt{L_{q_0}}+\\|H\\|_{P,2}\\sum_{q>q_0}2^{-q}\\sqrt{L_q}+\\sqrt n\\,P\\!\\left(H\\mathbf1_{\\{H>\\sqrt n a_{q_0}/2\\}}\\right)\\right].$$\n\nThis is a local maximal estimate: the nested partitions and their oscillation bounds are hypotheses. Empirical-process notation uses [[def-empirical-process-and-rademacher-process]]."
+      },
+      {
+        "id": "def-donsker-class-and-asymptotic-equicontinuity",
+        "kind": "definition",
+        "title": "Donsker classes and asymptotic equicontinuity",
+        "deps": [
+          "def-empirical-process-and-rademacher-process",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-convergence-in-distribution-of-random-elements",
+          "def-tight-family-of-probability-measures",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 2,
+        "statement": "For a class $\\mathcal H$ of measurable real functions under a probability measure $Q$, an **envelope** $H$ means a nonnegative measurable function with $|h|\\le H$ $Q$-almost surely for every $h\\in\\mathcal H$. Cauchy\u2013Schwarz [[cor-cauchy-schwarz-inequality-for-l-two]] gives $QH\\le\\|H\\|_{Q,2}<\\infty$ when $H\\in L^2(Q)$.\n\nLet $(S,\\mathcal A,P)$ be a probability space, let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal F$ be a nonempty class of measurable real-valued functions with a nonnegative measurable envelope $F$ satisfying $PF^2<\\infty$. A class is **pointwise measurable** if it has a countable subclass $\\mathcal F_0$ such that for each $f\\in\\mathcal F$ there is a sequence in $\\mathcal F_0$ converging pointwise to $f$. Write $\\mathbb G_n(f)=\\sqrt n(P_nf-Pf)$ using [[def-empirical-process-and-rademacher-process]], and put\n\n$$\\rho_P(f,g)=\\{P[(f-g)-P(f-g)]^2\\}^{1/2}.$$\n\nThis is a pseudometric: distinct functions can have zero distance when their centered difference vanishes $P$-almost surely. The empirical process is **asymptotically equicontinuous in probability** with respect to $\\rho_P$ if for every $\\eta>0$,\n\n$$\\lim_{\\delta\\downarrow0}\\limsup_{n\\to\\infty}P^*\\left(\\sup_{f,g\\in\\mathcal F:\\,\\rho_P(f,g)<\\delta}|\\mathbb G_n(f)-\\mathbb G_n(g)|>\\eta\\right)=0.$$\n\nHere $P^*(A)=\\inf\\{P(B): A\\subseteq B,\\ B\\in\\mathcal A\\}$ is outer probability; bounded nonmeasurable functionals are handled by the corresponding outer expectation $E^*Y=\\inf\\{EY':Y'\\text{ measurable and }Y'\\ge Y\\}$. For a pointwise-measurable class these conventions agree with ordinary probability whenever the displayed supremum is measurable.\n\nWrite $\\ell^\\infty(\\mathcal F)$ for the bounded real-valued functions on the index set $\\mathcal F$, with norm $\\|z\\|_{\\mathcal F}=\\sup_{f\\in\\mathcal F}|z(f)|$. The class is **$P$-Donsker** if, for each $n$, $\\mathbb G_n$ has bounded paths on a measurable event of probability one and, after setting the entire path to zero off that event, the resulting $\\ell^\\infty(\\mathcal F)$-valued process converges weakly in the outer-expectation sense to a tight Borel law of a centered Gaussian process $\\mathbb G_P$ with covariance\n\n$$\\operatorname{Cov}(\\mathbb G_P(f),\\mathbb G_P(g))=P[(f-Pf)(g-Pg)].$$\n\nHere outer weak convergence means $E^*H(\\mathbb G_n)\\to EH(\\mathbb G_P)$ for every bounded uniformly continuous real function $H$ on $\\ell^\\infty(\\mathcal F)$; the outer expectation is the infimum of expectations of measurable majorants. The law is tight in the sense of [[def-tight-family-of-probability-measures]]. Finite-dimensional convergence means weak convergence of the vector of process values at every finite list of indices, as in [[def-convergence-in-distribution-of-random-elements]]."
+      },
+      {
+        "id": "thm-dudley-entropy-integral",
+        "kind": "theorem",
+        "title": "Dudley entropy-integral bound for sub-Gaussian processes",
+        "deps": [
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-subgaussian-variable-and-vector",
+          "thm-jensen-inequality-for-expectation",
+          "cor-markov-inequality-for-random-variables",
+          "thm-monotone-convergence-for-the-integral",
+          "lem-probability-measure-basic-identities"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $(T,d)$ be a nonempty pseudometric space that is totally bounded in the following sense: for every $r>0$ there is a finite set $E_r\\subseteq T$ such that $T\\subseteq\\bigcup_{e\\in E_r}\\{t\\in T:d(t,e)\\le r\\}$. Its diameter is $D:=\\sup_{s,t\\in T}d(s,t)<\\infty$. For each $t\\in T$, let $X_t$ be a real random variable. Assume the process is separable: a specified countable dense subset $T_0\\subseteq T$, equipped with a fixed listing, has the property that the supremum of every process increment over $T$ equals its supremum over $T_0$ almost surely. Suppose all increments are centered and sub-Gaussian with their $d$-scale, meaning that for every $s,t\\in T$ and $\\lambda\\in\\mathbb R$,\n\n$$\\mathbb E\\exp\\{\\lambda(X_s-X_t)\\}\\le\\exp\\{\\lambda^2d(s,t)^2/2\\}.$$\n\nIf\n\n$$\\int_0^D\\sqrt{\\log N(\\epsilon,T,d)}\\,d\\epsilon<\\infty,$$\n\nwhere $N(\\epsilon,T,d)$ is the least number of closed $d$-balls of radius $\\epsilon$ covering $T$ ([[def-covering-packing-bracketing-number-and-metric-entropy]]), then for every $t_0\\in T$,\n\n$$\\mathbb E\\sup_{t\\in T}|X_t-X_{t_0}|\\le C\\int_0^D\\sqrt{\\log N(\\epsilon,T,d)}\\,d\\epsilon$$\n\nfor a universal constant $C$. If $D=0$, the integral and the supremum are both zero."
+      },
+      {
+        "id": "thm-gc-by-bracketing-entropy",
+        "kind": "theorem",
+        "title": "Glivenko\u2013Cantelli theorem by bracketing entropy",
+        "deps": [
+          "def-countable-choice",
+          "def-empirical-process-and-rademacher-process",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-glivenko-cantelli-class",
+          "lem-probability-measure-basic-identities",
+          "thm-dominated-convergence",
+          "thm-kolmogorov-iid-l1-strong-law"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal F$ be a nonempty pointwise-measurable class of measurable real functions with a nonnegative integrable envelope $F$. Suppose $N_{[]} (\\epsilon,\\mathcal F,L^1(P))<\\infty$ for every $\\epsilon>0$. Then $\\mathcal F$ is $P$-Glivenko\u2013Cantelli: $\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\to0$ in probability. If Countable Choice is assumed, then the stronger conclusion holds that this convergence is almost sure. The terms $P_n$, $P$, and the outer-probability convention are those of [[def-empirical-process-and-rademacher-process]], and the class notion is [[def-glivenko-cantelli-class]]."
+      },
+      {
+        "id": "lem-empirical-process-asymptotic-equicontinuity-from-bracketing-entropy",
+        "kind": "lemma",
+        "title": "Bracketing entropy implies empirical-process asymptotic equicontinuity",
+        "deps": [
+          "def-countable-choice",
+          "cor-markov-inequality-for-random-variables",
+          "def-donsker-class-and-asymptotic-equicontinuity",
+          "def-empirical-process-and-rademacher-process",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "lem-empirical-process-bracketing-maximal-inequality",
+          "thm-dominated-convergence",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 3,
+        "statement": "For a class $\\mathcal H$ of measurable real functions under a probability measure $Q$, an **envelope** $H$ means a nonnegative measurable function with $|h|\\le H$ $Q$-almost surely for every $h\\in\\mathcal H$. Cauchy\u2013Schwarz [[cor-cauchy-schwarz-inequality-for-l-two]] gives $QH\\le\\|H\\|_{Q,2}<\\infty$ when $H\\in L^2(Q)$.\n\nAssume Countable Choice. Let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal F$ be a nonempty pointwise-measurable class of measurable functions with a nonnegative envelope $F$ satisfying $PF^2<\\infty$. Assume $0<\\|F\\|_{P,2}<\\infty$ and\n\n$$\\int_0^1\\sqrt{\\log N_{[]}\\bigl(\\epsilon\\|F\\|_{P,2},\\mathcal F,L^2(P)\\bigr)}\\,d\\epsilon<\\infty.$$\n\nUse the empirical process $\\mathbb G_n$ and semimetric $\\rho_P$ from [[def-empirical-process-and-rademacher-process]] and [[def-donsker-class-and-asymptotic-equicontinuity]]. Then $\\mathbb G_n$ is asymptotically equicontinuous in probability with respect to $\\rho_P$."
+      },
+      {
+        "id": "thm-empirical-process-functional-clt",
+        "kind": "theorem",
+        "title": "Functional central limit theorem by bracketing entropy",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-asymptotic-distribution",
+          "def-donsker-class-and-asymptotic-equicontinuity",
+          "def-empirical-process-and-rademacher-process",
+          "def-countable-choice",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-metric-completion",
+          "def-metric-space",
+          "def-multivariate-normal-law",
+          "def-polish-space",
+          "def-standard-borel-space",
+          "def-borel-sigma-algebra",
+          "def-tight-family-of-probability-measures",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "cor-markov-inequality-for-random-variables",
+          "lem-countable-uniformly-dense-tests-on-a-compact-metric-space",
+          "lem-empirical-process-asymptotic-equicontinuity-from-bracketing-entropy",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-probability-measure-basic-identities",
+          "thm-c-k-complete-in-the-sup-metric",
+          "thm-complete-and-totally-bounded-implies-compact",
+          "thm-cramer-wold-device",
+          "thm-dominated-convergence",
+          "thm-every-borel-probability-on-a-polish-space-is-tight",
+          "thm-euclidean-space-complete",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "thm-metric-completion-exists",
+          "thm-multivariate-iid-central-limit-theorem",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-dudley-entropy-integral",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-integration-against-a-density",
+          "thm-substitution",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_level": 4,
+        "statement": "For a class $\\mathcal H$ of measurable real functions under a probability measure $Q$, an **envelope** $H$ means a nonnegative measurable function with $|h|\\le H$ $Q$-almost surely for every $h\\in\\mathcal H$. Cauchy\u2013Schwarz [[cor-cauchy-schwarz-inequality-for-l-two]] gives $QH\\le\\|H\\|_{Q,2}<\\infty$ when $H\\in L^2(Q)$.\n\nAssume the Axiom of Choice. Let $X_1,X_2,\\ldots$ be iid with law $P$ on a measurable space, and let $\\mathcal F$ be a nonempty pointwise-measurable class of measurable real functions with a measurable envelope $F\\ge0$ satisfying $PF^2<\\infty$. If $\\|F\\|_{P,2}=0$, the empirical process is the zero process almost surely. Otherwise assume\n\n$$\\int_0^1\\sqrt{\\log N_{[]}\\bigl(\\epsilon\\|F\\|_{P,2},\\mathcal F,L^2(P)\\bigr)}\\,d\\epsilon<\\infty,$$\n\nwhere $N_{[]}(r,\\mathcal F,L^2(P))$ is the least number of measurable brackets $[l,u]$ with $l\\le f\\le u$ $P$-almost surely and $\\|u-l\\|_{P,2}\\le r$ that cover $\\mathcal F$. Then $\\mathcal F$ is $P$-Donsker in the sense of [[def-donsker-class-and-asymptotic-equicontinuity]]: the empirical process $\\mathbb G_n=\\sqrt n(P_n-P)$ converges weakly in outer expectation in $\\ell^\\infty(\\mathcal F)$ to a tight centered Gaussian bridge with covariance\n\n$$K(f,g)=P[(f-Pf)(g-Pg)].$$\n\nThe $L^2(P)$ bracketing number and width use [[def-covering-packing-bracketing-number-and-metric-entropy]]."
+      }
+    ]
+  },
+  {
+    "order": 1875,
+    "id": "chaining-uniform-laws-and-empirical-process-limits-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Chaining and Uniform Limits \u2014 Examples",
+    "companion": "chaining-uniform-laws-and-empirical-process-limits",
+    "requires": [
+      "chaining-uniform-laws-and-empirical-process-limits"
+    ],
+    "items": [
+      {
+        "id": "cex-pointwise-strong-laws-do-not-imply-uniform-law",
+        "kind": "counterexample",
+        "title": "Pointwise strong laws need not give a uniform law",
+        "deps": [
+          "def-empirical-process-and-rademacher-process",
+          "def-glivenko-cantelli-class",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-probability-measure-basic-identities",
+          "def-probability-measure"
+        ],
+        "dependency_level": 2,
+        "statement": "The assertion that pointwise strong laws for every member of a class imply a uniform law of large numbers is false without a class-separability or entropy hypothesis."
+      },
+      {
+        "id": "ex-threshold-class-is-glivenko-cantelli",
+        "kind": "example",
+        "title": "The uniform threshold class is Glivenko\u2013Cantelli",
+        "deps": [
+          "def-countable-choice",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-empirical-process-and-rademacher-process",
+          "def-glivenko-cantelli-class",
+          "thm-gc-by-bracketing-entropy",
+          "thm-rationals-countable",
+          "lem-subset-of-countable",
+          "lem-rat-embeds-dense"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice. Let $P$ be uniform probability on $[0,1]$, let $X_1,X_2,\\ldots$ be iid with law $P$, and let\n$$\\mathcal F=\\{f_t:t\\in[0,1]\\},\\qquad f_t(x)=\\mathbf1_{[0,t]}(x).$$\nThen $\\mathcal F$ is strongly $P$-Glivenko\u2013Cantelli:\n$$\\sup_{0\\le t\\le1}|P_nf_t-Pf_t|\\longrightarrow0\\quad\\text{almost surely}.$$"
+      },
+      {
+        "id": "ex-uniform-empirical-cdf-converges-to-brownian-bridge",
+        "kind": "example",
+        "title": "The uniform empirical CDF converges to a Brownian bridge",
+        "deps": [
+          "def-donsker-class-and-asymptotic-equicontinuity",
+          "def-empirical-process-and-rademacher-process",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "thm-empirical-process-functional-clt",
+          "def-axiom-of-choice",
+          "thm-rationals-countable",
+          "lem-subset-of-countable",
+          "lem-rat-embeds-dense"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Choice. Let $X_i$ be iid Uniform$[0,1]$, $F_n(t)=P_n([0,t])$, and $F(t)=t$. The empirical process $\\mathbb G_n(t)=\\sqrt n(F_n(t)-F(t))$, $0\\le t\\le1$, converges weakly in outer expectation in $\\ell^\\infty([0,1])$ to the standard Brownian bridge: the tight centered Gaussian process $B$ with covariance\n$$E[B(s)B(t)]=\\min(s,t)-st.$$"
+      }
+    ]
+  }
+]

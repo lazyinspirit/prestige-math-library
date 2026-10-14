@@ -18,12 +18,7 @@ short: "$(\\mathbb{R}, |x-y|)$"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-08-02
-    scope: published-audit
-    delegated_by: owner
+  repair: research/mathematical-statistics-foundations-37-owner-s3-polish-lem-real-line-is-a-metric-space-repair.json
 sources:
   scraped: []
   references:
@@ -61,7 +56,7 @@ $d_{\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:
 
 **Given:** The complete ordered field $\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]) with its absolute value ([[def-abs-value]]), and the function $d_{\mathbb{R}}(x,y) = |x-y|$; points $x, y, z \in \mathbb{R}$ and a real $r > 0$.
 
-[L1] Absolute value: $|u| \ge 0$; $|u| = 0$ if and only if $u = 0$; $|-u| = |u|$; and for $c > 0$ one has $|u| < c$ if and only if $-c < u < c$ ([[lem-of-abs-value]], [[def-abs-value]]).
+[L1] Absolute value is defined by $|u|=u$ when $u\ge0$ and $|u|=-u$ when $u<0$. Its properties are: $|u| \ge 0$; $|u| = 0$ if and only if $u = 0$; $|-u| = |u|$; and for $c > 0$ one has $|u| < c$ if and only if $-c < u < c$ ([[lem-of-abs-value]], [[def-abs-value]]).
 
 [L2] Triangle inequality in an ordered field: $|u + v| \le |u| + |v|$ ([[lem-of-triangle-inequality]]).
 
@@ -85,7 +80,7 @@ $d_{\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:
 
 1.4 For $y \in \mathbb{R}$ and $r > 0$: $y \in B(x,r)$ means $|x - y| < r$, which by [L1] holds if and only if $-r < x - y < r$, and adding $y - r$ respectively $y + r$ to the two halves shows this is equivalent to $x - r < y < x + r$. [L1, L5]
 
-1.5 For $y \in \mathbb{R}$ and $r > 0$: $y \in \bar B(x,r)$ means $|x-y| \le r$, which by the same equivalence read with $\le$ in place of $<$ holds if and only if $x - r \le y \le x + r$. [L1, L5]
+1.5 Put $u=x-y$ and let $r>0$. If $u\ge0$, then $|u|=u$ by [L1] and $-r\le u$ automatically, so $|u|\le r$ is equivalent to $-r\le u\le r$. If $u<0$, then $|u|=-u$ by [L1] and $u\le r$ automatically; adding $u-r$ to $-u\le r$ gives $-r\le u$, and the same addition in reverse proves the converse. These sign cases are exhaustive by [L6], so $|u|\le r$ if and only if $-r\le u\le r$. Consequently, $y\in\bar B(x,r)$ is equivalent to $-r\le x-y\le r$, and translating the two inequalities by [L5] gives $x-r\le y\le x+r$. [L1, L5, L6]
 
 1.6 Let $x_0 \in \mathbb{R}$ and $r > 0$ be arbitrary, and use [L4] to fix a natural $n \ge 1$ with $x_0 + r < n \cdot 1_{\mathbb{R}}$; write $w := n \cdot 1_{\mathbb{R}}$. [L4, choose]
 

@@ -1,0 +1,1272 @@
+[
+  {
+    "order": 1910,
+    "id": "robust-covariance-and-high-dimensional-stability",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Robust Covariance and Sparse Robust Estimation",
+    "companion": "robust-covariance-and-high-dimensional-stability-examples",
+    "requires": [
+      "minimax-lower-bounds-and-information-theoretic-methods",
+      "contamination-models-and-robust-risk",
+      "robust-mean-estimation-under-heavy-tails",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "the-identity-theorem-and-the-open-mapping-theorem",
+      "euclidean-surface-measure-divergence-and-green-identities",
+      "matrix-norms-condition-numbers-and-numerical-stability"
+    ],
+    "items": [
+      {
+        "id": "def-covariance-matrix-of-a-random-vector",
+        "kind": "definition",
+        "title": "Covariance matrix of a finite-dimensional random vector",
+        "deps": [
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-inner-product-norm"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable",
+          "sources": {
+            "references": [
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 4",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-finite-second-moment-covariance-matrix-is-well-defined"
+        ],
+        "statement": "Let $X=(X_1,\\ldots,X_p)$ be a measurable random vector in $\\mathbb R^p$,\nwhere $p\\ge1$ is finite, and assume $\\mathbb E\\|X\\|_2^2<\\infty$. Define\nthe mean coordinatewise by $\\mu_j=\\mathbb E X_j$ and define the covariance\nmatrix by\n$$\\Sigma:=\\mathbb E[(X-\\mu)(X-\\mu)^T],$$\nwhere each entry is the expectation of the corresponding real random\nvariable. Write $\\operatorname{tr}(\\Sigma)=\\sum_{j=1}^p\\Sigma_{jj}$.\n\nThe well-definedness lemma proves these expectations are finite,\n$\\Sigma$ is symmetric positive semidefinite, and\n$\\operatorname{tr}(\\Sigma)=\\mathbb E\\|X-\\mu\\|_2^2$."
+      },
+      {
+        "id": "lem-finite-dimensional-golden-thompson-trace-inequality",
+        "kind": "lemma",
+        "title": "Finite-dimensional Golden–Thompson trace inequality",
+        "deps": [
+          "thm-hadamard-three-lines",
+          "thm-singular-value-decomposition",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-trace-of-a-square-matrix"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "statement": "For Hermitian matrices $H,K\\in\\mathbb C^{p\\times p}$ with $p\\ge1$,\n$$\\operatorname{tr}\\exp(H+K)\\le\\operatorname{tr}\\bigl(\\exp(H)\\exp(K)\\bigr).$$\nHere $\\exp(A)=\\sum_{j=0}^{\\infty}A^j/j!$ is the norm-convergent finite-matrix exponential series. No commutativity assumption is imposed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joel A. Tropp, An Introduction to Matrix Concentration Inequalities, §3.3, equation (3.3.3), printed p.34",
+              "url": "https://arxiv.org/pdf/1501.01571"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-matrix-depth-gaussian-scale-constant-exists-uniquely",
+        "kind": "lemma",
+        "title": "The Gaussian matrix-depth scale constant exists uniquely",
+        "deps": [
+          "def-standard-normal-and-normal-laws",
+          "thm-continuity-from-below-for-measures",
+          "thm-intermediate-value",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, Proposition 3.1",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              },
+              {
+                "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., §1.6",
+                "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the standard-normal-law definition. The continuity, symmetry, strict monotonicity and intermediate-value argument uses no additional choice.",
+        "dependency_level": 0,
+        "statement": "Let $\\Phi(t)=N(0,1)((-\\infty,t])$. There is a unique $\\beta>0$ such that\n$\\Phi(\\sqrt\\beta)=3/4$."
+      },
+      {
+        "id": "lem-projection-slab-uniform-deviation",
+        "kind": "lemma",
+        "title": "Uniform deviation for squared-projection slabs",
+        "deps": [
+          "def-probability-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements",
+          "def-inner-product-norm",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-dominated-convergence",
+          "thm-continuity-from-below-for-measures",
+          "thm-jensens-integral-inequality",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-hyperbolic-functions",
+          "thm-hyperbolic-identities-and-derivatives",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-mean-value-theorem"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, Lemma 7.3",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              },
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 4",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "statement": "Let $X_1,\\ldots,X_N$ be independent random elements of $\\mathbb R^p$ with\ncommon Borel probability law $P$. Let $S_1,\\ldots,S_m\\subseteq[p]$ be\nnonempty coordinate sets with $|S_j|\\le s$, where $m,s\\ge1$, and define\n$$V_{S_j}:=\\{u\\in\\mathbb R^p:\\|u\\|_2=1,\\ u_i=0\\text{ for }i\\notin S_j\\}.$$\nFor $u\\in V_{S_j}$ and $t\\in\\mathbb R$, put\n$A_{u,t}:=\\{x\\in\\mathbb R^p:|u^Tx|^2\\le t\\}$ and\n$P_N(A):=N^{-1}\\sum_{i=1}^N\\mathbf1\\{X_i\\in A\\}$. There is a universal\nconstant $C$ such that, for every $0<\\delta<1$,\n$$\\mathbb P\\!\\left(\\max_{1\\le j\\le m}\\sup_{\\substack{u\\in V_{S_j}\\\\t\\in\\mathbb R}}|P_N(A_{u,t})-P(A_{u,t})|\\le C\\left[\\sqrt{\\frac{s+1}{N}}+\\sqrt{\\frac{\\log(m/\\delta)}{N}}\\right]\\right)\\ge1-\\delta.$$\nThe same bound holds for the upper-tail sets\n$\\{x:|u^Tx|^2\\ge t\\}$."
+      },
+      {
+        "id": "def-bounded-spectrum-covariance-class",
+        "kind": "definition",
+        "title": "Bounded-spectrum covariance class",
+        "deps": [
+          "def-covariance-matrix-of-a-random-vector",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §3.2",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "dependency_level": 1,
+        "statement": "For $M>0$ and $p\\ge1$, define\n$$\\mathcal F_p(M):=\\{\\Sigma\\in\\mathbb R^{p\\times p}: \\Sigma=\\Sigma^T,\\ \\Sigma\\succeq0,\\ \\|\\Sigma\\|_{\\rm op}\\le M\\}.$$\nFor positive semidefinite $\\Sigma$, the operator norm is its largest\neigenvalue, so this is the bounded-spectrum covariance class."
+      },
+      {
+        "id": "def-matrix-variance-of-a-random-vector",
+        "kind": "definition",
+        "title": "Matrix variance for covariance estimation",
+        "deps": [
+          "def-covariance-matrix-of-a-random-vector",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable",
+          "sources": {
+            "references": [
+              {
+                "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, §2",
+                "url": "https://arxiv.org/pdf/1708.00502"
+              }
+            ]
+          }
+        },
+        "dependency_level": 1,
+        "statement": "For a random vector $X\\in\\mathbb R^p$ with mean $\\mu$ and covariance\n$\\Sigma$ as in [[def-covariance-matrix-of-a-random-vector]], assume\n$\\mathbb E\\|X-\\mu\\|_2^4<\\infty$. Its **matrix variance** is\n$$\\sigma_0^2:=\\left\\|\\mathbb E\\!\\left[\\|X-\\mu\\|_2^2 (X-\\mu)(X-\\mu)^T\\right]\\right\\|_{\\rm op}.$$\nWhen $\\|\\Sigma\\|_{\\rm op}>0$, define the intrinsic ratio\n$$d:=\\frac{\\sigma_0^2}{\\|\\Sigma\\|_{\\rm op}^2}.$$\n\nThe expectation is entrywise. The finite fourth moment makes every entry\nintegrable. This definition imposes neither Huber contamination nor sample\nreplacement."
+      },
+      {
+        "id": "lem-bounded-independent-matrix-bernstein-via-trace-exponential",
+        "kind": "lemma",
+        "title": "Bounded independent matrix Bernstein bound from the trace exponential",
+        "deps": [
+          "lem-finite-dimensional-golden-thompson-trace-inequality",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-trace-of-a-square-matrix",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-markov-inequality-for-random-variables"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "statement": "Let $B_1,\\ldots,B_m$ be independent centered random Hermitian $q\\times q$ matrices, $q,m\\ge1$. Suppose $R>0$, $v\\ge0$, and\n$$\\|B_i\\|_{\\rm op}\\le R\\quad\\text{almost surely},\\qquad\\|\\mathbb E B_i^2\\|_{\\rm op}\\le v\\quad(1\\le i\\le m).$$\nWriting $Y=\\sum_{i=1}^m B_i$, for $0<s<3/R$ one has\n$$\\mathbb E\\operatorname{tr}\\exp(sY)\\le q\\exp\\left(\\frac{ms^2v}{2(1-sR/3)}\\right).$$\nConsequently, for $u>0$ when $v>0$,\n$$\\mathbb P\\{\\lambda_{\\max}(Y)\\ge u\\}\\le q\\exp\\left(-\\frac{u^2}{2(mv+Ru/3)}\\right).$$\nFor every $b>0$, the following convenient forms also hold:\n$$\\mathbb P\\left\\{\\lambda_{\\max}(Y)>\\sqrt{2mvb}+\\frac{2Rb}{3}\\right\\}\\le qe^{-b},\\qquad\\mathbb P\\left\\{\\|Y\\|_{\\rm op}>\\sqrt{2mvb}+\\frac{2Rb}{3}\\right\\}\\le2qe^{-b}.$$\nIf $v=0$, all $B_i$ and $Y$ vanish almost surely, so the displayed positive-threshold conclusions remain valid.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joel A. Tropp, An Introduction to Matrix Concentration Inequalities, §§3.2–3.3 and §§6.6–6.7, especially Lemma 6.6.2",
+              "url": "https://arxiv.org/pdf/1501.01571"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-finite-second-moment-covariance-matrix-is-well-defined",
+        "kind": "lemma",
+        "title": "A finite second moment defines a positive semidefinite covariance matrix",
+        "deps": [
+          "def-covariance-matrix-of-a-random-vector",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 4",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "statement": "If $X\\in\\mathbb R^p$ is measurable and $\\mathbb E\\|X\\|_2^2<\\infty$, then\n$\\mu=\\mathbb E X$ and $\\Sigma=\\mathbb E[(X-\\mu)(X-\\mu)^T]$ in\n[[def-covariance-matrix-of-a-random-vector]] are well-defined entrywise,\n$\\Sigma$ is symmetric positive semidefinite, and\n$\\operatorname{tr}(\\Sigma)=\\mathbb E\\|X-\\mu\\|_2^2$."
+      },
+      {
+        "id": "alg-adaptive-truncated-covariance-estimator",
+        "kind": "algorithm",
+        "title": "Adaptive truncated covariance estimator",
+        "deps": [
+          "def-covariance-matrix-of-a-random-vector",
+          "def-matrix-variance-of-a-random-vector",
+          "alg-geometric-median-of-block-means",
+          "lem-measurable-minimum-norm-geometric-median-selection",
+          "def-countable-choice",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 2,
+        "statement": "Input a finite sample $X_1,\\ldots,X_m\\in\\mathbb R^p$, confidence\nparameter $\\beta>1$, and positive finite scale bounds\n$0<\\sigma_{\\min}\\le\\sigma_{\\max}$. The computational domain requires\n$k=\\lfloor3.5\\beta\\rfloor+1\\le m/2$. Statistical guarantees are stated\nseparately: for a clean iid finite-fourth-moment law, use the matrix variance\nof [[def-matrix-variance-of-a-random-vector]] and a bracket containing\n$\\sigma_0$. The statistical conditions are not needed merely to evaluate this\nfinite-sample procedure.\n\nPartition the indices deterministically into $k$ nonempty blocks whose sizes differ by at\nmost one. Compute each block mean and call the earlier\n[[alg-geometric-median-of-block-means]] to obtain the pilot $\\widehat\\mu$;\nthis uses the same sample and is not a sample split.\n\nFor a real symmetric matrix $A=Q\\operatorname{diag}(\\lambda_i)Q^T$, define\n$\\psi(A)=Q\\operatorname{diag}(\\psi(\\lambda_i))Q^T$, where\n$\\psi(x)=\\operatorname{sign}(x)\\min(|x|,1)$. The real spectral theorem\nmakes this definition independent of the chosen orthonormal eigenbasis.\nDefine the finite grid and truncation thresholds\n$$\\sigma_j=2^j\\sigma_{\\min},\\qquad J=\\{j\\in\\mathbb Z:\\sigma_{\\min}\\le\\sigma_j<2\\sigma_{\\max}\\},\\qquad \\theta_j=\\frac1{\\sigma_j}\\sqrt{\\frac\\beta m}.$$\nFor every $j\\in J$, form\n$$\\widehat\\Sigma_{m,j} =\\frac1{m\\theta_j}\\sum_{i=1}^m \\psi\\!\\left(\\theta_j(X_i-\\widehat\\mu)(X_i-\\widehat\\mu)^T\\right).$$\nChoose the smallest $j^*\\in J$ such that\n$$\\|\\widehat\\Sigma_{m,k'}-\\widehat\\Sigma_{m,j^*}\\|_{\\rm op} \\le6\\sigma_{k'}\\sqrt{\\frac\\beta m} \\quad\\text{for every }k'\\in J,\\ k'>j^*,$$\nand output $\\widehat\\Sigma^*=\\widehat\\Sigma_{m,j^*}$.\n\nThis is the clean heavy-tail moment procedure. It makes no Huber\ncontamination or sample-replacement guarantee.",
+        "sources": {
+          "references": [
+            {
+              "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, §2",
+              "url": "https://arxiv.org/pdf/1708.00502"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-adaptive-truncated-covariance-estimator-is-total"
+        ]
+      },
+      {
+        "id": "def-block-sparse-covariance-class",
+        "kind": "definition",
+        "title": "Single-block sparse covariance class and restricted directions",
+        "deps": [
+          "def-bounded-spectrum-covariance-class",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §3.4",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "dependency_level": 2,
+        "statement": "For $S\\subseteq[p]$, let\n$$G(S):=\\{A=A^T\\in\\mathbb R^{p\\times p}:A_{ij}=0 \\text{ whenever }i\\notin S\\text{ or }j\\notin S\\},$$\nand, for an integer $1\\le s\\le p$, let\n$$G(s):=\\bigcup_{\\substack{S\\subseteq[p]\\\\|S|\\le s}}G(S),\\qquad \\mathcal F_{p,s}(M):=\\{\\Sigma\\in\\mathcal F_p(M): \\Sigma-\\operatorname{diag}(\\Sigma)\\in G(s)\\}.$$\nHere $\\operatorname{diag}(\\Sigma)$ is the diagonal matrix with the same\ndiagonal entries as $\\Sigma$. Thus all nonzero off-diagonal entries lie in\none common coordinate block of size at most $s$; no row-sparsity condition\nis implied.\n\nFor $S\\subseteq[p]$, define\n$$V_S:=\\{u\\in\\mathbb R^p:\\|u\\|_2=1,\\ u_i=0\\text{ for }i\\notin S\\}.$$\nWhen $1\\le s\\le p/2$, the restricted direction set is\n$$U_s:=\\bigcup_{\\substack{S\\subseteq[p]\\\\|S|=2s}}V_S.$$"
+      },
+      {
+        "id": "def-huber-covariance-model",
+        "kind": "definition",
+        "title": "Gaussian Huber contamination model for covariance estimation",
+        "deps": [
+          "def-covariance-matrix-of-a-random-vector",
+          "def-huber-contamination-model",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §2",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "axiom_use": "AC is inherited through the published finite-dimensional Gaussian-law construction to supply $N_p(0,\\Sigma);$ the mixture definition itself makes no further choice.",
+        "dependency_level": 2,
+        "justified_by": [
+          "lem-huber-covariance-mixture-is-a-probability-measure"
+        ],
+        "statement": "Let $p\\ge1$, $0\\le\\epsilon\\le1$, and let $\\Sigma$ be a real positive\nsemidefinite $p\\times p$ covariance matrix. For any Borel probability law\n$Q$ on $\\mathbb R^p$, define\n$$P_{\\epsilon,\\Sigma,Q}:=(1-\\epsilon)N_p(0,\\Sigma)+\\epsilon Q,$$\nwhere $N_p(0,\\Sigma)$ is the finite-dimensional Gaussian law from\n[[def-multivariate-normal-law]]. A sample in this model consists of\nindependent observations with common law $P_{\\epsilon,\\Sigma,Q}$. The target\nis the covariance $\\Sigma$ of the uncontaminated Gaussian component, not the\ncovariance of the mixture.\n\nThis is the covariance specialization of the Huber model in\n[[def-huber-contamination-model]]. It is distinct from a clean heavy-tail\nmoment model and from adversarial sample replacement."
+      },
+      {
+        "id": "lem-covariance-median-pilot-exact-block-budget",
+        "kind": "lemma",
+        "title": "Exact block budget for the covariance geometric-median pilot",
+        "deps": [
+          "alg-geometric-median-of-block-means",
+          "lem-geometric-median-majority-radius-bound",
+          "lem-measurable-minimum-norm-geometric-median-selection",
+          "def-countable-choice",
+          "def-covariance-matrix-of-a-random-vector",
+          "def-independent-random-elements",
+          "thm-grouping-independent-sigma-algebras",
+          "lem-measurable-functions-preserve-independence",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-markov-inequality-for-random-variables",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-mean-value-theorem",
+          "thm-ftc-first-part",
+          "lem-geometric-sequence-null",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice. Let $X_1,\\ldots,X_m\\in\\mathbb R^p$ be iid with\nmean $\\mu$, finite covariance $\\Sigma$, and $T=\\operatorname{tr}\\Sigma$.\nFor $\\beta>1$, put $k=\\lfloor3.5\\beta\\rfloor+1\\le m/2$. Partition the\nsample deterministically into $k$ blocks whose sizes differ by at most one,\nand let $\\widehat\\mu$ be the minimum-norm geometric median of the block\nmeans as in [[alg-geometric-median-of-block-means]]. Then\n$$P\\!\\left(\\|\\widehat\\mu-\\mu\\|_2>11\\sqrt{\\frac{T(\\beta+1)}m}\\right)\\le e^{-\\beta}.$$\nIn particular the larger radius $B=11\\sqrt{2T\\beta/m}$ has the same\nfailure bound. This uses the prescribed covariance-pilot block count,\nwithout changing the robust-mean theorem's separate confidence convention.",
+        "sources": {
+          "references": [
+            {
+              "title": "Minsker and Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions",
+              "url": "https://arxiv.org/pdf/1708.00502"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-matrix-variance-intrinsic-dimension-at-least-one",
+        "kind": "lemma",
+        "title": "The covariance matrix variance ratio is at least one",
+        "deps": [
+          "def-covariance-matrix-of-a-random-vector",
+          "def-matrix-variance-of-a-random-vector",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, §2",
+                "url": "https://arxiv.org/pdf/1708.00502"
+              },
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 4",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "axiom_use": "No choice principle is used; one top eigenvector is supplied by the finite-dimensional spectral theorem.",
+        "proof_strategy": "direct",
+        "statement": "Let $X\\in\\mathbb R^p$ have finite fourth moment, mean $\\mu$, nonzero\ncovariance $\\Sigma$, and matrix variance $\\sigma_0^2$ as in\n[[def-covariance-matrix-of-a-random-vector]] and\n[[def-matrix-variance-of-a-random-vector]]. Then\n$$d:=\\frac{\\sigma_0^2}{\\|\\Sigma\\|_{\\rm op}^2}\\ge1.$$"
+      },
+      {
+        "id": "lem-oracle-truncated-covariance-and-vector-concentration",
+        "kind": "lemma",
+        "title": "Oracle-truncated covariance and vector concentration under finite matrix variance",
+        "deps": [
+          "lem-bounded-independent-matrix-bernstein-via-trace-exponential",
+          "def-covariance-matrix-of-a-random-vector",
+          "def-matrix-variance-of-a-random-vector",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-independent-random-elements"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "statement": "Let $Z_1,\\ldots,Z_m$ be independent copies of a centered random vector $Z\\in\\mathbb R^p$, $p,m\\ge1$, with nonzero covariance $\\Sigma=\\mathbb E ZZ^T$ and finite fourth moment. Write\n$$T=\\operatorname{tr}\\Sigma,\\qquad\\sigma_0^2=\\left\\|\\mathbb E[\\|Z\\|_2^2ZZ^T]\\right\\|_{\\rm op}.$$\nFor $\\beta>1$, $\\sigma\\ge\\sigma_0$, and $t=\\beta/m$, set\n$$\\theta=\\frac{\\sqrt t}{\\sigma},\\qquad R=\\frac1\\theta,\\qquad w(z)=\\min\\left\\{1,\\frac{R}{\\|z\\|_2^2}\\right\\},\\qquad w(0)=1,$$\n$$S=\\frac1m\\sum_{i=1}^m w(Z_i)Z_iZ_i^T,\\qquad V=\\frac1m\\sum_{i=1}^m w(Z_i)Z_i.$$\nThen there are events $E_S,E_V$ such that\n$$\\mathbb P(E_S^c)\\le pe^{-\\beta},\\qquad\\mathbb P(E_V^c)\\le\\frac{p+1}{2}e^{-\\beta},$$\nand on the respective events\n$$\\|S-\\Sigma\\|_{\\rm op}\\le\\left(2+\\frac{\\log2}{\\beta}\\right)\\sigma\\sqrt t<\\frac{27}{10}\\sigma\\sqrt t,$$\n$$\\|V\\|_2\\le\\sigma_0\\sqrt\\theta+2\\sqrt{Tt}+\\frac{8t}{3\\sqrt\\theta}.$$\nThe same $S$ also has the sharper-radius, larger-failure alternative\n$$\\mathbb P\\left\\{\\|S-\\Sigma\\|_{\\rm op}>\\left(\\sqrt2+\\frac23+\\frac14\\right)\\sigma\\sqrt t\\right\\}\\le2pe^{-\\beta}.$$\nNo independence between these events and a statistic formed from the same sample is asserted or needed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, §§5.3–5.5",
+              "url": "https://arxiv.org/pdf/1708.00502"
+            },
+            {
+              "title": "Joel A. Tropp, An Introduction to Matrix Concentration Inequalities, §§6.6–6.7",
+              "url": "https://arxiv.org/pdf/1501.01571"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "def-matrix-depth-covariance-estimator",
+        "kind": "definition",
+        "title": "Matrix depth and covariance estimators",
+        "deps": [
+          "def-bounded-spectrum-covariance-class",
+          "def-block-sparse-covariance-class",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "lem-matrix-depth-gaussian-scale-constant-exists-uniquely",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §3.1",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "axiom_use": "AC is inherited through the Gaussian scale constant beta. The definition returns the full argmax correspondence and selects no matrix.",
+        "dependency_level": 3,
+        "justified_by": [
+          "lem-matrix-depth-maximizer-exists-on-compact-classes",
+          "lem-measurable-matrix-depth-maximizer-selection"
+        ],
+        "statement": "For $p\\ge1$, write $S^{p-1}:=\\{u\\in\\mathbb R^p:\\|u\\|_2=1\\}$. Let\n$U$ be a nonempty subset of this sphere, let $P$ be a probability law on\n$\\mathbb R^p$, and let $\\Gamma\\succeq0$. Its **matrix depth relative to\n$U$** is\n$$D_U(\\Gamma,P):=\\inf_{u\\in U}\\min\\left\\{ P((u^TX)^2\\le u^T\\Gamma u),P((u^TX)^2\\ge u^T\\Gamma u)\\right\\},$$\nwhere $X$ has law $P$. Both weak inequalities include ties.\n\nFor observations $x_1,\\ldots,x_n$, let\n$P_n=n^{-1}\\sum_{i=1}^n\\delta_{x_i}$ be their empirical law. Let $\\beta>0$\nbe the constant of [[lem-matrix-depth-gaussian-scale-constant-exists-uniquely]].\nThe **global dense** depth correspondence is $\\operatorname{Argmax}_{\\Gamma\\succeq0}D_{S^{p-1}}(\\Gamma,P_n)$, over symmetric positive semidefinite matrices. For $1\\le s\\le p/2$, define the global single-block class $\\mathcal F_{p,s}:=\\bigcup_{c>0}\\mathcal F_{p,s}(c)$ and the **global single-block sparse** correspondence $\\operatorname{Argmax}_{\\Gamma\\in\\mathcal F_{p,s}}D_{U_s}(\\Gamma,P_n)$. These are the unrestricted-spectrum versions; no known spectral bound is needed to define their selectors.\n\nFor known $M>0$, the dense bounded-class depth correspondence is\n$$\\operatorname{Argmax}_{\\Gamma\\in\\mathcal F_p(\\beta M)} D_{S^{p-1}}(\\Gamma,P_n).$$\nFor known integer $1\\le s\\le p/2$, the single-block sparse version is\n$$\\operatorname{Argmax}_{\\Gamma\\in\\mathcal F_{p,s}(\\beta M)} D_{U_s}(\\Gamma,P_n),$$\nwhere the classes and $U_s$ are defined in\n[[def-bounded-spectrum-covariance-class]] and\n[[def-block-sparse-covariance-class]]. A **measurable matrix-depth estimator**\nis a Borel measurable selector $\\widehat\\Gamma$ from the applicable argmax\ncorrespondence, with covariance output $\\widehat\\Sigma=\\widehat\\Gamma/\\beta$.\nEither global correspondence or the applicable bounded-class correspondence may be used. The compact search restriction contains $\\beta\\Sigma$ whenever the target\nbelongs to the corresponding class; it makes no computational feasibility\nclaim."
+      },
+      {
+        "id": "lem-adaptive-truncated-covariance-estimator-is-total",
+        "kind": "lemma",
+        "title": "The adaptive truncated covariance procedure is well-defined on its declared domain",
+        "deps": [
+          "alg-adaptive-truncated-covariance-estimator",
+          "lem-measurable-minimum-norm-geometric-median-selection",
+          "def-countable-choice",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "cor-weierstrass-approximation-on-a-closed-interval",
+          "thm-of-archimedean"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "statement": "On the input domain in [[alg-adaptive-truncated-covariance-estimator]], the\nadaptive truncated covariance procedure is total and Borel measurable as a\nfunction of the sample.",
+        "sources": {
+          "references": [
+            {
+              "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, §2",
+              "url": "https://arxiv.org/pdf/1708.00502"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-fixed-scale-truncated-covariance-deviation",
+        "kind": "lemma",
+        "title": "Fixed-scale matrix-truncated covariance deviation under finite matrix variance",
+        "deps": [
+          "alg-adaptive-truncated-covariance-estimator",
+          "def-matrix-variance-of-a-random-vector",
+          "lem-oracle-truncated-covariance-and-vector-concentration",
+          "lem-covariance-median-pilot-exact-block-budget",
+          "lem-matrix-variance-intrinsic-dimension-at-least-one",
+          "def-countable-choice",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice for the specified geometric-median pilot. Let\n$X_i\\in\\mathbb R^p$, $1\\le i\\le m$, be iid with mean $\\mu$, nonzero\ncovariance $\\Sigma$, finite fourth central moment and matrix variance\n$\\sigma_0^2$ as in [[def-matrix-variance-of-a-random-vector]]. Put\n$$L=\\|\\Sigma\\|_{\\rm op},\\quad T=\\operatorname{tr}\\Sigma,\\quad d=\\sigma_0^2/L^2,\\quad D=\\max\\{d,(T/\\sigma_0)^2\\}.$$\nFor $\\sigma\\ge\\sigma_0$, $\\beta>1$ set $t=\\beta/m$,\n$\\theta=\\sqrt t/\\sigma$ and\n$$\\widehat\\Sigma_\\theta=\\frac1{m\\theta}\\sum_i\\psi\\!\\left(\\theta(X_i-\\widehat\\mu)(X_i-\\widehat\\mu)^{\\mathsf T}\\right).$$\nFor any measurable pilot, any $B\\ge0$ and any event $E$ on which\n$\\|\\widehat\\mu-\\mu\\|\\le B$, there is an event $G$ with\n$P(G^c)\\le h_p e^{-\\beta}$, $h_p=(3p+1)/2$, such that on $E\\cap G$,\n$$\\|\\widehat\\Sigma_\\theta-\\Sigma\\|_{\\rm op}\\le a_0\\sigma\\sqrt t+qM+2B(W+q\\sqrt M)+B^2,$$\nwhere $a_0=27/10$, $q=2B\\sqrt\\theta+B^2\\theta$,\n$M=L+a_0\\sigma\\sqrt t$ and\n$W=\\sigma_0\\sqrt\\theta+2\\sqrt{Tt}+8t/(3\\sqrt\\theta)$.\nThe concentration event is constructed from the true centered observations\nand the inequality is uniform over the pilot ball; no independence of the\npilot and sample is assumed.\n\nFor the exact pilot of [[alg-adaptive-truncated-covariance-estimator]], the\nexplicit sufficient sample condition\n$$m\\ge10^{16}D\\beta$$\ntherefore gives\n$$P\\!\\left(\\|\\widehat\\Sigma_\\theta-\\Sigma\\|_{\\rm op}>3\\sigma\\sqrt{\\beta/m}\\right)\\le(h_p+1)e^{-\\beta}\\le5p e^{-\\beta}.$$\nEvery finite-fourth-moment law is retained under this trace-aware sample\ncondition; no coordinate independence or bounded-kurtosis assumption is\nadded. If the mean is supplied exactly, the stronger bound\n$2.7\\sigma\\sqrt{\\beta/m}$ holds with failure at most $p e^{-\\beta}$ for\nevery $m\\ge1$, without the $D$ sample condition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, Lemma 2.1 and §§4.1–4.2",
+              "url": "https://arxiv.org/pdf/1708.00502"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-huber-covariance-mixture-is-a-probability-measure",
+        "kind": "lemma",
+        "title": "The Gaussian Huber covariance mixture is a probability law",
+        "deps": [
+          "def-huber-covariance-model",
+          "def-probability-measure",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §2",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited only from the Gaussian-law supplier in the model definition; the convex-mixture calculation is choice-free.",
+        "dependency_level": 3,
+        "statement": "For every admissible $p,\\epsilon,\\Sigma,Q$ in\n[[def-huber-covariance-model]], $P_{\\epsilon,\\Sigma,Q}$ is a probability\nmeasure on the Borel subsets of $\\mathbb R^p$."
+      },
+      {
+        "id": "lem-adaptive-covariance-lepski-scale-reduction",
+        "kind": "lemma",
+        "title": "Lepski scale selection transfers fixed-scale covariance bounds",
+        "deps": [
+          "alg-adaptive-truncated-covariance-estimator",
+          "lem-adaptive-truncated-covariance-estimator-is-total",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-matrix-variance-of-a-random-vector"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4,
+        "statement": "Let $\\Sigma\\ne0$, $\\sigma_0>0$, $m\\ge1$, $\\beta>1$ and\n$0<\\sigma_{\\min}\\le\\sigma_0\\le\\sigma_{\\max}$. Use the finite grid and\nagreement rule of [[alg-adaptive-truncated-covariance-estimator]], with any\nmatrix estimates on that grid. Put\n$$L_g=\\log_2(2\\sigma_{\\max}/\\sigma_{\\min}),\\quad J=\\{0,\\ldots,\\lceil L_g\\rceil-1\\},\\quad \\bar j=\\left\\lceil\\log_2(\\sigma_0/\\sigma_{\\min})\\right\\rceil,\\quad N_+=\\lceil L_g\\rceil-\\bar j.$$\nOn any event on which every $j\\ge\\bar j$ satisfies\n$\\|\\widehat\\Sigma_j-\\Sigma\\|\\le3\\sigma_j\\sqrt{\\beta/m}$, the selected\nestimate satisfies $\\|\\widehat\\Sigma^*-\\Sigma\\|<18\\sigma_0\\sqrt{\\beta/m}$.\nIf the individual failures are at most $q_j$, its success probability is at\nleast $1-\\sum_{j\\ge\\bar j}q_j$. In particular the earlier conditional\nbound, with $d=\\sigma_0^2/\\|\\Sigma\\|_{\\rm op}^2$ and $q_j=5d e^{-\\beta}$, gives\n$1-5d\\lceil L_g\\rceil e^{-\\beta}$, without asserting those individual\nbounds for an estimator whose hypotheses have not been checked.\n\nMore sharply, suppose a common event $E$ has $P(E^c)\\le\\delta$, and for\neach $j\\ge\\bar j$ an event $G_j$ has $P(G_j^c)\\le h e^{-\\beta}$, with\nthe stated fixed-scale bound valid on $E\\cap G_j$. Then success is at\nleast $1-\\delta-hN_+e^{-\\beta}$. No independence between scales or the\npilot and covariance estimates is required. The exact grid cardinality is\n$\\lceil L_g\\rceil$, not the generally false unrounded bound $|J|\\le L_g$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, Theorem 2.1 and §4.3",
+              "url": "https://arxiv.org/pdf/1708.00502"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-gaussian-kullback-leibler-covariance-formula",
+        "kind": "lemma",
+        "title": "Kullback–Leibler divergence between nondegenerate centered Gaussian laws",
+        "deps": [
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "thm-change-of-variables-for-expectation",
+          "def-kullback-leibler-divergence",
+          "def-trace-of-a-square-matrix",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-is-product-of-eigenvalues",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, Theorems 3.2 and 5.1 proofs",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              },
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 5",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "axiom_use": "AC is inherited from the finite-dimensional Gaussian-law definition. The Borel change-of-variables supplier assumes Countable Choice, which follows from AC; no further choice is used.",
+        "proof_strategy": "direct",
+        "statement": "Let $p\\ge1$ and let $\\Sigma_0,\\Sigma_1$ be real symmetric positive-definite\n$p\\times p$ matrices. Under the Gaussian law and directional KL conventions\nof [[def-multivariate-normal-law]] and\n[[def-kullback-leibler-divergence]],\n$$D\\bigl(N_p(0,\\Sigma_0)\\|N_p(0,\\Sigma_1)\\bigr)=\\frac12\\left[\\operatorname{tr}(\\Sigma_1^{-1}\\Sigma_0)-p+\\log\\frac{\\det\\Sigma_1}{\\det\\Sigma_0}\\right].$$"
+      },
+      {
+        "id": "lem-matrix-depth-maximizer-exists-on-compact-classes",
+        "kind": "lemma",
+        "title": "A matrix-depth maximizer exists on the bounded covariance classes",
+        "deps": [
+          "def-matrix-depth-covariance-estimator",
+          "def-bounded-spectrum-covariance-class",
+          "def-block-sparse-covariance-class",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-heine-borel-rn",
+          "def-upper-semicontinuous-real-map-on-a-topological-space",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "lem-closed-subset-of-a-compact-space-is-compact",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §3.1 and §3.2",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through beta in the estimator definition. The compactness and upper-semicontinuity proof itself is choice-free.",
+        "dependency_level": 4,
+        "statement": "For every integer $p\\ge1$, every nonempty finite sample in $\\mathbb R^p$,\nand every $M>0$, the dense argmax correspondence in\n[[def-matrix-depth-covariance-estimator]] is nonempty compact. If\n$1\\le s\\le p/2$, the single-block sparse argmax correspondence is also\nnonempty compact."
+      },
+      {
+        "id": "lem-scaled-gaussian-covariance-has-depth-at-least-half",
+        "kind": "lemma",
+        "title": "The scaled Gaussian covariance has matrix depth at least one half",
+        "deps": [
+          "def-matrix-depth-covariance-estimator",
+          "lem-matrix-depth-gaussian-scale-constant-exists-uniquely",
+          "def-huber-covariance-model",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, Proposition 3.1",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the finite-dimensional Gaussian-law supplier. The one-dimensional probability calculation is choice-free.",
+        "dependency_level": 4,
+        "statement": "Let $\\Sigma\\succeq0$, let $U\\subseteq S^{p-1}$ be nonempty, and let\n$N_p(0,\\Sigma)$ be its centered Gaussian law. If $\\beta$ is the unique\npositive constant satisfying $\\Phi(\\sqrt\\beta)=3/4$, then\n$$D_U(\\beta\\Sigma,N_p(0,\\Sigma))\\ge\\frac12.$$\nEquality holds for every direction with positive variance; when $\\Sigma=0$\nthe depth is $1$."
+      },
+      {
+        "id": "lem-huber-covariance-ambient-action-tail-lower-bound",
+        "kind": "lemma",
+        "title": "Huber covariance modulus lower bound for unrestricted matrix-valued actions",
+        "deps": [
+          "def-bounded-spectrum-covariance-class",
+          "def-block-sparse-covariance-class",
+          "def-huber-covariance-model",
+          "def-contamination-modulus",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-inner-product-norm",
+          "def-measurable-space",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "def-axiom-of-choice",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "lem-huber-contamination-mixtures-can-be-equalized-under-tv-threshold"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §5 and supplement",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              },
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 5, §5.3",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "axiom_use": "AC is required by the Huber mixture equalization supplier. All other steps are finite-product identities or pointwise triangle inequalities and use no further choice.",
+        "proof_strategy": "direct",
+        "statement": "Assume AC. Fix $p,n\\ge1$, $M>0$, $0\\le\\epsilon\\le1$, and let $\\Theta$ be\neither $\\mathcal F_p(M)$ from [[def-bounded-spectrum-covariance-class]] or\n$\\mathcal F_{p,s}(M)$ from [[def-block-sparse-covariance-class]] with\n$1\\le s\\le p/2$, equipped with its induced Borel sigma-algebra. Let\n$\\mathscr E_n$ be the set of Borel maps\n$(\\mathbb R^p)^n\\to\\mathbb R^{p\\times p}$. The clean family is\n$P_\\Sigma=N_p(0,\\Sigma)$. For $\\Sigma\\in\\Theta$ and matrix action $A$, put\n$$\\ell(\\Sigma,A)=\\|\\Sigma-A\\|_{\\rm op}^2.$$\nIts restriction to $\\Theta\\times\\Theta$ defines the contamination modulus\n$\\omega(\\epsilon,\\Theta)$ through [[def-contamination-modulus]]. Suppose\n$\\omega(\\epsilon,\\Theta)<\\infty$, $0\\le M_0<\\infty$, $0<c_0\\le1$, and\n$$\\inf_{\\widehat\\Sigma\\in\\mathscr E_n}\\sup_{\\Sigma\\in\\Theta} P_\\Sigma^{\\otimes n}\\{\\ell(\\Sigma,\\widehat\\Sigma)\\ge M_0\\}\\ge c_0.$$\nThen\n$$\\inf_{\\widehat\\Sigma\\in\\mathscr E_n}\\sup_{\\Sigma\\in\\Theta}\\sup_Q P_{\\epsilon,\\Sigma,Q}^{\\otimes n} \\left\\{\\ell(\\Sigma,\\widehat\\Sigma)\\ge \\frac1{16}\\bigl(M_0\\vee\\omega(\\epsilon,\\Theta)\\bigr)\\right\\} \\ge\\min(c_0,1/2).$$"
+      },
+      {
+        "id": "lem-huber-covariance-contamination-modulus-lower-bound",
+        "kind": "lemma",
+        "title": "The Huber covariance contamination modulus is at least M squared epsilon squared",
+        "deps": [
+          "def-huber-covariance-model",
+          "def-bounded-spectrum-covariance-class",
+          "def-block-sparse-covariance-class",
+          "lem-gaussian-kullback-leibler-covariance-formula",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-pinsker",
+          "def-contamination-modulus",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, proof of Theorems 3.2 and 3.7",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the finite-dimensional Gaussian-law supplier; the covariance pair is explicit and uses no further choice.",
+        "dependency_level": 5,
+        "statement": "For fixed $M>0$, $0\\le\\epsilon\\le1$, and $p\\ge1$, the squared operator\nloss $L(\\Sigma_0,\\Sigma_1)=\\|\\Sigma_0-\\Sigma_1\\|_{\\rm op}^2$ has\ncontamination modulus at least $c_M\\epsilon^2$ on $\\mathcal F_p(M)$ and on\n$\\mathcal F_{p,s}(M)$ for every $1\\le s\\le p/2$."
+      },
+      {
+        "id": "lem-huber-matrix-depth-estimator-operator-error",
+        "kind": "lemma",
+        "title": "Operator error bound for the Gaussian Huber matrix-depth estimator",
+        "deps": [
+          "def-matrix-depth-covariance-estimator",
+          "def-huber-covariance-model",
+          "def-bounded-spectrum-covariance-class",
+          "def-block-sparse-covariance-class",
+          "lem-matrix-depth-maximizer-exists-on-compact-classes",
+          "lem-scaled-gaussian-covariance-has-depth-at-least-half",
+          "lem-projection-slab-uniform-deviation",
+          "lem-matrix-depth-gaussian-scale-constant-exists-uniquely",
+          "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "cor-mean-value-theorem",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-axiom-of-choice",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-composition-with-borel-functions-preserves-measurability"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, Theorem 7.1 and proofs of Theorems 3.1 and 3.6",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the Gaussian Huber model. The comparison proof takes a Borel statistic as input and adds no choice.",
+        "dependency_level": 5,
+        "statement": "Let $X_1,\\ldots,X_n$ be independent with common law\n$P_{\\epsilon,\\Sigma,Q}$ from [[def-huber-covariance-model]], where\n$\\Sigma\\in\\mathcal F_p(M)$, $0\\le\\epsilon<1/5$, $Q$ is arbitrary, and\n$M>0$ is fixed. Let $\\widehat\\Gamma$ be a Borel measurable positive semidefinite symmetric matrix-valued statistic satisfying\n$$D_U(\\widehat\\Gamma,P_n)\\ge D_U(\\beta\\Sigma,P_n)$$\nfor every sample. This includes every measurable global maximizer and every measurable maximizer over a compact search class containing $\\beta\\Sigma$. For a direction family\n$U=\\bigcup_{j=1}^mV_{S_j}$ with $m\\ge1$, nonempty $S_j\\subseteq[p]$, integer\n$r\\ge1$, and $|S_j|\\le r$, assume $0<\\delta<1/2$ and\n$C_1(r+\\log(m/\\delta))/n<1$ for a sufficiently large universal $C_1$.\nThen, uniformly over $Q$ and $\\Sigma$,\n$$\\sup_{u\\in U}|u^T(\\widehat\\Gamma/\\beta-\\Sigma)u| \\le C_M\\left(\\epsilon+\\sqrt{\\frac{r+\\log(m/\\delta)}n}\\right)$$\nwith probability at least $1-2\\delta$. Here $C_M$ depends only on the\nfixed spectrum bound $M$.\n\nThis is a comparison bound. Existence of selectors is separate from this argument; the dense and block-sparse global and bounded-class selectors are proved in the local selection lemma."
+      },
+      {
+        "id": "lem-measurable-matrix-depth-maximizer-selection",
+        "kind": "lemma",
+        "title": "Measurable selection of a matrix-depth maximizer",
+        "deps": [
+          "def-matrix-depth-covariance-estimator",
+          "lem-matrix-depth-maximizer-exists-on-compact-classes",
+          "def-axiom-of-choice",
+          "def-upper-semicontinuous-real-map-on-a-topological-space",
+          "def-borel-sigma-algebra",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-block-sparse-covariance-class"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §3.2",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "axiom_use": "AC is inherited through beta in the matrix-depth definition. The deterministic finite dyadic construction adds no choice principle.",
+        "dependency_level": 5,
+        "statement": "For every nonempty finite sample, both the bounded-class and global dense\nand block-sparse argmax correspondences in\n[[def-matrix-depth-covariance-estimator]] admit Borel measurable selectors\nas functions of the sample. The covariance output obtained by division by\n$\\beta$ is Borel as well. No computational feasibility is asserted.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-heavy-tailed-covariance-bound",
+        "kind": "theorem",
+        "title": "Adaptive truncated covariance has a finite matrix-variance operator bound",
+        "deps": [
+          "alg-adaptive-truncated-covariance-estimator",
+          "lem-adaptive-truncated-covariance-estimator-is-total",
+          "lem-fixed-scale-truncated-covariance-deviation",
+          "lem-adaptive-covariance-lepski-scale-reduction",
+          "lem-matrix-variance-intrinsic-dimension-at-least-one",
+          "def-matrix-variance-of-a-random-vector",
+          "lem-covariance-median-pilot-exact-block-budget",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 5,
+        "statement": "Assume Countable Choice. Let $X_1,\\ldots,X_m\\in\\mathbb R^p$ be clean iid\nobservations with mean $\\mu$, nonzero covariance $\\Sigma$, and finite fourth\ncentral moment. For the matrix variance in\n[[def-matrix-variance-of-a-random-vector]], put\n$$d=\\frac{\\sigma_0^2}{\\|\\Sigma\\|^2},\\qquad D=\\max\\left\\{d,\\left(\\frac{\\operatorname{tr}\\Sigma}{\\sigma_0}\\right)^2\\right\\}.$$\nSuppose $\\beta>1$, $0<\\sigma_{\\min}\\le\\sigma_0\\le\\sigma_{\\max}$ and\n$$m\\ge10^{16}D\\beta.$$\nThe same-sample pilot and original scale/selection rule of\n[[alg-adaptive-truncated-covariance-estimator]] then satisfy\n$$P\\!\\left(\\|\\widehat\\Sigma^*-\\Sigma\\|_{\\rm op}>18\\sigma_0\\sqrt{\\frac\\beta m}\\right)\\le5p\\log_2\\!\\left(\\frac{2\\sigma_{\\max}}{\\sigma_{\\min}}\\right)e^{-\\beta}.$$\nHere $p$ is ambient dimension; it is not the intrinsic ratio $d$. More\nprecisely, with $L_g=\\log_2(2\\sigma_{\\max}/\\sigma_{\\min})$ and\n$N_+=\\lceil L_g\\rceil-\\lceil\\log_2(\\sigma_0/\\sigma_{\\min})\\rceil$, the\nfailure bound is\n$$\\left[1+\\frac{3p+1}{2}N_+\\right]e^{-\\beta}.$$\nThe trace-aware sample condition is sufficient, not necessary. All clean\nfinite-fourth-moment laws remain eligible; no coordinate independence,\nkurtosis bound, contamination or replacement guarantee is imposed.\nThe broader uniform pilot-accuracy formula in\n[[lem-fixed-scale-truncated-covariance-deviation]] can be used instead of\nthis sufficient sample condition whenever it establishes the same\nfixed-scale radius for each required scale.",
+        "sources": {
+          "references": [
+            {
+              "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, Theorem 2.1 and §4.3",
+              "url": "https://arxiv.org/pdf/1708.00502"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-clean-block-sparse-gaussian-covariance-minimax-lower-bound",
+        "kind": "lemma",
+        "title": "Clean block-sparse Gaussian covariance has squared operator lower rate s log(ep/s) over n",
+        "deps": [
+          "def-block-sparse-covariance-class",
+          "def-multivariate-normal-law",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-frobenius-matrix-norm",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "lem-gaussian-kullback-leibler-covariance-formula",
+          "thm-pinsker",
+          "thm-fano-packing",
+          "thm-product-kl-additivity",
+          "thm-two-point-le-cam-risk-bound",
+          "def-axiom-of-choice",
+          "def-measurable-function-between-measurable-spaces",
+          "def-borel-sigma-algebra",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, proof of Theorem 3.7",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              },
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 5",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the finite-dimensional Gaussian-law supplier. Every packing used below is an explicit finite set and needs no further choice.",
+        "dependency_level": 6,
+        "statement": "Fix $M>0$ and integers $1\\le s\\le p/2$. There are constants\n$c_M,c_1>0$ such that if $s\\log(ep/s)/n\\le c_1$, then\n$$\\inf_{\\widehat\\Sigma}\\sup_{\\Sigma\\in\\mathcal F_{p,s}(M)} P_\\Sigma^{\\otimes n}\\!\\left\\{\\|\\widehat\\Sigma-\\Sigma\\|_{\\rm op}^2 \\ge c_M\\frac{s\\log(ep/s)}n\\right\\}\\ge c_1.$$\nThe infimum is over Borel maps $(\\mathbb R^p)^n\\to\\mathbb R^{p\\times p}$.\nThis is the\nsingle-common-block class, not a row-sparsity class."
+      },
+      {
+        "id": "lem-clean-dense-gaussian-covariance-minimax-lower-bound",
+        "kind": "lemma",
+        "title": "Clean Gaussian covariance has a capped squared operator lower rate",
+        "deps": [
+          "def-bounded-spectrum-covariance-class",
+          "def-multivariate-normal-law",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-frobenius-matrix-norm",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+          "lem-gaussian-kullback-leibler-covariance-formula",
+          "thm-pinsker",
+          "thm-fano-packing",
+          "thm-product-kl-additivity",
+          "thm-two-point-le-cam-risk-bound",
+          "def-axiom-of-choice",
+          "def-measurable-function-between-measurable-spaces",
+          "def-borel-sigma-algebra",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-hyperbolic-functions",
+          "thm-hyperbolic-identities-and-derivatives",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-mean-value-theorem",
+          "thm-composition-with-borel-functions-preserves-measurability"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, proof of Theorem 3.2",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              },
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 5",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the finite-dimensional Gaussian-law supplier. The sign families and finite codes are chosen from explicit finite sets, so they require no further choice.",
+        "dependency_level": 6,
+        "statement": "Fix $M>0$. There are constants $c_M,c_1>0$ such that if $p/n\\le c_1$,\n$$\\inf_{\\widehat\\Sigma}\\sup_{\\Sigma\\in\\mathcal F_p(M)} P_\\Sigma^{\\otimes n}\\!\\left\\{\\|\\widehat\\Sigma-\\Sigma\\|_{\\rm op}^2 \\ge c_M\\frac pn\\right\\}\\ge c_1.$$\nThe infimum is over Borel maps $(\\mathbb R^p)^n\\to\\mathbb R^{p\\times p}$.\nThe constants\nmay depend on $M$, but not on $p$ or $n$.\n\nIn addition, there is $a_M>0$ such that for every $p,n\\ge1$,\n$$\\inf_{\\widehat\\Sigma}\\sup_{\\Sigma\\in\\mathcal F_p(M)}P_\\Sigma^{\\otimes n}\\left\\{\\|\\widehat\\Sigma-\\Sigma\\|_{\\rm op}^2\\ge a_M\\min\\{1,p/n\\}\\right\\}\\ge c_1.$$\nOne may choose $0<c_1\\le1/16$ and $a_M=\\min\\{c_Mc_1/2,M^2c_1/64\\}$ after fixing the constants of the first assertion. Thus the original small-ratio lower bound is retained and the capped extension covers every dimension and sample size."
+      },
+      {
+        "id": "thm-huber-covariance-upper-and-lower-risk",
+        "kind": "theorem",
+        "title": "Dense Gaussian Huber covariance has squared operator risk max(p over n, epsilon squared)",
+        "deps": [
+          "def-huber-covariance-model",
+          "def-bounded-spectrum-covariance-class",
+          "def-matrix-depth-covariance-estimator",
+          "lem-measurable-matrix-depth-maximizer-selection",
+          "lem-huber-matrix-depth-estimator-operator-error",
+          "lem-clean-dense-gaussian-covariance-minimax-lower-bound",
+          "lem-huber-covariance-contamination-modulus-lower-bound",
+          "lem-huber-covariance-ambient-action-tail-lower-bound",
+          "def-axiom-of-choice",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, Theorems 3.1, 3.2 and 5.1",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              },
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 5",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the Gaussian covariance model; the local error bounds and the contamination reduction add no choice.",
+        "dependency_level": 7,
+        "statement": "Fix $M>0$. Let $X_1,\\ldots,X_n$ be independent with common law\n$P_{\\epsilon,\\Sigma,Q}$ from [[def-huber-covariance-model]], where\n$\\Sigma\\in\\mathcal F_p(M)$ and $Q$ is arbitrary. If $0\\le\\epsilon<1/5$,\n$0<\\delta<1/2$, and\n$C_1(p+\\log(1/\\delta))/n<1$ for a sufficiently large universal $C_1$,\nthen every Borel measurable dense matrix-depth estimator, from either the global positive semidefinite correspondence or the bounded-class correspondence,\n$\\widehat\\Sigma=\\widehat\\Gamma/\\beta$ from\n[[def-matrix-depth-covariance-estimator]] satisfies\n$$\\|\\widehat\\Sigma-\\Sigma\\|_{\\rm op}^2 \\le C_M\\left[\\left(\\frac pn\\vee\\epsilon^2\\right) +\\frac{\\log(1/\\delta)}n\\right]$$\nwith probability at least $1-2\\delta$, uniformly over $Q$ and\n$\\Sigma\\in\\mathcal F_p(M)$.\n\nSuch Borel maximizing selectors exist by [[lem-measurable-matrix-depth-maximizer-selection]].\n\nThere are constants $c_M,c_M'>0$ such that for every $p,n\\ge1$ and every $0\\le\\epsilon\\le1$,\n$$\\inf_{\\widetilde\\Sigma}\\sup_{\\Sigma\\in\\mathcal F_p(M)}\\sup_Q P_{\\epsilon,\\Sigma,Q}^{\\otimes n}\\!\\left\\{ \\|\\widetilde\\Sigma-\\Sigma\\|_{\\rm op}^2 \\ge c_M\\min\\left\\{1,\\frac pn\\vee\\epsilon^2\\right\\}\\right\\}\\ge c_M'.$$\nThe infimum is over all Borel maps $(\\mathbb R^p)^n\\to\\mathbb R^{p\\times p}$.\nThe constants may depend on $M$."
+      },
+      {
+        "id": "thm-huber-sparse-covariance-upper-and-lower-risk",
+        "kind": "theorem",
+        "title": "Block-sparse Gaussian Huber covariance has squared operator risk max(s log(ep over s) over n, epsilon squared)",
+        "deps": [
+          "def-huber-covariance-model",
+          "def-block-sparse-covariance-class",
+          "def-matrix-depth-covariance-estimator",
+          "lem-measurable-matrix-depth-maximizer-selection",
+          "lem-huber-matrix-depth-estimator-operator-error",
+          "lem-clean-block-sparse-gaussian-covariance-minimax-lower-bound",
+          "lem-huber-covariance-contamination-modulus-lower-bound",
+          "lem-huber-covariance-ambient-action-tail-lower-bound",
+          "def-axiom-of-choice",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "def-factorial-and-falling-factorial",
+          "def-canonical-natural",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-product-rule",
+          "thm-ftc-second-part",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "def-integer-power",
+          "lem-power-laws",
+          "lem-finite-set-has-max"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, Theorems 3.6, 3.7 and 5.1",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              },
+              {
+                "title": "Philippe Rigollet, 18.S997 High-Dimensional Statistics Lecture Notes, MIT OpenCourseWare, Chapter 5",
+                "url": "https://ocw.mit.edu/courses/18-s997-high-dimensional-statistics-spring-2015/619e4ae252f1b26cbe0f7a29d5932978_MIT18_S997S15_CourseNotes.pdf"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the Gaussian covariance model; the local error bounds and the contamination reduction add no choice.",
+        "dependency_level": 7,
+        "statement": "Fix $M>0$ and an integer $1\\le s\\le p/2$. Let $X_1,\\ldots,X_n$ be\nindependent with common law $P_{\\epsilon,\\Sigma,Q}$ from\n[[def-huber-covariance-model]], where $\\Sigma\\in\\mathcal F_{p,s}(M)$ and\n$Q$ is arbitrary. If $0\\le\\epsilon<1/5$, $0<\\delta<1/2$, and\n$$C_1\\frac{s\\log(ep/s)+\\log(1/\\delta)}n<1$$\nfor sufficiently large universal $C_1$, then every Borel measurable restricted matrix-depth estimator, from either the global single-block correspondence or the bounded-class correspondence,\n$\\widehat\\Sigma=\\widehat\\Gamma/\\beta$ satisfies\n$$\\|\\widehat\\Sigma-\\Sigma\\|_{\\rm op}^2 \\le C_M\\left[\\left(\\frac{s\\log(ep/s)}n\\vee\\epsilon^2\\right) +\\frac{\\log(1/\\delta)}n\\right]$$\nwith probability at least $1-2\\delta$, uniformly over $Q$ and\n$\\Sigma\\in\\mathcal F_{p,s}(M)$.\n\nSuch Borel maximizing selectors exist by [[lem-measurable-matrix-depth-maximizer-selection]].\n\nThere are constants $c_M,c_M',c_1>0$ such that whenever\n$s\\log(ep/s)/n\\le c_1$, for every $0\\le\\epsilon\\le1$,\n$$\\inf_{\\widetilde\\Sigma}\\sup_{\\Sigma\\in\\mathcal F_{p,s}(M)}\\sup_Q P_{\\epsilon,\\Sigma,Q}^{\\otimes n}\\!\\left\\{ \\|\\widetilde\\Sigma-\\Sigma\\|_{\\rm op}^2 \\ge c_M\\left(\\frac{s\\log(ep/s)}n\\vee\\epsilon^2\\right)\\right\\}\\ge c_M'.$$\nThe constants may depend on $M$. The class is one common correlated block,\nnot a row-sparsity class. The infimum is over all Borel maps\n$(\\mathbb R^p)^n\\to\\mathbb R^{p\\times p}$."
+      }
+    ],
+    "batch": "34"
+  },
+  {
+    "order": 1911,
+    "id": "robust-covariance-and-high-dimensional-stability-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Robust Covariance and Sparse Robust Estimation — Examples",
+    "companion": "robust-covariance-and-high-dimensional-stability",
+    "requires": [
+      "robust-covariance-and-high-dimensional-stability"
+    ],
+    "items": [
+      {
+        "id": "cex-matrix-variance-does-not-dominate-trace-covariance-product",
+        "kind": "counterexample",
+        "title": "Matrix variance need not dominate trace covariance times operator norm",
+        "deps": [
+          "def-covariance-matrix-of-a-random-vector",
+          "def-matrix-variance-of-a-random-vector",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated",
+          "sources": {
+            "references": [
+              {
+                "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, Corollary 5.1",
+                "url": "https://arxiv.org/pdf/1708.00502"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2,
+        "generation": {
+          "role": "counterexample"
+        },
+        "statement": "For every centered square-integrable random vector $Z$ with finite fourth\nmoment, the matrix variance\n$$\\sigma_0^2=\\left\\|\\mathbb E[\\|Z\\|_2^2ZZ^T]\\right\\|_{\\rm op}$$\nis at least $\\operatorname{tr}(\\Sigma)\\|\\Sigma\\|_{\\rm op}$, where\n$\\Sigma=\\mathbb E[ZZ^T]$."
+      },
+      {
+        "id": "ex-clean-heavy-tailed-finite-matrix-variance",
+        "kind": "example",
+        "title": "A polynomial-tail law with finite matrix variance",
+        "deps": [
+          "def-covariance-matrix-of-a-random-vector",
+          "def-matrix-variance-of-a-random-vector",
+          "thm-p-series-rational",
+          "def-nonnegative-weighted-sum-of-measures",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "def-measurable-function-between-measurable-spaces",
+          "def-borel-sigma-algebra",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "cor-cauchy-schwarz-for-random-variables"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated",
+          "sources": {
+            "references": [
+              {
+                "title": "Stanislav Minsker and Xiaohan Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions, §2",
+                "url": "https://arxiv.org/pdf/1708.00502"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2,
+        "generation": {
+          "role": "example"
+        },
+        "statement": "For $r>1$ let $\\zeta(r)=\\sum_{k=1}^{\\infty}k^{-r}$. On\n$\\Omega=\\mathbb Z\\setminus\\{0\\}$ with its power-set sigma-algebra,\nlet\n$$P=\\sum_{k=1}^{\\infty}\\frac{1}{2\\zeta(6)k^6}(\\delta_k+\\delta_{-k}).$$\nSet $X(\\omega)=\\omega$. Thus the two atoms $k,-k$ each have mass\n$1/(2\\zeta(6)k^6)$."
+      },
+      {
+        "id": "cex-bounded-spectrum-covariance-lower-rate-must-be-capped",
+        "kind": "counterexample",
+        "title": "A bounded covariance class forces a capped lower rate",
+        "deps": [
+          "def-bounded-spectrum-covariance-class",
+          "def-huber-covariance-model",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-of-archimedean",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the Gaussian Huber model; the deterministic zero-estimator calculation adds no choice.",
+        "statement": "For fixed $M>0$, there are positive constants $C_M,c_0$ such that for every $p,n\\ge1$ and $0\\le\\epsilon\\le1$,\n$$\\inf_{\\widehat\\Sigma}\\sup_{\\Sigma\\in\\mathcal F_p(M)}\\sup_Q P_{\\epsilon,\\Sigma,Q}^{\\otimes n}\\left\\{\\|\\widehat\\Sigma-\\Sigma\\|_{\\rm op}^2\\ge C_M\\bigl((p/n)\\vee\\epsilon^2\\bigr)\\right\\}\\ge c_0,$$\nwhere the infimum ranges over all Borel matrix-valued estimators."
+      },
+      {
+        "id": "cex-intrinsic-variance-alone-does-not-control-covariance-pilot",
+        "kind": "counterexample",
+        "title": "Intrinsic matrix variance alone does not control pilot-centered covariance truncation",
+        "deps": [
+          "alg-adaptive-truncated-covariance-estimator",
+          "def-matrix-variance-of-a-random-vector",
+          "def-covariance-matrix-of-a-random-vector",
+          "def-countable-choice",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 3,
+        "statement": "There is a universal $C$ such that every clean iid finite-fourth-moment law\nwith nonzero covariance, intrinsic matrix-variance ratio\n$d=\\sigma_0^2/\\|\\Sigma\\|_{\\rm op}^2$ and $m\\ge Cd\\beta$ has the\nfollowing guarantees for the same-sample geometric-median pilot procedure:\nthe fixed-scale error is at most $3\\sigma\\sqrt{\\beta/m}$, with failure\nat most $5d e^{-\\beta}$, and the adaptive error is at most\n$18\\sigma_0\\sqrt{\\beta/m}$, with failure at most\n$5d\\log_2(2\\sigma_{\\max}/\\sigma_{\\min})e^{-\\beta}$.\nEven replacing the failure prefactor $d$ by ambient dimension $p$ does not\nmake the $Cd\\beta$ sample condition sufficient in general.",
+        "sources": {
+          "references": [
+            {
+              "title": "Minsker and Wei, Estimation of the Covariance Structure of Heavy-Tailed Distributions",
+              "url": "https://arxiv.org/pdf/1708.00502"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-block-sparse-huber-covariance-model",
+        "kind": "example",
+        "title": "A covariance matrix with one correlated block",
+        "deps": [
+          "def-huber-covariance-model",
+          "def-block-sparse-covariance-class",
+          "lem-huber-covariance-mixture-is-a-probability-measure",
+          "def-axiom-of-choice",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §3.4",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the finite-dimensional Gaussian law; the block-support and mixture checks use no further choice.",
+        "dependency_level": 4,
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $p=4$, $s=2$, $M=2$, $\\epsilon=1/10$, and\n$$\\Sigma=I_4+\\frac14(e_1e_2^T+e_2e_1^T),\\qquad Q=\\delta_0.$$\nThe observations have law $P_{\\epsilon,\\Sigma,Q}$."
+      },
+      {
+        "id": "ex-dense-huber-covariance-model",
+        "kind": "example",
+        "title": "Dense Gaussian Huber covariance model",
+        "deps": [
+          "def-huber-covariance-model",
+          "def-bounded-spectrum-covariance-class",
+          "lem-huber-covariance-mixture-is-a-probability-measure",
+          "def-axiom-of-choice",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated",
+          "sources": {
+            "references": [
+              {
+                "title": "Mengjie Chen, Chao Gao and Zhao Ren, Robust Covariance and Scatter Matrix Estimation under Huber's Contamination Model, §2",
+                "url": "https://arxiv.org/pdf/1506.00691"
+              }
+            ]
+          }
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the finite-dimensional Gaussian law; the explicit matrix checks use no further choice.",
+        "dependency_level": 4,
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $p=2$, $M=2$, $\\epsilon=1/10$,\n$$\\Sigma=\\begin{pmatrix}1&1/4\\\\1/4&1\\end{pmatrix},\\qquad Q=\\delta_{(2,0)}.$$\nTake independent observations with the Gaussian Huber law\n$P_{\\epsilon,\\Sigma,Q}$ from [[def-huber-covariance-model]]."
+      }
+    ],
+    "batch": "34"
+  }
+]

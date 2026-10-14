@@ -1,0 +1,398 @@
+[
+  {
+    "order": 1898,
+    "id": "semiparametric-models-and-tangent-spaces",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Semiparametric Models and Tangent Spaces",
+    "companion": "semiparametric-models-and-tangent-spaces-examples",
+    "requires": [
+      "dominated-experiments-likelihood-and-sufficiency",
+      "local-asymptotic-normality-contiguity-and-efficiency",
+      "hilbert-space-geometry-and-riesz-representation"
+    ],
+    "items": [
+      {
+        "id": "def-mean-zero-square-integrable-space",
+        "kind": "definition",
+        "title": "Mean-zero square-integrable functions",
+        "statement": "Let $P$ be a probability measure on $(\\mathcal X,\\mathcal A)$. Here $L^2(P)$ is the real space of square-integrable measurable functions modulo equality $P$-almost surely, with its usual quotient norm ([[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]). For $f\\in L^2(P)$, the integral $Pf:=\\int f\\,dP$ is finite and independent of the representative: Cauchy–Schwarz on the probability space gives $\\int|f|\\,dP\\le\\|f\\|_2$, and the expectation of integrable representatives is invariant under almost-sure equality ([[cor-cauchy-schwarz-inequality-for-l-two]], [[lem-expectation-is-independent-of-the-ae-representative]]).\n\nDefine the **mean-zero square-integrable space** by\n\n$$L^2_0(P):=\\{f\\in L^2(P):Pf=0\\}.$$\n\nIt carries the norm inherited from $L^2(P)$. Countable Choice is not needed for this definition; a later local Hilbert-space argument uses it only to inherit completeness from the library's general $L^2$ Hilbert-space result.",
+        "deps": [
+          "def-probability-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "lem-expectation-is-independent-of-the-ae-representative",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Semiparametric Statistics, Lecture 1 §1.2, Lemma 1.8",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            },
+            {
+              "title": "Edward H. Kennedy, Semiparametric theory, §4",
+              "url": "https://arxiv.org/pdf/1709.06418"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-dqm-submodel-through-a-law",
+        "kind": "definition",
+        "title": "A dominated differentiable-in-quadratic-mean submodel",
+        "statement": "Let $\\mathcal M$ be a model of probability measures on a measurable space $(\\mathcal X,\\mathcal A)$, let $\\epsilon>0$, and let $t\\mapsto P_t\\in\\mathcal M$ be a path for $0\\le t<\\epsilon$ with $P_0=P$. It is **dominated by a common measure** when one supplied sigma-finite positive measure $\\mu$ satisfies $P_t\\ll\\mu$ for every $t$ ([[def-dominated-statistical-experiment]]). Write $p_t=dP_t/d\\mu$ and $p=p_0$ for simultaneously supplied nonnegative density versions; the existence and normalization of each density are the Radon–Nikodym properties in [[def-likelihood-density]] and [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]. The Axiom of Choice is the library convention for selecting such a family of versions along a path ([[def-axiom-of-choice]]). The DQM property below is unchanged by replacing any $p_t$ by another version, since each $L^2(\\mu)$ norm is unchanged by a $\\mu$-null modification.\n\nThe path is **differentiable in quadratic mean at $0$**, with **score** $s\\in L^2(P)$, when\n\n$$\\left\\|\\sqrt{p_t}-\\sqrt p-\\frac{t}{2}s\\sqrt p\\right\\|_{L^2(\\mu)}=o(t)\\qquad(t\\downarrow0).$$\n\nHere $o(t)$ means that the displayed norm divided by $t$ tends to $0$ as $t\\downarrow0$; $L^2(P)$ and $L^2(\\mu)$ are quotient spaces modulo almost-everywhere equality ([[def-l-p-space-as-a-quotient-by-null-functions]]). The definition is directional. A two-sided regular submodel qualifies by restricting it to $t\\ge0$. No mean-zero condition is assumed in this definition.",
+        "deps": [
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Semiparametric Statistics, Lecture 1 §1.2, Definition 1.6",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            },
+            {
+              "title": "Edward H. Kennedy, Semiparametric theory, §4",
+              "url": "https://arxiv.org/pdf/1709.06418"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-mean-zero-square-integrable-space-is-hilbert",
+        "kind": "theorem",
+        "title": "The mean-zero L² space is a Hilbert space",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). For any probability measure $P$, the space $L^2_0(P)$ of [[def-mean-zero-square-integrable-space]] is a closed real linear subspace of real $L^2(P)$ with pairing $\\langle f,g\\rangle_P:=\\int fg\\,dP$; consequently it is a real Hilbert space ([[def-hilbert-space]]). The only choice use is the Countable Choice assumption already required by the general $L^2(P)$ completeness supplier.",
+        "strategy": "Identify expectation with the inner product against 1, use Cauchy–Schwarz to show its kernel is closed, and inherit completeness from L²(P).",
+        "deps": [
+          "def-mean-zero-square-integrable-space",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Semiparametric Statistics, Lecture 1 §1.2",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3 and 5.3.1",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-dqm-score-mean-zero",
+        "kind": "theorem",
+        "title": "A DQM score has mean zero and is unique",
+        "statement": "Assume the density-version convention for the path in [[def-dqm-submodel-through-a-law]]. If $s\\in L^2(P)$ is a DQM score, then $Ps=0$, so $s\\in L^2_0(P)$ ([[def-mean-zero-square-integrable-space]]). Moreover, any two scores satisfying the same DQM expansion agree $P$-almost surely. The normalization argument itself uses no choice beyond the density versions already supplied in the definition.",
+        "strategy": "Expand the squared L² norm of the square-root density around √p and use that every p_t is a probability density; subtract two expansions for uniqueness.",
+        "deps": [
+          "def-dqm-submodel-through-a-law",
+          "def-mean-zero-square-integrable-space",
+          "def-likelihood-density",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Semiparametric Statistics, Lecture 1 §1.2, Lemma 1.8",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            },
+            {
+              "title": "Edward H. Kennedy, Semiparametric theory, §4",
+              "url": "https://arxiv.org/pdf/1709.06418"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "def-tangent-set",
+        "kind": "definition",
+        "title": "Tangent set of a statistical model at a law",
+        "statement": "Fix a model $\\mathcal M$ containing a law $P$ and designate a collection of allowed submodels through $P$. Each allowed submodel is a one-sided DQM path as in [[def-dqm-submodel-through-a-law]]. Its score is the $P$-almost-sure equivalence class proved unique by [[thm-dqm-score-mean-zero]], and it belongs to $L^2_0(P)$ ([[def-mean-zero-square-integrable-space]]).\n\nThe **tangent set** $\\dot{\\mathcal M}(P)$ is the set of scores of the designated paths. The model specification determines which paths are allowed. In particular, the tangent set need not be a linear space: it may be a **cone**, meaning it is closed under multiplication by nonnegative real scalars, while failing closure under negative scalars. One-sided restrictions can produce this behavior. The closed linear span of the tangent set is a separate construction.",
+        "deps": [
+          "def-dqm-submodel-through-a-law",
+          "thm-dqm-score-mean-zero",
+          "def-mean-zero-square-integrable-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Semiparametric Statistics, Lecture 1 §1.2",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            },
+            {
+              "title": "Edward H. Kennedy, Semiparametric theory, §4",
+              "url": "https://arxiv.org/pdf/1709.06418"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "def-tangent-space",
+        "kind": "definition",
+        "title": "Closed tangent space",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) so that $L^2_0(P)$ is the real Hilbert space established by [[thm-mean-zero-square-integrable-space-is-hilbert]]. For a tangent set $\\dot{\\mathcal M}(P)\\subseteq L^2_0(P)$, its **linear span** is the set of all finite real linear combinations of elements of $\\dot{\\mathcal M}(P)$; the span of the empty set is $\\{0\\}$. Its **tangent space** $\\mathcal T(P)$ is the closure of that span in the $L^2(P)$ norm. The closure consists of limits of sequences from the span, equivalently of points every positive-radius norm ball around which meets the span.\n\nThe tangent set itself is retained separately and may be a cone rather than a vector space.",
+        "deps": [
+          "def-tangent-set",
+          "def-mean-zero-square-integrable-space",
+          "def-countable-choice",
+          "thm-mean-zero-square-integrable-space-is-hilbert"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Semiparametric Statistics, Lecture 1 §1.2",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            },
+            {
+              "title": "Edward H. Kennedy, Semiparametric theory, §4",
+              "url": "https://arxiv.org/pdf/1709.06418"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-tangent-space-is-closed-linear-subspace",
+        "kind": "theorem",
+        "title": "A tangent space is a closed linear subspace",
+        "statement": "Assume Countable Choice. Let $\\dot{\\mathcal M}(P)$ be any tangent set in the real Hilbert space $L^2_0(P)$. Its tangent space $\\mathcal T(P)$, defined as the norm closure of its finite real linear span ([[def-tangent-space]]), is a closed linear subspace of $L^2_0(P)$ ([[def-linear-subspace]]).",
+        "strategy": "Show the finite span is linear; prove its norm closure is linear and closed; inherit completeness from the ambient Hilbert space.",
+        "deps": [
+          "def-tangent-space",
+          "def-linear-subspace",
+          "def-countable-choice",
+          "thm-mean-zero-square-integrable-space-is-hilbert"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Semiparametric Statistics, Lecture 1 §1.2",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            },
+            {
+              "title": "Edward H. Kennedy, Semiparametric theory, §4",
+              "url": "https://arxiv.org/pdf/1709.06418"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "def-nuisance-tangent-space",
+        "kind": "definition",
+        "title": "Nuisance tangent space",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]), as required by the ambient Hilbert-space and tangent-space conventions. Let $\\mathcal M$ be a model through $P$, let $\\psi:\\mathcal M\\to\\mathbb R^k$ be a specified finite-dimensional parameter-of-interest functional, and let the model designate its nuisance submodels. A **nuisance submodel** is a designated allowed DQM path $t\\mapsto P_t$ through $P$ for which the right derivative $\\lim_{t\\downarrow0}(\\psi(P_t)-\\psi(P))/t$ exists and is the zero vector in $\\mathbb R^k$. Its score belongs to the tangent set $\\dot{\\mathcal M}(P)$ ([[def-tangent-set]]).\n\nThe **nuisance tangent space** $\\mathcal T_\\eta(P)$ is the norm closure in $L^2_0(P)$ of the finite real linear span of scores of nuisance submodels. It is a closed linear subspace by [[def-tangent-space]] and [[thm-tangent-space-is-closed-linear-subspace]]. The designated nuisance submodels are part of the model specification; this definition does not assert that every path with zero first-order target derivative is nuisance unless the model designates it as such.",
+        "deps": [
+          "def-countable-choice",
+          "def-tangent-set",
+          "def-tangent-space",
+          "thm-tangent-space-is-closed-linear-subspace"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Semiparametric Statistics, Lecture 1 §1.2",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            },
+            {
+              "title": "Edward H. Kennedy, Semiparametric theory, §4",
+              "url": "https://arxiv.org/pdf/1709.06418"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "def-nuisance-tangent-orthogonal-complement",
+        "kind": "definition",
+        "title": "Orthogonal complement of a nuisance tangent space",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]), so that $L^2_0(P)$ is the real Hilbert space of [[thm-mean-zero-square-integrable-space-is-hilbert]]. The **orthogonal complement of the nuisance tangent space within $L^2_0(P)$** is\n\n$$\\mathcal T_\\eta(P)^\\perp:=\\{h\\in L^2_0(P):\\langle h,g\\rangle_P=0\\text{ for every }g\\in\\mathcal T_\\eta(P)\\},\\qquad \\langle h,g\\rangle_P:=P(hg).$$\n\nThis is the ordinary orthogonal complement from [[def-orthogonality-and-orthogonal-complement]] applied in the mean-zero Hilbert space, not in all of $L^2(P)$. It is a closed linear subspace by [[lem-orthogonal-complement-is-closed]].",
+        "deps": [
+          "def-nuisance-tangent-space",
+          "def-mean-zero-square-integrable-space",
+          "def-countable-choice",
+          "thm-mean-zero-square-integrable-space-is-hilbert",
+          "def-orthogonality-and-orthogonal-complement",
+          "lem-orthogonal-complement-is-closed"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. W. van der Vaart, Semiparametric Statistics, Lecture 1 §1.2",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            },
+            {
+              "title": "Edward H. Kennedy, Semiparametric theory, §4",
+              "url": "https://arxiv.org/pdf/1709.06418"
+            }
+          ]
+        },
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 1899,
+    "id": "semiparametric-models-and-tangent-spaces-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Semiparametric Models and Tangent Spaces — Examples",
+    "companion": "semiparametric-models-and-tangent-spaces",
+    "requires": [
+      "semiparametric-models-and-tangent-spaces"
+    ],
+    "items": [
+      {
+        "id": "ex-bounded-scores-generate-unrestricted-tangent-space",
+        "kind": "example",
+        "title": "Bounded mean-zero scores generate the unrestricted tangent space",
+        "statement": "Assume the library's Axiom-of-Choice density convention in [[def-dqm-submodel-through-a-law]] and Countable Choice for [[thm-mean-zero-square-integrable-space-is-hilbert]]. Let $P$ be any probability law and take the unrestricted dominated model $\\mathcal M=\\{Q:Q\\ll P\\}$. Its allowed paths are all one-sided DQM paths through $P$ with common dominator $P$. Every bounded mean-zero $s\\in L^2_0(P)$ is such a path score, and the tangent space is all of $L^2_0(P)$. All densities constructed below are explicit, so the example's proof makes no density-selection choice.",
+        "strategy": "Normalize a squared-root perturbation to make a probability density, verify its first-order expansion, and approximate arbitrary mean-zero L² functions by centered truncations.",
+        "deps": [
+          "def-dqm-submodel-through-a-law",
+          "thm-dqm-score-mean-zero",
+          "def-mean-zero-square-integrable-space",
+          "def-countable-choice",
+          "thm-mean-zero-square-integrable-space-is-hilbert",
+          "def-tangent-set",
+          "def-tangent-space",
+          "thm-dominated-convergence",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-regular-bernoulli-submodel-dqm-score",
+        "kind": "example",
+        "title": "A regular Bernoulli submodel and its score",
+        "statement": "Under the Axiom-of-Choice density convention of [[def-dqm-submodel-through-a-law]], let $p\\in(0,1)$ and choose $0<\\delta<\\min(p,1-p)$. On $\\{0,1\\}$ with the full power-set sigma-algebra and counting measure, let $P_t\\{1\\}=p+t$ and $P_t\\{0\\}=1-p-t$ for $|t|<\\delta$. This two-sided regular path, restricted to $t\\ge0$, is DQM at zero with score\n\n$$s(1)=\\frac1p,\\qquad s(0)=-\\frac1{1-p},$$\n\nwhich has $Ps=0$ and $Ps^2=1/[p(1-p)]$. The densities with respect to counting measure are displayed explicitly, so the finite-path calculation makes no choice of versions.",
+        "strategy": "Expand the two square-root masses on the finite sample space and identify the score componentwise.",
+        "deps": [
+          "def-dqm-submodel-through-a-law",
+          "thm-dqm-score-mean-zero",
+          "def-mean-zero-square-integrable-space",
+          "def-axiom-of-choice",
+          "def-measurable-space",
+          "def-probability-measure",
+          "def-sigma-algebra",
+          "def-counting-measure",
+          "prop-counting-measure-is-a-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-boundary-score-cone-and-linear-tangent-space",
+        "kind": "example",
+        "title": "A boundary score cone differs from its tangent space",
+        "statement": "Assume the general DQM density-version convention uses AC and the mean-zero Hilbert-space convention uses Countable Choice; the two-point densities below are explicit, so this proof itself makes no choice. Let $\\mathcal X=\\{-1,+1\\}$ with all subsets measurable and let $P_\\theta\\{x\\}=(1+\\theta x)/2$ for $\\theta\\in[0,1]$. At the boundary law $P_0$, consider allowed one-sided paths $t\\mapsto P_{\\theta(t)}$ with $\\theta(0)=0$, $\\theta(t)\\in[0,1]$, and an existing right derivative at zero. Their DQM score set is the cone $\\{aX:a\\ge0\\}$, while its closed linear tangent space is all of $L^2_0(P_0)=\\{bX:b\\in\\mathbb R\\}$. Thus the score set and its linear tangent space are distinct.",
+        "strategy": "Use the two root-mass expansions to identify all one-sided DQM scores and verify that their nonnegative ray has the full one-dimensional linear span.",
+        "deps": [
+          "def-dqm-submodel-through-a-law",
+          "thm-dqm-score-mean-zero",
+          "def-mean-zero-square-integrable-space",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-tangent-set",
+          "def-tangent-space",
+          "def-measurable-space",
+          "def-probability-measure",
+          "def-sigma-algebra",
+          "def-counting-measure",
+          "prop-counting-measure-is-a-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-mean-zero-square-integrable-space-is-hilbert"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      }
+    ]
+  }
+]

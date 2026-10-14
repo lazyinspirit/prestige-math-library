@@ -1,0 +1,467 @@
+[
+  {
+    "order": 1894,
+    "id": "nonparametric-regression-and-smoothing",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Regression Estimation",
+    "companion": "nonparametric-regression-and-smoothing-examples",
+    "requires": [
+      "nonparametric-density-estimation-and-kernels",
+      "losses-risk-and-decision-rules"
+    ],
+    "items": [
+      {
+        "id": "def-regression-target-version",
+        "kind": "definition",
+        "title": "Regression target and chosen version",
+        "statement": "Assume the Axiom of Choice. Let $X,Y$ be real random variables on a probability\nspace, with $\\mathbb E|Y|<\\infty$, and choose a regular conditional law\n$Q(x,dy)$ of $Y$ given $X=x$. On\n$D=\\{x:\\int |y|\\,Q(x,dy)<\\infty\\}$ define\n$m(x)=\\int y\\,Q(x,dy)$, and put $m(x)=0$ off $D$. By\n[[cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable]],\n$m$ is Borel measurable and $m(X)$ is a version of\n$\\mathbb E[Y\\mid\\sigma(X)]$. A **regression target** is the resulting\n$P_X$-almost-sure equivalence class; a **chosen regression-function version**\nis the particular Borel function selected by the specified conditional law.\n\nPointwise smoothness is an additional hypothesis on the chosen version. It is\nnot implied by existence of conditional expectation, and statements about\n$m(x)$ at a specified point use that selected version.",
+        "deps": [
+          "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable",
+          "def-axiom-of-choice",
+          "def-random-element-and-real-random-variable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-local-linear-normalized-moment-matrix-converges-in-probability",
+        "kind": "lemma",
+        "title": "Local-linear moment matrix converges to a positive-definite limit",
+        "statement": "Let $X_i$ be iid real random variables with density $f$ continuous and\npositive at a fixed point $x$. Let $K$ be finite-valued Borel, nonnegative,\nsymmetric, with $\\int K=1$ and $0<\\mu_2=\\int u^2K(u)\\,du<\\infty$.\nAssume compact kernel support, a globally bounded density $f$, or a bounded\nrapid-tail kernel satisfying $\\sup_{|u|\\ge A}|u|^3K(u)\\to0$.\nFor $h=h_n\\to0$ with $nh_n\\to\\infty$, set $U_i=(x-X_i)/h_n$ and\n$$M_n=\\frac1{nh_n}\\sum_{i=1}^nK(U_i)\\begin{pmatrix}1\\\\U_i\\end{pmatrix}(1,U_i).$$\nThen\n$$M_n\\longrightarrow f(x)\\begin{pmatrix}1&0\\\\0&\\mu_2\\end{pmatrix}\\quad\\text{in probability},$$\nand $\\mathbb P(M_n\\text{ is nonsingular})\\to1$.\nMore generally, the proof establishes $(nh_n)^{-1}\\sum_i L(U_i)\\to f(x)\\int L$\nfor any integrable Borel function $L$, if $f$ is bounded globally or $L$\nhas compact support. Boundedness or square integrability of $L$ is unnecessary.",
+        "deps": [
+          "def-convergence-in-probability",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-measure-with-density",
+          "def-moments-variance-and-covariance",
+          "def-random-element-and-real-random-variable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Whitney K. Newey, Locally Linear Regression, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/40cac15c5fb98b5bf72b8cfaab90c273_local_lin_reg.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "strategy": "direct"
+      },
+      {
+        "id": "def-nadaraya-watson-estimator",
+        "kind": "definition",
+        "title": "Nadaraya–Watson estimator",
+        "statement": "Assume AC as in [[def-regression-target-version]]. Fix a sample size $n\\ge1$,\na prediction point $x\\in\\mathbb R$, a bandwidth $h>0$, a finite-valued\nnonnegative Borel function $K:\\mathbb R\\to[0,\\infty)$, and a fixed fallback\n$a_0\\in\\mathbb R$. For data $(X_i,Y_i)_{i=1}^n$, put\n$$D_{n,h}(x)=\\sum_{i=1}^n K((x-X_i)/h).$$\nThe **Nadaraya–Watson estimator** of the pointwise target $m(x)$ is\n$$\\widehat m_{\\mathrm{NW},h}(x)= \\begin{cases} \\dfrac{\\sum_{i=1}^n K((x-X_i)/h)Y_i}{D_{n,h}(x)},&D_{n,h}(x)>0,\\\\[6pt] a_0,&D_{n,h}(x)=0. \\end{cases}$$\nFor fixed $x,h,n$, this is a Borel statistic on $(\\mathbb R^2)^n$ with its\nproduct Borel sigma-algebra: each weight, product, and finite sum is Borel;\nthe positive-denominator set is Borel, and division is continuous there. In\nany statistical experiment on this sample space whose pointwise regression\nestimand is $\\psi_x(\\theta)=m_\\theta(x)$, with $m_\\theta$ the selected\nversion from [[def-regression-target-version]], it is an estimator of\n$\\psi_x$ in the sense of [[def-statistic-and-estimator]]. The fallback is\npart of the definition. Kernel regularity and bandwidth assumptions used for\nbias or variance results are stated in those results.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-regression-target-version",
+          "def-statistic-and-estimator"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-pointwise-regression-risk",
+        "kind": "definition",
+        "title": "Pointwise squared-error risk for regression",
+        "statement": "Assume AC as used to select the regression version. Fix a statistical experiment indexed by $\\theta$, a point $x$, a real\nregression target $m_\\theta(x)$, and a real-valued estimator\n$T_x$ of that target, meaning a measurable statistic with target space\n$\\mathbb R$ as in [[def-statistic-and-estimator]]. At this point, use the\nsquared-error loss\n$$L_x(\\theta,a)=(a-m_\\theta(x))^2,\\qquad a\\in\\mathbb R.$$\nIts **pointwise squared-error risk** is the possibly infinite quantity\n$$R_x(\\theta,T_x)=\\int (T_x(z)-m_\\theta(x))^2\\,P_\\theta(dz)\\in[0,\\infty].$$\nThis is the deterministic-rule specialization of the risk in\n[[def-loss-function-and-risk]]: the action space is $\\mathbb R$ with its\nBorel sigma-algebra, the action is $T_x(z)$, and the loss section is\nmeasurable because it is continuous in $a$. The integral is nonnegative, so\nit is defined without a finite-moment assumption.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-loss-function-and-risk",
+          "def-regression-target-version",
+          "def-statistic-and-estimator"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.1",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4.1–4.2",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-local-polynomial-estimator",
+        "kind": "definition",
+        "title": "Local-polynomial estimator",
+        "statement": "Assume AC as in [[def-regression-target-version]]. Fix $n\\ge1$, a point\n$x\\in\\mathbb R$, bandwidth $h>0$, degree $p\\in\\mathbb N_0$, a finite-valued\nnonnegative Borel function $K$, and fallback $a_0\\in\\mathbb R$. Set\n$u_i=(x-X_i)/h$, $r_p(u)=(1,u,\\ldots,u^p)^\\mathsf T$, let $Z$ be the matrix\nwhose $i$th row is $r_p(u_i)^\\mathsf T$, let\n$W=\\operatorname{diag}(K(u_1),\\ldots,K(u_n))$, and put\n$M=Z^\\mathsf TWZ$. If $M$ is nonsingular, define\n$$\\widehat\\beta=M^{-1}Z^\\mathsf TW(Y_1,\\ldots,Y_n)^\\mathsf T,\\qquad \\widehat m_{p,h}(x)=\\widehat\\beta_0.$$\nIf $M$ is singular, define $\\widehat m_{p,h}(x)=a_0$. For fixed $x,h,n,p$\nand Borel $K$, this is a real statistic on $(\\mathbb R^2)^n$ with its product\nBorel sigma-algebra: the matrix entries are Borel, the nonsingular-matrix set\nis Borel, matrix inversion is continuous there, and the fixed fallback gives\nthe other branch. In any statistical experiment on this sample space whose\npointwise regression estimand is $\\psi_x(\\theta)=m_\\theta(x)$, with\n$m_\\theta$ the selected version from [[def-regression-target-version]], it\nestimates $\\psi_x$ in the sense of [[def-statistic-and-estimator]]. The case\n$p=1$ is the **local-linear estimator**. No claim that $M$ is nonsingular for\na given sample is implicit in this definition.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-regression-target-version",
+          "def-statistic-and-estimator"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Locally Linear Regression, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/40cac15c5fb98b5bf72b8cfaab90c273_local_lin_reg.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-pointwise-risk-bias-variance-decomposition",
+        "kind": "theorem",
+        "title": "Pointwise risk is variance plus squared bias",
+        "statement": "Assume AC as used to select the regression target version. Fix a model\nparameter $\\theta$ and point $x$. Let $T_x$ be a real estimator of the finite\ntarget $\\psi=m_\\theta(x)$ with $\\mathbb E_\\theta[T_x^2]<\\infty$. Define its\nbias by $b_\\theta(x)=\\mathbb E_\\theta[T_x]-m_\\theta(x)$. Its pointwise\nsquared-error risk from [[def-pointwise-regression-risk]] satisfies\n$$R_x(\\theta,T_x)=\\operatorname{Var}_\\theta(T_x)+b_\\theta(x)^2.$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-moments-variance-and-covariance",
+          "def-pointwise-regression-risk",
+          "def-regression-target-version"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.1",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4.1–4.2",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "strategy": "Direct local proof."
+      },
+      {
+        "id": "thm-nadaraya-watson-population-bias",
+        "kind": "theorem",
+        "title": "Pointwise population bias of the Nadaraya–Watson smoother",
+        "statement": "Assume AC for the chosen regression version [[def-regression-target-version]].\nLet $X$ have Lebesgue density $f$, with $f(x)>0$ at a fixed interior point\n$x$, and let $f,m$ be $C^2$ near $x$. Let $K$ be a finite-valued Borel,\nnonnegative, symmetric kernel with $\\int K=1$,\n$0<\\mu_2=\\int u^2K(u)\\,du<\\infty$ and $\\int K^2<\\infty$.\nAssume either that $K$ has compact support, or that $f,m$ and their first\ntwo derivatives are bounded and continuous on $\\mathbb R$. In these first two alternatives, no continuity\nor boundedness of $K$ is required. The global alternative supplies tail\ncontrol for noncompact kernels; local smoothness alone does not supply it.\nA further localization alternative, including the Gaussian kernel, is that\n$\\mathbb E[Y^2]<\\infty$, $K$ is bounded, and\n$$\\lim_{A\\to\\infty}\\sup_{|u|\\ge A}|u|^3K(u)=0.$$\nUnder this rapid-tail alternative only the stated local smoothness of\n$f,m$ is needed; no global boundedness of $m$ or of its derivatives is assumed.\nFor sufficiently small $h>0$, the population smoother corresponding to\n[[def-nadaraya-watson-estimator]] is well defined by\n$$m_h(x)=\\frac{\\int K(u)m(x-hu)f(x-hu)\\,du}{\\int K(u)f(x-hu)\\,du},$$\nand\n$$m_h(x)-m(x)=\\frac{h^2\\mu_2}{2}\\left(m''(x)+2m'(x)\\frac{f'(x)}{f(x)}\\right)+o(h^2).$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure-with-density",
+          "def-nadaraya-watson-estimator",
+          "def-regression-target-version",
+          "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-local-linear-population-bias",
+        "kind": "theorem",
+        "title": "Pointwise population bias of local-linear regression",
+        "statement": "Assume AC for the chosen regression version [[def-regression-target-version]].\nLet $X$ have density $f$, with $f(x)>0$ at a fixed interior point $x$,\nand let $f,m$ be $C^2$ near $x$. Let $K$ be a finite-valued Borel,\nnonnegative symmetric kernel with $\\int K=1$,\n$0<\\mu_2=\\int u^2K(u)\\,du<\\infty$ and $\\int K^2<\\infty$.\nAssume either compact kernel support, or that $f,m$ and their first two\nderivatives are bounded and continuous on $\\mathbb R$.\nA further localization alternative, including the Gaussian kernel, is that\n$\\mathbb E[Y^2]<\\infty$, $K$ is bounded, and\n$$\\lim_{A\\to\\infty}\\sup_{|u|\\ge A}|u|^3K(u)=0.$$\nUnder this rapid-tail alternative only the stated local smoothness of\n$f,m$ is needed; no global boundedness of $m$ or of its derivatives is assumed.\nSet\n$$S_j(h)=\\int K(u)u^j f(x-hu)\\,du,\\qquad T_j(h)=\\int K(u)u^j f(x-hu)m(x-hu)\\,du.$$\nFor sufficiently small $h$, $D_h=S_0S_2-S_1^2>0$ and the population\nlocal-linear intercept, in the coordinates of [[def-local-polynomial-estimator]], is\n$$m_{\\mathrm{LL},h}(x)=\\frac{S_2T_0-S_1T_1}{D_h}.$$\nThen\n$$m_{\\mathrm{LL},h}(x)-m(x)=\\frac{h^2\\mu_2}{2}m''(x)+o(h^2).$$\nThis requires no fourth kernel moment.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-local-polynomial-estimator",
+          "def-measure-with-density",
+          "def-regression-target-version",
+          "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-local-linear-conditional-bias",
+        "kind": "theorem",
+        "title": "Conditional-on-design bias of the empirical local-linear estimator",
+        "statement": "Assume AC for the chosen regression version. Let $X_i$ be iid with density\n$f$, with $f(x)>0$ at a fixed interior point $x$, and let $f,m$ be $C^2$\nnear $x$. Let $K$ be finite-valued Borel, nonnegative and symmetric, with\n$\\int K=1$, $0<\\mu_2=\\int u^2K<\\infty$ and\n$\\int(1+u^2)K(u)^2\\,du<\\infty$. Assume either compact kernel support, or\nthat $f,m$ and their first two derivatives are bounded and continuous\nglobally. A further localization alternative, including the Gaussian kernel, is that\n$\\mathbb E[Y^2]<\\infty$, $K$ is bounded, and\n$$\\lim_{A\\to\\infty}\\sup_{|u|\\ge A}|u|^3K(u)=0.$$\nUnder this rapid-tail alternative only the stated local smoothness of\n$f,m$ is needed; no global boundedness of $m$ or of its derivatives is assumed.\nLet $h_n\\to0$ with $nh_n^3\\to\\infty$. For almost every realized design,\nintegrate the degree-one fit of [[def-local-polynomial-estimator]] against\nthe independent response laws $\\prod_iQ(X_i,dy_i)$; call the resulting\nfinite response-law mean $b_n(x)$, with the same fixed fallback on singular\ndesigns. Then\n$$b_n(x)-m(x)=\\frac{h_n^2\\mu_2}{2}m''(x)+o_P(h_n^2).$$\nHere $Z_n=o_P(h_n^2)$ means $Z_n/h_n^2\\to0$ in probability. This is a\nconditional response-law mean statement; it neither assumes nor asserts\nthat the estimator has an unconditional Lebesgue expectation.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-local-polynomial-estimator",
+          "def-measure-with-density",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-convergence-in-probability",
+          "lem-local-linear-normalized-moment-matrix-converges-in-probability",
+          "def-regression-target-version",
+          "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-kernel-regression-conditional-asymptotic-variance",
+        "kind": "theorem",
+        "title": "Conditional asymptotic variance of Nadaraya–Watson and local-linear estimators",
+        "statement": "Assume AC for the chosen regression version. Let $X_i$ be independent and\nidentically distributed with density $f$ continuous and positive at an\ninterior point $x$. For the chosen conditional law $Q(t,dy)$ in\n[[def-regression-target-version]], set\n$\\sigma^2(t)=\\int (y-m(t))^2Q(t,dy)$ where finite. Conditional on the\npredictor vector, assume the responses are independent, have means $m(X_i)$,\nand have variances $\\sigma^2(X_i)$, where $\\sigma^2$ is finite and continuous\nat $x$. Let $K$ be finite-valued Borel, nonnegative, symmetric, with $\\int K=1$,\n$0<\\mu_2=\\int u^2K(u)\\,du<\\infty$ and $R(K)=\\int K^2<\\infty$.\nAssume compact kernel support, globally bounded $f,\\sigma^2$, or the\nrapid-tail alternative: $\\mathbb E Y^2<\\infty$, bounded $K$, and\n$\\sup_{|u|\\ge A}|u|^3K(u)\\to0$. In this last alternative the stated\nlocal continuity is sufficient.\nFor the local-linear conclusion also assume $\\int u^2K(u)^2\\,du<\\infty$;\nthis extra squared moment is automatic for compactly supported kernels.\nThe Nadaraya–Watson conclusion requires only $R(K)<\\infty$. For $h_n\\to0$ with $nh_n\\to\\infty$, use the fixed\nfallbacks in [[def-nadaraya-watson-estimator]] and\n[[def-local-polynomial-estimator]]. Then, with variance taken conditionally\non $X_1,\\ldots,X_n$,\n$$nh_n\\operatorname{Var}(\\widehat m_{\\mathrm{NW},h_n}(x)\\mid X_1,\\ldots,X_n) \\longrightarrow \\frac{R(K)\\sigma^2(x)}{f(x)} \\quad\\text{in probability},$$\nand the same limit holds with $\\widehat m_{\\mathrm{NW},h_n}(x)$ replaced by\nthe degree-one local-linear estimator. This is a conditional-variance\nstatement for both estimators. If additionally $m$ is continuous at $x$\nand bounded globally (only bounded near $x$ is required for compact $K$),\nor if the rapid-tail alternative holds and $m$ is continuous at $x$,\nwith $nh_n^3\\to\\infty$ additionally in this rapid-tail unconditional clause,\nthen the Nadaraya–Watson estimator is square-integrable for large $n$ and\n$$\\operatorname{Var}(\\widehat m_{\\mathrm{NW},h_n}(x))=\\frac{R(K)\\sigma^2(x)}{nh_nf(x)}+o((nh_n)^{-1}).$$\nNo unconditional local-linear variance is asserted: near-singular designs\ncan make even its finite-sample expectation undefined.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-convergence-in-probability",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-measure-with-density",
+          "def-moments-variance-and-covariance",
+          "def-nadaraya-watson-estimator",
+          "def-local-polynomial-estimator",
+          "def-regression-target-version",
+          "lem-local-linear-normalized-moment-matrix-converges-in-probability",
+          "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Whitney K. Newey, Locally Linear Regression, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/40cac15c5fb98b5bf72b8cfaab90c273_local_lin_reg.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-nadaraya-watson-finite-sample-bias",
+        "kind": "theorem",
+        "title": "Finite-sample mean bias of the Nadaraya–Watson estimator",
+        "statement": "Assume AC for the chosen regression version. Let $X_i$ be iid with density\n$f$, and, conditional on the predictors, let the responses be independent\nwith the selected conditional laws $Q(X_i,dy)$, means $m(X_i)$ and variances\n$\\sigma^2(X_i)$. At a fixed interior point $x$, suppose $f(x)>0$, $f,m$ are\n$C^2$ near $x$, and $\\sigma^2$ is finite and continuous at $x$.\nLet $K$ be finite-valued Borel, nonnegative, symmetric, positive on some\nneighborhood of zero, with $\\int K=1$, $0<\\mu_2=\\int u^2K<\\infty$ and\n$R(K)=\\int K^2<\\infty$. Assume either compact kernel support, or that\n$f,m$ and their first two derivatives are bounded and continuous globally\nand $\\sigma^2$ is finite and bounded globally. A further localization alternative, including the Gaussian kernel, is that\n$\\mathbb E[Y^2]<\\infty$, $K$ is bounded, and\n$$\\lim_{A\\to\\infty}\\sup_{|u|\\ge A}|u|^3K(u)=0.$$\nUnder this rapid-tail alternative only the stated local smoothness of\n$f,m$ is needed; no global boundedness of $m$ or of its derivatives is assumed.\nFor $h_n\\to0$ with\n$nh_n^3\\to\\infty$, and any fixed finite fallback, the estimator in\n[[def-nadaraya-watson-estimator]] is integrable for all sufficiently large\n$n$ and\n$$\\mathbb E[\\widehat m_{\\mathrm{NW},h_n}(x)]-m(x)=\\frac{h_n^2\\mu_2}{2}\\left(m''(x)+2m'(x)\\frac{f'(x)}{f(x)}\\right)+o(h_n^2).$$\nThe compact/global alternatives require no boundedness or continuity of $K$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-measure-with-density",
+          "def-moments-variance-and-covariance",
+          "def-nadaraya-watson-estimator",
+          "def-regression-target-version",
+          "thm-nadaraya-watson-population-bias",
+          "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 1895,
+    "id": "nonparametric-regression-and-smoothing-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Regression Estimation — Examples",
+    "companion": "nonparametric-regression-and-smoothing",
+    "requires": [
+      "nonparametric-regression-and-smoothing"
+    ],
+    "items": [
+      {
+        "id": "ex-local-linear-reproduces-affine-regression",
+        "kind": "example",
+        "title": "Local-linear regression reproduces affine responses",
+        "statement": "Assume AC as in [[def-regression-target-version]]. Let $X,Y$ be real random\nvariables with $\\mathbb E|Y|<\\infty$ and $Y=a+bX$ almost surely. Choose the\nregular conditional law $Q(t,dy)=\\delta_{a+bt}(dy)$ for every $t\\in\\mathbb R$;\nthen the chosen regression-function version is $m(t)=a+bt$ at every point.\nFor any observed sample and any $x,h$ whose degree-one local moment matrix is\nnonsingular, the local-linear estimate equals $a+bx$, even when the design\npoints are asymmetric around $x$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-local-polynomial-estimator",
+          "def-regression-target-version"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Locally Linear Regression, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/40cac15c5fb98b5bf72b8cfaab90c273_local_lin_reg.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "strategy": "Direct local proof."
+      },
+      {
+        "id": "cex-local-linear-finite-sample-expectation-undefined",
+        "kind": "counterexample",
+        "title": "Local-linear estimator can lack a finite-sample expectation",
+        "statement": "At a fixed one-dimensional interior point, suppose the design density is\npositive and $C^2$ locally, the chosen regression function is $C^2$ locally,\nand the conditional response variance is finite and continuous. Suppose\n$K$ is nonnegative, symmetric, positive near zero, normalized, with finite\npositive second moment and finite squared integral. If $h_n\\to0$,\n$nh_n\\to\\infty$ and $nh_n^3\\to\\infty$, then the empirical local-linear fit\nwith a fixed fallback only on singular designs has a Lebesgue expectation\n(and hence an unconditional second-order mean-bias expansion).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-local-polynomial-estimator",
+          "def-measure-with-density",
+          "def-regression-target-version"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Locally Linear Regression, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/40cac15c5fb98b5bf72b8cfaab90c273_local_lin_reg.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-nadaraya-watson-design-gradient-and-boundary-bias",
+        "kind": "counterexample",
+        "title": "Nadaraya–Watson bias from design gradients and boundaries",
+        "statement": "Symmetry of the kernel alone makes the population Nadaraya–Watson smoother\nreproduce every affine regression function exactly in the interior and keeps\nits bias of order $h^2$ at a support boundary.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure-with-density",
+          "def-nadaraya-watson-estimator",
+          "def-regression-target-version",
+          "thm-nadaraya-watson-population-bias"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT course notes",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Nearest Neighbors and Kernels",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/nn_kernels.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "strategy": "Direct local proof."
+      }
+    ]
+  }
+]

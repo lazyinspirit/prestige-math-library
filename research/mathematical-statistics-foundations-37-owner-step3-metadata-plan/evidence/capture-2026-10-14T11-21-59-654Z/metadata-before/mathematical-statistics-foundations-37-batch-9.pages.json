@@ -1,0 +1,315 @@
+[
+  {
+    "order": 1860,
+    "id": "uniformly-most-powerful-tests-and-monotone-likelihood-ratio",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "UMP Tests",
+    "companion": "uniformly-most-powerful-tests-and-monotone-likelihood-ratio-examples",
+    "requires": [
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "complete-sufficiency-exponential-families-and-basu"
+    ],
+    "items": [
+      {
+        "id": "lem-randomized-threshold-has-exact-level",
+        "kind": "lemma",
+        "title": "A randomized threshold attains every test size",
+        "statement": "Let $Q$ be a Borel probability measure on $\\mathbb R$ and let $0<\\alpha<1$.\nThere are $c_+,c_-\\in\\mathbb R$ and $\\gamma_+,\\gamma_-\\in[0,1]$ such that\n$$Q((c_+,\\infty))+\\gamma_+Q(\\{c_+\\})=\\alpha,\\qquad Q(( -\\infty,c_-))+\\gamma_-Q(\\{c_-\\})=\\alpha.$$",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-measure",
+          "def-probability-measure",
+          "def-infimum",
+          "thm-infimum-property"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jun Shao, Stat 610 Mathematical Statistics, Lecture 11, Theorem 8.3.17, PDF pp. 9\u201310",
+              "url": "https://pages.stat.wisc.edu/~shao/stat610/stat610-11.pdf"
+            },
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Theorem 13.5, PDF p. 78",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice principle is used; the proof uses completeness of the real line through the infimum property."
+      },
+      {
+        "id": "def-monotone-likelihood-ratio-family",
+        "kind": "definition",
+        "title": "Families with a monotone likelihood ratio",
+        "statement": "Assume AC. Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment with $\\Theta\\subseteq\\mathbb R$, dominated by a\nfixed sigma-finite positive measure $\\mu$. Let $T:(\\mathcal X,\\mathcal A)\\to\n(\\mathbb R,\\mathcal B(\\mathbb R))$ be a statistic. Choose the simultaneous\nfinite-valued nonnegative density representatives $p_\\theta=dP_\\theta/d\\mu$\nfrom [[def-likelihood-density]].\n\nFor $\\theta_1<\\theta_2$, define the extended likelihood ratio on\n$U_{\\theta_1,\\theta_2}=\\{x:p_{\\theta_1}(x)+p_{\\theta_2}(x)>0\\}$ by\n$$R_{\\theta_2,\\theta_1}(x)=\\begin{cases}p_{\\theta_2}(x)/p_{\\theta_1}(x),&p_{\\theta_1}(x)>0,\\\\+\\infty,&p_{\\theta_1}(x)=0<p_{\\theta_2}(x).\\end{cases}$$\nThe family has a **monotone likelihood ratio (MLR) in $T$** when, for each\nordered pair $\\theta_1<\\theta_2$, there is a nondecreasing Borel function\n$r_{\\theta_2,\\theta_1}:\\mathbb R\\to[0,+\\infty]$ such that\n$R_{\\theta_2,\\theta_1}(x)=r_{\\theta_2,\\theta_1}(T(x))$ for $\\mu$-almost every\n$x\\in U_{\\theta_1,\\theta_2}$. The set where both densities vanish is\nirrelevant. No common exceptional null set for all parameter pairs is\nasserted. This definition concerns the likelihood ratio of the full data;\n$T$ need not be sufficient.",
+        "deps": [
+          "def-statistical-experiment",
+          "def-statistic-and-estimator",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Definition 13.4 and Theorem 13.5, PDF pp. 77\u201378",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Jun Shao, Stat 610 Mathematical Statistics, Lecture 11, Definition 8.3.16, PDF pp. 6\u20137",
+              "url": "https://pages.stat.wisc.edu/~shao/stat610/stat610-11.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 11, slides 9\u201312, annotated PDF pp. 13\u201322",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_11_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "axiom_use": "AC is used only through the simultaneous density-version selection in def-likelihood-density; the definition adds no further choice."
+      },
+      {
+        "id": "lem-mlr-orders-randomized-thresholds",
+        "kind": "lemma",
+        "title": "MLR orders the power of randomized thresholds",
+        "statement": "Assume AC and let a dominated one-parameter experiment have MLR in the real statistic $T$.\nFor $c\\in\\mathbb R$ and $\\gamma\\in[0,1]$, put\n$$\\phi^+_{c,\\gamma}=\\mathbf1_{\\{T>c\\}}+\\gamma\\mathbf1_{\\{T=c\\}},\\qquad \\phi^-_{c,\\gamma}=\\mathbf1_{\\{T<c\\}}+\\gamma\\mathbf1_{\\{T=c\\}}.$$\nThen for every $\\theta_1<\\theta_2$,\n$$E_{\\theta_1}\\phi^+_{c,\\gamma}\\le E_{\\theta_2}\\phi^+_{c,\\gamma},\\qquad E_{\\theta_1}\\phi^-_{c,\\gamma}\\ge E_{\\theta_2}\\phi^-_{c,\\gamma}.$$",
+        "deps": [
+          "def-monotone-likelihood-ratio-family",
+          "def-axiom-of-choice",
+          "def-measure",
+          "def-probability-measure",
+          "thm-integration-against-a-density",
+          "thm-composition-with-borel-functions-preserves-measurability"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jun Shao, Stat 610 Mathematical Statistics, Lecture 11, Lemma B and Theorem 8.3.17, PDF pp. 8\u201310",
+              "url": "https://pages.stat.wisc.edu/~shao/stat610/stat610-11.pdf"
+            },
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Theorem 13.5 and proof, PDF pp. 77\u201378",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "axiom_use": "Assume AC for the selected likelihood-density versions inherited through def-monotone-likelihood-ratio-family; the comparison itself uses no further choice."
+      },
+      {
+        "id": "thm-karlin-rubin-one-sided-ump-test",
+        "kind": "theorem",
+        "title": "The Karlin\u2013Rubin theorem for one-sided tests",
+        "statement": "Assume AC. Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ have\nMLR in a real statistic $T$, let $\\theta_0\\in\\Theta$, and let\n$0<\\alpha<1$. A randomized test is a binary-action probability kernel as in\n[[def-randomized-test]]; write $\\psi(x)=K(x,\\{1\\})$ for its measurable\nrejection function. For nonempty, disjoint null and alternative sets,\npower, size, and level have the conventions in\n[[def-test-size-and-power]]: $\\beta_\\psi(\\theta)=E_\\theta\\psi$,\nsize $\\sup_{\\theta\\in\\Theta_0}\\beta_\\psi(\\theta)$, and level $\\alpha$ when\nthe size is at most $\\alpha$. Here a level-$\\alpha$ test is **uniformly most\npowerful (UMP)** when it has at least as large a power as every other\nlevel-$\\alpha$ test at every parameter in the alternative set; if an\nalternative set is empty, define level by the same null-supremum formula and\nthe pointwise UMP comparison is vacuous.\n\nChoose $c_+,\\gamma_+$ and $c_-,\\gamma_-$ such that\n$$P_{\\theta_0}(T>c_+)+\\gamma_+P_{\\theta_0}(T=c_+)=\\alpha,\\qquad P_{\\theta_0}(T<c_-)+\\gamma_-P_{\\theta_0}(T=c_-)=\\alpha.$$\nSuch choices exist by [[lem-randomized-threshold-has-exact-level]]. Then\n$$\\phi_+=\\mathbf1_{\\{T>c_+\\}}+\\gamma_+\\mathbf1_{\\{T=c_+\\}}$$\ndefines a UMP randomized test of level $\\alpha$ for\n$H_0:\\theta\\le\\theta_0$ against\n$H_1:\\theta>\\theta_0$, and\n$$\\phi_-=\\mathbf1_{\\{T<c_-\\}}+\\gamma_-\\mathbf1_{\\{T=c_-\\}}$$\ndefines a UMP randomized test of level $\\alpha$ for\n$H_0:\\theta\\ge\\theta_0$ against\n$H_1:\\theta<\\theta_0$. All hypotheses are intersected with $\\Theta$.",
+        "deps": [
+          "def-monotone-likelihood-ratio-family",
+          "lem-randomized-threshold-has-exact-level",
+          "lem-mlr-orders-randomized-thresholds",
+          "def-randomized-test",
+          "def-measure-kernel-and-probability-kernel",
+          "def-test-size-and-power",
+          "def-likelihood-density",
+          "def-measure-with-density",
+          "thm-integration-against-a-density",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Theorem 13.5 and proof, PDF pp. 77\u201378",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Jun Shao, Stat 610 Mathematical Statistics, Lecture 11, Theorem 8.3.17 and proof, PDF pp. 8\u201310",
+              "url": "https://pages.stat.wisc.edu/~shao/stat610/stat610-11.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 11, Karlin\u2013Rubin theorem and examples, annotated PDF pp. 13\u201322",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_11_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the likelihood-density versions in the MLR definition; the threshold calibration and pairwise comparison add no choice."
+      },
+      {
+        "id": "thm-ump-nonexistence-witness",
+        "kind": "theorem",
+        "title": "A two-sided normal alternative need not have a UMP test",
+        "statement": "Assume AC. Let $X$ have law $P_\\theta=N(\\theta,1)$ on $\\mathbb R$, with\n$\\theta\\in\\mathbb R$, and test the simple null $H_0:\\theta=0$ against the\ntwo-sided alternative $H_1:\\theta\\in\\{-1,1\\}$. A randomized test is a\nbinary-action probability kernel as in [[def-randomized-test]]; write $\\psi$\nfor its measurable rejection function. Level $\\alpha$ and power use\n[[def-test-size-and-power]]. Here UMP means maximizing power at each\nalternative among level-$\\alpha$ tests. For every $0<\\alpha<1$, no such test\nmaximizes power at both alternative values.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-measure-preserving-transformation-and-system",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "def-measure-with-density",
+          "thm-integration-against-a-density",
+          "def-measure-kernel-and-probability-kernel",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-countable-choice",
+          "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "lem-randomized-threshold-has-exact-level",
+          "def-randomized-test",
+          "def-test-size-and-power",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-borel-sigma-algebra"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Neyman\u2013Pearson Theorem 13.2 and UMP discussion, PDF pp. 77\u201378",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 11, Neyman\u2013Pearson lemma and proof annotations, annotated PDF pp. 6\u20139",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_11_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "axiom_use": "Assume AC for the standard normal laws; AC implies the countable-choice premise used to show normal laws have no atoms."
+      }
+    ]
+  },
+  {
+    "order": 1861,
+    "id": "uniformly-most-powerful-tests-and-monotone-likelihood-ratio-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "UMP Tests \u2014 Examples",
+    "companion": "uniformly-most-powerful-tests-and-monotone-likelihood-ratio",
+    "requires": [
+      "uniformly-most-powerful-tests-and-monotone-likelihood-ratio"
+    ],
+    "items": [
+      {
+        "id": "ex-binomial-one-sided-ump-test",
+        "kind": "example",
+        "title": "A randomized UMP test for a binomial model",
+        "statement": "Assume AC. Let $X=(X_1,X_2,X_3)\\in\\{0,1\\}^3$ have mass function\n$P_p(X=x)=p^{T(x)}(1-p)^{3-T(x)}$ for $0<p<1$, where\n$T(x)=x_1+x_2+x_3$. For $H_0:p\\le\\tfrac12$ against $H_1:p>\\tfrac12$,\nthe randomized test with rejection function\n$\\phi(x)=\\mathbf1_{\\{T(x)>2\\}}+\\tfrac13\\mathbf1_{\\{T(x)=2\\}}$\nis UMP of level $\\alpha=\\tfrac14$.",
+        "deps": [
+          "def-monotone-likelihood-ratio-family",
+          "thm-karlin-rubin-one-sided-ump-test",
+          "lem-randomized-threshold-has-exact-level",
+          "def-randomized-test",
+          "def-measure-kernel-and-probability-kernel",
+          "def-test-size-and-power"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jun Shao, Stat 610 Mathematical Statistics, Lecture 11, Theorem 8.3.17, PDF pp. 9\u201310",
+              "url": "https://pages.stat.wisc.edu/~shao/stat610/stat610-11.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited only through the MLR definition's density-version convention; all displayed binomial masses are finite and explicit.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-two-sided-normal-alternatives-have-opposed-most-powerful-tests",
+        "kind": "example",
+        "title": "Opposed most powerful tests for two normal alternatives",
+        "statement": "Assume AC and let $X\\sim N(\\theta,1)$. For the simple null $H_0:\\theta=0$\nand alternatives $\\theta\\in\\{-1,1\\}$, consider the level-$1/2$ randomized\ntests with rejection functions\n$$\\phi_+(x)=\\mathbf1_{\\{x>0\\}},\\qquad \\phi_-(x)=\\mathbf1_{\\{x<0\\}}.$$\nThe upper-tail test favors $\\theta=1$, while the lower-tail test favors\n$\\theta=-1$; their powers at the opposite alternative are strictly below\n$1/2$.",
+        "deps": [
+          "thm-ump-nonexistence-witness",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-standard-normal-and-normal-laws",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "def-measure-space",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure-preserving-transformation-and-system",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-randomized-test",
+          "def-measure-kernel-and-probability-kernel",
+          "def-test-size-and-power",
+          "def-measure-with-density",
+          "thm-integration-against-a-density",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "def-borel-sigma-algebra",
+          "def-measure",
+          "def-probability-measure"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Neyman\u2013Pearson Theorem 13.2 and UMP discussion, PDF pp. 77\u201378",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the normal-law definition; its implication of countable choice supplies the singleton-null statement.",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

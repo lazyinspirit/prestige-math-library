@@ -1,0 +1,224 @@
+[
+  {
+    "order": 1912,
+    "id": "sequential-testing-and-anytime-valid-inference",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Sequential Validity and Ville's Inequality",
+    "companion": "sequential-testing-and-anytime-valid-inference-examples",
+    "requires": [
+      "estimators-and-randomized-procedures",
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "discrete-time-martingales",
+      "stopping-times-and-optional-stopping",
+      "martingale-inequalities-and-convergence"
+    ],
+    "items": [
+      {
+        "id": "def-nonnegative-test-supermartingale",
+        "kind": "definition",
+        "title": "Nonnegative test supermartingales",
+        "statement": "Assuming AC, on a common discrete filtered probability space and for a null family of laws P0, an adapted, integrable process E_t that is nonnegative P-almost surely at every time, is a supermartingale under every P in P0, and satisfies E_P E_0 <= 1 for every P in P0 is a nonnegative test supermartingale for P0. Time starts at zero.",
+        "deps": [
+          "def-filtration-and-filtered-probability-space",
+          "def-martingale-submartingale-and-supermartingale",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-villes-inequality",
+        "kind": "theorem",
+        "title": "Ville's inequality for nonnegative test supermartingales",
+        "statement": "Assume AC. For every P in P0, every nonnegative test supermartingale E under P, and every alpha in (0,1), P(sup_{t>=0} E_t >= 1/alpha) <= alpha.",
+        "strategy": "For any gamma, bound the actual first threshold hit using tau_gamma truncated at N, bounded optional sampling, nonnegativity, and continuity from below. For the supremum statement, if its probability q exceeds alpha, use beta=(alpha+q)/2 and the lower-threshold hit bound to contradict q>alpha.",
+        "deps": [
+          "def-nonnegative-test-supermartingale",
+          "def-discrete-stopping-time",
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-continuity-from-below-for-measures",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "contradiction",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-mixture-of-null-supermartingales",
+        "kind": "theorem",
+        "title": "Mixtures of null test supermartingales",
+        "statement": "Assume AC. Let pi be a probability measure on a measurable space Lambda. If (lambda,omega) maps to E_t^lambda(omega) is measurable with respect to A tensor F_t for every t and each E^lambda is a nonnegative test supermartingale for the same null family P0, then its pi-mixture, with an everywhere-finite version chosen by setting the mixture to zero where its integral is infinite, is a nonnegative test supermartingale for P0.",
+        "strategy": "Tonelli gives adaptedness and integrability of the mixture. Test the conditional-supermartingale inequality on every event in F_{t-1}, integrate the component inequalities, and use the event-integral characterization of conditional expectation.",
+        "deps": [
+          "def-nonnegative-test-supermartingale",
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-anytime-valid-p-value-process",
+        "kind": "definition",
+        "title": "Anytime-valid p-value processes",
+        "statement": "On a common discrete filtered probability space and for a null family P0, an adapted process p_t with values in [0,1] is an anytime-valid p-value process if for every P in P0 and alpha in (0,1), P(exists t>=0: p_t <= alpha) <= alpha. For each threshold alpha, the rejection rule 1{p_t <= alpha} is an F_t-measurable deterministic test via its binary probability kernel; every finite stopping-time rejection event is contained in the all-times crossing event.",
+        "deps": [
+          "def-filtration-and-filtered-probability-space",
+          "def-discrete-stopping-time",
+          "def-randomized-test",
+          "lem-measurable-rejection-function-defines-randomized-test"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-anytime-validity",
+        "kind": "theorem",
+        "title": "A test supermartingale gives anytime-valid p-values",
+        "statement": "Assume AC. If E is a nonnegative test supermartingale for P0, define p_t=1 when E_t<=0 and p_t=min(1,1/E_t) otherwise. Then p is an anytime-valid p-value process for P0; for every P in P0, fixed t>=0 and u in [0,1], P(p_t<=u)<=u. For every possibly unbounded stopping time tau and u in [0,1], P(tau<infinity, p_tau<=u)<=u under every P in P0.",
+        "strategy": "The Borel transform handles every real version of E_t. For alpha in (0,1), the all-times p-value crossing equals the actual evidence-hit event, which is contained in Ville's supremum event. Prove fixed-time and stopping-time bounds by inclusion, check endpoints, and identify p_t as a valid p-value in the nonempty fixed-time experiment.",
+        "deps": [
+          "def-nonnegative-test-supermartingale",
+          "thm-villes-inequality",
+          "def-anytime-valid-p-value-process",
+          "def-axiom-of-choice",
+          "def-p-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "def-confidence-sequence",
+        "kind": "definition",
+        "title": "Confidence sequences",
+        "statement": "For a parameter family (P_theta) on a common discrete filtered probability space, a (1-alpha) confidence sequence is a sequence of set-valued rules C_t such that each fixed-parameter membership event {theta in C_t} is F_t-measurable and P_theta(theta in C_t for every t>=0) >= 1-alpha.",
+        "deps": [
+          "def-filtration-and-filtered-probability-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-confidence-sequence-by-test-inversion",
+        "kind": "theorem",
+        "title": "Confidence sequences by test-supermartingale inversion",
+        "statement": "Assume AC and alpha in (0,1). Let (P_theta) be a parameter-indexed family on a common discrete filtered space. If for each theta, E_t^theta is a nonnegative test supermartingale for the singleton null {P_theta}, then C_t={theta:E_t^theta<1/alpha} is a (1-alpha) confidence sequence.",
+        "strategy": "For each fixed theta, transform E^theta to its anytime-valid p-value process. The event that theta is ever excluded is exactly the p-value crossing event and therefore has probability at most alpha.",
+        "deps": [
+          "def-nonnegative-test-supermartingale",
+          "def-anytime-valid-p-value-process",
+          "thm-anytime-validity",
+          "def-confidence-sequence",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 1913,
+    "id": "sequential-testing-and-anytime-valid-inference-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Sequential Validity and Ville's Inequality — Examples",
+    "companion": "sequential-testing-and-anytime-valid-inference",
+    "requires": [
+      "sequential-testing-and-anytime-valid-inference"
+    ],
+    "items": [
+      {
+        "id": "ex-likelihood-ratio-test-supermartingale",
+        "kind": "example",
+        "title": "A finite-horizon likelihood-ratio test supermartingale",
+        "statement": "On Omega={0,1}^K with the uniform law P0 and its prefix filtration, let Q be the product Bernoulli(3/4) law and P0 the product Bernoulli(1/2) law. The likelihood ratio E_t=dQ|F_t/dP0|F_t, held constant after K, is a nonnegative test martingale under P0 and hence a test supermartingale.",
+        "strategy": "Compute the one-step likelihood ratio values, check their conditional mean on each prefix atom, and verify the finite-horizon process is adapted, integrable, nonnegative, and starts at one.",
+        "deps": [
+          "def-nonnegative-test-supermartingale",
+          "def-filtration-and-filtered-probability-space",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-data-dependent-threshold-crossing",
+        "kind": "example",
+        "title": "A data-dependent threshold crossing",
+        "statement": "For two fair coin observations and the likelihood-ratio process from Bernoulli(3/4) against Bernoulli(1/2), the stopping rule tau=inf{t>=0:E_t>=2} rejects only on two heads, an event of probability 1/4 under the null. The level-1/2 threshold is selected from the data through the first-crossing rule, and the finite-horizon crossing probability is at most 1/2.",
+        "strategy": "Compute E_0,E_1,E_2 on all four outcomes, identify the first-crossing event, and compare its probability with the Ville bound at alpha=1/2.",
+        "deps": [
+          "def-nonnegative-test-supermartingale",
+          "thm-villes-inequality",
+          "def-discrete-stopping-time",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-process-valid-under-one-null-but-not-composite-null",
+        "kind": "counterexample",
+        "title": "Validity under one null law does not give a composite-null test supermartingale",
+        "statement": "Let X be Bernoulli(1/4) or Bernoulli(3/4) under two null laws, take F_0 trivial, F_t=sigma(X) for t>=1, M_0=1, and M_t=2X for t>=1. M is a nonnegative supermartingale under Bernoulli(1/4), but not under Bernoulli(3/4), so it is not a test supermartingale for the composite null family.",
+        "strategy": "Compute the conditional mean at time one under each null law. The first satisfies the supermartingale inequality and the second violates it.",
+        "deps": [
+          "def-nonnegative-test-supermartingale",
+          "def-filtration-and-filtered-probability-space",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      }
+    ]
+  }
+]

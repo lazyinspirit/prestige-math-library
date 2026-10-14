@@ -1,0 +1,208 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "37",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "def-conformal-nonconformity-score-and-rank-pvalue",
+      "model": "gpt-6-luna",
+      "context_sha256": "17ee8831a5a049135457a2a933de94fe56e09a610c3640832928ccbac56e8143",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The split rule binds only R_i=s(h,Z_i), whereas both candidate p-value formulas require R_i(y) and r introduced only for full assignments. This leaves the defining split outputs unspecified. The repair explicitly sets R_i(y)=s(h,Z_i) for i<=m and R_n(y)=r=s(h,(x,y)), using the same fixed training rule. The logic classification concerns undefined mathematical outputs, not a citation error.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-conformal-nonconformity-score-and-rank-pvalue",
+      "disposition": "repaired",
+      "post_sha256": "bfee40960b62d6819583d4e09825b8877a7abdc0d3abf1aa7c431bbe24ebfe7c",
+      "review_context_sha256": "b2f0fa467ed5dd2813d5fba2ad3ff8c99ab0b5287b804c0738afb4650102f977",
+      "reason": "The added split notation makes both formulas defined for every candidate, with calibration scores independent of y. For m=0 the formulas yield p=1 and p_U=U; with all n scores tied they likewise yield p=1 and p_U=U. Real scores and n=m+1>=1 keep denominators positive. Joint measurability, full-score equivariance, independent supplied U shared across the scan, and the kernel representation caveat are preserved. Existing prerequisite definitions support these conventions without new lemmas or choice assumptions. This is the repairer review, not an independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-finite-order-statistic-and-rank-maps-are-measurable",
+    "lem-permutation-equivariant-score-map-preserves-exchangeability",
+    "alg-split-conformal-prediction-set",
+    "alg-full-conformal-prediction-set",
+    "thm-conformal-rank-superuniformity-under-exchangeability",
+    "ex-split-conformal-conservative-ties",
+    "thm-split-conformal-marginal-coverage",
+    "thm-full-conformal-marginal-coverage"
+  ],
+  "repair_notes": {
+    "item_path": "items/def-conformal-nonconformity-score-and-rank-pvalue.md",
+    "change": "Appended explicit split candidate-score notation to Definition; all existing text and formulas preserved. Existing complete-definition citation quotes remain exact contiguous prefixes.",
+    "definition_changed": true,
+    "owning_contract": "research/mathematical-statistics-foundations-37-batch-37.proof-contracts.json: contracts.def-conformal-nonconformity-score-and-rank-pvalue",
+    "page_interface": "library/mathematical-statistics/conformal-prediction-and-exchangeable-ranks.md: fixed split versus recomputed full scoring remains accurate. No page edit needed.",
+    "sources_consulted": "Local item files and dependency definitions only; no external source reading claimed.",
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs items/def-conformal-nonconformity-score-and-rank-pvalue.md --json",
+        "exit_code": 0,
+        "result": "1 file; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-conformal-nonconformity-score-and-rank-pvalue.md --json",
+        "exit_code": 0,
+        "result": "Definition: not-applicable; 0 checked proofs, 0 failures."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-37.proof-contracts.json --strict --items def-conformal-nonconformity-score-and-rank-pvalue,lem-finite-order-statistic-and-rank-maps-are-measurable,lem-permutation-equivariant-score-map-preserves-exchangeability,alg-split-conformal-prediction-set,alg-full-conformal-prediction-set,thm-conformal-rank-superuniformity-under-exchangeability,ex-split-conformal-conservative-ties --json",
+        "exit_code": 0,
+        "result": "Seven selected contracts checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-conformal-nonconformity-score-and-rank-pvalue.md",
+        "exit_code": 0,
+        "result": "1 item; 0 numbered steps; 0 defects."
+      },
+      {
+        "command": "node tools/content-policy.mjs research/mathematical-statistics-foundations-37-batch-37.pages.json --json",
+        "exit_code": 0,
+        "result": "15 manifest items; no errors or warnings."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Hand off to the deterministic controller for independent rejudgment and frontier-owner routing; no worker cycle, stamp, certification, or shared ledger edit performed.",
+    "propagation": "Six explicit dependency/reference consumers plus two implicit score-definition uses were examined. Their statements and proofs need no repair, so propagation stops. All eight are draft frozen-frontier items; there are no outside or published direct consumer findings.",
+    "published_ledger_proposal": "No update to research/published-consumer-supplier-ledger.md: no published direct consumers or newly discovered published prerequisite defects.",
+    "metadata_repair": "Under shared-write lock acquire/reread/edit/check/release, updated only this assigned item’s statement mirror in research/mathematical-statistics-foundations-37-batch-37.pages.json. All pre-existing source text was retained, so supplier quotes in the owning proof contract remain exact and required no edit."
+  },
+  "consumer_examinations": [
+    {
+      "id": "lem-finite-order-statistic-and-rank-maps-are-measurable",
+      "path": "items/lem-finite-order-statistic-and-rank-maps-are-measurable.md",
+      "affected_use": "Facts F4 and Proof 1.2/2.1 use finite comparison sums for upper and randomized ranks. The appended split notation supplies their scores; the comparison formulas and measurability argument remain unchanged.",
+      "disposition": "sound_unchanged",
+      "route": "frontier_owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-permutation-equivariant-score-map-preserves-exchangeability",
+      "path": "items/lem-permutation-equivariant-score-map-preserves-exchangeability.md",
+      "affected_use": "Statement and Facts F2/Proof 2.1 use A(tau_pi z)=tau_pi A(z). The full assignment and equivariance identity are unchanged, so the pushforward exchangeability argument remains sound.",
+      "disposition": "sound_unchanged",
+      "route": "frontier_owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-split-conformal-prediction-set",
+      "path": "items/alg-split-conformal-prediction-set.md",
+      "affected_use": "Definition optional randomized branch returns C_U(x)={y:p_U(y)>alpha} using the supplier formula. With R_i(y)=s(h,Z_i) and r=s(h,(x,y)), this compares fixed calibration scores to the candidate and includes its tie count exactly as intended.",
+      "disposition": "sound_unchanged",
+      "route": "frontier_owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-full-conformal-prediction-set",
+      "path": "items/alg-full-conformal-prediction-set.md",
+      "affected_use": "Definition appends (x,y), computes all A_i on the augmented tuple, and returns p(y)>alpha or p_U(y)>alpha. Its full candidate notation and both rank formulas are unchanged.",
+      "disposition": "sound_unchanged",
+      "route": "frontier_owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-conformal-rank-superuniformity-under-exchangeability",
+      "path": "items/thm-conformal-rank-superuniformity-under-exchangeability.md",
+      "affected_use": "Facts F2 and Proof 1.1/1.2 use upper rank D_j/n and randomized rank (D_(j-1)+U d_j)/n. These formulas and candidate tie inclusion are unchanged; explicit ranks in the Statement still agree with the supplier.",
+      "disposition": "sound_unchanged",
+      "route": "frontier_owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-split-conformal-conservative-ties",
+      "path": "items/ex-split-conformal-conservative-ties.md",
+      "affected_use": "Facts F2 and Verification 1.2 use two calibration ties plus the candidate, giving p_U=3U/3=U. The split candidate score is explicitly zero under the constant rule, so coverage remains P(U>1/2)=1/2.",
+      "disposition": "sound_unchanged",
+      "route": "frontier_owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-split-conformal-marginal-coverage",
+      "path": "items/thm-split-conformal-marginal-coverage.md",
+      "affected_use": "Statement uses a jointly measurable split score rule without a direct link to this definition. Proof 1.1 forms g(omega,z)=(s(H(omega),z_i)) and Proof 2.1 identifies randomized membership at the true candidate with its tie-randomized rank. Substituting y=Y_n into the added R_n(y)=s(h,(x,y)) supplies precisely g_n when x=X_n; no proof or Statement repair is needed.",
+      "disposition": "sound_unchanged",
+      "route": "frontier_owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-full-conformal-marginal-coverage",
+      "path": "items/thm-full-conformal-marginal-coverage.md",
+      "affected_use": "Statement uses a measurable permutation-equivariant full score assignment without a direct link to this definition. Proof 1.1 uses its exchangeable augmented vector, and Proof 2.1 identifies true-candidate membership with the upper or randomized rank. The full A_i(Z_1,...,Z_m,(x,y)) notation is preserved, so the examined use remains sound.",
+      "disposition": "sound_unchanged",
+      "route": "frontier_owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "defect_id": "msf37-step5-initial-r1-u37-split-candidate-score-notation",
+      "run": "mathematical-statistics-foundations-37",
+      "at": "2026-10-14T12:28:30Z",
+      "class": "accuracy",
+      "subclass": "undefined-notation",
+      "severity": "fatal",
+      "location": "definition",
+      "subject": "def-conformal-nonconformity-score-and-rank-pvalue",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "group-alpha",
+      "disposition": "fixed",
+      "batch": "37",
+      "adjudication_ref": [
+        {
+          "id": "def-conformal-nonconformity-score-and-rank-pvalue",
+          "model": "gpt-6-luna",
+          "context_sha256": "17ee8831a5a049135457a2a933de94fe56e09a610c3640832928ccbac56e8143",
+          "item_sha256": "5f34f2206bea60ed536a71513bbfa1d16eb661ded7658e0555e1a556f103cfd4"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u37.json",
+          "detail": "Decision and repairer review bind the original rejected tuple and the repaired split candidate-score interface."
+        }
+      ],
+      "note": "Both split p-value outputs used R_i(y) and r that were defined only for full scoring. The explicit split notation now fixes calibration scores and evaluates the candidate using the same fixed h. All direct uses remain sound; no independent acceptance is claimed.",
+      "repair_cost": "inline-fix",
+      "introduced_at_stage": "unknown",
+      "prevention": {
+        "kind": "none",
+        "ref": "No mechanical notation validator was introduced."
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "downstream_uses": {
+    "thm-split-conformal-marginal-coverage": "Statement uses a jointly measurable split score rule without a direct link to this definition. Proof 1.1 forms g(omega,z)=(s(H(omega),z_i)) and Proof 2.1 identifies randomized membership at the true candidate with its tie-randomized rank. Substituting y=Y_n into the added R_n(y)=s(h,(x,y)) supplies precisely g_n when x=X_n; no proof or Statement repair is needed.",
+    "thm-full-conformal-marginal-coverage": "Statement uses a measurable permutation-equivariant full score assignment without a direct link to this definition. Proof 1.1 uses its exchangeable augmented vector, and Proof 2.1 identifies true-candidate membership with the upper or randomized rank. The full A_i(Z_1,...,Z_m,(x,y)) notation is preserved, so the examined use remains sound."
+  }
+}

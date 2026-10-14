@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "run": "mathematical-statistics-foundations-37",
+  "batch": "35",
+  "round": 0,
+  "reviewed_items": [
+    "def-nonnegative-test-supermartingale",
+    "thm-villes-inequality",
+    "thm-mixture-of-null-supermartingales",
+    "def-anytime-valid-p-value-process",
+    "thm-anytime-validity",
+    "def-confidence-sequence",
+    "thm-confidence-sequence-by-test-inversion",
+    "ex-likelihood-ratio-test-supermartingale",
+    "ex-data-dependent-threshold-crossing",
+    "cex-process-valid-under-one-null-but-not-composite-null"
+  ],
+  "reviewed_pages": [
+    "sequential-testing-and-anytime-valid-inference",
+    "sequential-testing-and-anytime-valid-inference-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch fits the approved discrete-time, null-uniform scope. The Ville argument, p-value transform and validity bounds, confidence-sequence inversion, and likelihood-ratio examples are otherwise sound. Request one local repair for the mixture-version issue and two explicit stopping-time source/proof gaps; no unresolved significant external prerequisite gap was found.",
+  "findings": [
+    {
+      "id": "thm-mixture-of-null-supermartingales",
+      "type": "local",
+      "reason": "The components are only nonnegative P-almost surely for each λ, but the Statement mixes their pointwise versions and Proof 1.1 applies Tonelli as if the integrand were pointwise nonnegative. For example, on Λ=Ω=[0,1] with uniform π and P, let every E_t^λ(ω) equal −1/λ when λ>0 and ω=0, and 1 otherwise (set E_t^0=1). Each component is constant in time and equals 1 P-almost surely, so it is a test supermartingale with initial expectation 1. Yet the mixture at ω=0 is −∞, which satisfies the written condition bar E_t<∞ and is retained. Before mixing, use the jointly measurable pointwise nonnegative versions max(E_t^λ,0); they agree P-almost surely under every null law, and then zero the set where the nonnegative mixture is infinite."
+    },
+    {
+      "id": "def-anytime-valid-p-value-process",
+      "type": "local",
+      "reason": "The final paragraph uses “stopping time” without linking or listing def-discrete-stopping-time as a dependency. The stopping-times page is an A-page prerequisite, so this does not block the claim; make the item-level source use explicit with a link/dependency, or phrase the inclusion for any map into N₀∪{∞}."
+    },
+    {
+      "id": "ex-data-dependent-threshold-crossing",
+      "type": "local",
+      "reason": "Proof 2.1 calls the crossing a stopping-time event but does not verify the stopping-time condition from def-discrete-stopping-time. Add {τ≤n}=⋃_{s=0}^n{E_s≥2}∈F_n; here this is empty for n<2 and the two-heads event for n≥2."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "sequential-testing-and-anytime-valid-inference",
+      "decision": "accept",
+      "reason": "This is the direct consumer of the mixture theorem. Its page objective remains valid with the requested positive-part version; no other current item consumer of the mixture theorem was found."
+    },
+    {
+      "id": "sequential-testing-and-anytime-valid-inference-examples",
+      "decision": "accept",
+      "reason": "The companion page does not use the mixture result; its scope is unaffected by the requested mixture-version repair."
+    },
+    {
+      "id": "thm-anytime-validity",
+      "decision": "accept",
+      "reason": "It uses the anytime-valid process definition for the crossing bound. Making the stopping-time source explicit does not change that claim or its proof."
+    },
+    {
+      "id": "thm-confidence-sequence-by-test-inversion",
+      "decision": "accept",
+      "reason": "It uses the process definition and the anytime-validity theorem for pointwise membership and coverage; it does not rely on the process definition’s stopping-time clause."
+    }
+  ]
+}

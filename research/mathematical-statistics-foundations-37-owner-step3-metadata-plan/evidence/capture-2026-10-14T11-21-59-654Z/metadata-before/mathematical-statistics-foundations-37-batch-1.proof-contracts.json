@@ -1,0 +1,790 @@
+{
+  "version": 1,
+  "scope": [
+    "def-statistical-experiment",
+    "def-parametric-statistical-model",
+    "def-parameter-measurable-statistical-model-as-markov-kernel",
+    "def-observational-equivalence",
+    "def-estimand-on-a-statistical-model",
+    "def-identifiability-of-an-estimand",
+    "thm-identifiability-iff-constant-on-equivalence-classes",
+    "ex-identifiable-bernoulli-model-and-estimand",
+    "cex-nonidentifiable-redundant-bernoulli-parameterization"
+  ],
+  "contracts": {
+    "def-statistical-experiment": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Θ may be empty; then there are no parameter-indexed probability measures to supply."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The parameter labels have no numerical structure, so zero is not distinguished."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The parameter labels have no numerical structure, so one is not distinguished."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: distinct labels may index equal probability measures; injectivity is not assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Θ is an arbitrary set, not an interval with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the law family is supplied pointwise; this definition selects no representatives and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The supplied measurable sample space, label set and family of probability measures are the experiment data; no implication giving parameter measurability from that data is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No sigma-algebra on Θ or common realization space is implied, so this definition contains no reverse theorem recovering such structures from a family of sampling laws."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-parametric-statistical-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the parameter-map domain Θ may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numerical structure on Θ is assumed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical structure on Θ is assumed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the parameter map need not be injective and may send distinct parameters to the same law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter set is arbitrary and has no required order or endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the parameter map is part of the data; no parameter is selected from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The model is the displayed parameter map P:Θ→P(X,A), regarded with its carrier; no characterization of identifiable models is asserted here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The map need not be injective and has no asserted measurability without extra structure on Θ, so no converse equivalence with injectivity or measurable kernels is present."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-parameter-measurable-statistical-model-as-markov-kernel": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: on Θ=∅ the parameterwise probability-section and eventwise measurability clauses are vacuous and all parameter preimages are empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: each A↦K(θ,A) is a probability measure, so its value on ∅ is zero; zero belongs to the stated [0,1] codomain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: each section is a probability measure on X, so K(θ,X)=1; the required endpoint value lies in [0,1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: K(θ,A)=Pθ(A) requires equality to the experiment law, with no injectivity requirement on θ; equal laws may give identical sections."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the event-probability codomain is [0,1] and its relative Borel sigma-algebra explicitly includes both endpoints, so maps attaining zero or one are allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: K is a supplied function satisfying section and measurability clauses; representation means specified equality, not an arbitrary section-selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: The kernel represents the given experiment exactly when K(θ,A)=Pθ(A); thus representation entails that equality for every θ and A."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: a kernel satisfying K(θ,A)=Pθ(A) for every θ and A represents the given experiment by the same exactly when clause; arbitrary experiments are not asserted to satisfy the kernel measurability condition."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-observational-equivalence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the relation is defined for θ,η∈Θ; when Θ=∅ there are no such pairs and the relation has no equivalence classes."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Observational equivalence uses equality of probability laws on events; parameter labels have no distinguished numeric zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: on a one-label model θ=η is permitted, since No distinctness ... is required and Pθ=Pθ."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: distinct parameter labels with identical sampling laws satisfy Pθ=Pη; injectivity is not required."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter map in this definition has an arbitrary domain with no order or interval boundary assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: θ∼η is determined by Pθ=Pη and selects no representative of an equivalence class."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: if θ∼η then the defining if and only if clause gives Pθ=Pη, hence equality on every A∈A."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: if Pθ(A)=Pη(A) for every measurable event, the laws are equal and the same defining if and only if clause gives θ∼η."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-estimand-on-a-statistical-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: an estimand is a function; the empty parameter set admits its unique empty-domain function whenever the target set is fixed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The target set is arbitrary and has no distinguished numeric zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The target set is arbitrary and has no distinguished numeric one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: an arbitrary target function may vary across observationally equivalent parameters; identifiability is a separate condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Neither parameter nor target set is required to be an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the target is a specified function and requires no representative choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The target ψ:Θ→T0 is a specified function of parameter labels; the item supplies no implication that ψ identifies the full parameter."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The estimand convention neither requires measurable target structure nor full-parameter determination, and no converse criterion from an estimator to ψ is stated."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-identifiability-of-an-estimand": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: when Θ is empty the pairwise implication is vacuous, and the identity map is injective vacuously."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numerical parameter or target structure is assumed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical parameter or target structure is assumed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: if a nonempty model has one law, an estimand is identifiable exactly when it is constant on all of Θ."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter set is not required to be an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: identifiability is a pairwise implication and chooses no parameter representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The equivalence-class characterization is proved in the separate theorem item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The equivalence-class characterization is proved in the separate theorem item."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-identifiability-iff-constant-on-equivalence-classes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-observational-equivalence",
+          "source_section": "Definition",
+          "quote": "In a parametric model $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$,\ntwo parameter values $\\theta,\\eta\\in\\Theta$ are **observationally\nequivalent**, written $\\theta\\sim\\eta$, if and only if\n$$\nP_\\theta=P_\\eta,\n$$\nthat is, $P_\\theta(A)=P_\\eta(A)$ for every $A\\in\\mathcal A$\n([[def-parametric-statistical-model]]). Equivalent parameter values therefore\ngive exactly the same sampling law. No distinctness of $\\theta$ and $\\eta$ is\nrequired.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Equality of measures is reflexive, symmetric and transitive; by [F2], $\\sim$ is therefore an equivalence relation, so each class $[\\theta]_\\sim$ is defined.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\psi=\\bar\\psi\\circ\\mathsf P$, then $P_\\theta=P_\\eta$ gives $\\bar\\psi(P_\\theta)=\\bar\\psi(P_\\eta)$ and hence $\\psi(\\theta)=\\psi(\\eta)$. Thus (iii) implies identifiability.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose $\\psi$ is identifiable. Form the relation $G:=\\{(Q,a):\\text{there exists }\\theta\\in\\Theta\\text{ with }Q=P_\\theta\\text{ and }a=\\psi(\\theta)\\}$. Every $Q\\in\\mathcal M$ has at least one such parameter by [F1]. If both $\\theta$ and $\\eta$ represent the same $Q$, then [F2] gives $\\theta\\sim\\eta$, so [F4] gives $\\psi(\\theta)=\\psi(\\eta)$. Thus $G$ has exactly one value for each $Q\\in\\mathcal M$, defines a function $\\bar\\psi:\\mathcal M\\to\\mathcal T_0$ by [F3], and satisfies $\\psi=\\bar\\psi\\circ\\mathsf P$. This construction defines the graph directly and uses no choice axiom.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $\\eta\\in[\\theta]_\\sim$ exactly when $\\eta\\sim\\theta$. If $a,b\\in[\\theta]_\\sim$, then $a\\sim\\theta$ and $b\\sim\\theta$, so symmetry and transitivity from step 1.1 give $a\\sim b$; conversely, $\\theta\\sim\\eta$ gives $\\eta\\in[\\theta]_\\sim$. Hence [F4] is exactly constancy of $\\psi$ on every class.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\bar\\psi_1$ and $\\bar\\psi_2$ both factor $\\psi$, each $Q\\in\\mathcal M$ equals $P_\\theta$ for some $\\theta$ by [F1], and then $\\bar\\psi_1(Q)=\\psi(\\theta)=\\bar\\psi_2(Q)$ by [F3]. The factor is unique. The implication in step 1.2 and the construction in step 1.3 give (i) iff (iii), while step 2.1 gives (i) iff (ii).",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: for Θ=∅, the class condition and pairwise identifiability are vacuous, M=∅, and the unique empty function factors ψ."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem is about sets and functions and assumes no numerical parameter or target structure."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem is about sets and functions and assumes no numerical parameter or target structure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.2–1.3, 2.1, and 3.1: for a nonempty constant model map, one class contains all parameters, so identifiability is exactly constancy of ψ and the factor is its single value."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered or interval structure is assumed on Θ or the target set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 defines the factor by its graph and proves each law has exactly one target value; no representative is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves that a factorization implies identifiability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 3.1 construct a factorization from identifiability and prove its uniqueness."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Independently checked all five current proof steps against F1–F4 and their actual Definition suppliers. Equality of measures gives an equivalence relation (1.1); a factor implies equal targets on equal laws (1.2); the explicit graph in 1.3 is a subset of M × T0 with one value per law by identifiability, requiring no AC; 2.1 proves both directions of class constancy using reflexivity, symmetry and transitivity; surjectivity onto the image M proves uniqueness (3.1). For Theta empty, M and the graph are empty and the unique empty map works even when T0 is empty. A nonempty Theta excludes an empty T0 because psi is supplied; constant models and singleton models are covered. Factorization is only set-theoretic and asserts no measurable factor or inference from one data point. Read reader-1, reader-findings-1 (empty) and refute-1 (no flags); verified Martin §§1.3.5–1.3.6, printed p.20 lines 1017–1040, and Geyer §6 printed p.6 lines 230–233 for identifiability context. These sources do not substitute for the complete local graph proof. No defect or unresolved prerequisite found."
+      }
+    },
+    "ex-identifiable-bernoulli-model-and-estimand": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-identifiability-iff-constant-on-equivalence-classes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\psi:\\Theta\\to\\mathcal T_0$ be an estimand, and set\n$\\mathcal M:=\\mathsf P(\\Theta)$, the set of laws in the model. For\n$\\theta\\in\\Theta$, write\n$$\n[\\theta]_\\sim:=\\{\\eta\\in\\Theta:\\eta\\sim\\theta\\}.\n$$\nThen the following are equivalent: **(i)** $\\psi$ is identifiable; **(ii)**\n$\\psi$ is constant on every observational equivalence class $[\\theta]_\\sim$;\nand **(iii)** there is a unique function $\\bar\\psi:\\mathcal M\\to\\mathcal T_0$\nsuch that $\\psi=\\bar\\psi\\circ\\mathsf P$.\n\nThe factorization is a statement about sets and functions. It asserts no\nmeasurable structure or measurable factor map.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The full power set contains $\\mathcal X$ and is closed under finite unions and complements, so it is an algebra of subsets. Every countable union of its members is still a subset of $\\mathcal X$, so it is a sigma-algebra by [F1] and gives a measurable space by [F2]. For any $p\\in[0,1]$, both singleton masses $p$ and $1-p$ are nonnegative, and $P_p(\\mathcal X)=p+(1-p)=1$. If $(A_n)$ is pairwise disjoint, each of $0$ and $1$ belongs to at most one $A_n$, so $\\sum_nP_p(A_n)=p\\mathbf1_{\\{1\\in\\cup_nA_n\\}}+(1-p)\\mathbf1_{\\{0\\in\\cup_nA_n\\}}=P_p(\\cup_nA_n)$. Hence every $P_p$ is a probability measure by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $P_p=P_{p'}$, evaluation on $\\{1\\}$ gives $p=P_p(\\{1\\})=P_{p'}(\\{1\\})=p'$. Thus the model map is injective and equal laws force $\\psi(p)=\\psi(p')$; the target is identifiable by [F7]. By [F8] it factors uniquely through the set of Bernoulli laws.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes Θ=[0,1], which is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: p=0 gives valid masses 0 and 1; the endpoint is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: p=1 gives valid masses 1 and 0; the endpoint is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: the point-mass laws at p=0 and p=1 are valid and remain distinct because their masses on {1} differ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 explicitly include p=0 and p=1 in the closed parameter interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The law is given by an explicit two-point formula; no selection is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one model; it does not prove an if-and-only-if theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one model; it does not prove an if-and-only-if theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "four-event-probability-table",
+          "claim": "For every p∈[0,1], the probabilities of the four measurable events are Pp(∅)=0, Pp({0})=1−p, Pp({1})=p, and Pp({0,1})=1.",
+          "result": "All four values are nonnegative, the total mass is 1, and equality of laws is determined by the singleton {1} mass p."
+        },
+        {
+          "id": "endpoint-laws",
+          "claim": "At p=0 the law is δ0; at p=1 the law is δ1.",
+          "result": "Both are probability measures and distinct, so the closed-interval endpoints do not break identifiability."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Independently read the complete current Example, F1–F8 and Verification 1.1–2.1, all actual supplier sections, eight exact contract citation excerpts, derivations, boundary and finite checks, plus reader/refuter evidence (no findings). The full power set on {0,1} is a sigma-algebra. For each p in [0,1], singleton masses p and 1-p are nonnegative with total 1 and empty-event mass 0; disjoint events count each atom at most once, so countable additivity holds. Equal laws evaluated on {1} force p=p-prime, establishing injectivity and target identifiability. The independently reviewed factorization theorem applies to this supplied model and psi(p)=p; concretely the unique factor is Q maps to Q({1}). At p=0 and p=1 the laws are delta0 and delta1 and remain distinct, so the closed interval and both degeneracies are valid. Empty Theta is irrelevant to this fixed nonempty example. No AC, joint realization or measurable parameter factor is asserted. This generated example needs no external proof: the local argument proves the displayed formula is a law and all stated properties. No defect or unresolved prerequisite found."
+      }
+    },
+    "cex-nonidentifiable-redundant-bernoulli-parameterization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-identifiability-iff-constant-on-equivalence-classes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\psi:\\Theta\\to\\mathcal T_0$ be an estimand, and set\n$\\mathcal M:=\\mathsf P(\\Theta)$, the set of laws in the model. For\n$\\theta\\in\\Theta$, write\n$$\n[\\theta]_\\sim:=\\{\\eta\\in\\Theta:\\eta\\sim\\theta\\}.\n$$\nThen the following are equivalent: **(i)** $\\psi$ is identifiable; **(ii)**\n$\\psi$ is constant on every observational equivalence class $[\\theta]_\\sim$;\nand **(iii)** there is a unique function $\\bar\\psi:\\mathcal M\\to\\mathcal T_0$\nsuch that $\\psi=\\bar\\psi\\circ\\mathsf P$.\n\nThe factorization is a statement about sets and functions. It asserts no\nmeasurable structure or measurable factor map.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The full power set contains $\\mathcal X$ and is closed under finite unions and complements, so it is an algebra of subsets. Every countable union of its members is still a subset of $\\mathcal X$, so it is a sigma-algebra by [F1] and gives a measurable space by [F2]. For every $(u,v)\\in\\Theta$, both masses $u+v$ and $1-u-v$ are nonnegative and sum to $1$. In a pairwise disjoint sequence of events, each singleton $\\{0\\}$ and $\\{1\\}$ appears at most once, so the displayed formula is countably additive. Thus $P_{u,v}$ is a probability measure by [F3], and the family is an experiment by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The points $(u,v)=(1/5,1/2)$ and $(u',v')=(3/10,2/5)$ have coordinates in $[0,1]$, and their sums are $1/5+1/2=2/10+5/10=7/10$ and $3/10+2/5=3/10+4/10=7/10\\le1$, so both belong to $\\Theta$. Both measures assign $7/10$ to $\\{1\\}$ and $3/10$ to $\\{0\\}$; the four events $\\varnothing,\\{0\\},\\{1\\},\\mathcal X$ consequently have probabilities $0,3/10,7/10,1$ under both laws, so $P_{u,v}=P_{u',v'}$. But $\\psi(u,v)=1/5\\ne3/10=\\psi(u',v')$. By [F7], $\\psi$ is not identifiable; by [F8], it cannot factor through the model-law set.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement exhibits two parameters in Θ, so this example has a nonempty parameter set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers (u,v)=(0,0), where the success-event mass is 0 and the target is 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers (u,v)=(1,0), where the success-event mass and target are both 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives distinct parameter pairs with exactly the same sampling law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The constraint u+v≤1 includes boundary pairs; step 1.1 keeps both masses nonnegative there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample uses two explicit rational parameter pairs and no selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample shows failure of identifiability; it is not a proof of the characterization theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample shows failure of identifiability; it is not a proof of the characterization theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "equal-law-distinct-targets",
+          "claim": "At (u,v)=(1/5,1/2) and (u′,v′)=(3/10,2/5), both coordinate sums equal 7/10.",
+          "result": "Each model law assigns 7/10 to {1} and 3/10 to {0}, while the target values are 1/5 and 3/10; the laws coincide and the targets differ."
+        },
+        {
+          "id": "boundary-mass-check",
+          "claim": "At (0,0) and (1,0), the success probabilities are 0 and 1, respectively.",
+          "result": "The formula remains a probability law at both parameter-space boundaries."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Read the current refuted universal claim, construction, F1–F8 and both steps, checked all eight contract citation excerpts against current supplier sections, and reviewed reader/refuter evidence (no findings). The full power set on {0,1} is a sigma-algebra; u,v nonnegative and u+v<=1 give masses u+v and 1-u-v in [0,1] summing to 1. Disjoint events allocate each atom at most once, proving countable additivity including the empty event. Explicit witnesses (1/5,1/2) and (3/10,2/5) lie in Theta, both give success mass 7/10 and failure mass 3/10, and all four event probabilities coincide while target values 1/5 and 3/10 differ. Thus the universal coordinate-identifiability claim is refuted, and by the already independently reviewed factorization theorem no factor can exist. The boundary u+v=0 gives delta0; u+v=1 gives delta1; endpoints (0,0), (1,0), (0,1) are admissible. The displayed model is nonempty, its target maps into [0,1], and no AC, measurability of parameters or unproved distributional supplier is used. No source citation is claimed in this ai-generated witness; all logical suppliers are local. No defect or blocker found."
+      }
+    }
+  }
+}

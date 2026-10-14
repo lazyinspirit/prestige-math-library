@@ -11,12 +11,7 @@ deps: [def-measure-with-density, thm-indefinite-integral-of-a-nonnegative-functi
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-05-receipts.jsonl (thm-integration-against-a-density). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/mathematical-statistics-foundations-37-owner-s4-published-thm-integration-against-a-density-repair.json
 sources:
   scraped: []
   references:
@@ -26,12 +21,12 @@ sources:
 
 ## Statement
 
-Let $f,g:X\to[0,+\infty]$ be measurable. Then
+Let $(X,\mathcal A,\mu)$ be an arbitrary measure space. Let $f,g:X\to[0,+\infty]$ be measurable. Then
 $$\int g\,d(f\,d\mu)=\int gf\,d\mu.$$
 
 ## Facts & Assumptions
 
-**Given:** Nonnegative measurable functions $f$ and $g$.
+**Given:** An arbitrary measure space $(X,\mathcal A,\mu)$; nonnegative measurable functions $f$ and $g$.
 
 [L1] The density measure is defined by $(f\,d\mu)(A)=\int_A f\,d\mu$ ([[def-measure-with-density]]).
 

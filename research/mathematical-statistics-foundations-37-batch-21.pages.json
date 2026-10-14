@@ -1,0 +1,201 @@
+[
+  {
+    "order": 1884,
+    "id": "delta-method-and-asymptotic-normality",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Delta Method and Asymptotic Normality",
+    "companion": "delta-method-and-asymptotic-normality-examples",
+    "requires": [
+      "asymptotic-convergence-consistency-and-identification",
+      "m-and-z-estimation-and-uniform-laws",
+      "weak-convergence-tightness-and-representation",
+      "matrix-differentiation-and-first-order-spectral-perturbation",
+      "inner-product-spaces-and-orthogonality"
+    ],
+    "items": [
+      {
+        "id": "thm-first-and-second-order-delta-method-for-random-vectors",
+        "kind": "theorem",
+        "title": "First- and second-order delta method for random vectors",
+        "statement": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+        "deps": [
+          "def-op-and-little-op-stochastic-bounds",
+          "def-convergence-in-distribution-of-random-elements",
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "thm-vector-stochastic-order-calculus",
+          "thm-vector-slutsky"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Bartlett, Theoretical Statistics, Stat 210B Lecture 16, PDF pp. 9\u201312",
+              "url": "https://www.stat.berkeley.edu/~bartlett/courses/2013spring-stat210b/notes/16notes.pdf"
+            },
+            {
+              "title": "John Duchi, Theory of Statistics, Stats 300B Lecture 2, PDF pp. 2\u20134",
+              "url": "https://web.stanford.edu/class/stats300b/ScribeNotes/2021/lecture-02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-z-estimator-asymptotic-linearity-and-normality",
+        "kind": "theorem",
+        "title": "Asymptotic linearity and normality of iid Z-estimators",
+        "statement": "Assume the Axiom of Choice (AC), as required by the library's multivariate iid central limit theorem. Let $(\\mathcal X,\\mathcal A)$ be a measurable space, let $\\Theta\\subset\\mathbb R^d$ be open with its Borel sigma-algebra, and let $\\theta_0\\in\\Theta$. Let $X_1,X_2,\\ldots$ be iid $\\mathcal X$-valued observations with law $P$. Let $\\psi:\\Theta\\times\\mathcal X\\to\\mathbb R^d$ be jointly measurable and satisfy $P\\|\\psi_\\theta\\|<\\infty$ for every $\\theta\\in\\Theta$; write $\\psi_\\theta(x)=\\psi(\\theta,x)$. Let $\\hat\\theta_n:(\\mathcal X^n,\\mathcal A^{\\otimes n})\\to(\\Theta,\\mathcal B(\\Theta))$ be a measurable estimator sequence as in [[def-estimator-sequence-in-iid-experiments]] and a Z-estimator as in [[def-z-estimator]], with the stronger root-rate condition below. Write\n$$P\\psi_\\theta=\\mathbb E[\\psi_\\theta(X_1)],\\qquad P_n\\psi_\\theta=\\frac1n\\sum_{i=1}^n\\psi_\\theta(X_i),\\qquad \\mathbb G_n\\psi_\\theta=\\sqrt n(P_n-P)\\psi_\\theta.$$\nAssume the displayed random vectors and suprema below are measurable, and suppose:\n\n1. $\\|\\hat\\theta_n-\\theta_0\\|=o_P(1)$ and $\\sqrt n\\,\\|P_n\\psi_{\\hat\\theta_n}\\|=o_P(1)$.\n2. $P\\psi_{\\theta_0}=0$, $P\\|\\psi_{\\theta_0}\\|^2<\\infty$, and $\\Sigma=P[\\psi_{\\theta_0}\\psi_{\\theta_0}^{T}]$.\n3. The mean map $\\Psi(\\theta)=P\\psi_\\theta$ has expansion $\\Psi(\\theta_0+h)=Vh+\\rho(h)$ with $V$ nonsingular and $\\|\\rho(h)\\|/\\|h\\|\\to0$ as $h\\to0$, $h\\ne0$.\n4. The local stochastic-equicontinuity condition holds: for every $\\varepsilon>0$,\n$$\\lim_{\\delta\\downarrow0}\\limsup_{n\\to\\infty}P^n\\!\\left(\\sup_{\\theta\\in\\Theta:\\,\\|\\theta-\\theta_0\\|<\\delta}\\|\\mathbb G_n(\\psi_\\theta-\\psi_{\\theta_0})\\|>\\varepsilon\\right)=0.$$\n\nHere $P^n$ denotes the product sampling law of $(X_1,\\ldots,X_n)$.\n\nThen\n$$\\sqrt n(\\hat\\theta_n-\\theta_0)=-V^{-1}\\mathbb G_n\\psi_{\\theta_0}+o_P(1)\\Rightarrow N_d(0,V^{-1}\\Sigma V^{-T}).$$\nThis theorem assumes consistency and the local empirical-process condition; it asserts neither. The local equicontinuity condition is the direct process hypothesis used in the proof, and consistency alone does not replace it.",
+        "deps": [
+          "def-z-estimator",
+          "def-estimator-sequence-in-iid-experiments",
+          "def-op-and-little-op-stochastic-bounds",
+          "def-convergence-in-distribution-of-random-elements",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "thm-vector-stochastic-order-calculus",
+          "thm-vector-slutsky",
+          "thm-multivariate-iid-central-limit-theorem"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter Bartlett, Theoretical Statistics, Stat 210B Lecture 16, PDF p. 13",
+              "url": "https://www.stat.berkeley.edu/~bartlett/courses/2013spring-stat210b/notes/16notes.pdf"
+            },
+            {
+              "title": "Aad W. van der Vaart, Semiparametric Statistics, Lecture 6 \u00a76.5, Theorem 6.19, PDF pp. 73\u201374",
+              "url": "https://sites.stat.washington.edu/jaw/COURSES/EPWG/stflour.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 1885,
+    "id": "delta-method-and-asymptotic-normality-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Delta Method and Asymptotic Normality \u2014 Examples",
+    "companion": "delta-method-and-asymptotic-normality",
+    "requires": [
+      "delta-method-and-asymptotic-normality"
+    ],
+    "items": [
+      {
+        "id": "ex-log-transformation-delta-method",
+        "kind": "example",
+        "title": "A logarithmic transformation",
+        "statement": "Let $\\Omega=\\{-1,1\\}$ with each point having probability $1/2$, let $Z(\\omega)=\\omega$, and set $T_n=\\max\\{1/2,\\,1+Z/\\sqrt n\\}$ for $n\\ge1$. Define the Borel map $g(t)=\\log t$ for $t>0$ and $g(t)=0$ for $t\\le0$. Then\n$$\\sqrt n\\{\\log T_n-\\log1\\}\\Rightarrow Z.$$\nThus the log transformation has first-order scale $\\sqrt n$ and derivative $g'(1)=1$ in this example.",
+        "deps": [
+          "thm-first-and-second-order-delta-method-for-random-vectors"
+        ],
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-ratio-delta-method",
+        "kind": "example",
+        "title": "A ratio transformation",
+        "statement": "Give $\\Omega=\\{-1,1\\}^2$ equal mass $1/4$ at each point, and let $Z=(Z_1,Z_2)$ be the coordinate vector. Put $\\theta=(1,2)$, $T_n=\\theta+n^{-1/2}Z$ for $n\\ge1$, and define $g(x,y)=x/y$ for $y\\ne0$ and $g(x,0)=0$. The denominator of $g(T_n)$ is positive for every $n$. The first-order delta method gives\n$$\\sqrt n\\left(\\frac{T_{n,1}}{T_{n,2}}-\\frac12\\right)\\Rightarrow \\frac12Z_1-\\frac14Z_2.$$\nThe limit takes the values $1/4,3/4,-3/4,-1/4$ with equal probability and has variance $5/16$.",
+        "deps": [
+          "thm-first-and-second-order-delta-method-for-random-vectors"
+        ],
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-second-order-delta-method-quadratic",
+        "kind": "example",
+        "title": "A zero-gradient quadratic limit",
+        "statement": "Let $\\Omega=\\{-\\sqrt2,0,\\sqrt2\\}$ with probabilities $1/4,1/2,1/4$, let $Z(\\omega)=\\omega$, and set $T_n=Z/\\sqrt n$ for $n\\ge1$. For $g(t)=t^2$ at $\\theta=0$, the first derivative vanishes and the second derivative is $2$. The second-order delta method gives $nT_n^2\\Rightarrow Z^2$, which equals $0$ or $2$ with probability $1/2$ each.",
+        "deps": [
+          "thm-first-and-second-order-delta-method-for-random-vectors"
+        ],
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-sample-variance-delta-method",
+        "kind": "example",
+        "title": "Sample variance from a multivariate delta method",
+        "statement": "Assume AC. Let $X_1,X_2,\\ldots$ be iid real random variables with $\\mathbb E|X_1|^4<\\infty$. Put $\\mu_j=\\mathbb E[X_1^j]$ for $1\\le j\\le4$, $\\sigma^2=\\mu_2-\\mu_1^2$, $\\bar X_n=n^{-1}\\sum_iX_i$, $Q_n=n^{-1}\\sum_iX_i^2$, and $S_n^2=Q_n-\\bar X_n^2$. Then\n$$\\sqrt n(S_n^2-\\sigma^2)\\Rightarrow N_1(0,\\tau^2),\\qquad \\tau^2=\\operatorname{Var}((X_1-\\mu_1)^2)=\\mathbb E[(X_1-\\mu_1)^4]-\\sigma^4=\\mu_4-4\\mu_1\\mu_3+8\\mu_1^2\\mu_2-4\\mu_1^4-\\mu_2^2.$$\nHere $\\sigma^4=(\\sigma^2)^2$ and $\\tau^2=\\operatorname{Var}((X_1-\\mu_1)^2)$.",
+        "deps": [
+          "thm-first-and-second-order-delta-method-for-random-vectors",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "thm-multivariate-iid-central-limit-theorem",
+          "def-multivariate-normal-law",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Duchi, Theory of Statistics, Stats 300B Lecture 2, sample-variance setup and covariance, PDF p. 3 (printed final variance corrected here)",
+              "url": "https://web.stanford.edu/class/stats300b/ScribeNotes/2021/lecture-02.pdf"
+            },
+            {
+              "title": "Peter Bartlett, Theoretical Statistics, Stat 210B Lecture 16, delta method, PDF pp. 10\u201312",
+              "url": "https://www.stat.berkeley.edu/~bartlett/courses/2013spring-stat210b/notes/16notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-continuity-alone-does-not-give-delta-method",
+        "kind": "counterexample",
+        "title": "Continuity alone does not give a delta-method limit",
+        "statement": "Continuity of $g$ at $\\theta$ alone suffices for a first-order delta-method conclusion: whenever $r_n(T_n-\\theta)\\Rightarrow Z$, there is a linear map $A$ for which $r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ$.",
+        "deps": [
+          "thm-first-and-second-order-delta-method-for-random-vectors"
+        ],
+        "generation": {
+          "role": "counterexample"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 4
+      }
+    ]
+  }
+]

@@ -26,14 +26,9 @@ items: [def-finite-probability-space-and-event,
         lem-indicator-expectation-and-products,
         def-independence-of-finite-random-variables,
         thm-event-independence-and-indicator-independence,
-        thm-expectation-of-products-of-independent-random-variables,
         def-variance-and-covariance,
         lem-variance-and-covariance-identities,
-        thm-covariance-bilinearity-and-symmetry,
-        thm-variance-of-a-finite-sum,
-        cor-variance-adds-for-pairwise-independent-random-variables,
         def-bernoulli-and-binomial-random-variables,
-        lem-bernoulli-and-binomial-mean-and-variance,
         thm-markov-inequality,
         thm-chebyshev-inequality,
         lem-cauchy-schwarz-for-finite-random-variables,
@@ -44,4 +39,4 @@ examples: []
 
 Finite sums and their reindexing laws, finite cardinality and Cartesian products, functions, and ordered-field arithmetic provide the background. The real exponential and logarithm development fixes the ambient real-number conventions used for probabilities, expectations, variances, and later tail estimates.
 
-Finite probability spaces lead through additivity, conditioning, Bayes' theorem, and the distinction between pairwise and mutual independence to product spaces. Random variables then introduce distributions, expectation, indicators, and independence; variance and covariance yield sum formulas and Bernoulli and binomial moments. Markov and Chebyshev inequalities, finite Cauchy-Schwarz, and the second-moment bound complete the progression from first-order averages to quantitative probability estimates.
+Finite probability spaces lead through additivity, conditioning, Bayes' theorem, and the distinction between pairwise and mutual independence to product spaces. Random variables then introduce distributions, expectation, indicators, and independence; variance and covariance provide finite moment identities, followed by Bernoulli and binomial variable definitions. Markov and Chebyshev inequalities, finite Cauchy-Schwarz, and the second-moment bound complete the progression from first-order averages to quantitative probability estimates.

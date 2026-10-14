@@ -1,0 +1,297 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "22",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "def-wald-score-likelihood-ratio-statistics",
+      "model": "gpt-6-luna",
+      "context_sha256": "8d43246b5bcd8e30d640202ca272ea76aabf349c44d2c9ee769dca2507feab51",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "In the N(mu,1) model with true mu=0, point null {0}, and local chart V=(-1,1), the global exact MLE bar X lies outside V with positive probability. Then its tested coordinate and W_n were undefined. The constrained score has the analogous chart-domain issue. W_n and S_n now have respective off-chart zero extensions, preserving on-chart formulas and global LR. Under consistency these events vanish in probability.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+      "model": "gpt-6-luna",
+      "context_sha256": "892bc28c0f28d12ad2e304eb276b64794403eecf07e35b4f0f519b8bdc18e0ab",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Statement already assumes AC, so no missing hypothesis invalidates the calibration. However A3 and Proof 4.1 incorrectly restrict its uses to F7-F9, although F2 assumes AC for density representatives and F3 explicitly assumes AC. Both accounting sentences now include F2 and F3. Proof 3.1 also states why consistency makes the repaired off-chart conventions asymptotically immaterial.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-wald-score-lr-asymptotic-equivalence",
+      "model": "gpt-6-luna",
+      "context_sha256": "46a88ef5b2566fa48457443b0178f5a4215f9acb177acb6372f7c535201c7e98",
+      "outcome": "false_positive",
+      "reason": "The actual F1 theorem lists thm-multivariate-iid-central-limit-theorem in deps and F7, and its Proof 1.1 applies that iid CLT to the centered QMD score. Thus A1 accurately describes the supplier proof. AC is also explicitly assumed here, as required. Subtracting the three common T_n+o_P(1) expansions gives the pairwise differences by the triangle inequality and a union bound; the proof does not infer equivalence merely from equal marginal limits.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-wald-score-likelihood-ratio-statistics",
+      "disposition": "repaired",
+      "post_sha256": "9d59e009985df52f9e134b8c8ed8d728d0d85029dcaf97509dd8c770f493dd75",
+      "review_context_sha256": "4695aee540cbb0c340a9f12a0369a7f829996a9b9ce35909420fd85a58fc20c4",
+      "reason": "Reviewed the full Definition, QMD and pointwise-score supplier conventions. The chart now has a named open neighborhood V, with W_n=0 off V for the full maximizer and S_n=0 off V for the constrained maximizer. Positive information gives the positive Schur complement by the displayed quadratic form; empty nuisance blocks and singular estimated-inverse fallbacks remain valid. AC remains explicit for the density representatives.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+      "disposition": "repaired",
+      "post_sha256": "19df817f1a807d24285cfad1077cc158032fefd2f3f6ad3d1672376f42588882",
+      "review_context_sha256": "f770a7aeefb8b43db628359cf8016c2e4f28b299c80f6fab8908b3956db2a9c6",
+      "reason": "Checked score centering by QMD norm expansion, the Schur complement covariance, full-MLE representation, restricted quadratic maximizer and uniform-expansion gap, covariance/information consistency, and whitening to chi-square. Root-n tightness localizes both maximizers, and consistency makes the new off-chart events negligible. AC is now accurately inherited from F2, F3, and F7-F9; the Statement and all conclusions are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-wald-score-lr-asymptotic-equivalence",
+      "disposition": "unaffected",
+      "post_sha256": "d99ded8e5b4578cd859a70c535fd0c11db4bb7c4119810026cb200cd627dad82",
+      "review_context_sha256": "92a0c6f884b683e90ea300f1e406b90451164d717042360aeb1213993caeac7b",
+      "reason": "Both proof steps follow from the supplier common quadratic approximation: each difference of vanishing errors is vanishing, and the theorem supplies all chi-square limits. Checked A1 against the actual supplier deps, F7 and Proof 1.1, where the multivariate iid CLT is explicitly used. The supplier Statement is unchanged by the AC-accounting and off-chart proof clarification, so all inherited hypotheses and conclusions remain intact. No item or metadata edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+    "ex-normal-mean-exact-likelihood-calibration",
+    "cex-boundary-null-has-nonstandard-lr-limit"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "subject": "def-wald-score-likelihood-ratio-statistics",
+      "class": "accuracy",
+      "subclass": "undefined-notation",
+      "severity": "fatal",
+      "location": "definition",
+      "caught_at_stage": "5-adjudicate",
+      "disposition": "fixed",
+      "reason": "In the N(mu,1) model with true mu=0, point null {0}, and local chart V=(-1,1), the global exact MLE bar X lies outside V with positive probability. Then its tested coordinate and W_n were undefined. The constrained score has the analogous chart-domain issue. W_n and S_n now have respective off-chart zero extensions, preserving on-chart formulas and global LR. Under consistency these events vanish in probability.",
+      "adjudication_ref": [
+        "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u22.json"
+      ],
+      "historical_distinction": "This chart-domain defect differs from msf37-b22-global-maximizer-clarity, which fixed ambiguity between local/global maximization. Preserve that historical row and its severity unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "subject": "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+      "class": "accuracy",
+      "subclass": "citation-inaccurate",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "caught_at_stage": "5-adjudicate",
+      "disposition": "fixed",
+      "reason": "The Statement already assumes AC, so no missing hypothesis invalidates the calibration. However A3 and Proof 4.1 incorrectly restrict its uses to F7-F9, although F2 assumes AC for density representatives and F3 explicitly assumes AC. Both accounting sentences now include F2 and F3. Proof 3.1 also states why consistency makes the repaired off-chart conventions asymptotically immaterial.",
+      "adjudication_ref": [
+        "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u22.json"
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "propose_audit_note",
+      "subject": "batch-22 Step-5 unit-22 consumer inventory",
+      "reason": "The repaired definition has exactly three direct item dependency/reference consumers, all draft frontier items: the calibration theorem, exact normal example, and boundary-null counterexample. Their affected uses are accounted for in downstream_reviews. No published consumer repair or outside-frontier supplier-interface event was found. The digest Gaussian-example alert is a draft frontier item in batch 23, not a published repair.",
+      "published_repairs": [],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-wald-score-likelihood-ratio-statistics",
+      "before_itemHashGuard": "8f688beab9ff37b0a3957275369cf786b73ce201b211952cbf92c73acea7358c",
+      "changed_section": "Definition",
+      "original_clause": "in a C^1 local parameter chart; hat psi_n is the tested coordinate of hat theta_n; only inverse failure has an explicit zero fallback.",
+      "replacement_clause": "The chart is on an open neighborhood V of theta_0. Evaluate W_n only for hat theta_n in V and S_n only for tilde theta_n in V, and set each to zero on its own off-chart event.",
+      "mathematical_evidence": "For any epsilon>0 with the epsilon-ball about theta_0 inside V, consistency bounds each off-chart probability by P(||theta_n-theta_0||>epsilon), which tends to zero. Therefore changing values only there preserves convergence in probability and distribution. Positive-definite I gives I_eff>0 by the displayed block quadratic form.",
+      "dependency_ids": [
+        "def-parametric-statistical-model",
+        "def-qmd-path",
+        "def-score-and-fisher-information",
+        "def-axiom-of-choice"
+      ],
+      "sources_read": [
+        "items/def-qmd-path.md: Definition",
+        "items/def-score-and-fisher-information.md: Definition"
+      ],
+      "metadata_repairs": [
+        "Updated only this item statement mirror in research/mathematical-statistics-foundations-37-batch-22.pages.json.",
+        "Updated this definition contract zero/endpoints boundaries and exact consumer quotations in the batch-22 proof contract. Original independent risk_review records remain unchanged."
+      ],
+      "independent_review_claimed": false
+    },
+    {
+      "id": "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+      "before_itemHashGuard": "c9c98c5d2bf0726b730992a82d5b59a2bf2ccdd2390629cabea2bf5a64f183ed",
+      "changed_sections": [
+        "Facts & Assumptions A3",
+        "Proof 3.1",
+        "Proof 4.1"
+      ],
+      "statement_comparison": "Statement unchanged verbatim; before and after section SHA-256 f78ad730649068562640e0b24d631564cdadea6e41220f3aadd1870109b69441.",
+      "mathematical_evidence": "All hypotheses already include AC. The accounting now lists F2, F3, F7-F9. Uniform local quadratic expansion plus root-n tightness and the strictly positive nuisance quadratic gap identify the restricted nuisance maximizer. Block inversion identifies the Wald form, the assumed score expansion identifies the score form, and completing the square identifies LR. Whitening the efficient centered Gaussian score gives chi-square. The added chart-consistency sentence makes the repaired supplier convention explicit.",
+      "sources_read": [
+        "items/thm-regular-mle-asymptotic-linearity-and-normality.md: Statement and Facts & Assumptions",
+        "items/def-wald-score-likelihood-ratio-statistics.md: repaired Definition",
+        "Batch-22 proof-contract exact CLT, normal-law, chi-square-law, stochastic-order and Slutsky interfaces, checked by strict contract validation."
+      ],
+      "metadata_repairs": [
+        "Regenerated only this item citations and derivations in the owning batch proof contract."
+      ],
+      "independent_review_claimed": false
+    },
+    {
+      "id": "cor-wald-score-lr-asymptotic-equivalence",
+      "before_itemHashGuard": "d99ded8e5b4578cd859a70c535fd0c11db4bb7c4119810026cb200cd627dad82",
+      "changed_sections": [],
+      "mathematical_evidence": "Supplier deps and F7 name the multivariate iid CLT; supplier Proof 1.1 invokes it on the centered square-integrable score. The corollary correctly inherits AC, and common T_n approximations yield all pairwise differences by triangle inequalities. The supplier proof-only edits preserve its entire Statement.",
+      "sources_read": [
+        "items/thm-wald-score-likelihood-ratio-asymptotic-chi-square.md: deps, Facts F7, Proof 1.1 and repaired full argument"
+      ],
+      "independent_review_claimed": false
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "def-wald-score-likelihood-ratio-statistics",
+      "id": "thm-wald-score-likelihood-ratio-asymptotic-chi-square",
+      "path": "items/thm-wald-score-likelihood-ratio-asymptotic-chi-square.md",
+      "affected_use": "Statement estimator assumptions, F2, Proof 3.1 and 3.2 use the local-coordinate Wald and constrained-score formulas.",
+      "invalidated_claim": "None after repair: full and constrained MLE consistency makes their off-chart probabilities tend to zero.",
+      "minimality": "One sentence in Proof 3.1 records why zero extension preserves all approximations. No Statement change.",
+      "disposition": "proof_clarified"
+    },
+    {
+      "supplier": "def-wald-score-likelihood-ratio-statistics",
+      "id": "ex-normal-mean-exact-likelihood-calibration",
+      "path": "items/ex-normal-mean-exact-likelihood-calibration.md",
+      "affected_use": "F6 and Verification 4.1 compute W_n=S_n=L_n=n(bar X-mu_0)^2/sigma^2 in the normal location model.",
+      "invalidated_claim": "None: the tested coordinate psi=mu-mu_0 is defined by a global chart on V=R; both maximizers always lie in V.",
+      "minimality": "No item repair needed; use the existing global normal-location coordinate and exact positive covariance/information estimates.",
+      "disposition": "unaffected"
+    },
+    {
+      "supplier": "def-wald-score-likelihood-ratio-statistics",
+      "id": "cex-boundary-null-has-nonstandard-lr-limit",
+      "path": "items/cex-boundary-null-has-nonstandard-lr-limit.md",
+      "affected_use": "F1 and Counterexample 2.2 use L_n=2{ell_n(hat mu)-ell_n(tilde mu)} for Theta_0=(-infinity,0].",
+      "invalidated_claim": "None: the general likelihood-ratio definition is unchanged and the boundary counterexample never uses W_n or S_n.",
+      "minimality": "No repair or additional propagation needed; its LR formula and mixture-law computation remain identical.",
+      "disposition": "unaffected"
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/mathematical-statistics/likelihood-asymptotics-wald-score-and-likelihood-ratio.md",
+      "affected_use": "Page lists the repaired definition and states regular interior equality-null calibration under stated local expansions.",
+      "disposition": "unaffected",
+      "reason": "The added convention completes finite-sample statistic values without changing the conditional asymptotic calibration."
+    },
+    {
+      "path": "library/mathematical-statistics/likelihood-asymptotics-wald-score-and-likelihood-ratio-examples.md",
+      "affected_use": "Page states exact normal-location equality and contrasts the one-sided boundary-null LR mixture.",
+      "disposition": "unaffected",
+      "reason": "The normal location model has global tested coordinates, and the boundary example uses only the unchanged LR formula."
+    }
+  ],
+  "outside_lane_findings": [
+    {
+      "id": "thm-regular-mle-asymptotic-linearity-and-normality",
+      "status": "draft",
+      "frontier": true,
+      "route": "frontier owner, batch 22; item is unassigned in this dispatch",
+      "path": "items/thm-regular-mle-asymptotic-linearity-and-normality.md",
+      "location": "Proof 3.1",
+      "exact_affected_use": "For each fixed original sample, the supremum of absolute values is convex in the ghost sample vector, so Jensen's inequality replaces P_0 f by the ghost empirical average.",
+      "finding": "Convexity in the observation vector does not follow for nonlinear criterion functions. The symmetrization inequality itself is justified by sup_t |E a_t| <= E sup_t |a_t|, or convexity in the evaluated function-value vector b_t.",
+      "minimality": "Replace the observation-vector convexity claim by that evaluated-vector or supremum/expectation inequality. No mathematical conclusion or Statement change is required.",
+      "severity": "nonfatal",
+      "edited": false,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-gaussian-shift-lan-and-regular-sample-mean",
+      "status": "draft",
+      "frontier": true,
+      "route": "frontier owner, batch 23; item is unassigned in this dispatch",
+      "path": "items/ex-gaussian-shift-lan-and-regular-sample-mean.md",
+      "location": "F7 and Proof 1.1",
+      "exact_affected_use": "[F7] [[thm-ftc-first-part]]: Integrating a continuous derivative along an interval recovers the endpoint difference. Proof 1.1 uses (g_t-g_0)/t=integral_0^1 partial_theta g_{rt} dr.",
+      "finding": "The actual FTC first-part Statement differentiates an integral function. The endpoint-difference identity used here is exactly the FTC second-part Statement. The Gaussian parameter derivative is continuous on each compact interval, so the intended identity is valid with that supplier.",
+      "minimality": "Use thm-ftc-second-part in F7 and deps, with compact-interval integrability and any required Riemann/Lebesgue bridge accounted for. No claim of full independent review of this outside-lane example.",
+      "severity": "nonfatal",
+      "edited": false,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-wald-score-likelihood-ratio-statistics.md --json",
+      "exit_code": 0,
+      "result": "1 file; not-applicable, 0 checked proofs, 0 failures."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-wald-score-likelihood-ratio-asymptotic-chi-square.md items/cor-wald-score-lr-asymptotic-equivalence.md --json",
+      "exit_code": 0,
+      "result": "2 checked proofs, both pass, 0 failures."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-wald-score-likelihood-ratio-statistics.md items/thm-wald-score-likelihood-ratio-asymptotic-chi-square.md items/cor-wald-score-lr-asymptotic-equivalence.md library/mathematical-statistics/likelihood-asymptotics-wald-score-and-likelihood-ratio.md library/mathematical-statistics/likelihood-asymptotics-wald-score-and-likelihood-ratio-examples.md --json",
+      "exit_code": 0,
+      "result": "5 carriers checked; 0 errors and 0 warnings."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-22.proof-contracts.json --strict --items def-wald-score-likelihood-ratio-statistics,thm-wald-score-likelihood-ratio-asymptotic-chi-square,cor-wald-score-lr-asymptotic-equivalence,ex-normal-mean-exact-likelihood-calibration,cex-boundary-null-has-nonstandard-lr-limit --json",
+      "exit_code": 0,
+      "result": "All 5 selected contract entries passed; 0 errors and 0 warnings."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-wald-score-likelihood-ratio-statistics.md items/thm-wald-score-likelihood-ratio-asymptotic-chi-square.md",
+      "exit_code": 0,
+      "result": "2 changed items, 6 numbered steps, 0 defects; run once after final item edits."
+    },
+    {
+      "command": "Read-only native discoverDownstream and reviewMatchesCurrent API checks",
+      "exit_code": 0,
+      "result": "Exactly the 3 inventoried direct consumers; all 3 captured assigned review contexts still match current interfaces. No old review hash was refreshed."
+    }
+  ],
+  "unresolved_obligations": [],
+  "supporting_evidence": {
+    "research/mathematical-statistics-foundations-37-batch-22.proof-contracts.json": "d1154b9b6bb7a9e5aa02720b9f3336a967d691f65a79250ed8057a44c44d6984",
+    "research/mathematical-statistics-foundations-37-batch-22.pages.json": "97d0268a43e798891ee63271b9d345fe7184ed4b10dc92753970ea309d2565bf"
+  }
+}

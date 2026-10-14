@@ -1,0 +1,72 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "33",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "lem-univariate-trimmed-mean-total-and-measurable",
+      "model": "gpt-6-luna",
+      "context_sha256": "509ffe1f37b50e2222eefca8b469448bf51def911290c3bb2bd324516ec4cd81",
+      "outcome": "false_positive",
+      "reason": "The lemma fixes epsilon and analyzes the rank-and-clipping rule displayed in the algorithm, not the feasibility of selecting eta and delta. F1 specifies that rule completely; steps 1.1 and 1.2 prove it is defined and continuous for every fixed 0<epsilon<=1/4, using the finite min-max formula for each order statistic. Thus N=100, epsilon=0.1 is a valid extension of the same formula, even though it is not an admissible confidence-parameter instance of the algorithm. No probability guarantee or parameter realizability is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-univariate-trimmed-mean-under-replacement",
+      "model": "gpt-6-luna",
+      "context_sha256": "647312836f2576fc66a8624b70a3c5189996b16e78ba1432c59f437ceec4cc56",
+      "outcome": "false_positive",
+      "reason": "F3 explicitly cites Proof step 2.1 of thm-bernstein-independent-sums, which proves P(S>=u)<=exp(-u^2/[2(v+bu/3)]) by the bounded-summand MGF, Markov inequality and lambda=u/(v+bu/3). Step 3.1 proves the corresponding lower tail. The two-sided Statement and contract quotation have factor 2, but the actual cited proof supplies factor 1. Count indicators and fixed clips satisfy centering, boundedness and independence; the failure budgets in steps 1.2, 2.1 and 4.1 are supported.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-univariate-trimmed-mean-total-and-measurable",
+      "disposition": "unaffected",
+      "post_sha256": "668ed90cce29763a1116d1760debd5ddd44e31ecb5bde868c5d757c3852a6f77",
+      "review_context_sha256": "b481a550b8e18103927de2bc2d59ac63bce5ccb22724865822546a72dfc1bb29",
+      "reason": "Checked the complete item, algorithm Definition, owning contract and page. Both ranks are valid and ordered; the kth statistic is the finite minimum over k-subsets of their coordinate maxima, including ties. Clipping and averaging are continuous, and the inverse-image sigma-algebra argument proves Borel measurability. The fixed-epsilon rule extends the algorithm formula without extending its confidence domain; no Choice axiom is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-univariate-trimmed-mean-under-replacement",
+      "disposition": "unaffected",
+      "post_sha256": "46792fbd125e3db22e4efa8d113054de9db10e37ab71fd6119096dad19f58e18",
+      "review_context_sha256": "6be3b5f691ffa825fd11c0863d52e5c7b8dc65d60a9277fb3c70aec09230a598",
+      "reason": "Checked the complete proof, supplier Bernstein proof, quantile proof, actual prerequisite statements, owning contract and page. The one-sided MGF derivation is valid. Inner and outer count exponents are at least 18ell/7 and 9ell/4; strict thresholds survive floor(2eta N) replacements and both ceil ranks. Fixed comparison clips have variance <=sigma^2, directional bias <=2E(4epsilon,X), and the stated widths. At t/epsilon<=1/12, noise <=2sigma sqrt(t); raw tails absorb the replacement shift. Wider outer quantiles give total constant 2sqrt(2)+1/sqrt(6)+2/9+1<10 and failure <=4exp(-s), s=epsilon N/12>log(4). Countable Choice is already explicit, covering the quantile proof assumption. No independent review of a self-authored repair is claimed; no carrier was changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-absolutely-continuous-upper-quantile-exact-tail-mass",
+      "disposition": "report_to_frontier_owner",
+      "reason": "Confirmed the Step-4 digest concern against the current carrier: Statement omits Countable Choice, whereas Proof Given assumes it and F2 invokes the Countable-Choice-dependent published singleton-null supplier. This item is outside unit 33 ownership and was not edited. Its owner should provide a choice-free singleton-null argument or explicitly retain the axiom and examine any changed interface. The assigned trimmed-mean theorem explicitly assumes Countable Choice, so this mismatch does not invalidate its use.",
+      "affected_use": "items/lem-absolutely-continuous-upper-quantile-exact-tail-mass.md: Proof Given and step 1.1 use F2, backed by prop-countable-subsets-of-rn-are-lebesgue-null; items/thm-univariate-trimmed-mean-under-replacement.md F1 and Statement retain Countable Choice.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Both assigned mathematical reviews are complete; both rejected tuples are false positives. Items, contracts, page interfaces, claims and dependencies are unchanged. Each review-contexts command succeeded immediately after its review and its hashes were copied.",
+    "Sources actually examined are the repository items, owning batch-33 proof contract, owning A page and rejection-blind digest; no external literature reading is claimed. The contract Bernstein quotation is the two-sided Statement, while its risk_review and the actual theorem F3 identify the sound one-sided Proof step 2.1.",
+    "The out-of-lane quantile hypothesis mismatch is routed through ledger_updates. No defective published consumer was identified, so no published-consumer-ledger update is proposed. Focused precheck passed for both proofs (2 checked, 0 failed); rendercheck passed for both items (0 errors, 0 warnings); strict proof-contract validation passed for both items; finite-smoke passed its single tied-cutoff witness. Each command exited 0. The finite witness validates that formula only, not the probability theorem.",
+    "Final proof-layout command: node tools/proof-layout.mjs items/lem-univariate-trimmed-mean-total-and-measurable.md items/thm-univariate-trimmed-mean-under-replacement.md; exit 0, 2 items, 8 steps, 0 defects. No assigned item or shared metadata was edited, so no Statement/Definition event or downstream examination inventory is generated."
+  ]
+}

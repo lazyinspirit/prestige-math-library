@@ -1,0 +1,1763 @@
+{
+  "version": 1,
+  "scope": [
+    "def-b-spline-space-and-basis",
+    "def-natural-cubic-spline",
+    "def-local-spline-quasi-interpolant",
+    "def-natural-cubic-smoothing-spline",
+    "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+    "thm-spline-polynomial-reproduction",
+    "def-series-spline-least-squares",
+    "thm-natural-cubic-smoothing-spline-exists-uniquely",
+    "thm-sobolev-spline-quasi-interpolant-rate",
+    "thm-series-training-risk",
+    "cor-series-spline-sobolev-training-risk-rate",
+    "cex-one-observation-does-not-identify-a-smoothing-spline",
+    "ex-b-spline-basis-and-polynomial-reproduction",
+    "ex-natural-cubic-interpolants-on-two-and-three-knots",
+    "ex-uniform-mesh-linear-spline-approximation",
+    "ex-spline-training-risk-can-differ-from-independent-test-risk"
+  ],
+  "contracts": {
+    "def-b-spline-space-and-basis": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly omits empty interior knot ranges, allowing n=p+1 with no interior knot."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition includes p=0, whose B-splines are half-open interval indicators; higher-degree zero-denominator terms are explicitly set to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition admits n=1 when p=0 and a<b: the sole indicator, with left-limit value at b, covers the interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits repeated interior knots up to the nonempty-support condition ξ_j<ξ_{j+p+1}; C^{-1} imposes no matching and right-cell values are fixed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition assigns the value at b by its left limit and takes other cells left-closed/right-open, including discontinuous knot values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition fixes a finite knot vector and recursive functions; it asserts no selection from families of bases. The basis theorem is a separate supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: def-b-spline-space-and-basis defines an object or gives a one-way assertion; it states no if-and-only-if claim whose iff-forward direction needs a separate proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: def-b-spline-space-and-basis defines an object or gives a one-way assertion; it states no if-and-only-if claim whose iff-reverse direction needs a separate proof."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-natural-cubic-spline": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-parameter boundary in the statement; zero-valued functions or data are included in the stated formulas where relevant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is not a classification as a scalar parameter varies over a one-point boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item is not a general classification of degenerate models; its stated knot, rank, or mesh hypotheses control admissibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint-excluded asymptotic or boundary classification is asserted by this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-family selection is asserted by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-local-spline-quasi-interpolant": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-parameter boundary in the statement; zero-valued functions or data are included in the stated formulas where relevant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is not a classification as a scalar parameter varies over a one-point boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item is not a general classification of degenerate models; its stated knot, rank, or mesh hypotheses control admissibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint-excluded asymptotic or boundary classification is asserted by this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition fixes its Sobolev representative convention by the one-dimensional representative supplier, whose statement requires AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-natural-cubic-smoothing-spline": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition assumes at least two distinct input values and λ>0; an empty sample cannot meet this hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition explicitly excludes λ=0; zero-valued responses remain ordinary data, but existence/uniqueness is proved by the separate named theorem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition excludes n=1 because at least two distinct inputs are required."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition excludes all-coincident inputs by the distinct-input requirement; it does not assert uniqueness for that degenerate design."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition places inputs in [a,b] including its endpoints and evaluates the unique continuous Sobolev representative on that closed interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition explicitly assumes AC for the Sobolev representative/existence framework and cites a separate unique-minimizer theorem; it asserts no further selector construction here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: def-natural-cubic-smoothing-spline defines an object or gives a one-way assertion; it states no if-and-only-if claim whose iff-forward direction needs a separate proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: def-natural-cubic-smoothing-spline defines an object or gives a one-way assertion; it states no if-and-only-if claim whose iff-reverse direction needs a separate proof."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-cubic-spline",
+          "source_section": "Definition",
+          "quote": "Let $[a,b]$ be a bounded interval and let $a\\le t_1<\\cdots<t_r\\le b$ with $r\\ge2$. A natural cubic spline with knots $t_1,\\ldots,t_r$ is a $C^2$ function on $[a,b]$ that is a polynomial of degree at most three on every $[t_j,t_{j+1}]$, has second derivative zero at $t_1$ and $t_r$, and is extended linearly on $[a,t_1]$ and $[t_r,b]$ when those intervals are nonempty. The knots $t_j$ are the distinct breakpoints; repeated observations at the same input do not create additional knots.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $h_i=x_{i+1}-x_i$ and $d_i=(y_{i+1}-y_i)/h_i$. For $r=2$ there are no interior second derivatives to solve. For $r\\ge3$, let $A$ be the $(r-2)\\times(r-2)$ symmetric tridiagonal matrix with diagonal entry $2(h_{i-1}+h_i)$ in row $i$ and adjacent off-diagonal entries $h_i$. For a nonzero vector $v=(v_2,\\ldots,v_{r-1})$, using $2v_iv_{i+1}\\ge-v_i^2-v_{i+1}^2$ gives $v^TAv\\ge\\sum_{i=2}^{r-1}(h_{i-1}+h_i)v_i^2>0.$ Thus $A$ is positive definite and invertible, so the displayed system has exactly one solution $M_2,\\ldots,M_{r-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $[x_i,x_{i+1}]$, define $s_i(x)=\\frac{M_i(x_{i+1}-x)^3+M_{i+1}(x-x_i)^3}{6h_i}+\\left(y_i-\\frac{M_i h_i^2}{6}\\right)\\frac{x_{i+1}-x}{h_i}+\\left(y_{i+1}-\\frac{M_{i+1}h_i^2}{6}\\right)\\frac{x-x_i}{h_i}.$ Direct substitution gives $s_i(x_i)=y_i$, $s_i(x_{i+1})=y_{i+1}$, and $s_i''(x_i)=M_i$, $s_i''(x_{i+1})=M_{i+1}$. Its endpoint slopes are $d_i+M_i h_i/6+M_{i+1}h_i/3$ and $d_i-M_i h_i/3-M_{i+1}h_i/6$. The tridiagonal equation at $x_i$ says the right slope from $s_{i-1}$ equals the left slope from $s_i$. Hence the pieces join $C^1$; their second derivatives are linear with the same nodal values, so they join $C^2$. At the extreme knots $M_1=M_r=0$, so adjoining the tangent line gives the required linear tails and preserves $C^2$. For $r=2$, the formula is the straight line between the two values and the same endpoint argument applies.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Any natural cubic interpolant has nodal second derivatives with $M_1=M_r=0$. Equality of its adjacent endpoint slopes forces the displayed tridiagonal equations, so by step 1.1 its nodal second derivatives equal the constructed ones. On each interval, the difference from $s_i$ is a cubic with zero second derivative at both endpoints; its second derivative is affine and therefore zero throughout, so the difference is affine and vanishes at both endpoint values. It is identically zero. Thus the interpolant is unique.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow arbitrary data, including all y_i=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The r=2 case is handled explicitly in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict-knot hypothesis makes every h_i positive; step 1.1 proves the system positive definite for every r≥3 and handles r=2 separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 allow x_1=a or x_r=b and use linear tails only on nonempty end intervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-family selection is asserted by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-spline-polynomial-reproduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-b-spline-space-and-basis",
+          "source_section": "Definition",
+          "quote": "Let $p\\in\\mathbb N_0$, $n\\ge p+1$, and $a<b$. A clamped knot vector is a nondecreasing finite sequence\n$$\\xi_1=\\cdots=\\xi_{p+1}=a<\\xi_{p+2}\\le\\cdots\\le\\xi_n<\\xi_{n+1}=\\cdots=\\xi_{n+p+1}=b,$$\nwith $\\xi_j<\\xi_{j+p+1}$ for every $1\\le j\\le n$. Empty interior ranges are omitted. The multiplicity $\\mu(\\eta)$ of an interior knot $\\eta$ is its number of occurrences among $\\xi_{p+2},\\ldots,\\xi_n$.\n\nWrite $\\mathcal P_p$ for the real polynomials of degree at most $p$. The degree-$p$ spline space $S_{p,\\xi}$ consists of functions that restrict to a member of $\\mathcal P_p$ on each nonempty knot interval and whose derivatives through order $p-\\mu(\\eta)$ agree across each interior knot $\\eta$. The convention $C^{-1}$ means that no matching condition is imposed. For this piecewise definition, take knot cells left-closed and right-open; at a knot with no matching condition, the value is the one from the cell on its right, and at $b$ use the left limit. Thus the function value at a discontinuous knot is specified.\n\nThe degree-zero B-spline is $B_{j,0,\\xi}=\\mathbf 1_{[\\xi_j,\\xi_{j+1})}$. For $p\\ge1$, define recursively\n$$B_{j,p,\\xi}(x)=\\frac{x-\\xi_j}{\\xi_{j+p}-\\xi_j}B_{j,p-1,\\xi}(x)+\\frac{\\xi_{j+p+1}-x}{\\xi_{j+p+1}-\\xi_{j+1}}B_{j+1,p-1,\\xi}(x),$$\nwhere a term with zero denominator is defined to be zero. At $b$, set $B_{j,p,\\xi}(b)$ equal to its left limit. The basis and regularity properties of this recursively defined family are proved in [[thm-spline-polynomial-reproduction]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $p=0$, support, piecewise degree, and nonnegativity follow from the indicator definition in [F1]. Inductively, each degree-$p$ term is a lower-degree spline multiplied by an affine factor; on the lower-degree spline's support that factor is nonnegative, and the two supports lie inside $[\\xi_j, \\xi_{j+p+1}]$. Thus support, degree at most $p$, and nonnegativity hold for every $p$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Define $\\psi_{j,0}(y)=1$ and $\\psi_{j,p}(y)=\\prod_{r=1}^{p}(y-\\xi_{j+r})$. Factoring $\\psi_{j,p-1}$ gives $(y-x)\\psi_{j,p-1}(y)=\\frac{x-\\xi_j}{\\xi_{j+p}-\\xi_j}\\psi_{j,p}(y)+\\frac{\\xi_{j+p}-x}{\\xi_{j+p}-\\xi_j}\\psi_{j-1,p}(y),$ with zero-denominator terms omitted. For $p=0$, $(y-x)^p=1$ is the local identity on any nonempty knot interval. If the identity holds for degree $p-1$, multiply it by $y-x$, apply the displayed dual-polynomial identity to each summand, and regroup the two contributions to each coefficient using the recurrence in [F1]. The endpoint terms vanish by local support. Hence, for $x\\in[\\xi_m,\\xi_{m+1})$, $(y-x)^p=\\sum_{i=m-p}^{m}\\psi_{i,p}(y)B_{i,p,\\xi}(x).$",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let the distinct interior knots be $\\eta_1<\\cdots<\\eta_s$ with multiplicities $\\mu_1,\\ldots,\\mu_s$. For $k\\ge1$ set $u_{r,k}(x)=(x-\\eta_r)^k\\mathbf1_{[\\eta_r,\\infty)}(x)$ and set $u_{r,0}(x)=\\mathbf1_{[\\eta_r,\\infty)}(x)$; the value at $\\eta_r$ follows the right-cell convention of [F1]. The functions $1,x,\\ldots,x^p$ together with $u_{r,k}$ for $p-\\mu_r+1\\le k\\le p$ span $S_{p,\\xi}$: start with the polynomial on the first interval, then at each knot the difference of adjacent pieces has its derivatives through $p-\\mu_r$ equal to zero, so it is a linear combination of the listed powers, including the right-continuous step when $\\mu_r=p+1$. They are independent because restriction to successive knot intervals first forces the initial polynomial coefficients, then each new knot's coefficients, to vanish. Thus $\\dim S_{p,\\xi}=p+1+\\sum_r\\mu_r=n$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiate the identity in step 1.2 exactly $p-k$ times in $y$ and set $y=0$, for each $0\\le k\\le p$. Since $\\frac{d^{p-k}}{dy^{p-k}}(y-x)^p|_{y=0}=\\frac{p!}{k!}(-x)^k$, this yields $x^k=\\sum_{i=m-p}^{m}\\left[(-1)^k\\frac{k!}{p!}\\psi_{i, p}^{(p-k)}(0)\\right]B_{i,p,\\xi}(x).$ The coefficients do not depend on $m$, so this is a single expansion valid on every knot interval. Linear combination proves reproduction of every member of $\\mathcal P_p$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $p=1$, differentiating the two affine pieces gives the derivative formula below. For $p\\ge2$, differentiate the recurrence in [F1] and substitute the degree-$(p-1)$ formula inductively. The coefficients of $B_{j,p-2,\\xi}$ and $B_{j+2,p-2,\\xi}$ become respectively $p(x-\\xi_j)/((\\xi_{j+p}-\\xi_j)(\\xi_{j+p-1}-\\xi_j))$ and $-p(\\xi_{j+p+1}-x)/((\\xi_{j+p+1}-\\xi_{j+1})(\\xi_{j+p+1}-\\xi_{j+2}))$; the middle coefficient is the sum $\\frac{\\xi_{j+p}-x-(p-1)(x-\\xi_j)}{(\\xi_{j+p}-\\xi_j)(\\xi_{j+p}-\\xi_{j+1})}+\\frac{-(x-\\xi_{j+1})+(p-1)(\\xi_{j+p+1}-x)}{(\\xi_{j+p+1}-\\xi_{j+1})(\\xi_{j+p}-\\xi_{j+1})},$ The target middle coefficient from expanding the right side of the claimed formula with [F1] is $\\frac{p(\\xi_{j+p}-x)}{(\\xi_{j+p}-\\xi_j)(\\xi_{j+p}-\\xi_{j+1})}-\\frac{p(x-\\xi_{j+1})}{(\\xi_{j+p+1}-\\xi_{j+1})(\\xi_{j+p}-\\xi_{j+1})}.$ The first summand in the previous display differs from the first target summand by $-(p-1)/(\\xi_{j+p}-\\xi_{j+1})$, while the second differs from the second target summand by $+(p-1)/(\\xi_{j+p}-\\xi_{j+1})$; these excess terms cancel. Zero-denominator terms vanish by [F1]. Thus, on each open knot interval, $B'_{j,p,\\xi}=p\\left(\\frac{B_{j,p-1,\\xi}}{\\xi_{j+p}-\\xi_j}-\\frac{B_{j+1,p-1,\\xi}}{\\xi_{j+p+1}-\\xi_{j+1}}\\right).$",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking $k=0$ in step 2.1 gives $\\sum_{i=m-p}^{m}B_{i,p,\\xi}(x)=1$. Step 2.1 also shows that these $p+1$ active functions span $\\mathcal P_p$ on the interval. Because $\\dim\\mathcal P_p=p+1$, they are linearly independent there and are a local basis.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Induct on $p$. If the knot multiplicity $\\mu\\le p-1$, the lower-degree splines in the recurrence are continuous there by induction, so the recurrence makes $B_{j,p,\\xi}$ continuous; the derivative formula then makes its derivative $C^{p-1-\\mu}$, hence $B_{j,p,\\xi}\\in C^{p-\\mu}$. If $\\mu=p$, a B-spline whose support crosses the repeated knot has one nonzero piece on either side, namely $(x-\\xi_j)^p/(\\xi_{j+p}-\\xi_j)^p$ and $(\\xi_{j+p+1}-x)^p/(\\xi_{j+p+1}-\\xi_{j+1})^p$; both one-sided limits equal $1$, while any B-spline not crossing it has zero endpoint value there. If $\\mu=p+1$, the required order is $C^{-1}$ and no matching is asserted.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "step 2.2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The smoothness and piecewise-degree properties from steps 1.1 and 3.2 put every B-spline in $S_{p,\\xi}$. If a linear combination of all $n$ B-splines is zero, then on every nonempty knot interval its active coefficients vanish by the local basis property in step 3.1. Each B-spline has a nonempty support interval by the clamped-knot hypothesis, so every coefficient occurs on at least one such interval and is zero. The B-splines are therefore $n$ independent members of the $n$-dimensional space in step 1.3, hence form its basis. The unique global expansion includes every polynomial from step 2.1.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 3.1",
+            "step 1.3",
+            "step 1.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Given clamped knots allow no interior knots; step 1.3 then has zero knot sum and dimension p+1=n. The empty-interior-range case is included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles degree p=0 explicitly; step 2.1 reproduces the zero polynomial and constant polynomial as members of P_p."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For p=0,n=1, step 1.1 indicator and step 3.1 local partition give the sole constant basis element; a<b is retained."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.2 separately treats knot multiplicity μ=p+1 with no continuity requirement, while step 2.2 omits zero-denominator terms by the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement uses expansions on [a,b]; Definition assigns left-limit value at b, and final step 4.1 global expansion includes that convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof uses finite algebra/induction and explicit recursively defined B-splines; no basis is selected by a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: thm-spline-polynomial-reproduction defines an object or gives a one-way assertion; it states no if-and-only-if claim whose iff-forward direction needs a separate proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: thm-spline-polynomial-reproduction defines an object or gives a one-way assertion; it states no if-and-only-if claim whose iff-reverse direction needs a separate proof."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-series-spline-least-squares": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-parameter boundary in the statement; zero-valued functions or data are included in the stated formulas where relevant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is not a classification as a scalar parameter varies over a one-point boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item is not a general classification of degenerate models; its stated knot, rank, or mesh hypotheses control admissibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint-excluded asymptotic or boundary classification is asserted by this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-family selection is asserted by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-natural-cubic-smoothing-spline-exists-uniquely": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge2$, $a\\le x_1<\\cdots<x_r\\le b$, and $y_1,\\ldots,y_r\\in\\mathbb R$. There is exactly one natural cubic spline $s$ on $[a,b]$ with $s(x_i)=y_i$ for each $i$. On each interval $[x_i,x_{i+1}]$ it is the cubic with endpoint values $y_i,y_{i+1}$ and endpoint second derivatives $M_i,M_{i+1}$, where $M_1=M_r=0$ and the interior values solve the positive-definite tridiagonal system\n$$h_{i-1}M_{i-1}+2(h_{i-1}+h_i)M_i+h_iM_{i+1}=6\\left(\\frac{y_{i+1}-y_i}{h_i}-\\frac{y_i-y_{i-1}}{h_{i-1}}\\right),\\quad 2\\le i\\le r-1,$$\nwith $h_i=x_{i+1}-x_i>0$. The interpolant is linear outside $[x_1,x_r]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-cubic-smoothing-spline",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $[a,b]$ be a bounded interval, let $(x_i,y_i)_{i=1}^n\\in([a,b]\\times\\mathbb R)^n$, assume at least two distinct input values, and let $\\lambda>0$. For $g\\in W^{2,2}(a,b)$ use its unique continuous representative on $[a,b]$ supplied by the one-dimensional Sobolev representative theorem. The natural cubic smoothing spline is the unique minimizer, whose existence and uniqueness are proved in [[thm-natural-cubic-smoothing-spline-exists-uniquely]], of\n$$J(g)=\\sum_{i=1}^n(y_i-g(x_i))^2+\\lambda\\int_a^b|D^2g(t)|^2\\,dt.$$\n\nThe requirement of two distinct inputs is essential. The penalty is the squared $L^2$ norm of the second weak derivative; the data term uses the distinct-input interpolation convention in [[def-natural-cubic-spline]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "source_section": "Statement",
+          "quote": "In ZF, assume the Axiom of Choice. Then the Axiom of Countable Choice holds.\nMoreover, if $R\\subseteq X\\times X$ is a serial relation on a nonempty set\n$X$ and $a\\in X$, there is a sequence $(x_n)_{n\\in\\mathbb N}$ such that\n$x_0=a$ and $x_nRx_{n+1}$ for every $n$. Thus AC supplies the\nprescribed-initial-point form of Dependent Choice.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $g\\in W^{2,2}(a,b)$ and use the continuous representative in [F2] for $g$ and $g'$. The Countable Choice convention in [F1] and the choice hypotheses for [F2] are available by [F5] and [A1]. Interpolate the values $g(t_j)$ by the natural cubic $s$ from [F3], and put $h=g-s$. Then $h(t_j)=0$ for every $j$. On each interval between distinct knots, $s'''$ is constant; on the two linear tails, $s''=s'''=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The natural spline with knots $t_1,\\ldots,t_r$ is uniquely determined by its nodal vector $z=(s(t_1),\\ldots,s(t_r))\\in\\mathbb R^r$ by [F3]. The tridiagonal system in the interpolation proof is linear in its data, and the interval formula is linear in the nodal values and second derivatives; hence $z\\mapsto s_z''$ is linear into the finite-dimensional space of piecewise-linear functions. Therefore $R(z)=\\int|s_z''|^2$ is a finite nonnegative quadratic form. In these coordinates $J(s)=\\sum_j\\sum_{i:x_i=t_j}(y_i-z_j)^2+\\lambda R(z)$. The data term has positive-definite diagonal quadratic part because every $t_j$ occurs at least once. Adding the nonnegative quadratic form $\\lambda R$ leaves a positive-definite quadratic objective, which has a unique minimizer by completing the square.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On each knot interval, the product $s''h'$ is absolutely continuous, so the fundamental theorem of calculus gives $\\int s''h''=[s''h']-\\int s'''h'$. Summing over the intervals, the interior boundary terms cancel because $s''$ and $h'$ are continuous. At each outer endpoint, $s''=0$ either on a linear tail or by the natural condition when that endpoint is a knot. The remaining terms are $-s'''|_{(t_j,t_{j+1})}(h(t_{j+1})-h(t_j))=0$. Thus $\\int_a^b s''h''=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $g=s+h$, expanding the square and applying step 2.1 yields $\\int_a^b|g''|^2=\\int_a^b|s''|^2+\\int_a^b|h''|^2.$ Also $s(x_i)=g(x_i)$ for every observed input, so their data residual terms agree. Therefore $J(g)=J(s)+\\lambda\\int_a^b|h''|^2\\ge J(s)$, with equality only if $h''=0$ almost everywhere.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F4",
+            "step 2.1",
+            "algebra",
+            "step 1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $s_*$ be this finite-dimensional minimizer. Step 3.1 shows $J(g)\\ge J(s_*)$ for every $g\\in W^{2,2}$. If equality holds, then $h''=0$ almost everywhere, so by [F2] $h$ is affine; its zero values at the two distinct knots $t_1,t_r$ force $h=0$. Thus $s_*$ is the unique minimizer over the full Sobolev class, and its natural cubic form and linear tails are those of [F3].",
+          "step": "4.1",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3",
+            "step 3.1",
+            "step 1.2",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 cover arbitrary response values, including zero, in the positive-definite finite-dimensional objective."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem includes exactly two distinct input locations; steps 1.1 and 4.1 use those two knots to eliminate the affine nullspace."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The lower boundary of two distinct inputs is included in step 4.1; the one-input failure is separately exhibited by the companion counterexample."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles data knots at a or b by the natural endpoint condition and handles nonempty linear tails."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 require AC; step 1.1 identifies its Sobolev representative and Countable Choice uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-sobolev-spline-quasi-interpolant-rate": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. For every $v\\in V$, the vector $P_Wv$ is the unique point of $W$ nearest to $v$: for every $w\\in W$,\n\n$$\\lVert v-P_Wv\\rVert\\le\\lVert v-w\\rVert,$$\n\nwith equality if and only if $w=P_Wv$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in an inner product space:\n\n1. if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;\n2. $\\lVert u+v\\rVert^2+\\lVert u-v\\rVert^2=2\\lVert u\\rVert^2+2\\lVert v\\rVert^2$;\n3. over $\\mathbb R$, $\\langle u,v\\rangle=\\frac14(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2)$;\n4. over $\\mathbb C$ with the linear-first convention,\n$$\\langle u,v\\rangle=\\frac14\\bigl(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2+i\\lVert u+iv\\rVert^2-i\\lVert u-iv\\rVert^2\\bigr).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-orthogonal-projection-formula-and-linearity",
+          "source_section": "Statement",
+          "quote": "Let $(e_0,\\ldots,e_{r-1})$ be an orthonormal basis of a subspace $W$ of a finite-dimensional inner product space $V$. Then\n\n$$P_Wv=\\sum_{i<r}\\langle v,e_i\\rangle e_i.$$\n\nThe map $P_W$ is linear, with image $W$, kernel $W^\\perp$, and $P_W^2=P_W$. Moreover, regarding both projections as endomorphisms of $V$,\n\n$$I-P_W=P_{W^\\perp}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "source_section": "Statement",
+          "quote": "In ZF, assume the Axiom of Choice. Then the Axiom of Countable Choice holds.\nMoreover, if $R\\subseteq X\\times X$ is a serial relation on a nonempty set\n$X$ and $a\\in X$, there is a sequence $(x_n)_{n\\in\\mathbb N}$ such that\n$x_0=a$ and $x_nRx_{n+1}$ for every $n$. Thus AC supplies the\nprescribed-initial-point form of Dependent Choice.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On any neighborhood $J=[c,d]$, use the continuous representatives of $D^jf$, $0\\le j\\le l$, supplied by [F2]. Their Sobolev-class convention [F1] and the choice hypotheses for [F2] are available under [A1] by [F5]. Repeated integration by parts for absolutely continuous functions gives the Taylor identity $f(x)-T_{c,l}f(x)=\\frac1{l!}\\int_c^x(x-t)^lD^{l+1}f(t)\\,dt,$ where $T_{c,l}f(x)=\\sum_{j=0}^lD^jf(c)(x-c)^j/j!$. For completeness, the case $l=0$ is the increment formula in [F2]; passing from order $l-1$ to $l$ integrates $\\int_c^x(x-t)^{l-1}D^lf(t)dt$ by parts with antiderivative $-(x-t)^l/l$, producing the degree-$l$ endpoint term and the displayed remainder. Hölder [F3] therefore gives $\\|f-T_{c,l}f\\|_{L^q(J)}\\le |J|^{l+1}\\|D^{l+1}f\\|_{L^q(J)}/l!$, including $q=\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose $c$ as the left endpoint of $J_m$ and write $T=T_{c,l}f$. Since $Q$ reproduces $\\mathcal P_l$, $QT=T$. The triangle inequality and the local stability in the definition give $\\|f-Qf\\|_{L^q(I_m)}\\le\\|f-T\\|_{L^q(I_m)}+\\|Q(f-T)\\|_{L^q(I_m)}\\le(1+C_Q)\\|f-T\\|_{L^q(J_m)}.$ Apply step 1.1 and $|J_m|\\le Mh_m$ to get the stated local estimate.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Raise the local estimates to the $q$th power and sum over the disjoint mesh cells. Each point belongs to at most $M$ neighborhoods, so $\\sum_m\\|D^{l+1}f\\|_{L^q(J_m)}^q\\le M\\|D^{l+1}f\\|_{L^q([a,b])}^q$. Taking the $q$th root and using $h_m\\le h$ gives the stated global bound for finite $q$. For $q=\\infty$, take the maximum of the local bounds; the factor $M^{1/q}$ is $1$.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For a uniform mesh with interior knots repeated $p+1$ times, $S_{p,\\xi}$ is the space of independent degree-$p$ polynomials on the cells by the definition and basis theorem. Define $Q_hf$ on each cell as the orthogonal projection of $f$ onto $\\mathcal P_p$. By [F4] it is linear and contractive in $L^2$; it depends only on that cell, takes values in $S_{p,\\xi}$, and fixes every member of $\\mathcal P_p$. Thus it satisfies the local quasi-interpolant hypotheses with one-cell neighborhoods, $M=1$, and $C_Q=1$. Applying steps 1.1, 2.1, and 3.1 with $l=s-1$ gives $\\|f-Q_hf\\|_{L^2}\\le 2h^s\\|D^sf\\|_{L^2}/(s-1)!$ for $1\\le s\\le p+1$.",
+          "step": "4.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 and 3.1 give zero error when the derivative remainder vanishes and include every reproduced polynomial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The order l=0 and exponent endpoints q=1 and q=infinity are covered in steps 1.1, 3.1 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The hypotheses allow p=l=0; step 2.1 also treats the one-cell full-multiplicity mesh."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use closed cell neighborhoods intersected with [a,b], including boundary cells."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 assume AC, and step 1.1 uses the AC-dependent one-dimensional Sobolev representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-series-training-risk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-series-spline-least-squares",
+          "source_section": "Definition",
+          "quote": "Let $p_K(x)=(B_{1,p,\\xi}(x),\\ldots,B_{K,p,\\xi}(x))^T$ be a specified degree-$p$ B-spline basis on the data domain, and let $(X_i,Y_i)_{i=1}^n$ be observed real-valued data. Form the design matrix $P\\in\\mathbb R^{n\\times K}$ with row $p_K(X_i)^T$. The **series least-squares fitted training vector** is\n$$\\widehat{\\mathbf g}_K=\\Pi_{\\operatorname{col}(P)}\\mathbf Y,$$\nthe orthogonal projection of $\\mathbf Y=(Y_1,\\ldots,Y_n)^T$ onto the column space of $P$. Conditional on the realized design, this is the fixed-design least-squares fitted vector of [[def-fixed-design-projection-estimator]]. Equivalently, it is $P\\widehat\\beta$ for any minimizer $\\widehat\\beta$ of $\\|\\mathbf Y-P\\beta\\|_2^2$; all such minimizers have the same fitted training vector. The training prediction loss relative to a specified target vector $\\mathbf g_0=(g_0(X_1),\\ldots,g_0(X_n))^T$ is $n^{-1}\\|\\widehat{\\mathbf g}_K-\\mathbf g_0\\|_2^2$. This definition specifies training fitted values and makes no test-risk assertion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. For every $v\\in V$, the vector $P_Wv$ is the unique point of $W$ nearest to $v$: for every $w\\in W$,\n\n$$\\lVert v-P_Wv\\rVert\\le\\lVert v-w\\rVert,$$\n\nwith equality if and only if $w=P_Wv$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-gram-schmidt-orthonormalisation",
+          "source_section": "Statement",
+          "quote": "Let $(v_0,\\ldots,v_{r-1})$ be a finite linearly independent list in a real or complex inner product space. There is an orthonormal list $(e_0,\\ldots,e_{r-1})$ such that, for every $k\\le r$,\n\n$$\\operatorname{span}(e_0,\\ldots,e_{k-1})=\\operatorname{span}(v_0,\\ldots,v_{k-1}).$$\n\nIt is obtained recursively from\n\n$$u_k=v_k-\\sum_{j<k}\\langle v_k,e_j\\rangle e_j,\\qquad e_k=\\frac{u_k}{\\lVert u_k\\rVert}.$$\n\nFor $r=0$, both lists are empty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-fixed-design-projection-estimator",
+          "source_section": "Definition",
+          "quote": "Let $n,d\\in\\mathbb N$ with $n,d\\ge1$, and let $X\\in\\mathbb R^{n\\times d}$ be a fixed design\nmatrix, and write $V_X:=\\{X\\theta:\\theta\\in\\mathbb R^d\\}\\subseteq\\mathbb R^n$\nfor its column space. For an observed vector $y\\in\\mathbb R^n$, the **fixed-design\nleast-squares fitted vector** is\n\n$$\\widehat\\mu_X(y):=P_{V_X}y,$$\n\nwhere $P_{V_X}$ is the orthogonal projection onto $V_X$, as defined in\n[[def-orthogonal-projection]]. It is uniquely defined even when $X$ is rank\ndeficient. The nearest-point characterization in\n[[thm-orthogonal-projection-is-the-unique-nearest-point]] says that\n$\\widehat\\mu_X(y)$ minimizes $\\|y-v\\|_2$ over $v\\in V_X$. This item defines the\nfitted vector; it does not select a coefficient representation $\\widehat\\theta$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nassociates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\mathbf X=(X_1,\\ldots,X_n)$ and $\\epsilon_i=Y_i-g_0(X_i)$. For fixed $\\mathbf x$, set $\\kappa_1=\\kappa(x_1,\\cdot)$ and, for $1\\le m<n$, apply [F10] to $\\kappa_m$ and $\\kappa(x_{m+1},\\cdot)$ to obtain $\\kappa_{m+1}$; both factors are probability measures, so the rectangle formula gives total mass one at each stage. Induction gives the finite product probability measure $\\kappa_n(\\mathbf x,\\cdot)$ with rectangle values $\\kappa_n(\\mathbf x,\\prod_iB_i)=\\prod_i\\kappa(x_i,B_i)$. The response rectangles form a pi-system because intersections of rectangles are rectangles, and [F5] says they generate the response product sigma-algebra. On response rectangles the evaluation is Borel in $\\mathbf x$ by [F4] and [F10]. Because $\\kappa_n(\\mathbf x,\\cdot)$ is a probability measure, the class of sets with Borel evaluation contains the whole space, is closed under complements by subtraction from $1$, and is closed under disjoint countable unions by limits of partial sums; [F11] therefore gives measurability for every response Borel set. For rectangles $A=\\prod_iA_i$ and $B=\\prod_iB_i$, iid sampling gives $P(\\mathbf X\\in A,\\mathbf Y\\in B)=\\prod_i\\int_{A_i}\\kappa(x,B_i)P_X(dx)$, and repeated Tonelli [F13] gives $\\int_A\\kappa_n(\\mathbf x,B)P_X^{\\otimes n}(d\\mathbf x)=\\prod_i\\int_{A_i}\\kappa(x,B_i)P_X(dx).$ For fixed response Borel $B$, the left side of the target identity is a finite measure in $A$; the right side is also a measure by [F12], applied to the nonnegative measurable function $\\mathbf x\\mapsto\\kappa_n(\\mathbf x,B)$. Design rectangles form a pi-system because intersections are rectangles and generate the design product sigma-algebra by [F5], so [F11] extends the equality to every design Borel $A$. For each such $A$, both sides are finite measures in $B$: countable additivity on the right follows from countable additivity of $\\kappa_n(\\mathbf x,\\cdot)$ and monotone convergence, and their common total mass is $P_X^{\\otimes n}(A)$ because the joint design marginal is $P_X^{\\otimes n}$ and $\\kappa_n$ is a probability kernel. Thus the response sets $B$ for which the identity holds for every $A$ form a Dynkin system (complements use the common total mass); they contain the response rectangles, so [F11] gives equality for every response Borel set. Hence $\\kappa_n$ is a conditional law of $\\mathbf Y$ given $\\mathbf X$. Under this product law the residuals are conditionally independent, have conditional means zero by [A2], and conditional second moments at most $\\Delta$. Hence $E[\\epsilon_i\\epsilon_j\\mid\\mathbf X]=0$ for $i\\ne j$ and $E[\\epsilon_i^2\\mid\\mathbf X]\\le\\Delta$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $Q=\\Pi_{\\operatorname{col}(D)}$. The matrix $Q$ is a Borel function of $D$: partition the finite-dimensional matrix space by rank and, within each positive-rank stratum, by the lexicographically first nonzero maximal minor; on each resulting Borel piece, the corresponding independent columns form a matrix $C$. The Gram matrix $C^TC$ is positive definite, and $C(C^TC)^{-1}C^T$ is symmetric, idempotent, and has image $\\operatorname{col}(C)=\\operatorname{col}(D)$, so it is the orthogonal projection; at rank zero put $Q=0$. These finitely many Borel formulas show that $Q$ is measurable with respect to $\\mathbf X$. Its rank $r$ is at most $K$. Scanning the finitely many columns and retaining a column precisely when it is not in the span of those already retained gives a basis of $\\operatorname{col}(D)$; applying Gram–Schmidt [F7] gives an $n\\times r$ matrix $U$ with orthonormal columns spanning that subspace. For any $v$, $UU^Tv$ belongs to $\\operatorname{col}(D)$ and $U^T(v-UU^Tv)=0$, so its residual is orthogonal to the columns of $U$ and hence to $\\operatorname{col}(D)$. By the uniqueness in [F9], $Q=UU^T$; therefore $\\operatorname{tr}(Q)=\\operatorname{tr}(U^TU)=r\\le K$. Since $Q_{ii}=\\|Qe_i\\|_2^2\\ge0$, step 1.1 gives $E[\\epsilon^TQ\\epsilon\\mid\\mathbf X]=\\sum_iQ_{ii}E[\\epsilon_i^2\\mid\\mathbf X]\\le\\Delta\\operatorname{tr}(Q)\\le\\Delta K.$",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "F7",
+            "F9",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $\\mathbf g=(g_0(X_1),\\ldots,g_0(X_n))^T$. From [F1] and [F8], $\\widehat{\\mathbf g}_K=Q\\mathbf Y$, and $\\mathbf Y=\\mathbf g+\\epsilon$. In the orthogonal decomposition $\\mathbb R^n=\\operatorname{col}(D)\\oplus\\operatorname{col}(D)^\\perp$, the projection [F9] is identity on the first summand and zero on the second, so $Q^T=Q=Q^2$, $\\|\\widehat{\\mathbf g}_K-\\mathbf g\\|_2^2=\\|Q\\epsilon-(I-Q)\\mathbf g\\|_2^2=\\epsilon^TQ\\epsilon+\\|(I-Q)\\mathbf g\\|_2^2,$ because $Q(I-Q)=0$. For $\\bar{\\mathbf g}=D\\bar\\beta_K\\in\\operatorname{col}(D)$, $(I-Q)\\bar{\\mathbf g}=0$; the nearest-point property [F6] therefore gives $\\|(I-Q)\\mathbf g\\|_2^2\\le\\|\\mathbf g-\\bar{\\mathbf g}\\|_2^2$.",
+          "step": "3.1",
+          "inputs": [
+            "A3",
+            "F1",
+            "F6",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Taking expectations in step 3.1, applying step 2.1 and then iid sampling with [A3] yields $E\\|\\widehat{\\mathbf g}_K-\\mathbf g\\|_2^2\\le\\Delta K+E\\sum_{i=1}^n\\{g_0(X_i)-p_K(X_i)^T\\bar\\beta_K\\}^2\\le\\Delta K+nC^2K^{-2\\gamma}.$ Divide by $n$ to obtain the claimed expected empirical training-risk bound.",
+          "step": "4.1",
+          "inputs": [
+            "A3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 include conditional variance Delta=0 and approximation constant C=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The hypotheses allow n=1 and K=1; steps 2.1–3.1 use only n,K≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes rank zero and every rank r≤K, so rank-deficient sample designs are covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The design support is the closed interval [a,b]; the product-kernel argument in step 1.1 includes its Borel endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-family selection is asserted by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "cor-series-spline-sobolev-training-risk-rate": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-series-training-risk",
+          "source_section": "Statement",
+          "quote": "Let $n,K\\ge1$, let $X_i\\in[a,b]$ and $Y_i\\in\\mathbb R$ be iid pairs, and suppose the one-observation law is $P_X(dx)\\kappa(x,dy)$ for a supplied Borel probability kernel $\\kappa$ from $([a,b],\\mathcal B([a,b]))$ to $(\\mathbb R,\\mathcal B(\\mathbb R))$. Assume a Borel function $g_0:[a,b]\\to\\mathbb R$ is supplied such that, for $P_X$-almost every $x$, $\\int |y|\\,\\kappa(x,dy)<\\infty$, $g_0(x)=\\int y\\,\\kappa(x,dy)$, and $\\int (y-g_0(x))^2\\,\\kappa(x,dy)\\le\\Delta$ for a finite $\\Delta\\ge0$. Let $p_K:[a,b]\\to\\mathbb R^K$ be a fixed Borel $K$-dimensional spline basis and assume a deterministic $\\bar\\beta_K\\in\\mathbb R^K$ and constants $C,\\gamma>0$ satisfy\n$$E\\{g_0(X)-p_K(X)^T\\bar\\beta_K\\}^2\\le C^2K^{-2\\gamma}.$$\nThen, with the fitted training vector $\\widehat{\\mathbf g}_K$ from [[def-series-spline-least-squares]] and $\\mathbf g_0=(g_0(X_1),\\ldots,g_0(X_n))^T$,\n$$E\\left[\\frac1n\\|\\widehat{\\mathbf g}_K-\\mathbf g_0\\|_2^2\\right]\\le\\frac{\\Delta K}{n}+C^2K^{-2\\gamma}.$$\nThis is expected empirical training-design loss.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sobolev-spline-quasi-interpolant-rate",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $p\\ge0$, $0\\le l\\le p$, $1\\le q\\le\\infty$, and let $Q$ be a bounded local quasi-interpolant as in [[def-local-spline-quasi-interpolant]] on a knot mesh in $[a,b]$. Let $f\\in W^{l+1,q}(a,b)$ and use its continuous Sobolev representative. For each nonempty mesh cell $I_m$, let $J_m$ be the corresponding neighborhood, let $h_m$ be the largest cell length in $J_m$, and suppose $|J_m|\\le M h_m$ with overlap multiplicity at most $M$. Then\n$$\\|f-Qf\\|_{L^q(I_m)}\\le (1+C_Q)\\frac{M^{l+1}}{l!}h_m^{l+1}\\|D^{l+1}f\\|_{L^q(J_m)}.$$\nWriting $h=\\max_m h_m$, the global bound is\n$$\\|f-Qf\\|_{L^q([a,b])}\\le (1+C_Q)\\frac{M^{l+1+1/q}}{l!}h^{l+1}\\|D^{l+1}f\\|_{L^q([a,b])},$$\nwhere $1/q=0$ for $q=\\infty$. In particular, on a uniform mesh with interior knots of multiplicity $p+1$, the cellwise $L^2$ projector onto $\\mathcal P_p$ is a local quasi-interpolant and gives the order-$h^s$ approximation bound for every integer $1\\le s\\le p+1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-regression-target-version",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $X,Y$ be real random variables on a probability\nspace, with $\\mathbb E|Y|<\\infty$, and choose a regular conditional law\n$Q(x,dy)$ of $Y$ given $X=x$. On\n$D=\\{x:\\int |y|\\,Q(x,dy)<\\infty\\}$ define\n$m(x)=\\int y\\,Q(x,dy)$, and put $m(x)=0$ off $D$. By\n[[cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable]],\n$m$ is Borel measurable and $m(X)$ is a version of\n$\\mathbb E[Y\\mid\\sigma(X)]$. A **regression target** is the resulting\n$P_X$-almost-sure equivalence class; a **chosen regression-function version**\nis the particular Borel function selected by the specified conditional law.\n\nPointwise smoothness is an additional hypothesis on the chosen version. It is\nnot implied by existence of conditional expectation, and statements about\n$m(x)$ at a specified point use that selected version.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-b-spline-space-and-basis",
+          "source_section": "Definition",
+          "quote": "Let $p\\in\\mathbb N_0$, $n\\ge p+1$, and $a<b$. A clamped knot vector is a nondecreasing finite sequence\n$$\\xi_1=\\cdots=\\xi_{p+1}=a<\\xi_{p+2}\\le\\cdots\\le\\xi_n<\\xi_{n+1}=\\cdots=\\xi_{n+p+1}=b,$$\nwith $\\xi_j<\\xi_{j+p+1}$ for every $1\\le j\\le n$. Empty interior ranges are omitted. The multiplicity $\\mu(\\eta)$ of an interior knot $\\eta$ is its number of occurrences among $\\xi_{p+2},\\ldots,\\xi_n$.\n\nWrite $\\mathcal P_p$ for the real polynomials of degree at most $p$. The degree-$p$ spline space $S_{p,\\xi}$ consists of functions that restrict to a member of $\\mathcal P_p$ on each nonempty knot interval and whose derivatives through order $p-\\mu(\\eta)$ agree across each interior knot $\\eta$. The convention $C^{-1}$ means that no matching condition is imposed. For this piecewise definition, take knot cells left-closed and right-open; at a knot with no matching condition, the value is the one from the cell on its right, and at $b$ use the left limit. Thus the function value at a discontinuous knot is specified.\n\nThe degree-zero B-spline is $B_{j,0,\\xi}=\\mathbf 1_{[\\xi_j,\\xi_{j+1})}$. For $p\\ge1$, define recursively\n$$B_{j,p,\\xi}(x)=\\frac{x-\\xi_j}{\\xi_{j+p}-\\xi_j}B_{j,p-1,\\xi}(x)+\\frac{\\xi_{j+p+1}-x}{\\xi_{j+p+1}-\\xi_{j+1}}B_{j+1,p-1,\\xi}(x),$$\nwhere a term with zero denominator is defined to be zero. At $b$, set $B_{j,p,\\xi}(b)$ equal to its left limit. The basis and regularity properties of this recursively defined family are proved in [[thm-spline-polynomial-reproduction]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-spline-polynomial-reproduction",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb N_0$ and let $\\xi$ be a clamped knot vector as in [[def-b-spline-space-and-basis]]. The recursively defined degree-$p$ B-splines are nonnegative, are supported on $[\\xi_j,\\xi_{j+p+1}]$, and are piecewise polynomials of degree at most $p$. At a knot of multiplicity $\\mu\\le p$, each B-spline is $C^{p-\\mu}$; multiplicity $p+1$ imposes no continuity requirement. On every nonempty knot interval $[\\xi_m,\\xi_{m+1})$, the active functions $B_{m-p,p,\\xi},\\ldots,B_{m,p,\\xi}$ form a basis of $\\mathcal P_p$ and sum to one. Globally, the $n$ B-splines form a basis of $S_{p,\\xi}$. In particular, every $q\\in\\mathcal P_p$ has a unique expansion $q=\\sum_{j=1}^n c_jB_{j,p,\\xi}$ on $[a,b]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], the conditional mean used here is the selected Borel version required by the data-model interface. On each cell of length $h=(b-a)/J$, project $g_0$ orthogonally in $L^2$ onto $\\mathcal P_p$. The resulting piecewise polynomial belongs to the spline space with full interior multiplicity $p+1$. Its dimension is $K=(p+1)J$ by [F4]. The projector is local and reproduces $\\mathcal P_p$, hence also $\\mathcal P_{s-1}$; [F2] gives $\\|g_0-Q_hg_0\\|_{L^2(a,b)}\\le C_{s,p}h^s\\|D^sg_0\\|_{L^2(a,b)}$. The density bound implies $\\|g_0-Q_hg_0\\|_{L^2(P_X)}^2\\le M_X\\|g_0-Q_hg_0\\|_{L^2(a,b)}^2$. Since $K=(p+1)J$ and $p$ is fixed, $h\\asymp K^{-1}$, so the squared approximation error is at most $C_{s,p,M_X,a,b}K^{-2s}\\|D^sg_0\\|_2^2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Insert this approximation bound into [F1]. The result is $\\Delta K/n+C_{s,p,M_X,a,b}K^{-2s}\\|D^sg_0\\|_2^2$. For $J\\asymp n^{1/(2s+1)}$, both terms have order $n^{-2s/(2s+1)}$ because $K=(p+1)J$ and $p$ is fixed. The criterion is evaluated at the training inputs in [F1], so no independent test-risk statement follows.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero target is in W^{s,2} and is included by the approximation estimate in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem assumes integer s≥1 and p≥s−1, so the boundary s=1,p=0 is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The density is a probability density supported on [a,b], and the full-multiplicity mesh has K=(p+1)J≥1 in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Sobolev approximation is on the closed finite interval [a,b], and step 1.1 integrates over every mesh cell including the endpoint cells."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 assume AC for the selected conditional-mean version and Sobolev representatives; steps 1.1–2.1 preserve that branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "cex-one-observation-does-not-identify-a-smoothing-spline": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-cubic-smoothing-spline",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $[a,b]$ be a bounded interval, let $(x_i,y_i)_{i=1}^n\\in([a,b]\\times\\mathbb R)^n$, assume at least two distinct input values, and let $\\lambda>0$. For $g\\in W^{2,2}(a,b)$ use its unique continuous representative on $[a,b]$ supplied by the one-dimensional Sobolev representative theorem. The natural cubic smoothing spline is the unique minimizer, whose existence and uniqueness are proved in [[thm-natural-cubic-smoothing-spline-exists-uniquely]], of\n$$J(g)=\\sum_{i=1}^n(y_i-g(x_i))^2+\\lambda\\int_a^b|D^2g(t)|^2\\,dt.$$\n\nThe requirement of two distinct inputs is essential. The penalty is the squared $L^2$ norm of the second weak derivative; the data term uses the distinct-input interpolation convention in [[def-natural-cubic-spline]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $c$, both terms in [F1] vanish at $g_c$, so $J(g_c)=0$. The criterion is a sum of nonnegative terms, hence zero is its minimum.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $c\\ne d$, then $g_c(1)=1+c/2\\ne1+d/2=g_d(1)$, so $g_c$ and $g_d$ are distinct minimizers. The one-observation extension is not unique, proving the lower bound of two distinct inputs is necessary.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no separate zero-parameter boundary in the statement; zero-valued functions or data are included in the stated formulas where relevant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample is precisely the one-distinct-input case; steps 1.1–2.1 give infinitely many minimizers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 identify the affine nullspace of the roughness penalty for the degenerate one-point design."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint-excluded asymptotic or boundary classification is asserted by this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-family selection is asserted by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "affine-nullspace-family",
+          "claim": "For c=0 and c=1, evaluate J(g_c) and compare the resulting functions.",
+          "result": "Both objectives equal 0; g_0(x)=1 and g_1(x)=1+x−1/2 are distinct."
+        }
+      ]
+    },
+    "ex-b-spline-basis-and-polynomial-reproduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-b-spline-space-and-basis",
+          "source_section": "Definition",
+          "quote": "Let $p\\in\\mathbb N_0$, $n\\ge p+1$, and $a<b$. A clamped knot vector is a nondecreasing finite sequence\n$$\\xi_1=\\cdots=\\xi_{p+1}=a<\\xi_{p+2}\\le\\cdots\\le\\xi_n<\\xi_{n+1}=\\cdots=\\xi_{n+p+1}=b,$$\nwith $\\xi_j<\\xi_{j+p+1}$ for every $1\\le j\\le n$. Empty interior ranges are omitted. The multiplicity $\\mu(\\eta)$ of an interior knot $\\eta$ is its number of occurrences among $\\xi_{p+2},\\ldots,\\xi_n$.\n\nWrite $\\mathcal P_p$ for the real polynomials of degree at most $p$. The degree-$p$ spline space $S_{p,\\xi}$ consists of functions that restrict to a member of $\\mathcal P_p$ on each nonempty knot interval and whose derivatives through order $p-\\mu(\\eta)$ agree across each interior knot $\\eta$. The convention $C^{-1}$ means that no matching condition is imposed. For this piecewise definition, take knot cells left-closed and right-open; at a knot with no matching condition, the value is the one from the cell on its right, and at $b$ use the left limit. Thus the function value at a discontinuous knot is specified.\n\nThe degree-zero B-spline is $B_{j,0,\\xi}=\\mathbf 1_{[\\xi_j,\\xi_{j+1})}$. For $p\\ge1$, define recursively\n$$B_{j,p,\\xi}(x)=\\frac{x-\\xi_j}{\\xi_{j+p}-\\xi_j}B_{j,p-1,\\xi}(x)+\\frac{\\xi_{j+p+1}-x}{\\xi_{j+p+1}-\\xi_{j+1}}B_{j+1,p-1,\\xi}(x),$$\nwhere a term with zero denominator is defined to be zero. At $b$, set $B_{j,p,\\xi}(b)$ equal to its left limit. The basis and regularity properties of this recursively defined family are proved in [[thm-spline-polynomial-reproduction]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-spline-polynomial-reproduction",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb N_0$ and let $\\xi$ be a clamped knot vector as in [[def-b-spline-space-and-basis]]. The recursively defined degree-$p$ B-splines are nonnegative, are supported on $[\\xi_j,\\xi_{j+p+1}]$, and are piecewise polynomials of degree at most $p$. At a knot of multiplicity $\\mu\\le p$, each B-spline is $C^{p-\\mu}$; multiplicity $p+1$ imposes no continuity requirement. On every nonempty knot interval $[\\xi_m,\\xi_{m+1})$, the active functions $B_{m-p,p,\\xi},\\ldots,B_{m,p,\\xi}$ form a basis of $\\mathcal P_p$ and sum to one. Globally, the $n$ B-splines form a basis of $S_{p,\\xi}$. In particular, every $q\\in\\mathcal P_p$ has a unique expansion $q=\\sum_{j=1}^n c_jB_{j,p,\\xi}$ on $[a,b]$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The only nonzero degree-zero spline on $(0,1)$ is $B_{3,0}=1$. Applying the recurrence [F1] first at degree one gives $B_{2,1}=1-x$ and $B_{3,1}=x$. Applying it again gives $B_{1,2}=(1-x)^2$, $B_{2,2}=x(1-x)+x(1-x)=2x(1-x)$, and $B_{3,2}=x^2$. Each is nonnegative on $[0,1]$ and their sum is $(1-x)^2+2x(1-x)+x^2=1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $q(x)=a+bx+cx^2$, choose coefficients $a$, $a+b/2$, and $a+b+c$. Their B-spline combination is $a(1-x)^2+2(a+b/2)x(1-x)+(a+b+c)x^2=a+bx+cx^2.$ Thus every quadratic is reproduced; uniqueness of the coefficient vector follows from the basis assertion [F2].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero polynomial among all quadratic polynomials."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement is not a classification as a scalar parameter varies over a one-point boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item is not a general classification of degenerate models; its stated knot, rank, or mesh hypotheses control admissibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the basis formulas on the closed interval [0,1] using the endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-family selection is asserted by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "quadratic-bernstein-basis",
+          "claim": "For knots (0,0,0,1,1,1), compute the three degree-two B-splines and their sum.",
+          "result": "The basis is ((1−x)^2, 2x(1−x), x^2); all terms are nonnegative on [0,1] and their sum is 1."
+        }
+      ]
+    },
+    "ex-natural-cubic-interpolants-on-two-and-three-knots": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-cubic-spline",
+          "source_section": "Definition",
+          "quote": "Let $[a,b]$ be a bounded interval and let $a\\le t_1<\\cdots<t_r\\le b$ with $r\\ge2$. A natural cubic spline with knots $t_1,\\ldots,t_r$ is a $C^2$ function on $[a,b]$ that is a polynomial of degree at most three on every $[t_j,t_{j+1}]$, has second derivative zero at $t_1$ and $t_r$, and is extended linearly on $[a,t_1]$ and $[t_r,b]$ when those intervals are nonempty. The knots $t_j$ are the distinct breakpoints; repeated observations at the same input do not create additional knots.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge2$, $a\\le x_1<\\cdots<x_r\\le b$, and $y_1,\\ldots,y_r\\in\\mathbb R$. There is exactly one natural cubic spline $s$ on $[a,b]$ with $s(x_i)=y_i$ for each $i$. On each interval $[x_i,x_{i+1}]$ it is the cubic with endpoint values $y_i,y_{i+1}$ and endpoint second derivatives $M_i,M_{i+1}$, where $M_1=M_r=0$ and the interior values solve the positive-definite tridiagonal system\n$$h_{i-1}M_{i-1}+2(h_{i-1}+h_i)M_i+h_iM_{i+1}=6\\left(\\frac{y_{i+1}-y_i}{h_i}-\\frac{y_i-y_{i-1}}{h_{i-1}}\\right),\\quad 2\\le i\\le r-1,$$\nwith $h_i=x_{i+1}-x_i>0$. The interpolant is linear outside $[x_1,x_r]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For two knots, there are no interior second derivatives in the system of [F2]. The endpoint second derivatives are both zero, so the cubic segment has affine second derivative vanishing at both ends, hence second derivative identically zero. The segment is the unique line through the two values, and its linear extension on any data-free tail is the same line.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the three-knot data, $h_1=h_2=1$ and the secant slopes are $d_1=1$, $d_2=-1$. The one interior system equation is $4M_2=6(d_2-d_1)=-12$, so $M_2=-3$ while $M_1=M_3=0$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution in the interval formula gives the displayed pieces. They interpolate $0,1,0$; their first derivatives at $1$ are both $0$, their second derivatives at $1$ are both $-3$, and the second derivatives at $0,2$ are $0$. Thus they join to a natural cubic spline, which is unique by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats arbitrary two-point values, including zero values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-knot example in step 1.1 is the smallest allowed knot count."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item is not a general classification of degenerate models; its stated knot, rank, or mesh hypotheses control admissibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 describes the linear extension on data-free tails."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-family selection is asserted by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "three-knot-natural-cubic",
+          "claim": "For knots 0,1,2 and values 0,1,0, solve the one-row natural second-derivative system.",
+          "result": "The system gives 4M_2=−12, so M_2=−3; the two cubic pieces in the item match values, first slopes, and second derivatives at x=1."
+        }
+      ]
+    },
+    "ex-uniform-mesh-linear-spline-approximation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-spline-polynomial-reproduction",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb N_0$ and let $\\xi$ be a clamped knot vector as in [[def-b-spline-space-and-basis]]. The recursively defined degree-$p$ B-splines are nonnegative, are supported on $[\\xi_j,\\xi_{j+p+1}]$, and are piecewise polynomials of degree at most $p$. At a knot of multiplicity $\\mu\\le p$, each B-spline is $C^{p-\\mu}$; multiplicity $p+1$ imposes no continuity requirement. On every nonempty knot interval $[\\xi_m,\\xi_{m+1})$, the active functions $B_{m-p,p,\\xi},\\ldots,B_{m,p,\\xi}$ form a basis of $\\mathcal P_p$ and sum to one. Globally, the $n$ B-splines form a basis of $S_{p,\\xi}$. In particular, every $q\\in\\mathcal P_p$ has a unique expansion $q=\\sum_{j=1}^n c_jB_{j,p,\\xi}$ on $[a,b]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-local-spline-quasi-interpolant",
+          "source_section": "Definition",
+          "quote": "Fix a degree-$p$ spline space $S_{p,\\xi}$ on $[a,b]$, an exponent $1\\le q\\le\\infty$, and an integer $0\\le l\\le p$. A **local quasi-interpolant** is a linear map $Q$ from continuous $L^q$ functions on $[a,b]$ into $S_{p,\\xi}$ with the following properties. For every nonempty knot interval $I_m$, there is a neighborhood $J_m\\subseteq[a,b]$ that is a union of at most $M$ adjacent knot intervals such that (i) if $f=g$ almost everywhere on $J_m$, then $Qf=Qg$ almost everywhere on $I_m$; (ii) $Qv=v$ for every $v\\in\\mathcal P_l$; and (iii) for a constant $C_Q$ independent of the mesh, $\\|Qf\\|_{L^q(I_m)}\\le C_Q\\|f\\|_{L^q(J_m)}$. Here $M$ bounds both the number of intervals in each $J_m$ and the number of neighborhoods $J_m$ containing any one point. The derivative and continuous-representative conventions for Sobolev inputs are those of [[def-sobolev-space-wkp-and-its-norm]] and [[cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives]].\n\nThe coefficient-functional formulation in Lyche–Manni–Speleers is one sufficient way to obtain these local stability and reproduction properties. The definition here records the operator hypotheses used in the approximation proof.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sobolev-spline-quasi-interpolant-rate",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $p\\ge0$, $0\\le l\\le p$, $1\\le q\\le\\infty$, and let $Q$ be a bounded local quasi-interpolant as in [[def-local-spline-quasi-interpolant]] on a knot mesh in $[a,b]$. Let $f\\in W^{l+1,q}(a,b)$ and use its continuous Sobolev representative. For each nonempty mesh cell $I_m$, let $J_m$ be the corresponding neighborhood, let $h_m$ be the largest cell length in $J_m$, and suppose $|J_m|\\le M h_m$ with overlap multiplicity at most $M$. Then\n$$\\|f-Qf\\|_{L^q(I_m)}\\le (1+C_Q)\\frac{M^{l+1}}{l!}h_m^{l+1}\\|D^{l+1}f\\|_{L^q(J_m)}.$$\nWriting $h=\\max_m h_m$, the global bound is\n$$\\|f-Qf\\|_{L^q([a,b])}\\le (1+C_Q)\\frac{M^{l+1+1/q}}{l!}h^{l+1}\\|D^{l+1}f\\|_{L^q([a,b])},$$\nwhere $1/q=0$ for $q=\\infty$. In particular, on a uniform mesh with interior knots of multiplicity $p+1$, the cellwise $L^2$ projector onto $\\mathcal P_p$ is a local quasi-interpolant and gives the order-$h^s$ approximation bound for every integer $1\\le s\\le p+1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the ACL and absolutely-continuous\nfundamental-theorem interfaces. Let $I\\subseteq\\mathbb R$ be a nonempty open\ninterval, let $1\\le p\\le\\infty$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$,\nand let $u\\in W^{1,p}(I;\\mathbb K)$, with weak derivative class $Du$. Then\nthere is exactly one continuous representative $u^*$ of the class of $u$ on\n$I$ that is locally absolutely continuous, that is, absolutely continuous on\nevery compact interval contained in $I$, and satisfies\n$$u^*(x)-u^*(y)=\\int_y^xDu(t)\\,dt\\qquad\\text{for every }x,y\\in I,$$\nwhere for $x<y$ the right-hand side denotes $-\\int_x^yDu$, equivalently\n$u^*(y)-u^*(x)=\\int_x^yDu$ whenever $x\\le y$.\n\nIf $I=(a,b)$ has finite endpoints, then $Du\\in L^1(a,b)$, the representative\n$u^*$ extends uniquely to an absolutely continuous function on $[a,b]$, and\nthe extension satisfies\n$$u^*(x)=u^*(a)+\\int_a^xDu(t)\\,dt\\qquad\\text{for every }x\\in[a,b].$$\n\nThe scalar field is arbitrary, $p=1$ and $p=\\infty$ are included, and the\none-dimensional interval may be bounded or unbounded. The Axiom of Choice is\nused only through the Countable-Choice and Dependent-Choice hypotheses of the\ncited characterisation, fundamental-theorem and completeness interfaces.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On each cell $[t_j,t_{j+1}]$, $I_hf(x)=\\frac{t_{j+1}-x}{h}f(t_j)+\\frac{x-t_j}{h}f(t_{j+1})$. The nonnegative weights sum to one, so $\\|I_hf\\|_{L^\\infty([t_j,t_{j+1}])}\\le\\|f\\|_{L^\\infty([t_j,t_{j+1}])}$. It depends only on that cell, reproduces every affine function, and is a continuous piecewise-linear spline by [F1]. Thus it satisfies the hypotheses in [F2] with one-cell neighborhoods and $C_Q=1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $M_2=\\|D^2f\\|_{L^\\infty(0,1)}$. On a cell $[u,v]$ of length $h$, put $a_x=x-u$ and $b_x=v-x$. By [F3] applied to $f$ and $Df$, let $f^*$ and $g^*$ be their absolutely continuous representatives; $(g^*)'=D^2f$ almost everywhere and $f^*(x)-f^*(u)=\\int_u^xg^*(s)\\,ds$. The absolutely continuous function $t\\mapsto(x-t)g^*(t)$ has derivative $-g^*(t)+(x-t)D^2f(t)$ almost everywhere, so the fundamental theorem for absolutely continuous functions gives $f^*(x)=f^*(u)+a_xg^*(u)+\\int_u^x(x-t)D^2f(t)\\,dt$, and the same formula at $v$. Since $I_hf(x)=f^*(u)+(a_x/h)(f^*(v)-f^*(u))$, subtraction and simplification yield $f^*(x)-I_hf(x)=-\\int_u^x\\frac{b_x(t-u)}hD^2f(t)\\,dt-\\int_x^v\\frac{a_x(v-t)}hD^2f(t)\\,dt$. Hence $|f^*(x)-I_hf(x)|\\le M_2\\{b_xa_x^2/(2h)+a_xb_x^2/(2h)\\}=M_2a_xb_x/2\\le M_2h^2/8$, since $a_x+b_x=h$ and $a_xb_x\\le h^2/4$. This holds on every cell and at every point, so taking the supremum gives $\\|f-I_hf\\|_{L^\\infty(0,1)}\\le h^2\\|D^2f\\|_{L^\\infty(0,1)}/8$.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include affine functions, for which the approximation error is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow J=1; both use only a positive integer cell count."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item is not a general classification of degenerate models; its stated knot, rank, or mesh hypotheses control admissibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 defines interpolation at every closed mesh endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 assume AC for the supplied absolutely continuous representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "single-cell-quadratic-error",
+          "claim": "For J=1 and f(x)=x^2 on [0,1], compute the linear interpolant and its maximum error.",
+          "result": "I_hf(x)=x and max_{[0,1]}|x^2−x|=1/4, consistent with the stated upper bound 2h^2||f″||_infinity=4."
+        }
+      ]
+    },
+    "ex-spline-training-risk-can-differ-from-independent-test-risk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-series-spline-least-squares",
+          "source_section": "Definition",
+          "quote": "Let $p_K(x)=(B_{1,p,\\xi}(x),\\ldots,B_{K,p,\\xi}(x))^T$ be a specified degree-$p$ B-spline basis on the data domain, and let $(X_i,Y_i)_{i=1}^n$ be observed real-valued data. Form the design matrix $P\\in\\mathbb R^{n\\times K}$ with row $p_K(X_i)^T$. The **series least-squares fitted training vector** is\n$$\\widehat{\\mathbf g}_K=\\Pi_{\\operatorname{col}(P)}\\mathbf Y,$$\nthe orthogonal projection of $\\mathbf Y=(Y_1,\\ldots,Y_n)^T$ onto the column space of $P$. Conditional on the realized design, this is the fixed-design least-squares fitted vector of [[def-fixed-design-projection-estimator]]. Equivalently, it is $P\\widehat\\beta$ for any minimizer $\\widehat\\beta$ of $\\|\\mathbf Y-P\\beta\\|_2^2$; all such minimizers have the same fitted training vector. The training prediction loss relative to a specified target vector $\\mathbf g_0=(g_0(X_1),\\ldots,g_0(X_n))^T$ is $n^{-1}\\|\\widehat{\\mathbf g}_K-\\mathbf g_0\\|_2^2$. This definition specifies training fitted values and makes no test-risk assertion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-series-training-risk",
+          "source_section": "Statement",
+          "quote": "Let $n,K\\ge1$, let $X_i\\in[a,b]$ and $Y_i\\in\\mathbb R$ be iid pairs, and suppose the one-observation law is $P_X(dx)\\kappa(x,dy)$ for a supplied Borel probability kernel $\\kappa$ from $([a,b],\\mathcal B([a,b]))$ to $(\\mathbb R,\\mathcal B(\\mathbb R))$. Assume a Borel function $g_0:[a,b]\\to\\mathbb R$ is supplied such that, for $P_X$-almost every $x$, $\\int |y|\\,\\kappa(x,dy)<\\infty$, $g_0(x)=\\int y\\,\\kappa(x,dy)$, and $\\int (y-g_0(x))^2\\,\\kappa(x,dy)\\le\\Delta$ for a finite $\\Delta\\ge0$. Let $p_K:[a,b]\\to\\mathbb R^K$ be a fixed Borel $K$-dimensional spline basis and assume a deterministic $\\bar\\beta_K\\in\\mathbb R^K$ and constants $C,\\gamma>0$ satisfy\n$$E\\{g_0(X)-p_K(X)^T\\bar\\beta_K\\}^2\\le C^2K^{-2\\gamma}.$$\nThen, with the fitted training vector $\\widehat{\\mathbf g}_K$ from [[def-series-spline-least-squares]] and $\\mathbf g_0=(g_0(X_1),\\ldots,g_0(X_n))^T$,\n$$E\\left[\\frac1n\\|\\widehat{\\mathbf g}_K-\\mathbf g_0\\|_2^2\\right]\\le\\frac{\\Delta K}{n}+C^2K^{-2\\gamma}.$$\nThis is expected empirical training-design loss.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-b-spline-space-and-basis",
+          "source_section": "Definition",
+          "quote": "Let $p\\in\\mathbb N_0$, $n\\ge p+1$, and $a<b$. A clamped knot vector is a nondecreasing finite sequence\n$$\\xi_1=\\cdots=\\xi_{p+1}=a<\\xi_{p+2}\\le\\cdots\\le\\xi_n<\\xi_{n+1}=\\cdots=\\xi_{n+p+1}=b,$$\nwith $\\xi_j<\\xi_{j+p+1}$ for every $1\\le j\\le n$. Empty interior ranges are omitted. The multiplicity $\\mu(\\eta)$ of an interior knot $\\eta$ is its number of occurrences among $\\xi_{p+2},\\ldots,\\xi_n$.\n\nWrite $\\mathcal P_p$ for the real polynomials of degree at most $p$. The degree-$p$ spline space $S_{p,\\xi}$ consists of functions that restrict to a member of $\\mathcal P_p$ on each nonempty knot interval and whose derivatives through order $p-\\mu(\\eta)$ agree across each interior knot $\\eta$. The convention $C^{-1}$ means that no matching condition is imposed. For this piecewise definition, take knot cells left-closed and right-open; at a knot with no matching condition, the value is the one from the cell on its right, and at $b$ use the left limit. Thus the function value at a discontinuous knot is specified.\n\nThe degree-zero B-spline is $B_{j,0,\\xi}=\\mathbf 1_{[\\xi_j,\\xi_{j+1})}$. For $p\\ge1$, define recursively\n$$B_{j,p,\\xi}(x)=\\frac{x-\\xi_j}{\\xi_{j+p}-\\xi_j}B_{j,p-1,\\xi}(x)+\\frac{\\xi_{j+p+1}-x}{\\xi_{j+p+1}-\\xi_{j+1}}B_{j+1,p-1,\\xi}(x),$$\nwhere a term with zero denominator is defined to be zero. At $b$, set $B_{j,p,\\xi}(b)$ equal to its left limit. The basis and regularity properties of this recursively defined family are proved in [[thm-spline-polynomial-reproduction]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spline-polynomial-reproduction",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb N_0$ and let $\\xi$ be a clamped knot vector as in [[def-b-spline-space-and-basis]]. The recursively defined degree-$p$ B-splines are nonnegative, are supported on $[\\xi_j,\\xi_{j+p+1}]$, and are piecewise polynomials of degree at most $p$. At a knot of multiplicity $\\mu\\le p$, each B-spline is $C^{p-\\mu}$; multiplicity $p+1$ imposes no continuity requirement. On every nonempty knot interval $[\\xi_m,\\xi_{m+1})$, the active functions $B_{m-p,p,\\xi},\\ldots,B_{m,p,\\xi}$ form a basis of $\\mathcal P_p$ and sum to one. Globally, the $n$ B-splines form a basis of $S_{p,\\xi}$. In particular, every $q\\in\\mathcal P_p$ has a unique expansion $q=\\sum_{j=1}^n c_jB_{j,p,\\xi}$ on $[a,b]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the clamped knot vector $(0,0,1,1)$, the only nonzero degree-zero spline on $(0,1)$ is $B_{2,0}=1$; the recurrence in [F3] gives $B_{1,1}=1-x$ and $B_{2,1}=x$, so $p(1/2)=(1/2,1/2)$. Therefore $p(1/2)^T\\widehat\\beta=(1/2,1/2)(0,2)^T=1$, the training residual and empirical training loss are zero, and the fitted vector equals the projection in [F1]. The chosen coefficient vector is one admissible representation of it.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The independent test squared error has expectation $E\\{\\widehat g(X')-g_0(X')\\}^2=\\int_0^1(2x-1)^2dx=\\frac43-2+1=\\frac13>0.$ Thus zero training loss does not imply zero independent test loss, consistent with the scope of [F2].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval, mesh, data set, or finite-dimensional model is nonempty; no claim classifies an empty instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero empirical training loss for the stated fit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses a single training observation and computes its fitted value in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The one-row two-column design is rank deficient; step 1.1 verifies the fitted projection while step 2.1 computes positive test risk."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 integrates the test error over the full closed support [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-family selection is asserted by this item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-row-train-test-risk",
+          "claim": "For the stated training pair and independent uniform test input, compare training and test squared errors.",
+          "result": "Training error is 0; the test integral is ∫_0^1(2x−1)^2dx=1/3."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,257 @@
+[
+  {
+    "order": 1904,
+    "id": "contamination-models-and-robust-risk",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Contamination and Robust Risk",
+    "companion": "contamination-models-and-robust-risk-examples",
+    "requires": [
+      "losses-risk-and-decision-rules",
+      "minimax-lower-bounds-and-information-theoretic-methods"
+    ],
+    "items": [
+      {
+        "id": "lem-convex-mixture-of-probability-laws",
+        "kind": "lemma",
+        "title": "A convex mixture of probability laws is a probability law",
+        "statement": "Let $(X,\\mathcal A)$ be a measurable space, let $P,Q$ be probability measures on it, and let $t\\in[0,1]$. The set function $M_t(A)=(1-t)P(A)+tQ(A)$ is a probability measure.",
+        "deps": [
+          "def-probability-measure"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-common-law-forces-two-point-tail-loss-bound",
+        "kind": "lemma",
+        "title": "A common data law forces a two-point tail-loss bound",
+        "statement": "Let $(\\mathcal Z,\\mathcal G,R)$ be a probability space and let $\\Theta$ be a measurable space ([[def-measurable-space]]) with $\\theta_0,\\theta_1\\in\\Theta$. Let $\\hat\\theta:\\mathcal Z\\to\\Theta$ be measurable and let $\\ell:\\Theta\\times\\Theta\\to[0,+\\infty]$ have measurable sections $a\\mapsto\\ell(\\theta_i,a)$. If $\\max\\{\\ell(\\theta_0,a),\\ell(\\theta_1,a)\\}\\ge\\kappa\\ell(\\theta_0,\\theta_1)$ for every $a\\in\\Theta$, where $\\kappa>0$, then $\\max_{i=0,1}R\\{\\ell(\\theta_i,\\hat\\theta)\\ge\\kappa\\ell(\\theta_0,\\theta_1)\\}\\ge1/2$.",
+        "deps": [
+          "def-probability-measure",
+          "def-measurable-space"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-gross-error-path",
+        "kind": "definition",
+        "title": "Gross-error contamination path",
+        "statement": "For probability measures $F,H$ on a common measurable space $(X,\\mathcal A)$ ([[def-probability-measure]]) and $0\\le\\epsilon\\le1$, the gross-error path is $F_{\\epsilon,H}=(1-\\epsilon)F+\\epsilon H$, a probability measure by [[lem-convex-mixture-of-probability-laws]]. For any $x\\in X$, its point-contamination direction at $x$ is the specialization $H=\\delta_x$ ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]). The path is used for a derivative at $\\epsilon=0$; the definition alone gives no uniform-in-$H$ remainder.",
+        "deps": [
+          "def-probability-measure",
+          "lem-convex-mixture-of-probability-laws",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-huber-contamination-model",
+        "kind": "definition",
+        "title": "Huber contamination model",
+        "statement": "Given a statistical experiment $\\{P_\\theta:\\theta\\in\\Theta\\}$ on $(\\mathcal X,\\mathcal A)$ ([[def-statistical-experiment]]) and any probability measure $Q$ on that space ([[def-probability-measure]]), Huber's one-observation contamination law is",
+        "deps": [
+          "def-statistical-experiment",
+          "def-probability-measure",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-convex-mixture-of-probability-laws"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-adversarial-sample-replacement",
+        "kind": "definition",
+        "title": "Adversarial sample replacement",
+        "statement": "For a statistical experiment $\\{P_\\theta\\}$ from [[def-statistical-experiment]], sample size $N\\ge1$, and replacement fraction $0\\le\\eta\\le1$, equip $\\mathcal X^N$ with its finite product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). A sample-replacement coupling is a pair of $\\mathcal X^N$-valued random elements on a common probability space ([[def-random-element-and-real-random-variable]]) $(X,Y)$ such that $X_1,\\ldots,X_N$ are iid with law $P_\\theta$ under [[def-identically-distributed-and-iid-random-variables]] and",
+        "deps": [
+          "def-statistical-experiment",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-random-element-and-real-random-variable",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-huber-contamination-mixtures-can-be-equalized-under-tv-threshold",
+        "kind": "lemma",
+        "title": "TV-close laws have identical Huber mixtures at the contamination threshold",
+        "statement": "Assume the Axiom of Choice. Let $P_0,P_1$ be probability measures on one measurable space. If $0\\le\\epsilon<1$ and $\\|P_0-P_1\\|_{TV}\\le\\epsilon/(1-\\epsilon)$, there are probability measures $Q_0,Q_1$ for which",
+        "deps": [
+          "def-probability-measure",
+          "def-huber-contamination-model",
+          "def-total-variation-distance-for-probability-laws",
+          "def-axiom-of-choice",
+          "def-radon-nikodym-derivative",
+          "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-extended-real-valued-measurable-function",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "lem-convex-mixture-of-probability-laws"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-contamination-robust-risk",
+        "kind": "definition",
+        "title": "Contamination-robust expected risk and tail risk",
+        "statement": "Let the experiment in [[def-statistical-experiment]] have nonempty parameter set $\\Theta$. Choose a sigma-algebra $\\mathcal T$ on $\\Theta$ and take $(\\Theta,\\mathcal T)$ as its measurable action space ([[def-measurable-space]]). Specialize the target-first loss of [[def-loss-function-and-risk]] to $L:\\Theta\\times\\Theta\\to[0,+\\infty]$ by taking its action space to be $(\\Theta,\\mathcal T)$. Fix an integer sample size $N\\ge1$ and a measurable rule $\\hat\\theta:\\mathcal X^N\\to\\Theta$. Equip $\\mathcal X^N$ with the finite product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]); the iid sample law is the finite product measure supplied by [[def-product-measure-on-sigma-finite-spaces]] and [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. Write $X(x)=x$ for the canonical sample vector on this product space. The Huber sampling law is from [[def-huber-contamination-model]], and nonnegative expectations use [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. For $0\\le\\epsilon\\le1$ and $0\\le\\eta\\le1$, its **Huber robust expected risk** at fraction $\\epsilon$ is",
+        "deps": [
+          "def-statistical-experiment",
+          "def-loss-function-and-risk",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-measurable-space",
+          "def-huber-contamination-model",
+          "def-adversarial-sample-replacement",
+          "def-gross-error-path",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-contamination-modulus",
+        "kind": "definition",
+        "title": "Huber contamination modulus",
+        "statement": "For an experiment $\\{P_\\theta:\\theta\\in\\Theta\\}$ with nonempty $\\Theta$ ([[def-statistical-experiment]]), choose a sigma-algebra $\\mathcal T$ on $\\Theta$ and take $(\\Theta,\\mathcal T)$ as the measurable action space ([[def-measurable-space]]). Take the target-first loss $L:\\Theta\\times\\Theta\\to[0,+\\infty]$ from [[def-loss-function-and-risk]] with that action space. For $0\\le\\epsilon<1$, define",
+        "deps": [
+          "def-statistical-experiment",
+          "def-loss-function-and-risk",
+          "def-measurable-space",
+          "def-total-variation-distance-for-probability-laws"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-huber-contamination-modulus-lower-bound",
+        "kind": "theorem",
+        "title": "Huber contamination modulus lower bound for tail risk",
+        "statement": "Assume the Axiom of Choice. Fix a contamination level $0\\le\\epsilon\\le1$, an integer sample size $N\\ge1$, and a nonempty statistical model $\\{P_\\theta:\\theta\\in\\Theta\\}$ on a common measurable sample space, and give $\\Theta$ a measurable structure as the parameter action space ([[def-measurable-space]]). Let the target-first loss $L:\\Theta\\times\\Theta\\to[0,+\\infty]$ of [[def-loss-function-and-risk]] have measurable sections $a\\mapsto L(\\theta,a)$. Suppose a fixed $0<\\kappa\\le1$ satisfies",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-loss-function-and-risk",
+          "def-measurable-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-huber-contamination-model",
+          "def-contamination-robust-risk",
+          "def-contamination-modulus",
+          "lem-huber-contamination-mixtures-can-be-equalized-under-tv-threshold",
+          "lem-common-law-forces-two-point-tail-loss-bound"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 1905,
+    "id": "contamination-models-and-robust-risk-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Contamination and Robust Risk — Examples",
+    "companion": "contamination-models-and-robust-risk",
+    "requires": [
+      "contamination-models-and-robust-risk"
+    ],
+    "items": [
+      {
+        "id": "ex-mean-gross-error-path-has-unbounded-sensitivity",
+        "kind": "example",
+        "title": "The mean has an unbounded directional derivative supremum",
+        "statement": "On $\\mathbb R$ with its Borel sigma-algebra, for $F=\\delta_0$ and $H=\\delta_a$, the mean functional $T(G)=\\int x\\,dG(x)$ has $T(F_{\\epsilon,H})=\\epsilon a$ and right derivative $a$ at $\\epsilon=0$. Each path law has finite support and hence a finite first moment. Taking the supremum of the absolute derivatives over $a\\in\\mathbb R$ gives $+\\infty$.",
+        "deps": [
+          "def-gross-error-path",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-borel-sigma-algebra",
+          "cor-expectation-agrees-with-the-finite-weighted-sum"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-bounded-sample-mean-under-replacement",
+        "kind": "example",
+        "title": "Bounded sample-mean change under replacements and a common corrupted sample",
+        "statement": "For integers $N\\ge1$ and $0\\le k\\le N$, if $x_i,y_i\\in[0,1]$ and at most $k$ coordinates differ, then",
+        "deps": [
+          "def-adversarial-sample-replacement",
+          "def-huber-contamination-model",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-statistical-experiment",
+          "def-measurable-space",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-bernoulli-huber-modulus-and-identical-mixtures",
+        "kind": "example",
+        "title": "Exact Bernoulli Huber modulus and indistinguishable mixtures",
+        "statement": "Take $\\Theta=[0,1]$ with its Borel sigma-algebra and sample space $\\{0,1\\}$ with full power set. Let $\\delta_0,\\delta_1$ be the point masses, set $P_\\theta=(1-\\theta)\\delta_0+\\theta\\delta_1$, and use absolute parameter loss $L(\\theta,a)=|\\theta-a|$. Then",
+        "deps": [
+          "def-huber-contamination-model",
+          "def-contamination-modulus",
+          "def-total-variation-distance-for-probability-laws",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "lem-convex-mixture-of-probability-laws",
+          "def-measurable-space",
+          "def-borel-sigma-algebra"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

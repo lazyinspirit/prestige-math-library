@@ -1,0 +1,989 @@
+{
+  "version": 1,
+  "scope": [
+    "def-randomized-procedure-as-a-markov-kernel",
+    "lem-procedure-action-law-is-measurable",
+    "def-statistic-and-estimator",
+    "def-randomized-test",
+    "ex-deterministic-statistic-as-dirac-kernel",
+    "ex-coin-flip-randomized-test",
+    "cex-nonmeasurable-rule-is-not-a-statistic-or-test"
+  ],
+  "contracts": {
+    "def-randomized-procedure-as-a-markov-kernel": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The domain may be empty, in which case the pointwise kernel clauses are vacuous. If the action space is empty and the domain is nonempty, no probability section can exist; the definition therefore admits a kernel into the empty action space only for an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition imposes no numerical structure on the data or action spaces."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition imposes no distinguished numerical value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No injectivity or distinctness condition is imposed: different observations may have the same action law. As checked in the Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint is part of the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The kernel is supplied as the procedure itself; the definition selects no measures, versions, or auxiliary random variables and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A randomized rule is specified as the pointwise probability kernel K with measurable action-event evaluations; no theorem converts it into an independent-random-seed representation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The final sentence expressly declines a separate random-seed representation for arbitrary measurable action spaces, so no converse seed-to-kernel equivalence is claimed."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-procedure-action-law-is-measurable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nonnegative-simple-measurable-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A measurable function\n$s:X\\to[0,+\\infty)\\subseteq\\overline{\\mathbb R}$\n([[def-extended-real-valued-measurable-function]]) is a\n**nonnegative simple measurable function** when it has finite range.\n\nEquivalently, there are pairwise disjoint measurable sets\n$E_1,\\dots,E_m\\in\\mathcal A$ and coefficients $c_1,\\dots,c_m\\in[0,+\\infty)$\nsuch that\n$$s=\\sum_{j=1}^m c_j\\chi_{E_j}.$$\nAny such display is a **simple representation** of $s$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-nonnegative-extended-series",
+          "source_section": "Definition",
+          "quote": "Let $a=(a_k)_{k\\in\\mathbb N}$ take values in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$ ([[def-extended-reals]]). Its **partial sums** are the unique sequence $(s_n)$ in $[0,+\\infty]$ satisfying\n\n$$s_0=0,\\qquad s_{n+1}=s_n+a_n.$$\n\nTo apply [[thm-recursion]] with a fixed successor function, use the state space $\\mathbb N\\times[0,+\\infty]$ and the self-map $T(n,s)=(n+1,s+a_n)$, starting from $(0,0)$. Recursion gives a unique state sequence; induction makes its first coordinate $n$, and its second coordinates are exactly the unique $(s_n)$ satisfying the displayed recurrence. Addition of two nonnegative extended reals is always defined, including when either is $+\\infty$. The sequence $(s_n)$ is nondecreasing, and its **nonnegative extended sum** is\n\n$$\\sum_{k=0}^{\\infty}a_k:=\\sup_{n\\in\\mathbb N}s_n\\in[0,+\\infty],$$\n\nwhose existence follows from completeness of the extended real line ([[lem-extended-reals-complete]]). More generally, for $m\\in\\mathbb N$,\n\n$$\\sum_{k\\ge m}a_k:=\\sum_{j=0}^{\\infty}a_{m+j}.$$\n\nFinite sums use the same recursion: $\\sum_{k<n}a_k=s_n$, so the empty sum at $n=0$ is $0$. A double sum such as $\\sum_i\\sum_j a_{ij}$ means that the inner nonnegative extended sum is formed first and the resulting nonnegative extended sequence is then summed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\theta\\in\\Theta$. For each $B\\in\\mathcal G$, the function $x\\mapsto K(x,B)$ is measurable and lies in $[0,1]$ by [F2]. Thus its integral is finite and at most $\\int1\\,dP_\\theta=1$ by [F1], [F3], [F8], and [F12]. Since $K(x,\\varnothing)=0$ and $K(x,\\mathsf D)=1$, the simple-integral formula and agreement [F5, F6] give $Q_\\theta(\\varnothing)=0$ and $Q_\\theta(\\mathsf D)=P_\\theta(\\mathcal X)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "F12"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F9], choose nonnegative simple functions $g_n\\uparrow g$. Fix $n$ and write $g_n=\\sum_{j=1}^m c_j1_{B_j}$ with finite $m$, $c_j\\ge0$, and pairwise disjoint $B_j\\in\\mathcal G$, as in [F4]. The simple-integral formula and agreement [F5, F6] give $h_{g_n}(x)=\\sum_{j=1}^m c_jK(x,B_j)$. Each summand is measurable by [F2], and finite sums and nonnegative scalar multiples are measurable by [F13]. For every $x$, monotone convergence under the probability measure $K(x,\\cdot)$ gives $h_{g_n}(x)\\uparrow h_g(x)$. Thus $h_g$ is measurable by the increasing-limit clause of [F13].",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "F13"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $(B_j)_{j\\in\\mathbb N}$ are pairwise disjoint members of $\\mathcal G$, then for every $x$, $K(x,\\bigcup_jB_j)=\\lim_{N\\to\\infty}S_N(x)$, where $S_N(x)=\\sum_{j=0}^NK(x,B_j)$, by countable additivity of $K(x,\\cdot)$. Each $S_N$ is measurable by [F2] and finite-sum closure [F13], and $S_N$ increases. Monotone convergence [F10] and finite additivity of the nonnegative integral [F7] give $Q_\\theta(\\bigcup_jB_j)=\\lim_N\\sum_{j=0}^NQ_\\theta(B_j)=\\sum_jQ_\\theta(B_j)$, where the last expression is the nonnegative extended sum [F11]. Together with step 1.1 and [F12], this proves that $Q_\\theta$ is a probability measure.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For an indicator $g=1_B$, [F5] and [F6] give $h_g(x)=K(x,B)$ and $\\int g\\,dQ_\\theta=Q_\\theta(B)$, so the defining equation for $Q_\\theta$ proves the iterated-integral identity. Finite addition [F7] and nonnegative homogeneity [F8] extend this equality from indicators to every nonnegative simple $g$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The increasing simple sequence from step 1.2 satisfies $g_n\\uparrow g$ and $h_{g_n}\\uparrow h_g$. By step 1.2 all $h_{g_n}$ and $h_g$ are measurable; by step 2.1, $Q_\\theta$ is a probability measure. Applying monotone convergence [F10] under $Q_\\theta$ and under $P_\\theta$ to the simple identities of step 3.1 proves the asserted equality, including when its value is $+\\infty$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F10",
+            "step 2.1",
+            "step 1.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If \u0398 is empty, the conclusions quantified by \u03b8 are vacuous; for any fixed \u03b8 the construction begins in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For g=0 the identity has value zero, by the simple identity in step 3.1 and the limit argument in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For g=1 both sides equal one by normalization in step 1.1 and the identity argument in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No distinction between data or actions is assumed; the measure and simple-integral arguments in steps 2.1 and 1.2 also cover constant kernels and point masses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The extended value +infinity is retained in the monotone-convergence argument of step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The simple-approximation theorem supplies an explicit sequence, and all measures and kernels are given; steps 1.2 and 4.1 use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is not an if-and-only-if result."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "indicator-action-law",
+          "claim": "For g=1_B, the identity reads Q_theta(B)=\u222b K(x,B)P_theta(dx).",
+          "result": "Step 3.1 proves the indicator identity from the defining action-event marginal; step 1.1 handles B=\u2205 and B=D, and step 2.1 establishes countable additivity."
+        },
+        {
+          "id": "zero-and-one-integrands",
+          "claim": "For g=0 both sides are 0; for g=1 both sides are 1.",
+          "result": "These boundary integrands agree with the probability normalization of K and P_theta."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Read all five proof steps and all 15 direct prerequisites. Step 1.1 normalizes Q and bounds its values by 1; step 1.2 uses the explicit finite-valued simple approximation, real-valued kernel evaluations, finite-sum closure and pointwise monotone convergence to prove h_g measurable. Step 2.1 integrates increasing partial sums of disjoint event probabilities, using finite integral additivity and monotone convergence with no finiteness restriction beyond nonnegativity. Step 3.1 establishes indicator and simple identities; step 4.1 applies monotone convergence under both probability measures, including infinite values. Checked empty parameter/domain/action cases, zero/one/indicator integrands and constant kernels: theta claims are vacuous if Theta is empty; a nonempty parameter set forces X nonempty, and a nonempty X forces D nonempty. Simple approximation is explicit, so no AC is used. No parameter measurability or random-seed representation is claimed. Martin \u00a75.1 Definition 5.1 and Hoff \u00a7\u00a72\u20134.2 support decision terminology; local integration suppliers supply the mathematical proof. Reader:2:1 is a nonfatal contract citation error only, now corrected to steps 3.1, 1.1 and 2.1; refuter reports no findings."
+      }
+    },
+    "def-statistic-and-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the data space is empty there is a unique empty map to any target, and its preimages are measurable. As checked in the Definition."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition imposes no numerical structure on the data, parameter, or target sets."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition imposes no distinguished numerical value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A statistic need not be injective or informative; constant measurable maps are allowed whenever their target value exists. As checked in the Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered or interval structure is assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition classifies a supplied map and selects no statistic or parameter representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This assigns the name statistic to the measurable map T and estimator to a statistic with the same target as \u03c8; it proves no implication about recovering the unknown parameter."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Measurability of \u03c8 as a parameter function is expressly not asserted; the estimator naming convention has no converse theorem imposing that property on \u03c8."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-randomized-test": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "On an empty data space the kernel and test-function clauses are vacuous; no parameter or hypothesis is required by this definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The constant test function 0 is allowed and never rejects. As checked in the Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The constant test function 1 is allowed and always rejects. As checked in the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rejection probability may be constant in x; no informativeness or identifiability assumption is imposed. As checked in the Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The values 0 and 1 are included in the action probabilities; their complementary no-rejection probabilities are 1 and 0. As checked in the Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The binary kernel is supplied directly; no auxiliary coin construction or choice axiom is asserted. As checked in the Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The binary action-kernel convention defines \u03c6(x)=K(x,{1}) and proves its measurability; no optimality characterization of a null-hypothesis test appears."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Although rejection probabilities characterize the binary action law, this item asserts neither a converse optimality test nor a criterion involving null or alternative hypotheses; its final sentence excludes them."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "binary-event-partition",
+          "claim": "The four binary events are \u2205, {0}, {1}, and {0,1}.",
+          "result": "For each x, K(x,{0})+K(x,{1})=K(x,{0,1})=1, so no-rejection probability is 1\u2212\u03c6(x)."
+        }
+      ]
+    },
+    "ex-deterministic-statistic-as-dirac-kernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $x\\in\\mathcal X$, the set function $C\\mapsto K(x,C)$ is the Dirac measure at $T(x)$, so it is a probability measure by [F2] and [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $C\\in\\mathcal B$ and put $E=T^{-1}(C)\\in\\mathcal A$ by [F1] and [F5]. The evaluation $x\\mapsto K(x,C)$ is $1$ on $E$ and $0$ on $\\mathcal X\\setminus E$, which belongs to $\\mathcal A$ by [F6]. For any Borel subset $D\\subseteq[0,1]$, its preimage is one of $\\varnothing$, $\\mathcal X$, $E$, or $\\mathcal X\\setminus E$, hence is measurable. Thus this evaluation is measurable.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 verify both clauses of [F4], so $K$ is a probability kernel and therefore a randomized procedure. Since each section is the point mass at $T(x)$, it takes the action $T(x)$ with probability one.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the data space is empty, both kernel clauses are vacuous. If it is nonempty, the supplied statistic ensures that each T(x) is a point in the target. As checked in steps 1.1 and 1.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For an event C not containing T(x), K(x,C)=0. As checked in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For an event C containing T(x), K(x,C)=1. As checked in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If T is constant, every section is the same Dirac probability; the proof does not require T to be injective. As checked in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Each evaluation is 0 or 1, both valid probability endpoints, including when the event or its complement is empty. As checked in steps 1.1 and 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The pointwise formula is explicit and selects no representatives or auxiliary randomness. As checked in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a direct construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a direct construction, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "dirac-event-evaluation",
+          "claim": "For every C in B, K(x,C)=1_C(T(x)).",
+          "result": "The evaluation is 1 exactly on T^{-1}(C), and 0 on its complement; both are measurable."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Read all three proof steps, seven direct prerequisites and the pointwise Dirac countable-additivity proof. For each x, T(x) is a supplied target point, so delta_T(x) is a probability measure on the actual target sigma-algebra. For each measurable C, the evaluation is the indicator of measurable T^{-1}(C); every Borel evaluation preimage is empty, X, that event or its complement, giving measurability also for the extended nonnegative Borel target by trace restriction. Checked empty domain and target compatibility, C=empty/Y, constant T and both probability endpoints. When X is nonempty the supplied map forces Y nonempty; an empty X gives vacuous sections. The phrase takes action T(x) describes the explicit deterministic realization and its Dirac law; no measurable-singleton assumption or assertion of uniqueness from kernel event values is needed for arbitrary target spaces. No seed representation or choice is used. Martin \u00a75.1 Definition 5.1 explicitly treats deterministic rules as point masses. Reader/refuter found no defect; complete independent review confirms the argument."
+      }
+    },
+    "ex-coin-flip-randomized-test": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-procedure-action-law-is-measurable",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a randomized procedure for the experiment\n$\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nwith action space $(\\mathsf D,\\mathcal G)$. Give $[0,+\\infty]$ its Borel\nsigma-algebra. For every nonnegative $\\mathcal G/\\mathcal B([0,+\\infty])$-\nmeasurable function $g:\\mathsf D\\to[0,+\\infty]$, the function\n$$h_g(x)=\\int_{\\mathsf D}g(a)\\,K(x,da)$$\nis $\\mathcal A$-measurable. In particular, $x\\mapsto K(x,B)$ is measurable\nfor every action event $B\\in\\mathcal G$. For each $\\theta\\in\\Theta$, the\nset function\n$$Q_\\theta(B)=\\int_{\\mathcal X}K(x,B)\\,P_\\theta(dx),\\qquad B\\in\\mathcal G,$$\nis a probability measure on $(\\mathsf D,\\mathcal G)$, and for every such $g$,\n$$\\int_{\\mathsf D}g\\,dQ_\\theta=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}g(a)\\,K(x,da)\\right)P_\\theta(dx).$$\nwith nonnegative extended values allowed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The full power set on the one-point data space is a sigma-algebra by [F7], and $P_{\\theta_0}=\\delta_{x_0}$ is a probability measure by [F1]. Hence the stated family is a statistical experiment by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The full power set on $\\{0,1\\}$ is a sigma-algebra by [F7]. The action section assigns masses $0$, $1-p$, $p$, and $1$ to $\\varnothing$, $\\{0\\}$, $\\{1\\}$, and $\\{0,1\\}$, respectively. They are nonnegative and have total mass one by [A1]. For any disjoint sequence of subsets of $\\{0,1\\}$, each of the two points occurs in at most one member, so the mass of the union equals the sum of the assigned masses. Thus $K(x_0,\\cdot)$ is a probability measure.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The data space has one point, so for every action event $B$ the evaluation $x\\mapsto K(x,B)$ is constant; its preimages are empty or the whole data space, both measurable. Step 1.2 and this measurability verify that $K$ is a probability kernel and hence a randomized procedure.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F7",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], the test function is $\\varphi(x_0)=K(x_0,\\{1\\})=p$. The action-law identity [F5] gives $Q_{\\theta_0}(\\{1\\})=\\int K(x,\\{1\\})P_{\\theta_0}(dx)$. The integrand is the simple function $p1_{\\mathcal X}$, whose integral is $pP_{\\theta_0}(\\mathcal X)=p$ by [F1] and [F6]. This includes both endpoints $p=0$ and $p=1$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty data space {x0} and singleton parameter space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At p=0 the action law assigns mass 0 to reject and 1 to not reject; the rejection probability is 0. As checked in steps 1.2 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At p=1 the action law assigns mass 1 to reject and 0 to not reject; the rejection probability is 1. As checked in steps 1.2 and 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The experiment has one data value and one parameter; the action distribution is explicitly p\u03b4_1+(1\u2212p)\u03b4_0. As checked in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proof of step 1.2 and the integral calculation in step 3.1 include p=0 and p=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example uses one explicit data point, law, and formula; no selection or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a construction, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "binary-probability-table",
+          "claim": "The masses of \u2205, {0}, {1}, {0,1} are 0, 1\u2212p, p, 1.",
+          "result": "All are nonnegative for p\u2208[0,1], their total mass is one, and the rejection event probability equals p."
+        },
+        {
+          "id": "endpoint-kernels",
+          "claim": "At p=0 the rule always takes action 0; at p=1 it always takes action 1.",
+          "result": "Both endpoint action sections are Dirac probability measures and both satisfy the kernel measurability condition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Read all four verification steps, all eleven direct prerequisites, and the reviewed action-law and Dirac proofs. The one-point data space with its power set and delta_x0 is a valid experiment. For each p in [0,1], the four action-event masses are 0,1-p,p,1; any disjoint sequence contains each binary point at most once, giving countable additivity, including empty members and either endpoint. Each data evaluation is constant and measurable, so the rule is a binary probability kernel. Its rejection function is p; the action-law formula integrates the finite simple function p*1_X under a mass-one Dirac law, yielding p for p=0, p=1 and every interior value. No independence/auxiliary-seed theorem, parameter measurability, integrability limit or choice is assumed. The cited local sources justify probability, kernel and integral clauses with their actual hypotheses; Martin \u00a75.1/Hoff \u00a73 support binary-action terminology. Reader/refuter report no item findings. Complete review finds no mathematical defect."
+      }
+    },
+    "cex-nonmeasurable-rule-is-not-a-statistic-or-test": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The family $\\mathcal A=\\{\\varnothing,\\mathcal X\\}$ contains $\\mathcal X$, and its only members have complements in $\\mathcal A$; any countable union of its members is either empty or $\\mathcal X$. Hence $\\mathcal A$ is a sigma-algebra and $(\\mathcal X,\\mathcal A)$ is a measurable space.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the full action sigma-algebra, $\\{1\\}$ is measurable, but $\\varphi^{-1}(\\{1\\})=\\{1\\}\\notin\\mathcal A$. Therefore $\\varphi$ is not measurable by [F5].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The point mass $P_{\\theta_0}=\\delta_0$ is a probability measure on this measurable space by [F3]. Thus the stated one-parameter family is a statistical experiment.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In this valid experiment, the map is not a statistic by [F6] and is not a randomized test function by [F7], since step 1.2 shows it is not measurable.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $\\varphi$ were the action-1 evaluation of a procedure kernel, then $x\\mapsto K(x,\\{1\\})=\\varphi(x)$ would have to be measurable by [F8], contradicting step 1.2. Thus the map is not a randomized procedure either, proving the stated claim false.",
+          "step": "4.1",
+          "inputs": [
+            "F8",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes a two-point data set and a one-point parameter set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The map takes value 0 at data point 0; this does not repair the missing measurable preimage at 1. As checked in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The map takes value 1 at data point 1; the singleton {1} is the nonmeasurable preimage witnessing failure. As checked in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The sampling law is the point mass \u03b4_0, but measurability is a pointwise structural requirement and the null point 1 remains in the domain. As checked in steps 2.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The map's values are the binary endpoints 0 and 1; the failure concerns measurability, not its range. As checked in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The counterexample uses explicit finite sets, a point mass, and a displayed map; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal claim and proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal claim and proves no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "trivial-sigma-algebra",
+          "claim": "For X={0,1}, A={\u2205,X}, and \u03c6(x)=x, one has \u03c6^{-1}({1})={1}.",
+          "result": "{1} is not \u2205 or X, hence is not in A; this is an explicit two-point measurability failure."
+        },
+        {
+          "id": "point-mass-on-trivial-sigma-algebra",
+          "claim": "\u03b4_0(\u2205)=0 and \u03b4_0(X)=1.",
+          "result": "These are the only two events in A, and the supplier proposition gives countable additivity; thus \u03b4_0 is a probability measure."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-2",
+        "notes": "Read all five counterexample steps, ten direct prerequisites and the Dirac probability proof. X={0,1}, A={empty,X} is closed under complements and countable unions; delta_0 has masses 0 and 1 on these two events and is countably additive. The preimage of the measurable action singleton {1} is the non-event {1}, so the identity map fails both statistic measurability and the [0,1] trace-Borel test-function requirement. A kernel with that rejection evaluation would contradict pointwise kernel measurability; no almost-everywhere modification is part of the claim. The witness has a nonempty one-parameter experiment, binary endpoint values and an explicit point mass, with no choice or empty-case assertion. Reader/refuter found no item defect. Formal sigma-algebra and measurability citations supply exactly these clauses; Hoff \u00a7\u00a72\u20133 supplies terminology. No mathematical repair or outside supplier escalation is necessary."
+      }
+    }
+  }
+}

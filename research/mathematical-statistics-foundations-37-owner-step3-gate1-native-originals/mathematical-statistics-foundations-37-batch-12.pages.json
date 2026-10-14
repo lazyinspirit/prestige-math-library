@@ -1,0 +1,479 @@
+[
+  {
+    "order": 1866,
+    "id": "conditional-and-finite-group-exact-inference",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Conditional and Finite-Group Exact Inference",
+    "companion": "conditional-and-finite-group-exact-inference-examples",
+    "requires": [
+      "complete-sufficiency-exponential-families-and-basu",
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "confidence-sets-pivots-and-test-inversion",
+      "conditional-distributions-and-regular-conditional-probability",
+      "finite-probability-spaces-and-random-variables"
+    ],
+    "items": [
+      {
+        "id": "lem-conditional-kernel-tail-and-atom-evaluations-are-measurable",
+        "kind": "lemma",
+        "title": "Conditional-kernel tail and atom evaluations are measurable",
+        "statement": "Let $K$ be a probability kernel from $(S,\\Sigma)$ to $(\\mathbb R,\\mathcal B(\\mathbb R))$. Define\n$$a(s,t):=K(s,(t,\\infty)),\\qquad b(s,t):=K(s,\\{t\\}).$$\nBoth maps are $\\Sigma\\otimes\\mathcal B(\\mathbb R)$-measurable. If $S_0$ and $T_0$ are measurable random elements of $S$ and $\\mathbb R$ on one probability space, and $U$ is any measurable real random variable on that space, then $a(S_0,T_0)$, $a(S_0,T_0)+b(S_0,T_0)$, and $a(S_0,T_0)+U b(S_0,T_0)$ are measurable. The middle expression equals $K(S_0,[T_0,\\infty))$.",
+        "strategy": "Lift K to the product base S×R, prove the strict-order and equality relation indicators are product-measurable, and apply measurable integration against a kernel. Then use product measurability and continuous arithmetic maps for the displayed p-values.",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-borel-sigma-algebra",
+          "thm-rationals-countable",
+          "lem-q-and-irrationals-dense-r",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-random-element-and-real-random-variable",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-composition-with-borel-functions-preserves-measurability"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §2.3, PDF pp. 33–35",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "A. J. Brockwell, Universal Residuals: A Multivariate Transformation, Lemma 2 and Theorem 1",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2211730/"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-randomized-probability-integral-transform",
+        "kind": "lemma",
+        "title": "Randomizing across CDF jumps gives a uniform variable",
+        "statement": "Let $Y$ be a real random variable with cumulative distribution function $F(y)=P(Y\\le y)$, and let $U$ be independent of $Y$ with the uniform Borel probability law on $[0,1]$. Write $F(y-):=P(Y<y)$ and $\\Delta F(y):=F(y)-F(y-)=P(Y=y)$. Then\n$$V:=F(Y-)+U\\Delta F(Y)$$\nhas the uniform distribution on $[0,1]$, for arbitrary continuous, discrete, mixed, or singular laws of $Y$.",
+        "strategy": "Use the generalized quantile q=inf{x:F(x)≥u}. The mass below q contributes F(q−), the jump at q contributes the remaining u−F(q−), and the region above q contributes zero; handle flat CDF intervals and the endpoints explicitly.",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "def-independent-random-elements",
+          "def-cumulative-distribution-function-of-a-random-variable",
+          "def-complete-ordered-field",
+          "def-borel-sigma-algebra",
+          "def-extended-real-valued-measurable-function",
+          "prop-measure-monotonicity",
+          "thm-continuity-from-below-for-measures",
+          "thm-continuity-from-above-for-measures",
+          "prop-measure-of-a-set-difference",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-rationals-countable",
+          "lem-q-and-irrationals-dense-r",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-composition-with-borel-functions-preserves-measurability"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Brockwell, Universal Residuals: A Multivariate Transformation, Lemma 2 and Theorem 1",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2211730/"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-finite-group-randomization-test",
+        "kind": "definition",
+        "title": "Finite-group randomization setups",
+        "statement": "A **finite-group randomization setup** consists of a finite probability space $(\\Omega,w)$ as in [[def-finite-probability-space-and-event]], a finite group $G$ acting on $\\Omega$ as in [[def-group-action]], a statistic $T:\\Omega\\to\\mathbb R$, and a family $\\mathcal P_0$ of null probability laws on $\\Omega$ that is invariant under the action. Invariance means that for every $P\\in\\mathcal P_0$, $g\\in G$, and $A\\subseteq\\Omega$, $P(\\{x:g\\cdot x\\in A\\})=P(A)$. The **orbit** of $x$ is $O(x):=\\{g\\cdot x:g\\in G\\}$, a finite subset of $\\Omega$. The setup itself does not assert that the action is free or that distinct group elements give distinct orbit points.",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-group-action"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter B. Stark, Statistics 240 Lecture Notes, Part 8: Resampling Methods, §1.3, PDF pp. 10–11",
+              "url": "https://www.stat.berkeley.edu/~stark/Teach/S240/Notes/ch8.pdf"
+            },
+            {
+              "title": "Jesse Hemerik and Jelle Goeman, Exact testing with random permutations, Sections 2–3",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405018/"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-multiset-randomized-rank-is-uniform",
+        "kind": "lemma",
+        "title": "Tied upper ranks on a finite multiset",
+        "statement": "Let $a_1,\\ldots,a_m\\in\\mathbb R$ with $m\\ge1$. Let $J$ be uniform on $\\{1,\\ldots,m\\}$ and let $U$ be independent of $J$ and uniform on $[0,1]$. Set\n$$R_0:=\\frac{\\#\\{i:a_i\\ge a_J\\}}{m},\\qquad R_U:=\\frac{\\#\\{i:a_i>a_J\\}+U\\#\\{i:a_i=a_J\\}}{m}.$$\nThen $R_U$ is uniform on $[0,1]$, while $R_0$ is superuniform: $P(R_0\\le u)\\le u$ for every $u\\in[0,1]$.",
+        "strategy": "Sort distinct values into tie blocks. A block of size r_j occurs with probability r_j/m, and its randomized rank is uniform on the consecutive interval of length r_j/m assigned to that block. The inclusive rank is the interval's right endpoint.",
+        "deps": [
+          "def-independent-random-elements",
+          "def-random-element-and-real-random-variable",
+          "def-uniform-finite-probability-space",
+          "lem-finite-set-has-max"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jesse Hemerik and Jelle Goeman, Exact testing with random permutations, randomized p-value result",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405018/"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-randomized-conditional-p-value",
+        "kind": "definition",
+        "title": "Randomized conditional upper-tail p-values",
+        "statement": "Fix one null probability law $P_0$. Let $S$ be a random element of a measurable space and let $T$ be a real random variable on the same probability space. Suppose a conditional law kernel $K(s,\\cdot)$ of $T$ given $S$ is supplied, in the sense of [[def-conditional-law-given-a-random-element]]. On an auxiliary extension, let $U$ be independent of $(S,T)$ and have the uniform Borel probability law on $[0,1]$, characterized by $P(U\\le u)=u$ for $0\\le u\\le1$. The **randomized conditional upper-tail p-value** is\n$$p_U:=K(S,(T,\\infty))+U K(S,\\{T\\}),$$\nand its **nonrandomized upper-tail value** is\n$$p_0:=K(S,[T,\\infty)).$$\nThe strict tail and atom terms are evaluated at the realized pair $(S,T)$; the independent $U$ randomizes only within the tie mass. Their measurability, including measurability of both displayed p-values, follows from [[lem-conditional-kernel-tail-and-atom-evaluations-are-measurable]]. The inclusive tail is the sum of the strict tail and the atom at $T$. This definition asserts no existence of the conditional kernel; it is supplied as part of the input.",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "def-conditional-law-given-a-random-element",
+          "def-independent-random-elements",
+          "lem-conditional-kernel-tail-and-atom-evaluations-are-measurable"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Brockwell, Universal Residuals: A Multivariate Transformation, Lemma 2 and Theorem 1",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2211730/"
+            },
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Chapter 13, PDF pp. 77–78",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-orbit-rank-p-value",
+        "kind": "definition",
+        "title": "Orbit upper-tail rank p-values",
+        "statement": "For a finite-group randomization setup with statistic $T$, the **inclusive orbit upper-tail rank** at $x\\in\\Omega$ is\n$$p_0(x):=\\frac{\\#\\{g\\in G:T(g\\cdot x)\\ge T(x)\\}}{|G|}.$$\nIf $U$ is independent of the observed data and uniform on $[0,1]$, the **tie-randomized orbit rank** is\n$$p_U(x,U):=\\frac{\\#\\{g\\in G:T(g\\cdot x)>T(x)\\}+U\\,\\#\\{g\\in G:T(g\\cdot x)=T(x)\\}}{|G|}.$$\nBoth counts are over group elements, with multiplicity. Thus a nonfree action counts a distinct orbit point as many times as it has preimages under $g\\mapsto g\\cdot x$.",
+        "deps": [
+          "def-finite-group-randomization-test",
+          "def-independent-random-elements"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter B. Stark, Statistics 240 Lecture Notes, Part 8: Resampling Methods, §1.3, PDF pp. 10–11",
+              "url": "https://www.stat.berkeley.edu/~stark/Teach/S240/Notes/ch8.pdf"
+            },
+            {
+              "title": "Jesse Hemerik and Jelle Goeman, Exact testing with random permutations, Sections 2–3",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405018/"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-conditional-randomized-p-uniformity",
+        "kind": "theorem",
+        "title": "Randomized conditional p-values are uniform",
+        "statement": "Under the simple null and the supplied conditional law in [[def-randomized-conditional-p-value]], for every $u\\in[0,1]$,\n$$P_0(p_U\\le u\\mid\\sigma(S))=u\\quad P_0\\text{-almost surely},$$\nwhile the nonrandomized upper-tail value satisfies\n$$P_0(p_0\\le u\\mid\\sigma(S))\\le u\\quad P_0\\text{-almost surely}.$$\nThus the randomized value is conditionally uniform and the inclusive-tail value is conditionally superuniform, including when the conditional law has atoms.",
+        "strategy": "Apply the randomized probability integral transform to each conditional law. The nonrandomized inclusive tail is the upper endpoint of the randomized interval and is therefore superuniform.",
+        "deps": [
+          "def-randomized-conditional-p-value",
+          "lem-randomized-probability-integral-transform",
+          "def-conditional-law-given-a-random-element",
+          "def-independent-random-elements",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-dynkin-pi-lambda"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Brockwell, Universal Residuals: A Multivariate Transformation, Lemma 2 and Theorem 1",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2211730/"
+            },
+            {
+              "title": "Jesse Hemerik and Jelle Goeman, Exact testing with random permutations, Sections 2–3 and randomized p-value result",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405018/"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-group-randomization-validity",
+        "kind": "theorem",
+        "title": "Finite-group orbit-rank validity",
+        "statement": "In a finite-group randomization setup, fix a null law invariant under the group action. Conditional on every orbit $O$ with positive probability, the data are uniform on the distinct points of $O$. For the orbit ranks of [[def-orbit-rank-p-value]], the inclusive p-value $p_0$ is superuniform under the null, and the independent-uniform tie-randomized value $p_U$ is Uniform$(0,1)$ conditionally on each positive-probability orbit. Consequently, $p_U$ is also Uniform$(0,1)$ unconditionally.",
+        "strategy": "First prove equal mass on distinct orbit points and constant transformation multiplicity by the stabilizer fibers. Then sort the orbit statistic values into tie blocks: their randomized rank intervals partition [0,1], while each inclusive rank is the right endpoint of its block.",
+        "deps": [
+          "def-finite-group-randomization-test",
+          "def-orbit-rank-p-value",
+          "lem-finite-multiset-randomized-rank-is-uniform",
+          "def-finite-probability-space-and-event",
+          "lem-finite-probability-basic-laws",
+          "def-conditional-probability",
+          "def-independent-random-elements"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter B. Stark, Statistics 240 Lecture Notes, Part 8: Resampling Methods, §1.3, PDF pp. 10–11",
+              "url": "https://www.stat.berkeley.edu/~stark/Teach/S240/Notes/ch8.pdf"
+            },
+            {
+              "title": "Jesse Hemerik and Jelle Goeman, Exact testing with random permutations, Sections 2–3",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405018/"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-conditional-test-given-statistic",
+        "kind": "definition",
+        "title": "Conditional tests given a statistic",
+        "statement": "Let $(\\mathcal X,\\mathcal A,\\{P_\\theta\\}_{\\theta\\in\\Theta})$ be a statistical experiment with nonempty disjoint null and alternative parameter sets $\\Theta_0,\\Theta_1\\subseteq\\Theta$. Let $\\mathcal S$ be a topological space with its Borel sigma-algebra $\\mathcal B(\\mathcal S)$, and let $S:\\mathcal X\\to\\mathcal S$ be measurable. Write $\\sigma(S):=\\{S^{-1}(C):C\\in\\mathcal B(\\mathcal S)\\}$, the sigma-algebra generated by $S$ as in [[def-sigma-algebra-generated-by-a-function]]. A possibly randomized test is a measurable function $\\varphi:\\mathcal X\\to[0,1]$ as in [[def-test-size-and-power]]. For each $\\theta\\in\\Theta_0$, a **conditional rejection probability given $S$** is a supplied version $q_\\theta$ of $E_\\theta[\\varphi(X)\\mid\\sigma(S)]$, where conditional expectation is understood as in [[def-conditional-expectation-given-a-sigma-algebra]]. The test has **conditional level at most $\\alpha$ given $S$ on $\\Theta_0$** if such versions can be supplied with $q_\\theta\\le\\alpha$ $P_\\theta$-almost surely for every $\\theta\\in\\Theta_0$. The almost-sure qualification is separate under each null law; no common null set or pointwise statement at conditioning values of probability zero is asserted.",
+        "deps": [
+          "def-test-size-and-power",
+          "def-sigma-algebra-generated-by-a-function",
+          "def-conditional-expectation-given-a-sigma-algebra"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §2.3, PDF pp. 33–35",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Chapter 13, PDF pp. 77–78",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Berkeley Stat 210A Course Reader, Testing with Nuisance Parameters, Conditional testing section",
+              "url": "https://stat210a.berkeley.edu/fall-2025/reader/testing-nuisance.html"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-conditioning-on-a-nuisance-sufficient-statistic",
+        "kind": "theorem",
+        "title": "Sufficiency makes the conditional rejection probability nuisance-free",
+        "statement": "Let $(\\mathcal X,\\mathcal A)$ and $(\\mathcal S,\\mathscr S)$ be standard Borel spaces as in [[def-standard-borel-space]]. Fix Polish topologies realizing these specified Borel sigma-algebras, as the standard-Borel definition permits. Let $\\Theta_0,\\Theta_1$ be nonempty disjoint parameter subsets, and write $\\{P_\\eta:\\eta\\in\\Theta_0\\}$ for the null subfamily. Let $S:\\mathcal X\\to\\mathcal S$ be measurable. Suppose there is one probability kernel $K(s,\\cdot)$ such that, for every $\\eta\\in\\Theta_0$, $K(S,\\cdot)$ is a regular conditional distribution of the full data $X$ given $\\sigma(S)$ under $P_\\eta$. This is the common-kernel premise of sufficiency for the null subfamily in [[def-sufficient-statistic]]. For any measurable $\\varphi:\\mathcal X\\to[0,1]$, define\n$$q(s):=\\int_{\\mathcal X}\\varphi(x)K(s,dx).$$\nThen $q$ is measurable and $q(S)$ is a version of the conditional rejection probability of $\\varphi$ given $S$ under every $P_\\eta$. The same function $q$ works for every nuisance value, with conditional-expectation identities interpreted almost surely under each corresponding law.",
+        "strategy": "Unfold the common-kernel sufficiency hypothesis and apply the conditional-integration identity to the bounded test function under each null law. Keep the a.s. exceptional sets parameter-specific; no common support is assumed.",
+        "deps": [
+          "def-sufficient-statistic",
+          "def-standard-borel-space",
+          "def-conditional-test-given-statistic",
+          "def-conditional-law-given-a-random-element",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-conditional-integration-through-a-regular-conditional-law",
+          "thm-composition-with-borel-functions-preserves-measurability"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §2.3, PDF pp. 33–35",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Berkeley Stat 210A Course Reader, Testing with Nuisance Parameters, Conditional testing section",
+              "url": "https://stat210a.berkeley.edu/fall-2025/reader/testing-nuisance.html"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-conditional-test-controls-unconditional-level",
+        "kind": "theorem",
+        "title": "Conditional level implies unconditional level",
+        "statement": "Let $\\varphi$ be a test for nonempty disjoint null and alternative parameter sets $\\Theta_0,\\Theta_1$ as in [[def-test-size-and-power]], let $S$ be a statistic, and let $\\alpha\\in[0,1]$. If for every $\\theta\\in\\Theta_0$ there is a conditional-expectation version $q_\\theta=E_\\theta[\\varphi(X)\\mid\\sigma(S)]$ with $q_\\theta\\le\\alpha$ $P_\\theta$-almost surely, then $E_\\theta[\\varphi(X)]\\le\\alpha$ for every $\\theta\\in\\Theta_0$. Consequently, the test has size at most $\\alpha$, where size is the supremum of its rejection expectation over the null family as in [[def-test-size-and-power]].",
+        "strategy": "Integrate the conditional-expectation version over the whole sample space, then use monotonicity of expectation and take the supremum over null parameters.",
+        "deps": [
+          "def-test-size-and-power",
+          "def-conditional-test-given-statistic",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Chapter 13, PDF pp. 77–78",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Berkeley Stat 210A Course Reader, Testing with Nuisance Parameters, Conditional testing section",
+              "url": "https://stat210a.berkeley.edu/fall-2025/reader/testing-nuisance.html"
+            }
+          ]
+        },
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 1867,
+    "id": "conditional-and-finite-group-exact-inference-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Conditional and Finite-Group Exact Inference — Examples",
+    "companion": "conditional-and-finite-group-exact-inference",
+    "requires": [
+      "conditional-and-finite-group-exact-inference"
+    ],
+    "items": [
+      {
+        "id": "cex-noninvariant-null-invalidates-group-pvalue",
+        "kind": "counterexample",
+        "title": "Without null invariance a group-rank p-value can be anti-conservative",
+        "statement": "For every finite group action and every null law, the inclusive group-average upper-tail rank is superuniform, even when the null law is not invariant under the group.",
+        "strategy": "Use the two-point space with the swapping group and statistic T(x)=x. Compute the orbit-rank p-value at each point and the probability of p≤1/2 under a null law concentrated mostly at the larger point.",
+        "deps": [
+          "def-finite-group-randomization-test",
+          "def-orbit-rank-p-value",
+          "def-finite-probability-space-and-event"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jesse Hemerik and Jelle Goeman, Exact testing with random permutations, Sections 2–3",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405018/"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-finite-permutation-orbit-with-ties-and-stabilizers",
+        "kind": "example",
+        "title": "A permutation orbit with tied ranks and nontrivial stabilizers",
+        "statement": "Let $G=S_3$ permute the coordinates of $\\Omega=\\{e_1,e_2,e_3\\}\\subset\\{0,1\\}^3$, give the three points equal probability, take $T(x)=x_1$, and use an independent $U\\sim\\operatorname{Unif}(0,1)$. Each point has a stabilizer of size two. The group-average inclusive ranks are $p_0(e_1)=1/3$ and $p_0(e_2)=p_0(e_3)=1$. The randomized values are $p_U(e_1)=U/3$ and $p_U(e_2)=p_U(e_3)=1/3+2U/3$, illustrating how tied ranks fill adjacent intervals even when each orbit point has multiple group preimages.",
+        "strategy": "List the six permutations, count their images with multiplicity for each observed point, and verify the tie-block intervals and uniform mixture directly.",
+        "deps": [
+          "def-finite-group-randomization-test",
+          "def-orbit-rank-p-value",
+          "thm-finite-group-randomization-validity",
+          "def-finite-probability-space-and-event",
+          "lem-finite-probability-basic-laws",
+          "def-conditional-probability"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter B. Stark, Statistics 240 Lecture Notes, Part 8: Resampling Methods, §1.3, PDF pp. 10–11",
+              "url": "https://www.stat.berkeley.edu/~stark/Teach/S240/Notes/ch8.pdf"
+            },
+            {
+              "title": "Jesse Hemerik and Jelle Goeman, Exact testing with random permutations, Sections 2–3",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405018/"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-fishers-exact-test-from-two-binomial-samples",
+        "kind": "example",
+        "title": "Fisher's exact test from two Bernoulli samples",
+        "statement": "Take two independent Bernoulli samples of sizes $n_1,n_2\\ge1$ and test the one-sided alternative that the first success probability exceeds the second. Under the null, all $N=n_1+n_2$ trials have a common success probability $p\\in[0,1]$. Let $K$ be the number of successes in the first sample and $S$ the total number in both samples. For every integer margin $s\\in\\{0,\\ldots,N\\}$, define the supplied conditional-law kernel $Q$ by\n$$Q(s,\\{k\\})=\\frac{\\binom{n_1}{k}\\binom{n_2}{s-k}}{\\binom{N}{s}},\\qquad \\max(0,s-n_2)\\le k\\le\\min(n_1,s),$$\nand set $Q(s,\\{k\\})=0$ outside the displayed range. For each $s$, these weights sum to one because they count all $\\binom Ns$ ways to choose the $s$ success positions according to how many lie in the first sample. At margins of positive probability this is the conditional law and it does not depend on $p$; at endpoint nulls $p=0,1$, the formula also supplies a version at the other, probability-zero margins. Large values of $K$ support the one-sided alternative that the first sample has a larger success probability. For $n_1=n_2=2$ and $s=2$, the conditional masses at $k=0,1,2$ are $1/6,4/6,1/6$; the inclusive upper-tail p-values are $1,5/6,1/6$.",
+        "strategy": "Count binary sequences with s successes, group them by the number k in the first sample, and cancel the common null weight. Then enumerate the n1=n2=2, s=2 conditional support and verify the conservative and randomized tail ranks.",
+        "deps": [
+          "def-conditional-test-given-statistic",
+          "thm-conditional-test-controls-unconditional-level",
+          "def-randomized-conditional-p-value",
+          "thm-conditional-randomized-p-uniformity",
+          "def-test-size-and-power",
+          "def-finite-probability-space-and-event",
+          "lem-finite-probability-basic-laws",
+          "def-conditional-probability",
+          "def-product-of-finite-probability-spaces",
+          "thm-product-probability-has-independent-coordinate-events",
+          "def-independence-of-finite-random-variables"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Berkeley Stat 210A Course Reader, Testing with Nuisance Parameters, Conditional testing section",
+              "url": "https://stat210a.berkeley.edu/fall-2025/reader/testing-nuisance.html"
+            },
+            {
+              "title": "George Deligiannidis, Foundations of Statistical Inference, Chapter 13, PDF pp. 77–78",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8
+      }
+    ]
+  }
+]

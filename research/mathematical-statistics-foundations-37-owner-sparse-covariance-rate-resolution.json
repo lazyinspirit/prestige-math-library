@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "run": "mathematical-statistics-foundations-37",
+  "batch": 19,
+  "escalation": "E17",
+  "round": 1,
+  "recorded_at": "2026-10-14T04:48:27.145777+00:00",
+  "disposition": "resolved-with-full-capped-regime-proof",
+  "confirmed_defect": "The original all-dimension uncapped comparison c²(logp/n)^(1-q)+logp/n is false. Directional Gaussian tails bound every covariance operator norm by2tau, giving zero-estimator risk at most4tau², whereas p=ceil(exp(n²)),q=0 and the admitted radius make the uncapped target diverge at least asn.",
+  "counterexample": {
+    "id": "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension",
+    "independent_review": "Verified class nonemptiness using point mass0, the layer-cake covariance cap, p>=n², radius condition and logp/n~n. Both the model and contradiction are valid. Mathematical content retained; only prohibited math delimiters were corrected and stale precheck stamp removed.",
+    "retained": true
+  },
+  "corrected_scope": {
+    "regime": "Every original n>=1,p>=2,p>=n^beta,0<=q<1 and nonnegative radius c<=M n^((1-q)/2)(logp)^(-(3-q)/2), with beta>1,M,tau,q fixed.",
+    "rate": "min{1,c²(logp/n)^(1-q)+logp/n}, comparison constants depending only on beta,M,tau,q.",
+    "estimator": "Unmodified raw sample-centered threshold estimator, divisorn, lambda8192tau sqrt(logp/n), has expected risk O(r) whenever logp/n<=1. Full capped risk is attained by the explicit measurable rule using this estimator when r<1 and the zero matrix otherwise. No global cap is claimed for the unmodified raw estimator.",
+    "zero_and_small_radius": "Explicit diagonal lower bound applies at c=0 and all effective row counts rounding to zero; main proof handles c/[2(sv sqrt(a))^q]<2 using sparse_term<=constant*a.",
+    "finite_sizes_and_saturation": "All p<P0 handled by n<=p^(1/beta), making a bounded below; all a>=1 handled by the diagonal saturated lower. No dimension regime is removed.",
+    "choice": "AC is explicit in main and Gaussian/Fano lower suppliers, inherited from actual published Gaussian definition and current Fano theorem."
+  },
+  "local_proofs": {
+    "expected_raw_threshold_risk": {
+      "id": "lem-weak-lq-thresholded-covariance-expected-risk",
+      "argument": "Expose arbitrary-u entrywise tail already proved by the supplier. At u=log(8p^10)<=13logp and a<=1, 192tau(sqrt13+13)sqrt(a)<4096tau sqrt(a)=lambda/2; failure<=p^-8. Row-sum bound handles good event. Directional tails yield E|Xj-EXj|^8<=384tau^4. Sample centering decreases the sample diagonal sum, and |Sjk|²<=SjjSkk gives fourth moments bounded uniformly in unknown mean. Thus E||threshold-Sigma||op^4<=Ctau^4p^4 and Cauchy–Schwarz bad risk<=Cp^-2<=Ca under p>=n^beta. No unbounded-risk integration is omitted."
+    },
+    "diagonal_lower": {
+      "id": "lem-diagonal-covariance-minimax-lower-bound",
+      "argument": "Use p+1 centered diagonal Gaussian targets: sI and s(I+delta ejej^T), s=tau/4,delta=.5min(1,sqrt(log(p+1)/n)). Gaussian directional tail with prefactor1 is proved by shifting the one-dimensional normal integral. Operator separation=sdelta; product density KL<=ndelta²/4<=log(p+1)/16. Fano bracket>=1-1/16-log2/log3>1/4 covers even p=2, giving tau²min(1,a)/1024."
+    },
+    "sparse_gaussian_mixture_lower": {
+      "id": "lem-gaussian-sparse-covariance-mixture-lower-bound",
+      "construction": "Uniform bit vectors and r-by-r k-regular-row/cap2k-column support matrices; covariance s[I+epsilon offdiag(Dgamma lambda)], epsilon=v sqrt(a), k=floor(c/[2(sepsilon)^q]), r=floor(p/2).",
+      "membership": "Eigenvalues lie within[2s/3,4s/3]subset(0,tau], and each off-diagonal strongq sum/count<=2k(sepsilon)^q<=c, hence the weak class and directional Gaussian tail condition hold.",
+      "complete_technical_steps": [
+        "Correct nuisance marginal proportional to N(L)=binom(d(L),k), and joint two-support weight proportional to1/N(L); no false uniform nuisance assumption.",
+        "Exact Gaussian density cross moment (1-epsilon²1_A^T(I-C^TC)^(-1)1_B)^(-n), derived by whitening, Gaussian integration and determinant(I-DeltaA DeltaB)=(1-t)^2. Precision positivity is checked.",
+        "Nonnegative inverse expansion and Cauchy–Schwarz bound the excess over overlap J epsilon² by epsilon^4 sum(X_l²+Y_l²)/(2delta).",
+        "For fixed A,B and all other nuisance rows, available columns>=r/4. Varying one row changes d by<=2k, so binomial-weight ratio<=exp(Ck²/r)<=2. Actual weighted conditional row second moments are bounded by C(k²/r+k^4/r²).",
+        "Since n epsilon^4 k²=O(1/logp), conditional exponential row factors are at most1+C n epsilon^4(k²/r+k^4/r²). Uniform conditional bounds let one remove factors iteratively; no row independence is assumed. The full remainder moment is1+o(1).",
+        "Hypergeometric overlap generating function gives exp(Ck²p^(2v²)/r)=1+o(1) for v²<(beta-1)/(4beta). Hence mean conditional chi-square=o(1), and mixture affinity>=1/2 uniformly.",
+        "Nearest finite target with fixed measurable tie order loses at most factor4. Every changed bit has row-sum separation sepsilon k, yielding operator squared loss>=h(sepsilon k)²/r. Finite binary-mixture testing gives risk>=(sepsilon k)²/16>=b c² a^(1-q)."
+      ],
+      "uniformity": "All o(1) bounds are uniform over admitted n,c as p->infinity, since k²<=Cn/log³p and n<=p^(1/beta). Choose one fixed P0 for all subsequent bounds; the main theorem explicitly covers p<P0."
+    },
+    "source_supplement": "No external technical lemma is left as a premise. The local weighted-row remainder proof replaces source Lemma11. Failed supplement retrieval is preserved honestly; no claim to have read it is made."
+  },
+  "supplier_and_consumer_review": {
+    "actual_suppliers_read": [
+      "def-weak-lq-sparse-covariance-class",
+      "alg-entrywise-thresholded-sample-covariance",
+      "def-minimax-squared-operator-risk",
+      "lem-weak-lq-thresholded-covariance-row-sum",
+      "thm-weak-lq-sample-covariance-entrywise-deviation",
+      "thm-fano-packing",
+      "thm-two-point-le-cam-risk-bound",
+      "def-multivariate-normal-law"
+    ],
+    "enumeration": "Current run manifests and actual item/library references were inspected. Changed existing entrywise supplier has only thm-thresholded-sparse-covariance-high-probability-bound as an existing direct consumer; its original fixed-u specialization remains intact, so no mathematical repair is needed. Its former sole minimax consumer was a proofless stub rather than a completed dependent argument. No aliases or actual outside consumers of the main minimax theorem were found.",
+    "consumer_dispositions": [
+      {
+        "id": "thm-thresholded-sparse-covariance-high-probability-bound",
+        "result": "Actual hypotheses and proof checked; u=log(8p^4) specialization and the unchanged threshold inequality still apply. Source body unchanged."
+      },
+      {
+        "id": "lem-weak-lq-thresholded-covariance-expected-risk",
+        "result": "New direct consumer uses proven arbitrary-u bound and exact same centering/divisor convention."
+      },
+      {
+        "id": "thm-thresholded-sparse-covariance-minimax-rate",
+        "result": "Replaced false proofless claim with fully supplied capped theorem; all new supplier hypotheses and finite/radius branches checked."
+      }
+    ],
+    "outside_consumers_found": [],
+    "unresolved_consumer_repairs": []
+  },
+  "smallest_missing_prerequisite": null,
+  "prerequisites_supplied": [
+    "Local expected-risk threshold lemma",
+    "Explicit diagonal covariance packing and KL calculation",
+    "Complete sparse covariance Gaussian-mixture affinity/remainder and testing argument"
+  ],
+  "writer_safety": "Root confirmed batch19 native writer drained. Process inspection before integration found no matching native batch19 dispatch (only the inspection shell and rg itself). No process suspension, native controls or state edits were performed.",
+  "delegated_work": {
+    "agent": "/root/msf_manifest_serialization/e17_sparse_lower",
+    "scope": "Read-only narrow lower-proof development under CLAUDE7; proposal staged only in /tmp/msf17-lower-proposal.md. Parent independently reviewed and authored/integrated the actual source, retains all supplier/consumer ownership. Root also read the full proposal and independently checked key estimates."
+  },
+  "source_reading": [
+    {
+      "title": "Cai and Zhou, Optimal Rates of Convergence for Sparse Covariance Matrix Estimation",
+      "url": "https://arxiv.org/pdf/1302.3030",
+      "actual_full_text": "Actual33-page PDF fetched to /tmp/msf17-cai-zhou.pdf; full relevant definitions, theorem statements, construction/lower-bound and expected-risk arguments read on PDF pp3–14 and20–28. Source Theorem1 has the same unqualified uncapped assertion; its own pp14 large-deviation step assumes a small deviation range."
+    },
+    {
+      "title": "Cai–Zhou technical supplement",
+      "actual_full_text": "Not read: retrieval returned HTML/failures. No included proof depends on it; complete independent replacement supplied locally."
+    }
+  ],
+  "changed_paths": [
+    "items/thm-weak-lq-sample-covariance-entrywise-deviation.md",
+    "items/lem-weak-lq-thresholded-covariance-expected-risk.md",
+    "items/lem-diagonal-covariance-minimax-lower-bound.md",
+    "items/lem-gaussian-sparse-covariance-mixture-lower-bound.md",
+    "items/thm-thresholded-sparse-covariance-minimax-rate.md",
+    "items/cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension.md",
+    "library/mathematical-statistics/sparse-high-dimensional-estimation-and-covariance.md",
+    "library/mathematical-statistics/sparse-high-dimensional-estimation-and-covariance-examples.md",
+    "research/mathematical-statistics-foundations-37-batch-19.pages.json",
+    "research/mathematical-statistics-foundations-37-batch-19.proof-contracts.json",
+    "research/mathematical-statistics-foundations-37-batch-19.cross-batch-dependencies.json",
+    "research/mathematical-statistics-foundations-37-batch-19.coverage.json",
+    "research/mathematical-statistics-foundations-37-batch-19.notes.md",
+    "research/mathematical-statistics-foundations-37-owner-sparse-covariance-rate-resolution.json",
+    "research/plan-mathematical-statistics-track.md"
+  ],
+  "page_carriers": "The assigned A/B files were absent at owner integration. Both are now authored with existing pair identity/category and current A29/B3 manifest inventory; no other batch/page identity was changed.",
+  "scaffold_row_proposal": {
+    "path": "research/plan-mathematical-statistics-track.md",
+    "row": 100,
+    "before": "| **MSF-23** `sparse-high-dimensional-estimation-and-covariance` — Sparse Estimation and Covariance | MSF-18; MSF-19; MSF-21; `linear-algebra/the-spectral-theorem-and-singular-value-decomposition` | `def-gaussian-sequence-sparse-means-model`; `def-subgaussian-fixed-design-regression-model`; `def-restricted-eigenvalue-condition`; `def-lasso-estimator`: minimize $n^{-1}\\|Y-X\\theta\\|_2^2+2\\tau\\|\\theta\\|_1$; `thm-lasso-basic-inequality`; `thm-lasso-prediction-and-l1-error-under-incoherence`: for $n\\ge2$, $s$-sparse truth, sub-Gaussian noise and the exact incoherence condition $\\max_{ij}|(X^TX/n-I_d)_{ij}|\\le1/(14s)$, use $\\tau=4\\sigma[\\sqrt{\\log(2d)/n}+\\sqrt{\\log(1/\\delta)/n}]$ to prove with probability at least $1-\\delta$ the fitted prediction error is $\\lesssim s\\sigma^2\\log(2d/\\delta)/n$ and coefficient $\\ell_1$ error is $\\lesssim s\\sigma\\sqrt{\\log(2d/\\delta)/n}$. This premise implies the required cone lower bound; no fast rate follows from sparsity alone. Proof route: the basic inequality gives a cone constraint, a sub-Gaussian score bound controls the stochastic term, and the cone RE inequality yields prediction and coefficient rates. `def-sample-covariance-and-operator-norm-loss`: for centered iid data $\\hat\\Sigma=n^{-1}\\sum_iX_iX_i^T$; `thm-centered-subgaussian-sample-covariance-bound`: for iid centered sub-Gaussian vectors with $E[XX^T]=\\Sigma$ and proxy $\\|\\Sigma\\|_{op}$, $\\|\\hat\\Sigma-\\Sigma\\|_{op}\\lesssim\\|\\Sigma\\|_{op}[\\sqrt{(d+\\log(1/\\delta))/n}\\vee(d+\\log(1/\\delta))/n]$ with its net/Bernstein proof; for nonzero mean, define/recenter covariance and prove the extra step. B: orthogonal sequence, RE failure, and $p\\gg n$ rank deficiency. `def-weak-lq-sparse-covariance-class`: for $0<q<1$, each off-diagonal column, sorted by magnitude, satisfies $\\max_j\\max_{1\\le i\\le p}i|\\sigma_{(i)j}|^q\\le c_{n,p}$; for $q=0$, each off-diagonal column has at most $c_{n,p}$ nonzero entries. Let $P_q(\\tau,c_{n,p})$ be iid laws with covariance in this class and directional sub-Gaussian tails $P(|v^T(X-EX)|>t)\\le e^{-t^2/(2\\tau)}$ for all unit $v$ and $t>0$. `alg-entrywise-thresholded-sample-covariance`: form $\\hat\\Sigma^*=n^{-1}\\sum_{k=1}^n(X_k-\\bar X)(X_k-\\bar X)^T$, leave its diagonal unchanged, and set $\\hat\\Sigma_{ij}=\\hat\\Sigma^*_{ij}\\mathbf 1\\{|\\hat\\Sigma^*_{ij}|\\ge\\gamma_\\tau\\sqrt{\\log p/n}\\}$ off diagonal, with the source's $\\gamma_\\tau$ depending on the directional tail parameter $\\tau$. `thm-thresholded-sparse-covariance-minimax-rate`: if $p\\ge n^\\beta$ for fixed $\\beta>1$ and $c_{n,p}\\le M n^{(1-q)/2}(\\log p)^{-(3-q)/2}$, the minimax expected squared spectral risk over $P_q(\\tau,c_{n,p})$ is comparable to $c_{n,p}^2(\\log p/n)^{1-q}+\\log p/n$; the thresholded estimator attains the upper bound by entrywise tail concentration and an operator-norm row-sum bound; a finite-family mixture-TV proof gives the lower bound, with technical lemmas in the cited supplement. This is not a Huber or heavy-tail theorem. | F04 complete for net/concentration prerequisites; F06 complete. Lasso: Rigollet Ch.2 Lemma 2.17/Theorem 2.18 pp.61–64. Dense sample covariance: Rigollet Ch.4 Theorem 4.6 pp.98–100. Weak-$\\ell_q$: Cai–Zhou Theorems 1–2, §7 and supplement, pp.3–6, 23–33. Keep their distinct model and growth assumptions. |",
+    "after": "| **MSF-23** `sparse-high-dimensional-estimation-and-covariance` — Sparse Estimation and Covariance | MSF-18; MSF-19; MSF-21; `linear-algebra/the-spectral-theorem-and-singular-value-decomposition` | `def-gaussian-sequence-sparse-means-model`; `def-subgaussian-fixed-design-regression-model`; `def-restricted-eigenvalue-condition`; `def-lasso-estimator`: minimize $n^{-1}\\|Y-X\\theta\\|_2^2+2\\tau\\|\\theta\\|_1$; `thm-lasso-basic-inequality`; `thm-lasso-prediction-and-l1-error-under-incoherence`: for $n\\ge2$, $s$-sparse truth, sub-Gaussian noise and the exact incoherence condition $\\max_{ij}|(X^TX/n-I_d)_{ij}|\\le1/(14s)$, use $\\tau=4\\sigma[\\sqrt{\\log(2d)/n}+\\sqrt{\\log(1/\\delta)/n}]$ to prove with probability at least $1-\\delta$ the fitted prediction error is $\\lesssim s\\sigma^2\\log(2d/\\delta)/n$ and coefficient $\\ell_1$ error is $\\lesssim s\\sigma\\sqrt{\\log(2d/\\delta)/n}$. This premise implies the required cone lower bound; no fast rate follows from sparsity alone. Proof route: the basic inequality gives a cone constraint, a sub-Gaussian score bound controls the stochastic term, and the cone RE inequality yields prediction and coefficient rates. `def-sample-covariance-and-operator-norm-loss`: for centered iid data $\\hat\\Sigma=n^{-1}\\sum_iX_iX_i^T$; `thm-centered-subgaussian-sample-covariance-bound`: for iid centered sub-Gaussian vectors with $E[XX^T]=\\Sigma$ and proxy $\\|\\Sigma\\|_{op}$, $\\|\\hat\\Sigma-\\Sigma\\|_{op}\\lesssim\\|\\Sigma\\|_{op}[\\sqrt{(d+\\log(1/\\delta))/n}\\vee(d+\\log(1/\\delta))/n]$ with its net/Bernstein proof; for nonzero mean, define/recenter covariance and prove the extra step. B: orthogonal sequence, RE failure, and $p\\gg n$ rank deficiency. `def-weak-lq-sparse-covariance-class`: for $0<q<1$, each off-diagonal column, sorted by magnitude, satisfies $\\max_j\\max_{1\\le i\\le p}i|\\sigma_{(i)j}|^q\\le c_{n,p}$; for $q=0$, each off-diagonal column has at most $c_{n,p}$ nonzero entries. Let $P_q(\\tau,c_{n,p})$ be iid laws with covariance in this class and directional sub-Gaussian tails $P(|v^T(X-EX)|>t)\\le e^{-t^2/(2\\tau)}$ for all unit $v$ and $t>0$. `alg-entrywise-thresholded-sample-covariance`: form $\\hat\\Sigma^*=n^{-1}\\sum_{k=1}^n(X_k-\\bar X)(X_k-\\bar X)^T$, leave its diagonal unchanged, and set $\\hat\\Sigma_{ij}=\\hat\\Sigma^*_{ij}\\mathbf 1\\{|\\hat\\Sigma^*_{ij}|\\ge\\gamma_\\tau\\sqrt{\\log p/n}\\}$ off diagonal, with the source's $\\gamma_\\tau$ depending on the directional tail parameter $\\tau$. `thm-thresholded-sparse-covariance-minimax-rate`: for fixed $\\beta>1$, $M,\\tau>0$, $0\\le q<1$, all $n\\ge1$, $p\\ge2$ with $p\\ge n^\\beta$, and $0\\le c_{n,p}\\le M n^{(1-q)/2}(\\log p)^{-(3-q)/2}$, put $a=\\log p/n$ and $r=c_{n,p}^2a^{1-q}+a$. The minimax expected squared spectral risk over $P_q(\\tau,c_{n,p})$ is comparable to $\\min\\{1,r\\}$, with constants depending only on the fixed parameters. For $a\\le1$ the unmodified sample-centered threshold estimator with $\\lambda=8192\\tau\\sqrt a$ has expected risk $O(r)$; prove this using the arbitrary-confidence entrywise bound, weak-$\\ell_q$ row sums, coordinate eighth moments and a controlled bad event. An explicit rule attaining the cap in every dimension uses this threshold estimator when $r<1$ and the zero matrix otherwise. Preserve all original dimension regimes; do not claim the unmodified raw threshold estimator attains the cap globally. Prove a diagonal $p+1$-Gaussian Fano lower bound $\\min\\{1,a\\}$ including zero/floor-small sparsity, and a full local sparse Gaussian-mixture lower bound with exact cross moments and uniform weighted-nuisance remainder control; then cover finite-$p$ and saturated regimes explicitly. Retain AC through the Gaussian/Fano suppliers. The uncapped claim at super-exponential dimension is false: preserve its explicit counterexample, since the directional-tail model gives $\\|\\Sigma\\|_{op}\\le2\\tau$ and zero-estimator risk at most $4\\tau^2$. Do not replace the missing covariance-specific proof by a citation or an open-problem label. This is not a Huber or heavy-tail theorem. | F04 complete for net/concentration prerequisites; F06 complete. Lasso: Rigollet Ch.2 Lemma 2.17/Theorem 2.18 pp.61–64. Dense sample covariance: Rigollet Ch.4 Theorem 4.6 pp.98–100. Weak-$\\ell_q$: Cai–Zhou Theorems 1–2, §7 and supplement, pp.3–6, 23–33. Keep their distinct model and growth assumptions. |",
+    "agent_modified_shared_scaffold": false,
+    "root_application": "Root confirmed exact before/after MSF-23 row applied and source ownership/policy evidence refreshed; all other rows/history retained. Agent did not modify shared scaffold."
+  },
+  "mandatory_verification": {
+    "command": "node tools/proof-layout.mjs items/thm-weak-lq-sample-covariance-entrywise-deviation.md items/lem-weak-lq-thresholded-covariance-expected-risk.md items/lem-diagonal-covariance-minimax-lower-bound.md items/lem-gaussian-sparse-covariance-mixture-lower-bound.md items/thm-thresholded-sparse-covariance-minimax-rate.md items/cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension.md",
+    "exit_code": 0,
+    "output": "proof-layout: 6 items, 24 steps, 0 defects",
+    "after_final_item_edit": true
+  },
+  "limits": "No optional tests, broad validators, hashes, readiness/acceptance records, native controls, gates or commits. Shared controlling scaffold was not edited by this agent; root confirmed exact MSF-23 row application and source-policy evidence refresh. Original native Step1 records retained; stale verification stamps on edited items removed. Root owns recertification.",
+  "path_ownership": {
+    "research/plan-mathematical-statistics-track.md": "root serialized application",
+    "all_other_listed_paths": "E17 delegated repair agent"
+  },
+  "owner_recertification_closure": {
+    "changed_items": [
+      "thm-weak-lq-sample-covariance-entrywise-deviation",
+      "lem-weak-lq-thresholded-covariance-expected-risk",
+      "lem-diagonal-covariance-minimax-lower-bound",
+      "lem-gaussian-sparse-covariance-mixture-lower-bound",
+      "thm-thresholded-sparse-covariance-minimax-rate",
+      "cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension"
+    ],
+    "unchanged_existing_direct_consumer": [
+      "thm-thresholded-sparse-covariance-high-probability-bound"
+    ],
+    "dependency_order": "Entrywise deviation -> expected-risk lemma -> main; diagonal/sparse lower lemmas -> main. Existing high-probability consumer remains valid under original retained entrywise specialization. Counterexample remains valid and is contextual, not a logical supplier of the corrected theorem.",
+    "carrier_closure": [
+      "batch19 A/B pages",
+      "batch19 pages manifest",
+      "batch19 proof-contracts",
+      "batch19 coverage/cross-batch/notes",
+      "MSF-23 controlling scaffold row"
+    ],
+    "outside_consumers": [],
+    "responsibility": "Root owns all content-hash refreshes, dependency-level reconciliation, readiness and recertification. This receipt records no hash or ready/acceptance decision."
+  },
+  "root_focused_review": "Root reported reading the actual three new lemmas, main theorem and strengthened entrywise theorem in full, independently checking the eighth-moment upper, p=2 diagonal Fano, weighted Gaussian-mixture proof, and all saturation/floor/finite-p branches, with no mathematical gap found in this focused review.",
+  "administrative_completion": {
+    "recorded_at": "2026-10-14T05:02:42.770084+00:00",
+    "scope": "Corrected the three dropped-supplement contents reasons and current source_resolution.reason, and appended explicit owner-current reconciliation. The local E17 covariance proof is complete; supplementary source remains unused/dropped.",
+    "preserved": "All six failed recovery attempts, all six resolution attempts, original network/search history and dropped status preserved. No new fetch or supplement reading asserted.",
+    "verification": "No tests, item/manifest/scaffold edits, hashes, readiness or state changes for this administrative completion."
+  }
+}

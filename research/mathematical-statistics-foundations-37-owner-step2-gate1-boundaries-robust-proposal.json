@@ -1,0 +1,2776 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "round": 1,
+  "scope": "30 boundary items in home batches 28 through 37",
+  "owner": "/root/msf_sauer_shelah_escalation",
+  "decision": "stage-240-specific-standard-boundary-rows-after-empty-center-repair",
+  "source_step_maps_read": "mathematical-statistics-foundations-37-owner-step2-gate1-format-robust-resolution.json",
+  "items": [
+    {
+      "id": "alg-geometric-median-of-block-means",
+      "home_batch": 33,
+      "source_path": "items/alg-geometric-median-of-block-means.md",
+      "claim_snapshot": "Let $H$ be a separable real Hilbert space, let $n\\ge1$, and let $1\\le k\\le n$ be an integer. Given $(x_1,\\ldots,x_n)\\in H^n$, put $q=\\lfloor n/k\\rfloor$ and $r=n-kq$. Form consecutive blocks $B_1,\\ldots,B_k$ in index order, with $|B_j|=q+1$ for $j\\le r$ and $|B_j|=q$ for $j>r$. Compute the block means $m_j=|B_j|^{-1}\\sum_{i\\in B_j}x_i$. Return the unique minimum-norm point of\n$$\n\\operatorname*{argmin}_{z\\in H}\\sum_{j=1}^k\\|z-m_j\\|.\n$$\n\nThe objective minimizers are called geometric medians of the block means. The minimum-norm rule makes the output single-valued. Existence, uniqueness of that selected point, and Borel measurability as a function of the input tuple are proved in [[lem-measurable-minimum-norm-geometric-median-selection]].",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement/Definition requires a positive sample or a nonempty finite input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition: Definition returns zero for an all-zero tuple."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: Definition permits k=1; the sole block mean minimizes the objective."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: Definition remains defined when all block means coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement/Definition has no interval endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition: The justified-by selector lemma uses Countable Choice, and the algorithm states that dependency."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: n>=1 and 1<=k<=n exclude an empty observation list or empty center list; q=floor(n/k)>=1 makes every block nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero observations give zero block means and objective k||z||, whose unique minimizer is 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: k=1 makes the sole block the complete sample; minimizing ||z-M_1|| returns M_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: if every block mean equals c, the objective is k||z-c|| and its minimizer is exactly c."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: at k=n every block has size one; at k=1 its size is n, so the partition formula covers both allowed block-count endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the minimum-norm rule imports the Borel selector lemma; that supplier states Countable Choice only for Hilbert projection, rather than arbitrary selection of a median."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the minimum-norm median of the specified contiguous block means is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the minimum-norm median of the specified contiguous block means has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "alg-multivariate-trimmed-mean",
+      "home_batch": 33,
+      "source_path": "items/alg-multivariate-trimmed-mean.md",
+      "claim_snapshot": "Let $d,N\\ge1$ be integers, let $0\\le\\eta\\le1/10$, and let $0<\\delta<1$ satisfy $N\\ge2560\\log(2/\\delta)$. Given two observed halves $\\widetilde X_1,\\ldots,\\widetilde X_N$ and $\\widetilde Y_1,\\ldots,\\widetilde Y_N$ in $\\mathbb R^d$, set\n$$\n\\varepsilon=\\max\\left\\{10\\eta,\\frac{2560\\log(2/\\delta)}{N}\\right\\}\\in(0,1].\n$$\nFor $v\\in S^{d-1}$, sort $\\langle\\widetilde Y_i,v\\rangle$ nondecreasingly and let $\\alpha_v$ and $\\beta_v$ be its order statistics of ranks $\\lceil\\varepsilon N/2\\rceil$ and $\\lceil(1-\\varepsilon/2)N\\rceil$. Write $\\phi_{a,b}(t)=\\min\\{b,\\max\\{a,t\\}\\}$. For $Q>0$ define\n$$U_Q(v)=\\frac1N\\sum_{i=1}^N\\phi_{\\alpha_v-Q,\\,\\beta_v+Q}(\\langle\\widetilde X_i,v\\rangle),\\qquad \\Gamma(v,Q)=\\{z\\in\\mathbb R^d:|\\langle z,v\\rangle-U_Q(v)|\\le2\\varepsilon Q\\}.$$\nand $\\Gamma(Q)=\\bigcap_{v\\in S^{d-1}}\\Gamma(v,Q)$. For each $j\\in\\mathbb Z$, put\n$$\nK_j=\\bigcap_{i\\ge j}\\Gamma(2^i),\\qquad S=\\{j\\in\\mathbb Z:K_j\\ne\\varnothing\\}.\n$$\nReturn the unique minimum-norm point of $K_j$ if $S$ has least element $j$; if $S=\\mathbb Z$, return the unique minimum-norm point of $\\bigcap_{i\\in\\mathbb Z}\\Gamma(2^i)$; if $S=\\varnothing$, return the first-half sample mean $N^{-1}\\sum_{i=1}^N\\widetilde X_i$. This three-branch selector is total on the displayed input domain; its existence and Borel measurability are proved in [[lem-multivariate-trimmed-mean-selector-total-and-measurable]].",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement/Definition requires a positive sample or a nonempty finite input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition: For all-zero data, the all-scale intersection is {0} and the procedure returns zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: N>=2560 log(2/delta)>1, so N=1 is inadmissible."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: Definition remains total for degenerate observed samples."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition: Definition permits epsilon=1; both quantile levels are 1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof uses explicit finite or least-index constructions and no arbitrary nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: S empty is a genuine handled branch returning the first-half average; nonempty K_j are handled by their minimum-norm rule."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: for zero observations U_Q(v)=0; intersecting all dyadic slabs leaves {0}, so the S=Z branch returns 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N>=2560 log(2/delta)>1 excludes N=1; dimension d=1 is allowed and gives the two unit directions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: tied directional observations still have specified ceil-ranked cutoffs; S proper, S=Z and S empty exhaust the possible tail-intersection patterns."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: epsilon=1 gives both cutoff ranks ceil(N/2); eta=0 still gives positive epsilon from the confidence term, and delta=0,1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: proper nonempty S uses its least integer and convex sets use unique minimum-norm points; the empty-S average is explicit, with no unspecified choice from an empty intersection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the three-branch total dyadic directional-slab procedure is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the three-branch total dyadic directional-slab procedure has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "alg-univariate-trimmed-mean",
+      "home_batch": 33,
+      "source_path": "items/alg-univariate-trimmed-mean.md",
+      "claim_snapshot": "Let $N\\ge1$ be an integer, let $\\eta\\ge0$, $0<\\delta<1$, and set\n$$\n\\varepsilon=8\\eta+\\frac{12\\log(4/\\delta)}{N}.\n$$\nThe procedure is admissible when $0<\\varepsilon\\le1/4$. Its input is two observed real samples $\\widetilde X_1,\\ldots,\\widetilde X_N$ and $\\widetilde Y_1,\\ldots,\\widetilde Y_N$. Sort the second sample nondecreasingly as $\\widetilde Y^*_{(1)}\\le\\cdots\\le\\widetilde Y^*_{(N)}$ and define $r(u)=\\lceil uN\\rceil$ for $0<u\\le1$. Set\n$$\n\\alpha=\\widetilde Y^*_{(r(\\varepsilon))},\\qquad \\beta=\\widetilde Y^*_{(r(1-\\varepsilon))},\n$$\nand, for $\\alpha\\le\\beta$, let $\\phi_{\\alpha,\\beta}(x)=\\min\\{\\beta,\\max\\{\\alpha,x\\}\\}$. Return\n$$\n\\widehat\\mu=\\frac1N\\sum_{i=1}^N\\phi_{\\alpha,\\beta}(\\widetilde X_i).\n$$\nThe operation is defined for every admissible input, including tied observations.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement/Definition requires a positive sample or a nonempty finite input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition: Definition returns zero when both halves are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: For N=1, epsilon>=12 log(4)>1/4, so the admissible domain is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: Definition is total for tied or identical data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition: Definition permits epsilon=1/4; both nearest ranks remain valid and ordered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof uses explicit finite or least-index constructions and no arbitrary nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: N>=1 supplies both nonempty halves and the denominator N; no zero-observation clipping average is defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: all observations zero give alpha=beta=0 and every clipped first-half observation zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N=1 would force epsilon>=12 log(4)>1/4, so no admissible parameter tuple has singleton halves."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: equal cutoff values are permitted: alpha=beta and the stated clipping function remains defined for tied second-half observations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: epsilon=1/4 gives ordered ranks ceil(N/4),ceil(3N/4); eta=0 is permitted but epsilon remains positive; delta is strictly between zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: finite order statistics use specified ceil ranks and clipping is explicit; selecting sample quantiles requires no arbitrary representative or choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the nearest-ranked second-half cutoffs and clipped first-half average is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the nearest-ranked second-half cutoffs and clipped first-half average has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "cex-correct-scale-trimming-slab-radius-four-is-false",
+      "home_batch": 33,
+      "source_path": "items/cex-correct-scale-trimming-slab-radius-four-is-false.md",
+      "claim_snapshot": "refuted\n\nThe claim that every point of the correct-scale tail intersection $K_{i_0}$ in [[alg-multivariate-trimmed-mean]] lies within $4\\varepsilon Q_0$ of the clean mean is false, even for an absolutely continuous univariate clean law and no actual replacements.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement specifies a nonempty class or positive dimension and sample size."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-variable, zero-covariance or zero-complexity cases are explicitly handled or excluded in the Statement and proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Finite/countable classes may be singleton; estimator sample-size hypotheses remain explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof states its positive-variance/trace branch or handles the deterministic case explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All displayed confidence, contamination and quantile endpoints retain their explicit domain; nearest-rank boundaries are treated directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite maximizers have fixed tie breaking and countable classes have a fixed enumeration; only the univariate quantile supplier retains its declared Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the witness uses two halves of size N=4096 and the fixed continuous law on [-1,1], so no empty-law or empty-data instance is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: zero actual replacements are used even though eta=1/10; variance is 1/3 and Q_0=16/sqrt(3)>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: this is the scalar d=1 witness, not a singleton-sample assertion; N remains fixed at 4096."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the covariance is strictly positive, while the identity Gamma(R)=[bar X-2R,bar X+2R] holds even for tied realized sample values."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: eta=1/10 makes epsilon=1 and both quantile ranks central; Q=32 is in [2Q_0,4Q_0), including the allowed trimming endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the point 50 belongs to K_5=[bar X-64,bar X+64] for every sample and violates 4epsilon Q_0; no arbitrary member of K_5 is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the explicit point 50 refuting the radius-four claim is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the explicit point 50 refuting the radius-four claim has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "cex-excess-tail-functional-does-not-bound-trimmed-mean",
+      "home_batch": 33,
+      "source_path": "items/cex-excess-tail-functional-does-not-bound-trimmed-mean.md",
+      "claim_snapshot": "refuted\n\nReplacing the raw centered-tail functional in the univariate trimmed-mean bound by\n$$E_{\\mathrm{exc}}(u)=\\max\\{E[|Z-Q_{u/2}(Z)|\\mathbf1_{\\{Z\\le Q_{u/2}(Z)\\}}],E[|Z-Q_{1-u/2}(Z)|\\mathbf1_{\\{Z\\ge Q_{1-u/2}(Z)\\}}]\\}$$\nwould falsely assert $P(|\\widehat\\mu-\\mu|\\le3E_{\\mathrm{exc}}(4\\varepsilon)+2\\sigma\\sqrt{\\log(4/\\delta)/N})\\ge1-\\delta$ for [[alg-univariate-trimmed-mean]]. This fails for a bounded absolutely continuous law.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement specifies a nonempty class or positive dimension and sample size."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-variable, zero-covariance or zero-complexity cases are explicitly handled or excluded in the Statement and proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Finite/countable classes may be singleton; estimator sample-size hypotheses remain explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof states its positive-variance/trace branch or handles the deterministic case explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All displayed confidence, contamination and quantile endpoints retain their explicit domain; nearest-rank boundaries are treated directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite maximizers have fixed tie breaking and countable classes have a fixed enumeration; only the univariate quantile supplier retains its declared Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the two continuous sign-intervals and two halves of size 10^6 are specified; the event construction is not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: EX=0 but Var(X)=1+w^2/3>0; E_u^exc=2wu^2 is small rather than a zero-variance limiting branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: each sign component has probability 1/2 and w=10^-3; no N=1 case is claimed for this fixed N=10^6 counterexample."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: event A guarantees at least 20000 negative first-half signs; selecting the first 20000 makes the replacement rule valid, including sample-dependent choices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: epsilon=8eta+12log(4/delta)/N<0.081<1/4 and delta=0.1>=exp(-N/4); the replacement count 20000 exactly meets 2eta N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the replacement coordinates are the first negative signs in their fixed order; Countable Choice is stated for the population-quantile supplier, not for choosing those coordinates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the fixed continuous two-sign replacement witness refuting the excess-tail estimate is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the fixed continuous two-sign replacement witness refuting the excess-tail estimate has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "def-adversarial-sample-replacement",
+      "home_batch": 31,
+      "source_path": "items/def-adversarial-sample-replacement.md",
+      "claim_snapshot": "For a statistical experiment $\\{P_\\theta\\}$ from [[def-statistical-experiment]], sample size $N\\ge1$, and replacement fraction $0\\le\\eta\\le1$, equip $\\mathcal X^N$ with its finite product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). A sample-replacement coupling is a pair of $\\mathcal X^N$-valued random elements on a common probability space ([[def-random-element-and-real-random-variable]]) $(X,Y)$ such that $X_1,\\ldots,X_N$ are iid with law $P_\\theta$ under [[def-identically-distributed-and-iid-random-variables]] and\n$$\n\\sum_{i=1}^N\\mathbf1\\{X_i\\ne Y_i\\}\\le\\lfloor\\eta N\\rfloor\n$$\nalmost surely. Assume the diagonal $\\Delta_{\\mathcal X}=\\{(x,x):x\\in\\mathcal X\\}$ belongs to the product sigma-algebra $\\mathcal A\\otimes\\mathcal A$ ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]), so each mismatch indicator is measurable. The joint law may depend on the entire clean sample; the observed vector $Y$ need not be iid.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes sample size N>=1 and a probability-law experiment."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: eta=0 forces the mismatch count to be zero almost surely."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: eta=1 permits at most N replacements."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the coupling Y=X has mismatch count zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition includes eta=0 and eta=1 and uses floor(eta N) at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition quantifies over couplings and makes no choice of one."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: N>=1 and a supplied iid clean sample exclude an empty coordinate aggregate; selecting theta presupposes the indicated probability law P_theta."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: eta=0 gives floor(eta N)=0 and the nonnegative mismatch count forces Y_i=X_i almost surely for every i."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: at eta=1 the budget is N; for N=1 and eta<1 the floor budget is zero, while eta=1 permits the single replacement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the identity coupling Y=X is admissible, including deterministic clean laws, without requiring Y to remain iid after other replacements."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both contamination endpoints belong to [0,1]; floor(eta N) enforces the integer budget also when eta N is integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the common coupling is supplied and quantified over; the measurable-diagonal assumption makes each mismatch indicator measurable rather than selecting a coupling by choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the almost-sure integer mismatch budget on a supplied coupling is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the almost-sure integer mismatch budget on a supplied coupling has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "def-asymptotically-linear-estimator-and-influence-function",
+      "home_batch": 29,
+      "source_path": "items/def-asymptotically-linear-estimator-and-influence-function.md",
+      "claim_snapshot": "Fix a law $P$ and an iid sample $X_1,\\ldots,X_n\\sim P$. For a measurable vector function $\\varphi:\\mathcal X\\to\\mathbb R^k$, write $P\\varphi=E_P[\\varphi(X)]$ and $P_n\\varphi=n^{-1}\\sum_{i=1}^n\\varphi(X_i)$, where $P_n=n^{-1}\\sum_{i=1}^n\\delta_{X_i}$ is the empirical measure. For a vector remainder $R_n$, $R_n=o_P(n^{-1/2})$ means $\\sqrt n R_n\\to0$ in $P$-probability.\n\nA measurable estimator sequence $\\widehat\\psi_n$ of $\\psi(P)\\in\\mathbb R^k$ is **asymptotically linear at $P$** with **estimator influence function** $\\varphi$ if\n\n$$\\widehat\\psi_n-\\psi(P)=(P_n-P)\\varphi+o_P(n^{-1/2}),$$\n\nwhere $\\varphi\\in L^2_0(P)^k$: $E_P\\varphi=0$ and $E_P\\|\\varphi\\|^2<\\infty$. The space $L^2_0(P)$ and its almost-sure equivalence convention are as in [[def-mean-zero-square-integrable-space]]. This definition alone does not assert regularity under local alternatives, pathwise differentiability of $\\psi$, or asymptotic normality.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: an iid sample and a target law are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero influence function and zero remainder are allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the target dimension k may equal one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a degenerate law or estimator is not excluded by the expansion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: no parameter endpoint is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: no choice-based construction is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: this item is not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empirical expression is for positive sample indices n and a fixed probability P; n=0 would make n^-1 undefined and is not an estimator-sequence index."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: phi=0 and remainder=0 give the constant estimator psi(P), satisfying the required centered square-integrable expansion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a scalar target uses k=1 and the same L2_0(P) expansion; the assertion concerns the sequence as n tends to infinity, not an n=1 limiting theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: P may be a point mass; centering then makes phi=0 P-almost surely, and the expansion still has its stated meaning."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: the asymptotically-linear expansion has no confidence or path-interval endpoint; its only limit is sqrt(n)R_n tending to zero in probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: a measurable phi and estimator sequence are supplied; this item proves no existence or choice-dependent construction of either."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the centered square-integrable estimator expansion with o_P remainder is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the centered square-integrable estimator expansion with o_P remainder has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "def-conformal-nonconformity-score-and-rank-pvalue",
+      "home_batch": 37,
+      "source_path": "items/def-conformal-nonconformity-score-and-rank-pvalue.md",
+      "claim_snapshot": "Let $\\mathcal Z=\\mathcal X\\times\\mathcal Y$ be a feature-response measurable\nspace, let $m\\ge0$, and put $n=m+1$. A **split score rule** is a jointly\nmeasurable map $s:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$, where $H$ is a\ntraining statistic with values in the specified measurable rule space\n$(\\mathcal H,\\mathscr H)$. The measurable-statistic convention is that of\n[[def-statistic-and-estimator]]. Once $H=h$ is fixed, calibration and test\nscores are $R_i=s(h,Z_i)$; the rule does not change when it scores the\ncalibration or test example.\n\nA **full score assignment** of length $n$ is a measurable map\n$A=(A_1,\\ldots,A_n):\\mathcal Z^n\\to\\mathbb R^n$ that is\npermutation-equivariant:\n$$A(\\tau_\\pi z)=\\tau_\\pi A(z)\\qquad\\text{for every }z\\in\\mathcal Z^n\\text{ and permutation }\\pi.$$\nFor a candidate response $y$, append $(x,y)$ as the $n$th example and write\n$R_i(y)=A_i(Z_1,\\ldots,Z_m,(x,y))$ and $r=R_n(y)$.\n\nFor either a split score vector or a full augmented score vector, the\n**nonrandomized upper-rank p-value** of the candidate is\n$$p(y)=\\frac1{m+1}\\sum_{i=1}^{m+1}\\mathbf1\\{R_i(y)\\ge R_{m+1}(y)\\}.$$\nAn optional **tie-randomized rank p-value** is defined when a supplied random\nvariable $U$ has Lebesgue probability law on $[0,1]$ and is independent of the\ndata and training information:\n$$p_U(y)=\\frac{\\#\\{i\\le m:R_i(y)>r\\}+U\\bigl(1+\\#\\{i\\le m:R_i(y)=r\\}\\bigr)}{m+1}.$$\nThe added $1$ counts the candidate itself in its tie group. A single such $U$\nis shared across a candidate scan. This is an explicit randomization; the\ngeneral Markov-kernel definition of a randomized procedure\n[[def-randomized-procedure-as-a-markov-kernel]] does not assert that arbitrary\nkernels have a random-seed representation.\n\nHere \u201cuniform on $[0,1]$\u201d means $\\mathbb P(U\\le u)=u$ for $0\\le u\\le1$.\n\nSmaller scores are treated as more conforming. The rank formula counts all\nties conservatively in the nonrandomized version; the randomized formula\nspreads the candidate uniformly over its entire tie block.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite tuple or does not concern empty sample size."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter endpoint is part of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-valued parameter endpoint is part of this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim does not require a nondegeneracy condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention is part of this claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses explicit finite indices and no choice axiom; see definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: m=0 is allowed but n=m+1=1 includes the candidate itself, so the nonrandomized sum is never over an empty augmented tuple."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: m=0 makes the strict and equal calibration counts zero; p=1 and p_U=U follow directly from the added candidate count."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n=1 is the m=0 rank case; more generally the nonrandomized p-value reaches 1 when every score is at least the candidate score."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: when all scores tie, nonrandomized p=1 and randomized p_U=U, because the tie-block size is m+1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: U=0 and U=1 give the lower and upper ends of the candidate tie block; the supplied uniform law uses the complete interval [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: U is explicitly supplied and independent of all data/training information; the Markov-kernel citation does not claim arbitrary kernels have seed representations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the conservative and tie-randomized augmented candidate rank formulas is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the conservative and tie-randomized augmented candidate rank formulas has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "def-dqm-submodel-through-a-law",
+      "home_batch": 28,
+      "source_path": "items/def-dqm-submodel-through-a-law.md",
+      "claim_snapshot": "Let $\\mathcal M$ be a model of probability measures on a measurable space $(\\mathcal X,\\mathcal A)$, let $\\epsilon>0$, and let $t\\mapsto P_t\\in\\mathcal M$ be a path for $0\\le t<\\epsilon$ with $P_0=P$. It is **dominated by a common measure** when one supplied sigma-finite positive measure $\\mu$ satisfies $P_t\\ll\\mu$ for every $t$ ([[def-dominated-statistical-experiment]]). Write $p_t=dP_t/d\\mu$ and $p=p_0$ for simultaneously supplied nonnegative density versions; the existence and normalization of each density are the Radon\u2013Nikodym properties in [[def-likelihood-density]] and [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]. The Axiom of Choice is the library convention for selecting such a family of versions along a path ([[def-axiom-of-choice]]). The DQM property below is unchanged by replacing any $p_t$ by another version, since each $L^2(\\mu)$ norm is unchanged by a $\\mu$-null modification.\n\nThe path is **differentiable in quadratic mean at $0$**, with **score** $s\\in L^2(P)$, when\n\n$$\\left\\|\\sqrt{p_t}-\\sqrt p-\\frac{t}{2}s\\sqrt p\\right\\|_{L^2(\\mu)}=o(t)\\qquad(t\\downarrow0).$$\n\nHere $o(t)$ means that the displayed norm divided by $t$ tends to $0$ as $t\\downarrow0$; $L^2(P)$ and $L^2(\\mu)$ are quotient spaces modulo almost-everywhere equality ([[def-l-p-space-as-a-quotient-by-null-functions]]). The definition is directional. A two-sided regular submodel qualifies by restricting it to $t\\ge0$. No mean-zero condition is assumed in this definition.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A DQM path is based at a specified probability law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the constant path P_t=P has score zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No isolated scalar parameter value is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant path is a valid degenerate DQM path with zero score."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the path includes t=0 and the expansion is a one-sided limit as t decreases to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is explicitly the convention for choosing the path-wide family of density versions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence theorem."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the path contains P_0=P and has epsilon>0, so its supplied family of densities is not empty even if the ambient model was introduced abstractly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: P_t=P with supplied p_t=p and score s=0 has identically zero DQM remainder."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: t=1 has no privileged role and may lie outside [0,epsilon); this directional definition asserts no unit-parameter boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant path through a point-mass law is admissible with that law as common dominator and zero score."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: t=0 is included in the path and the normalized remainder limit is taken only as t decreases to zero through positive t; epsilon is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC explicitly supplies simultaneous nonnegative density versions along the path; each quotient L2 norm is invariant under changing its own null-set version."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the one-sided L2 square-root-density remainder definition is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the one-sided L2 square-root-density remainder definition has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "def-l2-m-approximable-causal-bernoulli-shift",
+      "home_batch": 36,
+      "source_path": "items/def-l2-m-approximable-causal-bernoulli-shift.md",
+      "claim_snapshot": "Let $\\mathcal B$ be the Borel sigma-algebra of $[0,1]$, generated by intervals with rational endpoints; let $dt$ be Lebesgue measure restricted to $\\mathcal B$, and set $H=L^2([0,1],\\mathcal B,dt;\\mathbb R)$, with inner product $\\langle x,y\\rangle_H=\\int_0^1x(u)y(u)\\,du$. We use the quotient-by-null-functions convention for $L^2$ ([[def-l-p-space-as-a-quotient-by-null-functions]]). The measure space is finite and countably generated, so under Countable Choice $H$ is separable ([[thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable]], [[def-countable-choice]], [[def-separable-space]]); [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]] verifies that this real pairing makes the quotient a Hilbert space.\n\nLet $(S,\\mathcal S,\\nu)$ be a probability space and $(\\delta_t)_{t\\in\\mathbb Z}$ an independent identically distributed family of $S$-valued random elements with law $\\nu$ ([[def-random-element-and-real-random-variable]], [[def-law-or-distribution-of-a-random-element]], [[def-independent-random-elements]]). A **causal Bernoulli shift** with innovation law $\\nu$ is a process\n$$X_t=f(\\delta_t,\\delta_{t-1},\\delta_{t-2},\\ldots),\\qquad t\\in\\mathbb Z,$$\nwhere $f:S^{\\mathbb N_0}\\to H$ is measurable from the product sigma-algebra $\\mathcal S^{\\otimes\\mathbb N_0}$ to the Borel sigma-algebra of $H$. This product-measurability formulation is meaningful for a merely measurable innovation space $S$.\n\nOn an independent product extension, take replacement innovations $\\delta'_{t,m,k}$, indexed by $t\\in\\mathbb Z$, $m\\in\\mathbb N_0$, and integers $k\\le t-m$, all with law $\\nu$, mutually independent, and independent of the original innovations. Such a countable family and its product with the original probability space exist under Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]], [[cor-countable-independent-copies-exist]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]). For $m\\ge1$ define\n$$X_{t,m}=f(\\delta_t,\\ldots,\\delta_{t-m+1},\\delta'_{t,m,t-m},\\delta'_{t,m,t-m-1},\\ldots),$$\nand define the full replacement $X_{t,0}=f(\\delta'_{t,0,t},\\delta'_{t,0,t-1},\\ldots)$. Each $X_{t,m}$ has the same marginal law as $X_t$; for fixed $m\\ge1$ the sequence $(X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary and $m$-dependent because its original-innovation windows have length $m$ and its replacement arrays are independent across $t$.\n\nFor every fixed $m\\ge0$, the joint process $(X_t,X_{t,m})_{t\\in\\mathbb Z}$ is strictly stationary: shifting all indices relabels a family of mutually independent innovations with the same law and commutes with the defining measurable maps. Consequently $D_{t,m}:=X_t-X_{t,m}$ is stationary and $\\|D_{t,m}\\|_{L^2(H)}=\\delta_m$ for every $t$.\n\nWrite $\\|X\\|_{L^2(H)}=(\\mathbb E\\|X\\|_H^2)^{1/2}$ and\n$$\\delta_m=\\|X_0-X_{0,m}\\|_{L^2(H)},\\qquad m\\ge0.$$\nThe process is **$L^2$-$m$-approximable** when\n$$\\mathbb E\\|X_0\\|_H^2<\\infty\\qquad\\hbox{and}\\qquad\\sum_{m\\ge1}\\delta_m<\\infty.$$\nThe same marginal law gives $\\delta_0\\le2\\|X_0\\|_{L^2(H)}<\\infty$. For a Bochner-integrable $H$-valued random element $Y$, write $\\mathbb E_B Y=\\int Y\\,d\\mathbb P$; the moment condition makes $X_t$ and every $X_{t,m}$ Bochner integrable ([[def-bochner-integrable-function]], [[thm-bochner-integrability-criterion]]).\n\nHere **strict stationarity** means invariance of every finite-dimensional law under integer shifts. A process is **$m$-dependent** if, for every $a\\in\\mathbb Z$, the sigma-algebras generated by $(X_s)_{s\\le a}$ and $(X_s)_{s\\ge a+m+1}$ are independent ([[def-independent-sigma-algebras-and-events]]). The stated input windows for $X_{t,m}$ are disjoint across these two index ranges, so they satisfy this definition.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a probability space and an innovation law; it defines no empty-space branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero process satisfies the finite-moment and zero-error clauses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the full replacement m=0 and the first positive truncation m=1 are both explicitly defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant zero shift has \u03b4_m=0 and meets the stated moment condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the function domain is the closed interval [0,1], and m=0 is separately defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: countable and dependent choice are stated for the replacement product extension."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the sum starts at m=1 over infinitely many nonnegative errors; a finite-memory shift is allowed to have all sufficiently late summands zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: f identically zero gives X_t=X_{t,m}=0 and every delta_m=0, satisfying finite second moment and summability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: m=1 retains only delta_t and replaces all earlier inputs; this is distinct from the separately defined m=0 full replacement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: deterministic innovations and a constant H-valued map are allowed; replacement errors then vanish, without this definition requiring centering."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: full replacement m=0 is separately specified and delta_0<=2||X_0||_L2; the approximability series intentionally excludes that finite term."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Countable Choice and Dependent Choice are stated for the independent countably indexed replacement extension; no uncountable seed representation is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the summable replacement-error criterion for a measurable causal map is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the summable replacement-error criterion for a measurable causal map has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "def-statistical-functional-and-influence-function",
+      "home_batch": 32,
+      "source_path": "items/def-statistical-functional-and-influence-function.md",
+      "claim_snapshot": "Let $(\\mathcal X,\\mathcal A)$ be a measurable space, let $\\mathcal P$ be a collection of probability measures on it, and let $T:\\mathcal P\\to\\mathbb R^k$ be a single-valued map with finite $k\\ge1$. Such a map is a **statistical functional**. For $F\\in\\mathcal P$ and $x\\in\\mathcal X$, suppose the point-contamination path $F_{\\epsilon,x}=(1-\\epsilon)F+\\epsilon\\delta_x$ belongs to $\\mathcal P$ for all sufficiently small $\\epsilon\\ge0$ ([[def-gross-error-path]]). The **gross-error influence function** at $(x;T,F)$ is\n\n$$\\operatorname{IF}(x;T,F):=\\lim_{\\epsilon\\downarrow0}\\frac{T(F_{\\epsilon,x})-T(F)}{\\epsilon}\\in\\mathbb R^k,$$\n\nwhen this finite right limit exists. Its domain may be a proper subset of $\\mathcal X$.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition starts with a measurable space and a model of probability laws."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: If T is constant on its domain then the pointwise derivative is zero along every admitted path."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: At epsilon=0 the path is F and the derivative is taken from the right."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No statement is made about the fully contaminated endpoint epsilon=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Only a sufficiently small right neighborhood of zero is required."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition fixes one point x and makes no choice-function or representation claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: an empty model permits only the empty-domain functional, but an influence function instance requires a specified F in the model and a point x; none exists on an empty model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: at epsilon=0, F_{epsilon,x}=F; a constant functional has difference quotient zero on every admitted contamination path."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: k=1 gives a scalar influence function; epsilon=1 is not required because only a sufficiently small right neighborhood of zero is assumed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant functional, or x with delta_x=F, gives zero derivative when the path is admitted; the finite right limit is not guaranteed for all points."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: epsilon decreases to zero from the nonnegative side; existence of the finite limit may hold only on a proper subset of X."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: F and x are fixed and the derivative is a supplied finite limit when it exists; Riesz and pathwise-choice conclusions are terminology context only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the finite right derivative along an admitted point-contamination path is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the finite right derivative along an admitted point-contamination path has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "ex-finite-dependent-functional-moving-average",
+      "home_batch": 36,
+      "source_path": "items/ex-finite-dependent-functional-moving-average.md",
+      "claim_snapshot": "Let $(\\epsilon_t)_{t\\in\\mathbb Z}$ be iid Rademacher variables and let\n$e(u)=1$ in $H=L^2([0,1],dt;\\mathbb R)$. The centered process\n$$X_t=(\\epsilon_t+2\\epsilon_{t-1})e$$\nis a finite-dependent causal shift. Its physical-dependence coefficients\nsatisfy $\\delta_1=2\\sqrt2$ and $\\delta_m=0$ for $m\\ge2$, while its\nlong-run covariance is $\\Gamma=9(e\\otimes e)$. Under AC, the theorem\n[[thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts]] gives\n$$n^{-1/2}\\sum_{t=1}^nX_t\\Rightarrow G,$$\nwhere $G$ is centered Gaussian in $H$ with covariance $9(e\\otimes e)$.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a countable innovation family and has no empty-set branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed coefficients are nonzero; the example does not vary a covariance or coefficient through zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no scalar parameter whose value one is a boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed moving average has positive long-run variance 9."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks m=1 and every m\u22652, including the first truncation boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC for the countable innovation family and the CLT supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the fixed two coefficients 1 and 2 and the indexed Rademacher innovations define a nonempty moving-average window."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: delta_m=0 for every m>=2 because both original innovations are retained; this zero-error tail establishes summability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the first replacement m=1 changes only the lagged innovation and gives delta_1^2=8; e has norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 and step 2.1: Gamma=9(e tensor e) is rank one in H, so the Gaussian limit is degenerate on the orthogonal complement of e but has positive variance along e."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3: at the first separated group s>=a+2, innovation indices are >=a+1 and disjoint from those for s<=a, establishing exactly 1-dependence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts A1: AC supplies the countable Rademacher family; step 2.1 retains AC when applying the Hilbert CLT supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the two-lag example with delta_1 squared equal to eight and rank-one covariance nine is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the two-lag example with delta_1 squared equal to eight and rank-one covariance nine has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "ex-geometrically-summable-bernoulli-shift",
+      "home_batch": 36,
+      "source_path": "items/ex-geometrically-summable-bernoulli-shift.md",
+      "claim_snapshot": "Let $(\\epsilon_t)_{t\\in\\mathbb Z}$ be iid Rademacher variables, put\n$e(u)=1$ in $H=L^2([0,1],dt;\\mathbb R)$, and define\n$$X_t=\\left(\\sum_{k=0}^{\\infty}2^{-k}\\epsilon_{t-k}\\right)e.$$\nThe series converges absolutely for every sign sequence. Its physical\ndependence coefficients are\n$$\\delta_m^2=\\frac83\\,4^{-m},$$\nso they are summable. Its long-run covariance is $4(e\\otimes e)$, and under\nAC the Hilbert-valued CLT gives a centered Gaussian limit with that\ncovariance.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a countable innovation family and has no empty-set branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed geometric coefficients and long-run variance are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no scalar parameter whose value one is a boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed process has positive long-run variance 4."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the first replacement error at m=1 and all later terms."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC for the countable innovation family and the CLT supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the infinite coefficient family begins at k=0 and its absolute sum is 2; no empty-series example is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the process is centered but has E||X_0||^2=4/3; each finite-depth error is positive and tends to zero geometrically."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: substituting m=1 into delta_m^2=(8/3)4^-m gives 2/3 and the first retained coefficient is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 and step 3.1: Gamma=4(e tensor e) has rank one; degeneracy orthogonal to e is admitted by the Gaussian supplier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the replacement formula starts at k=m, so m=0 is full replacement and m=1 retains exactly the k=0 term."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts A1 and step 3.1: AC supplies the independent innovations and remains assumed for the Hilbert CLT; absolute convergence is pointwise on every sign input."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the geometric series example with covariance four is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the geometric series example with covariance four has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "ex-nonsummable-physical-dependence-linear-process",
+      "home_batch": 36,
+      "source_path": "items/ex-nonsummable-physical-dependence-linear-process.md",
+      "claim_snapshot": "Assume Countable Choice and Dependent Choice, and let\n$(\\epsilon_t)_{t\\in\\mathbb Z}$ be iid Rademacher variables\n($P(\\epsilon_t=1)=P(\\epsilon_t=-1)=1/2$), and let $e(u)=1$ in\n$H=L^2([0,1],dt;\\mathbb R)$, so $\\|e\\|_H=1$. Recursively choose the\nleast increasing integers $N_r$ such that\n$$\\sum_{k>N_r}(k+1)^{-2}<2^{-4r}.$$\nDefine a causal Borel filter by\n$$f(x_0,x_1,\\ldots)=e\\lim_{r\\to\\infty}\\sum_{k=0}^{N_r}\\frac{x_k}{k+1}$$\nwhen this subsequence converges, and define $f=0$ otherwise. Then\n$X_t=f(\\epsilon_t,\\epsilon_{t-1},\\ldots)$ is centered and has finite second\nmoment, but its physical-dependence coefficients satisfy\n$$\\delta_m^2=2\\sum_{k=m}^{\\infty}\\frac1{(k+1)^2},\\qquad \\delta_m\\ge\\sqrt{\\frac{2}{m+1}}\\quad(m\\ge1).$$\nConsequently $\\sum_{m\\ge1}\\delta_m=\\infty$: the sufficient summability\nhypothesis in [[def-l2-m-approximable-causal-bernoulli-shift]] does not\napply to this shift. The example makes no claim that nonsummability alone\nprecludes every possible central limit theorem.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty Rademacher product space and has no empty-set branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 4.1 cover every m\u22651, including the first truncation depth."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 verifies the lower bound at the boundary m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero Rademacher coefficients and does not vary through a degenerate process."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the first index m=1 in the integral lower bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and step 2.1 state the Countable/Dependent Choice product construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: infinitely many coefficients 1/(k+1) and the nonempty sign-product domain are fixed; least eligible N_r exists because the square-coefficient tails tend to zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: f is defined as zero on inputs without the chosen subsequence limit, making it a total map; this exceptional-input convention is not a claim that its probabilistic variance vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1: for m=1, delta_1^2=2 sum_{k>=1}(k+1)^-2>=1, and the harmonic lower bound already applies at the first retained-input depth."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 and step 3.1: the almost-sure L2 series has positive variance; the example establishes nonsummable physical dependence, not failure of every possible CLT."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1: the lower bound 2/(m+1) covers all m>=1, with no omitted first truncation index."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts and step 2.1: Countable Choice and Dependent Choice supply the replacement product; the increasing cutoffs N_r are least eligible integers, not arbitrary selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the harmonic-coefficient example with divergent replacement-error sum is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the harmonic-coefficient example with divergent replacement-error sum has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+      "home_batch": 37,
+      "source_path": "items/lem-coordinate-maps-and-permutations-are-measurable-on-finite-products.md",
+      "claim_snapshot": "Let $(S_i,\\Sigma_i)$, $1\\le i\\le n$, be finitely many measurable spaces, with\n$n\\ge1$, and equip $\\prod_{i=1}^nS_i$ with its finite product sigma-algebra.\nIf $f_i:(\\Omega,\\mathcal F)\\to(S_i,\\Sigma_i)$ are measurable, then the tuple\n$f=(f_1,\\ldots,f_n)$ is measurable. If all factors equal one measurable space\n$(S,\\Sigma)$, every coordinate permutation $\\tau_\\pi:S^n\\to S^n$ is\nmeasurable, where $(\\tau_\\pi z)_i=z_{\\pi(i)}$.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty finite tuple or does not concern empty sample size."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter endpoint is part of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-valued parameter endpoint is part of this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim does not require a nondegeneracy condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention is part of this claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses explicit finite indices and no choice axiom; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: n>=1 excludes a zero-factor tuple; measurable rectangles, including empty coordinate rectangles, have measurable preimages in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: a rectangle with an empty coordinate has empty preimage; constant zero real-valued coordinate maps are included whenever the relevant target is real."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: n=1 is the induction base; step 3.1 gives the identity as the only permutation at that length."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: singleton factor spaces or constant coordinate maps still have measurable rectangle preimages, with no nondegeneracy assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: finite product length is an integer n>=1 rather than an interval-valued tuning parameter; the length-one boundary is recorded separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 3.1: the finitely supplied maps and specified permutation determine the constructions; no choice of a map from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the measurability of supplied finite tuples and coordinate permutations is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the measurability of supplied finite tuples and coordinate permutations has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-finite-dependent-vector-clt",
+      "home_batch": 36,
+      "source_path": "items/lem-finite-dependent-vector-clt.md",
+      "claim_snapshot": "Assume the Axiom of Choice. Let $d\\ge1$ and $m\\ge0$ be finite integers, and let $(Y_t)_{t\\in\\mathbb Z}$ be a centered strictly stationary sequence of $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|Y_0\\|^2<\\infty$. Strict stationarity means that every finite-dimensional law is invariant under integer shifts. Assume $m$-dependence: for each $a\\in\\mathbb Z$, the sigma-algebras generated by $(Y_t)_{t\\le a}$ and $(Y_t)_{t\\ge a+m+1}$ are independent, in the sense of [[def-independent-sigma-algebras-and-events]]. Set\n$$\\Sigma_m=\\sum_{|j|\\le m}\\operatorname{Cov}(Y_0,Y_j),$$\nwhere $\\operatorname{Cov}(U,V)=\\mathbb E[(U-\\mathbb EU)(V-\\mathbb EV)^T]$ ([[def-moments-variance-and-covariance]]). Then $\\Sigma_m$ is symmetric positive semidefinite and\n$$\\frac1{\\sqrt n}\\sum_{t=1}^nY_t\\ \\Rightarrow\\ N_d(0,\\Sigma_m).$$\nThe conclusion allows singular $\\Sigma_m$, including $\\Sigma_m=0$.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a sequence of random vectors and has no empty-set conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles a scalar projection whose long-run variance is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits d=1 and m=0; step 3.1 allows blocks with no separating gap when m=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 and 6.1 include singular covariance, including \u03a3_m=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes the lower dependence endpoint m=0, handled in steps 1.1 and 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC; the triangular-array and characteristic-function suppliers retain that premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: d>=1 and sample indices n>=1 are assumed; at m=0 the finite covariance sum contains the lag-zero term rather than being empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: a scalar projection with long-run variance zero converges to zero in L2, so it needs no positive-variance normalization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: d=1 is the scalar case, and at m=0 separating gaps have length zero while block independence follows from independence of the source sequence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1: Cramer-Wold includes singular covariance, including Sigma_m=0; no covariance inverse is introduced."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 3.1: the allowed dependence endpoint m=0 has lag range {0} and no omitted gaps; positive truncation thresholds are sent to infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicitly retained for the probability CLT and characteristic-function suppliers; the deterministic block lengths floor(n^(1/4)) do not add an unstated selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the stationary m-dependent vector central limit implication is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the stationary m-dependent vector central limit implication has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-finite-empirical-measure-is-a-probability-law",
+      "home_batch": 32,
+      "source_path": "items/lem-finite-empirical-measure-is-a-probability-law.md",
+      "claim_snapshot": "Let $(X,\\mathcal A)$ be a measurable space, let $n\\ge1$, and let $x_1,\\ldots,x_n\\in X$. Define\n\n$$P_n(A):=\\frac1n\\sum_{i=1}^n\\delta_{x_i}(A),\\qquad A\\in\\mathcal A.$$\n\nThen $P_n$ is a probability measure on $(X,\\mathcal A)$.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1 and supplied sample points."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: P_n(empty)=0 follows from the defining finite sum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For n=1, P_1=delta_{x_1}, a probability law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If every x_i equals x, the empirical law is delta_x."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The total mass is n^{-1}n=1 for every integer n>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses only the supplied finite tuple."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a finite measure construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a finite measure construction, not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: P_n(empty)=0 from all zero indicators; Statement n>=1 prevents an empty sample and undefined n^-1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: an event containing no sample point has empirical mass zero, regardless of its population-law mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: n=1 gives delta_{x_1}, and the whole space has empirical mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: repeated points are allowed; if all x_i=x, summing the identical indicators gives the single Dirac probability delta_x."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2: masses zero and one are obtained on empty and whole-space events, and countable additivity uses at most n nonempty sample-index sets."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2: the sample points are supplied and only finitely many indicators are nonzero across disjoint events; no choice axiom selects sample points."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the probability-law conclusion for the given Dirac average is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the probability-law conclusion for the given Dirac average has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-geometric-median-majority-radius-bound",
+      "home_batch": 33,
+      "source_path": "items/lem-geometric-median-majority-radius-bound.md",
+      "claim_snapshot": "Let $H$ be a real Hilbert space, let $k\\ge1$ be an integer, let $m_1,\\ldots,m_k\\in H$, and let $m$ minimize $F(z)=\\sum_{j=1}^k\\|z-m_j\\|$. For $0<a<1/2$ and $r>0$, put\n$$\nC_a=\\frac{1-a}{\\sqrt{1-2a}}.\n$$\nIf $z\\in H$ satisfies $\\|m-z\\|>C_a r$, then more than $ak$ of the points $m_j$ satisfy $\\|m_j-z\\|>r$.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement/Definition requires a positive sample or a nonempty finite input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition: Statement excludes r=0 by requiring r>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 apply for k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes centers equal to the median."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition: Statement requires 0<a<1/2 and r>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof uses explicit finite or least-index constructions and no arbitrary nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement now explicitly requires integer k>=1; Remarks exhibits the excluded k=0 failure with H=R,z=0,r=1,a=1/4,m=4 and C_a=3/(2sqrt(2)). Step 2.1 obtains strict decrease because (1-a)k>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: m=z makes the strict antecedent false; zero distance is therefore outside the implication rather than a division-by-zero instance in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement with explicit k>=1: at k=1, m=m_1 and ||m-z||>C_a r>r makes the single center an outlier, exceeding a."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1: coincident centers are allowed; each good center differs from m under D>r, while centers equal to m are treated by the explicit +1 derivative contribution."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: 0<a<1/2 and r>0 exclude both singular a endpoints and r=0; D>C_a r is strict, so equality of distances is not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: a minimizer m is supplied rather than constructed; the directional contradiction in step 2.1 requires no choice of a minimizer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the strict-distance implication forcing more than ak outliers is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the strict-distance implication forcing more than ak outliers has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-l2-basis-projections-converge-and-satisfy-parseval",
+      "home_batch": 36,
+      "source_path": "items/lem-l2-basis-projections-converge-and-satisfy-parseval.md",
+      "claim_snapshot": "Let $H$ be a real Hilbert space and let $(e_k)$ be a finite or countable\northonormal family whose finite linear span is dense in $H$. Here\northonormal means $\\langle e_j,e_k\\rangle_H=1$ when $j=k$ and $0$ otherwise;\ndensity means every $x\\in H$ is arbitrarily close in norm to a finite linear\ncombination of the $e_k$. For $x\\in H$, define\n$$P_Nx=\\sum_{k\\le N}\\langle x,e_k\\rangle_H e_k,$$\nusing all basis vectors once $N$ reaches the size of a finite family. Then\n$P_Nx\\to x$ in norm and\n$$\\|x\\|_H^2=\\lim_{N\\to\\infty}\\sum_{k\\le N}|\\langle x,e_k\\rangle_H|^2.$$",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a real Hilbert space and a specified orthonormal family; it has no empty-set branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 include x=0, for which all projections and coefficient squares vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical parameter has one as a boundary value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 include the zero vector and finite-dimensional basis case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this Hilbert space statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement supplies the finite/countable basis as data; the proof makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves no if-and-only-if statement."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: an empty orthonormal family has span {0}, so density forces H={0}; then P_Nx=0=x and the empty Parseval sum is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: for x=0 all coefficients, projection and residual vanish and both Pythagorean identities read 0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: for a single basis vector with dense span, P_Nx=x after the first vector and Parseval is its single squared coefficient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: a finite basis stabilizes once all vectors are included; a zero Hilbert space is the empty-basis case rather than an assumed positive dimension."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: N reaches the size of a finite family using all its vectors; no endpoint in [0,1] or tuning probability is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: for each fixed x and epsilon, density supplies one finite approximation; this elementary existential use does not construct a countable family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the norm projection convergence and Parseval from a dense orthonormal span is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the norm projection convergence and Parseval from a dense orthonormal span has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-long-run-covariance-is-trace-class",
+      "home_batch": 36,
+      "source_path": "items/lem-long-run-covariance-is-trace-class.md",
+      "claim_snapshot": "Assume Countable Choice and Dependent Choice. Let $H=L^2([0,1],dt;\\mathbb R)$,\nlet $(X_t)_{t\\in\\mathbb Z}$ be a centered causal Bernoulli shift as in\n[[def-l2-m-approximable-causal-bernoulli-shift]], and suppose it is\n$L^2$-$m$-approximable. Write $\\sigma=(\\mathbb E\\|X_0\\|_H^2)^{1/2}$,\nlet $S_1(H)$ be the trace-class Banach space with trace norm $\\|\\cdot\\|_1$\n([[def-trace-class-operator]], [[thm-trace-class-is-a-two-sided-banach-operator-ideal]]),\nwrite $\\mathbb E_B$ for a Bochner integral, and define $x\\otimes y:H\\to H$ by\n$(x\\otimes y)h=\\langle h,y\\rangle_Hx$. The Bochner series\n$$ \\Gamma=\\mathbb E_B[X_0\\otimes X_0]+ \\sum_{j=1}^{\\infty}\\bigl(\\mathbb E_B[X_0\\otimes X_j] +\\mathbb E_B[X_j\\otimes X_0]\\bigr) $$\nconverges absolutely in trace norm to a positive self-adjoint trace-class\noperator. For $S_n=\\sum_{t=1}^nX_t$, the Bochner covariance operators\n$\\Gamma_n=n^{-1}\\mathbb E_B[S_n\\otimes S_n]$ satisfy\n$\\|\\Gamma_n-\\Gamma\\|_1\\to0$. If $\\boxtimes$ is the product-kernel class from\n[[lem-real-l-two-kernel-operator-is-bounded-and-rank-one-compatible]], then\n$$ \\kappa_j=\\mathbb E_B[X_0\\boxtimes X_j],\\qquad \\widetilde\\kappa_j=\\mathbb E_B[X_j\\boxtimes X_0] $$\nare well-defined elements of $K=L^2([0,1]^2,dt\\times dt;\\mathbb R)$, and\n$$ c=\\kappa_0+\\sum_{j=1}^{\\infty}(\\kappa_j+\\widetilde\\kappa_j) $$\nconverges absolutely in $K$ and satisfies $T_c=\\Gamma$. Equivalently, $c$ is\nthe design's long-run covariance-kernel series interpreted as an\n$L^2([0,1]^2)$ equivalence class; no pointwise representatives are fixed.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma assumes an indexed centered process and has no empty-set branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits the zero process, for which every covariance and kernel term vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the first positive lag j=1 using the separately defined full replacement X_{1,0}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 preserves positivity when \u0393=0 or has finite rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 include lag j=1 and the diagonal lag j=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement explicitly assumes Countable Choice and Dependent Choice for the Bochner and product-space constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1: at n=1 the lag sum is empty, leaving E_B[X_0 tensor X_0]; the infinite covariance series in the Statement starts at lag one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1: sigma=0 forces X_t=0 almost surely by stationarity, and every tensor and kernel expectation is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2: lag j=1 uses the full replacement X_{1,0}, whose independent centered law makes the cross expectation zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: positivity and self-adjointness pass from Gamma_n to Gamma without positive definiteness; a zero or finite-rank covariance is allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: delta_0 is a finite separately bounded term at j=1, and summability of delta_m starts at m=1; no pointwise kernel endpoint representative is chosen."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts A1: Countable Choice supplies trace-class completeness and Dependent Choice the replacement extension; step 4.1 uses kernel equivalence classes, not chosen pointwise versions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the absolute trace/kernel covariance convergence from summable replacement errors is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the absolute trace/kernel covariance convergence from summable replacement errors has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-measurable-minimum-norm-geometric-median-selection",
+      "home_batch": 33,
+      "source_path": "items/lem-measurable-minimum-norm-geometric-median-selection.md",
+      "claim_snapshot": "Fix a separable real Hilbert space $H$ and an integer $k\\ge1$. The rule in [[alg-geometric-median-of-block-means]] defines a single-valued Borel map $H^k\\to H$: for every tuple $(m_1,\\ldots,m_k)$ the function $F_m(z)=\\sum_{j=1}^k\\|z-m_j\\|$ has a nonempty closed convex minimizer set, and that set has a unique point of minimum norm. The choice-free Borel construction below does not use weak compactness or reflexivity. Countable Choice is used only for the published Hilbert projection supplier that identifies the minimum-norm point.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement/Definition requires a positive sample or a nonempty finite input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Definition: Steps 1.1 and 2.1 include the all-zero tuple."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Definition: Statement and step 1.1 include a one-center objective."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Definition: Step 1.1 applies when all centers coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Definition: Steps 1.2 and 2.1 use lambda>0 and the limit lambda down to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Definition: A1 and step 1.2 identify the exact Countable Choice use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is one-way and claims no converse."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: k>=1 excludes an empty objective; step 1.1 obtains a nonempty compact sublevel set containing 0 and hence a nonempty minimizer set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: when the center span has dimension zero, all centers are zero and F_m(z)=k||z|| has the unique minimizer 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: k=1 makes the sole center the unique median and therefore the minimum-norm minimizer."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: even when the original median set contains many points, Hilbert projection chooses its unique nearest point to 0; regularization is strictly convex."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: the regularization parameters 1/s decrease to zero only through positive values; no assertion of strict convexity at lambda=0 is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1: Countable Choice is retained for F2 projection only; dense approximations use least-index Borel rules and the supplied dense sequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the existence, uniqueness and Borel construction of a minimum-norm median is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the existence, uniqueness and Borel construction of a minimum-norm median has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-multivariate-mean-rate-given-correct-scale-event",
+      "home_batch": 33,
+      "source_path": "items/lem-multivariate-mean-rate-given-correct-scale-event.md",
+      "claim_snapshot": "Let $\\Sigma$ be a finite covariance matrix in $\\mathbb R^d$, $d\\ge1$, with $\\operatorname{tr}\\Sigma>0$, mean $\\mu$, and $0\\le\\lambda_{\\max}(\\Sigma)\\le\\operatorname{tr}\\Sigma$ as in [[lem-finite-covariance-matrix-basic-properties]]. Let $0\\le\\eta\\le1/10$, $0<\\delta<1$, $N\\ge2560\\log(2/\\delta)$, and $\\varepsilon=\\max\\{10\\eta,2560\\log(2/\\delta)/N\\}$. Define\n$$\nQ_0=\\max\\left\\{\\frac{256}{\\varepsilon}\\sqrt{\\frac{\\operatorname{tr}\\Sigma}{N}},\\ 16\\sqrt{\\frac{\\lambda_{\\max}(\\Sigma)}{\\varepsilon}}\\right\\}.\n$$\nFix $b>0$ and any integer $i_0$ with $2^{i_0}\\in[2Q_0,4Q_0)$ and any observed input tuple to [[alg-multivariate-trimmed-mean]]. If $K_{i_0}$ is nonempty and every $z\\in K_{i_0}$ satisfies $\\|z-\\mu\\|_2\\le b\\varepsilon Q_0$, then the algorithm's output satisfies\n$$\n\\|\\widehat\\mu-\\mu\\|_2\\le c_b\\left[\\sqrt{\\frac{\\operatorname{tr}\\Sigma}{N}}+\\sqrt{\\frac{\\lambda_{\\max}(\\Sigma)\\log(1/\\delta)}{N}}+\\sqrt{\\lambda_{\\max}(\\Sigma)\\eta}\\right],\n$$\nwhere\n$$\nc_b=b\\max\\left\\{256+16\\sqrt{2560\\log2},\\ 16\\sqrt{2560},\\ 16\\sqrt{10}\\right\\}.\n$$\nIn particular, $b=4$ recovers the original constant and $b=16$ applies to the corrected slab proposition. This is a deterministic implication from the slab event; it does not assert that the event has high probability.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement specifies a nonempty class or positive dimension and sample size."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-variable, zero-covariance or zero-complexity cases are explicitly handled or excluded in the Statement and proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Finite/countable classes may be singleton; estimator sample-size hypotheses remain explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof states its positive-variance/trace branch or handles the deterministic case explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All displayed confidence, contamination and quantile endpoints retain their explicit domain; nearest-rank boundaries are treated directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite maximizers have fixed tie breaking and countable classes have a fixed enumeration; only the univariate quantile supplier retains its declared Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: K_{i_0} is explicitly nonempty, so S cannot be empty; least-index or all-scale selector output belongs to K_{i_0}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: tr(Sigma)>0 excludes zero trace and ensures Q_0>0; eta=0 remains allowed because the confidence term keeps epsilon positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: d=1 is allowed, but N=1 violates N>=2560 log(2/delta); the deterministic implication is not a singleton-data theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: singular Sigma is allowed when trace is positive; only lambda_max<=tr(Sigma) is used, with no inverse covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: b>0 and delta in (0,1); b=4 gives the original deterministic constant while b=16 applies to the corrected slab radius; eta=1/10 is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: if S is proper nonempty its least element is <=i_0; if S=Z the all-scale selector lies in K_{i_0}; no probabilistic event is manufactured from this conditional hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the deterministic rate implication conditional on a nonempty bounded slab tail is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the deterministic rate implication conditional on a nonempty bounded slab tail has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-one-sided-dqm-implies-iid-lan",
+      "home_batch": 30,
+      "source_path": "items/lem-one-sided-dqm-implies-iid-lan.md",
+      "claim_snapshot": "Assume AC. Let $t\\mapsto P_t$ be a one-sided path ($0\\le t<\\epsilon$) of probability laws on $(\\mathcal X,\\mathcal A)$ dominated by one supplied sigma-finite measure $\\mu$, with supplied densities $p_t$ and $P_0=P$. Suppose the path is differentiable in quadratic mean at $0$ with score $s\\in L^2(P)$, in the sense of [[def-dqm-submodel-through-a-law]]. Put $I=P[s^2]$. For a fixed $h\\ge0$, let $t_n=h/\\sqrt n$ and let $X_1,\\ldots,X_n$ be iid $P$. On $S=\\{p_0>0\\}$ set $\\alpha_t=P_t(S^c)$ and, for sufficiently small $t$, define\n\n$$q_t(x)=\\frac{\\mathbf1_S(x)p_t(x)}{(1-\\alpha_t)p_0(x)}\\quad\\text{on }S,\\qquad q_t(x)=0\\quad\\text{on }S^c.$$\n\nThen $q_t$ is a probability density relative to $P$. With $L_n=\\prod_{i=1}^nq_{t_n}(X_i)$ and $\\Delta_n=n^{-1/2}\\sum_{i=1}^ns(X_i)$,\n\n$$\\left\\|P_{t_n}^{\\otimes n}-L_nP^{\\otimes n}\\right\\|_{\\rm TV}\\longrightarrow0,\\qquad \\log L_n=h\\Delta_n-\\tfrac12h^2I+o_P(1),\\qquad \\Delta_n\\Rightarrow N(0,I).$$\n\nFor $h=0$ take $L_n=1$ and use the convention $\\log0=-\\infty$. The proxy $L_nP^{\\otimes n}$ is the normalized absolutely continuous component; the conclusion does not assert a full likelihood ratio for $P_{t_n}^{\\otimes n}$.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A DQM path is based at a specified probability law and has a supplied common dominator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For s=0, I=0 and the log proxy limit is the degenerate N(0,0); the same argument applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The result is one-dimensional in the path parameter and includes the scalar score case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The score may vanish P-almost surely; no inverse information is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The path is one-sided at t=0 and h=0 gives the exact base product law."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicit; the proof does not select any additional density versions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if result."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 6.1: n is a positive iid sample length; the product density is measured on the generated finite-product sigma-algebra, not an empty experiment."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 and step 5.1: I=0 gives a degenerate central limit and the same remainder bounds; no division by I is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the path has a scalar score, and fixed h=1 is allowed; the theorem is asymptotic in n rather than a special n=1 identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1: alpha_t=0 makes the original and normalized product laws exactly equal and requires no normalized residual mixture law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 6.1: h=0 uses L_n=1 and both laws equal P^n; for h>0, t_n eventually lies in the one-sided interval [0,epsilon)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Facts A1: AC is explicit for simultaneous density versions and the scalar CLT; q_t is then defined from those supplied versions, not chosen again."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the normalized one-sided DQM LAN proxy and total-variation approximation is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the normalized one-sided DQM LAN proxy and total-variation approximation has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "lem-variance-sensitive-bounded-empirical-process-concentration",
+      "home_batch": 33,
+      "source_path": "items/lem-variance-sensitive-bounded-empirical-process-concentration.md",
+      "claim_snapshot": "Let $X_1,\\ldots,X_n$ be iid with law $P$, $n\\ge1$, and let $\\mathcal F$ be a finite or countable class of measurable real functions containing $0$. Suppose $|f|\\le B$ everywhere and $Pf^2\\le s^2$ for all $f\\in\\mathcal F$, with finite $B,s\\ge0$. Put\n$$Z=\\sup_{f\\in\\mathcal F}\\sum_{i=1}^n(f(X_i)-Pf),\\qquad W=\\sup_{f\\in\\mathcal F}\\sum_{i=1}^n f(X_i)^2,\\qquad m=EW.$$\nFor every $x>0$,\n$$P\\left(Z>EZ+2\\sqrt{(8m+4ns^2)x}+\\sqrt8\\,Bx\\right)\\le e^{-x}.$$\nThe bound uses second moments, not only variances. All suprema are measurable by countability. No choice axiom is assumed.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement specifies a nonempty class or positive dimension and sample size."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-variable, zero-covariance or zero-complexity cases are explicitly handled or excluded in the Statement and proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Finite/countable classes may be singleton; estimator sample-size hypotheses remain explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof states its positive-variance/trace branch or handles the deterministic case explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All displayed confidence, contamination and quantile endpoints retain their explicit domain; nearest-rank boundaries are treated directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite maximizers have fixed tie breaking and countable classes have a fixed enumeration; only the univariate quantile supplier retains its declared Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: F contains the zero function, so its supremum is over a nonempty class and Z,W>=0; n>=1 excludes an empty sample aggregate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof Given: B=0 is immediate since every f=0; step 2.2 handles m=0 by W=0 almost surely, and step 4.1 separately handles A=8m+4ns^2=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the singleton class {0} is allowed and gives Z=W=EZ=m=0; n=1 is also permitted by the finite product argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1: zero second moments and deterministic functions are not excluded; the proof passes finite-class bounds to a countable class by bounded convergence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: x>0 excludes the zero-threshold endpoint; step 4.1 takes t upward to 1/b for A=0, while B=0 has already been handled without that reciprocal."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: a fixed finite ordering picks the first maximizing f; step 4.1 uses an enumeration for countable subclasses; the Statement assumes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the upper concentration bound involving EW and second moments is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the upper concentration bound involving EW and second moments has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "prop-correct-scale-multivariate-trimming-slab-bound",
+      "home_batch": 33,
+      "source_path": "items/prop-correct-scale-multivariate-trimming-slab-bound.md",
+      "claim_snapshot": "Let $X$ be an absolutely continuous random vector in $\\mathbb R^d$ with mean $\\mu$ and finite covariance matrix $\\Sigma$ as defined in [[lem-finite-covariance-matrix-basic-properties]]. Let $X_1,\\ldots,X_N,Y_1,\\ldots,Y_N$ be $2N$ iid clean copies and let their observed replacement sample have at most $\\lfloor2\\eta N\\rfloor$ changed coordinates in total. Assume $0\\le\\eta\\le1/10$, $0<\\delta<1$, $N\\ge2560\\log(2/\\delta)$, and $\\varepsilon=\\max\\{10\\eta,2560\\log(2/\\delta)/N\\}\\le1$. If $\\operatorname{tr}\\Sigma>0$, put\n$$\nQ_0=\\max\\left\\{\\frac{256}{\\varepsilon}\\sqrt{\\frac{\\operatorname{tr}\\Sigma}{N}},\\ 16\\sqrt{\\frac{\\lambda_{\\max}(\\Sigma)}{\\varepsilon}}\\right\\}.\n$$\nFor the slabs and tail intersections in [[alg-multivariate-trimmed-mean]], [[lem-positive-real-has-dyadic-scale-in-factor-two]] supplies an integer $i_0$ with $2^{i_0}\\in[2Q_0,4Q_0)$. Then, with probability at least $1-\\delta$, $K_{i_0}=\\bigcap_{i\\ge i_0}\\Gamma(2^i)$ is nonempty and every $z\\in K_{i_0}$ satisfies $\\|z-\\mu\\|\\le16\\varepsilon Q_0$. The positive-trace condition is required to make $Q_0>0$.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement specifies a nonempty class or positive dimension and sample size."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-variable, zero-covariance or zero-complexity cases are explicitly handled or excluded in the Statement and proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Finite/countable classes may be singleton; estimator sample-size hypotheses remain explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof states its positive-variance/trace branch or handles the deterministic case explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All displayed confidence, contamination and quantile endpoints retain their explicit domain; nearest-rank boundaries are treated directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite maximizers have fixed tie breaking and countable classes have a fixed enumeration; only the univariate quantile supplier retains its declared Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 and step 5.1: mu belongs to Gamma(Q), nesting gives K_{i_0}=Gamma(Q), and this proves the claimed nonempty intersection rather than assuming it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the proposition is conditional on tr(Sigma)>0, ensuring Q_0>0; eta=0 is allowed and the confidence term keeps epsilon positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: d=1 is included; N=1 cannot meet N>=2560 log(2/delta), and epsilon=1 is explicitly included in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.2: covariance need not be invertible but trace is positive; no assertion is made for a point-mass clean law under the absolute-continuity premise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1: strict tail counts control both ceil ranks even at epsilon=1 and at integral epsilon N/2; step 5.1 uses the allowed eta=1/10 confidence domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: a fixed countable dense directional subset gives measurable suprema; Facts F5 imports the positive dyadic-scale supplier, while no arbitrary point of an empty slab is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the high-probability nonempty dyadic tail with radius sixteen epsilon Q_0 is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the high-probability nonempty dyadic tail with radius sixteen epsilon Q_0 has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "thm-general-regular-estimator-convolution-bound",
+      "home_batch": 30,
+      "source_path": "items/thm-general-regular-estimator-convolution-bound.md",
+      "claim_snapshot": "Assume AC and Countable Choice. Let $\\psi$ be pathwise differentiable at $P$ with tangent space $\\mathcal T$ and canonical gradient $\\phi_{\\rm can}\\in\\mathcal T^k$, and write $V_{\\rm can}=P[\\phi_{\\rm can}\\phi_{\\rm can}^T]$. If $\\mathcal T\\ne\\{0\\}$, suppose a directed family of finite-dimensional, dominated QMD models $\\{P_{\\gamma,\\theta}:\\theta\\in\\Theta_\\gamma\\subseteq\\mathbb R^{d_\\gamma}\\}$, with each $\\Theta_\\gamma$ open and $P_{\\gamma,\\theta_{\\gamma,0}}=P$, has score spans $\\mathcal S_\\gamma\\subseteq\\mathcal T$ whose union is dense in $\\mathcal T$. In each model let $S_\\gamma\\in L^2_0(P)^{d_\\gamma}$ be a score basis, let $I_\\gamma=P[S_\\gamma S_\\gamma^T]$ be nonsingular, and let $D_\\gamma=P[\\phi_{\\rm can}S_\\gamma^T]$. Assume for each fixed $h\\in\\mathbb R^{d_\\gamma}$ that $\\sqrt n\\{\\psi(P_{\\gamma,\\theta_{\\gamma,0}+h/\\sqrt n})-\\psi(P)\\}\\to D_\\gamma h$, and that under each local law the centered estimator $\\sqrt n\\{\\widehat\\psi_n-\\psi(P_{\\gamma,\\theta_{\\gamma,0}+h/\\sqrt n})\\}$ converges to one common law $L$, independent of $\\gamma$ and $h$. Suppose $L$ has finite covariance. By [[thm-qmd-implies-lan-for-iid]], each model has the required LAN proxy; [[lem-finite-dimensional-functional-convolution-bound]] then applies with derivative matrix $D_\\gamma$. If $\\mathcal T=\\{0\\}$, no submodel family is needed. Then\n\n$$\\operatorname{Cov}(L)\\succeq V_{\\rm can}.$$\n\nThis is a lower bound for general regular estimators; asymptotic linearity is not assumed.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statistical model and target functional are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If T={0}, then the canonical gradient and bound vanish, and covariance positivity proves the conclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: One-dimensional interest and one-dimensional score submodels are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Target derivative matrices may be rank-deficient; only each submodel information matrix is required nonsingular."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Local asymptotics are pointwise for fixed h in each open QMD submodel; no uniformity is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC and Countable Choice are both stated, with distinct uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if result."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.2: if T={0}, no submodel family is required; if T is nonzero, the directed score-span family must have dense union."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2: T={0} forces phi_can=0 and V_can=0; covariance positivity gives the lower bound without a convolution submodel."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: k=1 and a one-dimensional score model are allowed, provided its scalar information is nonsingular; the matrix proof then gives the scalar variance bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: D_gamma can be rank deficient and the Gaussian component can be singular; the independent remainder still has a positive-semidefinite covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: each Theta_gamma is open around theta_gamma,0 and each fixed h eventually yields a valid local parameter; no boundary-uniform or one-sided model conclusion is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts A1 and A2: AC is used by finite-dimensional probability suppliers and Countable Choice by Hilbert projection/Riesz; step 2.2 uses density to select one approximation for fixed a,epsilon."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the covariance lower bound for a common regular limit over dense QMD score spans is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the covariance lower bound for a common regular limit over dense QMD score spans has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts",
+      "home_batch": 36,
+      "source_path": "items/thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts.md",
+      "claim_snapshot": "Assume the Axiom of Choice. Let $H=L^2([0,1],dt;\\mathbb R)$ and let\n$(X_t)_{t\\in\\mathbb Z}$ be a centered, $L^2$-$m$-approximable causal\nBernoulli shift as defined in\n[[def-l2-m-approximable-causal-bernoulli-shift]], with Bochner mean\n$\\mathbb E_BX_0=0$. Let $\\Gamma$ be its long-run covariance operator from\n[[lem-long-run-covariance-is-trace-class]], and let $G$ be a centered\n$H$-valued Gaussian random element with covariance $\\Gamma$, whose existence\nis given by [[lem-positive-trace-class-covariance-defines-hilbert-gaussian]].\nThen, for $S_n=\\sum_{t=1}^nX_t$,\n$$n^{-1/2}S_n\\ \\Rightarrow\\ G$$\nin the weak topology of Borel probability measures on $H$. The covariance\nkernel is the $L^2([0,1]^2)$ equivalence class $c$ in the long-run covariance\nlemma, and its integral operator is $T_c=\\Gamma$. This is a CLT for the\n$H$-valued sample sums; it is not a functional CLT for the time-indexed\npartial-sum process.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a centered process and an H-valued Gaussian law; it has no empty-set branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement includes \u0393=0; steps 5.1\u20136.1 give the zero tail and degenerate Gaussian case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly covers m=1, where the middle-lag sum is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The theorem and steps 4.1\u20136.1 include a degenerate centered Gaussian covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The minimum truncation depth m=1 is covered in step 1.1; full replacement X_{h,0} appears at h=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC; step 2.1 makes the truncation subsequence selection under that premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves no if-and-only-if statement."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: at m=1 the middle-lag sum is empty and equals zero; sample lengths n are positive, so normalized partial sums are defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 and step 5.1: Gamma=0 is permitted; all limiting projection variances and Gaussian eigenvalues are zero, yielding the point-mass Gaussian law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: m=1 has no middle lags; step 5.1 uses full replacement X_{h,0} at h=1 to bound the first lag."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 and step 4.1: finite-dimensional covariance matrices may be singular and converge through characteristic functions without inversion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1: a finite basis uses P_K=I after its final vector; the Gaussian tail sum is then zero, and the first full-replacement lag uses delta_0 separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts A1 and step 2.1: AC implies CC/DC for the countable constructions; the increasing m_r are least eligible indices after liminf(m delta_m)=0, with the eigenbasis supplied under AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the H-valued sample-sum Gaussian limit from L2-m approximability is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the H-valued sample-sum Gaussian limit from L2-m approximability has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "thm-mean-and-median-replacement-breakdown",
+      "home_batch": 32,
+      "source_path": "items/thm-mean-and-median-replacement-breakdown.md",
+      "claim_snapshot": "For any fixed sample $x\\in\\mathbb R^n$, the sample mean $\\bar x=n^{-1}\\sum_{i=1}^n x_i$ has finite-sample replacement breakdown fraction $1/n$. If $n=2r+1$ is odd and the conventional sample median is the $(r+1)$-st order statistic, its finite-sample replacement breakdown fraction is $(r+1)/n=\\lfloor(n+1)/2\\rfloor/n$.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1 and a fixed real sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero replacements leave both statistics unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: One replacement breaks the mean; for n=1 it is also the median's first break."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The min/max argument and mean coordinate formula remain valid for a constant sample."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The first breaking count is at most n; for n=1 the median count is one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: A single explicit M sequence witnesses breaking; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives exact fractions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives exact fractions, not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: sample means and odd-sample order statistics require a positive sample length; zero replacements leave the fixed sample unchanged in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-replacement set is just the original sample and cannot make the statistic unbounded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.3: one replacement breaks the mean; for n=1, r=0 and one replacement also breaks the median, so both fractions are one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: the min/max argument still bounds a median when the original values tie or all coincide; the diverging replacements in step 1.3 still escape that fixed range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 and step 1.3: r replacements keep the median between the clean extrema while r+1 replacements force it to M; this is the exact first breaking count."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.3: replacing a specified coordinate or a specified group by M tending to infinity gives explicit witnesses, not an arbitrary family selected by choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the exact first breaking fractions for mean and odd-sample median is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the exact first breaking fractions for mean and odd-sample median has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "thm-multivariate-trimmed-mean-under-replacement",
+      "home_batch": 33,
+      "source_path": "items/thm-multivariate-trimmed-mean-under-replacement.md",
+      "claim_snapshot": "Let $X$ be an absolutely continuous random vector in $\\mathbb R^d$ with mean $\\mu$ and finite covariance matrix $\\Sigma$ as defined in [[lem-finite-covariance-matrix-basic-properties]]. Let $X_1,\\ldots,X_N,Y_1,\\ldots,Y_N$ be $2N$ iid clean copies and let their observed replacement sample have at most $\\lfloor2\\eta N\\rfloor$ changed coordinates in total. Assume $0\\le\\eta\\le1/10$, $0<\\delta<1$, and $N\\ge2560\\log(2/\\delta)$. Set $\\varepsilon=\\max\\{10\\eta,2560\\log(2/\\delta)/N\\}$ and let $\\widehat\\mu$ be the repaired, total selector in [[alg-multivariate-trimmed-mean]]. Then there is a universal constant $c>0$ such that\n$$\nP\\!\\left(\\|\\widehat\\mu-\\mu\\|\\le c\\left[\\sqrt{\\frac{\\operatorname{tr}\\Sigma}{N}}+\\sqrt{\\frac{\\lambda_{\\max}(\\Sigma)\\log(1/\\delta)}{N}}+\\sqrt{\\lambda_{\\max}(\\Sigma)\\eta}\\right]\\right)\\ge1-\\delta.\n$$\nThe claim is restricted to the displayed domain, which ensures $\\varepsilon\\le1$. No guarantee is asserted for $1/10<\\eta<1/2$, for $\\eta\\ge1/2$, or for atomic laws.",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement specifies a nonempty class or positive dimension and sample size."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-variable, zero-covariance or zero-complexity cases are explicitly handled or excluded in the Statement and proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Finite/countable classes may be singleton; estimator sample-size hypotheses remain explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof states its positive-variance/trace branch or handles the deterministic case explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All displayed confidence, contamination and quantile endpoints retain their explicit domain; nearest-rank boundaries are treated directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite maximizers have fixed tie breaking and countable classes have a fixed enumeration; only the univariate quantile supplier retains its declared Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the corrected slab proposition proves K_{i_0} nonempty on the high-probability event; the total algorithm separately includes an empty-S fallback."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: tr(Sigma)=0 implies the constant clean vector and the exact-recovery supplier returns mu; under an absolutely continuous law this branch is vacuous but it is explicitly proved."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: d=1 is permitted but singleton halves violate N>=2560 log(2/delta); epsilon=1 is an admissible trimming endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: singular positive-trace covariance is handled through trace and lambda_max without inversion; the zero-trace branch is handled independently in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: eta=0 and eta=1/10 are included, delta stays in (0,1), and the epsilon<=1 domain is preserved by the imported slab argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the selector is the total measurable algorithm and the slab event is a proved nonempty event; neither this proof nor the rate lemma chooses an unspecified point from its intersection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the universal-constant multivariate mean rate under the prescribed replacement budget is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the universal-constant multivariate mean rate under the prescribed replacement budget has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    },
+    {
+      "id": "thm-univariate-trimmed-mean-under-replacement",
+      "home_batch": 33,
+      "source_path": "items/thm-univariate-trimmed-mean-under-replacement.md",
+      "claim_snapshot": "Assume Countable Choice. Let $X$ be an absolutely continuous real random variable with mean $\\mu$ and finite positive variance $\\sigma^2=E[(X-\\mu)^2]$ ([[def-moments-variance-and-covariance]]). Let $X_1,\\ldots,X_N,Y_1,\\ldots,Y_N$ be $2N$ iid clean copies of $X$, and let $(\\widetilde X_1,\\ldots,\\widetilde X_N,\\widetilde Y_1,\\ldots,\\widetilde Y_N)$ be a sample-replacement version with at most $\\lfloor2\\eta N\\rfloor$ changed coordinates in total ([[def-adversarial-sample-replacement]]). Let $0<\\delta<1$, $\\delta\\ge e^{-N/4}$, and\n$$\n\\varepsilon=8\\eta+\\frac{12\\log(4/\\delta)}{N}\\in(0,1/4].\n$$\nApply [[alg-univariate-trimmed-mean]] with these parameters. For the centered variable $Z=X-\\mu$, define, for $0<u\\le1$,\n$$\nQ_u(Z)=\\sup\\{t\\in\\mathbb R:P(Z\\ge t)\\ge1-u\\},\n$$\nand\n$$\nE(u,X)=\\max\\left\\{E\\bigl[|Z|\\mathbf1_{\\{Z\\le Q_{u/2}(Z)\\}}\\bigr],\\ E\\bigl[|Z|\\mathbf1_{\\{Z\\ge Q_{1-u/2}(Z)\\}}\\bigr]\\right\\}.\n$$\nHere $E$ is the raw centered-tail functional, distinct from the excess-tail lower-bound functional. The claims are\n$$\nP\\!\\left(|\\widehat\\mu-\\mu|\\le3E(4\\varepsilon,X)+2\\sigma\\sqrt{\\frac{\\log(4/\\delta)}{N}}\\right)\\ge1-\\delta\n$$\nand\n$$\nP\\!\\left(|\\widehat\\mu-\\mu|\\le10\\sqrt{\\varepsilon}\\,\\sigma\\right)\\ge1-4e^{-\\varepsilon N/12}.\n$$",
+      "old_rows": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement specifies a nonempty class or positive dimension and sample size."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-variable, zero-covariance or zero-complexity cases are explicitly handled or excluded in the Statement and proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Finite/countable classes may be singleton; estimator sample-size hypotheses remain explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof states its positive-variance/trace branch or handles the deterministic case explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All displayed confidence, contamination and quantile endpoints retain their explicit domain; nearest-rank boundaries are treated directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite maximizers have fixed tie breaking and countable classes have a fixed enumeration; only the univariate quantile supplier retains its declared Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "proposed_rows": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: both clean halves have positive length N and the clipping average has denominator N; the population law is absolutely continuous with sigma^2>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: eta=0 permits zero replacements while epsilon remains positive from confidence; sigma^2=0 is excluded rather than normalized in the proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 makes epsilon>=12 log(4)>1/4 and is inadmissible; this bound concerns sufficiently large positive halves, not singleton samples."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 and step 2.1: strict tail counts bound the corrupted ceil-ranked cutoffs and dependent clipping is compared to fixed clips; arbitrary replacement ties are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2: epsilon=1/4 uses inner level 2epsilon=1/2 and outer level epsilon/2>0; delta>=exp(-N/4) is inclusive, while delta=0,1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Facts: Countable Choice is retained for population-quantile bounds; empirical cutoffs have fixed finite ranks, and replacement choices are bounded simultaneously rather than selected by this proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the raw-tail and square-root-epsilon scalar trimmed-mean bounds is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the raw-tail and square-root-epsilon scalar trimmed-mean bounds has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "independent_acceptance": false,
+      "review_scope": "focused boundary worksheet owner read of current claim and relevant complete proof; not independent native full-proof acceptance"
+    }
+  ],
+  "unresolved_findings": [],
+  "execution": "Only this proposal JSON and the explicitly authorized geometric-median empty-center source repair/receipt written. No contracts, manifests, hashes or state changed; no tests or gates run. Required source proof-layout result recorded in the repair receipt.",
+  "resolved_source_finding": {
+    "id": "lem-geometric-median-majority-radius-bound",
+    "receipt": "mathematical-statistics-foundations-37-owner-step2-geometric-median-empty-resolution.json"
+  }
+}

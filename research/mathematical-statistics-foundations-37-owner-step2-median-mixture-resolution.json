@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "run": "mathematical-statistics-foundations-37",
+  "escalation": "E34",
+  "round": 1,
+  "maximum_rounds": 2,
+  "recorded_at": "2026-10-14T07:45:13.799702+00:00",
+  "decision": "accept-focused-median-mixture-repair",
+  "native_review": "research/mathematical-statistics-foundations-37-scope-review/batch-32/review-1.json",
+  "confirmed_defect": "Median influence supplier step1.2 falsely says atom contribution vanishes for x<t<q_epsilon. It is epsilon since delta_x((-infinity,t])=1.",
+  "smallest_missing_prerequisite": null,
+  "repair": {
+    "path": "items/thm-median-influence-function.md",
+    "exact_before_fragment": "For $x<t<q_\\epsilon$, the contamination term is again zero and $F(t)<F(q_\\epsilon)$: below the local interval this follows from monotonicity and $F(t)\\le F(m-\\delta)<F(q_\\epsilon)$, and inside it from strict increase. Thus the mixture cdf is below $1/2$ for every $t<q_\\epsilon$",
+    "exact_after_fragment": "For $x<t<q_\\epsilon$, the contamination term is $\\epsilon$ and $F(t)<F(q_\\epsilon)=r_\\epsilon$: below the local interval this follows from monotonicity and $F(t)\\le F(m-\\delta)<F(q_\\epsilon)$, and inside it from strict increase. Therefore the mixture cdf at such $t$ is $(1-\\epsilon)F(t)+\\epsilon<(1-\\epsilon)r_\\epsilon+\\epsilon=1/2$. Together with the cases $t<x$ and $t=x$, this puts the mixture cdf below $1/2$ for every $t<q_\\epsilon$",
+    "statement_unchanged": true,
+    "definitions_dependencies_axioms_unchanged": true,
+    "scope": "Replace only erroneous step1.2 atom/CDF comparison, retaining prior t=x repair and all other proof steps."
+  },
+  "independent_check": "x<m and q_epsilon in(m\u2212delta,m), q_epsilon>x. For every x<t<q_epsilon strict local increase or monotonicity below interval gives F(t)<F(q)=r=(1/2\u2212epsilon)/(1\u2212epsilon); adding atom epsilon gives (1\u2212epsilon)F(t)+epsilon<1/2. Earlier t<x and t=x cases already establish strict lower CDF; at q equality holds. Thus q is lower median, and derivative \u22121/(2f(m)) follows unchanged. x>m and x=m branches unaffected.",
+  "consumer_dispositions": [
+    {
+      "id": "ex-median-influence-and-replacement-breakdown",
+      "actual_read": "Entire Example/Facts/Verification, focusedF1 and1.1",
+      "disposition": "Its unique smooth median assumptions imply supplier local continuous positive density and F(m)=1/2. F1/1.1 use exactly gross-error sensitivity supremum1/(2f(m)); corrected lower-tail median argument establishes same unchanged formula. Separate finite-sample breakdown count uses another theorem; no consumer edit required."
+    },
+    {
+      "id": "cex-bounded-influence-does-not-imply-positive-breakdown",
+      "actual_read": "Entire Statement refuted/Facts/Counterexample, focusedF12 and1.2",
+      "disposition": "Uniform[-1,1] law has median0/local density1/2. Point contamination creates at most one atom, so two-atom trigger remains false and functional equals lower median on the contamination path. F12/1.2 use literal pointwise influence \u22121 below0,+1 above0,0 at0, exactly preserved. Subsequent2/n breakdown construction independent of erroneous CDF sentence; no consumer edit required."
+    }
+  ],
+  "actual_closure": "Read all current run manifests and authored source uses: supplier plus exactly the two named B consumers, no additional direct/transitive item consumers. Statements unchanged, no semantic consumer repair required.",
+  "metadata_changes": [],
+  "validation": [
+    {
+      "command": "node tools/proof-layout.mjs items/thm-median-influence-function.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 7 steps, 0 defects\n",
+      "scope": "Mandatory final changed-path layout only; no optional tests."
+    }
+  ],
+  "not_performed": [
+    "No metadata/contracts/manifests/coverage edits",
+    "No hashes/readiness/state/tests/gates/commit",
+    "No broad whole-batch review"
+  ],
+  "next_action": "Root independently reads exact supplier correction and consumer dispositions, owns metadata mirroring and native owner resolution.",
+  "acceptance_scope": "Exact native second-review CDF defect and its two actual consumer uses only; no whole-batch or independent native acceptance."
+}

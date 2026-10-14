@@ -12,12 +12,7 @@ deps: [cor-reverse-fatou-lemma-under-an-integrable-majorant, def-integrable-real
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (thm-dominated-convergence). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/mathematical-statistics-foundations-37-owner-s4-published-thm-dominated-convergence-v2-repair.json
 sources:
   scraped: []
   references:
@@ -29,7 +24,7 @@ sources:
 
 ## Statement
 
-Let $f$ and $(f_n)$ be measurable complex-valued functions such that
+Let $(X,\mathcal A,\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that
 $f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for a single
 nonnegative measurable function $g$ with $\int g\,d\mu<+\infty$. Then
 $f\in L^1(\mu)$,
@@ -39,7 +34,7 @@ $$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
 
 ## Facts & Assumptions
 
-**Given:** Measurable complex-valued functions $f,f_n$ with $f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for one nonnegative measurable function $g$ of finite integral.
+**Given:** An arbitrary measure space $(X,\mathcal A,\mu)$; measurable complex-valued functions $f,f_n$ with $f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for one nonnegative measurable function $g$ of finite integral.
 
 [L1] Reverse Fatou's lemma holds under an integrable majorant ([[cor-reverse-fatou-lemma-under-an-integrable-majorant]]).
 

@@ -1,0 +1,374 @@
+[
+  {
+    "order": 1848,
+    "id": "losses-risk-and-decision-rules",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Loss, Risk and Decision Theory",
+    "companion": "losses-risk-and-decision-rules-examples",
+    "requires": [
+      "estimators-and-randomized-procedures",
+      "statistical-experiments-models-and-identifiability",
+      "probability-spaces-random-variables-and-expectation",
+      "conditional-expectation",
+      "convex-and-semicontinuous-functions-on-rn"
+    ],
+    "items": [
+      {
+        "id": "lem-finite-dimensional-integral-jensen-for-convex-loss",
+        "kind": "lemma",
+        "title": "Integral Jensen inequality for finite-dimensional convex losses",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\geq1$ and let $C$ be a\nnonempty closed convex subset of $\\mathbb R^d$, with closedness in the Euclidean\ntopology ([[def-metric-interior-closure-boundary]]) and convexity as in\n[[def-convex-subset-of-euclidean-space]]. Let $\\mu$ be a probability measure on\nits Borel sets, and assume $\\int_C\\|a\\|_2\\,\\mu(da)<\\infty$, where $\\|\\cdot\\|_2$\nis the Euclidean norm from [[def-euclidean-inner-product]]. Define the barycenter\n$b=\\int_Ca\\,\\mu(da)$ coordinatewise and assume $b\\in C$. If\n$f:C\\to[0,+\\infty]$ is Borel measurable and convex, then\n$$f(b)\\leq\\int_C f(a)\\,\\mu(da).$$\nConvexity for this possibly extended-valued $f$ uses the extended-functional\nconvention of\n[[def-convex-and-strictly-convex-functionals-on-a-banach-space]], including its\nendpoint convention for $0\\cdot(+\\infty)$. On a convex restriction where\n$f$ is finite, this inequality reduces to the real-valued Euclidean convention of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]], as used in the\nsubgradient step of the proof. The barycenter is the vector of coordinate\nintegrals.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-convex-subset-of-euclidean-space",
+          "def-euclidean-inner-product",
+          "def-metric-interior-closure-boundary",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+          "thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set",
+          "lem-convex-set-and-closure-have-same-interior-and-boundary",
+          "thm-convex-functions-have-subgradients-at-interior-points",
+          "def-subgradient-and-subdifferential",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "strategy": "Direct proof via relative interior of the closed convex hull of the measure support, a supporting subgradient, and integration.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §§5.1–5.3, PDF pp. 100–110",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4–5, PDF pp. 7–13",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-prior-and-model-kernel-define-joint-law",
+        "kind": "lemma",
+        "title": "A prior and model kernel define a joint law",
+        "statement": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable spaces,\nlet $\\pi$ be a probability measure on $(\\Theta,\\mathcal T)$, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel. For\n$C\\in\\mathcal T\\otimes\\mathcal A$, write\n$C_\\theta=\\{x\\in\\mathcal X:(\\theta,x)\\in C\\}$ and set\n$$J(C)=\\int_\\Theta K(\\theta,C_\\theta)\\,\\pi(d\\theta).$$\nThen $J$ is a probability measure on the product sigma-algebra, and for every\nnonnegative product-measurable $h$,\n$$\\int_{\\Theta\\times\\mathcal X}h(\\theta,x)\\,J(d\\theta,dx)=\\int_\\Theta\\left(\\int_\\mathcal Xh(\\theta,x)\\,K(\\theta,dx)\\right)\\pi(d\\theta).$$\nIn particular, $J(A\\times B)=\\int_AK(\\theta,B)\\,\\pi(d\\theta)$ for\n$A\\in\\mathcal T$ and $B\\in\\mathcal A$.",
+        "deps": [
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-probability-measure",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "strategy": "Direct construction on product-measurable sets, countable additivity, then simple approximation and monotone convergence.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §§5.1–5.3, PDF pp. 100–110",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4–5, PDF pp. 7–13",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-loss-function-and-risk",
+        "kind": "definition",
+        "title": "Loss functions and risk",
+        "statement": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]), let\n$(\\mathsf D,\\mathcal G)$ be a measurable action space, meaning a set with\na specified sigma-algebra ([[def-measurable-space]]), and let\n$L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be a loss function whose section\n$a\\mapsto L(\\theta,a)$ is $\\mathcal G$-measurable for each $\\theta$. A\nrandomized decision rule is a probability kernel $\\delta$ from the data space\nto the action space ([[def-randomized-procedure-as-a-markov-kernel]]). Its\n**risk** at $\\theta$ is the extended nonnegative number\n$$R(\\theta,\\delta)=\\int_{\\mathcal X}\\left(\\int_{\\mathsf D}L(\\theta,a)\\,\\delta(x,da)\\right)P_\\theta(dx).$$\nThe inner integral is a measurable function of $x$, by\n[[lem-procedure-action-law-is-measurable]], so the outer nonnegative integral\nis defined by [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\nA deterministic measurable rule is included by taking its point-mass action\nkernel. No measurability on $\\Theta$ is required for this definition.",
+        "deps": [
+          "def-statistical-experiment",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "lem-procedure-action-law-is-measurable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-measurable-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §§5.1–5.3, PDF pp. 100–110",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4–5, PDF pp. 7–13",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-risk-domination-and-admissibility",
+        "kind": "definition",
+        "title": "Risk domination and admissibility",
+        "statement": "For two decision rules $\\delta_0,\\delta_1$ in one decision problem,\n$\\delta_1$ **dominates** $\\delta_0$ if\n$R(\\theta,\\delta_1)\\leq R(\\theta,\\delta_0)$ for every parameter $\\theta$,\nwith strict inequality for at least one $\\theta$. A rule is **admissible** if\nno decision rule dominates it; otherwise it is inadmissible. Risk is the\nextended-valued function of [[def-loss-function-and-risk]]. Admissibility is\na pointwise comparison across the whole parameter set; it does not assert that\nthe rule minimizes risk at any particular parameter or under a global\ncriterion.",
+        "deps": [
+          "def-loss-function-and-risk"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §§5.1–5.3, PDF pp. 100–110",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4–5, PDF pp. 7–13",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-bayes-and-minimax-risk",
+        "kind": "definition",
+        "title": "Bayes risk and minimax risk",
+        "statement": "Let $(\\Theta,\\mathcal T)$ and $(\\mathcal X,\\mathcal A)$ be measurable\nparameter and data spaces, with $\\Theta$ nonempty, and let\n$K:\\Theta\\times\\mathcal A\\to[0,1]$ be a probability kernel, writing\n$P_\\theta=K(\\theta,\\cdot)$ for the sampling law\n([[def-parameter-measurable-statistical-model-as-markov-kernel]]). Let\n$(\\mathsf D,\\mathcal G)$ be a nonempty measurable action space\n([[def-measurable-space]]). Let $L:\\Theta\\times\\mathsf D\\to\\overline{\\mathbb R}$\nbe measurable from the product measurable space with sigma-algebra\n$\\mathcal T\\otimes\\mathcal G$ to the extended real line with its Borel\nsigma-algebra, and assume $L(\\theta,a)\\geq0$ for all $(\\theta,a)$\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]],\n[[def-measurable-function-between-measurable-spaces]], [[def-extended-reals]],\n[[def-borel-sigma-algebra-on-the-extended-real-line]]). A **prior** $\\pi$ is a\nprobability measure on $\\Theta$. The risk function $\\theta\\mapsto R(\\theta,\\delta)$ is measurable\nunder these hypotheses by kernel integration\n([[def-parameter-measurable-statistical-model-as-markov-kernel]],\n[[thm-measurability-of-integration-against-a-kernel]]). The **Bayes risk** of\n$\\delta$ under $\\pi$ is\n$$r_\\pi(\\delta)=\\int_\\Theta R(\\theta,\\delta)\\,\\pi(d\\theta)\\in[0,+\\infty].$$\nIts **worst-case risk** is\n$$R^*(\\delta)=\\sup_{\\theta\\in\\Theta}R(\\theta,\\delta)\\in[0,+\\infty],$$\nand the **minimax value** is\n$$V_{\\rm mm}=\\inf\\{R^*(\\delta):\\delta\\text{ is a measurable randomized rule from data to actions}\\}\\in[0,+\\infty].$$\nThese suprema and infima are taken in the extended order on $\\overline{\\mathbb R}$\n([[def-extended-reals]]); they exist by\n[[lem-extended-reals-complete]]. The parameter set is nonempty and the rule\nclass is nonempty under the action-space hypothesis, so these are suprema and\ninfima of nonempty sets of nonnegative extended risks.\nA rule is minimax if its worst-case risk equals this infimum. These definitions\nmake no assertion that a minimizer exists. Nonemptiness of $\\mathsf D$ ensures\nthe rule class is nonempty: fixing any $a_0\\in\\mathsf D$ gives the constant\npoint-mass rule $x\\mapsto\\delta_{a_0}$.",
+        "deps": [
+          "def-loss-function-and-risk",
+          "def-measurable-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measurable-function-between-measurable-spaces",
+          "def-extended-reals",
+          "def-borel-sigma-algebra-on-the-extended-real-line",
+          "lem-extended-reals-complete",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-probability-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §§5.1–5.3, PDF pp. 100–110",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4–5, PDF pp. 7–13",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-randomization-does-not-improve-convex-action-loss",
+        "kind": "theorem",
+        "title": "Randomization does not improve convex action loss",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\geq1$ and let the\nstatistical experiment be\n$\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$,\n([[def-statistical-experiment]]), with a nonempty closed convex action set\n$\\mathsf D\\subseteq\\mathbb R^d$,\nwith its Borel sigma-algebra ([[def-measurable-space]]). Closedness is in the\nEuclidean topology ([[def-metric-interior-closure-boundary]]) and convexity\nuses [[def-convex-subset-of-euclidean-space]]. Let $\\delta(x,da)$ be a\nrandomized decision rule, and let $L(\\theta,\\cdot):\\mathsf D\\to[0,+\\infty]$\nbe a nonnegative Borel loss convex in the extended-functional sense of\n[[def-convex-and-strictly-convex-functionals-on-a-banach-space]]. On its\nconvex finite-valued domain this inequality agrees with the real-valued Euclidean\nconvention of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]], used in the\nJensen proof's subgradient step. Define\n$$m_\\delta(x)=\\int_\\mathsf D\\|a\\|_2\\,\\delta(x,da),\\qquad E_0=\\{x:m_\\delta(x)<\\infty\\}.$$\nFor $x\\in E_0$, define the coordinatewise barycenter\n$$b_\\delta(x)=\\left(\\int_\\mathsf D a_j\\,\\delta(x,da)\\right)_{j=1}^d.$$\nAssume that for every $\\theta\\in\\Theta$,\n$$P_\\theta\\bigl(\\{x\\in E_0:b_\\delta(x)\\in\\mathsf D\\}\\bigr)=1.$$\nThen there is a measurable deterministic rule $d$ such that\n$$R(\\theta,d)\\leq R(\\theta,\\delta)\\qquad(\\theta\\in\\Theta).$$\nOn $E_0$, finite first moment in the Euclidean norm of\n[[def-euclidean-inner-product]] makes each coordinate integral finite. No claim\nis made for nonconvex action sets or when the parameterwise almost-sure\nbarycenter condition fails.",
+        "deps": [
+          "def-loss-function-and-risk",
+          "def-statistical-experiment",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "lem-finite-dimensional-integral-jensen-for-convex-loss",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-convex-subset-of-euclidean-space",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-euclidean-inner-product",
+          "def-measurable-space",
+          "def-metric-interior-closure-boundary",
+          "cor-integral-over-a-null-set-vanishes",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "strategy": "Direct: define the measurable barycenter rule and apply finite-dimensional integral Jensen pointwise before integrating each sampling law.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §§5.1–5.3, PDF pp. 100–110",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4–5, PDF pp. 7–13",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-bayes-rule-minimizes-prior-risk",
+        "kind": "theorem",
+        "title": "A posterior-risk minimizer minimizes prior risk",
+        "statement": "Assume the Axiom of Choice. Let $K$ be a probability\nkernel from a standard-Borel parameter space $(\\Theta,\\mathcal T)$ to a\nstandard-Borel data space $(\\mathcal X,\\mathcal A)$, where standard Borel means\nmeasurably isomorphic to a Polish space\n([[def-standard-borel-space]]). Let $\\pi$ be a prior,\nand let $L:\\Theta\\times\\mathsf D\\to[0,+\\infty]$ be jointly measurable for a\nmeasurable action space $(\\mathsf D,\\mathcal G)$. Let $J$ be the joint prior-data\nlaw of [[lem-prior-and-model-kernel-define-joint-law]], let $M$ be its data\nmarginal, and let $\\Pi_x(d\\theta)$ be a regular posterior distribution of\n$\\theta$ given $x$ (the disintegration is supplied by\n[[thm-disintegration-of-a-joint-law-on-standard-borel-spaces]]).\nDefine posterior risk\n$$q(x,a)=\\int_\\Theta L(\\theta,a)\\,\\Pi_x(d\\theta).$$\nSuppose a measurable deterministic rule $d^*:\\mathcal X\\to\\mathsf D$\nattains the posterior minimum for $M$-almost every $x$; that is,\n$q(x,d^*(x))\\leq q(x,a)$ for every $a\\in\\mathsf D$ on one measurable\n$M$-full-measure set. Then $d^*$ minimizes prior-integrated risk among all randomized decision\nrules $\\delta$:\n$$r_\\pi(d^*)\\leq r_\\pi(\\delta).$$\nNo conclusion is asserted when a measurable posterior minimizer does not\nexist. All risks may be $+\\infty$.",
+        "deps": [
+          "def-loss-function-and-risk",
+          "def-bayes-and-minimax-risk",
+          "def-parameter-measurable-statistical-model-as-markov-kernel",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "def-regular-conditional-distribution",
+          "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-integral-over-a-null-set-vanishes",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-measurable-function-between-measurable-spaces",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-standard-borel-space",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "strategy": "Direct: disintegrate the prior-data law, use Tonelli to express posterior risk, then integrate the pointwise minimizing inequality against any action kernel.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §§5.1–5.3, PDF pp. 100–110",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4–5, PDF pp. 7–13",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 1849,
+    "id": "losses-risk-and-decision-rules-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Loss, Risk and Decision Theory — Examples",
+    "companion": "losses-risk-and-decision-rules",
+    "requires": [
+      "losses-risk-and-decision-rules"
+    ],
+    "items": [
+      {
+        "id": "ex-squared-error-risk-for-bernoulli-observation",
+        "kind": "example",
+        "title": "Squared-error risk for a Bernoulli observation",
+        "statement": "Observe one Bernoulli variable $X\\in\\{0,1\\}$ with parameter\n$\\theta\\in[0,1]$, so $P_\\theta(\\{1\\})=\\theta$ and\n$P_\\theta(\\{0\\})=1-\\theta$. Estimate $\\theta$ by the rule\n$d(X)=X$ under squared-error loss $L(\\theta,a)=(a-\\theta)^2$. Its risk is\n$$R(\\theta,d)=\\theta(1-\\theta),$$\nwhich is zero at both endpoints and has maximum $1/4$ at $\\theta=1/2$.",
+        "deps": [
+          "def-loss-function-and-risk",
+          "def-statistic-and-estimator",
+          "def-probability-measure",
+          "cor-expectation-agrees-with-the-finite-weighted-sum"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "strategy": "Direct finite verification of the probability law, measurable estimator, risk sum, and endpoint/maximal-risk cases.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-zero-one-loss-randomization-minimax",
+        "kind": "example",
+        "title": "Randomization lowers worst-case risk under zero-one loss",
+        "statement": "Let $\\Theta=\\{0,1\\}$, let the data space contain one point with the same\nsampling law at both parameters, and let the action space be $\\{0,1\\}$.\nUnder zero-one loss $L(\\theta,a)=1_{\\{a\\ne\\theta\\}}$, the deterministic rule\nthat always chooses $0$ has risks $0$ and $1$, hence worst-case risk $1$.\nThe randomized rule that chooses each action with probability $1/2$ has risk\n$1/2$ at both parameters and is minimax with value $1/2$.",
+        "deps": [
+          "def-loss-function-and-risk",
+          "def-bayes-and-minimax-risk",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-probability-measure",
+          "cor-expectation-agrees-with-the-finite-weighted-sum"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "strategy": "Direct finite verification of the decision kernels and exact worst-case risks for every randomization probability.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-data-rule-dominates-constant-rule",
+        "kind": "example",
+        "title": "A data-dependent rule dominates a constant rule",
+        "statement": "Let $\\Theta=\\{0,1\\}$ and observe $X\\in\\{0,1\\}$ with\n$P_\\theta(\\{x\\})=1$ when $x=\\theta$ and zero otherwise. Under squared-error\nloss, the constant rule $d_0(x)=0$ has risk $0$ at $\\theta=0$ and $1$ at\n$\\theta=1$. The data rule $d_1(x)=x$ has risk zero at both parameters, so it\ndominates $d_0$.",
+        "deps": [
+          "def-loss-function-and-risk",
+          "def-risk-domination-and-admissibility",
+          "def-statistic-and-estimator",
+          "def-probability-measure",
+          "cor-expectation-agrees-with-the-finite-weighted-sum"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "strategy": "Direct finite calculation of both risk functions at both parameter values.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-open-action-set-no-minimizer",
+        "kind": "counterexample",
+        "title": "An open action set need not contain a posterior-risk minimizer",
+        "statement": "Every posterior expected-loss function on a nonempty open action space attains\nits infimum.",
+        "deps": [
+          "def-loss-function-and-risk",
+          "def-bayes-and-minimax-risk",
+          "thm-bayes-rule-minimizes-prior-risk",
+          "def-probability-measure",
+          "def-regular-conditional-distribution",
+          "def-standard-borel-space"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "strategy": "Direct singleton posterior calculation and an explicit sequence approaching the unattained infimum.",
+        "generation": {
+          "role": "counterexample"
+        },
+        "dependency_level": 6
+      }
+    ]
+  }
+]

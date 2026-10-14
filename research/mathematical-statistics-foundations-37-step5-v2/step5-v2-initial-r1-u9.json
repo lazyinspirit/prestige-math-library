@@ -1,0 +1,149 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "phase": "initial",
+  "round": 1,
+  "unit": "9",
+  "input_sha256": "d09cd87bf1a789ab3aae4c9439e049e9981c7df3bd49e414cef635da1d327e21",
+  "decisions": [
+    {
+      "id": "thm-karlin-rubin-one-sided-ump-test",
+      "model": "gpt-6-luna",
+      "context_sha256": "a85ac18636b311e1dca85756dafe7f639201ae658a2939192adc286f7758c765",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly claims pointwise MLR for chosen density representatives although its supplier asserts equality only mu-almost everywhere for each parameter pair. For Lebesgue measure on [0,1], two uniform laws with p0=1, p1=1 except p1(1/2)=2 and constant T satisfy the supplied a.e. MLR definition but contradict pointwise F1. This is nonfatal because step 2.2 already excludes an MLR exceptional set and concludes only an a.e. integrand inequality. Repaired F1 and made that pairwise set explicit; also supplied the extended reciprocal conventions missing from step 4.1.",
+      "uncertain": false,
+      "source_urls": [
+        "https://pages.stat.wisc.edu/~shao/stat610/stat610-11.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-karlin-rubin-one-sided-ump-test",
+      "disposition": "repaired",
+      "post_sha256": "7025335bf0d26044e7f072d023f18a7a20a0da070ecbdf9ad5ce7e652bd5da05",
+      "review_context_sha256": "6a6e0eb5e2f952519867101f05f73254fe602165a6c42faf03d176121b7d9f64",
+      "reason": "Checked calibration, binary-kernel measurability, composite-null level and both power comparisons against the actual suppliers. Positive null mass at or above the cutoff makes k finite, including k=0; alternative-only mass lies above the cutoff off the pairwise null set. The integrand is nonnegative a.e. and dominated in absolute value by p1+k p0. Reflection uses the Borel order-reversing extended reciprocal with h(0)=infinity and h(infinity)=0 and the exact cutoff -c_minus. No common exceptional set, sufficiency assumption or additional choice is needed; empty alternatives remain vacuous. This is repair-author verification, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://pages.stat.wisc.edu/~shao/stat610/stat610-11.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "mathematical-statistics-foundations-37-step5-initial-r1-u9-pairwise-ae-mlr",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T12:30:03.387525+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "thm-karlin-rubin-one-sided-ump-test",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "description": "F1 asserted pointwise monotone likelihood ratio, but def-monotone-likelihood-ratio-family provides q(T)=ratio only mu-almost everywhere for each pair. A singleton modification of one uniform density and constant T contradict the asserted pointwise equality. F1 now matches its supplier, and step 2.2 explicitly removes its pairwise exceptional set.",
+        "evidence": [
+          {
+            "path": "items/thm-karlin-rubin-one-sided-ump-test.md",
+            "locator": "Facts & Assumptions F1; Proof step 2.2"
+          },
+          {
+            "path": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u9.json",
+            "locator": "decisions[0], reviews[0], repair_notes"
+          }
+        ],
+        "source_urls": [
+          "https://pages.stat.wisc.edu/~shao/stat610/stat610-11.pdf"
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "mathematical-statistics-foundations-37-step5-initial-r1-u9-extended-reciprocal",
+        "run": "mathematical-statistics-foundations-37",
+        "at": "2026-10-14T12:30:03.387525+00:00",
+        "class": "accuracy",
+        "subclass": "undefined-notation",
+        "severity": "nonfatal",
+        "location": "proof-step",
+        "subject": "thm-karlin-rubin-one-sided-ump-test",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "description": "Step 4.1 used a reciprocal without defining it at zero or infinity, both permitted by the MLR interface. It now defines h(0)=infinity, h(infinity)=0 and h(u)=1/u otherwise, constructs the Borel nondecreasing reflected function h(q(-s)) outside the original pairwise exceptional set, and uses cutoff -c_minus with gamma_minus.",
+        "evidence": [
+          {
+            "path": "items/thm-karlin-rubin-one-sided-ump-test.md",
+            "locator": "Proof step 4.1"
+          },
+          {
+            "path": "research/mathematical-statistics-foundations-37-step5-v2/step5-v2-initial-r1-u9.json",
+            "locator": "decisions[0], reviews[0], repair_notes"
+          }
+        ],
+        "source_urls": [
+          "https://pages.stat.wisc.edu/~shao/stat610/stat610-11.pdf"
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "retain_existing_repair_record",
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "marker": "local-published-repair:mathematical-statistics-foundations-37-stage4-owner-s4-published-thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "reason": "The Step-4 batch-9 alert concerned duplicate tag groups in this published supplier. Current steps 2.1 and 6.1 have a single trailing group, and the canonical ledger already records removal throughout steps 2.1-6.1. Its current Statement supplies the finite arithmetic measurability used in steps 1.1-3.1 of the assigned theorem. No new defect, mathematical audit, publication or published repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Repaired only the assigned draft frontier carrier items/thm-karlin-rubin-one-sided-ump-test.md and its own entry in research/mathematical-statistics-foundations-37-batch-9.proof-contracts.json. F1 now states the exact Borel pairwise mu-a.e. MLR interface. Step 2.2 removes the pairwise exceptional set and makes the finite-k and support cases explicit. Step 4.1 defines the extended reciprocal, proves reflected MLR, and selects the exact reflected lower cutoff and boundary probability. No new items or dependencies were needed.",
+    "The original Statement section is unchanged: frozen and current statement hash both equal 827a56ca03adadc14e7e7257a36202b03d2eb9ae7b5c67d15a6f6020e62fa65c. Therefore downstream is empty. The page accurately describes full-data MLR, arbitrary-alpha boundary randomization and both one-sided tests and needs no edit. The Foundations boundary and inherited AC density-version selection are preserved.",
+    "Immediately after the mathematical repair review, review-contexts returned post_sha256 7025335bf0d26044e7f072d023f18a7a20a0da070ecbdf9ad5ce7e652bd5da05 and review_context_sha256 6a6e0eb5e2f952519867101f05f73254fe602165a6c42faf03d176121b7d9f64. After examining and synchronizing only this item contract, the required command returned the identical pair. No mathematical supplier changed between those captures.",
+    "The shared metadata lock initially belonged to unit 6. After it became available, acquired as step5-v2-initial-r1-u9, reread the current batch contract, changed only the assigned derivations for steps 2.2 and 4.1 and the F5 citation use maps, appended an explicitly identified repair-author note while preserving the original risk-review provenance, ran the passing focused strict contract check, and released the lock. Shared ledgers were not edited; ledger_updates are controller proposals.",
+    "The first focused strict contract check after the item edit failed with three citation-use-unmapped diagnostics for F5 at step 2.2 and one step-entry-input-omitted diagnostic. Contract synchronization resolved all four; the final strict check passed with no errors or warnings.",
+    "Consulted Shao Lecture 11 PDF pp. 6-10: Lemma A and its complete proof, Definition 8.3.16, the Lemma B statement, and Theorem 8.3.17 and its complete proof. That displayed theorem concerns nonrandomized thresholds at attainable tail levels; the repository-specific pairwise a.e. and arbitrary-alpha boundary details are established by the checked local argument, rather than inferred from the source proof.",
+    "The Step-4 published formatting alert is already resolved on the current supplier thm-arithmetic-and-lattice-operations-preserve-measurability: steps 2.1 and 6.1 have single trailing tag groups, matching the existing local-repair marker in research/published-consumer-supplier-ledger.md. No published item was edited or adjudicated. The digest concern about thm-ump-nonexistence-witness belongs to its separate owner and was not included in this assigned item review.",
+    "No uncertainty or unsatisfied repair obligation remains in this assignment. This report records adjudication and repair-author verification; it does not claim an independent review of the repair or run-level certification."
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-karlin-rubin-one-sided-ump-test.md --json",
+      "exit_code": 0,
+      "result": "One file, one checked proof, zero failures; direct-strategy pass."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/thm-karlin-rubin-one-sided-ump-test.md --json",
+      "exit_code": 0,
+      "result": "One checked item; zero errors and zero warnings."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-karlin-rubin-one-sided-ump-test.md",
+      "exit_code": 0,
+      "result": "One item, five steps, zero defects. Run once after the final item edit; no subsequent item formatter or edit."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/mathematical-statistics-foundations-37-batch-9.proof-contracts.json --strict --items thm-karlin-rubin-one-sided-ump-test --json",
+      "exit_code": 0,
+      "result": "ok=true; assigned item checked; zero errors and zero warnings."
+    },
+    {
+      "command": "node tools/step5-workflow.mjs review-contexts --run mathematical-statistics-foundations-37 --items thm-karlin-rubin-one-sided-ump-test",
+      "exit_code": 0,
+      "result": "Required post guard and review-context hash copied into reviews[0]."
+    }
+  ]
+}

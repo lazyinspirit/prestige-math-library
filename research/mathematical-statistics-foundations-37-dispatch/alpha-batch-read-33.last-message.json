@@ -1,0 +1,572 @@
+{
+  "group": "k",
+  "batches": ["33"],
+  "pages_read": [
+    "robust-mean-estimation-under-heavy-tails",
+    "robust-mean-estimation-under-heavy-tails-examples"
+  ],
+  "items_read": [
+    "lem-variance-sensitive-bounded-empirical-process-concentration",
+    "alg-geometric-median-of-block-means",
+    "alg-multivariate-trimmed-mean",
+    "alg-univariate-trimmed-mean",
+    "lem-absolutely-continuous-upper-quantile-exact-tail-mass",
+    "lem-finite-covariance-matrix-basic-properties",
+    "lem-positive-real-has-dyadic-scale-in-factor-two",
+    "cex-correct-scale-trimming-slab-radius-four-is-false",
+    "cex-excess-tail-functional-does-not-bound-trimmed-mean",
+    "cex-univariate-clean-quantile-count-exponent-is-false",
+    "lem-geometric-median-majority-radius-bound",
+    "lem-measurable-minimum-norm-geometric-median-selection",
+    "lem-multivariate-trimmed-mean-selector-total-and-measurable",
+    "lem-univariate-trimmed-mean-total-and-measurable",
+    "lem-multivariate-mean-rate-given-correct-scale-event",
+    "lem-zero-covariance-multivariate-trimmed-mean-exact",
+    "prop-correct-scale-multivariate-trimming-slab-bound",
+    "thm-finite-variance-geometric-median-mean-bound",
+    "thm-univariate-trimmed-mean-under-replacement",
+    "thm-multivariate-trimmed-mean-under-replacement",
+    "ex-one-corrupted-block-is-rejected-by-the-geometric-median",
+    "cex-half-replacement-prevents-covariance-only-mean-recovery",
+    "ex-polynomial-tail-law-with-finite-variance"
+  ],
+  "conventions": [
+    {
+      "convention": "Blocks are consecutive and balanced: the first n−k floor(n/k) blocks have size floor(n/k)+1, and the rest have size floor(n/k). The output is the minimum-norm objective minimizer.",
+      "fixed_by": "alg-geometric-median-of-block-means",
+      "matters_for": [
+        "lem-measurable-minimum-norm-geometric-median-selection",
+        "thm-finite-variance-geometric-median-mean-bound",
+        "ex-one-corrupted-block-is-rejected-by-the-geometric-median",
+        "ex-polynomial-tail-law-with-finite-variance"
+      ]
+    },
+    {
+      "convention": "The Hilbert mean theorem assumes Countable Choice, a separable real Hilbert space, clean iid Borel observations, and finite second moment. It asserts a strict tail bound at zero variance; the nonstrict version is restricted to positive variance.",
+      "fixed_by": "thm-finite-variance-geometric-median-mean-bound",
+      "matters_for": [
+        "ex-polynomial-tail-law-with-finite-variance"
+      ]
+    },
+    {
+      "convention": "The multivariate selector uses nearest-rank cutoffs at ceil(εN/2) and ceil((1−ε/2)N), slabs of radius 2εQ, and tail intersections indexed by all integers. It distinguishes least-index, all-scale, and empty-index branches.",
+      "fixed_by": "alg-multivariate-trimmed-mean",
+      "matters_for": [
+        "lem-multivariate-trimmed-mean-selector-total-and-measurable",
+        "lem-multivariate-mean-rate-given-correct-scale-event",
+        "lem-zero-covariance-multivariate-trimmed-mean-exact",
+        "prop-correct-scale-multivariate-trimming-slab-bound",
+        "thm-multivariate-trimmed-mean-under-replacement",
+        "cex-correct-scale-trimming-slab-radius-four-is-false"
+      ]
+    },
+    {
+      "convention": "The univariate procedure winsorizes the first half using second-half order statistics at ceil(εN) and ceil((1−ε)N), with ε=8η+12 log(4/δ)/N in (0,1/4].",
+      "fixed_by": "alg-univariate-trimmed-mean",
+      "matters_for": [
+        "lem-univariate-trimmed-mean-total-and-measurable",
+        "thm-univariate-trimmed-mean-under-replacement",
+        "cex-excess-tail-functional-does-not-bound-trimmed-mean"
+      ]
+    },
+    {
+      "convention": "Q_u(Z)=sup{t:P(Z≥t)≥1−u} is defined for 0<u<1. The upper-bound functional E(u,X), defined for 0<u≤1, uses raw centered absolute tail moments, not distances from quantile endpoints.",
+      "fixed_by": "thm-univariate-trimmed-mean-under-replacement",
+      "matters_for": [
+        "cex-excess-tail-functional-does-not-bound-trimmed-mean",
+        "cex-univariate-clean-quantile-count-exponent-is-false"
+      ]
+    },
+    {
+      "convention": "Replacement is budgeted across the entire sample of length 2N: at most floor(2ηN) coordinates change in total. Either half may contain all permitted changes.",
+      "fixed_by": "thm-univariate-trimmed-mean-under-replacement",
+      "matters_for": [
+        "thm-univariate-trimmed-mean-under-replacement",
+        "prop-correct-scale-multivariate-trimming-slab-bound",
+        "lem-zero-covariance-multivariate-trimmed-mean-exact",
+        "thm-multivariate-trimmed-mean-under-replacement",
+        "cex-half-replacement-prevents-covariance-only-mean-recovery"
+      ]
+    },
+    {
+      "convention": "Finite covariance is defined entrywise from a Borel vector with finite second moment; its trace equals the centered squared-norm expectation and bounds its largest eigenvalue.",
+      "fixed_by": "lem-finite-covariance-matrix-basic-properties",
+      "matters_for": [
+        "lem-multivariate-mean-rate-given-correct-scale-event",
+        "lem-zero-covariance-multivariate-trimmed-mean-exact",
+        "prop-correct-scale-multivariate-trimming-slab-bound",
+        "thm-multivariate-trimmed-mean-under-replacement"
+      ]
+    },
+    {
+      "convention": "The bounded empirical-process concentration bound uses uniform second moments Pf²≤s², includes zero in a finite or countable class, and uses EW for the supremum of empirical squared functions.",
+      "fixed_by": "lem-variance-sensitive-bounded-empirical-process-concentration",
+      "matters_for": [
+        "prop-correct-scale-multivariate-trimming-slab-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-variance-sensitive-bounded-empirical-process-concentration",
+      "statement": "For iid X_1,…,X_n and a finite or countable measurable class containing zero, with |f|≤B and Pf²≤s², define Z=sup_f Σ_i(f(X_i)−Pf), W=sup_f Σ_i f(X_i)², and m=EW. For every x>0, P(Z>EZ+2√((8m+4ns²)x)+√8 Bx)≤e^(−x).",
+      "used_by": [
+        "prop-correct-scale-multivariate-trimming-slab-bound",
+        "thm-multivariate-trimmed-mean-under-replacement"
+      ]
+    },
+    {
+      "id": "lem-multivariate-trimmed-mean-selector-total-and-measurable",
+      "statement": "For each fixed admissible d,N,ε and each observed data tuple in (R^d)^(2N), the procedure alg-multivariate-trimmed-mean returns a unique vector in R^d. As a function of the observed data tuple it is Borel measurable.",
+      "used_by": [
+        "lem-multivariate-mean-rate-given-correct-scale-event",
+        "lem-zero-covariance-multivariate-trimmed-mean-exact",
+        "prop-correct-scale-multivariate-trimming-slab-bound",
+        "thm-multivariate-trimmed-mean-under-replacement"
+      ]
+    },
+    {
+      "id": "prop-correct-scale-multivariate-trimming-slab-bound",
+      "statement": "For absolutely continuous clean iid vector data with finite positive covariance trace, at most floor(2ηN) total replacements, 0≤η≤1/10, 0<δ<1, N≥2560 log(2/δ), and ε=max{10η,2560 log(2/δ)/N}, choose 2^i0 in [2Q0,4Q0), where Q0=max{256√(trΣ/N)/ε,16√(λmax(Σ)/ε)}. With probability at least 1−δ, K_i0 is nonempty and every z∈K_i0 satisfies ||z−μ||≤16εQ0.",
+      "used_by": [
+        "thm-multivariate-trimmed-mean-under-replacement"
+      ]
+    },
+    {
+      "id": "lem-measurable-minimum-norm-geometric-median-selection",
+      "statement": "For a separable real Hilbert space H and k≥1, every tuple of k centers has a nonempty closed convex geometric-median minimizer set with a unique minimum-norm point, and the selected map H^k→H is Borel. Countable Choice is used for the published projection supplier.",
+      "used_by": [
+        "thm-finite-variance-geometric-median-mean-bound",
+        "ex-one-corrupted-block-is-rejected-by-the-geometric-median",
+        "ex-polynomial-tail-law-with-finite-variance",
+        "alg-adaptive-truncated-covariance-estimator",
+        "lem-covariance-median-pilot-exact-block-budget",
+        "lem-adaptive-truncated-covariance-estimator-is-total"
+      ]
+    },
+    {
+      "id": "lem-geometric-median-majority-radius-bound",
+      "statement": "For k≥1 points in a real Hilbert space, a geometric median m, 0<a<1/2, r>0, and C_a=(1−a)/√(1−2a), ||m−z||>C_a r implies that more than ak centers satisfy ||m_j−z||>r.",
+      "used_by": [
+        "thm-finite-variance-geometric-median-mean-bound",
+        "lem-covariance-median-pilot-exact-block-budget"
+      ]
+    },
+    {
+      "id": "lem-absolutely-continuous-upper-quantile-exact-tail-mass",
+      "statement": "Let Z have law absolutely continuous with respect to Lebesgue measure on R. For 0<u<1, Q_u(Z)=sup{t:P(Z≥t)≥1−u} is finite and P(Z≥Q_u(Z))=P(Z>Q_u(Z))=1−u.",
+      "used_by": [
+        "thm-univariate-trimmed-mean-under-replacement",
+        "cex-excess-tail-functional-does-not-bound-trimmed-mean",
+        "cex-univariate-clean-quantile-count-exponent-is-false"
+      ]
+    },
+    {
+      "id": "lem-finite-covariance-matrix-basic-properties",
+      "statement": "For a Borel X∈R^d, d≥1, with finite second moment, the entrywise covariance matrix is symmetric positive semidefinite, trΣ=E||X−μ||², and 0≤λmax(Σ)≤trΣ. Zero trace implies X=μ almost surely.",
+      "used_by": [
+        "cex-correct-scale-trimming-slab-radius-four-is-false",
+        "lem-multivariate-mean-rate-given-correct-scale-event",
+        "lem-zero-covariance-multivariate-trimmed-mean-exact",
+        "prop-correct-scale-multivariate-trimming-slab-bound",
+        "thm-multivariate-trimmed-mean-under-replacement"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expectation conventions and integrability in concentration and mean calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Ghost-coordinate integration, independent halves, and block cross-term calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-jensen-inequality-for-expectation",
+      "used_for": "Entropy, tilted-law, and symmetrization inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Coordinatewise product integration and integrable Hilbert cross terms.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Bounded limits in empirical suprema and continuity of directional expectations.",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "Chernoff bounds, second-moment bounds, and absolute-tail estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Logarithmic confidence calculations and binomial divergence calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Entropy differentiation and rigorous logarithmic series estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Differentiation of bounded exponential moments in the entropy argument.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space",
+      "used_for": "Real Hilbert geometry and the Cauchy-sequence completeness convention.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit axiom accounting for projection, trace-class, and singleton-null suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-separable-space",
+      "used_for": "Dense countable sequences in measurable Hilbert selectors.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Directional projections, finite covariance identities, and Euclidean norms.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-spheres-and-closed-balls",
+      "used_for": "Unit-direction indexing and compact selector domains.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Borel random-element and real-variable hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Finite total mass in quantile tail continuity.",
+      "opened": true
+    },
+    {
+      "id": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+      "used_for": "Transferring singleton Lebesgue nullity to absence of atoms.",
+      "opened": true
+    },
+    {
+      "id": "prop-countable-subsets-of-rn-are-lebesgue-null",
+      "used_for": "Singleton nullity in the quantile lemma; its Statement assumes Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-below-for-measures",
+      "used_for": "Tail limits and continuity from increasing events.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "Tail limits and continuity from decreasing probability events.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-reals-lub-complete",
+      "used_for": "Existence of finite upper quantiles as suprema.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Centered second moments and scalar covariance conventions.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Entrywise covariance, finite sums, and integrability estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Covariance Rayleigh bounds, rank-one norms, and block cross-term integrability.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+      "used_for": "Exact recovery from vanishing centered second moment.",
+      "opened": true
+    },
+    {
+      "id": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+      "used_for": "Identifying symmetric covariance matrices as self-adjoint operators.",
+      "opened": true
+    },
+    {
+      "id": "def-rayleigh-quotient",
+      "used_for": "Largest-eigenvalue covariance bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-rayleigh-quotient-extreme-eigenvalue-characterisation",
+      "used_for": "Maximum Rayleigh quotient characterization of λmax.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Bounding positive reals between finite dyadic powers.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "The bound 2^n≥n+1 in dyadic scale existence.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Positive and negative dyadic exponent conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-laws",
+      "used_for": "Reciprocal powers and adjacent dyadic scale ratios.",
+      "opened": true
+    },
+    {
+      "id": "cor-chebyshev-inequality-for-random-variables",
+      "used_for": "Finite probability estimates in the excess-tail counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence of clean data and quantile-count indicators.",
+      "opened": true
+    },
+    {
+      "id": "def-bernoulli-and-binomial-random-variables",
+      "used_for": "Exact quantile-count distributions.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Confidence parameters and inverse exponential identities.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Chernoff moments and exponential lower bounds in the binomial counterexample.",
+      "opened": true
+    },
+    {
+      "id": "lem-countable-iff-surjection-from-n",
+      "used_for": "Enumeration of dense countable sets without choosing representatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-projection-onto-a-nonempty-closed-convex-set",
+      "used_for": "Unique minimum-norm Hilbert minimizer under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compact finite-dimensional minimizer sets and Euclidean selector domains.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Attainment of geometric-median and regularized objective minima.",
+      "opened": true
+    },
+    {
+      "id": "thm-compact-iff-finite-intersection-property",
+      "used_for": "All-scale feasibility and convergence of compact tail closures.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel level sets and measurable selector constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Inverse-image verification of all estimator maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+      "used_for": "Countable infimum objectives and pointwise limits of approximate selectors.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-compactness",
+      "used_for": "Compactness conventions in the multivariate selector proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-compactness-under-continuous-maps",
+      "used_for": "Attainment of minima on compact selector domains.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Continuity of compact directional maxima and compact-domain minima.",
+      "opened": true
+    },
+    {
+      "id": "thm-rational-points-and-boxes-in-rn",
+      "used_for": "Countable dense directions, rational approximations, and Borel bases.",
+      "opened": true
+    },
+    {
+      "id": "def-adversarial-sample-replacement",
+      "used_for": "Full-sample replacement budgets and sample-dependent measurable couplings.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-process-symmetrization",
+      "used_for": "Ghost/sign symmetrization context; the slab proof derives its required one-sided form locally.",
+      "opened": true
+    },
+    {
+      "id": "thm-one-sided-coordinate-rademacher-contraction",
+      "used_for": "One-sided contraction with factor L, including the countable-class extension.",
+      "opened": true
+    },
+    {
+      "id": "def-strongly-measurable-banach-valued-function",
+      "used_for": "Simple-function approximation of Hilbert data and rank-one covariance operators.",
+      "opened": true
+    },
+    {
+      "id": "def-bochner-integrable-function",
+      "used_for": "Hilbert means and trace-class covariance expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-bochner-integrability-criterion",
+      "used_for": "Integrability from strong measurability and integrable norm.",
+      "opened": true
+    },
+    {
+      "id": "lem-bochner-integral-norm-inequality",
+      "used_for": "Mean norm bounds and integrable centered Hilbert observations.",
+      "opened": true
+    },
+    {
+      "id": "thm-bounded-linear-maps-commute-with-bochner-integration",
+      "used_for": "Trace identities, covariance evaluations, and zero cross terms.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-class-operator",
+      "used_for": "Trace norm and Countable Choice accounting for Hilbert covariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+      "used_for": "Banach-space structure for trace-class Bochner integration.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-is-absolutely-convergent-and-basis-independent",
+      "used_for": "Bounded linear trace and rank-one trace identities.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence conventions for Hilbert observations and blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-grouping-independent-sigma-algebras",
+      "used_for": "Independence of disjoint block statistics.",
+      "opened": true
+    },
+    {
+      "id": "thm-bernstein-independent-sums",
+      "used_for": "The explicit one-sided bound in Proof step 2.1, used for quantile counts and fixed comparison clips.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "The real Hilbert structure in both examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-ordered-field",
+      "used_for": "Real inner-product algebra in both examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Identification of the induced real norm with absolute value.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Real norm identification and geometric-median calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-cauchy-complete",
+      "used_for": "Completeness of the real Hilbert example.",
+      "opened": true
+    },
+    {
+      "id": "thm-rationals-countable",
+      "used_for": "Separability of the real Hilbert example.",
+      "opened": true
+    },
+    {
+      "id": "lem-rat-embeds-dense",
+      "used_for": "Density of the embedded rationals in the real examples.",
+      "opened": true
+    },
+    {
+      "id": "def-huber-contamination-model",
+      "used_for": "Distinguishing iid Huber mixtures from the deterministic half-replacement counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-subgaussian-variable-and-vector",
+      "used_for": "The centered all-real-parameter MGF definition refuted by the polynomial-tail example.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-absolutely-continuous-upper-quantile-exact-tail-mass",
+      "concern": "The Statement begins 'Let Z be a real random variable whose law is absolutely continuous' without assuming Countable Choice, but Proof Given explicitly assumes it, and A1/F2 invoke prop-countable-subsets-of-rn-are-lebesgue-null, whose Statement requires that axiom. Align the stated hypotheses with this proof, or supply the elementary choice-free singleton-null argument. This does not suggest the quantile conclusion is false; downstream univariate consumers already retain Countable Choice.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "robust-mean-estimation-under-heavy-tails",
+      "to": "concentration-inequalities-and-tail-bounds",
+      "faithful": true,
+      "note": "The univariate theorem explicitly cites the one-sided Bernstein inequality proved in supplier step 2.1, rather than dropping the factor 2 from its two-sided Statement. Count indicators and fixed comparison clips satisfy boundedness, centering, and independence. The polynomial-tail example uses the exact centered MGF definition."
+    },
+    {
+      "from": "robust-mean-estimation-under-heavy-tails",
+      "to": "contamination-models-and-robust-risk",
+      "faithful": true,
+      "note": "The replacement definition applied at sample size 2N gives floor(2ηN) total changes, allowing all changes in either half and dependence on the entire clean sample. The proofs preserve this budget. Huber mixtures are explicitly distinguished in the half-replacement example and page prose."
+    },
+    {
+      "from": "robust-mean-estimation-under-heavy-tails",
+      "to": "symmetrization-rademacher-complexity-and-covering-entropy",
+      "faithful": true,
+      "note": "The slab proof uses countable dense directions and continuous bounded directional classes. It derives one-sided ghost/sign symmetrization locally and uses one-sided contraction with factor L. It does not treat expectation symmetrization as a tail bound or use the absolute contraction theorem with the wrong constant."
+    },
+    {
+      "from": "robust-covariance-and-high-dimensional-stability",
+      "to": "robust-mean-estimation-under-heavy-tails",
+      "faithful": true,
+      "note": "Opened the adaptive covariance algorithm, its totality lemma, and the exact pilot block-budget lemma. They use the prescribed consecutive balanced blocks, minimum-norm Borel selection, and Countable Choice convention. The pilot lemma uses the majority-radius supplier and proves its own confidence calculation for k=floor(3.5β)+1, avoiding an unsupported substitution into the robust-mean theorem's different block-count formula."
+    }
+  ]
+}

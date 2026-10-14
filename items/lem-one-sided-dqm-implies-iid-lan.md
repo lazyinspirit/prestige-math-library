@@ -1,0 +1,114 @@
+---
+id: lem-one-sided-dqm-implies-iid-lan
+kind: lemma
+title: A one-sided DQM path yields an iid LAN proxy
+status: draft
+origin: pipeline
+pipeline_run: mathematical-statistics-foundations-37
+dependency_level: 5
+deps:
+  - def-dqm-submodel-through-a-law
+  - thm-dqm-score-mean-zero
+  - def-identically-distributed-and-iid-random-variables
+  - thm-khinchin-weak-law-for-iid-integrable-variables
+  - thm-multivariate-iid-central-limit-theorem
+  - cor-cauchy-schwarz-inequality-for-l-two
+  - thm-l1-convergence-implies-uniform-integrability
+  - thm-linearity-of-the-lebesgue-integral-on-l-one
+  - def-total-variation-distance-for-probability-laws
+  - cor-markov-inequality-for-random-variables
+  - thm-finite-and-countable-subadditivity-of-measures
+  - cor-taylor-remainder-bound
+  - def-measure-with-density
+  - def-product-sigma-algebra-and-finite-product-sigma-algebras
+  - thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+  - thm-tonelli-theorem-for-sigma-finite-product-spaces
+  - thm-measure-uniqueness-on-a-sigma-finite-pi-system
+  - def-axiom-of-choice
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-14
+sources:
+  references:
+    - title: John Duchi, A few notes on contiguity, asymptotics, and local asymptotic normality, §§2 and 4.3.1 (2021)
+      url: https://web.stanford.edu/class/stats300b/Notes/contiguity-and-asymptotics.pdf
+    - title: Peter Bartlett, Theoretical Statistics, Stat 210B Lecture 22, PDF pp. 8–11 (2013)
+      url: https://www.stat.berkeley.edu/~bartlett/courses/2013spring-stat210b/notes/22notes.pdf
+---
+
+## Statement
+
+Assume AC. Let $t\mapsto P_t$ be a one-sided path ($0\le t<\epsilon$) of probability laws on $(\mathcal X,\mathcal A)$ dominated by one supplied sigma-finite measure $\mu$, with supplied densities $p_t$ and $P_0=P$. Suppose the path is differentiable in quadratic mean at $0$ with score $s\in L^2(P)$, in the sense of [[def-dqm-submodel-through-a-law]]. Put $I=P[s^2]$. For a fixed $h\ge0$, let $t_n=h/\sqrt n$ and let $X_1,\ldots,X_n$ be iid $P$. On $S=\{p_0>0\}$ set $\alpha_t=P_t(S^c)$ and, for sufficiently small $t$, define
+
+$$q_t(x)=\frac{\mathbf1_S(x)p_t(x)}{(1-\alpha_t)p_0(x)}\quad\text{on }S,\qquad q_t(x)=0\quad\text{on }S^c.$$
+
+Then $q_t$ is a probability density relative to $P$. With $L_n=\prod_{i=1}^nq_{t_n}(X_i)$ and $\Delta_n=n^{-1/2}\sum_{i=1}^ns(X_i)$,
+
+$$\left\|P_{t_n}^{\otimes n}-L_nP^{\otimes n}\right\|_{\rm TV}\longrightarrow0,\qquad \log L_n=h\Delta_n-\tfrac12h^2I+o_P(1),\qquad \Delta_n\Rightarrow N(0,I).$$
+
+For $h=0$ take $L_n=1$ and use the convention $\log0=-\infty$. The proxy $L_nP^{\otimes n}$ is the normalized absolutely continuous component; the conclusion does not assert a full likelihood ratio for $P_{t_n}^{\otimes n}$.
+
+## Facts & Assumptions
+
+**Given:** AC; the common-dominator one-sided DQM path and supplied density family; iid $X_i\sim P$; and fixed $h\ge0$.
+
+[F1] [[def-dqm-submodel-through-a-law]]: $\|\sqrt{p_t}-\sqrt{p_0}-\frac t2s\sqrt{p_0}\|_{L^2(\mu)}=o(t)$ as $t\downarrow0$; the path may be one-sided.
+
+[F2] [[thm-dqm-score-mean-zero]]: $Ps=0$ and $Ps^2<\infty$ for this dominated one-sided DQM path.
+
+[F3] [[cor-cauchy-schwarz-inequality-for-l-two]]: the $L^2$ pairing is bounded by the product of the $L^2$ norms.
+
+[F4] [[thm-khinchin-weak-law-for-iid-integrable-variables]]: averages of iid integrable real variables converge in probability to their expectation.
+
+[F5] [[thm-multivariate-iid-central-limit-theorem]]: under AC, iid square-integrable vectors have the centered Gaussian limit with their covariance, including the zero-variance case.
+
+[F6] [[def-identically-distributed-and-iid-random-variables]]: the sample coordinates are iid under $P^{\otimes n}$.
+
+[F7] [[def-total-variation-distance-for-probability-laws]]: $\|Q-R\|_{\rm TV}=\sup_{A\in\mathcal A}|Q(A)-R(A)|$.
+
+[F8] [[cor-markov-inequality-for-random-variables]]: for nonnegative integrable $Y$ and $c>0$, $P(Y\ge c)\le EY/c$.
+
+[F9] [[thm-finite-and-countable-subadditivity-of-measures]]: the measure of a finite union is at most the sum of its members' measures.
+
+[F10] [[thm-linearity-of-the-lebesgue-integral-on-l-one]]: the integral is linear on integrable functions, so the normalization identity for $q_t=(1+Y_t/2)^2$ expands into its three terms.
+
+[F11] [[cor-taylor-remainder-bound]]: if the third derivative is bounded on an interval, the second-order Taylor polynomial has a remainder bounded by a constant times the cube of the displacement.
+
+[F12] [[thm-l1-convergence-implies-uniform-integrability]]: on a probability space, convergence in $L^1$ to an integrable limit makes the convergent sequence uniformly integrable.
+
+[F13] [[def-measure-with-density]]: for a nonnegative measurable function $f$, $A\mapsto\int_A f\,d\nu$ is a measure.
+
+[F14] [[def-product-sigma-algebra-and-finite-product-sigma-algebras]]: the finite product sigma-algebra is generated by measurable coordinate rectangles. Coordinate projections are measurable because the inverse image of a coordinate event is such a rectangle; finite products of nonnegative measurable coordinate functions are therefore product-measurable.
+
+[F15] [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]: products of sigma-finite measures exist and have the rectangle formula; iterating this applies to finite products of probabilities.
+
+[F16] [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]: nonnegative product-measurable functions have their product integral equal to the iterated integrals.
+
+[F17] [[thm-measure-uniqueness-on-a-sigma-finite-pi-system]]: measures agreeing on a generating pi-system agree everywhere if an increasing finite-measure exhaustion belongs to that pi-system.
+
+[A1] [[def-axiom-of-choice]]: AC is the density-version convention in [F1] and is assumed by [F5].
+
+## Proof
+
+**Given:** The path, densities, score, iid sample, and fixed $h$ in the statement.
+
+1.1 For $t>0$ let $r_t=\sqrt{p_t}-\sqrt{p_0}-\frac t2s\sqrt{p_0}$. On $S^c$, $r_t=\sqrt{p_t}$, so $\alpha_t=\int_{S^c}p_t\,d\mu\le\|r_t\|_2^2=o(t^2)$. Let $B_t=S\cap\{p_t=0\}$. Then $P(B_t)\le\|\sqrt{p_t}-\sqrt{p_0}\|_2^2=O(t^2)$. On $B_t$, the DQM identity gives $\sqrt{p_0}=-\frac t2s\sqrt{p_0}-r_t$, hence $\sqrt{P(B_t)}\le\frac t2\{P[s^2\mathbf1_{B_t}]\}^{1/2}+o(t)$. Since $P(B_t)\to0$ and $s^2$ is integrable, truncating $s^2$ at a fixed bound and then increasing that bound shows $P[s^2\mathbf1_{B_t}]\to0$. Thus $\beta_t:=P(p_t=0)=P(B_t)=o(t^2)$. [A1, F1, F2, given, algebra]
+
+2.1 For small $t$, $1-\alpha_t>0$. The definition of $q_t$ gives $Pq_t=(1-\alpha_t)^{-1}\int_Sp_t\,d\mu=1$. On $S$, divide the DQM expansion by $\sqrt{p_0}$ and include the normalizer $(1-\alpha_t)^{-1/2}=1+o(t^2)$. With $Y_t=2(\sqrt{q_t}-1)$, this yields $Y_t=ts+R_t$ in $L^2(P)$ with $\|R_t\|_2=o(t)$. [F1, step 1.1, given, algebra]
+
+3.1 Since $Pq_t=1$ and $q_t=(1+Y_t/2)^2$ $P$-almost surely, linearity [F10] expands this normalization identity to $PY_t=-\frac14P[Y_t^2]$. By [F2], [F3], and step 2.1, $P[Y_t^2]=t^2I+o(t^2)$, so $PY_t=-\frac14t^2I+o(t^2)$. [F2, F3, F10, step 2.1, algebra]
+
+3.2 Suppose $h>0$. By [F4] applied to $s^2$ and [F5] applied to $s(X_i)$, $n^{-1}\sum_i s(X_i)^2\to I$ in probability and $\Delta_n\Rightarrow N(0,I)$. Step 2.1 and [F3] give $E|Y_{t_n}^2-t_n^2s^2|\le\|R_{t_n}\|_2(\|Y_{t_n}\|_2+t_n\|s\|_2)=o(t_n^2)$. Since $nt_n^2=h^2$, linearity [F10] and identical distribution [F6] show that the expected sum of these absolute differences is $o(1)$, so Markov's inequality [F8] makes that sum converge to zero in probability. Also $t_n^2\sum_i s(X_i)^2=(h^2/n)\sum_i s(X_i)^2\to h^2I$ in probability; therefore $\sum_iY_{t_n}(X_i)^2\to h^2I$. [A1, F2, F3, F4, F5, F6, F8, F10, step 2.1, given]
+
+4.1 The centered iid sum of $R_{t_n}(X_i)$ has variance at most $n\|R_{t_n}\|_2^2=o(nt_n^2)=o(1)$, so [F8] (applied to its square) gives $\sum_iR_{t_n}(X_i)=nPR_{t_n}+o_P(1)$. By [F2], $PR_{t_n}=PY_{t_n}$; step 3.1 therefore gives $\sum_iY_{t_n}(X_i)=h\Delta_n-\frac14h^2I+o_P(1)$. [F2, F8, step 3.1, given, algebra]
+
+5.1 The variables $V_n=\sqrt nY_{t_n}(X_1)$ converge in $L^2(P)$ to $hs(X_1)$ by step 2.1. By [F3], $E|V_n^2-h^2s(X_1)^2|\le\|V_n-hs(X_1)\|_2(\|V_n\|_2+h\|s\|_2)\to0$, since the second factor is bounded. Thus [F12] makes $V_n^2$ uniformly integrable. For every $\eta>0$, [F8] and [F9] give $P^{\otimes n}(\max_{i\le n}|Y_{t_n}(X_i)|>\eta)\le\eta^{-2}E[V_n^2\mathbf1_{\{|V_n|>\eta\sqrt n\}}]\to0$, because the tail threshold for $V_n^2$ tends to infinity. Also $P^{\otimes n}(L_n=0)\le n\beta_{t_n}=o(1)$ by step 1.1. On the event all factors are positive and $\max_i|Y_{t_n}(X_i)|\le1$, let $g(y)=2\log(1+y/2)$; its third derivative is $g'''(y)=\frac12(1+y/2)^{-3}$, so $|g'''(y)|\le4$ on $[-1,1]$. [F11] gives $g(y)=y-\frac14y^2+O(|y|^3)$ there, with a uniform constant. Thus $\log q_{t_n}(X_i)=Y_{t_n}(X_i)-\frac14Y_{t_n}(X_i)^2+O(|Y_{t_n}(X_i)|^3)$. The sum of cubic terms is bounded by a constant times $\max_i|Y_{t_n}(X_i)|\sum_iY_{t_n}(X_i)^2=o_P(1)$. Steps 3.2–4.1 now yield $\log L_n=h\Delta_n-\frac12h^2I+o_P(1)$. [F3, F6, F8, F9, F11, F12, step 1.1, step 2.1, step 3.2, step 4.1, algebra]
+
+6.1 Decompose $P_{t_n}=(1-\alpha_{t_n})\bar P_{t_n}+\alpha_{t_n}S_{t_n}$, where $\bar P_{t_n}=q_{t_n}P$ and, when $\alpha_{t_n}>0$, $S_{t_n}$ is the normalized restriction to $S^c$. Expanding the product mixture, the all-$\bar P_{t_n}$ term has weight $(1-\alpha_{t_n})^n$ and law $\bar P_{t_n}^{\otimes n}$. If $\alpha_{t_n}>0$, normalize the remaining mixture terms to a probability law $R_{n,t_n}$; then $P_{t_n}^{\otimes n}=(1-\alpha_{t_n})^n\bar P_{t_n}^{\otimes n}+\bigl(1-(1-\alpha_{t_n})^n\bigr)R_{n,t_n}$. When $\alpha_{t_n}=0$, the two product laws are equal. Otherwise, this mixture identity and the event-supremum definition [F7] give $\|P_{t_n}^{\otimes n}-\bar P_{t_n}^{\otimes n}\|_{\rm TV}\le1-(1-\alpha_{t_n})^n\le n\alpha_{t_n}$ by finite subadditivity [F9]. Since $\alpha_{t_n}=o(t_n^2)$ and $nt_n^2=h^2$ for fixed $h>0$, this is $o(1)$. For the asserted product-density identity, the coordinate factors $q_{t_n}$ are nonnegative measurable, so [F14] makes $L_n(x_1,\ldots,x_n)=\prod_iq_{t_n}(x_i)$ product-measurable. Define the measure $Q_n(A)=\int_A L_n\,dP^{\otimes n}$ by [F13]. Repeated Tonelli [F16] on a measurable rectangle $A_1\times\cdots\times A_n$ gives $Q_n(A_1\times\cdots\times A_n)=\prod_{i=1}^n\int_{A_i}q_{t_n}\,dP=\prod_{i=1}^n\bar P_{t_n}(A_i)$, where the one-coordinate identity is the definition $\bar P_{t_n}=q_{t_n}P$. In particular, step 2.1 gives $Q_n(\mathcal X^n)=(Pq_{t_n})^n=1$. By [F15], $\bar P_{t_n}^{\otimes n}$ is also a probability and has the same rectangle values. The measurable rectangles form a pi-system (their intersections are coordinate intersections) generating the finite product sigma-algebra by [F14]; the constant exhaustion $\mathcal X^n$ belongs to it and both measures have mass one there. Thus [F17] proves $Q_n=\bar P_{t_n}^{\otimes n}$ on every product-measurable event. Consequently $L_nP^{\otimes n}=\bar P_{t_n}^{\otimes n}$, identifying exactly the proxy in the statement with the product law compared above. If $h=0$, both product laws equal $P^{\otimes n}$ and $L_n=1$. This proves every assertion. [F1, F6, F7, F9, F13, F14, F15, F16, F17, step 1.1, step 2.1, step 5.1, given] ∎
+

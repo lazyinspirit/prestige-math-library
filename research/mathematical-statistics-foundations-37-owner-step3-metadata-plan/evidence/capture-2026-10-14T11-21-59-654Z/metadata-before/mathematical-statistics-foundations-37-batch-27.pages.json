@@ -1,0 +1,452 @@
+[
+  {
+    "order": 1896,
+    "id": "splines-series-and-approximation-rates",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Splines and Series Methods",
+    "companion": "splines-series-and-approximation-rates-examples",
+    "requires": [
+      "decision-theoretic-upper-bounds-and-oracle-risk",
+      "nonparametric-regression-and-smoothing",
+      "losses-risk-and-decision-rules",
+      "weak-derivatives-and-sobolev-spaces",
+      "sobolev-traces-and-zero-boundary-values",
+      "inner-product-spaces-and-orthogonality"
+    ],
+    "items": [
+      {
+        "id": "def-b-spline-space-and-basis",
+        "kind": "definition",
+        "title": "B-spline spaces and knot conventions",
+        "statement": "For a finite nondecreasing clamped knot vector on a bounded interval and degree p, recursively define the B-splines, their multiplicities and the piecewise-polynomial spline space; the accompanying theorem establishes their support, continuity, partition, and basis properties.",
+        "deps": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation, CIME 2017, §§1.1–1.2 and §2.2, PDF pp. 2–15, 25–29",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [
+          "thm-spline-polynomial-reproduction"
+        ]
+      },
+      {
+        "id": "def-natural-cubic-spline",
+        "kind": "definition",
+        "title": "Natural cubic splines",
+        "statement": "On a bounded interval [a,b] and at distinct ordered knots t_1<...<t_r, r>=2, a natural cubic spline is a C^2 function that is polynomial of degree at most three between successive knots, has second derivative zero at the extreme knots, and is extended linearly on data-free end intervals.",
+        "deps": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Splines and RKHS Methods, Berkeley, Spring 2023, §§2.1–2.4, PDF pp. 3–6",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s23/lectures/splines_rkhs.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-local-spline-quasi-interpolant",
+        "kind": "definition",
+        "title": "Bounded local spline quasi-interpolants",
+        "statement": "A local quasi-interpolant is a linear map from continuous L^q functions into the spline space that depends only on bounded local neighborhoods, reproduces P_l, and satisfies a mesh-uniform cellwise L^q stability bound.",
+        "deps": [
+          "def-b-spline-space-and-basis",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation, CIME 2017, §§1.1–1.2 and §2.2, PDF pp. 2–15, 25–29",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-natural-cubic-smoothing-spline",
+        "kind": "definition",
+        "title": "Natural cubic smoothing spline",
+        "statement": "For lambda>0 and data with at least two distinct inputs in [a,b], the natural cubic smoothing spline is the minimizer of the squared empirical residual plus lambda times the integrated squared second derivative over W^{2,2}(a,b), using the continuous Sobolev representative.",
+        "deps": [
+          "def-natural-cubic-spline",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Splines and RKHS Methods, Berkeley, Spring 2023, §§2.1–2.4, PDF pp. 3–6",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s23/lectures/splines_rkhs.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [
+          "thm-natural-cubic-smoothing-spline-exists-uniquely"
+        ]
+      },
+      {
+        "id": "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+        "kind": "theorem",
+        "title": "Natural cubic interpolation at distinct knots",
+        "statement": "At r at least 2 strictly increasing knots and arbitrary real values there is a unique natural cubic interpolant, linear outside the extreme knots; its interior nodal second derivatives solve a positive-definite tridiagonal system.",
+        "deps": [
+          "def-natural-cubic-spline"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Splines and RKHS Methods, Berkeley, Spring 2023, §§2.1–2.4, PDF pp. 3–6",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s23/lectures/splines_rkhs.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-spline-polynomial-reproduction",
+        "kind": "theorem",
+        "title": "B-spline basis properties and polynomial reproduction",
+        "statement": "For a finite clamped knot vector, the recursively defined degree-p B-splines form a basis of the piecewise-polynomial space with continuity p-m at a knot of multiplicity m, and reproduce every polynomial of degree at most p.",
+        "deps": [
+          "def-b-spline-space-and-basis"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation, CIME 2017, §§1.1–1.2 and §2.2, PDF pp. 2–15, 25–29",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-series-spline-least-squares",
+        "kind": "definition",
+        "title": "Series least squares with a spline basis",
+        "statement": "Given a fixed B-spline design vector and observed data, the series least-squares fit is the projection of the response vector onto the design column space; its defined target is the fitted training vector and its loss is squared empirical prediction error.",
+        "deps": [
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction",
+          "def-orthogonal-projection",
+          "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "def-fixed-design-projection-estimator"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OCW 14.385, Fall 2007, Proposition 3 and proof, PDF pp. 10–11",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-natural-cubic-smoothing-spline-exists-uniquely",
+        "kind": "theorem",
+        "title": "Existence, uniqueness, and spline reduction for cubic smoothing",
+        "statement": "With lambda>0 and at least two distinct input locations, the variational problem defining the natural cubic smoothing spline has a unique minimizer; it is a natural cubic spline with knots at the distinct inputs and linear tails.",
+        "deps": [
+          "def-natural-cubic-smoothing-spline",
+          "def-natural-cubic-spline",
+          "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Splines and RKHS Methods, Berkeley, Spring 2023, §§2.1–2.4, PDF pp. 3–6",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s23/lectures/splines_rkhs.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-sobolev-spline-quasi-interpolant-rate",
+        "kind": "theorem",
+        "title": "Sobolev approximation by local spline quasi-interpolants",
+        "statement": "For 0<=l<=p, 1<=q<=infinity, f in W^{l+1,q}, and a bounded local quasi-interpolant reproducing P_l, local and global L^q errors are bounded by a constant times the (l+1)-st power of the controlled local mesh size times ||D^{l+1}f||_q; on uniform meshes the cellwise L^2 projector supplies the q=2 spline rate.",
+        "deps": [
+          "def-local-spline-quasi-interpolant",
+          "thm-spline-polynomial-reproduction",
+          "def-sobolev-space-wkp-and-its-norm",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-holder-inequality-for-integrals",
+          "def-orthogonal-projection",
+          "prop-orthogonal-projection-formula-and-linearity",
+          "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "prop-pythagorean-parallelogram-and-polarisation-identities"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation, CIME 2017, §§1.1–1.2 and §2.2, PDF pp. 2–15, 25–29",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-series-training-risk",
+        "kind": "theorem",
+        "title": "Expected empirical training risk for spline series least squares",
+        "statement": "For iid real-valued pairs with a supplied Borel conditional-law kernel, a supplied Borel conditional mean with finite conditional first absolute moment, conditional variance at most Delta, and L^2(P_X) spline approximation error at most C^2K^{-2gamma}, expected empirical training-vector loss is at most Delta K/n+C^2K^{-2gamma}.",
+        "deps": [
+          "def-series-spline-least-squares",
+          "def-fixed-design-projection-estimator",
+          "def-measure-kernel-and-probability-kernel",
+          "def-random-element-and-real-random-variable",
+          "def-law-or-distribution-of-a-random-element",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-dynkin-pi-lambda",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-orthogonal-projection",
+          "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "thm-gram-schmidt-orthonormalisation"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OCW 14.385, Fall 2007, Proposition 3 and proof, PDF pp. 10–11",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-series-spline-sobolev-training-risk-rate",
+        "kind": "corollary",
+        "title": "Sobolev rate for spline-series training risk",
+        "statement": "For a univariate W^{s,2} regression target on a compact interval supporting the design law with bounded density, degree p>=s-1 and a uniform full-multiplicity knot mesh of dimension K=(p+1)J, expected empirical training-vector risk is O(n^{-2s/(2s+1)}) when J is comparable to n^{1/(2s+1)}.",
+        "deps": [
+          "thm-series-training-risk",
+          "thm-sobolev-spline-quasi-interpolant-rate",
+          "def-regression-target-version",
+          "def-axiom-of-choice",
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OCW 14.385, Fall 2007, Proposition 3 and proof, PDF pp. 10–11",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 1897,
+    "id": "splines-series-and-approximation-rates-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Splines and Series Methods — Examples",
+    "companion": "splines-series-and-approximation-rates",
+    "requires": [
+      "splines-series-and-approximation-rates"
+    ],
+    "items": [
+      {
+        "id": "cex-one-observation-does-not-identify-a-smoothing-spline",
+        "kind": "counterexample",
+        "title": "One observation does not determine a natural cubic smoothing fit",
+        "statement": "If the cubic smoothing objective is extended to a single distinct input, every affine function through that input has zero residual and zero roughness, so the minimizing function is not unique.",
+        "deps": [
+          "def-natural-cubic-smoothing-spline"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Splines and RKHS Methods, Berkeley, Spring 2023, §§2.1–2.4, PDF pp. 3–6",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s23/lectures/splines_rkhs.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-b-spline-basis-and-polynomial-reproduction",
+        "kind": "example",
+        "title": "A quadratic Bernstein B-spline basis",
+        "statement": "On [0,1], the clamped degree-two knot vector gives the Bernstein basis; the three functions are nonnegative, sum to one, and reproduce every quadratic polynomial.",
+        "deps": [
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation, CIME 2017, §§1.1–1.2 and §2.2, PDF pp. 2–15, 25–29",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-natural-cubic-interpolants-on-two-and-three-knots",
+        "kind": "example",
+        "title": "Natural cubic interpolation with two and three knots",
+        "statement": "Two distinct knots give their unique linear interpolant; for three equally spaced knots with values 0,1,0, the middle nodal second derivative is -3 and the two cubic pieces are explicit.",
+        "deps": [
+          "def-natural-cubic-spline",
+          "thm-natural-cubic-interpolant-exists-uniquely-at-distinct-knots"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Tibshirani, Nonparametric Regression: Splines and RKHS Methods, Berkeley, Spring 2023, §§2.1–2.4, PDF pp. 3–6",
+              "url": "https://www.stat.berkeley.edu/~ryantibs/statlearn-s23/lectures/splines_rkhs.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-uniform-mesh-linear-spline-approximation",
+        "kind": "example",
+        "title": "Uniform-mesh linear spline approximation",
+        "statement": "For a W^{2,infinity} function, linear interpolation on a uniform knot mesh is a bounded local quasi-interpolant reproducing affine functions and has uniform error at most h^2 times the essential supremum of the second weak derivative divided by 8.",
+        "deps": [
+          "def-local-spline-quasi-interpolant",
+          "thm-sobolev-spline-quasi-interpolant-rate",
+          "thm-spline-polynomial-reproduction",
+          "cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives",
+          "def-axiom-of-choice"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Lyche, Carla Manni, and Hendrik Speleers, B-Splines and Spline Approximation, CIME 2017, §§1.1–1.2 and §2.2, PDF pp. 2–15, 25–29",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2017/material/notes_lyche.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-spline-training-risk-can-differ-from-independent-test-risk",
+        "kind": "example",
+        "title": "Training risk and independent test risk are different quantities",
+        "statement": "On a one-row degree-one clamped B-spline design, the fit can have zero empirical training loss while its squared error under an independent uniform test draw is 1/3.",
+        "deps": [
+          "def-series-spline-least-squares",
+          "thm-series-training-risk",
+          "def-b-spline-space-and-basis",
+          "thm-spline-polynomial-reproduction"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Whitney K. Newey, Nonparametric and Semiparametric Estimation, MIT OCW 14.385, Fall 2007, Proposition 3 and proof, PDF pp. 10–11",
+              "url": "https://ocw.mit.edu/courses/14-385-nonlinear-econometric-analysis-fall-2007/655fcef1b4192f40d80edea3c1dd85ce_notes_nonsemi.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  }
+]

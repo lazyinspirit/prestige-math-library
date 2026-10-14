@@ -11,12 +11,7 @@ deps: [thm-monotone-convergence-for-the-integral, thm-increasing-simple-approxim
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-receipts.jsonl (cor-additivity-of-the-nonnegative-lebesgue-integral). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/mathematical-statistics-foundations-37-owner-s4-published-cor-additivity-of-the-nonnegative-lebesgue-integral-repair.json
 sources:
   scraped: []
   references:
@@ -28,12 +23,12 @@ sources:
 
 ## Statement
 
-If $f,g:X\to[0,+\infty]$ are measurable, then
+Let $(X,\mathcal A,\mu)$ be an arbitrary measure space. If $f,g:X\to[0,+\infty]$ are measurable, then
 $$\int(f+g)\,d\mu=\int f\,d\mu+\int g\,d\mu.$$
 
 ## Facts & Assumptions
 
-**Given:** Nonnegative measurable functions $f$ and $g$.
+**Given:** An arbitrary measure space $(X,\mathcal A,\mu)$; nonnegative measurable functions $f$ and $g$.
 
 [L1] Nonnegative measurable functions admit increasing simple approximations ([[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]]).
 

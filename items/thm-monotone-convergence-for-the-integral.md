@@ -12,12 +12,7 @@ deps: [def-nonnegative-lebesgue-integral, def-integral-over-a-measurable-set, th
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (thm-monotone-convergence-for-the-integral). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/mathematical-statistics-foundations-37-owner-mct-ambient-thm-monotone-convergence-for-the-integral-repair.json
 sources:
   scraped: []
   references:
@@ -31,13 +26,12 @@ sources:
 
 ## Statement
 
-Let $0\le f_1\le f_2\le\cdots$ be measurable and suppose $f_n(x)\uparrow f(x)$
-for every $x$. Then
+Let $(X,\mathcal A,\mu)$ be an arbitrary measure space. Let $f_n:X\to[0,+\infty]$ be measurable for every $n\ge1$, with $0\le f_1\le f_2\le\cdots$, and suppose $f_n(x)\uparrow f(x)$ for every $x\in X$. Then
 $$\int f_n\,d\mu\uparrow\int f\,d\mu.$$
 
 ## Facts & Assumptions
 
-**Given:** A nondecreasing sequence $(f_n)$ of nonnegative measurable functions with pointwise limit $f$.
+**Given:** An arbitrary measure space $(X,\mathcal A,\mu)$ and a nondecreasing sequence $(f_n)$ of nonnegative measurable functions $f_n:X\to[0,+\infty]$ with pointwise limit $f$.
 
 [L1] The nonnegative integral is monotone ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).
 

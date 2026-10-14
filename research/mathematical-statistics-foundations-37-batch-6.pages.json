@@ -1,0 +1,408 @@
+[
+  {
+    "order": 1854,
+    "id": "finite-sample-point-estimation-and-unbiased-optimality",
+    "kind": "A",
+    "category": "mathematical-statistics",
+    "title": "Finite-Sample Point Estimation",
+    "companion": "finite-sample-point-estimation-and-unbiased-optimality-examples",
+    "requires": [
+      "estimators-and-randomized-procedures",
+      "losses-risk-and-decision-rules",
+      "complete-sufficiency-exponential-families-and-basu",
+      "conditional-expectation"
+    ],
+    "items": [
+      {
+        "id": "lem-dirac-integral-evaluation",
+        "kind": "lemma",
+        "title": "Integration against a Dirac measure evaluates at its point",
+        "statement": "Let $\\mathcal A$ be a sigma-algebra on a set $X$, let $x_0\\in X$, and let\n$\\delta_{x_0}$ be the Dirac probability measure on $(X,\\mathcal A)$. For every\nnonnegative $\\mathcal A$-measurable $f:X\\to[0,+\\infty]$,\n$$\\int_X f\\,d\\delta_{x_0}=f(x_0).$$",
+        "deps": [
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Measure, Integration & Real Analysis, Example 2.55",
+              "url": "https://measure.axler.net/MIRA.pdf"
+            },
+            {
+              "title": "Terence Tao, An Introduction to Measure Theory, Example 1.4.29",
+              "url": "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "strategy": "Reduce to nonnegative simple functions, evaluate each using the Dirac set function, then pass to the pointwise increasing limit by monotone convergence.",
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "lem-statistic-induces-deterministic-procedure",
+        "kind": "lemma",
+        "title": "A statistic induces a deterministic probability kernel",
+        "statement": "Let $T:(\\mathcal X,\\mathcal A)\\to(\\mathsf D,\\mathcal G)$ be a measurable\nstatistic, where $\\mathcal G$ is a sigma-algebra on the action set\n([[def-statistic-and-estimator]]). Then\n$$K_T(x,B):=\\delta_{T(x)}(B)=\\mathbf 1_B(T(x)),\\qquad x\\in\\mathcal X,\\ B\\in\\mathcal G,$$\nis a probability kernel and therefore a deterministic randomized procedure.",
+        "deps": [
+          "def-statistic-and-estimator",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-measurable-function-between-measurable-spaces"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, \u00a75.1, PDF pp. 100\u2013102",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, \u00a7\u00a72\u20134.2, PDF pp. 2\u20138",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "strategy": "Check the probability-measure section at every data point and the measurability of each event evaluation.",
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "def-bias-and-mean-squared-error",
+        "kind": "definition",
+        "title": "Bias and mean squared error",
+        "statement": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment: a measurable data space, a parameter-label set,\nand a family of probability measures on the data space. Let\n$\\psi:\\Theta\\to\\mathbb R$ be its real-valued target function (estimand). An estimator\n$T:\\mathcal X\\to\\mathbb R$ is a measurable statistic\nwith the real Borel target ([[def-statistic-and-estimator]]). At a parameter\n$\\theta$ for which $T$ is integrable under $P_\\theta$, its **bias** is\n$$\\operatorname{Bias}_\\theta(T):=\\mathbb E_\\theta[T]-\\psi(\\theta).$$\n\nIts **mean squared error** (MSE) is the extended nonnegative number\n$$\\operatorname{MSE}_\\theta(T):=\\mathbb E_\\theta[(T-\\psi(\\theta))^2]\\in[0,+\\infty].$$\nThis is the risk of the deterministic rule induced by $T$ under squared-error\nloss $L(\\theta,a)=(a-\\psi(\\theta))^2$: its Dirac kernel is constructed in\n[[lem-statistic-induces-deterministic-procedure]], and the risk supplier's\nintegral formula reduces to the displayed expectation when the action is\n$T(x)$ by [[lem-dirac-integral-evaluation]]\n([[def-loss-function-and-risk]]). For each fixed $\\theta$, this loss is Borel\nin the real action $a$; no measurable structure on $\\Theta$ or measurability\nof $\\psi$ is required. The expectation convention is\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. If $T$ is\nsquare-integrable under $P_\\theta$, then its variance is defined by\n[[def-moments-variance-and-covariance]] and this MSE is finite. Bias is not\ndefined at parameters where $T$ is not integrable.",
+        "deps": [
+          "def-statistic-and-estimator",
+          "lem-statistic-induces-deterministic-procedure",
+          "lem-dirac-integral-evaluation",
+          "def-loss-function-and-risk",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 5, PDF pp. 29\u201331",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 6: Best Unbiased Estimators, Rao-Blackwell Theorem, PDF pp. 2\u20138",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_06_slides_annotated.pdf"
+            },
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, \u00a75.1, PDF pp. 100\u2013102",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "thm-bias-variance-decomposition",
+        "kind": "theorem",
+        "title": "Bias\u2013variance decomposition",
+        "statement": "In a statistical experiment, let $\\psi:\\Theta\\to\\mathbb R$ and let $T$ be a\nreal estimator with $\\mathbb E_\\theta[T^2]<\\infty$. For every $\\theta$,\n$$\\operatorname{MSE}_\\theta(T)=\\operatorname{Var}_\\theta(T)+\\operatorname{Bias}_\\theta(T)^2.$$",
+        "deps": [
+          "def-bias-and-mean-squared-error",
+          "def-moments-variance-and-covariance",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 5, PDF pp. 29\u201331",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 6: Best Unbiased Estimators, Rao-Blackwell Theorem, PDF pp. 2\u20138",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_06_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "strategy": "Write estimation error as centered noise plus bias, expand its square, and use the centered term\u2019s zero expectation.",
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "def-unbiased-estimator-and-umvu",
+        "kind": "definition",
+        "title": "Unbiased estimators and UMVU estimators",
+        "statement": "Let $T$ be an estimator of a real estimand $\\psi$ in a statistical experiment.\nIt is **unbiased** if it is integrable under every $P_\\theta$ and\n$$\\mathbb E_\\theta[T]=\\psi(\\theta)\\qquad\\text{for every }\\theta\\in\\Theta.$$\nEquivalently, its bias from [[def-bias-and-mean-squared-error]] is zero at every\nparameter. It is a **finite-variance unbiased estimator** if it is unbiased\nand square-integrable under every $P_\\theta$.\n\nA finite-variance unbiased estimator $T$ is **uniformly minimum-variance\nunbiased** (UMVU) for $\\psi$ if, for every $\\theta\\in\\Theta$ and every other\nfinite-variance unbiased estimator $U$ of the same estimand,\n$$\\operatorname{Var}_\\theta(T)\\leq\\operatorname{Var}_\\theta(U).$$\nThe same estimator must satisfy these inequalities throughout the parameter\nspace; the definition asserts no existence of a UMVU estimator. Variance has\nthe meaning in [[def-moments-variance-and-covariance]].",
+        "deps": [
+          "def-statistic-and-estimator",
+          "def-bias-and-mean-squared-error",
+          "def-moments-variance-and-covariance"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Definition 5.2, PDF pp. 29\u201330",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Jun Shao, STAT 709 Lecture 15: UMVUE, PDF pp. 1\u20133",
+              "url": "https://pages.cs.wisc.edu/~shao/stat709/stat709-15.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 6: Best Unbiased Estimators, Rao-Blackwell Theorem, PDF pp. 2\u20138",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_06_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "thm-rao-blackwell",
+        "kind": "theorem",
+        "title": "Rao\u2013Blackwell theorem for scalar finite-variance estimators",
+        "statement": "Assume the Axiom of Choice as in the library conditional-expectation\nconvention. Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta))$ have\nstandard-Borel data space, let $\\mathsf S$ be standard Borel, and let\n$S:\\mathcal X\\to\\mathsf S$ be a sufficient statistic. Here sufficiency uses\na **supplied common kernel** $K(s,\\cdot)$ that is a regular conditional law of\nthe data given $S=s$ under every $P_\\theta$ and does not depend on $\\theta$\n([[def-sufficient-statistic]]). For Borel $B\\subseteq\\mathsf S$, write $P_\\theta^S(B):=P_\\theta(S^{-1}(B))$ for the pushforward law of $S$. Let $\\psi:\\Theta\\to\\mathbb R$ and let $U$ be\na measurable real estimator with $\\mathbb E_\\theta[U]=\\psi(\\theta)$ and\n$\\mathbb E_\\theta[U^2]<\\infty$ for every $\\theta$.\n\nThere is a single Borel function $g:\\mathsf S\\to\\mathbb R$, independent of\n$\\theta$, such that $g(S)$ is a version of\n$\\mathbb E_\\theta[U\\mid\\sigma(S)]$ for every $\\theta$. It is unbiased,\nfinite-variance, and\n$$\\operatorname{Var}_\\theta(g(S))\\leq\\operatorname{Var}_\\theta(U)\\qquad(\\theta\\in\\Theta).$$\nFor each $\\theta$, equality holds exactly when $U$ is\n$\\sigma(S)$-measurable $P_\\theta$-almost surely.",
+        "deps": [
+          "def-unbiased-estimator-and-umvu",
+          "def-sufficient-statistic",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-sigma-algebra-generated-by-a-function",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-conditional-expectation-as-an-ae-class",
+          "cor-conditional-lp-contraction",
+          "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "lem-procedure-action-law-is-measurable",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Theorem 6.1 and proof, PDF pp. 33\u201335",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 6: Best Unbiased Estimators, Rao-Blackwell Theorem, PDF pp. 9\u201311",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_06_slides_annotated.pdf"
+            },
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, Theorem 5.1 and proof, PDF pp. 102\u2013103",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "strategy": "Use the common sufficient-statistic kernel to construct one parameter-free conditional mean, then apply conditional expectation and L2 orthogonality.",
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-lehmann-scheffe",
+        "kind": "theorem",
+        "title": "Lehmann\u2013Scheff\u00e9 theorem",
+        "statement": "Assume AC as in the library conditional-expectation convention. Let\n$\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be\na statistical experiment with standard-Borel data space. Let\n$S:(\\mathcal X,\\mathcal A)\\to(\\mathsf S,\\mathcal B)$ be a statistic with\nstandard-Borel target, sufficient under the common conditional-law interface\nof [[def-sufficient-statistic]] and complete under [[def-complete-statistic]].\nLet $\\psi:\\Theta\\to\\mathbb R$ be a real-valued estimand and let\n$g:\\mathsf S\\to\\mathbb R$ be Borel, with $g(S)$ unbiased for $\\psi$ and of\nfinite variance under every $P_\\theta$. Then $g(S)$ is the unique UMVU\nestimator of $\\psi$: for every finite-variance unbiased estimator $U$,\n$$\\operatorname{Var}_\\theta(g(S))\\leq\\operatorname{Var}_\\theta(U)\\qquad(\\theta\\in\\Theta),$$\nand any other UMVU estimator equals $g(S)$ $P_\\theta$-almost surely for each\n$\\theta$.",
+        "deps": [
+          "def-unbiased-estimator-and-umvu",
+          "def-sufficient-statistic",
+          "def-complete-statistic",
+          "thm-rao-blackwell",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Theorem 6.5 and proof, PDF pp. 37\u201338",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 6: Best Unbiased Estimators, Rao-Blackwell Theorem, PDF pp. 15\u201316",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_06_slides_annotated.pdf"
+            },
+            {
+              "title": "Jun Shao, STAT 709 Lecture 15: UMVUE, PDF pp. 1\u20134",
+              "url": "https://pages.cs.wisc.edu/~shao/stat709/stat709-15.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "strategy": "Rao\u2013Blackwellize each unbiased competitor, use completeness on the difference of functions of the sufficient statistic, and use the equality case for uniqueness.",
+        "proof_strategy": "direct",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 1855,
+    "id": "finite-sample-point-estimation-and-unbiased-optimality-examples",
+    "kind": "B",
+    "category": "mathematical-statistics",
+    "title": "Finite-Sample Point Estimation \u2014 Examples",
+    "companion": "finite-sample-point-estimation-and-unbiased-optimality",
+    "requires": [
+      "finite-sample-point-estimation-and-unbiased-optimality"
+    ],
+    "items": [
+      {
+        "id": "ex-binomial-sample-proportion",
+        "kind": "example",
+        "title": "The binomial sample proportion",
+        "statement": "Let $X_1,\\ldots,X_n$ be independent Bernoulli$(p)$ observations, where\n$n\\geq1$ and $p\\in[0,1]$. For $\\overline X=n^{-1}\\sum_{i=1}^nX_i$,\n$$\\mathbb E_p[\\overline X]=p,\\qquad \\operatorname{Var}_p(\\overline X)=\\operatorname{MSE}_p(\\overline X)=\\frac{p(1-p)}{n}.$$\nThe equalities include the degenerate endpoints $p=0$ and $p=1$.",
+        "deps": [
+          "def-statistic-and-estimator",
+          "def-bias-and-mean-squared-error",
+          "def-unbiased-estimator-and-umvu",
+          "thm-bias-variance-decomposition",
+          "def-moments-variance-and-covariance",
+          "def-variance-and-covariance",
+          "cor-covariance-vanishes-under-independence",
+          "thm-variance-of-a-finite-sum",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-bernoulli-and-binomial-random-variables",
+          "def-independence-of-finite-random-variables"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 5, PDF pp. 29\u201331",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 6: Best Unbiased Estimators, Rao-Blackwell Theorem, PDF pp. 2\u20138",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_06_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "strategy": "Compute Bernoulli moments, use independence to remove cross covariances, and apply the bias\u2013variance identity.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-biased-estimator-lower-mse",
+        "kind": "example",
+        "title": "A biased estimator can have lower MSE",
+        "statement": "Observe one $X\\sim\\operatorname{Bernoulli}(p)$ and estimate $p$. The unbiased\nestimator $T_1=X$ has $\\operatorname{MSE}_p(T_1)=p(1-p)$. The constant\nestimator $T_0=0$ is biased when $p>0$, but at $p=1/5$,\n$$\\operatorname{MSE}_{1/5}(T_0)=\\frac1{25}<\\frac4{25}=\\operatorname{MSE}_{1/5}(T_1).$$\nThis is a pointwise comparison at $p=1/5$, not a uniform improvement: at $p=1$\nthe constant rule has MSE $1$ and $T_1$ has MSE $0$.",
+        "deps": [
+          "def-statistic-and-estimator",
+          "def-bias-and-mean-squared-error",
+          "def-unbiased-estimator-and-umvu",
+          "def-moments-variance-and-covariance",
+          "def-bernoulli-and-binomial-random-variables",
+          "lem-bernoulli-and-binomial-mean-and-variance"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 5, PDF pp. 29\u201331",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 6: Best Unbiased Estimators, Rao-Blackwell Theorem, PDF pp. 2\u20138",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_06_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "strategy": "Compute both Bernoulli risks and compare them at p=1/5; check p=1 to show the comparison is not uniform.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-rao-blackwell-bernoulli-observation",
+        "kind": "example",
+        "title": "Rao\u2013Blackwellizing one Bernoulli observation by the sample sum",
+        "statement": "Work on the finite product sample space $\\{0,1\\}^n$ with its discrete\nsigma-algebra. Let its coordinates $X_1,\\ldots,X_n$ be iid Bernoulli$(p)$ with\n$p\\in[0,1]$, $n\\geq1$, and $S=\\sum_{i=1}^nX_i$. The unbiased estimator $U=X_1$\nis Rao\u2013Blackwellized by $S$ to\n$$\\mathbb E_p[X_1\\mid S]=\\frac Sn.$$\nThe statistic $S$ is sufficient: conditional on $S=s$, the data vector is\nuniform over the vectors with $s$ ones when $0<p<1$. At $p=0$ and $p=1$, only\nthe fibers $s=0$ and $s=n$ are supported, respectively, and their conditional\nlaws are point masses at the all-zero and all-one vectors. These conditional\nlaws do not depend on $p$.",
+        "deps": [
+          "thm-rao-blackwell",
+          "def-sufficient-statistic",
+          "def-standard-borel-space",
+          "def-statistic-and-estimator",
+          "def-unbiased-estimator-and-umvu",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice",
+          "def-bernoulli-and-binomial-random-variables",
+          "def-independence-of-finite-random-variables"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Theorem 6.1 and Bernoulli example, PDF pp. 33\u201335",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            },
+            {
+              "title": "Karl B. Gregory, STAT 713 Lecture 6: Best Unbiased Estimators, Rao-Blackwell Theorem, PDF pp. 9\u201311",
+              "url": "https://people.stat.sc.edu/gregorkb/STAT_713_sp_2023/STAT_713_Lec_06_slides_annotated.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "strategy": "Verify the common conditional law on each sample-sum fiber and use permutation symmetry to compute the conditional mean.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      }
+    ]
+  }
+]

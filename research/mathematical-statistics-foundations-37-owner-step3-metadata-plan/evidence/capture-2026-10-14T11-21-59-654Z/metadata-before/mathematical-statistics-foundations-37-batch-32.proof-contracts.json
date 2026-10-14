@@ -1,0 +1,1435 @@
+{
+  "version": 1,
+  "scope": [
+    "def-finite-sample-replacement-breakdown",
+    "def-lower-median-functional",
+    "lem-finite-empirical-measure-is-a-probability-law",
+    "lem-lower-median-of-odd-empirical-sample-is-middle-order-statistic",
+    "thm-mean-and-median-replacement-breakdown",
+    "def-statistical-functional-and-influence-function",
+    "def-gross-error-sensitivity",
+    "thm-influence-function-for-m-location-estimator",
+    "thm-median-influence-function",
+    "ex-mean-influence-and-replacement-breakdown",
+    "ex-median-influence-and-replacement-breakdown",
+    "cex-bounded-influence-does-not-imply-positive-breakdown"
+  ],
+  "contracts": {
+    "def-finite-sample-replacement-breakdown": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes n>=1 and a fixed real sample x."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: With zero replacements, B_0 is zero because y=x is the only admissible vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: m=1 is included among candidate first-breaking counts when n>=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The displacement supremum is defined for every total statistic, including a constant statistic."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The replacement-count range explicitly includes m=n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition quantifies over the supplied finite vector and uses no choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the first positive integer m with infinite displacement defines the breakdown fraction when such an m exists; this is a fixed-sample convention, not an iff probability theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the fraction is only defined for a nonempty breaking-count set; it does not imply a law-uniform contamination-neighborhood result or require every total statistic to break."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-lower-median-functional": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is a Borel probability law on R with a nonempty threshold set bounded below."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: For G=delta_c the threshold set begins at c, so the lower median is c."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "No contamination endpoint occurs in this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The point-mass example fixes the tie convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "There is no epsilon parameter in this definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The lower median is an infimum of one specified subset of R and uses no choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the infimum of the nonempty, bounded-below half-mass upper set specifies the lower median; it does not assert uniqueness of all medians or existence of a density."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: selecting the left endpoint is the convention even when medians form an interval; no converse smoothness or uniqueness condition is inferred from this finite infimum."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "point-mass-median",
+          "claim": "For G=delta_c the lower median equals c.",
+          "result": "F_G(t)=0 for t<c and 1 for t>=c, so inf{t:F_G(t)>=1/2}=c."
+        }
+      ]
+    },
+    "lem-finite-empirical-measure-is-a-probability-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each summand in $P_n(A)$ is nonnegative, $P_n(\\varnothing)=0$, and $P_n(X)=n^{-1}\\sum_{i=1}^n1=1$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $(A_j)_{j\\ge1}$ be pairwise disjoint. For each $j$, let $I_j:=\\{i\\in\\{1,\\ldots,n\\}:x_i\\in A_j\\}$. The sets $I_j$ are pairwise disjoint, and at most $n$ of them are nonempty, because each index $i$ belongs to at most one $I_j$. Their union is $\\{i:x_i\\in\\bigcup_jA_j\\}$. Hence the number of sample indices in $\\bigcup_jA_j$ is $\\sum_j\\#I_j$, and dividing by $n$ gives $P_n(\\bigcup_jA_j)=\\sum_jP_n(A_j)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1\u20131.2 show that $P_n$ is a nonnegative countably additive set function with total mass one; by [F2] it is a probability measure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: P_n(empty)=0 from all zero indicators; Statement n>=1 prevents an empty sample and undefined n^-1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: an event containing no sample point has empirical mass zero, regardless of its population-law mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: n=1 gives delta_{x_1}, and the whole space has empirical mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: repeated points are allowed; if all x_i=x, summing the identical indicators gives the single Dirac probability delta_x."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2: masses zero and one are obtained on empty and whole-space events, and countable additivity uses at most n nonempty sample-index sets."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2: the sample points are supplied and only finitely many indicators are nonzero across disjoint events; no choice axiom selects sample points."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the probability-law conclusion for the given Dirac average is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the probability-law conclusion for the given Dirac average has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "single-observation",
+          "claim": "For n=1 the empirical law is delta_{x_1}.",
+          "result": "P_1(A)=delta_{x_1}(A), so it is a probability law."
+        },
+        {
+          "id": "repeated-observations",
+          "claim": "If all observations equal x, P_n=delta_x.",
+          "result": "P_n(A)=n^{-1}sum_i delta_x(A)=delta_x(A) for every measurable A."
+        }
+      ]
+    },
+    "lem-lower-median-of-odd-empirical-sample-is-middle-order-statistic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-empirical-measure-is-a-probability-law",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space, let $n\\ge1$, and let $x_1,\\ldots,x_n\\in X$. Define\n\n$$P_n(A):=\\frac1n\\sum_{i=1}^n\\delta_{x_i}(A),\\qquad A\\in\\mathcal A.$$\n\nThen $P_n$ is a probability measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lower-median-functional",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a probability measure on the Borel subsets of $\\mathbb R$, and put $F_G(t):=G(( -\\infty,t])$. For any $G$ such that $S_G:=\\{t\\in\\mathbb R:F_G(t)\\ge1/2\\}$ is nonempty and bounded below, define its **lower median** by\n\n$$m(G):=\\inf S_G.$$\n\nThe stated condition makes $m(G)$ a finite real number. This convention chooses the left endpoint when the set of medians is an interval; it assumes neither a density nor uniqueness.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $t<x_{(r+1)}$, at most $r$ sample coordinates are at most $t$. Therefore $P_n(( -\\infty,t])\\le r/(2r+1)<1/2$, so no such $t$ belongs to the defining set in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At $t=x_{(r+1)}$, at least $r+1$ sample coordinates are at most $t$. Hence $P_n(( -\\infty,t])\\ge(r+1)/(2r+1)>1/2$, so $x_{(r+1)}$ belongs to that defining set.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1\u20131.2 show that the defining set has no point below $x_{(r+1)}$ and contains $x_{(r+1)}$ itself. Its infimum is therefore $x_{(r+1)}$, as claimed.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n=2r+1>=1 and supplied real observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For n=1, r=0 and the unique order statistic is the lower median."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: At n=1 the empirical cdf first reaches one half at x_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If all observations equal c, both the lower median and middle order statistic equal c."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: For every r>=0, r/(2r+1)<1/2<(r+1)/(2r+1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses the given finite sorted list and no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an identification, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is an identification, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "n-one",
+          "claim": "For n=1 the lower empirical median equals x_1.",
+          "result": "The empirical cdf first reaches one half at x_1."
+        },
+        {
+          "id": "n-three",
+          "claim": "For sorted data x_(1)<=x_(2)<=x_(3), the lower median is x_(2).",
+          "result": "Below x_(2) at most one of three values is counted; at x_(2) at least two are counted."
+        }
+      ]
+    },
+    "thm-mean-and-median-replacement-breakdown": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-sample-replacement-breakdown",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $T_n:\\mathbb R^n\\to\\mathbb R$ be a total statistic, and fix a sample $x=(x_1,\\ldots,x_n)$. For $0\\le m\\le n$, define its maximum replacement displacement by\n\n$$B_m(T_n,x):=\\sup\\bigl\\{|T_n(y)-T_n(x)|:y\\in\\mathbb R^n,\\ \\#\\{i:y_i\\ne x_i\\}\\le m\\bigr\\}\\in[0,+\\infty].$$\n\nWhen the set is nonempty, the finite-sample replacement breakdown fraction is\n\n$$\\epsilon_n^*(T_n,x):=\\frac1n\\min\\{m\\in\\{1,\\ldots,n\\}:B_m(T_n,x)=+\\infty\\}.$$\n\nOnly coordinate replacements are counted, and the replacement values range over all of $\\mathbb R$. This is a property of the statistic at the fixed sample; it is not a probability or contamination-neighborhood statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With no replacements the mean displacement is zero. Replacing coordinate $i$ by $M$ changes the sample mean to $\\bar x+(M-x_i)/n$, whose displacement is unbounded as $M\\to+\\infty$. Thus the smallest breaking count for the mean is one, and [F1] gives $1/n$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $n=2r+1$. If at most $r$ coordinates are replaced, at least $r+1$ original observations remain. Writing $x_{\\min}=\\min_i x_i$ and $x_{\\max}=\\max_i x_i$, at least $r+1$ resulting observations are at most $x_{\\max}$ and at least $r+1$ are at least $x_{\\min}$. Therefore the $(r+1)$-st order statistic lies in $[x_{\\min},x_{\\max}]$, so its displacement from the original median is bounded uniformly over all such replacements.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Replace $r+1$ coordinates by the same value $M>x_{\\max}$. The $r$ unchanged observations are the first $r$ order statistics and the $r+1$ copies of $M$ occupy positions $r+1$ through $2r+1$. The median is therefore $M$, which is unbounded as $M\\to+\\infty$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.2\u20131.3 show that the smallest breaking count for the odd-sample median is $r+1$. By [F1] its breakdown fraction is $(r+1)/(2r+1)=\\lfloor(n+1)/2\\rfloor/n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: sample means and odd-sample order statistics require a positive sample length; zero replacements leave the fixed sample unchanged in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-replacement set is just the original sample and cannot make the statistic unbounded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.3: one replacement breaks the mean; for n=1, r=0 and one replacement also breaks the median, so both fractions are one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: the min/max argument still bounds a median when the original values tie or all coincide; the diverging replacements in step 1.3 still escape that fixed range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 and step 1.3: r replacements keep the median between the clean extrema while r+1 replacements force it to M; this is the exact first breaking count."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.3: replacing a specified coordinate or a specified group by M tending to infinity gives explicit witnesses, not an arbitrary family selected by choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the exact first breaking fractions for mean and odd-sample median is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the exact first breaking fractions for mean and odd-sample median has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "mean-n-one",
+          "claim": "For n=1 the mean breaks after one replacement.",
+          "result": "Replacing x_1 by M makes the statistic M, so the fraction is 1."
+        },
+        {
+          "id": "median-n-three",
+          "claim": "For n=3 the median first breaks after two replacements.",
+          "result": "One replacement leaves the median between the two fixed observations; replacing two values by M makes the median M, giving 2/3."
+        }
+      ]
+    },
+    "def-statistical-functional-and-influence-function": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: an empty model permits only the empty-domain functional, but an influence function instance requires a specified F in the model and a point x; none exists on an empty model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: at epsilon=0, F_{epsilon,x}=F; a constant functional has difference quotient zero on every admitted contamination path."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: k=1 gives a scalar influence function; epsilon=1 is not required because only a sufficiently small right neighborhood of zero is assumed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant functional, or x with delta_x=F, gives zero derivative when the path is admitted; the finite right limit is not guaranteed for all points."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: epsilon decreases to zero from the nonnegative side; existence of the finite limit may hold only on a proper subset of X."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: F and x are fixed and the derivative is a supplied finite limit when it exists; Riesz and pathwise-choice conclusions are terminology context only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: the finite right derivative along an admitted point-contamination path is specified here, with no separate sufficiency-direction equivalence to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: the finite right derivative along an admitted point-contamination path has no asserted converse characterizing its premises from its conclusion."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read the full Definition and Remarks and all three cited local definitions. The finite right derivative requires membership of every sufficiently small nonnegative point-contamination path and may have a proper direction domain. No uniform remainder, DQM membership, L2 representer, estimator expansion, or choice conclusion is inferred. The batch-29 definitions are terminology context only; batch-31 mixture uses one common measurable space. Reader and refuter report no findings."
+      }
+    },
+    "def-gross-error-sensitivity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition presupposes a statistical functional and its pointwise influence function."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: If all defined influence values are zero, their supremum is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: No contamination endpoint is involved."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: No contamination endpoint is involved."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "There is no epsilon parameter in this definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition ranges over a fixed domain of directions and selects none."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: sensitivity is the supremum of finite pointwise influence norms over their nonempty domain; it does not assert derivative existence at every contamination point."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition and Remarks: finite sensitivity is not stated sufficient for a uniform neighborhood bias bound without uniform remainder control, so there is no converse robustness equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-influence-function-for-m-location-estimator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gross-error-path",
+          "source_section": "Definition",
+          "quote": "For probability measures $F,H$ on a common measurable space $(X,\\mathcal A)$ ([[def-probability-measure]]) and $0\\le\\epsilon\\le1$, the gross-error path is $F_{\\epsilon,H}=(1-\\epsilon)F+\\epsilon H$, a probability measure by [[lem-convex-mixture-of-probability-laws]]. For any $x\\in X$, its point-contamination direction at $x$ is the specialization $H=\\delta_x$ ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]). The path is used for a derivative at $\\epsilon=0$; the definition alone gives no uniform-in-$H$ remainder.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-statistical-functional-and-influence-function",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ be a measurable space, let $\\mathcal P$ be a collection of probability measures on it, and let $T:\\mathcal P\\to\\mathbb R^k$ be a single-valued map with finite $k\\ge1$. Such a map is a **statistical functional**. For $F\\in\\mathcal P$ and $x\\in\\mathcal X$, suppose the point-contamination path $F_{\\epsilon,x}=(1-\\epsilon)F+\\epsilon\\delta_x$ belongs to $\\mathcal P$ for all sufficiently small $\\epsilon\\ge0$ ([[def-gross-error-path]]). The **gross-error influence function** at $(x;T,F)$ is\n\n$$\\operatorname{IF}(x;T,F):=\\lim_{\\epsilon\\downarrow0}\\frac{T(F_{\\epsilon,x})-T(F)}{\\epsilon}\\in\\mathbb R^k,$$\n\nwhen this finite right limit exists. Its domain may be a proper subset of $\\mathcal X$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $t\\in I$, the mean value theorem [F3] gives $|\\psi(y-t)-\\psi(y-\\theta)|\\le |t-\\theta|g(y)$ for $F$-almost every $y$, so $J(t)$ is finite. For any $t\\in I$ and nonzero $h$ with $t+h\\in I$, the difference quotient of $\\psi(y-t)$ in $t$ converges pointwise to $-\\psi'(y-t)$ and is bounded in absolute value by $g(y)$, again by [F3]. Dominated convergence [F2] therefore gives $J'(t)=-\\int\\psi'(y-t)\\,dF(y)$. If $t_j\\to t$ in $I$, continuity of $\\psi'$ gives pointwise convergence of $\\psi'(y-t_j)$ to $\\psi'(y-t)$, and the same majorant with [F2] shows $J'(t_j)\\to J'(t)$. Thus $J$ is $C^1$ on $I$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $H_x(e,t):=(1-e)J(t)+e\\psi(x-t)$ for real $e$ near $0$ and $t\\in I$. By step 1.1 and $\\psi\\in C^1$, $H_x$ is $C^1$; also $H_x(0,\\theta)=0$ and $\\partial_tH_x(0,\\theta)=J'(\\theta)=-A\\ne0$. Applying [F4] gives a unique local $C^1$ root $t=\\theta_x(e)$ through $(0,\\theta)$. For $e\\ge0$ small, [F1] identifies its equation with the stated M-location equation under $F_{e,x}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At $(0,\\theta)$, $\\partial_eH_x=\\psi(x-\\theta)-J(\\theta)=\\psi(x-\\theta)$ and $\\partial_tH_x=-A$. The derivative formula in [F4] therefore yields $\\theta_x'(0)=\\psi(x-\\theta)/A$. Since a two-sided derivative implies the same right derivative, [F5] identifies this value with $\\operatorname{IF}(x;T,F)$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $\\psi(u)=u$, then $J(t)=\\int y\\,dF(y)-t=\\mu-t$, so its unique root is $\\theta=\\mu$ and $A=\\int1\\,dF=1$. Substitution in step 3.1 gives $\\operatorname{IF}(x;T,F)=x-\\mu$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a Borel probability law F and real root theta."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: H_x(0,theta)=J(theta)=0 and the local root passes through theta."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The conclusion is local as epsilon decreases to zero; it does not assert a root at epsilon=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If F=delta_theta, psi(0)=0 and psi'(0) is nonzero, the local formula applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The derivative is right-sided at zero; the far endpoint is outside the theorem's local claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof fixes one x and applies a finite-dimensional IFT; it selects no family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a derivative formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a derivative formula, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "identity-score",
+          "claim": "For psi(u)=u, theta=mu, A=1 and IF(x)=x-mu.",
+          "result": "J(t)=mu-t and psi'(u)=1, so the formula gives (x-mu)/1."
+        },
+        {
+          "id": "scaled-linear-score",
+          "claim": "For psi(u)=a u with a!=0, the formula remains x-theta.",
+          "result": "The numerator is a(x-theta) and A=a, so the ratio is x-theta."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read all four steps and exact MVT, dominated-convergence and Euclidean IFT suppliers. The common a.e. derivative majorant on the interval controls both difference quotients and derivative continuity; integrability at theta implies integrability throughout I. H_x extends algebraically to an open real e interval, with partial_t=-A nonzero, so the scalar IFT supplies a local C1 branch; only nonnegative e is interpreted as a probability mixture. The derivative is psi(x-theta)/A. With psi(u)=u, g=1 and the absolute first moment suffice, including a point mass. Neighborhoods are pointwise in x, no global root or uniform remainder is claimed. Reader/refuter have no findings; no choice is needed."
+      }
+    },
+    "thm-median-influence-function": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gross-error-path",
+          "source_section": "Definition",
+          "quote": "For probability measures $F,H$ on a common measurable space $(X,\\mathcal A)$ ([[def-probability-measure]]) and $0\\le\\epsilon\\le1$, the gross-error path is $F_{\\epsilon,H}=(1-\\epsilon)F+\\epsilon H$, a probability measure by [[lem-convex-mixture-of-probability-laws]]. For any $x\\in X$, its point-contamination direction at $x$ is the specialization $H=\\delta_x$ ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]). The path is used for a derivative at $\\epsilon=0$; the definition alone gives no uniform-in-$H$ remainder.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lower-median-functional",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a probability measure on the Borel subsets of $\\mathbb R$, and put $F_G(t):=G(( -\\infty,t])$. For any $G$ such that $S_G:=\\{t\\in\\mathbb R:F_G(t)\\ge1/2\\}$ is nonempty and bounded below, define its **lower median** by\n\n$$m(G):=\\inf S_G.$$\n\nThe stated condition makes $m(G)$ a finite real number. This convention chooses the left endpoint when the set of medians is an interval; it assumes neither a density nor uniqueness.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-statistical-functional-and-influence-function",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ be a measurable space, let $\\mathcal P$ be a collection of probability measures on it, and let $T:\\mathcal P\\to\\mathbb R^k$ be a single-valued map with finite $k\\ge1$. Such a map is a **statistical functional**. For $F\\in\\mathcal P$ and $x\\in\\mathcal X$, suppose the point-contamination path $F_{\\epsilon,x}=(1-\\epsilon)F+\\epsilon\\delta_x$ belongs to $\\mathcal P$ for all sufficiently small $\\epsilon\\ge0$ ([[def-gross-error-path]]). The **gross-error influence function** at $(x;T,F)$ is\n\n$$\\operatorname{IF}(x;T,F):=\\lim_{\\epsilon\\downarrow0}\\frac{T(F_{\\epsilon,x})-T(F)}{\\epsilon}\\in\\mathbb R^k,$$\n\nwhen this finite right limit exists. Its domain may be a proper subset of $\\mathcal X$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gross-error-sensitivity",
+          "source_section": "Definition",
+          "quote": "For a statistical functional $T$ at a law $F$, let $D_{T,F}:=\\{x\\in\\mathcal X:\\operatorname{IF}(x;T,F)\\text{ exists as a finite vector}\\}$. When $D_{T,F}\\ne\\varnothing$, its **gross-error sensitivity** is the extended nonnegative number\n\n$$\\gamma^*(T,F):=\\sup_{x\\in D_{T,F}}\\|\\operatorname{IF}(x;T,F)\\|_2.$$\n\nFor a real-valued functional the norm is absolute value. This supremum only ranges over directions where the influence function exists; it makes no claim that the derivative exists in every direction.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $I$ is open, $f$ is continuous at $m$, and $f(m)>0$, choose $\\delta>0$ and $c>0$ so that $[m-\\delta,m+\\delta]\\subset I$ and $f(u)\\ge c$ throughout this closed interval. For $s<t$ in it, the density identity gives $F(t)-F(s)=\\int_s^t f(u)\\,du\\ge c(t-s)>0$. Thus $F$ is continuous and strictly increasing there, with $F(m)=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose first that $x<m$, and shrink $\\delta$ so that $m-\\delta>x$. For sufficiently small $\\epsilon>0$, the number $r_\\epsilon=(1/2-\\epsilon)/(1-\\epsilon)$ lies strictly between $F(m-\\delta)$ and $1/2$. Continuity and strict increase give a unique $q_\\epsilon\\in(m-\\delta,m)$ with $F(q_\\epsilon)=r_\\epsilon$. Since $r_\\epsilon\\uparrow1/2$ as $\\epsilon\\downarrow0$, for every $0<\\eta<\\delta$ eventually $r_\\epsilon>F(m-\\eta)$, so $m-\\eta<q_\\epsilon<m$ and $q_\\epsilon\\to m$. Since $q_\\epsilon>x$, the mixture cdf at $q_\\epsilon$ is $(1-\\epsilon)F(q_\\epsilon)+\\epsilon=1/2$. For $t<x$, the contamination term is zero and, by monotonicity and $F(m)=1/2$, the mixture cdf is $(1-\\epsilon)F(t)\\le(1-\\epsilon)/2<1/2$. At $t=x$, monotonicity gives $F(x)\\le F(m-\\delta)<r_\\epsilon$, so $(1-\\epsilon)F(x)+\\epsilon<(1-\\epsilon)r_\\epsilon+\\epsilon=1/2$. For $x<t<q_\\epsilon$, the contamination term is $\\epsilon$ and $F(t)<F(q_\\epsilon)=r_\\epsilon$: below the local interval this follows from monotonicity and $F(t)\\le F(m-\\delta)<F(q_\\epsilon)$, and inside it from strict increase. Therefore the mixture cdf at such $t$ is $(1-\\epsilon)F(t)+\\epsilon<(1-\\epsilon)r_\\epsilon+\\epsilon=1/2$. Together with the cases $t<x$ and $t=x$, this puts the mixture cdf below $1/2$ for every $t<q_\\epsilon$, while it equals $1/2$ at $q_\\epsilon$, so [F2] gives $m(F_{\\epsilon,x})=q_\\epsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $x>m$, shrink $\\delta$ so that $m+\\delta<x$. For small $\\epsilon>0$, $s_\\epsilon=1/(2(1-\\epsilon))$ lies strictly between $1/2$ and $F(m+\\delta)$. There is a unique $q_\\epsilon\\in(m,m+\\delta)$ with $F(q_\\epsilon)=s_\\epsilon$. Since $s_\\epsilon\\downarrow1/2$ as $\\epsilon\\downarrow0$, for every $0<\\eta<\\delta$ eventually $s_\\epsilon<F(m+\\eta)$, so $m<q_\\epsilon<m+\\eta$ and $q_\\epsilon\\to m$. Now $q_\\epsilon<x$, so the mixture cdf at $q_\\epsilon$ is $(1-\\epsilon)F(q_\\epsilon)=1/2$. For every $t<q_\\epsilon$, the contamination term is zero; if $m\\le t<q_\\epsilon$, strict increase on the local interval gives $F(t)<F(q_\\epsilon)$, and if $t<m$ then monotonicity gives $F(t)\\le F(m)<F(q_\\epsilon)$. Thus the mixture cdf is below $1/2$ for every $t<q_\\epsilon$, while it equals $1/2$ at $q_\\epsilon$, so [F2] gives $m(F_{\\epsilon,x})=q_\\epsilon$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the case $x<m$, step 2.1 gives $F(q_\\epsilon)-F(m)=-\\epsilon/[2(1-\\epsilon)]$ and $q_\\epsilon\\to m$. The density identity and continuity of $f$ imply $[F(q_\\epsilon)-F(m)]/(q_\\epsilon-m)\\to f(m)$. Dividing these two relations yields $(q_\\epsilon-m)/\\epsilon\\to-1/(2f(m))$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In the case $x>m$, step 2.2 gives $F(q_\\epsilon)-F(m)=\\epsilon/[2(1-\\epsilon)]$ and $q_\\epsilon\\to m$. The same density quotient tends to $f(m)$, hence $(q_\\epsilon-m)/\\epsilon\\to+1/(2f(m))$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $x=m$, continuity of $F$ at $m$ gives $F_{\\epsilon,m}(m-)=(1-\\epsilon)/2<1/2$ and $F_{\\epsilon,m}(m)=(1+\\epsilon)/2>1/2$. Monotonicity then puts every $t<m$ below the median threshold, while $m$ itself is above it, so the lower median remains exactly $m$ and its right derivative is $0$. By [F3] and steps 3.1\u20133.2, these three cases give the displayed pointwise influence function.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "step 3.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The absolute influence value is $1/(2f(m))$ for every $x\\ne m$ and zero at $m$. Both sides of $m$ are nonempty in $\\mathbb R$, so the supremum over all directions is $1/(2f(m))$ by [F4]. Since $F$ has a density near $m$, $F\\{m\\}=0$; therefore the conventional expression $(1/2-\\mathbf1\\{x\\le m\\})/f(m)$ agrees with this pointwise derivative $F$-almost everywhere, though its value at $x=m$ is not the literal right derivative.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "step 3.1",
+            "step 3.2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a probability law with a finite lower median m and F(m)=1/2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At epsilon=0 the contaminated law is F and the lower median is m."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The theorem is local at epsilon=0; it makes no endpoint epsilon=1 conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A degenerate law has no positive continuous local density at its median."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The tie direction x=m is checked separately and gives exact right derivative zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof fixes one x and constructs one local quantile, using no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a direct influence formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a direct influence formula, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "uniform-density-at-median",
+          "claim": "For f(m)=1/2, the median IF is -1 below m, +1 above m, and 0 at m.",
+          "result": "The side values have magnitude 1/(2f(m))=1 and the tie calculation is zero."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read all seven steps and all four local cited definitions. Local continuity and f(m)>0 give a strictly increasing cdf interval. For fixed x<m and x>m, the levels (1/2-epsilon)/(1-epsilon) and 1/[2(1-epsilon)] remain inside it; the proof checks every smaller t, including t=x and t outside the density interval, so their unique inverse points are the global lower medians. The density difference quotient tends to f(m)>0, giving the signed derivatives. At x=m the atom straddles 1/2 and fixes the median, hence literal derivative zero. All directions exist, the supremum is 1/[2f(m)], and the conventional indicator differs only at the F-null singleton. Mozharovskyi PDF p.32 supports the exact three branches, under its stronger global density positivity; local proof supplies the stated weaker hypotheses. Reader changed only citation metadata, refuter has no finding; no choice or uniform remainder is used."
+      }
+    },
+    "ex-mean-influence-and-replacement-breakdown": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-influence-function-for-m-location-estimator",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a Borel probability law on $\\mathbb R$, let $\\psi:\\mathbb R\\to\\mathbb R$ be $C^1$, and let $\\theta\\in\\mathbb R$ satisfy\n\n$$J(\\theta):=\\int\\psi(y-\\theta)\\,dF(y)=0.$$\n\nAssume $\\int|\\psi(y-\\theta)|\\,dF(y)<\\infty$ and that there is an open interval $I$ containing $\\theta$ and a nonnegative $g\\in L^1(F)$ such that $|\\psi'(y-t)|\\le g(y)$ for $F$-almost every $y$ and every $t\\in I$. Put $A:=\\int\\psi'(y-\\theta)\\,dF(y)$ and assume $A\\ne0$. For each fixed $x\\in\\mathbb R$, let $\\theta_x(\\epsilon)$ be the locally unique root near $\\theta$ of\n\n$$\\int\\psi(y-t)\\,dF_{\\epsilon,x}(y)=0,\\qquad F_{\\epsilon,x}=(1-\\epsilon)F+\\epsilon\\delta_x.$$\n\nThen, for all sufficiently small $\\epsilon\\ge0$, this local root exists and\n\n$$\\operatorname{IF}(x;T,F)=\\lim_{\\epsilon\\downarrow0}\\frac{\\theta_x(\\epsilon)-\\theta}{\\epsilon}=\\frac{\\psi(x-\\theta)}{A}.$$\n\nHere $T(F_{\\epsilon,x})$ denotes this local root. In the special case $\\psi(u)=u$ and $F$ has a finite first absolute moment, $\\theta=\\mu:=\\int y\\,dF(y)$ and $\\operatorname{IF}(x;T,F)=x-\\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gross-error-sensitivity",
+          "source_section": "Definition",
+          "quote": "For a statistical functional $T$ at a law $F$, let $D_{T,F}:=\\{x\\in\\mathcal X:\\operatorname{IF}(x;T,F)\\text{ exists as a finite vector}\\}$. When $D_{T,F}\\ne\\varnothing$, its **gross-error sensitivity** is the extended nonnegative number\n\n$$\\gamma^*(T,F):=\\sup_{x\\in D_{T,F}}\\|\\operatorname{IF}(x;T,F)\\|_2.$$\n\nFor a real-valued functional the norm is absolute value. This supremum only ranges over directions where the influence function exists; it makes no claim that the derivative exists in every direction.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-mean-and-median-replacement-breakdown",
+          "source_section": "Statement",
+          "quote": "For any fixed sample $x\\in\\mathbb R^n$, the sample mean $\\bar x=n^{-1}\\sum_{i=1}^n x_i$ has finite-sample replacement breakdown fraction $1/n$. If $n=2r+1$ is odd and the conventional sample median is the $(r+1)$-st order statistic, its finite-sample replacement breakdown fraction is $(r+1)/n=\\lfloor(n+1)/2\\rfloor/n$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the mean influence function exists for every $x\\in\\mathbb R$ and equals $x-\\mu$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The sample-mean replacement breakdown fraction is $1/n$ by [F3], independently of the distribution $F$.",
+          "step": "1.2",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The values $|x-\\mu|$ are unbounded as $x$ ranges over $\\mathbb R$; hence [F2] gives $\\gamma^*(T,F)=+\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus in this example the population gross-error sensitivity is infinite, while one arbitrary coordinate replacement already makes the finite-sample mean unbounded.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a probability law on R and sample size n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The mean IF is zero at the contamination point x=mu."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: One replacement breaks the sample mean, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Even for a point-mass F, the mean IF values x-mu are unbounded as x ranges over R."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The influence is local at epsilon=0 and the sample breakdown calculation covers replacement counts through n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The real contamination points are quantified directly; no selections are made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: the finite-first-moment mean has influence x-mu and a single replacement breaks its sample version; these are joint verified properties, not an iff connecting all influence functions and breakdown fractions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: infinite sensitivity is witnessed over contamination locations while breakdown is computed at each fixed sample; the reverse deduction of one notion from the other is not asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "unbounded-mean-influence",
+          "claim": "For x=mu+k, |IF|=k for positive integers k.",
+          "result": "These values are unbounded."
+        },
+        {
+          "id": "one-coordinate-mean-replacement",
+          "claim": "Replacing x_i by M changes the mean by (M-x_i)/n.",
+          "result": "Its absolute value tends to infinity with M."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read all four verification steps and both proved suppliers. Finite first absolute moment permits psi(u)=u with derivative majorant 1, A=1 and local root equal to the mean for every point contamination. The full direction domain makes sup|x-mu| infinite. At every fixed n>=1 sample, zero changes give zero displacement and one coordinate M gives displacement |M-x_i|/n unbounded. Includes n=1 and degenerate laws; no population tail, L2 or probability interpretation is added. Reader/refuter have no findings."
+      }
+    },
+    "ex-median-influence-and-replacement-breakdown": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-median-influence-function",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a Borel probability law on $\\mathbb R$, let $m=m(F)$ be its lower median, and assume $F(m)=1/2$. Suppose that on an open interval $I$ containing $m$ there is a continuous density version $f$ satisfying\n\n$$F((s,t])=\\int_s^t f(u)\\,du\\quad(s<t,\\ s,t\\in I),\\qquad f(m)>0.$$\n\nFor each fixed $x\\in\\mathbb R$, the right point-contamination influence function of the lower-median functional is\n\n$$\\operatorname{IF}(x;m,F)=\\begin{cases}-\\dfrac1{2f(m)},&x<m,\\\\[4pt]0,&x=m,\\\\[4pt]+\\dfrac1{2f(m)},&x>m.\\end{cases}$$\n\nConsequently, its gross-error sensitivity is $\\gamma^*(m,F)=1/(2f(m))$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mean-and-median-replacement-breakdown",
+          "source_section": "Statement",
+          "quote": "For any fixed sample $x\\in\\mathbb R^n$, the sample mean $\\bar x=n^{-1}\\sum_{i=1}^n x_i$ has finite-sample replacement breakdown fraction $1/n$. If $n=2r+1$ is odd and the conventional sample median is the $(r+1)$-st order statistic, its finite-sample replacement breakdown fraction is $(r+1)/n=\\lfloor(n+1)/2\\rfloor/n$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the influence values have absolute value at most $1/(2f(m))$, and their supremum is exactly that value, which is finite because $f(m)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2], the finite-sample replacement breakdown fraction is $(r+1)/(2r+1)=1/2+1/[2(2r+1)]$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $1/[2(2r+1)]\\to0$ as $r\\to\\infty$, the odd-sample median breakdown fractions tend to $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The bounded pointwise sensitivity and the separate replacement count follow from different definitions and theorems; here the median has both properties under the stated density hypothesis.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a probability law with the stated median and density."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The right-contamination derivative is defined at epsilon=0, including the point x=m tie."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No full-contamination endpoint conclusion is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A degenerate law cannot satisfy the positive continuous density premise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The x=m pointwise derivative is zero; the sides have absolute value 1/(2f(m))."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses the supplied F,m,f,n and selects no family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: the positive continuous median density yields sensitivity 1/(2f(m)), and odd-sample order statistics have the displayed breaking fraction; this does not characterize every statistic with bounded influence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: a breaking fraction approaching one half does not imply the clean law has a positive median density; the population sensitivity hypotheses and sample breakdown calculation are separately stated."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "odd-median-n-five",
+          "claim": "For n=5 the median breakdown fraction is 3/5.",
+          "result": "With r=2 the formula gives (r+1)/(2r+1)=3/5."
+        },
+        {
+          "id": "positive-density-bound",
+          "claim": "If f(m)=c>0, every median IF value has magnitude at most 1/(2c).",
+          "result": "The pointwise values are -1/(2c), 0, and +1/(2c)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read all four steps and exact median-influence and finite-sample-breakdown suppliers. The example imposes the local theorem hypotheses (and unnecessary but harmless unique median) so sensitivity 1/[2f(m)] is finite. The sample statistic is the middle order statistic for odd n=2r+1; its first breaking count r+1 gives 1/2+1/[2(2r+1)]. This includes n=1, ties and fixed arbitrary samples; limit is through odd n, independent of the population law. No iid or uniform contamination result is inferred. The Given line refers to uniqueness as if present in the supplier; the example separately assumes it and no inference needs it, so this harmless wording does not require a repair. Reader/refuter report no findings."
+      }
+    },
+    "cex-bounded-influence-does-not-imply-positive-breakdown": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarath\u00e9odory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate \u2014 the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates \u2014 and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-lower-median-functional",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a probability measure on the Borel subsets of $\\mathbb R$, and put $F_G(t):=G(( -\\infty,t])$. For any $G$ such that $S_G:=\\{t\\in\\mathbb R:F_G(t)\\ge1/2\\}$ is nonempty and bounded below, define its **lower median** by\n\n$$m(G):=\\inf S_G.$$\n\nThe stated condition makes $m(G)$ a finite real number. This convention chooses the left endpoint when the set of medians is an interval; it assumes neither a density nor uniqueness.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-empirical-measure-is-a-probability-law",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space, let $n\\ge1$, and let $x_1,\\ldots,x_n\\in X$. Define\n\n$$P_n(A):=\\frac1n\\sum_{i=1}^n\\delta_{x_i}(A),\\qquad A\\in\\mathcal A.$$\n\nThen $P_n$ is a probability measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-statistical-functional-and-influence-function",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ be a measurable space, let $\\mathcal P$ be a collection of probability measures on it, and let $T:\\mathcal P\\to\\mathbb R^k$ be a single-valued map with finite $k\\ge1$. Such a map is a **statistical functional**. For $F\\in\\mathcal P$ and $x\\in\\mathcal X$, suppose the point-contamination path $F_{\\epsilon,x}=(1-\\epsilon)F+\\epsilon\\delta_x$ belongs to $\\mathcal P$ for all sufficiently small $\\epsilon\\ge0$ ([[def-gross-error-path]]). The **gross-error influence function** at $(x;T,F)$ is\n\n$$\\operatorname{IF}(x;T,F):=\\lim_{\\epsilon\\downarrow0}\\frac{T(F_{\\epsilon,x})-T(F)}{\\epsilon}\\in\\mathbb R^k,$$\n\nwhen this finite right limit exists. Its domain may be a proper subset of $\\mathcal X$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-gross-error-path",
+          "source_section": "Definition",
+          "quote": "For probability measures $F,H$ on a common measurable space $(X,\\mathcal A)$ ([[def-probability-measure]]) and $0\\le\\epsilon\\le1$, the gross-error path is $F_{\\epsilon,H}=(1-\\epsilon)F+\\epsilon H$, a probability measure by [[lem-convex-mixture-of-probability-laws]]. For any $x\\in X$, its point-contamination direction at $x$ is the specialization $H=\\delta_x$ ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]). The path is used for a derivative at $\\epsilon=0$; the definition alone gives no uniform-in-$H$ remainder.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-gross-error-sensitivity",
+          "source_section": "Definition",
+          "quote": "For a statistical functional $T$ at a law $F$, let $D_{T,F}:=\\{x\\in\\mathcal X:\\operatorname{IF}(x;T,F)\\text{ exists as a finite vector}\\}$. When $D_{T,F}\\ne\\varnothing$, its **gross-error sensitivity** is the extended nonnegative number\n\n$$\\gamma^*(T,F):=\\sup_{x\\in D_{T,F}}\\|\\operatorname{IF}(x;T,F)\\|_2.$$\n\nFor a real-valued functional the norm is absolute value. This supremum only ranges over directions where the influence function exists; it makes no claim that the derivative exists in every direction.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-finite-sample-replacement-breakdown",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $T_n:\\mathbb R^n\\to\\mathbb R$ be a total statistic, and fix a sample $x=(x_1,\\ldots,x_n)$. For $0\\le m\\le n$, define its maximum replacement displacement by\n\n$$B_m(T_n,x):=\\sup\\bigl\\{|T_n(y)-T_n(x)|:y\\in\\mathbb R^n,\\ \\#\\{i:y_i\\ne x_i\\}\\le m\\bigr\\}\\in[0,+\\infty].$$\n\nWhen the set is nonempty, the finite-sample replacement breakdown fraction is\n\n$$\\epsilon_n^*(T_n,x):=\\frac1n\\min\\{m\\in\\{1,\\ldots,n\\}:B_m(T_n,x)=+\\infty\\}.$$\n\nOnly coordinate replacements are counted, and the replacement values range over all of $\\mathbb R$. This is a property of the statistic at the fixed sample; it is not a probability or contamination-neighborhood statement.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-median-influence-function",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a Borel probability law on $\\mathbb R$, let $m=m(F)$ be its lower median, and assume $F(m)=1/2$. Suppose that on an open interval $I$ containing $m$ there is a continuous density version $f$ satisfying\n\n$$F((s,t])=\\int_s^t f(u)\\,du\\quad(s<t,\\ s,t\\in I),\\qquad f(m)>0.$$\n\nFor each fixed $x\\in\\mathbb R$, the right point-contamination influence function of the lower-median functional is\n\n$$\\operatorname{IF}(x;m,F)=\\begin{cases}-\\dfrac1{2f(m)},&x<m,\\\\[4pt]0,&x=m,\\\\[4pt]+\\dfrac1{2f(m)},&x>m.\\end{cases}$$\n\nConsequently, its gross-error sensitivity is $\\gamma^*(m,F)=1/(2f(m))$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-lower-median-of-odd-empirical-sample-is-middle-order-statistic",
+          "source_section": "Statement",
+          "quote": "Let $n=2r+1\\ge1$ and $x_1,\\ldots,x_n\\in\\mathbb R$. Let $P_n=n^{-1}\\sum_i\\delta_{x_i}$ be their empirical probability law and write $x_{(1)}\\le\\cdots\\le x_{(n)}$ for the sorted sample. Then the lower median $m(P_n)$ is $x_{(r+1)}$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F14], every Borel set is Lebesgue measurable; since [F5] makes $[-1,1]$ Borel and Lebesgue measurable with measure $2$, each $A\\cap[-1,1]$ is measurable for Borel $A$. For pairwise disjoint Borel sets $A_j$, these intersections are disjoint, so countable additivity of $\\lambda$ gives countable additivity of $P(A)=\\lambda(A\\cap[-1,1])/2$. Also $P(\\varnothing)=0$ because $\\lambda(\\varnothing)=0$, and $P(\\mathbb R)=1$ by [F5]. Thus [F1] and [F2] make $P$ a Borel probability law. For $-1\\le t\\le1$, [F5] gives $F_P(t)=P((-\\infty,t])=(t+1)/2$; for $t<-1$ the intersection $(-\\infty,t]\\cap[-1,1]$ is empty. It follows that $m(P)=0$, the density near zero is $f=1/2$, and $P$ has no atoms, the latter by the degenerate-interval case of [F5].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F14",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix any point $z\\in\\mathbb R$. By [F9], $P_{\\epsilon,z}$ is carried by a bounded interval containing $[-1,1]$ and $z$, and its only possible atom location is $z$, because [F5] gives $P(\\{z\\})=0$. The trigger in $T$ requires two distinct atom locations, so it is false and $T(P_{\\epsilon,z})=m(P_{\\epsilon,z})$ for all sufficiently small $\\epsilon\\ge0$. Therefore [F8] and [F12] give $\\operatorname{IF}(z;T,P)=\\operatorname{IF}(z;m,P)$, equal to $-1$ for $z<0$, $+1$ for $z>0$, and $0$ for $z=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix odd $n=2r+1\\ge5$ and a clean sample $x\\in[-1,1]^n$. Its empirical median is the middle order statistic by [F13] and lies in $[-1,1]$, so every atom location of $P_n$ is within distance $2$ of that median. The trigger is false and $T_n(x)$ is the sample median.",
+          "step": "1.3",
+          "inputs": [
+            "F6",
+            "F7",
+            "F13",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "After at most one replacement, at least $n-1=2r$ observations remain in $[-1,1]$. At least $r+1$ resulting observations are at most $1$ and at least $r+1$ are at least $-1$, so the middle order statistic, hence the lower empirical median by [F13], remains in $[-1,1]$. All unchanged atom locations are within distance $2$ of it, and only the single replacement can add a distinct outlying atom. Thus the trigger is still false and $T_n$ remains the sample median in $[-1,1]$ for every one-coordinate replacement; its maximum displacement is bounded.",
+          "step": "1.4",
+          "inputs": [
+            "F6",
+            "F7",
+            "F13",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The absolute values in step 1.2 have supremum $1$ over $z\\in\\mathbb R$, so [F10] gives $\\gamma^*(T,P)=1<\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "F10",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Replace two coordinates by distinct values $M$ and $2M$ with $M>3$. The remaining $2r-1$ observations lie in $[-1,1]$, so the middle order statistic (position $r+1$) is still one of them and lies in $[-1,1]$; by [F13] this is the lower empirical median. Both new atom locations are more than $2$ above that median, so the trigger is true and $T_n=2M$. Letting $M\\to+\\infty$ makes the maximum displacement unbounded. Since step 1.4 ruled out one replacement and [F11] defines the first unbounded count, the breakdown fraction is exactly $2/n$.",
+          "step": "2.2",
+          "inputs": [
+            "F6",
+            "F7",
+            "F11",
+            "F13",
+            "step 1.4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Along odd $n\\to\\infty$, $2/n\\to0$, while step 2.1 gives finite gross-error sensitivity at the fixed law $P$. Hence this functional has bounded influence and an empirical plug-in statistic whose replacement breakdown is not bounded away from zero, refuting the Statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty real sample space and n odd with n>=5."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At the clean law and sample the trigger is false and T is the lower/sample median."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Every one-coordinate replacement leaves T equal to the sample median in [-1,1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The base law is the nondegenerate uniform law on [-1,1]."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The influence calculation is local at epsilon=0; epsilon=1 is not used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The construction uses Countable Choice only through the Lebesgue interval measure facts; points, samples, and M values are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a counterexample to an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a counterexample to an implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "n-five-sample",
+          "claim": "For clean sample (-1,-1/2,0,1/2,1), one replacement does not trigger, while replacing -1 and -1/2 by M and 2M does.",
+          "result": "With one large replacement there is only one outlying atom and the median remains in [-1,1]; with two replacements the median is 1 and M,2M>3 trigger T=2M, so the fraction is 2/5."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read the complete defining functional and all seven counterexample steps, plus every direct supplier. Compact support makes the lower-median threshold nonempty/bounded below; a triggered atom set is nonempty and bounded, so its real supremum defines a total T. Countable Choice is explicitly assumed for the complete Lebesgue measure, Borel measurability and box-volume suppliers; these exact statements and proofs yield the normalized non-atomic uniform law, local density 1/2 and median 0. Every fixed point contamination has at most one atom, so the trigger never fires and all influence values equal the median values (-1,0,1). For each odd n>=5 clean sample, ties and endpoints are allowed: one replacement keeps the median in [-1,1], and no unchanged atom is farther than 2. With two replacements at M and 2M, M>3, n-2=2r-1>=r+1 guarantees a clean median, two distinct far atoms trigger T_n=2M, and hence exact breakdown 2/n. The n=5 equality case and odd subsequence limit refute the positive asymptotic lower bound. No uniform remainder, measurability-of-estimator or iid robustness assertion is claimed. Reader/refuter report no findings."
+      }
+    }
+  }
+}

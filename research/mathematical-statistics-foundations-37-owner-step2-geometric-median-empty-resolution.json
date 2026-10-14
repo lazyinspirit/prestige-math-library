@@ -1,0 +1,73 @@
+{
+  "run": "mathematical-statistics-foundations-37",
+  "round": 1,
+  "owner": "/root/msf_sauer_shelah_escalation",
+  "gate_failed_subject": "lem-geometric-median-majority-radius-bound",
+  "confirmed_defect": "Standalone Statement did not state k>=1; empty sum admits arbitrary minimizers, defeating strict outlier conclusion.",
+  "smallest_missing_prerequisite": "A positive integer center count; no missing external mathematical supplier.",
+  "path": "items/lem-geometric-median-majority-radius-bound.md",
+  "before_statement": "Let $H$ be a real Hilbert space, let $m_1,\\ldots,m_k\\in H$, and let $m$ minimize $F(z)=\\sum_{j=1}^k\\|z-m_j\\|$. For $0<a<1/2$ and $r>0$, put\n$$\nC_a=\\frac{1-a}{\\sqrt{1-2a}}.\n$$\nIf $z\\in H$ satisfies $\\|m-z\\|>C_a r$, then more than $ak$ of the points $m_j$ satisfy $\\|m_j-z\\|>r$.",
+  "after_statement": "Let $H$ be a real Hilbert space, let $k\\ge1$ be an integer, let $m_1,\\ldots,m_k\\in H$, and let $m$ minimize $F(z)=\\sum_{j=1}^k\\|z-m_j\\|$. For $0<a<1/2$ and $r>0$, put\n$$\nC_a=\\frac{1-a}{\\sqrt{1-2a}}.\n$$\nIf $z\\in H$ satisfies $\\|m-z\\|>C_a r$, then more than $ak$ of the points $m_j$ satisfy $\\|m_j-z\\|>r$.",
+  "exact_changes": [
+    "Inserted integer k>=1 in Statement and both Given lines.",
+    "Appended the exact empty-center counterexample Remarks; all positive-k constants and complete proof paragraphs preserved."
+  ],
+  "counterexample": {
+    "H": "R",
+    "k": 0,
+    "z": 0,
+    "r": 1,
+    "a": "1/4",
+    "m": 4,
+    "C_a": "3/(2sqrt(2))",
+    "failure": "F identically zero, strict distance holds, but outlier count zero is not greater than ak=0."
+  },
+  "closure_search": "Read all item sources mentioning root supplier or subsequent closure suppliers in body links or deps; identified exactly two direct and three transitive authored item consumers. Read complete actual claims/Facts/proofs of these five. Controlling MSF32 row uses algorithm with 1<=k<=n; no planned zero-center use found.",
+  "consumers": [
+    {
+      "id": "thm-finite-variance-geometric-median-mean-bound",
+      "relationship": "direct",
+      "actual_use": "Facts F9; proof steps 1.3 and 4.1",
+      "premise": "Statement k=floor(log(1/delta)/psi(7/18;1/10))+1 with 0<delta<1 and positive psi, hence k>=1; k<=n/2 makes the algorithm admissible.",
+      "disposition": "Compatible; no source repair needed."
+    },
+    {
+      "id": "lem-covariance-median-pilot-exact-block-budget",
+      "relationship": "direct",
+      "actual_use": "Facts F1; proof step 2.1",
+      "premise": "Statement beta>1 and k=floor(3.5beta)+1 give k>=4; k<=m/2 supplies nonempty blocks.",
+      "disposition": "Compatible; no source repair needed."
+    },
+    {
+      "id": "ex-polynomial-tail-law-with-finite-variance",
+      "relationship": "transitive via finite-variance mean theorem",
+      "actual_use": "Facts Given and verification step 2.1",
+      "premise": "Fixes positive n, delta in (0,1), k=floor(log(1/delta)/psi)+1<=n/2 and specified estimator; inherits k>=1.",
+      "disposition": "Compatible; all invoked hypotheses present."
+    },
+    {
+      "id": "lem-fixed-scale-truncated-covariance-deviation",
+      "relationship": "transitive via covariance pilot",
+      "actual_use": "Facts F2; proof step 3.1",
+      "premise": "beta>1 gives positive prescribed pilot k; m>=10^16 D beta and D>=1 imply k<=4.5beta<=m/2. General any-pilot first conclusion does not invoke the geometric-median radius lemma.",
+      "disposition": "Compatible; no source repair needed."
+    },
+    {
+      "id": "thm-heavy-tailed-covariance-bound",
+      "relationship": "transitive via covariance pilot and fixed-scale deviation",
+      "actual_use": "Facts F1/F2; proof step 1.1",
+      "premise": "beta>1, D>=1 and the trace-aware sample condition imply positive k and k<=4.5beta<=m/2 as explicitly checked in step 1.1.",
+      "disposition": "Compatible; no source repair needed."
+    }
+  ],
+  "validation": {
+    "mandatory_proof_layout_command": "node tools/proof-layout.mjs items/lem-geometric-median-majority-radius-bound.md",
+    "result": "proof-layout: 1 items, 2 steps, 0 defects",
+    "exit_code": 0,
+    "optional_tests": "none run"
+  },
+  "decision": "accept focused condition repair and consumer compatibility; independent native full-proof acceptance not claimed",
+  "independent_acceptance": false,
+  "metadata_hash_state_changes": "none",
+  "unresolved_findings": []
+}

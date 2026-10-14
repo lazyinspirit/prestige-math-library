@@ -1,0 +1,2109 @@
+{
+  "version": 1,
+  "scope": [
+    "def-glivenko-cantelli-class",
+    "def-donsker-class-and-asymptotic-equicontinuity",
+    "thm-empirical-risk-oracle-bound",
+    "thm-dudley-entropy-integral",
+    "lem-empirical-process-bracketing-maximal-inequality",
+    "thm-gc-by-bracketing-entropy",
+    "lem-empirical-process-asymptotic-equicontinuity-from-bracketing-entropy",
+    "thm-empirical-process-functional-clt",
+    "cex-pointwise-strong-laws-do-not-imply-uniform-law",
+    "ex-threshold-class-is-glivenko-cantelli",
+    "ex-uniform-empirical-cdf-converges-to-brownian-bridge"
+  ],
+  "contracts": {
+    "def-glivenko-cantelli-class": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition explicitly says “F be a nonempty class”; its supremum concerns that class. The empirical finite sum has positive sample index n and does not introduce an empty-class convention.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_qmd_tangent_resolution/boundaries_minimax1618",
+            "reason": "Definition explicitly says “F be a nonempty class”; its supremum concerns that class. The empirical finite sum has positive sample index n and does not introduce an empty-class convention."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition uniform deviation is sup_f |P_nf−Pf| and may equal 0. For F={0} it is identically 0 and satisfies both the in-probability and almost-sure convergence definitions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows F={f}; the supremum is the single real deviation |P_nf−Pf|, and F itself is a countable pointwise-dense subclass."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition imposes PF<∞ but no positive variance or positive envelope norm. For a constant class or a point-mass sampling law the empirical deviations may vanish, which still satisfies the displayed definitions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition envelope F is nonnegative and permits PF=0; the convergence target is 0. There is no confidence-level interval or additional endpoint parameter in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes a nonempty F; pointwise measurability requires an existing countable subclass and approximating sequences. The countable subclass has a common conull envelope bound as stated, so its measurable supremum requires no arbitrary uncountable representative selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition distinguishes convergence in probability from almost-sure convergence; its only implication is that almost-sure convergence implies in-probability convergence, citing the supplier. No equivalence between the two GC properties is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition does not assert that convergence in probability implies strong GC; “strongly P-Glivenko–Cantelli” is a separate almost-sure condition."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "def-donsker-class-and-asymptotic-equicontinuity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition explicitly begins with “F be a nonempty class”. Its suprema and ℓ∞(F) convergence are defined for that specified nonempty index class; the indexed formulas do not extend its domain to F=∅.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_qmd_tangent_resolution/boundaries_minimax1618",
+            "reason": "Definition explicitly begins with “F be a nonempty class”. Its suprema and ℓ∞(F) convergence are defined for that specified nonempty index class; the indexed formulas do not extend its domain to F=∅."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition explicitly permits distinct functions at ρ_P distance zero when their centered difference vanishes P-a.s. If F consists of zero functions, G_n and its covariance are zero and the displayed equicontinuity limit is 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits a singleton F={f}; ℓ∞(F) is one-coordinate space, the covariance formula is P(f−Pf)², and the equicontinuity supremum over the only pair (f,f) is 0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition covariance P[(f−Pf)(g−Pg)] has no positivity requirement; constant functions give zero covariance, and the explicit pseudometric clause permits nonidentical indices with zero distance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition equicontinuity requires η>0 and a limit δ↓0 with the strict condition ρ_P(f,g)<δ; it does not substitute δ=0 or η=0. The envelope condition PF²<∞ includes PF²=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes a nonempty class and requires for each n a specified measurable probability-one event of bounded empirical paths before zero extension into ell-infinity. An envelope that dominates each function only individually almost surely does not supply this event without an additional class property. Pointwise measurability is a separate definition; no arbitrary representative selection is performed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition supplies meanings of asymptotic equicontinuity and P-Donsker by their displayed limits. It states no theorem equating Donsker convergence with finite-dimensional convergence plus equicontinuity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition ends by defining finite-dimensional convergence separately; it supplies no converse characterization of P-Donsker from that property or from equicontinuity."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Checked all five cited definitions/interfaces. Centered L2 difference is a pseudometric (norm triangle); covariance is finite by Cauchy–Schwarz. Zero-distance pairs are allowed. Outer probability and bounded signed outer expectation conventions are explicit; Donsker uses bounded uniformly continuous tests and a tight Borel Gaussian law. Pointwise measurability alone is not asserted to imply Borel measurability in l-infinity. Nonempty class and finite envelope hypotheses are retained. No defect."
+      },
+      "step5_repair_notes": "The Donsker clause now includes bounded paths on a common measurable conull event and zero extension. This corrects the null-singleton multiple counterexample; previous risk_review is retained as historical evidence, not a review of this repair."
+    },
+    "thm-empirical-risk-oracle-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix any $\\ell\\in\\mathcal L$. On the stated event, $R(\\widehat\\ell)\\le R_n(\\widehat\\ell)+\\epsilon$ by applying the uniform deviation bound to $\\widehat\\ell$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The approximate-minimization property gives $R_n(\\widehat\\ell)\\le R_n(\\ell)+\\eta$, and the same event gives $R_n(\\ell)\\le R(\\ell)+\\epsilon$. Combining these inequalities with step 1.1 yields $R(\\widehat\\ell)\\le R(\\ell)+2\\epsilon+\\eta$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since step 2.1 holds for every $\\ell\\in\\mathcal L$, take the infimum of its right-hand side over $\\mathcal L$ to obtain the claimed bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires L nonempty, finite inf_{ell in L} P ell, and a supplied hat ell in L. Empty L has neither that minimizer nor a finite real risk infimum, so the oracle comparison cannot be instantiated.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_qmd_tangent_resolution/boundaries_empirical15",
+            "reason": "I read Statement and Proof steps 1.1-3.1: each comparison fixes ell in L and evaluates the supplied hat ell. The regex detects a class, but Statement expressly excludes the empty class and its finite-infimum hypothesis independently fails there."
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1–2.1 allow epsilon=0 and eta=0.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 takes the infimum over a class with one loss without requiring an exact empirical minimizer.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement: tied population or empirical risks satisfy the same inequalities. ",
+          "case": "degenerate"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "No interval endpoint or boundary parameter is part of the statement.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement: the pointwise risk inequality uses no choice principle.",
+          "case": "nonempty-choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement derives R(hat ell)<=inf R+2epsilon+eta on the uniform-deviation event from the supplied approximate empirical minimizer. Proof steps 1.1-3.1 compare it to each loss and then take an infimum; there is no additional equivalence to verify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The population-risk guarantee in Statement is a consequence, not a characterization of approximate empirical minimization: a population-optimal loss can satisfy the guarantee while failing a specified empirical tolerance on a realized sample. Proof never infers the minimization premise from its conclusion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two-loss equality case",
+          "calculation": "Let population risks be 5 and 2, empirical risks 4 and 3, choose the first loss with eta=1 and epsilon=1. The uniform deviation is 1, the empirical gap is 1, and 5=2+2(1)+1.",
+          "result": "The stated 2 epsilon plus eta bound is attained."
+        }
+      ],
+      "axioms_used": []
+    },
+    "thm-dudley-entropy-integral": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "A pseudometric $d$ on a set $T$ is a nonnegative symmetric function $d:T\\times T\\to[0,\\infty)$ with $d(t,t)=0$ and $d(s,t)\\le d(s,u)+d(u,t)$; distinct points may have distance zero. For a nonempty subset $\\mathcal F\\subseteq T$ and $\\epsilon>0$, the covering number $N(\\epsilon,\\mathcal F,d)$ is the least finite $k$ for which there are centers $f_1,\\ldots,f_k\\in\\mathcal F$ such that every $f\\in\\mathcal F$ satisfies $d(f,f_j)\\le\\epsilon$ for some $j$. It is $+\\infty$ if no finite cover exists. Set $N(\\epsilon,\\varnothing,d)=1$.\n\nThe packing number $D(\\epsilon,\\mathcal F,d)$ is the largest size of a finite subset $\\{f_1,\\ldots,f_k\\}\\subseteq\\mathcal F$ whose distinct members have pairwise distance strictly greater than $\\epsilon$. If the sizes of such finite subsets are unbounded, put $D=+\\infty$; put $D(\\epsilon,\\varnothing,d)=0$. These conventions give the radius comparison proved in [[lem-packing-covering-number-comparison]]. The metric entropy is $H(\\epsilon,\\mathcal F,d):=\\log N(\\epsilon,\\mathcal F,d)$ for nonempty classes, with $\\log(+\\infty)=+\\infty$.\n\nFor a probability measure $Q$ on $(\\mathcal X,\\mathcal A)$ and a measurable real function $g$, set $\\|g\\|_{Q,r}:=(\\int |g|^r\\,dQ)^{1/r}$ for $1\\le r<\\infty$ when the integral is finite, using the real-power convention, including $0^{1/r}=0$, of [[def-real-power]]. If the integral is $+\\infty$, define $\\|g\\|_{Q,r}:=+\\infty$ directly. The function $|g|$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and [[lem-real-power-preserves-measurability]] makes $|g|^r$ measurable, so this nonnegative extended integral is well-defined. On a class of functions with finite such norms, $d_{Q,r}(f,g):=\\|f-g\\|_{Q,r}$ is a pseudometric: nonnegativity, symmetry, and zero diagonal follow from the absolute value, and the triangle inequality is [[thm-minkowski-inequality-for-integrals]]. Functions that agree $Q$-almost everywhere have distance zero. We write $N(\\epsilon,\\mathcal F,L^r(Q))$ for this covering number.\n\nFor measurable real endpoints $\\ell\\le u$ $Q$-almost everywhere, the bracket $[\\ell,u]$ is the set of measurable functions $f$ satisfying $\\ell\\le f\\le u$ $Q$-almost everywhere. Its $L^r(Q)$ width is $\\|u-\\ell\\|_{Q,r}$. The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F$, or $+\\infty$ if no finite cover exists; for the empty class set it equal to $1$. Centers of metric covers are in $\\mathcal F$; bracket endpoints need not be.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an\nintegrable real random variable, let $I\\subseteq\\mathbb R$ be an interval\ncontaining $X(\\omega)$ for almost every $\\omega$, and let $\\varphi:I\\to\\mathbb R$\nbe convex.\n\nAssume additionally that $\\varphi(X)$ is either integrable or nonnegative, so\nits expectation is defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Then\n$$\\varphi(\\mathbb E[X])\\le\\mathbb E[\\varphi(X)].$$\nIn the nonnegative case the right-hand side may be $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First derive a finite-maximum estimate. If $Y_1,\\ldots,Y_m$ are centered and each has sub-Gaussian proxy at most $s^2$, then for $\\lambda>0$, $\\mathbb E e^{\\lambda\\max_j|Y_j|}\\le\\sum_{j=1}^m(\\mathbb Ee^{\\lambda Y_j}+\\mathbb Ee^{-\\lambda Y_j})\\le2m e^{\\lambda^2s^2/2}.$ By [F3], $\\mathbb E\\max_j|Y_j|\\le\\lambda^{-1}\\log(2m)+\\lambda s^2/2$. For $s>0$, choosing $\\lambda=\\sqrt{2\\log(2m)}/s$ gives $\\mathbb E\\max_j|Y_j|\\le s\\sqrt{2\\log(2m)}$; for $s=0$, the proxy bound forces every $Y_j=0$ almost surely by [F4] applied to $e^{\\pm\\lambda Y_j}$ and letting $\\lambda\\to\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $D=0$, every pair in $T$ has distance zero. The proxy-zero case of step 1.1 applied to each increment, together with separability and [F6] for the countable intersection of probability-one events, makes the supremum zero. Assume $D>0$. Fix $k\\ge1$ and put $\\epsilon_k=2^{-k}D$. Total boundedness gives a finite cover of $T$ by $N(\\epsilon_k/4,T,d)$ closed balls of radius $\\epsilon_k/4$. Approximate each center by a point of the dense set $T_0$ within $\\epsilon_k/4$ to obtain a cover of $T$ by the same number of balls of radius $\\epsilon_k/2$. Since the specified countable dense set is listed, choose the first finite tuple under its induced enumeration that is an $\\epsilon_k$-net and has cardinality at most this cover size; such a tuple exists by the construction. Denote it by $T_k$. For each $t$, choose the least-index point $\\pi_k(t)\\in T_k$ within $\\epsilon_k$. These canonical choices across scales require no choice axiom. Put $T_0^{(0)}=\\{t_0\\}$ and $\\pi_0(t)=t_0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For a finite subset $A\\subset T_0$, telescope $X_t-X_{t_0}$ through $\\pi_1(t),\\ldots,\\pi_m(t)$ for every $t\\in A$. At level $1$ there are at most $|T_1|$ increments, each with proxy at most $D^2$; for $k\\ge2$ there are at most $|T_k||T_{k-1}|$ increments, each with proxy at most $(\\epsilon_k+\\epsilon_{k-1})^2=(3\\epsilon_k)^2$. Applying step 1.1 to the finite set of increments at each level, and the triangle inequality for their maxima, yields $\\mathbb E\\max_{t\\in A}|X_{\\pi_m(t)}-X_{t_0}|\\le C_1\\sum_{k=1}^m\\epsilon_k\\sqrt{1+\\log N(\\epsilon_k/4,T,d)}$ for a universal $C_1$; the $k=1$ term is absorbed using $\\epsilon_1=D/2$ and $N(\\epsilon_1/4)\\ge1$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The residual maximum over $A$ has expectation at most $\\epsilon_m\\sqrt{2\\log(2|A|)}$ by step 1.1, since $d(t,\\pi_m(t))\\le\\epsilon_m$. Letting $m\\to\\infty$ for this fixed finite $A$ removes the residual. The dyadic sum in step 2.2 is bounded by a universal multiple of the entropy integral: on each interval $[\\epsilon_k/8,\\epsilon_k/4]$, monotonicity of $N$ makes the integral at least $(\\epsilon_k/8)\\sqrt{\\log N(\\epsilon_k/4,T,d)}$. Also, for $0<\\epsilon<D/2$, one ball of radius $\\epsilon$ cannot cover a set of diameter $D$, so $N(\\epsilon,T,d)\\ge2$ and the entropy integral is at least $(D/2)\\sqrt{\\log2}$; this absorbs the geometric contribution from the added $1$. Hence $\\mathbb E\\max_{t\\in A}|X_t-X_{t_0}|\\le C\\int_0^D\\sqrt{\\log N(\\epsilon,T,d)}\\,d\\epsilon.$ Taking an increasing sequence of finite subsets whose union is $T_0$, [F5] and the separability assumption give the asserted supremum over $T$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 2.2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement explicitly assumes “(T,d) be a nonempty pseudometric space” and fixes t_0∈T. Its indexed cover and increment formulas do not define the empty-index case.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_qmd_tangent_resolution/boundaries_minimax1618",
+            "reason": "Statement explicitly assumes “(T,d) be a nonempty pseudometric space” and fixes t_0∈T. Its indexed cover and increment formulas do not define the empty-index case."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement explicitly states that if D=0 the integral and supremum are zero. Proof step 2.1 derives this from proxy-zero increments, separability, and the countable intersection of probability-one events."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits T={t_0}, then D=0 and the sole increment X_{t0}−X_{t0}=0; Proof step 2.1 gives the asserted zero bound. Proof step 1.1 also allows a one-variable finite maximum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement allows a pseudometric with distinct zero-distance points. Proof step 1.1 shows proxy-zero increments vanish almost surely; step 2.1 and separability handle the all-zero-distance case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement covers D=0 separately; for D>0 Proof step 2.1 uses ε_k=2⁻ᵏD>0 tending to 0. Covering balls use ≤ radius, and step 3.1 integrates across [ε_k/8,ε_k/4], so their boundary points cause no uncovered-scale branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement specifies a countable dense set T_0 with a fixed listing and t_0∈T. Proof step 2.1 chooses the first admissible finite tuple in that listing and then least-index π_k(t); existence follows from total boundedness plus density, without an arbitrary countable choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives an upper bound when the entropy integral is finite, and Proof constructs that estimate. It asserts no iff between finite entropy and sample boundedness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement does not deduce finite entropy integral from bounded expected increments; no reverse implication is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one increment",
+          "calculation": "For m=1, the finite-maximum estimate in step 1.1 gives E|Y_1| <= s sqrt(2 log 2).",
+          "result": "The one-element boundary is covered by the same finite maximum bound."
+        }
+      ],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Checked steps 1.1–3.1 with all six cited suppliers. Finite maximum exponential moment is finite, establishing integrability before Jensen. Zero proxy gives a.s. zero by exponential Markov in both directions. Listed dense set makes finite net choices canonical. Fixed finite A residual tends to zero; dyadic intervals are disjoint and entropy monotonicity bounds the sum. N>=2 below D/2 absorbs added constants. D=0 and singleton cases rely on the supplied separability, not an uncountable intersection of null events. No defect."
+      }
+    },
+    "lem-empirical-process-bracketing-maximal-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bernstein-independent-sums",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $X_1,\\ldots,X_n$ be independent centered square-integrable real random variables. Suppose $b\\ge0$ is finite and $|X_i|\\le b$ almost surely for each $i$. Put $v=\\sum_{i=1}^n\\operatorname{Var}(X_i)$. For $t>0$, if $v>0$ then\n$$\\mathbb P\\left(\\left|\\sum_{i=1}^nX_i\\right|\\ge t\\right)\\le 2\\exp\\!\\left(-\\frac{t^2}{2(v+bt/3)}\\right),$$\nand if $v=0$ then this probability is $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-layer-cake-formula-for-l-p-powers",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $f : X \\to \\mathbb C$ be\nmeasurable, and let $0<p<\\infty$. Then\n$$\\int_X |f|^p\\,d\\mu = p\\int_0^\\infty t^{p-1}\\mu(\\{|f|>t\\})\\,dt = p\\int_0^\\infty t^{p-1}A_f(t)\\,dt,$$\nwhere either side may be $+\\infty$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First let $h_1,\\ldots,h_m$ be measurable functions with $Ph_j^2\\le\\sigma^2$ and $|h_j|\\le b$. Applying [F2] to $h_j(X_i)-Ph_j$, whose variance is at most $\\sigma^2$ and whose absolute value is at most $2b$, gives $P\\{|\\mathbb G_n(h_j)|>\\sqrt{2\\sigma^2u}+2bu/\\sqrt n\\}\\le2e^{-u}.$ Put $L=\\log(2m)$ and $Z=\\max_j|\\mathbb G_n(h_j)|$. By [F4], for $s\\ge0$, $P\\{Z>\\phi(s)\\}\\le e^{-s},\\qquad \\phi(s)=\\sqrt{2\\sigma^2(L+s)}+2b(L+s)/\\sqrt n.$ Using [F3] to integrate this tail after the increasing change of variable $t=\\phi(s)$ gives $EZ\\le\\phi(0)+\\int_0^\\infty e^{-s}\\phi'(s)\\,ds\\le C_0(\\sigma\\sqrt L+bL/\\sqrt n)$, since $L\\ge\\log2$ and $\\int_0^\\infty e^{-s}(L+s)^{-1/2}ds\\le L^{-1/2}$. The same bound follows by continuity if $\\sigma=0$ or $b=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $g\\in\\mathcal G$, abbreviate its cell oscillation by $\\Delta_qg$. The sequence $\\Delta_qg$ decreases pointwise and is dominated by $2H$, while $\\|\\Delta_qg\\|_{P,2}\\le2^{-q}\\|H\\|_{P,2}$. By [F7], $P\\Delta_qg\\to0$; by [F5] and the integrable majorant $2H$, the pointwise limit of $\\Delta_qg$ consequently has integral zero and is zero $P$-almost everywhere. Countability of $\\mathcal G$ and finiteness of each partition give one common full-measure set on which all envelope and oscillation bounds hold and every oscillation tends to zero; iid observations avoid its null complement almost surely. Define $A_qg=\\prod_{p=q_0}^q\\mathbf1_{\\{\\Delta_pg\\le\\sqrt n a_p\\}},\\quad B_{q_0}g=\\mathbf1_{\\{\\Delta_{q_0}g>\\sqrt n a_{q_0}\\}},\\quad B_qg=A_{q-1}g\\mathbf1_{\\{\\Delta_qg>\\sqrt n a_q\\}}\\ (q>q_0).$ Nestedness makes these indicators constant on the corresponding cells. At each point either every cutoff passes or there is a unique first failed cutoff. In the first case, $\\pi_qg\\to g$ by the vanishing oscillation; in the second, the sum stops at that first failure. In either case, pointwise telescoping gives $g-\\pi_{q_0}g=(g-\\pi_{q_0}g)B_{q_0}g+\\sum_{q>q_0}(g-\\pi_qg)B_qg+\\sum_{q>q_0}(\\pi_qg-\\pi_{q-1}g)A_{q-1}g.$",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The $m_{q_0}$ representatives $\\pi_{q_0}(C)$ have $L^2(P)$ norm at most $M_{\\mathcal G}$. Clip each representative to zero on $\\{H>\\sqrt n a_{q_0}\\}$. The clipped functions have absolute bound $\\sqrt n a_{q_0}$ and the same $L^2$ bound, so step 1.1 bounds their expected maximum by $C_0[M_{\\mathcal G}\\sqrt{L_{q_0}}+a_{q_0}\\log(2m_{q_0})]$. The unclipped remainders are bounded by $H\\mathbf1_{\\{H>\\sqrt n a_{q_0}\\}}$, whose empirical-process maximum has expectation at most $2\\sqrt n P(H\\mathbf1_{\\{H>\\sqrt n a_{q_0}\\}})$. Since $m_{q_0+1}\\ge m_{q_0}$, the definition of $a_{q_0}$ absorbs the second term into $2^{-q_0}\\|H\\|_{P,2}\\sqrt{L_{q_0}}$. Thus the coarse representatives contribute at most the first and tail terms in the claimed bound, up to a universal factor.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The first term on the right of step 1.2 is bounded by $2H\\mathbf1_{\\{H>\\sqrt n a_{q_0}/2\\}}$, because $\\Delta_{q_0}g>\\sqrt n a_{q_0}$ and $\\Delta_{q_0}g\\le2H$. For any integrable $Y$, the triangle inequality and $E P_n|Y|=P|Y|$ give $E|\\mathbb G_n(Y)|\\le2\\sqrt n P|Y|$. Thus this first term contributes at most $4\\sqrt n P(H\\mathbf1_{\\{H>\\sqrt n a_{q_0}/2\\}})$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Fix $q>q_0$. Because $B_qg$ is constant on its level-$q$ cell, the functions $w_q=\\Delta_qg\\,B_qg$ take at most $m_q$ distinct values. On $B_qg=1$, $\\Delta_qg>\\sqrt n a_q$ and $\\Delta_qg\\le\\Delta_{q-1}g\\le\\sqrt n a_{q-1}$, so $P w_q^2\\le\\frac{a_{q-1}}{a_q}P(\\Delta_qg)^2\\le\\frac{a_{q-1}}{a_q}4^{-q}\\|H\\|_{P,2}^2,$ and $|w_q|\\le\\sqrt n a_{q-1}$. Step 1.1 therefore bounds the expected maximum of $|\\mathbb G_n(w_q)|$ by $C_0\\left[2^{-q}\\|H\\|_{P,2}\\sqrt{\\frac{a_{q-1}}{a_q}L_q}+a_{q-1}\\log(2m_q)\\right].$ For each residual $r_q=(g-\\pi_qg)B_qg$, $|r_q|\\le w_q$, whence $|\\mathbb G_n(r_q)|\\le|\\mathbb G_n(w_q)|+2\\sqrt n Pw_q$. The cutoff also gives $\\sqrt n Pw_q\\le P(\\Delta_qg)^2/a_q\\le2^{-q}\\|H\\|_{P,2}\\sqrt{L_{q+1}}$. Since $a_{q-1}/a_q=2\\sqrt{L_{q+1}/L_q}$ and $a_{q-1}=2^{-(q-1)}\\|H\\|_{P,2}/\\sqrt{L_q}$, these bounds are at most a universal multiple of $\\|H\\|_{P,2}2^{-q}(\\sqrt{L_q}+\\sqrt{L_{q+1}})$. Summing over $q>q_0$ is bounded by a universal multiple of the entropy tail in the statement.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "The functions $v_q=(\\pi_qg-\\pi_{q-1}g)A_{q-1}g$ take at most $m_q$ distinct values by nestedness. On $A_{q-1}g=1$, both representatives lie in the level-$(q-1)$ cell, so $|v_q|\\le\\Delta_{q-1}g\\le\\sqrt n a_{q-1}$ and $Pv_q^2\\le4^{-(q-1)}\\|H\\|_{P,2}^2$. Step 1.1 bounds their expected maximum by a universal multiple of $\\|H\\|_{P,2}2^{-q}\\sqrt{L_q}+a_{q-1}\\log(2m_q)\\le C_1\\|H\\|_{P,2}2^{-q}\\sqrt{L_q}.$ Summing over $q>q_0$ gives the same entropy-tail bound.",
+          "step": "2.4",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the entropy tail in the claimed bound is infinite, the result is immediate. Otherwise take finite partial sums in the decomposition of step 1.2: they stabilize at a first failed cutoff or telescope to $g-\\pi_{q_0}g$, and their absolute values are bounded by $2H$ outside the common null set from step 1.2. Dominated convergence [F5] and convergence of the finite sample averages therefore let the linear empirical-process map pass to the decomposition for each $g$. Now take the supremum over the countable class. Step 2.1 bounds the coarse representatives, step 2.2 bounds the first failed-cutoff term, and steps 2.3–2.4 bound the two series; [F6] justifies summing the nonnegative expected maxima by monotone convergence. Combining these estimates and increasing the universal constant gives the stated inequality.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 2.1",
+            "step 1.2",
+            "step 2.2",
+            "step 2.3",
+            "step 2.4",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires “G be a nonempty countable class” and every partition has m_q nonempty cells. Consequently neither an empty class nor m_q=0 is admissible; the sum over q does not weaken these hypotheses.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_qmd_tangent_resolution/boundaries_minimax1618",
+            "reason": "Statement requires “G be a nonempty countable class” and every partition has m_q nonempty cells. Consequently neither an empty class nor m_q=0 is admissible; the sum over q does not weaken these hypotheses."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement excludes ||H||_{P,2}=0 by 0<||H||_{P,2}<∞, while zero cell oscillations are allowed. Proof step 1.1 explicitly extends the finite-maximum estimate by continuity when its variance proxy σ=0 or absolute bound b=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits one cell m_q=1: L_q=1+log2>0 and a_q is defined. A singleton G has Δ_{q,C}=0, and the coarse-representative estimate in Proof step 2.1 remains applicable."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits Δ_{q,C}=0 and g with zero L² norm, while keeping the chosen H positive in L². Proof step 1.2 uses decreasing nonnegative oscillations and their vanishing L² bounds, including the identically-zero case. Statement uses the countable supremum even when it is not attained; the Remarks exhibit rational multiples of a Bernoulli indicator with supremum 1/2 and no maximizing function."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement allows q_0=1 and uses strict cutoffs H>√n a_{q0}/2. Proof step 1.2 assigns Δ_q=√n a_q to the passing event via ≤, so equality at a cutoff is covered without overlap with the > failure branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement supplies fixed nested finite partitions and representatives π_q(C)∈C from nonempty cells; Proof uses these supplied objects. All m_q≥1 ensure L_q,L_{q+1}>0 and no division by a zero log or a_q."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is a one-way upper estimate conditional on supplied oscillation bounds; neither the partitions nor the bounds are characterized by an iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement does not infer bracketing partitions or oscillation hypotheses from the displayed expected supremum estimate; no reverse implication is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Independently checked steps 1.1–3.1 and all seven current cited supplier interfaces. Bernstein uses centered bound 2b and variance n sigma^2; layer cake integrates the finite union tail. Nested cell oscillations vanish on one common full-measure set by countability and DCT. The stopping decomposition telescopes even at cutoff equality; finite partial sums are bounded by 2H and DCT plus finite sample convergence passes G_n to the limit. Residual maxima use cellwise w_q and the shifted L_{q+1} series is absorbed by reindexing. MCT sums nonnegative maxima. Nonempty cells, positive envelope norm, singleton classes, zero oscillations, q0=1 and infinite entropy tail checked. Reader limit-passage repair accepted; exact current item equals reader-post hash. No defect or unresolved prerequisite."
+      }
+    },
+    "thm-gc-by-bracketing-entropy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "A pseudometric $d$ on a set $T$ is a nonnegative symmetric function $d:T\\times T\\to[0,\\infty)$ with $d(t,t)=0$ and $d(s,t)\\le d(s,u)+d(u,t)$; distinct points may have distance zero. For a nonempty subset $\\mathcal F\\subseteq T$ and $\\epsilon>0$, the covering number $N(\\epsilon,\\mathcal F,d)$ is the least finite $k$ for which there are centers $f_1,\\ldots,f_k\\in\\mathcal F$ such that every $f\\in\\mathcal F$ satisfies $d(f,f_j)\\le\\epsilon$ for some $j$. It is $+\\infty$ if no finite cover exists. Set $N(\\epsilon,\\varnothing,d)=1$.\n\nThe packing number $D(\\epsilon,\\mathcal F,d)$ is the largest size of a finite subset $\\{f_1,\\ldots,f_k\\}\\subseteq\\mathcal F$ whose distinct members have pairwise distance strictly greater than $\\epsilon$. If the sizes of such finite subsets are unbounded, put $D=+\\infty$; put $D(\\epsilon,\\varnothing,d)=0$. These conventions give the radius comparison proved in [[lem-packing-covering-number-comparison]]. The metric entropy is $H(\\epsilon,\\mathcal F,d):=\\log N(\\epsilon,\\mathcal F,d)$ for nonempty classes, with $\\log(+\\infty)=+\\infty$.\n\nFor a probability measure $Q$ on $(\\mathcal X,\\mathcal A)$ and a measurable real function $g$, set $\\|g\\|_{Q,r}:=(\\int |g|^r\\,dQ)^{1/r}$ for $1\\le r<\\infty$ when the integral is finite, using the real-power convention, including $0^{1/r}=0$, of [[def-real-power]]. If the integral is $+\\infty$, define $\\|g\\|_{Q,r}:=+\\infty$ directly. The function $|g|$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and [[lem-real-power-preserves-measurability]] makes $|g|^r$ measurable, so this nonnegative extended integral is well-defined. On a class of functions with finite such norms, $d_{Q,r}(f,g):=\\|f-g\\|_{Q,r}$ is a pseudometric: nonnegativity, symmetry, and zero diagonal follow from the absolute value, and the triangle inequality is [[thm-minkowski-inequality-for-integrals]]. Functions that agree $Q$-almost everywhere have distance zero. We write $N(\\epsilon,\\mathcal F,L^r(Q))$ for this covering number.\n\nFor measurable real endpoints $\\ell\\le u$ $Q$-almost everywhere, the bracket $[\\ell,u]$ is the set of measurable functions $f$ satisfying $\\ell\\le f\\le u$ $Q$-almost everywhere. Its $L^r(Q)$ width is $\\|u-\\ell\\|_{Q,r}$. The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F$, or $+\\infty$ if no finite cover exists; for the empty class set it equal to $1$. Centers of metric covers are in $\\mathcal F$; bracket endpoints need not be.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\epsilon>0$ and let $\\mathcal F_0$ be the countable pointwise-dense subclass. Choose a finite $L^1(P)$ bracketing cover of $\\mathcal F$ with widths at most $\\epsilon/2$, which is strictly below $\\epsilon$; discard brackets not meeting $\\mathcal F_0$. For each retained bracket, choose one member of $\\mathcal F_0$ in it. The envelope and that member imply that clipping its endpoints to $[-F,F]$ preserves every inclusion in the bracket $P$-almost surely, and cannot increase the width. Since only finitely many endpoints remain and each is bounded by the integrable $F$, they are integrable. Countability and [F5] give one probability-one event on which all pointwise-dense-class bracket inclusions hold at every observation.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $f\\in[l_j,u_j]$, then $P_nf-Pf\\le P_nu_j-Pl_j=(P_nu_j-Pu_j)+P(u_j-l_j)$; likewise $Pf-P_nf\\le(Pl_j-P_nl_j)+P(u_j-l_j)$. Hence $\\sup_{f\\in\\mathcal F_0}|P_nf-Pf|\\le\\max_{1\\le j\\le m}|P_nu_j-Pu_j|\\vee\\max_{1\\le j\\le m}|P_nl_j-Pl_j|+\\epsilon/2.$ Each endpoint is integrable, so [F3] makes both finite maxima tend to zero almost surely. For arbitrary $f\\in\\mathcal F$, choose pointwise approximants $f_k\\in\\mathcal F_0$; [F4] gives $Pf_k\\to Pf$, and the finite empirical averages give $P_nf_k\\to P_nf$ at every sample. Thus the supremum over $\\mathcal F$ equals the countable supremum over $\\mathcal F_0$ samplewise. Given any target $\\eta>0$, take $\\epsilon=\\eta$; the endpoint maxima then imply $P(\\sup_{f\\in\\mathcal F}|P_nf-Pf|>\\eta)\\to0$. No simultaneous choice of brackets across scales is used for this probability-convergence conclusion.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Now assume Countable Choice. For each integer $m\\ge1$, choose one finite bracket family of width at most $1/(2m)$. Step 2.1 with $\\epsilon=1/m$ and [F3] give a probability-one event on which $\\limsup_n\\sup_f|P_nf-Pf|\\le1/(2m)$. By [F5], the countable intersection of these events still has probability one. On it the nonnegative supremum has limsup at most $1/(2m)$ for every $m$, hence converges to zero. This is strong $P$-Glivenko–Cantelli convergence as defined in [[def-glivenko-cantelli-class]].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement specifies a nonempty pointwise-measurable F with an integrable envelope. Its conclusion uses sup over F, and Proof step 1.1 takes brackets meeting a nonempty dense subclass; no convention for an empty supremum is stated.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_qmd_tangent_resolution/boundaries_empirical15",
+            "reason": "Actual Statement and complete Proof read: nonempty F is an explicit hypothesis. Step 1.1 discards brackets not meeting its dense subclass and step 2.1 takes finite endpoint maxima; an empty indexed supremum is outside the claimed convergence assertion despite the class regex."
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 clips integrable bracket endpoints to the envelope interval, including the zero-envelope case.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 takes a finite maximum over the finite bracket endpoints, including one bracket.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 uses only finite endpoint strong laws and permits zero-width brackets. ",
+          "case": "degenerate"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The scale hypothesis is epsilon>0; no interval endpoint is asserted.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is isolated to the strong-law conclusion; convergence in probability has no choice premise.",
+          "case": "nonempty-choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement finite L1 bracketing at every positive scale and an integrable envelope supply convergence in probability; Proof step 2.1 bounds deviations by finitely many endpoint sample means. The Countable Choice strong-law branch adds a conclusion, not an equivalent reformulation of the entropy premise."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement does not infer finite bracketing numbers from Glivenko-Cantelli convergence. Proof step 3.1 uses Countable Choice to select already existing finite covers at countably many scales, so the strong convergence conclusion cannot replace that premise in a reverse argument."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "Countable Choice (strong-law branch only)"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Checked steps 1.1–3.1 and seven cited dependencies. Clipping brackets to integrable envelope preserves inclusions and width; endpoint transforms of iid samples satisfy L1 SLLN. One common null set suffices for countable subclass. Pointwise approximation and DCT transfer the supremum samplewise. Probability branch fixes one cover; AC_omega only selects all covers in the a.s. branch. Empty classes excluded; zero envelope, singleton class and bracket boundary equalities valid. No defect."
+      }
+    },
+    "lem-empirical-process-asymptotic-equicontinuity-from-bracketing-entropy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-donsker-class-and-asymptotic-equicontinuity",
+          "source_section": "Definition",
+          "quote": "For a class $\\mathcal H$ of measurable real functions under a probability measure $Q$, an **envelope** $H$ means a nonnegative measurable function with $|h|\\le H$ $Q$-almost surely for every $h\\in\\mathcal H$. Cauchy–Schwarz [[cor-cauchy-schwarz-inequality-for-l-two]] gives $QH\\le\\|H\\|_{Q,2}<\\infty$ when $H\\in L^2(Q)$.\n\nLet $(S,\\mathcal A,P)$ be a probability space, let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal F$ be a nonempty class of measurable real-valued functions with a nonnegative measurable envelope $F$ satisfying $PF^2<\\infty$. A class is **pointwise measurable** if it has a countable subclass $\\mathcal F_0$ such that for each $f\\in\\mathcal F$ there is a sequence in $\\mathcal F_0$ converging pointwise to $f$. Write $\\mathbb G_n(f)=\\sqrt n(P_nf-Pf)$ using [[def-empirical-process-and-rademacher-process]], and put\n\n$$\\rho_P(f,g)=\\{P[(f-g)-P(f-g)]^2\\}^{1/2}.$$\n\nThis is a pseudometric: distinct functions can have zero distance when their centered difference vanishes $P$-almost surely. The empirical process is **asymptotically equicontinuous in probability** with respect to $\\rho_P$ if for every $\\eta>0$,\n\n$$\\lim_{\\delta\\downarrow0}\\limsup_{n\\to\\infty}P^*\\left(\\sup_{f,g\\in\\mathcal F:\\,\\rho_P(f,g)<\\delta}|\\mathbb G_n(f)-\\mathbb G_n(g)|>\\eta\\right)=0.$$\n\nHere $P^*(A)=\\inf\\{P(B): A\\subseteq B,\\ B\\in\\mathcal A\\}$ is outer probability; bounded nonmeasurable functionals are handled by the corresponding outer expectation $E^*Y=\\inf\\{EY':Y'\\text{ measurable and }Y'\\ge Y\\}$. For a pointwise-measurable class these conventions agree with ordinary probability whenever the displayed supremum is measurable.\n\nWrite $\\ell^\\infty(\\mathcal F)$ for the bounded real-valued functions on the index set $\\mathcal F$, with norm $\\|z\\|_{\\mathcal F}=\\sup_{f\\in\\mathcal F}|z(f)|$. The class is **$P$-Donsker** if, for each $n$, $\\mathbb G_n$ has bounded paths on a measurable event of probability one and, after setting the entire path to zero off that event, the resulting $\\ell^\\infty(\\mathcal F)$-valued process converges weakly in the outer-expectation sense to a tight Borel law of a centered Gaussian process $\\mathbb G_P$ with covariance\n\n$$\\operatorname{Cov}(\\mathbb G_P(f),\\mathbb G_P(g))=P[(f-Pf)(g-Pg)].$$\n\nHere outer weak convergence means $E^*H(\\mathbb G_n)\\to EH(\\mathbb G_P)$ for every bounded uniformly continuous real function $H$ on $\\ell^\\infty(\\mathcal F)$; the outer expectation is the infimum of expectations of measurable majorants. The law is tight in the sense of [[def-tight-family-of-probability-measures]]. Finite-dimensional convergence means weak convergence of the vector of process values at every finite list of indices, as in [[def-convergence-in-distribution-of-random-elements]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-empirical-process-bracketing-maximal-inequality",
+          "source_section": "Statement",
+          "quote": "Let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal G$ be a nonempty countable class of measurable real functions with a nonnegative measurable envelope $H$, so $|g|\\le H$ $P$-almost everywhere for every $g\\in\\mathcal G$, and $0<\\|H\\|_{P,2}<\\infty$. Use $\\mathbb G_n(g)=\\sqrt n(P_ng-Pg)$ as in [[def-empirical-process-and-rademacher-process]]. Suppose that for some integer $q_0\\ge1$ there are nested finite partitions $\\Pi_q$ of $\\mathcal G$, for all $q\\ge q_0$, with $m_q$ nonempty cells. For each cell $C\\in\\Pi_q$ choose a representative $\\pi_q(C)\\in C$ and define its pointwise oscillation\n\n$$\\Delta_{q,C}(x)=\\sup_{g,h\\in C}|g(x)-h(x)|.$$\n\nAssume $\\Delta_{q,C}$ is measurable, $0\\le\\Delta_{q,C}\\le2H$ $P$-almost everywhere, and $\\|\\Delta_{q,C}\\|_{P,2}\\le2^{-q}\\|H\\|_{P,2}$. If $C'\\in\\Pi_{q+1}$ is contained in $C\\in\\Pi_q$, then $\\Delta_{q+1,C'}\\le\\Delta_{q,C}$ pointwise by definition. Put\n\n$$L_q=1+\\log(2m_q),\\qquad a_q=\\frac{2^{-q}\\|H\\|_{P,2}}{\\sqrt{L_{q+1}}},\\qquad M_{\\mathcal G}=\\sup_{g\\in\\mathcal G}\\|g\\|_{P,2}.$$\n\nThe refinement property gives $m_{q+1}\\ge m_q$, so $a_q$ is nonincreasing.\n\nThere is a universal constant $C<\\infty$ such that\n\n$$\\mathbb E\\sup_{g\\in\\mathcal G}|\\mathbb G_n(g)|\\le C\\left[(M_{\\mathcal G}+2^{-q_0}\\|H\\|_{P,2})\\sqrt{L_{q_0}}+\\|H\\|_{P,2}\\sum_{q>q_0}2^{-q}\\sqrt{L_q}+\\sqrt n\\,P\\!\\left(H\\mathbf1_{\\{H>\\sqrt n a_{q_0}/2\\}}\\right)\\right].$$\n\nThis is a local maximal estimate: the nested partitions and their oscillation bounds are hypotheses. Empirical-process notation uses [[def-empirical-process-and-rademacher-process]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "A pseudometric $d$ on a set $T$ is a nonnegative symmetric function $d:T\\times T\\to[0,\\infty)$ with $d(t,t)=0$ and $d(s,t)\\le d(s,u)+d(u,t)$; distinct points may have distance zero. For a nonempty subset $\\mathcal F\\subseteq T$ and $\\epsilon>0$, the covering number $N(\\epsilon,\\mathcal F,d)$ is the least finite $k$ for which there are centers $f_1,\\ldots,f_k\\in\\mathcal F$ such that every $f\\in\\mathcal F$ satisfies $d(f,f_j)\\le\\epsilon$ for some $j$. It is $+\\infty$ if no finite cover exists. Set $N(\\epsilon,\\varnothing,d)=1$.\n\nThe packing number $D(\\epsilon,\\mathcal F,d)$ is the largest size of a finite subset $\\{f_1,\\ldots,f_k\\}\\subseteq\\mathcal F$ whose distinct members have pairwise distance strictly greater than $\\epsilon$. If the sizes of such finite subsets are unbounded, put $D=+\\infty$; put $D(\\epsilon,\\varnothing,d)=0$. These conventions give the radius comparison proved in [[lem-packing-covering-number-comparison]]. The metric entropy is $H(\\epsilon,\\mathcal F,d):=\\log N(\\epsilon,\\mathcal F,d)$ for nonempty classes, with $\\log(+\\infty)=+\\infty$.\n\nFor a probability measure $Q$ on $(\\mathcal X,\\mathcal A)$ and a measurable real function $g$, set $\\|g\\|_{Q,r}:=(\\int |g|^r\\,dQ)^{1/r}$ for $1\\le r<\\infty$ when the integral is finite, using the real-power convention, including $0^{1/r}=0$, of [[def-real-power]]. If the integral is $+\\infty$, define $\\|g\\|_{Q,r}:=+\\infty$ directly. The function $|g|$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and [[lem-real-power-preserves-measurability]] makes $|g|^r$ measurable, so this nonnegative extended integral is well-defined. On a class of functions with finite such norms, $d_{Q,r}(f,g):=\\|f-g\\|_{Q,r}$ is a pseudometric: nonnegativity, symmetry, and zero diagonal follow from the absolute value, and the triangle inequality is [[thm-minkowski-inequality-for-integrals]]. Functions that agree $Q$-almost everywhere have distance zero. We write $N(\\epsilon,\\mathcal F,L^r(Q))$ for this covering number.\n\nFor measurable real endpoints $\\ell\\le u$ $Q$-almost everywhere, the bracket $[\\ell,u]$ is the set of measurable functions $f$ satisfying $\\ell\\le f\\le u$ $Q$-almost everywhere. Its $L^r(Q)$ width is $\\|u-\\ell\\|_{Q,r}$. The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F$, or $+\\infty$ if no finite cover exists; for the empty class set it equal to $1$. Centers of metric covers are in $\\mathcal F$; bracket endpoints need not be.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a countable pointwise-dense subclass $\\mathcal F_0\\subseteq\\mathcal F$. For $\\delta>0$, set $\\mathcal H_\\delta=\\{(f-g)-P(f-g):f,g\\in\\mathcal F_0,\\ \\rho_P(f,g)\\le\\delta\\}$. Every $h\\in\\mathcal H_\\delta$ has $\\|h\\|_{P,2}\\le\\delta$ and is bounded in absolute value by $H:=2F+2PF$, with $\\|H\\|_{P,2}\\le4\\|F\\|_{P,2}$.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F6",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $f$ and $g$ lie in $L^2(P)$ brackets $[l_i,u_i]$ and $[l_j,u_j]$ of width at most $r\\|F\\|_{P,2}$, respectively, then $(f-g)-P(f-g)$ lies in the bracket $[l_i-u_j-P(u_i-l_j),\\ u_i-l_j-P(l_i-u_j)].$ Its width is $w_i+w_j+P(w_i+w_j)$, where $w_i=u_i-l_i$ and $w_j=u_j-l_j$; Cauchy–Schwarz gives its $L^2(P)$ norm at most $2(\\|w_i\\|_{P,2}+\\|w_j\\|_{P,2})\\le4r\\|F\\|_{P,2}$. Thus $N_{[]}(4r\\|F\\|_{P,2},\\mathcal H_\\delta,L^2(P))\\le N_{[]}(r\\|F\\|_{P,2},\\mathcal F,L^2(P))^2$.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $0<\\delta<\\|H\\|_{P,2}/2$ and choose $q_0\\ge1$ with $\\delta/2<2^{-q_0}\\|H\\|_{P,2}\\le\\delta$. For each $q\\ge q_0$, take a finite bracketing cover of $\\mathcal H_\\delta$ at width $2^{-q}\\|H\\|_{P,2}$ and partition the class by assigning each function to the first bracket containing it. Refine these finite partitions cumulatively through level $q$; by [A1], the countable family of finite covers and their representatives can be selected. If $b_q$ is the unrefined level-$q$ count, step 1.2 gives $b_q\\le N_{[]} (r_q\\|F\\|_{P,2},\\mathcal F,L^2(P))^2$ for $r_q=2^{-q}\\|H\\|_{P,2}/(4\\|F\\|_{P,2})$, and the refined count satisfies $m_q\\le\\prod_{p=q_0}^q b_p$. Consequently, using $\\sqrt{1+\\sum x_p}\\le1+\\sum\\sqrt{x_p}$ for $x_p\\ge0$ and summing the resulting geometric weights, $\\sum_{q\\ge q_0}2^{-q}\\sqrt{1+\\log(2m_q)}\\le C_1\\int_0^{C_2\\delta/\\|F\\|_{P,2}}\\sqrt{1+\\log N_{[]} (\\epsilon\\|F\\|_{P,2},\\mathcal F,L^2(P))}\\,d\\epsilon$ for universal constants $C_1,C_2$: the unrefined entropy terms at scale $r_q$ are bounded by the integrand on the adjacent dyadic interval $[r_q/2,r_q]$ by monotonicity of bracketing numbers, and cumulative refinement contributes only a geometric sum of earlier terms. The added $1$ contributes a geometric sum of order $2^{-q_0}$, which is also bounded by the displayed integral because its integrand is at least $1$. On each refined cell $C$, define $\\Delta_{q,C}=\\sup_{h,h'\\in C}|h-h'|$ and choose $\\pi_q(C)\\in C$. Countability makes this pointwise supremum measurable; containment in a level-$q$ bracket gives $\\Delta_{q,C}\\le u-l$ $P$-almost everywhere, so it has the required $L^2(P)$ bound. Intersecting partitions makes these oscillations nonincreasing on child cells. Thus these partitions and widths satisfy the hypotheses of [F2] when the local maximal inequality is applied.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F2] to $\\mathcal H_\\delta$ with envelope $H$ and this nested partition. Its coarse term is at most $C\\delta\\sqrt{1+\\log(2m_{q_0})}$, its dyadic tail is bounded by the right-hand side of step 2.1, and its final envelope-tail term tends to zero as $n\\to\\infty$ for this fixed $\\delta$: for each fixed $a>0$, $\\sqrt n P(H\\mathbf1_{\\{H>a\\sqrt n\\}})\\le a^{-1}P(H^2\\mathbf1_{\\{H>a\\sqrt n\\}})\\to0$ by [F4].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The entropy integral in the statement makes the integral in step 2.1 tend to zero with $\\delta$. It also gives $\\delta\\sqrt{\\log N_{[]} (c\\delta\\|F\\|_{P,2},\\mathcal F,L^2(P))}\\to0$ for each fixed $c>0$: if $h(\\epsilon)=\\sqrt{\\log N_{[]} (\\epsilon\\|F\\|_{P,2},\\mathcal F,L^2(P))}$, monotonicity yields $(\\epsilon/2)h(\\epsilon)\\le\\int_{\\epsilon/2}^{\\epsilon}h(u)\\,du\\to0$. Therefore step 3.1 implies $\\lim_{\\delta\\downarrow0}\\limsup_n E\\sup_{h\\in\\mathcal H_\\delta}|\\mathbb G_n(h)|=0$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F5], Markov's inequality converts the expected-supremum limit in step 4.1 into asymptotic equicontinuity for pairs in $\\mathcal F_0$. For arbitrary $f,g\\in\\mathcal F$, choose pointwise approximants $f_k,g_k\\in\\mathcal F_0$. The common envelope gives $L^1(P)$ convergence by [F4]; applying [F4] to $|f_k-f|^2\\le4F^2$ and $|g_k-g|^2\\le4F^2$ also gives $L^2(P)$ convergence. Pointwise convergence gives $P_nf_k\\to P_nf$ and $P_ng_k\\to P_ng$ for each fixed finite sample, so $\\rho_P(f_k,g_k)\\to\\rho_P(f,g)$ and the empirical-process increment converges pointwise to the desired increment. Hence a pair with $\\rho_P(f,g)<\\delta/2$ is a limit of pairs from $\\mathcal F_0$ with distance below $\\delta$. The outer-probability modulus over $\\mathcal F$ is therefore bounded by the countable-class modulus over $\\mathcal F_0$ at radius $\\delta$, proving the asserted asymptotic equicontinuity.",
+          "step": "5.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F4",
+            "F5",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires nonempty F and positive finite ||F||_{P,2}. Proof step 1.1 builds H_delta from pairs in its dense subclass, including diagonal pairs giving zero, and never claims an empty-class modulus convention.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_qmd_tangent_resolution/boundaries_empirical15",
+            "reason": "I read the whole Statement, Facts, and Proof: the nonempty premise provides diagonal pairs in H_delta and nonempty finite partition cells in step 2.1 from which representatives are taken. The family/aggregate regex does not override this supplied nonempty domain."
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement: the zero-envelope boundary is excluded by 0<||F||_{P,2}.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 makes the increment class contain the zero function when the index class is a singleton.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 5.1 handles pairs at zero semimetric distance by pointwise approximation. ",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 control every positive scale as delta decreases to zero.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement and step 2.1 explicitly use Countable Choice to select brackets at countably many scales.",
+          "case": "nonempty-choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement finite normalized L2 bracketing entropy integral implies asymptotic equicontinuity in the centered semimetric rho_P. Proof steps 1.2-4.1 construct bracket partitions and bound increments; the local-bracket comparison is an upper inequality, not a bidirectional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Equicontinuity controls centered increments only and does not require the particular uncentered bracketing integral in Statement. For example arbitrary constant offsets give rho_P=0 and zero empirical increments; the proof therefore makes no reverse inference from equicontinuity to its entropy or positive-envelope hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "Countable Choice"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Checked steps 1.1–5.1 and all eight cited supplier interfaces. Centered differences have envelope 2F+2PF and L2 norm <=delta. For each bracket actually containing a class member f, both endpoints are L2 because their absolute values are bounded by |f|+(u-l); hence every expectation in step 1.2 is defined. Unused brackets may be discarded without increasing counts. Width bound is 4r||F||. Countable Choice selects dyadic covers and representatives. Cumulative refinement entropy is bounded by swapping geometric sums; H norm lies between 2||F|| and 4||F||, so rescaling constants are uniform. H_delta is nonempty (diagonal zero). Fixed-delta envelope tail tends to zero by DCT on H^2 before delta tends to zero. Coarse entropy vanishes by monotonicity. Corrected reader DCT citation in step 5.1 accepted; squared-error DCT preserves rho and strict-radius slack transfers the modulus by outer probability. Zero envelope excluded here and handled separately by CLT. No unresolved defect."
+      }
+    },
+    "thm-empirical-process-functional-clt": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "8.1",
+            "10.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "8.1",
+            "10.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "6.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "A pseudometric $d$ on a set $T$ is a nonnegative symmetric function $d:T\\times T\\to[0,\\infty)$ with $d(t,t)=0$ and $d(s,t)\\le d(s,u)+d(u,t)$; distinct points may have distance zero. For a nonempty subset $\\mathcal F\\subseteq T$ and $\\epsilon>0$, the covering number $N(\\epsilon,\\mathcal F,d)$ is the least finite $k$ for which there are centers $f_1,\\ldots,f_k\\in\\mathcal F$ such that every $f\\in\\mathcal F$ satisfies $d(f,f_j)\\le\\epsilon$ for some $j$. It is $+\\infty$ if no finite cover exists. Set $N(\\epsilon,\\varnothing,d)=1$.\n\nThe packing number $D(\\epsilon,\\mathcal F,d)$ is the largest size of a finite subset $\\{f_1,\\ldots,f_k\\}\\subseteq\\mathcal F$ whose distinct members have pairwise distance strictly greater than $\\epsilon$. If the sizes of such finite subsets are unbounded, put $D=+\\infty$; put $D(\\epsilon,\\varnothing,d)=0$. These conventions give the radius comparison proved in [[lem-packing-covering-number-comparison]]. The metric entropy is $H(\\epsilon,\\mathcal F,d):=\\log N(\\epsilon,\\mathcal F,d)$ for nonempty classes, with $\\log(+\\infty)=+\\infty$.\n\nFor a probability measure $Q$ on $(\\mathcal X,\\mathcal A)$ and a measurable real function $g$, set $\\|g\\|_{Q,r}:=(\\int |g|^r\\,dQ)^{1/r}$ for $1\\le r<\\infty$ when the integral is finite, using the real-power convention, including $0^{1/r}=0$, of [[def-real-power]]. If the integral is $+\\infty$, define $\\|g\\|_{Q,r}:=+\\infty$ directly. The function $|g|$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and [[lem-real-power-preserves-measurability]] makes $|g|^r$ measurable, so this nonnegative extended integral is well-defined. On a class of functions with finite such norms, $d_{Q,r}(f,g):=\\|f-g\\|_{Q,r}$ is a pseudometric: nonnegativity, symmetry, and zero diagonal follow from the absolute value, and the triangle inequality is [[thm-minkowski-inequality-for-integrals]]. Functions that agree $Q$-almost everywhere have distance zero. We write $N(\\epsilon,\\mathcal F,L^r(Q))$ for this covering number.\n\nFor measurable real endpoints $\\ell\\le u$ $Q$-almost everywhere, the bracket $[\\ell,u]$ is the set of measurable functions $f$ satisfying $\\ell\\le f\\le u$ $Q$-almost everywhere. Its $L^r(Q)$ width is $\\|u-\\ell\\|_{Q,r}$. The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F$, or $+\\infty$ if no finite cover exists; for the empty class set it equal to $1$. Centers of metric covers are in $\\mathcal F$; bracket endpoints need not be.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-asymptotic-distribution",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be fixed, and equip $\\mathbb R^d$ with the Borel sigma-algebra generated by its Euclidean open sets. Let $Z_n$ be measurable random elements of this Borel space, not necessarily defined on a common probability space, and let $\\nu$ be a Borel probability measure on $\\mathbb R^d$. The sequence $(Z_n)$ has **asymptotic distribution** $\\nu$ if its laws converge weakly to $\\nu$; equivalently, $Z_n\\Rightarrow Z$ for any random vector $Z$ with law $\\nu$ ([[def-convergence-in-distribution-of-random-elements]], [[def-weak-convergence-of-borel-probability-measures]]).\n\nFor an estimator, any centering or scaling, such as $r_n(T_n-\\psi(\\theta))$, is part of the sequence whose asymptotic distribution is being specified; it is not implicit in the term. Weak convergence alone does not assert convergence of moments.",
+          "uses": [
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "9.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For any set $I$, standard-Borel coordinate spaces $(E_i,\\mathcal E_i)$, and consistent finite-dimensional laws $(\\mu_F)_{F\\Subset I}$, there is a unique probability measure $\\mu$ on $\\mathcal C_I$ whose $F$-coordinate marginal is $\\mu_F$ for each finite $F$.",
+          "uses": [
+            "3.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dudley-entropy-integral",
+          "source_section": "Statement",
+          "quote": "Let $(T,d)$ be a nonempty pseudometric space that is totally bounded in the following sense: for every $r>0$ there is a finite set $E_r\\subseteq T$ such that $T\\subseteq\\bigcup_{e\\in E_r}\\{t\\in T:d(t,e)\\le r\\}$. Its diameter is $D:=\\sup_{s,t\\in T}d(s,t)<\\infty$. For each $t\\in T$, let $X_t$ be a real random variable. Assume the process is separable: a specified countable dense subset $T_0\\subseteq T$, equipped with a fixed listing, has the property that the supremum of every process increment over $T$ equals its supremum over $T_0$ almost surely. Suppose all increments are centered and sub-Gaussian with their $d$-scale, meaning that for every $s,t\\in T$ and $\\lambda\\in\\mathbb R$,\n\n$$\\mathbb E\\exp\\{\\lambda(X_s-X_t)\\}\\le\\exp\\{\\lambda^2d(s,t)^2/2\\}.$$\n\nIf\n\n$$\\int_0^D\\sqrt{\\log N(\\epsilon,T,d)}\\,d\\epsilon<\\infty,$$\n\nwhere $N(\\epsilon,T,d)$ is the least number of closed $d$-balls of radius $\\epsilon$ covering $T$ ([[def-covering-packing-bracketing-number-and-metric-entropy]]), then for every $t_0\\in T$,\n\n$$\\mathbb E\\sup_{t\\in T}|X_t-X_{t_0}|\\le C\\int_0^D\\sqrt{\\log N(\\epsilon,T,d)}\\,d\\epsilon$$\n\nfor a universal constant $C$. If $D=0$, the integral and the supremum are both zero.",
+          "uses": [
+            "5.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-empirical-process-asymptotic-equicontinuity-from-bracketing-entropy",
+          "source_section": "Statement",
+          "quote": "For a class $\\mathcal H$ of measurable real functions under a probability measure $Q$, an **envelope** $H$ means a nonnegative measurable function with $|h|\\le H$ $Q$-almost surely for every $h\\in\\mathcal H$. Cauchy–Schwarz [[cor-cauchy-schwarz-inequality-for-l-two]] gives $QH\\le\\|H\\|_{Q,2}<\\infty$ when $H\\in L^2(Q)$.\n\nAssume Countable Choice. Let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal F$ be a nonempty pointwise-measurable class of measurable functions with a nonnegative envelope $F$ satisfying $PF^2<\\infty$. Assume $0<\\|F\\|_{P,2}<\\infty$ and\n\n$$\\int_0^1\\sqrt{\\log N_{[]}\\bigl(\\epsilon\\|F\\|_{P,2},\\mathcal F,L^2(P)\\bigr)}\\,d\\epsilon<\\infty.$$\n\nUse the empirical process $\\mathbb G_n$ and semimetric $\\rho_P$ from [[def-empirical-process-and-rademacher-process]] and [[def-donsker-class-and-asymptotic-equicontinuity]]. Then $\\mathbb G_n$ is asymptotically equicontinuous in probability with respect to $\\rho_P$.",
+          "uses": [
+            "10.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-metric-completion-exists",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice for assertion 5 and the consequent\nexistence claim ([[def-countable-choice]]). Let $(X,d)$ be a metric space\n([[def-metric-space]]) and let $\\mathcal{C}$ be the set of all Cauchy sequences\nin $X$ ([[def-cauchy-in-metric]]). Then:\n\n1. For all $x = (x_n)$ and $y = (y_n)$ in $\\mathcal{C}$ the real sequence\n   $\\big(d(x_n,y_n)\\big)_n$ converges, so\n   $$\\rho(x,y) \\;:=\\; \\lim_{n} d(x_n,y_n)$$\n   is a single well-determined real ([[thm-cauchy-criterion-via-lub]],\n   [[lem-limit-unique]]).\n2. The relation $x \\sim y :\\Longleftrightarrow \\rho(x,y) = 0$ is an equivalence\n   relation on $\\mathcal{C}$. Write $\\widehat{X} := \\mathcal{C}/\\!\\sim$ for the\n   set of its classes and $[x]$ for the class of $x$.\n3. $\\widehat{d}\\big([x],[y]\\big) := \\rho(x,y)$ does not depend on the chosen\n   representatives, and $\\widehat{d}$ is a metric on $\\widehat{X}$.\n4. The map $\\iota : X \\to \\widehat{X}$ sending $p$ to the class of the constant\n   sequence at $p$ is an isometric embedding with dense image\n   ([[def-isometry-and-metric-embedding]],\n   [[def-metric-interior-closure-boundary]]).\n5. $(\\widehat{X}, \\widehat{d})$ is complete.\n\nConsequently $\\big((\\widehat{X},\\widehat{d}), \\iota\\big)$ is a completion of\n$(X,d)$ ([[def-metric-completion]]), and **every metric space has a\ncompletion**.\n\n**The notation is kept honest.** A Cauchy sequence in $X$ need not converge in\n$X$, so no symbol $\\lim_n x_n$ appears anywhere below; the only limits taken are\nlimits of *real* sequences, and each is written only after its existence has been\nproved. The equivalence relation is defined and verified here rather than cited, as was\ndone for [[def-integers]], so that the construction is self-contained and its\ntransitivity argument is visible at the point of use.",
+          "uses": [
+            "6.1",
+            "7.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-complete-and-totally-bounded-implies-compact",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). Let $(X,d)$\nbe a metric space ([[def-metric-space]]) that is complete\n([[def-complete-metric-space]]) and totally bounded ([[def-totally-bounded]]).\nThen $(X,d)$ is compact ([[def-metric-compactness]]).\n\n**Where the axiom is spent, and why the weaker principle suffices.**\n$\\mathrm{AC}_\\omega$ is used exactly once, at step 3.1, to fix one finite\n$1/(n+1)$-net **together with a listing of it** for every $n \\in \\mathbb{N}$ at\nonce. The family of sets being chosen from is written down before any selection\nis made and does not depend on the earlier selections, which is precisely the\nsituation countable choice covers and dependent choice\n([[def-dependent-choice]]) is not needed for. Everything after step 3.1 is\ncanonical: at each stage the construction takes the **least** admissible index in\nthe listing already fixed.\n\nAs always on this page, the claim is an upper bound on the cost of the proof\ngiven here, not an assertion that $\\mathrm{AC}_\\omega$ is necessary for the\ntheorem.",
+          "uses": [
+            "6.1",
+            "7.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space. Every member of\n$C(K,\\mathbb{R})$ is bounded, so the supremum metric\n\n$$d_\\infty(f,g):=\\sup_{x\\in K}|f(x)-g(x)|$$\n\nis defined on $C(K,\\mathbb{R})$. With this metric,\n$C(K,\\mathbb{R})$ is complete.",
+          "uses": [
+            "8.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-countable-uniformly-dense-tests-on-a-compact-metric-space",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a compact metric K, $C(K;\\mathbb R)$ has a countable uniformly dense subset in the supremum norm.",
+          "uses": [
+            "8.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "8.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-every-borel-probability-on-a-polish-space-is-tight",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every Borel probability on a Polish space S is tight.",
+          "uses": [
+            "8.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-first-borel-cantelli-lemma-for-events",
+          "source_section": "Statement",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-substitution",
+          "source_section": "Statement",
+          "quote": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ ([[def-derivative]]), with\n$\\varphi'$ integrable on $[c,d]$ ([[def-darboux-integral]]). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ ([[def-continuity-real]]).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of [[def-oriented-integral]].\n\n**Neither injectivity nor monotonicity of $\\varphi$ is assumed**, and that is\nexactly why the left-hand side is written with oriented limits: $\\varphi(d)$ may\nlie below $\\varphi(c)$, and $\\varphi$ may return to the same value many times.\nThe proof runs through a primitive of $f$ and the chain rule, and no inverse\nfunction is ever formed.\n\n**Continuity of $f$ is a hypothesis and cannot be weakened to integrability.**\nWith $f$ merely integrable the composite $f \\circ \\varphi$ need not be\nintegrable at all, so the right-hand side need not exist; that is\nthe false statement that weakens it on the companion page.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\|F\\|_{P,2}=0$, every member of a countable pointwise-dense subclass is zero $P$-almost surely. By [F15], countable subadditivity gives a probability-one event on which all those functions vanish at every observation. Pointwise approximation then makes every $f\\in\\mathcal F$ vanish at the observations; dominated convergence gives $Pf=0$ for each $f$. Thus $\\mathbb G_n$ is the zero process in outer probability and the conclusion holds with the zero Gaussian bridge.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L3",
+            "F7",
+            "F15",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $\\|F\\|_{P,2}>0$. The countable pointwise-dense subclass has a common measurable conull set on which its members are bounded by $F$; pointwise approximation extends that bound to every $f\\in\\mathcal F$ on the same set. By [F15], all observations lie in it on one measurable event of probability one. On that event, $\\sup_{f\\in\\mathcal F}|\\mathbb G_n(f)|\\le\\sqrt n(P_nF+PF)<\\infty$ for every $n$, by [L3]. Set the entire empirical path to zero off that event, as required by the Donsker definition. Each finite $L^2(P)$ bracket of width $r$ has $\\rho_P$-diameter at most $r$, because $\\rho_P(f,g)\\le\\|f-g\\|_{P,2}\\le\\|u-l\\|_{P,2}$. The entropy integral being finite forces $N_{[]}(r,\\mathcal F,L^2(P))<\\infty$ for every $r>0$: if it were infinite at one positive scale, monotonicity would make the integral infinite on an interval below that scale. Therefore the quotient of $\\mathcal F$ by zero $\\rho_P$-distance is totally bounded. The countable pointwise-dense subclass is dense in this quotient, since $|f_k-f|^2\\le4F^2$ and [F7] gives $\\|f_k-f\\|_{P,2}\\to0$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "L1",
+            "L2",
+            "L3",
+            "F7",
+            "F15",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Enumerate the countable dense subclass as $\\mathcal F_0=\\{f_j:j\\in J\\}$. For any finite list $f_{j_1},\\ldots,f_{j_m}$, the covariance matrix $\\Sigma_{ab}=K(f_{j_a},f_{j_b})$ is positive semidefinite, since $c^T\\Sigma c=P[\\sum_a c_a(f_{j_a}-Pf_{j_a})]^2\\ge0$. [F3] supplies the centered Gaussian law $N_m(0,\\Sigma)$. For any sublist, both the corresponding marginal and the Gaussian law constructed from its covariance have, in every direction, the same centered normal projection; [F14] makes the laws equal. Thus these finite-dimensional laws are consistent.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L3",
+            "F3",
+            "F14",
+            "given",
+            "algebra",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The coordinate space $\\mathbb R$ with its Borel sigma-algebra is standard Borel by [F13], so [F4] extends the consistent Gaussian laws to a centered Gaussian process $\\mathbb G_0$ indexed by $\\mathcal F_0$, with covariance $K$. Each increment $\\mathbb G_0(f)-\\mathbb G_0(g)$ is centered normal with variance $\\rho_P(f,g)^2$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F13",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any centered normal $Y$ with variance $\\sigma^2$, if $\\sigma=0$ then [F16] makes $Y=0$ almost surely and $\\mathbb E e^{\\lambda Y}=1$. If $\\sigma>0$, [F16]–[F17] give $$\\mathbb E e^{\\lambda Y}=\\int_{\\mathbb R}e^{\\lambda\\sigma x}\\phi(x)\\,dx=e^{\\lambda^2\\sigma^2/2}\\int_{\\mathbb R}\\phi(x-\\lambda\\sigma)\\,dx,$$ by completing the square. For $a=\\lambda\\sigma$ and positive integer $R>|a|$, apply [F18] to the translation $x\\mapsto x-a$, whose derivative is the integrable constant one, and the continuous integrand $\\phi$. Both compact integrands are continuous and bounded, so the Riemann–Lebesgue bridge in [F18], with Countable Choice from [A1], gives $\\int_{[-R,R]}\\phi(x-a)\\,dx=\\int_{[-R-a,R-a]}\\phi(u)\\,du$. These intervals increase to $\\mathbb R$ as $R\\to\\infty$; [F19] on both sides and the normalization in [F16] give $\\int_{\\mathbb R}\\phi(x-a)\\,dx=1$. Thus every centered Gaussian increment with variance $\\sigma^2$ has MGF proxy $\\sigma^2$, as needed for chaining.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F16",
+            "F17",
+            "F18",
+            "F19",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $\\delta>0$, index the Gaussian increment process by pairs $(f,g)\\in\\mathcal F_0^2$ with $\\rho_P(f,g)\\le\\delta$, and write $Y_{f,g}=\\mathbb G_0(f)-\\mathbb G_0(g)$. Its canonical pseudometric is $d_Y((f,g),(f',g'))=\\{E[(Y_{f,g}-Y_{f',g'})^2]\\}^{1/2}$. The triangle inequality in $L^2(P)$ gives $d_Y\\le\\rho_P(f,f')+\\rho_P(g,g')$, while every $Y_{f,g}$ has standard deviation at most $\\delta$, so the $d_Y$-diameter of this pair set is at most $2\\delta$. By step 4.1 its increments are centered sub-Gaussian with their $d_Y$-scale. A product of two $\\epsilon/4$-nets of $\\mathcal F_0$ covers the pair set within $d_Y$-distance $\\epsilon/2$. Its centers might lie outside the restricted pair set; from each product ball that meets the pair set, choose one pair inside it. The triangle inequality then gives an $\\epsilon$-net with centers in the pair set and cardinality at most $N(\\epsilon/4,\\mathcal F_0,\\rho_P)^2$. Applying [F5] with the diagonal base point $(f_*,f_*)$ yields $E\\sup_{f,g\\in\\mathcal F_0:\\,\\rho_P(f,g)\\le\\delta}|\\mathbb G_0(f)-\\mathbb G_0(g)|\\le C\\int_0^{C'\\delta}\\sqrt{\\log N(\\epsilon,\\mathcal F_0,\\rho_P)}\\,d\\epsilon,$ which tends to zero as $\\delta\\downarrow0$ by the bracketing cover bound in step 1.2.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Choose rational $\\delta_k\\downarrow0$ so that the expectation in step 5.1 is at most $2^{-3k}$. By [F11], the probability that the corresponding modulus exceeds $2^{-k}$ is at most $2^{-2k}$, and the first Borel–Cantelli lemma makes only finitely many such events occur almost surely. Thus the Gaussian sample paths are uniformly $\\rho_P$-continuous on $\\mathcal F_0$ almost surely. By [A2], Countable Choice is available for the metric-completion construction in [F8], so the metric quotient embeds densely in a complete metric completion $T$; compactness and the pathwise extension are established below.",
+          "step": "6.1",
+          "inputs": [
+            "A2",
+            "F8",
+            "F11",
+            "step 5.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Fix $\\varepsilon>0$ and take a finite $\\varepsilon/2$-net in the totally bounded metric quotient from step 1.2. Its image in $T$ is still a finite $\\varepsilon/2$-net for the dense embedded quotient. For any $x\\in T$, density gives a quotient point $q$ with $d(x,q)<\\varepsilon/2$, and some net point $y$ satisfies $d(q,y)\\le\\varepsilon/2$; hence $d(x,y)<\\varepsilon$. Thus $T$ is totally bounded, and it is compact by its completeness from [F8] and the complete-plus-totally-bounded theorem in [F8]. To extend a path $G_0$ that is uniformly $\\rho_P$-continuous on the listed dense subset $\\mathcal F_0$, for each $x\\in T$ and $n\\ge1$ let $f_n(x)$ be the first listed point of $\\mathcal F_0$ within $1/n$ of $x$. The sequence $G_0(f_n(x))$ is Cauchy by uniform continuity and therefore has a real limit by [F13]. Any two sequences from $\\mathcal F_0$ converging to $x$ have pairwise distances tending to zero, so uniform continuity makes their value limits equal. Define $\\overline G_0(x)$ by this common limit. To verify continuity, given $\\eta>0$ choose $\\tau>0$ so that $d(u,v)<\\tau$ for $u,v\\in\\mathcal F_0$ implies $|G_0(u)-G_0(v)|<\\eta/2$. If $d(x,y)<\\tau/3$, approximating sequences $u_n\\to x$ and $v_n\\to y$ eventually satisfy $d(u_n,v_n)<\\tau$; passing to their value limits gives $|\\overline G_0(x)-\\overline G_0(y)|\\le\\eta/2<\\eta$. Density makes this extension unique.",
+          "step": "7.1",
+          "inputs": [
+            "A2",
+            "F8",
+            "F13",
+            "step 1.2",
+            "step 6.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Uniform continuity on the countable set $\\mathcal F_0$ is a measurable path event: for each integer $m$, the condition that some positive rational radius makes every coordinate increment below $1/m$ for pairs in $\\mathcal F_0$ closer than that radius is a countable union and intersection of measurable coordinate events. By step 6.1 this event has probability one. On it use the extension from step 7.1, and define the function to be zero off it. The resulting map is a Borel random element of $C(T,\\mathbb R)$: evaluations at the countable dense set $\\mathcal F_0$ are measurable, and for continuous functions the supremum distance is the supremum over $\\mathcal F_0$, so preimages of open balls are measurable; separability makes every open set a countable union of such balls. By [F9], $C(T,\\mathbb R)$ is complete and separable; [F10] makes it Polish and its Gaussian law tight. For any finite list $f_1,\\ldots,f_m\\in\\mathcal F$, choose pointwise approximants $f_{i,k}\\in\\mathcal F_0$ for each $i$. By [F7], $\\|f_{i,k}-f_i\\|_{P,2}\\to0$. Fix coefficients $c_1,\\ldots,c_m$ and put $S_k=\\sum_i c_i\\mathbb G_0(f_{i,k})$ and $S=\\sum_i c_i\\overline G_0([f_i])$. Step 7.1 gives $S_k\\to S$ almost surely. Each $S_k$ is centered normal with variance $\\sigma_k^2\\to\\sigma^2=\\sum_{i,j}c_ic_jK(f_i,f_j)=P[\\sum_i c_i(f_i-Pf_i)]^2\\ge0$. Dominated convergence [F7] applied to $e^{itS_k}$, whose modulus is one, gives convergence of characteristic functions. By [F12], the limit is $e^{-t^2\\sigma^2/2}$ and determines the centered normal law of variance $\\sigma^2$. Every linear combination of the limiting vector is therefore centered normal; [F3] identifies that vector as multivariate normal with covariance $(K(f_i,f_j))$. This proves that the pathwise extension has the required Gaussian finite-dimensional laws. Define $R:C(T,\\mathbb R)\\to\\ell^\\infty(\\mathcal F)$ by $R(z)(f)=z([f])$, where $[f]$ is the image of $f$ in the metric quotient and its completion. Since these images are dense in $T$ and $z-w$ is continuous, $\\|R(z)-R(w)\\|_{\\mathcal F}=\\sup_{f\\in\\mathcal F}|z([f])-w([f])|=\\sup_{t\\in T}|z(t)-w(t)|$, so $R$ is an isometry and is continuous. Its pushforward of the tight Borel law on $C(T,\\mathbb R)$ is a tight Borel Gaussian bridge on $\\ell^\\infty(\\mathcal F)$.",
+          "step": "8.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "L3",
+            "F3",
+            "F7",
+            "F9",
+            "F10",
+            "F12",
+            "step 3.1",
+            "step 6.1",
+            "step 7.1"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "Fix any finite $f_1,\\ldots,f_m\\in\\mathcal F$. The vectors $(f_1(X_i)-Pf_1,\\ldots,f_m(X_i)-Pf_m)$ are iid and have finite second moments, bounded in squared norm by $2m(F(X_i)^2+(PF)^2)$ almost surely. [F2] gives convergence of their normalized sums to $N_m(0,(K(f_a,f_b))_{a,b})$, the corresponding finite-dimensional law of the Gaussian bridge from step 8.1. This proves finite-dimensional convergence, with the asymptotic-distribution convention of [F1].",
+          "step": "9.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L3",
+            "given",
+            "step 8.1"
+          ]
+        },
+        {
+          "id": "step-10-1",
+          "claim": "By [F6], the empirical processes are asymptotically equicontinuous in $\\rho_P$. For each $\\epsilon>0$, the totally bounded quotient from step 1.2 has a finite $\\epsilon/2$-net with centers in the dense subset $\\mathcal F_0$; density then makes it an $\\epsilon$-net for all of $\\mathcal F$. List its finitely many centers and assign to each $f$ the first center within distance $\\epsilon$, obtaining $\\pi_\\epsilon(f)$. Define $\\mathbb G_{n,\\epsilon}(f)=\\mathbb G_n(\\pi_\\epsilon(f))$ and $\\mathbb G_{\\epsilon}(f)=\\mathbb G_P(\\pi_\\epsilon(f))$. Their ranges lie in a finite-dimensional subspace of $\\ell^\\infty(\\mathcal F)$; the linear map from the selected coordinate vector to that subspace is continuous in the supremum norm. Thus the finite-dimensional convergence in step 9.1, tested after composition with any bounded continuous functional, gives $\\mathbb G_{n,\\epsilon}\\Rightarrow\\mathbb G_\\epsilon$ for each fixed $\\epsilon$.",
+          "step": "10.1",
+          "inputs": [
+            "A1",
+            "F6",
+            "step 1.2",
+            "step 9.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-11-1",
+          "claim": "The sup-norm error $\\|\\mathbb G_n-\\mathbb G_{n,\\epsilon}\\|_{\\mathcal F}$ is bounded by the empirical-process modulus over pairs at $\\rho_P$-distance at most $\\epsilon$; it is therefore bounded by the modulus at radius $2\\epsilon$ in [F6], which tends to zero in outer probability as $\\epsilon\\downarrow0$. Uniform continuity of the Gaussian paths gives $\\|\\mathbb G_P-\\mathbb G_\\epsilon\\|_{\\mathcal F}\\to0$ almost surely. For bounded uniformly continuous $H$, put $\\omega_H(r)=\\sup_{\\|x-y\\|_{\\mathcal F}\\le r}|H(x)-H(y)|$, which tends to zero as $r\\downarrow0$. If $Z,Z'$ are random elements and $P^*(\\|Z-Z'\\|>r)=p$, a measurable event of probability arbitrarily close to $p$ covers the exceptional set; outside it $|H(Z)-H(Z')|\\le\\omega_H(r)$, and everywhere the difference is at most $2\\|H\\|_\\infty$. This gives $|E^*H(Z)-E^*H(Z')|\\le\\omega_H(r)+2\\|H\\|_\\infty p$ by measurable majorants. Use the three-term bound $|E^*H(\\mathbb G_n)-EH(\\mathbb G_P)|\\le|E^*H(\\mathbb G_n)-E^*H(\\mathbb G_{n,\\epsilon})|+|EH(\\mathbb G_{n,\\epsilon})-EH(\\mathbb G_\\epsilon)|+|EH(\\mathbb G_\\epsilon)-EH(\\mathbb G_P)|.$ For fixed $\\epsilon$ the middle term tends to zero by step 10.1; then letting $\\epsilon\\downarrow0$ makes the other two terms vanish by the outer-probability approximation bound and $\\omega_H(r)\\to0$. This is the outer weak convergence in [[def-donsker-class-and-asymptotic-equicontinuity]], with the tight Gaussian bridge from step 8.1. AC is used in [F2], [F4], [F10], and the countable-choice completion in [F8]; no finite-dimensional limit is used as a substitute for the process-level equicontinuity step.",
+          "step": "11.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "step 8.1",
+            "step 9.1",
+            "step 10.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement explicitly assumes nonempty F, including in the zero-envelope branch. Proof step 5.1 uses a diagonal base pair (f_*,f_*), and steps 7.1-10.1 use a listed dense subclass and finite nets, with no empty-index convention.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/msf_qmd_tangent_resolution/boundaries_empirical15",
+            "reason": "Actual current full claim and Proof steps 1.1-10.1 read. The explicit nonempty F hypothesis supplies the Gaussian-increment base point and dense index list; zero envelope is allowed but does not remove the nonempty class assumption. The aggregate regex is a false contradiction here."
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 proves the zero-envelope process and zero Gaussian bridge case.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 8.1–10.1 include one-coordinate classes and their finite-dimensional CLT.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 2.1, 7.1, and 6.1 allow singular covariance matrices and zero-variance directions.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.2 and 10.1 control the entropy integral at small scales and the outer weak-convergence approximation.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement assumes AC; steps 3.1, 5.1–7.1, and 6.1 identify its extension, completion, tightness, and CLT uses.",
+          "case": "nonempty-choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement uses a finite L2 bracketing integral to obtain a Donsker Gaussian bridge, with a separate zero-envelope branch. Proof steps 9.1-11.1 combine finite-dimensional CLT and equicontinuity. This is a sufficient construction, not an equivalent entropy definition of the Donsker property."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Weak outer convergence to the Gaussian bridge in Statement does not assert necessity of its fixed-P bracketing integral. Proof builds nets and an approximating process from the entropy hypothesis, and does not recover bracket covers from weak convergence of centered empirical processes."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "Axiom of Choice",
+        "Countable Choice"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Independently reviewed all twelve steps and 33 current dependency interfaces, including normal density/normalization and substitution used through F12. AC covers Gaussian existence, Kolmogorov extension, CLT, separability and tightness; CC covers completion. Zero envelope uses common countable null set and pointwise approximation. Quotient is totally bounded and completion compact. PSD covariances and Cramer–Wold give consistency even for singular covariances. Completing square and translated-interval MCT establish Gaussian MGF. Restricted increment-pair covering uses internal representatives; countable index provides separability, entropy bounds yield vanishing expected modulus, and Markov/BC give uniform continuity. Dense path extension is unique and Borel in separable C(T); its isometric pushforward is tight. Bounded characteristic integrands and DCT identify extended Gaussian laws without L2 completeness. Step 9.1 repaired to bound centered squared norm by 2m(F(X)^2+(PF)^2), proving finite second moment. Finite-net convergence and outer-expectation approximation then give the process limit; epsilon limit follows n limit. Reader MGF/CF repairs accepted with this additional nonfatal correction. No remaining defect."
+      },
+      "step5_repair_notes": "Added direct density, normalization, integration, substitution, compact integrability, Riemann/Lebesgue bridge and MCT interfaces. Step 1.2 proves conull bounded empirical paths. Original risk_review remains historical, not independent review of this repair."
+    },
+    "cex-pointwise-strong-laws-do-not-imply-uniform-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-glivenko-cantelli-class",
+          "source_section": "Definition",
+          "quote": "Use the empirical-measure convention of [[def-empirical-process-and-rademacher-process]]: for iid observations $X_1,X_2,\\ldots$ with common law $P$, $P_nf=n^{-1}\\sum_{i=1}^n f(X_i)$ and $Pf=\\int f\\,dP$. Let $\\mathcal F$ be a nonempty class of measurable real-valued functions with a nonnegative measurable integrable envelope $F$, meaning $|f|\\le F$ $P$-almost surely for every $f\\in\\mathcal F$ and $PF<\\infty$. It is **pointwise measurable** if there is a countable subclass $\\mathcal F_0$ such that every $f\\in\\mathcal F$ is the pointwise limit of a sequence from $\\mathcal F_0$. For a pointwise-measurable class, dominated convergence [[thm-dominated-convergence]] gives $Pf_k\\to Pf$ along the approximating sequence, and finite empirical averages converge pointwise, so the supremum defining the uniform law is determined by $\\mathcal F_0$. The class is **$P$-Glivenko–Cantelli** if\n\n$$\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\longrightarrow0$$\n\nin probability. It is **strongly $P$-Glivenko–Cantelli** if the same convergence holds almost surely. For an uncountable class with a countable pointwise-dense subclass, the supremum is interpreted using outer probability unless the chosen version makes it measurable. For a pointwise-measurable class the supremum is determined by the countable subclass and is measurable. That subclass has a common conull envelope bound, so the supremum is finite almost surely; after choosing a real-valued version, almost-sure convergence implies convergence in probability by [[thm-almost-sure-convergence-implies-convergence-in-probability]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a finite set $A\\subseteq[0,1]$. If $A=\\varnothing$, then $P(A)=0$. Otherwise write $m=|A|\\ge1$. Given $\\epsilon>0$, for each $x\\in A$ let $I_x=\\{y\\in[0,1]:|y-x|<\\epsilon/(2m)\\}$. These $m$ intervals cover $A$, and each has length at most $\\epsilon/m$. By [A1] and finite subadditivity [F2], $0\\le P(A)\\le\\sum_{x\\in A}P(I_x)\\le\\epsilon$. Since this holds for every $\\epsilon>0$, $P(A)=0$. By [F1], each event $\\{X_i\\in A\\}$ has probability zero; countable subadditivity [F2] gives $P(\\exists i\\ge1:X_i\\in A)=0$. Hence with probability one $P_n(A)=0=P(A)$ for every $n$. This proves the pointwise strong law for this fixed $A$, without asserting one common event for all finite sets.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any realized finite sample $x_1,\\ldots,x_n$, the set $A_n=\\{x_1,\\ldots,x_n\\}$ is finite, so $A_n\\in\\mathcal A$, $P_n(A_n)=1$, and $P(A_n)=0$. Every indicator deviation is at most one, so the supremum over $\\mathcal A$ equals one for every sample. This supremum is the constant measurable function one; by [F4] it does not converge to zero in probability.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The example class contains the empty finite set and is nonempty.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 proves zero deviation for each fixed finite A.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 constructs a finite sample set with empirical probability one.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 concentrates the empirical measure on its finite support while the Uniform law gives that support mass zero. ",
+          "case": "degenerate"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "No interval endpoint or boundary parameter is part of the statement.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use countable subadditivity and a sample-defined finite set; no choice axiom is used.",
+          "case": "nonempty-choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted denies that individual strong laws imply a uniform law. Refutation step 1.1 proves those laws for each fixed finite set, and step 2.1 proves supremum identically one; these establish a witness to failure of implication rather than an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The witness does not characterize all failures of uniform convergence by the finite-subset construction. Refutation chooses the realized finite sample support to attain one and does not assert a converse implication from uniform failure to any particular class geometry."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=2 sample",
+          "calculation": "For any realized x1,x2, A={x1,x2} is finite, P_2(A)=1 and P(A)=0, even if x1=x2.",
+          "result": "The supremum deviation is exactly 1 for every two-point sample."
+        }
+      ],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Checked both refutation steps and all five cited interfaces. Each fixed finite set has measure zero, including empty set and endpoint singletons; countably many observations avoid that fixed set a.s. No intersection over all finite sets is used. Sample set A_n belongs to fixed class even with repeated observations and attains empirical mass one. Every finite set has population mass zero. Supremum is constant one and measurable; witness invalidates uniform convergence. No defect."
+      }
+    },
+    "ex-threshold-class-is-glivenko-cantelli": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-glivenko-cantelli-class",
+          "source_section": "Definition",
+          "quote": "Use the empirical-measure convention of [[def-empirical-process-and-rademacher-process]]: for iid observations $X_1,X_2,\\ldots$ with common law $P$, $P_nf=n^{-1}\\sum_{i=1}^n f(X_i)$ and $Pf=\\int f\\,dP$. Let $\\mathcal F$ be a nonempty class of measurable real-valued functions with a nonnegative measurable integrable envelope $F$, meaning $|f|\\le F$ $P$-almost surely for every $f\\in\\mathcal F$ and $PF<\\infty$. It is **pointwise measurable** if there is a countable subclass $\\mathcal F_0$ such that every $f\\in\\mathcal F$ is the pointwise limit of a sequence from $\\mathcal F_0$. For a pointwise-measurable class, dominated convergence [[thm-dominated-convergence]] gives $Pf_k\\to Pf$ along the approximating sequence, and finite empirical averages converge pointwise, so the supremum defining the uniform law is determined by $\\mathcal F_0$. The class is **$P$-Glivenko–Cantelli** if\n\n$$\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\longrightarrow0$$\n\nin probability. It is **strongly $P$-Glivenko–Cantelli** if the same convergence holds almost surely. For an uncountable class with a countable pointwise-dense subclass, the supremum is interpreted using outer probability unless the chosen version makes it measurable. For a pointwise-measurable class the supremum is determined by the countable subclass and is measurable. That subclass has a common conull envelope bound, so the supremum is finite almost surely; after choosing a real-valued version, almost-sure convergence implies convergence in probability by [[thm-almost-sure-convergence-implies-convergence-in-probability]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "A pseudometric $d$ on a set $T$ is a nonnegative symmetric function $d:T\\times T\\to[0,\\infty)$ with $d(t,t)=0$ and $d(s,t)\\le d(s,u)+d(u,t)$; distinct points may have distance zero. For a nonempty subset $\\mathcal F\\subseteq T$ and $\\epsilon>0$, the covering number $N(\\epsilon,\\mathcal F,d)$ is the least finite $k$ for which there are centers $f_1,\\ldots,f_k\\in\\mathcal F$ such that every $f\\in\\mathcal F$ satisfies $d(f,f_j)\\le\\epsilon$ for some $j$. It is $+\\infty$ if no finite cover exists. Set $N(\\epsilon,\\varnothing,d)=1$.\n\nThe packing number $D(\\epsilon,\\mathcal F,d)$ is the largest size of a finite subset $\\{f_1,\\ldots,f_k\\}\\subseteq\\mathcal F$ whose distinct members have pairwise distance strictly greater than $\\epsilon$. If the sizes of such finite subsets are unbounded, put $D=+\\infty$; put $D(\\epsilon,\\varnothing,d)=0$. These conventions give the radius comparison proved in [[lem-packing-covering-number-comparison]]. The metric entropy is $H(\\epsilon,\\mathcal F,d):=\\log N(\\epsilon,\\mathcal F,d)$ for nonempty classes, with $\\log(+\\infty)=+\\infty$.\n\nFor a probability measure $Q$ on $(\\mathcal X,\\mathcal A)$ and a measurable real function $g$, set $\\|g\\|_{Q,r}:=(\\int |g|^r\\,dQ)^{1/r}$ for $1\\le r<\\infty$ when the integral is finite, using the real-power convention, including $0^{1/r}=0$, of [[def-real-power]]. If the integral is $+\\infty$, define $\\|g\\|_{Q,r}:=+\\infty$ directly. The function $|g|$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and [[lem-real-power-preserves-measurability]] makes $|g|^r$ measurable, so this nonnegative extended integral is well-defined. On a class of functions with finite such norms, $d_{Q,r}(f,g):=\\|f-g\\|_{Q,r}$ is a pseudometric: nonnegativity, symmetry, and zero diagonal follow from the absolute value, and the triangle inequality is [[thm-minkowski-inequality-for-integrals]]. Functions that agree $Q$-almost everywhere have distance zero. We write $N(\\epsilon,\\mathcal F,L^r(Q))$ for this covering number.\n\nFor measurable real endpoints $\\ell\\le u$ $Q$-almost everywhere, the bracket $[\\ell,u]$ is the set of measurable functions $f$ satisfying $\\ell\\le f\\le u$ $Q$-almost everywhere. Its $L^r(Q)$ width is $\\|u-\\ell\\|_{Q,r}$. The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F$, or $+\\infty$ if no finite cover exists; for the empty class set it equal to $1$. Centers of metric covers are in $\\mathcal F$; bracket endpoints need not be.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gc-by-bracketing-entropy",
+          "source_section": "Statement",
+          "quote": "Let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal F$ be a nonempty pointwise-measurable class of measurable real functions with a nonnegative integrable envelope $F$. Suppose $N_{[]} (\\epsilon,\\mathcal F,L^1(P))<\\infty$ for every $\\epsilon>0$. Then $\\mathcal F$ is $P$-Glivenko–Cantelli: $\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\to0$ in probability. If Countable Choice is assumed, then the stronger conclusion holds that this convergence is almost sure. The terms $P_n$, $P$, and the outer-probability convention are those of [[def-empirical-process-and-rademacher-process]], and the class notion is [[def-glivenko-cantelli-class]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-subset-of-countable",
+          "source_section": "Statement",
+          "quote": "Let $A$ be at most countable ([[def-countable]]) and let $B \\subseteq A$. Then\n$B$ is at most countable.\n\nThe proof establishes the sharper statement about subsets of $\\mathbb{N}$ from\nwhich this follows: **a subset $S \\subseteq \\mathbb{N}$ is finite if it is\nbounded above, and countably infinite if it is not.**\n\n**No choice principle is used.** This is the point of the lemma rather than a\nfootnote to it. The enumeration of an unbounded $S \\subseteq \\mathbb{N}$ is built\nby always taking the *least* element of $S$ above the previous one, and the least\nelement of a nonempty set of naturals is canonical\n([[thm-well-ordering-principle]]): it is determined by $S$, not selected from it.\nReplacing \"least\" by \"some\" would turn the construction into an appeal to\ndependent choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The class is pointwise measurable. Since $1\\in\\mathbb Q$, the rational thresholds together with $1$ are indexed by $\\mathbb Q\\cap[0,1]$, a countable set by [F5]–[F6]. For each fixed $t<1$, Countable Choice [A2] selects $q_k\\in\\mathbb Q\\cap(t,\\min(1,t+1/k))$, which exist by [F7]. Then $q_k\\to t$ from above, so $\\mathbf1_{[0,q_k]}(x)\\to\\mathbf1_{[0,t]}(x)$ for every $x\\in[0,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F5",
+            "F6",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each integer $m\\ge1$, the $m$ brackets $[f_{j/m},f_{(j+1)/m}]$, $0\\le j<m$, cover $\\mathcal F$ and have $L^1(P)$ width $(j+1)/m-j/m=1/m$. Thus for every $\\epsilon>0$, taking an integer $m>1/\\epsilon$ gives $N_{[]} (\\epsilon,\\mathcal F,L^1(P))\\le m<\\infty$. The envelope condition is [A1].",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4] under [A2], the hypotheses verified in steps 1.1 and 1.2 imply $\\sup_{t\\in[0,1]}|P_nf_t-Pf_t|\\to0$ almost surely, which is the claimed strong Glivenko–Cantelli property by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The threshold class contains f_0, so it is nonempty.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.2 gives the first bracket width 1/m, tending to zero.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 include t=1, where f_1 is constant one.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 includes t=0; its singleton support has P-measure zero. ",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use the closed parameter interval [0,1] and cover both endpoints.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement and step 2.1 assume Countable Choice for the theorem’s strong-law branch.",
+          "case": "nonempty-choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts strong uniform convergence for the Uniform[0,1] threshold class under Countable Choice. Verification steps 1.1-1.2 check pointwise measurability and finite brackets, then step 2.1 applies the sufficient bracketing theorem; no equivalent condition is proposed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example does not derive Uniform[0,1] sampling, Countable Choice, or the specific threshold brackets from strong convergence. Its proof verifies a fixed model and class and invokes the strong-law theorem in that supplied direction only."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "four equal bins",
+          "calculation": "For m=4 the four brackets [f_{j/4},f_{(j+1)/4}] have L1(P) width 1/4 for j=0,1,2,3.",
+          "result": "They cover all thresholds at a finite positive scale, including 0 and 1."
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Reviewed all three verification steps and eight dependency statements. Rational thresholds approach from above, retaining value one at x=t, including t=0; t=1 is already rational. AC_omega is stated and supplies the strong branch. m grid brackets cover both endpoints and have L1 width exactly 1/m under uniform law; m=1 works. Constant envelope is integrable. No defect."
+      }
+    },
+    "ex-uniform-empirical-cdf-converges-to-brownian-bridge": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-donsker-class-and-asymptotic-equicontinuity",
+          "source_section": "Definition",
+          "quote": "For a class $\\mathcal H$ of measurable real functions under a probability measure $Q$, an **envelope** $H$ means a nonnegative measurable function with $|h|\\le H$ $Q$-almost surely for every $h\\in\\mathcal H$. Cauchy–Schwarz [[cor-cauchy-schwarz-inequality-for-l-two]] gives $QH\\le\\|H\\|_{Q,2}<\\infty$ when $H\\in L^2(Q)$.\n\nLet $(S,\\mathcal A,P)$ be a probability space, let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal F$ be a nonempty class of measurable real-valued functions with a nonnegative measurable envelope $F$ satisfying $PF^2<\\infty$. A class is **pointwise measurable** if it has a countable subclass $\\mathcal F_0$ such that for each $f\\in\\mathcal F$ there is a sequence in $\\mathcal F_0$ converging pointwise to $f$. Write $\\mathbb G_n(f)=\\sqrt n(P_nf-Pf)$ using [[def-empirical-process-and-rademacher-process]], and put\n\n$$\\rho_P(f,g)=\\{P[(f-g)-P(f-g)]^2\\}^{1/2}.$$\n\nThis is a pseudometric: distinct functions can have zero distance when their centered difference vanishes $P$-almost surely. The empirical process is **asymptotically equicontinuous in probability** with respect to $\\rho_P$ if for every $\\eta>0$,\n\n$$\\lim_{\\delta\\downarrow0}\\limsup_{n\\to\\infty}P^*\\left(\\sup_{f,g\\in\\mathcal F:\\,\\rho_P(f,g)<\\delta}|\\mathbb G_n(f)-\\mathbb G_n(g)|>\\eta\\right)=0.$$\n\nHere $P^*(A)=\\inf\\{P(B): A\\subseteq B,\\ B\\in\\mathcal A\\}$ is outer probability; bounded nonmeasurable functionals are handled by the corresponding outer expectation $E^*Y=\\inf\\{EY':Y'\\text{ measurable and }Y'\\ge Y\\}$. For a pointwise-measurable class these conventions agree with ordinary probability whenever the displayed supremum is measurable.\n\nWrite $\\ell^\\infty(\\mathcal F)$ for the bounded real-valued functions on the index set $\\mathcal F$, with norm $\\|z\\|_{\\mathcal F}=\\sup_{f\\in\\mathcal F}|z(f)|$. The class is **$P$-Donsker** if, for each $n$, $\\mathbb G_n$ has bounded paths on a measurable event of probability one and, after setting the entire path to zero off that event, the resulting $\\ell^\\infty(\\mathcal F)$-valued process converges weakly in the outer-expectation sense to a tight Borel law of a centered Gaussian process $\\mathbb G_P$ with covariance\n\n$$\\operatorname{Cov}(\\mathbb G_P(f),\\mathbb G_P(g))=P[(f-Pf)(g-Pg)].$$\n\nHere outer weak convergence means $E^*H(\\mathbb G_n)\\to EH(\\mathbb G_P)$ for every bounded uniformly continuous real function $H$ on $\\ell^\\infty(\\mathcal F)$; the outer expectation is the infimum of expectations of measurable majorants. The law is tight in the sense of [[def-tight-family-of-probability-measures]]. Finite-dimensional convergence means weak convergence of the vector of process values at every finite list of indices, as in [[def-convergence-in-distribution-of-random-elements]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "A pseudometric $d$ on a set $T$ is a nonnegative symmetric function $d:T\\times T\\to[0,\\infty)$ with $d(t,t)=0$ and $d(s,t)\\le d(s,u)+d(u,t)$; distinct points may have distance zero. For a nonempty subset $\\mathcal F\\subseteq T$ and $\\epsilon>0$, the covering number $N(\\epsilon,\\mathcal F,d)$ is the least finite $k$ for which there are centers $f_1,\\ldots,f_k\\in\\mathcal F$ such that every $f\\in\\mathcal F$ satisfies $d(f,f_j)\\le\\epsilon$ for some $j$. It is $+\\infty$ if no finite cover exists. Set $N(\\epsilon,\\varnothing,d)=1$.\n\nThe packing number $D(\\epsilon,\\mathcal F,d)$ is the largest size of a finite subset $\\{f_1,\\ldots,f_k\\}\\subseteq\\mathcal F$ whose distinct members have pairwise distance strictly greater than $\\epsilon$. If the sizes of such finite subsets are unbounded, put $D=+\\infty$; put $D(\\epsilon,\\varnothing,d)=0$. These conventions give the radius comparison proved in [[lem-packing-covering-number-comparison]]. The metric entropy is $H(\\epsilon,\\mathcal F,d):=\\log N(\\epsilon,\\mathcal F,d)$ for nonempty classes, with $\\log(+\\infty)=+\\infty$.\n\nFor a probability measure $Q$ on $(\\mathcal X,\\mathcal A)$ and a measurable real function $g$, set $\\|g\\|_{Q,r}:=(\\int |g|^r\\,dQ)^{1/r}$ for $1\\le r<\\infty$ when the integral is finite, using the real-power convention, including $0^{1/r}=0$, of [[def-real-power]]. If the integral is $+\\infty$, define $\\|g\\|_{Q,r}:=+\\infty$ directly. The function $|g|$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and [[lem-real-power-preserves-measurability]] makes $|g|^r$ measurable, so this nonnegative extended integral is well-defined. On a class of functions with finite such norms, $d_{Q,r}(f,g):=\\|f-g\\|_{Q,r}$ is a pseudometric: nonnegativity, symmetry, and zero diagonal follow from the absolute value, and the triangle inequality is [[thm-minkowski-inequality-for-integrals]]. Functions that agree $Q$-almost everywhere have distance zero. We write $N(\\epsilon,\\mathcal F,L^r(Q))$ for this covering number.\n\nFor measurable real endpoints $\\ell\\le u$ $Q$-almost everywhere, the bracket $[\\ell,u]$ is the set of measurable functions $f$ satisfying $\\ell\\le f\\le u$ $Q$-almost everywhere. Its $L^r(Q)$ width is $\\|u-\\ell\\|_{Q,r}$. The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F$, or $+\\infty$ if no finite cover exists; for the empty class set it equal to $1$. Centers of metric covers are in $\\mathcal F$; bracket endpoints need not be.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-empirical-process-functional-clt",
+          "source_section": "Statement",
+          "quote": "For a class $\\mathcal H$ of measurable real functions under a probability measure $Q$, an **envelope** $H$ means a nonnegative measurable function with $|h|\\le H$ $Q$-almost surely for every $h\\in\\mathcal H$. Cauchy–Schwarz [[cor-cauchy-schwarz-inequality-for-l-two]] gives $QH\\le\\|H\\|_{Q,2}<\\infty$ when $H\\in L^2(Q)$.\n\nAssume the Axiom of Choice. Let $X_1,X_2,\\ldots$ be iid with law $P$ on a measurable space, and let $\\mathcal F$ be a nonempty pointwise-measurable class of measurable real functions with a measurable envelope $F\\ge0$ satisfying $PF^2<\\infty$. If $\\|F\\|_{P,2}=0$, the empirical process is the zero process almost surely. Otherwise assume\n\n$$\\int_0^1\\sqrt{\\log N_{[]}\\bigl(\\epsilon\\|F\\|_{P,2},\\mathcal F,L^2(P)\\bigr)}\\,d\\epsilon<\\infty,$$\n\nwhere $N_{[]}(r,\\mathcal F,L^2(P))$ is the least number of measurable brackets $[l,u]$ with $l\\le f\\le u$ $P$-almost surely and $\\|u-l\\|_{P,2}\\le r$ that cover $\\mathcal F$. Then $\\mathcal F$ is $P$-Donsker in the sense of [[def-donsker-class-and-asymptotic-equicontinuity]]: the empirical process $\\mathbb G_n=\\sqrt n(P_n-P)$ converges weakly in outer expectation in $\\ell^\\infty(\\mathcal F)$ to a tight centered Gaussian bridge with covariance\n\n$$K(f,g)=P[(f-Pf)(g-Pg)].$$\n\nThe $L^2(P)$ bracketing number and width use [[def-covering-packing-bracketing-number-and-metric-entropy]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-subset-of-countable",
+          "source_section": "Statement",
+          "quote": "Let $A$ be at most countable ([[def-countable]]) and let $B \\subseteq A$. Then\n$B$ is at most countable.\n\nThe proof establishes the sharper statement about subsets of $\\mathbb{N}$ from\nwhich this follows: **a subset $S \\subseteq \\mathbb{N}$ is finite if it is\nbounded above, and countably infinite if it is not.**\n\n**No choice principle is used.** This is the point of the lemma rather than a\nfootnote to it. The enumeration of an unbounded $S \\subseteq \\mathbb{N}$ is built\nby always taking the *least* element of $S$ above the previous one, and the least\nelement of a nonempty set of naturals is canonical\n([[thm-well-ordering-principle]]): it is determined by $S$, not selected from it.\nReplacing \"least\" by \"some\" would turn the construction into an appeal to\ndependent choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The class $\\mathcal F=\\{f_t:t\\in[0,1]\\}$ is pointwise measurable. Since $1\\in\\mathbb Q$, the rational thresholds together with $1$ are indexed by $\\mathbb Q\\cap[0,1]$, which is countable by [F5]–[F6]. For each fixed $t<1$, [A2] and [F7] give rationals $q_k\\in\\mathbb Q\\cap(t,\\min(1,t+1/(k+1)))$ for every integer $k\\ge0$, so $q_k\\to t$ from above and $f_{q_k}(x)\\to f_t(x)$ for every $x\\in[0,1]$. For $t=1$, use the constant sequence $q_k=1$. The envelope $H\\equiv1$ is measurable and square-integrable.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For an integer $m\\ge1$, the $m$ brackets $[f_{j/m},f_{(j+1)/m}]$ have $L^2(P)$ width $\\sqrt{1/m}$, since their endpoint difference is the indicator of an interval of length $1/m$. Thus for $0<\\epsilon\\le1$, choosing $m=\\lceil\\epsilon^{-2}\\rceil$ gives $N_{[]} (\\epsilon,\\mathcal F,L^2(P))\\le m$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Consequently $\\log N_{[]} (\\epsilon,\\mathcal F,L^2(P))\\le\\log(1+\\epsilon^{-2})\\le\\log2+2\\log(1/\\epsilon)$ for $0<\\epsilon\\le1$. Since $\\log(1/\\epsilon)\\le1/\\epsilon$, the square-root entropy is bounded by $\\sqrt{\\log2}+\\sqrt2\\epsilon^{-1/2}$, an integrable function on $(0,1]$. All hypotheses of [F4] hold.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [F4] gives a tight centered Gaussian limit. For $s,t\\in[0,1]$, $P(f_sf_t)=P([0,\\min(s,t)])=\\min(s,t)$ and $Pf_sPf_t=st$, so [F2] gives covariance $\\min(s,t)-st$. This is precisely the defining covariance of the standard Brownian bridge stated in the example, proving the claimed limit. AC is carried from [F4].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The class includes f_0 and is nonempty.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 gives zero bridge variance at t=0 and t=1.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 evaluates the t=1 covariance endpoint.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the bridge, whose endpoint coordinates are degenerate zero variables.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 cover t=0 and t=1 and integrate the entropy bound over (0,1].",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement and [A1] carry the Axiom of Choice required by the functional CLT.",
+          "case": "nonempty-choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example claims an outer weak limit for the Uniform[0,1] empirical CDF under AC. Verification steps 1.2-2.1 verify an integrable bracketing bound and step 3.1 computes covariance min(s,t)-st; covariance identification is an equality, not a biconditional inference."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example does not characterize sampling laws or entropy assumptions by convergence to a bridge. Verification applies the functional CLT to the given uniform threshold functions and identifies its Gaussian limit; it offers no reverse derivation of uniform observations from that limit."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "epsilon=1/2 and bridge endpoints",
+          "calculation": "The four brackets of width 1/2 have L2(P) width 1/2; K(0,t)=K(t,1)=0 and K(1,1)=0.",
+          "result": "The entropy scale and degenerate endpoint covariance agree with the standard Brownian bridge."
+        }
+      ],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Reviewed all four verification steps and eight actual supplier statements. Rational approximants from above preserve threshold endpoints, including t=0; t=1 is in countable subclass. Envelope norm is one. Grid brackets cover the class and L2 widths are exactly m^(-1/2); ceil(epsilon^(-2)) works also epsilon=1. Entropy bound by sqrt(log2)+sqrt(2)epsilon^(-1/2) is integrable. AC premise is retained. Functional CLT supplies tight outer weak Gaussian limit; injective indexing t -> f_t identifies l-infinity spaces. Covariance min(s,t)-st is computed directly and variance vanishes at both endpoints. No defect."
+      },
+      "step5_repair_notes": "Renamed the envelope to H to keep F(t)=t exclusively the CDF. Original risk_review remains historical. Repeat round 1 unit 16: step 1.1 now uses 1/(k+1) for k>=0, so all rational-selection intervals are nonempty and defined, including the initial index; t=1 uses the constant rational sequence. The Example, dependencies, AC premise, and other proof steps are unchanged."
+    }
+  }
+}
