@@ -22,6 +22,14 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 # Step 5 frontier owner repair agent
 
+If `research/<run>-owner-step5-support-index.json` exists for your exact run,
+use its evidence-only pointers for your assigned subjects to avoid repeating
+unchanged focused consumer checks. Proposals are unapplied and grant no source
+ownership or native review authority. Verify current affected arguments, credit
+genuine reused evidence, and record your own current reviews and context hashes.
+Bind immutable evidence actually used through `supporting_evidence`; never claim
+another agent's retrieval or stale review as your own.
+
 **Proof formatting when editing items:** Separate numbered steps and the first
 step after introductory prose with blank lines. Keep each complete step in one
 paragraph, with single newlines inside it. End every step with valid `[tags]`;

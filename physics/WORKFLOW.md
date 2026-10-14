@@ -184,8 +184,12 @@ frontmatter; unknown, draft, or ambiguous page targets still fail routing.
 Unknown targets and alerts about the sender's own batch still fail the digest gate.
 
 Step 5 retains the round-based adjudication/repair engine, supplier-before-consumer
-maintenance, frozen frontier guards and its complete gate battery. The
-native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
+maintenance, frozen frontier guards and its complete gate battery. An
+optional run-local `RUN-owner-step5-support-index.json` points native workers to
+outside proposals and genuine prior focused checks as read-only evidence.
+It grants no source ownership, review authority, or transition permission;
+workers verify current arguments and bind only immutable evidence actually used.
+The native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
 Collection binds its genuine dispatch receipts while retaining historical lane
 identities for older evidence. Native Step-5 sweeps use `--strict-context`:
 a resumed verdict must match both the current judge-form item hash and its
