@@ -55,7 +55,7 @@ export function ownerReviewedFindingAlias(root, run, group, prior, decision, tar
     const owner = JSON.parse(bound(entry.scientific_owner_receipt));
     if (locationAlias) {
       if (owner.run !== run || owner.same_actual_issue !== true
-        || owner.canonical_defect_id !== entry.original_defect_id
+        || owner.existing_canonical_defect_id !== entry.original_defect_id
         || owner.primary?.obligation !== prior.obligation || owner.alias?.obligation !== decision.obligation
         || owner.primary?.finding?.location !== primary.location || owner.alias?.finding?.location !== alias.location
         || owner.primary?.finding?.defect !== primary.defect || owner.alias?.finding?.defect !== alias.defect
@@ -68,6 +68,10 @@ export function ownerReviewedFindingAlias(root, run, group, prior, decision, tar
       if (before.path !== owner.current_source?.before_archive || before.sha256 !== owner.current_source?.before_raw_sha256
         || entry.current_source?.sha256 !== owner.current_source?.final_raw_sha256) return false;
       bound({path: owner.final_scientific_release, sha256: receipt.inputs?.[owner.final_scientific_release]});
+      const scopeGuard = entry.frozen_scope_guard;
+      if (scopeGuard?.path !== `research/${run}-step3-scope-${primaryBatch}.json`) return false;
+      const scope = JSON.parse(bound(scopeGuard));
+      if (scope.run !== run || String(scope.batch) !== String(primaryBatch)) return false;
     } else if (owner.run !== run || owner.classification_approved !== true || owner.one_underlying_issue !== true
       || !owner.obligations?.includes(prior.obligation) || !owner.obligations?.includes(decision.obligation)
       || owner.original_labels_preserved?.[prior.obligation] !== primary.defect
