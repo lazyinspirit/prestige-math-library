@@ -238,8 +238,11 @@ const writeBlock = (text, block, stampModels) => {
   // have valid YAML frontmatter and a current configured-judge pass, so the
   // absence of those optional mappings must not make stamping impossible.
   const frontmatterEnd = text.indexOf('\n---\n', 4);
-  if (frontmatterEnd >= 0) {
-    return `${text.slice(0, frontmatterEnd)}\nverification:\n${block}${text.slice(frontmatterEnd + 1)}`;
+  if (frontmatterEnd >= 0 && text.startsWith('---\n')) {
+    // A first judge-only mapping must precede the original frontmatter fields.
+    // Appending it last leaves a separator newline after stripVerification,
+    // so a metadata-only stamp would falsely change the Step-5 guard hash.
+    return `${text.slice(0, 4)}verification:\n${block}${text.slice(4)}`;
   }
   return null;
 };

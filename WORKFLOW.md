@@ -244,7 +244,11 @@ accepts arbitrary models, invents verdicts or drops subjects. All normal item/co
 currency and exact rejection-adjudication checks continue to apply.
 Repeated adjudication consumes the actual rejudge verdicts.
 Terminal judge stamps and mechanical coverage use the same per-item policy and
-stamp the actual judging model. A guarded native `record-operational-supplement`
+stamp the actual judging model. When an item has no verification mapping or
+source block, its first judge-only verification mapping is inserted immediately
+after the opening frontmatter delimiter. Removing that mapping must recover the
+original guard and judge representations exactly; stamping cannot change item
+currency through separator whitespace. A guarded native `record-operational-supplement`
 may reconcile a coverage-only diagnostic from an incorrect lineup descriptor.
 Creation requires the exact paused native repair stage and drained successful
 workers; it binds their unchanged reports, assignment, diagnostics, original
