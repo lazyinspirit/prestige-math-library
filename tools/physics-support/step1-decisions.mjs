@@ -3,7 +3,7 @@ import { realpathSync as physicsRealpath } from 'node:fs';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadStep3, itemHash } from './frontier-snapshot.mjs';
+import { loadStep3, loadStep1Record, itemHash } from './frontier-snapshot.mjs';
 
 const safe = value => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid run or item ID');
@@ -41,8 +41,9 @@ export function recordStep1(root, { run, item, decision, reason, dependencies, o
   if (!reason?.trim()) throw Error('Record evidence or the exact blocker');
   if (!Array.isArray(dependencies) || dependencies.some(d => typeof d !== 'string' || !d.trim()))
     throw Error('Record examined dependency IDs, including an explicit empty list');
-  const s = loadStep3(root, run);
+  const s = loadStep1Record(root, run);
   if (!s.items.has(item)) throw Error(`Unknown run item ${item}`);
+  if (s.invalidItems.has(item)) throw Error(s.invalidItems.get(item));
   const previous = step1Decision(s, item);
   if (!owner && (previous.owner || previous.row?.owner)) throw Error('Only the owner may resolve this record');
   if (previous.closed && !owner) throw Error('Keep unchanged ready items and records intact');

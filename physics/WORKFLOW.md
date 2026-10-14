@@ -63,6 +63,15 @@ local authored carriers, inventories, contracts, coverage and readiness records.
 The complete, drained Step-1 gate battery still requires current supplier content,
 resolved readiness and correct dependency levels before review. This adds no stage.
 
+Per-item Step-1 readiness recording retains the complete manifest page/pair and
+item ownership index, but hashes only the target and its actual transitive
+dependencies, including explicitly examined context. A bare item ID in an
+unrelated unfinished inventory does not prevent that local authoring record;
+the same unfinished ID in the target's dependency closure fails recording.
+Malformed JSON, ambiguous ownership and invalid page/pair structure still fail.
+The hash calculation and alias resolution are shared with the strict full-frontier
+checker; local readiness records grant no global acceptance or gate authority.
+
 Item `dependency_level` is determined before writing item/page carriers, recorded
 and independently checked in Step 1: zero
 without in-run logical suppliers, otherwise one plus the maximum supplier level.
