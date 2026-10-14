@@ -152,14 +152,42 @@ export function externalContextReceipt(root, run, decision, target = null, group
       supersededIds.add(id); superseded.push({ defect_id: id, ledger_row_sha256: hashValue(prior) });
       pendingSuperseded.push(...(prior.supersedes ?? []));
     }
+    // A distinct, already recorded nonfatal supplier maintenance issue may
+    // accompany this same exact owned-use review. It remains a separate row;
+    // it is neither superseded into the missing-marker chain nor repaired.
+    const reviewedMaintenance = [];
+    if (!Array.isArray(entry.reviewed_maintenance_findings ?? [])) return reject('invalid reviewed maintenance findings');
+    for (const findingReview of entry.reviewed_maintenance_findings ?? []) {
+      const matches = ledgerRows.filter(row => row.defect_id === findingReview.defect_id), row = matches[0];
+      if (matches.length !== 1 || supersededIds.has(row.defect_id)
+        || row.run !== run || row.subject !== finding.id || String(row.batch) !== batch
+        || row.caught_at_stage !== '3a-adjudicate' || row.disposition !== 'nonfatal-recorded'
+        || row.severity === 'fatal' || findingReview.ledger_row_sha256 !== hashValue(row)) {
+        return reject('reviewed maintenance finding does not retain an exact nonfatal outside row');
+      }
+      const reviewed = findingReview.review;
+      if (reviewed?.completed !== true || reviewed.confidence !== 1
+        || reviewed.verdict !== 'sound_under_explicit_consumer_premises'
+        || reviewed.prerequisites !== 'supplied' || !meaningful(reviewed.evidence)
+        || !Array.isArray(reviewed.evidence_refs) || !reviewed.evidence_refs.length) {
+        return reject('distinct maintenance owned-use review is incomplete');
+      }
+      for (const ref of reviewed.evidence_refs) {
+        if (!/^research\/[a-zA-Z0-9._/-]+$/.test(ref?.path ?? '') || ref.path.includes('..')
+          || sha256(readFileSync(join(root, ref.path))) !== ref.sha256) return reject('distinct maintenance review evidence changed');
+      }
+      supersededIds.add(row.defect_id);
+      reviewedMaintenance.push({ defect_id: row.defect_id, ledger_row_sha256: hashValue(row), review_evidence: reviewed.evidence_refs });
+    }
     return { valid: true, defect_id: maintenance.defect_id,
-      ...(superseded.length ? { defect_ids: [...supersededIds] } : {}), seal: {
+      ...(superseded.length || reviewedMaintenance.length ? { defect_ids: [...supersededIds] } : {}), seal: {
       receipt_path: receiptPath, receipt_sha256: sha256(raw), finding_sha256: hashValue(finding),
       decision_path: decisionPath, decision_group: ownerGroup, assignment_group: scope.group,
       supplier_math_sha256: entry.supplier_math_sha256, consumer_math_sha256: entry.consumer_math_sha256,
       review_evidence: referenceHashes, maintenance_path: maintenance.path,
       maintenance_quote_sha256: sha256(maintenance.quote), ledger_row_sha256: hashValue(ledgerRow),
       ...(superseded.length ? { superseded_rows: superseded } : {}),
+      ...(reviewedMaintenance.length ? { reviewed_maintenance_findings: reviewedMaintenance } : {}),
     } };
   } catch (cause) { return reject(`context receipt unavailable: ${cause.message}`); }
 }

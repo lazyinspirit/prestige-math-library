@@ -375,6 +375,13 @@ archive, and the frozen scope. The original scientific owner must explicitly
 classify the same underlying issue. Both reports and observations remain intact;
 ordinary ledger ownership and current-content checks still apply.
 
+An exact published-supplier owned-use context may retain additional distinct
+`nonfatal-recorded` maintenance findings in `reviewed_maintenance_findings`.
+Each entry requires its exact same-supplier, same-batch ledger-row hash and a
+complete guarded scientific review of the owned use. These rows remain separate
+from open missing-marker findings and are neither closed nor superseded. This
+does not create a new in-run obligation or certify the published supplier.
+
 Proof-contract inputs treat a bare decimal as a step reference only when that
 number identifies an actual proof step. Explicit `step p.q` references are
 checked even when the named step is missing.
