@@ -77,7 +77,9 @@ export function prerequisiteBatches(root, run, batch, pass=null, {constructionSc
       const path=join(root,'items',`${item.id}.md`);
       const text=existsSync(path)?readFileSync(path,'utf8'):'';
       const raw=text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1];
-      if(constructionScheduling&&text)assert(raw!==undefined,`${item.id}: incomplete source frontmatter during scheduling`);
+      // A live initial author may not have finished the frontmatter envelope.
+      // Until it exists, only declared manifest deps contribute to scheduling;
+      // this grants no source validity or readiness and is reread next pass.
       const sourceDeps=constructionScheduling?schedulingList(raw??'','deps',item.id):(yaml().parse(raw??'')??{}).deps??[];
       assert(Array.isArray(item.deps??[])&&(item.deps??[]).every(id=>typeof id==='string'&&id.trim()),`${item.id}: manifest deps must be an ID array`);
       assert(Array.isArray(sourceDeps)&&sourceDeps.every(id=>typeof id==='string'&&id.trim()),`${item.id}: source deps must be an ID array`);

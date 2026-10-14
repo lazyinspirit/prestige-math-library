@@ -76,9 +76,12 @@ Each dispatch pass shares a fresh manifest/alias snapshot across its dependency 
 Initial priority-author scheduling parses complete actual source `deps` fields
 and any needed alias fields with the renderer's YAML parser, together with all
 current manifests. Unrelated metadata being written by another author does not
-block slot refill. Malformed or duplicate dependency/alias fields, incomplete
-existing source frontmatter, invalid manifests, ambiguous ownership and cycles
-still fail closed; no batch or actual dependency is dropped. This narrow graph
+block slot refill. A missing or unformed source frontmatter envelope is unfinished
+construction input: its declared manifest/page dependencies remain, and available
+source dependencies are read again on the next dispatch pass. This does not
+certify that source or grant readiness. Complete present dependency/alias fields
+that are malformed or duplicate, invalid manifests, ambiguous ownership and
+cycles still fail closed; no batch or declared dependency is dropped. This narrow graph
 projection records scheduling metadata only. Post-drain level recomputation,
 ordinary level commands, readiness, reviews and every gate retain strict whole
 frontmatter parsing and check the actual current carriers.
