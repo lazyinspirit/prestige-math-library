@@ -46,6 +46,21 @@ Readiness records bind the finished carriers. Cross-pair supplier completion
 does not hold initial author dispatch; nonempty authored inventories and current
 readiness remain required for acceptance.
 
+After a confirmed planning defect is repaired, the owner may resolve its exact
+`drift-blocked` verdict through `research/RUN-owner-drift-resolutions.json`
+(version 1, `owner-resolved-drift-blockers`, `authorized_by: owner`). The receipt
+binds the unchanged native report and full archived original report, successful
+original native attempt/result and prompt, original drift evidence, and current
+page scope/interfaces. Each resolution names the exact page/verdict, complete
+archived source preimages and changed current raw source hashes, and focused
+owner acceptance evidence referencing the genuine delegated repair evidence.
+Consumer dispositions cover the companion and every direct/indirect planned
+consumer. Missing, stale or ambiguous bindings fail closed; acceptance satisfies
+only the named planning blocker. It grants no new worker execution, proof or
+review coverage, rewrites no native evidence, and leaves all scope checks,
+later reviews, recertification and complete gate batteries mandatory. The schema
+and scope-digest calculation are in [tools/drift-owner-resolutions.md](tools/drift-owner-resolutions.md).
+
 Construction readiness retains its snapshot and receipt-stamped decisions across
 fresh controller contexts belonging to the same configuration and frontier.
 Manifest, coverage, plan, consumed supplier and missing-dependency file stamps

@@ -5,6 +5,7 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pageBuildability } from './buildability.mjs';
+import { loadDriftOwnerResolutions } from './drift-owner-resolutions.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
@@ -100,6 +101,12 @@ const owedPages = ledgerPages
 const errors = [];
 let applied = 0;
 let edgesChecked = 0;
+let ownerResolved = new Map();
+try {
+  ownerResolved = loadDriftOwnerResolutions(process.cwd(), run, text, ledger, spec);
+} catch (error) {
+  errors.push(`drift-check-owner-resolution: ${error.message}`);
+}
 
 // Scope amendments must exist in the plan before application and in the final ledger afterward.
 for (const id of mintedOrRescoped) {
@@ -216,8 +223,10 @@ for (const id of reviewedOwed) {
     }
   }
   if (kind === 'drift-blocked') {
-    errors.push(`drift-check-blocked: ${id} — ${detail.trim() || 'unspecified edge'} — `
-      + 'owner action required; no automatic re-review.');
+    if (ownerResolved.get(id) !== verdicts[0][0]) {
+      errors.push(`drift-check-blocked: ${id} — ${detail.trim() || 'unspecified edge'} — `
+        + 'owner action required; no automatic re-review.');
+    }
   }
 }
 
@@ -225,6 +234,6 @@ if (errors.length) {
   for (const e of errors) console.error(`ERROR ${e}`);
   process.exit(1);
 }
-console.log(beforeApply ? `drift-review-check: ${reviewedOwed.length} page(s) reviewed; decisions valid, materialization and buildability pending` : `drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, no blocked edges; `
+console.log(beforeApply ? `drift-review-check: ${reviewedOwed.length} page(s) reviewed; ${ownerResolved.size} exact blocker(s) owner-resolved; decisions valid, materialization and buildability pending` : `drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, ${ownerResolved.size} exact blocker(s) owner-resolved, no unresolved blocked edges; `
   + `${edgesChecked} same-category requires edge(s) checked, every owed A and B page strictly above 95% `
   + (allowInRunDependencies ? 'published-or-earlier-in-run' : 'published'));
