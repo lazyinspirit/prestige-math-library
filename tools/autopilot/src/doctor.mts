@@ -26,7 +26,7 @@ import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
 import { resolveLineup } from '../../models.mjs';
 import { stageComplete } from './coverage.mts';
 
-const flagsOf = (s: string): string[] => [...new Set(s.match(/--[a-z-]+/g) ?? [])];
+const flagsOf = (s: string): string[] => [...new Set(s.match(/--[a-z0-9-]+/g) ?? [])];
 
 /** The identity placeholders dispatch.mjs hard-errors on, found in a prompt
  *  file. Same token grammar as the dispatcher: single lowercase letters n and

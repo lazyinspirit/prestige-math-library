@@ -358,6 +358,7 @@ Use `node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts` with the ordinary
 `plan`, `doctor`, `start`, `status`, `pause`, `resume` and `retry` commands.
 `doctor` and generated task checks can run before authoring; they do not prepare
 or spend review rounds. No stage may install new prompts beneath a live old run.
+Doctor checks complete command flags, including digit-bearing names such as `--step5-run`, against their tool definitions.
 The new revision is `six-step-v1-construction-scope`. Start a fresh run and state directory; historical
 receipts/revisions do not satisfy the rebuilt pipeline. Legacy authoring-prefix
 migration and ready-pair initial-authoring variants are not current entry routes.
