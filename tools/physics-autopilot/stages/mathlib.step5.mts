@@ -16,7 +16,7 @@ const { frontierGateBattery } = await import(
 // Version this composed dependency as the root stage loader does for Step 5.
 // Collection runs the workflow CLI in a fresh subprocess and sees the same code.
 const WORKFLOW_URL=new URL('../../physics-support/step5-workflow.mjs',import.meta.url),WORKFLOW_STAT=statSync(WORKFLOW_URL);
-const { prepareAdjudication, prepareImpact, advanceImpact, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir, digest, emptyAdjudicationAssignment, emptyAdjudicationLabel, hasAdjudicatorArtifacts } = await import(
+const { prepareAdjudication, prepareImpact, advanceImpact, adjudicationCorrectionWork, advanceAdjudicationCorrection, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir, digest, emptyAdjudicationAssignment, emptyAdjudicationLabel, hasAdjudicatorArtifacts } = await import(
   `${WORKFLOW_URL.href}?v=${WORKFLOW_STAT.mtimeMs}:${WORKFLOW_STAT.size}`
 );
 
@@ -30,12 +30,15 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
   const ownerUnits=(ctx:any,phase:string,id:string)=>impactWork(ctx.repo,ctx.run,phase,round(ctx,id))
     .flatMap((work:any)=>['1','2','3'].map(u=>work.kind==='maintenance'?`maintenance:${work.id}:${u}`:work.phase===phase?u:`${work.phase}:${u}`));
   const outsideLane=(ctx:any,u:string)=>{const [,pack,lane]=u.split(':');return maintenancePack(ctx.repo,ctx.run,pack).lanes.find((row:any)=>String(row.lane)===lane);};
+  const adjudicationBaseUnits=(ctx:any)=>existsSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'))
+    ? JSON.parse(readFileSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'),'utf8')).batches.map((b:any)=>String(b.id)) : ['1'];
+  const adjudicationUnits=(ctx:any,phase:string,id:string)=>[...adjudicationBaseUnits(ctx),
+    ...adjudicationCorrectionWork(ctx.repo,ctx.run,phase,round(ctx,id))];
   const workerStage=(id:string,phase:string,adjudication:boolean):any=>({
     id,label:`${id.split('-')[0]} ${adjudication?'batch adjudication and repair':'three owner agents repair downstream consumers'}`,
     modelProfile:SOL61_HIGH,
-    units:(ctx:any)=>adjudication ? (existsSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'))
-      ? JSON.parse(readFileSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'),'utf8')).batches.map((b:any)=>String(b.id)) : ['1']) : ownerUnits(ctx,phase,id),
-    pattern:(ctx:any)=>adjudication?new RegExp(`(?:${pattern(phase,id)(ctx).source})|^tool-step5-v2-empty-${phase}-r${round(ctx,id)}-u[^.]+\\.result\\.json$`):new RegExp(`(?:${pattern(phase,id)(ctx).source})|^alpha-repair-${maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')}\\.result\\.json$`),concurrency:adjudication?24:3,
+    units:(ctx:any)=>adjudication ? adjudicationUnits(ctx,phase,id) : ownerUnits(ctx,phase,id),
+    pattern:(ctx:any)=>adjudication?new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^tool-step5-v2-empty-'+phase+'-r'+round(ctx,id)+'-u[^.]+\\.result\\.json$|^alpha-repair-step5-v2-correction-'+phase+'-r'+round(ctx,id)+'-u1\\.result\\.json$'):new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^alpha-repair-'+maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')+'\\.result\\.json$'),concurrency:adjudication?24:3,
     // Sibling owners run concurrently. Shared metadata edits use a short
     // critical section; a new pass waits for the entire preceding pass.
     ...(!adjudication?{
@@ -46,7 +49,14 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
         const complete=executor.unitsComplete(stage,ctx);
         if(ownerUnits(ctx,phase,id).every((u:string)=>complete.has(u)))advanceImpact(ctx.repo,ctx.run,phase,round(ctx,id));
       },
-    }:{}),
+    }:{
+      onProgress:({ctx,executor,stage}:any)=>{
+        if([...executor.inflight.values()].some((d:any)=>d.meta.stage===id)||executor.hasAdoptedWork(stage))return;
+        const complete=executor.unitsComplete(stage,ctx);
+        if(adjudicationBaseUnits(ctx).every((u:string)=>complete.has(u)))
+          advanceAdjudicationCorrection(ctx.repo,ctx.run,phase,round(ctx,id));
+      },
+    }),
     artifacts:(ctx:any,u:string)=>{if(u.startsWith('maintenance:'))return outsideLane(ctx,u).report;const [pass,unit]=decode(phase,u);return relative(ctx.repo,report(ctx,pass,round(ctx,id),unit));},
     plan:(ctx:any,pending:string[])=>{
       const n=round(ctx,id);
@@ -64,6 +74,10 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
             brief:'briefs/consumer-maintenance.md',task:input.task,timeout:21600};
         }
         const [pass,unit]=decode(phase,u);
+        if(pass==='correction-'+phase){
+          return {role:'alpha-repair',label:workerLabel(pass,n,unit),job:'authoring',covers:[u],profile:SOL61_HIGH,
+            brief:'briefs/step5-owner-repair.md',task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};
+        }
         if(adjudicationPack&&emptyAdjudicationAssignment(adjudicationPack,unit)
           &&(!existsSync(report(ctx,pass,n,unit))||JSON.parse(readFileSync(report(ctx,pass,n,unit),'utf8')).completion==='mechanical-zero-work')
           &&!hasAdjudicatorArtifacts(ctx.repo,ctx.run,pass,n,unit)){

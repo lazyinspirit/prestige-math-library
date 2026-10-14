@@ -2,7 +2,7 @@
 import { realpathSync as physicsRealpath } from 'node:fs';
 // Round-based Step 5. Mathematical workers write evidence; only the controller
 // collects it, judges a stable snapshot, and certifies a completed repair wave.
-import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, appendFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, appendFileSync, statSync } from 'node:fs';
 import { resolve, join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -20,6 +20,12 @@ import { orderedItems, runPages } from './item-dependency-levels.mjs';
 import { ownerRepairHandoffs, ownerHandoffPhase } from './step5-owner-repair-handoffs.mjs';
 import { ownerFormatRepair } from './step5-owner-format-repair.mjs';
 import { certificationEvidenceTransition } from './step5-certification-transition.mjs';
+// The live controller may have loaded an earlier helper during owner review.
+const INHERITED_REPAIR_URL=new URL('./step5-inherited-repair.mjs',import.meta.url);
+const INHERITED_REPAIR_STAT=statSync(INHERITED_REPAIR_URL);
+const { correctionPhase, correctionProgressPath, correctionRequest, assertCorrectionDrained, correctionAdoption } = await import(
+  INHERITED_REPAIR_URL.href+'?v='+INHERITED_REPAIR_STAT.mtimeMs+':'+INHERITED_REPAIR_STAT.size
+);
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -438,7 +444,69 @@ export function validateReports(pack,reports,now,{root=null}={}) {
   return {errors,decisions,reviews,changed,created_items:createdItems};
 }
 
-export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
+// The original assignment did not license a false-positive edit. Only a
+// separately completed native adoption can reconcile that historical violation.
+export function adjudicationCorrectionWork(root,run,phase,round) {
+  const path=correctionProgressPath(workflowDir(root,run),phase,round);
+  return existsSync(path)?[correctionPhase(phase)+':1']:[];
+}
+
+function inheritedContext(root,run,phase,round) {
+  if(!['initial','repeat'].includes(phase))return null;
+  const dir=workflowDir(root,run);
+  if(!existsSync(join(dir,'owner-inherited-repair-request.json')))return null;
+  const pack=readPack(root,run,phase,round),reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+  const current=hashes(root),items=readLibraryItems(root);
+  return correctionRequest(root,run,phase,round,{pack,reports,current,items,dir,
+    statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),
+    errors:validateReports(pack,reports,current,{root}).errors});
+}
+
+export function advanceAdjudicationCorrection(root,run,phase,round) {
+  const context=inheritedContext(root,run,phase,round);
+  if(!context)return null;
+  assertCorrectionDrained(root,context);
+  const dir=workflowDir(root,run),path=correctionProgressPath(dir,phase,round);
+  const correction=correctionPhase(phase),request=context.payload;
+  if(existsSync(path)){
+    const prior=read(path);
+    requireValue(prior.request.path===context.request.path&&prior.request.sha256===context.request.sha256,'inherited correction request changed');
+    verifyEvidence(prior.evidence);return prior;
+  }
+  const identity=libraryIdentity(root);
+  const pack={version:2,run,phase:correction,round,repair_scope:'frontier',
+    frontier_ids:[...gateFrontier(root,run)],units:['1'],assignments:{'1':[request.subject]},
+    before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),
+    home_pages:manifestHomes(root,run),seeds:[],impacts:[],cycles:[],failures:null,gateAssignments:{},
+    ledger_updates:[],input_evidence:context.evidence};
+  frozen(packPath(root,run,correction,round),pack);writeTasks(root,pack,'repair');
+  const task=workerReport(root,run,correction,round,'1').replace(/\.json$/,'.task.md');
+  const instructions=[
+    '',
+    '# Native inherited-defect correction review',
+    context.violation,
+    'Root request: '+context.request.path+'. Read its bound before/current carriers and scientific evidence.',
+    'Only '+request.subject+' is assigned. Original confirmed supplier: '+request.supplier+'.',
+    'READ AND ADOPT ONLY: do not edit source, original reports, frozen tuples, contracts or shared metadata. If a further repair is necessary, report uncertainty and stop adoption.',
+    'Inspect the distinct inherited defect in the preserved before carrier, the exact delta, the confirmed supplier interface and actual consumer uses. Reuse genuine completed proof review only with attribution.',
+    'Return ordinary decisions:[], created_items:[], and one reviews row with disposition:unaffected for the exact existing current carrier. Obtain fresh review-contexts after the current review.',
+    'Also return inherited_adjudications:[{id,outcome:confirmed_fatal|confirmed_nonfatal,defect_type:logic,reason,uncertain:false,source_urls:[],familiar:true}]. This finding is separately attributed; omit model/context_sha256 and never invent an original judge tuple.',
+    'Return inherited_adoptions:[{id,disposition:adopted,original_scope_violation:true,reason}]. Confirm no rejected false-positive claim was changed. Preserve the original instruction violation explicitly.',
+    'Bind every additional scientific-review nested source, diff or prior receipt actually read in supporting_evidence using its exact raw SHA256. Reading the parent JSON does not authenticate those nested files.',
+    'Record actual affected consumer uses and necessary referrals in downstream; do not close downstream defects. Do not claim a source repair or independent acceptance for adopting existing content.',
+    ''
+  ].join('\n');
+  writeFileSync(task,readFileSync(task,'utf8')+instructions);
+  const progress={version:1,run,phase,round,correction_phase:correction,request:context.request,
+    subject:request.subject,violation:context.violation,evidence:context.evidence};
+  frozen(path,progress);return progress;
+}
+
+// The correction receipt is collected only inside its authenticated parent.
+const inheritedCollectionToken=Symbol('native inherited correction collection');
+export function collect(root,run,phase,round,{deferImpactClosure=false,correctionToken=null}={}) {
+  if(phase.startsWith('correction-'))requireValue(correctionToken===inheritedCollectionToken,
+    'correction collection requires its authenticated native parent');
   const collectedPath=join(workflowDir(root,run),`${phase}-${round}-collected.json`);
   if(existsSync(collectedPath)){
     const prior=read(collectedPath);
@@ -462,6 +530,23 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     for(const repair of external.repairs)reported[repair.id]=pack.before[repair.id];
   }
   const result=validateReports(pack,reports,reported,{root});
+  let correction=null,adopted=null;
+  if(result.errors.length&&['initial','repeat'].includes(phase)){
+    const progressPath=correctionProgressPath(workflowDir(root,run),phase,round);
+    if(existsSync(progressPath)){
+      const context=inheritedContext(root,run,phase,round),progress=read(progressPath);
+      requireValue(context&&progress.request.path===context.request.path&&progress.request.sha256===context.request.sha256,'missing or stale native correction request');
+      assertCorrectionDrained(root,context);verifyEvidence(progress.evidence);
+      const correctionReport=read(workerReport(root,run,correctionPhase(phase),round,'1'));
+      adopted=correctionAdoption(correctionReport,context.payload,current,
+        reviewContextHashes(root,[context.payload.subject])[context.payload.subject]);
+      correction=collect(root,run,correctionPhase(phase),round,{correctionToken:inheritedCollectionToken});
+      // A separately completed native adoption supplies new authority now.
+      // The original false-positive tuple and scope violation remain evidence.
+      result.errors=[];
+      result.reviews=result.reviews.map(row=>row.id===adopted.review.id?adopted.review:row);
+    }
+  }
   if(result.errors.length)throw Error(result.errors.join('\n'));
   const evidence={...(pack.input_evidence??{}),...external.evidence,[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
   verifyEvidence(evidence);
@@ -516,12 +601,21 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   }
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
   if(external.repairs.length)receipt.external_owner_repairs=external.repairs;
+  if(correction){
+    const correctionPath=join(workflowDir(root,run),correctionPhase(phase)+'-'+round+'-collected.json');
+    Object.assign(receipt.evidence,correction.evidence,{[correctionPath]:digest(readFileSync(correctionPath,'utf8'))});
+    receipt.native_corrections=[{phase:correctionPhase(phase),round,id:adopted.review.id,
+      original_scope_violation:true,adoption:adopted.adoption}];
+    receipt.native_correction_decisions=[adopted.decision];
+    receipt.downstream=[...new Set([...receipt.downstream,...correction.downstream])];
+    receipt.ledger_updates.push(...correction.ledger_updates);
+  }
   receipt.restated=restatedIds(pack,diff(pack.before,current),statementHashes(root));
   const afterStatements=statementHashes(root);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
   // Gate workers may explicitly refer a failed, unassigned frontier carrier.
   // Retain that inventory for native review without inventing interface seeds.
-  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length&&pack.phase!=='gate'&&pack.basePhase!=='gate')receipt.downstream=[];
+  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length&&pack.phase!=='gate'&&pack.basePhase!=='gate'&&!phase.startsWith('correction-'))receipt.downstream=[];
   const frontier=gateFrontier(root,run);
   const direct=discoverDownstream({items:readLibraryItems(root),repairedIds:receipt.restated});
   const required=direct.filter(row=>frontier.has(row.id));
@@ -837,7 +931,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
   if(phase==='impact-repeat') {
     const frontier=read(join(dir,'frontier.json'));
-    const decisions=sourceResult.decisions.map(d=>({run,round,id:d.id,decision:d.outcome==='confirmed_fatal'?'confirmed-fatal':'rejected-finding',resolved:true,basis:d.reason,item_sha256:readPack(root,run,'repeat',round).before[d.id]}));
+    const decisions=[...sourceResult.decisions,...(sourceResult.native_correction_decisions??[])].map(d=>({run,round,id:d.id,decision:d.outcome==='confirmed_fatal'?'confirmed-fatal':'rejected-finding',resolved:true,basis:d.reason,item_sha256:readPack(root,run,'repeat',round).before[d.id]}));
     const byId=new Map();for(const row of decisions){const old=byId.get(row.id);if(!old||row.decision==='confirmed-fatal')byId.set(row.id,row);}
     const threshold=assessFatalThreshold({frontier,round,expectedIds:[...byId.keys()],decisions:[...byId.values()]});
     if(threshold.errors.length)throw Error(threshold.errors.join('\n'));

@@ -32,6 +32,18 @@ another agent's retrieval or stale review as your own.
 Also read root-published `research/<run>-owner-step5-support-supplement-*.json`
 when present; earlier indexes remain immutable.
 
+A generated `correction-initial` or `correction-repeat` assignment is a
+read-only correction review with narrower authority than ordinary owner repair.
+Read its exact root-bound request, original pack/report, genuine before and
+observed-current carriers, and the confirmed supplier's affected-use evidence.
+Review the distinct inherited finding and adopt or reject the current carrier
+with your own current evidence and context. Preserve the original false-positive
+judge disposition and explicitly retain any earlier instruction violation.
+Do not edit source, metadata, original reports, tasks, or judge tuples. Return
+only the separate correction report required by the generated task. An honest
+rejection or uncertainty blocks collection; never claim retrospective permission,
+independent review of your own edits, or a gate waiver.
+
 Run each shared metadata patch through
 `node tools/physics-support/step5-shared-write-lock.mjs run --owner DISPATCH_LABEL -- node research/RUN-scoped-metadata-update.mjs`.
 The scoped script must reread current owning files before surgical changes and

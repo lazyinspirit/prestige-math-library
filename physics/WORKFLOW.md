@@ -214,6 +214,31 @@ judgment/adjudication rounds continue until the latest round's unique confirmed
 fatal original-frontier items are strictly below 2% of the immutable original
 inventory. Exactly 2% requires another round; unresolved defects still block closure.
 
+An initial or repeated adjudicator may encounter a distinct inherited defect
+in an assigned consumer while rejecting the original judge objection. The
+original false-positive verdict does not authorize an edit. If an actual
+collection gate catches such an edit, preserve the original pack, report,
+judge tuple, and task-instruction violation. A root-requested native correction
+review may assess the exact current carrier without rewriting that history.
+The request must bind the original evidence, genuine before bytes, observed
+current bytes, and the same-owner confirmed supplier change that invalidated
+the consumer use. A fresh native Sol 6.1 high owner reviews that separate
+finding and adopts or rejects the current carrier without editing source.
+The root advertises the immutable request with
+`research/RUN-step5-v2/owner-inherited-repair-request.json` containing
+`version:1`, `run`, and `request:{path,sha256}`. The referenced
+`owner-inherited-repair-ID.json` binds the run, phase, round, original unit,
+subject and supplier, original pack/report/task, actual failed gate evidence,
+genuine before and observed source, content guards, and scientific review.
+The engine waits for drained writers before queuing one `correction-initial:1`
+or `correction-repeat:1` unit; completed adjudication units remain complete.
+Collection remains blocked until its exact source guards, fresh review,
+distinct finding, dispatch identity, and request bindings validate. An open
+scope incident is not erased by later adoption. Separate confirmed fatal
+findings count in the round's unique original-frontier fatal-item inventory;
+they never become fabricated original judge tuples. This continuation grants
+no outside source-write permission and does not waive ordinary gate checks.
+
 An outside repair authorized by the root owner can enter only deferred
 `impact-initial`/`impact-repeat` owner collection, including their continuation
 passes. Place an explicit grant in `research/RUN-step5-v2/owner-repair-handoffs.json`:
