@@ -150,13 +150,13 @@ function validateItem(id, item, entry) {
       error('citation-uses', `${fact} -> ${source} needs every proof step that cites ${fact}`, id);
     } else {
       const actualUses = [...steps.values()]
-        .filter((step) => explicitTokens(step.text).has(fact))
+        .filter((step) => explicitTokens(step.text, steps).has(fact))
         .map((step) => step.id);
       const claimedUses = new Set(uses);
       for (const stepId of uses) {
         const step = steps.get(stepId);
         if (!step) error('citation-use-step-missing', `${fact} names missing step ${stepId}`, id);
-        else if (!explicitTokens(step.text).has(fact)) {
+        else if (!explicitTokens(step.text, steps).has(fact)) {
           error('citation-use-not-supported', `${fact} is not cited by declared use ${stepId}`, id);
         }
       }
@@ -194,10 +194,10 @@ function validateItem(id, item, entry) {
     const factLabels = new Set(facts.keys());
     if (factLabels.size >= 4) {
       for (const step of steps.values()) {
-        const cited = [...explicitTokens(step.text)].filter((t) => factLabels.has(t));
+        const cited = [...explicitTokens(step.text, steps)].filter((t) => factLabels.has(t));
         if (cited.length >= 4 && cited.length * 2 >= factLabels.size) {
           const bare = [...steps.values()]
-            .filter((s) => s.id !== step.id && ![...explicitTokens(s.text)].some((t) => factLabels.has(t)));
+            .filter((s) => s.id !== step.id && ![...explicitTokens(s.text, steps)].some((t) => factLabels.has(t)));
           if (bare.length >= 2) {
             warn('shotgun-bracket',
               `${step.id} cites ${cited.length} of ${factLabels.size} declared facts while ${bare.length} other step(s) cite none — cite each fact at the step that uses it`, id);
@@ -239,7 +239,7 @@ function validateStepEntries(entries, field, id, facts, steps, classified) {
       if (classified.has(entry.step)) error('step-entry-overlap', `${entry.step} is mapped by both ${classified.get(entry.step)} and ${entry.id ?? '?'}`, id);
       else classified.set(entry.step, entry.id ?? field);
       const inputs = new Set(entry.inputs ?? []);
-      for (const token of explicitTokens(step.text)) {
+      for (const token of explicitTokens(step.text, steps)) {
         const acceptable = inputs.has(token) || inputs.has(`step ${token}`);
         if (!acceptable) error('step-entry-input-omitted', `${entry.id ?? field} omits ${token}, cited by ${entry.step}`, id);
       }
@@ -279,7 +279,8 @@ function validateBoundaries(id, boundaries, steps) {
     if (status === 'checked') {
       if (typeof evidence !== 'string' || !evidence.trim()) error('boundary-evidence', `${name} needs evidence`, id);
       else {
-        const references = [...evidence.matchAll(/(?:step\s+)?(\d+\.\d+)/g)].map((m) => m[1]);
+        const references = [...evidence.matchAll(/\b(?:steps?\s+)?(\d+\.\d+)\b/gi)]
+          .filter(m => /^steps?\s/i.test(m[0]) || steps.has(m[1])).map(m => m[1]);
         if (!references.length && !/statement|definition|example|counterexample/i.test(evidence)) {
           error('boundary-evidence-unanchored', `${name} evidence must name a step or statement`, id);
         }
@@ -324,9 +325,12 @@ function factsByLabel(body) { return factParagraphs(body); }
 function numberedSteps(body) {
   return new Map(numberedProofSteps(body).map((step) => [step.id, step]));
 }
-function explicitTokens(text) {
+function explicitTokens(text, steps) {
   const out = new Set();
-  for (const match of text.matchAll(/\b(?:step\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) out.add(match[1] ?? match[2]);
+  for (const match of text.matchAll(/\b(?:[Ss]teps?\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) {
+    if (match[2]) out.add(match[2]);
+    else if (/^steps?\s/i.test(match[0]) || steps.has(match[1])) out.add(match[1]);
+  }
   return out;
 }
 function normalise(value) {

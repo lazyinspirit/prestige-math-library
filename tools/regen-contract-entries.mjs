@@ -43,10 +43,13 @@ function parseFacts(md) {
  * parser feeds the checker, so regeneration cannot omit an input that the
  * checker later discovers (or silently agree with the same truncated view). */
 function parseSteps(md) {
-  return numberedProofSteps(splitFrontmatter(md).body).map((step) => {
+  const steps = numberedProofSteps(splitFrontmatter(md).body);
+  const ids = new Set(steps.map(step => step.id));
+  return steps.map((step) => {
     const tokens = new Set();
-    for (const t of step.text.matchAll(/\b(?:step\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) {
-      tokens.add(t[1] ?? t[2]);
+    for (const t of step.text.matchAll(/\b(?:[Ss]teps?\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) {
+      if (t[2]) tokens.add(t[2]);
+      else if (/^steps?\s/i.test(t[0]) || ids.has(t[1])) tokens.add(t[1]);
     }
     return { step: step.id, claim: step.claim, inputs: step.inputs, tokens };
   });

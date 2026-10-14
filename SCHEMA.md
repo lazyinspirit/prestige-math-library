@@ -206,6 +206,10 @@ in `## Definition` triggers the same direct and indirect consumer duties.
   `tools/precheck.mts`. The wrapper checks declarations and every proof section;
   source notes, bibliography and editorial remarks after the last proof section
   are outside the phase proof. Adopt any repair it proposes before recording a pass.
+  Proof-contract step references include explicit `step p.q` citations and bare
+  labels that occur in the current proof. Decimal constants such as `1.000001`
+  do not become nonexistent step references; an explicitly cited missing step
+  still fails validation.
 - Use `$...$` for inline math and `$$...$$` for display math. A display formula
   must occupy one source line between delimiters; put delimiters on separate
   lines when display-only KaTeX features such as `\tag` or `CD` are needed.

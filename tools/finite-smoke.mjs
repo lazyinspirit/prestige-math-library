@@ -85,6 +85,160 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  // Mathematical-statistics finite witnesses. Defaults are the contract
+  // models; parameterized checks validate their admissible input domains.
+  'diagonal-matrix-rayleigh-equality': ({ matrix = [[3, 0], [0, -1]] } = {}) => {
+    if (!Array.isArray(matrix) || matrix.length !== 2 || matrix.some(row => !Array.isArray(row) || row.length !== 2 || row.some(x => !Number.isFinite(x))) || matrix[0][1] !== 0 || matrix[1][0] !== 0)
+      return smokeResult(false, 'expected a finite real diagonal 2-by-2 matrix');
+    const [a, b] = [matrix[0][0], matrix[1][1]], maximum = Math.max(Math.abs(a), Math.abs(b));
+    let count = 0;
+    // Rational directions normalized from integer pairs, including both axes.
+    for (let x = -8; x <= 8; x++) for (let y = -8; y <= 8; y++) {
+      const norm2 = x * x + y * y;
+      if (!norm2) continue;
+      if (Math.abs((a * x * x + b * y * y) / norm2) > maximum + 1e-12 || (a * a * x * x + b * b * y * y) / norm2 > maximum * maximum + 1e-12)
+        return smokeResult(false, 'a sampled normalized direction exceeds the diagonal maximum');
+      count++;
+    }
+    return smokeResult(maximum === Math.max(Math.abs(a), Math.abs(b)), `${count} normalized rational directions bounded; a coordinate eigenvector attains norm and absolute Rayleigh value ${maximum}`);
+  },
+  'zero-proxy-covariance': ({ sample_size = 1, dimension = 1 } = {}) => {
+    const n = boundedInteger(sample_size, 1, 1, 32), d = boundedInteger(dimension, 1, 1, 16);
+    const sample = Array.from({ length: n }, () => Array(d).fill(0));
+    const { mean, raw, centered } = smokeCovariances(sample);
+    return smokeResult([...mean, ...raw.flat(), ...centered.flat()].every(x => x === 0), `computed raw and centered covariance of ${n} zero vectors in dimension ${d}`);
+  },
+  'scalar-soft-threshold': ({ z = 3, tau = 1 } = {}) => {
+    if (!Number.isFinite(z) || !Number.isFinite(tau) || tau <= 0) return smokeResult(false, 'finite z and positive finite tau required');
+    const soft = z > tau ? z - tau : z < -tau ? z + tau : 0;
+    const objective = a => (z - a) ** 2 + 2 * tau * Math.abs(a);
+    const candidates = [0, Math.max(z - tau, 0), Math.min(z + tau, 0)];
+    if (candidates.some(a => objective(a) < objective(soft) - 1e-12)) return smokeResult(false, 'branch constrained minimizer has lower objective than soft threshold');
+    const probes = Array.from({ length: 81 }, (_, i) => soft + (i - 40) / 4);
+    return smokeResult(probes.every(a => objective(a) >= objective(soft) - 1e-12), `soft=${soft}, Q(soft)=${objective(soft)}, Q(1)=${objective(1)}; both branch candidates and 81 nearby actions checked`);
+  },
+  'collinear-two-column-witness': ({ design = [[1, 1]], vector = [1, -1] } = {}) => {
+    if (!Array.isArray(design) || !design.length || design.some(r => !Array.isArray(r) || r.length !== 2 || r.some(x => !Number.isFinite(x))) || !Array.isArray(vector) || vector.length !== 2 || vector.some(x => !Number.isFinite(x)))
+      return smokeResult(false, 'expected finite two-column design and two-coordinate vector');
+    const fitted = design.map(r => r[0] * vector[0] + r[1] * vector[1]);
+    const n = design.length, gram = [0, 1].map(i => [0, 1].map(j => design.reduce((s, r) => s + r[i] * r[j], 0) / n));
+    const deviation = Math.max(...gram.flatMap((r, i) => r.map((x, j) => Math.abs(x - Number(i === j)))));
+    const cone = Math.abs(vector[1]) <= 3 * Math.abs(vector[0]);
+    return smokeResult(cone && vector[0] ** 2 > 0 && fitted.every(x => x === 0) && deviation > 1 / 14, `cone=${cone}; Xv=${fitted}; support norm squared=${vector[0] ** 2}; Gram deviation=${deviation}`);
+  },
+  'n2-p3-centered-rank': ({ observations = [[1, 0, 0], [0, 1, 0]] } = {}) => {
+    if (!Array.isArray(observations) || observations.length !== 2 || observations.some(r => !Array.isArray(r) || r.length !== 3 || r.some(x => !Number.isFinite(x))))
+      return smokeResult(false, 'expected two finite observations in dimension three');
+    const { mean, centered } = smokeCovariances(observations);
+    const rows = observations.map(r => r.map((x, i) => x - mean[i]));
+    const rowRank = smokeMatrixRank(rows), covarianceRank = smokeMatrixRank(centered);
+    return smokeResult(rowRank === 1 && covarianceRank === 1 && covarianceRank < 3, `centered row rank=${rowRank}, covariance rank=${covarianceRank}; all covariance entries computed`);
+  },
+  'balanced-partition-n5-k2': () => {
+    const n = 5, k = 2, q = Math.floor(n / k), r = n - k * q;
+    let cursor = 0;
+    const blocks = Array.from({ length: k }, (_, j) => Array.from({ length: q + Number(j < r) }, () => cursor++));
+    return smokeResult(blocks.map(b => b.length).join(',') === '3,2' && blocks.flat().join(',') === '0,1,2,3,4', `q=${q}, r=${r}, blocks=${JSON.stringify(blocks)} cover each index once`);
+  },
+  'nearest-rank-epsilon-quarter-n4': () => {
+    const n = 4, epsilon = 1 / 4, ranks = [Math.ceil(epsilon * n), Math.ceil((1 - epsilon) * n)];
+    return smokeResult(ranks[0] === 1 && ranks[1] === 3 && ranks.every(r => r >= 1 && r <= n) && ranks[0] <= ranks[1], `nearest ranks ${ranks} are valid and ordered`);
+  },
+  'one-observation-tied-cutoffs': () => {
+    const x = [2], y = [3], epsilon = 1 / 4, sorted = [...y].sort((a, b) => a - b);
+    const alpha = sorted[Math.ceil(epsilon * y.length) - 1], beta = sorted[Math.ceil((1 - epsilon) * y.length) - 1];
+    const output = x.reduce((s, value) => s + Math.min(beta, Math.max(alpha, value)), 0) / x.length;
+    return smokeResult(alpha === 3 && beta === 3 && output === 3, `coincident nearest-rank cutoffs=${alpha},${beta}; winsorized output=${output}`);
+  },
+  'all-zero-observed-data': () => {
+    // The admitted selector takes fixed epsilon as input. For zero data each
+    // directional interval is [-Q,Q], so U_Q=0 and the slab intersection
+    // is ||z|| <= 2 epsilon Q. This computes slabs and the nested radii,
+    // including their algebraic limit; no stochastic inputs are simulated.
+    const epsilon = 1 / 4, half = Array.from({ length: 4 }, () => [0, 0]);
+    const directions = [[1, 0], [0, 1], [-1, 0], [0, -1], [3 / 5, 4 / 5]];
+    for (let i = -8; i <= 8; i++) {
+      const q = 2 ** i;
+      for (const v of directions) {
+        const projected = half.map(x => x[0] * v[0] + x[1] * v[1]).sort((a, b) => a - b);
+        const alpha = projected[Math.ceil(epsilon * half.length / 2) - 1];
+        const beta = projected[Math.ceil((1 - epsilon / 2) * half.length) - 1];
+        const center = projected.reduce((s, x) => s + Math.min(beta + q, Math.max(alpha - q, x)), 0) / half.length;
+        if (alpha !== 0 || beta !== 0 || center !== 0) return smokeResult(false, 'zero projections did not give zero winsorized center');
+      }
+      if (!(2 * epsilon * q > 0)) return smokeResult(false, 'dyadic zero-centered slab radius invalid');
+    }
+    // Tail intersections have minimum radius at i=j. All contain zero;
+    // radius 2 epsilon 2^j tends to zero as j tends to negative infinity.
+    const radius = j => 2 * epsilon * 2 ** j;
+    return smokeResult(radius(-20) < radius(-8) && radius(-8) < radius(0) && radius(0) === 0.5, '85 directional models give center zero; nested ball radii are 2 epsilon 2^j with infimum zero, selecting the unique minimum-norm origin');
+  },
+  'uniform-upper-median': () => {
+    const cdf = t => Math.max(0, Math.min(1, t)), u = 1 / 2, quantile = u;
+    const survival = t => 1 - cdf(t);
+    const below = [0, 1 / 4, 1 / 2], above = [3 / 4, 1];
+    return smokeResult(survival(quantile) === 1 - u && below.every(t => survival(t) >= 1 - u) && above.every(t => survival(t) < 1 - u), 'uniform interval-length CDF gives upper median 1/2; singleton length zero makes strict/inclusive tails both 1/2');
+  },
+  'symmetric-rademacher-covariance': () => {
+    const atoms = [-1, 1], weights = [1 / 2, 1 / 2];
+    const mean = atoms.reduce((s, x, i) => s + weights[i] * x, 0);
+    const covariance = atoms.reduce((s, x, i) => s + weights[i] * (x - mean) ** 2, 0);
+    const centeredSecondMoment = atoms.reduce((s, x, i) => s + weights[i] * (x - mean) ** 2, 0);
+    return smokeResult(mean === 0 && covariance === 1 && centeredSecondMoment === covariance && covariance >= 0, `two-atom weighted enumeration: mean=${mean}, covariance=trace=lambda_max=${covariance}`);
+  },
+  'unit-scale-bracket': () => {
+    const a = 1, candidates = Array.from({ length: 9 }, (_, i) => i - 4);
+    const i = candidates.find(j => 2 ** j >= a), scale = 2 ** i;
+    return smokeResult(i === 0 && a <= scale && scale < 2 * a && 2 ** (i - 1) < a, `least qualifying exponent=${i}; ${a}<=${scale}<${2 * a}, previous scale=${2 ** (i - 1)}`);
+  },
+  'binomial-quantile-exponent-counterexample': ({ sample_size = 4000 } = {}) => {
+    const n = boundedInteger(sample_size, 4000, 4000, 200000);
+    if (n % 40) return smokeResult(false, 'counterexample sample size must be divisible by forty');
+    const p = 1 / 20, m = 3 * n / 40 + 1;
+    // Direct log of one binomial mass, avoiding underflow and computing the
+    // combinatorial factor rather than substituting the asymptotic KL rate.
+    let logChoose = 0;
+    for (let j = 1; j <= m; j++) logChoose += Math.log((n - m + j) / j);
+    const logMass = logChoose + m * Math.log(p) + (n - m) * Math.log1p(-p);
+    const margin = logMass + n / 120, logDelta = Math.log(4) - n / 120;
+    const epsilon = 12 * (Math.log(4) - logDelta) / n;
+    return smokeResult(m > 3 * n / 40 && margin > 1e-6 && logDelta < 0 && logDelta >= -n / 4 && Math.abs(epsilon - 0.1) < 1e-12, `Bin(${n},1/20) mass at ${m} is above exp(-n/120) by log margin ${margin}; admissible epsilon=${epsilon}, log(delta)=${logDelta}`);
+  },
+  'rational-series-bounds-for-Minsker-constants': () => {
+    // Log via 2 sum t^(2j+1)/(2j+1), with the absolute geometric
+    // remainder bound from the source. Conservative roundoff padding is
+    // much smaller than the stated rational interval margins.
+    const logInterval = t => {
+      let sum = 0;
+      for (let j = 0; j <= 50; j++) sum += 2 * t ** (2 * j + 1) / (2 * j + 1);
+      const remainder = 2 * Math.abs(t) ** 103 / (103 * (1 - t * t));
+      const padding = 1e-12;
+      return [sum - remainder - padding, sum + remainder + padding];
+    };
+    const left = logInterval(-13 / 68), right = logInterval(13 / 22), sevenFifths = logInterval(1 / 6);
+    // log((1-a)/(1-p)) uses -13/68; log(a/p) uses 13/22.
+    const a = 7 / 18, p = 1 / 10;
+    const lo = a * right[0] + (1 - a) * left[0], hi = a * right[1] + (1 - a) * left[1];
+    const caSquared = (1 - a) ** 2 / (1 - 2 * a), constantSquaredUpper = caSquared * 2 / (p * lo);
+    return smokeResult(lo > 2915 / 10000 && hi < 2916 / 10000 && lo > 5 / 18 && hi < sevenFifths[0] && sevenFifths[0] > 3364 / 10000 && constantSquaredUpper <= 121, `51-term log series with explicit tails and roundoff padding: psi in [${lo},${hi}], log(7/5)>${sevenFifths[0]}, coefficient squared<=${constantSquaredUpper}`);
+  },
+  'five-point-objective': ({ magnitude = 7 } = {}) => {
+    if (!Number.isFinite(magnitude) || magnitude <= 0) return smokeResult(false, 'positive finite magnitude required');
+    const points = [0, 0, 0, 0, magnitude], value = z => points.reduce((s, x) => s + Math.abs(z - x), 0);
+    const probes = Array.from({ length: 41 }, (_, i) => (i - 10) * magnitude / 10);
+    if (probes.some(z => value(z) < magnitude - 1e-10 || (z !== 0 && value(z) <= magnitude))) return smokeResult(false, 'objective probe violates unique origin minimum');
+    const slope = z => points.reduce((s, x) => s + Math.sign(z - x), 0);
+    return smokeResult(value(0) === magnitude && slope(-magnitude) === -5 && slope(magnitude / 2) === 3 && slope(2 * magnitude) === 5, `direct five-distance sums and all three linear-region slopes verify unique minimizer zero, value=${magnitude}`);
+  },
+  'identical-observation-law-at-eta-half': ({ half_size = 3, magnitude = 7 } = {}) => {
+    const n = boundedInteger(half_size, 3, 1, 64);
+    if (!Number.isFinite(magnitude) || magnitude <= 0) return smokeResult(false, 'distinct positive finite mean required');
+    const cleanZero = Array(2 * n).fill(0), cleanOther = Array(2 * n).fill(magnitude);
+    const observed = [...Array(n).fill(0), ...Array(n).fill(magnitude)];
+    const changes = clean => clean.filter((x, i) => x !== observed[i]).length;
+    const variance = clean => { const mean = clean.reduce((s, x) => s + x, 0) / clean.length; return clean.reduce((s, x) => s + (x - mean) ** 2, 0) / clean.length; };
+    return smokeResult(changes(cleanZero) === n && changes(cleanOther) === n && variance(cleanZero) === 0 && variance(cleanOther) === 0, `same deterministic observed vector from means0/${magnitude}, each clean covariance0, exactly${n}/${2 * n} replacements in either coupling`);
+  },
   'max-cut-triangle-conditional-expectation': ({ expected_cut = 2 } = {}) => {
     // Count the eight placements and all fifteen prefixes independently of
     // the edge-contribution formula used by the worked example.
@@ -1111,6 +1265,31 @@ function components(graph) {
   }
   return count;
 }
+
+function smokeResult(ok, summary) { return { ok, summary }; }
+function smokeCovariances(sample) {
+  const n = sample.length, d = sample[0].length;
+  const mean = Array.from({ length: d }, (_, j) => sample.reduce((s, row) => s + row[j], 0) / n);
+  const raw = Array.from({ length: d }, (_, j) => Array.from({ length: d }, (_, k) => sample.reduce((s, row) => s + row[j] * row[k], 0) / n));
+  const centered = Array.from({ length: d }, (_, j) => Array.from({ length: d }, (_, k) => sample.reduce((s, row) => s + (row[j] - mean[j]) * (row[k] - mean[k]), 0) / n));
+  return { mean, raw, centered };
+}
+function smokeMatrixRank(matrix) {
+  const a = matrix.map(row => [...row]);
+  let rank = 0;
+  for (let column = 0; column < a[0].length && rank < a.length; column++) {
+    const pivot = a.findIndex((row, i) => i >= rank && Math.abs(row[column]) > 1e-12);
+    if (pivot < 0) continue;
+    [a[rank], a[pivot]] = [a[pivot], a[rank]];
+    for (let i = rank + 1; i < a.length; i++) {
+      const factor = a[i][column] / a[rank][column];
+      for (let j = column; j < a[0].length; j++) a[i][j] -= factor * a[rank][j];
+    }
+    rank++;
+  }
+  return rank;
+}
+
 function acyclic(graph) {
   const parent = Array.from({ length: graph.vertices }, (_, value) => value);
   const find = (value) => {
