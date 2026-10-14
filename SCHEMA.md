@@ -98,8 +98,12 @@
   `correction`, current canonical `content_sha256` (verification excluded), a
   durable `before_file`, its raw `before_raw_sha256` and canonical `pre_sha256`,
   and `recorded_at`. The pre-edit carrier must already be published with a
-  prior `verification.audited` or `verification.verified` marker, and its
-  hash and owner must match the actual run's Step-5 published ownership claim.
+  prior `verification.audited` or `verification.verified` marker, or an exact
+  authenticated prior publication bound by `prior_publication_commit`. The
+  latter must be an ancestor commit containing the same canonical published
+  carrier, committed before the pre-edit ownership claim; it records historical
+  publication provenance and grants no new audit coverage. Its hash and owner
+  must match the actual run's pre-edit published ownership claim.
   `ledger_marker` and `ledger_sha256` bind the exact text between unique
   `<!-- local-published-repair:MARKER:begin -->` and corresponding `:end`
   markers in the canonical published ledger; that text identifies the item and
