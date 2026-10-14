@@ -38,6 +38,13 @@ const { ownerScientificRepair, scientificRepairCompletion }=await import(
   SCIENTIFIC_REPAIR_URL.href+'?v='+SCIENTIFIC_REPAIR_STAT.mtimeMs+':'+SCIENTIFIC_REPAIR_STAT.size
 );
 
+const ADJUDICATION_SCIENCE_URL=new URL('./step5-adjudication-scientific-repair.mjs',import.meta.url);
+const ADJUDICATION_SCIENCE_STAT=statSync(ADJUDICATION_SCIENCE_URL);
+const { scientificCorrectionPhase, scientificCorrectionProgressPath, scientificCorrectionRequest,
+  assertScientificCorrectionDrained, scientificCorrectionCompletion }=await import(
+  ADJUDICATION_SCIENCE_URL.href+'?v='+ADJUDICATION_SCIENCE_STAT.mtimeMs+':'+ADJUDICATION_SCIENCE_STAT.size);
+const scientificValidationToken=Symbol('authenticated single-subject scientific correction');
+
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 const lines = path => existsSync(path) ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse) : [];
@@ -367,7 +374,8 @@ function writeTasks(root,pack,mode) {
   }
 }
 
-export function validateReports(pack,reports,now,{root=null}={}) {
+export function validateReports(pack,reports,now,{root=null,scientificCorrection=null}={}) {
+  const corrected=id=>scientificCorrection?.token===scientificValidationToken&&scientificCorrection.subject===id;
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
   for(const unit of pack.units) {
     const report=reports.find(r=>String(r.unit)===unit);
@@ -418,12 +426,12 @@ export function validateReports(pack,reports,now,{root=null}={}) {
     if(pack.repair_scope==='frontier'&&!pack.frontier_ids?.includes(id)&&pack.before[id])errors.push(`out-of-frontier consumer cannot be repaired by Step 5: ${id}`);
     const created=creatorById.get(id),review=reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
     if(!now[id]||!review||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
-    if(pack.rejected&&!created&&!decisions.some(r=>r.id===id&&['confirmed_fatal','confirmed_nonfatal'].includes(r.outcome)))errors.push(`change without confirmed adjudication ${id}`);
+    if(pack.rejected&&!created&&!corrected(id)&&!decisions.some(r=>r.id===id&&['confirmed_fatal','confirmed_nonfatal'].includes(r.outcome)))errors.push(`change without confirmed adjudication ${id}`);
   }
   for(const id of Object.keys(pack.before))if(!now[id])errors.push(`unlicensed deletion ${id}`);
   for(const id of creatorById.keys())if(!changed.includes(id))errors.push(`claimed creation without new item ${id}`);
   for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id))errors.push(`confirmed defect not repaired ${row.id}`);
-  for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
+  for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id)&&!corrected(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
   if(createdItems.length&&root){
     try{
       const identity=libraryIdentity(root),itemById=new Map(identity.items.map(value=>[value.id,value]));
@@ -459,7 +467,8 @@ export function validateReports(pack,reports,now,{root=null}={}) {
 // separately completed native adoption can reconcile that historical violation.
 export function adjudicationCorrectionWork(root,run,phase,round) {
   const path=correctionProgressPath(workflowDir(root,run),phase,round);
-  return existsSync(path)?[correctionPhase(phase)+':1']:[];
+  return [...(existsSync(path)?[correctionPhase(phase)+':1']:[]),
+    ...(existsSync(scientificCorrectionProgressPath(workflowDir(root,run),phase,round))?[scientificCorrectionPhase(phase)+':1']:[])];
 }
 
 function inheritedContext(root,run,phase,round) {
@@ -473,7 +482,62 @@ function inheritedContext(root,run,phase,round) {
     errors:validateReports(pack,reports,current,{root}).errors});
 }
 
+function scientificAdjudicationContext(root,run,phase,round) {
+  if(phase!=='repeat')return null;
+  const dir=workflowDir(root,run);
+  if(!existsSync(join(dir,'owner-adjudication-scientific-repair-request.json')))return null;
+  const pack=readPack(root,run,phase,round),items=readLibraryItems(root);
+  return scientificCorrectionRequest(root,run,phase,round,{pack,
+    reports:pack.units.map(unit=>read(workerReport(root,run,phase,round,unit))),
+    current:hashes(root,items),statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),items,dir,
+    ...(existsSync(scientificCorrectionProgressPath(dir,phase,round))
+      &&existsSync(workerReport(root,run,scientificCorrectionPhase(phase),round,'1'))
+      ?{allowCompletedContinuation:true,currentReview:reviewContextHashes(root,
+        [read(scientificCorrectionProgressPath(dir,phase,round)).subject])[
+          read(scientificCorrectionProgressPath(dir,phase,round)).subject]}:{})});
+}
+
+function advanceScientificAdjudication(root,run,phase,round) {
+  const context=scientificAdjudicationContext(root,run,phase,round);
+  if(!context)return null;
+  assertScientificCorrectionDrained(root,context);
+  const dir=workflowDir(root,run),path=scientificCorrectionProgressPath(dir,phase,round);
+  if(existsSync(path)){
+    const prior=read(path);
+    requireValue(prior.request.path===context.request.path&&prior.request.sha256===context.request.sha256,'scientific correction request changed');
+    verifyEvidence(prior.evidence);return prior;
+  }
+  const originalPack=readPack(root,run,phase,round),originalReports=originalPack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+  const originalValidation=validateReports(originalPack,originalReports,hashes(root),{root});
+  requireValue(!originalValidation.errors.length,originalValidation.errors.join('\n'));
+  const identity=libraryIdentity(root),request=context.payload,correction=scientificCorrectionPhase(phase);
+  const pack={version:2,run,phase:correction,round,repair_scope:'frontier',
+    frontier_ids:[...gateFrontier(root,run)],units:['1'],assignments:{'1':[request.subject]},
+    before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),
+    home_pages:manifestHomes(root,run),seeds:[],impacts:[],cycles:[],failures:null,gateAssignments:{},
+    ledger_updates:[],input_evidence:context.evidence};
+  frozen(packPath(root,run,correction,round),pack);writeTasks(root,pack,'repair');
+  const task=workerReport(root,run,correction,round,'1').replace(/\.json$/,'.task.md');
+  writeFileSync(task,readFileSync(task,'utf8')+[
+    '', '# Native single-subject scientific scope restoration',
+    'Read root request '+context.request.path+' and its genuine bound original-owner evidence and proposed restoration.',
+    'Only items/'+request.subject+'.md is assigned for source editing. No other Source, prerequisite creation, shared metadata, original report, original tuple, original task or pack edits are authorized.',
+    'Restore the richest sound generic GR tetrad scope while retaining precise native typing. Future-directed must remain an additional qualification; only that subclass agrees with SR. Preserve all other sound clauses. Check the exact affected uses using original-owner evidence; do not repeat unaffected proof audits.',
+    'Actually repair the current narrowed Source, obtain a fresh review-context immediately after review, and return ordinary decisions:[], created_items:[], one genuine repaired review, downstream and exact downstream_uses.',
+    'Additionally return scientific_correction_adjudications:[{id,model,context_sha256,outcome,defect_type,reason,uncertain:false,source_urls:[],familiar:true}] using ONLY the exact frozen original tuple identity in the request. This is a separately attributed fresh effective decision; preserve the original decision/report unchanged. Restoring the original rich content requires effective outcome false_positive.',
+    'Return root_finding_resolutions:[{defect_id:"'+request.root_finding.defect_id+'",status:"fixed",subjects:["'+request.subject+'"],reason,uncertain:false,source_urls:[],familiar:true}]. This reports a native resolution and does not itself close the canonical ledger.',
+    'Bind all scientific evidence actually used, including nested files, by exact raw SHA256 in supporting_evidence. Report real content checks. Do not run software tests or claim independent certification. Run required proof-layout on the explicit changed item.', ''
+  ].join('\n'));
+  const progress={version:1,run,phase,round,correction_phase:correction,request:context.request,
+    subject:request.subject,evidence:{...context.evidence,
+      [packPath(root,run,correction,round)]:digest(readFileSync(packPath(root,run,correction,round),'utf8')),
+      [task]:digest(readFileSync(task,'utf8'))}};
+  frozen(path,progress);return progress;
+}
+
 export function advanceAdjudicationCorrection(root,run,phase,round) {
+  const scientific=advanceScientificAdjudication(root,run,phase,round);
+  if(scientific)return scientific;
   const context=inheritedContext(root,run,phase,round);
   if(!context)return null;
   assertCorrectionDrained(root,context);
@@ -515,7 +579,10 @@ export function advanceAdjudicationCorrection(root,run,phase,round) {
 
 // The correction receipt is collected only inside its authenticated parent.
 const inheritedCollectionToken=Symbol('native inherited correction collection');
+const scientificCollectionToken=Symbol('native scientific correction collection');
 export function collect(root,run,phase,round,{deferImpactClosure=false,correctionToken=null}={}) {
+  if(phase.startsWith('scientific-correction-'))requireValue(correctionToken===scientificCollectionToken,
+    'scientific correction collection requires its authenticated native parent');
   if(phase.startsWith('correction-'))requireValue(correctionToken===inheritedCollectionToken,
     'correction collection requires its authenticated native parent');
   const collectedPath=join(workflowDir(root,run),`${phase}-${round}-collected.json`);
@@ -544,7 +611,29 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     // retained in receipt.post and must receive a fresh native owner review.
     for(const repair of external.repairs)reported[repair.id]=pack.before[repair.id];
   }
-  const result=validateReports(pack,reports,reported,{root});
+  let scientificCorrection=null,scientificAdopted=null,scientificContext=null;
+  let effectiveReports=reports;
+  const scientificProgress=scientificCorrectionProgressPath(workflowDir(root,run),phase,round);
+  if(['initial','repeat'].includes(phase)&&existsSync(scientificProgress)){
+    scientificContext=scientificAdjudicationContext(root,run,phase,round);
+    const progress=read(scientificProgress),context=scientificContext;
+    requireValue(context&&progress.request.path===context.request.path&&progress.request.sha256===context.request.sha256,
+      'missing or stale scientific correction request');
+    assertScientificCorrectionDrained(root,context);verifyEvidence(progress.evidence);
+    const historical={...reported,[context.payload.subject]:context.payload.narrowed_content_sha256};
+    const originalValidation=validateReports(pack,reports,historical,{root});
+    requireValue(!originalValidation.errors.length,originalValidation.errors.join('\n'));
+    const childPhase=scientificCorrectionPhase(phase),child=read(workerReport(root,run,childPhase,round,'1'));
+    scientificAdopted=scientificCorrectionCompletion(child,context.payload,current,
+      reviewContextHashes(root,[context.payload.subject])[context.payload.subject]);
+    scientificCorrection=collect(root,run,childPhase,round,{correctionToken:scientificCollectionToken});
+    const subject=context.payload.subject,originalKey=key(context.payload.original_tuple);
+    effectiveReports=reports.map(report=>String(report.unit)!==context.payload.unit?report:{...report,
+      decisions:report.decisions.map(row=>key(row)===originalKey?scientificAdopted.decision:row),
+      reviews:report.reviews.map(row=>row.id===subject?scientificAdopted.review:row)});
+  }
+  const result=validateReports(pack,effectiveReports,reported,{root,
+    scientificCorrection:scientificAdopted?{token:scientificValidationToken,subject:scientificAdopted.subject}:null});
   let correction=null,adopted=null;
   if(result.errors.length&&['initial','repeat'].includes(phase)){
     const progressPath=correctionProgressPath(workflowDir(root,run),phase,round);
@@ -629,12 +718,23 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     receipt.downstream=[...new Set([...receipt.downstream,...correction.downstream])];
     receipt.ledger_updates.push(...correction.ledger_updates);
   }
+  if(scientificCorrection){
+    const path=join(workflowDir(root,run),scientificCorrectionPhase(phase)+'-'+round+'-collected.json');
+    Object.assign(receipt.evidence,scientificContext.evidence,scientificCorrection.evidence,{[path]:digest(readFileSync(path,'utf8'))});
+    receipt.native_scientific_corrections=[{phase:scientificCorrectionPhase(phase),round,
+      original_decision:scientificContext.originalDecision,original_review:scientificContext.originalReview,
+      effective_decision:scientificAdopted.decision,review:scientificAdopted.review,
+      root_finding_resolution:scientificAdopted.root_finding_resolution,
+      request:scientificContext.request,projection:'subject-only separately attributed native correction'}];
+    receipt.downstream=[...new Set([...receipt.downstream,...scientificCorrection.downstream])];
+    receipt.ledger_updates.push(...scientificCorrection.ledger_updates);
+  }
   receipt.restated=restatedIds(pack,diff(pack.before,current),statementHashes(root));
   const afterStatements=statementHashes(root);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
   // Gate workers may explicitly refer a failed, unassigned frontier carrier.
   // Retain that inventory for native review without inventing interface seeds.
-  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length&&pack.phase!=='gate'&&pack.basePhase!=='gate'&&!phase.startsWith('correction-'))receipt.downstream=[];
+  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length&&pack.phase!=='gate'&&pack.basePhase!=='gate'&&!phase.startsWith('correction-')&&!phase.startsWith('scientific-correction-')&&!scientificCorrection)receipt.downstream=[];
   const frontier=gateFrontier(root,run);
   const direct=discoverDownstream({items:readLibraryItems(root),repairedIds:receipt.restated});
   const required=direct.filter(row=>frontier.has(row.id));

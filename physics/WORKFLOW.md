@@ -243,6 +243,34 @@ findings count in the round's unique original-frontier fatal-item inventory;
 they never become fabricated original judge tuples. This continuation grants
 no outside source-write permission and does not waive ordinary gate checks.
 
+A completed repeated adjudicator may introduce a confirmed richness scope loss
+in its own assigned source. Before that repeat wave is collected, a distinct
+single-subject native scientific correction may restore the sound scope. Root
+advertises `owner-adjudication-scientific-repair-ID.json` through
+`research/RUN-step5-v2/owner-adjudication-scientific-repair-request.json` with
+`version:1`, `run`, and `request:{path,sha256}`. The immutable request binds the
+unique unsuperseded OPEN owner `richness`/`scope-drop` canonical finding, exact
+original rejected tuple and completed native pack/report/task/dispatch, genuine
+original rich and current narrowed carriers with raw/content/interface guards,
+and the original scientific owner's evidence and unapplied proposals. This is
+not outside authorship, inherited read-only adoption, or coupled impact repair.
+
+At the drained `5.5-adjudicate` join, one fresh native Sol 6.1 high child receives
+only that original-frontier subject. It must actually change the narrowed
+carrier, review the exact current source and dependency context, reconcile the
+original tuple explicitly, resolve the distinct root scope finding, and report
+affected uses. It authors no prerequisite or unrelated source. Original reports,
+decisions, tuples and tasks remain immutable. Parent collection first validates
+all original reports at their authentic historical subject guards, then validates
+only the corrected subject using the separate child decision/review and actual
+current hashes. Any private corrective authorization is confined to that exact
+subject and genuine child repair; it never clears unrelated errors. A return to
+the original rich content requires a fresh false-positive effective adjudication,
+while retaining the original decision as history. No fabricated tuple, stale
+review, extra supplier edit or gate waiver supplies authority. Collection binds
+the genuine correction receipt, and the ordinary full gate battery and later
+consumer maintenance still apply. Root alone closes the canonical finding.
+
 When an actual initial/repeat collection gate reports a missing original-frontier
 downstream inventory, root may complete the routing metadata through
 `research/RUN-step5-v2/owner-downstream-inventory.json` with `version:1`, `run`,

@@ -38,7 +38,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
     id,label:`${id.split('-')[0]} ${adjudication?'batch adjudication and repair':'three owner agents repair downstream consumers'}`,
     modelProfile:SOL61_HIGH,
     units:(ctx:any)=>adjudication ? adjudicationUnits(ctx,phase,id) : ownerUnits(ctx,phase,id),
-    pattern:(ctx:any)=>adjudication?new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^tool-step5-v2-empty-'+phase+'-r'+round(ctx,id)+'-u[^.]+\\.result\\.json$|^alpha-repair-step5-v2-correction-'+phase+'-r'+round(ctx,id)+'-u1\\.result\\.json$'):new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^alpha-repair-'+maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')+'\\.result\\.json$'),concurrency:adjudication?24:3,
+    pattern:(ctx:any)=>adjudication?new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^tool-step5-v2-empty-'+phase+'-r'+round(ctx,id)+'-u[^.]+\\.result\\.json$|^alpha-repair-step5-v2-(?:scientific-)?correction-'+phase+'-r'+round(ctx,id)+'-u1\\.result\\.json$'):new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^alpha-repair-'+maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')+'\\.result\\.json$'),concurrency:adjudication?24:3,
     // Sibling owners run concurrently. Shared metadata edits use a short
     // critical section; a new pass waits for the entire preceding pass.
     ...(!adjudication?{
@@ -74,7 +74,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
             brief:'briefs/consumer-maintenance.md',task:input.task,timeout:21600};
         }
         const [pass,unit]=decode(phase,u);
-        if(pass==='correction-'+phase){
+        if(pass==='correction-'+phase||pass==='scientific-correction-'+phase){
           return {role:'alpha-repair',label:workerLabel(pass,n,unit),job:'authoring',covers:[u],profile:SOL61_HIGH,
             brief:'briefs/step5-owner-repair.md',task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};
         }
