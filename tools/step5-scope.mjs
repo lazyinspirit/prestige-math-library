@@ -48,6 +48,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { buildGroupBundle } from './evidence-bundle.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
+import { publishedAlertRoute } from './step4-published-alerts.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard } from './item-hash.mjs';
@@ -215,6 +216,7 @@ function openRejections() {
 
 function collectAlerts(groups, index, { includeConcerns = true } = {}) {
   const alerts = [];
+  const publishedAlerts = [];
   const problems = [];
   const groupLabels = new Set(groups.map((g) => g.label));
   for (const digest of readAllDigests()) {
@@ -242,8 +244,14 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
       if (!alert.finding.trim()) problems.push(`${alert.alert_id}: finding is empty`);
       alerts.push(alert);
     }
-    for (const raw of digest.alerts ?? []) {
-      if (isPublishedItem(REPO, raw.item)) continue;
+    for (const [alertIndex, raw] of (digest.alerts ?? []).entries()) {
+      if (!index.itemOwner.has(raw.item) && isPublishedItem(REPO, raw.item)) {
+        const routed = publishedAlertRoute({ root: REPO, run, batch: fromBatch, group: from,
+          digestPath: rel(digestPath(fromBatch)), digest, alertIndex, frontierIds: new Set(index.itemOwner.keys()) });
+        if (!routed.ok) problems.push(`batch ${fromBatch}: published alert ${raw.item}: ${routed.reason}`);
+        else publishedAlerts.push(routed.route);
+        continue;
+      }
       const owner = index.itemOwner.get(raw.item)?.group;
       const alert = {
         version: 1,
@@ -294,7 +302,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
     if (ids.has(alert.alert_id)) problems.push(`${alert.alert_id}: duplicate alert`);
     ids.add(alert.alert_id);
   }
-  return { alerts, problems };
+  return { alerts, publishedAlerts, problems };
 }
 
 /** Edges that leave a group: this group's pages requiring another group's, and
@@ -487,7 +495,8 @@ function batchHeader(batch, index, seam) {
     'Read every assigned page and item in dependency order, including cited prerequisites outside the batch.',
     'This is read-only, rejection-blind work. Return findings through the schema-constrained digest.',
     '`pages_read` and `items_read` must match the inventories below exactly.',
-    'Record findings on this batch in concerns and findings on another batch in alerts, even within the same Step-5 group.', '',
+    'Record findings on this batch in concerns and findings on another batch in alerts, even within the same Step-5 group.',
+    'Record published-supplier findings in alerts unchanged; they go to the published owner through an evidence-bound repair route, never a fabricated run batch.', '',
     '## Your pages', '', '| batch | page | kind | requires |', '|---|---|---|---|',
   ];
   for (const page of pages)
@@ -524,7 +533,7 @@ if (mode === 'render') {
   const rejections = openRejections();
   const alertReceipt = collectAlerts(groups, index);
   if (alertReceipt.problems.length) fail(alertReceipt.problems.join('\n'));
-  writeFileSync(alertsPath, `${JSON.stringify({ version: 2, run, alerts: alertReceipt.alerts }, null, 2)}\n`);
+  writeFileSync(alertsPath, `${JSON.stringify({ version: 2, run, alerts: alertReceipt.alerts, published_alerts: alertReceipt.publishedAlerts }, null, 2)}\n`);
 
   const orphans = rejections.filter((r) => !index.itemOwner.has(r.id));
 
@@ -654,10 +663,14 @@ if (mode === 'digests') {
     // An alert is for ANOTHER batch. One aimed at an item the sender owns is a
     // defect it should have kept in `concerns` and adjudicated itself, and
     // delivering it would send the batch its own finding back.
-    for (const a of d.alerts ?? []) {
+    for (const [alertIndex, a] of (d.alerts ?? []).entries()) {
       const owner = index.itemOwner.get(a.item);
-      if (!owner) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which belongs to no batch in this run`);
-      else if (owner.group === g.label) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which it owns — that is a concern, not an alert`);
+      if (!owner && isPublishedItem(REPO, a.item)) {
+        const routed = publishedAlertRoute({ root: REPO, run, batch: g.label, group: g.group,
+          digestPath: rel(p), digest: d, alertIndex, frontierIds: new Set(index.itemOwner.keys()) });
+        if (!routed.ok) bad.push(`batch ${g.label}: published alert ${a.item}: ${routed.reason}`);
+      } else if (!owner) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which belongs to no batch in this run`);
+      else if (owner.batch === g.label) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which it owns — that is a concern, not an alert`);
     }
     for (const concern of d.concerns ?? []) {
       const owner = index.itemOwner.get(concern.id) ?? index.pageOwner.get(concern.id);
@@ -830,7 +843,7 @@ for (const alert of alertReceipt.alerts) {
     }
   }
 }
-writeFileSync(alertsPath, `${JSON.stringify({ version: scope.version >= 2 ? 2 : 1, run, alerts: alertReceipt.alerts }, null, 2)}\n`);
+writeFileSync(alertsPath, `${JSON.stringify({ version: scope.version >= 2 ? 2 : 1, run, alerts: alertReceipt.alerts, published_alerts: alertReceipt.publishedAlerts }, null, 2)}\n`);
 
 reportProblems();
 console.log(`step5-scope --check: ${scope.groups.length} group(s) scoped, `

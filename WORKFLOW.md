@@ -213,6 +213,17 @@ raw archived-report suffix containing the not-opened and flagged fields; the
 unchanged hash-bound full report supplies the original observations. Only a fresh
 successful native correction result supplies coverage; never add an unread subject to the old report or waive collection.
 
+Outside published-supplier alerts in native Step-4 digests retain their exact
+original bytes. The owner may record `research/RUN-step4-published-alert-routes.json`
+(version 1, `owner-routed-step4-published-alerts`, `authorized_by: owner`). Each
+route binds the unchanged digest, exact alert index and object, successful native
+reader attempt and original structured output, focused owner evidence, and the
+current policy-valid recorded published repair. Digests and later alert routing
+validate that receipt; published routes remain separately visible in the derived
+alert inventory and never acquire a fabricated in-run owner or new review coverage.
+Original Step-3 closure and judge verdicts remain immutable. Existing judge
+currency rules continue to govern unchanged consumer carriers.
+
 Step 4's read-only
 batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
 cannot cover the inventory, and retries target only failing batches.
