@@ -30,8 +30,20 @@ export function ownerReviewedFindingAlias(root, run, group, prior, decision, tar
       || entry.subject !== primary.id || entry.subject !== alias.id
       || entry.consumer_id !== primary.consumer_id || entry.consumer_id !== alias.consumer_id
       || entry.producer_batch !== primary.producer_batch || entry.producer_batch !== alias.producer_batch
-      || primary.defect === alias.defect || entry.primary_defect !== primary.defect || entry.alias_defect !== alias.defect
-      || entry.primary_finding_sha256 !== hashValue(primary) || entry.alias_finding_sha256 !== hashValue(alias)
+      || entry.primary_defect !== primary.defect || entry.alias_defect !== alias.defect
+      || entry.primary_finding_sha256 !== hashValue(primary) || entry.alias_finding_sha256 !== hashValue(alias)) return false;
+    const locationAlias = entry.kind === 'location-only-unbound-reader';
+    if (locationAlias) {
+      if (prior.route !== 'reader' || decision.route !== 'flagged'
+        || primary.defect !== alias.defect || primary.severity !== alias.severity
+        || primary.location !== entry.primary_location || alias.location !== entry.alias_location
+        || primary.location === alias.location || primary.observation_basis !== 'unbound'
+        || primary.observed_sha256 !== null || primary.observed_source
+        || prior.historical_delta_unknown !== true || typeof prior.owner_resolution !== 'string'
+        || prior.owner_resolution.length < 40
+        || !/^[a-f0-9]{64}$/.test(alias.observed_sha256 ?? '')
+        || !/^[a-f0-9]{64}$/.test(alias.observed_source?.item_sha256 ?? '')) return false;
+    } else if (primary.defect === alias.defect
       || !/^[a-f0-9]{64}$/.test(primary.observed_sha256 ?? '') || primary.observed_sha256 !== alias.observed_sha256
       || primary.observed_source?.item_sha256 !== alias.observed_source?.item_sha256
       || !/^[a-f0-9]{64}$/.test(primary.observed_source?.item_sha256 ?? '')) return false;
@@ -41,7 +53,22 @@ export function ownerReviewedFindingAlias(root, run, group, prior, decision, tar
       return bytes(binding.path);
     };
     const owner = JSON.parse(bound(entry.scientific_owner_receipt));
-    if (owner.run !== run || owner.classification_approved !== true || owner.one_underlying_issue !== true
+    if (locationAlias) {
+      if (owner.run !== run || owner.same_actual_issue !== true
+        || owner.canonical_defect_id !== entry.original_defect_id
+        || owner.primary?.obligation !== prior.obligation || owner.alias?.obligation !== decision.obligation
+        || owner.primary?.finding?.location !== primary.location || owner.alias?.finding?.location !== alias.location
+        || owner.primary?.finding?.defect !== primary.defect || owner.alias?.finding?.defect !== alias.defect
+        || owner.primary?.observation_basis !== 'unbound' || owner.primary?.observed_sha256 !== null
+        || owner.primary?.finding?.observed_source !== null
+        || owner.alias?.observed_source_item_sha256 !== alias.observed_source.item_sha256
+        || typeof owner.literal_common_fault !== 'string' || owner.literal_common_fault.length < 80) return false;
+      const before = entry.reviewed_before_source;
+      bound(before);
+      if (before.path !== owner.current_source?.before_archive || before.sha256 !== owner.current_source?.before_raw_sha256
+        || entry.current_source?.sha256 !== owner.current_source?.final_raw_sha256) return false;
+      bound({path: owner.final_scientific_release, sha256: receipt.inputs?.[owner.final_scientific_release]});
+    } else if (owner.run !== run || owner.classification_approved !== true || owner.one_underlying_issue !== true
       || !owner.obligations?.includes(prior.obligation) || !owner.obligations?.includes(decision.obligation)
       || owner.original_labels_preserved?.[prior.obligation] !== primary.defect
       || owner.original_labels_preserved?.[decision.obligation] !== alias.defect
@@ -55,7 +82,8 @@ export function ownerReviewedFindingAlias(root, run, group, prior, decision, tar
     const source = entry.current_source;
     if (source?.path !== `items/${entry.subject}.md` || receipt.inputs?.[source.path] !== source.sha256
       || !/^[a-f0-9]{64}$/.test(source.sha256 ?? '') || sha(bytes(source.path)) !== source.sha256
-      || owner.current_source_guard?.sha256 !== source.sha256 || owner.current_source_guard?.path !== source.path) return false;
+      || (locationAlias ? owner.current_source?.path !== source.path
+        : owner.current_source_guard?.sha256 !== source.sha256 || owner.current_source_guard?.path !== source.path)) return false;
     const text = bytes(source.path).toString();
     if (!Array.isArray(entry.reviewed_source_excerpts) || entry.reviewed_source_excerpts.length < 2
       || entry.reviewed_source_excerpts.some(excerpt => typeof excerpt !== 'string' || excerpt.length < 80 || !text.includes(excerpt))) return false;

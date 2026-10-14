@@ -361,6 +361,13 @@ current-hash-bound and formatting/metadata-only under CLAUDE.md.
 
 ## Pre-gate recertification
 
+An owner finding-alias receipt may also bind an exact location-only variant
+between a historically unbound reader and a bound refuter. It must preserve the
+reader's unknown history, bind both frozen findings and reports, and include the
+original supplier owner's same-issue classification, reviewed pre-repair archive,
+final source excerpts and scientific release. This reconciles one canonical
+defect's ownership; it grants no source acceptance or gate exemption.
+
 Proof-contract inputs treat a bare decimal as a step reference only when that
 number identifies an actual proof step. Explicit `step p.q` references are
 checked even when the named step is missing.

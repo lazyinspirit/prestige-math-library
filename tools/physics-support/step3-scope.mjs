@@ -1345,6 +1345,7 @@ if (command === 'check') {
           const sameLocation = (left, right) => String(left ?? '').trim().toLowerCase() === String(right ?? '').trim().toLowerCase();
           const sameObservedCarrier = /^[a-f0-9]{64}$/.test(prior?.target?.observed_sha256 ?? '')
             && prior.target.observed_sha256 === target?.observed_sha256;
+          const reviewedFindingAlias = prior && ownerReviewedFindingAlias(ROOT, run, group.label, prior, decision, target, hashValue);
           const sharedFinding = prior && decision.same_defect_as === prior.obligation
             && typeof decision.same_defect_evidence === 'string' && decision.same_defect_evidence.trim()
             && prior.id === decision.id
@@ -1352,9 +1353,9 @@ if (command === 'check') {
             && ['reader', 'flagged'].includes(decision.route)
             && prior.verdict === decision.verdict
             && (prior.target?.defect === target?.defect
-              || ownerReviewedFindingAlias(ROOT, run, group.label, prior, decision, target, hashValue))
+              || reviewedFindingAlias)
             && ((prior.target?.severity === target?.severity
-              && sameLocation(prior.target?.location, target?.location))
+              && (sameLocation(prior.target?.location, target?.location) || reviewedFindingAlias))
               || sameObservedCarrier);
           const sharedCausalAddition = prior && target?.added
             && decision.same_defect_as === prior.obligation
@@ -1364,6 +1365,7 @@ if (command === 'check') {
           if (prior && !sharedFinding && !sharedCausalAddition) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
+            historical_delta_unknown: decision.historical_delta_unknown, owner_resolution: decision.owner_resolution,
           });
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }
