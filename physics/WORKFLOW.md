@@ -161,6 +161,15 @@ work.
 Step 3 keeps the existing independent batch review, routed adjudication and
 unfinished cross-review continuation. A partial process handoff is not completed
 artifact coverage; continuations require actual completed-obligation progress.
+When two reader/refuter findings classify one defect differently, the owner may
+record `research/RUN-step3-owner-same-defect-aliases.json` and bind its raw hash
+with `same_defect_receipt_sha256` on the alias decision. This route requires an
+explicit root adoption of the original scientific owner's same-issue review,
+the exact frozen finding objects and report hashes, identical observed source
+and carrier bindings, and guarded current source excerpts. All ordinary shared
+finding, ledger and current-content checks still apply. It does not rewrite
+observations, accept source content, or combine unrelated defects. Native owner
+recertification binds this receipt and its evidence inputs before the battery.
 Step-3 readers and refuters use GPT-6 Luna/max; batch adjudicators use GPT-6.1
 Sol/medium. Step-4 read-only batch readers use GPT-6.1 Sol/medium, and the
 per-item judge sweep uses GPT-6 Luna/max.

@@ -24,6 +24,7 @@ import { step3Escalations, externalContextReceipt } from './step3-escalations.mj
 import { step3Adjudicators } from './step3-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { taxonomyOwnership } from './defect-ledger-taxonomy.mjs';
+import { ownerReviewedFindingAlias } from './step3-owner-finding-alias.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -1350,7 +1351,8 @@ if (command === 'check') {
             && ['reader', 'flagged'].includes(prior.route)
             && ['reader', 'flagged'].includes(decision.route)
             && prior.verdict === decision.verdict
-            && prior.target?.defect === target?.defect
+            && (prior.target?.defect === target?.defect
+              || ownerReviewedFindingAlias(ROOT, run, group.label, prior, decision, target, hashValue))
             && ((prior.target?.severity === target?.severity
               && sameLocation(prior.target?.location, target?.location))
               || sameObservedCarrier);

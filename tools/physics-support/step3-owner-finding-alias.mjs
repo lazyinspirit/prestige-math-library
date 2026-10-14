@@ -1,0 +1,66 @@
+// A reviewed classification alias preserves the original independent findings.
+// It grants neither source acceptance nor permission to share unrelated defects.
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { createHash } from 'node:crypto';
+
+export function ownerReviewedFindingAlias(root, run, group, prior, decision, target, hashValue) {
+  try {
+    if (!/^[a-z0-9-]+$/.test(run)) return false;
+    const path = `research/${run}-step3-owner-same-defect-aliases.json`;
+    if (!existsSync(join(root, path))) return false;
+    const cache = new Map();
+    const bytes = relative => {
+      if (typeof relative !== 'string' || relative.startsWith('/') || relative.split('/').includes('..')) throw Error('unsafe alias evidence');
+      if (!cache.has(relative)) cache.set(relative, readFileSync(join(root, relative)));
+      return cache.get(relative);
+    };
+    const sha = value => createHash('sha256').update(value).digest('hex');
+    const raw = bytes(path), receipt = JSON.parse(raw);
+    if (receipt.version !== 1 || receipt.run !== run || receipt.reviewed_by !== 'root'
+      || sha(raw) !== decision.same_defect_receipt_sha256 || !Array.isArray(receipt.aliases)) return false;
+    const entries = receipt.aliases.filter(row => row.group === group
+      && row.primary_obligation === prior?.obligation && row.alias_obligation === decision.obligation);
+    if (entries.length !== 1) return false;
+    const entry = entries[0];
+    const { batch: primaryBatch, route: _primaryRoute, ...primary } = prior.target ?? {};
+    const { batch: aliasBatch, route: _aliasRoute, ...alias } = target ?? {};
+    if (primaryBatch !== aliasBatch || !['reader', 'flagged'].includes(prior.route)
+      || !['reader', 'flagged'].includes(decision.route) || prior.verdict !== decision.verdict
+      || entry.subject !== primary.id || entry.subject !== alias.id
+      || entry.consumer_id !== primary.consumer_id || entry.consumer_id !== alias.consumer_id
+      || entry.producer_batch !== primary.producer_batch || entry.producer_batch !== alias.producer_batch
+      || primary.defect === alias.defect || entry.primary_defect !== primary.defect || entry.alias_defect !== alias.defect
+      || entry.primary_finding_sha256 !== hashValue(primary) || entry.alias_finding_sha256 !== hashValue(alias)
+      || !/^[a-f0-9]{64}$/.test(primary.observed_sha256 ?? '') || primary.observed_sha256 !== alias.observed_sha256
+      || primary.observed_source?.item_sha256 !== alias.observed_source?.item_sha256
+      || !/^[a-f0-9]{64}$/.test(primary.observed_source?.item_sha256 ?? '')) return false;
+    const bound = binding => {
+      if (!binding?.path?.startsWith(`research/${run}-`) || !/^[a-f0-9]{64}$/.test(binding.sha256 ?? '')
+        || receipt.inputs?.[binding.path] !== binding.sha256 || sha(bytes(binding.path)) !== binding.sha256) throw Error('stale alias evidence');
+      return bytes(binding.path);
+    };
+    const owner = JSON.parse(bound(entry.scientific_owner_receipt));
+    if (owner.run !== run || owner.classification_approved !== true || owner.one_underlying_issue !== true
+      || !owner.obligations?.includes(prior.obligation) || !owner.obligations?.includes(decision.obligation)
+      || owner.original_labels_preserved?.[prior.obligation] !== primary.defect
+      || owner.original_labels_preserved?.[decision.obligation] !== alias.defect
+      || typeof owner.rationale !== 'string' || owner.rationale.length < 80
+      || owner.canonical_defect_id !== entry.original_defect_id) return false;
+    const guards = entry.frozen_file_guards;
+    if (!Array.isArray(guards) || guards.length !== 2
+      || !guards.some(g => g.path === `research/${run}-reader-findings-${primaryBatch}.json`)
+      || !guards.some(g => g.path === `research/${run}-refute-${primaryBatch}.json`)) return false;
+    for (const guard of guards) bound(guard);
+    const source = entry.current_source;
+    if (source?.path !== `items/${entry.subject}.md` || receipt.inputs?.[source.path] !== source.sha256
+      || !/^[a-f0-9]{64}$/.test(source.sha256 ?? '') || sha(bytes(source.path)) !== source.sha256
+      || owner.current_source_guard?.sha256 !== source.sha256 || owner.current_source_guard?.path !== source.path) return false;
+    const text = bytes(source.path).toString();
+    if (!Array.isArray(entry.reviewed_source_excerpts) || entry.reviewed_source_excerpts.length < 2
+      || entry.reviewed_source_excerpts.some(excerpt => typeof excerpt !== 'string' || excerpt.length < 80 || !text.includes(excerpt))) return false;
+    return true;
+  } catch {
+    return false;
+  }
+}

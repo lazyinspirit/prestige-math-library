@@ -196,6 +196,8 @@ export function gateReviewSnapshot(ctx, gates, stages) {
       implicit.push(`${ctx.run}-step${step}-auditor-${kind}.json`);
   }
   const names = readdirSync(research).sort();
+  if (toolNames.has('step3-scope.mjs')) implicit.push(`${ctx.run}-step3-owner-same-defect-aliases.json`,
+    `${ctx.run}-step3-owner-external-context.json`);
   if (toolNames.has('step3-scope.mjs')) for (const name of names) {
     if (name.startsWith(`${ctx.run}-`) && /(?:-step3-(?:hash|scope|historical-dependencies|auditor-certifications|published-claims)|-refute-\d+|-reader-findings-\d+|-alpha-.*-3a-decisions)\b/.test(name)) implicit.push(name);
   }
