@@ -9,6 +9,7 @@ import { tmpdir } from 'node:os';
 import { runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
 import { verifyProofLayout } from './proof-layout-receipt.mjs';
 import { recordedPublishedRepair, unchangedPublishedClaim } from './published-repair-policy.mjs';
+import { recordedPublishedRepair as recordedPhysicsPublishedRepair } from './physics-support/published-repair-policy.mjs';
 
 const decoder = new TextDecoder('utf-8', { fatal: true });
 const decode = bytes => decoder.decode(bytes);
@@ -29,7 +30,7 @@ const inertHook = Object.freeze({
   required_absent_path: 'graphify-out',
 });
 
-function git(root, args, { input, env = {}, optional = false, literalPathspecs = true } = {}) {
+export function git(root, args, { input, env = {}, optional = false, literalPathspecs = true } = {}) {
   const result = spawnSync('git', [...(literalPathspecs ? ['--literal-pathspecs'] : []), ...args], {
     cwd: root, env: { ...process.env, LC_ALL: 'C', ...env }, input,
     maxBuffer: 256 * 1024 * 1024,
@@ -39,13 +40,13 @@ function git(root, args, { input, env = {}, optional = false, literalPathspecs =
     + ' failed: ' + (result.error?.message || result.stderr?.toString().trim()));
   return result.stdout;
 }
-const textGit = (root, args, options) => {
+export const textGit = (root, args, options) => {
   const result = git(root, args, options);
   return result === null ? null : decode(result).trim();
 };
-const gitPath = (root, name) => resolve(root, textGit(root, ['rev-parse', '--git-path', name]));
+export const gitPath = (root, name) => resolve(root, textGit(root, ['rev-parse', '--git-path', name]));
 
-function safePath(path) {
+export function safePath(path) {
   if (typeof path !== 'string' || !path || isAbsolute(path) || path.startsWith('-')
     || /[\x00-\x1f\x7f\\:*?\[\]]/.test(path)
     || path.split('/').some(part => !part || part === '.' || part === '..'
@@ -54,7 +55,7 @@ function safePath(path) {
   }
   return path;
 }
-function regularPath(root, path, missingAllowed = false) {
+export function regularPath(root, path, missingAllowed = false) {
   safePath(path);
   let cursor = root;
   for (const part of path.split('/')) {
@@ -78,7 +79,7 @@ const runtimeExcluded = (run, path) => path.startsWith('physics/.physics-autopil
   part === '.git' || part === 'node_modules' || part.startsWith('.autopilot'))
   || operationalLog(run, path);
 
-function treeEntries(root, revision = 'HEAD') {
+export function treeEntries(root, revision = 'HEAD') {
   return nul(git(root, ['ls-tree', '-r', '-z', '--full-tree', revision])).map(row => {
     const tab = row.indexOf('\t'), [mode, type, oid] = row.slice(0, tab).split(' ');
     if (tab < 0 || !/^[0-7]{6}$/.test(mode) || !/^(blob|commit)$/.test(type)
@@ -86,7 +87,7 @@ function treeEntries(root, revision = 'HEAD') {
     return { path: row.slice(tab + 1), mode, oid };
   });
 }
-function indexEntries(root) {
+export function indexEntries(root) {
   const path = gitPath(root, 'index');
   const before = existsSync(path) ? sha256(readFileSync(path)) : null;
   const rows = nul(git(root, ['ls-files', '--stage', '-z'])).map(row => {
@@ -120,7 +121,7 @@ function indexEntries(root) {
   if (rows.some(row => row.mode === '160000')) throw Error('closeout: submodule index preservation is not supported');
   return rows;
 }
-function fileState(root, path) {
+export function fileState(root, path) {
   const full = join(root, path);
   if (!existsSync(full) && !lstatExists(full)) return { path, kind: 'missing' };
   const stat = lstatSync(full), mode = stat.mode & 0o777;
@@ -234,7 +235,18 @@ function verifyReviewedHook(root, reviewedHook, hookDir) {
   }
 }
 
-function refuseGitSideEffects(root, paths, reviewedHook = null) {
+// Isolated plumbing does not execute commit hooks. Retain the existing exact
+// source/absence guard for the known inert installation without requiring a
+// run-local ownership policy merely to recognize that same fixed hook.
+export function verifiedInertHook(root) {
+  const configured = textGit(root, ['config', '--path', '--get', 'core.hooksPath'], { optional: true });
+  const hookDir = configured ? resolve(root, configured) : gitPath(root, 'hooks');
+  if (join(hookDir, inertHook.name) !== inertHook.path || !existsSync(inertHook.path)) return null;
+  verifyReviewedHook(root, inertHook, hookDir);
+  return inertHook;
+}
+
+export function refuseGitSideEffects(root, paths, reviewedHook = null) {
   for (const key of ['GIT_INDEX_FILE', 'GIT_DIR', 'GIT_WORK_TREE', 'GIT_COMMON_DIR',
     'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES', 'GIT_CONFIG',
     'GIT_CONFIG_GLOBAL', 'GIT_CONFIG_SYSTEM', 'GIT_CONFIG_NOSYSTEM',
@@ -364,9 +376,19 @@ function operationalContextExclusions(root, run, protectedPaths) {
     candidate === dir || candidate.startsWith(dir + '/')) };
 }
 
-function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingReceipt = false, preflight = false) {
+function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingReceipt = false, preflight = false, { physics = false } = {}) {
   const { policyPath, policyText, policy, reviewedHook } = readScopePolicy(root, run);
   const selected = runScope(run, root);
+  const imported = new Set();
+  if (physics) {
+    const imports = JSON.parse(readFileSync(join(root, 'research/math-imports.json'), 'utf8'));
+    if (imports.version !== 1 || !Array.isArray(imports.files)) throw Error('closeout: invalid native physics import map');
+    for (const row of imports.files) {
+      if (typeof row.path !== 'string' || row.path.startsWith('/') || row.path.split('/').includes('..')
+        || imported.has(row.path)) throw Error('closeout: invalid or duplicate native physics import pin');
+      imported.add(row.path);
+    }
+  }
   // Pathway gates govern absent authored pathways. Closeout owns every
   // existing selected-category carrier; lstat keeps dangling links present
   // so the regular-path validation below rejects them rather than omitting them.
@@ -389,10 +411,11 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
       || seenClaims.has(claim.id)) throw Error('closeout: invalid or duplicate published ownership claim');
     seenClaims.add(claim.id);
     const path = 'items/' + claim.id + '.md';
+    if (physics && imported.has(path)) throw Error('closeout: imported mathematical pin cannot be owned by physics: ' + path);
     regularPath(root, path);
     const current = readFileSync(join(root, path), 'utf8'), fm = splitFrontmatter(current).frontmatter;
     const receipt = /^ {2}repair:\s*(?:"([^"\n]+)"|'([^'\n]+)'|([^\s'"]+))\s*$/m.exec(fm)?.slice(1).find(Boolean);
-    const recorded = recordedPublishedRepair(root, claim.id, current, receipt);
+    const recorded = (physics ? recordedPhysicsPublishedRepair : recordedPublishedRepair)(root, claim.id, current, receipt);
     if (recorded.ok) {
       // Actual repair receipts and their archived preimages are authoritative,
       // even if somebody mislabels their directory as a resolver context.
@@ -401,6 +424,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
       publishedInputs.add(repair.before_file);
     }
     if (!recorded.ok) {
+      if (physics) throw Error('closeout: local physics published claim has no valid native repair receipt; mathematical no-op closure is not physics authority: ' + claim.id + ': ' + recorded.reason);
       const unchanged = unchangedPublishedClaim(root, run, claim, current);
       if (!unchanged.ok) throw Error('closeout: unclosed published ownership ' + claim.id
         + ': ' + recorded.reason + '; unchanged closure: ' + unchanged.reason);
@@ -416,6 +440,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
       || typeof row.reason !== 'string' || row.reason.trim().length < 20
       || !(row.sha256 === null || /^[a-f0-9]{64}$/.test(row.sha256 ?? ''))) throw Error('closeout: malformed additional ownership row');
     safePath(row.path);
+    if (physics && imported.has(row.path)) throw Error('closeout: imported mathematical pin cannot be additional physics ownership: ' + row.path);
     if (required.has(row.path) || runResearch(run, row.path) || additional.has(row.path) || operationalLog(run, row.path)) {
       throw Error('closeout: redundant or operational additional path ' + row.path);
     }
@@ -439,8 +464,16 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     'publication-readiness.json', 'step6-report-integrity.json', 'step6-report.response.json',
     'step6-report.md', 'step6-evidence.json'].some(name => path === `research/${run}-${name}`));
   for (const path of required) regularPath(root, path, pending(path) || allowMissingReceipt && path === finalReceipt);
-  const index = indexEntries(root), tree = treeEntries(root);
-  const others = nul(git(root, ['ls-files', '--others', '--exclude-standard', '-z']));
+  const index = indexEntries(root), rawTree = treeEntries(root);
+  // ls-tree --full-tree is repository-relative; local item/research selectors
+  // and ls-files records are relative to this workspace cwd.
+  const workspacePrefix = physics ? textGit(root, ['rev-parse', '--show-prefix']) : '';
+  const tree = physics && workspacePrefix ? rawTree.filter(row => row.path.startsWith(workspacePrefix))
+    .map(row => ({ ...row, path: row.path.slice(workspacePrefix.length) })) : rawTree;
+  const isolatedPreflight = preflight && finalReceipt === `research/${run}-dispatch/tool-step6-finalize-v3.result.json`;
+  const others = nul(git(root, ['ls-files', '--others', '--exclude-standard', '-z',
+    ...(isolatedPreflight ? ['--', `:(glob)research/${run}-*`, `:(glob)research/${run}-*/**`] : [])],
+    { literalPathspecs: !isolatedPreflight }));
   const inventory = [...new Set([...index.map(row => row.path), ...tree.map(row => row.path), ...others])].sort();
   const closurePath = 'research/' + run + '-step3-closure.json';
   const frozen = existsSync(join(root, closurePath))
@@ -463,6 +496,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   const paths = [...new Set([...automatic, ...required, ...additional])].sort();
   const owned = new Set(paths), owns = path => owned.has(path);
   for (const path of paths) {
+    if (physics && imported.has(path)) throw Error('closeout: imported mathematical pin cannot enter the physics commit: ' + path);
     if (!owns(path)) throw Error('closeout: recorded path no longer belongs to this run: ' + path);
     regularPath(root, path, pending(path) || !required.has(path) || allowMissingReceipt && path === finalReceipt);
   }
@@ -472,15 +506,19 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   }) || Buffer.alloc(0));
   if (ignored.length) throw Error('closeout: required/authorized artifact is ignored by Git: ' + ignored[0]);
   return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook,
-    contextSha256: sha256(JSON.stringify({ selected, required: [...required].sort(),
+    contextSha256: sha256(JSON.stringify({ ...(physics ? { domain: 'physics' } : {}), selected, required: [...required].sort(),
       claims: sha256(claimsText), noopClosures, operationalContexts: exclusions.sha256, additional: policy.additional_paths })) };
 }
 
 // Read-only binding helper for an owner administrative reseal. It does not
 // capture outside rows, write receipts or grant workflow/commit authority.
-export function preflightCloseoutScope(root, run) {
-  const receipt = 'research/' + run + '-dispatch/tool-close-step6-v2.result.json';
-  return loadScope(root, run, receipt, [], true, true);
+export function preflightCloseoutScope(root, run, finalReceipt = `research/${run}-dispatch/tool-close-step6-v2.result.json`, { physics = false } = {}) {
+  if (![ `research/${run}-dispatch/tool-close-step6-v2.result.json`,
+    `research/${run}-dispatch/tool-step6-finalize-v3.result.json` ].includes(finalReceipt))
+    throw Error('closeout: unknown native final receipt selector');
+  if (physics && finalReceipt !== `research/${run}-dispatch/tool-step6-finalize-v3.result.json`)
+    throw Error('closeout: native physics policy support requires the isolated v3 preflight');
+  return loadScope(root, run, finalReceipt, [], true, true, { physics });
 }
 
 export function inspectCloseoutScope(root, run) {

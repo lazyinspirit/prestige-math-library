@@ -16,7 +16,8 @@
 // The lesson is not "remember to add gates to step 6". It is that a stage with
 // no gate is a stage that cannot fail, and that should not be something a spec
 // can say by accident. It now has to be said on purpose, with a reason, and the
-// terminal stage may not say it at all.
+// terminal stage may not waive gates. Its sole exception is the authenticated
+// native report-and-commit transaction immediately after full final validation.
 
 import type { Stage, Ctx, Gate } from './types.mts';
 
@@ -153,6 +154,35 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
     if (!s?.id) continue;
     const terminal = i === stages.length - 1;
     const waiver = (s as any).gatesWaived;
+    const transaction = s.terminalTransaction;
+    if (transaction) {
+      const previous = stages[i - 1];
+      if (!terminal || s.pipeline || s.route || s.routeTargets || waiver || s.gates)
+        P(s.id, 'terminalTransaction must be the standalone terminal stage, without routing, waived gates or a second gate battery');
+      if (!previous || previous.id !== '6-final-validation-v3' || previous.id !== transaction.validatedStage || previous.finalValidation !== true
+        || previous.pipeline || previous.gatesWaived || typeof previous.gates !== 'function')
+        P(s.id, 'terminalTransaction must immediately follow its named complete finalValidation barrier');
+      try {
+        const gates = previous?.gates?.(descriptorCtx) ?? [];
+        if (!gates.length || gates.some(g => g.required === false))
+          P(s.id, 'terminalTransaction predecessor must require a real nonempty complete gate battery');
+        const receipt = transaction.receipt(descriptorCtx);
+        const plans = s.plan?.(descriptorCtx, ['all'], 1) ?? [];
+        const helper = 'tools/step6-finalize.mjs';
+        const expected = ['node', helper, '--run', ctx.run, '--validated-stage', transaction.validatedStage,
+          '--final-receipt', receipt];
+        if (plans.length !== 1 || plans[0].role !== 'tool' || plans[0].writeReceipt !== false
+          || JSON.stringify(plans[0].covers) !== JSON.stringify(['all'])
+          || JSON.stringify(plans[0].argv) !== JSON.stringify(expected)
+          || receipt !== `research/${ctx.run}-dispatch/tool-${plans[0]?.label}.result.json`)
+          P(s.id, 'terminalTransaction requires the exact native report-and-commit helper and its own final receipt, never a noop or arbitrary plan');
+        const artifacts = s.artifacts?.(descriptorCtx, 'all');
+        if (!(Array.isArray(artifacts) ? artifacts : [artifacts]).includes(receipt))
+          P(s.id, 'terminalTransaction must owe its actual committed final receipt as an artifact');
+      } catch (err: any) { P(s.id, `invalid terminalTransaction — ${err?.message ?? err}`); }
+      continue;
+    }
+
 
     if (waiver) {
       if (terminal) {

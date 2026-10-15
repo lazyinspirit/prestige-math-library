@@ -36,6 +36,7 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { itemHashGuard, itemSurfaceHash, shortHash } from "./item-hash.mjs";
+import { runPages } from "./item-dependency-levels.mjs";
 
 const [, , cmd, ledgerPath, ...rest] = process.argv;
 const ITEMS = "items";
@@ -51,10 +52,34 @@ const load = () =>
 // must answer "did the mathematics change?" identically — see that file for why
 // the `verification:` block is excluded and everything else is kept.
 
+// Only the final endpoint is scoped. Earlier snapshots and all historical
+// records retain their original whole-corpus semantics and bytes.
+const scopeOption = rest.indexOf('--step6-run');
+const scopedRun = scopeOption < 0 ? null : rest[scopeOption + 1];
+if (scopeOption >= 0 && (cmd !== 'snap' || !/^[a-zA-Z0-9_-]+$/.test(scopedRun ?? '')))
+  die('--step6-run requires snap and an actual run');
+const selectedFiles = () => {
+  if (!scopedRun) return readdirSync(ITEMS).filter(f => f.endsWith('.md')).sort();
+  const pages = runPages(process.cwd(), scopedRun);
+  const ids = new Set(pages.flatMap(page => page.items.map(item => typeof item === 'string' ? item : item.id)));
+  const claims = `research/${scopedRun}-step3-published-claims.jsonl`;
+  if (existsSync(claims)) for (const line of readFileSync(claims, 'utf8').split(/\r?\n/).filter(Boolean)) {
+    const claim = JSON.parse(line);
+    if (claim.version !== 1 || claim.run !== scopedRun) die('foreign or invalid published touch claim');
+    ids.add(claim.id);
+  }
+  if (!ids.size || [...ids].some(id => !/^[a-z][a-z0-9-]*$/.test(id ?? '')))
+    die('empty or invalid final touch scope');
+  return [...ids].sort().map(id => id + '.md');
+};
+const snapshotFiles = cmd === 'snap' ? selectedFiles() : [];
+const selectedBytes = scopedRun ? new Map(snapshotFiles.map(file => [file, readFileSync(join(ITEMS, file), 'utf8')])) : null;
+const snapshotText = file => selectedBytes?.get(file) ?? readFileSync(join(ITEMS, file), 'utf8');
+
 const hashes = () => {
   const out = {};
-  for (const f of readdirSync(ITEMS).filter((f) => f.endsWith(".md")).sort())
-    out[f.slice(0, -3)] = shortHash(itemHashGuard(readFileSync(join(ITEMS, f), "utf8")));
+  for (const f of snapshotFiles)
+    out[f.slice(0, -3)] = shortHash(itemHashGuard(snapshotText(f)));
   return out;
 };
 
@@ -66,8 +91,8 @@ const hashes = () => {
  * those cases without trusting an agent's description of its own edit. */
 const surfaces = () => {
   const out = {};
-  for (const f of readdirSync(ITEMS).filter((f) => f.endsWith(".md")).sort())
-    out[f.slice(0, -3)] = itemSurfaceHash(readFileSync(join(ITEMS, f), "utf8")).slice(0, 16);
+  for (const f of snapshotFiles)
+    out[f.slice(0, -3)] = itemSurfaceHash(snapshotText(f)).slice(0, 16);
   return out;
 };
 
@@ -121,7 +146,7 @@ if (cmd === "snap") {
         `this name would silently move their baseline forward past the edits it is meant to ` +
         `bound. Choose a distinct label — round-qualify it, e.g. "${label}-round-2".`);
   }
-  led.snapshots.push({ label, at: new Date().toISOString(), hashes: currentHashes, surfaces: currentSurfaces });
+  led.snapshots.push({ label, at: new Date().toISOString(), ...(scopedRun ? { scope: { run: scopedRun, kind: "frontier-and-published-claims" } } : {}), hashes: currentHashes, surfaces: currentSurfaces });
   writeFileSync(ledgerPath, JSON.stringify(led, null, 1) + "\n");
   const r = repairs(led);
   console.log(`snapshot "${label}" recorded — ${Object.keys(led.snapshots.at(-1).hashes).length} items, ` +

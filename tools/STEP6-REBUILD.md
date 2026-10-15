@@ -1,64 +1,60 @@
-# Step 6: concise native closeout
+# Step 6
 
-The owner-authorized rebuild applies to mathematics and physics. Four operational
-phases share the existing stable stage IDs so completed work remains authentic:
+Both workflows use the same order:
 
-1. Prepare contracts, touch endpoint, pathways and judge stamps. The existing
-   contract rework/certification loop and pathway author remain available. A
-   genuinely empty pathway obligation set uses its actual native checker instead
-   of a prose worker; every pathway gate still executes.
-2. Run the complete final readiness battery and seal its exact current inputs.
-   Mathematics also preflights scoped packaging before writing readiness, so
-   temporary symlinks and stale ownership cannot first appear after reporting.
-3. Generate the existing version-2 response deterministically from current native
-   evidence. Render fewer than 250 words: status, scope, material caveat counts,
-   measured elapsed/retry/token telemetry and audit links. No reporting LLM is
-   dispatched. Full defects, verdicts, resolutions and qualifications remain in
-   the unchanged-format JSON audit packet. Missing usage is never estimated;
-   retained attempt totals are explicitly distinguished from complete history.
-4. Create the local closeout commit and execute every existing terminal gate.
-   Scope, temporary-index integration, outside index/flags/HEAD/working-byte
-   preservation, physics imports and public/empirical qualifications stay strict.
+1. Check metadata and rendering, and prepare current pathways, stamps and evidence.
+2. Repair confirmed defects. Suspicious mathematical or physics defects may receive focused scientific repair, including affected consumers.
+3. Run every distinct old mechanical/content gate. A failure blocks completion; repair, refresh changed inputs, then repeat the full battery.
+4. Immediately generate the concise final report from the validated evidence.
+5. Commit only the run's owned artifacts on main.
 
-No gate, liveness bound, mathematical/physics repair callback, repair-round cap,
-reviewer independence requirement or publication boundary is removed. Old native
-Alpha report/pathway receipts remain recognized alongside new tool receipts.
-No stat-only or cross-process hash cache is introduced. Real protected-tree scans
-and before/after outside-preservation comparisons remain mandatory.
+The native stages are `6-prepare-v3`, `6-pathway-author-v3`,
+`6-final-validation-v3`, and `6-finalize-v3`. Only actual outstanding pathway
+prose dispatches a model. Reporting is deterministic. There is one final gate
+barrier, followed by one real report-and-commit transaction; no content battery
+runs after commit. Earlier workflow stages are unchanged.
 
-For owner-supervised math, authorize a stable Step-6 frontier at its existing hold:
+Every original applicable mechanical condition remains required. Identical
+commands collapse once; distinct arguments, liveness bounds, required inputs,
+context projections and repair routes remain. See
+[the mechanical check map](STEP6-MECHANICAL-CHECKS.md). Checks that depend on a
+report or commit move into those operations: the final battery validates the
+planned response, then the transaction validates the actual report and committed
+owned blobs. This never treats an absent report or unmade commit as a pass.
 
-```
-node tools/owner-gate-supervision.mjs --run RUN --state-dir .autopilot/RUN \
-  --escalations-resolved --authorize-step6
-```
+Readiness and report receipts select the current frontier, actual prerequisite
+closure, owned evidence and workflow inputs. Physics includes the relevant pinned
+imports and original mathematical sources. They do not hash unrelated library
+bodies or discover the entire workspace. Identity/home inventories and Git tree
+metadata remain available to detect scope changes. Shared workflow code remains
+strict; unrelated shared-ledger records use their existing run projections.
 
-Then resume through the native CLI. Each later Step-6 battery gets a fresh actual
-supplier-before-consumer formatting, metadata and hash pass automatically while
-its exact frontier/context fingerprint matches. This removes repeated human
-waiting, not checks. Source/context mutation or a native failure hold returns to
-owner intervention. The final pass stays in runtime to avoid dirtying a committed
-run. Without authorization, the existing manual protocol remains unchanged.
+Metadata/render preparation is reused only for the exact unchanged inputs and
+repair round. Changed inputs or repairs require fresh preparation and the full
+battery. Quiet engine ticks neither launch renderers nor rehash the library.
+The terminal helper requires the genuine immediately preceding native gate pass,
+its complete event sequence, current prepared inputs and drained writers. A
+failed preparation, gate or transaction remains a visible blocker. Outside OPEN
+findings and documented deferrals remain explicit in the audit packet.
 
-Physics has the same optional owner-bound protocol, retaining its existing v2
-per-attempt receipt validation. From the physics workspace, authorize an exact
-paused Step-6 boundary with:
+The scoped commit constructs a Git tree from HEAD and exact owned blobs, then
+updates main with compare-and-swap. It does not checkout files, run filters or
+commit hooks, or write foreign working files. It preserves outside staged blobs
+and index flags and compares outside HEAD metadata. Owned current bytes and
+committed/index blobs are checked inside the transaction. The native receipt stays unsuccessful until all transaction assertions pass.
+A failure after a landed commit holds for recovery; it never resets another
+session's work.
 
-```
-node ../tools/physics-support/owner-gate-supervision.mjs --run RUN \
-  --state-dir .physics-autopilot/RUN --authorize-step6 --resolve-escalations
-```
+The final report records status, frontier counts, material caveats, measured
+elapsed time/retries/token usage when available, and an audit link. It omits
+exhaustive bookkeeping; full evidence stays in JSON. Missing telemetry is not
+estimated. Content remains draft; publication and push require owner action.
 
-Every subsequent battery performs real renderer and current source/manifest
-metadata checks over the dependency-ordered native scope. Changed originals of
-pinned imports invalidate the authorization. Outside OPEN findings remain OPEN.
+New stage identities cannot adopt historical v2 coverage. Existing frozen runs
+require an explicit native guarded cutover; original state, reports and receipts
+stay historical. Installing this rebuild does not resume or migrate a live run.
+Legacy report v1 inspection requires explicit `--legacy-v1`; it reads only the
+recorded historical entries and never recreates a whole-workspace baseline.
 
-Active frozen reporting intervals must use the native guarded recovery described
-in STEP6-REPORT-RECOVERY.md. Never replace a frozen snapshot manually. Its original
-state, receipts and reports are archived; the complete reopened native suffix
-executes again and no new coverage is invented. Exact hash-bound operational
-resolver exclusions preserve the directories physically and outside the scoped
-commit, and cannot exclude authoritative sources, claims or review artifacts.
-
-Implementation tests were explicitly prohibited by the owner for this rebuild.
-No test result is claimed. Normal native engine gates remain enabled.
+The owner prohibited tests and execution for this rebuild. No tests, syntax
+checks, gates, renderers or rebuilt engine run were used to validate it.

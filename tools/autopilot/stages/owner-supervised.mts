@@ -11,6 +11,9 @@ import { holdBeforeBattery, consumePermission } from '../../owner-gate-supervisi
 export { workflowRevision };
 export function stagesForRun(ctx: any) {
   return nativeStages(ctx).map((source: any) => {
+    // Step 6 has one native preparation/validation transaction; repeated owner
+    // recertification pauses around its bookkeeping stages would duplicate it.
+    if (source.id.startsWith('6-')) return source;
     const stage = { ...source };
     const progress = source.onProgress;
     stage.onProgress = async (args: any) => {

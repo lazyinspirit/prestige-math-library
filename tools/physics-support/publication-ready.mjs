@@ -11,10 +11,12 @@
 // protected.
 
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
 import { REPO } from './paths.mjs';
 import { runContentHash, runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
+import { scopedReadinessTree } from '../step6-scoped-tree.mjs';
+import { step6OwnedInputs } from '../step6-owned-inputs.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : null; };
@@ -35,35 +37,8 @@ const artifactRels = [
   `research/${run}-judge-closure.json`,
 ];
 
-function protectedTreeReceipt() {
-  const ignoredTopLevel = new Set(['.git', 'node_modules']);
-  const mutableAfterReadiness = new Set([
-    receiptRel,
-    `research/${run}-judge-context-hashes.json`,
-    `research/${run}-step6-evidence.json`,
-    // Created by the final readiness gates, checked separately before commit.
-    `research/${run}-proof-layout.json`,
-    `research/${run}-step6-report-integrity.json`,
-    `research/${run}-step6-report.response.json`,
-    `research/${run}-step6-report.md`,
-  ]);
-  const dispatchPrefix = `research/${run}-dispatch/`;
-  const files = [];
-  const walk = (dir) => {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      const absolute = join(dir, entry.name);
-      const rel = relative(root, absolute).replaceAll('\\', '/');
-      const topLevel = rel.split('/')[0];
-      if (!rel || ignoredTopLevel.has(topLevel)
-        || topLevel === '.physics-autopilot' || topLevel.startsWith('.physics-autopilot-')) continue;
-      if (mutableAfterReadiness.has(rel) || rel.startsWith(dispatchPrefix)) continue;
-      if (entry.isDirectory()) walk(absolute);
-      else if (entry.isFile()) files.push(rel);
-    }
-  };
-  walk(root);
-  const rows = files.sort().map((file) => `${file}\0${sha256(readFileSync(join(root, file)))}`);
-  return { protected_tree_files: rows.length, protected_tree_sha256: sha256(rows.join('\n')) };
+function protectedTreeReceipt(scope) {
+  return scopedReadinessTree(run, root, { scope, physics: true, ownedPaths: step6OwnedInputs(run, root, { physics: true }) });
 }
 
 const blockers = [];
@@ -107,7 +82,7 @@ if (scope) {
 
 const inputHashes = Object.fromEntries(artifactRels.filter((file) => existsSync(join(root, file)))
   .map((file) => [file, sha256(readFileSync(join(root, file)))]));
-const treeReceipt = protectedTreeReceipt();
+const treeReceipt = protectedTreeReceipt(scope);
 const expected = {
   schema: 2,
   run,
@@ -126,7 +101,7 @@ if (write) {
   if (!existsSync(receiptPath)) blockers.push(`missing ${receiptRel}`);
   else {
     const saved = JSON.parse(readFileSync(receiptPath, 'utf8'));
-    for (const key of ['schema', 'run', 'verdict', 'content_sha256', 'published_baseline_commit', 'protected_tree_files', 'protected_tree_sha256']) {
+    for (const key of ['schema', 'run', 'verdict', 'content_sha256', 'published_baseline_commit', 'protected_tree_scope', 'protected_tree_files', 'protected_tree_sha256']) {
       if (saved[key] !== expected[key]) blockers.push(`${receiptRel}: ${key} is stale`);
     }
     if (JSON.stringify(saved.input_sha256) !== JSON.stringify(expected.input_sha256)) blockers.push(`${receiptRel}: input hashes are stale`);

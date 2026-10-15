@@ -30,6 +30,8 @@ import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { batchInput, loopState, collectBatch, accepted, loopPattern, batchPlans, engineRepairEligible, repairCohort } from '../../physics-support/batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
+import { prepareFinalIfChanged } from '../../physics-support/step6-finalize.mjs';
+import { assertFreshStep6State } from '../../step6-prepared.mjs';
 
 // Version the composed Step-3 module independently. The executor watches both
 // files and re-imports this root when either changes; the query prevents Node's
@@ -1006,6 +1008,154 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['env', `JUDGE_LINEUP=
 const resultPattern = (role: string, labelSource: string): RegExp =>
   new RegExp(`^${role}-(?:${role}-)?(?:${labelSource})\\.result\\.json$`);
 
+
+// Step 6 has one final validation barrier. Preparation may repair content;
+// reporting starts only after the actual complete battery passes.
+const step6ContractRepair = async ({ ctx, executor, stage, round, failure }: any) => {
+      if (failure.id !== 'defect-ledger') return;
+      const rows = openContractRows(ctx);
+      if (!rows.length) return;
+      const blocked = blockedObligation(ctx, 'contract-rework');
+      if (blocked) return { outage: { reason: blocked.reason, retryAfterMs: blocked.retryAfterMs } };
+      const batchesOwed = [...new Set(rows.map((r) => String(r.batch)))];
+      const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
+      const versions = new Map(batchesOwed.map((b) => [b,
+        contractReworkVersion(rows.filter((row) => String(row.batch) === b))]));
+      const reworkDone = (b: string) => readdirSync(dispatchDir).some((f: string) => {
+        if (!f.includes('contract-rework') || !f.includes(`-b${b}-${versions.get(b)}`)
+          || !f.endsWith('.result.json')) return false;
+        try {
+          const result = JSON.parse(readFileSync(join(dispatchDir, f), 'utf8'));
+          return result.ok === true && result.run === ctx.run
+            && String(result.label ?? '').endsWith(`-b${b}-${versions.get(b)}`)
+            && Array.isArray(result.covers) && result.covers.map(String).includes(b);
+        } catch { return false; }
+      });
+      const pendingRework = batchesOwed.filter((b) => {
+        try { return !reworkDone(b); } catch { return true; }
+      });
+      if (pendingRework.length) {
+        // The chartered lane is the owning Beta; an obligation row's
+        // `dispatch` overrides it when the owner substituted a model (the
+        // substitution then lives in the run's artifacts, on the record).
+        const override = obligationDispatch(ctx, 'contract-rework');
+        for (const b of pendingRework) {
+          executor.start(stage, {
+            role: 'beta',
+            job: 'authoring',
+            brief: 'briefs/content-repair.md',
+            task: [`research/${ctx.run}-beta-contract-rework.task.md`],
+            timeout: 14400,
+            ...(override ?? {}),
+            // The batch is both prompt identity (`<i>`) and evidence identity.
+            // An obligation override may substitute a lane, never the work unit.
+            covers: [b],
+            label: `contract-rework-${round}-b${b}-${versions.get(b)}`,
+          });
+        }
+        return;
+      }
+      // Every owed batch has a rework result: certify. The certifying Alpha
+      // samples the rewritten rows against the items and closes (or keeps
+      // open, with why) the ledger row IN PLACE — no author certifies its
+      // own repair.
+      executor.start(stage, {
+        role: 'alpha',
+        label: `certify-rework-${round}`,
+        job: 'adjudication',
+        covers: [],
+        brief: 'briefs/alpha.md',
+        task: [`research/${ctx.run}-alpha-rework-certify.task.md`],
+        timeout: 7200,
+      });
+    };
+const step6ObligationRepair = async ({ ctx, executor, stage, round, failure }: any) => {
+      if (failure.id !== 'obligations') return;
+      // Due rows with a recorded dispatch re-fire themselves; rows still on
+      // their clock are an outage wait; anything else is genuinely the
+      // owner's (accept on the record) and the blocker says so.
+      let rows: any[] = [];
+      try {
+        rows = readFileSync(join(ctx.repo, 'research', `${ctx.run}-obligations.jsonl`), 'utf8')
+          .split('\n').filter(Boolean).map((l) => JSON.parse(l))
+          .filter((r) => r.tier === 'block' && r.status === 'open');
+      } catch { return; }
+      const due = rows.filter((r) => r.dispatch && (!r.unblock_at || new Date(r.unblock_at).getTime() <= Date.now()));
+      if (due.length) {
+        for (const r of due) {
+          executor.start(stage, {
+            covers: [], timeout: 14400,
+            ...r.dispatch,
+            label: `obligation-${r.id}-${round}`,
+          });
+        }
+        return;
+      }
+      const clocks = rows.map((r) => (r.unblock_at ? new Date(r.unblock_at).getTime() - Date.now() : 0)).filter((ms) => ms > 0);
+      if (clocks.length) {
+        return { outage: { reason: `${rows.length} obligation(s) on an unblock clock`, retryAfterMs: Math.min(...clocks) } };
+      }
+    };
+const step6Helper = 'tools/physics-support/step6-finalize.mjs';
+const step6Receipt = (ctx: any) => `research/${ctx.run}-dispatch/tool-step6-finalize-v3.result.json`;
+function step6PathwayOwed(ctx: any): string[] {
+  const file = join(ctx.repo, 'research', `${ctx.run}-pathway-closure.json`);
+  if (!existsSync(file)) return ['all'];
+  const receipt = JSON.parse(readFileSync(file, 'utf8'));
+  if (receipt.run !== ctx.run || !Array.isArray(receipt.briefs)) throw Error('Malformed current pathway closure');
+  return receipt.briefs.some((row: any) => row.status !== 'closed') ? ['all'] : [];
+}
+function step6FinalGates(ctx: any) {
+  const all = [
+    closureGate(ctx), ledgerGate(ctx, { terminal: true }),
+    gate('pathway-closure', ['node', 'tools/physics-support/pathway-closure.mjs', 'check', '--run', ctx.run]),
+    ...[gate('judge-stamps', ['node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+      '--exclude-published',
+      '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+      '--terminal-resolutions', terminalResolutionsPath(ctx), ...auditorCertificationArgs(ctx), '--verify'], {
+      liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' } }), closureGate(ctx)],
+    ...repoWide(ctx), levelCoverageGate(ctx),
+    gate('proof-step-separation', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--write', '--gate', 'proof-step-separation']),
+    gate('proof-blue-tags', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--write', '--gate', 'proof-blue-tags']),
+    gate('proof-step-separation', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--verify', '--gate', 'proof-step-separation']),
+    gate('proof-blue-tags', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--verify', '--gate', 'proof-blue-tags']),
+    gate('publication-readiness', ['node', 'tools/physics-support/publication-ready.mjs', '--run', ctx.run, '--verify']),
+    gate('step6-evidence', ['node', 'tools/physics-support/step6-report.mjs', 'check-evidence', '--run', ctx.run]),
+    gate('report-integrity', ['node', 'tools/physics-support/step6-report.mjs', 'check', '--run', ctx.run]),
+    gate('report-response', ['node', 'tools/physics-support/step6-report.mjs', 'check-response', '--planned-summary', '--run', ctx.run]),
+    gate('obligations', ['node', 'tools/physics-support/obligations.mjs', 'check', '--run', ctx.run, '--terminal']),
+    gate('tree-clean', ['node', 'tools/physics-support/run-commit.mjs', '--run', ctx.run, '--preflight']),
+    gate('physics-content', ['node', 'tools/physics-support/physics-check.mjs', '--run', ctx.run, '--step6-scope']),
+  ];
+  // Only identical commands collapse. Preserve stronger arguments, liveness,
+  // needs, result projections and every original gate's required status.
+  const unique = new Map<string, any>();
+  for (const g of all) {
+    const argv = typeof g.argv === 'function' ? g.argv() : g.argv;
+    const key = g.id + '\0' + JSON.stringify(argv);
+    const previous = unique.get(key);
+    if (!previous) { unique.set(key, g); continue; }
+    // Preserve any stronger metadata instead of silently dropping it with a
+    // duplicate. Different projection semantics require separate commands.
+    if (previous.projectResult !== g.projectResult)
+      throw Error(`Conflicting final gate projection: ${g.id}`);
+    if (previous.liveness && g.liveness
+      && (previous.liveness.pattern !== g.liveness.pattern || previous.liveness.unit !== g.liveness.unit))
+      throw Error(`Conflicting final gate liveness: ${g.id}`);
+    const liveness = previous.liveness || g.liveness;
+    if (liveness) previous.liveness = { ...liveness,
+      min: Math.max(previous.liveness?.min ?? 1, g.liveness?.min ?? 1) };
+    previous.required = previous.required !== false || g.required !== false;
+    const beforeNeeds = typeof previous.needs === 'function' ? previous.needs() : previous.needs ?? [];
+    const afterNeeds = typeof g.needs === 'function' ? g.needs() : g.needs ?? [];
+    if (beforeNeeds.length || afterNeeds.length) previous.needs = [...new Set([...beforeNeeds, ...afterNeeds])];
+    const beforeInputs = previous.ownerReviewInputs ?? [];
+    const afterInputs = g.ownerReviewInputs ?? [];
+    if (beforeInputs.length || afterInputs.length) previous.ownerReviewInputs = [...new Set([...beforeInputs, ...afterInputs])];
+  }
+  return [...unique.values()];
+}
+
 export const stages = [
   // Drift review, mechanical materialization, then parallel construction and an owner-held gate.
   {
@@ -1379,314 +1529,72 @@ export const stages = [
   },
 
   {
-    id: '6-contract-close',
-    label: 'terminal contract and defect-ledger closure',
-    units: () => ['all'],
-    artifacts: () => 'research/DEFECT-LEDGER.md',
-    pattern: resultPattern('tool', 'step6-contract-close-v2'),
-    concurrency: 1,
-    plan: () => [{
-      role: 'tool',
-      label: 'step6-contract-close-v2',
-      job: 'bookkeeping-mechanical',
-      covers: ['all'],
-      argv: ['node', 'tools/physics-support/defect-ledger.mjs', 'render'],
-    }],
-    // This is an early terminal-ledger closer, not yet a final-text check:
-    // pathway placement, pathway prose, and stamps still follow.  Re-running
-    // repo-wide and level coverage here used a full pass on a tree later stages
-    // could immediately supersede.  `9-readiness-v2` owns the first full
-    // final-text validation, and the read-only report integrity receipt lets
-    // `6-close-v2` safely reuse it on an unchanged protected tree.
-    gates: (ctx) => [closureGate(ctx), ledgerGate(ctx, { terminal: true })],
-    // THE CONTRACT-REWORK LOOP (owner directive, 2026-08-17). `--no-open`
-    // red on a contract-quality row with an owning batch — the rr-005 shape —
-    // used to be a dead end: its recorded remedy is "the owning Beta rewrites
-    // the worksheets with its sources to hand", and no stage after authoring
-    // could dispatch a Beta. Round shape: rework by the OWNING Beta (contract
-    // files only, never item text — contracts are not judged, so no verdict
-    // is voided), then an Alpha certification that samples the rewritten rows
-    // and closes the ledger row in place; the gate re-verifies. A rework
-    // blocked by a lane quota is an OUTAGE with the obligation row's clock,
-    // not a burnt round — the engine re-fires it when the lane recovers.
+    id: '6-prepare-v3', label: 'prepare final metadata and pathway obligations', units: () => ['all'],
+    pattern: resultPattern('tool', 'step6-prepare-v3'), concurrency: 1,
+    artifacts: (ctx) => [`research/${ctx.run}-pathway.json`, `research/${ctx.run}-pathway-closure.json`],
+    plan: (ctx) => [{ role: 'tool', label: 'step6-prepare-v3', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', step6Helper, 'prepare', '--run', ctx.run] }],
+    gatesWaived: 'This serial preparation writes current mechanical inputs; the single final validation barrier checks every constraint after any repair.',
+  },
+  {
+    id: '6-pathway-author-v3', label: 'repair actual pathway prose obligations', units: step6PathwayOwed,
+    pattern: resultPattern('alpha-high', 'pathway-close-v3'), concurrency: 1,
+    artifacts: (ctx) => `research/${ctx.run}-pathway-closure.json`,
+    plan: (ctx, pending) => pending.length ? [{ role: 'alpha-high', label: 'pathway-close-v3', job: 'authoring', covers: ['all'],
+      brief: 'briefs/alpha.md', task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }] : [],
+    gatesWaived: 'Only real pending prose obligations dispatch an author; the complete final barrier verifies their exact closure and final source.',
+  },
+  {
+    id: '6-final-validation-v3', label: 'metadata/render recertification and all final gates', units: () => ['all'],
+    finalValidation: true,
+    pattern: resultPattern('tool', 'step6-prepare-final-v3'), concurrency: 1,
+    artifacts: (ctx) => [`research/${ctx.run}-publication-readiness.json`, `research/${ctx.run}-step6-evidence.json`,
+      `research/${ctx.run}-step6-report-integrity.json`],
+    plan: (ctx) => [{ role: 'tool', label: 'step6-prepare-final-v3', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', step6Helper, 'prepare-final', '--run', ctx.run] }],
+    // The helper owns a memo on actual selected-source fingerprint and repair
+    // round. No repeated renderer/recertification work occurs on quiet ticks.
+    onProgress: async (args: any) => {
+      await prepareFinalIfChanged({ ...args, physics: true });
+    },
+    gates: step6FinalGates,
     maxFixRounds: 4,
-    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      if (failure.id !== 'defect-ledger') return;
-      const rows = openContractRows(ctx);
-      if (!rows.length) return;
-      const blocked = blockedObligation(ctx, 'contract-rework');
-      if (blocked) return { outage: { reason: blocked.reason, retryAfterMs: blocked.retryAfterMs } };
-      const batchesOwed = [...new Set(rows.map((r) => String(r.batch)))];
-      const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
-      const versions = new Map(batchesOwed.map((b) => [b,
-        contractReworkVersion(rows.filter((row) => String(row.batch) === b))]));
-      const reworkDone = (b: string) => readdirSync(dispatchDir).some((f: string) => {
-        if (!f.includes('contract-rework') || !f.includes(`-b${b}-${versions.get(b)}`)
-          || !f.endsWith('.result.json')) return false;
-        try {
-          const result = JSON.parse(readFileSync(join(dispatchDir, f), 'utf8'));
-          return result.ok === true && result.run === ctx.run
-            && String(result.label ?? '').endsWith(`-b${b}-${versions.get(b)}`)
-            && Array.isArray(result.covers) && result.covers.map(String).includes(b);
-        } catch { return false; }
-      });
-      const pendingRework = batchesOwed.filter((b) => {
-        try { return !reworkDone(b); } catch { return true; }
-      });
-      if (pendingRework.length) {
-        // The chartered lane is the owning Beta; an obligation row's
-        // `dispatch` overrides it when the owner substituted a model (the
-        // substitution then lives in the run's artifacts, on the record).
-        const override = obligationDispatch(ctx, 'contract-rework');
-        for (const b of pendingRework) {
-          executor.start(stage, {
-            role: 'beta',
-            job: 'authoring',
-            brief: 'briefs/content-repair.md',
-            task: [`research/${ctx.run}-beta-contract-rework.task.md`],
-            timeout: 14400,
-            ...(override ?? {}),
-            // The batch is both prompt identity (`<i>`) and evidence identity.
-            // An obligation override may substitute a lane, never the work unit.
-            covers: [b],
-            label: `contract-rework-${round}-b${b}-${versions.get(b)}`,
-          });
+    onGateFailure: async (args: any) => {
+      const failures = [args.failure, ...(args.failure.advisory ?? [])];
+      const outages: any[] = [];
+      for (const failure of failures) {
+        const routed = { ...args, failure: { ...failure, advisory: [] } };
+        if (failure.id === 'defect-ledger') {
+          const report = await step6ContractRepair(routed);
+          if (report?.outage) outages.push(report.outage);
+        } else if (failure.id === 'obligations') {
+          const report = await step6ObligationRepair(routed);
+          if (report?.outage) outages.push(report.outage);
+        } else if (failure.id === 'pathway-closure') {
+          args.executor.start(args.stage, { role: 'alpha-high', label: `pathway-repair-${args.round}`, job: 'authoring', covers: [],
+            brief: 'briefs/alpha.md', task: [`research/${args.ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 });
+        } else {
+          // A failed scope preflight must never commit before validation.
+          // Its ordinary commit retry belongs to the final transaction.
+          const report = await mechanicalRepair({ ctx: args.ctx, failure: { ...failure, advisory: [] }, excludeGateIds: ['tree-clean'] });
+          if (report.outcome === 'outage') outages.push({ reason: report.reason! });
         }
-        return;
       }
-      // Every owed batch has a rework result: certify. The certifying Alpha
-      // samples the rewritten rows against the items and closes (or keeps
-      // open, with why) the ledger row IN PLACE — no author certifies its
-      // own repair.
-      executor.start(stage, {
-        role: 'alpha',
-        label: `certify-rework-${round}`,
-        job: 'adjudication',
-        covers: [],
-        brief: 'briefs/alpha.md',
-        task: [`research/${ctx.run}-alpha-rework-certify.task.md`],
-        timeout: 7200,
-      });
-    },
-  },
-
-  // Step 6 is intentionally serial. Frontier 16's old report stage launched
-  // snapshot, pathway mutation and report writing together; the report could
-  // therefore read state that had not happened yet. Each transition below owns
-  // one durable artifact and the next stage cannot start without it.
-  {
-    id: '6-snapshot-v2', label: 'pre-closeout touch snapshot', units: () => ['all'],
-    pattern: resultPattern('tool', 'snap-pre-closeout-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'tool', label: 'snap-pre-closeout-v2', job: 'bookkeeping-mechanical',
-      covers: ['all'], argv: ['node', 'tools/physics-support/touchlog.mjs', 'snap', touchesPath(ctx), 'pre-closeout-v2'] }],
-    gatesWaived: 'This is the immutable endpoint used by later touch audits; successful execution is its receipt.',
-  },
-  {
-    id: '6-pathway-sync-v2', label: 'mechanical pathway placement', units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-pathway.json`,
-    pattern: resultPattern('tool', 'pathway-sync-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'tool', label: 'pathway-sync-v2', job: 'bookkeeping-mechanical',
-      covers: ['all'], argv: ['node', 'tools/physics-support/pathway-sync.mjs', '--run', ctx.run] }],
-    gates: (ctx) => [frontierItemGate(ctx, 'pathcheck', 'pathcheck'), closureGate(ctx)],
-  },
-  {
-    id: '6-pathway-seed-v2', label: 'pathway prose obligations', units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-pathway-closure.json`,
-    pattern: resultPattern('tool', 'pathway-seed-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'tool', label: 'pathway-seed-v2', job: 'bookkeeping-mechanical',
-      covers: ['all'], argv: ['node', 'tools/physics-support/pathway-closure.mjs', 'seed', '--run', ctx.run] }],
-    gatesWaived: 'The seed deliberately contains pending cognitive prose obligations; the next stage is their hard gate.',
-  },
-  {
-    id: '6-pathway-author-v2', label: 'Lead Alpha pathway rewrite', units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-pathway-closure.json`,
-    // Retain native prose work whenever an actual obligation exists. Only a
-    // current empty receipt, accepted by its real checker, needs no writer.
-    // Both receipt identities remain valid across an active-run reload.
-    pattern: /^(?:alpha-high-(?:alpha-high-)?|tool-(?:tool-)?)(?:pathway-close-v2)\.result\.json$/, concurrency: 1,
-    plan: (ctx) => {
-      let empty = false;
-      try {
-        const receipt = JSON.parse(readFileSync(join(ctx.repo, 'research', `${ctx.run}-pathway-closure.json`), 'utf8'));
-        empty = receipt.run === ctx.run && Array.isArray(receipt.briefs) && receipt.briefs.length === 0;
-      } catch { /* Missing or malformed evidence still belongs to the native route. */ }
-      if (empty) {
-        const argv = ['tools/physics-support/pathway-closure.mjs', 'check', '--run', ctx.run];
-        const checked = spawnSync(process.execPath, argv, { cwd: ctx.repo, encoding: 'utf8' });
-        if (!checked.error && checked.status === 0) return [{ role: 'tool', label: 'pathway-close-v2',
-          job: 'bookkeeping-mechanical', covers: ['all'], argv: ['node', ...argv] }];
-      }
-      return [{ role: 'alpha-high', label: 'pathway-close-v2', job: 'authoring', covers: ['all'],
-        brief: 'briefs/alpha.md',
-        task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }];
-    },
-    gates: (ctx) => [
-      gate('pathway-closure', ['node', 'tools/physics-support/pathway-closure.mjs', 'check', '--run', ctx.run]),
-      frontierItemGate(ctx, 'pathcheck', 'pathcheck'), frontierItemGate(ctx, 'prosecheck', 'prosecheck'), closureGate(ctx),
-    ],
-  },
-  {
-    id: '6-stamps-v2', label: 'final judge stamps', units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-judge-stamps.json`,
-    pattern: resultPattern('tool', 'judge-stamps-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'tool', label: 'judge-stamps-v2', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
-        '--exclude-published',
-        '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
-        '--terminal-resolutions', terminalResolutionsPath(ctx),
-        ...auditorCertificationArgs(ctx),
-        '--apply', '--report', `research/${ctx.run}-judge-stamps.json`] }],
-    gates: (ctx) => [gate('judge-stamps', ['node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
-      '--exclude-published',
-      '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
-      '--terminal-resolutions', terminalResolutionsPath(ctx), ...auditorCertificationArgs(ctx), '--verify'], {
-      liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' } }), closureGate(ctx)],
-  },
-  {
-    id: '6-readiness-v2', label: 'structured publication readiness', units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-publication-readiness.json`,
-    pattern: resultPattern('tool', 'readiness-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'tool', label: 'readiness-v2', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', 'tools/physics-support/publication-ready.mjs', '--run', ctx.run, '--write'] }],
-    // Full level coverage already performs the configured-judge closure and
-    // writes its receipt. Running the judge-only scan beside it reread every
-    // manifest, verdict, adjudication and terminal resolution for no added
-    // assurance.
-    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), ledgerGate(ctx, { terminal: true }),
-      // Both gates share one actual renderer scan, cached on content and
-      // renderer/checker inputs. No new agent stage or repeated SSR pass.
-      gate('proof-step-separation', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--write', '--gate', 'proof-step-separation']),
-      gate('proof-blue-tags', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--write', '--gate', 'proof-blue-tags']),
-      gate('publication-readiness', ['node', 'tools/physics-support/publication-ready.mjs', '--run', ctx.run, '--verify'])],
-  },
-  // Reconcile the final receipts and append-only ledgers once.  The reporter
-  // receives this compact evidence packet instead of re-running gates or
-  // reconstructing fatal counts from prose; the exhaustive defect table is
-  // rendered mechanically from it.
-  {
-    id: '6-evidence-v2', label: 'mechanically reconciled owner evidence', units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-step6-evidence.json`,
-    pattern: resultPattern('tool', 'step6-evidence-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'tool', label: 'step6-evidence-v2', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', 'tools/physics-support/step6-report.mjs', 'evidence', '--run', ctx.run] }],
-    gates: (ctx) => [gate('step6-evidence', ['node', 'tools/physics-support/step6-report.mjs', 'check-evidence', '--run', ctx.run])],
-  },
-  // Seal validated inputs before deterministic reporting; later integrity
-  // gates retain their ordinary strict mutation checks.
-  {
-    id: '6-report-baseline-v2', label: 'freeze validated tree before reporting', units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-step6-report-integrity.json`,
-    pattern: resultPattern('tool', 'report-baseline-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'tool', label: 'report-baseline-v2', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', 'tools/physics-support/step6-report.mjs', 'snapshot', '--run', ctx.run] }],
-    gates: (ctx) => [gate('report-integrity', ['node', 'tools/physics-support/step6-report.mjs', 'check', '--run', ctx.run])],
-  },
-  {
-    id: '6-owner-report-v2', label: 'deterministic evidence-bound owner summary', units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-step6-report.response.json`,
-    // Historical completed read-only responses retain their native identity;
-    // new closeouts generate the same schema without another LLM worker.
-    pattern: /^(?:alpha-report-(?:alpha-report-)?|tool-(?:tool-)?)(?:owner-report-v2)\.result\.json$/, concurrency: 1,
-    plan: (ctx) => [{ role: 'tool', label: 'owner-report-v2', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', 'tools/physics-support/step6-report.mjs', 'summary', '--run', ctx.run] }],
-    gates: (ctx) => [gate('step6-evidence', ['node', 'tools/physics-support/step6-report.mjs', 'check-evidence', '--run', ctx.run]),
-      gate('report-response', ['node', 'tools/physics-support/step6-report.mjs', 'check-response', '--run', ctx.run])],
-  },
-  {
-    id: '6-owner-report-render-v2', label: 'materialize owner report', units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-step6-report.md`,
-    pattern: resultPattern('tool', 'owner-report-render-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'tool', label: 'owner-report-render-v2', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', 'tools/physics-support/step6-report.mjs', 'render', '--run', ctx.run] }],
-    gates: (ctx) => [
-      gate('report-integrity', ['node', 'tools/physics-support/step6-report.mjs', 'check', '--run', ctx.run]),
-      gate('publication-readiness', ['node', 'tools/physics-support/publication-ready.mjs', '--run', ctx.run, '--verify', '--require-report']),
-    ],
-  },
-
-  // THE CLOSE-OUT COMMIT — the new terminal stage (owner directive,
-  // 2026-08-17: everything on main, no worktrees, no branches; committing is
-  // the engine's job so a `git clean` cannot lose a run that exists only in
-  // the working tree — frontier-15 held 16 page files and 18 items
-  // uncommitted at its pause). PUSH and `status: published` remain owner
-  // acts; run-commit.mjs refuses any branch but main and never touches a
-  // status field. The obligations gate is the other half of full closure:
-  // externally-blocked work is rows with unblock clocks, and a `block`-tier
-  // row must be closed or owner-accepted before the run may end.
-  {
-    id: '6-close-v2',
-    label: 'close-out commit on main',
-    units: () => ['all'],
-    pattern: resultPattern('tool', 'close-step6-v2'),
-    concurrency: 1,
-    plan: (ctx) => [{
-      role: 'tool',
-      label: 'close-step6-v2',
-      job: 'bookkeeping-mechanical',
-      covers: ['all'],
-      timeout: 300,
-      // run-commit writes this final receipt before staging, so the one close
-      // commit contains its own coverage evidence and the engine must not add
-      // a second, post-commit receipt.
-      writeReceipt: false,
-      argv: ['node', 'tools/physics-support/run-commit.mjs', '--run', ctx.run, '--require-proof-layout', '--final-receipt',
-        `research/${ctx.run}-dispatch/tool-close-step6-v2.result.json`],
-    }],
-    gates: (ctx) => [
-      // No liveness floor: zero obligation rows is a legitimately empty set.
-      gate('obligations', ['node', 'tools/physics-support/obligations.mjs', 'check', '--run', ctx.run, '--terminal']),
-      gate('proof-step-separation', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--verify', '--gate', 'proof-step-separation']),
-      gate('proof-blue-tags', ['node', 'tools/physics-support/proof-layout.mjs', '--run', ctx.run, '--verify', '--gate', 'proof-blue-tags']),
-      // `9-readiness-v2` already ran repo-wide, level coverage, judge closure,
-      // terminal ledger, and stamp validation, and its receipt sealed the tree
-      // on which those gates ran. The later report baseline independently
-      // protects the evidence/report interval. Together their cheap hash checks
-      // prove the validated inputs remain current instead of paying the same
-      // full scan again. Any unexpected mutation is an honest hard stop.
-      gate('report-integrity', ['node', 'tools/physics-support/step6-report.mjs', 'check', '--run', ctx.run]),
-      gate('publication-readiness', ['node', 'tools/physics-support/publication-ready.mjs', '--run', ctx.run,
-        '--verify', '--require-report']),
-      // Last, so the commit the gate verifies includes the rendered report and
-      // any obligation closure written in a repair round.
-      gate('tree-clean', ['node', 'tools/physics-support/run-commit.mjs', '--run', ctx.run, '--check']),
-    ],
-    // The close command commits its own receipt, so a clean run passes on the
-    // first battery. Repair rounds remain for a real late obligation; a
-    // report-integrity mismatch is never auto-repaired because it signals an
-    // unexpected protected-tree mutation.
-    maxFixRounds: 3,
-    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      if (failure.id === 'tree-clean') {
-        const r = await mechanicalRepair({ ctx, failure });
-        if (r.outcome === 'outage') return { outage: { reason: r.reason! } };
-        return;
-      }
-      if (failure.id !== 'obligations') return;
-      // Due rows with a recorded dispatch re-fire themselves; rows still on
-      // their clock are an outage wait; anything else is genuinely the
-      // owner's (accept on the record) and the blocker says so.
-      let rows: any[] = [];
-      try {
-        rows = readFileSync(join(ctx.repo, 'research', `${ctx.run}-obligations.jsonl`), 'utf8')
-          .split('\n').filter(Boolean).map((l) => JSON.parse(l))
-          .filter((r) => r.tier === 'block' && r.status === 'open');
-      } catch { return; }
-      const due = rows.filter((r) => r.dispatch && (!r.unblock_at || new Date(r.unblock_at).getTime() <= Date.now()));
-      if (due.length) {
-        for (const r of due) {
-          executor.start(stage, {
-            covers: [], timeout: 14400,
-            ...r.dispatch,
-            label: `obligation-${r.id}-${round}`,
-          });
-        }
-        return;
-      }
-      const clocks = rows.map((r) => (r.unblock_at ? new Date(r.unblock_at).getTime() - Date.now() : 0)).filter((ms) => ms > 0);
-      if (clocks.length) {
-        return { outage: { reason: `${rows.length} obligation(s) on an unblock clock`, retryAfterMs: Math.min(...clocks) } };
+      if (outages.length) {
+        const clocks = outages.map(row => row.retryAfterMs).filter(value => Number.isFinite(value) && value > 0);
+        return { outage: { reason: outages.map(row => row.reason).join('; '),
+          ...(clocks.length ? { retryAfterMs: Math.min(...clocks) } : {}) } };
       }
     },
+  },
+  {
+    id: '6-finalize-v3', label: 'concise final report immediately followed by scoped commit', units: () => ['all'],
+    pattern: resultPattern('tool', 'step6-finalize-v3'), concurrency: 1,
+    artifacts: (ctx) => [`research/${ctx.run}-step6-report.response.json`, `research/${ctx.run}-step6-report.md`, step6Receipt(ctx)],
+    terminalTransaction: { validatedStage: '6-final-validation-v3', receipt: step6Receipt },
+    plan: (ctx) => [{ role: 'tool', label: 'step6-finalize-v3', job: 'bookkeeping-mechanical', covers: ['all'],
+      timeout: 1800, writeReceipt: false,
+      argv: ['node', step6Helper, '--run', ctx.run, '--validated-stage', '6-final-validation-v3', '--final-receipt', step6Receipt(ctx)] }],
   },
 ];
 
@@ -1716,7 +1624,7 @@ const preAuthorPhysicsStages = new Set([
 ]);
 
 for (const stage of stages) {
-  if (stage.id === '1-baseline') continue;
+  if (stage.id === '1-baseline' || stage.id.startsWith('6-')) continue;
   const existing = stage.gates;
   delete stage.gatesWaived;
   stage.gates = (ctx: any) => [
@@ -1726,4 +1634,8 @@ for (const stage of stages) {
 }
 
 export const workflowRevision = 'physics-six-step-v1-construction-scope';
-export default { stages, batches, alphaGroups, workflowRevision };
+export const stagesForRun = (ctx: any) => {
+  assertFreshStep6State(ctx, { physics: true });
+  return stages;
+};
+export default { stages, stagesForRun, batches, alphaGroups, workflowRevision };

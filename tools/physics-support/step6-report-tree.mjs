@@ -1,4 +1,5 @@
-// Preserve the report baseline byte format without following archived links.
+// Legacy explicit-entry hash transport and selected-entry hashing only.
+// Callers must supply the native scoped inventory, never a whole-workspace walk.
 // Keep this transport fix separate from scientific receipt implementation inputs.
 import { lstatSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';

@@ -25,6 +25,18 @@ import { fileURLToPath } from 'node:url';
 
 const REPO = (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot));
 const argv = process.argv.slice(2);
+
+// Fresh Step 6 checks packaging before its content battery. No commit or
+// content gates are run by this read-only scope assertion.
+if (argv.includes('--preflight')) {
+  const i = argv.indexOf('--run');
+  const run = i >= 0 ? argv[i + 1] : null;
+  const { preflightStep6 } = await import('../step6-commit.mjs');
+  const scope = preflightStep6(REPO, run, { physics: true });
+  console.log(`run-commit: ${scope.paths.length} owned paths; scope/index/main preflight checked`);
+  process.exit(0);
+}
+
 const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d; };
 const run = opt('run');
 const checkOnly = argv.includes('--check');

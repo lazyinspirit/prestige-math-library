@@ -397,12 +397,18 @@ performs mechanical contract closure and emits `step6-` owner-report artifacts;
 its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
-The native Step-6 closeout tool has a 1,800-second dispatch budget (1,920
-seconds including the executor cleanup margin). Scoped closeout performs several
-complete outside-preservation scans and report checks; the finite budget allows
-these checks to finish before owned index integration. Every preservation guard
-and terminal gate remains required. The terminal gate runner has no dispatch
-timeout; it waits for each gate to finish unless the controller is aborted.
+Fresh Step 6 uses metadata/render checks -> focused repair -> all final gates
+(repeat after repairs) -> concise report -> scoped commit, for both mathematics
+and physics. Every distinct mechanical condition and repair route remains;
+identical checks run once. Readiness/report integrity hash only the frontier,
+actual suppliers, owned evidence and workflow inputs. Git plumbing preserves
+foreign working files by construction and verifies outside index flags/HEAD
+metadata plus owned committed blobs inside the transaction. There is no
+post-commit content gate battery. See [the implementation](tools/STEP6-REBUILD.md)
+and [mechanical check map](tools/STEP6-MECHANICAL-CHECKS.md). New v3 stages require
+an explicit guarded cutover for historical frozen runs; installation alone does
+not migrate or resume them. Legacy closeout/recovery commands remain available
+for their original historical receipts.
 
 Readiness and closeout treat both `ENOENT` and `ENOTDIR` as an absent path:
 a regular file cannot contain child evidence files. Readiness follows existing

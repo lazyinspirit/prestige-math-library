@@ -1,3 +1,8 @@
+> Historical v2 recovery protocol. Fresh Step 6 uses
+> [metadata/render -> repair -> all gates -> concise report -> commit](STEP6-REBUILD.md).
+> These old commands do not migrate a frozen run into v3 or grant new coverage.
+> Historical v1 report inventories require explicit `--legacy-v1`.
+
 # Native pre-report integrity recovery
 
 `reopen-report` repairs a failed `6-report-baseline-v2` boundary before any owner

@@ -186,9 +186,16 @@ export interface Stage {
   /** Dispatch ready item handoffs while the owning stage's workers wait. */
   onProgress?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
   gates?: (ctx: Ctx) => Gate[];
+  /** The single complete final validation barrier immediately before reporting. */
+  finalValidation?: true;
+  /** A real native report-and-commit transaction, never an empty gate waiver.
+   * Its tool authenticates the immediate predecessor's actual native battery
+   * and unchanged validated source before writing its own committed receipt. */
+  terminalTransaction?: { validatedStage: string; receipt: (ctx: Ctx) => string };
+
   /** Why this stage needs no gate, and what checks it instead. A stage with no
-   *  gate cannot fail; saying so has to be deliberate. The terminal stage may
-   *  not waive — see `validateStages`. */
+   *  gate cannot fail; saying so has to be deliberate. A terminal stage cannot
+   *  waive; its explicit native terminalTransaction is separately validated. */
   gatesWaived?: string;
   escalate?: (args: { ctx: Ctx; units: Unit[]; executor: unknown }) => Promise<void> | void;
   /**

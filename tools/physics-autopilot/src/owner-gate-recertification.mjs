@@ -8,6 +8,7 @@ import { markdownFiles, readItem } from '../../physics-support/physics-content.m
 import { originalImportPath } from '../../physics-support/physics-imports.mjs';
 import { scanProofFiles } from '../../physics-support/proof-layout.mjs';
 import { runPages, dependencyLevels } from '../../physics-support/item-dependency-levels.mjs';
+import { registerStateDirectory, validatePrepared } from '../../step6-prepared.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const json = value => JSON.stringify(value);
@@ -332,6 +333,23 @@ function automaticStep6Receipt(ctx, request, snapshot, receiptPath) {
  * formatting/metadata checks, without a detailed content review. */
 export function authorizeOwnerGate({ ctx, gates, stages, writers = [] }) {
   if (writers.length) return { ok: false, why: `Live writers: ${writers.join(', ')}` };
+  // The new final barrier consumes actual prepared metadata/render evidence.
+  // Its genuine checks necessarily precede this native request; never rewrite
+  // their timestamps to imitate the old per-request certification protocol.
+  if (stages.length === 1 && stages[0] === '6-final-validation-v3') {
+    try {
+      registerStateDirectory(ctx.repo, ctx.run, { physics: true, stateDir: ctx.config.stateDir });
+      const prepared = validatePrepared(ctx.repo, ctx.run, { physics: true, gates, stages });
+      const attempt = randomUUID();
+      const receipt = { version: 1, kind: 'actual-prepared-final-battery-authorization', run: ctx.run,
+        attempt, preparedCompletedAt: prepared.completedAt, preparedSourceSha256: prepared.source.sha256,
+        gateInventorySha256: prepared.gateInventorySha256, at: new Date().toISOString(),
+        mathematical_review: false, gate_pass_created: false };
+      atomic(join(ctx.config.stateDir, 'owner-gate-history', `${attempt}.json`), receipt);
+      return { ok: true, attempt, gates };
+    } catch (error) { return { ok: false, why: error.message }; }
+  }
+
   const requestPath = join(ctx.config.stateDir, 'owner-gate-request.json');
   const receiptPath = join(ctx.config.stateDir, 'owner-gate-receipt.json');
   try {

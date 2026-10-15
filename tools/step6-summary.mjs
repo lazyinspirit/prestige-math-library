@@ -1,7 +1,7 @@
 // Shared presentation and native metadata only; never grants review or gate coverage.
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-const labels = new Set(['step6-contract-close-v2', 'snap-pre-closeout-v2', 'pathway-sync-v2', 'pathway-seed-v2', 'pathway-close-v2', 'judge-stamps-v2', 'readiness-v2', 'step6-evidence-v2', 'report-baseline-v2', 'owner-report-v2', 'owner-report-render-v2', 'close-step6-v2']);
+const labels = new Set(['step6-contract-close-v2', 'snap-pre-closeout-v2', 'pathway-sync-v2', 'pathway-seed-v2', 'pathway-close-v2', 'judge-stamps-v2', 'readiness-v2', 'step6-evidence-v2', 'report-baseline-v2', 'owner-report-v2', 'owner-report-render-v2', 'close-step6-v2', 'step6-prepare-v3', 'step6-prepare-final-v3', 'pathway-close-v3', 'step6-finalize-v3']);
 const isCloseout = label => labels.has(label) || /^(?:contract-rework-|certify-rework-)/.test(label ?? '');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 export function makeSummaryResponse(evidence, run, { physics = false } = {}) {
@@ -64,6 +64,6 @@ export function renderSummaryReport({ run, evidence, response, telemetry }) {
   else lines.push('Worker token telemetry unavailable.', '');
   lines.push(`Audit packet: [exact evidence](${run}-step6-evidence.json).`);
   if (response.caveats.length) lines.push(`Recorded caveats: ${response.caveats.length}; [full response](${run}-step6-report.response.json).`);
-  lines.push('', 'Content remains draft. Publication and push require separate owner action. The local closeout commit and its native terminal gates follow this report.', '');
+  lines.push('', 'Content remains draft. Publication and push require separate owner action. All final gates passed. The local closeout commit follows this report.', '');
   return lines.join('\n');
 }

@@ -17,6 +17,7 @@ import { resolveLineup } from './models.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
 import { activeOwnershipRows } from '../defect-ledger-ownership.mjs';
 import { protectedEntryHashes } from './step6-report-tree.mjs';
+import { scopedReportTree } from '../step6-report-scope.mjs';
 import { validateFrontier } from './step5-rounds.mjs';
 import { makeSummaryResponse, renderSummaryReport, step6Telemetry } from '../step6-summary.mjs';
 
@@ -56,6 +57,9 @@ const canonical = (value) => {
   if (value && typeof value === 'object') return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical(value[key])}`).join(',')}}`;
   return JSON.stringify(value);
 };
+
+const defectProjection = rows => ({ kind: 'run-defect-history-v1', run,
+  sha256: sha256(canonical(rows.filter(row => row.run === run))) });
 
 function countBy(rows, key) {
   const out = {};
@@ -236,10 +240,10 @@ function buildEvidence() {
     else configuredSetStats.mixed++;
   }
   const adjudications = jsonLines(paths.adjudications);
-  const inputs = Object.fromEntries([...Object.values(paths), ...Object.values(deferralPaths).filter(existsSync)]
+  const inputs = Object.fromEntries([...Object.values(paths).filter(path => path !== paths.defects), ...Object.values(deferralPaths).filter(existsSync)]
     .map((path) => [relative(root, path), sha256(readFileSync(path))]));
   const result = {
-    version: 2,
+    version: 3,
     run,
     readiness: {
       verdict: readiness.verdict,
@@ -292,6 +296,7 @@ function buildEvidence() {
       categories: [...new Set((pathway.briefs ?? []).map((row) => row.category).filter(Boolean))].sort(),
     },
     input_sha256: inputs,
+    input_projections: { [relative(root, paths.defects)]: defectProjection(defects) },
   };
   return { ...result, evidence_sha256: sha256(canonical(result)) };
 }
@@ -324,40 +329,33 @@ if (command === 'summary') {
   process.exit(0);
 }
 
-const ignored = new Set(['.git', 'node_modules']);
-const allowed = new Set([relative(root, responsePath), relative(root, reportPath), relative(root, integrityPath)]);
-const dispatchPrefix = `research/${run}-dispatch/`;
-function files(dir = root, out = []) {
-  for (const name of readdirSync(dir)) {
-    const full = join(dir, name);
-    const rel = relative(root, full).replaceAll('\\', '/');
-    const topLevel = rel.split('/')[0];
-    if (!rel || ignored.has(topLevel)
-      || topLevel === '.physics-autopilot' || topLevel.startsWith('.physics-autopilot-')) continue;
-    if (allowed.has(rel) || rel.startsWith(dispatchPrefix)) continue;
-    // Seal link identity, including dangling links; never traverse aliases.
-    const stat = lstatSync(full);
-    if (stat.isDirectory()) files(full, out);
-    else if (stat.isFile() || stat.isSymbolicLink()) out.push(rel);
-  }
-  return out;
-}
-const tree = () => {
-  const paths = files().sort();
-  const hashes = protectedEntryHashes(paths.map(rel => join(root, rel)));
-  return Object.fromEntries(paths.map((rel, index) => [rel, hashes[index]]));
+// Version-1 receipts remain historical, explicitly selected verification only.
+// Check their recorded entries; never discover or hash a fresh whole workspace.
+const tree = receipt => {
+  if (!args.includes('--legacy-v1')) die('step6-report-legacy: use --legacy-v1 for historical verification, or create a current version-2 snapshot');
+  if (receipt?.version !== 1 || receipt.run !== run || !receipt.protected_tree)
+    die('step6-report-integrity-shape');
+  return Object.fromEntries(Object.keys(receipt.protected_tree).sort().map(path => [path,
+    protectedEntryHashes([join(root, path)])[0]]));
 };
 
 if (command === 'snapshot') {
-  writeFileSync(integrityPath, `${JSON.stringify({ version: 1, run, protected_tree: tree() }, null, 2)}\n`);
-  console.log(`step6-report-integrity: snapshotted ${Object.keys(readJson(integrityPath).protected_tree).length} protected file(s)`);
+  const receipt = scopedReportTree(run, root, { physics: true });
+  writeFileSync(integrityPath, `${JSON.stringify(receipt, null, 2)}\n`);
+  console.log(`step6-report-integrity: scoped snapshot of ${Object.keys(receipt.protected_tree).length} exact input(s)`);
   process.exit(0);
 }
 
 if (command === 'check') {
   const receipt = readJson(integrityPath);
+  if (receipt?.version === 2) {
+    const current = scopedReportTree(run, root, { physics: true });
+    if (canonical(receipt) !== canonical(current)) die('step6-report-tree-changed: scoped selectors, prerequisite context or protected inputs changed');
+    console.log(`step6-report-integrity: ${Object.keys(current.protected_tree).length} scoped input(s) unchanged`);
+    process.exit(0);
+  }
   if (receipt?.version !== 1 || receipt.run !== run || !receipt.protected_tree || typeof receipt.protected_tree !== 'object') die('step6-report-integrity-shape');
-  const now = tree();
+  const now = tree(receipt);
   const paths = new Set([...Object.keys(receipt.protected_tree), ...Object.keys(now)]);
   const changed = [...paths].filter((path) => receipt.protected_tree[path] !== now[path]).sort();
   if (changed.length) die(`step6-report-tree-changed: ${changed.join(', ')}`);
@@ -365,8 +363,8 @@ if (command === 'check') {
   process.exit(0);
 }
 
-function parseResponse(path) {
-  const response = readJson(path, relative(root, path));
+function parseResponse(path, plannedResponse = null) {
+  const response = plannedResponse ?? readJson(path, relative(root, path));
   const nonempty = (text) => typeof text === 'string' && text.trim().length >= 20;
   if (response?.version !== 2 || !nonempty(response.executive_summary)) die('step6-report-response-shape: version 2 and a substantive executive_summary are required');
   const evidence = readJson(evidencePath);
@@ -382,7 +380,10 @@ function parseResponse(path) {
 }
 
 if (command === 'check-response') {
-  parseResponse(value('--in') || responsePath);
+  if (args.includes('--planned-summary')) {
+    const evidence = readJson(evidencePath);
+    parseResponse(null, makeSummaryResponse(evidence, run, { physics: true }));
+  } else parseResponse(value('--in') || responsePath);
   console.log('step6-report-response: structured interpretation matches evidence');
   process.exit(0);
 }

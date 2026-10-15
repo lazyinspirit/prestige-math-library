@@ -151,7 +151,7 @@ export function inspectReportReopen(o) {
     restoredRows = [...rows.values()].sort();
   }
   if (restoredRows.length !== originalReady.protected_tree_files || sha(restoredRows.join('\n')) !== originalReady.protected_tree_sha256) fail('original readiness cannot be reconstructed using exact core history and authenticated brief prefix');
-  const inventory = invoke(repo, 'step6-report.mjs', ['recovery-inventory', '--run', run, '--root', repo]);
+  const inventory = invoke(repo, 'step6-report.mjs', ['recovery-inventory', '--legacy-v1', '--run', run, '--root', repo]);
   const scoped = new Set(inventory.scoped), corePaths = new Set(core.map(row => row.path));
   const proposalPrefix = `research/${run}-owner/step6-integrity-lock-escalation/`;
   const proposal = [];
@@ -269,7 +269,7 @@ export function inspectPackagingReopen(o) {
   for (const row of core) { if (row.before === null) rows.delete(row.path); else rows.set(row.path, `${row.path}\0${row.before}`); }
   const restoredRows = [...rows.values()].sort();
   if (restoredRows.length !== originalReady.protected_tree_files || sha(restoredRows.join('\n')) !== originalReady.protected_tree_sha256) fail('original readiness cannot be reconstructed from exact core preimages');
-  const inventory = invoke(repo, 'step6-report.mjs', ['recovery-inventory', '--run', run, '--root', repo]);
+  const inventory = invoke(repo, 'step6-report.mjs', ['recovery-inventory', '--legacy-v1', '--run', run, '--root', repo]);
   const scoped = new Set(inventory.scoped), corePaths = new Set(paths);
   for (const path of inventory.changed) if (!scoped.has(path) && !corePaths.has(path)) fail('unexplained protected change: ' + path);
   const scope = runScope(run, repo);

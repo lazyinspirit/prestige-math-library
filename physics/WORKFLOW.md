@@ -523,9 +523,9 @@ its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
 Keep fresh owner formatting/metadata check logs and supervision observations in
-`.physics-autopilot/RUN/` during Step 6. The report baseline seals the workspace,
-including research files; later pre-gate receipts must not mutate that protected
-tree. This changes only evidence storage, never scope, checks or gate authority.
+`.physics-autopilot/RUN/` during Step 6. The report baseline seals the selected frontier, actual suppliers, relevant
+import pins/originals and owned evidence; later preparation receipts must not
+mutate those protected inputs. Unrelated library bodies are not hashed. This changes only evidence storage, never scope, checks or gate authority.
 The proof-layout renderer receives its unchanged JSON input through a temporary
 seekable file, cleaned after execution. When app tsx dependencies are absent,
 the TypeScript fallback resolves configured project path aliases and missing
@@ -554,9 +554,15 @@ migration and ready-pair initial-authoring variants are not current entry routes
 Preserve historical run evidence rather than relabeling it.
 
 Item/page validators select current run manifests. Outside suppliers stay
-prerequisite context; do not validate or repair unrelated content. Closeout checks
-the engine's content commit. All owner-gate authorization remains one-attempt,
-current-hash-bound and formatting/metadata-only under CLAUDE.md.
+prerequisite context; do not validate or repair unrelated content. Closeout verifies the engine's exact owned content commit inside its transaction.
+Fresh Step 6 uses metadata/render checks -> focused repair -> all final gates
+(repeat after repairs) -> concise report -> commit. All distinct old mechanical
+conditions and repair mechanisms remain. The report immediately follows the
+genuine gate pass; there is no post-commit content battery. New v3 stage identities
+require guarded cutover rather than adoption of old coverage. Earlier owner-gate
+protocols remain current-hash-bound under CLAUDE.md. See
+[the implementation](../tools/STEP6-REBUILD.md) and
+[mechanical check map](../tools/STEP6-MECHANICAL-CHECKS.md).
 
 ## Pre-gate recertification
 

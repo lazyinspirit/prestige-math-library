@@ -195,7 +195,7 @@ async function buildExecutor(run?: string) {
   if (mod.workflowRevision) state.data.workflowRevision = mod.workflowRevision;
   state.init(config.run);
   const reporter = new Reporter({ dir: config.stateDir, intervalMs: config.reportIntervalMin * 60 * 1000 });
-  const adapter = makeExecAdapter({ argv: config.argv, cwd: repo, logger: (m) => reporter.event('exec', { command: m }) });
+  const adapter = makeExecAdapter({ argv: config.argv, cwd: repo, env: { PRESTIGE_STEP6_STATE_DIR: config.stateDir }, logger: (m) => reporter.event('exec', { command: m }) });
   // The abort signal is deliberately NOT wired to SIGTERM.
   //
   // The handler used to call controller.abort(), which propagates to every
@@ -215,7 +215,7 @@ async function buildExecutor(run?: string) {
       process.exit(0);
     });
   }
-  const stageTable = typeof mod.stagesForRun === 'function' ? mod.stagesForRun({ repo, run: config.run }) : mod.stages;
+  const stageTable = typeof mod.stagesForRun === 'function' ? mod.stagesForRun({ repo, run: config.run, config }) : mod.stages;
   return new Executor({ config, stages: stageTable, adapter, state, reporter, signal: controller.signal });
 }
 
