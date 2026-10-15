@@ -16,7 +16,7 @@ const { frontierGateBattery } = await import(
 // Version this composed dependency as the root stage loader does for Step 5.
 // Collection runs the workflow CLI in a fresh subprocess and sees the same code.
 const WORKFLOW_URL=new URL('../../step5-workflow.mjs',import.meta.url),WORKFLOW_STAT=statSync(WORKFLOW_URL);
-const { prepareAdjudication, prepareImpact, advanceImpact, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir, digest, emptyAdjudicationAssignment, emptyAdjudicationLabel, hasAdjudicatorArtifacts } = await import(
+const { prepareAdjudication, prepareImpact, advanceImpact, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir, digest, emptyAdjudicationAssignment, emptyAdjudicationLabel, hasAdjudicatorArtifacts, readerConcernSession } = await import(
   `${WORKFLOW_URL.href}?v=${WORKFLOW_STAT.mtimeMs}:${WORKFLOW_STAT.size}`
 );
 
@@ -71,6 +71,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
         }
         return {role:adjudication?'alpha-adjudicate':'alpha-repair',label:workerLabel(pass,n,unit),
         job:adjudication?'adjudication':'authoring',covers:[u],profile:SOL61_HIGH,
+        ...(!adjudication?(readerConcernSession?.(ctx.repo,ctx.run,pass,n,unit)??{}):{}),
         brief:`briefs/step5-${adjudication?'adjudicator':'owner-repair'}.md`,
         task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};});
     },

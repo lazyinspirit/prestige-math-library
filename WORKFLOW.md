@@ -345,6 +345,49 @@ The owner-supervised wrapper forwards its reload version to the native stage
 table and applies the owner hold before progress bookkeeping, so paused work
 cannot cache derived collections before an authorized reconciliation.
 
+An owner may admit an individually confirmed Step-4 reader concern about an
+unchanged draft original-frontier item whose genuine original Luna verdict is
+`keep:true`, before the first `impact-initial-1` owner pack freezes. The optional
+`research/RUN-step5-reader-concern-admissions.json` is version 1, kind
+`owner-confirmed-step4-reader-concerns`, authorized by `owner` with
+`owner_identity: /root`, `native_coverage_adopted: false`, a dated record,
+`original_count`, nonempty bounded `entries` and raw-SHA256 `bindings`.
+Each entry names `id`, owning string `batch`, zero-based `concern_index`, the
+exact original `concern` object, `before_guard_sha256`, and `owner_review`.
+The review records `reviewed_by: root`, `confirmed_defect: true`, `reviewed_at`,
+a concrete `reason`, and a bound focused `evidence_file`; exact proposed edits
+use `proposed_edits: [{source_excerpt, proposed_replacement}]` with unique current
+literal excerpts, or a bound `candidate_patch_file`. A single edit may place
+`source_excerpt` and `proposed_replacement` directly on `owner_review`.
+These are focused repair instructions, never preapplied source edits.
+
+Bindings cover the immutable original frontier, baseline and verdict inventory;
+the frozen initial pack and every genuine successful native per-unit initial
+report/result (including unchanged mechanical zero-work reports); each current
+owning batch manifest; the unchanged native Step-4 digest, successful Sol 6.1
+medium reader result and exact attempt result and original structured output;
+and focused root review evidence or candidate patches. Native preparation also
+requires and binds the actual successful initial collection, once produced.
+`node tools/step5-workflow.mjs check-reader-concerns --run RUN` validates the
+admission read-only at the drained paused 5.1 boundary without claiming that
+collection already exists. Preparation accepts only that boundary or drained 5.2
+before owner dispatch; stale guards, missing individual confirmation, malformed or
+foreign subjects, duplicate entries, or a late admission fail closed.
+
+The first ordinary 5.2 pack unions these explicit concern subjects with real
+consumer impacts and records their distinct origin. Mutable manifest preimages
+are archived by the existing supporting-evidence mechanism. The admission grants
+no worker execution, mathematical acceptance, judgment, or fatal-threshold credit,
+and changes no frozen pack, native report or original verdict. Genuine 5.2
+workers review and repair, 5.3 certifies, and 5.4 obtains current Sol judgments for
+changed guards. Only actual Statement/Definition changes propagate consumers.
+Concern-owning 5.2 lanes use persistent runtime homes under
+`.autopilot/RUN/step5-reader-owner-sessions/uN`; necessary subsequent consumer
+passes retain the supplier's owner and resume its authenticated successful native
+session. Missing session continuity or conflicting reviewer ownership holds for
+the root. Unrelated lanes retain their existing dispatch behavior, and all later
+rounds, closure checks and complete gate batteries remain mandatory.
+
 The additional
 `proof-contract-coverage` mechanical check still requires a contract for each
 actual proof-bearing carrier. No new substantive review gate is added. Step 6

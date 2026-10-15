@@ -17,6 +17,8 @@ import { FATAL_TYPES } from './step5-adjudication-compat.mjs';
 import { restatedIds, statementHash } from './step5-statement.mjs';
 import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintenance } from './consumer-maintenance.mjs';
 import { orderedItems, runPages } from './item-dependency-levels.mjs';
+import { loadReaderConcerns, checkFrozenReaderConcernInput, readerConcernSession } from './step5-reader-concerns.mjs';
+export { readerConcernSession };
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -581,6 +583,8 @@ function writeTasks(root,pack,mode) {
       `Frozen inputs: ${packPath(root,pack.run,pack.phase,pack.round)}.`,
       mode==='adjudicate'&&existsSync(batchDigest)
         ? `Read this batch's rejection-blind Step-4 review digest first: ${batchDigest}. Its findings are evidence, not authority; verify relevant concerns against the current item files and the assigned judge tuples.` : '',
+      pack.reader_concerns?.some(row=>assigned.includes(row.id))
+        ? `Owner-confirmed Step-4 reader concerns assigned for genuine current review and smallest necessary repair (these are not judge rejections or downstream claims):\n${JSON.stringify(pack.reader_concerns.filter(row=>assigned.includes(row.id)),null,2)}. Review the bound original digest and individual owner evidence; repair confirmed presentation defects as well as mathematical defects. Return ordinary reviews, with no adjudication decision for these concerns. Only actual Statement/Definition changes propagate consumer examinations.` : '',
       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
       'SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.',
@@ -1270,9 +1274,37 @@ export function advanceImpact(root,run,phase,round) {
     const nextPhase=nextImpactPhase(phase,progress);
     const assignments={'1':[],'2':[],'3':[]};
     const {order,cycles}=orderImpacts(items,pending);
-    order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+    // Admitted supplier restatements retain their actual native reviewer.
+    const concernOwners=Object.assign({},...progress.passes.map(pass=>readPack(root,run,pass,round).reader_concern_owners??{}));
+    const propagated={...concernOwners};
+    for(const impact of impacts){
+      const owners=new Set(impact.suppliers.map(id=>concernOwners[id]).filter(Boolean));
+      if(propagated[impact.id])owners.add(propagated[impact.id]);
+      requireValue(owners.size<=1,`reader concern consumer has conflicting reviewer owners: ${impact.id}`);
+      if(owners.size)propagated[impact.id]=[...owners][0];
+    }
+    order.forEach((id,index)=>assignments[propagated[id]??String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
     const identity=libraryIdentity(root);
     const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
+    if(Object.keys(propagated).length){
+      pack.reader_concern_owners=propagated;
+      pack.reader_owner_sessions={};pack.input_evidence={};
+      for(const unit of pack.units){
+        if(!assignments[unit].some(id=>propagated[id]===unit))continue;
+        const origin=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,unit)}.result.json`);
+        const result=read(origin);
+        pack.reader_owner_sessions[unit]={result:origin,sha256:digest(readFileSync(origin,'utf8')),session_id:result.session_id};
+        pack.input_evidence[origin]=pack.reader_owner_sessions[unit].sha256;
+      }
+      // Validate real session continuity before freezing or dispatching work.
+      for(const unit of pack.units){
+        const binding=pack.reader_owner_sessions[unit];if(!binding)continue;
+        const result=read(binding.result),home=join(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
+        requireValue(result.run===run&&result.role==='alpha-repair'&&result.ok===true&&result.model===MODELS.sol61.id
+          &&result.provider_effort==='high'&&result.session_home===home&&typeof result.session_id==='string'&&result.session_id.length>0,
+          `reader concern continuation lacks genuine persistent reviewer: ${unit}`);
+      }
+    }
     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
     progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;atomic(path,progress);
     return {complete:false,pack,passes:progress.passes};
@@ -1345,13 +1377,20 @@ function orderImpacts(items,targets) {
 
 export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   requireValue(['impact-initial','impact-repeat','gate'].includes(phase),'invalid impact phase');
-  const path=packPath(root,run,phase,round); if(existsSync(path))return read(path);
+  const path=packPath(root,run,phase,round);
+  if(existsSync(path)){
+    const saved=read(path);
+    if(phase==='impact-initial'&&round===1)checkFrozenReaderConcernInput(root,run,saved);
+    return saved;
+  }
   if(phase==='gate')return prepareGateRepairPack(root,run,phase,round,failures);
   const source=phase==='impact-initial'?'initial':'repeat';
   const result=collect(root,run,source,round);
   const items=readLibraryItems(root);
   const scope=impactTargets(root,run,phase,items,result.restated??result.changed,result.downstream??[]);
-  const {seeds,impacts,targets}=scope;
+  const {seeds,impacts}=scope;
+  const concerns=phase==='impact-initial'&&round===1?loadReaderConcerns(root,run):null;
+  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id)])];
   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
   // Closure requeues reviews invalidated by a concurrent supplier repair.
   const assignments={'1':[],'2':[],'3':[]};
@@ -1360,6 +1399,11 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
   const identity=libraryIdentity(root);
   const pack={version:2,run,phase,round,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,units:['1','2','3'],assignments,before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
+  if(concerns){
+    pack.reader_concerns=concerns.entries;
+    pack.reader_concern_owners=Object.fromEntries(concerns.entries.map(row=>[row.id,pack.units.find(unit=>assignments[unit].includes(row.id))]));
+    pack.input_evidence=frozenSupportingEvidence(root,run,concerns.evidence);
+  }
   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
 
@@ -1548,6 +1592,11 @@ function main() {
   switch(args[0]) {
     case 'recover-operational-derived':result=recoverOperationalDerived(root,run,round,opt('--authorization'));break;
     case 'record-operational-supplement':result=recordOperationalSupplement(root,run,phase,round,opt('--authorization'));break;
+    case 'check-reader-concerns':{
+      const admission=loadReaderConcerns(root,run,{requireCollection:false});
+      requireValue(admission,'reader concern admission missing');
+      console.log(JSON.stringify({run,ids:admission.entries.map(row=>row.id),mathematical_review:false,native_coverage_adopted:false}));return;
+    }
     case 'init':result=initialize(root,run);break;
     case 'prepare':result=['initial','repeat'].includes(phase)?prepareAdjudication(root,run,phase,round):prepareImpact(root,run,phase,round,{failures:opt('--failures')?read(opt('--failures')):null});break;
     case 'collect':result=collect(root,run,phase,round);break;
