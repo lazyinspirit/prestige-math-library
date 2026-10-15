@@ -173,6 +173,19 @@ Finite-smoke obligations use named deterministic computations in `tools/finite-s
 
 ## Independent review through closeout
 
+For an owner-authorized recovery of exactly two local, unpushed legacy whole-tree
+closeout commits, `autopilot reopen-closeout --run RUN --state-dir .autopilot/RUN
+--authorization research/RUN-closeout-reopen-authorization.json --inspect` reads
+the exact guards without changing Git or state. The same command without
+`--inspect` requires the sealed guards and a current owner scope policy, archives
+the genuine native suffix history and original commits in a hash-bound bundle,
+and compare-and-swaps only `main` to their parent. It preserves the current index
+byte for byte and checks working file bytes/modes before and after the ref change.
+Original pre-legacy outside staging remains explicitly unknown; it is never
+reconstructed from the parent tree. Only `6-readiness-v2` through `6-close-v2`
+reopens, paused; native restart/resume must rerun its actual gates, reporting and
+scoped commit. Earlier stages and mathematical carriers remain untouched.
+
 Step 3 uses independent batch review and routed adjudication after authoring in
 dependency-level order. Step 3b is retired in both engines: there is no separate
 cross-batch edge review, impact-review window or unfinished cross-review lane.

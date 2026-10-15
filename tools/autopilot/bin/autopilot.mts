@@ -35,6 +35,7 @@ import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
 import { reopenStep3 } from '../src/step3-reopen.mts';
+import { inspectCloseoutReopen, reopenCloseout } from '../src/closeout-reopen.mts';
 import { appendFrontier, assertNoAppendTransaction, recoverAppendItemOrder } from '../src/frontier-append.mts';
 import type { Config } from '../src/types.mts';
 
@@ -218,6 +219,26 @@ async function buildExecutor(run?: string) {
 }
 
 switch (cmd) {
+  case 'reopen-closeout': {
+    const run = opt('run') ?? die('--run is required');
+    const authorization = opt('authorization') ?? die('--authorization is required');
+    const config = loadConfig();
+    const options = { repo, run,
+      stateDir: opt('state-dir') ? stateDir : join(repo, '.autopilot', run),
+      dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`),
+      authorizationPath: resolve(repo, authorization) };
+    try {
+      if (has('inspect')) {
+        const { workingRows, state, indexPath, authorizationPath, ...guards } = inspectCloseoutReopen(options);
+        console.log(JSON.stringify(guards, null, 2));
+      } else {
+        const receipt = reopenCloseout(options);
+        console.log(`reopen-closeout: archived legacy closeout and reopened ${receipt.reopened_stages.length} suffix stages`);
+        console.log('  run remains paused; start and resume for native readiness, report and scoped closeout');
+      }
+    } catch (error: any) { console.error(String(error?.message ?? error)); process.exitCode = 1; }
+    break;
+  }
   case 'reopen-step3': {
     const run = opt('run') ?? die('--run is required');
     const authorization = opt('authorization') ?? die('--authorization is required');
