@@ -24,7 +24,7 @@ const value = (flag) => { const i = args.indexOf(flag); return i < 0 ? '' : args
 const run = value('--run');
 const root = resolve(value('--root') || join(dirname(fileURLToPath(import.meta.url)), '..'));
 const die = (message) => { console.error(`ERROR ${message}`); process.exit(1); };
-const commands = ['evidence', 'check-evidence', 'snapshot', 'check', 'check-response', 'render'];
+const commands = ['evidence', 'check-evidence', 'snapshot', 'check', 'check-response', 'render', 'recovery-inventory'];
 if (!run || !commands.includes(command)) die(`usage: node tools/step6-report.mjs <${commands.join('|')}> --run <run> [--root <repo>] [--in <response.json>] [--out <path>]`);
 
 const research = join(root, 'research');
@@ -292,6 +292,11 @@ if (command === 'check-evidence') {
 // Math tools and evidence outside that namespace remain protected. The
 // physics-support reporter independently snapshots its own content root.
 const ignored = new Set(['.git', 'node_modules', 'physics']);
+// This exact directory is a process mutex, not evidence. The ledger writer
+// creates owner.json beneath it and removes the directory after its append.
+// Skip before lstat: it may disappear immediately after readdir. Do not hide
+// arbitrary .lock paths or missing protected content/evidence.
+const operationalLocks = new Set(['research/defect-ledger.jsonl.append-lock']);
 const allowed = new Set([relative(root, responsePath), relative(root, reportPath), relative(root, integrityPath)]);
 const dispatchPrefix = `research/${run}-dispatch/`;
 function files(dir = root, out = []) {
@@ -301,7 +306,7 @@ function files(dir = root, out = []) {
     const topLevel = rel.split('/')[0];
     if (!rel || ignored.has(topLevel)
       || topLevel === '.autopilot' || topLevel.startsWith('.autopilot-')) continue;
-    if (allowed.has(rel) || rel.startsWith(dispatchPrefix)) continue;
+    if (allowed.has(rel) || rel.startsWith(dispatchPrefix) || operationalLocks.has(rel)) continue;
     const stat = lstatSync(full);
     if (stat.isDirectory()) files(full, out);
     else if (stat.isFile() || stat.isSymbolicLink()) out.push(rel);
@@ -313,7 +318,7 @@ const tree = () => Object.fromEntries(files().sort().map((rel) => [rel,
 
 // Ownership comes from an unchanged ledger already sealed by this report,
 // never from a newly invented filename prefix or mutable runtime state.
-function scopedChanges(receipt, now, changed) {
+function scopedChanges(receipt, now, changed, verifyReadiness = true) {
   const namespaces = [];
   const selectedContent = new Set();
   const slug = value => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
@@ -396,6 +401,62 @@ function scopedChanges(receipt, now, changed) {
       }
     }
   }
+  // A changed foreign manifest cannot establish item ownership by itself.
+  // Its exact per-item Step-1 identity and original native page assignment
+  // must already have been sealed by this report. These are ownership facts,
+  // never reused as current readiness, audit or execution coverage.
+  for (const [ledgerPath, ledgerHash] of Object.entries(receipt.protected_tree)) {
+    const owner = /^research\/([a-z0-9]+(?:-[a-z0-9]+)*)-scope-ledger\.json$/.exec(ledgerPath)?.[1];
+    if (!owner || owner === run || now[ledgerPath] !== ledgerHash || !unchangedFile(ledgerPath)) continue;
+    let ledger;
+    try { ledger = JSON.parse(readFileSync(join(root, ledgerPath), 'utf8')); } catch { continue; }
+    if (ledger.run !== owner || !Array.isArray(ledger.pages)) continue;
+    for (const owed of ledger.pages) {
+      if (!slug(owed?.id) || !['A', 'B'].includes(owed.kind)
+        || !/^\d+$/.test(String(owed.batch)) || ledger.pages.filter(p => p?.id === owed.id).length !== 1) continue;
+      const batch = String(owed.batch), before = beforePages.get(owed.id) ?? [], current = currentPages.get(owed.id) ?? [];
+      const planned = plannedPages.filter(page => page?.id === owed.id);
+      if (before.length !== 1 || current.length !== 1 || before[0].path !== current[0].path
+        || planned.length !== 1 || planned[0].kind !== owed.kind || planned[0].category !== before[0].category
+        || !physicalSelectedContent(current[0].path)) continue;
+      const manifest = `research/${owner}-batch-${batch}.pages.json`;
+      const resultPath = `research/${owner}-dispatch/beta-batch-${batch}.result.json`;
+      if (!unchangedFile(resultPath) || !physicalSelectedContent(manifest)) continue;
+      let pages, native;
+      try { pages = JSON.parse(readFileSync(join(root, manifest), 'utf8')); native = JSON.parse(readFileSync(join(root, resultPath), 'utf8')); } catch { continue; }
+      if (native.run !== owner || native.role !== 'beta' || native.label !== `batch-${batch}`
+        || native.ok !== true || native.runner !== 'codex' || native.written_by === 'autopilot'
+        || native.process_exit_code !== 0 || !Array.isArray(native.covers) || !native.covers.map(String).includes(batch)
+        || !Number.isInteger(native.attempt) || native.attempt < 1 || !Array.isArray(pages)) continue;
+      const promptPath = `research/${owner}-dispatch/beta-batch-${batch}.attempt-${native.attempt}.prompt.md`;
+      if (!unchangedFile(promptPath)) continue;
+      const prompt = readFileSync(join(root, promptPath), 'utf8');
+      if (!prompt.includes(`run: ${owner}\nrole: beta\nlabel: batch-${batch}\ncovers: ${batch}\n`)
+        || !prompt.includes('`' + owed.id + '`') || !prompt.includes('`' + before[0].category + '`')) continue;
+      const selected = pages.filter(page => page?.id === owed.id);
+      if (selected.length !== 1 || selected[0].category !== before[0].category || selected[0].kind !== owed.kind
+        || !Array.isArray(selected[0].items)) continue;
+      let pageMetadata;
+      try { pageMetadata = parseFrontmatter(splitFrontmatter(readFileSync(join(root, current[0].path), 'utf8')).frontmatter); } catch { continue; }
+      if (pageMetadata?.page !== owed.id) continue;
+      for (const item of selected[0].items) {
+        const id = item?.id;
+        if (!/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id ?? '')
+          || selected[0].items.filter(row => row?.id === id).length !== 1
+          || pages.flatMap(page => Array.isArray(page?.items) ? page.items : []).filter(row => row?.id === id).length !== 1) continue;
+        const path = `items/${id}.md`, decisionPath = `research/${owner}-step1-${id}.json`;
+        if (!changedPaths.has(path) || !Object.hasOwn(receipt.protected_tree, path)
+          || !unchangedFile(decisionPath) || !physicalSelectedContent(path)) continue;
+        let decision, metadata;
+        try { decision = JSON.parse(readFileSync(join(root, decisionPath), 'utf8'));
+          metadata = parseFrontmatter(splitFrontmatter(readFileSync(join(root, path), 'utf8')).frontmatter); } catch { continue; }
+        if (decision.version !== 1 || decision.run !== owner || decision.item !== id || decision.owner !== true
+          || decision.decision !== 'ready' || metadata?.id !== id || metadata.origin !== 'pipeline'
+          || metadata.pipeline_run !== owner || metadata.kind !== item.kind) continue;
+        selectedContent.add(path);
+      }
+    }
+  }
   const readiness = readJson(join(research, `${run}-publication-readiness.json`));
   // Derived index names are semantic receipts, never physical path ownership.
   const projections = new Set((Array.isArray(readiness.protected_tree_projections)
@@ -430,12 +491,28 @@ function scopedChanges(receipt, now, changed) {
   if (!outside.length) return new Set();
   // Reuse the native closure selection and projection logic. In particular,
   // a foreign-prefixed source actually consumed by this run is still sealed.
+  if (!verifyReadiness) return new Set(outside);
   const verification = spawnSync(process.execPath, [join(dirname(fileURLToPath(import.meta.url)), 'publication-ready.mjs'),
     '--run', run, '--root', root, '--verify'], { cwd: root, encoding: 'utf8' });
   if (verification.error || verification.status !== 0)
     die(`step6-report-foreign-scope: native readiness verification failed: ${verification.error?.message
       ?? (verification.stderr || verification.stdout).trim()}`);
   return new Set(outside);
+}
+
+// Diagnostic inventory for guarded native pre-report recovery. This grants no
+// gate success: the recovery module independently reconstructs the original
+// readiness digest before it may retire any derived receipt.
+if (command === 'recovery-inventory') {
+  const receipt = readJson(integrityPath);
+  if (receipt?.version !== 1 || receipt.run !== run || !receipt.protected_tree) die('step6-report-integrity-shape');
+  const now = tree();
+  const paths = new Set([...Object.keys(receipt.protected_tree), ...Object.keys(now)]);
+  const changed = [...paths].filter(path => receipt.protected_tree[path] !== now[path]).sort();
+  // Piped stdout is asynchronous; finish the diagnostic before exiting.
+  await new Promise((resolve, reject) => process.stdout.write(`${JSON.stringify({ now, changed, scoped: [...scopedChanges(receipt, now, changed, false)].sort() })}\n`,
+    error => error ? reject(error) : resolve()));
+  process.exit(0);
 }
 
 if (command === 'snapshot') {

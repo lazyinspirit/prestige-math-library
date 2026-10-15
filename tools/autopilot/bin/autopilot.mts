@@ -34,6 +34,7 @@ import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
+import { inspectReportReopen, reopenReport } from '../../autopilot-report-reopen.mjs';
 import { reopenStep3 } from '../src/step3-reopen.mts';
 import { inspectCloseoutReopen, reopenCloseout } from '../src/closeout-reopen.mts';
 import { appendFrontier, assertNoAppendTransaction, recoverAppendItemOrder } from '../src/frontier-append.mts';
@@ -219,6 +220,22 @@ async function buildExecutor(run?: string) {
 }
 
 switch (cmd) {
+  case 'reopen-report': {
+    const run = opt('run') ?? die('--run is required');
+    const authorization = opt('authorization') ?? die('--authorization is required');
+    const config = loadConfig();
+    const options = { repo, run, stateDir: opt('state-dir') ? stateDir : join(repo, '.autopilot', run),
+      dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`), authorizationPath: resolve(repo, authorization) };
+    try {
+      if (has('inspect')) console.log(JSON.stringify(inspectReportReopen(options).guards, null, 2));
+      else {
+        const receipt = reopenReport(options);
+        console.log(`reopen-report: archived original evidence and reopened ${receipt.guards.reopen_stages.length} native suffix stages`);
+        console.log('  remains paused; start/resume for fresh readiness, evidence, baseline and owner report');
+      }
+    } catch (error: any) { console.error(String(error?.message ?? error)); process.exitCode = 1; }
+    break;
+  }
   case 'reopen-closeout': {
     const run = opt('run') ?? die('--run is required');
     const authorization = opt('authorization') ?? die('--authorization is required');

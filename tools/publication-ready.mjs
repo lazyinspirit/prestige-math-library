@@ -23,6 +23,7 @@ const run = value('--run');
 const root = resolve(value('--root') || REPO);
 const write = argv.includes('--write');
 const verify = argv.includes('--verify');
+const inspect = argv.includes('--inspect');
 const requireReport = argv.includes('--require-report');
 if (!run || write === verify) {
   console.error('usage: node tools/publication-ready.mjs --run <run> (--write|--verify) [--require-report] [--root <repo>]');
@@ -279,7 +280,7 @@ function protectedTreeReceipt(scope) {
   };
   const rows = [...physical.map(file => `${file}\0${protectedEntryHash(join(root, file))}`),
     ...[...projections].map(([file, value]) => `${file}\0${projectionHash(file, value)}`)].sort();
-  return { protected_tree_scope: 'frontier-prerequisite-context-v1', protected_tree_files: rows.length,
+  return { ...(inspect ? { protected_tree_rows: rows } : {}), protected_tree_scope: 'frontier-prerequisite-context-v1', protected_tree_files: rows.length,
     protected_tree_paths: physical, protected_tree_projections: [...projections.keys()].sort(),
     protected_tree_sha256: sha256(rows.join('\n')) };
 }
@@ -337,6 +338,14 @@ const expected = {
   ...treeReceipt,
   owner_actions_remaining: ['personal mathematical audit', 'deliberate status:published changes', 'push/deployment'],
 };
+
+if (inspect) {
+  if (write || requireReport) throw new Error('--inspect requires --verify without --require-report');
+  // Piped stdout is asynchronous; finish the diagnostic before exiting.
+  await new Promise((resolve, reject) => process.stdout.write(`${JSON.stringify(expected)}\n`,
+    error => error ? reject(error) : resolve()));
+  process.exit(blockers.length ? 1 : 0);
+}
 
 if (write) {
   writeFileSync(receiptPath, JSON.stringify({ ...expected, generated_at: new Date().toISOString() }, null, 2) + '\n');
