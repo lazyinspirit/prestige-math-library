@@ -453,7 +453,9 @@ A later native certificate may carry forward a legitimately repaired canonical
 `research/RUN-batch-N.proof-contracts.json` that an earlier certificate bound at
 its old bytes. Ordinary/current certificate verification remains strict. At the
 native certification transition only, the engine checks the immutable prior
-certificate's payload and every static evidence hash; an old live contract
+certificate's payload and every static evidence hash using the original raw
+file bytes, including binary sources. Unchanged binary evidence does not require
+an evidence transition. An old live contract
 binding may evolve only with bound current native owning repair reports,
 assignments, current reviews and Sol 6.1 high dispatch authority, plus the
 consumed predecessor owner-gate history. That gate must cover the complete
