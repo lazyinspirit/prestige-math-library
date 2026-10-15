@@ -3,7 +3,8 @@ import { realpathSync as physicsRealpath } from 'node:fs';
 // Explicit files: read-only checks. --run --write: one cached SSR scan shared
 // by both readiness gates. --verify: hashes/coverage only, never rerenders.
 import { spawnSync } from 'node:child_process';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, openSync, closeSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { REPO, WEB_DIR } from './paths.mjs';
@@ -18,9 +19,21 @@ export function scanProofFiles(files, root = REPO) {
     const { body } = splitFrontmatter(raw);
     return { file, body, linesBeforeBody: raw.slice(0, raw.length - body.length).split('\n').length - 1 };
   });
-  const result = spawnSync(process.execPath, [join(REPO, 'tools/physics-support/tsx-run.mjs'), join(REPO, 'tools/physics-support/proof-layout-render.mts')], {
-    cwd: WEB_DIR, input: JSON.stringify(inputs), encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, timeout: 300_000,
-  });
+  // A seekable input avoids large synchronous pipe writes masking an early
+  // loader error with EPIPE and Node's nonblocking stdin reads with EAGAIN.
+  const temporary = mkdtempSync(join(tmpdir(), 'prestige-proof-layout-'));
+  let descriptor, result;
+  try {
+    const input = join(temporary, 'input.json');
+    writeFileSync(input, JSON.stringify(inputs));
+    descriptor = openSync(input, 'r');
+    result = spawnSync(process.execPath, [join(REPO, 'tools/physics-support/tsx-run.mjs'), join(REPO, 'tools/physics-support/proof-layout-render.mts')], {
+      cwd: WEB_DIR, stdio: [descriptor, 'pipe', 'pipe'], encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, timeout: 300_000,
+    });
+  } finally {
+    if (descriptor !== undefined) closeSync(descriptor);
+    rmSync(temporary, { recursive: true, force: true });
+  }
   if (result.error || result.status !== 0) throw Error(`proof-layout: renderer failed (${result.error?.message ?? result.stderr})`);
   const items = JSON.parse(result.stdout);
   if (!Array.isArray(items) || items.length !== files.length || items.some((item, i) => item.file !== files[i])) throw Error('proof-layout: renderer returned incomplete coverage');

@@ -524,6 +524,11 @@ Keep fresh owner formatting/metadata check logs and supervision observations in
 `.physics-autopilot/RUN/` during Step 6. The report baseline seals the workspace,
 including research files; later pre-gate receipts must not mutate that protected
 tree. This changes only evidence storage, never scope, checks or gate authority.
+The proof-layout renderer receives its unchanged JSON input through a temporary
+seekable file, cleaned after execution. When app tsx dependencies are absent,
+the TypeScript fallback resolves configured project path aliases and missing
+extensionless relative TypeScript imports; ordinary package resolution retains
+Node export-map checks. These runtime details do not change renderer analysis.
 
 Step-6 terminal defect-ledger gates use the run's frozen Step-5 frontier when
 present. Outside item findings remain recorded with their actual dispositions
