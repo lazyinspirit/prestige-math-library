@@ -240,7 +240,7 @@ export function sourceIdenticalAcceptanceContinuity(
     const heading =
       meta.kind === "definition" || meta.kind === "algorithm"
         ? "Definition"
-        : meta.kind === "example"
+        : meta.kind === "example" && sectionText(body, "Example")
           ? "Example"
           : meta.kind === "counterexample"
             ? "Statement refuted"
