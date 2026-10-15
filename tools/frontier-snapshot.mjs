@@ -7,13 +7,58 @@ const safe = value => { if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('
 const json = path => JSON.parse(readFileSync(path, 'utf8'));
 const read = path => existsSync(path) ? json(path) : null;
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
-export function loadStep3(root, run) {
+export function loadStep3(root, run, {constructionScheduling=false}={}) {
   safe(run);
   const dir = join(root, 'research'), pages = [], items = new Map(), pairs = new Map();
+  let schedulingIdentityInputs;
+  // Only native construction scheduling may project incomplete identities.
+  // The worker's explicit page spelling must already have one exact owner and
+  // canonical identity. Never infer inventory, relocate a page, or repair disk.
+  const schedulingPage = (page, batch) => {
+    const missingId = !Object.hasOwn(page, 'id');
+    const stringItems = (page.items ?? []).some(item => typeof item === 'string');
+    if (!constructionScheduling || (!missingId && !stringItems)) return page;
+    if (!schedulingIdentityInputs) schedulingIdentityInputs = {
+      ledger: readFileSync(join(dir, `${run}-scope-ledger.json`), 'utf8'),
+      plan: readFileSync(join(dir, 'plan-spec.json'), 'utf8'),
+    };
+    const ledger = JSON.parse(schedulingIdentityInputs.ledger);
+    const id = missingId ? page.page : page.id;
+    const owners = (ledger.pages ?? []).filter(p => p.id === id);
+    const planned = (JSON.parse(schedulingIdentityInputs.plan).pages ?? []).filter(p => p.id === id);
+    if (typeof id !== 'string' || !id || ledger.run !== run
+      || owners.length !== 1 || owners[0].batch !== batch || owners[0].kind !== page.kind
+      || planned.length !== 1 || planned[0].kind !== page.kind
+      || planned[0].category !== page.category || planned[0].companion !== page.companion)
+      throw Error(`Invalid construction scheduling page identity in batch ${batch}`);
+    if (!stringItems) return { ...page, id };
+    // Some authors keep complete current contracts in an adjacent items file
+    // while their pages file temporarily lists IDs. Preserve those contracts,
+    // including every explicit dependency; absent/ambiguous contracts hold.
+    const inputs = schedulingIdentityInputs.items ??= {};
+    inputs[batch] ??= readFileSync(join(dir, `${run}-batch-${batch}.items.json`), 'utf8');
+    const contracts = JSON.parse(inputs[batch]);
+    if (contracts.run !== run || contracts.batch !== batch || !Array.isArray(contracts.items))
+      throw Error(`Invalid construction scheduling item contracts in batch ${batch}`);
+    const prefixes = {definition:'def',algorithm:'alg',theorem:'thm',lemma:'lem',proposition:'prop',
+      corollary:'cor',example:'ex',counterexample:'cex','false-statement':'fs',remark:'rem','open-problem':'op'};
+    return { ...page, id, items: page.items.map(item => {
+      if (typeof item !== 'string') return item;
+      const matches = contracts.items.filter(contract => contract.id === item);
+      const contract = matches[0];
+      if (matches.length !== 1 || contract.page !== id || !prefixes[contract.kind]
+        || !item.startsWith(`${prefixes[contract.kind]}-`) || !/^[a-zA-Z0-9_-]+$/.test(item)
+        || !Array.isArray(contract.deps) || contract.deps.some(dep =>
+          typeof dep !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(dep)))
+        throw Error(`Invalid construction scheduling item identity ${item} in batch ${batch}`);
+      return { ...contract };
+    }) };
+  };
   for (const f of readdirSync(dir).filter(f => new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(f)).sort()) {
     const batch = f.match(/-batch-(\d+)\./)[1];
     const coverage = read(join(dir, f.replace('.pages.json', '.coverage.json')));
-    for (const page of json(join(dir, f))) {
+    for (const original of json(join(dir, f))) {
+      const page = schedulingPage(original, batch);
       const livePage = { ...page, batch, coverage: coverage?.pages?.find(p => p.page === page.id) };
       pages.push(livePage);
       for (const item of page.items ?? []) {
@@ -37,7 +82,8 @@ export function loadStep3(root, run) {
   const planned = new Map();
   for (const page of read(join(dir, 'plan-spec.json'))?.pages ?? [])
     for (const item of page.items ?? []) planned.set(item.id, { item, page });
-  return { root, run, pages, pairs, items, planned, cache: new Map() };
+  return { root, run, pages, pairs, items, planned, cache: new Map(),
+    ...(schedulingIdentityInputs ? { schedulingIdentityInputs } : {}) };
 }
 
 // Proof repairs do not reopen scope. Changed claims or inventory do.

@@ -69,7 +69,10 @@ export function loopPattern(ctx,batches){
 }
 /** Actual item and page prerequisites; never infer order from batch numbers. */
 export function prerequisiteBatches(root, run, batch, pass=null, {constructionScheduling=false}={}) {
-  const snapshot = pass ? (pass.scopeSnapshot??=loadStep3(root,run)) : loadStep3(root,run), home = new Map(snapshot.pages.map(page => [page.id, page.batch]));
+  const snapshot = constructionScheduling
+    ? (pass ? (pass.scopeSchedulingSnapshot??=loadStep3(root,run,{constructionScheduling:true})) : loadStep3(root,run,{constructionScheduling:true}))
+    : (pass ? (pass.scopeSnapshot??=loadStep3(root,run)) : loadStep3(root,run));
+  const home = new Map(snapshot.pages.map(page => [page.id, page.batch]));
   const out = new Set(), deps = new Set();
   for (const page of snapshot.pages.filter(page => page.batch === String(batch))) {
     for (const id of page.requires ?? []) if (home.has(id) && home.get(id) !== String(batch)) out.add(home.get(id));
