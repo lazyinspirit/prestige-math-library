@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-prerequisites-4-2026-10-15-owner/published-repairs/def-finite-sum.json
 id: def-finite-sum
 kind: definition
 title: "Finite sums and finite products, by recursion"
@@ -7,22 +9,10 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [thm-recursion, thm-induction-principle, def-ordered-field, def-natural-numbers, def-nat-addition, def-field, def-complete-ordered-field, lem-of-naturals-positive, lem-of-q-embeds]
+deps: [thm-recursion, thm-induction-principle, def-ordered-field, def-natural-numbers, def-nat-addition, def-nat-order, lem-nat-add-commutative, lem-nat-add-cancellative, def-field, def-complete-ordered-field, lem-of-naturals-positive, lem-of-q-embeds]
 justified_by: []
 aliases: [def-finite-product]
 landmark: false
-verification:
-  precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -88,8 +78,13 @@ and we write $\prod_{k < n} a_k := \Pi_n$.
 
 $$\sum_{k=0}^{n} a_k := \sum_{k < n+1} a_k, \qquad \prod_{k=0}^{n} a_k := \prod_{k < n+1} a_k,$$
 
-and, for a general lower index $m$ with $m \le n + 1$, writing $d = n + 1 - m$
-for the number of terms,
+and, for a general lower index $m$ with $m \le n + 1$, let $d$ be the
+unique natural number satisfying $m+d=n+1$. Existence is the definition of
+natural order ([[def-nat-order]]); if $m+d=m+e$, commutativity
+([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation
+([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,
+we may write this unique additive gap as $d=n+1-m$; no total natural subtraction
+operation is presupposed. With $d$ thus fixed, define
 
 $$\sum_{k=m}^{n} a_k := \sum_{j < d} a_{m+j}, \qquad \prod_{k=m}^{n} a_k := \prod_{j < d} a_{m+j} .$$
 
@@ -98,6 +93,14 @@ the empty product has value $1$. In the same spirit $\sum_{k=0}^{-1} a_k$ is
 notation for the empty sum $\Sigma_0 = 0$ and $\prod_{k=0}^{-1} a_k$ for the
 empty product $\Pi_0 = 1$; the index $-1$ never occurs as an element of
 $\mathbb{N}$ and is only a way of writing "no terms".
+
+Equivalently, for naturals $m \le r$, the half-open endpoint notation
+$\sum_{k=m}^{r-1}a_k$ and $\prod_{k=m}^{r-1}a_k$ means
+$\sum_{j<d}a_{m+j}$ and $\prod_{j<d}a_{m+j}$, respectively, where $d$ is the
+unique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms
+before $r$, so this notation needs no total subtraction operation. For $m=r$,
+the unique gap is $0$ because $m+0=m$, giving the empty sum and product; the
+case $m=r=0$ is the $-1$ endpoint convention just stipulated.
 
 Only finitely many values of $a$ enter $\sum_{k<n} a_k$, so the notation
 $\sum_{k<n} a_k$ and $\prod_{k<n} a_k$ is also used for a list

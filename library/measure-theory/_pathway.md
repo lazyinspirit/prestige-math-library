@@ -6,6 +6,7 @@ parts:
     title: "Sigma-algebras and Borel sets"
     pages:
       - sigma-algebras-and-borel-sets
+      - pointwise-extended-real-function-products
       - measures-and-their-basic-properties
       - outer-measure-and-the-caratheodory-extension-theorem
       - lebesgue-measure-on-euclidean-space
@@ -36,16 +37,18 @@ parts:
 
 ## sigma-algebras-and-borel-sets
 
-Carathéodory extension and Lebesgue measure, measurable functions, integration and
-convergence, product and signed measures, Radon--Nikodym, the $L^p$ calculus and
-duality, Riesz--Markov representation, Vitali covering, maximal estimates,
-differentiation, Hausdorff measure, complex $L^p$ conventions, Riesz--Thorin
-interpolation and the sharp FTC, with choice and sigma-finiteness hypotheses explicit.
-Measure preservation then gives Koopman isometries, invariant sigma-algebras, ergodicity
-and strong mixing criteria; weak mixing means vanishing Cesàro correlations, product
-ergodicity and no nonconstant eigenfunctions; Poincaré recurrence, first-return maps,
-Kac's formula, rotations, shifts and Krylov--Bogolyubov lead to the Chacon
-transformation, ergodic and weakly but not strongly mixing. The dynamics closes with the
-maximal ergodic inequality, Birkhoff's almost-everywhere theorem and von Neumann's $L^2$
-mean theorem, unique ergodicity, Weyl equidistribution, Borel normality and the
-fair-coin strong law.
+A total pointwise product for extended-real functions, with no measurability
+claim, opens the part: the zero rule covers every ordered zero--infinity pair,
+signs govern infinite factors. Carathéodory extension, Lebesgue measure,
+measurable functions, integration, convergence, product and signed measures,
+Radon--Nikodym, $L^p$ calculus and duality, Riesz--Markov, Vitali covering,
+maximal estimates, differentiation, Hausdorff measure, complex $L^p$
+conventions, Riesz--Thorin interpolation, sharp FTC, with choice and
+sigma-finiteness explicit. Measure preservation gives Koopman isometries,
+invariant sigma-algebras, ergodicity, strong mixing; weak mixing means
+vanishing Cesàro correlations, product ergodicity, no nonconstant
+eigenfunctions; Poincaré recurrence, first-return maps, Kac's formula,
+rotations, shifts, Krylov--Bogolyubov yield Chacon, weakly but not strongly
+mixing, closing with the maximal ergodic inequality, Birkhoff and von Neumann
+ergodic theorems, Weyl equidistribution, Borel normality, the fair-coin strong
+law.

@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/quantum-prerequisites-4-2026-10-15-owner/published-repairs/lem-finite-sum-laws.json
 id: lem-finite-sum-laws
 kind: lemma
 title: "Laws of finite sums and finite products"
@@ -7,23 +9,11 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-finite-sum, thm-induction-principle, def-ordered-field, def-field, lem-of-add-order, lem-of-sign-rules, lem-of-zero-mult, cor-of-one-positive, lem-of-q-embeds, lem-of-naturals-positive]
+deps: [def-finite-sum, def-nat-order, def-nat-addition, lem-nat-add-commutative, lem-nat-add-cancellative, thm-induction-principle, def-ordered-field, def-field, lem-of-add-order, lem-of-sign-rules, lem-of-zero-mult, cor-of-one-positive, lem-of-q-embeds, lem-of-naturals-positive]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
-verification:
-  precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -57,7 +47,7 @@ finite products as in [[def-finite-sum]]. Then:
 
 **Given:** Sequences $a, b, c : \mathbb{N} \to \mathbb{R}$, a real $\lambda$, and naturals $m, n$. Write $\Sigma_n = \sum_{k<n} a_k$ and $\Pi_n = \prod_{k<n} a_k$.
 
-[L1] Recursion clauses ([[def-finite-sum]]): $\sum_{k<0} a_k = 0$ and $\sum_{k<n+1} a_k = \sum_{k<n} a_k + a_n$; $\prod_{k<0} a_k = 1$ and $\prod_{k<n+1} a_k = \big(\prod_{k<n} a_k\big) \cdot a_n$; and $\sum_{k=m}^{n-1} a_k = \sum_{j < n-m} a_{m+j}$ for $m \le n$, likewise for products.
+[L1] Recursion clauses ([[def-finite-sum]]): $\sum_{k<0} a_k = 0$ and $\sum_{k<n+1} a_k = \sum_{k<n} a_k + a_n$; $\prod_{k<0} a_k = 1$ and $\prod_{k<n+1} a_k = \big(\prod_{k<n} a_k\big) \cdot a_n$; and for $m \le n$, $\sum_{k=m}^{n-1} a_k = \sum_{j < d} a_{m+j}$ and likewise for products, where $d$ is the unique natural with $m+d=n$. If $m=n$, then $d=0$, including $m=n=0$ with the stipulated $-1$ endpoint label.
 
 [L2] Field axioms: addition and multiplication are associative and commutative, $0$ and $1$ are the identities, $x - x = 0$, and multiplication distributes over addition ([[def-field]], [[def-ordered-field]]); and $0 \cdot x = 0$, which is not an axiom but a lemma ([[lem-of-zero-mult]]).
 
@@ -69,6 +59,8 @@ finite products as in [[def-finite-sum]]. Then:
 
 [L6] Sign rules: a product of two positives is positive ([[lem-of-sign-rules]], claim 1), and a product of two nonnegatives is nonnegative, since a factor equal to $0$ makes the product $0$ ([[lem-of-zero-mult]]) and otherwise both factors are positive; and $1 > 0$, which is proved in [[cor-of-one-positive]] and stated by none of the items named above.
 
+[L7] Natural order means $m\le n$ if and only if $m+d=n$ for some natural $d$ ([[def-nat-order]]). Such $d$ is unique: commutativity ([[lem-nat-add-commutative]]) turns $m+d=m+e$ into $d+m=e+m$, and cancellation ([[lem-nat-add-cancellative]]) gives $d=e$. Natural addition satisfies $m+0=m$ and $m+(d+1)=(m+d)+1$ ([[def-nat-addition]]).
+
 ## Proof
 
 **Proof technique:** induction.
@@ -77,7 +69,7 @@ finite products as in [[def-finite-sum]]. Then:
 
 1.2 Inductive hypothesis: fix $n \in \mathbb{N}$ and assume claims 1, 2, 4, 5 and 6 hold for this $n$ and for all sequences $a, b, c$ and all $\lambda$. [ih]
 
-1.3 Splitting, claim 3, by a separate induction on the number of trailing terms $d = n - m$ with $m$ fixed: for $d = 0$ the claim reads $\sum_{k<m} a_k = \sum_{k<m} a_k + 0$ and $\prod_{k<m} a_k = \big(\prod_{k<m} a_k\big) \cdot 1$, which hold; and if $\sum_{k<m+d} a_k = \sum_{k<m} a_k + \sum_{j<d} a_{m+j}$, then $\sum_{k<m+d+1} a_k = \sum_{k<m+d} a_k + a_{m+d} = \sum_{k<m} a_k + \big(\sum_{j<d} a_{m+j} + a_{m+d}\big) = \sum_{k<m} a_k + \sum_{j<d+1} a_{m+j}$ by associativity, and identically for products with $1$ in place of $0$ and multiplication in place of addition, so induction on $d$ gives claim 3 for every $m \le n$. [L1, L2, L3]
+1.3 Splitting, claim 3: fix $m$ and prove for every natural $d$ the identities $\sum_{k<m+d}a_k=\sum_{k<m}a_k+\sum_{j<d}a_{m+j}$ and $\prod_{k<m+d}a_k=(\prod_{k<m}a_k)(\prod_{j<d}a_{m+j})$. For $d=0$, [L7] gives $m+0=m$ and [L1, L2] give addition of $0$ and multiplication by $1$. If the two identities hold for $d$, then $m+(d+1)=(m+d)+1$ by [L7]; recursion and associativity give $\sum_{k<m+(d+1)}a_k=\sum_{k<m+d}a_k+a_{m+d}=\sum_{k<m}a_k+(\sum_{j<d}a_{m+j}+a_{m+d})=\sum_{k<m}a_k+\sum_{j<d+1}a_{m+j}$. Likewise, $\prod_{k<m+(d+1)}a_k=(\prod_{k<m+d}a_k)a_{m+d}=(\prod_{k<m}a_k)((\prod_{j<d}a_{m+j})a_{m+d})=(\prod_{k<m}a_k)(\prod_{j<d+1}a_{m+j})$. Thus [L3] proves both identities for every $d$. Given the stated $m\le n$, choose the unique $d$ with $m+d=n$ by [L7]; substituting $n=m+d$ and using the lower-index notation in [L1] proves claim 3, including $m=n$ and $m=n=0$. [L1, L2, L3, L7]
 
 2.1 Additivity at $n+1$: $\sum_{k<n+1}(a_k + b_k) = \sum_{k<n}(a_k + b_k) + (a_n + b_n) = \big(\sum_{k<n} a_k + \sum_{k<n} b_k\big) + (a_n + b_n) = \big(\sum_{k<n} a_k + a_n\big) + \big(\sum_{k<n} b_k + b_n\big) = \sum_{k<n+1} a_k + \sum_{k<n+1} b_k$, using the recursion clause, the hypothesis, and commutativity with associativity of addition. [step 1.2, L1, L2]
 

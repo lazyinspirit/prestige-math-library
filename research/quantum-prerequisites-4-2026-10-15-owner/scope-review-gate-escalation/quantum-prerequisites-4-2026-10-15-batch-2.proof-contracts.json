@@ -1,0 +1,932 @@
+{
+  "version": 1,
+  "scope": [
+    "def-complex-norm-and-complex-normed-space",
+    "lem-complex-modulus-of-real-embedding-equals-real-absolute-value",
+    "lem-complex-norm-realification-is-a-real-norm",
+    "lem-complex-coordinate-l1-is-a-norm",
+    "def-complex-normed-subspace",
+    "def-equivalent-complex-norms",
+    "ex-anisotropic-real-norm-on-c"
+  ],
+  "contracts": {
+    "def-complex-norm-and-complex-normed-space": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition has no indexed sum or empty-domain operation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition includes the explicit condition N(v)=0 iff v=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional space is singled out."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition makes no nonzero-dimension assumption, so the zero vector space is in its declared scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no interval or endpoint parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition selects no elements from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The definition states N(v)=0 implies v=0 as one direction of its separation clause."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The definition states v=0 implies N(v)=0 as the other direction of its separation clause."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-complex-modulus-of-real-embedding-equals-real-absolute-value": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-numbers-and-arithmetic",
+          "source_section": "Definition",
+          "quote": "The constant-class map $\\mathbb R\\to\\mathbb C$ is the specified real map",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-numbers-and-arithmetic",
+          "source_section": "Definition",
+          "quote": "set $$i:=x+(x^2+1).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "|z|=\\sqrt{a^2+b^2}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "The **absolute value** of $x \\in F$ is $$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "|x| \\ge 0; \\quad |x| = 0 \\iff x = 0",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-square-positive",
+          "source_section": "Statement",
+          "quote": "For every $a \\in F$ with $a \\neq 0$ we have $a^2 > 0",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "embedded-coordinate",
+          "claim": "The embedded real has complex coordinates r+0i.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "nonnegative-radicand",
+          "claim": "The radicand r^2 is nonnegative, including r=0, and so has a nonnegative square root.",
+          "step": "1.2",
+          "inputs": [
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "real-absolute-square",
+          "claim": "The real absolute value is nonnegative and its square is r^2, including r=0.",
+          "step": "1.3",
+          "inputs": [
+            "F5"
+          ]
+        },
+        {
+          "id": "modulus-evaluation",
+          "claim": "The complex modulus of the embedded real is the nonnegative square root of r^2.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "unique-root-identification",
+          "claim": "The complex modulus and real absolute value are the same nonnegative square root of r^2.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "step 2.1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns one arbitrary real scalar and has no empty-index case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 treat r=0; step 3.1 identifies both sides as the unique nonnegative square root."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 apply at r=1 and identify both moduli by the same unique-root argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 include r=0, the only scalar for which r^2 is the zero radicand."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval or endpoint parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 are pointwise for the given r and use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an equality, not a biconditional with two logical directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an equality, not a biconditional with two logical directions."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-complex-norm-realification-is-a-real-norm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-norm-and-complex-normed-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over $\\mathbb C$ ([[def-vector-space]], with the complex field of [[def-complex-numbers-and-arithmetic]]). A **complex norm** on $V$ is a function $N:V\\to\\mathbb R$ such that, for all $u,v\\in V$ and every $\\lambda\\in\\mathbb C$: - $N(v)=0$ if and only if $v=0$; - $N(\\lambda v)=|\\lambda|_{\\mathbb C}N(v)$, where $|\\lambda|_{\\mathbb C}$ is the complex modulus of [[def-complex-conjugate-real-imaginary-part-and-modulus]]; - $N(u+v)\\le N(u)+N(v)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-realification-of-a-complex-vector-space",
+          "source_section": "Definition",
+          "quote": "whose underlying set and addition are those of $W$, and whose scalar multiplication is the restriction of the complex scalar multiplication to the canonical real embedding",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-complex-modulus-of-real-embedding-equals-real-absolute-value",
+          "source_section": "Statement",
+          "quote": "For every real $r$, write $\\lambda_r$ for its canonical image in $\\mathbb C$. Then $$ |\\lambda_r|_{\\mathbb C}=|r|_{\\mathbb R}. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "A **norm on $V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all $\\lambda \\in \\mathbb{R}$: - **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$. - **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute value being that of [[def-abs-value]]. - **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Let $N$ be a norm on $V$ and define $$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$ where $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on $V$** ([[def-metric-space]])",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "inherited-separation-and-triangle",
+          "claim": "Separation and the triangle inequality are unchanged under realification.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "real-homogeneity",
+          "claim": "Restriction of complex scalar multiplication and the modulus restriction give real absolute homogeneity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "same-induced-metric",
+          "claim": "The real norm metric is the same function N(u-v) on the same underlying pairs.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no indexed family or empty sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 inherits separation at the zero vector, and step 2.1 covers every real scalar including zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional space is singled out."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 impose no nonzero-dimension assumption and apply to the zero space."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval or endpoint parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 use only pointwise restrictions and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a preservation assertion, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a preservation assertion, not an iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-complex-coordinate-l1-is-a-norm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-function-space",
+          "source_section": "Definition",
+          "quote": "Taking $X = n$ therefore gives $$F^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to F \\,\\},$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-function-space",
+          "source_section": "Definition",
+          "quote": "The operations read $$(x + y)_i = x_i + y_i, \\qquad (\\lambda x)_i = \\lambda x_i \\qquad (i < n),$$ and the zero of $F^{n}$ is the tuple all of whose coordinates are $0_F$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-function-space",
+          "source_section": "Definition",
+          "quote": "Since $0 = \\varnothing$, the set $F^{0} = F^{\\varnothing}$ has exactly one element, the empty function; that element is $0_{F^{0}}$, so $F^{0}$ is the **zero space** $\\{0_{F^{0}}\\}$, not the empty set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$ $$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Only finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list $a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the list to all of $\\mathbb{N}$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "When $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$. 2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-complex-norm-and-complex-normed-space",
+          "source_section": "Definition",
+          "quote": "A **complex norm** on $V$ is a function $N:V\\to\\mathbb R$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "separation-including-n0",
+          "claim": "The coordinate sum is zero exactly at the zero tuple, including the empty tuple when n=0.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "complex-homogeneity",
+          "claim": "For every complex scalar lambda, the finite coordinate sum scales by |lambda|.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F7",
+            "F9"
+          ]
+        },
+        {
+          "id": "triangle-inequality",
+          "claim": "Coordinatewise modulus subadditivity and finite-sum laws give the triangle inequality.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles n=0: the empty sum is 0 and C^0 is the singleton zero vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves both directions of separation for the zero tuple."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 apply at n=1, where the sum has the single coordinate modulus."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly covers the degenerate zero space C^0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 use the finite index set j<n, with n=0 as its empty endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 use finite sums over the supplied coordinates and make no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves N_1(z)=0 implies z=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves z=0 implies N_1(z)=0."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-complex-normed-subspace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-norm-and-complex-normed-space",
+          "source_section": "Definition",
+          "quote": "A **complex norm** on $V$ is a function $N:V\\to\\mathbb R$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-subspace",
+          "source_section": "Definition",
+          "quote": "- **(W1)** $0_V \\in W$; - **(W2)** $W$ is closed under the vector addition: $u, v \\in W$ implies $u + v \\in W$; - **(W3)** $W$ is closed under scalar multiplication: $\\lambda \\in F$ and $v \\in W$ imply $\\lambda v \\in W$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "restricted-separation",
+          "claim": "The restricted norm separates zero on W.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "restricted-homogeneity-and-triangle",
+          "claim": "Closure of W under complex scalars and addition lets both remaining norm axioms restrict to W.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A linear subspace contains zero and cannot be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies separation at zero and step 2.1 applies to every w in W."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No dimension-one hypothesis is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 remain valid for W={0} and for W=V."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval or endpoint parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 restrict the supplied norm pointwise and use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves N_W(w)=0 implies w=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves w=0 implies N_W(w)=0."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-equivalent-complex-norms": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition has no indexed or empty-domain operation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition quantifies over every v, including v=0, where both inequalities read 0<=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional space is singled out."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition makes no dimension assumption and its inequalities are well-typed on the zero space."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval or endpoint parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition selects no objects from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition does not state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not state a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-anisotropic-real-norm-on-c": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$, and $$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$ $$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-numbers-and-arithmetic",
+          "source_section": "Definition",
+          "quote": "The constant-class map $\\mathbb R\\to\\mathbb C$ is the specified real map",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-realification-of-a-complex-vector-space",
+          "source_section": "Definition",
+          "quote": "whose underlying set and addition are those of $W$, and whose scalar multiplication is the restriction of the complex scalar multiplication to the canonical real embedding $\\mathbb R\\subseteq\\mathbb C$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "$$|z|=\\sqrt{a^2+b^2}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "The **absolute value** of $x \\in F$ is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "A **norm on $V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all $\\lambda \\in \\mathbb{R}$: - **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$. - **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute value being that of [[def-abs-value]]. - **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-norm-and-complex-normed-space",
+          "source_section": "Definition",
+          "quote": "- $N(\\lambda v)=|\\lambda|_{\\mathbb C}N(v)$, where $|\\lambda|_{\\mathbb C}$ is the complex modulus",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds: $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-of-one-positive",
+          "source_section": "Statement",
+          "quote": "In any ordered field $F$ with positive cone $P$, the multiplicative identity satisfies $0 < 1$; that is, $1 \\in P$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-of-sign-rules",
+          "source_section": "Statement",
+          "quote": "1. If $a > 0$ and $b > 0$ then $ab > 0$. 2. If $a > 0$ and $b < 0$ then $ab < 0$. 3. If $a < 0$ and $b < 0$ then $ab > 0$. 4. If $c > 0$ then $a < b \\iff ac < bc$. 5. If $c < 0$ then $a < b \\iff bc < ac$ (multiplication by a negative reverses order).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-add-order",
+          "source_section": "Statement",
+          "quote": "1. **Translation invariance.** If $a < b$ then $a + c < b + c$. 2. **Adding inequalities.** If $a < b$ and $c < d$ then $a + c < b + d$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "real-norm-separation",
+          "claim": "N(z)=0 iff z=0; if z is nonzero, at least one positive weighted absolute coordinate makes the sum positive.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "real-homogeneity",
+          "claim": "For every real scalar r, N(rz)=|r|N(z).",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "real-triangle",
+          "claim": "Coordinatewise subadditivity, positive scaling, and equality/strict cases for weak-order addition give N(z+w)<=N(z)+N(w).",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "complex-homogeneity-counterexample",
+          "claim": "N(1)=1 and N(i)=2 while |i|N(1)=1, so complex homogeneity fails.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "F9",
+            "F11"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is on C and has no empty-index case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks z=0 and the implication N(z)=0 iff z=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 computes N(1)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero vector, while step 3.1 exhibits nonzero vectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval or endpoint parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 are pointwise and use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves N(z)=0 implies z=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves z=0 implies N(z)=0."
+        }
+      ],
+      "finite_smoke": [],
+      "notes": "Exact hand computation N(1)=1, N(i)=2, and |i|=1 is recorded in Verification step 3.1. No registered finite-smoke check applies to this elementary norm example."
+    }
+  }
+}

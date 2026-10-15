@@ -1,0 +1,1549 @@
+{
+  "version": 1,
+  "level": "quantum-prerequisites-4-2026-10-15-batch-3",
+  "scope": [
+    "thm-complex-coordinate-map-preserves-real-scalar-multiplication",
+    "def-complex-path-polygonal-length-and-rectifiability",
+    "thm-complex-coordinate-isometry-and-topology-transport",
+    "thm-complex-coordinate-map-preserves-real-total-differentiability",
+    "thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed",
+    "thm-complex-path-length-invariant-under-monotone-reparametrization",
+    "ex-complex-coordinate-and-path-transport"
+  ],
+  "contracts": {
+    "thm-complex-coordinate-map-preserves-real-scalar-multiplication": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-numbers-are-the-real-coordinate-plane",
+          "source_section": "Statement",
+          "quote": "The map\n$$\\Phi:\\mathbb C\\longrightarrow\\mathbb R^2,\\qquad \\Phi(a+bi)=(a,b),$$\nis a bijection. Under it,\n$$\\Phi((a+bi)+(u+vi))=(a+u,b+v)$$\nand\n$$\\Phi((a+bi)(u+vi))=(au-bv,av+bu).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-numbers-and-arithmetic",
+          "source_section": "Definition",
+          "quote": "Form the polynomial ring $\\mathbb R[x]$\n([[def-polynomial-ring-over-a-commutative-ring]]) and define the **complex\nnumbers** by the quotient ring\n$$\\mathbb C:=\\mathbb R[x]/(x^2+1)$$\n([[def-quotient-ring]]). Write $a$ for the constant class $a+(x^2+1)$ and set\n$$i:=x+(x^2+1).$$\nThus $i^2=-1$ in the quotient. The constant-class map\n$\\mathbb R\\to\\mathbb C$ is the specified real map; its injectivity and the\nfield structure are proved in [[thm-complex-numbers-form-a-field]], after which\n$\\mathbb C/\\mathbb R$ is a field extension in the sense of\n[[def-field-extension-generated-subfields-and-simple-extension]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Writing z=a+bi and the embedded scalar r=r+0i, the supplied product-coordinate formula gives Phi(rz)=(ra,rb)=rPhi(z), including r=0.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The coordinate theorem supplies addition and bijectivity; together with the scalar identity this is exactly a real-linear bijection.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is a universal map identity and has no set-valued empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly includes r=0 and computes the zero coordinate vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the universal formula includes r=1 and z=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 also permits z=0; no nonzero-vector hypothesis is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence."
+        }
+      ]
+    },
+    "def-complex-path-polygonal-length-and-rectifiability": {
+      "kind": "definition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-metric-convergence-and-continuity",
+          "source_section": "Definition",
+          "quote": "For $z=x+iy$ and $w=u+iv$, put\n$$ d_{\\mathbb C}(z,w):=|z-w|=\\sqrt{(x-u)^2+(y-v)^2}=\\lVert(x-u,y-v)\\rVert_2. $$\nUnder the identification $\\mathbb C=\\mathbb R^2$, this is exactly the metric\n$d_2$ induced by the Euclidean norm of [[def-p-norms-on-rn]]. It is a metric by\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]], so the metric axioms\nare established rather than assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-partition-and-refinement",
+          "source_section": "Definition",
+          "quote": "A **partition of $[a,b]$** is a pair $P = (n, t)$ consisting of a natural number\n$n \\ge 1$ and a sequence $t : \\mathbb{N} \\to \\mathbb{R}$ ([[def-sequence]]) with",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Let $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-extended-reals",
+          "source_section": "Definition",
+          "quote": "$$\\overline{\\mathbb{R}} := \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-extended-reals-complete",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\overline{\\mathbb{R}}$ be **any** subset of the extended real\nline ([[def-extended-reals]]) and write $A_{\\mathbb{R}} := A \\cap \\mathbb{R}$.\nThen $A$ has a least upper bound and a greatest lower bound in\n$\\overline{\\mathbb{R}}$ ([[def-upper-bound]]), each unique, which we write\n$\\sup A$ and $\\inf A$ with the ambient set always $\\overline{\\mathbb{R}}$.\nExplicitly:",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Each chord modulus is a finite nonnegative real, so the finite partition sum is a finite nonnegative real.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For a<b the partition-sum set is nonempty and has an extended-real supremum; because it consists of nonnegative reals, that supremum is finite exactly when a real upper bound exists.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For a=b the definition assigns length zero and rectifiability directly, with no partition.",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition restricts a<b partition sums to n>=1. In step 2.1 the endpoint partition n=1 proves the family of sums nonempty, so no empty supremum is used. On the singleton a=b, Definition and step 3.1 assign length0 and rectifiability directly without invoking a partition or a chord sum. Empty path domains are excluded by a<=b; the empty partition/index issue is resolved by this explicit split, not by treating a nonexistent partition as admissible."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 permits zero chord lengths and Step 3.1 assigns singleton length zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs the n=1 endpoint partition when a<b."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 defines the singleton-interval case without a partition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs a partition with endpoints a and b."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a family is used; the one-part partition is explicitly constructed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 shows a finite supremum is a real upper bound for every partition sum."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 shows a real upper bound makes the extended supremum finite."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed Definition and Proof 1.1\u20133.1 against the current metric, partition, prefix finite-sum/nonnegativity and extended-supremum suppliers. The n=1 endpoint sequence has constant b tail, so the supremum family is nonempty for a<b; nonnegative finite chords exclude -infinity, and a real upper bound is equivalent to finite supremum in both directions. Singleton a=b is defined separately as zero. Only prefix sums and nonnegativity are used, not the disputed general lower-index convention or splitting. No choice or extra regularity is needed."
+      }
+    },
+    "thm-complex-coordinate-isometry-and-topology-transport": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-numbers-are-the-real-coordinate-plane",
+          "source_section": "Statement",
+          "quote": "The map\n$$\\Phi:\\mathbb C\\longrightarrow\\mathbb R^2,\\qquad \\Phi(a+bi)=(a,b),$$\nis a bijection. Under it,\n$$\\Phi((a+bi)+(u+vi))=(a+u,b+v)$$\nand\n$$\\Phi((a+bi)(u+vi))=(au-bv,av+bu).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-complex-coordinate-map-preserves-real-scalar-multiplication",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi:\\mathbb C\\to\\mathbb R^2$ be the coordinate bijection\n$\\Phi(a+bi)=(a,b)$. Here a map is **real-linear** when it preserves addition and\nmultiplication by real scalars embedded in $\\mathbb C$ via\n[[def-complex-numbers-and-arithmetic]]. Then $\\Phi$ is real-linear: for all\n$z,w\\in\\mathbb C$ and $r\\in\\mathbb R$,\n\n$$\\Phi(z+w)=\\Phi(z)+\\Phi(w),\\qquad \\Phi(rz)=r\\Phi(z).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-metric-convergence-and-continuity",
+          "source_section": "Definition",
+          "quote": "For $z=x+iy$ and $w=u+iv$, put\n$$ d_{\\mathbb C}(z,w):=|z-w|=\\sqrt{(x-u)^2+(y-v)^2}=\\lVert(x-u,y-v)\\rVert_2. $$\nUnder the identification $\\mathbb C=\\mathbb R^2$, this is exactly the metric\n$d_2$ induced by the Euclidean norm of [[def-p-norms-on-rn]]. It is a metric by\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]], so the metric axioms\nare established rather than assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "### The three cases the rest of the page uses",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "A subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-metric-open-set-algebra",
+          "source_section": "Statement",
+          "quote": "1. **Balls are open.** $B(x,r)$ is open, for every $x \\in X$ and every $r > 0$.\n2. **Arbitrary unions.** If $\\mathcal{U}$ is any collection of open subsets of\n   $X$, then $\\bigcup \\mathcal{U}$ is open.\n3. **Finite intersections.** If $n \\ge 1$ and $U_0, \\dots, U_{n-1}$ are open,\n   then $U_0 \\cap \\dots \\cap U_{n-1}$ is open.\n4. **Closed balls are closed.** $\\bar B(x,r)$ is closed, for every $x \\in X$ and\n   every $r > 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-isometry-and-metric-embedding",
+          "source_section": "Definition",
+          "quote": "and an **isometry** if it is in addition bijective\n([[def-injection-surjection-bijection]]). Two metric spaces are **isometric** if\nsome isometry between them exists.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-homeomorphism-and-open-maps",
+          "source_section": "Definition",
+          "quote": "- $f$ is an **open map** if $f[U]$ is open in $Y$ for every open $U \\subseteq X$.\n- $f$ is a **closed map** if $f[F]$ is closed in $Y$ for every closed\n  $F \\subseteq X$.\n- $f$ is a **homeomorphism** if $f$ is a continuous bijection whose inverse\n  $f^{-1} : Y \\to X$ is also continuous. The spaces are **homeomorphic**, written\n  $X \\cong Y$, when a homeomorphism $X \\to Y$ exists.\n- $f$ is an **embedding** if $f$ is injective and the corestriction\n  $f_0 : X \\to f[X]$, $f_0(x) = f(x)$, is a homeomorphism onto $f[X]$ carrying\n  the subspace topology inherited from $Y$ ([[def-subspace-topology-top]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-interior-closure-boundary",
+          "source_section": "Definition",
+          "quote": "- $x$ is an **interior point** of $A$ if $B(x,r) \\subseteq A$ for some $r$. The\n  set of interior points is the **interior** $\\operatorname{int}(A)$.\n- $x$ is an **adherent point** of $A$ if $B(x,r) \\cap A \\ne \\emptyset$ for every\n  $r$. The set of adherent points is the **closure** $\\overline{A}$.\n- $x$ is a **limit point** (accumulation point) of $A$ if\n  $B(x,r) \\cap (A \\setminus \\{x\\}) \\ne \\emptyset$ for every $r$. The set of limit\n  points is the **derived set** $A'$.\n- $x$ is an **isolated point** of $A$ if $x \\in A$ and $B(x,r) \\cap A = \\{x\\}$\n  for some $r$.\n- The **boundary** of $A$ is $\\partial A := \\overline{A} \\setminus \\operatorname{int}(A)$.\n- $A$ is **dense** in $X$ if $\\overline{A} = X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-bounded-diameter",
+          "source_section": "Definition",
+          "quote": "**Bounded subset.** $A$ is **bounded** if $A = \\emptyset$ or there are $x_0 \\in X$\nand a real $r > 0$ with $A \\subseteq B(x_0, r)$ ([[def-metric-ball]]). The space\n$(X,d)$ is a **bounded metric space** if $X$ is a bounded subset of itself.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-metric-compactness",
+          "source_section": "Definition",
+          "quote": "- An **open cover** of $(X,d)$ is a family $\\mathcal{U}$ of open subsets of $X$\n  with $X = \\bigcup \\mathcal{U}$, where\n  $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$.\n- A **subcover** of $\\mathcal{U}$ is a subfamily\n  $\\mathcal{V} \\subseteq \\mathcal{U}$ that is itself an open cover.\n- A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\emptyset$ or\n  there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with\n  $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and\n  harmless.\n- $(X,d)$ is **compact** when every open cover of it has a finite subcover: for\n  every open cover $\\mathcal{U}$, either $X = \\emptyset$ and the empty subfamily\n  covers it, or there are $n \\in \\mathbb{N}$ and\n  $U_0, \\dots, U_n \\in \\mathcal{U}$ with\n  $$X = U_0 \\cup \\dots \\cup U_n .$$\n- A subset $A \\subseteq X$ is a **compact subset** of $X$ when the metric\n  subspace $(A, d_A)$ is a compact metric space, $d_A$ being the restriction of\n  $d$ to $A \\times A$ ([[def-isometry-and-metric-embedding]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-image-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "1. If $(X,d_X)$ is compact ([[def-metric-compactness]]), the image\n   $f[X] \\subseteq Y$ is a compact subset of $Y$.\n2. More generally, if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is\n   a compact subset of $Y$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-image-of-a-connected-space",
+          "source_section": "Statement",
+          "quote": "1. **Images.** If $A \\subseteq X$ is a connected subset of $X$\n   ([[def-connected-space]]) then $f[A]$ is a connected subset of $Y$. In\n   particular, if $X$ is connected then $f[X]$ is connected, and if $f$ is\n   moreover surjective then $Y$ is connected.\n2. **Topological invariance.** If $h : X \\to Y$ is a homeomorphism\n   ([[def-homeomorphism-and-open-maps]]) then $X$ is connected if and only if\n   $Y$ is. So connectedness is a **topological property**.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Distance equality and bijectivity make Phi an isometry; the exact ball correspondence, epsilon-delta continuity, and open-set union argument give a homeomorphism.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Real-linearity transports every real affine combination, including all parameter values t.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Ball correspondence transfers interior and closure tests; bijectivity then transfers boundary, openness, and closedness.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Boundedness, compactness, and connectedness transfer in both directions, with the empty set handled separately.",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 treats A=empty; its image is the same empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem has no scalar-zero parameter; all metric radii are positive by definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies to every nonempty A, including a one-point subset."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 and the Statement include singleton subsets and the empty subset."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the affine identity for every real t, including t=0 and t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The restrictions of the bijection and its inverse use no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 transfers compactness and connectedness from A to Phi[A]."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 applies the same image arguments to Phi inverse."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed all four proof steps and exact supplier statements. Coordinate distance equality and surjectivity give equality of positive-radius balls and the inverse correspondence. The union is the family of all contained balls, so no arbitrary choice is used. Both maps are continuous with delta=epsilon and open; bijectivity transfers complements, interior/closure ball tests and boundary difference. Compactness and connectedness are transported by restrictions with induced spaces in each direction. Empty subsets, zero distance and arbitrary real affine parameter t (including 0 and 1) are covered; boundedness never invokes an undefined empty diameter. No defect found."
+      }
+    },
+    "thm-complex-coordinate-map-preserves-real-total-differentiability": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-coordinate-isometry-and-topology-transport",
+          "source_section": "Statement",
+          "quote": "Equip $\\mathbb C$ with $d_{\\mathbb C}(z,w)=|z-w|$ and $\\mathbb R^2$ with the Euclidean metric $d_2$. The coordinate bijection $\\Phi(a+bi)=(a,b)$ is a bijective isometry and a homeomorphism.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-complex-coordinate-map-preserves-real-scalar-multiplication",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi:\\mathbb C\\to\\mathbb R^2$ be the coordinate bijection\n$\\Phi(a+bi)=(a,b)$. Here a map is **real-linear** when it preserves addition and\nmultiplication by real scalars embedded in $\\mathbb C$ via\n[[def-complex-numbers-and-arithmetic]]. Then $\\Phi$ is real-linear: for all\n$z,w\\in\\mathbb C$ and $r\\in\\mathbb R$,\n\n$$\\Phi(z+w)=\\Phi(z)+\\Phi(w),\\qquad \\Phi(rz)=r\\Phi(z).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\ge1$. A map $L:\\mathbb R^m\\to\\mathbb R^n$ is **linear** when\n\n$$L(\\alpha u+\\beta v)=\\alpha L(u)+\\beta L(v)$$\n\nfor all $u,v\\in\\mathbb R^m$ and all $\\alpha,\\beta\\in\\mathbb R$. Both spaces carry their Euclidean vector-space operations and Euclidean norms from [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "inverse-coordinate-linearity",
+          "step": "1.1",
+          "claim": "Surjectivity supplies preimages of arbitrary coordinate vectors, and additivity and real homogeneity of Phi verify both laws for Phi inverse.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "bijection-on-linear-maps",
+          "step": "2.1",
+          "claim": "Conjugation by Phi sends real-linear maps to real-linear maps, and conjugation by its inverse reverses this correspondence, so the two constructions are inverse.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "remainder-quotient-identity",
+          "step": "3.1",
+          "claim": "For a corresponding pair of linear maps, the Euclidean remainder is Phi of the complex remainder; the isometry identifies the quotient and the domain restrictions.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivative-iff-transport",
+          "step": "4.1",
+          "claim": "The Euclidean total-derivative definition, the bijection on linear maps, and the remainder identity give both implications and the derivative formula.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes z in U, so an empty U has no instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 invokes the total-derivative definition with h nonzero, matching the stated remainder quotient domain."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality or one-dimensional boundary parameter occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no interval partition or degenerate parameter domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The domain U is open and no endpoint case is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only preimages under a bijection and explicit conjugation of maps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 uses the linear-map correspondence and remainder identity to show a complex remainder limit gives the Euclidean derivative."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 uses the inverse linear-map correspondence and the same remainder identity to recover the complex remainder limit."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read Proof 1.1\u20134.1 and the Euclidean linear-map and total-derivative definitions. The inverse coordinate map preserves real linear combinations; conjugation is a bijection on real-linear candidates. For k=Phi(h), the open-domain condition, nonzero increments, norms and remainder ratios agree exactly, giving both existence implications and the displayed derivative formula. The 2-dimensional domain/codomain meet m,n>=1. No complex-linearity is assumed and no choice is required (inverse images are unique). No defect found."
+      }
+    },
+    "thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-coordinate-isometry-and-topology-transport",
+          "source_section": "Statement",
+          "quote": "Equip $\\mathbb C$ with $d_{\\mathbb C}(z,w)=|z-w|$ and $\\mathbb R^2$ with the Euclidean metric $d_2$. The coordinate bijection $\\Phi(a+bi)=(a,b)$ is a bijective isometry and a homeomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-path-polygonal-length-and-rectifiability",
+          "source_section": "Definition",
+          "quote": "For $a\\le b$, a **complex path** is a map $\\gamma:[a,b]\\to\\mathbb C$ continuous\nfrom the usual real metric to $d_{\\mathbb C}(z,w)=|z-w|$\n([[def-interval]], [[lem-real-line-is-a-metric-space]],\n[[def-metric-continuity]], [[def-complex-metric-convergence-and-continuity]]).\nIts domain and parametrization are part of the path, not merely its trace.\n\nIf $a<b$ and $P=(n,t)$ is a partition of $[a,b]$ as in\n[[def-partition-and-refinement]], define\n\n$$\\ell_P^{\\mathbb C}(\\gamma):=\\sum_{j<n}|\\gamma(t_{j+1})-\\gamma(t_j)|,\\qquad L_{\\mathbb C}(\\gamma):=\\sup_P\\ell_P^{\\mathbb C}(\\gamma)\\in\\overline{\\mathbb R}.$$\n\nThe sum is the ordinary finite real sum of the moduli of the chords. Its\nsupremum is taken in the extended real line\n([[def-extended-reals]], [[lem-extended-reals-complete]]). The path is\n**rectifiable** when these sums are bounded above by a real number, equivalently\nwhen $L_{\\mathbb C}(\\gamma)<+\\infty$. A bounded trace alone does not imply\nrectifiability; the companion worked example gives a continuous path with\nbounded trace and unbounded partition sums.\n\nOn a singleton interval $[a,a]$, define $L_{\\mathbb C}(\\gamma)=0$ and call every\npath rectifiable. This convention does not invoke a partition, whose definition\nrequires distinct endpoints.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-path-polygonal-length-and-rectifiability-in-rn",
+          "source_section": "Definition",
+          "quote": "If $a<b$ and $P=(t_0,\\ldots,t_m)$ is a partition of $[a,b]$, define the **polygonal length inscribed by $P$** by",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rectifiable-iff-coordinate-functions-have-bounded-variation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $a\\le b$, and let $\\gamma:[a,b]\\to\\mathbb R^n$ be a path, with coordinate functions $\\gamma_j(t):=\\gamma(t)(j)$ for $j<n$, so that $\\gamma=(\\gamma_0,\\ldots,\\gamma_{n-1})$ ([[def-euclidean-inner-product]]). Then $\\gamma$ is rectifiable if and only if every coordinate function $\\gamma_j$ has bounded variation. When these conditions hold,\n\n$$\\max_{j<n}\\operatorname{Var}_{[a,b]}(\\gamma_j)\\le L_{[a,b]}(\\gamma)\\le\\sum_{j<n}\\operatorname{Var}_{[a,b]}(\\gamma_j).$$\n\nFor $a=b$, every term in this display is zero.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb R^n$ be continuous. Suppose there is a partition $a=t_0<\\cdots<t_m=b$ such that on each $[t_i,t_{i+1}]$ the restriction is differentiable in the interior and its derivative has a continuous extension $v_i$ to that closed subinterval. Then $\\gamma$ is rectifiable and\n\n$$L_{[a,b]}(\\gamma)=\\sum_{i<m}\\int_{t_i}^{t_{i+1}}\\lVert v_i(t)\\rVert_2\\,dt.$$\n\nNo agreement between $v_{i-1}(t_i)$ and $v_i(t_i)$ is required, so corners are allowed. For a singleton interval the empty sum and the length are zero.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "### The three cases the rest of the page uses",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The coordinate path is continuous, its coordinates are real and imaginary parts, and every complex chord length equals the corresponding Euclidean chord length.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Taking suprema of the identical partition sums gives equality of lengths; the singleton convention gives equality when a=b.",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The Euclidean coordinate-variation theorem applied to the continuous coordinate path proves both rectifiability directions.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "The supplied piecewise-C1 speed theorem gives the sum of speed integrals and finiteness; the Euclidean norm formula gives the square-root expression.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "On a singleton interval both lengths and coordinate variations vanish and the speed sum is empty.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly treats singleton intervals: length and coordinate variations are zero and the piecewise-speed sum is empty. Step 2.1 proves both lengths zero when a=b; step 4.1 identifies zero variations and the empty speed sum, hence its value0. For a<b, the given finite partition has m>=1 by the partition definition; step 3.2 applies the speed-integral supplier to those nonempty pieces. Thus no integral over a nonexistent piece or supremum of an empty partition family is needed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 allows zero-speed pieces, and Step 4.1 gives zero length on a singleton interval."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The coordinate dimension is fixed at two; there is no n=1 boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 handles a=b."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.2 applies the supplied speed formula on the entire finite subdivision, including its endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no element selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the forward implication of the Euclidean bounded-variation theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the reverse implication of the Euclidean bounded-variation theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed Proof 1.1\u20134.1 and the complete Euclidean length, coordinate-BV and piecewise-C1 supplier arguments. Exact chord equality uses the same partitions; extended suprema agree even at infinite length. Continuity transfers by the isometry before applying the BV equivalence in both directions. The stated differentiability on interiors with continuous one-sided derivative extensions is precisely the piecewise-speed supplier hypothesis; corners, zero speed and singleton zero variation/empty sum are allowed. Dimension is 2 throughout, so norm dimension restrictions hold. No extra AC or smoothness premise is used. No defect found."
+      }
+    },
+    "thm-complex-path-length-invariant-under-monotone-reparametrization": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-path-polygonal-length-and-rectifiability",
+          "source_section": "Definition",
+          "quote": "For $a\\le b$, a **complex path** is a map $\\gamma:[a,b]\\to\\mathbb C$ continuous\nfrom the usual real metric to $d_{\\mathbb C}(z,w)=|z-w|$\n([[def-interval]], [[lem-real-line-is-a-metric-space]],\n[[def-metric-continuity]], [[def-complex-metric-convergence-and-continuity]]).\nIts domain and parametrization are part of the path, not merely its trace.\n\nIf $a<b$ and $P=(n,t)$ is a partition of $[a,b]$ as in\n[[def-partition-and-refinement]], define\n\n$$\\ell_P^{\\mathbb C}(\\gamma):=\\sum_{j<n}|\\gamma(t_{j+1})-\\gamma(t_j)|,\\qquad L_{\\mathbb C}(\\gamma):=\\sup_P\\ell_P^{\\mathbb C}(\\gamma)\\in\\overline{\\mathbb R}.$$\n\nThe sum is the ordinary finite real sum of the moduli of the chords. Its\nsupremum is taken in the extended real line\n([[def-extended-reals]], [[lem-extended-reals-complete]]). The path is\n**rectifiable** when these sums are bounded above by a real number, equivalently\nwhen $L_{\\mathbb C}(\\gamma)<+\\infty$. A bounded trace alone does not imply\nrectifiability; the companion worked example gives a continuous path with\nbounded trace and unbounded partition sums.\n\nOn a singleton interval $[a,a]$, define $L_{\\mathbb C}(\\gamma)=0$ and call every\npath rectifiable. This convention does not invoke a partition, whose definition\nrequires distinct endpoints.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-coordinate-isometry-and-topology-transport",
+          "source_section": "Statement",
+          "quote": "Equip $\\mathbb C$ with $d_{\\mathbb C}(z,w)=|z-w|$ and $\\mathbb R^2$ with the Euclidean metric $d_2$. The coordinate bijection $\\Phi(a+bi)=(a,b)$ is a bijective isometry and a homeomorphism.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed",
+          "source_section": "Statement",
+          "quote": "For every partition, the complex polygonal\nsum of $\\gamma$ equals the Euclidean polygonal sum of $\\Gamma$, and\n\n$$L_{\\mathbb C}(\\gamma)=L_{\\mathbb R^2}(\\Gamma),$$\n\nincluding singleton intervals.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-arc-length-is-invariant-under-monotone-reparametrization",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb R^n$ be a path, and let $\\varphi:[c,d]\\to[a,b]$ be continuous, surjective, and either nondecreasing or nonincreasing. Then\n\n$$L_{[c,d]}(\\gamma\\circ\\varphi)=L_{[a,b]}(\\gamma).$$\n\nThe equality holds for finite or infinite length. Constant stretches of $\\varphi$ are allowed. If $[c,d]$ is a singleton, surjectivity forces $[a,b]$ to be one as well; if instead $[a,b]$ is a singleton, $[c,d]$ need not be, since a constant map on a nondegenerate interval is continuous, surjective and monotone. In both cases each side of the displayed equality is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-monotone-function",
+          "source_section": "Definition",
+          "quote": "- **nondecreasing** when $f(x) \\le f(y)$ for all $x, y \\in A$ with $x \\le y$;\n- **increasing**, or *strictly increasing*, when $f(x) < f(y)$ for all\n  $x, y \\in A$ with $x < y$;\n- **nonincreasing** when $f(x) \\ge f(y)$ for all $x, y \\in A$ with $x \\le y$;\n- **decreasing**, or *strictly decreasing*, when $f(x) > f(y)$ for all\n  $x, y \\in A$ with $x < y$;\n- **monotone** when it is nondecreasing or nonincreasing;\n- **strictly monotone** when it is increasing or decreasing.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-continuity",
+          "source_section": "Definition",
+          "quote": "Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces ([[def-metric-space]]), let\n$f : X \\to Y$ be a function and let $a \\in X$.\n\n$f$ is **continuous at $a$** if for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that\n\n$$d_X(x,a) < \\delta \\;\\Longrightarrow\\; d_Y\\big(f(x), f(a)\\big) < \\varepsilon \\qquad \\text{for all } x \\in X .$$\n\n$f$ is **continuous** (globally, or on $X$) if it is continuous at every point of\n$X$.\n\n**The same condition in balls.** Since $d_X(x,a) < \\delta$ says $x \\in B_X(a,\\delta)$\nand $d_Y(f(x),f(a)) < \\varepsilon$ says $f(x) \\in B_Y(f(a),\\varepsilon)$\n([[def-metric-ball]]), continuity at $a$ reads: for every $\\varepsilon > 0$ there\nis $\\delta > 0$ with\n\n$$f\\big[B_X(a,\\delta)\\big] \\subseteq B_Y\\big(f(a), \\varepsilon\\big).$$\n\nBoth forms are used below and are the same statement written twice.\n\n**Both metrics matter, and both are named.** Continuity is a property of the\ntriple $(d_X, d_Y, f)$, not of $f$ alone. When several metrics on the same\nunderlying sets are in play, as in [[def-equivalent-metrics]], the metrics are\nalways written out.\n\n**Quantifier order.** The $\\delta$ is allowed to depend on $\\varepsilon$ **and on\nthe point $a$**. Requiring one $\\delta$ to work at every point simultaneously is\na strictly stronger condition, uniform continuity; it is defined on a later page\nof this library, and at this point in the reading order it is written out in full\nwhere needed ([[def-equivalent-metrics]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-metric-convergence-and-continuity",
+          "source_section": "Definition",
+          "quote": "For $z=x+iy$ and $w=u+iv$, put\n$$ d_{\\mathbb C}(z,w):=|z-w|=\\sqrt{(x-u)^2+(y-v)^2}=\\lVert(x-u,y-v)\\rVert_2. $$\nUnder the identification $\\mathbb C=\\mathbb R^2$, this is exactly the metric\n$d_2$ induced by the Euclidean norm of [[def-p-norms-on-rn]]. It is a metric by\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]], so the metric axioms\nare established rather than assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "The **intervals** of $\\mathbb{R}$ are the sets of the following nine forms, where\n$a, b \\in \\mathbb{R}$:",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The epsilon-delta definitions for gamma and phi compose to prove continuity of gamma composed with phi.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "If the source interval is a singleton, surjectivity forces the target interval to be a singleton; if the target is a singleton, both paths are constant, so both lengths are zero.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The coordinate path is continuous, composition commutes with Phi, and the Euclidean monotone-reparametrization theorem gives equality of coordinate lengths.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The complex-to-coordinate length equality for both paths transfers that Euclidean equality back to complex length.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "A monotone surjection between nondegenerate closed intervals takes the endpoints to the ordered endpoints or their reversal, while a singleton target has no orientation.",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both parameter intervals [a,b] and [c,d] are nonempty for their ordered endpoints."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the singleton cases with both lengths zero; Step 3.1 transfers the reparametrization equality."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-dimensional index or cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 treats both singleton-domain cases, including a singleton image interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the endpoint values in each monotone orientation and handles the singleton target."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses no arbitrary choice; the supplied Euclidean theorem handles finite partitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts equality of lengths, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts equality of lengths, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed Proof 1.1\u20134.1 and the complete Euclidean reparametrization proof: monotone image partitions delete repeated points; finitely many ordered preimages lift target partitions; reversal uses symmetry of chords. The consumer first proves composition continuity with the interval subspace metrics, then applies coordinate-length equality and the Euclidean theorem under continuous, surjective and weak monotonicity hypotheses. Nondecreasing and nonincreasing cases, pauses, infinite length, singleton source forcing singleton target, and a singleton target with nondegenerate source are all accounted for. Only finite preimage selection is involved; no arbitrary choice is assumed. No defect found."
+      }
+    },
+    "ex-complex-coordinate-and-path-transport": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-coordinate-map-preserves-real-scalar-multiplication",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi:\\mathbb C\\to\\mathbb R^2$ be the coordinate bijection\n$\\Phi(a+bi)=(a,b)$. Here a map is **real-linear** when it preserves addition and\nmultiplication by real scalars embedded in $\\mathbb C$ via\n[[def-complex-numbers-and-arithmetic]]. Then $\\Phi$ is real-linear: for all\n$z,w\\in\\mathbb C$ and $r\\in\\mathbb R$,\n\n$$\\Phi(z+w)=\\Phi(z)+\\Phi(w),\\qquad \\Phi(rz)=r\\Phi(z).$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-coordinate-isometry-and-topology-transport",
+          "source_section": "Statement",
+          "quote": "Equip $\\mathbb C$ with $d_{\\mathbb C}(z,w)=|z-w|$ and $\\mathbb R^2$ with the Euclidean metric $d_2$. The coordinate bijection $\\Phi(a+bi)=(a,b)$ is a bijective isometry and a homeomorphism.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-coordinate-map-preserves-real-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open in $d_{\\mathbb C}$, let $z\\in U$, and let\n$f:U\\to\\mathbb C$. Define\n$f_{\\mathbb R}:=\\Phi\\circ f\\circ\\Phi^{-1}:\\Phi[U]\\to\\mathbb R^2$. The set\n$\\Phi[U]$ is open by\n[[thm-complex-coordinate-isometry-and-topology-transport]]. A map\n$L:\\mathbb C\\to\\mathbb C$ is **real-linear** when it preserves addition and\nmultiplication by embedded real scalars. Then $f_{\\mathbb R}$ is totally\ndifferentiable at $\\Phi(z)$ exactly when there is a real-linear $L$ such that,\nwith $r(h):=f(z+h)-f(z)-L(h)$,\n\n$$\\frac{|r(h)|}{|h|}\\longrightarrow 0$$\n\nas $h\\to0$, $h\\ne0$, and $z+h\\in U$. In that case\n\n$$Df_{\\mathbb R}(\\Phi(z))=\\Phi\\circ L\\circ\\Phi^{-1}.$$\n\nThe map $L$ need not be complex-linear; this is a real total-derivative\nstatement.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complex-path-polygonal-length-and-rectifiability",
+          "source_section": "Definition",
+          "quote": "For $a\\le b$, a **complex path** is a map $\\gamma:[a,b]\\to\\mathbb C$ continuous\nfrom the usual real metric to $d_{\\mathbb C}(z,w)=|z-w|$\n([[def-interval]], [[lem-real-line-is-a-metric-space]],\n[[def-metric-continuity]], [[def-complex-metric-convergence-and-continuity]]).\nIts domain and parametrization are part of the path, not merely its trace.\n\nIf $a<b$ and $P=(n,t)$ is a partition of $[a,b]$ as in\n[[def-partition-and-refinement]], define\n\n$$\\ell_P^{\\mathbb C}(\\gamma):=\\sum_{j<n}|\\gamma(t_{j+1})-\\gamma(t_j)|,\\qquad L_{\\mathbb C}(\\gamma):=\\sup_P\\ell_P^{\\mathbb C}(\\gamma)\\in\\overline{\\mathbb R}.$$\n\nThe sum is the ordinary finite real sum of the moduli of the chords. Its\nsupremum is taken in the extended real line\n([[def-extended-reals]], [[lem-extended-reals-complete]]). The path is\n**rectifiable** when these sums are bounded above by a real number, equivalently\nwhen $L_{\\mathbb C}(\\gamma)<+\\infty$. A bounded trace alone does not imply\nrectifiability; the companion worked example gives a continuous path with\nbounded trace and unbounded partition sums.\n\nOn a singleton interval $[a,a]$, define $L_{\\mathbb C}(\\gamma)=0$ and call every\npath rectifiable. This convention does not invoke a partition, whose definition\nrequires distinct endpoints.",
+          "uses": [
+            "1.4",
+            "1.5",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed",
+          "source_section": "Statement",
+          "quote": "If $a<b$ and there is a finite partition\n$a=t_0<\\cdots<t_m=b$ such that on each piece\n$[t_j,t_{j+1}]$ the path $\\Gamma$ is differentiable in the interior and its\nderivative extends continuously to the closed piece, then\n\n$$L_{\\mathbb C}(\\gamma)=\\sum_{j<m}\\int_{t_j}^{t_{j+1}}\\|\\Gamma'_j(t)\\|_2\\,dt=\\sum_{j<m}\\int_{t_j}^{t_{j+1}}\\sqrt{x'_j(t)^2+y'_j(t)^2}\\,dt<\\infty.$$\n\nCorners and zero-speed pieces are allowed. On a singleton interval the length\nand coordinate variations are zero, and the piecewise-speed sum is empty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-path-length-invariant-under-monotone-reparametrization",
+          "source_section": "Statement",
+          "quote": "Let $a\\le b$ and $c\\le d$. Suppose $\\gamma:[a,b]\\to\\mathbb C$ is continuous and\n$\\varphi:[c,d]\\to[a,b]$ is continuous, surjective, and either nondecreasing or\nnonincreasing in the sense of [[def-monotone-function]]. Then\n\n$$L_{\\mathbb C}(\\gamma\\circ\\varphi)=L_{\\mathbb C}(\\gamma).$$\n\nThe equality includes finite and infinite lengths, constant pauses, reversal,\nand singleton intervals. A nondecreasing map preserves parameter order; a\nnonincreasing map reverses it. When $a=b$, $\\varphi$ is constant and there is\nno nontrivial orientation to distinguish.",
+          "uses": [
+            "1.5",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-metric-continuity",
+          "source_section": "Definition",
+          "quote": "Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces ([[def-metric-space]]), let\n$f : X \\to Y$ be a function and let $a \\in X$.\n\n$f$ is **continuous at $a$** if for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that\n\n$$d_X(x,a) < \\delta \\;\\Longrightarrow\\; d_Y\\big(f(x), f(a)\\big) < \\varepsilon \\qquad \\text{for all } x \\in X .$$\n\n$f$ is **continuous** (globally, or on $X$) if it is continuous at every point of\n$X$.\n\n**The same condition in balls.** Since $d_X(x,a) < \\delta$ says $x \\in B_X(a,\\delta)$\nand $d_Y(f(x),f(a)) < \\varepsilon$ says $f(x) \\in B_Y(f(a),\\varepsilon)$\n([[def-metric-ball]]), continuity at $a$ reads: for every $\\varepsilon > 0$ there\nis $\\delta > 0$ with\n\n$$f\\big[B_X(a,\\delta)\\big] \\subseteq B_Y\\big(f(a), \\varepsilon\\big).$$\n\nBoth forms are used below and are the same statement written twice.\n\n**Both metrics matter, and both are named.** Continuity is a property of the\ntriple $(d_X, d_Y, f)$, not of $f$ alone. When several metrics on the same\nunderlying sets are in play, as in [[def-equivalent-metrics]], the metrics are\nalways written out.\n\n**Quantifier order.** The $\\delta$ is allowed to depend on $\\varepsilon$ **and on\nthe point $a$**. Requiring one $\\delta$ to work at every point simultaneously is\na strictly stronger condition, uniform continuity; it is defined on a later page\nof this library, and at this point in the reading order it is written out in full\nwhere needed ([[def-equivalent-metrics]]).",
+          "uses": [
+            "1.4",
+            "1.7"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-complex-metric-convergence-and-continuity",
+          "source_section": "Definition",
+          "quote": "For $z=x+iy$ and $w=u+iv$, put\n$$ d_{\\mathbb C}(z,w):=|z-w|=\\sqrt{(x-u)^2+(y-v)^2}=\\lVert(x-u,y-v)\\rVert_2. $$\nUnder the identification $\\mathbb C=\\mathbb R^2$, this is exactly the metric\n$d_2$ induced by the Euclidean norm of [[def-p-norms-on-rn]]. It is a metric by\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]], so the metric axioms\nare established rather than assumed.",
+          "uses": [
+            "1.4",
+            "1.7"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "1.4",
+            "1.7"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "The **intervals** of $\\mathbb{R}$ are the sets of the following nine forms, where\n$a, b \\in \\mathbb{R}$:",
+          "uses": [
+            "1.4",
+            "1.7"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-complex-numbers-and-arithmetic",
+          "source_section": "Definition",
+          "quote": "Form the polynomial ring $\\mathbb R[x]$\n([[def-polynomial-ring-over-a-commutative-ring]]) and define the **complex\nnumbers** by the quotient ring\n$$\\mathbb C:=\\mathbb R[x]/(x^2+1)$$\n([[def-quotient-ring]]). Write $a$ for the constant class $a+(x^2+1)$ and set\n$$i:=x+(x^2+1).$$\nThus $i^2=-1$ in the quotient. The constant-class map\n$\\mathbb R\\to\\mathbb C$ is the specified real map; its injectivity and the\nfield structure are proved in [[thm-complex-numbers-form-a-field]], after which\n$\\mathbb C/\\mathbb R$ is a field extension in the sense of\n[[def-field-extension-generated-subfields-and-simple-extension]].",
+          "uses": [
+            "1.4",
+            "1.7",
+            "1.8"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.4",
+            "1.7",
+            "1.8"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.4",
+            "1.7",
+            "1.8"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.4",
+            "1.7",
+            "1.8"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.4",
+            "1.7",
+            "1.8"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.6",
+            "1.7",
+            "1.8",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "1.6",
+            "1.7",
+            "1.8",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b \\in F$.\n\n1. If $a > 0$ then $a^{-1} > 0$.\n2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "1.6",
+            "1.7",
+            "1.8",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.6",
+            "1.7",
+            "1.8",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.",
+          "uses": [
+            "1.8",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.",
+          "uses": [
+            "1.8",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-nat-addition",
+          "source_section": "Definition",
+          "quote": "**Addition** $+ : \\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$ is defined by\nrecursion on the second argument: for each fixed $m \\in \\mathbb{N}$,\n\n$$m + 0 = m, \\qquad m + \\sigma(n) = \\sigma(m + n).$$",
+          "uses": [
+            "1.8",
+            "1.9",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-nat-order",
+          "source_section": "Definition",
+          "quote": "For $m, n \\in \\mathbb{N}$, define the **order** by\n\n$$m \\le n \\iff \\exists k \\in \\mathbb{N}\\ (m + k = n),$$\n\nand the **strict order** by $m < n \\iff (m \\le n \\text{ and } m \\neq n)$, using\naddition ([[def-nat-addition]]).",
+          "uses": [
+            "1.8",
+            "1.9",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-nat-order-add-compatible",
+          "source_section": "Statement",
+          "quote": "For all $m, n, k \\in \\mathbb{N}$: $m \\le n \\iff m + k \\le n + k$; and $m < n \\iff m + k < n + k$ ([[def-nat-order]]).",
+          "uses": [
+            "1.8",
+            "1.9",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-nat-add-identity",
+          "source_section": "Statement",
+          "quote": "For all $n \\in \\mathbb{N}$: $0 + n = n$. The right identity $n + 0 = n$ is definitional, so together with this law $0$ is a two-sided identity for addition.",
+          "uses": [
+            "1.8",
+            "1.9",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-nat-linear-order",
+          "source_section": "Statement",
+          "quote": "The relation $\\le$ on $\\mathbb{N}$, where $m \\le n \\iff \\exists k\\ (m + k = n)$ ([[def-nat-order]]), is a linear (total) order: reflexive, antisymmetric, transitive, and total.",
+          "uses": [
+            "1.8",
+            "1.9",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "1.8",
+            "1.9",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.8",
+            "1.9",
+            "2.2",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "coordinate-and-affine-computation",
+          "step": "1.1",
+          "claim": "The coordinates of z and w, the real scalar multiple rz, and the real affine point (1-t)z+tw are computed directly.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "isometry-and-ball-computation",
+          "step": "1.2",
+          "claim": "The complex and coordinate distances both equal sqrt(13), and the coordinate map sends the specified complex ball to its Euclidean ball.",
+          "inputs": [
+            "given",
+            "F2",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conjugation-derivative",
+          "step": "1.3",
+          "claim": "Conjugation has the real matrix diag(1,-1) and zero remainder, so its total derivative is that matrix.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-path-continuity",
+          "step": "1.4",
+          "claim": "The finite path is continuous on each piece and at its corners, and its coordinate functions are identified.",
+          "inputs": [
+            "given",
+            "F4",
+            "F7",
+            "F9",
+            "F10",
+            "construct"
+          ]
+        },
+        {
+          "id": "singleton-reparametrization",
+          "step": "1.5",
+          "claim": "The singleton path and its singleton reparametrization both have length zero.",
+          "inputs": [
+            "given",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "bounded-path-definition",
+          "step": "1.6",
+          "claim": "The intervals are disjoint, the triangular formulas agree at their midpoint and vanish at endpoints, and every value lies in [0,1].",
+          "inputs": [
+            "given",
+            "F11",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "bounded-path-continuity",
+          "step": "1.7",
+          "claim": "Only finitely many spikes occur near any positive parameter, their affine pieces match at joins, and the spike heights tend to zero at the origin; hence eta is continuous.",
+          "inputs": [
+            "given",
+            "F9",
+            "F10",
+            "F11",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "large-partition-sums",
+          "step": "1.8",
+          "claim": "Define H_N as the prefix sum of 1/(j+1), so H_0=0 and H_(N+1)=H_N+1/(N+1). The displayed partition has polygonal sum 2H_N by induction, adding one spike and two nonzero chords at a time.",
+          "inputs": [
+            "given",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "doubling-indices",
+          "step": "1.9",
+          "claim": "Recursion defines q_k by q_0=1 and q_{k+1}=q_k+q_k; compatibility of natural order with addition and induction show q_k is at least one.",
+          "inputs": [
+            "F13",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "finite-path-length",
+          "step": "2.1",
+          "claim": "Both coordinate functions have variation one and the piecewise speed integrals are 1, 1, and 0, giving coordinate and complex path length two.",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-block-variation",
+          "step": "2.2",
+          "claim": "The explicit prefix block B_k=sum_(j<q_k) 1/(q_k+j+1) has q_k positive terms with denominators at most q_k+q_k; prefix monotonicity and scaling bound it below by 1/2.",
+          "inputs": [
+            "F11",
+            "F12",
+            "F13",
+            "step 1.9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reversal-and-pause",
+          "step": "3.1",
+          "claim": "The decreasing reversal and increasing pause are continuous surjections, so both reparametrized paths have length two.",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "harmonic-partial-sums-unbounded",
+          "step": "3.2",
+          "claim": "An independent induction on d using only prefix recursions proves H_(q+d)=H_q+sum_(j<d)1/(q+j+1). With q=d=q_K this gives H_(q_(K+1))=H_(q_K)+B_K and hence H_(q_K)>=1+K/2, unbounded by the Archimedean property.",
+          "inputs": [
+            "F11",
+            "F12",
+            "F13",
+            "step 1.8",
+            "step 1.9",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounded-nonrectifiable-conclusion",
+          "step": "4.1",
+          "claim": "These bounded-trace paths have unbounded polygonal sums, so the constructed continuous path is not rectifiable.",
+          "inputs": [
+            "F4",
+            "step 1.6",
+            "step 1.8",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses nonempty closed intervals and explicitly handles a singleton interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.3, 1.5, 1.6, and 1.8 check a zero remainder, singleton length, zero spike endpoints, and zero gap chords. Step 1.8 defines H_0=0, and the block identity in 3.2 is proved starting at d=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.8 verifies N=1 with one spike and H_1=1; steps 1.9 and 3.2 begin at q_0=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.5 checks the singleton path and its singleton reparametrization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.4, 1.5, and 3.1 check piece endpoints, singleton intervals, and reparametrization endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All paths, maps, and values are explicitly defined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves computations and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves computations and contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed every verification step and all actual cited supplier clauses, reader findings 1\u20132 and refuter findings 1\u20132. Coordinates, affine parameter, sqrt(13) distance, ball image, conjugation real derivative, finite-path continuity/corners, coordinate variations and speeds (1,1,0) are correct. Reversal and paused surjection satisfy the reparametrization hypotheses; singleton length is zero. Spikes have positive denominators and disjoint intervals, match at midpoints/endpoints, remain in [0,1], are locally finite away from zero and satisfy the explicit 2/N continuity bound at zero. Repaired the harmonic construction to primitive prefix H_N=sum_(j<N)1/(j+1), including H_0=0 and N=1. An independent prefix-recursion induction now proves the needed block identity, avoiding the disputed published lower-index notation/splitting. B_k has exactly q_k positive terms at least 1/(2q_k), with q_k>=1, and Archimedean growth makes the constructed partition sums unbounded. No choice needed. Published general lower-index/splitting defects remain separately escalated; this consumer no longer uses those clauses."
+      }
+    }
+  }
+}

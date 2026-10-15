@@ -31516,10 +31516,10 @@ This index retains the initial 2,185-ID classification reference pool and subseq
 | U-P | Unaudited and potentially defective items | 5 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 1 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 1282 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 55 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 57 | Recorded direct review and an unresolved item-specific repair. |
 
 Bounded no-repair-needed dispositions appear below, outside these four active
-defect classes. The four queues currently contain 1,343 distinct items.
+defect classes. The four queues currently contain 1,345 distinct items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -32027,8 +32027,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `def-countable` | Frontier-22 countability-core audit 2026-09-11: finite, countably infinite, at-most-countable and uncountable are coherent under the stated convention, including the empty set. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
 | `lem-countable-iff-surjection-from-n` | Frontier-22 countability-core audit 2026-09-11: a finite nonempty bijection extends by one fixed value, and a supplied surjection gives the canonical least-preimage injection without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
 | `lem-subset-of-countable` | Frontier-22 countability-core audit 2026-09-11: bounded natural subsets are finite by strong induction; successive least elements give a choice-free bijection from the naturals onto each unbounded subset. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
-| `def-finite-sum` | Frontier-22 finite-sum/recursion audit 2026-09-11: product-valued recursion carries the running index, induction identifies it, and recursion uniqueness defines real finite sums/products including empty values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
-| `lem-finite-sum-laws` | Frontier-22 finite-sum/recursion audit 2026-09-11: universal property induction and trailing-length induction prove additivity, scaling, splitting, monotonicity, telescoping and product laws with all zero cases. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
 | `def-interval` | Frontier-22 finite-sum/recursion audit 2026-09-11: the nine forms have the stated convexity, boundedness and degeneracy; midpoint and explicit unboundedness witnesses handle the nontrivial clauses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
 | `def-ordered-field` | Frontier-22 ordered-field foundation audit 2026-09-11: positive-cone trichotomy and closure induce the stated strict total order and its non-strict extension. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
 | `def-complete-ordered-field` | Frontier-22 ordered-field foundation audit 2026-09-11: the nonempty bounded-above LUB property has the correct scope; negating a nonempty bounded-below set gives the stated infimum dual without selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
@@ -33942,6 +33940,8 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-finite-sum` | A-P retained. The exact natural-gap finding is now locally corrected by the authentic recorded published repair `research/quantum-prerequisites-4-2026-10-15-owner/published-repairs/def-finite-sum.json`; supplier-first integration preserves the typed finite-sum/product interface and empty cases. The current draft consumer uses prefix recursion independently. This records this correction only, not a new whole-item audit or A-R promotion. Historical native escalation retained in `research/quantum-prerequisites-4-2026-10-15-alpha-batch-3-3a.md`; closure evidence: `research/quantum-prerequisites-4-2026-10-15-owner/published-supplier-alerts/finite-sums/owner-closure/current-prerequisite-review.json`. |
+| `lem-finite-sum-laws` | A-P retained. The exact natural-gap finding is now locally corrected by the authentic recorded published repair `research/quantum-prerequisites-4-2026-10-15-owner/published-repairs/lem-finite-sum-laws.json`; supplier-first integration preserves the typed finite-sum/product interface and empty cases. The current draft consumer uses prefix recursion independently. This records this correction only, not a new whole-item audit or A-R promotion. Historical native escalation retained in `research/quantum-prerequisites-4-2026-10-15-alpha-batch-3-3a.md`; closure evidence: `research/quantum-prerequisites-4-2026-10-15-owner/published-supplier-alerts/finite-sums/owner-closure/current-prerequisite-review.json`. |
 | `thm-substitution` | A-P: batch-38 independent Step-3a review confirms a nonfatal bibliography URL mismatch; local proof remains applicable. Owner URL-omission proposal is unapplied. Exact suppliers, consumer, current raw hash and strategy in `research/statistical-models-experiments-62-alpha-batch-38-3a.md`. Previous disposition retained in dated addendum. |
 | `cor-mean-value-theorem` | A-P: batch-38 independent Step-3a review confirms a nonfatal bibliography URL mismatch; local proof remains applicable. Owner URL-omission proposal is unapplied. Exact suppliers, consumer, current raw hash and strategy in `research/statistical-models-experiments-62-alpha-batch-38-3a.md`. Previous disposition retained in dated addendum. |
 | `thm-intermediate-value` | A-P: batch-38 independent Step-3a review confirms a nonfatal bibliography URL mismatch; local proof remains applicable. Owner URL-omission proposal is unapplied. Exact suppliers, consumer, current raw hash and strategy in `research/statistical-models-experiments-62-alpha-batch-38-3a.md`. Previous disposition retained in dated addendum. |
@@ -38488,3 +38488,127 @@ Published prerequisite thm-birkhoff-limit-identification-on-finite-measure-space
 <!-- local-published-repair:statistical-models-experiments-62-s4-stieltjes-proof-format:begin -->
 Published prerequisite thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures; run statistical-models-experiments-62; repair owner owner-s4-stieltjes-proof-format; original canonical hash eeccf97dcb8472f195a56377c3a794eeb997a4221393420895004aa18c05e350; current canonical hash ea405003f7c79c81b20422d935344ebbac76b1982b19e860a630e36ec83e4b1d. Joined split numbered steps into six single physical paragraphs; retained mathematical words/formulas in original order. Consolidated duplicated/nonterminal proof annotations as trailing step tags, omitted only the malformed self-reference step3.1 annotation from step3.1, and attached QED to final6.1. Statement, Facts, frontmatter, deps, provenance and verification unchanged. Focused supplier/consumer evidence: research/statistical-models-experiments-62-owner-stieltjes-proof-format-resolution.json. This records a local repair, with no new whole-item audit, independent native review, publication or judgment coverage.
 <!-- local-published-repair:statistical-models-experiments-62-s4-stieltjes-proof-format:end -->
+
+<!-- local-published-repair:quantum-hopf-hecke-75-2026-10-15:def-metric-bounded-diameter:begin -->
+def-metric-bounded-diameter: Remove remark dependency and replace ambient-operation commentary with the actual real LUB/GLB contracts; retain nonempty bounded diameter, nonempty point/set distances, and all existence arguments.
+Current canonical content hash: 27a06362ca8fbe3af079c41fb452e977220774a8aa968e3b8bf3b681135d5b65.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/def-metric-bounded-diameter.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-hopf-hecke-75-2026-10-15:def-metric-bounded-diameter:end -->
+
+<!-- local-published-repair:quantum-hopf-hecke-75-2026-10-15:def-norm-and-normed-space:begin -->
+def-norm-and-normed-space: Replace the two metric-convention remark references with the actual real-valued metric/pseudometric definition; retain all norm axioms, local nonnegativity derivation, induced metric proof and bounded-remetrisation example.
+Current canonical content hash: ea074620bafd00999f1b65eb34ca544b6c119b63ddd1fb309c18d4179e37e035.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/def-norm-and-normed-space.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-hopf-hecke-75-2026-10-15:def-norm-and-normed-space:end -->
+
+<!-- local-published-repair:quantum-hopf-hecke-75-2026-10-15:def-p-norms-on-rn:begin -->
+def-p-norms-on-rn: Remove logical remark edge and stale claim that real exponentiation does not exist; retain exactly rational p >= 1, n=0 finite p norm, and n>=1 maximum norm. No defining formula/hypothesis changes.
+Current canonical content hash: 1d5ca1848337f68c691fec14a8934176657f03b25126e0e1e6851e0991944cff.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/def-p-norms-on-rn.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-hopf-hecke-75-2026-10-15:def-p-norms-on-rn:end -->
+
+<!-- local-published-repair:quantum-hopf-hecke-75-2026-10-15:thm-sequential-criterion-for-continuity:begin -->
+thm-sequential-criterion-for-continuity: Remove remark dependency and replace commentary by exact proof-specific countable-choice account; all statement hypotheses, implications, choice assumptions and proof steps unchanged.
+Current canonical content hash: aea8bc5d6b1172184c923fc995bfbc40438a6b97daf889766a5571618a2a571a.
+Delegated proposed source: /home/lazyinspirit/Projects/prestige-math-library/research/quantum-build-60-2026-10-15-owner/real-measure/proposed/items/thm-sequential-criterion-for-continuity.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-hopf-hecke-75-2026-10-15:thm-sequential-criterion-for-continuity:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:thm-kazhdan-lusztig-polynomial-recursion:begin -->
+thm-kazhdan-lusztig-polynomial-recursion: Replace broad positivity-bearing KL theorem dependency and every corresponding citation with the identical elementary triangular-bar supplier; remove stale verification. Statement, hypotheses, proof steps and all genuine mathematical inputs preserved.
+Current canonical content hash: 8a86bb14c66bd833e22840d21e94baf4700557b5087cf98dadc18f4dc8f09418.
+Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/drift-escalation/proposed-source/items/thm-kazhdan-lusztig-polynomial-recursion.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:thm-kazhdan-lusztig-polynomial-recursion:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:thm-kazhdan-lusztig-inversion-formula:begin -->
+thm-kazhdan-lusztig-inversion-formula: Replace broad positivity-bearing KL theorem dependency and every corresponding citation with the identical elementary triangular-bar supplier; remove stale verification. Statement, hypotheses, proof steps and all genuine mathematical inputs preserved.
+Current canonical content hash: 27dde972c0ea673b6921adffbcc99ff219493e9c00dc52d0c16fd5fb721d484f.
+Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/drift-escalation/proposed-source/items/thm-kazhdan-lusztig-inversion-formula.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:thm-kazhdan-lusztig-inversion-formula:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells:begin -->
+def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells: Replace broad positivity-bearing KL theorem dependency and every corresponding citation with the identical elementary triangular-bar supplier; remove stale verification. Statement, hypotheses, proof steps and all genuine mathematical inputs preserved.
+Current canonical content hash: a463dcd1557880c42fc9bfe9e3b598fe799b189119a8eff29c296488620808bb.
+Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/drift-escalation/proposed-source/items/def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:def-left-right-and-two-sided-kazhdan-lusztig-preorders-and-cells:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges:begin -->
+lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges: Replace broad positivity-bearing KL theorem dependency and every corresponding citation with the identical elementary triangular-bar supplier; remove stale verification. Statement, hypotheses, proof steps and all genuine mathematical inputs preserved.
+Current canonical content hash: 294ac1e2413dcf6cf0c7afb40611719c952e51bf924b74f0413e5b25182be2f8.
+Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/drift-escalation/proposed-source/items/lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-dual-knuth-star-operations-give-antiparallel-kazhdan-lusztig-graph-edges:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations:begin -->
+lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations: Replace broad positivity-bearing KL theorem dependency and every corresponding citation with the identical elementary triangular-bar supplier; remove stale verification. Statement, hypotheses, proof steps and all genuine mathematical inputs preserved.
+Current canonical content hash: 7bf05058f05ebdbbb923ebd54292d0073225d741aa0bef99cb7e402f890775b9.
+Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/drift-escalation/proposed-source/items/lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-kazhdan-lusztig-mu-edges-and-left-cells-are-transported-by-star-operations:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux:begin -->
+thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux: Replace broad positivity-bearing KL theorem dependency and every corresponding citation with the identical elementary triangular-bar supplier; remove stale verification. Statement, hypotheses, proof steps and all genuine mathematical inputs preserved.
+Current canonical content hash: 4216230b9f045bf84b03a1b15e39d1ba131077a1b8fd0403c5209c60e7f09193.
+Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/drift-escalation/proposed-source/items/thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:thm-type-a-kazhdan-lusztig-cells-are-classified-by-rsk-tableaux:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:ex-kazhdan-lusztig-bases-for-s-two-and-s-three:begin -->
+ex-kazhdan-lusztig-bases-for-s-two-and-s-three: Replace broad positivity-bearing KL theorem dependency and every corresponding citation with the identical elementary triangular-bar supplier; remove stale verification. Statement, hypotheses, proof steps and all genuine mathematical inputs preserved.
+Current canonical content hash: e472cb59ba856b203aec54782123002674db1e8d9fbb8b5508ab7411377d1ba1.
+Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/drift-escalation/proposed-source/items/ex-kazhdan-lusztig-bases-for-s-two-and-s-three.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:ex-kazhdan-lusztig-bases-for-s-two-and-s-three:end -->
+
+## quantum-prerequisites-4-2026-10-15 — batch-3 published-supplier escalations
+
+Completed defect-focused review on 2026-10-15; both carriers remain published and read-only. Canonical item IDs remain in the deduplicated index, moved from bounded clear to A-P. The prior bounded review descriptions are retained here as history:
+
+> Historical: `def-finite-sum` | Frontier-22 finite-sum/recursion audit 2026-09-11: product-valued recursion carries the running index, induction identifies it, and recursion uniqueness defines real finite sums/products including empty values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`.
+> Historical: `lem-finite-sum-laws` | Frontier-22 finite-sum/recursion audit 2026-09-11: universal property induction and trailing-length induction prove additivity, scaling, splitting, monotonicity, telescoping and product laws with all zero cases. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`.
+
+The two rows above are historical evidence, not additional index entries.
+
+`def-finite-sum`: **A-P, owner repair pending**; current raw SHA-256 `4cf40c8200c759cbf0a02f539ea6c9604ec4f2f5272ef01cb650d1b8def69bc7`. Exact defect: Definition / Notation: d=n+1-m. Define the unique additive gap m+d=n+1 using def-nat-order, lem-nat-add-commutative and lem-nat-add-cancellative. Do not introduce a cycle through def-nat-finite-sum-and-product. Original consuming carrier: ex-complex-coordinate-and-path-transport, Verification 1.8 and 3.2; the local consumer repair removes these two clause uses without claiming a repair to either published supplier. Exact evidence and owner decisions required are in research/quantum-prerequisites-4-2026-10-15-alpha-batch-3-3a.md.
+
+`lem-finite-sum-laws`: **A-P, owner repair pending**; current raw SHA-256 `79f2e027d726371ea6f310526ad85fcaa8785ab92db773162331e6cc2a81308f`. Exact defect: Statement clause 3, L1 and Proof 1.3: d=n-m. Repair def-finite-sum first, then use the order witness m+d=n in the existing trailing-count induction and explicitly identify the shifted prefix sum, including d=0. Original consuming carrier: ex-complex-coordinate-and-path-transport, Verification 1.8 and 3.2; the local consumer repair removes these two clause uses without claiming a repair to either published supplier. Exact evidence and owner decisions required are in research/quantum-prerequisites-4-2026-10-15-alpha-batch-3-3a.md.
+
+
+<!-- local-published-repair:quantum-prerequisites-4-2026-10-15:def-finite-sum:begin -->
+def-finite-sum: Define every admissible lower-index block by its unique natural additive gap, with explicit order/cancellation prerequisites and unchanged prefix recursion, domains and empty values.
+Current canonical content hash: c4eb3304ca4915dcb79a2f8b9763374d67269e8b672686ee7c8201d44bdd4336.
+Delegated proposed source: research/quantum-prerequisites-4-2026-10-15-owner/published-supplier-alerts/finite-sums/proposed/items/def-finite-sum.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-prerequisites-4-2026-10-15:def-finite-sum:end -->
+
+<!-- local-published-repair:quantum-prerequisites-4-2026-10-15:lem-finite-sum-laws:begin -->
+lem-finite-sum-laws: Prove finite-block splitting for every additive term-count witness before selecting the unique natural-order gap; retain the complete Statement and every sum/product boundary case.
+Current canonical content hash: c3f36520f557bc1e75e4940007edeac4afb9c2bba8ced8660ecfcd49891f3b6d.
+Delegated proposed source: research/quantum-prerequisites-4-2026-10-15-owner/published-supplier-alerts/finite-sums/proposed/items/lem-finite-sum-laws.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:quantum-prerequisites-4-2026-10-15:lem-finite-sum-laws:end -->
+
+
+## quantum-prerequisites-4-2026-10-15 — finite-sum owner correction closure
+
+The earlier batch-3 pending descriptions above record the native Alpha handoff before owner integration. Both exact gaps are now corrected by authentic recorded-local-published-repair receipts at research/quantum-prerequisites-4-2026-10-15-owner/published-repairs/def-finite-sum.json and research/quantum-prerequisites-4-2026-10-15-owner/published-repairs/lem-finite-sum-laws.json. Existing A-P classification is retained with this local correction complete; no whole-item audit or new native acceptance is claimed. Original reader/refuter observations, Alpha decisions archive, report and successful dispatch result remain unchanged. The current assigned draft consumer uses primitive prefix sums and an independent d-induction; the historical published findings remain confirmed rather than reclassified as false positives. Final focused prerequisite review and source bindings: research/quantum-prerequisites-4-2026-10-15-owner/published-supplier-alerts/finite-sums/owner-closure/.
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-hh-cyclotomic-commuting-jucys-murphy-generators:begin -->
+lem-hh-cyclotomic-commuting-jucys-murphy-generators: Replace the normalized basis premise with the exact multiplicative finite Hecke basis and its arbitrary-base-change clause. Define the target over K=Q(Q,u1), verify the presented map as before, and conclude p(L2) is nonzero from basis vector T1 times a nonzero field coefficient. Focused current supplier and consumer evidence: research/hopf-hecke-unfinished-15-2026-10-15-owner/scope13-normalization-escalation/repair-manifest.json; no new whole-item audit.
+Current canonical content hash: 75ed3f8e05e9ca5218881e7846c0e2790baaf33132f635d7b3c78b9df557ab50.
+Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/scope13-normalization-escalation/proposed-source/items/lem-hh-cyclotomic-commuting-jucys-murphy-generators.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-hh-cyclotomic-commuting-jucys-murphy-generators:end -->
+
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-hh-cyclotomic-straightening-spanning:begin -->
+lem-hh-cyclotomic-straightening-spanning: Supply the exact multiplicative finite Hecke basis by a declared dependence on the native-batch12-accepted bridge. Handle n=1 directly and n>=2,r=1 as a finite multiplicative quotient span. Keep normalized F3 for the r>=2 scaled generators and preserve all r>=2 reductions. Correct the inaccurate final short step-range summary. Focused current supplier and consumer evidence: research/hopf-hecke-unfinished-15-2026-10-15-owner/scope13-normalization-escalation/repair-manifest.json; no new whole-item audit.
+Current canonical content hash: 1c08ce1906bc99cec0fa674cb644187dd1485fcf9948a7526469e45ab198fdaf.
+Delegated proposed source: research/hopf-hecke-unfinished-15-2026-10-15-owner/scope13-normalization-escalation/proposed-source/items/lem-hh-cyclotomic-straightening-spanning.md.
+Actual local precheck, renderer and proof-layout checks passed; this is a recorded local correction, not a new whole-item audit.
+<!-- local-published-repair:hopf-hecke-unfinished-15-2026-10-15:lem-hh-cyclotomic-straightening-spanning:end -->

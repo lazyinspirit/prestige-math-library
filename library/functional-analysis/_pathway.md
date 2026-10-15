@@ -7,7 +7,9 @@ parts:
     pages:
       - normed-and-banach-spaces
       - fourier-transform-convolution-and-approximate-identities
+      - complex-norms-and-realification
       - bounded-linear-operators-and-quotient-spaces
+      - complex-subspace-realification
       - finite-dimensional-normed-spaces-and-riesz-lemma
       - the-analytic-hahn-banach-theorem
       - the-baire-principles-of-functional-analysis
@@ -42,16 +44,17 @@ parts:
 ## foundations
 
 Banach spaces: completions, quotients, finite-dimensional equivalence, Riesz's
-lemma, Baire category, open mapping under DC and uniform boundedness under
-$\mathrm{AC}_\omega$; Fourier analysis: convolution, inversion, Schwartz
-Parseval, Plancherel, Poisson summation, tempered distributions; Hahn--Banach
-separation and norming, duality, weak and weak-star topologies, locally convex
-spaces, Banach--Alaoglu, Krein--Milman, reflexivity and James; Schauder bases,
-Bochner integration and the Radon--Nikodym property; Hilbert geometry,
-projections and Riesz representation; orthonormal bases and Parseval; compact
-operators and Fredholm theory; Banach algebras, spectra and the operator
-calculi; Gelfand theory; the compact self-adjoint spectral theorem with
-Hilbert--Schmidt kernels and trace-class operators; Fréchet calculus; Stone's
-theorem; Fredholm determinants and Lidskii's trace formula for trace-class
-operators; measurable Hilbert fields, direct integrals and the spectral
-multiplicity model for separable abelian von Neumann algebras.
+lemma, Baire category, open mapping under DC, $\mathrm{AC}_\omega$ uniform
+boundedness; complex norms with absolute homogeneity, realification preserving
+norm and metric, $\mathbb C^n$ coordinate sum norms, subspace restrictions,
+equivalent-norm comparisons, interleaved real bases; Fourier analysis:
+convolution, inversion, Schwartz Parseval, Plancherel, Poisson summation,
+tempered distributions; Hahn--Banach separation and norming, duality, weak and
+weak-star topologies, locally convex spaces, Banach--Alaoglu, Krein--Milman,
+reflexivity, James; Schauder bases, Bochner integration, Radon--Nikodym;
+Hilbert geometry, projections, Riesz representation, orthonormal bases,
+Parseval; compact operators, Fredholm theory; Banach algebras, spectra,
+operator calculi, Gelfand theory; compact self-adjoint spectral theorem with
+Hilbert--Schmidt and trace-class operators; Fréchet calculus; Stone's theorem;
+Fredholm determinants, Lidskii's trace formula; measurable Hilbert fields,
+direct integrals, multiplicity for separable abelian von Neumann algebras.

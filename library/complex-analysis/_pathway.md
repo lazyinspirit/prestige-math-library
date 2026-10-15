@@ -6,6 +6,7 @@ parts:
     title: "Holomorphic and analytic functions"
     pages:
       - complex-differentiability-and-cauchy-riemann
+      - complex-coordinate-and-path-transport
       - complex-power-series-and-analytic-functions
   - part: contours-and-cauchy
     title: "Contour integration and Cauchy's theorem"
@@ -61,11 +62,18 @@ parts:
 
 ## holomorphic-functions
 
-Complex differentiability asks for one limit in the plane rather than two along the axes,
-and the Cauchy-Riemann equations are what that costs: a real total derivative is complex
-linear exactly when they hold. A complex power series converges absolutely inside its
-Cauchy-Hadamard radius and uniformly on smaller discs, so it may be differentiated term by
-term, and its derivatives recover its coefficients.
+Complex differentiability asks for one limit in the plane rather than two
+along the axes, and the Cauchy-Riemann equations are what that costs: a real
+total derivative is complex linear exactly when they hold. The identification
+$\mathbb C\cong\mathbb R^2$ is made precise: the coordinate map is
+real-linear, a bijective isometry carrying affine segments and topology, and
+it transfers real total differentiability; complex path length is defined
+polygonally, equals Euclidean coordinate length, is finite exactly for
+bounded-variation coordinates, obeys the piecewise-$C^1$ speed integral and is
+invariant under monotone reparametrization. A complex power series converges
+absolutely inside its Cauchy-Hadamard radius and uniformly on smaller discs,
+so it may be differentiated term by term, and its derivatives recover its
+coefficients.
 
 ## contours-and-cauchy
 
