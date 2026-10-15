@@ -16,11 +16,16 @@ batch; each listed ID must match exactly one contract with the same assigned
 page, a valid kind/prefix and an explicit valid dependency array. The complete
 contract is retained and actual source dependencies are combined normally.
 If no adjacent record exists for an explicit listed ID, its actual item source
-may supply the contract only with complete parseable YAML frontmatter naming
-the exact ID and `pipeline_run`, a valid kind/prefix and an explicit dependency
-array. Any explicit source `page` must agree with the assigned page. The full
-actual frontmatter is retained and the dependency hash additionally binds the
-exact source bytes. An existing contradictory or duplicate adjacent record
+may supply the scheduling contract only with a complete frontmatter envelope
+and complete parseable top-level `id`, `kind`, `pipeline_run`, optional `page`
+and `deps` fields. Quoted keys are decoded before selection; duplicate selected
+fields fail. Each selected field is parsed with its entire YAML value, including
+block lists. These fields must name the exact ID and run, a valid kind/prefix
+and an explicit dependency array. Any explicit source `page` must agree with
+the assigned page. The actual selected metadata is retained and the dependency
+hash additionally binds the entire exact source bytes. Unrelated live source
+metadata is outside this scheduling projection and remains subject to ordinary
+strict whole-frontmatter validation. An existing contradictory or duplicate adjacent record
 cannot use this fallback. Missing or invalid source identity, frontmatter or
 dependencies fail closed. The dependency hash also binds the exact adjacent
 document bytes. This does not infer an absent dependency array or use empty

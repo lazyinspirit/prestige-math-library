@@ -7,6 +7,28 @@ const safe = value => { if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('
 const json = path => JSON.parse(readFileSync(path, 'utf8'));
 const read = path => existsSync(path) ? json(path) : null;
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+// Read complete top-level graph/identity fields while unrelated live metadata
+// may be unfinished. Decode quoted keys before selection and reject duplicates.
+// Each selected field retains its entire YAML value, including block lists.
+function constructionSourceFields(frontmatter, subject) {
+  const wanted = new Set(['id', 'kind', 'pipeline_run', 'page', 'deps']);
+  const seen = new Set(), selected = [], lines = frontmatter.split(/\r?\n/);
+  const header = /^("(?:[^"\\]|\\.)*"|'(?:[^']|'')*'|[a-zA-Z_][a-zA-Z0-9_-]*)[ \t]*:/;
+  for (let i = 0; i < lines.length; i++) {
+    const match = lines[i].match(header);
+    if (!match) continue;
+    const key = Object.keys(yaml().parse(`${match[1]}: null`))[0];
+    if (!wanted.has(key)) continue;
+    if (seen.has(key)) throw Error(`Duplicate construction scheduling source field ${key} for ${subject}`);
+    seen.add(key);
+    selected.push(lines[i]);
+    while (i + 1 < lines.length) {
+      if (/^[^\s#-][^\n]*:/.test(lines[i + 1])) break;
+      selected.push(lines[++i]);
+    }
+  }
+  return yaml().parse(selected.join('\n'));
+}
 export function loadStep3(root, run, {constructionScheduling=false}={}) {
   safe(run);
   const dir = join(root, 'research'), pages = [], items = new Map(), pairs = new Map();
@@ -35,7 +57,7 @@ export function loadStep3(root, run, {constructionScheduling=false}={}) {
     // Some authors keep complete current contracts in an adjacent items file
     // while their pages file temporarily lists IDs. Preserve those contracts,
     // including every explicit dependency. A missing adjacent entry can use a
-    // complete same-run actual source; contradictory entries still hold.
+    // complete same-run source identity/deps; contradictory entries still hold.
     const inputs = schedulingIdentityInputs.items ??= {};
     inputs[batch] ??= readFileSync(join(dir, `${run}-batch-${batch}.items.json`), 'utf8');
     const contracts = JSON.parse(inputs[batch]);
@@ -50,7 +72,7 @@ export function loadStep3(root, run, {constructionScheduling=false}={}) {
       if (matches.length === 0) {
         const source = readFileSync(join(root, 'items', `${safe(item)}.md`), 'utf8');
         const envelope = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
-        contract = envelope ? yaml().parse(envelope[1]) : null;
+        contract = envelope ? constructionSourceFields(envelope[1], item) : null;
         if (!contract || typeof contract !== 'object' || Array.isArray(contract)
           || contract.id !== item || contract.pipeline_run !== run
           || (Object.hasOwn(contract, 'page') && contract.page !== id))
