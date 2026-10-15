@@ -611,7 +611,16 @@ export function advanceAdjudicationCorrection(root,run,phase,round) {
     requireValue(prior.run===run&&prior.phase===phase&&prior.round===round
       &&resolve(root,pointer.request.path)===prior.request.path&&pointer.request.sha256===prior.request.sha256,
       'frozen owner finding queue authority changed');
-    verifyEvidence(prior.evidence);return prior;
+    verifyEvidence(prior.evidence);
+    const completed=['1','2','3'].every(unit=>{
+      const path=join(root,'research',run+'-dispatch','alpha-repair-'+workerLabel(ownerFindingPhase(phase),round,unit)+'.result.json');
+      return existsSync(path)&&read(path).ok===true;
+    });
+    if(completed){
+      collect(root,run,phase,round);
+      return {...prior,parent_collected:true};
+    }
+    return prior;
   }
   const scientific=advanceScientificAdjudication(root,run,phase,round);
   if(scientific){

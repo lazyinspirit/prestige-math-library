@@ -53,8 +53,17 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
       onProgress:({ctx,executor,stage}:any)=>{
         if([...executor.inflight.values()].some((d:any)=>d.meta.stage===id)||executor.hasAdoptedWork(stage))return;
         const complete=executor.unitsComplete(stage,ctx);
-        if(adjudicationBaseUnits(ctx).every((u:string)=>complete.has(u)))
-          advanceAdjudicationCorrection(ctx.repo,ctx.run,phase,round(ctx,id));
+        if(adjudicationBaseUnits(ctx).every((u:string)=>complete.has(u))){
+          const progress=advanceAdjudicationCorrection(ctx.repo,ctx.run,phase,round(ctx,id));
+          if(progress?.parent_collected&&executor.state){
+            const handoff=executor.state.stage(id);
+            if(!handoff.ownerFindingCollectionPausedAt){
+              handoff.ownerFindingCollectionPausedAt=new Date().toISOString();
+              executor.state.paused=true;
+              executor.reporter.notify('paused','Native owner findings collected; Root closes canonical findings before the next gate snapshot.',{stage:id});
+            }
+          }
+        }
       },
     }),
     artifacts:(ctx:any,u:string)=>{if(u.startsWith('maintenance:'))return outsideLane(ctx,u).report;const [pass,unit]=decode(phase,u);return relative(ctx.repo,report(ctx,pass,round(ctx,id),unit));},

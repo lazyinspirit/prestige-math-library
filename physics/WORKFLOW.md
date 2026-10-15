@@ -298,6 +298,13 @@ only authenticated subject-specific replacements; unrelated errors still block.
 Separate fatal findings count in the round's unique fatal original-frontier item
 inventory, deduplicated by subject, without fabricated model/context tuples.
 Root closes canonical findings only after genuine completed resolutions.
+At the drained three-lane join, the controller authenticates and collects the
+parent before its gate, then pauses once for Root's canonical ledger closure.
+Root resumes after adopting the genuine resolutions; the next gate snapshot
+therefore includes those closures. Resumed progress verifies the existing
+immutable collection before any OPEN-request intake, avoiding stale-input
+recertification and reauthentication of findings already closed. This technical
+handoff neither attempts nor waives the ordinary full gate battery.
 
 An earlier collected single-subject correction remains bound to its genuine
 collected `post` snapshot and immutable native evidence. Later source differences
