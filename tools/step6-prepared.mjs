@@ -107,8 +107,16 @@ export async function checkMetadataAndRender(root, run, { physics = false } = {}
     throw Error('Renderer did not return the complete ordered final frontier');
   const problems = formatting.flatMap(row => row.errors.map(error => `${row.file}: ${error.message ?? JSON.stringify(error)}`));
   if (problems.length) throw Error(problems.join('\n'));
-  if (sourceState(root, run, { physics, includeDerived: false }).sha256 !== before.sha256)
-    throw Error('Selected source/context changed during actual metadata/render checks');
+  const after = sourceState(root, run, { physics, includeDerived: false });
+  if (after.sha256 !== before.sha256) {
+    const changed = [...new Set([...Object.keys(before.tree), ...Object.keys(after.tree)])]
+      .filter(path => before.tree[path] !== after.tree[path]);
+    atomicJSON(join(stateDirectory(root, run, physics), 'step6-preparation-input-drift.json'), {
+      run, at: new Date().toISOString(), changed: changed.map(path => ({ path,
+        before: before.tree[path] ?? null, after: after.tree[path] ?? null })),
+    });
+    throw Error('Selected source/context changed during actual metadata/render checks: ' + changed.join(', '));
+  }
   if (proofLayoutInputs(run, root).fingerprint !== layoutInputs.fingerprint)
     throw Error('Renderer source/input dependencies changed during actual rendering');
   const rendered = new Map(formatting.map(row => [row.file, row]));
@@ -148,6 +156,35 @@ export function assertFreshStep6State(ctx, { physics = false } = {}) {
   if (!existsSync(file)) return;
   const state = readJSON(file);
   if (state.run && state.run !== ctx.run) throw Error('Foreign state directory');
+  let binding = state.step6Cutover;
+  const cutoverChain = new Set();
+  while (binding) {
+    if (cutoverChain.has(binding.receipt)) throw Error('Cyclic native Step-6 cutover chain');
+    cutoverChain.add(binding.receipt);
+    if (typeof binding.receipt !== 'string'
+      || !new RegExp(`^research/${ctx.run}-step6-cutover-[a-f0-9]{24}\\.json$`).test(binding.receipt))
+      throw Error('Invalid native Step-6 cutover binding');
+    const receiptBytes = readFileSync(join(ctx.repo, binding.receipt));
+    const receipt = JSON.parse(receiptBytes.toString());
+    if (digest(receiptBytes) !== binding.sha256 || receipt.version !== 1
+      || receipt.kind !== 'native-current-input-step6-v3-cutover' || receipt.run !== ctx.run
+      || receipt.coverage_created !== false || receipt.earlier_stages_changed !== false)
+      throw Error('Invalid native Step-6 cutover receipt');
+    const expectedArchive = join(directory, 'step6-cutover-' + binding.receipt.match(/([a-f0-9]{24})\.json$/)[1]);
+    if (resolve(ctx.repo, receipt.archive ?? '') !== expectedArchive
+      || !receipt.archive_sha256?.['state.json'] || !receipt.archive_sha256?.['events.jsonl']
+      || !receipt.archive_sha256?.['authorization.json']) throw Error('Invalid native Step-6 archive identity');
+    for (const [path, sha256] of Object.entries(receipt.archive_sha256 ?? {})) {
+      if (path.startsWith('/') || path.split('/').some(part => part === '..' || part === '.'))
+        throw Error('Unsafe native Step-6 cutover archive');
+      if (digest(readFileSync(join(expectedArchive, path))) !== sha256)
+        throw Error('Changed historical Step-6 archive: ' + path);
+    }
+    const prefix = Object.fromEntries(Object.entries(state.stages ?? {}).filter(([id]) => !/^6-/.test(id)));
+    if (digest(JSON.stringify(prefix)) !== receipt.guards.prefix_stages_sha256)
+      throw Error('Historical earlier stages changed after Step-6 cutover');
+    binding = receipt.previous_cutover ?? null;
+  }
   const current = new Set(['6-prepare-v3', '6-pathway-author-v3', '6-final-validation-v3', '6-finalize-v3']);
   if (Object.keys(state.stages ?? {}).some(id => /^6-/.test(id) && !current.has(id))
     || /^6-/.test(state.stage ?? '') && !current.has(state.stage))

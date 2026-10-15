@@ -188,6 +188,9 @@ async function buildExecutor(run?: string) {
   config.stagesWatch = readdirSync(dirname(stagesPath))
     .filter((name) => name.endsWith('.mts'))
     .map((name) => join(dirname(stagesPath), name));
+  // Preparation/prose can discharge the optional author stage after startup.
+  // Recompose through the existing guarded reload using file metadata only.
+  config.stagesWatch.push(join(repo, 'research', `${config.run}-pathway-closure.json`));
   const state = new State(statePath(config.stateDir));
   const hasResults = existsSync(config.dispatchDir)
     && readdirSync(config.dispatchDir).some(name => name.endsWith('.result.json'));

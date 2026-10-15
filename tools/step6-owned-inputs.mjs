@@ -13,7 +13,8 @@ export function step6OwnedInputs(run, root, { physics = false } = {}) {
   if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(run)) throw Error('invalid scoped run identity');
   const finalReceipt = `research/${run}-dispatch/tool-step6-finalize-v3.result.json`;
   if (existsSync(join(root, `research/${run}-closeout-scope.json`))) {
-    return preflightCloseoutScope(root, run, finalReceipt, { physics }).paths;
+    const selected = new Set(preflightCloseoutScope(root, run, finalReceipt, { physics }).paths);
+    return selectSharedOwnership(run, root, { physics, scope: runScope(run, root), selected, policy: true });
   }
   const scope = runScope(run, root);
   if (!scope.items.length || !scope.pages.length) throw Error('empty closeout source frontier');
@@ -70,10 +71,14 @@ export function step6OwnedInputs(run, root, { physics = false } = {}) {
       selected.add(path);
     }
   }
+  return selectSharedOwnership(run, root, { physics, scope, selected, policy: false });
+}
+
+function selectSharedOwnership(run, root, { physics, scope, selected, policy }) {
   // Preserve unchanged and foreign-only shared edits outside the commit.
   // Reuse precisely the native scientific projections, not a filename-prefix
   // approximation or a whole-ledger object hash. A relevant change still
-  // requires exact owner policy; this default path grants no shared ownership.
+  // requires exact owner policy; the default path grants no shared ownership.
   const shared = ['research/defect-ledger.jsonl', 'research/published-consumer-supplier-ledger.md', 'research/plan-spec.json'];
   const head = new Map(treeEntries(root).map(row => [row.path, row]));
   const index = new Map(indexEntries(root).map(row => [row.path, row]));
@@ -96,8 +101,19 @@ export function step6OwnedInputs(run, root, { physics = false } = {}) {
   const current = projection({}), committed = projection(headSources);
   const staged = same(indexSources, headSources) ? committed : projection(indexSources);
   for (const path of shared) {
-    if ((current[path] ?? '') !== (committed[path] ?? '') || (staged[path] ?? '') !== (committed[path] ?? ''))
-      throw Error(`changed run-relevant shared input requires an exact owner closeout policy: ${path}`);
+    // Explicit policy owns only its selected carriers. Other relevant shared
+    // records remain sealed context, without acquiring commit ownership.
+    if (policy && !selected.has(path)) continue;
+    const relevantChange = (current[path] ?? '') !== (committed[path] ?? '')
+      || (staged[path] ?? '') !== (committed[path] ?? '');
+    if (relevantChange) {
+      if (!policy)
+        throw Error(`changed run-relevant shared input requires an exact owner closeout policy: ${path}`);
+    } else if (workingSources[path] !== headSources[path] || indexSources[path] !== headSources[path]) {
+      // Even an explicit policy must leave another run's entire staged/working
+      // carrier outside this transaction when our native projection is unchanged.
+      selected.delete(path);
+    }
   }
   return [...selected].sort();
 }

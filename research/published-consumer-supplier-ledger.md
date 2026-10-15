@@ -4,12 +4,16 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 5, U-C 1, A-R 1282, A-P 60. The
+Current classifications: U-P 5, U-C 1, A-R 1282, A-P 62. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
 
 
+
+## BCS batch 61 published Cholesky findings — 2026-10-16
+
+`thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique` — A-P, three confirmed nonfatal maintenance findings. Raw current SHA-256 `e10c6bdb599f6780406864cd7b74dc4405337cd6740da430b992ef0b7fb0f58c`; native reader carrier `cc7aa7c8607d9427adc97abf513dd162e48ebe85e008798567b1d77a2248be7b` matches the routed observation. Proof 1.1 uses determinant nonzero ⇒ invertible without its supplier; Proof 3.1 omits triangular-inverse and triangular-unitary derivations. Forward substitution, inverse columns and M^{-1}=M* close these finite elementary omissions; the theorem is sound. Driscoll–Braun §2.9.3 Theorem 2.9.3 and Bindel's Cholesky section cover real SPD existence/recurrence, not the full complex converse/uniqueness statement. Strategy: owner inserts the short substitution/diagonality arguments and qualifies source locators or adds a full-coverage source, following published repair controls. Actual declared suppliers: `def-cholesky-factorisation-with-positive-diagonal`, `thm-determinant-of-a-triangular-matrix`, `thm-determinant-multiplicative`, `def-matrix-product-and-identity-matrix`; all four and complete current theorem independently read. Owned consumer `alg-synthetic-likelihood-monte-carlo-estimation` Definition branch 4 uses unique Cholesky only for real PD covariance; `def-synthetic-likelihood` uses the same sound interface and the Gaussian-density supplier. No consumer change is necessary. Closed `nonfatal-recorded` defect rows `bcs62-b61-3a-cholesky-1`, `bcs62-b61-3a-cholesky-2`, `bcs62-b61-3a-cholesky-3` dispose reader:61:1–3; they do not claim a published repair. Published carrier remains read-only; no audit or judge stamp added. Evidence: `research/bayesian-computational-statistics-62-alpha-batch-61-3a.md` and its decisions file.
 
 ## HH batch 14 separated-residue faithfulness — 2026-10-15
 
@@ -31523,17 +31527,17 @@ Required supplier: a proved compact-Hausdorff countable direct-limit product the
 
 ## Item classification index — 2026-09-08
 
-This index retains the initial 2,185-ID classification reference pool and subsequent reconciliations. Its current literal rows contain **3,585 unique item IDs**, of which **3,517 currently published** (2026-10-15 batch-60 literal index refresh). These are index counts, not a whole-corpus audit or a publication decision. Supplier mappings and item-specific findings remain in their dated evidence.
+This index retains the initial 2,185-ID classification reference pool and subsequent reconciliations. Its current literal rows contain **3,586 unique item IDs**, of which **3,518 currently published** (2026-10-15 batch-60 literal index refresh). These are index counts, not a whole-corpus audit or a publication decision. Supplier mappings and item-specific findings remain in their dated evidence.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
 | U-P | Unaudited and potentially defective items | 5 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 1 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 1282 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 59 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 62 | Recorded direct review and an unresolved item-specific repair. |
 
 Bounded no-repair-needed dispositions appear below, outside these four active
-defect classes. The four queues currently contain 1,346 distinct items.
+defect classes. The four queues currently contain 1,350 distinct items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -33947,6 +33951,7 @@ owner's scan policy.
 
 ### A-P — Audited items pending Phase 3 repair
 
+| `thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique` | A-P: BCS batch 61 Step-3a, 2026-10-16. Three nonfatal elementary proof/source-coverage findings; published editorial repair pending owner. Exact suppliers and closure strategy in the BCS batch 61 entry above. |
 | `thm-separated-hecke-residues-give-seminormal-idempotents-and-bases` | A-P: recorded local Proof 6.1 repair under hopf-hecke-unfinished-15-2026-10-15; explicit block triangular cell action proves faithfulness and split semisimplicity. Statement unchanged; current canonical hash 9069977588b9b8085ee32b555bba6744151f24fc20ab7cb026e2f0c884838688. Focused repair receipt research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/thm-separated-hecke-residues-give-seminormal-idempotents-and-bases.json; no new whole-item audit. |
 | `lem-hh-cyclotomic-straightening-spanning` | A-P: cumulative recorded local published repair, including Step1.3 right-Y reductions; current hash 272e3226f8acad10c9da6b27ae5c5abb563e7c88d0738b5be501067797179e59. Statement unchanged. research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/lem-hh-cyclotomic-straightening-spanning.json; no new whole-item audit. |
 | `lem-hh-quantum-and-hecke-tensor-actions-commute` | A-P: recorded local published Proof2.1 E/F coproduct-factor correction; current hash b3de912ee50121134d5a03aa573c22e1acb37e2ce0e31699213dde40a337dbb9. Statement unchanged. research/hopf-hecke-unfinished-15-2026-10-15-owner/published-repairs/lem-hh-quantum-and-hecke-tensor-actions-commute.json; no new whole-item audit. |

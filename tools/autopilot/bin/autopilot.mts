@@ -36,6 +36,7 @@ import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
 import { inspectReportReopen, reopenReport, inspectPackagingReopen, reopenPackaging } from '../../autopilot-report-reopen.mjs';
 import { reopenStep3 } from '../src/step3-reopen.mts';
+import { inspectStep6Cutover, cutoverStep6 } from '../src/step6-cutover.mts';
 import { inspectCloseoutReopen, reopenCloseout } from '../src/closeout-reopen.mts';
 import { appendFrontier, assertNoAppendTransaction, recoverAppendItemOrder } from '../src/frontier-append.mts';
 import type { Config } from '../src/types.mts';
@@ -188,6 +189,9 @@ async function buildExecutor(run?: string) {
   config.stagesWatch = readdirSync(dirname(stagesPath))
     .filter((name) => name.endsWith('.mts'))
     .map((name) => join(dirname(stagesPath), name));
+  // Preparation/prose can discharge the optional author stage after startup.
+  // Recompose through the existing guarded reload using file metadata only.
+  config.stagesWatch.push(join(repo, 'research', `${config.run}-pathway-closure.json`));
   const state = new State(statePath(config.stateDir));
   const hasResults = existsSync(config.dispatchDir)
     && readdirSync(config.dispatchDir).some(name => name.endsWith('.result.json'));
@@ -220,6 +224,22 @@ async function buildExecutor(run?: string) {
 }
 
 switch (cmd) {
+  case 'cutover-step6': {
+    const run = opt('run') ?? die('--run is required');
+    const config = loadConfig();
+    const options = { repo, run, stateDir: opt('state-dir') ? stateDir : join(repo, '.autopilot', run),
+      dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`),
+      authorizationPath: opt('authorization') ? resolve(repo, opt('authorization')) : undefined, refresh: has('refresh') };
+    try {
+      if (has('inspect')) console.log(JSON.stringify(inspectStep6Cutover(options).guards, null, 2));
+      else {
+        const result = cutoverStep6(options);
+        console.log(JSON.stringify(result, null, 2));
+        console.log('Run remains paused; native start/resume must perform fresh Step-6 preparation, every final gate, report and scoped commit.');
+      }
+    } catch (error: any) { console.error(String(error?.message ?? error)); process.exitCode = 1; }
+    break;
+  }
   case 'reopen-closeout-packaging':
   case 'reopen-report': {
     const run = opt('run') ?? die('--run is required');

@@ -45,6 +45,11 @@ committed/index blobs are checked inside the transaction. The native receipt sta
 A failure after a landed commit holds for recovery; it never resets another
 session's work.
 
+An explicit closeout policy still leaves a shared ledger or plan outside the
+commit when both its current and staged native run projections equal HEAD and
+only foreign raw content changed. Exact policy preflight remains required;
+run-relevant shared changes retain their existing explicit ownership requirement.
+
 The final report records status, frontier counts, material caveats, measured
 elapsed time/retries/token usage when available, and an audit link. It omits
 exhaustive bookkeeping; full evidence stays in JSON. Missing telemetry is not
@@ -53,6 +58,9 @@ estimated. Content remains draft; publication and push require owner action.
 New stage identities cannot adopt historical v2 coverage. Existing frozen runs
 require an explicit native guarded cutover; original state, reports and receipts
 stay historical. Installing this rebuild does not resume or migrate a live run.
+See [the native cutover](STEP6-CUTOVER.md) for the explicit owner-sealed
+transition and archive requirements.
+
 Legacy report v1 inspection requires explicit `--legacy-v1`; it reads only the
 recorded historical entries and never recreates a whole-workspace baseline.
 

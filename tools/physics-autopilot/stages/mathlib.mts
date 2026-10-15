@@ -1636,6 +1636,7 @@ for (const stage of stages) {
 export const workflowRevision = 'physics-six-step-v1-construction-scope';
 export const stagesForRun = (ctx: any) => {
   assertFreshStep6State(ctx, { physics: true });
-  return stages;
+  // No prose obligation means no author stage; the final pathway gate remains.
+  return stages.filter(stage => stage.id !== '6-pathway-author-v3' || step6PathwayOwed(ctx).length > 0);
 };
 export default { stages, stagesForRun, batches, alphaGroups, workflowRevision };
