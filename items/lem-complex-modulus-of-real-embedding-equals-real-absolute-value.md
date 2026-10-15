@@ -2,7 +2,7 @@
 id: lem-complex-modulus-of-real-embedding-equals-real-absolute-value
 kind: lemma
 title: "Complex modulus restricts to real absolute value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 provenance:

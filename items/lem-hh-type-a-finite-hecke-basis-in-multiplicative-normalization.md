@@ -2,7 +2,7 @@
 id: lem-hh-type-a-finite-hecke-basis-in-multiplicative-normalization
 kind: lemma
 title: "The finite type-A Hecke basis over the multiplicative parameter ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

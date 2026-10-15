@@ -2,7 +2,7 @@
 id: cor-hh-hopf-module-functor-equivalence
 kind: corollary
 title: "Right-right Hopf modules are equivalent to vector spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 7

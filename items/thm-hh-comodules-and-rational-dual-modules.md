@@ -2,7 +2,7 @@
 id: thm-hh-comodules-and-rational-dual-modules
 kind: theorem
 title: "Right comodules are rational modules over the dual algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

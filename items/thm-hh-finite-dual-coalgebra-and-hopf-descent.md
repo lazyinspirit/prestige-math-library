@@ -2,7 +2,7 @@
 id: thm-hh-finite-dual-coalgebra-and-hopf-descent
 kind: theorem
 title: "The finite dual is a coalgebra and descends through bialgebras and Hopf algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

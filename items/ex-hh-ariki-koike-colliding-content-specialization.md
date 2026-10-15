@@ -2,7 +2,7 @@
 id: ex-hh-ariki-koike-colliding-content-specialization
 kind: example
 title: "A repeated root collides the generic one-box contents"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

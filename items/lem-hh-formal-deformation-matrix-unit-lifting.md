@@ -2,7 +2,7 @@
 id: lem-hh-formal-deformation-matrix-unit-lifting
 kind: lemma
 title: "Matrix units lift through a finite free split formal deformation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

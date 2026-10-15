@@ -2,7 +2,7 @@
 id: ex-hh-finite-group-algebra-integrals-and-maschke
 kind: example
 title: "Finite group algebras and the characteristic condition in Maschke's theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: def-hh-leg-notation-and-quasitriangular-hopf-algebra
 kind: definition
 title: "Leg notation and quasitriangular Hopf algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

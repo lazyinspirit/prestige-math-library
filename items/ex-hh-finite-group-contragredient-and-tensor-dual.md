@@ -2,7 +2,7 @@
 id: ex-hh-finite-group-contragredient-and-tensor-dual
 kind: example
 title: "The tensor product and contragredient dual of a finite-group module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 6

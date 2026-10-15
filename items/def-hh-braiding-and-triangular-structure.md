@@ -2,7 +2,7 @@
 id: def-hh-braiding-and-triangular-structure
 kind: definition
 title: "Braiding on the module category and triangular structures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-hh-two-dimensional-formal-split-deformation
 kind: example
 title: "Explicitly lifting the two simple labels in a formal rank-two algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

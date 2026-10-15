@@ -2,7 +2,7 @@
 id: ex-hh-group-graded-spaces-as-comodules
 kind: example
 title: "Group-graded vector spaces as comodules over the group-like coalgebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

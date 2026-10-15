@@ -2,7 +2,7 @@
 id: lem-hh-type-a-quantum-antipode-descends
 kind: lemma
 title: "The type-A quantum presentation admits its displayed antipode"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

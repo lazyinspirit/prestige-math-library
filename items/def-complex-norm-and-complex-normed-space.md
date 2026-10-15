@@ -2,7 +2,7 @@
 id: def-complex-norm-and-complex-normed-space
 kind: definition
 title: "Complex norm and complex normed space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 provenance:

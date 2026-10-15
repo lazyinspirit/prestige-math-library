@@ -2,7 +2,7 @@
 id: ex-hh-dual-trace-basis-in-type-a2-hecke-algebra
 kind: example
 title: "The dual trace basis for the type-A2 Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

@@ -7,7 +7,7 @@ verification:
 id: ex-complex-line-realification-basis-in-c2
 kind: example
 title: "The complex line through (1,i) has a two-vector real basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 3

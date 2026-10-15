@@ -2,7 +2,7 @@
 id: lem-hh-hopf-module-coinvariant-projection
 kind: lemma
 title: "The coinvariant projection of a right-right Hopf module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

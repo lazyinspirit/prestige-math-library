@@ -2,7 +2,7 @@
 id: lem-hh-taft-algebra-pbw-and-hopf-structure
 kind: lemma
 title: "The Taft algebra: PBW basis and Hopf structure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

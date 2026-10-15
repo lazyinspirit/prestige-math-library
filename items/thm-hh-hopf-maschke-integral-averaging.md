@@ -2,7 +2,7 @@
 id: thm-hh-hopf-maschke-integral-averaging
 kind: theorem
 title: "Hopf–Maschke theorem by integral averaging"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

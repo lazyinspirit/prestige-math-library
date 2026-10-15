@@ -2,7 +2,7 @@
 id: cex-hh-perfect-symmetrizing-trace-does-not-imply-semisimple
 kind: counterexample
 title: "A perfect symmetrizing trace does not imply semisimplicity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

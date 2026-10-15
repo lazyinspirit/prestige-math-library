@@ -2,7 +2,7 @@
 id: ex-hh-finite-group-dual-hopf-algebra
 kind: example
 title: "The dual Hopf algebra of a finite group algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

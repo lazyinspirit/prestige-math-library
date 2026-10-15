@@ -1,7 +1,7 @@
 ---
 page: hopf-ideals-finite-duals-and-basic-constructions
 title: "Hopf Ideals, Finite Duals, and Basic Constructions"
-status: draft
+status: published
 items:
   - def-hh-finite-dual-of-an-associative-algebra
   - def-hh-hopf-ideal-and-hopf-subalgebra

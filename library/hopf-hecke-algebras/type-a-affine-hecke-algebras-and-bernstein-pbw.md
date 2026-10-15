@@ -1,7 +1,7 @@
 ---
 page: type-a-affine-hecke-algebras-and-bernstein-pbw
 title: "Type A Affine Hecke Algebras and Bernstein PBW"
-status: draft
+status: published
 items:
   - lem-hh-type-a-finite-hecke-basis-in-multiplicative-normalization
   - def-hh-type-a-weight-lattice-laurent-ring-and-divided-differences

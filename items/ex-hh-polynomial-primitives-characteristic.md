@@ -2,7 +2,7 @@
 id: ex-hh-polynomial-primitives-characteristic
 kind: example
 title: "Primitive polynomials depend on the characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

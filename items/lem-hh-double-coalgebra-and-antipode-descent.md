@@ -2,7 +2,7 @@
 id: lem-hh-double-coalgebra-and-antipode-descent
 kind: lemma
 title: "Double coalgebra, multiplicativity, and antipode"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 10

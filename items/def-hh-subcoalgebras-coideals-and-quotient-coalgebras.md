@@ -2,7 +2,7 @@
 id: def-hh-subcoalgebras-coideals-and-quotient-coalgebras
 kind: definition
 title: "Subcoalgebras, coideals, and quotient coalgebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: complex-coordinate-and-path-transport-examples
 title: Complex Coordinate and Path Transport — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-complex-coordinate-and-path-transport

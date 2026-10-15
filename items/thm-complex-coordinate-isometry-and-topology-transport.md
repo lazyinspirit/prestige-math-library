@@ -2,7 +2,7 @@
 id: thm-complex-coordinate-isometry-and-topology-transport
 kind: theorem
 title: The complex coordinate isometry transports topology and affine segments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 1

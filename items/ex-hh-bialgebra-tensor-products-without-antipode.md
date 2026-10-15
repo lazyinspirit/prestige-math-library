@@ -2,7 +2,7 @@
 id: ex-hh-bialgebra-tensor-products-without-antipode
 kind: example
 title: "Tensor products of modules over a bialgebra without an antipode"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

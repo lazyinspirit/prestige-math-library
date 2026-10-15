@@ -1,7 +1,7 @@
 ---
 page: pointwise-extended-real-function-products-examples
 title: "Pointwise Extended-Real Function Products: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-pointwise-extended-real-function-product-cases]
 ---

@@ -2,7 +2,7 @@
 id: def-hh-frobenius-functional-and-associative-pairing
 kind: definition
 title: "Frobenius functionals and associative pairings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

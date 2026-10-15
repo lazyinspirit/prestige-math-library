@@ -2,7 +2,7 @@
 id: lem-hh-cyclotomic-component-shift-and-dominance-ideals
 kind: lemma
 title: "Cyclotomic component shift and multipartition dominance ideals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

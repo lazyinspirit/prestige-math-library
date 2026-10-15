@@ -2,7 +2,7 @@
 id: cex-hh-infinite-dual-module-is-not-rational
 kind: counterexample
 title: "An infinite-dimensional dual algebra with a nonrational module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

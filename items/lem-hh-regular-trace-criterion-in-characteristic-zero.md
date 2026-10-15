@@ -2,7 +2,7 @@
 id: lem-hh-regular-trace-criterion-in-characteristic-zero
 kind: lemma
 title: "A nondegenerate regular-trace pairing forces semisimplicity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

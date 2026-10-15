@@ -2,7 +2,7 @@
 id: ex-hh-regular-hopf-module-projection
 kind: example
 title: "The regular Hopf module and its projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 7

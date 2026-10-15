@@ -2,7 +2,7 @@
 id: def-complex-normed-subspace
 kind: definition
 title: "A complex normed linear subspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 provenance:

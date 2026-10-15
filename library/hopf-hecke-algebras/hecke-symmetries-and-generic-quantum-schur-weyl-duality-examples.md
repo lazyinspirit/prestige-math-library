@@ -1,7 +1,7 @@
 ---
 page: hecke-symmetries-and-generic-quantum-schur-weyl-duality-examples
 title: "Hecke Symmetries and Generic Quantum Schur–Weyl Duality — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hh-hecke-operator-rank-two-and-braid-cases, ex-hh-quantum-hecke-commutation-in-rank-two, cex-hh-rank-one-tensor-action-is-not-faithful]
 ---

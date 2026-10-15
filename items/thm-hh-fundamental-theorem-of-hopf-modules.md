@@ -2,7 +2,7 @@
 id: thm-hh-fundamental-theorem-of-hopf-modules
 kind: theorem
 title: "The fundamental theorem of right-right Hopf modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 6

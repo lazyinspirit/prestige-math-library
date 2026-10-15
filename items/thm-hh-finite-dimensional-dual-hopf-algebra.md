@@ -2,7 +2,7 @@
 id: thm-hh-finite-dimensional-dual-hopf-algebra
 kind: theorem
 title: "The dual of a finite-dimensional Hopf algebra is a Hopf algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

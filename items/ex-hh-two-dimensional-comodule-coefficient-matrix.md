@@ -2,7 +2,7 @@
 id: ex-hh-two-dimensional-comodule-coefficient-matrix
 kind: example
 title: "A two-dimensional comodule and its coefficient matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

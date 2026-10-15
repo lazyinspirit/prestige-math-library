@@ -2,7 +2,7 @@
 id: def-hh-dual-algebra-and-rational-module
 kind: definition
 title: "The dual convolution algebra and rational modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

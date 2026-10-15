@@ -2,7 +2,7 @@
 id: thm-hh-generic-finite-hecke-semisimplicity
 kind: theorem
 title: "Finite Coxeter Hecke algebras are semisimple over the generic characteristic-zero field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

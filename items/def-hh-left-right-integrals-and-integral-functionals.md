@@ -2,7 +2,7 @@
 id: def-hh-left-right-integrals-and-integral-functionals
 kind: definition
 title: "Left and right integrals and integral functionals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: complex-norms-and-realification-examples
 title: "Complex Norms and Realification — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-anisotropic-real-norm-on-c]
 ---

@@ -1,7 +1,7 @@
 ---
 page: hecke-symmetries-and-generic-quantum-schur-weyl-duality
 title: "Hecke Symmetries and Generic Quantum Schur–Weyl Duality"
-status: draft
+status: published
 items: [def-hh-hecke-symmetry-and-ordered-basis-operator, lem-hh-type-a-tensor-operator-is-a-hecke-symmetry, thm-hh-hecke-symmetry-tensor-power-action, def-hh-type-a-quantum-antipode-formula, lem-hh-type-a-quantum-antipode-descends, lem-hh-quantum-and-hecke-tensor-actions-commute, lem-hh-classical-tensor-centralizer-by-polarization, lem-hh-finite-semisimple-matrix-double-commutant, lem-hh-finite-matrix-rank-under-specialization, lem-hh-classical-and-generic-tensor-double-centralizer-suppliers, thm-hh-generic-quantum-schur-weyl-mutual-centralizers]
 examples: []
 ---

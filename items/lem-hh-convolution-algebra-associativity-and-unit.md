@@ -2,7 +2,7 @@
 id: lem-hh-convolution-algebra-associativity-and-unit
 kind: lemma
 title: "Convolution of linear maps is associative and unital"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1
@@ -19,7 +19,8 @@ sources:
   references:
     - title: "Hans-Jürgen Schneider, Lectures on Hopf algebras, notes by Sonia Natale"
       url: "https://www.famaf.unc.edu.ar/~andrus/papers/Schn1.pdf"
-      locator: 'Proposition 1.4, printed p. 14: convolution on Hom(C,A), associativity and unit $u\varepsilon$'
+      locator: 'Proposition 1.4, printed p. 14: convolution on Hom(C,A), associativity and unit $u\varepsilon
+---
     - title: "Thomas Rüd, Hopf Algebras and rooted trees, Practical work in mathematics"
       url: "https://math.mit.edu/~rud/TeXthings/HopfAlgebras-1.1.pdf"
       locator: "§2.3.1, PDF pp. 9–10: the convolution multiplication on maps from a coalgebra to an algebra"

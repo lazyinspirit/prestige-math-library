@@ -2,7 +2,7 @@
 id: thm-hh-left-dual-evaluation-coevaluation-and-triangle-identities
 kind: theorem
 title: "Evaluation, coevaluation, and triangle identities for left duals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

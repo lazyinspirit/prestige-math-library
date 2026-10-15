@@ -2,7 +2,7 @@
 id: ex-hh-relative-primitive-elements-in-two-dimensional-coalgebra
 kind: example
 title: "Group-like elements and primitives relative to g in a two-dimensional coalgebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

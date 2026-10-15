@@ -1,7 +1,7 @@
 ---
 page: quasitriangular-hopf-algebras-and-braided-module-categories
 title: "Quasitriangular Hopf Algebras and Braided Module Categories"
-status: draft
+status: published
 items:
   - lem-hh-tensor-algebra-regular-detection
   - def-hh-leg-notation-and-quasitriangular-hopf-algebra

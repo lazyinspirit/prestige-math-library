@@ -2,7 +2,7 @@
 id: lem-hh-comodule-kernels-quotients-and-coefficient-identities
 kind: lemma
 title: "Kernels, images, quotients, and matrix coefficients of comodules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

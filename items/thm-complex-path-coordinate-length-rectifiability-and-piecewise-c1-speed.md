@@ -2,7 +2,7 @@
 id: thm-complex-path-coordinate-length-rectifiability-and-piecewise-c1-speed
 kind: theorem
 title: Complex path length equals coordinate length and piecewise speed integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 2

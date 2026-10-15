@@ -2,7 +2,7 @@
 id: ex-hh-type-a-rank-two-bernstein-relation
 kind: example
 title: "The rank-two multiplicative Bernstein relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

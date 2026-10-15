@@ -2,7 +2,7 @@
 id: def-equivalent-complex-norms
 kind: definition
 title: "Equivalent complex norms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 provenance:

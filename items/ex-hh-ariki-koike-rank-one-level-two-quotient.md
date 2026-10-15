@@ -2,7 +2,7 @@
 id: ex-hh-ariki-koike-rank-one-level-two-quotient
 kind: example
 title: "The rank-one level-two cyclotomic quotient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

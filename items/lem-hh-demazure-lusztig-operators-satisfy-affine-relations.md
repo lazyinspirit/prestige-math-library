@@ -2,7 +2,7 @@
 id: lem-hh-demazure-lusztig-operators-satisfy-affine-relations
 kind: lemma
 title: "Demazure–Lusztig operators satisfy the affine type-A relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

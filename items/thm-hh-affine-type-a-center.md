@@ -2,7 +2,7 @@
 id: thm-hh-affine-type-a-center
 kind: theorem
 title: "The center of the universal affine Hecke algebra of type A"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

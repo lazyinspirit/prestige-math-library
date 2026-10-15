@@ -2,7 +2,7 @@
 id: lem-complex-norm-realification-is-a-real-norm
 kind: lemma
 title: "Realification preserves a complex norm and its metric"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 provenance:

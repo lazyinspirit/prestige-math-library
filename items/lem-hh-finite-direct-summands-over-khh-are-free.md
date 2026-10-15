@@ -2,7 +2,7 @@
 id: lem-hh-finite-direct-summands-over-khh-are-free
 kind: lemma
 title: "Finite direct summands over a formal-series ring are free with rank read from reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

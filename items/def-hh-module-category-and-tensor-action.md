@@ -2,7 +2,7 @@
 id: def-hh-module-category-and-tensor-action
 kind: definition
 title: "The module category of a bialgebra and its tensor action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

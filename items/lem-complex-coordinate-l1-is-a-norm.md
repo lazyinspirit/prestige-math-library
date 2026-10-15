@@ -2,7 +2,7 @@
 id: lem-complex-coordinate-l1-is-a-norm
 kind: lemma
 title: "The complex coordinate sum norm, including the zero space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 provenance:

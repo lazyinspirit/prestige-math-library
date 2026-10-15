@@ -1,7 +1,7 @@
 ---
 page: hopf-module-tensor-products-and-rigid-duality
 title: "Hopf Module Tensor Products and Rigid Duality"
-status: draft
+status: published
 items: [def-hh-module-category-and-tensor-action,
         thm-hh-bialgebra-module-tensor-coherence,
         def-hh-left-dual-of-a-finite-hopf-module,

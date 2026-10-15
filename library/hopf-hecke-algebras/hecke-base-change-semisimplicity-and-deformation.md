@@ -1,7 +1,7 @@
 ---
 page: hecke-base-change-semisimplicity-and-deformation
 title: "Hecke Base Change, Semisimplicity, and Deformation"
-status: draft
+status: published
 items:
   - def-hh-specialization-and-regular-trace-determinant
   - lem-hh-one-parameter-formal-series-local-ring

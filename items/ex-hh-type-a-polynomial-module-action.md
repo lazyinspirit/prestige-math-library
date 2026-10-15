@@ -2,7 +2,7 @@
 id: ex-hh-type-a-polynomial-module-action
 kind: example
 title: "The rank-two polynomial-module action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

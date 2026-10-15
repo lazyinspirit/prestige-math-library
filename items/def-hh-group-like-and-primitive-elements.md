@@ -2,7 +2,7 @@
 id: def-hh-group-like-and-primitive-elements
 kind: definition
 title: "Group-like elements and primitives relative to a group-like element"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

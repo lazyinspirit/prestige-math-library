@@ -2,7 +2,7 @@
 id: cex-full-dual-of-infinite-group-algebra-has-no-algebraic-coproduct
 kind: counterexample
 title: "The full dual of an infinite group algebra has no transpose coproduct"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

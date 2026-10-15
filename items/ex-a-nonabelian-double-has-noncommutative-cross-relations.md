@@ -2,7 +2,7 @@
 id: ex-a-nonabelian-double-has-noncommutative-cross-relations
 kind: example
 title: "A nonabelian group makes the double cross-relations noncommutative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 14

@@ -2,7 +2,7 @@
 id: thm-complex-path-length-invariant-under-monotone-reparametrization
 kind: theorem
 title: Complex path length is invariant under monotone surjective reparametrization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 3

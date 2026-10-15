@@ -2,7 +2,7 @@
 id: cex-hh-rank-one-tensor-action-is-not-faithful
 kind: counterexample
 title: "The rank-one tensor action of the two-strand Hecke algebra is not faithful"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

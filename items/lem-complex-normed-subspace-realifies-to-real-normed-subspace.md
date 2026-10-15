@@ -2,7 +2,7 @@
 id: lem-complex-normed-subspace-realifies-to-real-normed-subspace
 kind: lemma
 title: "A complex normed subspace and its finite basis realify"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 2

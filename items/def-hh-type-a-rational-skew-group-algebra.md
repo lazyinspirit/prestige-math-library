@@ -2,7 +2,7 @@
 id: def-hh-type-a-rational-skew-group-algebra
 kind: definition
 title: "The rational skew group algebra for type A"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

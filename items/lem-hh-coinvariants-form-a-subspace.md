@@ -2,7 +2,7 @@
 id: lem-hh-coinvariants-form-a-subspace
 kind: lemma
 title: "The coinvariants of a right-right Hopf module form a subspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

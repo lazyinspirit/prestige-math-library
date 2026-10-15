@@ -2,7 +2,7 @@
 id: cex-hh-coideal-with-nonzero-counit-does-not-give-quotient-map
 kind: counterexample
 title: "A coproduct coideal with nonzero counit does not give a quotient coalgebra map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-hh-finite-dual-of-a-polynomial-hopf-algebra
 kind: example
 title: "The finite dual of the primitive polynomial Hopf algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

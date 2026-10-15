@@ -2,7 +2,7 @@
 id: lem-hh-coinvariants-of-free-hopf-module
 kind: lemma
 title: "Coinvariants of a free right-right Hopf module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

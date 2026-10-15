@@ -2,7 +2,7 @@
 id: def-hh-type-a-quantum-antipode-formula
 kind: definition
 title: "The candidate antipode for the type-A quantum algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

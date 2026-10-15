@@ -2,7 +2,7 @@
 id: thm-hh-finite-integrals-are-one-dimensional-and-antipode-is-bijective
 kind: theorem
 title: "Finite Hopf algebras have one-dimensional integral spaces and bijective antipode"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 7

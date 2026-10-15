@@ -1,7 +1,7 @@
 ---
 page: complex-coordinate-and-path-transport
 title: Complex Coordinate and Path Transport
-status: draft
+status: published
 items:
   - thm-complex-coordinate-map-preserves-real-scalar-multiplication
   - def-complex-path-polygonal-length-and-rectifiability

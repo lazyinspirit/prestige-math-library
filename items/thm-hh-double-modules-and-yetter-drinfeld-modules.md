@@ -2,7 +2,7 @@
 id: thm-hh-double-modules-and-yetter-drinfeld-modules
 kind: theorem
 title: "Modules over the finite double are left-left Yetter–Drinfeld modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 11

@@ -1,7 +1,7 @@
 ---
 page: complex-norms-and-realification
 title: "Complex Norms and Realification"
-status: draft
+status: published
 items: [def-complex-norm-and-complex-normed-space,
         lem-complex-modulus-of-real-embedding-equals-real-absolute-value,
         lem-complex-norm-realification-is-a-real-norm,

@@ -2,7 +2,7 @@
 id: lem-hh-type-a-garnir-straightening-and-murphy-cell-law
 kind: lemma
 title: "Integral type-A Garnir straightening and the Murphy cell law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

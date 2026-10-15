@@ -2,7 +2,7 @@
 id: lem-hh-type-a-murphy-strong-tableau-straightening
 kind: lemma
 title: "Ordinary Murphy straightening preserves both tableau prefixes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

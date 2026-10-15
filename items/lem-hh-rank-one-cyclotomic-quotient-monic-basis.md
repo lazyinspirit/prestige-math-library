@@ -2,7 +2,7 @@
 id: lem-hh-rank-one-cyclotomic-quotient-monic-basis
 kind: lemma
 title: "The rank-one cyclotomic quotient has a monic basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

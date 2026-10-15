@@ -2,7 +2,7 @@
 id: thm-complex-coordinate-map-preserves-real-scalar-multiplication
 kind: theorem
 title: The complex coordinate map preserves real scalar multiplication
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 0

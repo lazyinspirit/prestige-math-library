@@ -2,7 +2,7 @@
 id: ex-pointwise-extended-real-function-product-cases
 kind: example
 title: "Zero, sign, and finite cases for the pointwise function product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 1

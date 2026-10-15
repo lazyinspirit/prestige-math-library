@@ -2,7 +2,7 @@
 id: lem-hh-tensor-algebra-regular-detection
 kind: lemma
 title: "Regular tensor-algebra multiplication is detected at the unit tensor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

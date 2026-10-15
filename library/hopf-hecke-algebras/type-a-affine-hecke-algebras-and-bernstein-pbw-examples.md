@@ -1,7 +1,7 @@
 ---
 page: type-a-affine-hecke-algebras-and-bernstein-pbw-examples
 title: "Type A Affine Hecke Algebras and Bernstein PBW — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-hh-type-a-negative-laurent-divided-difference

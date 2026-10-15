@@ -2,7 +2,7 @@
 id: cex-hh-nondegenerate-symmetrizing-trace-does-not-imply-semisimplicity
 kind: counterexample
 title: "A rank-one Hecke algebra with a perfect symmetrizing form and degenerate regular trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

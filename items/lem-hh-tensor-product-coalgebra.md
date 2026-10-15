@@ -2,7 +2,7 @@
 id: lem-hh-tensor-product-coalgebra
 kind: lemma
 title: "The tensor product of two coalgebras is a coalgebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

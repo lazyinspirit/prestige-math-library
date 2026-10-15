@@ -2,7 +2,7 @@
 id: ex-hh-group-and-function-algebras-for-s3
 kind: example
 title: "Group and function Hopf algebras of the symmetric group on three letters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-hh-canonical-hecke-trace-is-symmetric-and-perfect
 kind: theorem
 title: "The canonical Hecke trace is symmetric and perfect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

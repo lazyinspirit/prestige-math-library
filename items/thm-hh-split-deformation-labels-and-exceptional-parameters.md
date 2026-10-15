@@ -2,7 +2,7 @@
 id: thm-hh-split-deformation-labels-and-exceptional-parameters
 kind: theorem
 title: "Split formal deformations preserve simple-block labels; the trace determinant bounds exceptional parameters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

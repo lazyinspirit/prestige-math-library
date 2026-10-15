@@ -2,7 +2,7 @@
 id: def-hh-cyclotomic-murphy-elements
 kind: definition
 title: "Cyclotomic Murphy elements"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-hh-r-matrix-constructs-a-module-braiding
 kind: theorem
 title: "A quasitriangular structure gives and is recovered from a module braiding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

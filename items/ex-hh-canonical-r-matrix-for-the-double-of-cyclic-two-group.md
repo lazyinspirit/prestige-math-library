@@ -2,7 +2,7 @@
 id: ex-hh-canonical-r-matrix-for-the-double-of-cyclic-two-group
 kind: example
 title: "The canonical R-matrix for the finite double of the group of order two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

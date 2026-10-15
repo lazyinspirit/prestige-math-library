@@ -2,7 +2,7 @@
 id: thm-hh-cellular-simple-module-classification-over-a-field
 kind: theorem
 title: "Nonzero cellular heads classify the simple modules over a field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 8

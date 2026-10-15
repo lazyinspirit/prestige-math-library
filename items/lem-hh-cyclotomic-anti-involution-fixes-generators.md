@@ -2,7 +2,7 @@
 id: lem-hh-cyclotomic-anti-involution-fixes-generators
 kind: lemma
 title: "The cyclotomic anti-involution fixes the affine and Murphy generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

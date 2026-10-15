@@ -2,7 +2,7 @@
 id: lem-hh-one-parameter-formal-series-local-ring
 kind: lemma
 title: "The one-parameter formal-series ring is complete, separated, and has residue field $k$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

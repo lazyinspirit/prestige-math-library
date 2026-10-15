@@ -2,7 +2,7 @@
 id: lem-hh-finite-spanning-list-contains-a-basis
 kind: lemma
 title: "A finite spanning list contains a basis, without choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

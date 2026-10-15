@@ -2,7 +2,7 @@
 id: lem-hh-quasitriangular-counit-and-yang-baxter-identities
 kind: lemma
 title: "Counit normalization and the Yang–Baxter identity for a quasitriangular structure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

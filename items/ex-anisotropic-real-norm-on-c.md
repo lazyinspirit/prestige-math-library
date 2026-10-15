@@ -2,7 +2,7 @@
 id: ex-anisotropic-real-norm-on-c
 kind: example
 title: "A real norm on C that is not a complex norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 provenance:

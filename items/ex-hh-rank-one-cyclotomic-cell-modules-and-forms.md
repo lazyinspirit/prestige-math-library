@@ -2,7 +2,7 @@
 id: ex-hh-rank-one-cyclotomic-cell-modules-and-forms
 kind: example
 title: "Rank-one cyclotomic cell modules and their forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 8

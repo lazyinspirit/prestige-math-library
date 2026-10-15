@@ -1,7 +1,7 @@
 ---
 page: complex-subspace-realification
 title: "Complex Subspace Realification"
-status: draft
+status: published
 items: [lem-complex-normed-subspace-realifies-to-real-normed-subspace]
 examples: []
 ---

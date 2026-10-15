@@ -2,7 +2,7 @@
 id: lem-hh-every-comodule-element-lies-in-a-finite-subcomodule
 kind: lemma
 title: "Every comodule element lies in a finite-dimensional subcomodule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

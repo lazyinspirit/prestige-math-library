@@ -2,7 +2,7 @@
 id: ex-hh-free-hopf-module-over-group-algebra
 kind: example
 title: "The free Hopf module over a group algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 7

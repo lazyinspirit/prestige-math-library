@@ -1,7 +1,7 @@
 ---
 page: finite-hopf-integrals-frobenius-duality-and-maschke
 title: "Finite Hopf Integrals, Frobenius Duality, and Maschke"
-status: draft
+status: published
 items: [def-hh-frobenius-functional-and-associative-pairing,
         def-hh-left-right-integrals-and-integral-functionals,
         lem-hh-finite-dual-regular-hopf-module-construction,

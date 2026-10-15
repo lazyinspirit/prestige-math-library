@@ -2,7 +2,7 @@
 id: def-hh-type-a-weight-lattice-laurent-ring-and-divided-differences
 kind: definition
 title: "The type-A weight lattice, Laurent ring, and divided differences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

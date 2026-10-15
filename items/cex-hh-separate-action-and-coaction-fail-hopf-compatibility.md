@@ -2,7 +2,7 @@
 id: cex-hh-separate-action-and-coaction-fail-hopf-compatibility
 kind: counterexample
 title: "A module and comodule need not satisfy Hopf compatibility"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

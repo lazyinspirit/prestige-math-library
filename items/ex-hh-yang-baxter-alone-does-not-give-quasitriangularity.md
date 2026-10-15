@@ -2,7 +2,7 @@
 id: ex-hh-yang-baxter-alone-does-not-give-quasitriangularity
 kind: example
 title: "An invertible Yang–Baxter solution that is not a universal R-matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

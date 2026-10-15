@@ -2,7 +2,7 @@
 id: lem-hh-right-dual-and-bidual-conditions
 kind: lemma
 title: "Right duals and the antipode twist on biduals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 6

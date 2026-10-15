@@ -1,7 +1,7 @@
 ---
 page: hopf-modules-coinvariants-and-the-fundamental-theorem
 title: "Hopf Modules, Coinvariants, and the Fundamental Theorem"
-status: draft
+status: published
 items:
   - def-hh-right-right-hopf-module-and-coinvariants
   - lem-hh-coinvariants-form-a-subspace

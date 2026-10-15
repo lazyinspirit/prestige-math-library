@@ -2,7 +2,7 @@
 id: def-hh-finite-dual-of-an-associative-algebra
 kind: definition
 title: "The finite dual of an associative algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

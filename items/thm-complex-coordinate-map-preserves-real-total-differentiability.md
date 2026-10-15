@@ -2,7 +2,7 @@
 id: thm-complex-coordinate-map-preserves-real-total-differentiability
 kind: theorem
 title: Real total derivatives transport through the complex coordinate isometry
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 2

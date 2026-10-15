@@ -2,7 +2,7 @@
 id: ex-hh-convolution-is-not-composition
 kind: example
 title: "A finite calculation separating convolution from composition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

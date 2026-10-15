@@ -2,7 +2,7 @@
 id: ex-hh-ariki-koike-level-one-is-finite-type-a
 kind: example
 title: "Level one recovers the finite type-A Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

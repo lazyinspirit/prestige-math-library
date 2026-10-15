@@ -1,7 +1,7 @@
 ---
 page: pointwise-extended-real-function-products
 title: "Pointwise Extended-Real Function Products"
-status: draft
+status: published
 items: [def-measurable-pointwise-extended-real-product]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: lem-hh-counit-uniqueness-and-finite-sweedler-calculus
 kind: lemma
 title: "Counit uniqueness and finite Sweedler calculus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

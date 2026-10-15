@@ -2,7 +2,7 @@
 id: def-hh-left-left-yetter-drinfeld-module
 kind: definition
 title: "Left-left Yetter–Drinfeld module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

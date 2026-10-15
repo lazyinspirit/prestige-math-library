@@ -2,7 +2,7 @@
 id: def-measurable-pointwise-extended-real-product
 kind: definition
 title: "A total pointwise product for extended-real-valued functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 0

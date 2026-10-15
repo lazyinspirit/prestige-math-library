@@ -2,7 +2,7 @@
 id: ex-hh-type-a-rank-two-cell-module-specialization
 kind: example
 title: "Rank-two type-A cell modules at a singular parameter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 8

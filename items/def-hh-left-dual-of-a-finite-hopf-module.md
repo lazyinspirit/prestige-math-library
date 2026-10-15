@@ -2,7 +2,7 @@
 id: def-hh-left-dual-of-a-finite-hopf-module
 kind: definition
 title: "The left dual of a finite-dimensional Hopf module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

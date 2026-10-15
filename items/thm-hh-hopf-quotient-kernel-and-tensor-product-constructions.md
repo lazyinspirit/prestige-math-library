@@ -2,7 +2,7 @@
 id: thm-hh-hopf-quotient-kernel-and-tensor-product-constructions
 kind: theorem
 title: "Hopf quotients, kernels of Hopf maps, and tensor products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

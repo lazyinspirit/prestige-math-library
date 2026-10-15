@@ -1,7 +1,7 @@
 ---
 page: hecke-parabolic-induction-and-symmetrizing-traces
 title: "Hecke Parabolic Induction and Symmetrizing Traces"
-status: draft
+status: published
 items: [def-hh-parabolic-hecke-subalgebra-and-induced-module, def-hh-canonical-hecke-trace-and-symmetrizing-form, thm-hh-parabolic-hecke-freeness-and-induced-bases, thm-hh-canonical-hecke-trace-is-symmetric-and-perfect]
 examples: []
 ---

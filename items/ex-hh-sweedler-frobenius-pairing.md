@@ -2,7 +2,7 @@
 id: ex-hh-sweedler-frobenius-pairing
 kind: example
 title: "The Frobenius pairing on the four-dimensional Sweedler algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

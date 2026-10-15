@@ -1,7 +1,7 @@
 ---
 page: hecke-parabolic-induction-and-symmetrizing-traces-examples
 title: "Hecke Parabolic Induction and Symmetrizing Traces — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hh-parabolic-induction-from-rank-one-into-s3, ex-hh-dual-trace-basis-in-type-a2-hecke-algebra, cex-hh-perfect-symmetrizing-trace-does-not-imply-semisimple]
 ---

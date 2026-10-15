@@ -2,7 +2,7 @@
 id: ex-hh-tensor-product-hopf-algebra
 kind: example
 title: "A tensor product Hopf algebra from a group and a primitive element"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

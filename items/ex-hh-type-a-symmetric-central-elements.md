@@ -2,7 +2,7 @@
 id: ex-hh-type-a-symmetric-central-elements
 kind: example
 title: "Symmetric Laurent polynomials in the center"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

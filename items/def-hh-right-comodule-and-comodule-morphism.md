@@ -2,7 +2,7 @@
 id: def-hh-right-comodule-and-comodule-morphism
 kind: definition
 title: "Right comodules, comodule maps, and subcomodules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

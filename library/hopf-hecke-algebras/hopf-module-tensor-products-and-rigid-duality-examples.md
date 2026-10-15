@@ -1,7 +1,7 @@
 ---
 page: hopf-module-tensor-products-and-rigid-duality-examples
 title: "Hopf Module Tensor Products and Rigid Duality — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hh-bialgebra-tensor-products-without-antipode,
            ex-hh-finite-group-contragredient-and-tensor-dual,

@@ -2,7 +2,7 @@
 id: thm-hh-bialgebra-module-tensor-coherence
 kind: theorem
 title: "Bialgebra module tensor actions and their coherence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

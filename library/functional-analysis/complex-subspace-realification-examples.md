@@ -1,7 +1,7 @@
 ---
 page: complex-subspace-realification-examples
 title: "Complex Subspace Realification — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-complex-line-realification-basis-in-c2]
 ---

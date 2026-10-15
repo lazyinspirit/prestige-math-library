@@ -2,7 +2,7 @@
 id: lem-hh-componentwise-initial-row-straightening
 kind: lemma
 title: "Componentwise initial-row straightening"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

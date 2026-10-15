@@ -2,7 +2,7 @@
 id: ex-hh-counital-coideal-quotient-of-comatrix-coalgebra
 kind: example
 title: "A counital coideal quotient of the two-by-two comatrix coalgebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

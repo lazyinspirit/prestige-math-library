@@ -2,7 +2,7 @@
 id: thm-hh-parabolic-hecke-freeness-and-induced-bases
 kind: theorem
 title: "Parabolic freeness and bases of induced Hecke modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-hh-canonical-hecke-trace-and-symmetrizing-form
 kind: definition
 title: "The canonical Hecke trace and symmetrizing form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-hh-bialgebra-and-bialgebra-map
 kind: definition
 title: "Bialgebras and bialgebra maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

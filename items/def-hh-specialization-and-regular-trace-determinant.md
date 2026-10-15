@@ -2,7 +2,7 @@
 id: def-hh-specialization-and-regular-trace-determinant
 kind: definition
 title: "Finite Hecke specialization and its regular-trace determinant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

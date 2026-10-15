@@ -2,7 +2,7 @@
 id: thm-hh-cell-modules-forms-and-radicals
 kind: theorem
 title: "Cell modules, their forms, and radicals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 7

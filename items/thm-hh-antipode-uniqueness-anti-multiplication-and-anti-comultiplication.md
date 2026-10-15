@@ -2,7 +2,7 @@
 id: thm-hh-antipode-uniqueness-anti-multiplication-and-anti-comultiplication
 kind: theorem
 title: "Uniqueness and anti-multiplicativity and anti-comultiplicativity of the antipode"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-hh-finite-dual-regular-hopf-module-construction
 kind: lemma
 title: "The finite dual is a right regular Hopf module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

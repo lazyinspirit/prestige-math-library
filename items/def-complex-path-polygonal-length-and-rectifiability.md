@@ -2,7 +2,7 @@
 id: def-complex-path-polygonal-length-and-rectifiability
 kind: definition
 title: Polygonal length and rectifiability of complex paths
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 0

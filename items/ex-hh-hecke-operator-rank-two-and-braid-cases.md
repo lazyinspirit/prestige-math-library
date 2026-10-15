@@ -2,7 +2,7 @@
 id: ex-hh-hecke-operator-rank-two-and-braid-cases
 kind: example
 title: "The rank-two ordered-basis Hecke operator and all braid cases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

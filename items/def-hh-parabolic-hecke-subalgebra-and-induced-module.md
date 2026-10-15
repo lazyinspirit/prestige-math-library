@@ -2,7 +2,7 @@
 id: def-hh-parabolic-hecke-subalgebra-and-induced-module
 kind: definition
 title: "Parabolic Hecke subalgebras, induction, and restriction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

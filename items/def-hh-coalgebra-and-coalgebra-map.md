@@ -2,7 +2,7 @@
 id: def-hh-coalgebra-and-coalgebra-map
 kind: definition
 title: "Coalgebra and coalgebra map over a field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

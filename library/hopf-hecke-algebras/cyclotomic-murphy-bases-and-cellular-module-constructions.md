@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-murphy-bases-and-cellular-module-constructions
 title: "Cyclotomic Murphy Bases and Cellular Module Constructions"
-status: draft
+status: published
 requires: [tensor-coherence-and-algebraic-descent, coxeter-presentations-exchange-and-reduced-word-theorems, generic-coxeter-hecke-algebras-and-the-standard-basis, type-a-affine-hecke-algebras-and-bernstein-pbw, cyclotomic-hecke-quotients-and-ariki-koike-pbw, chain-conditions-and-semisimple-modules, type-a-hecke-specht-modules-and-cellular-bases, kazhdan-lusztig-bases-polynomials-and-cells]
 
 items:

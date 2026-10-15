@@ -1,7 +1,7 @@
 ---
 page: comodules-matrix-coefficients-and-coalgebra-duality
 title: "Comodules, Matrix Coefficients, and Coalgebra Duality"
-status: draft
+status: published
 items:
   - def-hh-right-comodule-and-comodule-morphism
   - def-hh-dual-algebra-and-rational-module

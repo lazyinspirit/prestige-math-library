@@ -2,7 +2,7 @@
 id: ex-hh-parabolic-induction-from-rank-one-into-s3
 kind: example
 title: "Inducing the rank-one Hecke module into type A2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

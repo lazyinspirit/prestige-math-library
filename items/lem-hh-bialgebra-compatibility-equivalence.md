@@ -2,7 +2,7 @@
 id: lem-hh-bialgebra-compatibility-equivalence
 kind: lemma
 title: "The two standard bialgebra compatibility formulations are equivalent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

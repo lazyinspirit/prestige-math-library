@@ -2,7 +2,7 @@
 id: def-hh-type-a-affine-bernstein-presentation
 kind: definition
 title: "The multiplicative Bernstein presentation of the affine Hecke algebra of type A"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

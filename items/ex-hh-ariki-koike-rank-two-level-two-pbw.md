@@ -2,7 +2,7 @@
 id: ex-hh-ariki-koike-rank-two-level-two-pbw
 kind: example
 title: "The eight PBW words at level two and rank two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 0

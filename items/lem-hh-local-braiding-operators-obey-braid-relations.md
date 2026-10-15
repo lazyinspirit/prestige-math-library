@@ -2,7 +2,7 @@
 id: lem-hh-local-braiding-operators-obey-braid-relations
 kind: lemma
 title: "Local braiding operators satisfy adjacent braid and distant commutation relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 6

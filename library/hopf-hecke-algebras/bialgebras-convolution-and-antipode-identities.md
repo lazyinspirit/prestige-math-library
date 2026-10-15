@@ -1,7 +1,7 @@
 ---
 page: bialgebras-convolution-and-antipode-identities
 title: "Bialgebras, Convolution, and Antipode Identities"
-status: draft
+status: published
 items: [lem-hh-tensor-product-coalgebra,
         def-hh-bialgebra-and-bialgebra-map,
         lem-hh-convolution-algebra-associativity-and-unit,

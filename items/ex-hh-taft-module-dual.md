@@ -2,7 +2,7 @@
 id: ex-hh-taft-module-dual
 kind: example
 title: "A two-dimensional module and its Taft-algebra dual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 6

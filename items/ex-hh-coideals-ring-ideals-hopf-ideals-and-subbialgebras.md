@@ -2,7 +2,7 @@
 id: ex-hh-coideals-ring-ideals-hopf-ideals-and-subbialgebras
 kind: example
 title: "Coideals, ring ideals, Hopf ideals, and subbialgebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 4

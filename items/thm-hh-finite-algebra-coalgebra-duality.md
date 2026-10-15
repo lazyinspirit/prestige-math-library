@@ -2,7 +2,7 @@
 id: thm-hh-finite-algebra-coalgebra-duality
 kind: theorem
 title: "Finite-dimensional algebra-coalgebra duality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

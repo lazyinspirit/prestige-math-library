@@ -2,7 +2,7 @@
 id: def-hh-finite-double-cross-relations
 kind: definition
 title: "Finite Drinfeld double: convention and candidate multiplication"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 8

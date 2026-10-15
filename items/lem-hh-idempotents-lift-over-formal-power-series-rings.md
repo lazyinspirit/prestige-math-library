@@ -2,7 +2,7 @@
 id: lem-hh-idempotents-lift-over-formal-power-series-rings
 kind: lemma
 title: "Orthogonal idempotents lift over a complete formal power-series ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 1

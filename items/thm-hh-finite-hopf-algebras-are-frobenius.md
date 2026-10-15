@@ -2,7 +2,7 @@
 id: thm-hh-finite-hopf-algebras-are-frobenius
 kind: theorem
 title: "Finite-dimensional Hopf algebras are Frobenius"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 8

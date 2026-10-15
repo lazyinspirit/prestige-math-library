@@ -2,7 +2,7 @@
 id: ex-complex-coordinate-and-path-transport
 kind: example
 title: A finite coordinate path and a bounded nonrectifiable path
-status: draft
+status: published
 origin: pipeline
 pipeline_run: quantum-prerequisites-4-2026-10-15
 dependency_level: 4

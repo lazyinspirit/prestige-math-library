@@ -2,7 +2,7 @@
 id: ex-drinfeld-double-of-a-finite-group
 kind: example
 title: "The Drinfeld double of a finite group algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 13

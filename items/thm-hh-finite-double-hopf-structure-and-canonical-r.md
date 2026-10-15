@@ -2,7 +2,7 @@
 id: thm-hh-finite-double-hopf-structure-and-canonical-r
 kind: theorem
 title: "Finite double and its canonical quasitriangular structure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 12

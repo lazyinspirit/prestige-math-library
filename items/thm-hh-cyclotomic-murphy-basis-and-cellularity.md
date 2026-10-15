@@ -2,7 +2,7 @@
 id: thm-hh-cyclotomic-murphy-basis-and-cellularity
 kind: theorem
 title: "The cyclotomic Murphy basis and cellularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 6

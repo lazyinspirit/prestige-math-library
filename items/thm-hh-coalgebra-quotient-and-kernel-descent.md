@@ -2,7 +2,7 @@
 id: thm-hh-coalgebra-quotient-and-kernel-descent
 kind: theorem
 title: "Coideal quotients, coalgebra-map kernels, and sums of subcoalgebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 2

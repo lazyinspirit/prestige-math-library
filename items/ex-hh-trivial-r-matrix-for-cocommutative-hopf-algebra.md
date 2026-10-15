@@ -2,7 +2,7 @@
 id: ex-hh-trivial-r-matrix-for-cocommutative-hopf-algebra
 kind: example
 title: "The trivial universal R-matrix for the group algebra of a two-element group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 5

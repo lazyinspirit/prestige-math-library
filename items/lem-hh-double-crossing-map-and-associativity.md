@@ -2,7 +2,7 @@
 id: lem-hh-double-crossing-map-and-associativity
 kind: lemma
 title: "Double crossing laws and associativity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: hopf-hecke-unfinished-15-2026-10-15
 dependency_level: 9
