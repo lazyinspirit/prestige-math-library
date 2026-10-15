@@ -2,7 +2,7 @@
 id: lem-convex-windows-admit-rectangle-approximations-and-are-folner
 kind: lemma
 title: "Compact convex windows admit rectangle approximations and have negligible translated boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-bh-prds-null-contribution-bound
 kind: lemma
 title: "A PRDS bound for each BH true-null contribution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

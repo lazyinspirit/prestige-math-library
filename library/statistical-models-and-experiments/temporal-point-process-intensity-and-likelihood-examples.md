@@ -1,7 +1,7 @@
 ---
 page: temporal-point-process-intensity-and-likelihood-examples
 title: "Temporal intensity and likelihood — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-terminating-temporal-point-process-with-terminal-mass

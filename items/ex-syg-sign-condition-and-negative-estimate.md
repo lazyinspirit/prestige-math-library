@@ -2,7 +2,7 @@
 id: ex-syg-sign-condition-and-negative-estimate
 kind: example
 title: Positive pair covariances and a negative SYG estimate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

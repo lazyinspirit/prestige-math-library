@@ -2,7 +2,7 @@
 id: ex-state-space-model-same-dynamics-distinct-observation-kernels
 kind: example
 title: Same state dynamics with distinct observation kernels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

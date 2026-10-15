@@ -1,7 +1,7 @@
 ---
 page: stationary-time-series-moments-and-autocovariance
 title: "Stationary means and sample autocovariance"
-status: draft
+status: published
 items:
   - def-strict-and-weak-stationarity-for-time-series
   - def-autocovariance-and-sample-autocovariance

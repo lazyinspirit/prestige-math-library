@@ -2,7 +2,7 @@
 id: thm-by-fdr-control-under-arbitrary-dependence
 kind: theorem
 title: "BY controls FDR under arbitrary dependence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

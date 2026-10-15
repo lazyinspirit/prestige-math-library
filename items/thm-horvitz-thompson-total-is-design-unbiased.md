@@ -2,7 +2,7 @@
 id: thm-horvitz-thompson-total-is-design-unbiased
 kind: theorem
 title: "The Horvitz–Thompson total and mean are design-unbiased under positive inclusion probabilities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

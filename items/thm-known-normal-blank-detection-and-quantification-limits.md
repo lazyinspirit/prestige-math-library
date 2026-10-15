@@ -2,7 +2,7 @@
 id: thm-known-normal-blank-detection-and-quantification-limits
 kind: theorem
 title: "Exact limits in the known-blank equal-variance normal model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

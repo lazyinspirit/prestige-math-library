@@ -2,7 +2,7 @@
 id: def-mcar-mar-and-mnar
 kind: definition
 title: "MCAR, MAR, and MNAR relative to an observation pattern"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

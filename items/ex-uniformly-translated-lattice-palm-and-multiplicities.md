@@ -2,7 +2,7 @@
 id: ex-uniformly-translated-lattice-palm-and-multiplicities
 kind: example
 title: "A translated lattice exposes recentering, atomic pair measures, and one-occurrence deletion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

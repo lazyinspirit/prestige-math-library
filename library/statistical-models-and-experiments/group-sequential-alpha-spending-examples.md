@@ -1,7 +1,7 @@
 ---
 page: "group-sequential-alpha-spending-examples"
 title: "Group-sequential alpha spending — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-pocock-spending-two-look

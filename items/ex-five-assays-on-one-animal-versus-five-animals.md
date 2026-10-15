@@ -2,7 +2,7 @@
 id: ex-five-assays-on-one-animal-versus-five-animals
 kind: example
 title: Five assays on one animal versus one assay on five animals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-group-sequential-alpha-spending-calibration
 kind: theorem
 title: Group-sequential boundaries exist uniquely and spend alpha exactly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

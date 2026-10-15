@@ -2,7 +2,7 @@
 id: thm-pca-leading-direction-maximizes-variance
 kind: theorem
 title: "The leading PCA eigenspace maximizes projected variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-finite-support-nelson-aalen-kaplan-meier-consistency
 kind: theorem
 title: Finite-support consistency of Nelson–Aalen and Kaplan–Meier
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-dag-factorization-implies-d-separation-conditional-independence
 kind: theorem
 title: "DAG factorization implies the global Markov property"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

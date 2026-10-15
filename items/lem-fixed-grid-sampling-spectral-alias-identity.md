@@ -2,7 +2,7 @@
 id: lem-fixed-grid-sampling-spectral-alias-identity
 kind: lemma
 title: "Spectral alias identity for fixed regular-grid sampling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 deps:

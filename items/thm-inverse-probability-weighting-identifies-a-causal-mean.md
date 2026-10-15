@@ -2,7 +2,7 @@
 id: thm-inverse-probability-weighting-identifies-a-causal-mean
 kind: theorem
 title: "Inverse probability weighting identifies a causal mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

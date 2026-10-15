@@ -2,7 +2,7 @@
 id: def-linear-gaussian-state-space-model-with-independent-noises
 kind: definition
 title: Linear-Gaussian state-space models with independent noises
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

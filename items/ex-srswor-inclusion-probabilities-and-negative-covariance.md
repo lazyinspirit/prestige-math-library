@@ -2,7 +2,7 @@
 id: ex-srswor-inclusion-probabilities-and-negative-covariance
 kind: example
 title: "SRSWOR inclusion probabilities, pairwise nonpositive indicator covariance, and the sample mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

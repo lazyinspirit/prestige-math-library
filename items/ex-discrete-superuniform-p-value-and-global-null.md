@@ -2,7 +2,7 @@
 id: ex-discrete-superuniform-p-value-and-global-null
 kind: example
 title: A discrete p-value family under global and mixed nulls
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

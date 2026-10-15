@@ -2,7 +2,7 @@
 id: cex-linear-mixed-model-covariance-does-not-imply-ignorable-dropout
 kind: counterexample
 title: "A mixed-model covariance does not imply MAR dropout"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

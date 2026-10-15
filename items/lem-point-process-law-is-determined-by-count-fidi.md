@@ -2,7 +2,7 @@
 id: lem-point-process-law-is-determined-by-count-fidi
 kind: lemma
 title: "A point-process law is determined by its finite-dimensional count laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

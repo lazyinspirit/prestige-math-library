@@ -2,7 +2,7 @@
 id: lem-elementary-counting-process-integral-isometry
 kind: lemma
 title: "Isometry for elementary predictable counting-process integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

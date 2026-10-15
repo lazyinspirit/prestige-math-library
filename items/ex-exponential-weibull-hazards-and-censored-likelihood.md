@@ -2,7 +2,7 @@
 id: ex-exponential-weibull-hazards-and-censored-likelihood
 kind: example
 title: Exponential and Weibull hazards with right-censored exposure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

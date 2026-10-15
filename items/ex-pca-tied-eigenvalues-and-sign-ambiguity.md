@@ -2,7 +2,7 @@
 id: ex-pca-tied-eigenvalues-and-sign-ambiguity
 kind: example
 title: "Tied PCA eigenvalues and sign ambiguity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

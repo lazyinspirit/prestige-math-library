@@ -2,7 +2,7 @@
 id: ex-exact-wishart-trace-and-asymptotic-covariance-lrt-differ
 kind: example
 title: The exact Wishart trace and covariance likelihood ratio are different statistics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

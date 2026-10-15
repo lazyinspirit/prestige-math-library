@@ -1,7 +1,7 @@
 ---
 page: full-factorial-contrasts-and-interactions-examples
 title: "Full factorials — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-unbalanced-full-factorial-loses-orthogonality

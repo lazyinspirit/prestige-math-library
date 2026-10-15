@@ -2,7 +2,7 @@
 id: lem-deletion-of-one-point-is-measurable
 kind: lemma
 title: "Deleting one occurrence from a locally finite counting measure is measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

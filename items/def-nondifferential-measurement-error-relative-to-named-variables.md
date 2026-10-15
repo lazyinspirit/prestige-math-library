@@ -2,7 +2,7 @@
 id: def-nondifferential-measurement-error-relative-to-named-variables
 kind: definition
 title: "Nondifferential measurement error relative to named variables"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

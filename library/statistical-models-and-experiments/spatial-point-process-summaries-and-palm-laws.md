@@ -1,7 +1,7 @@
 ---
 page: spatial-point-process-summaries-and-palm-laws
 title: "Spatial summaries and Palm laws"
-status: draft
+status: published
 items:
   - lem-convex-windows-admit-rectangle-approximations-and-are-folner
   - lem-translation-invariant-locally-finite-borel-measure-on-rd

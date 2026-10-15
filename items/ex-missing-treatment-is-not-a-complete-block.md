@@ -2,7 +2,7 @@
 id: ex-missing-treatment-is-not-a-complete-block
 kind: example
 title: A missing treatment falls outside the complete-block assignment space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

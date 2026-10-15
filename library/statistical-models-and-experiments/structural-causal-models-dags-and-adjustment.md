@@ -1,7 +1,7 @@
 ---
 page: structural-causal-models-dags-and-adjustment
 title: "SCM, DAGs, adjustment"
-status: draft
+status: published
 items:
   - def-d-separation-in-a-dag
   - lem-finite-products-of-probability-kernels

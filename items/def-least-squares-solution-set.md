@@ -2,7 +2,7 @@
 id: def-least-squares-solution-set
 kind: definition
 title: "Least-squares solution set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

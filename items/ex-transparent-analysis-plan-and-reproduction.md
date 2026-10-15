@@ -2,7 +2,7 @@
 id: ex-transparent-analysis-plan-and-reproduction
 kind: example
 title: A documented grouping change and a new-data study
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

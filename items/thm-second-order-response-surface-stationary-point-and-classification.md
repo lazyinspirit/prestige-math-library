@@ -2,7 +2,7 @@
 id: thm-second-order-response-surface-stationary-point-and-classification
 kind: theorem
 title: "Stationary point and classification of a nonsingular quadratic response surface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

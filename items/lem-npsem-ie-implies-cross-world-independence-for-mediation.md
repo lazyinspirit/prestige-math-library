@@ -2,7 +2,7 @@
 id: lem-npsem-ie-implies-cross-world-independence-for-mediation
 kind: lemma
 title: "Independent errors imply mediation cross-world independence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

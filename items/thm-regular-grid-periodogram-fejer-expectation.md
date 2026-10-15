@@ -2,7 +2,7 @@
 id: thm-regular-grid-periodogram-fejer-expectation
 kind: theorem
 title: "Fejer convolution formula for the lattice periodogram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

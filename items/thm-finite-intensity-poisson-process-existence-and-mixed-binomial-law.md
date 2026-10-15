@@ -2,7 +2,7 @@
 id: thm-finite-intensity-poisson-process-existence-and-mixed-binomial-law
 kind: theorem
 title: "Finite-intensity Poisson-process existence and mixed-binomial law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

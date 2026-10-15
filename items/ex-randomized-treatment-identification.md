@@ -2,7 +2,7 @@
 id: ex-randomized-treatment-identification
 kind: example
 title: "Randomized treatment identifies the target mean contrast"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-pair-correlation-integrates-to-ripleys-k
 kind: theorem
 title: "A pair-correlation density integrates to Ripley K"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

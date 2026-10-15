@@ -1,0 +1,68 @@
+---
+id: ex-independent-uniform-repeated-peeking-inflates-global-null-error
+kind: example
+title: Repeated unadjusted tests inflate global-null error
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 2
+deps:
+  - def-axiom-of-choice
+  - def-discrete-stopping-time
+  - def-independent-random-elements
+  - thm-discrete-ville-inequality
+  - thm-independent-random-elements-have-product-joint-law
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+generation:
+  role: example
+---
+
+## Example
+
+Let $K\ge2$ be an integer, let $\alpha\in(0,1)$, and under a global-null
+law $P_0$ let $P_1,\ldots,P_K$ be mutually independent random variables with
+$$P_0(P_i\le u)=u\qquad(0\le u\le1).$$
+At each of the $K$ looks, reject the global null if the current value is at
+most $\alpha$, without adjusting the threshold. The probability of at least
+one rejection is
+$$P_0\!\left(\bigcup_{i=1}^K\{P_i\le\alpha\}\right)=1-(1-\alpha)^K>\alpha.$$
+The first rejection time is a stopping time for the filtration
+$\mathcal F_k=\sigma(P_1,\ldots,P_{\min(k,K)})$ for $k\ge0$, with
+$\mathcal F_0$ trivial; thus the filtration stays constant after look $K$.
+
+## Facts & Assumptions
+
+**Given:** Assume AC for the comparison with the A-page theorem. Under a global null law $P_0$, $K\ge2$ independent uniform $[0,1]$ random variables $P_1,\ldots,P_K$ are observed successively. Here uniform means exactly $P_0(P_i\le u)=u$ for every $u\in[0,1]$.
+
+[F1] [[def-independent-random-elements]]: random variables are independent when the sigma-algebras they generate are independent.
+
+[F2] [[thm-independent-random-elements-have-product-joint-law]]: the joint law of finitely many independent random elements is the product of their marginal laws.
+
+[F3] [[def-discrete-stopping-time]]: $\sigma$ is a stopping time when $\{\sigma\le k\}\in\mathcal F_k$ for every $k$.
+
+[F4] [[thm-discrete-ville-inequality]]: under each null law, a nonnegative test supermartingale with initial expectation at most one has all-time threshold-crossing probability at most the threshold level.
+
+[A1] AC is required only for applying [F4]; the exact product probability calculation below uses no choice principle ([[def-axiom-of-choice]]).
+
+## Verification
+
+1.1 For each $i$, the uniform-law assumption gives $P_0(P_i>\alpha)=1-\alpha$. [given]
+
+1.2 Define $\sigma=\inf\{1\le i\le K:P_i\le\alpha\}$, with $\inf\varnothing=\infty$. For every $k\ge0$, $\{\sigma\le k\}=\bigcup_{i=1}^{\min(k,K)}\{P_i\le\alpha\}\in\mathcal F_k$, where the union is empty for $k=0$. Thus [F3] makes $\sigma$ a stopping time, and the rejection event by look $K$ is $\{\sigma\le K\}$. [F3, given, construct]
+
+2.1 By [F1]–[F2], the probability that every look misses is the product of the marginal probabilities, so $P_0(\bigcap_{i=1}^K\{P_i>\alpha\})=(1-\alpha)^K$. [F1, F2, step 1.1]
+
+3.1 The event of at least one rejection is the complement of the event in step 2.1. Therefore its probability is $1-(1-\alpha)^K$. [step 2.1, algebra]
+
+4.1 Since $0<1-\alpha<1$ and $K\ge2$, $(1-\alpha)^K<1-\alpha$, so step 3.1 is strictly greater than $\alpha$. [given, step 3.1, algebra]
+
+5.1 [F4] controls arbitrary threshold stopping only when its nonnegative test-supermartingale hypotheses hold. The calculation above concerns repeated fixed-look uniform p-values and does not assume such a process, so the excess rejection probability is not a violation of Ville's inequality. [F4, A1, step 1.2, step 4.1] ∎

@@ -1,7 +1,7 @@
 ---
 page: spectral-measures-and-periodogram-bias
 title: "Spectral measures and periodogram bias"
-status: draft
+status: published
 items:
   - thm-discrete-integers-have-circle-dual
   - def-time-series-spectral-measure-and-periodogram

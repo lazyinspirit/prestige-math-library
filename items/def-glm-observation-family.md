@@ -2,7 +2,7 @@
 id: def-glm-observation-family
 kind: definition
 title: Explicit exponential-family response contracts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

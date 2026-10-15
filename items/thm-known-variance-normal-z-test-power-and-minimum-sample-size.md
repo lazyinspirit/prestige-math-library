@@ -2,7 +2,7 @@
 id: thm-known-variance-normal-z-test-power-and-minimum-sample-size
 kind: theorem
 title: "Exact power and least sample size for a known-variance normal z-test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

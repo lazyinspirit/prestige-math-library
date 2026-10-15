@@ -2,7 +2,7 @@
 id: cex-observed-first-cause-does-not-identify-latent-failure-times
 kind: counterexample
 title: "The observed first time and cause do not identify the latent joint failure-time law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

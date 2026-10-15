@@ -2,7 +2,7 @@
 id: lem-finite-horizon-test-supermartingale-crossing-bound
 kind: lemma
 title: Finite-horizon crossing bound for a nonnegative test supermartingale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: alg-inverse-probability-weighting-for-a-causal-mean
 kind: algorithm
 title: "Inverse probability weighting for a causal mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

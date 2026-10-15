@@ -2,7 +2,7 @@
 id: thm-finite-candidate-power-sample-size-search-correctness
 kind: theorem
 title: "Finite-candidate power and sample-size search is correct"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

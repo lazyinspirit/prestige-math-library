@@ -1,7 +1,7 @@
 ---
 page: generalized-linear-models-and-fisher-scoring
 title: Generalized linear models and Fisher scoring
-status: draft
+status: published
 items:
   - def-glm-observation-family
   - lem-glm-product-density

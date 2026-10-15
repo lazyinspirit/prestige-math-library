@@ -2,7 +2,7 @@
 id: thm-exponential-and-weibull-survival-laws
 kind: theorem
 title: Exponential and Weibull survival specifications define probability laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

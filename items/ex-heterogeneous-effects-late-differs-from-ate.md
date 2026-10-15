@@ -2,7 +2,7 @@
 id: ex-heterogeneous-effects-late-differs-from-ate
 kind: example
 title: "With heterogeneous effects, LATE can differ from ATE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

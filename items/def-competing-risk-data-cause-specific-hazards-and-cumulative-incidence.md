@@ -2,7 +2,7 @@
 id: def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence
 kind: definition
 title: "Competing-risk data, cause-specific hazard measures, and cumulative incidence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-finite-configuration-product-measurable
 kind: lemma
 title: "Products of a measurable intensity over finite configurations are measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

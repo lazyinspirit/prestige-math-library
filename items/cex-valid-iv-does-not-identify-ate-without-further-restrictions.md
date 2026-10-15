@@ -2,7 +2,7 @@
 id: cex-valid-iv-does-not-identify-ate-without-further-restrictions
 kind: counterexample
 title: "Core IV conditions alone do not identify the population ATE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-finite-window-spatial-poisson-likelihood
 kind: theorem
 title: "Finite-window spatial Poisson likelihood relative to unit rate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

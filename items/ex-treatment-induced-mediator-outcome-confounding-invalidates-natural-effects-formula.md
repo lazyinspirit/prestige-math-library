@@ -2,7 +2,7 @@
 id: ex-treatment-induced-mediator-outcome-confounding-invalidates-natural-effects-formula
 kind: example
 title: "A treatment-induced mediator–outcome confounder breaks the formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

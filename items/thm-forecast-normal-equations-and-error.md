@@ -2,7 +2,7 @@
 id: thm-forecast-normal-equations-and-error
 kind: theorem
 title: Finite-history forecast equations and error variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

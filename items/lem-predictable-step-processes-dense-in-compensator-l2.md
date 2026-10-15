@@ -2,7 +2,7 @@
 id: lem-predictable-step-processes-dense-in-compensator-l2
 kind: lemma
 title: "Predictable step processes are dense for the compensator L² norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

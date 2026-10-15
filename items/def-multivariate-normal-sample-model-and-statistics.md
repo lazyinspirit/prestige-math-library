@@ -2,7 +2,7 @@
 id: def-multivariate-normal-sample-model-and-statistics
 kind: definition
 title: The iid multivariate-normal sample and covariance conventions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

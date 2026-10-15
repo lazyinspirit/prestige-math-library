@@ -2,7 +2,7 @@
 id: prop-rcbd-treatment-block-interaction-confounded-with-residual
 kind: proposition
 title: One cell observation confounds unrestricted interaction with residual error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

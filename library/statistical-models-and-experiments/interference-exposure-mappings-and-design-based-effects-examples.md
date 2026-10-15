@@ -1,7 +1,7 @@
 ---
 page: interference-exposure-mappings-and-design-based-effects-examples
 title: "Interference and exposure mappings — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-cross-group-contamination-violates-partial-interference

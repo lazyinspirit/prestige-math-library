@@ -2,7 +2,7 @@
 id: lem-joint-measurability-of-spatial-recentering
 kind: lemma
 title: "The spatial recentering action is jointly measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

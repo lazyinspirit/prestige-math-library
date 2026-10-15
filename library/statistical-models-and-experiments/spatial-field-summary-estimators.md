@@ -1,7 +1,7 @@
 ---
 page: spatial-field-summary-estimators
 title: "Spatial summary estimators"
-status: draft
+status: published
 items:
   - def-van-hove-window-sequence
   - def-spatial-window-average

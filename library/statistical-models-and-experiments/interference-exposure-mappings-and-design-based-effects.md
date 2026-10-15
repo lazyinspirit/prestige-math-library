@@ -1,7 +1,7 @@
 ---
 page: interference-exposure-mappings-and-design-based-effects
 title: "Interference and exposure mappings"
-status: draft
+status: published
 items:
   - lem-finite-simple-random-sampling-identities
   - lem-finite-event-conditional-expectation-formula

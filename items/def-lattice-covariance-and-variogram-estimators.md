@@ -2,7 +2,7 @@
 id: def-lattice-covariance-and-variogram-estimators
 kind: definition
 title: "Lagged lattice covariance and variogram estimators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

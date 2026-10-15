@@ -2,7 +2,7 @@
 id: def-generalized-linear-model
 kind: definition
 title: Generalized linear model with explicit conditioning
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

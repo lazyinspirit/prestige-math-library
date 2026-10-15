@@ -2,7 +2,7 @@
 id: lem-missing-at-random-integrable-factorization
 kind: lemma
 title: "Conditional-independence factorization for integrable outcomes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

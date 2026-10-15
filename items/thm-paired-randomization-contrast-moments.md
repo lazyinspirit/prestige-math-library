@@ -2,7 +2,7 @@
 id: thm-paired-randomization-contrast-moments
 kind: theorem
 title: Design expectation and variance of a paired contrast
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

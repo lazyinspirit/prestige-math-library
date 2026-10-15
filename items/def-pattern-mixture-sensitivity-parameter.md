@@ -2,7 +2,7 @@
 id: def-pattern-mixture-sensitivity-parameter
 kind: definition
 title: "Location-shift pattern-mixture sensitivity function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

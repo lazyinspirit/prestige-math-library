@@ -2,7 +2,7 @@
 id: thm-classical-error-attenuation-in-simple-linear-regression
 kind: theorem
 title: "Classical error attenuates the simple linear regression slope"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

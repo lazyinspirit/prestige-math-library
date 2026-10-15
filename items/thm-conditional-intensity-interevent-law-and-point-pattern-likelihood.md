@@ -2,7 +2,7 @@
 id: thm-conditional-intensity-interevent-law-and-point-pattern-likelihood
 kind: theorem
 title: "Conditional-intensity inter-event law and point-pattern likelihood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-prds-on-true-null-coordinates
 kind: definition
 title: "Positive regression dependence on true-null coordinates (PRDS)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

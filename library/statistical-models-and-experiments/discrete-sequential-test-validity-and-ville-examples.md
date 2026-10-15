@@ -1,7 +1,7 @@
 ---
 page: discrete-sequential-test-validity-and-ville-examples
 title: Discrete test supermartingales and Ville — Examples
-status: draft
+status: published
 requires:
   - discrete-sequential-test-validity-and-ville
 items: []

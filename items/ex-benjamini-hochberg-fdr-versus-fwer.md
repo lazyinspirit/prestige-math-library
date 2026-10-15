@@ -2,7 +2,7 @@
 id: ex-benjamini-hochberg-fdr-versus-fwer
 kind: example
 title: "A two-test BH family distinguishes FDR from FWER"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

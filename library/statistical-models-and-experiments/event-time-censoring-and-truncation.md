@@ -1,7 +1,7 @@
 ---
 page: event-time-censoring-and-truncation
 title: Event observation, censoring, truncation
-status: draft
+status: published
 items:
   - def-event-time-observation-schemes
   - thm-likelihood-contributions-under-censoring-and-delayed-entry

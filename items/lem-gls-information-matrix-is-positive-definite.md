@@ -2,7 +2,7 @@
 id: lem-gls-information-matrix-is-positive-definite
 kind: lemma
 title: "The GLS information matrix is positive definite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

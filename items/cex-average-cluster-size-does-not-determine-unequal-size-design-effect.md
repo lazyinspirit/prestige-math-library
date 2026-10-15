@@ -2,7 +2,7 @@
 id: cex-average-cluster-size-does-not-determine-unequal-size-design-effect
 kind: counterexample
 title: "Average cluster size does not determine the unequal-size design effect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

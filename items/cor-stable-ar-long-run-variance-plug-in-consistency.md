@@ -2,7 +2,7 @@
 id: cor-stable-ar-long-run-variance-plug-in-consistency
 kind: corollary
 title: "Plug-in long-run variance for a stable AR mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

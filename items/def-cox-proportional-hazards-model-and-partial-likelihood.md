@@ -2,7 +2,7 @@
 id: def-cox-proportional-hazards-model-and-partial-likelihood
 kind: definition
 title: Cox proportional-hazards model and partial likelihood
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

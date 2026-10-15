@@ -2,7 +2,7 @@
 id: def-random-measure-and-locally-finite-point-process
 kind: definition
 title: "Random measures and locally finite point processes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

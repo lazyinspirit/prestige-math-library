@@ -2,7 +2,7 @@
 id: def-temporal-point-process-and-conditional-intensity
 kind: definition
 title: "Temporal point-process models and conditional intensity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

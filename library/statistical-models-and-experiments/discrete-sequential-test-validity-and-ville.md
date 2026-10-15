@@ -1,7 +1,7 @@
 ---
 page: discrete-sequential-test-validity-and-ville
 title: Discrete test supermartingales and Ville
-status: draft
+status: published
 requires:
   - sequential-testing-and-anytime-valid-inference
   - discrete-time-martingales

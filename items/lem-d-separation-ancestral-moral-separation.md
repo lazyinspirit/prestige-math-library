@@ -2,7 +2,7 @@
 id: lem-d-separation-ancestral-moral-separation
 kind: lemma
 title: "D-separation is separation in the ancestral moral graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

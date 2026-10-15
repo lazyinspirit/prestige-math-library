@@ -1,7 +1,7 @@
 ---
 page: "multivariate-normal-wishart-hotelling-examples"
 title: "Multivariate normal, Wishart, and Hotelling $T^2$ — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-sample-covariance-singular-when-sample-size-not-exceeding-dimension

@@ -1,7 +1,7 @@
 ---
 page: holm-step-down-familywise-error-control
 title: Holm Step-Down Familywise Error Control
-status: draft
+status: published
 items:
   - alg-holm-step-down-procedure
   - lem-holm-rejection-events-are-measurable

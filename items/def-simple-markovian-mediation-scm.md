@@ -2,7 +2,7 @@
 id: def-simple-markovian-mediation-scm
 kind: definition
 title: "A simple Markovian mediation model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

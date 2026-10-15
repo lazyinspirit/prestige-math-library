@@ -2,7 +2,7 @@
 id: cex-small-eigengap-allows-fixed-angle-rotation
 kind: counterexample
 title: "A vanishing eigengap allows a fixed eigenvector rotation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

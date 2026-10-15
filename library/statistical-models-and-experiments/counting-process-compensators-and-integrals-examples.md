@@ -1,7 +1,7 @@
 ---
 page: counting-process-compensators-and-integrals-examples
 title: "Counting-process compensators, integrals, brackets — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-delayed-entry-predictable-risk-process

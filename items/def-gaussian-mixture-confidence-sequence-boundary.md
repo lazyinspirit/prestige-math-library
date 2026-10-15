@@ -2,7 +2,7 @@
 id: def-gaussian-mixture-confidence-sequence-boundary
 kind: definition
 title: Gaussian-mixture confidence-sequence boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

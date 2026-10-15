@@ -1,7 +1,7 @@
 ---
 page: benjamini-hochberg-independent-fdr-control-examples
 title: "BH independent FDR — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-benjamini-hochberg-fdr-versus-fwer

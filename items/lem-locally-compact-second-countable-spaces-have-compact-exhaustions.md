@@ -2,7 +2,7 @@
 id: lem-locally-compact-second-countable-spaces-have-compact-exhaustions
 kind: lemma
 title: "Second-countable locally compact Hausdorff spaces admit compact exhaustions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

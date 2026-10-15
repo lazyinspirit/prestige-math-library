@@ -2,7 +2,7 @@
 id: def-autocovariance-and-sample-autocovariance
 kind: definition
 title: "Autocovariance and sample autocovariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

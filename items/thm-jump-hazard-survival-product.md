@@ -2,7 +2,7 @@
 id: thm-jump-hazard-survival-product
 kind: theorem
 title: Survival jumps multiply by one minus the atomic hazard
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

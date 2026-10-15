@@ -1,7 +1,7 @@
 ---
 page: independent-subject-terminal-influence-limits
 title: Independent-subject terminal influence limits
-status: draft
+status: published
 items:
   - thm-iid-terminal-influence-limit
   - thm-independent-groups-terminal-influence-limit

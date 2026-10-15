@@ -2,7 +2,7 @@
 id: thm-full-two-level-factorial-contrast-orthogonality
 kind: theorem
 title: "Orthogonality of the full two-level factorial contrasts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

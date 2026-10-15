@@ -2,7 +2,7 @@
 id: lem-continuous-finite-variation-martingale-is-zero
 kind: lemma
 title: "A continuous finite-variation martingale is constant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

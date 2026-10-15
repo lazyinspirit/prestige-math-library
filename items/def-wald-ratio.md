@@ -2,7 +2,7 @@
 id: def-wald-ratio
 kind: definition
 title: "Binary-instrument Wald ratio"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-weighted-logrank-terminal-normal-limit
 kind: theorem
 title: "Terminal normal limit for weighted logrank scores"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

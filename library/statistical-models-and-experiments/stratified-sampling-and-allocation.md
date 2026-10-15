@@ -1,7 +1,7 @@
 ---
 page: stratified-sampling-and-allocation
 title: Stratification and allocation
-status: draft
+status: published
 items:
   - def-stratified-sampling-design-and-estimator
   - thm-stratified-total-unbiasedness-and-variance

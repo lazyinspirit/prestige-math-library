@@ -2,7 +2,7 @@
 id: cor-exact-hotelling-one-sample-test
 kind: corollary
 title: The one-sample Hotelling F test has exact size alpha
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

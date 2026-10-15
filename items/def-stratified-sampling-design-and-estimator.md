@@ -2,7 +2,7 @@
 id: def-stratified-sampling-design-and-estimator
 kind: definition
 title: Stratified sampling designs and the stratified total estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

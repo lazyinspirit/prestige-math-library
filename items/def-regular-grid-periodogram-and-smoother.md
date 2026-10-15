@@ -2,7 +2,7 @@
 id: def-regular-grid-periodogram-and-smoother
 kind: definition
 title: "Regular-grid spatial periodogram and smoothed estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

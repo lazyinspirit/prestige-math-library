@@ -1,7 +1,7 @@
 ---
 page: parametric-survival-and-reliability
 title: Parametric survival and reliability
-status: draft
+status: published
 items:
   - def-parametric-survival-and-reliability
   - thm-exponential-and-weibull-survival-laws

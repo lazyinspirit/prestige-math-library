@@ -2,7 +2,7 @@
 id: ex-unvalidated-calibration-offset-is-not-identifiable
 kind: example
 title: "An unvalidated calibration offset leaves the true quantity unidentified"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-ordinary-kriging-larger-error-than-simple
 kind: example
 title: "Ordinary kriging can have larger error than simple kriging"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

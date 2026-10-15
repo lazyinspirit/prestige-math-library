@@ -2,7 +2,7 @@
 id: ex-randomized-encouragement-late-calculation
 kind: example
 title: "A finite randomized encouragement example"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-berkson-error-slope-in-simple-linear-model
 kind: theorem
 title: "Berkson error preserves the simple linear regression slope"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

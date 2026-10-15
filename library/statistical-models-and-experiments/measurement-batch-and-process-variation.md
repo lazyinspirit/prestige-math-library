@@ -1,7 +1,7 @@
 ---
 page: measurement-batch-and-process-variation
 title: "Batch and measurement-process variation"
-status: draft
+status: published
 items:
   - def-batch-and-measurement-process-variation
   - thm-nested-batch-repeatability-covariance-and-mean-variance

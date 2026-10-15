@@ -2,7 +2,7 @@
 id: ex-positivity-failure-nonidentification
 kind: example
 title: "Positivity failure leaves the target unsupported"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

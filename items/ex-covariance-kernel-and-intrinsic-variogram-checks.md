@@ -2,7 +2,7 @@
 id: ex-covariance-kernel-and-intrinsic-variogram-checks
 kind: example
 title: "A failed stationary covariance and a valid quadratic variogram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

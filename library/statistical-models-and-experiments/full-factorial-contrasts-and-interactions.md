@@ -1,7 +1,7 @@
 ---
 page: full-factorial-contrasts-and-interactions
 title: "Full factorials"
-status: draft
+status: published
 items:
   - def-two-level-full-factorial-design
   - thm-full-two-level-factorial-contrast-orthogonality

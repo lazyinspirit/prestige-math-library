@@ -2,7 +2,7 @@
 id: def-scalar-poisson-count-law
 kind: definition
 title: "The scalar Poisson count law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

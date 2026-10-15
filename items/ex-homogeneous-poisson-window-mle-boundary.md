@@ -2,7 +2,7 @@
 id: ex-homogeneous-poisson-window-mle-boundary
 kind: example
 title: "Homogeneous Poisson rate estimation at positive-count and zero-count boundaries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

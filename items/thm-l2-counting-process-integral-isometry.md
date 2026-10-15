@@ -2,7 +2,7 @@
 id: thm-l2-counting-process-integral-isometry
 kind: theorem
 title: "L² extension of the predictable counting-process integral"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

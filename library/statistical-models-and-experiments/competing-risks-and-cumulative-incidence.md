@@ -1,7 +1,7 @@
 ---
 page: competing-risks-and-cumulative-incidence
 title: "Competing risks and cumulative incidence"
-status: draft
+status: published
 items:
   - def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence
   - thm-cause-specific-cumulative-incidence-decomposition

@@ -1,7 +1,7 @@
 ---
 page: horvitz-thompson-variance-and-srswor
 title: HT variance and SRSWOR
-status: draft
+status: published
 items:
   - def-inclusion-covariance-difference
   - def-simple-random-sampling-without-replacement

@@ -2,7 +2,7 @@
 id: lem-finite-product-measure-with-density
 kind: lemma
 title: "Finite products of measures with densities have the product density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

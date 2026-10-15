@@ -1,7 +1,7 @@
 ---
 page: nelson-aalen-kaplan-meier-greenwood-examples
 title: Nelson–Aalen, Kaplan–Meier, Greenwood — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-kaplan-meier-hand-risk-set-and-support-loss

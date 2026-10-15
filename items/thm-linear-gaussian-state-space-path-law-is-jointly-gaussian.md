@@ -2,7 +2,7 @@
 id: thm-linear-gaussian-state-space-path-law-is-jointly-gaussian
 kind: theorem
 title: The finite linear-Gaussian state-space path is jointly Gaussian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-finite-population-average-treatment-effect-and-weak-null
 kind: definition
 title: "Finite-population average treatment effect and weak null"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

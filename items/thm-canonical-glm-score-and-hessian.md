@@ -2,7 +2,7 @@
 id: thm-canonical-glm-score-and-hessian
 kind: theorem
 title: Canonical-link score and Hessian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

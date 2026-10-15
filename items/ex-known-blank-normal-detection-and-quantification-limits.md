@@ -2,7 +2,7 @@
 id: ex-known-blank-normal-detection-and-quantification-limits
 kind: example
 title: "Known-blank normal limits at five-percent error and ten-percent CV"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

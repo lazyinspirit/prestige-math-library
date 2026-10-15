@@ -2,7 +2,7 @@
 id: thm-gaussian-conditional-law-of-random-effects
 kind: theorem
 title: "Conditional Gaussian law of random effects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

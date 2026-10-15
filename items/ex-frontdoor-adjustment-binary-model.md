@@ -2,7 +2,7 @@
 id: ex-frontdoor-adjustment-binary-model
 kind: example
 title: "A binary SCM where front-door adjustment works"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

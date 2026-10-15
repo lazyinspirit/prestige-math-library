@@ -2,7 +2,7 @@
 id: thm-cross-brackets-vanish-under-no-simultaneous-jumps
 kind: theorem
 title: "Cross brackets vanish without simultaneous jumps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

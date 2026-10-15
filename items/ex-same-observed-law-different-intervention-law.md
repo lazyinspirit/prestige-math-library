@@ -2,7 +2,7 @@
 id: ex-same-observed-law-different-intervention-law
 kind: example
 title: "The same observed law can have different intervention laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

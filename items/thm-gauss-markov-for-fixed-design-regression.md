@@ -2,7 +2,7 @@
 id: thm-gauss-markov-for-fixed-design-regression
 kind: theorem
 title: "Gauss–Markov theorem for estimable contrasts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

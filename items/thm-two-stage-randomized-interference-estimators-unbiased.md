@@ -2,7 +2,7 @@
 id: thm-two-stage-randomized-interference-estimators-unbiased
 kind: theorem
 title: "Two-stage strategy-specific effect estimators are design-unbiased"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

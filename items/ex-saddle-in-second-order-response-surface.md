@@ -2,7 +2,7 @@
 id: ex-saddle-in-second-order-response-surface
 kind: example
 title: "A second-order response surface with a saddle point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

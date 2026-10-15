@@ -2,7 +2,7 @@
 id: thm-rcbd-treatment-contrast-f-law
 kind: theorem
 title: Exact Gaussian F law for RCBD treatment contrasts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

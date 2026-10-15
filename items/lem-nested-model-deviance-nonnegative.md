@@ -2,7 +2,7 @@
 id: lem-nested-model-deviance-nonnegative
 kind: lemma
 title: Nested-model deviance is nonnegative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

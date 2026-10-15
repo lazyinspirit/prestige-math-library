@@ -1,7 +1,7 @@
 ---
 page: spatial-field-summary-estimators-examples
 title: "Spatial summary estimators — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-boundary-dominated-windows-are-not-van-hove

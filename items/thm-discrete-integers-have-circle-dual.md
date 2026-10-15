@@ -2,7 +2,7 @@
 id: thm-discrete-integers-have-circle-dual
 kind: theorem
 title: "The Pontryagin dual of the discrete integers is the circle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

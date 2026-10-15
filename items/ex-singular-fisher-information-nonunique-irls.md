@@ -2,7 +2,7 @@
 id: ex-singular-fisher-information-nonunique-irls
 kind: example
 title: Rank deficiency gives singular information and nonunique weighted least squares
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

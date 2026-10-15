@@ -2,7 +2,7 @@
 id: thm-van-hove-window-average-l2-consistency
 kind: theorem
 title: "Unbiasedness and L2 consistency of the spatial window average"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

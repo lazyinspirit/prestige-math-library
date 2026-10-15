@@ -1,7 +1,7 @@
 ---
 page: random-fields-covariance-and-variograms
 title: "Random fields and variograms"
-status: draft
+status: published
 items:
   - def-random-field-stationarity-covariance-and-variogram
   - lem-random-field-covariance-kernel-is-positive-semidefinite

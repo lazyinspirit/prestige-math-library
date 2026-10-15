@@ -2,7 +2,7 @@
 id: ex-logistic-separation-no-finite-mle
 kind: example
 title: Complete separation prevents a finite logistic MLE
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

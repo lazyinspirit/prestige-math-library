@@ -1,7 +1,7 @@
 ---
 page: fractional-factorial-aliasing-and-foldover-examples
 title: "Fractional factorial aliases and foldover — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-two-three-minus-one-alias-class

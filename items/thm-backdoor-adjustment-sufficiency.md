@@ -2,7 +2,7 @@
 id: thm-backdoor-adjustment-sufficiency
 kind: theorem
 title: "Backdoor adjustment identifies an interventional law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

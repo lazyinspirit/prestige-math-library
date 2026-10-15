@@ -1,7 +1,7 @@
 ---
 page: missing-data-weighting-and-sensitivity-examples
 title: "Missingness weights and sensitivity — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ipw-instability-and-mnar-sensitivity-curve

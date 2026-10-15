@@ -1,7 +1,7 @@
 ---
 page: kriging-as-best-linear-prediction
 title: "Kriging"
-status: draft
+status: published
 items:
   - def-simple-ordinary-and-universal-kriging
   - thm-kriging-systems-and-l2-optimality

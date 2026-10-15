@@ -1,7 +1,7 @@
 ---
 page: poisson-and-cox-point-process-models
 title: "Poisson and Cox point processes"
-status: draft
+status: published
 items:
   - def-random-measure-and-locally-finite-point-process
   - lem-locally-compact-second-countable-spaces-have-compact-exhaustions

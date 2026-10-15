@@ -2,7 +2,7 @@
 id: def-optional-and-predictable-brackets-for-counting-processes
 kind: definition
 title: "Optional and predictable brackets for counting-process martingales"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

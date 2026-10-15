@@ -2,7 +2,7 @@
 id: def-central-composite-design
 kind: definition
 title: "Central composite designs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

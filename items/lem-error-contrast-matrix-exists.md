@@ -2,7 +2,7 @@
 id: lem-error-contrast-matrix-exists
 kind: lemma
 title: "A full-rank error-contrast matrix exists when n exceeds p"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-van-hove-window-sequence
 kind: definition
 title: "Van Hove sequences of spatial windows"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

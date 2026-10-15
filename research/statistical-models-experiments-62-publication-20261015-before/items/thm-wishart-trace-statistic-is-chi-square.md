@@ -1,0 +1,65 @@
+---
+id: thm-wishart-trace-statistic-is-chi-square
+kind: theorem
+title: The exact covariance trace statistic has p(n−1) chi-square degrees of freedom
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 3
+deps:
+  - def-multivariate-normal-sample-model-and-statistics
+  - thm-multivariate-normal-sample-mean-scatter-independence-and-wishart
+  - def-wishart-law
+  - def-axiom-of-choice
+  - def-multivariate-normal-law
+  - thm-non-negative-square-root-exists-and-is-unique
+  - def-chi-square-law
+  - thm-independent-random-elements-have-product-joint-law
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Arak Mathai, Serge Provost, and Hans J. Haubold, Multivariate Statistical Analysis in the Real and Complex Domains, Chapter 5 §5.5, PDF pp. 47–66"
+      url: "https://link.springer.com/content/pdf/10.1007/978-3-030-95864-0_5.pdf"
+    - title: "Soumendu Mukherjee, Multivariate Analysis 2021, Lecture 3, PDF pp. 1–5"
+      url: "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-3.pdf"
+    - title: "Peter D. Hoff, Multivariate Statistical Analysis, Duke STA 832 lecture notes, relevant sections in Chapters 4 and 7"
+      url: "https://www2.stat.duke.edu/~pdh10/Teaching/832/Materials/notes.pdf"
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+---
+
+## Statement
+
+Assume AC, $p\ge1$, $n\ge2$, and the iid multivariate-normal sample model. Under $H_0:\Sigma=\Sigma_0$ for a specified $\Sigma_0\succ0$, the distinct statistic
+$$\operatorname{tr}\{\Sigma_0^{-1}(n-1)S\}$$
+has the exact law $\chi^2_{p(n-1)}$, even when $n\le p$ and $S$ is singular. This is the Wishart trace statistic, not the covariance likelihood-ratio statistic.
+
+## Facts & Assumptions
+
+**Given:** AC, $n\ge2$, $p\ge1$, the iid Gaussian sample model, and true covariance $\Sigma_0\succ0$.
+
+[A1] AC is used in the Gaussian law and Wishart construction. [[def-axiom-of-choice]]
+
+[F1] The centered scatter satisfies $(n-1)S\sim W_p(\Sigma,n-1)$ for every $n\ge2$. [[thm-multivariate-normal-sample-mean-scatter-independence-and-wishart]]
+
+[F2] The Wishart law is the law of a sum of independent centered Gaussian outer products, including singular support. [[def-wishart-law]]
+
+[F3] Under the null, each $N_p(0,\Sigma_0)$ vector has the representation $\Sigma_0^{1/2}Z_j$ with independent standard-normal coordinates. The positive square root exists by [[thm-non-negative-square-root-exists-and-is-unique]]; if $\Sigma_0^{1/2}v=0$, then $v^T\Sigma_0v=\|\Sigma_0^{1/2}v\|^2=0$, so $\Sigma_0\succ0$ makes it invertible. [[def-multivariate-normal-law]]
+
+[F4] The chi-square law with positive integer $k$ is the law of a sum of $k$ independent squared standard normals. [[def-chi-square-law]] [[thm-independent-random-elements-have-product-joint-law]]
+
+## Proof
+
+1.1 Put $m=n-1\ge1$. By [F1]–[F3], the law of $(n-1)S$ is the law of $\sum_{j=1}^{m}X_jX_j^T$ for independent $X_j=\Sigma_0^{1/2}Z_j$ with all $pm$ scalar coordinates independent standard normals. [A1, F1, F2, F3, given]
+
+2.1 For each summand, cyclicity of the finite trace and $\Sigma_0^{-1/2}\Sigma_0^{1/2}=I_p$ give $$\operatorname{tr}(\Sigma_0^{-1}X_jX_j^T)=X_j^T\Sigma_0^{-1}X_j=Z_j^TZ_j.$$ By linearity of trace, the target statistic therefore has the law of $\sum_{j=1}^{m}\sum_{a=1}^{p}Z_{ja}^2$. [F3, step 1.1, algebra]
+
+3.1 The $pm=p(n-1)$ coordinates in step 2.1 are independent standard normals, so their squared sum has law $\chi^2_{pm}$ by [F4]. This argument does not require $m\ge p$: if $m<p$, the matrix scatter may be singular, but its trace and the sum of squares remain defined; $m=1$ and $p=1$ are both included. The statistic is distinct from the likelihood-ratio statistic, whose formula contains a log determinant when the scatter is nonsingular. [F4, step 2.1, algebra] ∎
+

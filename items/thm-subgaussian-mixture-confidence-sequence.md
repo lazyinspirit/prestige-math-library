@@ -2,7 +2,7 @@
 id: thm-subgaussian-mixture-confidence-sequence
 kind: theorem
 title: A Gaussian mixture confidence sequence for conditional sub-Gaussian means
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-sample-centered-covariance-root-n-frobenius
 kind: theorem
 title: "Finite-fourth-moment root-n consistency of sample-centered covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

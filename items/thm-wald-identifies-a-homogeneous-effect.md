@@ -2,7 +2,7 @@
 id: thm-wald-identifies-a-homogeneous-effect
 kind: theorem
 title: "A constant additive effect is identified by the Wald ratio"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

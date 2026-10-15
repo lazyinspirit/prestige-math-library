@@ -2,7 +2,7 @@
 id: ex-weak-first-stage-wald-ratio-sensitivity
 kind: example
 title: "A small first stage magnifies reduced-form changes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

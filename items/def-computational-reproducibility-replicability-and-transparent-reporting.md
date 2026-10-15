@@ -2,7 +2,7 @@
 id: def-computational-reproducibility-replicability-and-transparent-reporting
 kind: definition
 title: Computational reproducibility, replicability, and transparent reporting
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

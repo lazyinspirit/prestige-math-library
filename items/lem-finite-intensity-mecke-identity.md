@@ -2,7 +2,7 @@
 id: lem-finite-intensity-mecke-identity
 kind: lemma
 title: "Mecke identity for a finite-intensity Poisson point process"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

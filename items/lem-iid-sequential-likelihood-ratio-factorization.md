@@ -2,7 +2,7 @@
 id: lem-iid-sequential-likelihood-ratio-factorization
 kind: lemma
 title: Finite-sample likelihood ratio for iid observations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: spectral-measures-and-periodogram-bias-examples
 title: "Spectral measures and periodogram bias — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-atomic-spectrum-versus-continuous-spectral-density

@@ -1,7 +1,7 @@
 ---
 page: fixed-design-linear-regression-and-estimability-examples
 title: "Fixed-design regression, estimability, and Gauss–Markov — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-collinear-fixed-design-estimability

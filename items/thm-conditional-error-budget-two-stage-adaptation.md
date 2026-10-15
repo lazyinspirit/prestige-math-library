@@ -2,7 +2,7 @@
 id: thm-conditional-error-budget-two-stage-adaptation
 kind: theorem
 title: "Conditional-error budget for two-stage adaptation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

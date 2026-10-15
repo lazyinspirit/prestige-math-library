@@ -1,7 +1,7 @@
 ---
 page: structural-causal-models-dags-and-adjustment-examples
 title: "SCM, DAGs, adjustment — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-confounding-and-collider-conditioning

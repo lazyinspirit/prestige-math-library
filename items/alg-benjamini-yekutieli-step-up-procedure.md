@@ -2,7 +2,7 @@
 id: alg-benjamini-yekutieli-step-up-procedure
 kind: algorithm
 title: "Benjamini–Yekutieli step-up procedure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

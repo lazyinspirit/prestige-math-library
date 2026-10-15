@@ -1,7 +1,7 @@
 ---
 page: response-surfaces-and-optimal-design-examples
 title: "Response surfaces and optimal design — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-saddle-in-second-order-response-surface

@@ -2,7 +2,7 @@
 id: ex-bernoulli-sequential-likelihood-ratio-crossings
 kind: example
 title: Exact Bernoulli crossings in a sequential likelihood-ratio test
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

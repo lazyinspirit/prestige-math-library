@@ -1,7 +1,7 @@
 ---
 page: potential-outcomes-and-causal-identification-examples
 title: "Potential outcomes and identification — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-randomized-treatment-identification

@@ -1,7 +1,7 @@
 ---
 page: mixed-effects-and-longitudinal-models-examples
 title: "Mixed effects and longitudinal models — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-random-intercept-intraclass-correlation

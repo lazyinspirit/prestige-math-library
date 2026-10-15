@@ -2,7 +2,7 @@
 id: lem-finite-weighted-upper-tail-pvalues-and-randomized-ties
 kind: lemma
 title: "Finite weighted upper-tail p-values and randomized ties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

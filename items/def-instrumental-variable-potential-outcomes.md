@@ -2,7 +2,7 @@
 id: def-instrumental-variable-potential-outcomes
 kind: definition
 title: "Binary instrumental-variable potential-outcome setup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

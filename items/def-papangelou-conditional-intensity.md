@@ -2,7 +2,7 @@
 id: def-papangelou-conditional-intensity
 kind: definition
 title: "Papangelou conditional intensity on a finite window"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

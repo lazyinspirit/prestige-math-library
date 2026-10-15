@@ -2,7 +2,7 @@
 id: def-potential-outcomes-and-consistency
 kind: definition
 title: "Potential outcomes and consistency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-second-factorial-and-reduced-moment-measures
 kind: definition
 title: "Second factorial and reduced second factorial moment measures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: measurement-calibration-and-uncertainty-examples
 title: "Calibration and measurement uncertainty — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-calibration-curve-reference-uncertainty-and-batch-drift

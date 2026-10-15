@@ -2,7 +2,7 @@
 id: ex-random-intercept-intraclass-correlation
 kind: example
 title: "Random-intercept covariance and intraclass correlation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-exposure-mapping-under-interference
 kind: definition
 title: "Exposure mappings and exposure consistency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

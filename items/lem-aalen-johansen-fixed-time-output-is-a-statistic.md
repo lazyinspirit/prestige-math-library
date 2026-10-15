@@ -2,7 +2,7 @@
 id: lem-aalen-johansen-fixed-time-output-is-a-statistic
 kind: lemma
 title: "Fixed-time Aalen–Johansen outputs are well-defined statistics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

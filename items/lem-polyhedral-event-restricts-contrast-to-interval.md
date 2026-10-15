@@ -2,7 +2,7 @@
 id: lem-polyhedral-event-restricts-contrast-to-interval
 kind: lemma
 title: A polyhedral event restricts the contrast to a computable interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

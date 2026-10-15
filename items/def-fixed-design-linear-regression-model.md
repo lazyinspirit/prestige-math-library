@@ -2,7 +2,7 @@
 id: def-fixed-design-linear-regression-model
 kind: definition
 title: "Fixed-design linear regression model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

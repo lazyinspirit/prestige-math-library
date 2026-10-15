@@ -2,7 +2,7 @@
 id: def-strict-and-weak-stationarity-for-time-series
 kind: definition
 title: "Strict and weak stationarity for integer-indexed time series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

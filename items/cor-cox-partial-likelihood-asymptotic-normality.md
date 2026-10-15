@@ -2,7 +2,7 @@
 id: cor-cox-partial-likelihood-asymptotic-normality
 kind: corollary
 title: Asymptotic normality of the Cox partial-likelihood estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 9

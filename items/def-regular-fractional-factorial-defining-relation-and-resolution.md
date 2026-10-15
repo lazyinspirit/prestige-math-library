@@ -2,7 +2,7 @@
 id: def-regular-fractional-factorial-defining-relation-and-resolution
 kind: definition
 title: "Regular two-level fractions, signed defining relations, and resolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

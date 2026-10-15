@@ -2,7 +2,7 @@
 id: lem-finite-window-pair-count-is-measurable
 kind: lemma
 title: "Finite-window pair counts are measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

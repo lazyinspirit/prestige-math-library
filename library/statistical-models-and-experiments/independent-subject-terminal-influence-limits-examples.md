@@ -1,7 +1,7 @@
 ---
 page: independent-subject-terminal-influence-limits-examples
 title: Independent-subject terminal influence limits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-bernoulli-terminal-influence-limit

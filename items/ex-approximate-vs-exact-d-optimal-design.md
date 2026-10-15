@@ -2,7 +2,7 @@
 id: ex-approximate-vs-exact-d-optimal-design
 kind: example
 title: "An approximate D-optimum need not be an exact three-run design"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

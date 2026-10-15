@@ -2,7 +2,7 @@
 id: lem-iv-observed-contrasts-equal-potential-outcome-contrasts
 kind: lemma
 title: "IV observed contrasts as potential-outcome contrasts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

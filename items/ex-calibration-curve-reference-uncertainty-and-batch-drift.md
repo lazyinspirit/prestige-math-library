@@ -2,7 +2,7 @@
 id: ex-calibration-curve-reference-uncertainty-and-batch-drift
 kind: example
 title: "Calibration curve with uncertain reference standards and batch drift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

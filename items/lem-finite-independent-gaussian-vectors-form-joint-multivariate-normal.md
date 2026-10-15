@@ -2,7 +2,7 @@
 id: lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal
 kind: lemma
 title: A finite stack of independent Gaussian vectors is jointly Gaussian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

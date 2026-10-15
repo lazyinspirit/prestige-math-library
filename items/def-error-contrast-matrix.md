@@ -2,7 +2,7 @@
 id: def-error-contrast-matrix
 kind: definition
 title: "Error-contrast matrix for a full-rank fixed design"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: cox-ph-and-partial-likelihood-examples
 title: Cox PH and partial likelihood — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cox-risk-set-likelihood-and-model-checks

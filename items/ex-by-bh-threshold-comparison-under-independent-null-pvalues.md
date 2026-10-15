@@ -2,7 +2,7 @@
 id: ex-by-bh-threshold-comparison-under-independent-null-pvalues
 kind: example
 title: "BY and BH thresholds for independent valid p-values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

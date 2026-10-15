@@ -2,7 +2,7 @@
 id: ex-hotelling-t2-two-dimensional-exact-test
 kind: example
 title: A two-dimensional Hotelling statistic and its exact F cutoff
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: prop-observed-law-does-not-identify-latent-error-variance-split
 kind: proposition
 title: "The observed law need not identify the latent-error variance split"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

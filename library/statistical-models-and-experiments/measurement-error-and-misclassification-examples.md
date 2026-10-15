@@ -1,7 +1,7 @@
 ---
 page: measurement-error-and-misclassification-examples
 title: "Measurement error and misclassification — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-classical-berkson-differential-error-and-validation

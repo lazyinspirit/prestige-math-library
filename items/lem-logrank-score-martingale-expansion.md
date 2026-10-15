@@ -2,7 +2,7 @@
 id: lem-logrank-score-martingale-expansion
 kind: lemma
 title: "Weighted logrank score expansion under a common-hazard model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

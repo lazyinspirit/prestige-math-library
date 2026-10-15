@@ -2,7 +2,7 @@
 id: lem-linear-contrast-statistics-are-borel-measurable
 kind: lemma
 title: "Linear statistics on Euclidean data are Borel-measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: cluster-and-two-stage-sampling-examples
 title: "Cluster and two-stage sampling — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-two-stage-village-field-subsampling

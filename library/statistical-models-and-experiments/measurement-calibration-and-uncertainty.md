@@ -1,7 +1,7 @@
 ---
 page: measurement-calibration-and-uncertainty
 title: "Calibration and measurement uncertainty"
-status: draft
+status: published
 items:
   - def-measurand-calibration-and-measurement-uncertainty
   - thm-first-order-measurement-uncertainty-propagation

@@ -2,7 +2,7 @@
 id: ex-srswor-census-and-singleton-boundaries
 kind: example
 title: Census and singleton SRSWOR boundaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

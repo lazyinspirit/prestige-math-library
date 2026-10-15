@@ -2,7 +2,7 @@
 id: prop-homogeneous-poisson-window-mle
 kind: proposition
 title: "Homogeneous Poisson rate MLE in a positive-volume window"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

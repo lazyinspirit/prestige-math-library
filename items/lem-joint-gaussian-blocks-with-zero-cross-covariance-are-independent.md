@@ -2,7 +2,7 @@
 id: lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent
 kind: lemma
 title: "Jointly Gaussian blocks with zero cross-covariance are independent, including singular blocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-scientific-statistical-model-contract
 kind: definition
 title: "Scientific statistical model contracts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

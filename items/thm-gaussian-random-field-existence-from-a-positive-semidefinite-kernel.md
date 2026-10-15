@@ -2,7 +2,7 @@
 id: thm-gaussian-random-field-existence-from-a-positive-semidefinite-kernel
 kind: theorem
 title: "Gaussian field existence from a mean and a positive-semidefinite kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-cox-risk-set-likelihood-and-model-checks
 kind: example
 title: Risk-set likelihood and time-varying hazard-ratio check
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

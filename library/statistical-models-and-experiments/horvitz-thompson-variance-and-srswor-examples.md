@@ -1,7 +1,7 @@
 ---
 page: horvitz-thompson-variance-and-srswor-examples
 title: HT variance and SRSWOR — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-srswor-ht-variance-and-yates-grundy

@@ -2,7 +2,7 @@
 id: ex-two-factor-interaction-and-scale-dependence
 kind: example
 title: "A two-factor interaction depends on response scale"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

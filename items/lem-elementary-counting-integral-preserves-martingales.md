@@ -2,7 +2,7 @@
 id: lem-elementary-counting-integral-preserves-martingales
 kind: lemma
 title: "Elementary predictable counting-process integrals are martingales"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

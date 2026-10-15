@@ -7,7 +7,7 @@ verification:
 id: cex-lattice-sample-covariance-not-positive-definite
 kind: counterexample
 title: "A pair-count lattice sample covariance need not be positive definite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

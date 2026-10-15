@@ -2,7 +2,7 @@
 id: ex-identity-link-bernoulli-boundary
 kind: example
 title: The Bernoulli identity-link boundary leaves the regular family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

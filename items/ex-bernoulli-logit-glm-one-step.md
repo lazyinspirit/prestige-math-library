@@ -2,7 +2,7 @@
 id: ex-bernoulli-logit-glm-one-step
 kind: example
 title: A one-observation Bernoulli-logit Fisher-scoring step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

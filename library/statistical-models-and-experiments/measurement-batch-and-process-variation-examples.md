@@ -1,7 +1,7 @@
 ---
 page: measurement-batch-and-process-variation-examples
 title: "Batch and measurement-process variation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-day-specific-calibration-slope-drift-and-check-standards

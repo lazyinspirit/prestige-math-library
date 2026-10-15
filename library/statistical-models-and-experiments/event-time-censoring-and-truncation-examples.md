@@ -1,7 +1,7 @@
 ---
 page: event-time-censoring-and-truncation-examples
 title: Event observation, censoring, truncation — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-informative-censoring-does-not-identify-event-law

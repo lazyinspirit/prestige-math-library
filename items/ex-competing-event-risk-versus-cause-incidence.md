@@ -2,7 +2,7 @@
 id: ex-competing-event-risk-versus-cause-incidence
 kind: example
 title: "Higher competing mortality lowers incidence in a two-time table"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

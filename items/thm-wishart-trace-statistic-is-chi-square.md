@@ -2,7 +2,7 @@
 id: thm-wishart-trace-statistic-is-chi-square
 kind: theorem
 title: The exact covariance trace statistic has p(n−1) chi-square degrees of freedom
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

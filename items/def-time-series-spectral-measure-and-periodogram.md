@@ -2,7 +2,7 @@
 id: def-time-series-spectral-measure-and-periodogram
 kind: definition
 title: "Spectral measures and the known-mean periodogram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

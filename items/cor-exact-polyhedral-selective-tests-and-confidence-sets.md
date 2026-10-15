@@ -2,7 +2,7 @@
 id: cor-exact-polyhedral-selective-tests-and-confidence-sets
 kind: corollary
 title: Exact selective tests and confidence sets from the pivot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

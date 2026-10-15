@@ -2,7 +2,7 @@
 id: alg-holm-step-down-procedure
 kind: algorithm
 title: Holm step-down procedure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

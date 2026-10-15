@@ -2,7 +2,7 @@
 id: ex-uncontrolled-risk-set-denominator
 kind: example
 title: An empty risk set prevents root-n tightness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

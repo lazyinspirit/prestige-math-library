@@ -2,7 +2,7 @@
 id: def-event-time-observation-schemes
 kind: definition
 title: Event-time observation, censoring, and truncation schemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

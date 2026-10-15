@@ -2,7 +2,7 @@
 id: ex-two-three-minus-one-alias-class
 kind: example
 title: "The alias classes in a $2^{3-1}$ fraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

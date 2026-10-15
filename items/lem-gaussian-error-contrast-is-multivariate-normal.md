@@ -2,7 +2,7 @@
 id: lem-gaussian-error-contrast-is-multivariate-normal
 kind: lemma
 title: "A Gaussian error contrast has the induced multivariate-normal law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

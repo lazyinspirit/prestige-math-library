@@ -2,7 +2,7 @@
 id: ex-tied-jumps-produce-nonzero-cross-bracket
 kind: example
 title: "A tied jump produces a nonzero cross bracket"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

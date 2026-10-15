@@ -2,7 +2,7 @@
 id: lem-logrank-risk-fraction-converges
 kind: lemma
 title: "Uniform convergence of the risk-set treatment fraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

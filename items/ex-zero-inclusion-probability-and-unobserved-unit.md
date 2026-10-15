@@ -2,7 +2,7 @@
 id: ex-zero-inclusion-probability-and-unobserved-unit
 kind: example
 title: "An unobserved unit prevents universal unbiased estimation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

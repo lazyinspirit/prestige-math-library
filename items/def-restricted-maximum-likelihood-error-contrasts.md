@@ -2,7 +2,7 @@
 id: def-restricted-maximum-likelihood-error-contrasts
 kind: definition
 title: "Restricted maximum likelihood from error contrasts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

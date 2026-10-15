@@ -1,7 +1,7 @@
 ---
 page: benjamini-hochberg-independent-fdr-control
 title: "BH independent FDR"
-status: draft
+status: published
 items:
   - def-false-discovery-rate-and-familywise-error-rate
   - alg-benjamini-hochberg-step-up-procedure

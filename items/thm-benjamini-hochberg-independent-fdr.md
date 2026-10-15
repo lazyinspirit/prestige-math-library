@@ -2,7 +2,7 @@
 id: thm-benjamini-hochberg-independent-fdr
 kind: theorem
 title: "Benjamini–Hochberg FDR under independence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

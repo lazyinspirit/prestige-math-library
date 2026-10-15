@@ -2,7 +2,7 @@
 id: ex-positivity-failure-prevents-standardization-and-ipw-identification
 kind: example
 title: "Positivity failure prevents standardization and IPW identification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-sample-acvf-properties-and-summable-covariance-mean-consistency
 kind: theorem
 title: "Sample-mean variance and positive semidefinite sample ACVF"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

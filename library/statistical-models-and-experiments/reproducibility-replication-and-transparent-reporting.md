@@ -1,7 +1,7 @@
 ---
 page: reproducibility-replication-and-transparent-reporting
 title: Reproducibility and transparent reporting
-status: draft
+status: published
 items:
   - def-computational-reproducibility-replicability-and-transparent-reporting
 examples: []

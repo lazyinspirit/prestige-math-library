@@ -2,7 +2,7 @@
 id: def-potential-outcomes-under-partial-interference
 kind: definition
 title: "Finite-population potential outcomes under partial interference"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-reml-error-contrast-basis-change-is-parameter-free
 kind: lemma
 title: "Changing an error-contrast basis changes the REML likelihood by a constant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

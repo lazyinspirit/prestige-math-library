@@ -2,7 +2,7 @@
 id: alg-aalen-johansen-cumulative-incidence-estimator
 kind: algorithm
 title: "Aalen–Johansen cumulative-incidence estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

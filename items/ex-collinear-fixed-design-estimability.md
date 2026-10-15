@@ -2,7 +2,7 @@
 id: ex-collinear-fixed-design-estimability
 kind: example
 title: "Collinear predictors can leave a contrast estimable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

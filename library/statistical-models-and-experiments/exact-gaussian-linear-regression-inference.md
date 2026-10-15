@@ -1,7 +1,7 @@
 ---
 page: exact-gaussian-linear-regression-inference
 title: "Exact Gaussian regression inference and prediction"
-status: draft
+status: published
 items:
   - lem-full-column-rank-matrix-has-economy-qr
   - thm-exact-gaussian-linear-regression-inference

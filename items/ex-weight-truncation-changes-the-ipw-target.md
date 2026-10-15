@@ -2,7 +2,7 @@
 id: ex-weight-truncation-changes-the-ipw-target
 kind: example
 title: "Weight truncation changes the IPW target"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

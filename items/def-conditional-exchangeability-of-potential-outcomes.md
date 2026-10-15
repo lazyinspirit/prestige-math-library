@@ -2,7 +2,7 @@
 id: def-conditional-exchangeability-of-potential-outcomes
 kind: definition
 title: "Conditional exchangeability of potential outcomes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

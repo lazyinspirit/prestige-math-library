@@ -2,7 +2,7 @@
 id: ex-boundary-dominated-windows-are-not-van-hove
 kind: example
 title: "Boundary-dominated windows fail the Van Hove condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

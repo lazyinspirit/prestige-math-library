@@ -2,7 +2,7 @@
 id: def-nelson-aalen-kaplan-meier-greenwood-estimators
 kind: definition
 title: Nelson–Aalen, Kaplan–Meier, and Greenwood estimators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

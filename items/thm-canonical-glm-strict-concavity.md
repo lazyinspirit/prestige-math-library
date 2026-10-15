@@ -2,7 +2,7 @@
 id: thm-canonical-glm-strict-concavity
 kind: theorem
 title: Strict concavity and uniqueness of a finite stationary maximizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

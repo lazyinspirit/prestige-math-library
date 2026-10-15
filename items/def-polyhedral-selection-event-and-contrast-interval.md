@@ -2,7 +2,7 @@
 id: def-polyhedral-selection-event-and-contrast-interval
 kind: definition
 title: Polyhedral selection event and contrast interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

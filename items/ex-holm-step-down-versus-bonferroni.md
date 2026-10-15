@@ -2,7 +2,7 @@
 id: ex-holm-step-down-versus-bonferroni
 kind: example
 title: Holm step-down versus one-step Bonferroni
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

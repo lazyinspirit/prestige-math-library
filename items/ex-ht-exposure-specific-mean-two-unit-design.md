@@ -2,7 +2,7 @@
 id: ex-ht-exposure-specific-mean-two-unit-design
 kind: example
 title: "Horvitz–Thompson exposure mean in a two-unit design"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

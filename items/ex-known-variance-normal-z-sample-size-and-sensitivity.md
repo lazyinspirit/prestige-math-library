@@ -2,7 +2,7 @@
 id: ex-known-variance-normal-z-sample-size-and-sensitivity
 kind: example
 title: "An exact one-sided normal sample size and its effect-variance sensitivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

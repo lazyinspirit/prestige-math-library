@@ -1,7 +1,7 @@
 ---
 page: subgaussian-mixture-confidence-sequences-examples
 title: Sub-Gaussian mixture confidence sequences — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-marginal-subgaussianity-does-not-justify-mixture-confidence-sequence

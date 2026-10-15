@@ -2,7 +2,7 @@
 id: thm-stratified-interference-variance-estimators-conservative
 kind: theorem
 title: "Stratified-interference variance estimators are conservative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

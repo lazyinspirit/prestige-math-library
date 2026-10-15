@@ -2,7 +2,7 @@
 id: lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power
 kind: lemma
 title: "Standard-normal CDF, tail, and quantile identities for power calculations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-binary-confounding-standardization
 kind: example
 title: "Binary confounding and standardization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

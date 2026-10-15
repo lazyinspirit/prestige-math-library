@@ -2,7 +2,7 @@
 id: thm-two-stage-expansion-total-unbiasedness-and-variance
 kind: theorem
 title: "Unbiasedness and variance decomposition for the two-stage expansion total"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

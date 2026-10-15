@@ -2,7 +2,7 @@
 id: def-stratified-interference-design-based-variance-estimators
 kind: definition
 title: "Stratified interference and source design-based variance estimators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

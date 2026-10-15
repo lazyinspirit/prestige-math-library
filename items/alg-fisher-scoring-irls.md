@@ -2,7 +2,7 @@
 id: alg-fisher-scoring-irls
 kind: algorithm
 title: One minimum-norm IRLS step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

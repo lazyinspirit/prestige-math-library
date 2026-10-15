@@ -2,7 +2,7 @@
 id: thm-natural-effect-identification-under-cross-world-independence
 kind: theorem
 title: "The natural-effect mediation formula under independent errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

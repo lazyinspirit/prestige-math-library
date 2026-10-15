@@ -2,7 +2,7 @@
 id: lem-iid-normal-sample-mean-law
 kind: lemma
 title: "The mean of a finite independent normal sample is normal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

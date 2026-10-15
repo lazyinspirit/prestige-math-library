@@ -2,7 +2,7 @@
 id: thm-linear-estimability-iff-row-space
 kind: theorem
 title: "Linear estimability is equivalent to row-space membership"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

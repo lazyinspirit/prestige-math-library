@@ -2,7 +2,7 @@
 id: ex-gaussian-regression-mean-and-prediction-intervals
 kind: example
 title: "Mean-response and prediction intervals from one Gaussian regression fit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 verification:

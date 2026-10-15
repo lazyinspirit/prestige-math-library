@@ -2,7 +2,7 @@
 id: def-wishart-law
 kind: definition
 title: Wishart law by Gaussian outer products
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

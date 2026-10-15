@@ -2,7 +2,7 @@
 id: def-fisher-sharp-null-and-predeclared-test-orderings
 kind: definition
 title: "Fisher sharp null and predeclared test orderings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: stationary-time-series-moments-and-autocovariance-examples
 title: "Stationary means and sample autocovariance — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-pairwise-uncorrelated-dependent-triple

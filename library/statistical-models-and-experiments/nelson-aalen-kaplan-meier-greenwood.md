@@ -1,7 +1,7 @@
 ---
 page: nelson-aalen-kaplan-meier-greenwood
 title: Nelson–Aalen, Kaplan–Meier, Greenwood
-status: draft
+status: published
 items:
   - def-nelson-aalen-kaplan-meier-greenwood-estimators
   - lem-finite-support-risk-set-proportion-limits

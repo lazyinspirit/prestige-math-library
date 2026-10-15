@@ -2,7 +2,7 @@
 id: def-positivity-for-discrete-treatment
 kind: definition
 title: "Positivity for discrete treatment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

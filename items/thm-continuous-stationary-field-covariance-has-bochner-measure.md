@@ -2,7 +2,7 @@
 id: thm-continuous-stationary-field-covariance-has-bochner-measure
 kind: theorem
 title: "Bochner spectral measure of a continuous stationary field covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

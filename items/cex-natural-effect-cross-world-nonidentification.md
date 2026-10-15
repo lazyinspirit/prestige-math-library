@@ -2,7 +2,7 @@
 id: cex-natural-effect-cross-world-nonidentification
 kind: counterexample
 title: "Single-world assumptions do not identify natural effects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

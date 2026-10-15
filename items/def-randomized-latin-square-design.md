@@ -2,7 +2,7 @@
 id: def-randomized-latin-square-design
 kind: definition
 title: Randomized Latin-square design
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

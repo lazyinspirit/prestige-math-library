@@ -2,7 +2,7 @@
 id: def-approximate-linear-model-design-and-optimality-criteria
 kind: definition
 title: "Approximate designs and linear-model optimality criteria"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

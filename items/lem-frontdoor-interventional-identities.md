@@ -2,7 +2,7 @@
 id: lem-frontdoor-interventional-identities
 kind: lemma
 title: "Counterfactual identities under the front-door conditions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

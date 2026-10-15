@@ -1,7 +1,7 @@
 ---
 page: arma-causality-invertibility-and-spectra
 title: "ARMA roots, spectra and inference"
-status: draft
+status: published
 items:
   - def-linear-process-and-arma-model
   - lem-absolutely-summable-linear-filters-preserve-weak-stationarity

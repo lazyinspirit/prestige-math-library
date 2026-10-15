@@ -1,7 +1,7 @@
 ---
 page: standardization-and-ipw-identification-examples
 title: "Standardization and IPW identification — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-positivity-failure-prevents-standardization-and-ipw-identification

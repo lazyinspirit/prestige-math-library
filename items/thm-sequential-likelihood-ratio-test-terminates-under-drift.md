@@ -2,7 +2,7 @@
 id: thm-sequential-likelihood-ratio-test-terminates-under-drift
 kind: theorem
 title: Iid drift conditions imply almost-sure test termination
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

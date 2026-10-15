@@ -2,7 +2,7 @@
 id: ex-rank-deficient-universal-kriging-design
 kind: example
 title: "A rank-deficient universal-kriging design"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

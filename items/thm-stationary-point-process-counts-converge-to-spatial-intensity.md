@@ -2,7 +2,7 @@
 id: thm-stationary-point-process-counts-converge-to-spatial-intensity
 kind: theorem
 title: "Spatial ergodic limit for counts in dilates of a convex window"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

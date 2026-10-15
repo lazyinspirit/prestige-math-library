@@ -2,7 +2,7 @@
 id: lem-iv-reduced-form-is-complier-effect
 kind: lemma
 title: "The monotone IV reduced form is a complier-weighted effect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

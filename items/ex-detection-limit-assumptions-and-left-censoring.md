@@ -2,7 +2,7 @@
 id: ex-detection-limit-assumptions-and-left-censoring
 kind: example
 title: "Detection-limit assumptions and left-censored readings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

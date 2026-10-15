@@ -2,7 +2,7 @@
 id: ex-two-stage-village-field-subsampling
 kind: example
 title: "A two-stage village-and-field sample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

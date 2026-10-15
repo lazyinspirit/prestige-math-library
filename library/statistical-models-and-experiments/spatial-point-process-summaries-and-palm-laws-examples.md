@@ -1,7 +1,7 @@
 ---
 page: spatial-point-process-summaries-and-palm-laws-examples
 title: "Spatial summaries and Palm laws — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-uniformly-translated-lattice-palm-and-multiplicities

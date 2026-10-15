@@ -2,7 +2,7 @@
 id: ex-strauss-exact-likelihood-versus-pseudolikelihood
 kind: example
 title: "Exact and pseudo likelihoods for finite-window Poisson and Strauss models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

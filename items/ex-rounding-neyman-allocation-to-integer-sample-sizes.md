@@ -2,7 +2,7 @@
 id: ex-rounding-neyman-allocation-to-integer-sample-sizes
 kind: example
 title: Continuous Neyman allocation may require constrained rounding
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: thm-bonferroni-simultaneous-coverage
 kind: theorem
 title: Bonferroni simultaneous coverage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

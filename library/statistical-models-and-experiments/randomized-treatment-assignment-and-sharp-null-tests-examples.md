@@ -1,7 +1,7 @@
 ---
 page: randomized-treatment-assignment-and-sharp-null-tests-examples
 title: "Assignment randomization and sharp-null tests — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-zero-average-treatment-effect-does-not-imply-fisher-sharp-null

@@ -1,7 +1,7 @@
 ---
 page: blocking-and-paired-designs
 title: "Blocking, pairs, and Latin squares"
-status: draft
+status: published
 items:
   - def-randomized-complete-block-design
   - lem-rcbd-nested-contrast-model-and-projection

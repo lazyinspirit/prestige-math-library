@@ -1,7 +1,7 @@
 ---
 page: standardization-and-ipw-identification
 title: "Standardization and IPW identification"
-status: draft
+status: published
 items:
   - alg-standardization-for-a-causal-mean
   - alg-inverse-probability-weighting-for-a-causal-mean

@@ -2,7 +2,7 @@
 id: lem-gaussian-mixture-boundary-crossing-equivalence
 kind: lemma
 title: The Gaussian-mixture threshold is the stated square-root boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

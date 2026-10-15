@@ -2,7 +2,7 @@
 id: ex-ipw-instability-and-mnar-sensitivity-curve
 kind: example
 title: "Positivity failure, near-positivity weights, and an MNAR sensitivity curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

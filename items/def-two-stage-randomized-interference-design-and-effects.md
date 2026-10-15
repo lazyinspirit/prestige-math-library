@@ -2,7 +2,7 @@
 id: def-two-stage-randomized-interference-design-and-effects
 kind: definition
 title: "Two-stage randomized design and strategy-specific effects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

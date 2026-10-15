@@ -2,7 +2,7 @@
 id: ex-two-stage-village-strategy-contrasts
 kind: example
 title: "A finite two-stage village strategy comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

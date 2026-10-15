@@ -2,7 +2,7 @@
 id: lem-glm-product-density
 kind: lemma
 title: The product response law has the product density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

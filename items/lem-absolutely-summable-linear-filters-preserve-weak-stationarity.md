@@ -2,7 +2,7 @@
 id: lem-absolutely-summable-linear-filters-preserve-weak-stationarity
 kind: lemma
 title: "Absolutely summable linear filters preserve weak stationarity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

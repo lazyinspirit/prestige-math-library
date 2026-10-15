@@ -2,7 +2,7 @@
 id: def-randomized-complete-block-design
 kind: definition
 title: Randomized complete-block design
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-natural-effect-identification-assumptions
 kind: definition
 title: "Assumptions for identifying natural effects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

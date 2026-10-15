@@ -2,7 +2,7 @@
 id: cex-cross-group-contamination-violates-partial-interference
 kind: counterexample
 title: "Cross-group contamination violates partial interference"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

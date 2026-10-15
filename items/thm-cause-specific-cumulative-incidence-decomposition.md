@@ -2,7 +2,7 @@
 id: thm-cause-specific-cumulative-incidence-decomposition
 kind: theorem
 title: "Cause-specific cumulative incidence as an integral against its hazard measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

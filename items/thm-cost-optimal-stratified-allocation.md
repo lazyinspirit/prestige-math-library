@@ -2,7 +2,7 @@
 id: thm-cost-optimal-stratified-allocation
 kind: theorem
 title: Continuous cost-optimal stratified allocation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: def-finite-window-gibbs-density
 kind: definition
 title: "Finite-window Gibbs density relative to a Poisson reference"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

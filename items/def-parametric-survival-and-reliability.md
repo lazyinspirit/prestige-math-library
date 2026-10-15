@@ -2,7 +2,7 @@
 id: def-parametric-survival-and-reliability
 kind: definition
 title: Parametric survival and reliability models
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

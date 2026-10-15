@@ -2,7 +2,7 @@
 id: thm-binary-outcome-mnar-nonidentification
 kind: theorem
 title: "Exact binary-outcome bounds under unrestricted missingness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

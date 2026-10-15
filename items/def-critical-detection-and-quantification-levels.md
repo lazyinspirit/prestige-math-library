@@ -2,7 +2,7 @@
 id: def-critical-detection-and-quantification-levels
 kind: definition
 title: "Critical, detection, and quantification levels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

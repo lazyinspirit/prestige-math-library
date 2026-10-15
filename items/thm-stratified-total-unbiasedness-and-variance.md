@@ -2,7 +2,7 @@
 id: thm-stratified-total-unbiasedness-and-variance
 kind: theorem
 title: Unbiasedness and variance of the stratified total estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

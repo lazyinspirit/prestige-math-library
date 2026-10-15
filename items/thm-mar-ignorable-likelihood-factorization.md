@@ -2,7 +2,7 @@
 id: thm-mar-ignorable-likelihood-factorization
 kind: theorem
 title: "MAR factorization and likelihood ignorability for the full-data parameter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: alg-response-probability-weighting
 kind: algorithm
 title: "Response-probability weighting for a sample mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

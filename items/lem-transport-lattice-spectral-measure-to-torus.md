@@ -2,7 +2,7 @@
 id: lem-transport-lattice-spectral-measure-to-torus
 kind: lemma
 title: "Transport of a lattice spectral measure to torus coordinates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

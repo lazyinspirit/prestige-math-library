@@ -1,7 +1,7 @@
 ---
 page: "valid-p-values-bonferroni-and-simultaneous-coverage"
 title: "Valid p-values, Bonferroni, simultaneous coverage"
-status: draft
+status: published
 items:
   - def-null-valid-p-value-and-fwer-fdr
   - thm-bonferroni-simultaneous-coverage

@@ -2,7 +2,7 @@
 id: ex-poisson-and-history-dependent-temporal-intensities
 kind: example
 title: "Homogeneous Poisson likelihood and a Hawkes intensity specification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

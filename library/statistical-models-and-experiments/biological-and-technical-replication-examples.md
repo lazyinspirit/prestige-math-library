@@ -1,7 +1,7 @@
 ---
 page: biological-and-technical-replication-examples
 title: Biological and technical replication — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-five-assays-on-one-animal-versus-five-animals

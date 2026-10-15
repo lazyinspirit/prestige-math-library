@@ -2,7 +2,7 @@
 id: thm-gaussian-regression-confidence-and-prediction-intervals
 kind: theorem
 title: "Exact confidence and prediction intervals in Gaussian regression"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 verification:

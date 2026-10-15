@@ -2,7 +2,7 @@
 id: thm-logrank-conditional-risk-set-moments
 kind: theorem
 title: "Conditional hypergeometric moments for a logrank risk set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-poisson-and-cox-count-laws-on-a-finite-window
 kind: example
 title: "Poisson and Cox counts with the same mean on a finite window"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

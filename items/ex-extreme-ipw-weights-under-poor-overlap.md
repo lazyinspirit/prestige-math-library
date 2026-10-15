@@ -2,7 +2,7 @@
 id: ex-extreme-ipw-weights-under-poor-overlap
 kind: example
 title: "Extreme IPW weights under poor overlap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

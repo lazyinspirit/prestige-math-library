@@ -2,7 +2,7 @@
 id: def-l2-counting-process-integral
 kind: definition
 title: "L² counting-process integral when the limit exists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: fixed-design-linear-regression-and-estimability
 title: "Fixed-design regression, estimability, and Gauss–Markov"
-status: draft
+status: published
 items:
   - def-fixed-design-linear-regression-model
   - lem-linear-contrast-statistics-are-borel-measurable

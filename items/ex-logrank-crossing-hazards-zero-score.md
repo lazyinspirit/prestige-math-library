@@ -2,7 +2,7 @@
 id: ex-logrank-crossing-hazards-zero-score
 kind: example
 title: "Crossing hazards with a zero observed logrank score"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

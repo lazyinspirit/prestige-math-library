@@ -2,7 +2,7 @@
 id: lem-log-determinant-concavity-on-positive-definite-matrices
 kind: lemma
 title: "The log determinant is concave on positive-definite matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

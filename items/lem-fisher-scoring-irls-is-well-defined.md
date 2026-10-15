@@ -2,7 +2,7 @@
 id: lem-fisher-scoring-irls-is-well-defined
 kind: lemma
 title: The minimum-norm IRLS step is well-defined for every design rank
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 deps:

@@ -2,7 +2,7 @@
 id: lem-ceiling-and-least-positive-integer-threshold
 kind: lemma
 title: "Ceilings give the least positive integer meeting a real threshold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

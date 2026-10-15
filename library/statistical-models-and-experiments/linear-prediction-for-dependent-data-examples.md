@@ -1,7 +1,7 @@
 ---
 page: linear-prediction-for-dependent-data-examples
 title: "Finite-history linear prediction — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ar1-one-step-and-multistep-forecast

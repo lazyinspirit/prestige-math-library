@@ -1,7 +1,7 @@
 ---
 page: linear-prediction-for-dependent-data
 title: "Finite-history linear prediction"
-status: draft
+status: published
 items:
   - lem-uncorrelated-jointly-gaussian-blocks-are-independent
   - def-best-linear-forecast-from-a-finite-history

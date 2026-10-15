@@ -2,7 +2,7 @@
 id: ex-logrank-fisher-randomization-with-unequal-weights
 kind: example
 title: "An exact logrank randomization p-value with unequal assignment weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

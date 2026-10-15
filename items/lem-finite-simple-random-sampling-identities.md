@@ -2,7 +2,7 @@
 id: lem-finite-simple-random-sampling-identities
 kind: lemma
 title: "Finite simple-random-sampling moment identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

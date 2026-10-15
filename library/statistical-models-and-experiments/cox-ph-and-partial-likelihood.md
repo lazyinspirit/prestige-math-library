@@ -1,7 +1,7 @@
 ---
 page: cox-ph-and-partial-likelihood
 title: Cox PH and partial likelihood
-status: draft
+status: published
 items:
   - def-cox-proportional-hazards-model-and-partial-likelihood
   - lem-cox-uniform-risk-set-convergence

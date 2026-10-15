@@ -2,7 +2,7 @@
 id: lem-integers-lattice-is-discrete-lca-group
 kind: lemma
 title: "The integer lattice is a discrete locally compact abelian group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

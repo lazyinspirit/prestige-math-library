@@ -2,7 +2,7 @@
 id: ex-obrien-fleming-spending-two-look
 kind: example
 title: Two-look O’Brien–Fleming-type spending
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

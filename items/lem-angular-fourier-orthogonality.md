@@ -2,7 +2,7 @@
 id: lem-angular-fourier-orthogonality
 kind: lemma
 title: "Integer exponentials are orthogonal for angular Lebesgue measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

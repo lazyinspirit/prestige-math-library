@@ -2,7 +2,7 @@
 id: thm-bh-fdr-control-under-prds
 kind: theorem
 title: "BH controls FDR under PRDS"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

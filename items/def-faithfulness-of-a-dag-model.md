@@ -2,7 +2,7 @@
 id: def-faithfulness-of-a-dag-model
 kind: definition
 title: "Faithfulness of a law to a DAG"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

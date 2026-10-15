@@ -2,7 +2,7 @@
 id: lem-bounded-stopping-preserves-cadlag-square-integrable-martingales
 kind: lemma
 title: "Bounded stopping preserves càdlàg square-integrable martingales"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

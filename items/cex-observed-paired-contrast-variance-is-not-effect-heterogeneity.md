@@ -7,7 +7,7 @@ verification:
 id: cex-observed-paired-contrast-variance-is-not-effect-heterogeneity
 kind: counterexample
 title: Observed paired-contrast variance is not determined by effect heterogeneity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

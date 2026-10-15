@@ -7,7 +7,7 @@ verification:
 id: cex-no-finite-query-universal-sample-size-infeasibility-detector
 kind: counterexample
 title: "Finite power-oracle queries cannot universally certify no feasible sample size"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 deps:

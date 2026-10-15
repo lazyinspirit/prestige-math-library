@@ -2,7 +2,7 @@
 id: alg-standardization-for-a-causal-mean
 kind: algorithm
 title: "Standardization for a causal mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

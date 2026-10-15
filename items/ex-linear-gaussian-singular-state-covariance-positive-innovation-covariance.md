@@ -2,7 +2,7 @@
 id: ex-linear-gaussian-singular-state-covariance-positive-innovation-covariance
 kind: example
 title: Singular state covariance with positive innovation covariance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: two-stage-conditional-error-adaptation
 title: "Two-stage conditional-error adaptation"
-status: draft
+status: published
 items:
   - lem-selected-sample-size-conditionally-superuniform-pvalue
   - thm-conditional-error-budget-two-stage-adaptation

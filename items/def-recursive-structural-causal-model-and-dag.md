@@ -2,7 +2,7 @@
 id: def-recursive-structural-causal-model-and-dag
 kind: definition
 title: "Recursive structural causal models on finite DAGs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

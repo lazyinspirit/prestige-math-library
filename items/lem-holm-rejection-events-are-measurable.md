@@ -2,7 +2,7 @@
 id: lem-holm-rejection-events-are-measurable
 kind: lemma
 title: Holm rejection events are measurable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: finite-populations-and-sampling-designs-examples
 title: "Finite populations and design probability — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-srswor-inclusion-probabilities-and-negative-covariance

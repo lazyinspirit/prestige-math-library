@@ -2,7 +2,7 @@
 id: def-simple-random-sampling-without-replacement
 kind: definition
 title: Simple random sampling without replacement
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

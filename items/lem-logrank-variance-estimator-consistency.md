@@ -2,7 +2,7 @@
 id: lem-logrank-variance-estimator-consistency
 kind: lemma
 title: "Consistency of the weighted logrank variance estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

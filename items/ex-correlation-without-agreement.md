@@ -2,7 +2,7 @@
 id: ex-correlation-without-agreement
 kind: example
 title: "Perfect correlation can coexist with a method offset"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

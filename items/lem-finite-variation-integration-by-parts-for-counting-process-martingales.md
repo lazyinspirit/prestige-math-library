@@ -2,7 +2,7 @@
 id: lem-finite-variation-integration-by-parts-for-counting-process-martingales
 kind: lemma
 title: "Finite-variation integration by parts for counting-process martingales"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

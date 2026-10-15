@@ -2,7 +2,7 @@
 id: lem-finite-population-design-law-is-a-probability-measure
 kind: lemma
 title: "A finite-population design induces probability laws on observed records"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

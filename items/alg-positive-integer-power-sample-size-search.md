@@ -2,7 +2,7 @@
 id: alg-positive-integer-power-sample-size-search
 kind: algorithm
 title: "Search over all positive sample sizes with explicit stopping certificates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 deps:

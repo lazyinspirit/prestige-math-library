@@ -2,7 +2,7 @@
 id: thm-homogeneous-poisson-ripleys-k-is-ball-volume
 kind: theorem
 title: "Ripley K for a homogeneous Poisson process is Euclidean ball volume"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

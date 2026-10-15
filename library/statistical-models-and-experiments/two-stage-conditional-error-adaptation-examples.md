@@ -1,7 +1,7 @@
 ---
 page: two-stage-conditional-error-adaptation-examples
 title: "Two-stage conditional-error adaptation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-two-stage-conditional-error-sample-size-and-weight-adaptation

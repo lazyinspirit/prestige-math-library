@@ -2,7 +2,7 @@
 id: lem-glm-mean-and-variance-identities
 kind: lemma
 title: Mean and variance from the cumulant function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

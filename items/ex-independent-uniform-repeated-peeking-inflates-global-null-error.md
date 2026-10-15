@@ -2,7 +2,7 @@
 id: ex-independent-uniform-repeated-peeking-inflates-global-null-error
 kind: example
 title: Repeated unadjusted tests inflate global-null error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

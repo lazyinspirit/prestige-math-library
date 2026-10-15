@@ -2,7 +2,7 @@
 id: ex-resolution-three-foldover-and-targeted-followup
 kind: example
 title: "Full and targeted foldovers of a resolution III fraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

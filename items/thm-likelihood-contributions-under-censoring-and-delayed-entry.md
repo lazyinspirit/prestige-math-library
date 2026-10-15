@@ -2,7 +2,7 @@
 id: thm-likelihood-contributions-under-censoring-and-delayed-entry
 kind: theorem
 title: Likelihood contributions under censoring, truncation, and delayed entry
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

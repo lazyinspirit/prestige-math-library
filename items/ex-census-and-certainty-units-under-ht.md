@@ -2,7 +2,7 @@
 id: ex-census-and-certainty-units-under-ht
 kind: example
 title: "A certainty unit and a census under Horvitz–Thompson estimation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

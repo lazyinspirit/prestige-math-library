@@ -2,7 +2,7 @@
 id: thm-standardization-identifies-a-causal-mean
 kind: theorem
 title: "Conditional-class standardization identifies a causal mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

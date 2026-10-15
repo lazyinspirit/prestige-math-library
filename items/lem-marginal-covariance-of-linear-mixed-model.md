@@ -2,7 +2,7 @@
 id: lem-marginal-covariance-of-linear-mixed-model
 kind: lemma
 title: "Marginal covariance of the linear mixed model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

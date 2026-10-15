@@ -2,7 +2,7 @@
 id: def-linear-estimability-in-fixed-design
 kind: definition
 title: "Linearly estimable contrasts in fixed-design regression"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

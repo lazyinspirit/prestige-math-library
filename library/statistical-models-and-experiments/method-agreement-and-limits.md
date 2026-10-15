@@ -1,7 +1,7 @@
 ---
 page: method-agreement-and-limits
 title: "Method agreement"
-status: draft
+status: published
 items:
   - def-method-agreement-and-limits
   - thm-normal-difference-agreement-limits

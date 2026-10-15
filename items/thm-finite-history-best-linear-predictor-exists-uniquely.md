@@ -2,7 +2,7 @@
 id: thm-finite-history-best-linear-predictor-exists-uniquely
 kind: theorem
 title: Existence and uniqueness of the finite-history predictor class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

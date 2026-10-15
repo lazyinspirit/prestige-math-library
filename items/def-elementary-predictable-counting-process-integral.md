@@ -2,7 +2,7 @@
 id: def-elementary-predictable-counting-process-integral
 kind: definition
 title: "Elementary predictable integral against a counting-process martingale"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

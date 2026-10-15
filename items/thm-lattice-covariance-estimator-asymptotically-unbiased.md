@@ -2,7 +2,7 @@
 id: thm-lattice-covariance-estimator-asymptotically-unbiased
 kind: theorem
 title: "Asymptotic unbiasedness of lattice covariance and variogram estimators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

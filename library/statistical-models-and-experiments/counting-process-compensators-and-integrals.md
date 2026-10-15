@@ -1,7 +1,7 @@
 ---
 page: counting-process-compensators-and-integrals
 title: "Counting-process compensators, integrals, brackets"
-status: draft
+status: published
 items:
   - lem-continuous-finite-variation-martingale-is-zero
   - lem-bounded-stopping-preserves-cadlag-square-integrable-martingales

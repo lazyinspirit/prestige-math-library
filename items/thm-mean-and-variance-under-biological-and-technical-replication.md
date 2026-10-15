@@ -2,7 +2,7 @@
 id: thm-mean-and-variance-under-biological-and-technical-replication
 kind: theorem
 title: Mean and variance under balanced biological and technical replication
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

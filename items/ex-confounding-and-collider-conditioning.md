@@ -2,7 +2,7 @@
 id: ex-confounding-and-collider-conditioning
 kind: example
 title: "A confounder and a conditioned collider"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-finite-window-pseudolikelihood
 kind: definition
 title: "Finite-window point-process pseudolikelihood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

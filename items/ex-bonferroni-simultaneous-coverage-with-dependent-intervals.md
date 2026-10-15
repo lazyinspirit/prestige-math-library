@@ -2,7 +2,7 @@
 id: ex-bonferroni-simultaneous-coverage-with-dependent-intervals
 kind: example
 title: Simultaneous coverage for dependent interval sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

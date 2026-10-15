@@ -2,7 +2,7 @@
 id: thm-nested-batch-repeatability-covariance-and-mean-variance
 kind: theorem
 title: "Within-batch covariance and replicate-mean variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

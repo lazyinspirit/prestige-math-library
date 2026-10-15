@@ -2,7 +2,7 @@
 id: thm-sen-yates-grundy-variance-identity
 kind: theorem
 title: Sen–Yates–Grundy variance identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

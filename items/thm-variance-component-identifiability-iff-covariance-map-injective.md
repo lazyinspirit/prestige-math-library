@@ -2,7 +2,7 @@
 id: thm-variance-component-identifiability-iff-covariance-map-injective
 kind: theorem
 title: "Gaussian variance-component identifiability is covariance-map injectivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

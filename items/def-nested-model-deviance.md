@@ -2,7 +2,7 @@
 id: def-nested-model-deviance
 kind: definition
 title: Likelihood deviance for nested models on common support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

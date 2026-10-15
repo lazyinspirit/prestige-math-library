@@ -2,7 +2,7 @@
 id: def-interventionist-mediation-effect
 kind: definition
 title: "Separable interventionist mediation effects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

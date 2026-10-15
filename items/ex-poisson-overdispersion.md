@@ -2,7 +2,7 @@
 id: ex-poisson-overdispersion
 kind: example
 title: A mean-matched count law can be overdispersed relative to Poisson
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

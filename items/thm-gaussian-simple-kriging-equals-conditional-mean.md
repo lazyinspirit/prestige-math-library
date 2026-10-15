@@ -2,7 +2,7 @@
 id: thm-gaussian-simple-kriging-equals-conditional-mean
 kind: theorem
 title: "Gaussian simple kriging is a conditional mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

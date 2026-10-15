@@ -2,7 +2,7 @@
 id: thm-gaussian-contrast-independent-of-orthogonal-residual
 kind: theorem
 title: A Gaussian contrast is independent of its orthogonal residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

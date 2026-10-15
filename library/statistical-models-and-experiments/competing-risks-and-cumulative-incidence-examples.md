@@ -1,7 +1,7 @@
 ---
 page: competing-risks-and-cumulative-incidence-examples
 title: "Competing risks and cumulative incidence — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-observed-first-cause-does-not-identify-latent-failure-times

@@ -2,7 +2,7 @@
 id: ex-sample-covariance-singular-when-sample-size-not-exceeding-dimension
 kind: example
 title: The unbiased sample covariance is singular when 2 ≤ n ≤ p
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

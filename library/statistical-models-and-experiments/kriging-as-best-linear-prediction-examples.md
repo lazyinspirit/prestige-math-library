@@ -1,7 +1,7 @@
 ---
 page: kriging-as-best-linear-prediction-examples
 title: "Kriging — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-singular-covariance-simple-kriging

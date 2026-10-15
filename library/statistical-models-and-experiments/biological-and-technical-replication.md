@@ -1,7 +1,7 @@
 ---
 page: biological-and-technical-replication
 title: Biological and technical replication
-status: draft
+status: published
 items:
   - def-biological-and-technical-replication-model
   - thm-mean-and-variance-under-biological-and-technical-replication

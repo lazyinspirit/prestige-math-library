@@ -2,7 +2,7 @@
 id: cex-heteroskedasticity-invalidates-ols-blue
 kind: counterexample
 title: "Unequal error variances can make OLS fail to be BLUE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

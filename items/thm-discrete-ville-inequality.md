@@ -2,7 +2,7 @@
 id: thm-discrete-ville-inequality
 kind: theorem
 title: Discrete Ville inequality and anytime threshold validity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-hotelling-t2-exact-f-distribution
 kind: theorem
 title: The one-sample Hotelling statistic has an exact F law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

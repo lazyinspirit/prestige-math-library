@@ -1,7 +1,7 @@
 ---
 page: exact-gaussian-linear-regression-inference-examples
 title: "Exact Gaussian regression inference and prediction — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-rademacher-errors-do-not-give-exact-regression-t

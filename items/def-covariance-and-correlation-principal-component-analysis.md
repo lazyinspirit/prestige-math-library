@@ -2,7 +2,7 @@
 id: def-covariance-and-correlation-principal-component-analysis
 kind: definition
 title: "Covariance and correlation principal component analysis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-event-time-observation-likelihoods-and-delayed-entry
 kind: example
 title: Exponential event-time observations with censoring and delayed entry
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

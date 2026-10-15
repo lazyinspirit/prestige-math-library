@@ -1,7 +1,7 @@
 ---
 page: detection-and-quantification-limits-examples
 title: Detection and quantification limits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-known-blank-normal-detection-and-quantification-limits

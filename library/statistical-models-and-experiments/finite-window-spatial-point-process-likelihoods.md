@@ -1,7 +1,7 @@
 ---
 page: finite-window-spatial-point-process-likelihoods
 title: "Finite-window spatial likelihood"
-status: draft
+status: published
 items:
   - lem-borel-product-of-second-countable-spaces
   - def-finite-window-spatial-observation

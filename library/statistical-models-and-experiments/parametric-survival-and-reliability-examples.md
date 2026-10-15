@@ -1,7 +1,7 @@
 ---
 page: parametric-survival-and-reliability-examples
 title: Parametric survival and reliability — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-exponential-weibull-hazards-and-censored-likelihood

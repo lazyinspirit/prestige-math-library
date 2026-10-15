@@ -2,7 +2,7 @@
 id: thm-gaussian-best-linear-forecast-equals-conditional-expectation
 kind: theorem
 title: A Gaussian finite-history forecast is a conditional expectation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

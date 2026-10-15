@@ -2,7 +2,7 @@
 id: thm-fixed-order-autoregressive-ols-martingale-limit
 kind: theorem
 title: "Fixed-order autoregressive OLS martingale limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

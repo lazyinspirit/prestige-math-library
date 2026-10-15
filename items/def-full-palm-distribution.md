@@ -2,7 +2,7 @@
 id: def-full-palm-distribution
 kind: definition
 title: "The full Palm distribution defined by the refined Campbell identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

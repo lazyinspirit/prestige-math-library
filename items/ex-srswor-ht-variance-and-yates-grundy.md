@@ -2,7 +2,7 @@
 id: ex-srswor-ht-variance-and-yates-grundy
 kind: example
 title: A three-unit SRSWOR variance calculation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

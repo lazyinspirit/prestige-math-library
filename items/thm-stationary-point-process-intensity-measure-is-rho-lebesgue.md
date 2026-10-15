@@ -2,7 +2,7 @@
 id: thm-stationary-point-process-intensity-measure-is-rho-lebesgue
 kind: theorem
 title: "A stationary point process of finite intensity has mean measure rho times Lebesgue measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

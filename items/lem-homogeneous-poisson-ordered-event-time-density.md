@@ -2,7 +2,7 @@
 id: lem-homogeneous-poisson-ordered-event-time-density
 kind: lemma
 title: "Finite-window homogeneous Poisson construction and ordered event-time density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

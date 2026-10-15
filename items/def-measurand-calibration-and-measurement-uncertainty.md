@@ -2,7 +2,7 @@
 id: def-measurand-calibration-and-measurement-uncertainty
 kind: definition
 title: "Measurands, calibration, and measurement uncertainty"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: instrumental-variables-and-late-examples
 title: "IV and LATE — Examples"
-status: draft
+status: published
 items:
   - cex-valid-iv-does-not-identify-ate-without-further-restrictions
 examples:

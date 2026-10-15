@@ -2,7 +2,7 @@
 id: thm-finite-horizon-state-space-kernel-law-exists-uniquely
 kind: theorem
 title: Finite-horizon state-space kernel law exists and is unique
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

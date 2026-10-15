@@ -1,7 +1,7 @@
 ---
 page: stratified-sampling-and-allocation-examples
 title: Stratification and allocation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-proportional-and-disproportionate-stratified-allocation

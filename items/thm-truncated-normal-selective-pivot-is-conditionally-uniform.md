@@ -2,7 +2,7 @@
 id: thm-truncated-normal-selective-pivot-is-conditionally-uniform
 kind: theorem
 title: The truncated normal selective pivot is conditionally uniform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

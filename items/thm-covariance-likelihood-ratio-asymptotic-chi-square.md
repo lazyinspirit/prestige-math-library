@@ -2,7 +2,7 @@
 id: thm-covariance-likelihood-ratio-asymptotic-chi-square
 kind: theorem
 title: The Gaussian covariance likelihood ratio has its fixed-dimensional Wilks limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

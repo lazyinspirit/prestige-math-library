@@ -2,7 +2,7 @@
 id: thm-cox-score-limit-and-estimator-linearization
 kind: theorem
 title: Cox partial-likelihood score expansion and estimator linearization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 8

@@ -1,7 +1,7 @@
 ---
 page: principal-components-and-eigenspace-stability
 title: PCA and eigengap stability
-status: draft
+status: published
 items:
   - thm-local-leading-eigenvector-stability-under-eigengap
   - thm-sample-centered-covariance-root-n-frobenius

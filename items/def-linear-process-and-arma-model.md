@@ -2,7 +2,7 @@
 id: def-linear-process-and-arma-model
 kind: definition
 title: "Linear processes, white noise, and ARMA models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

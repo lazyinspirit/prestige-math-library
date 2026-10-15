@@ -2,7 +2,7 @@
 id: prop-known-variance-normal-two-sided-z-test-power
 kind: proposition
 title: "Both tails determine power for the known-variance two-sided normal z-test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

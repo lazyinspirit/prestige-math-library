@@ -2,7 +2,7 @@
 id: thm-holm-stepdown-strong-fwer
 kind: theorem
 title: Holm step-down controls strong FWER
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: cex-zero-average-treatment-effect-does-not-imply-fisher-sharp-null
 kind: counterexample
 title: "Zero average effect need not be a Fisher sharp null"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

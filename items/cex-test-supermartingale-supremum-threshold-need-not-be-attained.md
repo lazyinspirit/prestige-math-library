@@ -2,7 +2,7 @@
 id: cex-test-supermartingale-supremum-threshold-need-not-be-attained
 kind: counterexample
 title: A supermartingale supremum threshold need not be attained
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

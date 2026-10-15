@@ -2,7 +2,7 @@
 id: def-full-observed-and-missing-data
 kind: definition
 title: "Full and observed data under a missingness pattern"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

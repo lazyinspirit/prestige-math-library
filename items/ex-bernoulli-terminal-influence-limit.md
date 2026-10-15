@@ -2,7 +2,7 @@
 id: ex-bernoulli-terminal-influence-limit
 kind: example
 title: Bernoulli sample mean as an exact terminal influence expansion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: method-agreement-and-limits-examples
 title: "Method agreement — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-correlation-without-agreement

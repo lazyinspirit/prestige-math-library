@@ -2,7 +2,7 @@
 id: thm-reduced-second-factorial-moment-palm-identity
 kind: theorem
 title: "The reduced second factorial moment measure is the Palm expectation after one-occurrence deletion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

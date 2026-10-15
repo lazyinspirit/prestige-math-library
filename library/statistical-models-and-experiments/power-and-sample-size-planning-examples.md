@@ -1,7 +1,7 @@
 ---
 page: power-and-sample-size-planning-examples
 title: "Power and sample size — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-no-finite-query-universal-sample-size-infeasibility-detector

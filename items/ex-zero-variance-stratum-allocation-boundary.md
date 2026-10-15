@@ -2,7 +2,7 @@
 id: ex-zero-variance-stratum-allocation-boundary
 kind: example
 title: A zero-variance stratum is outside the positive-variance allocation formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 8

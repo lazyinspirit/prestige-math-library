@@ -1,7 +1,7 @@
 ---
 page: scientific-statistical-model-contracts
 title: "Scientific model contracts and applicability"
-status: draft
+status: published
 items:
   - def-scientific-statistical-model-contract
 examples: []

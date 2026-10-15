@@ -2,7 +2,7 @@
 id: thm-fisher-sharp-null-randomization-pvalues-are-valid
 kind: theorem
 title: "Fisher sharp-null randomization p-values are valid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: cex-pair-count-normalized-sample-acvf-not-positive-semidefinite
 kind: counterexample
 title: "Pair-count-normalized sample ACVF need not be positive semidefinite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

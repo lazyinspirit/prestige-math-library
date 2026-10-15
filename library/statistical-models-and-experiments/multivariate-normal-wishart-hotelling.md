@@ -1,7 +1,7 @@
 ---
 page: "multivariate-normal-wishart-hotelling"
 title: "Multivariate normal, Wishart, and Hotelling $T^2$"
-status: draft
+status: published
 items:
   - def-wishart-law
   - lem-standard-normal-matrix-has-full-row-rank-almost-surely

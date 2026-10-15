@@ -2,7 +2,7 @@
 id: lem-conditional-subgaussian-exponential-process
 kind: lemma
 title: Conditional sub-Gaussian increments generate exponential test supermartingales
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

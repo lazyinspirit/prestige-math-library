@@ -1,7 +1,7 @@
 ---
 page: response-surfaces-and-optimal-design
 title: "Response surfaces and optimal design"
-status: draft
+status: published
 items:
   - def-local-response-surface-model
   - def-central-composite-design

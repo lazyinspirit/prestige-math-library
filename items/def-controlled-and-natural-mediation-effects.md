@@ -2,7 +2,7 @@
 id: def-controlled-and-natural-mediation-effects
 kind: definition
 title: "Controlled and natural mediation effects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

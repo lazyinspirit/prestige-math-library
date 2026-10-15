@@ -2,7 +2,7 @@
 id: lem-least-feasible-sample-size-exists
 kind: lemma
 title: "A nonempty set of positive integers has a least member"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

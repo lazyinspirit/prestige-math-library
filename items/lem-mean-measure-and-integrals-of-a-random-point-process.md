@@ -2,7 +2,7 @@
 id: lem-mean-measure-and-integrals-of-a-random-point-process
 kind: lemma
 title: "Mean measures and measurable nonnegative integrals of random measures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

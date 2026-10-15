@@ -1,7 +1,7 @@
 ---
 page: missing-data-weighting-and-sensitivity
 title: "Missingness weights and sensitivity"
-status: draft
+status: published
 items:
   - lem-missing-at-random-integrable-factorization
   - alg-response-probability-weighting

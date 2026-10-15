@@ -2,7 +2,7 @@
 id: lem-recursive-scm-topological-kernel-factorization
 kind: lemma
 title: "A Markovian recursive SCM has a topological kernel factorization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-poisson-mecke-identity
 kind: theorem
 title: "Mecke identity for locally finite Poisson point processes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

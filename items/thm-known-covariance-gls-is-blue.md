@@ -2,7 +2,7 @@
 id: thm-known-covariance-gls-is-blue
 kind: theorem
 title: "Known-covariance GLS is BLUE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

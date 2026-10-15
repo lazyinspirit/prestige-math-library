@@ -2,7 +2,7 @@
 id: lem-conditional-treatment-indicator-factorization
 kind: lemma
 title: "Conditional treatment-indicator factorization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

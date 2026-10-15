@@ -2,7 +2,7 @@
 id: thm-regular-fractional-factorial-aliasing-criterion
 kind: theorem
 title: "The defining subgroup gives the exact alias relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

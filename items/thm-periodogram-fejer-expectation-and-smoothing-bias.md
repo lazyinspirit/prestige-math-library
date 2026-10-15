@@ -2,7 +2,7 @@
 id: thm-periodogram-fejer-expectation-and-smoothing-bias
 kind: theorem
 title: "Expected periodogram and smoothed spectral-density bias"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

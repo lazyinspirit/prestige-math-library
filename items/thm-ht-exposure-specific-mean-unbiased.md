@@ -2,7 +2,7 @@
 id: thm-ht-exposure-specific-mean-unbiased
 kind: theorem
 title: "Horvitz–Thompson exposure-specific mean is design-unbiased"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

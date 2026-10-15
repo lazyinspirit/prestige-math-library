@@ -2,7 +2,7 @@
 id: thm-choice-free-l1-mean-limit-for-stationary-sequences
 kind: theorem
 title: "An integrable stationary sequence has an L1 Cesaro limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

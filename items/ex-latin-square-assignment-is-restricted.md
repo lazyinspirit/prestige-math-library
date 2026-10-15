@@ -2,7 +2,7 @@
 id: ex-latin-square-assignment-is-restricted
 kind: example
 title: A Latin-square assignment is a strict subset of RCBD assignments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

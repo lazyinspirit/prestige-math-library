@@ -1,7 +1,7 @@
 ---
 page: randomized-treatment-assignment-and-sharp-null-tests
 title: "Assignment randomization and sharp-null tests"
-status: draft
+status: published
 items:
   - lem-finite-weighted-upper-tail-pvalues-and-randomized-ties
   - def-finite-randomized-treatment-assignment-model

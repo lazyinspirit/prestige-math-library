@@ -2,7 +2,7 @@
 id: def-group-sequential-alpha-spending-design
 kind: definition
 title: Canonical group-sequential alpha-spending design
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

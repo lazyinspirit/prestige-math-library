@@ -2,7 +2,7 @@
 id: thm-neyman-allocation-minimizes-stratified-variance
 kind: theorem
 title: Continuous fixed-size Neyman allocation minimizes stratified variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

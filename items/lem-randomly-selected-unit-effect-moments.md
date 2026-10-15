@@ -2,7 +2,7 @@
 id: lem-randomly-selected-unit-effect-moments
 kind: lemma
 title: Moments of the effect for the randomly selected treated unit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

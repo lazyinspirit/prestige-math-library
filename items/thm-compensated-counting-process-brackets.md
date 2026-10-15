@@ -2,7 +2,7 @@
 id: thm-compensated-counting-process-brackets
 kind: theorem
 title: "Brackets of a compensated simple counting process"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-arma-causality-and-invertibility-root-criteria
 kind: theorem
 title: "ARMA causality and invertibility root criteria"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

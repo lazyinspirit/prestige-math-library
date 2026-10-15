@@ -1,7 +1,7 @@
 ---
 page: missingness-mechanisms-and-identification
 title: "Missingness and nonidentification"
-status: draft
+status: published
 items:
   - def-full-observed-and-missing-data
   - def-mcar-mar-and-mnar

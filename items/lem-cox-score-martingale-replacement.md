@@ -2,7 +2,7 @@
 id: lem-cox-score-martingale-replacement
 kind: lemma
 title: Cox score martingale representation and random-risk-mean replacement
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

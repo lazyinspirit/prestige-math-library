@@ -2,7 +2,7 @@
 id: ex-covariance-and-correlation-pca-differ-after-rescaling
 kind: example
 title: "Rescaling can change covariance-PCA directions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

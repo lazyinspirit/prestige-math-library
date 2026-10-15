@@ -2,7 +2,7 @@
 id: cex-two-visits-alias-random-slope-and-residual-variance
 kind: counterexample
 title: "Two visits can alias random-slope and residual variance components"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

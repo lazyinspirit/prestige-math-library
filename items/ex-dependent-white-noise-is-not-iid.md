@@ -2,7 +2,7 @@
 id: ex-dependent-white-noise-is-not-iid
 kind: example
 title: "Uncorrelated white noise need not be iid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

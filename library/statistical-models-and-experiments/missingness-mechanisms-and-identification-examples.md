@@ -1,7 +1,7 @@
 ---
 page: missingness-mechanisms-and-identification-examples
 title: "Missingness and nonidentification — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-death-is-not-missingness

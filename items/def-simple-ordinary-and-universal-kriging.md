@@ -2,7 +2,7 @@
 id: def-simple-ordinary-and-universal-kriging
 kind: definition
 title: "Simple, ordinary, and universal kriging"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

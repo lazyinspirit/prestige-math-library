@@ -2,7 +2,7 @@
 id: ex-zero-pair-support-prevents-universal-unbiased-variance-estimation
 kind: example
 title: Zero pair support can prevent universal unbiased variance estimation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

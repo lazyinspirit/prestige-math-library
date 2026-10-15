@@ -2,7 +2,7 @@
 id: ex-mediator-confounding-invalidates-natural-effects-formula
 kind: example
 title: "Mediator confounding changes the natural-effect functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

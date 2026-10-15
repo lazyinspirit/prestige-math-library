@@ -2,7 +2,7 @@
 id: lem-standard-normal-cdf-quantiles-and-symmetry
 kind: lemma
 title: "The standard normal CDF has unique symmetric quantiles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: "valid-p-values-bonferroni-and-simultaneous-coverage-examples"
 title: "Valid p-values, Bonferroni, simultaneous coverage — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-bonferroni-simultaneous-coverage-with-dependent-intervals

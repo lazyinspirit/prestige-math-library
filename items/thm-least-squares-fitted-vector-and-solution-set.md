@@ -2,7 +2,7 @@
 id: thm-least-squares-fitted-vector-and-solution-set
 kind: theorem
 title: "Least-squares fitted vectors and residuals are unique"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

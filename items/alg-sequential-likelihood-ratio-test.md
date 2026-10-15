@@ -2,7 +2,7 @@
 id: alg-sequential-likelihood-ratio-test
 kind: algorithm
 title: Sequential likelihood-ratio test
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

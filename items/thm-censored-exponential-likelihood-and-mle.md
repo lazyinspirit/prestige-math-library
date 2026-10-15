@@ -2,7 +2,7 @@
 id: thm-censored-exponential-likelihood-and-mle
 kind: theorem
 title: Right-censored exponential likelihood and its boundary maximum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

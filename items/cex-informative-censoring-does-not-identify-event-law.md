@@ -2,7 +2,7 @@
 id: cex-informative-censoring-does-not-identify-event-law
 kind: counterexample
 title: Informative censoring can hide distinct event-time laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

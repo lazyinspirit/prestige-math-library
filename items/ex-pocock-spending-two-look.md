@@ -2,7 +2,7 @@
 id: ex-pocock-spending-two-look
 kind: example
 title: Two-look Pocock-type symmetric spending
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

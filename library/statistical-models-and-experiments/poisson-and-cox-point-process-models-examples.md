@@ -1,7 +1,7 @@
 ---
 page: poisson-and-cox-point-process-models-examples
 title: "Poisson and Cox point processes — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-poisson-and-cox-count-laws-on-a-finite-window

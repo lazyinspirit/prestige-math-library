@@ -1,7 +1,7 @@
 ---
 page: random-fields-covariance-and-variograms-examples
 title: "Random fields and variograms — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-covariance-kernel-and-intrinsic-variogram-checks

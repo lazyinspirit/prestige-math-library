@@ -2,7 +2,7 @@
 id: ex-unit-root-precludes-nonzero-variance-stationary-ar1
 kind: example
 title: "A unit-root AR(1) has no weakly stationary solution with nonzero white noise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-pointwise-nelson-aalen-kaplan-meier-greenwood-limit
 kind: theorem
 title: Pointwise influence limit and Greenwood variance consistency
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

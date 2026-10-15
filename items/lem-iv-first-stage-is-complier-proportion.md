@@ -2,7 +2,7 @@
 id: lem-iv-first-stage-is-complier-proportion
 kind: lemma
 title: "The monotone IV first stage is the complier proportion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

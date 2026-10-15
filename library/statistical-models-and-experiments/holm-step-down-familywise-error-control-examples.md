@@ -1,7 +1,7 @@
 ---
 page: holm-step-down-familywise-error-control-examples
 title: Holm Step-Down Familywise Error Control — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-holm-step-down-versus-bonferroni

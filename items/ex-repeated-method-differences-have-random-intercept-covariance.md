@@ -2,7 +2,7 @@
 id: ex-repeated-method-differences-have-random-intercept-covariance
 kind: example
 title: "Repeated method differences can share a random intercept"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

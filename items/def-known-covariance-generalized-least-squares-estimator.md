@@ -2,7 +2,7 @@
 id: def-known-covariance-generalized-least-squares-estimator
 kind: definition
 title: "Generalized least-squares estimator for known covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

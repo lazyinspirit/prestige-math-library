@@ -2,7 +2,7 @@
 id: def-method-agreement-and-limits
 kind: definition
 title: "Method agreement and limits of agreement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

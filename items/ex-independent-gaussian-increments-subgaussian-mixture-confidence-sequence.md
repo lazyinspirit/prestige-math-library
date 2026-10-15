@@ -2,7 +2,7 @@
 id: ex-independent-gaussian-increments-subgaussian-mixture-confidence-sequence
 kind: example
 title: Independent Gaussian increments satisfy the conditional proxy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

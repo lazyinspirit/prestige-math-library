@@ -2,7 +2,7 @@
 id: lem-finite-window-gibbs-density-ratio-is-papangelou
 kind: lemma
 title: "A positive finite-window Gibbs density has its density-ratio Papangelou intensity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

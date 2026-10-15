@@ -2,7 +2,7 @@
 id: def-best-linear-forecast-from-a-finite-history
 kind: definition
 title: Best linear forecast from a finite history
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: instrumental-variables-and-late
 title: "IV and LATE"
-status: draft
+status: published
 items:
   - def-instrumental-variable-potential-outcomes
   - def-principal-strata-and-late

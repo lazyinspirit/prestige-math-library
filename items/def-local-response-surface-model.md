@@ -2,7 +2,7 @@
 id: def-local-response-surface-model
 kind: definition
 title: "Local response-surface models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

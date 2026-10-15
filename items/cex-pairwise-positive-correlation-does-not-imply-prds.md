@@ -2,7 +2,7 @@
 id: cex-pairwise-positive-correlation-does-not-imply-prds
 kind: counterexample
 title: "Positive covariance does not imply PRDS"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

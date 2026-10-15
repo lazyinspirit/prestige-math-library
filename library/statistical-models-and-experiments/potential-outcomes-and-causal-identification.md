@@ -1,7 +1,7 @@
 ---
 page: potential-outcomes-and-causal-identification
 title: "Potential outcomes and identification"
-status: draft
+status: published
 items:
   - def-potential-outcomes-and-consistency
   - def-positivity-for-discrete-treatment

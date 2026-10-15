@@ -2,7 +2,7 @@
 id: cor-pca-sample-leading-eigenspace-root-n-consistency
 kind: corollary
 title: "A simple population eigengap gives root-n sample PCA eigenspace consistency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

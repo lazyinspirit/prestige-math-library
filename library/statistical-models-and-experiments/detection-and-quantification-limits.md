@@ -1,7 +1,7 @@
 ---
 page: detection-and-quantification-limits
 title: Detection and quantification limits
-status: draft
+status: published
 items:
   - def-critical-detection-and-quantification-levels
   - lem-standard-normal-cdf-quantiles-and-symmetry

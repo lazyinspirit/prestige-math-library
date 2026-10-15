@@ -2,7 +2,7 @@
 id: def-spatial-recentering-action
 kind: definition
 title: "Recentering a point configuration at a spatial location"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

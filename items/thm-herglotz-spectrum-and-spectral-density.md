@@ -2,7 +2,7 @@
 id: thm-herglotz-spectrum-and-spectral-density
 kind: theorem
 title: "Herglotz spectral measure and the summable-covariance density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

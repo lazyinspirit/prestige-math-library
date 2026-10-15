@@ -2,7 +2,7 @@
 id: thm-sequential-likelihood-ratio-test-error-bounds
 kind: theorem
 title: Terminal error bounds for a sequential likelihood-ratio test
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

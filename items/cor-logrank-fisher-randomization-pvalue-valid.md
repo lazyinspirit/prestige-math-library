@@ -2,7 +2,7 @@
 id: cor-logrank-fisher-randomization-pvalue-valid
 kind: corollary
 title: "The logrank ordering gives a valid Fisher randomization p-value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

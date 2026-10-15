@@ -2,7 +2,7 @@
 id: lem-cox-partial-likelihood-hessian-convergence
 kind: lemma
 title: Uniform Cox partial-likelihood Hessian convergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

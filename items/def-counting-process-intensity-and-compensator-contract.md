@@ -2,7 +2,7 @@
 id: def-counting-process-intensity-and-compensator-contract
 kind: definition
 title: "Simple counting-process intensity and compensator contract"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: fdr-control-under-dependence
 title: "BY arbitrary dependence and BH PRDS"
-status: draft
+status: published
 items:
   - alg-benjamini-yekutieli-step-up-procedure
   - lem-unit-interval-is-standard-borel

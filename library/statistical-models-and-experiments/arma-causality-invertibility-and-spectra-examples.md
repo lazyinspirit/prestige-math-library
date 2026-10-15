@@ -1,7 +1,7 @@
 ---
 page: arma-causality-invertibility-and-spectra-examples
 title: "ARMA roots, spectra and inference — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-arma-common-factor-cancellation-and-root-classification

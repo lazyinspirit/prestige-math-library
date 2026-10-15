@@ -2,7 +2,7 @@
 id: ex-nongaussian-conditional-mean-not-best-affine-predictor
 kind: example
 title: A finite-history conditional mean can be nonlinear
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

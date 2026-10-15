@@ -2,7 +2,7 @@
 id: thm-d-optimality-equivalence-theorem
 kind: theorem
 title: "Equivalence criterion for D-optimal approximate designs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: blocking-and-paired-designs-examples
 title: "Blocking, pairs, and Latin squares — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-missing-treatment-is-not-a-complete-block

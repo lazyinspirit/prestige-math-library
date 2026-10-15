@@ -2,7 +2,7 @@
 id: thm-horvitz-thompson-variance-and-pair-inclusion-estimator
 kind: theorem
 title: Horvitz–Thompson variance and pair-inclusion estimate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

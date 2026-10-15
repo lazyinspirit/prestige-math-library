@@ -2,7 +2,7 @@
 id: lem-random-field-covariance-kernel-is-positive-semidefinite
 kind: lemma
 title: "Covariance kernels of square-integrable fields are positive semidefinite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-ancestral-moral-graph-of-a-dag
 kind: definition
 title: "The ancestral moral graph of a DAG"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

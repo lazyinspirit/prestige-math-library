@@ -2,7 +2,7 @@
 id: thm-stationary-arma-spectral-density
 kind: theorem
 title: "Spectral density of a stationary ARMA solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

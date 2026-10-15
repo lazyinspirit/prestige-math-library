@@ -2,7 +2,7 @@
 id: ex-singular-covariance-simple-kriging
 kind: example
 title: "Singular observation covariance in simple kriging"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: mixed-effects-and-longitudinal-models
 title: "Mixed effects and longitudinal models"
-status: draft
+status: published
 items:
   - lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent
   - thm-nondegenerate-multivariate-normal-law-has-density

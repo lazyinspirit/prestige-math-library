@@ -2,7 +2,7 @@
 id: thm-normal-difference-agreement-limits
 kind: theorem
 title: "Normal differences have limits at their central quantiles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

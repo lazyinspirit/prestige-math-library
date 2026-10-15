@@ -2,7 +2,7 @@
 id: def-finite-window-spatial-observation
 kind: definition
 title: "Finite-window spatial observations and configurations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

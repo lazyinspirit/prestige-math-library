@@ -2,7 +2,7 @@
 id: thm-ols-unbiasedness-and-covariance-full-rank
 kind: theorem
 title: "Full-rank OLS is unbiased with its classical covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

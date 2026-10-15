@@ -1,7 +1,7 @@
 ---
 page: sequential-likelihood-ratio-tests
 title: Sequential likelihood-ratio tests
-status: draft
+status: published
 items:
   - alg-sequential-likelihood-ratio-test
   - lem-iid-sequential-likelihood-ratio-factorization

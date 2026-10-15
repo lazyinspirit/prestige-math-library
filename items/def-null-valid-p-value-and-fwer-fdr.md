@@ -2,7 +2,7 @@
 id: def-null-valid-p-value-and-fwer-fdr
 kind: definition
 title: Null-valid p-values and familywise and false-discovery error rates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

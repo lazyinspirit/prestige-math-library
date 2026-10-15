@@ -2,7 +2,7 @@
 id: thm-factorial-column-aliases-prevent-separate-identification
 kind: theorem
 title: "Aliased factorial columns prevent separate coefficient identification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

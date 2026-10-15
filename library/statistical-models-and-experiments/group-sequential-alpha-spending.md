@@ -1,7 +1,7 @@
 ---
 page: "group-sequential-alpha-spending"
 title: "Group-sequential alpha spending"
-status: draft
+status: published
 items:
   - def-group-sequential-alpha-spending-design
   - alg-group-sequential-alpha-spending-boundary-calibration

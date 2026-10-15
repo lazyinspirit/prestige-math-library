@@ -2,7 +2,7 @@
 id: thm-equal-cluster-size-design-effect
 kind: theorem
 title: "Equal-size cluster design effect under exchangeable within-cluster covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

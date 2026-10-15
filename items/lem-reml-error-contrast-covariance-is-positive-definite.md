@@ -2,7 +2,7 @@
 id: lem-reml-error-contrast-covariance-is-positive-definite
 kind: lemma
 title: "The REML error-contrast covariance is positive definite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

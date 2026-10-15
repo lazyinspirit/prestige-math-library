@@ -1,7 +1,7 @@
 ---
 page: polyhedral-selective-inference-examples
 title: Polyhedral selective inference — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-selective-inference-after-choosing-the-larger-of-two-means

@@ -2,7 +2,7 @@
 id: thm-glm-general-link-score-and-information
 kind: theorem
 title: General-link score and Fisher information
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

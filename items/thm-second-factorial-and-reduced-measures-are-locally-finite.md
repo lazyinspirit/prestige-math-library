@@ -2,7 +2,7 @@
 id: thm-second-factorial-and-reduced-measures-are-locally-finite
 kind: theorem
 title: "Factorial and reduced factorial moment measures are well-defined and locally finite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

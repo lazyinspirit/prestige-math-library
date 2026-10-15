@@ -2,7 +2,7 @@
 id: def-batch-and-measurement-process-variation
 kind: definition
 title: "Batch and measurement-process variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

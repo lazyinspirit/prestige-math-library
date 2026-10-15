@@ -2,7 +2,7 @@
 id: def-principal-strata-and-late
 kind: definition
 title: "Binary-instrument principal strata and LATE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-regular-grid-smoothed-periodogram-bias-vanishes
 kind: theorem
 title: "Vanishing bias of a smoothed regular-grid spatial periodogram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

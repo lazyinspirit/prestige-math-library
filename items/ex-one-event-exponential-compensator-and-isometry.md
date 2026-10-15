@@ -2,7 +2,7 @@
 id: ex-one-event-exponential-compensator-and-isometry
 kind: example
 title: "One exponential event: compensator and isometry"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

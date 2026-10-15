@@ -2,7 +2,7 @@
 id: thm-poisson-point-process-existence
 kind: theorem
 title: "Existence of a locally finite Poisson point process"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

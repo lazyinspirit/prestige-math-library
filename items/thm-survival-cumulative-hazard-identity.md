@@ -2,7 +2,7 @@
 id: thm-survival-cumulative-hazard-identity
 kind: theorem
 title: The continuous survival and cumulative-hazard identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

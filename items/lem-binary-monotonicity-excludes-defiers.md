@@ -2,7 +2,7 @@
 id: lem-binary-monotonicity-excludes-defiers
 kind: lemma
 title: "Binary monotonicity excludes defiers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

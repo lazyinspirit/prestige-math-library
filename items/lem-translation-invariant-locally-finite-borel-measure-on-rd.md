@@ -2,7 +2,7 @@
 id: lem-translation-invariant-locally-finite-borel-measure-on-rd
 kind: lemma
 title: 'A locally finite translation-invariant Borel measure on $\mathbb R^d$ is a multiple of Lebesgue measure'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

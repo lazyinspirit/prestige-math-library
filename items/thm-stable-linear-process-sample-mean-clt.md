@@ -2,7 +2,7 @@
 id: thm-stable-linear-process-sample-mean-clt
 kind: theorem
 title: "Sample-mean CLT for stable linear processes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

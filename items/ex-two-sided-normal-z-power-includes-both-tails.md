@@ -2,7 +2,7 @@
 id: ex-two-sided-normal-z-power-includes-both-tails
 kind: example
 title: "A two-sided normal z-test retains its lower-tail power"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: subgaussian-mixture-confidence-sequences
 title: Sub-Gaussian mixture confidence sequences
-status: draft
+status: published
 items:
   - def-conditional-subgaussian-increments
   - def-gaussian-mixture-confidence-sequence-boundary

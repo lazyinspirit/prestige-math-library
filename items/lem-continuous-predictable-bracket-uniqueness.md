@@ -2,7 +2,7 @@
 id: lem-continuous-predictable-bracket-uniqueness
 kind: lemma
 title: "Uniqueness of continuous predictable brackets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

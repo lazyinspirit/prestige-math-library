@@ -2,7 +2,7 @@
 id: ex-selective-inference-after-choosing-the-larger-of-two-means
 kind: example
 title: Selective inference after choosing the larger of two means
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

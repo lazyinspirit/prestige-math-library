@@ -2,7 +2,7 @@
 id: def-logrank-risk-set-score-and-test
 kind: definition
 title: "Two-group logrank and weighted logrank scores"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

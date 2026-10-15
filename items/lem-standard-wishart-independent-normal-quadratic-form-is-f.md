@@ -2,7 +2,7 @@
 id: lem-standard-wishart-independent-normal-quadratic-form-is-f
 kind: lemma
 title: The standard Wishart inverse quadratic form has an exact Fisher law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

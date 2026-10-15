@@ -2,7 +2,7 @@
 id: def-stationary-point-process-and-intensity
 kind: definition
 title: "Stationarity, finite intensity, and spatial ergodicity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

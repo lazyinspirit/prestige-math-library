@@ -2,7 +2,7 @@
 id: def-d-separation-in-a-dag
 kind: definition
 title: "Paths, active paths, and d-separation in a finite DAG"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

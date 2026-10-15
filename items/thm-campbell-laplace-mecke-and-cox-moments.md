@@ -2,7 +2,7 @@
 id: thm-campbell-laplace-mecke-and-cox-moments
 kind: theorem
 title: "Campbell, Laplace, Mecke, and Cox moment formulas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

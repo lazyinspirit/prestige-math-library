@@ -2,7 +2,7 @@
 id: ex-atomic-spectrum-versus-continuous-spectral-density
 kind: example
 title: "An atomic sinusoid and an AR(1) process have different spectra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

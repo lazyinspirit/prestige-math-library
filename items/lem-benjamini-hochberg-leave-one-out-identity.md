@@ -2,7 +2,7 @@
 id: lem-benjamini-hochberg-leave-one-out-identity
 kind: lemma
 title: "Leave-one-out identity for the BH step-up rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

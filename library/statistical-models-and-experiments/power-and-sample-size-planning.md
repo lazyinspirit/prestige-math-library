@@ -1,7 +1,7 @@
 ---
 page: power-and-sample-size-planning
 title: "Power and sample size"
-status: draft
+status: published
 items:
   - lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power
   - lem-iid-normal-sample-mean-law

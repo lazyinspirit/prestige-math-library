@@ -2,7 +2,7 @@
 id: thm-frontdoor-adjustment-sufficiency
 kind: theorem
 title: "Front-door adjustment identifies an interventional mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

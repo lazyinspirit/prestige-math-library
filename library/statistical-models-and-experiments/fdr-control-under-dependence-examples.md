@@ -1,7 +1,7 @@
 ---
 page: fdr-control-under-dependence-examples
 title: "BY arbitrary dependence and BH PRDS — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-pairwise-positive-correlation-does-not-imply-prds

@@ -2,7 +2,7 @@
 id: def-longitudinal-missingness-mechanisms
 kind: definition
 title: "Longitudinal observation patterns and missingness mechanisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

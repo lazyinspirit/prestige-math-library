@@ -2,7 +2,7 @@
 id: thm-wald-identifies-the-complier-average-effect
 kind: theorem
 title: "The Wald ratio identifies the complier average treatment effect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

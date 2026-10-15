@@ -1,7 +1,7 @@
 ---
 page: scientific-statistical-model-contracts-examples
 title: "Scientific model contracts and applicability — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-technical-biological-units-and-repeated-visits

@@ -2,7 +2,7 @@
 id: cor-conditionally-superuniform-stage-two-pvalue
 kind: corollary
 title: "A conditionally superuniform stage-2 p-value preserves conditional error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

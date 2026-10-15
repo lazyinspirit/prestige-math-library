@@ -1,7 +1,7 @@
 ---
 page: polyhedral-selective-inference
 title: Polyhedral selective inference
-status: draft
+status: published
 items:
   - def-polyhedral-selection-event-and-contrast-interval
   - lem-standard-normal-cdf-is-continuous-and-strictly-increasing

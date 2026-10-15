@@ -1,7 +1,7 @@
 ---
 page: mediation-effects-and-identification
 title: "Mediation and cross-world assumptions"
-status: draft
+status: published
 items:
   - def-controlled-and-natural-mediation-effects
   - def-simple-markovian-mediation-scm

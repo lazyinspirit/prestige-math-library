@@ -2,7 +2,7 @@
 id: ex-estimated-blank-variance-inflates-detection-limits
 kind: example
 title: "An estimated blank increases the effective normal scale"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

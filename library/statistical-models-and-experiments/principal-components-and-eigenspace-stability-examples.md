@@ -1,7 +1,7 @@
 ---
 page: principal-components-and-eigenspace-stability-examples
 title: PCA and eigengap stability — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-small-eigengap-allows-fixed-angle-rotation

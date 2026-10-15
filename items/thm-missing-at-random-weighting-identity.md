@@ -2,7 +2,7 @@
 id: thm-missing-at-random-weighting-identity
 kind: theorem
 title: "Inverse response-probability weighting identifies the mean under MAR"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

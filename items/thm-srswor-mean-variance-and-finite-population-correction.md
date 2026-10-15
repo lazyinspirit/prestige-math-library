@@ -2,7 +2,7 @@
 id: thm-srswor-mean-variance-and-finite-population-correction
 kind: theorem
 title: SRSWOR inclusion covariance and sample-mean variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

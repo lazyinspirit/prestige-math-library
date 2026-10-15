@@ -2,7 +2,7 @@
 id: lem-conditional-independence-under-kernel-extension-and-conditioning
 kind: lemma
 title: "Conditional independence under kernel extension and conditioning"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 deps:

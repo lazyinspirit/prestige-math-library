@@ -1,7 +1,7 @@
 ---
 page: state-space-models-as-probability-laws
 title: "State-space model laws"
-status: draft
+status: published
 items:
   - lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal
   - def-general-state-space-model-by-kernels

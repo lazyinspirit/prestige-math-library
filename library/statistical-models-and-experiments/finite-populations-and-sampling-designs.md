@@ -1,7 +1,7 @@
 ---
 page: finite-populations-and-sampling-designs
 title: "Finite populations and design probability"
-status: draft
+status: published
 items:
   - def-finite-population-and-sampling-design
   - lem-finite-population-design-law-is-a-probability-measure

@@ -2,7 +2,7 @@
 id: thm-srswor-cluster-total-estimator-unbiased-and-variance
 kind: theorem
 title: "Unbiasedness and variance of the SRSWOR cluster-total estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-polyhedral-selective-normal-pivot
 kind: definition
 title: Polyhedral selective normal pivot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

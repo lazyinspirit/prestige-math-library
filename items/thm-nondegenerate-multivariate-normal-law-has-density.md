@@ -2,7 +2,7 @@
 id: thm-nondegenerate-multivariate-normal-law-has-density
 kind: theorem
 title: "A positive-definite multivariate normal law has its Gaussian density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

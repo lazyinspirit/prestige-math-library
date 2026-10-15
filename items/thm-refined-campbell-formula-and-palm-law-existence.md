@@ -2,7 +2,7 @@
 id: thm-refined-campbell-formula-and-palm-law-existence
 kind: theorem
 title: "Existence and uniqueness of the full Palm law and the refined Campbell identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

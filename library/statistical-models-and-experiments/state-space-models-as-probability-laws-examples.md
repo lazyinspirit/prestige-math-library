@@ -1,7 +1,7 @@
 ---
 page: state-space-models-as-probability-laws-examples
 title: "State-space model laws — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-state-space-model-same-dynamics-distinct-observation-kernels

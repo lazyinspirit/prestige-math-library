@@ -2,7 +2,7 @@
 id: thm-order-two-field-variogram-is-conditionally-negative-definite
 kind: theorem
 title: "Order-two intrinsic variograms are conditionally negative definite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

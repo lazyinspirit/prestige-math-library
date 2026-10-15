@@ -2,7 +2,7 @@
 id: def-inclusion-covariance-difference
 kind: definition
 title: Inclusion-covariance difference
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

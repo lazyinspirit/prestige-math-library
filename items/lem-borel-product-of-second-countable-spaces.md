@@ -2,7 +2,7 @@
 id: lem-borel-product-of-second-countable-spaces
 kind: lemma
 title: "Borel sigma-algebra of a product of second-countable spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

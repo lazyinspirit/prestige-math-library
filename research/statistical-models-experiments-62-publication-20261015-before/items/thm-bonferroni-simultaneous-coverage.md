@@ -1,0 +1,62 @@
+---
+id: thm-bonferroni-simultaneous-coverage
+kind: theorem
+title: Bonferroni simultaneous coverage
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 0
+deps:
+  - def-statistical-experiment
+  - def-confidence-set-and-coverage
+  - lem-probability-measure-basic-identities
+justified_by: []
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+proof_strategy: direct
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references:
+    - title: "William Fithian, STAT 210A Lecture 26: Multiple Testing, PDF pp. 9–11"
+      url: "https://www.stat.berkeley.edu/~wfithian/courses/stat210a/lectures/lecture26-F21.pdf"
+    - title: "Jelle J. Goeman and Aldo Solari, The Sequential Rejection Principle of Familywise Error Control, Section 3, Eq. (13)"
+      url: "https://arxiv.org/pdf/1211.3313"
+---
+
+## Statement
+
+Let $\mathsf E=((\mathcal X,\mathcal A),\Theta,(P_\theta)_{\theta\in\Theta})$ be a statistical experiment ([[def-statistical-experiment]]) with nonempty parameter set $\Theta$. Fix $m\ge1$ coordinate targets $\psi_i:\Theta\to\Psi_i$ and procedures $C_i:\mathcal X\to\mathcal P(\Psi_i)$, $i\in[m]$, where $\mathcal P(\Psi_i)$ denotes the set of all subsets of $\Psi_i$. For every $\theta\in\Theta$, suppose each membership event
+$$A_i(\theta):=\{x\in\mathcal X:\psi_i(\theta)\in C_i(x)\}$$
+belongs to $\mathcal A$ and has marginal coverage
+$$P_\theta(A_i(\theta))\ge1-\alpha_i,$$
+where $0\le\alpha_i\le1$ and $\sum_{i=1}^m\alpha_i\le\alpha\le1$. Then, for every $\theta\in\Theta$,
+$$P_\theta\{\psi_i(\theta)\in C_i(X)\text{ for every }i\in[m]\}\ge1-\alpha.$$
+Thus the family of marginal confidence sets has simultaneous coverage at least $1-\alpha$. No independence assumption is needed.
+
+## Facts & Assumptions
+
+**Given:** A statistical experiment with nonempty parameter set, a fixed finite family of targets and procedures, measurable membership events $A_i(\theta)$ for every $i$ and $\theta$, and marginal coverage bounds $P_\theta(A_i(\theta))\ge1-\alpha_i$ with $\sum_i\alpha_i\le\alpha\le1$.
+
+[F1] [[def-statistical-experiment]]: for each $\theta$, $P_\theta$ is a probability measure on the sample sigma-algebra.
+
+[F2] [[def-confidence-set-and-coverage]]: a confidence-set procedure has a measurable membership section for every candidate parameter, and its coverage at $\theta$ is the probability that the reported set contains $\theta$.
+
+[F3] [[lem-probability-measure-basic-identities]]: complements satisfy $P(A^c)=1-P(A)$, and a finite union of measurable events has probability at most the sum of their probabilities.
+
+[A1] For every $\theta\in\Theta$ and $i\in[m]$, $A_i(\theta)\in\mathcal A$ and $P_\theta(A_i(\theta))\ge1-\alpha_i$.
+
+## Proof
+
+**Proof technique:** direct.
+
+**Given:** The experiment with nonempty parameter set, targets, confidence procedures, and marginal coverage assumptions in the statement.
+
+1.1 For each $i$, define the induced full-parameter confidence set $D_i(x):=\{\eta\in\Theta:\psi_i(\eta)\in C_i(x)\}$. Each membership section of $D_i$ is $A_i(\eta)$, measurable by [A1], so [F2] applies and its coverage at $\theta$ is $P_\theta(A_i(\theta))\ge1-\alpha_i$. The miss event $B_i(\theta):=A_i(\theta)^c$ is measurable and, by [F3], satisfies $P_\theta(B_i(\theta))=1-P_\theta(A_i(\theta))\le\alpha_i$. [given, A1, F2, F3, construct]
+
+2.1 Failure of simultaneous coverage is $\bigcup_{i=1}^m B_i(\theta)$. By finite subadditivity [F3] and step 1.1, its probability is at most $\sum_{i=1}^m\alpha_i\le\alpha$. Taking the complement gives the stated simultaneous coverage bound. This argument allows the membership events to be dependent. [given, F1, F3, step 1.1, algebra] ∎

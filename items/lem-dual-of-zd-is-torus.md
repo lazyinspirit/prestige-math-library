@@ -2,7 +2,7 @@
 id: lem-dual-of-zd-is-torus
 kind: lemma
 title: "The Pontryagin dual of the integer lattice is the torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

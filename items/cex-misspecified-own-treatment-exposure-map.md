@@ -2,7 +2,7 @@
 id: cex-misspecified-own-treatment-exposure-map
 kind: counterexample
 title: "An own-treatment-only exposure map can be misspecified"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: def-biological-and-technical-replication-model
 kind: definition
 title: Biological and technical replication model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

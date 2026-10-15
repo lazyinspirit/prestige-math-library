@@ -1,7 +1,7 @@
 ---
 page: finite-window-spatial-point-process-likelihoods-examples
 title: "Finite-window spatial likelihood — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-homogeneous-poisson-window-mle-boundary

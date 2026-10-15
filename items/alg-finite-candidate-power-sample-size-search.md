@@ -2,7 +2,7 @@
 id: alg-finite-candidate-power-sample-size-search
 kind: algorithm
 title: "Finite-candidate power and sample-size search"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

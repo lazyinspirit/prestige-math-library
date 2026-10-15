@@ -2,7 +2,7 @@
 id: def-gaussian-linear-mixed-model
 kind: definition
 title: "Gaussian branch of the linear mixed model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

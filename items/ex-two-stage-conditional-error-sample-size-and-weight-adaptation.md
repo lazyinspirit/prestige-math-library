@@ -2,7 +2,7 @@
 id: ex-two-stage-conditional-error-sample-size-and-weight-adaptation
 kind: example
 title: "Calibrated selected sample size and an uncalibrated weight change"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

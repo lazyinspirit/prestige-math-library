@@ -2,7 +2,7 @@
 id: ex-poisson-log-glm-one-step
 kind: example
 title: A one-observation Poisson-log Fisher-scoring step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

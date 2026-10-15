@@ -2,7 +2,7 @@
 id: ex-exclusion-violation-distorts-wald-ratio
 kind: example
 title: "A direct encouragement effect changes the Wald ratio"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

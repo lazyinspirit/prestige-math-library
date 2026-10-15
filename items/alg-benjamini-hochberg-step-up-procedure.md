@@ -2,7 +2,7 @@
 id: alg-benjamini-hochberg-step-up-procedure
 kind: algorithm
 title: "Benjamini–Hochberg step-up procedure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

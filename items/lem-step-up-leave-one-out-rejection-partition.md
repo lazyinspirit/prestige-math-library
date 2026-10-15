@@ -2,7 +2,7 @@
 id: lem-step-up-leave-one-out-rejection-partition
 kind: lemma
 title: "Leave-one-coordinate rejection partition for a step-up rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

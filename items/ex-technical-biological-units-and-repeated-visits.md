@@ -2,7 +2,7 @@
 id: ex-technical-biological-units-and-repeated-visits
 kind: example
 title: "Biological units, repeated visits, and technical assay replicates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

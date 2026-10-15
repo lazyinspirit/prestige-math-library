@@ -2,7 +2,7 @@
 id: cor-ergodic-time-series-sample-mean-converges-a-s-and-l1
 kind: corollary
 title: "Ergodic time-series sample means converge almost surely and in L1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

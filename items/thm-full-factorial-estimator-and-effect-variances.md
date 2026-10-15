@@ -2,7 +2,7 @@
 id: thm-full-factorial-estimator-and-effect-variances
 kind: theorem
 title: "Coefficient and factorial-effect variances under equal replication"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

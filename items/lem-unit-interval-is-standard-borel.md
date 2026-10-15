@@ -2,7 +2,7 @@
 id: lem-unit-interval-is-standard-borel
 kind: lemma
 title: "The unit interval with its Borel structure is standard Borel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

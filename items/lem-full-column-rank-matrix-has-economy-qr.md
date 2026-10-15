@@ -2,7 +2,7 @@
 id: lem-full-column-rank-matrix-has-economy-qr
 kind: lemma
 title: "A full-column-rank real matrix has an economy QR factorization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 verification:

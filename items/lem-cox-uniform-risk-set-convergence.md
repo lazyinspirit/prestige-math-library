@@ -2,7 +2,7 @@
 id: lem-cox-uniform-risk-set-convergence
 kind: lemma
 title: Integrated and conditional uniform convergence of Cox risk-set sums
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

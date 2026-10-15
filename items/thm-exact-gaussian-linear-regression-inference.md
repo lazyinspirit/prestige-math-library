@@ -2,7 +2,7 @@
 id: thm-exact-gaussian-linear-regression-inference
 kind: theorem
 title: "Exact t and partial F inference in full-rank Gaussian regression"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 verification:

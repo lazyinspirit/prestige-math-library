@@ -2,7 +2,7 @@
 id: lem-active-routes-in-a-finite-dag-have-active-paths
 kind: lemma
 title: "Every active finite route contains an active path"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 deps:

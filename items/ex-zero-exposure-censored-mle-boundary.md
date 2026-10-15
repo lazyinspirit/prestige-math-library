@@ -2,7 +2,7 @@
 id: ex-zero-exposure-censored-mle-boundary
 kind: example
 title: No observed failures with positive versus zero exposure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

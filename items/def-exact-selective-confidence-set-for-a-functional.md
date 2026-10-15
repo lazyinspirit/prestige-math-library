@@ -2,7 +2,7 @@
 id: def-exact-selective-confidence-set-for-a-functional
 kind: definition
 title: Exact selective confidence set for a parameter functional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

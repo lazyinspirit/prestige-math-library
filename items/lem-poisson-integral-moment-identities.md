@@ -2,7 +2,7 @@
 id: lem-poisson-integral-moment-identities
 kind: lemma
 title: "First and second moments of a Poisson random integral"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

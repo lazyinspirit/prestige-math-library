@@ -1,7 +1,7 @@
 ---
 page: reproducibility-replication-and-transparent-reporting-examples
 title: Reproducibility and transparent reporting — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-transparent-analysis-plan-and-reproduction

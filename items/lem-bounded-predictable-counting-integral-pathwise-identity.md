@@ -2,7 +2,7 @@
 id: lem-bounded-predictable-counting-integral-pathwise-identity
 kind: lemma
 title: "Pathwise identity for bounded predictable counting-process integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 deps:

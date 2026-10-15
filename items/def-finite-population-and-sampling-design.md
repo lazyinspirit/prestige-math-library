@@ -2,7 +2,7 @@
 id: def-finite-population-and-sampling-design
 kind: definition
 title: "Finite populations and sampling designs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

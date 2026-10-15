@@ -2,7 +2,7 @@
 id: lem-gaussian-exponential-mixture-integral
 kind: lemma
 title: Closed form for a Gaussian exponential mixture
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

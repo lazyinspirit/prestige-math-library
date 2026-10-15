@@ -2,7 +2,7 @@
 id: lem-finite-support-risk-set-proportion-limits
 kind: lemma
 title: Finite-support risk-set proportion limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

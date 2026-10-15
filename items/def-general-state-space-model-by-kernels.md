@@ -2,7 +2,7 @@
 id: def-general-state-space-model-by-kernels
 kind: definition
 title: General finite-horizon state-space models by kernels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

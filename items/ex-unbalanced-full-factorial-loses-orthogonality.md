@@ -2,7 +2,7 @@
 id: ex-unbalanced-full-factorial-loses-orthogonality
 kind: example
 title: "Unequal replication removes factorial-column orthogonality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: mediation-effects-and-identification-examples
 title: "Mediation and cross-world assumptions — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-natural-effect-cross-world-nonidentification

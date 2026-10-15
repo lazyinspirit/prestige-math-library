@@ -2,7 +2,7 @@
 id: def-two-level-full-factorial-design
 kind: definition
 title: "Two-level full factorial designs and coded effects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

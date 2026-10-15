@@ -2,7 +2,7 @@
 id: ex-high-leverage-is-a-design-feature
 kind: example
 title: "Leverage is determined by the design"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

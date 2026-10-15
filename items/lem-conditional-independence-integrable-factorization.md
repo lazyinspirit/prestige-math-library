@@ -2,7 +2,7 @@
 id: lem-conditional-independence-integrable-factorization
 kind: lemma
 title: "Integrable factorization under conditional independence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

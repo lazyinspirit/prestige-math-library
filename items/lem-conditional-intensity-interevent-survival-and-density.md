@@ -2,7 +2,7 @@
 id: lem-conditional-intensity-interevent-survival-and-density
 kind: lemma
 title: "Inter-event survival and density from a conditional intensity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

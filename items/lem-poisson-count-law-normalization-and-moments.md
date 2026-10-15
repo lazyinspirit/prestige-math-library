@@ -2,7 +2,7 @@
 id: lem-poisson-count-law-normalization-and-moments
 kind: lemma
 title: "Normalization, moments, and generating function of the Poisson count law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-factorial-foldover-separates-opposite-parity-aliases
 kind: theorem
 title: "Full and partial foldovers separate aliases by parity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

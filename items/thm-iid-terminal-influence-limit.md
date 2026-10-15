@@ -2,7 +2,7 @@
 id: thm-iid-terminal-influence-limit
 kind: theorem
 title: IID terminal influence limit from a separately established expansion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

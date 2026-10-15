@@ -1,7 +1,7 @@
 ---
 page: logrank-and-weighted-logrank-examples
 title: Logrank and weighted logrank — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-logrank-crossing-hazards-zero-score

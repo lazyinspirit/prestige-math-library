@@ -1,7 +1,7 @@
 ---
 page: fractional-factorial-aliasing-and-foldover
 title: "Fractional factorial aliases and foldover"
-status: draft
+status: published
 items:
   - def-regular-fractional-factorial-defining-relation-and-resolution
   - thm-regular-fractional-factorial-aliasing-criterion

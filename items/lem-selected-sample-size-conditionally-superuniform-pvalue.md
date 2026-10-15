@@ -2,7 +2,7 @@
 id: lem-selected-sample-size-conditionally-superuniform-pvalue
 kind: lemma
 title: "Selected-size conditional validity yields a conditionally superuniform p-value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

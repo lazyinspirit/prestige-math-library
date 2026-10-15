@@ -2,7 +2,7 @@
 id: ex-ar1-one-step-and-multistep-forecast
 kind: example
 title: One-step and multistep forecasts for a causal AR(1)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-bonferroni-familywise-error-control
 kind: theorem
 title: Strong familywise error control by Bonferroni
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

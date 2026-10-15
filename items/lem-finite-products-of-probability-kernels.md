@@ -2,7 +2,7 @@
 id: lem-finite-products-of-probability-kernels
 kind: lemma
 title: "Finite products of probability kernels are probability kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

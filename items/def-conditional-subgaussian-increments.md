@@ -2,7 +2,7 @@
 id: def-conditional-subgaussian-increments
 kind: definition
 title: Conditionally sub-Gaussian increments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

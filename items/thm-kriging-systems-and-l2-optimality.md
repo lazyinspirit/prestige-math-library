@@ -2,7 +2,7 @@
 id: thm-kriging-systems-and-l2-optimality
 kind: theorem
 title: "Kriging systems and mean-square optimality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

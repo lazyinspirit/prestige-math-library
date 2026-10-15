@@ -1,7 +1,7 @@
 ---
 page: cluster-and-two-stage-sampling
 title: "Cluster and two-stage sampling"
-status: draft
+status: published
 items:
   - def-cluster-sampling-design-and-cluster-totals
   - def-two-stage-cluster-sampling-and-expansion-estimator

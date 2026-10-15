@@ -2,7 +2,7 @@
 id: def-measurement-error-models
 kind: definition
 title: "Additive measurement error and categorical misclassification models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

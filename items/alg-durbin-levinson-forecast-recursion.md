@@ -2,7 +2,7 @@
 id: alg-durbin-levinson-forecast-recursion
 kind: algorithm
 title: Durbin–Levinson forecast recursion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

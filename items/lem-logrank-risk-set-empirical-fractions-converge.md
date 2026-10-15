@@ -2,7 +2,7 @@
 id: lem-logrank-risk-set-empirical-fractions-converge
 kind: lemma
 title: "Uniform convergence of empirical risk-set fractions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-gaussian-mixture-test-supermartingale
 kind: theorem
 title: The Gaussian mixture is a sub-Gaussian test supermartingale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: cor-fixed-grid-unaliased-spectral-bias-under-no-alias-condition
 kind: corollary
 title: "Unaliased fixed-grid spectral bias under the exact no-alias condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 deps:

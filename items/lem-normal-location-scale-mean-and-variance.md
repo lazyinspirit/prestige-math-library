@@ -2,7 +2,7 @@
 id: lem-normal-location-scale-mean-and-variance
 kind: lemma
 title: "Location-scale normal laws have their stated mean and variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

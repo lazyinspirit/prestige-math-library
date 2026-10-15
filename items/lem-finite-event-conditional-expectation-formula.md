@@ -2,7 +2,7 @@
 id: lem-finite-event-conditional-expectation-formula
 kind: lemma
 title: "Conditional expectation on positive-probability events in finite spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

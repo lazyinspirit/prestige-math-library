@@ -2,7 +2,7 @@
 id: def-two-stage-cluster-sampling-and-expansion-estimator
 kind: definition
 title: "Two-stage sampling laws and the expansion estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

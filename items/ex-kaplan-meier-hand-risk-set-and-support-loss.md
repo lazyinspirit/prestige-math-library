@@ -2,7 +2,7 @@
 id: ex-kaplan-meier-hand-risk-set-and-support-loss
 kind: example
 title: A hand Kaplan–Meier calculation and loss of tail support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

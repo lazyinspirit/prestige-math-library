@@ -2,7 +2,7 @@
 id: def-linear-mixed-model
 kind: definition
 title: "Finite-dimensional linear mixed model with explicit longitudinal roles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

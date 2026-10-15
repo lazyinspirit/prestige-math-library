@@ -2,7 +2,7 @@
 id: lem-standard-normal-matrix-has-full-row-rank-almost-surely
 kind: lemma
 title: A standard-normal matrix with at least as many columns as rows has full row rank almost surely
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

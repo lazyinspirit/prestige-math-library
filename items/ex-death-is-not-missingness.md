@@ -2,7 +2,7 @@
 id: ex-death-is-not-missingness
 kind: example
 title: "Death is not automatically a missing outcome"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-pair-correlation-and-ripleys-k-function
 kind: definition
 title: "Pair-correlation density and Ripley K-function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

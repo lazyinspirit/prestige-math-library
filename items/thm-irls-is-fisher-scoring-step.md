@@ -2,7 +2,7 @@
 id: thm-irls-is-fisher-scoring-step
 kind: theorem
 title: IRLS equals the Fisher-scoring step when information is invertible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

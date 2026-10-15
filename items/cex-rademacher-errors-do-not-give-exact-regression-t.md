@@ -2,7 +2,7 @@
 id: cex-rademacher-errors-do-not-give-exact-regression-t
 kind: counterexample
 title: "Independent Rademacher errors need not give the Gaussian regression t pivot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 verification:

@@ -2,7 +2,7 @@
 id: lem-backdoor-criterion-implies-counterfactual-exchangeability
 kind: lemma
 title: "The backdoor criterion implies conditional exchangeability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

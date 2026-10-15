@@ -2,7 +2,7 @@
 id: lem-rcbd-nested-contrast-model-and-projection
 kind: lemma
 title: Nested contrast models and projections in a balanced block design
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

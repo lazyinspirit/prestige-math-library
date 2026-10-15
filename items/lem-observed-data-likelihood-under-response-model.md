@@ -2,7 +2,7 @@
 id: lem-observed-data-likelihood-under-response-model
 kind: lemma
 title: "Observed-data likelihood under a response model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

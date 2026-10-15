@@ -2,7 +2,7 @@
 id: thm-repeated-leading-eigenvalue-identifies-subspace
 kind: theorem
 title: "A repeated leading PCA eigenvalue identifies a subspace, not a vector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

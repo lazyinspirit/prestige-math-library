@@ -2,7 +2,7 @@
 id: thm-zero-inclusion-probability-precludes-identification-and-universal-unbiasedness
 kind: theorem
 title: "A zero inclusion probability prevents total identification and universal unbiased estimation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

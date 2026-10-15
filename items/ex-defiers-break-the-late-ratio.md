@@ -2,7 +2,7 @@
 id: ex-defiers-break-the-late-ratio
 kind: example
 title: "Defiers can make the Wald ratio differ from the complier effect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

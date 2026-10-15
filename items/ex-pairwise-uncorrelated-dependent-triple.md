@@ -2,7 +2,7 @@
 id: ex-pairwise-uncorrelated-dependent-triple
 kind: example
 title: "Pairwise uncorrelated data can be jointly dependent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

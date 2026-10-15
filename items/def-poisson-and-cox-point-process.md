@@ -2,7 +2,7 @@
 id: def-poisson-and-cox-point-process
 kind: definition
 title: "Poisson and Cox point processes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

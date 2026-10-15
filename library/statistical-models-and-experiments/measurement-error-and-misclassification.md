@@ -1,7 +1,7 @@
 ---
 page: measurement-error-and-misclassification
 title: "Measurement error and misclassification"
-status: draft
+status: published
 items:
   - def-measurement-error-models
   - def-nondifferential-measurement-error-relative-to-named-variables

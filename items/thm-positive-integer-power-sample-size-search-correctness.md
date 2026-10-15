@@ -2,7 +2,7 @@
 id: thm-positive-integer-power-sample-size-search-correctness
 kind: theorem
 title: "Correctness and exact termination conditions for all-size planning search"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 deps:

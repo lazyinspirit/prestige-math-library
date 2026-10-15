@@ -2,7 +2,7 @@
 id: ex-unequal-weighted-two-sided-randomization-test-with-ties
 kind: example
 title: "A weighted two-sided randomization test with tied scores"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

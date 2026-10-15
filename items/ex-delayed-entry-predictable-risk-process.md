@@ -2,7 +2,7 @@
 id: ex-delayed-entry-predictable-risk-process
 kind: example
 title: "Delayed entry with a predictable risk process"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

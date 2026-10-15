@@ -2,7 +2,7 @@
 id: lem-two-stage-finite-design-variance-identities
 kind: lemma
 title: "Finite two-stage sampling variance identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

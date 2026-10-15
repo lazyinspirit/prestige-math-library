@@ -1,7 +1,7 @@
 ---
 page: temporal-point-process-intensity-and-likelihood
 title: "Temporal intensity and likelihood"
-status: draft
+status: published
 items:
   - def-temporal-point-process-and-conditional-intensity
   - lem-conditional-intensity-interevent-survival-and-density

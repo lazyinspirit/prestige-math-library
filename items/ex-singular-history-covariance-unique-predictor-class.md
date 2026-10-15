@@ -2,7 +2,7 @@
 id: ex-singular-history-covariance-unique-predictor-class
 kind: example
 title: A singular history covariance can have nonunique coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

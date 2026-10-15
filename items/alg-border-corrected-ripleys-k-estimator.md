@@ -2,7 +2,7 @@
 id: alg-border-corrected-ripleys-k-estimator
 kind: algorithm
 title: "Border-corrected estimator for Ripley K"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 7

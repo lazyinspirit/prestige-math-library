@@ -2,7 +2,7 @@
 id: thm-known-covariance-blup-for-random-effects
 kind: theorem
 title: "Known-covariance BLUP and its prediction-error covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

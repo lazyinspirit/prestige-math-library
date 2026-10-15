@@ -2,7 +2,7 @@
 id: thm-multivariate-normal-sample-mean-scatter-independence-and-wishart
 kind: theorem
 title: The Gaussian sample mean is independent of the Wishart sample scatter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

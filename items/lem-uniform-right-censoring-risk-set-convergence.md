@@ -2,7 +2,7 @@
 id: lem-uniform-right-censoring-risk-set-convergence
 kind: lemma
 title: Uniform convergence of the empirical right-censoring risk set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

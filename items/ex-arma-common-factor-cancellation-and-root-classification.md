@@ -2,7 +2,7 @@
 id: ex-arma-common-factor-cancellation-and-root-classification
 kind: example
 title: "A common factor can reverse an unreduced root classification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

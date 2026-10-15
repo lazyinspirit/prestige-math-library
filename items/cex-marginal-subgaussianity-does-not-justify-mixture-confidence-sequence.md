@@ -2,7 +2,7 @@
 id: cex-marginal-subgaussianity-does-not-justify-mixture-confidence-sequence
 kind: counterexample
 title: Marginal sub-Gaussianity does not justify an anytime confidence sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

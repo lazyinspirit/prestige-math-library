@@ -1,7 +1,7 @@
 ---
 page: generalized-linear-models-and-fisher-scoring-examples
 title: Generalized linear models and Fisher scoring — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-bernoulli-logit-glm-one-step

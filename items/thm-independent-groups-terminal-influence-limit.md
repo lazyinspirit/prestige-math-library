@@ -2,7 +2,7 @@
 id: thm-independent-groups-terminal-influence-limit
 kind: theorem
 title: Independent-group terminal influence limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

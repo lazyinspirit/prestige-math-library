@@ -2,7 +2,7 @@
 id: ex-independent-groups-weighted-mean-limit
 kind: example
 title: Weighted means from two independent subject groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

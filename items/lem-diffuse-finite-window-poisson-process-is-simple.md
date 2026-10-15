@@ -2,7 +2,7 @@
 id: lem-diffuse-finite-window-poisson-process-is-simple
 kind: lemma
 title: "A finite Poisson process with atomless intensity is simple"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

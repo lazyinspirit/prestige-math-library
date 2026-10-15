@@ -2,7 +2,7 @@
 id: def-cluster-sampling-design-and-cluster-totals
 kind: definition
 title: "Cluster sampling units, cluster totals, and one-stage SRSWOR"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

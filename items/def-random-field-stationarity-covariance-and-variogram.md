@@ -2,7 +2,7 @@
 id: def-random-field-stationarity-covariance-and-variogram
 kind: definition
 title: "Random fields, stationarity, covariance, and variograms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

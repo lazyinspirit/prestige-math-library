@@ -2,7 +2,7 @@
 id: thm-discrete-treatment-potential-outcome-mean-identification
 kind: theorem
 title: "Discrete-treatment potential-outcome means are identifiable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 2

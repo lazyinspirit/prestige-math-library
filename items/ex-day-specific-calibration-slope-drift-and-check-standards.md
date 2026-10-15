@@ -2,7 +2,7 @@
 id: ex-day-specific-calibration-slope-drift-and-check-standards
 kind: example
 title: "Day-specific calibration slope drift and check standards"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

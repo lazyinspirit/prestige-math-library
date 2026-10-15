@@ -2,7 +2,7 @@
 id: ex-nonadditive-spillovers-create-positive-variance-bias
 kind: example
 title: "Nonadditive direct effects create positive variance-estimator bias"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 6

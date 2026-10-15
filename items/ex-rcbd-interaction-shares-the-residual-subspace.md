@@ -2,7 +2,7 @@
 id: ex-rcbd-interaction-shares-the-residual-subspace
 kind: example
 title: A two-by-two interaction and error share one residual array
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 5

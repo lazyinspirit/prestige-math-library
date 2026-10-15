@@ -2,7 +2,7 @@
 id: ex-terminating-temporal-point-process-with-terminal-mass
 kind: example
 title: "A finite-window Poisson process that terminates at time one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

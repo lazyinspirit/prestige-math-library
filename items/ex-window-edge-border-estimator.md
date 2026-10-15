@@ -2,7 +2,7 @@
 id: ex-window-edge-border-estimator
 kind: example
 title: "A finite window makes the border correction weight visible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 8

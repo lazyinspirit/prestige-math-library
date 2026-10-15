@@ -1,7 +1,7 @@
 ---
 page: logrank-and-weighted-logrank
 title: Logrank and weighted logrank
-status: draft
+status: published
 items:
   - def-logrank-risk-set-score-and-test
   - lem-logrank-risk-set-empirical-fractions-converge

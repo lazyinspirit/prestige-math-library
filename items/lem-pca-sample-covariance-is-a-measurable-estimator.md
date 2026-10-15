@@ -2,7 +2,7 @@
 id: lem-pca-sample-covariance-is-a-measurable-estimator
 kind: lemma
 title: "Sample-centered covariance is a measurable statistic and estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

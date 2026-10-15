@@ -2,7 +2,7 @@
 id: ex-paired-randomization-contrast-with-heterogeneous-effects
 kind: example
 title: A paired contrast with unequal unit-level effects
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 3

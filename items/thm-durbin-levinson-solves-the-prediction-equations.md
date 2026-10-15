@@ -2,7 +2,7 @@
 id: thm-durbin-levinson-solves-the-prediction-equations
 kind: theorem
 title: Durbin–Levinson solves the successive prediction equations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 4

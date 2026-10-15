@@ -1,7 +1,7 @@
 ---
 page: sequential-likelihood-ratio-tests-examples
 title: Sequential likelihood-ratio tests — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-bernoulli-sequential-likelihood-ratio-crossings

@@ -2,7 +2,7 @@
 id: def-power-and-sample-size-planning-specification
 kind: definition
 title: "Power and sample-size planning specifications"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1

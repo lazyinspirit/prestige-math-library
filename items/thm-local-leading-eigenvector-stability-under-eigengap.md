@@ -2,7 +2,7 @@
 id: thm-local-leading-eigenvector-stability-under-eigengap
 kind: theorem
 title: "Local leading-eigenvector stability under a spectral gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 0

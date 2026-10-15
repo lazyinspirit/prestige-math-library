@@ -2,7 +2,7 @@
 id: def-finite-randomized-treatment-assignment-model
 kind: definition
 title: "Finite randomized treatment-assignment models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: statistical-models-experiments-62
 dependency_level: 1
