@@ -85,6 +85,36 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  // Exact source witness: this checks the counterexample, not all real norm axioms.
+  'anisotropic-real-norm-complex-homogeneity-witness': ({
+    weights = [1, 2], vector = [1, 0], scalar = [0, 1], expected_values = [1, 2, 1],
+  } = {}) => {
+    const fail = summary => smokeResult(false, summary);
+    const integerPair = value => Array.isArray(value) && value.length === 2
+      && value.every(Number.isSafeInteger);
+    if (!integerPair(weights) || !weights.every(x => x > 0)
+      || !integerPair(vector) || !integerPair(scalar)
+      || !Array.isArray(expected_values) || expected_values.length !== 3
+      || !expected_values.every(Number.isSafeInteger))
+      return fail('expected positive integer weights, Gaussian-integer pairs [real, imaginary], and three integer values');
+    const [a, b] = weights.map(BigInt), [x, y] = vector.map(BigInt), [u, v] = scalar.map(BigInt);
+    const abs = n => n < 0n ? -n : n;
+    const norm = (re, im) => a * abs(re) + b * abs(im);
+    const before = norm(x, y), after = norm(u * x - v * y, u * y + v * x);
+    const modulusSquared = u * u + v * v;
+    // Squaring avoids any numerical square-root approximation. All quantities
+    // in the homogeneity equation are nonnegative; unequal squares refute it.
+    if (after * after === modulusSquared * before * before)
+      return fail('complex homogeneity does not fail at the supplied witness');
+    if (JSON.stringify(weights) !== '[1,2]' || JSON.stringify(vector) !== '[1,0]'
+      || JSON.stringify(scalar) !== '[0,1]')
+      return fail('source witness requires weights [1,2], z=1 and scalar i');
+    const [claimedBefore, claimedAfter, claimedModulus] = expected_values.map(BigInt);
+    if (before !== claimedBefore || after !== claimedAfter || claimedModulus < 0n
+      || claimedModulus * claimedModulus !== modulusSquared)
+      return fail('computed norm values or nonnegative complex modulus disagree with expected_values');
+    return smokeResult(true, 'exact Gaussian-integer witness z=1, scalar i: N(1)=1, N(i)=2, |i|=1; squared complex-homogeneity sides are 4 and 1 (finite witness only)');
+  },
   'four-outcome-rademacher-pivot': ({ support = [[-1, -1], [-1, 1], [1, -1], [1, 1]] } = {}) => {
     const fail = summary => smokeResult(false, summary);
     if (!Array.isArray(support) || support.length !== 4 || support.some(row =>
