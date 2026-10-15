@@ -4,7 +4,7 @@ kind: example
 domain: physics
 library: physics
 title: Exact two-level transition versus its first coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 dependency_level: 4
@@ -31,6 +31,15 @@ sources:
   references:
     - title: David Tong, Quantum Field Theory, Chapter 3 “Interacting Fields,” §3.1.1 “Dyson’s Formula”
       url: https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S3.html
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Example

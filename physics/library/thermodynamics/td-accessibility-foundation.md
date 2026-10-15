@@ -1,7 +1,7 @@
 ---
 page: td-accessibility-foundation
 title: Accessibility Foundation
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items:

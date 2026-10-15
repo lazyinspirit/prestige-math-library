@@ -1,7 +1,7 @@
 ---
 title: Einstein–Maxwell Models Mathematics
 library: mathematics
-status: draft
+status: published
 ---
 
 These prerequisite pages specify oriented Lorentzian fields, observers and coordinate conventions, together with the conversion between SI and geometrized Einstein–Maxwell parameters. They distinguish geometric quantities from their coordinate components, and make the units and normalization conventions explicit. These definitions support the particle-mechanics framework without treating a mathematical change of notation as an empirical assertion. The worked companions illustrate the same conventions in concrete settings and keep every required hypothesis visible.

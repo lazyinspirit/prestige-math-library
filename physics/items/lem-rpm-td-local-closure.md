@@ -2,7 +2,7 @@
 id: lem-rpm-td-local-closure
 kind: lemma
 title: Admissible TD pole-dipole local closure
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -43,7 +43,15 @@ sources:
     - title: Gerald Teschl, Ordinary Differential Equations and Dynamical Systems, American Mathematical Society, Graduate Studies in Mathematics 140 (2012)
       url: https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf
       locator: Complete author-hosted book, Chapter 2, Theorem 2.2, for local existence and uniqueness of a locally Lipschitz coordinate vector field.
-verification: {}
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

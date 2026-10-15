@@ -1,7 +1,7 @@
 ---
 page: qft-ir01-examples
 title: Finite-lattice polynomial Hamiltonian data — Examples
-status: draft
+status: published
 items: []
 examples:
   - rem-qft-cutoff-vs-continuum-interaction

@@ -1,7 +1,7 @@
 ---
 page: td-interacting-equilibrium-preparations
 title: "Interacting Equilibrium Preparations"
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items:

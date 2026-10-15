@@ -1,7 +1,7 @@
 ---
 page: td-math-mixture-dynamics-and-shells-examples
 title: Mixture Dynamics And Shells — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

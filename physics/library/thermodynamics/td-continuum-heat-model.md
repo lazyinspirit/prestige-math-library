@@ -1,7 +1,7 @@
 ---
 page: td-continuum-heat-model
 title: Continuum Heat Model
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items:

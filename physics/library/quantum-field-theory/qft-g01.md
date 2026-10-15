@@ -1,7 +1,7 @@
 ---
 page: qft-g01
 title: "Positive transverse free photon model"
-status: draft
+status: published
 library: physics
 items:
   - def-qft-qed-physical-gauge-quantities

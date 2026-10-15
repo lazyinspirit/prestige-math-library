@@ -1,7 +1,7 @@
 ---
 page: qft-mx02-examples
 title: Clifford traces and normalized spin completeness — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 requires:

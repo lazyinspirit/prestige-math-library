@@ -1,7 +1,7 @@
 ---
 page: qft-mc03
 title: Finite bounded instruments normalize measurement probabilities
-status: draft
+status: published
 items:
   - def-qft-finite-bounded-kraus-instrument
   - lem-qft-finite-instrument-normalization

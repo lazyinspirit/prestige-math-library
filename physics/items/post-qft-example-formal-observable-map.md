@@ -4,7 +4,7 @@ kind: postulate
 domain: physics
 library: physics
 title: Formal diagram coefficient-to-observable adoption
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 dependency_level: 7
@@ -38,6 +38,13 @@ sources:
       url: https://web.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf
     - title: X. Fan et al., Measurement of the Electron Magnetic Moment, Physical Review Letters 130, 071801 (2023), arXiv:2209.13084v2
       url: https://arxiv.org/html/2209.13084
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

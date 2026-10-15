@@ -1,7 +1,7 @@
 ---
 page: td-math-nonsmooth-equilibrium-examples
 title: Nonsmooth Equilibrium — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

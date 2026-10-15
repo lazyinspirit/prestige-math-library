@@ -2,7 +2,7 @@
 id: post-rpm-external-charge-action
 kind: postulate
 title: "External-field charged-particle action"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -23,7 +23,13 @@ sources:
     - title: "Eric Poisson, Adam Pound and Ian Vega, The Motion of Point Particles in Curved Spacetime, author manuscript arXiv:1102.0529v3 (2011)"
       url: "https://arxiv.org/pdf/1102.0529v3"
       locator: "Author manuscript, arXiv v3, §18.1, equations (18.3)–(18.7), printed pp. 96–97: the proper-length particle action, electromagnetic interaction e∫A_mu dz^mu, reparameterization invariance, and the Lorentz-force equation. The source varies a coupled field-particle system and warns that its point-particle equation is only formal because the self-field is singular on the worldline; it is cited as context, not as a derivation of this prescribed smooth external-field model."
-verification: {}
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

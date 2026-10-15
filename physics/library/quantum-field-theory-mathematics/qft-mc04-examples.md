@@ -1,7 +1,7 @@
 ---
 page: qft-mc04-examples
 title: Exact massless scalar on a conformally flat external metric — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

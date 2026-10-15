@@ -1,7 +1,7 @@
 ---
 page: qft-mx01-examples
 title: Example conventions, energy units and constructed/formal data — Examples
-status: draft
+status: published
 items: []
 requires:
   - qft-mx01

@@ -2,7 +2,7 @@
 id: "def-td-retained-hard-core-zero-beta-preparation"
 kind: "definition"
 title: "Retained hard-core continuation at zero inverse temperature"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "physics"
 library: "physics"
@@ -22,6 +22,15 @@ sources:
     - title: "Konstantin K. Likharev, Essential Graduate Physics, Part SM: Statistical Mechanics (2024 author-hosted lecture notes)"
       url: "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/03%3A_Ideal_and_Not-So-Ideal_Gases/3.01%3A_Ideal_classical_gas"
 dependency_level: 5
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Definition

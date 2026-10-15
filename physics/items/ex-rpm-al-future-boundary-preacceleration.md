@@ -2,7 +2,7 @@
 id: ex-rpm-al-future-boundary-preacceleration
 kind: example
 title: "Future-boundary solution of the nonrelativistic Abraham–Lorentz equation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -45,7 +45,15 @@ sources:
     - title: "Sen Zhang, Pre-acceleration from Landau–Lifshitz Series, arXiv:1303.7120"
       url: "https://arxiv.org/html/1303.7120"
       locator: "Relevant HTML text inspected; §2, Eqs. (2.5)–(2.6), gives the nonrelativistic future-selected integral solution. The pulse-specific positivity and uniqueness proof below is local."
-verification: {}
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 physical_scope: "Exact solution and sign check for a separately stated one-dimensional nonrelativistic Abraham–Lorentz ODE. Pre-acceleration is a property of this future-boundary model solution, not an empirical finding or a conclusion about finite-body causal dynamics."
 empirical_premises: []
 ---

@@ -2,7 +2,7 @@
 id: post-rpm-ideal-rindler-phase-reception
 kind: postulate
 title: "Ideal local phase reception by stationary Rindler observers"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -30,7 +30,13 @@ sources:
     - title: "Bahram Mashhoon, The Hypothesis of Locality and its Limitations, arXiv:gr-qc/0303029v1 (2003)"
       url: "https://arxiv.org/pdf/gr-qc/0303029"
       locator: "Complete 14-page author manuscript inspected; §1 pp. 1–2 on momentarily comoving inertial observers and frequency observation, and §4 p. 12 on the ray limit and limitations."
-verification: {}
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

@@ -1,7 +1,7 @@
 ---
 page: qft-ir04
 title: Scaling degree and local extension space
-status: draft
+status: published
 library: mathematics
 items:
   - def-qft-distribution-scaling-degree

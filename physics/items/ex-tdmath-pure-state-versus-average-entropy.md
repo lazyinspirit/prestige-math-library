@@ -2,7 +2,7 @@
 id: ex-tdmath-pure-state-versus-average-entropy
 kind: example
 title: "Pure-state entropy and entropy of a dephased average"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -24,6 +24,15 @@ sources:
     - title: "David Tong, Statistical Physics, complete author-hosted lecture text"
       url: https://davidtong.org/teaching/statistical-physics/statmechhtml/S1
       locator: "Complete author-hosted HTML chapter read; §§1.2–1.4, finite canonical and microcanonical ensemble conventions."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Example

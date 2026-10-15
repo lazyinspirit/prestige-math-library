@@ -4,7 +4,7 @@ kind: postulate
 domain: physics
 library: physics
 title: Specified finite spatial compact U(1) gauge regulator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 dependency_level: 4
@@ -30,6 +30,13 @@ sources:
     - title: "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.2"
       url: "https://arxiv.org/html/1807.01294"
       locator: "Full-text HTML lecture notes; printed pp. 3–6, compact U(1) link rotor, integer electric basis, fermionic matter and physical Gauss sector. Their worked model is not identified with this finite-graph model."
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

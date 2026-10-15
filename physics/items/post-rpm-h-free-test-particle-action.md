@@ -2,7 +2,7 @@
 id: post-rpm-h-free-test-particle-action
 kind: postulate
 title: "Free massive test-particle action"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -25,6 +25,13 @@ sources:
     - title: "W. F. Chagas-Filho, Free massless particles and extended space-time algebra, contextual comparison with the einbein formulation"
       url: "https://arxiv.org/pdf/hep-th/0401091"
       locator: "§1, pp. 1–2, Eqs. (1)–(2): massive einbein action and its x equation, not a square-root-action derivation."
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

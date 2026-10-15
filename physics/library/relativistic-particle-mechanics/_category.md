@@ -1,7 +1,7 @@
 ---
 title: Relativistic Particle Mechanics
 library: physics
-status: draft
+status: published
 ---
 
 This category specifies particle spacetime, observers, worldlines, momentum and mass shells before studying force and action models. Its pages include curved charged motion, constrained Hamiltonian geometry, Poincare moment components, spin transport, accelerated-clock reception and orbital stability. Reduced-order radiation-reaction equations and finite-time comparisons appear with their stated approximation and model scopes. Coordinate, clock, field and constitutive conventions remain explicit where they enter an observable conclusion.

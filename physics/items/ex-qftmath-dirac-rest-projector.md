@@ -2,7 +2,7 @@
 id: ex-qftmath-dirac-rest-projector
 kind: example
 title: Dirac rest projections and two spin-component sectors
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -26,6 +26,15 @@ sources:
     - title: Niklas Beisert, Quantum Field Theory I, ETH Zürich 2025 HS complete lecture notes
       url: https://people.phys.ethz.ch/~nbeisert/lectures/QFT1-25HS-Notes.pdf
       locator: Complete 194-page official course notes; Chapter 5 §§5.1, 5.2, 5.4–5.6, printed 5.1–5.6 and 5.10–5.18, for Clifford algebra, spinor covariance, Hamiltonian form and fermionic quantization. The exact local conventions and domains are proved in the library.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: thm-qft-tempered-field-reconstruction
 kind: theorem
 title: Tested positive moments reconstruct closable smeared fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 domain: mathematics
@@ -49,6 +49,15 @@ sources:
     - title: "Christopher J. Fewster and Kasia Rejzner, Algebraic Quantum Field Theory—an introduction, arXiv:1904.04051v2 (2019)"
       url: https://arxiv.org/pdf/1904.04051
       locator: "§2.3, printed pp. 7–9: algebraic GNS quotient, common domain, adjoint relation, state recovery, and unitary uniqueness."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

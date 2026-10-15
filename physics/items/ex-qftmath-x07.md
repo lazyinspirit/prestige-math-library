@@ -4,7 +4,7 @@ kind: example
 domain: mathematics
 library: mathematics
 title: Worked mathematical example B07 — subtraction and a factorial series
-status: draft
+status: published
 origin: pipeline
 physical_scope: null
 dependency_level: 2
@@ -24,6 +24,15 @@ sources:
       url: https://djvu.online/file/NPF4BEtSuqdFA
     - title: Sheldon Axler, Measure, Integration & Real Analysis, §5C, Theorem 5.44
       url: https://measure.axler.net/MIRA.pdf
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Example

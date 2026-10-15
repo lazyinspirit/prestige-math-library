@@ -3,7 +3,7 @@ requires:
   - rpm-hamiltonian-constraints
 page: rpm-hamiltonian-constraints-examples
 title: "Cotangent phase data, observables and action dimensions — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

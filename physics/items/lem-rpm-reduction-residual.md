@@ -2,7 +2,7 @@
 id: lem-rpm-reduction-residual
 kind: lemma
 title: "Conditional LAD-to-LL residual and finite-interval stability"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -57,7 +57,15 @@ sources:
     - title: "Sen Zhang, Pre-acceleration from Landau–Lifshitz Series, arXiv:1303.7120"
       url: "https://arxiv.org/html/1303.7120"
       locator: "Full HTML text inspected; §2, Eqs. (2.1)–(2.6). The source discusses perturbative order reduction and does not supply the uniform family bounds assumed here."
-verification: {}
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 physical_scope: "Conditional finite-interval residual estimate for regular flat LAD families satisfying the stated small-defect and bounded-coefficient hypotheses, together with finite-time stability for two specified Lipschitz second-order vector fields on a common compact phase region with the same initial data. It proves neither existence of such LAD families nor convergence of LAD trajectories or global-in-time accuracy."
 empirical_premises: []
 ---

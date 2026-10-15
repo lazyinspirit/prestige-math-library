@@ -1,7 +1,7 @@
 ---
 page: qft-mf04-examples
 title: Tempered time-ordered scalar two-point carrier — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qftmath-timeordered-jump

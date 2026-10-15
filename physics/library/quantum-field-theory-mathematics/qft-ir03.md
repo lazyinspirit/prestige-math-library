@@ -1,7 +1,7 @@
 ---
 page: qft-ir03
 title: Regular polynomial field functional algebra
-status: draft
+status: published
 items:
   - def-qft-regular-polynomial-functional-algebra
   - thm-qft-diagonal-delta-distribution

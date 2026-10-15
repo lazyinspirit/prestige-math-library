@@ -2,7 +2,7 @@
 id: pthm-qft-scalar-vacuum-moments
 kind: physics-theorem
 title: Gaussian free vacuum and time-ordered carrier
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 domain: physics
@@ -39,6 +39,15 @@ sources:
     - title: "Mark Srednicki, Quantum Field Theory, author-hosted 2006 prepublication book draft, §3 Canonical Quantization of Scalar Fields"
       url: "https://www.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf"
       locator: "Complete 616-page book draft; printed pp. 36–42 and 67–69, scalar action and normalization, canonical commutators, time-ordered propagator and vacuum pairings."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

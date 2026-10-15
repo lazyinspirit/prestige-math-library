@@ -1,7 +1,7 @@
 ---
 page: td-potentials-and-responses
 title: Potentials And Responses
-status: draft
+status: published
 items:
   - lem-tdmath-euler-identity-for-degree-one-homogeneous-function
   - lem-tdmath-smooth-partial-legendre-transform-differential

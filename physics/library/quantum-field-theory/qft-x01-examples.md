@@ -1,7 +1,7 @@
 ---
 page: qft-x01-examples
 title: Example observable types and scoped meanings — Examples
-status: draft
+status: published
 items: []
 requires:
   - qft-x01

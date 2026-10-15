@@ -1,7 +1,7 @@
 ---
 page: qft-mf01
 title: "Schwartz/distribution spaces and Hilbert Fock conventions"
-status: draft
+status: published
 library: mathematics
 companion: qft-mf01-examples
 requires: ["fourier-transform-convolution-and-approximate-identities", "qm-math-oscillator", "schwartz-space-and-the-plancherel-theorem", "field-extensions-and-the-complex-numbers", "tempered-distributions-and-the-fourier-transform", "density-separability-and-convolution-in-lp"]

@@ -3,7 +3,7 @@ id: thm-qft-self-adjoint-regulated-interaction
 kind: theorem
 domain: mathematics
 title: Self-adjoint unbounded polynomial interaction at fixed regulator
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-qft-regulated-polynomial-hamiltonian, lem-qft-coercive-polynomial-form-domain, lem-qft-polynomial-positive-compact-resolvent, thm-spectral-theorem-for-compact-self-adjoint-operators, thm-hilbert-space-fourier-expansion, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, thm-cauchy-schwarz-in-an-inner-product-space, def-unbounded-linear-operator-domain-and-graph, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-countable-choice]
@@ -29,6 +29,15 @@ sources:
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
     - title: "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 4, pp.27–32"
       url: "https://arxiv.org/pdf/1203.2344v1"
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

@@ -3,7 +3,7 @@ id: def-qft-finite-bounded-kraus-instrument
 kind: definition
 domain: mathematics
 title: Finite bounded Kraus instrument
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-bounded-linear-operator, def-countable-choice, def-hilbert-space, def-hilbert-space-adjoint, def-operator-norm, def-real-and-complex-inner-product-space, def-space-of-bounded-linear-operators, thm-hilbert-adjoint-properties]
@@ -25,6 +25,15 @@ sources:
       url: "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf"
     - title: "R. B. Griffiths, Notes on Quantum Information Theory, version 30 Jan. 2004, §7 pp. 1–3, equations (7.2)–(7.9)"
       url: "https://www.andrew.cmu.edu/course/33-658/qit7.pdf"
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Definition

@@ -1,7 +1,7 @@
 ---
 title: Thermodynamics Mathematics
 library: mathematics
-status: draft
+status: published
 ---
 
 These pages develop ordered composition and scalable compounds, local Pfaff geometry, convex contact sectors and entropy calibration. Ensemble constructions, mixture dynamics, continuum pressure, spatial measure and information provide further analytic prerequisites. The results specify the mathematical assumptions needed for each construction, including local regularity, admissibility, integrability and any choice principle. Their physical interpretation belongs to the corresponding thermodynamics pages and does not enter the mathematical proofs.

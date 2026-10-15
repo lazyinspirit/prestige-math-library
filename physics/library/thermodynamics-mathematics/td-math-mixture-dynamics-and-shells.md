@@ -1,7 +1,7 @@
 ---
 page: td-math-mixture-dynamics-and-shells
 title: Mixture Dynamics And Shells
-status: draft
+status: published
 library: mathematics
 items:
   - def-tdmath-mixture-generator-space-and-energy

@@ -4,7 +4,7 @@ requires:
   - rpm-hamiltonian-constraints
 page: rpm-symmetries-hamilton-jacobi
 title: "Poincare semidirect group, dual pairing and moment components"
-status: draft
+status: published
 library: physics
 items:
   - def-rpm-h-poincare-charge-space

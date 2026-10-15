@@ -1,7 +1,7 @@
 ---
 page: qft-ir01
 title: Finite-lattice polynomial Hamiltonian data
-status: draft
+status: published
 requires: ["compact-self-adjoint-hilbert-schmidt-and-trace-class-operators", "density-separability-and-convolution-in-lp", "hilbert-space-geometry-and-riesz-representation", "orthonormal-bases-parseval-and-fourier-series", "relations-functions-and-quotients", "qm-math-oscillator"]
 items:
   - def-qft-regulated-polynomial-hamiltonian

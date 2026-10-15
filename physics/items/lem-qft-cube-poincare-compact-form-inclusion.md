@@ -3,7 +3,7 @@ id: lem-qft-cube-poincare-compact-form-inclusion
 kind: lemma
 domain: mathematics
 title: Cube mean estimate and compact form inclusion
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-qft-coercive-polynomial-form-domain, def-compact-linear-operator, thm-cauchy-schwarz-in-an-inner-product-space, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]
@@ -22,6 +22,15 @@ sources:
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
     - title: "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 8, pp.48–50"
       url: "https://arxiv.org/pdf/1203.2344v1"
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

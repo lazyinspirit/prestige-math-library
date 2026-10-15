@@ -1,7 +1,7 @@
 ---
 page: qft-c01
 title: "Quantum field quantities and compatible SI normalizations"
-status: draft
+status: published
 library: physics
 items:
   - def-qft-framework-units

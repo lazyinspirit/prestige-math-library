@@ -1,7 +1,7 @@
 ---
 page: qft-mx02
 title: Clifford traces and normalized spin completeness
-status: draft
+status: published
 library: mathematics
 items:
   - def-qft-example-two-body-phase-space-data

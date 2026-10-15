@@ -1,7 +1,7 @@
 ---
 page: td-entropy-foundation-examples
 title: Entropy Foundation — Examples
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items: []

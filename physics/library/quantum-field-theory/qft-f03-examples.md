@@ -1,7 +1,7 @@
 ---
 page: qft-f03-examples
 title: "Exact Dirac particle/antiparticle free model — Examples"
-status: draft
+status: published
 library: physics
 items: []
 requires:

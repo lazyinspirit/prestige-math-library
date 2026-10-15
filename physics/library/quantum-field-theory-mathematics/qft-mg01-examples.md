@@ -1,7 +1,7 @@
 ---
 page: qft-mg01-examples
 title: Charged gauge data and SI-natural conventions — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qft-qed-two-polarizations

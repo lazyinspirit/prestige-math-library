@@ -1,7 +1,7 @@
 ---
 title: Quantum Field Theory Mathematics
 library: mathematics
-status: draft
+status: published
 ---
 
 These pages construct algebraic states, distributional test spaces, Fock conventions and free-field carriers, together with finite measurement instruments. Further topics include Clifford algebra, gauge data, soft coherent profiles, finite regulator models, polynomial functionals and scaling-degree extensions. Exact finite or regulated constructions are distinguished from formal coefficients and unconstructed limits. Every result specifies its spaces, domains, pairings and hypotheses before those objects enter the corresponding physical framework.

@@ -1,7 +1,7 @@
 ---
 page: emg-mg01-examples
 title: "Oriented Lorentzian fields, observers and coordinate conventions — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-mg01

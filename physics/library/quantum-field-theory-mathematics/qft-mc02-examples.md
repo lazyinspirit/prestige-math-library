@@ -1,7 +1,7 @@
 ---
 page: qft-mc02-examples
 title: Tensor test algebra and positive tempered moment data — Examples
-status: draft
+status: published
 items: []
 requires:
   - qft-mc02

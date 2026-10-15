@@ -1,7 +1,7 @@
 ---
 page: qft-x02-examples
 title: Formal diagram coefficient-to-observable adoption — Examples
-status: draft
+status: published
 items: []
 requires:
   - qft-x02

@@ -1,7 +1,7 @@
 ---
 page: qft-f01-examples
 title: "Specified bosonic scalar and CAR Dirac model adoption — Examples"
-status: draft
+status: published
 library: physics
 items:
   - ex-qft-mode-occupations

@@ -1,7 +1,7 @@
 ---
 page: qft-mx04
 title: Ideal linear Penning mode-frequency invariant
-status: draft
+status: published
 items:
   - lem-qft-example-penning-frequency-invariant
   - lem-qft-example-deterministic-ratio-error

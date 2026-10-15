@@ -1,7 +1,7 @@
 ---
 page: qft-mf01-examples
 title: "Schwartz/distribution spaces and Hilbert Fock conventions — Examples"
-status: draft
+status: published
 library: mathematics
 companion: qft-mf01
 requires:

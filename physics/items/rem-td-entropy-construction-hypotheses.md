@@ -2,7 +2,7 @@
 id: rem-td-entropy-construction-hypotheses
 kind: remark
 title: Scope of the accessibility entropy construction
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -33,6 +33,14 @@ sources:
     - title: "Samuel J. Ling, William Moebs, and Jeff Sanny, University Physics Volume 2, §4.6 Entropy"
       url: https://openstax.org/books/university-physics-volume-2/pages/4-6-entropy
 verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
   precheck: n/a
 dependency_level: 20
 ---

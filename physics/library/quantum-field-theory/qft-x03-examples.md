@@ -1,7 +1,7 @@
 ---
 page: qft-x03-examples
 title: Regulated soft coherent photon-count prediction — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

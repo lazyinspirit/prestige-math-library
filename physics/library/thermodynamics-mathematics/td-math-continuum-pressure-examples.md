@@ -1,7 +1,7 @@
 ---
 page: td-math-continuum-pressure-examples
 title: "Continuum Pressure — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

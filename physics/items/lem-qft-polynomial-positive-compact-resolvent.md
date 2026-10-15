@@ -3,7 +3,7 @@ id: lem-qft-polynomial-positive-compact-resolvent
 kind: lemma
 domain: mathematics
 title: Positive injective compact polynomial form resolvent
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-qft-coercive-polynomial-form-domain, lem-qft-cube-poincare-compact-form-inclusion, thm-riesz-representation-for-hilbert-space, thm-cauchy-schwarz-in-an-inner-product-space, def-bounded-linear-operator, def-compact-linear-operator, def-self-adjoint-positive-unitary-and-normal-operator, thm-double-orthogonal-complement-is-closure, def-countable-choice]
@@ -27,6 +27,15 @@ sources:
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
     - title: "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 4, pp.27–32"
       url: "https://arxiv.org/pdf/1203.2344v1"
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

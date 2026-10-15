@@ -1,7 +1,7 @@
 ---
 page: qft-mf02-examples
 title: Scalar future mass-shell measure and test restriction — Examples
-status: draft
+status: published
 requires:
   - qft-mf02
 items: []

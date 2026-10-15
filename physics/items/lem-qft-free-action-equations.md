@@ -2,7 +2,7 @@
 id: lem-qft-free-action-equations
 kind: lemma
 title: Classical free action variations and normalization
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,6 +36,14 @@ sources:
       url: https://www.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf
       locator: Complete 616-page draft; §3, equations 3.7–3.10, and §36, equations 36.1–36.11. The spinor discussion uses anticommuting fields; the argument here concerns commuting classical fields.
 verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
   precheck: pass
 ---
 

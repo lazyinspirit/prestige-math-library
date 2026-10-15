@@ -1,7 +1,7 @@
 ---
 page: td-finite-statistical-bridge-examples
 title: "Finite Statistical Bridge — Examples"
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items: []

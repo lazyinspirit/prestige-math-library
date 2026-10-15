@@ -4,7 +4,7 @@ kind: postulate
 domain: physics
 library: physics
 title: Explicit formal QED vertex/free-line convention
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 dependency_level: 6
@@ -29,6 +29,13 @@ sources:
     - title: "David Tong, Quantum Field Theory, complete author-hosted Cambridge lecture notes, Chapter 6: Quantum Electrodynamics, §§6.4.1–6.5"
       url: "https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S6.html"
       locator: "Complete HTML Chapter 6; QED interaction and tree-current argument, equations 6.569–6.584, and the vertex/free-line table in §6.5. Tong uses signature (+---); the local h=-eta convention is stated explicitly here."
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

@@ -1,7 +1,7 @@
 ---
 page: qft-mc01
 title: Unital star algebra and positive normalized state
-status: draft
+status: published
 items:
   - def-qft-involutive-algebra-state
   - lem-qft-positive-state-cauchy-schwarz

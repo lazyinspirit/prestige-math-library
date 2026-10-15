@@ -2,7 +2,7 @@
 id: lem-qft-mass-shell-measure-invariant
 kind: lemma
 title: Local finiteness and Lorentz invariance of the scalar shell measure
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,6 +36,15 @@ sources:
     - title: David Tong, Quantum Field Theory, section 2.4.1
       url: https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S2.html
       locator: Author-hosted HTML text of chapter 2, section 2.4.1 equations 2.133–2.141 discusses Lorentz-invariant one-particle normalization; the complete lecture-note set is also listed as a 155-page PDF.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

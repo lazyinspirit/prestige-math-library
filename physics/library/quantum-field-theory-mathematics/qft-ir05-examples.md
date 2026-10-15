@@ -1,7 +1,7 @@
 ---
 page: qft-ir05-examples
 title: Finite quartic graph and superficial scaling conventions — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

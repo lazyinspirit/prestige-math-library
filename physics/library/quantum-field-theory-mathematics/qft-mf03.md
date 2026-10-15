@@ -1,7 +1,7 @@
 ---
 page: qft-mf03
 title: Dirac Clifford matrices and energy projections
-status: draft
+status: published
 requires:
   - qft-mf02
   - tempered-distributions-and-the-fourier-transform

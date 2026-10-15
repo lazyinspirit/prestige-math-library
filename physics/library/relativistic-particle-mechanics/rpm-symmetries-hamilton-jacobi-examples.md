@@ -3,7 +3,7 @@ requires:
   - rpm-symmetries-hamilton-jacobi
 page: rpm-symmetries-hamilton-jacobi-examples
 title: "Poincare semidirect group, dual pairing and moment components — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

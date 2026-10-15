@@ -1,7 +1,7 @@
 ---
 page: td-math-spatial-measure-and-information-examples
 title: Spatial Measure And Information — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

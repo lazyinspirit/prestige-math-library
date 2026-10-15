@@ -1,7 +1,7 @@
 ---
 page: qft-f04
 title: "Free observable domains and limits of point notation"
-status: draft
+status: published
 library: physics
 items:
   - pthm-qft-free-observable-domain-limits

@@ -1,7 +1,7 @@
 ---
 page: td-potentials-and-responses-examples
 title: Potentials And Responses — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-td-response-chart-failure

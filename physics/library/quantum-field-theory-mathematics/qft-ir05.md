@@ -1,7 +1,7 @@
 ---
 page: qft-ir05
 title: Finite quartic graph and superficial scaling conventions
-status: draft
+status: published
 library: mathematics
 items:
   - def-qft-quartic-graph-power-counting

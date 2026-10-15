@@ -2,7 +2,7 @@
 id: "post-td-equilibrium-ensemble-sampling"
 kind: "postulate"
 title: "Finite-volume equilibrium ensemble sampling"
-status: "draft"
+status: "published"
 origin: "pipeline"
 domain: "physics"
 library: "physics"
@@ -26,6 +26,13 @@ sources:
     - title: "Hans-Otto Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction, Probability Theory and Related Fields 99 (1994), 171–195"
       url: "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf"
 dependency_level: 6
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

@@ -6,7 +6,7 @@ requires:
   - sr-energy-momentum
 page: rpm-geometry-actions
 title: "Particle spacetime, observers and worldlines"
-status: draft
+status: published
 library: physics
 items:
   - def-rpm-spacetime-observer-and-worldline

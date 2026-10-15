@@ -1,7 +1,7 @@
 ---
 page: qft-mc02
 title: Tensor test algebra and positive tempered moment data
-status: draft
+status: published
 items:
   - def-qft-positive-tempered-moments
   - def-qft-weak-operator-valued-tempered-distribution

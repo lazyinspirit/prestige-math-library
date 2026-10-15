@@ -1,7 +1,7 @@
 ---
 page: rpm-external-charge-examples
 title: "Fixed-endpoint curved charge variation — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - rpm-external-charge

@@ -2,7 +2,7 @@
 id: def-rpm-charge-spin-model
 kind: definition
 title: "Charged and spinning test-body quantities"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Definitions of one classical massive charged and spinning test body on a prescribed smooth time-oriented Lorentzian background: constant positive mass and fixed charge/gyromagnetic parameter, proper-time worldline, kinetic momentum, orthogonal polarization and magnetic-moment convention, and prescribed external two-form with local potential. These are ideal model quantities and SI conventions, not a field equation, motion law, measured gyromagnetic value or quantum-spin construction. Self-gravity, self-field evaluation, radiation reaction, collisions, electric dipole forces, field-gradient translational forces and higher multipoles are excluded as stated in the Definition."
@@ -38,7 +38,15 @@ sources:
     - title: "V. Bargmann, L. Michel and V. L. Telegdi, Precession of the Polarization of Particles Moving in a Homogeneous Electromagnetic Field, Physical Review Letters 2 (1959), 435–437"
       url: "https://www.ihes.fr/~vergne/LouisMichel/publications/PhysRevLett.2.435.pdf"
       locator: "Complete author-hosted copy, both PDF pages; the paper introduces the polarization four-vector and rest-frame magnetic-moment parameter. It treats homogeneous flat fields only and does not supply the curved RPM extension."
-verification: {}
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Definition

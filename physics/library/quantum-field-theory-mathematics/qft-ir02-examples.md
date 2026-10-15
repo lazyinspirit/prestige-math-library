@@ -1,7 +1,7 @@
 ---
 page: qft-ir02-examples
 title: Finite Euclidean quartic interacting measure — Examples
-status: draft
+status: published
 library: mathematics
 items:
   - cex-qft-zero-dimensional-perturbation-radius-zero

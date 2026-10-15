@@ -1,7 +1,7 @@
 ---
 page: qft-f02-examples
 title: Exact real scalar free model — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qft-scalar-vacuum-correlation

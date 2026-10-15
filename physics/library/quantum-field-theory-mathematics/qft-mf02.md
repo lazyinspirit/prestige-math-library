@@ -1,7 +1,7 @@
 ---
 page: qft-mf02
 title: Scalar future mass-shell measure and test restriction
-status: draft
+status: published
 requires: ["qft-mf01", "sr-spacetime-primitives", "smooth-partitions-of-unity-and-exhaustions"]
 items:
   - def-qft-scalar-mass-shell

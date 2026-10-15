@@ -1,7 +1,7 @@
 ---
 page: qft-mx04-examples
 title: Ideal linear Penning mode-frequency invariant — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qftmath-x08

@@ -1,7 +1,7 @@
 ---
 page: td-math-nonsmooth-equilibrium
 title: Nonsmooth Equilibrium
-status: draft
+status: published
 library: mathematics
 items:
   - def-tdmath-extended-convex-function

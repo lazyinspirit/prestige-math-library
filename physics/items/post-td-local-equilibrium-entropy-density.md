@@ -2,7 +2,7 @@
 id: post-td-local-equilibrium-entropy-density
 kind: postulate
 title: Local-equilibrium caloric entropy density
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -24,6 +24,13 @@ sources:
     - title: Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics
       url: https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf
       locator: Complete 607-page lecture notes read; Chapter 2, §2.7.7, measuring entropy from heat capacity.
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

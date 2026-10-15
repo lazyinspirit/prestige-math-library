@@ -1,7 +1,7 @@
 ---
 page: td-math-ordered-composition-examples
 title: Ordered Composition — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

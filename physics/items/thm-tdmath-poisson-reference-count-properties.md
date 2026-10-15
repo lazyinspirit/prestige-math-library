@@ -2,7 +2,7 @@
 id: thm-tdmath-poisson-reference-count-properties
 kind: theorem
 title: Poisson Reference Counts and Translation Invariance
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -28,6 +28,15 @@ sources:
     - title: "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields"
       url: "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf"
       locator: "Section 2.3, printed p.184 / PDF p.7, Poisson process characterized by independent Poisson counts on disjoint bounded sets"
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: qft-ir03-examples
 title: Regular polynomial field functional algebra — Examples
-status: draft
+status: published
 items:
   - rem-qft-local-wick-diagonal-obligation
   - ex-qft-regular-quadratic-star-product

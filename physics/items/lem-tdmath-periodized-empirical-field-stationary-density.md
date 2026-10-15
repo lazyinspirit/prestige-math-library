@@ -2,7 +2,7 @@
 id: lem-tdmath-periodized-empirical-field-stationary-density
 kind: lemma
 title: Stationarity and intensity of a periodized empirical field
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -30,6 +30,15 @@ sources:
     - title: "H.-O. Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction"
       url: "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf"
       locator: "Section 1, equation (1.1), printed p.172 / PDF p.2: the periodic empirical field is translation invariant."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

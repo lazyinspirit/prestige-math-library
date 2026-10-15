@@ -2,7 +2,7 @@
 id: post-td-entropy-maximum
 kind: postulate
 title: Stable equilibrium requires an attained global entropy maximum
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -28,6 +28,13 @@ sources:
     - title: Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§II.F and IV.A
       url: https://arxiv.org/pdf/cond-mat/9708200v2
 dependency_level: 6
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

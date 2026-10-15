@@ -1,7 +1,7 @@
 ---
 page: rpm-controlled-limits-examples
 title: "Finite-time comparison of bounded vector fields — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - rpm-controlled-limits

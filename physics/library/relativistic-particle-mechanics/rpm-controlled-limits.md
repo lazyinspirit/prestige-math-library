@@ -1,7 +1,7 @@
 ---
 page: rpm-controlled-limits
 title: "Finite-time comparison of bounded vector fields"
-status: draft
+status: published
 library: physics
 requires:
   - em-lorentz-covariant-formulation

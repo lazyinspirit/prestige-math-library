@@ -3,7 +3,7 @@ requires:
   - rpm-exact-flat-orbits
 page: rpm-exact-flat-orbits-examples
 title: "Right-wedge accelerated clocks and rays — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

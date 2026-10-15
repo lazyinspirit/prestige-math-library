@@ -1,7 +1,7 @@
 ---
 page: qft-mg01
 title: Charged gauge data and SI-natural conventions
-status: draft
+status: published
 items:
   - def-qft-photon-transverse-space
   - def-qft-qed-gauge-data

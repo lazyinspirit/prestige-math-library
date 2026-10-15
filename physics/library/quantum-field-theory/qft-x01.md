@@ -1,7 +1,7 @@
 ---
 page: qft-x01
 title: Example observable types and scoped meanings
-status: draft
+status: published
 items:
   - def-qft-example-observable-types
   - pthm-qft-example-regulated-probability-control

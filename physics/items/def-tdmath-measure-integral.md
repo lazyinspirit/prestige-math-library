@@ -2,7 +2,7 @@
 id: def-tdmath-measure-integral
 kind: definition
 title: "Measure space and integral"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -21,6 +21,15 @@ sources:
     - title: "MIT OpenCourseWare 18.102 Spring 2021, complete lecture notes (Lecture 12 on Lebesgue Integration and Dominated Convergence)"
       url: "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
       locator: "Complete full lecture-notes PDF retrieved and read; Lecture 12, definitions 120–121, Propositions 122–123, and Theorem 125 with its Fatou-based dominated-convergence proof, lecture pp.59–62."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Definition

@@ -1,7 +1,7 @@
 ---
 page: rpm-radiation-models
 title: "Reduced-order LL local ODE and shell"
-status: draft
+status: published
 library: physics
 items:
   - lem-rpm-ll-reduced-ode

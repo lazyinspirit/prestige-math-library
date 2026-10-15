@@ -1,7 +1,7 @@
 ---
 page: qft-f01
 title: "Specified bosonic scalar and CAR Dirac model adoption"
-status: draft
+status: published
 library: physics
 items:
   - post-qft-free-field-model

@@ -1,7 +1,7 @@
 ---
 title: Thermodynamics
 library: physics
-status: draft
+status: published
 ---
 
 This category begins with systems, exchanges, energy and entropy, then develops accessibility, equilibrium representations, potentials and response functions. Later pages address cycles, low-temperature assumptions, phase coexistence, statistical preparations, irreversible boundaries and stochastic protocols. Continuum heat and interacting equilibrium preparations retain their own specified assumptions. The mathematical companions supply the ordered, geometric, analytic and statistical constructions used in these conditional physical deductions.

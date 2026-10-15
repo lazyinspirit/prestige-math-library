@@ -2,7 +2,7 @@
 id: thm-tdmath-regular-energy-shell-measure
 kind: theorem
 title: "Coarea and invariant measure on compact regular energy shells"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -25,6 +25,15 @@ sources:
     - title: "ETH Zürich, Numerical Methods for Ordinary Differential Equations"
       url: https://people.math.ethz.ch/~grsam/SS19/NAII/resources/lecture1.pdf
       locator: "Read §5.2.6.3, printed p.70: complete determinant/variational proof and Theorem 5.13 for a C1 divergence-free field. Local step 1.2 supplies the proof used here."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

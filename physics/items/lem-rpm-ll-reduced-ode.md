@@ -2,7 +2,7 @@
 id: lem-rpm-ll-reduced-ode
 kind: lemma
 title: "Reduced-order Landau–Lifshitz local ODE and mass shell"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -43,7 +43,15 @@ sources:
     - title: "Sen Zhang, Pre-acceleration from Landau–Lifshitz Series, arXiv:1303.7120"
       url: "https://arxiv.org/html/1303.7120"
       locator: "Full HTML text inspected; §2, Eqs. (2.1)–(2.6), and Appendix A, Eqs. (A.1)–(A.4). The source motivates reduction of order; the local existence and shell proof below is independent."
-verification: {}
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 physical_scope: "Mathematical local-existence and shell-preservation result for the explicitly displayed reduced-order vector field on flat affine Minkowski space. It asserts no global existence, physical truth, or approximation accuracy."
 empirical_premises: []
 ---

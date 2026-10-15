@@ -2,7 +2,7 @@
 id: lem-rpm-bmt-transport-algebra
 kind: lemma
 title: BMT transport constraint and restricted-ansatz algebra
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -35,6 +35,14 @@ sources:
       url: https://galileoandeinstein.phys.virginia.edu/Elec_Mag/2022_Lectures/EM_71_g-2.html
       locator: "Section “Relativistic Spin Precession: the BMT Equation”, four-spin construction and coefficient determination; the local statement below is proved independently."
 verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
   precheck: pass
 ---
 

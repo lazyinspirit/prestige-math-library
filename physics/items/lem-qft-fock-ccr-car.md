@@ -2,7 +2,7 @@
 id: lem-qft-fock-ccr-car
 kind: lemma
 title: Bosonic and fermionic Fock operators with exact domains
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -42,6 +42,15 @@ sources:
     - title: David Tong, Quantum Field Theory, §§2.2–2.4 (free-field modes, multi-particle states and Fock space)
       url: https://www.damtp.cam.ac.uk/user/tong/qft/qft.pdf
       locator: Complete 155-page author-hosted lecture notes; printed pp. 23–25 and 29–30.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

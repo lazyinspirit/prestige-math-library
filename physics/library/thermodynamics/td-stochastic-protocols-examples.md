@@ -1,7 +1,7 @@
 ---
 page: td-stochastic-protocols-examples
 title: "Stochastic Protocols — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-td-finite-quench-work-fluctuation

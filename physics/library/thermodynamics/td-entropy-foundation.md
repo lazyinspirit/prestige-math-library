@@ -1,7 +1,7 @@
 ---
 page: td-entropy-foundation
 title: Entropy Foundation
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items:

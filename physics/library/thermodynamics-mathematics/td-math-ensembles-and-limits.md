@@ -1,7 +1,7 @@
 ---
 page: td-math-ensembles-and-limits
 title: Ensembles And Limits
-status: draft
+status: published
 library: mathematics
 items:
   - def-tdmath-countable-canonical-model

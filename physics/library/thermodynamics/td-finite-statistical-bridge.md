@@ -1,7 +1,7 @@
 ---
 page: td-finite-statistical-bridge
 title: "Finite Statistical Bridge"
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items:

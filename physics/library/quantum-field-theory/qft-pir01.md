@@ -1,7 +1,7 @@
 ---
 page: qft-pir01
 title: Adopted finite-regulator bosonic polynomial model
-status: draft
+status: published
 library: physics
 requires:
   - qft-c01

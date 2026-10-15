@@ -1,7 +1,7 @@
 ---
 page: qft-g02-examples
 title: "Explicit formal QED vertex/free-line convention — Examples"
-status: draft
+status: published
 library: physics
 items:
   - texp-qft-qed-infrared-sequence

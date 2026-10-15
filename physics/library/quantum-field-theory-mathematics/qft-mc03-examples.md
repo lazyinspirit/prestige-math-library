@@ -1,7 +1,7 @@
 ---
 page: qft-mc03-examples
 title: Formal factorial series with zero convergence radius — Counterexample
-status: draft
+status: published
 items: []
 requires:
   - qft-mc03

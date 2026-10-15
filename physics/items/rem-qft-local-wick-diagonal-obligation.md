@@ -2,7 +2,7 @@
 id: rem-qft-local-wick-diagonal-obligation
 kind: remark
 title: Local Wick diagonal products need additional prerequisites
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -37,6 +37,15 @@ sources:
     - title: Klaus Fredenhagen and Katarzyna Rejzner, Perturbative algebraic quantum field theory, complete lecture notes, sections 4–5
       url: https://arxiv.org/html/1208.1428
       locator: Complete 42-page notes, section 4, equations (23)–(25), distinguishing regular from local functionals; section 5, Example 5.2, the Wick-square extension discussion.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Remarks

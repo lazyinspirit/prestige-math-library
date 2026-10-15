@@ -1,7 +1,7 @@
 ---
 page: td-representation-and-equilibrium
 title: Representation And Equilibrium
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items:

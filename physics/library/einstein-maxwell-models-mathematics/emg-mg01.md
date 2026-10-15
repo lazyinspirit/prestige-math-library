@@ -1,7 +1,7 @@
 ---
 page: emg-mg01
 title: "Oriented Lorentzian fields, observers and coordinate conventions"
-status: draft
+status: published
 library: mathematics
 requires: ["gr-connections-and-free-fall","gr-einstein-and-matter","the-inverse-function-theorem-completed"]
 items:

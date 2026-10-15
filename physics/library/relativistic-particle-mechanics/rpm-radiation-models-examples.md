@@ -1,7 +1,7 @@
 ---
 page: rpm-radiation-models-examples
 title: "Reduced-order LL local ODE and shell — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

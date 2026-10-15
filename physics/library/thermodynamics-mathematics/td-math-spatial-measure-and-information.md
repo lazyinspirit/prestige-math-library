@@ -1,7 +1,7 @@
 ---
 page: td-math-spatial-measure-and-information
 title: Spatial Measure And Information
-status: draft
+status: published
 library: mathematics
 items:
   - def-tdmath-finite-region-relative-entropy

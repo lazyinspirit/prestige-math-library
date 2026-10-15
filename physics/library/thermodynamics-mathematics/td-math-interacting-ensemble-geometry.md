@@ -1,7 +1,7 @@
 ---
 page: td-math-interacting-ensemble-geometry
 title: Interacting Ensemble Geometry
-status: draft
+status: published
 library: mathematics
 items:
   - def-tdmath-van-hove-sequence

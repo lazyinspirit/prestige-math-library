@@ -1,7 +1,7 @@
 ---
 page: td-math-local-pfaff-geometry-examples
 title: Local Pfaff Geometry — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

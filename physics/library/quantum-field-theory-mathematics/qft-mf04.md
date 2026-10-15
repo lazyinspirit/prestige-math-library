@@ -1,7 +1,7 @@
 ---
 page: qft-mf04
 title: Tempered time-ordered scalar two-point carrier
-status: draft
+status: published
 items:
   - lem-qft-free-time-ordered-kernel
   - lem-qft-free-action-equations

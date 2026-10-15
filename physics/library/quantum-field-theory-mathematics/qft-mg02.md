@@ -1,7 +1,7 @@
 ---
 page: qft-mg02
 title: Exact compact U1 rotor plus finite CAR data
-status: draft
+status: published
 items:
   - lem-qft-finite-mode-occupation-basis
   - def-qft-compact-lattice-gauge-data

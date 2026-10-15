@@ -3,7 +3,7 @@ id: thm-qft-regulated-gibbs-trace
 kind: theorem
 domain: mathematics
 title: Finite-regulator Gibbs trace and bounded expectations
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-qft-regulated-polynomial-hamiltonian, thm-qft-self-adjoint-regulated-interaction, lem-qft-hermite-oscillator-research-supplier, lem-qft-coercive-polynomial-form-domain, thm-hilbert-space-fourier-expansion, thm-riesz-representation-for-hilbert-space, thm-cauchy-schwarz-in-an-inner-product-space, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, lem-nuclear-series-characterizes-trace-norm, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-trace-is-absolutely-convergent-and-basis-independent, def-bounded-linear-operator, def-countable-choice]
@@ -34,6 +34,15 @@ sources:
     - title: "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapters 8–9, pp.48–54"
       url: "https://arxiv.org/pdf/1203.2344v1"
       locator: "Chapter 8, confining-well compactness; Chapter 9, variational comparison of eigenvalues."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

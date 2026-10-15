@@ -4,7 +4,7 @@ kind: postulate
 domain: physics
 library: physics
 title: "Physical interpretation of a supplied constructed quantum model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 dependency_level: 2
@@ -32,6 +32,13 @@ sources:
       url: "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf"
     - title: "R. B. Griffiths, Notes on Quantum Information Theory, version 30 Jan. 2004, complete §7, printed pp. 1–3, equations (7.2)–(7.9)"
       url: "https://www.andrew.cmu.edu/course/33-658/qit7.pdf"
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

@@ -4,7 +4,7 @@ kind: physics-theorem
 domain: physics
 library: physics
 title: Constructed regulated polynomial-model evolution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 dependency_level: 6
@@ -34,6 +34,15 @@ sources:
     - title: "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Ch.4 and Ch.8"
       url: "https://arxiv.org/pdf/1203.2344v1"
       locator: "Printed pp.27–32 and 48–50, compact-form spectral theory and confining Schrödinger operators."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

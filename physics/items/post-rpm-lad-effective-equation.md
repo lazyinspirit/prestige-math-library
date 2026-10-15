@@ -2,7 +2,7 @@
 id: post-rpm-lad-effective-equation
 kind: postulate
 title: "Flat Lorentz–Abraham–Dirac effective equation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -26,7 +26,13 @@ sources:
     - title: "Sen Zhang, Pre-acceleration from Landau–Lifshitz Series, arXiv:1303.7120"
       url: "https://arxiv.org/html/1303.7120"
       locator: "Full HTML text inspected; §2, Eqs. (2.1)–(2.6), and Appendix A, Eqs. (A.1)–(A.4), discussing the LAD equation and its reduced-order use."
-verification: {}
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 physical_scope: "Adopted flat-space point-particle effective equation in a prescribed external field. It is a model postulate, not a derivation from a coupled Maxwell point source, finite-body limit, or observation; it asserts no solution existence or global accuracy."
 empirical_premises: []
 ---

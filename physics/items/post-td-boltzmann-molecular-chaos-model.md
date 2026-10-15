@@ -2,7 +2,7 @@
 id: post-td-boltzmann-molecular-chaos-model
 kind: postulate
 title: Periodic Boltzmann model with incoming molecular chaos
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -30,6 +30,13 @@ sources:
     - title: R. Fitzpatrick, Plasma Physics, Boltzmann H-Theorem
       url: https://farside.ph.utexas.edu/teaching/plasma/lectures1/node40.html
       locator: Complete author-hosted HTML section read; equations (3.123)–(3.144), collision model and H-theorem context.
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

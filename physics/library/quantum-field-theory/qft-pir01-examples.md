@@ -1,7 +1,7 @@
 ---
 page: qft-pir01-examples
 title: Adopted finite-regulator bosonic polynomial model — Examples
-status: draft
+status: published
 library: physics
 requires:
   - qft-pir01

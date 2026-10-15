@@ -2,7 +2,7 @@
 id: post-qft-free-field-model
 kind: postulate
 title: "Specified bosonic scalar and CAR Dirac model adoption"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 domain: physics
@@ -42,6 +42,13 @@ sources:
     - title: "Mark Srednicki, Quantum Field Theory, author-hosted 2006 prepublication book draft"
       url: "https://www.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf"
       locator: "Complete 616-page draft; §3, Canonical Quantization of Scalar Fields, and §§37–39, Canonical Quantization of Spinor Fields."
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

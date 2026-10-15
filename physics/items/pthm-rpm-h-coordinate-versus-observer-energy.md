@@ -2,7 +2,7 @@
 id: pthm-rpm-h-coordinate-versus-observer-energy
 kind: physics-theorem
 title: "Coordinate Hamiltonian and normal-observer energy: lapse and shift"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -27,6 +27,15 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/0703035"
       locator: "Complete 220-page notes; §§3.3.1–3.3.3, printed pp. 41–44, and §§4.2.2–4.2.3, pp. 56–58; full relevant sections inspected."
 physical_scope: "Conditional energy identities in a supplied temporal chart; SR is used only as a flat consistency specialization, not as a curved premise."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

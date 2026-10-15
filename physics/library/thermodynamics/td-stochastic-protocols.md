@@ -1,7 +1,7 @@
 ---
 page: td-stochastic-protocols
 title: "Stochastic Protocols"
-status: draft
+status: published
 items:
   - def-td-driven-finite-path-model
   - def-td-detailed-balance-rate-model

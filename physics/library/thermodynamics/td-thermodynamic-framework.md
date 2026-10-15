@@ -1,7 +1,7 @@
 ---
 page: td-thermodynamic-framework
 title: Thermodynamic Framework
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items:

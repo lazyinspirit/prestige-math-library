@@ -1,7 +1,7 @@
 ---
 page: qft-mf03-examples
 title: Dirac Clifford matrices and energy projections — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qftmath-dirac-rest-projector

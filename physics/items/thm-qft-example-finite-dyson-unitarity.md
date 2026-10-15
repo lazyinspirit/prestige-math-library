@@ -3,7 +3,7 @@ id: thm-qft-example-finite-dyson-unitarity
 kind: theorem
 domain: mathematics
 title: Finite Dyson remainder, coefficient unitarity, and regulator counterexamples
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:
@@ -27,6 +27,15 @@ sources:
     - title: M. Srednicki, Quantum Field Theory, author-hosted prepublication draft, §9, problem 9.5(b)–(g), printed pp. 84–85
       url: https://web.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf
       locator: "Problem 9.5(b)–(g), printed pp. 84–85, equations (9.34)–(9.36): unitary interaction-picture evolution, differential equation, time-ordered expansion, and composition/adjoint identities. The local finite-dimensional theorem supplies its own convergence proof."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: td-irreversible-boundaries-examples
 title: Irreversible Boundaries — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

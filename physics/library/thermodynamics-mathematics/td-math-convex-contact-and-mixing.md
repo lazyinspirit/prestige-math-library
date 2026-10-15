@@ -1,7 +1,7 @@
 ---
 page: td-math-convex-contact-and-mixing
 title: Convex Contact And Mixing
-status: draft
+status: published
 library: mathematics
 requires:
   - td-math-local-pfaff-geometry

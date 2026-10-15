@@ -2,7 +2,7 @@
 id: lem-qft-qed-formal-matrix-ward
 kind: lemma
 title: Finite/formal gauge covariance and matrix Ward identity
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -28,6 +28,15 @@ sources:
     - title: Mark Srednicki, Quantum Field Theory, §§67–68
       url: https://www.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf
       locator: Complete author-hosted draft; Ward identities in QED, printed pp. 400–404. The local item proves only finite/formal matrix identities.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

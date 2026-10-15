@@ -2,7 +2,7 @@
 id: thm-tdmath-infinite-no-sinks-sandwich
 kind: theorem
 title: Infinite-valued no-sinks Hahn–Banach sandwich and conditional offsets
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -38,6 +38,15 @@ sources:
       url: "https://www.maths.usyd.edu.au/u/athomas/FunctionalAnalysis/daners-functional-analysis-2017.pdf?download=1"
     - title: "G. Teschl, Topics in Real and Functional Analysis, §4.2, Theorem 4.11 and proof"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf?download=1"
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

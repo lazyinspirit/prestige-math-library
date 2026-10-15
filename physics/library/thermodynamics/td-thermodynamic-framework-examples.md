@@ -1,7 +1,7 @@
 ---
 page: td-thermodynamic-framework-examples
 title: Thermodynamic Framework — Examples
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items: []

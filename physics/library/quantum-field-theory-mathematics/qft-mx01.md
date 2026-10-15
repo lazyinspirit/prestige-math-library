@@ -1,7 +1,7 @@
 ---
 page: qft-mx01
 title: Example conventions, energy units and constructed/formal data
-status: draft
+status: published
 items:
   - def-qft-example-data
   - thm-qft-example-finite-dyson-unitarity

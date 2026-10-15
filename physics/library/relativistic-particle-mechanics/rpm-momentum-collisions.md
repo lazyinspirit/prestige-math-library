@@ -2,7 +2,7 @@
 requires: ["rpm-geometry-actions", "sr-causality-and-signals"]
 page: rpm-momentum-collisions
 title: "Mass shell inversion, observer work and variable mass"
-status: draft
+status: published
 library: physics
 items:
   - pthm-rpm-inverse-momentum-and-work

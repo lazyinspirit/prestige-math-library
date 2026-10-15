@@ -2,7 +2,7 @@
 id: thm-tdmath-continuous-ideal-gas-block-limit
 kind: theorem
 title: "Continuous ideal-gas bulk limit and finite-block bridge"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -22,6 +22,15 @@ sources:
     - title: "Hocky Research Group, Statistical Mechanics Lecture 5: Ideal Gas"
       url: https://hockygroup.com/teaching/statmech/notes/2021/Lecture5-IdealGas.pdf
       locator: "Complete 8-page lecture notes retrieved and read; pp.1–8, classical phase-space normalization and ideal-gas thermodynamics."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

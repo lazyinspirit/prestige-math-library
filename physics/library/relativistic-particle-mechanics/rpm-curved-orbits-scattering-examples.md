@@ -3,7 +3,7 @@ requires:
   - rpm-curved-orbits-scattering
 page: rpm-curved-orbits-scattering-examples
 title: "Circular timelike orbit and reduced radial stability — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

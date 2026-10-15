@@ -2,7 +2,7 @@
 id: lem-rpm-sine-over-angle-limit
 kind: lemma
 title: "The sine-to-angle limit at the origin"
-status: draft
+status: published
 origin: session
 domain: mathematics
 library: mathematics
@@ -24,7 +24,15 @@ sources:
   references:
     - title: "OpenStax, Calculus Volume 1, §2.3 The Limit Laws, unit-circle squeeze proof of the fundamental sine limit"
       url: "https://openstax.org/books/calculus-volume-1/pages/2-3-the-limit-laws"
-verification: {}
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

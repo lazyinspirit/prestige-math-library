@@ -2,7 +2,7 @@
 requires: ["distributions-integral-manifolds-and-the-frobenius-theorem", "geodesics-the-exponential-map-completeness-and-hopf-rinow", "hamiltonian-mechanics-and-completely-integrable-systems", "rank-theorems-and-embedded-submanifolds", "rpm-geometry-actions", "symplectic-manifolds-moser-stability-and-darboux-weinstein-theory", "cm-math-variations"]
 page: rpm-hamiltonian-constraints
 title: "Cotangent phase data, observables and action dimensions"
-status: draft
+status: published
 library: physics
 items:
   - def-rpm-h-cotangent-phase-space

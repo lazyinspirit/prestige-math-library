@@ -1,7 +1,7 @@
 ---
 page: td-math-continuum-pressure
 title: "Continuum Pressure"
-status: draft
+status: published
 library: mathematics
 items:
   - def-tdmath-stable-power-tempered-particle-model

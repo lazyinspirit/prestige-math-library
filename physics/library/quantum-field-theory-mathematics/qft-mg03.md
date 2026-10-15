@@ -1,7 +1,7 @@
 ---
 page: qft-mg03
 title: Finite matrix formal inverse and gauge-covariant kernel
-status: draft
+status: published
 library: mathematics
 items:
   - def-qft-qed-finite-graph-gauge-data

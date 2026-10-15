@@ -1,7 +1,7 @@
 ---
 page: qft-g01-examples
 title: "Positive transverse free photon model — Examples"
-status: draft
+status: published
 library: physics
 items:
   - texp-qft-photon-auxiliary-comparison

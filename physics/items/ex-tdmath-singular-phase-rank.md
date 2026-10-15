@@ -2,7 +2,7 @@
 id: ex-tdmath-singular-phase-rank
 kind: example
 title: "A singular two-phase equation map with a four-dimensional solution set"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -24,6 +24,14 @@ sources:
     - title: "Faye Jackson, MATH 395 notes, Implicit Function Theorem, pp. 99–106 and 127–132"
       url: "https://math.uchicago.edu/~alephnil/notes/MATH-395-notes.pdf"
 verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
   precheck: n/a
 ---
 

@@ -1,7 +1,7 @@
 ---
 page: td-math-ensembles-and-limits-examples
 title: Ensembles And Limits — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

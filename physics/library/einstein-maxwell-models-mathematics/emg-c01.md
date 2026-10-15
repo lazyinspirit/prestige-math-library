@@ -1,7 +1,7 @@
 ---
 page: emg-c01
 title: "SI and geometrized Einstein–Maxwell parameters"
-status: draft
+status: published
 library: mathematics
 requires: ["emg-mg01","the-inverse-function-theorem-completed"]
 items:

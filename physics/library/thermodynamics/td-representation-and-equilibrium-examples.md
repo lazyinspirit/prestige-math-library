@@ -1,7 +1,7 @@
 ---
 page: td-representation-and-equilibrium-examples
 title: Representation And Equilibrium — Examples
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items: []

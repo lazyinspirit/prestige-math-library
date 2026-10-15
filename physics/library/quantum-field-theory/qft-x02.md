@@ -1,7 +1,7 @@
 ---
 page: qft-x02
 title: Formal diagram coefficient-to-observable adoption
-status: draft
+status: published
 items:
   - post-qft-example-formal-observable-map
   - pthm-qft-example-formal-scattering-decay

@@ -2,7 +2,7 @@
 id: ex-rpm-pure-gauge-free-charge
 kind: example
 title: "Pure-gauge potential and free massive charged motion"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -43,7 +43,15 @@ sources:
     - title: "Eric Poisson, Adam Pound and Ian Vega, The Motion of Point Particles in Curved Spacetime, author manuscript arXiv:1102.0529v3 (2011)"
       url: "https://arxiv.org/pdf/1102.0529v3"
       locator: "Source context for the charged-particle action in §18.1, equations (18.3)–(18.7), printed pp. 96–97; no self-field theory or empirical observation is used in this example."
-verification: {}
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Example

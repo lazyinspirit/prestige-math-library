@@ -2,7 +2,7 @@
 id: pthm-rpm-rindler-clock-gradient
 kind: physics-theorem
 title: "Right-wedge Rindler clocks, radial rays and frequency ratio"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -49,7 +49,15 @@ sources:
     - title: "Tevian Dray, Geometry of General Relativity, Chapter 4: Rindler Geometry, online textbook sections §1 The Rindler Metric and §2 Rindler Geometry"
       url: "https://sites.science.oregonstate.edu/physics/coursewikis/GGR/book/ggr/rindprop.html"
       locator: "Chapter 4 §2 Rindler Geometry: stationary constant-rho proper-time relation, four-velocity and proper-acceleration magnitude; complete section inspected. Source coordinates use c=1 and were restored to SI in this proof."
-verification: {}
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

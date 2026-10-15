@@ -2,7 +2,7 @@
 id: thm-tdmath-continuum-variational-pressure
 kind: theorem
 title: Superstable regular continuum grand pressure and variational formula
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -59,6 +59,15 @@ sources:
     - title: "D. Dereudre, Introduction to the theory of Gibbs point processes"
       url: "https://arxiv.org/pdf/1701.08105"
       locator: "Sections 1.2–1.3, PDF pp.7–12: pair energy and finite-volume Poisson-Gibbs normalization; its infinite-volume variational theorem assumes finite range and is not used here."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

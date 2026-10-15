@@ -2,7 +2,7 @@
 id: post-rpm-bmt-dipole-model
 kind: postulate
 title: "Classical BMT polarization model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -29,7 +29,13 @@ sources:
     - title: "András László, General relativity experiment with frozen spin (EDM) rings, PSI Zürich, 20 September 2018, 29-page lecture notes, based on A. László and Z. Zimborás, Classical and Quantum Gravity 35 (2018), 175003"
       url: "https://www.psi.ch/en/media/48911/download"
       locator: "PDF pp. 6–7: the covariant Thomas–Bargmann–Michel–Telegdi transport equation and its Fermi–Walker derivative in a curved background, with a separate electric-dipole term. The source uses the opposite metric signature and field-index convention; the present postulate states its own converted convention and does not import the source as a proof."
-verification: {}
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

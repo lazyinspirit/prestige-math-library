@@ -2,7 +2,7 @@
 id: lem-tdmath-measure-integral-agrees-with-root-lebesgue-integral
 kind: lemma
 title: "The thermodynamics measure integral agrees with the shared nonnegative integral"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -28,6 +28,15 @@ sources:
       url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes_ch4.pdf"
     - title: "MIT OpenCourseWare 18.102 Spring 2021, complete lecture notes (Lecture 12: Lebesgue integration and dominated convergence)"
       url: "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

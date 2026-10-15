@@ -1,7 +1,7 @@
 ---
 page: qft-mx03
 title: "Soft-current angular norm and exact cutoff coherent model"
-status: draft
+status: published
 library: mathematics
 companion: qft-mx03-examples
 requires:

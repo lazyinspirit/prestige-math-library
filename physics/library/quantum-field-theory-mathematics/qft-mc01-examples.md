@@ -1,7 +1,7 @@
 ---
 page: qft-mc01-examples
 title: Unital star algebra and positive normalized state — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-qft-nonregular-weyl-state

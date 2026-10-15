@@ -1,7 +1,7 @@
 ---
 page: rpm-external-charge
 title: "Fixed-endpoint curved charge variation"
-status: draft
+status: published
 items:
   - lem-rpm-curved-charge-action-variation
   - lem-rpm-external-charge-local-ivp

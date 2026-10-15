@@ -3,7 +3,7 @@ id: thm-qft-regulated-global-unitary-evolution
 kind: theorem
 domain: mathematics
 title: Global unitary evolution at fixed finite regulator
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [thm-qft-self-adjoint-regulated-interaction, thm-hilbert-space-fourier-expansion, thm-cauchy-schwarz-in-an-inner-product-space, def-countable-choice]
@@ -24,6 +24,15 @@ sources:
     - title: "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 4, pp.27–32"
       url: "https://arxiv.org/pdf/1203.2344v1"
       locator: "Chapter 4, printed pp.27–32: discrete spectral expansions from compact resolvent."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

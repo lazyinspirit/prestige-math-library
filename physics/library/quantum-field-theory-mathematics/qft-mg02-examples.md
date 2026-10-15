@@ -1,7 +1,7 @@
 ---
 page: qft-mg02-examples
 title: Exact compact U1 rotor plus finite CAR data — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-qft-qed-nonempty-gauss

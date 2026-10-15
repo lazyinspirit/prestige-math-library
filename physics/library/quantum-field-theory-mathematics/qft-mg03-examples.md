@@ -1,7 +1,7 @@
 ---
 page: qft-mg03-examples
 title: Finite matrix formal inverse and gauge-covariant kernel — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

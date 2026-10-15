@@ -1,7 +1,7 @@
 ---
 page: td-irreversible-boundaries
 title: Irreversible Boundaries
-status: draft
+status: published
 library: physics
 items:
   - def-td-macro-versus-micro-entropy-claim

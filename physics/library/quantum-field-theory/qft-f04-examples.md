@@ -1,7 +1,7 @@
 ---
 page: qft-f04-examples
 title: "Free observable domains and limits of point notation — Examples"
-status: draft
+status: published
 library: physics
 items:
   - cex-qft-point-operator-assumption

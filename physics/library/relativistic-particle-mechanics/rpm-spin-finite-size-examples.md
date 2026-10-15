@@ -1,7 +1,7 @@
 ---
 page: rpm-spin-finite-size-examples
 title: "BMT constraint and restricted-ansatz algebra — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-rpm-bmt-fw-and-g-two

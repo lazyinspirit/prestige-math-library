@@ -2,7 +2,7 @@
 id: def-td-thermodynamic-limit-contract
 kind: definition
 title: Finite-state thermodynamic-limit contract
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -28,6 +28,15 @@ sources:
       url: https://davidtong.org/teaching/statistical-physics/statmechhtml/S5
     - title: "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §§4.1–4.2"
       url: https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Definition

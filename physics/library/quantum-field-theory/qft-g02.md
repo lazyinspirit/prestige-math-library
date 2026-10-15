@@ -1,7 +1,7 @@
 ---
 page: qft-g02
 title: "Explicit formal QED vertex/free-line convention"
-status: draft
+status: published
 library: physics
 items:
   - post-qft-formal-qed-coefficients

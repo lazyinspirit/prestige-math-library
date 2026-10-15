@@ -1,7 +1,7 @@
 ---
 page: emg-c01-examples
 title: "SI and geometrized Einstein–Maxwell parameters — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-c01

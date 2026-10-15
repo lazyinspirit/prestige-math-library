@@ -4,7 +4,7 @@ kind: remark
 domain: physics
 library: physics
 title: Scope of a local-equilibrium continuum branch
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -36,6 +36,15 @@ sources:
       url: "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf"
     - title: "D. Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics (work in progress, 12 October 2026), §§8.2, 8.4, and 8.8"
       url: "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Remark

@@ -1,7 +1,7 @@
 ---
 page: qft-x03
 title: Regulated soft coherent photon-count prediction
-status: draft
+status: published
 library: physics
 items:
   - def-qft-x03-photon-count-pvm

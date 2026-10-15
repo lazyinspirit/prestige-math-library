@@ -1,7 +1,7 @@
 ---
 page: td-interacting-equilibrium-preparations-examples
 title: "Interacting Equilibrium Preparations — Examples"
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items:

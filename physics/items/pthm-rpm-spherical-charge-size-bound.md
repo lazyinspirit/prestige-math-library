@@ -2,7 +2,7 @@
 id: pthm-rpm-spherical-charge-size-bound
 kind: physics-theorem
 title: Coulomb-exterior support-radius energy bound
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -34,7 +34,15 @@ sources:
     - title: "Konstantin K. Likharev, Essential Graduate Physics: Classical Electrodynamics, §1.3 Scalar Potential and Electric Field Energy"
       url: https://phys.libretexts.org/Bookshelves/Electricity_and_Magnetism/Essential_Graduate_Physics_-_Classical_Electrodynamics_%28Likharev%29/01%3A_Electric_Charge_Interaction/1.03%3A_Scalar_Potential_and_Electric_Field_Energy
       locator: "Full HTML section §1.3, Eqs. (1.34)–(1.35) Coulomb field/potential and (1.65)–(1.68) field energy with a uniform sphere's interior/exterior calculation; the point-charge interpretation is context only."
-verification: {}
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

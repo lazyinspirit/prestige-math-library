@@ -1,7 +1,7 @@
 ---
 page: rpm-spin-finite-size
 title: "BMT constraint and restricted-ansatz algebra"
-status: draft
+status: published
 items:
   - lem-rpm-bmt-transport-algebra
   - lem-rpm-body-spin-size-bound

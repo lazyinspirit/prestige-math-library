@@ -1,7 +1,7 @@
 ---
 title: Quantum Field Theory
 library: physics
-status: draft
+status: published
 ---
 
 This category fixes field quantities, SI conventions, observable meanings and the adoption of specified constructed models. It includes free scalar, Dirac and transverse-photon frameworks, scoped formal QED conventions, soft coherent photon-count predictions and finite-regulator interacting models. Observable domains and smearing conventions are stated explicitly. Mathematical constructions are supplied by the companion category; physical interpretation remains conditional on the model postulates and measurement assumptions identified in each page.

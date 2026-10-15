@@ -1,7 +1,7 @@
 ---
 page: td-math-interacting-ensemble-geometry-examples
 title: Interacting Ensemble Geometry — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

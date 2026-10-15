@@ -2,7 +2,7 @@
 id: def-qft-fock-and-test-spaces
 kind: definition
 title: Schwartz/distribution spaces and Hilbert Fock conventions
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -43,6 +43,15 @@ sources:
     - title: Semyon Dyatlov, Lecture Notes for MIT 18.155, §§11.1.1 and 11.2.1 (Schwartz functions and tempered distributions)
       url: https://math.mit.edu/~dyatlov/18.155/155-notes.pdf
       locator: Full 266-page lecture notes; printed pp. 120–126.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Definition

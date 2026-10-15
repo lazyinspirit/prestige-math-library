@@ -1,7 +1,7 @@
 ---
 page: td-math-local-pfaff-geometry
 title: Local Pfaff Geometry
-status: draft
+status: published
 library: mathematics
 items:
   - def-tdmath-one-form-and-horizontal-path

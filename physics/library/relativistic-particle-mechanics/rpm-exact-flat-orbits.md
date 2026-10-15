@@ -2,7 +2,7 @@
 requires: ["cm-math-dynamics", "rpm-external-charge", "sr-accelerated-observers", "cm-math-central"]
 page: rpm-exact-flat-orbits
 title: "Right-wedge accelerated clocks and rays"
-status: draft
+status: published
 library: physics
 items:
   - post-rpm-ideal-rindler-phase-reception

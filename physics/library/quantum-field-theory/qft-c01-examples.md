@@ -1,7 +1,7 @@
 ---
 page: qft-c01-examples
 title: "Quantum field quantities and compatible SI normalizations — Examples"
-status: draft
+status: published
 library: physics
 items:
   - texp-qft-two-level-measurement

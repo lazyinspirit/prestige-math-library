@@ -1,7 +1,7 @@
 ---
 page: qft-mc04
 title: Exact massless scalar on a conformally flat external metric
-status: draft
+status: published
 library: mathematics
 items:
   - thm-qft-conformal-external-scalar

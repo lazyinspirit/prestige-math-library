@@ -2,7 +2,7 @@
 id: lem-qft-example-deterministic-ratio-error
 kind: lemma
 title: Deterministic ratio error and Taylor remainder
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0
@@ -18,6 +18,15 @@ sources:
       url: https://cfp.physics.northwestern.edu/documents/GeoniumTheoryReview.pdf
     - title: "Manuel Vogel, Particle Confinement in Penning Traps: An Introduction, Springer Series on Atomic, Optical, and Plasma Physics 100 (2018), Chapter 5"
       url: https://ndl.ethernet.edu.et/bitstream/123456789/72726/1/243.pdf
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 requires: ["cm-math-central", "cm-math-dynamics", "gr-spherical-vacuum-model", "rpm-external-charge", "the-integral-logarithm-and-its-characterisations"]
 page: rpm-curved-orbits-scattering
 title: "Circular timelike orbit and reduced radial stability"
-status: draft
+status: published
 library: physics
 items:
   - pthm-rpm-schwarzschild-circular-stability

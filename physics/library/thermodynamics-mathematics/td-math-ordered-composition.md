@@ -1,7 +1,7 @@
 ---
 page: td-math-ordered-composition
 title: Ordered Composition
-status: draft
+status: published
 library: mathematics
 items:
   - def-tdmath-tagged-scalable-compound

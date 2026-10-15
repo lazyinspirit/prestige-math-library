@@ -1,7 +1,7 @@
 ---
 page: qft-ir04-examples
 title: Scaling degree and local extension space — Examples
-status: draft
+status: published
 library: mathematics
 items:
   - ex-qft-unique-subcritical-extension

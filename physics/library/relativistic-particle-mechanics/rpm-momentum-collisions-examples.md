@@ -3,7 +3,7 @@ requires:
   - rpm-momentum-collisions
 page: rpm-momentum-collisions-examples
 title: "Mass shell inversion, observer work and variable mass — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

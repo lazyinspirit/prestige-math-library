@@ -2,7 +2,7 @@
 id: pthm-qft-dirac-free-properties
 kind: physics-theorem
 title: Dirac CAR, covariance, graded locality and positive Fock energy
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -41,6 +41,15 @@ sources:
     - title: Niklas Beisert, Quantum Field Theory I, ETH Zürich 2025 HS complete lecture notes
       url: https://people.phys.ethz.ch/~nbeisert/lectures/QFT1-25HS-Notes.pdf
       locator: Complete 194-page notes; Chapter 5 §§5.1–5.6, Clifford projectors, spinor covariance, Hamiltonian form and fermionic quantization; pp. 82–83, Dirac-sea comparison.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: qft-ir02
 title: Finite Euclidean quartic interacting measure
-status: draft
+status: published
 library: mathematics
 items:
   - def-qft-finite-euclidean-interacting-measure

@@ -1,7 +1,7 @@
 ---
 page: td-accessibility-foundation-examples
 title: Accessibility Foundation — Examples
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items: []

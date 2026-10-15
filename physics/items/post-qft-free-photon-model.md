@@ -4,7 +4,7 @@ kind: postulate
 domain: physics
 library: physics
 title: "Positive transverse free photon model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-td-qft-rpm-62-2026-10-14
 dependency_level: 7
@@ -44,6 +44,13 @@ sources:
     - title: "Mark Srednicki, Quantum Field Theory, author-hosted 2006 prepublication book draft"
       url: "https://web.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf"
       locator: "§§54–55, printed pp. 332–338, for the Maxwell potential, Coulomb-gauge transverse projector, free modes, two helicities, and Hamiltonian. The source uses Heaviside–Lorentz units and c=1; the adopted model retains the explicit SI conversion."
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
 ---
 
 ## Postulate

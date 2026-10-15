@@ -1,7 +1,7 @@
 ---
 page: td-continuum-heat-model-examples
 title: Continuum Heat Model — Examples
-status: draft
+status: published
 library: physics
 category: thermodynamics
 items: []

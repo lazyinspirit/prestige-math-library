@@ -1,7 +1,7 @@
 ---
 page: qft-f03
 title: "Exact Dirac particle/antiparticle free model"
-status: draft
+status: published
 library: physics
 items:
   - def-qft-free-dirac-model

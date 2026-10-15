@@ -2,7 +2,7 @@
 id: lem-qft-mass-shell-test-range-dense
 kind: lemma
 title: Density of Schwartz test restrictions in the scalar shell space
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -33,6 +33,15 @@ sources:
     - title: Richard B. Melrose, MIT OpenCourseWare 18.155 Differential Analysis, Fall 2004, lecture notes, section 9
       url: https://ocw.mit.edu/courses/18-155-differential-analysis-fall-2004/fa60b20e070ee676b70cdf8a373e6197_section9.pdf
       locator: Complete five-page official MIT OCW PDF, printed pages 58–62; Theorem 9.1 proves the Fourier transform isomorphism on Schwartz space and gives its inverse.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
 ---
 
 ## Statement

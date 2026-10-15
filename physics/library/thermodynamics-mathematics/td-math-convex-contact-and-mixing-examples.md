@@ -1,7 +1,7 @@
 ---
 page: td-math-convex-contact-and-mixing-examples
 title: Convex Contact And Mixing — Examples
-status: draft
+status: published
 library: mathematics
 requires: ["td-math-convex-contact-and-mixing", "the-logarithm-and-general-powers"]
 items: []

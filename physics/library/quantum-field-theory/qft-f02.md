@@ -1,7 +1,7 @@
 ---
 page: qft-f02
 title: Exact real scalar free model
-status: draft
+status: published
 items:
   - def-qft-free-scalar-model
   - pthm-qft-scalar-free-properties

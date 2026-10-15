@@ -3,7 +3,7 @@ requires:
   - rpm-geometry-actions
 page: rpm-geometry-actions-examples
 title: "Particle spacetime, observers and worldlines — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:
