@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "batch": "33",
+  "round": 0,
+  "reviewed_items": [
+    "def-emg-geometric-scaling",
+    "thm-emg-field-normalization-equivalence",
+    "thm-emg-conformal-maxwell",
+    "thm-emg-conformal-einstein-transformation",
+    "prop-emg-constant-electrovac-rescaling",
+    "prop-emg-test-field-residual-order",
+    "cex-emg-conformal-maxwell-not-einstein",
+    "ex-emg-coulomb-charge-normalization"
+  ],
+  "reviewed_pages": [
+    "emg-c01",
+    "emg-c01-examples"
+  ],
+  "decision": "repair",
+  "reason": "The identities and approved scope check out overall. Two prerequisite uses need explicit suppliers, and the residual norm needs a convention for the empty compact set; these are locally repairable. An outside-batch planned consumer is recorded for follow-up if the repair narrows the norm’s domain.",
+  "findings": [
+    {
+      "id": "prop-emg-test-field-residual-order",
+      "type": "prerequisite",
+      "reason": "The Statement uses ★gF₁, and Proof 1.1 uses linearity of d and ★g, but the declared dependencies omit lem-emg-lorentz-hodge-calculus, which defines the Hodge operator and supplies the exterior-calculus facts used."
+    },
+    {
+      "id": "prop-emg-test-field-residual-order",
+      "type": "local",
+      "reason": "The Statement allows any compact K⊂U, including K=∅, but its real-valued supremum norm is undefined there. Require K nonempty or state an explicit empty-set norm convention."
+    },
+    {
+      "id": "thm-emg-conformal-einstein-transformation",
+      "type": "prerequisite",
+      "reason": "Proof 2.2 invokes the coordinate curvature formula to expand the conformal curvature difference. The listed curvature definition does not state that formula, and thm-gr-curvature-tensoriality-and-coordinate-formula is absent from deps/Facts. Add that supplier and its relevant formula, or provide the full expansion locally."
+    },
+    {
+      "id": "lem-emg-source-and-test-scaling",
+      "type": "outside-batch",
+      "reason": "The research-only planned consumer in workers/matter-limits/mathematical-proofs.md#ML06 declares prop-emg-test-field-residual-order as a dependency and uses a supremum on a compact region. If the local repair requires nonempty K, carry that condition into the consumer when it is materialized; otherwise define the applicable empty-set convention there."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "emg-c01",
+      "decision": "accept",
+      "reason": "Its scope summary accurately limits the result to an exact quadratic residual and makes no claim about empty-set norm values."
+    },
+    {
+      "id": "emg-c01-examples",
+      "decision": "accept",
+      "reason": "The conformal counterexample and Coulomb example do not use the test-field residual claim."
+    },
+    {
+      "id": "lem-emg-source-and-test-scaling",
+      "decision": "escalate",
+      "reason": "This research-only planned consumer is outside batch 33; the owner should reconcile its compact-region supremum with the chosen local norm repair before accepting it as a consumer."
+    }
+  ]
+}

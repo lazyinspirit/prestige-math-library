@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+const run='physics-td-qft-rpm-62-2026-10-14';
+const {stages}=await import('../../../tools/physics-autopilot/stages/mathlib.mts');
+const ctx={repo:process.cwd(),run};
+const stage=stages.find((s:any)=>s.id==='1-scaffold');
+const gates=stage.gates(ctx);
+const path=resolve('research',run+'-owner-native-gate-preparation','native-battery.json');
+writeFileSync(path,JSON.stringify({run,stage:stage.id,extracted_only:true,gates_executed:false,gates},null,2)+'\n');
+console.log(`Extracted ${gates.length} native gate descriptors to ${path}`);

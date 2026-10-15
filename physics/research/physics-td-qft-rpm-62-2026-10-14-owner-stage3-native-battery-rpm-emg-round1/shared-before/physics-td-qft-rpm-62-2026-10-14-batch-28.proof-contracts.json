@@ -1,0 +1,1405 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14",
+  "scope": [
+    "pthm-rpm-rindler-clock-gradient",
+    "pthm-rpm-constant-electric-orbit",
+    "pthm-rpm-constant-magnetic-helix",
+    "pthm-rpm-crossed-field-drift",
+    "ex-rpm-rindler-clock-gradient",
+    "ex-rpm-constant-electric-orbit",
+    "ex-rpm-constant-magnetic-helix",
+    "ex-rpm-crossed-field-drift",
+    "post-rpm-ideal-rindler-phase-reception"
+  ],
+  "contracts": {
+    "pthm-rpm-rindler-clock-gradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-inertial-frame-and-inertial-chart",
+          "source_section": "Definition",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]]), with orientation fixed as a positive ray of\nthe determinant line $\\Lambda^4V$\n([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]])\nand with the corresponding class of positively oriented ordered bases of $V$\n([[def-orientation-of-a-finite-dimensional-real-vector-space]]); by\n[[prop-orientations-and-positive-basis-classes-agree-in-positive-dimension]] the\npositive ray selects exactly one such class for $\\dim V=4>0$.\n\nAn **inertial frame** of the model is a tuple $(o;e_0,e_1,e_2,e_3)$ consisting\nof an event $o\\in A$ and an ordered basis $(e_0,e_1,e_2,e_3)$ of $V$ that is\n\n1. **$\\eta$-orthonormal**: $\\eta(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ for all $a,b$ ([[lem-lorentz-form-has-orthonormal-basis]]);\n2. **future**: $e_0\\in C^+$, i.e. $e_0$ is future timelike; and\n3. **positively oriented**: the ordered basis lies in the positive-basis class\n   selected by the fixed orientation.\n\nThe event $o$ is the **origin** of the frame and $e_0,e_1,e_2,e_3$ are its\n**basis vectors**.\n\n**Inertial charts.** For an inertial frame $(o;e_0,e_1,e_2,e_3)$, define\n\n$$E:\\mathbb R^4\\longrightarrow V,\\qquad E(u):=\\sum_{a=0}^3u^ae_a .$$\n\nThen $E$ is a linear isomorphism ([[def-linear-isomorphism-and-invertible-linear-map]]):\nit is linear by construction, and it is bijective because\n$(e_0,e_1,e_2,e_3)$ is an ordered basis, every $v\\in V$ having exactly one\ncoordinate list $u$ with $v=\\sum_au^ae_a$\n([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). The **inertial\nchart** of the frame is the map\n\n$$x:A\\longrightarrow\\mathbb R^4,\\qquad x(p):=E^{-1}(p-o),$$\n\nand its values $x^a(p)$ are the **inertial coordinates of the event $p$** in the\nframe. Since $E$ and $v\\mapsto p+v$ are bijections, $x$ is a bijection\n$A\\to\\mathbb R^4$; and $x(p)=0$ exactly when $p-o=0_V$, that is, exactly when\n$p=o$.\n\n**Transition law.** Let $(o';e'_0,e'_1,e'_2,e'_3)$ be another inertial frame\nwith chart $x'$, and let $M=(M^b_a)$ be the change-of-basis matrix defined by\n$e'_a=\\sum_bM^b_ae_b$, a $4\\times4$ real matrix that is invertible because both\nfamilies are ordered bases. Then $E'(u)=\\sum_au^ae'_a=E(Mu)$ for all\n$u\\in\\mathbb R^4$, for the matrix-vector product $Mu$ in the coordinates of the\nfirst frame, because $\\sum_au^a\\sum_bM^b_ae_b=\\sum_b(\\sum_aM^b_au^a)e_b$; hence\n$E'=E\\circ M$ and $E'^{-1}=M^{-1}\\circ E^{-1}$, so for every event $p$,\n\n$$x'(p)=M^{-1}\\bigl(x(p)-x(o')\\bigr)=M^{-1}x(p)-M^{-1}x(o') .$$\n\nIn particular the transition between two inertial charts is an affine map of\n$\\mathbb R^4$ with invertible linear part $M^{-1}$ and constant part\n$-M^{-1}x(o')$, and it is a bijection of $\\mathbb R^4$ with inverse\n$u\\mapsto Mu+x(o')$, which is the transition in the reverse direction.\n\n**The inertial atlas.** The **inertial atlas** of the model is the family of\nall inertial frames together with their inertial charts. Its charts are\navailable at every event by [[lem-future-oriented-inertial-frames-exist]], which\nsupplies for every $o\\in A$ an inertial frame with origin $o$; and any two of\nits charts are related by the affine transition displayed above.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sr-si-units-and-coordinate-conventions",
+          "source_section": "Definition",
+          "quote": "This framework fixes the following SI coordinate and unit conventions for the\noriented time-oriented affine Minkowski space $(A,V,\\eta,C^+)$ and its inertial\ncharts ([[def-sr-affine-minkowski-model]],\n[[def-inertial-frame-and-inertial-chart]]).\n\n1. **Adopted conversion constant.** The framework uses a positive constant $c$\n   with unit metre per second, $\\mathrm m/\\mathrm s$, interpreted as the\n   **speed of light in vacuum** under the framework's light postulate. In SI\n   its numerical value is exactly $299\\,792\\,458$ by the definition of the\n   metre (BIPM, *SI defining constants*, table row $c$). This exact unit\n   convention does not prove that the ideal-light model describes nature;\n   measurements and realizations of units still have uncertainty.\n2. **Coordinates.** In every inertial chart $x=(x^0,x^1,x^2,x^3)$ define the\n   coordinate-time map $t:A\\to\\mathbb R$ by $t(p)=x^0(p)/c$, with unit second\n   $\\mathrm s$, and assign unit metre $\\mathrm m$ to every $x^a$. An **at-rest\n   line of this frame** is $s\\mapsto o+cs e_0+\\sum_{i=1}^3r^ie_i$, $s\\in\\mathbb R$,\n   for fixed spatial coordinates $(r^1,r^2,r^3)$ in metres; its coordinate\n   time is $s$. Interpreting coordinate-time differences as readings of\n   synchronized ideal clocks on these lines is a physical assumption stated\n   in the clock postulate, not a consequence of assigning units.\n3. **Metric components.** The matrix $\\eta_{ab}=\\eta(e_a,e_b)$ in the frame is\n   $\\operatorname{diag}(-1,1,1,1)$ with **dimensionless** entries. Thus\n   $I(p,q)=\\eta(q-p,q-p)=-(\\Delta x^0)^2+\\sum_{i=1}^3(\\Delta x^i)^2$\n   carries unit $\\mathrm m^2$.\n4. **Proper time of a straight segment.** For a timelike displacement $q-p$,\n   the affine straight segment is $s\\mapsto p+s(q-p)$, $s\\in[0,1]$. Define its\n   positive **proper-time length** as\n\n   $$\\tau:=c^{-1}\\sqrt{-\\eta(q-p,q-p)}.$$\n\n   It has unit second, since $c^{-1}$ converts the square-root interval in\n   metres into seconds. This length is positive even if the segment is\n   oriented toward the past; a physical advancing clock uses future orientation.\n5. **Kinematic bookkeeping.** Let $J\\subseteq\\mathbb R$ be an open interval\n   with parameter $\\tau$ in seconds, and let $\\gamma:J\\to A$ have $C^2$\n   coordinates $y=x\\circ\\gamma:J\\to\\mathbb R^4$\n   ([[def-ck-and-multi-index-notation-in-several-variables]]). With\n   $E(u)=\\sum_au^ae_a$, require $U(\\tau):=E(y'(\\tau))\\in C^+$ and\n   $\\eta(U,U)=-c^2$. This is the **proper-time normalization** used here for\n   units; the general construction of a proper-time parameter is developed\n   later. The **four-velocity** is $U:J\\to V$, with components $U^a=(y^a)'$\n   and unit $\\mathrm m/\\mathrm s$. The **four-acceleration** is\n   $\\mathcal A=E(y''):J\\to V$, with unit $\\mathrm m/\\mathrm s^2$.\n   For a positive constant mass parameter $m$ in kilograms, define\n   **four-momentum** $P=mU:J\\to V$, with unit\n   $\\mathrm{kg}\\,\\mathrm m/\\mathrm s$, and **energy measured by this frame**\n   $\\mathcal E=cP^0=-c\\eta(e_0,P):J\\to\\mathbb R$, with unit joule\n   $\\mathrm J=\\mathrm{kg}\\,\\mathrm m^2/\\mathrm s^2$. The equality follows from\n   $\\eta(e_0,P)=-P^0$. These are definitions for dimensional bookkeeping;\n   the physical particle interpretation and dynamics belong to later pages.\n6. **Temporal-coordinate convention.** Replacing $x^0$ by $t=x^0/c$ pulls\n   the interval expression back to $-c^2(\\Delta t)^2+\\sum_i(\\Delta x^i)^2$.\n   Thus $g_{tt}=-c^2$ has unit $\\mathrm m^2/\\mathrm s^2$, the spatial\n   components remain dimensionless, and mixed time-space components have unit\n   $\\mathrm m/\\mathrm s$ (and equal zero in this inertial chart). Formulas\n   must be transformed when changing this convention.\n7. **Natural units.** A presentation with $c=1$ identifies temporal and spatial\n   units by this conversion factor; it requires an explicit restoration table\n   for $c$. It does not assert that the SI numerical value of $c$ is $1$.\n\n**Status.** These are conventions and dimensional bookkeeping for the model.\nThe SI numerical value of $c$ is exact by unit definition; the physical\ninterpretation and applicability of the model remain adopted and empirically\ntestable. SI unit status does not make a quantity primitive in the theory.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-sr-rindler-horizons-and-radar",
+          "source_section": "Statement",
+          "quote": "Adopt [[post-sr-inertial-covariance]], [[post-sr-ideal-clocks-and-light]] and [[post-sr-causal-signal-propagation]], and the SI conventions of [[def-sr-si-units-and-coordinate-conventions]] ($x^0 = c t$). Let $x = (x^0,x^1,x^2,x^3)$ be the chart of an inertial frame ([[def-inertial-frame-and-inertial-chart]]) and let $W := \\{x^1 > |x^0|\\}$ be the right wedge. Let $\\Phi$ and $n$ be the Rindler chart and congruence of [[thm-sr-fermi-walker-and-rigid-observer-examples]] (b): $\\Phi(\\theta,\\rho,y,z) = (\\rho \\sinh \\theta, \\rho \\cosh \\theta, y, z)$ on $\\mathbb R \\times (0,\\infty) \\times \\mathbb R^2$ with inverse $\\rho = \\sqrt{(x^1)^2 - (x^0)^2}$, $\\theta = \\frac12 \\log((x^1+x^0)/(x^1-x^0))$, pullback metric $-\\rho^2 d\\theta^2 + d\\rho^2 + dy^2 + dz^2$, and acceleration field $a_{\\mathrm{cg}} = \\nabla_n n = \\rho^{-1} \\partial_\\rho$. Fix $\\rho_0 > 0$ and real $y_0,z_0$, and let $O$ be the congruence worldline $\\rho = \\rho_0$, $y = y_0$, $z = z_0$, parametrized by its proper time $\\tau$ with $\\theta = c \\tau/\\rho_0$; by [[def-sr-proper-acceleration]] its proper acceleration is $c^2/\\rho_0$. Write $U(q) := q^0 + q^1$ and $V(q) := q^0 - q^1$ for events $q$, so that $U = \\rho e^{\\theta}$ and $V = -\\rho e^{-\\theta}$ on $W$, and write $\\le$ and $J^+$, $J^-$ for the causal reachability relations of [[def-sr-causal-reachability-in-affine-minkowski-space]]. Then, conditionally on the adopted model:\n\n(i) **Chart domain and light rays.** $\\Phi$ is a smooth bijection of $\\mathbb R \\times (0,\\infty) \\times \\mathbb R^2$ onto $W$ with the stated smooth inverse, so the chart domain is exactly $W$ and $\\rho = 0$ is not part of its coordinate domain. The boundary of $W$ in the affine model is $\\{x^1 = |x^0|\\}$, with arbitrary $x^2,x^3$: it is the union of the two null half-planes $\\{x^1 = x^0 \\ge 0\\}$ and $\\{x^1 = -x^0 \\ge 0\\}$. These half-planes are portions of the full null planes appearing as causal horizons in (ii); the full planes are not the wedge boundary. Along the worldline $\\rho = \\rho_0$ one has $V = -\\rho_0 e^{-\\theta} \\to 0^-$ and $U \\to +\\infty$ as $\\theta \\to +\\infty$, while $U = \\rho_0 e^{\\theta} \\to 0^+$ and $V \\to -\\infty$ as $\\theta \\to -\\infty$. The future null straight lines of the model that lie in the plane $y = y_0$, $z = z_0$ and meet $O$ are exactly the lines of constant $V$ (on which $d\\theta = +d\\rho/\\rho$) and the lines of constant $U$ (on which $d\\theta = -d\\rho/\\rho$).\n\n(ii) **Causal horizons.** An event $q$ satisfies $q \\le p$ for some event $p$ of $O$ if and only if $V(q) < 0$; an event $q$ satisfies $p \\le q$ for some event $p$ of $O$ if and only if $U(q) > 0$. Consequently no event with $V(q) \\ge 0$ can ever influence $O$; this set contains the null plane $\\{x^1 = x^0\\}$, the left wedge $\\{x^1 < -|x^0|\\}$ and the future wedge $\\{x^0 > |x^1|\\}$; and no event with $U(q) \\le 0$ can ever be influenced by $O$, a set containing the null plane $\\{x^1 = -x^0\\}$, the left wedge and the past wedge $\\{x^0 < -|x^1|\\}$. The null plane $\\{x^1 = x^0\\}$ is the boundary of the causal past of $O$ (the future horizon: the surface its worldline approaches as $\\theta \\to +\\infty$), and the null plane $\\{x^1 = -x^0\\}$ is the boundary of the causal future of $O$ (the past horizon); every event of the left wedge is causally unrelated to $O$ in both directions. The same criteria with $O$ any other congruence worldline $\\rho = \\rho_1$, $y = y_1$, $z = z_1$ hold verbatim: the constants $\\rho_0$, $y_0$, $z_0$ do not enter.\n\n(iii) **Radar time and distance to a coaxial congruence reflector.** Fix $\\rho_m > 0$ with $\\rho_m \\ne \\rho_0$ and let $R_m$ be the congruence worldline $\\rho = \\rho_m$, $y = y_0$, $z = z_0$ (a second uniformly accelerated observer, coaxial with $O$, with proper acceleration $c^2/\\rho_m$). Let $e_-$ be the event of $O$ at parameter $\\theta_e$ (so $\\tau(e_-) = \\rho_0 \\theta_e/c$ up to the base point of $\\tau$), let $q_m$ be the event of $R_m$ lying on the future null straight line from $e_-$ in the plane $y = y_0$, $z = z_0$, and let $e_+$ be the event of $O$ lying on the future null straight line from $q_m$; the reflection at $q_m$ is idealized as instantaneous and as leaving $R_m$'s motion unchanged, as in [[def-sr-operational-radar-protocol]]. Then $e_-, q_m, e_+$ exist uniquely, the Rindler time of $q_m$ is $\\theta_m = \\theta_e + |\\log(\\rho_m/\\rho_0)|$, the return event satisfies $\\theta(e_+) = \\theta_e + 2|\\log(\\rho_m/\\rho_0)|$ and $(\\theta_e + \\theta(e_+))/2 = \\theta_m$, so the round trip lasts $2|\\log(\\rho_m/\\rho_0)|$ in Rindler time and $(2\\rho_0/c)|\\log(\\rho_m/\\rho_0)|$ in $O$'s proper time. The radar protocol therefore assigns to $q_m$ the radar time $\\tau_{\\mathrm{rad}}(q_m) = (\\rho_0/c) \\theta_m$ plus the base constant of $\\tau$ and the radar distance $\\rho_{\\mathrm{rad}}(q_m) = \\rho_0 |\\log(\\rho_m/\\rho_0)|$; within this coaxial family the radar-time level sets are the intersections of the Rindler rest slices $\\theta=\\mathrm{const}$ with $y=y_0$, $z=z_0$, excluding the observer radius $\\rho_0$ ([[def-sr-simultaneity-slice-and-rest-distance]]). The radar distance is not the rest distance: in the slice $\\theta = \\theta_m$ the two worldlines are at rest distance $|\\rho_m - \\rho_0|$, whereas for $\\rho_m = 2\\rho_0$ the radar distance is $\\rho_0 \\log 2 < \\rho_0$, because $\\log$ is strictly increasing and $e > 2$ implies $\\log 2 < \\log e = 1$ ([[cor-two-less-than-e-less-than-three]], [[thm-natural-logarithm-laws]]). For every distinct positive reflector radius the notions differ: with $r = \\rho_m/\\rho_0$, one has $\\log r < r - 1$ when $r > 1$ and $-\\log r > 1 - r$ when $0 < r < 1$. The two distance formulas agree only at $r = 1$, where both have the continuous degenerate value zero. The coincident case is not a nonzero emission-reflection-reception triple of the protocol, whose distinct-reflector hypothesis remains in force. As $\\rho_m \\to 0^+$ the round-trip proper time and the radar distance grow without bound while the reflector's proper acceleration $c^2/\\rho_m$ diverges; as $\\rho_m \\to +\\infty$ the round-trip proper time and the radar distance also grow without bound while the reflector's proper acceleration tends to $0$.\n\n(iv) **Restrictions of the protocol.** No event with $V \\ge 0$ --- in particular no event of the horizon plane $\\{x^1 = x^0\\}$, of the left wedge or of the future wedge --- can be assigned a radar time or radar distance by this protocol from $O$, because by (ii) it cannot causally precede any reception event on $O$: the required reflection-to-reception leg is impossible. Separately, every event with $U \\le 0$ lacks an emission-to-reflection leg from $O$. Thus any event admitting this radar triple must satisfy $U > 0$ and $V < 0$, equivalently it must belong to $W$; the horizon is at infinite radar distance in the limit $\\rho_m \\to 0^+$. For example $q = x^{-1}(2\\rho_0,0,y_0,z_0)$ has $U(q) = V(q) = 2\\rho_0 > 0$. It is causally after $O$ at $\\theta = 0$, since the displacement is $(2\\rho_0,-\\rho_0,0,0)$, future timelike, and it even lies on a future null ray from $O$ at $\\theta = \\log 2$, with displacement $(5\\rho_0/4,-5\\rho_0/4,0,0)$. Nevertheless it cannot send a causal return to $O$, so it receives no radar assignment from $O$. The protocol therefore does not extend to a global coordinate system of $A$.\n\n(v) **Scope.** All clauses are conditional computations and readings in flat classical spacetime with ideal clocks, ideal light rays and ideal reflectors, for the specified congruence worldlines. They are not empirical claims and contain no measurement, apparatus, source, detector or statistical content; gravitation, media, dispersion, finite resolution, quantum effects and material models of the reflector are excluded. No choice principle is used.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "post-sr-ideal-clocks-and-light",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the special-relativity framework the following\ntwo statements, with the SI coordinate and unit conventions of\n[[def-sr-si-units-and-coordinate-conventions]].\n\n**(i) Ideal clocks.** Let $I\\subseteq\\mathbb R$ be a nondegenerate interval and\n$\\gamma:I\\to A$ a curve. Choose an inertial chart $\\chi$ with\n$E(u)=\\sum_au^ae_a$ as in [[def-inertial-frame-and-inertial-chart]]. Require\n$y:=\\chi\\circ\\gamma:I\\to\\mathbb R^4$ to be $C^1$ on the interior of $I$,\nwith its derivative extending continuously to any included endpoints, where\nit is the one-sided derivative. Define the displacement-valued derivative by\n$\\dot\\gamma(s):=E(y'(s))\\in V$ and require $\\dot\\gamma(s)\\in C^+$ everywhere,\nincluding such endpoints. This derivative is chart-independent: a second\nchart has coordinates $\\widetilde y=M^{-1}(y-\\chi(o'))$, so its\nparameter derivative is $M^{-1}\\mathrm dy/\\mathrm ds$, while its basis map\nis $E'=EM$; their product is $E\\,\\mathrm dy/\\mathrm ds$.\n\nAn **ideal clock on this curve** has a reading map $\\sigma:I\\to\\mathbb R$\nin seconds, specified up to an additive constant, with, for all $a<b$ in $I$,\n\n$$\\sigma(b)-\\sigma(a)=c^{-1}\\int_a^b\\sqrt{-\\eta\\bigl(\\dot\\gamma(s),\\dot\\gamma(s)\\bigr)}\\,\\mathrm ds .$$\n\nThe integrand is positive and continuous on $[a,b]$: the coordinate derivatives\nare continuous, $\\eta$ is a finite bilinear expression, and the square root\nis continuous at every positive argument, as follows from\n$|\\sqrt r-\\sqrt q|=|r-q|/(\\sqrt r+\\sqrt q)$ for $r,q>0$.\nThus [[thm-continuous-implies-integrable]] applies to this compact interval\nand gives a well-defined Riemann integral. The reading rule contains no\nadditional acceleration-dependent correction (**clock hypothesis**); it does\nnot require $C^2$ regularity or an acceleration to exist. This is an adopted\nphysical interpretation of the length integral, not a proof about real clocks.\n\n**(ii) Ideal light.** In vacuum, the **ideal light rays** are the oriented\nstraight lines parametrized by $\\ell:\\mathbb R\\to A$,\n$\\ell(\\lambda)=p+\\lambda v$, where $p\\in A$ and $v\\in V$ is future null;\nincreasing $\\lambda$ specifies their future direction. In an inertial chart\n$\\chi$ their coordinate map is\n\n$$\\chi(\\ell(\\lambda))=\\chi(p)+\\lambda\\,(v^0,v^1,v^2,v^3).$$\n\nSince the chart's time-axis vector is future, the cone description of\n[[lem-timelike-cone-has-two-convex-components]] gives\n$v^0=\\lvert v_{\\mathrm{vec}}\\rvert>0$. With $t=\\chi^0/c$ the spatial\ncoordinate velocity is $c(v^1,v^2,v^3)/v^0$ and has Euclidean magnitude $c$\nin every inertial chart. The conversion constant is the same across charts;\nits exact SI numerical value is a unit convention as specified in\n[[def-sr-si-units-and-coordinate-conventions]], while the ideal-vacuum-light\ninterpretation is an adopted, empirically testable model assumption.",
+          "uses": [
+            "2.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sr-proper-time-and-observer-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $c > 0$ and let $(A,V,\\eta,C^{+})$ be an oriented time-oriented affine\nMinkowski space ([[def-sr-affine-minkowski-model]]).\n\n**(a) Norm of the four-velocity.** Let $x : I \\to A$ be a $C^{1}$ future\ntimelike worldline with four-velocity $U$\n([[def-sr-four-velocity-and-four-acceleration]]). Then\n$\\eta(U(s),U(s)) = -c^{2}$ for every $s \\in I$; equivalently the dimensionless\nfour-velocity $u = U/c$ satisfies $\\eta(u,u) = -1$, and $U(s)$ is future\ntimelike. Thus the dimensionless four-velocity lies on the future unit\nhyperboloid $\\{v \\in C^{+}:\\eta(v,v)=-1\\}$.\n\n**(b) Orthogonality of the four-acceleration.** If $x$ is $C^{2}$ at $s$, then\n$\\eta(U(s),A(s)) = 0$: the four-acceleration has no component along the\nfour-velocity; if in addition $A(s) \\ne 0$, then $A(s)$ is spacelike.\n\n**(c) Rest space and projection.** Let $n \\in V$ be future unit timelike,\n$\\eta(n,n) = -1$, and put $n^{\\perp} := \\{\\,v \\in V : \\eta(n,v) = 0\\,\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]). Then $n^{\\perp}$ is a\n3-dimensional linear subspace of $V$, the restriction of $\\eta$ to $n^{\\perp}$\nis positive definite, and the map $h : V \\to V$, $h(v) := v + \\eta(n,v)\\,n$, is\nlinear, idempotent with $h \\circ h = h$, has image $n^{\\perp}$ and kernel\n$\\operatorname{span}(n)$, satisfies $h(n) = 0$ and $\\eta(n,h(v)) = 0$ for all\n$v \\in V$, and every $v \\in V$ has the unique decomposition\n$v = -\\eta(n,v)\\,n + h(v)$. Moreover $|w| := \\sqrt{\\eta(w,w)}$ defines a norm\non $n^{\\perp}$.\n\n**(d) Relative velocity and Lorentz factor.** Let $n$ and $u$ be future unit\ntimelike vectors, put $\\gamma := -\\eta(n,u)$ and $w := c\\,h(u)/\\gamma$. Then\n$\\gamma \\ge 1$, $w$ lies in $n^{\\perp}$,\n$u = \\gamma\\,(n + w/c)$, $|w|^{2} = c^{2}(1-\\gamma^{-2}) < c^{2}$,\n$\\gamma = (1-|w|^{2}/c^{2})^{-1/2}$, and $\\gamma = 1$ if and only if $u = n$.\nThe vector $w$ is the velocity of a worldline with four-velocity $cu$ relative\nto the observer $n$, and $\\gamma$ is its Lorentz factor.\n\n**(e) Coordinate form.** Let $(o;e_0,\\dots,e_3)$ be an inertial frame and let\n$y$ be a $C^{1}$ future timelike worldline whose inertial coordinates are\n$t \\mapsto (ct,r(t))$, with coordinate velocity $w(t) := r'(t)$ in\n$\\mathbb{R}^{3}$ and, when $y$ is $C^{2}$, coordinate acceleration\n$a(t) := w'(t)$. Then $|w(t)| < c$, the four-velocity is\n$U = \\gamma_w\\,(c,w)$ with $\\gamma_w := (1-|w|^{2}/c^{2})^{-1/2}$, and the\nfour-acceleration is $A = \\gamma_w\\,\\frac{d}{dt}\\bigl(\\gamma_w(c,w)\\bigr)$, so\nthat\n\n$$A^{0} = \\gamma_w^{4}\\,\\frac{w \\cdot a}{c}, \\qquad A_{\\mathrm{vec}} = \\gamma_w^{2}\\,a + \\gamma_w^{4}\\,\\frac{(w \\cdot a)\\,w}{c^{2}} ;$$\n\nconsequently\n$\\eta(A,A) = \\gamma_w^{4}|a|^{2} + \\gamma_w^{6}(w \\cdot a)^{2}/c^{2} \\ge 0$,\nwith $\\eta(A,A) = 0$ if and only if $a = 0$, and $\\eta(U,A) = 0$. For the\nobserver $n = e_0$ of the chart, clauses (c) and (d) specialize to\n$\\gamma = \\gamma_w$ and $w_{\\mathrm{rel}} = (0,w)$ in the frame coordinates, identified with $w$ via the spatial basis.\n\n**(f) Scope.** The statement is a theorem about the affine Minkowski model with\na fixed positive constant $c$; it asserts no clock reading and identifies no\nphysical four-velocity. No choice principle is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sr-proper-acceleration",
+          "source_section": "Definition",
+          "quote": "Let $c>0$ and let $x:I\\to A$ be a $C^2$ future timelike worldline in the affine Minkowski model ([[def-sr-affine-minkowski-model]], [[def-sr-regular-causal-curve-and-worldline]]), with generic parameter $s\\in I$. Write $\\tau:I\\to\\tau[I]$ for its proper-time function and $U(s):=x'(s)/\\tau'(s)$, $A(s):=U'(s)/\\tau'(s)$ for its four-velocity and four-acceleration ([[def-sr-four-velocity-and-four-acceleration]]). These are proper-time derivatives evaluated at the event $x(s)$; $s$ need not itself be proper time. Pointwise $\\eta(U,U)=-c^2$, $\\eta(U,A)=0$, and $A(s)$ is spacelike whenever it is nonzero ([[thm-sr-proper-time-and-observer-decomposition]] (a),(b)).\n\n**(a) Definition.** The **proper acceleration** of $x$ at the parameter value $s$ is the real number\n\n$$a(s) := \\sqrt{\\eta(A(s),A(s))},$$\n\nthe nonnegative square root of [[def-rational-power]]. This is well defined for every $s \\in I$. Indeed, fix an inertial chart of $A$ ([[def-inertial-frame-and-inertial-chart]]); since $x$ is $C^2$, the component functions of $A$ are continuous, and $\\eta(A,A)$ is a sum of products of continuous component functions, hence continuous, by [[thm-algebra-of-continuous-functions]]. If $A(s) = 0$ then $\\eta(A,A) = 0$ at $s$, and if $A(s) \\neq 0$ then $A(s)$ is spacelike and $\\eta(A,A) > 0$ ([[def-causal-classification-of-lorentz-vectors]]); in both cases the argument of the square root is nonnegative, so $a(s)$ is a well-defined nonnegative real number for every $s \\in I$. With the SI coordinate and unit conventions of [[def-sr-si-units-and-coordinate-conventions]], in which $x^0 = c t$ with $t$ in seconds and the spatial coordinates are in metres while $\\eta$ has the dimensionless matrix $\\operatorname{diag}(-1,1,1,1)$ in an inertial chart, the components of $A$ carry the unit metre per second squared and $\\eta(A,A)$ carries the unit $(\\text{metre per second squared})^2$, so $a$ carries the unit metre per second squared. The worldline is **uniformly accelerated** when $a$ is constant on $I$.\n\n**(b) Agreement with the acceleration of a congruence.** Let $\\Omega$ be a nonempty open subset of $A$ and let $n : \\Omega \\to V$ be an observer congruence with acceleration field $a_{\\mathrm{cg}} := \\nabla_n n$, where $\\nabla$ is the flat covariant derivative of [[def-flat-covariant-derivative-on-affine-minkowski-space]] ([[def-sr-observer-congruence-and-kinematics]] (b)). If $x$ is a flow line of $n$ and $U = c n$ along $x$, then $A = c^2 a_{\\mathrm{cg}}$ along $x$: the derivative along the worldline of the field $n$ is the covariant derivative $\\nabla_{dx/d\\tau} n = \\nabla_{cn} n = c \\nabla_n n = c\\, a_{\\mathrm{cg}}$, by the defining properties of the flat covariant derivative along curves ([[def-flat-covariant-derivative-on-affine-minkowski-space]] (d)), so $A = d(c n)/d\\tau = c\\, \\nabla_{dx/d\\tau} n = c^2 a_{\\mathrm{cg}}$. Consequently $a = c^2 \\sqrt{\\eta(a_{\\mathrm{cg}},a_{\\mathrm{cg}})}$ along $x$: the proper acceleration is $c^2$ times the magnitude of the congruence acceleration. In particular the proper acceleration of a congruence worldline is determined by the congruence field alone, and such a worldline is uniformly accelerated exactly when $\\eta(a_{\\mathrm{cg}},a_{\\mathrm{cg}})$ is constant along it.\n\n**(c) Reading and scope.** This item defines a quantity of the model and fixes its name, its unit and its physical reading. The model reads $a(s)$ as the magnitude that an ideal accelerometer carried along the worldline would register at $s$; this ideal-instrument identification is adopted with the model in the same sense as the framework's ideal-clock reading of proper time and is not derived here. No accelerometer response law, calibration, frequency dependence, force law or interaction is specified or asserted; the definition asserts nothing about which bodies follow which worldlines; no measurement outcome and no statistical, uncertainty or empirical claim is made. No choice principle is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sr-null-wave-covector-and-observer-frequency",
+          "source_section": "Definition",
+          "quote": "Adopt the SI coordinate and unit conventions of [[def-sr-si-units-and-coordinate-conventions]]: in every inertial chart $x^0=ct$ with $c>0$ in metres per second and spatial coordinates in metres, so $c$ is the model's conversion constant. Let $k$ be a future null wave covector and $\\theta$ its affine phase ([[def-sr-affine-phase-and-wave-covector]]). Take $\\theta$ dimensionless; its covector components then have unit $\\mathrm m^{-1}$.\n\n**Angular convention.** Here angles use radian arc length on the unit circle. An explicit construction, also fixing $\\pi$, is $a(t):=2\\int_0^t(1+r^2)^{-1}\\,\\mathrm dr$ for $0\\le t\\le1$, and $\\pi:=2a(1)$. These are finite Riemann integrals ([[def-oriented-integral]]): the integrand is continuous with positive denominator by [[thm-algebra-of-continuous-functions]] and integrable by [[thm-continuous-implies-integrable]]. By [[thm-ftc-first-part]], $a'(t)=2/(1+t^2)>0$; [[cor-mean-value-theorem]] makes $a$ strictly increasing, and [[thm-intermediate-value]] makes it a bijection onto $[0,\\pi/2]$. This is the arc-length parameter of the quarter-circle $q(t)=((1-t^2)/(1+t^2),2t/(1+t^2))$: the sum, product and quotient rules of [[thm-algebra-of-derivatives]] give $q'(t)=(-4t,2(1-t^2))/(1+t^2)^2$, hence $|q'(t)|=2/(1+t^2)$, and $|q(t)|=1$.\n\nFor $\\alpha\\in[0,\\pi/2]$, let $t$ be the unique value with $a(t)=\\alpha$ and define $\\cos\\alpha:=(1-t^2)/(1+t^2)$ and $\\sin\\alpha:=2t/(1+t^2)$; for $\\alpha\\in[\\pi/2,\\pi]$ use the unique $t$ with $a(t)=\\pi-\\alpha$ and define $\\cos\\alpha:=-(1-t^2)/(1+t^2)$ and $\\sin\\alpha:=2t/(1+t^2)$. The definitions agree at $\\pi/2$. The rational function $(1-t^2)/(1+t^2)$ decreases continuously from $1$ to $0$, since its difference at $v>u\\ge0$ is $-2(v^2-u^2)/[(1+v^2)(1+u^2)]<0$. Thus cosine is a strictly decreasing bijection $[0,\\pi]\\to[-1,1]$; write $\\arccos$ for its inverse. For spatial coordinate vectors $v,w\\in\\mathbb R^3$ in one named inertial frame, write $v\\cdot w:=\\sum_{i=1}^3v_iw_i$ and $|v|:=\\sqrt{\\sum_{i=1}^3v_i^2}$. If $v,w$ are nonzero, their norms are positive and their **angle** is $\\arccos((v\\cdot w)/(|v||w|))$: [[thm-cauchy-schwarz-finite]], applied to the three real coordinate entries, gives $|v\\cdot w|\\le|v||w|$, so division by $|v||w|>0$ puts the argument in $[-1,1]$. For unit vectors it is $\\arccos(v\\cdot w)$. These formulas give $\\sin\\alpha\\ge0$ and $\\sin^2\\alpha+\\cos^2\\alpha=1$ on $[0,\\pi]$ and fix a full turn as $2\\pi$.\n\n**(a) Frame data as wave data.** In the inertial chart of a frame $(o;e_0,e_1,e_2,e_3)$ ([[def-inertial-frame-and-inertial-chart]]) let $(\\varpi,s)$ be the frame data of $k$ given by [[lem-sr-null-covector-frame-data]], so $\\varpi=-k(e_0)>0$ and $|s|=1$. Define the **angular frequency** $\\omega:=c\\varpi$ (unit $\\mathrm s^{-1}$), the **linear frequency** $\\nu:=\\omega/(2\\pi)$ (unit $\\mathrm s^{-1}$, hertz), the **wave vector** $\\kappa:=(\\omega/c)s$ (unit $\\mathrm m^{-1}$, with $|\\kappa|=\\omega/c$), the **wavelength** $\\lambda:=2\\pi/|\\kappa|=2\\pi c/\\omega=c/\\nu$ (unit $\\mathrm m$), and the **propagation direction** $s$ (dimensionless). In these conventions the phase is $\\theta(p)=-\\omega t+\\kappa\\cdot x_{\\mathrm{vec}}(p)+\\mathrm{const}$ with $t:=x^0(p)/c$ the coordinate time in seconds, so the components of $k$ in the chart are\n\n$$k_a=\\bigl(-\\omega/c,(\\omega/c)s_1,(\\omega/c)s_2,(\\omega/c)s_3\\bigr).$$\n\n**(b) Observer frequency.** For an ideal observer whose four-velocity is $U_o=cn$ with $n\\in V$ future unit timelike, $\\eta(n,n)=-1$ ([[def-sr-four-velocity-and-four-acceleration]], [[thm-sr-proper-time-and-observer-decomposition]]), define the **observer angular frequency** of the wave as\n\n$$\\omega_n:=-ck(n)=-k(U_o)\\qquad(\\text{unit }\\mathrm s^{-1}),$$\n\nand the **observer linear frequency** as $\\omega_n/(2\\pi)$. By [[lem-sr-phase-rate-along-worldline]] this is minus the rate of change of the phase with respect to the observer's own proper time, and the sign convention makes it positive.\n\n**(c) Well-definedness.** $\\varpi=-k(e_0)>0$ and $|s|=1$ in every inertial frame, hence $\\omega>0$ and $\\lambda>0$ are well defined and independent of the choices made in their computation (frame-data lemma); $\\omega_n>0$ for every future unit timelike $n$ and every future null wave covector $k$ ([[lem-sr-future-causal-pairing-negative]], [[lem-sr-metric-duality-on-lorentz-vector-space]]), so every ideal observer reads a positive angular frequency, and $\\omega_n$ depends only on $k$ and the observer vector $n$. The classification of $k$ as future null is the one of [[def-causal-classification-of-lorentz-vectors]] and [[def-time-orientation-and-future-causal-sets]].\n\n**(d) Scope.** This item fixes definitions, units and sign conventions only. It does not assert that any physical light is described by such a phase; that identification is adopted in post-sr-ideal-plane-wave-model. It contains no quantum identification of energy with $\\hbar\\omega$, no amplitude or intensity content, no medium or dispersion model, no source or detector model, and no measurement or empirical claim. No choice principle is used.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "post-sr-ideal-plane-wave-model",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of this framework, extending [[post-sr-ideal-clocks-and-light]] (ideal vacuum light rays are exactly the future null straight lines, with coordinate speed $c$ in every inertial chart) and [[post-sr-inertial-covariance]] (the affine Minkowski model, with the model's equations covariant under proper orthochronous affine Lorentz maps):\n\n**(i) Ideal plane wave.** An ideal monochromatic light wave in vacuum is modeled, in any inertial chart, by a dimensionless affine phase $\\theta$ with future null wave covector $k$ ([[def-sr-affine-phase-and-wave-covector]], [[lem-sr-null-covector-frame-data]]): the level sets of $\\theta$ are the wave fronts, and the complete ray trajectories of this wave are the constant-phase lines $\\lambda\\mapsto p+\\lambda k^\\sharp$ for $\\lambda\\in\\mathbb R$, whose tangents are future null. Their future portions from $p$ have images $p+\\mathbb R_{\\ge0}k^\\sharp$. The complete trajectories are ideal light rays in the sense of [[post-sr-ideal-clocks-and-light]]; the portions are half-lines. The model is one ideal plane wave: constant wave covector, no medium, no dispersion, no absorption, no modulation or envelope, no boundary or source model, no intensity or polarization model.\n\n**(ii) Frequency reading.** An ideal observer of the model with four-velocity $U_o=cn$ ($n$ future unit timelike) that receives this wave reads the angular frequency $\\omega_n:=-ck(n)=-k(U_o)$ and the linear frequency $\\omega_n/(2\\pi)$ of [[def-sr-null-wave-covector-and-observer-frequency]], that is, minus the rate of change of the phase with respect to the observer's own proper time with the sign convention that this number is positive ([[lem-sr-phase-rate-along-worldline]], [[lem-sr-future-causal-pairing-negative]]). The reading is attached to the observer's worldline at the event of reception.\n\n**(iii) Frequency comparisons.** Comparing the frequency of one wave between two ideal observers or between two inertial descriptions means comparing $\\omega_n$ at specified reception events, or the frame data $(\\omega,s)$ of the same phase function in specified inertial charts; this postulate asserts no Doppler or aberration formula, and comparing events requires propagating the phase along the specified observer worldlines.\n\n**(iv) Scope and exclusions.** These are adopted idealizations, not deductions from experiment and not claims about nature. No quantum photon model and no identification of energy with $\\hbar\\omega$ is made; no claim is made that real light, real clocks, real receivers or real sources are exactly described; dispersive, absorbing, nonlinear or modulated media, finite line width, intensity, polarization, source and detector physics, gravitation, quantum effects and accelerated-observer reception are outside the model. Empirical tests of the model belong to the framework's experimental work and are not asserted here.\n\nNo choice principle is used in this formulation; the postulate is an adopted assumption of the model, not a proved assertion.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-hyperbolic-identities-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sinh(x+y)=\\sinh x\\cosh y+\\cosh x\\sinh y,\\qquad\\cosh(x+y)=\\cosh x\\cosh y+\\sinh x\\sinh y,$$\n$$\\cosh^2x-\\sinh^2x=1,\\qquad(\\sinh x)'=\\cosh x,\\qquad(\\cosh x)'=\\sinh x.$$\nMoreover $\\sinh:\\mathbb R\\to\\mathbb R$ is odd, strictly increasing, and onto;\n$\\cosh:\\mathbb R\\to[1,\\infty)$ is even and positive, and its restriction\nto $[0,\\infty)$ is strictly increasing and onto $[1,\\infty)$; and\n$\\tanh:\\mathbb R\\to(-1,1)$ is strictly increasing and onto. On their declared domains,\n$$(\\tanh x)'=\\operatorname{sech}^2x,\\quad(\\coth x)'=-\\operatorname{csch}^2x,\\quad(\\operatorname{sech}x)'=-\\operatorname{sech}x\\tanh x,\\quad(\\operatorname{csch}x)'=-\\operatorname{csch}x\\coth x.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-hyperbolic-functions",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sinh x:=\\frac{\\exp x-\\exp(-x)}2,\\qquad\\cosh x:=\\frac{\\exp x+\\exp(-x)}2,$$\n$$\\tanh x:=\\frac{\\sinh x}{\\cosh x},\\qquad\\operatorname{sech}x:=\\frac1{\\cosh x}.$$\nFor $x\\ne0$, define\n$$\\coth x:=\\frac{\\cosh x}{\\sinh x},\\qquad\\operatorname{csch}x:=\\frac1{\\sinh x}.$$\n\nThe positivity of $\\exp$ makes $\\cosh x>0$ for every $x$. If $x\\ne0$, then\n$x\\ne-x$, so strict increase of $\\exp$ makes $\\exp x\\ne\\exp(-x)$; hence\n$\\sinh x\\ne0$. Thus all four quotients above are defined on exactly their\nstated domains ([[cor-exponential-reciprocal-and-positivity]],\n[[thm-exponential-is-strictly-increasing]]).",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-rpm-ideal-rindler-phase-reception",
+          "source_section": "Postulate",
+          "quote": "In the flat affine Minkowski model with signature $(-,+,+,+)$ and $x^0=ct$, use the smooth right-wedge chart and stationary congruence of [[pthm-sr-rindler-horizons-and-radar]]. A stationary observer has fixed $\\rho>0,y,z$, worldline $z(\\tau)$ on an open proper-time interval in seconds, and four-velocity $U=dz/d\\tau$ with $\\eta(U,U)=-c^2$. These are accelerated timelike worldlines, not global inertial frames.\n\nLet $\\theta$ be the dimensionless affine phase with constant nonzero future null covector $k=d\\theta$ and ideal vacuum rays of [[post-sr-ideal-plane-wave-model]] (i). As an **additional local reception assumption**, adopt that an ideal point receiver comoving with a stationary Rindler observer assigns, at the event $z(\\tau)$, the instantaneous received angular frequency\n\n$$\\omega(\\tau):=-\\frac{d(\\theta\\circ z)}{d\\tau}=-k(U(\\tau))>0,$$\n\nand linear frequency $\\nu(\\tau)=\\omega(\\tau)/(2\\pi)$ in the conventions of [[def-sr-null-wave-covector-and-observer-frequency]] and [[def-sr-si-units-and-coordinate-conventions]]. The phase derivative and positivity are mathematical facts of [[lem-sr-phase-rate-along-worldline]]; their identification with this ideal receiver's reading is the assumption adopted here. This is the pointwise equivalence to the momentarily comoving inertial phase receiver, together with the proper-time clock convention of [[post-sr-ideal-clocks-and-light]]. Reception comparisons use one and the same affine wave and events joined by one of its radial rays. This assumption does not postulate an emitter mechanism.\n\nThe instantaneous quantity may vary along an accelerated worldline. It is not an assertion that an observer's entire proper-time signal is monochromatic or that an arbitrary finite-duration Fourier measurement equals this value. For possible finite-apparatus use, define the local wavelength $\\lambda_{\\rm loc}:=2\\pi c/\\omega$ and the translational acceleration length $L_\\alpha:=c^2/\\alpha$, where $\\alpha$ is the observer's proper-acceleration magnitude; for this congruence $L_\\alpha=\\rho$. The intended local ray regime has $\\lambda_{\\rm loc}/L_\\alpha\\ll1$ throughout the observation segment, receiver size small relative to $L_\\alpha$, and an observation duration long enough for several cycles but short relative to $L_\\alpha/c$. These qualitative scale separations give no numerical tolerance or measured uncertainty. The equality above is exact only inside the adopted ideal model; no accuracy claim for a real receiver follows from it.\n\nThis supplements, without changing, the accelerated-reception exclusion in [[post-sr-ideal-plane-wave-model]] (iv). It includes no detector dynamics, intensity, polarization, finite-bandwidth pulse or envelope, medium, dispersion, absorption, quantum or gravity model, no energy identification with $\\hbar\\omega$, and no empirical outcome or proof of the model's applicability. It is a sourced adopted idealization, not a deductive or experimentally established law.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\theta=aT/c$. The exponential definitions [F11] give $x^1+x^0=\\rho e^\\theta$ and $x^1-x^0=\\rho e^{-\\theta}$, both positive, so the image lies in $W$. Conversely, [F3] supplies the unique smooth Rindler inverse $\\rho=\\sqrt{(x^1)^2-(x^0)^2}$, $\\theta=\\frac12\\log((x^1+x^0)/(x^1-x^0))$; setting $T=c\\theta/a$ gives the stated inverse, which is smooth because $a,c>0$. The range agrees with [F3], and units and coordinates are those of [F1, F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating the map with [F9] gives $dx^0=\\sinh\\theta\\,d\\rho+(a\\rho/c)\\cosh\\theta\\,dT$ and $dx^1=\\cosh\\theta\\,d\\rho+(a\\rho/c)\\sinh\\theta\\,dT$. Substitution into the inertial metric of [F1, F2], using $\\cosh^2\\theta-\\sinh^2\\theta=1$, cancels the mixed terms and yields the displayed pullback metric. For $d\\rho=dy=dz=0$, the proper-time line element and adopted clock rule [F4] give $d\\tau/dT=a\\rho/c^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F4",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Along a stationary worldline set $\\eta=c\\tau/\\rho=aT/c$. Its inertial coordinates are $(\\rho\\sinh\\eta,\\rho\\cosh\\eta)$. Differentiating twice with respect to $\\tau$ by [F9] gives $U=(c\\cosh\\eta,c\\sinh\\eta)$ and $A=(c^2\\sinh\\eta/\\rho,c^2\\cosh\\eta/\\rho)$. Thus $\\eta(U,U)=-c^2$ and $\\eta(A,A)=c^4/\\rho^2$ by [F1]; $U$ is future timelike and has the proper-time normalization of [F5]. The definition [F6] makes the proper-acceleration magnitude $c^2/\\rho$, consistently with [F3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For a radial null curve, set $dy=dz=0$ and $ds^2=0$ in the metric of step 2.1. Since $a,\\rho,c$ are positive, this gives $d\\rho/dT=\\pm a\\rho/c$. By [F10], $d(\\log\\rho)/dT=\\pm a/c$; integration between its endpoint radii gives $\\Delta T=(c/a)|\\log(\\rho_R/\\rho_E)|$, finite for positive finite radii. [F4] identifies these null curves with the ideal vacuum rays.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F4",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "Over a common nonzero Rindler-time interval $\\Delta T$, step 2.1 gives $\\Delta\\tau_E=(a\\rho_E/c^2)\\Delta T$ and $\\Delta\\tau_R=(a\\rho_R/c^2)\\Delta T$. Their ratio is $\\rho_R/\\rho_E$. If the radii coincide the two increments agree; for distinct positive radii the ratio is positive and finite.",
+          "step": "3.3",
+          "inputs": [
+            "step 2.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For an outward radial wave take dimensionless phase $\\vartheta=\\kappa(x^1-x^0)=\\kappa\\rho e^{-aT/c}$ with $\\kappa>0$ in inverse metres; for an inward wave take $\\vartheta=-\\kappa(x^1+x^0)=-\\kappa\\rho e^{aT/c}$, using [F11]. Each is an inertial affine phase with future null covector as in [F8], and its $T$ derivative is constant along its corresponding null ray because $\\rho e^{\\mp aT/c}$ is constant there by step 3.2. A stationary observer has $U_n=(c^2/(a\\rho))\\partial_T$ by step 2.1, so [F7] yields $\\omega_n=-k(U_n)=-(c^2/(a\\rho))\\partial_T\\vartheta$, proportional to $1/\\rho$ with the same positive proportionality constant at the two events. Hence $\\omega_R/\\omega_E=\\rho_E/\\rho_R$ as a contraction identity. Under [A2] these contractions are the instantaneous received angular frequencies; their finite-apparatus interpretation retains the local ray-regime and short-observation qualifications of that postulate. This is separate from [F8] and does not extend its scope.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.2",
+            "F7",
+            "F8",
+            "F11",
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement \u2014 Right-wedge Rindler clocks, radial rays and frequency ratio: The conclusion concerns supplied local or finite data rather than an aggregate construction over an empty index set. Positive acceleration parameter and positive wedge radii define the chart, clock gradient and radial travel. The received-frequency ratio uses a separate ideal accelerated local phase-reception adoption; rho zero and finite-apparatus accuracy claims are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes rho=0 from the chart; step 3.2 gives zero travel time for coincident radii."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Right-wedge Rindler clocks, radial rays and frequency ratio: There is no distinct singleton aggregate assertion; the fixed-dimensional or pointwise calculation uses exactly its declared data. Positive acceleration parameter and positive wedge radii define the chart, clock gradient and radial travel. The received-frequency ratio uses a separate ideal accelerated local phase-reception adoption; rho zero and finite-apparatus accuracy claims are excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.3 shows equal radii give equal clock increments while rho remains positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.2 evaluates positive finite endpoint radii, and step 3.3 uses a common nonzero T interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement \u2014 Right-wedge Rindler clocks, radial rays and frequency ratio: No additional arbitrary selection is inferred; any inherited choice hypothesis and finite constructions retain their declared scope. Positive acceleration parameter and positive wedge radii define the chart, clock gradient and radial travel. The received-frequency ratio uses a separate ideal accelerated local phase-reception adoption; rho zero and finite-apparatus accuracy claims are excluded."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Right-wedge Rindler clocks, radial rays and frequency ratio: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. Positive acceleration parameter and positive wedge radii define the chart, clock gradient and radial travel. The received-frequency ratio uses a separate ideal accelerated local phase-reception adoption; rho zero and finite-apparatus accuracy claims are excluded."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Right-wedge Rindler clocks, radial rays and frequency ratio: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. Positive acceleration parameter and positive wedge radii define the chart, clock gradient and radial travel. The received-frequency ratio uses a separate ideal accelerated local phase-reception adoption; rho zero and finite-apparatus accuracy claims are excluded."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set rho_R=2rho_E with a>0.",
+          "result": "Delta T=(c/a)log 2; clock ratio 2; contraction-frequency ratio 1/2.",
+          "verifies": "Steps 3.2, 3.3 and 4.1."
+        }
+      ],
+      "unresolved_prerequisites": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Read every current proof step and the direct supplier definitions/statements. Chart inverse on rho>0, metric cancellation, future normalized U and acceleration c^2/rho, both radial null directions, positive finite endpoint radii and equal-radius clock ratio checked. Along a single constant-phase ray, partial_T phase is constant and -k(U) has ratio rho_E/rho_R. Ideal-clock and the separate local reception postulate are adopted; SR accelerated-reception exclusion and qualitative finite-apparatus limits remain intact. No empirical premises or choice use. Sources checked: Dray Chapter 4 section 2; Gourgoulhon Rindler section; Mashhoon section 1 pp.1-2 and section 4 p.12. No confirmed defect."
+      }
+    },
+    "pthm-rpm-constant-electric-orbit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rpm-charge-spin-model",
+          "source_section": "Definition",
+          "quote": "etres uses $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$, matching [[def-em-electromagnetic-tensor]]. On the curved background, $F$ is only a two-form; at an event its components in a chosen orthonormal tetrad use the same algebraic convention. Such a tetrad is a basis field, no",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-rpm-external-charge-action",
+          "source_section": "Postulate",
+          "quote": "Adopt the following motion principle for the massive charged test body of [[def-rpm-charge-spin-model]]. Let $a<b$ be finite real parameters and let $z:[a,b]\\to O$ be a $C^2$ future-directed timelike segment in a local potential domain, with its endpoint events fixed in the variations. A change from this parameter interval to another compact interval $[\\tilde a,\\tilde b]$ is admissible when it is a $C^2$ diffeomorphism $\\phi:[\\tilde a,\\tilde b]\\to[a,b]$ with $\\phi'(\\lambda)>0$ throughout; the same oriented segment is then represented by $\\tilde z=z\\circ\\phi$. In any chosen representation write $\\gamma:[\\alpha,\\beta]\\to O$ and let $\\lambda$ denote its parameter; the choice $\\lambda=\\tau$ is included when the curve is parameterized by proper time as in [[def-rpm-charge-spin-model]]. Use seconds for the parameter in SI evaluation.\n\nFor each such parameterized segment, the physical trajectories of this idealized model are the stationary points of\n\n$$S[\\gamma]=-mc\\int_\\alpha^\\beta\\sqrt{-g(\\gamma',\\gamma') }\\,d\\lambda+q\\int_\\alpha^\\beta A(\\gamma')\\,d\\lambda,$$\n\nwhere $A$ is the prescribed $C^2$ external potential, $F=dA$, $m>0$ is constant rest mass, $q$ is constant charge, and $c>0$ is the SI conversion constant. A local fixed-endpoint variation is a $C^2$ family $\\gamma_\\epsilon:[\\alpha,\\beta]\\to O$, defined for $\\epsilon$ near $0$, with $\\gamma_0=\\gamma$, each $\\gamma_\\epsilon$ future timelike, and $\\gamma_\\epsilon(\\alpha)=\\gamma(\\alpha)$ and $\\gamma_\\epsilon(\\beta)=\\gamma(\\beta)$; the local variation field is supported in a coordinate chart. The segment is stationary when $\\left.\\frac{d}{d\\epsilon}S[\\gamma_\\epsilon]\\right|_{\\epsilon=0}=0$ for every such variation. A reparameterization acts on the whole family by $\\gamma_\\epsilon\\mapsto\\gamma_\\epsilon\\circ\\phi$. With $\\lambda=\\tau$ in seconds, coordinates in metres and $A$ in tesla metres, $S$ has units joule seconds. The potential and metric are fixed inputs, independent of the particle path. This is a local action postulate: no global potential is assumed, and a global field equation or global trajectory is not part of the postulate. Reparameterization invariance and its implication for stationarity are proved separately in [[pthm-rpm-external-charge-action-equivalence]].\n\nThis model describes a test body: it does not evaluate the body's own field, include self-gravity, or adopt radiation reaction, variable mass or charge, electric dipole forces, or spin-dependent translational forces. The postulate is an adopted model assumption, not a deduction from the electromagnetic field equations or a claim that nature follows this action.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-rpm-external-charge-action-equivalence",
+          "source_section": "Statement",
+          "quote": "late, choose the orientation-preserving parameter $\\lambda=\\tau$; the segment is stationary for the adopted action if and only if $$m\\nabla_UU=qF^\\sharp(U),\\qquad (\\nabla_UU)_a=\\frac qm F_{ab}U^b.$$ This is a model deduction: it establishes the equation equivalent to stationarity",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-rpm-charge-mass-shell",
+          "source_section": "Statement",
+          "quote": "athbf v|^2/c^2)^{-1/2}$. Then, with $\\mathbf p=m\\gamma\\mathbf v$ and $E_{\\rm part}=\\gamma mc^2$ supplied by [[pthm-sr-momentum-and-four-force]], the same equation gives $$\\frac{d\\mathbf p}{dt}=q(\\mathbf E+\\mathbf v\\times\\mathbf B),\\qquad \\frac{dE_{\\rm part}}{dt}=q\\,\\mathbf E\\cdot",
+          "uses": [
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-sr-massive-particle-dynamics",
+          "source_section": "Postulate",
+          "quote": "coordinate-conventions]], together with the framework's idealisations of point particles, ideal clocks and ideal light signals: **(i) Mass and momentum.** Every massive classical particle of the model carries a positive constant invariant mass parameter $m>0$ and has four-momentu",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\math",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-sr-momentum-and-four-force",
+          "source_section": "Statement",
+          "quote": "P)\\ge0$ and the mass-shell identity $E_n(P)^2=m^2c^4+c^2|q_n(P)|^2$; $T_n(P)=0$ if and only if the particle is at rest in the observer's frame ($U=cn$). In an inertial frame whose stationary observer is $n=e_0$, the components are $P=(E/c,\\mathbf p)$ with $E=E_{e_0}(P)=m\\gamma_wc",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sr-proper-time-and-observer-decomposition",
+          "source_section": "Statement",
+          "quote": "for all $v \\in V$, and every $v \\in V$ has the unique decomposition $v = -\\eta(n,v)\\,n + h(v)$. Moreover $|w| := \\sqrt{\\eta(w,w)}$ defines a norm on $n^{\\perp}$. **(d) Relative velocity and Lorentz factor.** Let $n$ and $u$ be future unit timelike vectors, put $\\gamma := -\\eta(n",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and $$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and $$(a^x)'=a^x\\log a.$$ For $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with $$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "ntinuous on $I$ ([[def-continuity-real]]) and differentiable at every point of $I$ that is interior to $I$ ([[def-interior-closure-boundary-r]], [[def-derivative]]), with $$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$ Then $f$ is constant on $I$: there is",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The displayed scalar and vector potentials are smooth on all of Minkowski space. With the covector convention $A_0=-\\phi/c$ and $A_i=\\mathbf A_i$, they give $F_{01}=-E_0/c$, $F_{ij}=0$, hence exactly the field in [F1]. Thus the action potential-domain hypothesis [A1] is met, and under the exact assumption [A3], [F2] gives its covariant Lorentz-force equation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "A3",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Apply [F3] under [A3] to this field: $\\dot p_1=F_0$, $\\dot{\\mathbf p}_\\perp=0$, and $\\dot{\\mathcal E}=F_0v_1$. Integration with the initial data gives $p_1(t)=p_{01}+F_0t$ and constant $\\mathbf p_\\perp$. By adopted [A2] and the inertial momentum relations [F4], $\\mathcal E^2=m^2c^4+c^2|\\mathbf p|^2$; since $\\mathcal E=\\gamma mc^2>0$, this is $\\mathcal E=c\\sqrt{m^2c^2+|\\mathbf p|^2}$, while $\\mathbf p=\\gamma m\\mathbf v$ gives $\\mathbf v=c^2\\mathbf p/\\mathcal E$. Thus the definitions of $\\Pi,\\mathcal E,\\mathbf v$ in the statement follow. Differentiating the shell identity with $\\dot{\\mathbf p}=F_0e_1$ gives $2\\mathcal E\\dot{\\mathcal E}=2c^2p_1F_0$, hence $\\dot{\\mathcal E}=c^2p_1F_0/\\mathcal E=F_0v_1$, as required by [F3]. Since $m,c>0$, the square-root denominator is at least $mc>0$, and [F5] gives subluminal motion.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A2",
+            "A3",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Suppose $F_0\\ne0$. Differentiating the proposed $x^1(t)$ and using $\\dot p_1=F_0$ gives $\\dot x^1=cp_1/\\sqrt{\\Pi^2+p_1^2}=v_1$. For the transverse formula, the derivative of $\\log(p+\\sqrt{\\Pi^2+p^2})$ is $1/\\sqrt{\\Pi^2+p^2}$: the argument is positive since $\\sqrt{\\Pi^2+p^2}>|p|$, and the identity follows from [F6, F7] and the chain rule. Hence $\\dot{\\mathbf x}_\\perp=c\\mathbf p_\\perp/\\sqrt{\\Pi^2+p_1^2}=\\mathbf v_\\perp$. At $t=0$ both position increments vanish, so these formulas have the prescribed initial position and velocity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "If $F_0=0$, [F3] makes $\\mathbf p$ and $\\mathcal E$ constant, so the displayed free position has derivative $c^2\\mathbf p_0/\\mathcal E(0)=\\mathbf v$ and the initial position. Its speed is below $c$ by [F5].",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "In either case the constructed curve satisfies the force equation and the initial data by steps 2.1\u20132.2. Any other solution has the same momentum by integrating [F3]; subtracting its position from the displayed one gives a differentiable vector with zero derivative and zero initial value, so each component vanishes by [F8]. Thus it agrees throughout any common connected interval. The formulas have positive square-root arguments and positive logarithm arguments for every finite $t$, so they extend smoothly over all $\\mathbb R$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "F3",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement \u2014 Exact relativistic orbit in a uniform electric field: The conclusion concerns supplied local or finite data rather than an aggregate construction over an empty index set. A smooth global uniform-electric potential, positive mass and arbitrary constant charge specify the conditional orbit. Nonzero qE uses the logarithmic integral, while qE zero is separately free; inherited AComega and massive momentum adoption remain in the assumptions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 explicitly covers F0=0, and step 3.1 keeps Pi positive because m>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Exact relativistic orbit in a uniform electric field: There is no distinct singleton aggregate assertion; the fixed-dimensional or pointwise calculation uses exactly its declared data. A smooth global uniform-electric potential, positive mass and arbitrary constant charge specify the conditional orbit. Nonzero qE uses the logarithmic integral, while qE zero is separately free; inherited AComega and massive momentum adoption remain in the assumptions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 3.2 include zero transverse momentum and the zero-force free branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 3.2 verify initial data at t=0; step 4.1 proves agreement for every common interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement \u2014 Exact relativistic orbit in a uniform electric field: No additional arbitrary selection is inferred; any inherited choice hypothesis and finite constructions retain their declared scope. A smooth global uniform-electric potential, positive mass and arbitrary constant charge specify the conditional orbit. Nonzero qE uses the logarithmic integral, while qE zero is separately free; inherited AComega and massive momentum adoption remain in the assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Exact relativistic orbit in a uniform electric field: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. A smooth global uniform-electric potential, positive mass and arbitrary constant charge specify the conditional orbit. Nonzero qE uses the logarithmic integral, while qE zero is separately free; inherited AComega and massive momentum adoption remain in the assumptions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Exact relativistic orbit in a uniform electric field: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. A smooth global uniform-electric potential, positive mass and arbitrary constant charge specify the conditional orbit. Nonzero qE uses the logarithmic integral, while qE zero is separately free; inherited AComega and massive momentum adoption remain in the assumptions."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set p01=0, p_perp=0 and t=0.",
+          "result": "p1=0, x=x0 and v=0; Pi=mc>0.",
+          "verifies": "Steps 3.1 and 3.1."
+        }
+      ],
+      "unresolved_prerequisites": [
+        {
+          "supplier": "rpm-external-charge",
+          "status": "open",
+          "evidence": "The current batch 24 carriers remain draft and require explicit AC_omega; this consumer records that exact conditional interface, but the supplier batch remains unvalidated and unaccepted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "All five proof steps and every direct supplier interface checked. A_0=E0*x1/c yields F01=-E0/c; shell positive branch gives energy=c*sqrt(Pi^2+p1^2), v=c*p/sqrt(Pi^2+p1^2), and |v|<c follows algebraically since m>0. Differentiated both position formulas; log argument p+sqrt(Pi^2+p^2)>0 for every real p. F0=0 (q=0 or E0=0), negative F0, zero transverse momentum and arbitrary initial longitudinal momentum checked. All finite times smooth; momentum integration and component zero-derivative theorem establish uniqueness on common intervals containing initial data. AC_omega is explicitly inherited from draft action suppliers; no extra choice use. Conditional model scope, prescribed smooth external field, no radiation/self-field and empty empirical premises preserved. Likharev section 9.6 and Fowler Lecture 73 consulted; no local defect confirmed."
+      }
+    },
+    "pthm-rpm-constant-magnetic-helix": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rpm-charge-spin-model",
+          "source_section": "Definition",
+          "quote": "etres uses $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$, matching [[def-em-electromagnetic-tensor]]. On the curved background, $F$ is only a two-form; at an event its components in a chosen orthonormal tetrad use the same algebraic convention. Such a tetrad is a basis field, no",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-rpm-external-charge-action",
+          "source_section": "Postulate",
+          "quote": "Adopt the following motion principle for the massive charged test body of [[def-rpm-charge-spin-model]]. Let $a<b$ be finite real parameters and let $z:[a,b]\\to O$ be a $C^2$ future-directed timelike segment in a local potential domain, with its endpoint events fixed in the variations. A change from this parameter interval to another compact interval $[\\tilde a,\\tilde b]$ is admissible when it is a $C^2$ diffeomorphism $\\phi:[\\tilde a,\\tilde b]\\to[a,b]$ with $\\phi'(\\lambda)>0$ throughout; the same oriented segment is then represented by $\\tilde z=z\\circ\\phi$. In any chosen representation write $\\gamma:[\\alpha,\\beta]\\to O$ and let $\\lambda$ denote its parameter; the choice $\\lambda=\\tau$ is included when the curve is parameterized by proper time as in [[def-rpm-charge-spin-model]]. Use seconds for the parameter in SI evaluation.\n\nFor each such parameterized segment, the physical trajectories of this idealized model are the stationary points of\n\n$$S[\\gamma]=-mc\\int_\\alpha^\\beta\\sqrt{-g(\\gamma',\\gamma') }\\,d\\lambda+q\\int_\\alpha^\\beta A(\\gamma')\\,d\\lambda,$$\n\nwhere $A$ is the prescribed $C^2$ external potential, $F=dA$, $m>0$ is constant rest mass, $q$ is constant charge, and $c>0$ is the SI conversion constant. A local fixed-endpoint variation is a $C^2$ family $\\gamma_\\epsilon:[\\alpha,\\beta]\\to O$, defined for $\\epsilon$ near $0$, with $\\gamma_0=\\gamma$, each $\\gamma_\\epsilon$ future timelike, and $\\gamma_\\epsilon(\\alpha)=\\gamma(\\alpha)$ and $\\gamma_\\epsilon(\\beta)=\\gamma(\\beta)$; the local variation field is supported in a coordinate chart. The segment is stationary when $\\left.\\frac{d}{d\\epsilon}S[\\gamma_\\epsilon]\\right|_{\\epsilon=0}=0$ for every such variation. A reparameterization acts on the whole family by $\\gamma_\\epsilon\\mapsto\\gamma_\\epsilon\\circ\\phi$. With $\\lambda=\\tau$ in seconds, coordinates in metres and $A$ in tesla metres, $S$ has units joule seconds. The potential and metric are fixed inputs, independent of the particle path. This is a local action postulate: no global potential is assumed, and a global field equation or global trajectory is not part of the postulate. Reparameterization invariance and its implication for stationarity are proved separately in [[pthm-rpm-external-charge-action-equivalence]].\n\nThis model describes a test body: it does not evaluate the body's own field, include self-gravity, or adopt radiation reaction, variable mass or charge, electric dipole forces, or spin-dependent translational forces. The postulate is an adopted model assumption, not a deduction from the electromagnetic field equations or a claim that nature follows this action.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-rpm-external-charge-action-equivalence",
+          "source_section": "Statement",
+          "quote": "late, choose the orientation-preserving parameter $\\lambda=\\tau$; the segment is stationary for the adopted action if and only if $$m\\nabla_UU=qF^\\sharp(U),\\qquad (\\nabla_UU)_a=\\frac qm F_{ab}U^b.$$ This is a model deduction: it establishes the equation equivalent to stationarity",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-rpm-charge-mass-shell",
+          "source_section": "Statement",
+          "quote": "Assume the charged test-body quantities of [[def-rpm-charge-spin-model]], the field convention of [[def-em-electromagnetic-tensor]], and the stationary-action equivalence [[pthm-rpm-external-charge-action-equivalence]], and assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure. Let $O\\subseteq M$ be the open local-potential domain of the model, with prescribed field $F=dA$ there. For every future-timelike initial datum $(x_0,U_0)$ with $x_0\\in O$ and $g(U_0,U_0)=-c^2$, the equation of motion has a unique local solution by [[lem-rpm-external-charge-local-ivp]]. Along it the kinetic four-momentum $P=mU$ remains future timelike and satisfies\n\n$$g(P,P)=-m^2c^2.$$\n\nIn the flat Minkowski specialization, use the massive-particle momentum result [[pthm-sr-momentum-and-four-force]] under its stated model assumptions, and choose a named inertial chart with $x^0=ct$, $E,B$ defined by [[def-em-electromagnetic-tensor]], and $\\mathbf v$ the Euclidean spatial chart velocity. Set $\\gamma:=(1-|\\mathbf v|^2/c^2)^{-1/2}$. Then, with $\\mathbf p=m\\gamma\\mathbf v$ and $E_{\\rm part}=\\gamma mc^2$ supplied by [[pthm-sr-momentum-and-four-force]], the same equation gives\n\n$$\\frac{d\\mathbf p}{dt}=q(\\mathbf E+\\mathbf v\\times\\mathbf B),\\qquad \\frac{dE_{\\rm part}}{dt}=q\\,\\mathbf E\\cdot\\mathbf v.$$\n\nThe mass-shell and force statements are conditional deductions within the specified model; they do not establish empirical applicability.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-sr-massive-particle-dynamics",
+          "source_section": "Postulate",
+          "quote": "coordinate-conventions]], together with the framework's idealisations of point particles, ideal clocks and ideal light signals: **(i) Mass and momentum.** Every massive classical particle of the model carries a positive constant invariant mass parameter $m>0$ and has four-momentu",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\math",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-sr-momentum-and-four-force",
+          "source_section": "Statement",
+          "quote": "P)\\ge0$ and the mass-shell identity $E_n(P)^2=m^2c^4+c^2|q_n(P)|^2$; $T_n(P)=0$ if and only if the particle is at rest in the observer's frame ($U=cn$). In an inertial frame whose stationary observer is $n=e_0$, the components are $P=(E/c,\\mathbf p)$ with $E=E_{e_0}(P)=m\\gamma_wc",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sr-proper-time-and-observer-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $c > 0$ and let $(A,V,\\eta,C^{+})$ be an oriented time-oriented affine Minkowski space ([[def-sr-affine-minkowski-model]]). **(a) Norm of the four-velocity.** Let $x : I \\to A$ be a $C^{1}$ future timelike worldline with four-velocity $U$ ([[def-sr-four-velocity-and-four-acce",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and differentiable at every point of $I$ that is interior to $I$ ([[def-interior-closure-boundary-r]], [[def-derivative]]), with $$f'(x) =",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner produ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The potential components satisfy $F_{12}=\\partial_1A_2-\\partial_2A_1=B_0$ and all electric components vanish, by the tensor convention [F1]. The potential is smooth on all of Minkowski space, so the local-potential assumption [A1] applies, and under [A3], [F2] supplies the covariant equation. The coordinate force and energy equations are therefore those of [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "A3",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "With $\\mathbf E=0$, the actual current carrier [F3] under [A3] gives $\\dot{\\mathcal E}=0$. The adopted massive-particle model [A2] and inertial relations [F4] give $\\mathcal E^2=c^2(m^2c^2+|\\mathbf p|^2)$ and $\\mathbf v=c^2\\mathbf p/\\mathcal E$. Thus $\\mathcal E=cS_0$ and $\\mathbf v=c\\mathbf p/S_0$. Using [F3], [F8], and $\\mathbf v=c\\mathbf p/S_0$, one has $\\mathbf v\\times B_0e_3=B_0(v_2e_1-v_1e_2)$, so $\\dot p_1=\\Omega p_2$, $\\dot p_2=-\\Omega p_1$, $\\dot p_3=0$ because $qB_0c/S_0=qB_0/(\\gamma_0m)=\\Omega$. Differentiation using [F6] verifies the stated sinusoidal momenta and their initial values. The sum and product rules [F9] show that the rotating components also satisfy $\\frac d{dt}(p_1^2+p_2^2)=2\\Omega p_1p_2-2\\Omega p_1p_2=0$, so $|\\mathbf p(t)|=|\\mathbf p_0|$ and the displayed constant $\\mathcal E=cS_0$ obeys the shell and $\\dot{\\mathcal E}=0$; when $\\Omega=0$, the force is zero and momentum is constant.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A2",
+            "A3",
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "For $\\Omega\\ne0$, differentiating the proposed $x^1$ and $x^2$ with [F6] gives $\\dot x^1=cp_1/S_0$ and $\\dot x^2=cp_2/S_0$; differentiating $x^3$ gives $cp_3/S_0$. These are exactly the velocity components from step 2.1, and all increments vanish at $t=0$. For $\\Omega=0$, the stated free position has constant derivative $c\\mathbf p_0/S_0=\\mathbf v$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "For $\\Omega\\ne0$, set $A=c p_{01}/(S_0\\Omega)$ and $B=c p_{02}/(S_0\\Omega)$. The transverse coordinates relative to the fixed centre $(x^1_0+B,x^2_0-A)$ are $(A\\sin\\Omega t-B\\cos\\Omega t,\\,B\\sin\\Omega t+A\\cos\\Omega t)$; their squared distance from that centre is $A^2+B^2$. Since $S_0=\\gamma_0mc$ and $|\\Omega|=|qB_0|/(\\gamma_0m)$, the radius is $c|\\mathbf p_\\perp|/(S_0|\\Omega|)=|\\mathbf p_\\perp|/|qB_0|$. If $\\mathbf p_\\perp=0$, $x^1=x^1_0$ and $x^2=x^2_0$, so the transverse projection is a point. Then $x^3=x^3_0+cp_{03}t/S_0$ makes the full spatial orbit an axial straight line when $p_{03}\\ne0$ and a stationary point when $p_{03}=0$. If $\\mathbf p_\\perp\\ne0$ and $p_{03}=0$, $x^3$ is constant and the circle is planar. The energy constancy in step 2.1 proves zero magnetic work.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "The displayed curves satisfy the force equation and initial data by steps 2.1 and 3.1. Any other solution with the same data has constant energy $\\mathcal E=cS_0$ by [F3], so step 2.1 puts its momentum in the same constant-coefficient system $\\dot p_1=\\Omega p_2$, $\\dot p_2=-\\Omega p_1$, $\\dot p_3=0$. For the difference $d$ of two such momenta, the product rule [F9] gives $\\frac d{dt}(d_1^2+d_2^2)=2\\Omega d_1d_2-2\\Omega d_2d_1=0$, and $\\dot d_3=0$. With zero initial difference, [F7] makes $d_1^2+d_2^2=d_3=0$ on every common connected interval, hence both momenta agree, including $\\Omega=0$. Their velocities then agree by [F4], so each position difference has zero derivative and zero initial value; [F7] gives equality. The formulas are smooth for all real $t$; $S_0\\ge mc>0$, and in the rotating case the denominator $\\Omega$ is nonzero. The resulting worldline is timelike by [F5].",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement \u2014 Exact relativistic helix in a uniform magnetic field: The conclusion concerns supplied local or finite data rather than an aggregate construction over an empty index set. The uniform magnetic potential and massive inertial momentum model yield conserved energy and constant rotation frequency. Frequency zero is a separate free branch and transverse momentum zero gives a point projection and axial motion, stationary when axial momentum also vanishes; the positive mass keeps S0 nonzero, with inherited AComega."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats Omega=0 as free motion and step 4.1 treats zero transverse momentum."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Exact relativistic helix in a uniform magnetic field: There is no distinct singleton aggregate assertion; the fixed-dimensional or pointwise calculation uses exactly its declared data. The uniform magnetic potential and massive inertial momentum model yield conserved energy and constant rotation frequency. Frequency zero is a separate free branch and transverse momentum zero gives a point projection and axial motion, stationary when axial momentum also vanishes; the positive mass keeps S0 nonzero, with inherited AComega."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 treats p_perp=0 as a point transverse projection, with a full axial line when p03 is nonzero and a stationary point when p03=0; nonzero p_perp with p03=0 is a planar circle."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 verifies the initial position at t=0 and step 5.1 covers common intervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement \u2014 Exact relativistic helix in a uniform magnetic field: No additional arbitrary selection is inferred; any inherited choice hypothesis and finite constructions retain their declared scope. The uniform magnetic potential and massive inertial momentum model yield conserved energy and constant rotation frequency. Frequency zero is a separate free branch and transverse momentum zero gives a point projection and axial motion, stationary when axial momentum also vanishes; the positive mass keeps S0 nonzero, with inherited AComega."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Exact relativistic helix in a uniform magnetic field: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. The uniform magnetic potential and massive inertial momentum model yield conserved energy and constant rotation frequency. Frequency zero is a separate free branch and transverse momentum zero gives a point projection and axial motion, stationary when axial momentum also vanishes; the positive mass keeps S0 nonzero, with inherited AComega."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Exact relativistic helix in a uniform magnetic field: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. The uniform magnetic potential and massive inertial momentum model yield conserved energy and constant rotation frequency. Frequency zero is a separate free branch and transverse momentum zero gives a point projection and axial motion, stationary when axial momentum also vanishes; the positive mass keeps S0 nonzero, with inherited AComega."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take p0=(p*,0,0), p*>0 and Omega t=pi/2.",
+          "result": "p=(0,-p*,0), x3=x30 and transverse radius p*/|qB0|.",
+          "verifies": "Steps 3.1, 3.1 and 4.1."
+        },
+        {
+          "check": "Set p01=p02=0, with p03=0 or p03 nonzero and Omega nonzero.",
+          "result": "x1=x10, x2=x20; x3=x30+cp03*t/S0 is stationary for p03=0 and parametrizes an axial line otherwise.",
+          "verifies": "Statement and step 4.1."
+        }
+      ],
+      "unresolved_prerequisites": [
+        {
+          "supplier": "rpm-external-charge",
+          "status": "open",
+          "evidence": "The current batch 24 carriers remain draft and require explicit AC_omega; this consumer records that exact conditional interface, but the supplier batch remains unvalidated and unaccepted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Every step and all direct supplier interfaces checked. Smooth potential gives F12=B0; energy is constant, v=c*p/S0, and signed rotation satisfies p1dot=Omega*p2, p2dot=-Omega*p1. Differentiated positions and computed center and radius |p_perp|/|qB0|. Confirmed and repaired refuter:28:1: zero transverse momentum gives point projection; axial nonzero momentum gives full line, all-zero momentum gives stationary spatial point. Omega=0 (q or B0 zero), either sign of Omega, zero axial momentum and positive S0>=mc verified. Difference squared norm proves momentum uniqueness, zero derivative fixes positions; speed<c follows shell algebra. No extra choice beyond inherited AC_omega; adopted external test-particle model and empty empirical premises retained. Actual reference consumers are the crossed-field theorem (uses orbit formulas, existence/uniqueness and free branch), the circular example (p_perp nonzero), and the A page (conditional trajectory summary); all remain sound without edit. Likharev section 9.6 equations 9.149-9.153 and Fowler magnetic section checked. Repair confidence 1."
+      }
+    },
+    "pthm-rpm-crossed-field-drift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rpm-charge-spin-model",
+          "source_section": "Definition",
+          "quote": "Use the smooth, time-oriented Lorentzian background $(M,g,N)$, signature $(-,+,+,+)$, and the distinct chart, observer, congruence, tetrad and worldline meanings of [[def-rpm-spacetime-observer-and-worldline]]. The metric and time orientation are prescribed data, not dynamical variables. A **charged spinning test body** in this definition consists of the following model quantities along a massive worldline $z:I\\to M$:\n\n- $I\\subseteq\\mathbb R$ is an open interval whose parameter is proper time $\\tau$ in seconds; $z$ is $C^2$, future-directed and timelike, and $U:=dz/d\\tau$ obeys $g(U,U)=-c^2$. The SI conversion constant is $c>0$ metres per second; in a flat specialization use the affine Minkowski model and the proper-time decomposition of [[def-sr-affine-minkowski-model]] and [[thm-sr-proper-time-and-observer-decomposition]].\n- The constant rest-mass parameter $m>0$ has unit kilogram, and the constant charge parameter $q\\in\\mathbb R$ has unit coulomb. They are primitive model parameters; this definition does not derive them from the background field or from another framework.\n- The **kinetic four-momentum** is the derived vector $P:=mU$ along $z$, with unit kilogram metre per second. It is distinct from the potential-dependent covector defined in [[lem-rpm-charge-gauge-boundary]].\n- The **spin or polarization vector** is a $C^1$ tangent vector field $s(\\tau)\\in T_{z(\\tau)}M$ constrained by $g(s,U)=0$, so it lies in the positive-definite instantaneous rest space $U^\\perp$. Its unit is angular momentum, kilogram metre squared per second. This is a classical model vector; no quantization or quantum spin state is defined here.\n- The gyromagnetic ratio $g_s\\in\\mathbb R$ is a dimensionless primitive species parameter. In the instantaneous rest space the model defines the magnetic-moment vector by $\\mu=(g_s q/2m)s$, with unit ampere metre squared. No value $g_s=2$ is assumed, and this constitutive relation is not deduced from Lorentz covariance or classical electromagnetism.\n- The prescribed external electromagnetic field is a $C^1$ alternating covariant two-tensor $F$ on an open region of $M$, independent of the unknown curve. Define $F^\\sharp:T M\\to T M$ by $g(F^\\sharp(v),w)=F(w,v)$. In the flat specialization, a named inertial chart with $x^0=ct$ and $x^i$ in metres uses $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$, matching [[def-em-electromagnetic-tensor]]. On the curved background, $F$ is only a two-form; at an event its components in a chosen orthonormal tetrad use the same algebraic convention. Such a tetrad is a basis field, not a coordinate chart or an observer congruence, as distinguished in [[def-rpm-spacetime-observer-and-worldline]]. The components in an orthonormal tetrad have tesla units. This is an explicit curved-background model input. The cited EM supplier is a flat Minkowski definition and does not derive a curved field or curved Maxwell system.\n- On any open potential domain where a $C^2$ covector field $A$ exists, $F=dA$ with components $F_{ab}=\\partial_aA_b-\\partial_bA_a$ and $A$ has tesla metre components in the stated coordinates. No global potential is assumed, and no Maxwell equation or constitutive law is imposed here.\n\nThis is a test-body model on a fixed background: self-gravity, gravitational backreaction, self-field evaluation, radiation reaction, collisions, electric dipole moments, field-gradient translational forces and higher multipoles are outside this definition. Units follow the framework-local SI conventions of [[def-em-si-conventions]] and do not identify quantities across frameworks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-rpm-external-charge-action",
+          "source_section": "Remark",
+          "quote": "For dependent deductions, the adopted premise is that on a finite fixed-endpoint timelike segment in a local potential domain, the model trajectory is stationary for the displayed action. The potential and metric are fixed inputs, $m>0$ and $q$ are constant, and this premise asserts neither a global potential nor global trajectory existence.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-rpm-external-charge-action-equivalence",
+          "source_section": "Statement",
+          "quote": "Assume the charged test-body quantities and local potential domain of [[def-rpm-charge-spin-model]], the flat-space sign convention of [[def-em-electromagnetic-tensor]], and the adopted fixed-endpoint action postulate [[post-rpm-external-charge-action]], and assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure. For a finite $C^2$ future-timelike curve segment $z:[a,b]\\to O$ in that domain, where $a<b$ are proper-time endpoints, and the local $C^2$ fixed-endpoint variations of the postulate, choose the orientation-preserving parameter $\\lambda=\\tau$; the segment is stationary for the adopted action if and only if\n\n$$m\\nabla_UU=qF^\\sharp(U),\\qquad (\\nabla_UU)_a=\\frac qm F_{ab}U^b.$$\n\nThis is a model deduction: it establishes the equation equivalent to stationarity of the postulated functional, not the physical truth of the postulate.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-rpm-charge-mass-shell",
+          "source_section": "Statement",
+          "quote": "Assume the charged test-body quantities of [[def-rpm-charge-spin-model]], the field convention of [[def-em-electromagnetic-tensor]], and the stationary-action equivalence [[pthm-rpm-external-charge-action-equivalence]], and assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure. Let $O\\subseteq M$ be the open local-potential domain of the model, with prescribed field $F=dA$ there. For every future-timelike initial datum $(x_0,U_0)$ with $x_0\\in O$ and $g(U_0,U_0)=-c^2$, the equation of motion has a unique local solution by [[lem-rpm-external-charge-local-ivp]]. Along it the kinetic four-momentum $P=mU$ remains future timelike and satisfies\n\n$$g(P,P)=-m^2c^2.$$\n\nIn the flat Minkowski specialization, use the massive-particle momentum result [[pthm-sr-momentum-and-four-force]] under its stated model assumptions, and choose a named inertial chart with $x^0=ct$, $E,B$ defined by [[def-em-electromagnetic-tensor]], and $\\mathbf v$ the Euclidean spatial chart velocity. Set $\\gamma:=(1-|\\mathbf v|^2/c^2)^{-1/2}$. Then, with $\\mathbf p=m\\gamma\\mathbf v$ and $E_{\\rm part}=\\gamma mc^2$ supplied by [[pthm-sr-momentum-and-four-force]], the same equation gives\n\n$$\\frac{d\\mathbf p}{dt}=q(\\mathbf E+\\mathbf v\\times\\mathbf B),\\qquad \\frac{dE_{\\rm part}}{dt}=q\\,\\mathbf E\\cdot\\mathbf v.$$\n\nThe mass-shell and force statements are conditional deductions within the specified model; they do not establish empirical applicability.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-sr-massive-particle-dynamics",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the relativistic particle model, on top of the\nflat spacetime model of [[def-sr-affine-minkowski-model]] and the SI unit\nconventions of [[def-sr-si-units-and-coordinate-conventions]], together with\nthe framework's idealisations of point particles, ideal clocks and ideal light\nsignals:\n\n**(i) Mass and momentum.** Every massive classical particle of the model\ncarries a positive constant invariant mass parameter $m>0$ and has\nfour-momentum $P=mU$, where $U$ is the four-velocity of its future timelike\nworldline ([[def-sr-regular-causal-curve-and-worldline]],\n[[def-sr-four-velocity-and-four-acceleration]],\n[[thm-sr-proper-time-and-observer-decomposition]]); $P$ is a vector of $V$\nwhose SI unit is kilogram metre per second. The formula is adopted only for\n$m>0$; the case $m=0$ is not defined by it and is the separate premise\n[[post-sr-ideal-massless-particle-momentum]]. In particular $\\eta(P,P)=-m^2c^2$\nis a consequence of the four-velocity normalisation, not a separate\nassumption.\n\n**(ii) Observer measurement identification.** Relative to a future unit\nobserver $n$, the model identifies the measured energy of the particle with\n$E_n(P)$, its measured spatial momentum with $q_n(P)$, its kinetic energy with\n$T_n(P)=E_n(P)-mc^2$ and its rest energy with $mc^2$, where $E_n,q_n,T_n$ are\nthe quantities of [[def-sr-observed-energy-momentum-and-kinetic-energy]]; the\nunits are the joule, kilogram metre per second and kilogram of\n[[def-sr-si-units-and-coordinate-conventions]]. This clause is a formulation\nconvention identifying mathematical quantities with the quantities the model\ncalls measured; it is not a measurement report and no experiment is claimed.\n\n**(iii) Isolated collision balance.** An isolated collision is represented by\na mass-specified on-shell collision datum at an event, with finite nonempty\nincoming and outgoing lists of the massive particles of (i) and/or the ideal\nmassless particles of [[post-sr-ideal-massless-particle-momentum]], and with\nno external four-momentum transfer or omitted leg. The interaction is\nidealized as confined to that event. The sum of the incoming four-momenta equals the sum of the\noutgoing four-momenta, in the sense of the collision data of\n[[def-sr-collision-datum-and-conservation]]: the model adopts\n$Q_{\\mathrm{in}}=Q_{\\mathrm{out}}$ for such an isolated datum. No particular\ncollision is asserted to occur, and no mechanism, probability, cross section\nor amplitude is supplied by this clause.\n\n**(iv) Equation of motion for a stipulated force.** Put\n$H_c^+:=\\{U\\in C^+:\\eta(U,U)=-c^2\\}$. A stipulated force law is a given\nmap $F:D\\to V$ on a given subset $D\\subseteq A\\times H_c^+$,\nwith force components in $\\mathrm{kg}\\,\\mathrm m/\\mathrm s^2$. No regularity\naway from the specified worldline is assumed. Along a given $C^2$ massive worldline\n$x:I\\to A$ with $(x(s),U(s))\\in D$ for all $s\\in I$, the model's particle\nequation is $m\\,dU/d\\tau=F(x,U)$, with\n$dU/d\\tau$ the proper-time derivative of\n[[def-sr-proper-time-derivative-and-four-force]], so that the stipulated $F$\nis the four-force of the motion. A particular force law, and the existence,\nuniqueness and domain of solutions of the resulting equation, are not adopted\nhere and belong to a separate model.\n\nEmpirical support for these assumptions is a nonlogical relation of the\nframework, not a proof; the idealisations of point particles, ideal clocks,\nideal light signals and flat spacetime are inherited and travel to every\nconsumer of this premise.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-em-lorentz-field-transform",
+          "source_section": "Statement",
+          "quote": "Let $E,B$ be jointly $C^k$ fields of [[def-em-fields]] on the laboratory region\n$U\\cong I\\times\\Omega$ of an inertial chart $x$ of the framework\n([[def-em-lab-geometry]]), $k\\ge1$, with the SI units of\n[[def-em-si-conventions]], and let $F$ be the electromagnetic two-form of\n[[def-em-electromagnetic-tensor]] with its fixed components\n$F_{0i}=-E_i/c$, $F_{ij}=\\epsilon_{ijk}B_k$, $F^{0i}=E_i/c$,\n$F^{ij}=\\epsilon_{ijk}B_k$. Let $0\\le\\beta<1$, $\\gamma:=(1-\\beta^2)^{-1/2}$,\n$v:=\\beta c\\,e_1$, and let $\\Lambda_\\beta$ be the explicit boost of\n[[lem-em-boost-preserves-metric]] with\n$\\Lambda_\\beta{}^0{}_0=\\Lambda_\\beta{}^1{}_1=\\gamma$,\n$\\Lambda_\\beta{}^0{}_1=\\Lambda_\\beta{}^1{}_0=-\\gamma\\beta$,\n$\\Lambda_\\beta{}^2{}_2=\\Lambda_\\beta{}^3{}_3=1$ and all other entries zero. Let\n$x'=\\Lambda_\\beta x+b$ be the corresponding inertial chart, and for every event\n$p$ in the overlap of the two chart restrictions define the primed field\ncomponents by reading the components of the same $F$ in $x'$ through the\ndictionary of [[def-em-electromagnetic-tensor]], so that $F'_{0i}=-E'_i/c$,\n$F'_{ij}=\\epsilon_{ijk}B'_k$ at $p$. Then:\n\n(a) [Boosted fields] at every such $p$, with $\\parallel$ and $\\perp$ the\ncomponents along and orthogonal to $e_1$ in the spatial Euclidean structure of\nthe chart,\n$$E'_1=E_1,\\quad B'_1=B_1,\\qquad E'_\\parallel=E_\\parallel,\\quad B'_\\parallel=B_\\parallel,\\qquad E'_\\perp=\\gamma\\,(E+v\\times B)_\\perp,\\qquad B'_\\perp=\\gamma\\,(B-v\\times E/c^2)_\\perp,$$\nequivalently, componentwise,\n$E'_2=\\gamma(E_2-\\beta cB_3)$, $E'_3=\\gamma(E_3+\\beta cB_2)$,\n$B'_2=\\gamma(B_2+\\beta E_3/c)$, $B'_3=\\gamma(B_3-\\beta E_2/c)$.\n\n(a\u2032) [Arbitrary boost direction] For a velocity vector $v\\in\\mathbb R^3$ with\n$|v|<c$, use the actual vector boost $B(v/c)$ of [[def-lorentz-boost]], with\n$\\gamma_v=(1-|v|^2/c^2)^{-1/2}$. If $v\\ne0$, decompose the fields along\n$\\widehat v=v/|v|$ and its orthogonal complement. Then $E'_\\parallel=E_\\parallel$,\n$B'_\\parallel=B_\\parallel$, $E'_\\perp=\\gamma_v(E+v\\times B)_\\perp$ and\n$B'_\\perp=\\gamma_v(B-v\\times E/c^2)_\\perp$. Equivalently, for every $v$,\nincluding $v=0$,\n$$E'=\\gamma_v(E+v\\times B)-\\frac{\\gamma_v^2}{\\gamma_v+1}\\frac{v(v\\cdot E)}{c^2},\\qquad B'=\\gamma_v(B-v\\times E/c^2)-\\frac{\\gamma_v^2}{\\gamma_v+1}\\frac{v(v\\cdot B)}{c^2}.$$\nAt $v=0$ these are the identity and no preferred parallel direction is\nassigned.\n\n(b) [Invariants] at every such $p$,\n$$|B'|^2-\\frac{|E'|^2}{c^2}=|B|^2-\\frac{|E|^2}{c^2},\\qquad E'\\cdot B'=E\\cdot B;$$\nequivalently the scalar fields $I_1:=\\tfrac12F_{ab}F^{ab}=|B|^2-|E|^2/c^2$\nand $I_2:=F_{ab}(*F)^{ab}=4\\,E\\cdot B/c$ of [[def-em-electromagnetic-tensor]]\n(b) take the same values whether computed from the components in $x$ or in\n$x'$.\n\n(c) [General proper orthochronous changes] for any proper orthochronous Lorentz\nmatrix $\\Lambda$ with chart $x'=\\Lambda x+b$, the primed components of $F$ are\ngiven by the component law of [[thm-sr-tensor-and-current-transformation]] (iii),\n$F'^{ab}=\\Lambda^a{}_c\\Lambda^b{}_dF^{cd}$; in particular, if\n$\\Lambda=\\widehat R$ is the extension of a spatial rotation $R$ of the frame\n([[def-spatial-rotation-of-an-inertial-frame]]), then $E'=RE$ and $B'=RB$, and\nby the unique factorization $\\Lambda=B(-\\beta)\\widehat R$ of\n[[thm-sr-proper-orthochronous-lorentz-algebra]] (iii) every proper\northochronous change acts first by $(E,B)\\mapsto(RE,RB)$ and then by the\narbitrary-direction boost law (a\u2032) with velocity $-c\\beta$, where $\\beta$ is\nthe vector parameter of that factorization. The axis-only law (a) is not\nsubstituted for a general vector boost.\n\n(d) [Form invariance of the Maxwell branch] if $(E,B,\\rho,J)$ satisfy the\nsmooth branch of [[post-em-vacuum-maxwell]] in $x$ on the overlap, and\n$(\\rho',J')$ are the components of the same four-current in $x'$, then\n$(E',B',\\rho',J')$ satisfy the same four equations in $x'$, by\n[[pthm-em-tensor-maxwell-equivalence]].\n\n(e) [Scope] All clauses are pointwise on the overlap $U\\cap U'$ of the two\nchart restrictions, are conditional on the adopted postulates, and concern the\nsmooth classical flat branch; no accelerating coordinates, curved spacetime,\nmaterial medium, apparatus or empirical claim is involved; the transformation\nis exact algebra, and the primed component functions are $C^k$ wherever the\noverlap is open. The invariants clause uses only the proper orthochronous\nchanges of description adopted in [[post-sr-inertial-covariance]];\norientation-reversing changes are outside the framework's field conventions\n([[def-em-fields]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-rpm-constant-magnetic-helix",
+          "source_section": "Statement",
+          "quote": "Use the flat SI charged-particle model and local external-action adoption of [[def-rpm-charge-spin-model]] and [[post-rpm-external-charge-action]], with the conditional equation and coordinate Lorentz force of [[pthm-rpm-external-charge-action-equivalence]] and [[pthm-rpm-charge-mass-shell]], adopt the flat massive-particle momentum model [[post-sr-massive-particle-dynamics]], and assume $\\mathrm{AC}_\\omega$ of [[def-countable-choice]] for the canonical tangent-bundle smooth structure required by the current local IVP and action-equivalence carriers. Let $m>0$ be in kilograms, $q\\in\\mathbb R$ in coulombs, $c>0$ in metres per second, and $B_0\\in\\mathbb R$ in tesla; $\\mathbf E=0$, $\\mathbf B=B_0e_3$. The smooth global potential $\\phi=0$, $\\mathbf A=(-B_0x^2/2,B_0x^1/2,0)$ has $\\nabla\\times\\mathbf A=B_0e_3$. Spatial coordinates are in metres, coordinate time $t$ in seconds, and initial momentum components in kilograms metres per second. Given initial position $\\mathbf x_0$ and momentum $\\mathbf p_0=(p_{01},p_{02},p_{03})$ at $t=0$, define\n\n$$S_0=\\sqrt{m^2c^2+|\\mathbf p_0|^2},\\qquad \\gamma_0=S_0/(mc),\\qquad \\Omega=\\frac{qB_0}{\\gamma_0m}.$$\n\nHere $S_0$ has momentum units, $\\gamma_0$ is dimensionless, and the signed angular frequency $\\Omega$ has units of inverse seconds; all displayed positions are in metres and $\\mathcal E$ is in joules.\n\nFor $\\Omega\\ne0$, the exact momentum and energy are\n\n$$p_1(t)=p_{01}\\cos(\\Omega t)+p_{02}\\sin(\\Omega t),\\quad p_2(t)=p_{02}\\cos(\\Omega t)-p_{01}\\sin(\\Omega t),\\quad p_3(t)=p_{03},\\quad \\mathcal E(t)=cS_0,$$\n\nand the exact position is\n\n$$x^1(t)=x^1_0+\\frac{c}{S_0\\Omega}\\bigl(p_{01}\\sin(\\Omega t)+p_{02}(1-\\cos(\\Omega t))\\bigr),$$\n$$x^2(t)=x^2_0+\\frac{c}{S_0\\Omega}\\bigl(p_{02}\\sin(\\Omega t)-p_{01}(1-\\cos(\\Omega t))\\bigr),\\qquad x^3(t)=x^3_0+\\frac{cp_{03}}{S_0}t.$$\n\nThe transverse projection is a circle of radius $|\\mathbf p_\\perp|/|qB_0|$ when $\\mathbf p_\\perp=(p_{01},p_{02})\\ne0$; it is a point when $\\mathbf p_\\perp=0$. In that case the full spatial orbit is a straight line parallel to $e_3$ if $p_{03}\\ne0$, and a stationary point if $p_{03}=0$. If $\\mathbf p_\\perp\\ne0$ and $p_{03}=0$, the circular orbit is planar. The field does no work. If $\\Omega=0$ (including $q=0$ or $B_0=0$), the solution is free motion $\\mathbf p(t)=\\mathbf p_0$, $\\mathcal E=cS_0$, $\\mathbf x(t)=\\mathbf x_0+c\\mathbf p_0t/S_0$. These formulas give a global future-timelike orbit and are unique on every common connected time interval; they are conditional model deductions, not empirical claims.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sr-proper-time-and-observer-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $c > 0$ and let $(A,V,\\eta,C^{+})$ be an oriented time-oriented affine\nMinkowski space ([[def-sr-affine-minkowski-model]]).\n\n**(a) Norm of the four-velocity.** Let $x : I \\to A$ be a $C^{1}$ future\ntimelike worldline with four-velocity $U$\n([[def-sr-four-velocity-and-four-acceleration]]). Then\n$\\eta(U(s),U(s)) = -c^{2}$ for every $s \\in I$; equivalently the dimensionless\nfour-velocity $u = U/c$ satisfies $\\eta(u,u) = -1$, and $U(s)$ is future\ntimelike. Thus the dimensionless four-velocity lies on the future unit\nhyperboloid $\\{v \\in C^{+}:\\eta(v,v)=-1\\}$.\n\n**(b) Orthogonality of the four-acceleration.** If $x$ is $C^{2}$ at $s$, then\n$\\eta(U(s),A(s)) = 0$: the four-acceleration has no component along the\nfour-velocity; if in addition $A(s) \\ne 0$, then $A(s)$ is spacelike.\n\n**(c) Rest space and projection.** Let $n \\in V$ be future unit timelike,\n$\\eta(n,n) = -1$, and put $n^{\\perp} := \\{\\,v \\in V : \\eta(n,v) = 0\\,\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]). Then $n^{\\perp}$ is a\n3-dimensional linear subspace of $V$, the restriction of $\\eta$ to $n^{\\perp}$\nis positive definite, and the map $h : V \\to V$, $h(v) := v + \\eta(n,v)\\,n$, is\nlinear, idempotent with $h \\circ h = h$, has image $n^{\\perp}$ and kernel\n$\\operatorname{span}(n)$, satisfies $h(n) = 0$ and $\\eta(n,h(v)) = 0$ for all\n$v \\in V$, and every $v \\in V$ has the unique decomposition\n$v = -\\eta(n,v)\\,n + h(v)$. Moreover $|w| := \\sqrt{\\eta(w,w)}$ defines a norm\non $n^{\\perp}$.\n\n**(d) Relative velocity and Lorentz factor.** Let $n$ and $u$ be future unit\ntimelike vectors, put $\\gamma := -\\eta(n,u)$ and $w := c\\,h(u)/\\gamma$. Then\n$\\gamma \\ge 1$, $w$ lies in $n^{\\perp}$,\n$u = \\gamma\\,(n + w/c)$, $|w|^{2} = c^{2}(1-\\gamma^{-2}) < c^{2}$,\n$\\gamma = (1-|w|^{2}/c^{2})^{-1/2}$, and $\\gamma = 1$ if and only if $u = n$.\nThe vector $w$ is the velocity of a worldline with four-velocity $cu$ relative\nto the observer $n$, and $\\gamma$ is its Lorentz factor.\n\n**(e) Coordinate form.** Let $(o;e_0,\\dots,e_3)$ be an inertial frame and let\n$y$ be a $C^{1}$ future timelike worldline whose inertial coordinates are\n$t \\mapsto (ct,r(t))$, with coordinate velocity $w(t) := r'(t)$ in\n$\\mathbb{R}^{3}$ and, when $y$ is $C^{2}$, coordinate acceleration\n$a(t) := w'(t)$. Then $|w(t)| < c$, the four-velocity is\n$U = \\gamma_w\\,(c,w)$ with $\\gamma_w := (1-|w|^{2}/c^{2})^{-1/2}$, and the\nfour-acceleration is $A = \\gamma_w\\,\\frac{d}{dt}\\bigl(\\gamma_w(c,w)\\bigr)$, so\nthat\n\n$$A^{0} = \\gamma_w^{4}\\,\\frac{w \\cdot a}{c}, \\qquad A_{\\mathrm{vec}} = \\gamma_w^{2}\\,a + \\gamma_w^{4}\\,\\frac{(w \\cdot a)\\,w}{c^{2}} ;$$\n\nconsequently\n$\\eta(A,A) = \\gamma_w^{4}|a|^{2} + \\gamma_w^{6}(w \\cdot a)^{2}/c^{2} \\ge 0$,\nwith $\\eta(A,A) = 0$ if and only if $a = 0$, and $\\eta(U,A) = 0$. For the\nobserver $n = e_0$ of the chart, clauses (c) and (d) specialize to\n$\\gamma = \\gamma_w$ and $w_{\\mathrm{rel}} = (0,w)$ in the frame coordinates, identified with $w$ via the spatial basis.\n\n**(f) Scope.** The statement is a theorem about the affine Minkowski model with\na fixed positive constant $c$; it asserts no clock reading and identifies no\nphysical four-velocity. No choice principle is used.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-cm-cross-product-triple-identity",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$,\n$$u\\times(v\\times w)=\\langle u,w\\rangle\\,v-\\langle u,v\\rangle\\,w .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "post-sr-inertial-covariance",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the special-relativity framework the following\ntwo statements.\n\n**(i) Spacetime.** The oriented time-oriented affine Minkowski space\n$(A,V,\\eta,C^+)$ of [[def-sr-affine-minkowski-model]] is the spacetime of the\nframework. Its points represent idealized physical events; the displacement\n$q-p$ of two events represents an idealized spacetime separation of those\nevents; and the sign of $\\eta(q-p,q-p)$ plus the chosen component $C^+$ is the\nadopted causal structure: the timelike, null, spacelike, future-causal and\npast-causal classifications of displacements are those of\n[[def-causal-classification-of-lorentz-vectors]] and\n[[def-time-orientation-and-future-causal-sets]].\n\n**(ii) Inertial changes of description.** Write $F:A\\to A$ for a map for which\nthere is a linear map $L:V\\to V$ satisfying\n\n$$F(q)-F(p)=L(q-p)\\qquad\\text{for all }p,q\\in A .$$\n\nSuch an $L$ is unique when it exists: for each $v\\in V$ and any fixed $p\\in A$,\napplying the display to the pair $(p,p+v)$ gives $Lv=F(p+v)-F(p)$, so the value\n$Lv$ is determined by $F$. An **inertial change of description** is such a map\n$F$ whose linear part $L$ satisfies\n\n$$\\eta(Lv,Lw)=\\eta(v,w)\\quad\\text{for all }v,w\\in V,\\qquad \\det L=+1\\ \\text{relative to the fixed orientation of }V,\\qquad L(C^+)=C^+ .$$\n\nThe condition $\\det L=1\\ne0$ makes $L$ invertible by\n[[thm-operator-invertible-iff-determinant-nonzero]]. Fix $p_0\\in A$; then\n$F(p)=F(p_0)+L(p-p_0)$ by the affine condition, and the map\n$r\\mapsto p_0+L^{-1}(r-F(p_0))$ is its inverse, so $F$ is a bijection.\n\nFor clarity, the induced transformation of tensors has the following precise\nmeaning. The **algebraic dual** $V^*$ is the vector space of linear maps\n$\\alpha:V\\to\\mathbb R$ ([[def-algebraic-dual-and-linear-functional]]).\nFor integers $r,s\\ge0$, a **type $(r,s)$ tensor** is a map\n$T:(V^*)^r\\times V^s\\to\\mathbb R$ linear in each argument; write\n$\\mathcal T^r_s(V)$ for their vector space with pointwise operations\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]). A **tensor\nfield** here is an assignment $T:A\\to\\mathcal T^r_s(V)$; each particular\nmodel specifies its tensor types, domains and required regularity. Its\ntransformed field is defined by\n\n$$(F_*T)_{F(p)}(\\alpha_1,\\ldots,\\alpha_r,w_1,\\ldots,w_s):=T_p(\\alpha_1\\circ L,\\ldots,\\alpha_r\\circ L,L^{-1}w_1,\\ldots,L^{-1}w_s).$$\n\nThis is well defined since $F$ is bijective and all slot maps are linear;\nfor a restricted domain $D\\subseteq A$ the new domain is $F(D)$. In particular\nscalar fields transform by composition with $F^{-1}$ and vector fields by\n$v_p\\mapsto Lv_p$ at $F(p)$, since $\\alpha(Lv_p)=(\\alpha\\circ L)(v_p)$.\n\nAdopt the assumption that every solution configuration of each specified\nmechanical or electromagnetic model is carried to a solution of that same\nmodel by relabelling events with $F$ and applying the displayed transformations\nto its fields and displacements. This is the meaning of **covariance** here;\nwhich equations and admissible configurations constitute a model is specified\nwhen that model is introduced.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-lorentz-boost",
+          "source_section": "Definition",
+          "quote": "Let $(o;e_0,e_1,e_2,e_3)$ be an inertial frame of the model\n([[def-inertial-frame-and-inertial-chart]]), and let\n$x=(x^0,x^1,x^2,x^3)$ be its coordinates, so that a vector is written\n$x=x^0e_0+x^1e_1+x^2e_2+x^3e_3$ and the spatial part is the coordinate\ncolumn $x_{\\mathrm{vec}}=(x^1,x^2,x^3)$ of $\\mathbb R^3$ with its standard\nEuclidean structure ([[def-euclidean-inner-product]]).\n\nFor $\\boldsymbol\\beta\\in\\mathbb R^3$ with $|\\boldsymbol\\beta|<1$, where\n$|\\boldsymbol\\beta|$ is the Euclidean norm, set\n\n$$\\gamma(\\boldsymbol\\beta):=(1-|\\boldsymbol\\beta|^2)^{-1/2}\\ \\ge 1,$$\n\nwith equality exactly for $\\boldsymbol\\beta=\\mathbf 0$ and strict inequality\nfor $\\boldsymbol\\beta\\neq\\mathbf 0$; here the power is the rational power\n([[def-rational-power]], [[lem-rational-power-laws]]). The **passive Lorentz\nboost with parameter $\\boldsymbol\\beta$** is the linear map\n$B(\\boldsymbol\\beta):V\\to V$ ([[def-linear-map]]) defined by its action on\ncoordinates: for $\\boldsymbol\\beta\\neq\\mathbf 0$,\n\n$$x'^0=\\gamma\\,(x^0-\\boldsymbol\\beta\\cdot x_{\\mathrm{vec}}),\\qquad x'_{\\mathrm{vec}}=x_{\\mathrm{vec}}+\\frac{\\gamma-1}{|\\boldsymbol\\beta|^2}\\,(\\boldsymbol\\beta\\cdot x_{\\mathrm{vec}})\\,\\boldsymbol\\beta-\\gamma\\,\\boldsymbol\\beta\\,x^0,$$\n\nand for $\\boldsymbol\\beta=\\mathbf 0$, $B(\\mathbf 0):=\\operatorname{id}_V$.\nHere $x'$ denotes the coordinates of $B(\\boldsymbol\\beta)$ applied to the\nvector with coordinates $x$, and $\\boldsymbol\\beta\\cdot x_{\\mathrm{vec}}$ is\nthe Euclidean scalar product. Equivalently, in the ordered basis\n$(e_0,e_1,e_2,e_3)$ the matrix of $B(\\boldsymbol\\beta)$ is\n\n$$\\begin{pmatrix}\\gamma & -\\gamma\\boldsymbol\\beta^{T}\\\\ -\\gamma\\boldsymbol\\beta & I_3+\\dfrac{\\gamma-1}{|\\boldsymbol\\beta|^{2}}\\,\\boldsymbol\\beta\\boldsymbol\\beta^{T}\\end{pmatrix},$$\n\nthat is, $B^0{}_0=\\gamma$, $B^0{}_i=B^i{}_0=-\\gamma\\beta_i$ for\n$i=1,2,3$, and\n$B^i{}_j=\\delta^i{}_j+\\frac{\\gamma-1}{|\\boldsymbol\\beta|^2}\\beta_i\\beta_j$\nfor $i,j=1,2,3$, with the spatial block replaced by\n$I_3$ when $\\boldsymbol\\beta=\\mathbf 0$. In the $1+1$ case\n$\\boldsymbol\\beta=\\beta e_1$ this reads\n$x'^0=\\gamma(x^0-\\beta x^1)$ and $x'^1=\\gamma(x^1-\\beta x^0)$. The vector\n$\\boldsymbol\\beta$ is called the **boost parameter**; it is dimensionless and\nmathematically independent of any unit convention.\n\n**Consistency of the definition.** The displayed formulas assign to every\ncoordinate pair $(x^0,x_{\\mathrm{vec}})$ a pair\n$(x'^0,x'_{\\mathrm{vec}})$; writing the result as the matrix product above and\nusing that $\\mathbb R^4$ is identified with coordinates through\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] (see\n[[def-coordinate-column-and-matrix-of-a-linear-map]]), the map\n$v\\mapsto E(M(E^{-1}(v)))$ is the unique linear map with that matrix. The case\n$\\boldsymbol\\beta=\\mathbf 0$ is declared separately because the expression\n$(\\gamma-1)/|\\boldsymbol\\beta|^2$ is undefined there. That the two cases fit\ntogether is the limit computation recorded next.\n\n**The limit as $\\boldsymbol\\beta\\to\\mathbf 0$.** For\n$\\boldsymbol\\beta\\neq\\mathbf 0$ the identity\n$\\gamma^2-1=|\\boldsymbol\\beta|^2\\gamma^2$ gives\n\n$$\\frac{\\gamma-1}{|\\boldsymbol\\beta|^{2}}=\\frac{\\gamma^{2}}{\\gamma+1}.$$\n\nSince $|\\boldsymbol\\beta|^2\\le3/4$ forces $1\\le\\gamma\\le2$, the bounds\n$|\\beta_i|\\le|\\boldsymbol\\beta|$ and $|\\beta_i\\beta_j|\\le|\\boldsymbol\\beta|^2$\n(from the Euclidean norm convention, [[def-abs-value]], [[lem-of-abs-value]])\nshow that $\\gamma\\to1$ as $\\boldsymbol\\beta\\to\\mathbf 0$; here continuity of\nthe positive-base power at fixed exponent $-1/2$ is\n[[thm-real-power-continuity-and-derivatives]], with real and rational powers\nidentified by [[thm-real-power-agrees-with-rational-exponent]]. Hence\n$(\\gamma-1)/|\\boldsymbol\\beta|^2\\to1/2$, so\n$B^i{}_j=\\delta^i{}_j+\\frac12\\beta_i\\beta_j+o(|\\boldsymbol\\beta|^2)$ and\n$B(\\boldsymbol\\beta)\\to I$ entrywise, without a hidden division by zero.\nHere $o(|\\boldsymbol\\beta|^2)$ denotes a remainder whose ratio to\n$|\\boldsymbol\\beta|^2$ tends to $0$ through nonzero parameters: the ratio\nof each spatial remainder is bounded by\n$|\\gamma^2/(\\gamma+1)-1/2|\\to0$. The time-space entries obey\n$|\\gamma\\beta_i|\\le2|\\boldsymbol\\beta|\\to0$, and the time-time entry tends to\n$1$ by $\\gamma\\to1$. The\ndefinition asserts no Lorentz property: that $B(\\boldsymbol\\beta)$ is a proper\northochronous Lorentz map with inverse $B(-\\boldsymbol\\beta)$ is proved in\n[[lem-boost-is-proper-orthochronous-with-inverse]], and its collinear\ncomposition law in\n[[lem-collinear-boost-composition-and-velocity-addition]]. The physical\nreading of $c\\boldsymbol\\beta$ as a relative velocity is not part of this\ndefinition ([[def-lorentz-map-and-lorentz-group]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.\n\nThis is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-boost-is-proper-orthochronous-with-inverse",
+          "source_section": "Statement",
+          "quote": "Let $B(\\boldsymbol\\beta)$ be the passive boost of [[def-lorentz-boost]] in an\ninertial frame $(o;e_0,e_1,e_2,e_3)$. For every\n$\\boldsymbol\\beta\\in\\mathbb R^3$ with $|\\boldsymbol\\beta|<1$ the following\nhold.\n\n(i) $B(\\boldsymbol\\beta)$ is a proper orthochronous Lorentz map:\n$\\eta(B(\\boldsymbol\\beta)v,B(\\boldsymbol\\beta)w)=\\eta(v,w)$ for all $v,w\\in V$,\n$\\det B(\\boldsymbol\\beta)=+1$, and $B(\\boldsymbol\\beta)(C^+)=C^+$.\n\n(ii) $B(\\mathbf 0)$ is the identity, and for every $\\boldsymbol\\beta$ the image\nof the frame vector $e_0$ is\n$B(\\boldsymbol\\beta)e_0=\\gamma\\,(e_0-\\beta_1e_1-\\beta_2e_2-\\beta_3e_3)$, so\nthe map $\\boldsymbol\\beta\\mapsto B(\\boldsymbol\\beta)$ is injective and\n$B(\\boldsymbol\\beta)$ fixes $0_V$; moreover every vector $y$ with\ncoordinates $(0,y_{\\mathrm{vec}})$ and\n$\\boldsymbol\\beta\\cdot y_{\\mathrm{vec}}=0$ satisfies\n$B(\\boldsymbol\\beta)y=y$.\n\n(iii) $B(-\\boldsymbol\\beta)B(\\boldsymbol\\beta)\n=B(\\boldsymbol\\beta)B(-\\boldsymbol\\beta)=\\operatorname{id}_V$; in particular\n$B(\\boldsymbol\\beta)$ is invertible with\n$B(\\boldsymbol\\beta)^{-1}=B(-\\boldsymbol\\beta)$, and $B(\\boldsymbol\\beta)$ and\n$B(-\\boldsymbol\\beta)$ are inverse bijections of $V$.\n\n(iv) If $u$ is a future timelike unit vector with coordinates\n$(u^0,u_{\\mathrm{vec}})$, so that $\\eta(u,u)=-1$, $u^0>0$ and\n$|u_{\\mathrm{vec}}|<u^0$, then the boost with parameter\n$\\boldsymbol\\beta:=u_{\\mathrm{vec}}/u^0$ satisfies\n$B(\\boldsymbol\\beta)u=e_0$.\n\n(v) If a vector $x$ has $x^0>|x_{\\mathrm{vec}}|$, then the first coordinate of\n$B(\\boldsymbol\\beta)x$ is $\\gamma\\,(x^0-\\boldsymbol\\beta\\cdot x_{\\mathrm{vec}})>0$;\nif $x^0<-|x_{\\mathrm{vec}}|$ then that first coordinate is negative. In\nparticular $B(\\boldsymbol\\beta)$ maps the future open cone\n$\\{x:x^0>|x_{\\mathrm{vec}}|\\}$ into itself.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The scalar and vector potentials are smooth. By [F1], their tensor components are $F_{01}=-E_0/c$, $F_{12}=B_0$, and the remaining independent components vanish, so they give precisely the displayed fields. Thus [A1] applies and, under the explicit $\\mathrm{AC}_\\omega$ premise [A3], [F2] yields the covariant force equation. Under the flat massive-particle adoption [A2] and the same countable-choice condition, [F3] gives the coordinate Lorentz law in the named inertial chart.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "A2",
+            "A3",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The component definition [F10] gives $\\mathbf v_d=-E_0e_2/B_0$, so $|\\mathbf v_d|/c=|E_0|/(c|B_0|)<1$. Orthogonality from [F12] gives $\\mathbf v_d\\cdot\\mathbf E=\\mathbf v_d\\cdot\\mathbf B=0$ and, by the triple-product identity [F7], $\\mathbf v_d\\times\\mathbf B=-\\mathbf E$. Substitution in [F4] makes the electric parallel correction terms zero and gives $\\mathbf E'=\\gamma_d(\\mathbf E+\\mathbf v_d\\times\\mathbf B)=0$. The same component definition gives $\\mathbf v_d\\times\\mathbf E= (E_0^2/B_0)e_3$, so the magnetic formula gives $\\mathbf B'=\\gamma_d(B_0-E_0^2/(B_0c^2))e_3=\\mathbf B/\\gamma_d$, using $1-|\\mathbf v_d|^2/c^2=\\gamma_d^{-2}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F7",
+            "F10",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Boost any laboratory initial event and future-timelike four-velocity into the primed chart; metric and future-cone preservation keep the transformed data future timelike by [F8]. Let the boosted initial event have coordinate time $t\\prime_0$ and spatial position $\\mathbf x\\prime_0$, with spatial momentum $\\mathbf p\\prime_0$. The primed field is uniform magnetic by step 2.1. By [A2] and [F3], its coordinate equations are $d\\mathbf x\\prime/dt\\prime=c\\mathbf p\\prime/\\sqrt{m^2c^2+|\\mathbf p\\prime|^2}$ and $d\\mathbf p\\prime/dt\\prime=q(d\\mathbf x\\prime/dt\\prime)\\times\\mathbf B\\prime$; their right sides depend on momentum and the constant field, not on time. Put $s=t\\prime-t\\prime_0$. Apply [F5] at $s=0$ to position $\\mathbf x\\prime_0$, momentum $\\mathbf p\\prime_0$ and field $\\mathbf B\\prime$, obtaining its global orbit $(\\boldsymbol\\xi(s),\\boldsymbol\\pi(s))$. Set $\\mathbf x\\prime(t\\prime)=\\boldsymbol\\xi(t\\prime-t\\prime_0)$ and $\\mathbf p\\prime(t\\prime)=\\boldsymbol\\pi(t\\prime-t\\prime_0)$. The chain rule leaves those autonomous equations unchanged and gives precisely the required initial data at $t\\prime=t\\prime_0$; future timelikeness is unchanged. Conversely, translating any primed solution by the same constant time shift gives a solution with those data at $s=0$, so [F5] gives uniqueness on every common connected interval. The action in [A1] is unchanged by the boost: [F8] preserves the metric term, and pulling the one-form potential back by the coordinate change preserves its line integral. Thus stationary curves map to stationary curves, and under [A3], [F2] gives the covariant force equation in either chart. Applying the inverse Lorentz map therefore gives a laboratory worldline with the original initial data. Conversely, any laboratory solution transforms to a primed solution and coincides with the unique [F5] orbit; hence all laboratory solutions are exactly the inverse boosts of those magnetic orbits.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "A1",
+            "A2",
+            "A3",
+            "F2",
+            "F3",
+            "F5",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "With $\\boldsymbol\\beta=\\mathbf v_d/c$, the inverse $B(-\\boldsymbol\\beta)$ from [F11] applied to the time-coordinate formula [F9] gives $t=\\gamma_d(t'+\\mathbf v_d\\cdot\\mathbf x'/c^2)$. Differentiating along the magnetic-frame orbit gives $dt/dt'=\\gamma_d(1+\\mathbf v_d\\cdot\\mathbf v'/c^2)$. Since its speed satisfies $|\\mathbf v'|<c$ by [F5, F6], this derivative is at least $\\gamma_d(1-|\\mathbf v_d|/c)>0$. The positive lower bound makes $t$ strictly increasing and unbounded in both directions as $t'$ ranges over $\\mathbb R$; thus the inverse-boosted curve is defined as a laboratory-time orbit for all real $t$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F5",
+            "F6",
+            "F9",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Finally, $\\mathbf v_d\\times\\mathbf B=-\\mathbf E$ from step 2.1, so the laboratory force in [F3] under [A3] vanishes at constant $\\mathbf v=\\mathbf v_d$. The corresponding momentum is constant and its speed is subluminal by step 2.1. This exhibits one exact drift solution; step 3.1 shows that general initial data instead produce inverse-boosted magnetic orbits. No assertion is made about null or supercritical fields.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "A3",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement \u2014 Subcritical crossed fields and exact drift-frame orbits: The conclusion concerns supplied local or finite data rather than an aggregate construction over an empty index set. Nonzero magnetic field and the strict subcritical ratio give a subluminal passive boost to a magnetic frame. Every orbit is inverse-boosted with monotone all-real laboratory time; a straight drift solution is singled out without identifying all velocities with it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes E0=0, for which vd=0 and gamma_d=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Subcritical crossed fields and exact drift-frame orbits: There is no distinct singleton aggregate assertion; the fixed-dimensional or pointwise calculation uses exactly its declared data. Nonzero magnetic field and the strict subcritical ratio give a subluminal passive boost to a magnetic frame. Every orbit is inverse-boosted with monotone all-real laboratory time; a straight drift solution is singled out without identifying all velocities with it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes B0=0 and |E0|=c|B0|; step 3.1 uses the strict inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the laboratory time map is strictly increasing and unbounded both ways."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement \u2014 Subcritical crossed fields and exact drift-frame orbits: No additional arbitrary selection is inferred; any inherited choice hypothesis and finite constructions retain their declared scope. Nonzero magnetic field and the strict subcritical ratio give a subluminal passive boost to a magnetic frame. Every orbit is inverse-boosted with monotone all-real laboratory time; a straight drift solution is singled out without identifying all velocities with it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Subcritical crossed fields and exact drift-frame orbits: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. Nonzero magnetic field and the strict subcritical ratio give a subluminal passive boost to a magnetic frame. Every orbit is inverse-boosted with monotone all-real laboratory time; a straight drift solution is singled out without identifying all velocities with it."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Subcritical crossed fields and exact drift-frame orbits: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. Nonzero magnetic field and the strict subcritical ratio give a subluminal passive boost to a magnetic frame. Every orbit is inverse-boosted with monotone all-real laboratory time; a straight drift solution is singled out without identifying all velocities with it."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take E0=cB0/2 with B0>0.",
+          "result": "|vd|=c/2, gamma_d=2/sqrt(3), E'=0 and B'=sqrt(3)B/2.",
+          "verifies": "Steps 3.1 and 4.1."
+        }
+      ],
+      "unresolved_prerequisites": [
+        {
+          "supplier": "rpm-external-charge",
+          "status": "open",
+          "evidence": "The current batch 24 carriers remain draft and require explicit AC_omega; this consumer records that exact conditional interface, but the supplier batch remains unvalidated and unaccepted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-28",
+        "notes": "Read all five current proof steps and all direct supplier Definition/Postulate/Statement sections, including corrected magnetic theorem. Explicit combined potential gives F01=-E0/c and F12=B0. For either sign E0,B0 with B0 nonzero and |E0|<c|B0|, v_d=-E0/B0*e2 is subluminal, v_d cross B=-E, and v_d cross E=E0^2/B0*e3; arbitrary-direction field transform gives Eprime=0, Bprime=B/gamma_d. E0=0 is the identity boost; q=0 is the free branch. Initial primed time shift is explicit and the constant-field equations autonomous. Isometry and one-form pullback preserve action/force equation and future data; inverse-boosting supplies all laboratory solutions by uniqueness. dt/dtprime>=gamma_d*(1-|v_d|/c)>0, so monotonicity, continuity and both-direction unboundedness yield all-real laboratory time. Constant drift has zero force but general velocities differ. Null/supercritical boundaries excluded; no measured input or extra choice beyond inherited AC_omega. Sources: Likharev section 9.6 crossed-field discussion and Fowler Lecture 73 final section. No defect confirmed; magnetic geometry correction does not alter this use."
+      }
+    },
+    "ex-rpm-rindler-clock-gradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-rpm-rindler-clock-gradient",
+          "source_section": "Statement",
+          "quote": "Use the flat affine Minkowski model with signature $(-,+,+,+)$ and SI coordinates $(x^0,x^1,y,z)=(ct,x^1,y,z)$. Fix $a>0$ in metres per second squared and define\n\n$$\\Phi_a(T,\\rho,y,z)=\\bigl(\\rho\\sinh(aT/c),\\rho\\cosh(aT/c),y,z\\bigr),\\qquad T\\in\\mathbb R,\\quad \\rho>0.$$\n\nThen $\\Phi_a$ is a smooth chart of the right wedge $W=\\{x^1>|x^0|\\}$, with $\\rho$ in metres and $T$ in seconds. Its pullback metric, the proper-time rate of a stationary Rindler observer, and that observer's proper-acceleration magnitude are\n\n$$ds^2=-\\frac{a^2\\rho^2}{c^2}\\,dT^2+d\\rho^2+dy^2+dz^2,\\qquad \\frac{d\\tau}{dT}=\\frac{a\\rho}{c^2},\\qquad \\alpha=\\frac{c^2}{\\rho}.$$\n\nFor ideal radial vacuum rays with $y,z$ fixed, $d\\rho/dT=\\pm a\\rho/c$. A ray joining positive radii $\\rho_E,\\rho_R$ therefore has one-way Rindler travel time $\\Delta T=(c/a)|\\log(\\rho_R/\\rho_E)|$, and stationary ideal clocks at those radii satisfy $\\Delta\\tau_R/\\Delta\\tau_E=\\rho_R/\\rho_E$ over any common nonzero $T$ interval. The clock statement is conditional on the ideal-clock adoption in [[post-sr-ideal-clocks-and-light]].\n\nFor a future null plane-wave covector $k$ directed along the same radial ray, define $\\omega_n=-k(U_n)$ using [[def-sr-null-wave-covector-and-observer-frequency]]. Under the additional adopted local reception rule [[post-rpm-ideal-rindler-phase-reception]], the instantaneous received angular frequencies at the two events obey $\\omega_R/\\omega_E=\\rho_E/\\rho_R$. The ratio is exact within that ideal model and inherits its local ray-regime and finite-apparatus qualifications, with no numerical error bound or empirical validation. Clause (iv) of [[post-sr-ideal-plane-wave-model]] retains its accelerated-reception exclusion; this theorem uses the separately adopted rule. The coordinate chart excludes $\\rho=0$; no global rigid accelerated frame is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substitute $a=2\\,\\mathrm{m\\,s^{-2}}$, $\\rho_R/\\rho_E=2$ into the theorem's travel-time formula. Since both radii are positive and the ray is outward, $\\Delta T=(c/a)\\log2=(c/2\\,\\mathrm{m\\,s^{-2}})\\log2$, which is finite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The clock-gradient formula gives $\\Delta\\tau_R/\\Delta\\tau_E=\\rho_R/\\rho_E=4\\,\\mathrm m/(2\\,\\mathrm m)=2$. The contraction functional gives $\\omega_R/\\omega_E=\\rho_E/\\rho_R=1/2$. By [F1], the latter is the instantaneous received-frequency ratio within the additional adopted local phase-reception model, with its local ray-regime and finite-apparatus limits; no measured accuracy is asserted.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example \u2014 Two stationary clocks and one radial Rindler ray: The conclusion concerns supplied local or finite data rather than an aggregate construction over an empty index set. The chosen Rindler radii two and four metres and positive acceleration parameter give finite travel time, clock ratio two and reception ratio one half. The latter remains conditional on the separately adopted local accelerated phase-reception rule."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This example fixes positive nonzero radii and acceleration, so it has no zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example \u2014 Two stationary clocks and one radial Rindler ray: There is no distinct singleton aggregate assertion; the fixed-dimensional or pointwise calculation uses exactly its declared data. The chosen Rindler radii two and four metres and positive acceleration parameter give finite travel time, clock ratio two and reception ratio one half. The latter remains conditional on the separately adopted local accelerated phase-reception rule."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The parent theorem covers equal radii; this example statement selects distinct positive radii."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 gives finite travel time between the selected positive endpoint radii."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example \u2014 Two stationary clocks and one radial Rindler ray: No additional arbitrary selection is inferred; any inherited choice hypothesis and finite constructions retain their declared scope. The chosen Rindler radii two and four metres and positive acceleration parameter give finite travel time, clock ratio two and reception ratio one half. The latter remains conditional on the separately adopted local accelerated phase-reception rule."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example \u2014 Two stationary clocks and one radial Rindler ray: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. The chosen Rindler radii two and four metres and positive acceleration parameter give finite travel time, clock ratio two and reception ratio one half. The latter remains conditional on the separately adopted local accelerated phase-reception rule."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example \u2014 Two stationary clocks and one radial Rindler ray: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. The chosen Rindler radii two and four metres and positive acceleration parameter give finite travel time, clock ratio two and reception ratio one half. The latter remains conditional on the separately adopted local accelerated phase-reception rule."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Use rhoE=2 m and rhoR=4 m.",
+          "result": "rhoR/rhoE=2 and rhoE/rhoR=1/2.",
+          "verifies": "Step 2.1."
+        }
+      ]
+    },
+    "ex-rpm-constant-electric-orbit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-rpm-constant-electric-orbit",
+          "source_section": "Statement",
+          "quote": "In the flat Minkowski specialization of [[def-rpm-charge-spin-model]], adopt the fixed-endpoint external-charge action [[post-rpm-external-charge-action]], its conditional stationary-action equivalence [[pthm-rpm-external-charge-action-equivalence]], the flat massive-particle momentum model [[post-sr-massive-particle-dynamics]], and $\\mathrm{AC}_\\omega$ of [[def-countable-choice]] for the canonical tangent-bundle smooth structure required by the current local IVP and action-equivalence carriers. Let $m>0$ in kilograms, $q\\in\\mathbb R$ in coulombs, $c>0$ in metres per second, and $E_0\\in\\mathbb R$ in newtons per coulomb; let the uniform field in one named inertial SI chart be $\\mathbf E=E_0e_1$, $\\mathbf B=0$. A smooth global potential is $\\phi=-E_0x^1$, $\\mathbf A=0$, so the local-potential hypothesis is satisfied. Spatial coordinates are in metres, coordinate time $t$ is in seconds, and initial momenta are in kilograms metres per second. Set $F_0=qE_0$ (newtons), take initial event $(0,\\mathbf x_0)$ and initial momentum $\\mathbf p_0=(p_{01},\\mathbf p_\\perp)$ at $t=0$, and define $\\Pi$ (momentum units), $\\mathcal E$ (joules) and $\\mathbf v$ (metres per second) by\n\n$$p_1(t)=p_{01}+F_0t,\\qquad \\Pi=\\sqrt{m^2c^2+|\\mathbf p_\\perp|^2}>0,\\qquad \\mathcal E(t)=c\\sqrt{\\Pi^2+p_1(t)^2},\\qquad \\mathbf v(t)=\\frac{c(p_1(t)e_1+\\mathbf p_\\perp)}{\\sqrt{\\Pi^2+p_1(t)^2}}.$$\n\nIf $F_0\\ne0$, the exact position for every $t\\in\\mathbb R$ is\n\n$$x^1(t)=x^1_0+\\frac c{F_0}\\left(\\sqrt{\\Pi^2+p_1(t)^2}-\\sqrt{\\Pi^2+p_{01}^2}\\right),$$\n$$\\mathbf x_\\perp(t)=\\mathbf x_{\\perp0}+\\frac{c\\mathbf p_\\perp}{F_0}\\log\\!\\left(\\frac{p_1(t)+\\sqrt{\\Pi^2+p_1(t)^2}}{p_{01}+\\sqrt{\\Pi^2+p_{01}^2}}\\right).$$\n\nIf $F_0=0$, the field exerts no force on the particle and the orbit is free:\n$\\mathbf p(t)=\\mathbf p_0$, $\\mathcal E(t)=\\mathcal E(0)$ and\n$\\mathbf x(t)=\\mathbf x_0+c^2\\mathbf p_0t/\\mathcal E(0)$. These formulas define future-timelike worldlines for all finite coordinate times; any model solution with the same data agrees with them on every common connected time interval. This is a conditional model deduction, not evidence that the adopted action describes a measured particle.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $F_0=qE_0=(1\\,\\mathrm C)(2\\,\\mathrm{N\\,C^{-1}})=2\\,\\mathrm N\\ne0$, $p_{01}=0$, $\\mathbf p_\\perp=0$, and $\\Pi=mc$. Inserting these values into [F1] gives $p_1(t)=F_0t$, zero transverse coordinates, and the displayed $x^1(t)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution in the velocity formula of [F1] gives $v_1=cF_0t/\\sqrt{m^2c^2+F_0^2t^2}$ and $v_2=v_3=0$. At $t=0$, $x^1=0$ and $v_1=0$; for finite $t$, $|v_1|<c$ because the denominator is strictly larger than $|F_0t|$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example \u2014 Uniform electric field from rest: The conclusion concerns supplied local or finite data rather than an aggregate construction over an empty index set. The chosen electric example has unit mass and charge, field two newtons per coulomb and zero initial momentum. It is one fixed specialization of the conditional all-time electric orbit, retaining that theorem's adopted model and bundle hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 sets the initial momentum to zero and step 2.1 verifies zero initial velocity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example \u2014 Uniform electric field from rest: There is no distinct singleton aggregate assertion; the fixed-dimensional or pointwise calculation uses exactly its declared data. The chosen electric example has unit mass and charge, field two newtons per coulomb and zero initial momentum. It is one fixed specialization of the conditional all-time electric orbit, retaining that theorem's adopted model and bundle hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 has zero transverse momentum, giving a one-dimensional orbit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 substitute the initial endpoint t=0 and cover finite t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example \u2014 Uniform electric field from rest: No additional arbitrary selection is inferred; any inherited choice hypothesis and finite constructions retain their declared scope. The chosen electric example has unit mass and charge, field two newtons per coulomb and zero initial momentum. It is one fixed specialization of the conditional all-time electric orbit, retaining that theorem's adopted model and bundle hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example \u2014 Uniform electric field from rest: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. The chosen electric example has unit mass and charge, field two newtons per coulomb and zero initial momentum. It is one fixed specialization of the conditional all-time electric orbit, retaining that theorem's adopted model and bundle hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example \u2014 Uniform electric field from rest: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. The chosen electric example has unit mass and charge, field two newtons per coulomb and zero initial momentum. It is one fixed specialization of the conditional all-time electric orbit, retaining that theorem's adopted model and bundle hypotheses."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "At t=0 with p0=0.",
+          "result": "x1=0, p1=0 and v1=0.",
+          "verifies": "Steps 1.1 and 2.1."
+        }
+      ]
+    },
+    "ex-rpm-constant-magnetic-helix": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-rpm-constant-magnetic-helix",
+          "source_section": "Statement",
+          "quote": "Use the flat SI charged-particle model and local external-action adoption of [[def-rpm-charge-spin-model]] and [[post-rpm-external-charge-action]], with the conditional equation and coordinate Lorentz force of [[pthm-rpm-external-charge-action-equivalence]] and [[pthm-rpm-charge-mass-shell]], adopt the flat massive-particle momentum model [[post-sr-massive-particle-dynamics]], and assume $\\mathrm{AC}_\\omega$ of [[def-countable-choice]] for the canonical tangent-bundle smooth structure required by the current local IVP and action-equivalence carriers. Let $m>0$ be in kilograms, $q\\in\\mathbb R$ in coulombs, $c>0$ in metres per second, and $B_0\\in\\mathbb R$ in tesla; $\\mathbf E=0$, $\\mathbf B=B_0e_3$. The smooth global potential $\\phi=0$, $\\mathbf A=(-B_0x^2/2,B_0x^1/2,0)$ has $\\nabla\\times\\mathbf A=B_0e_3$. Spatial coordinates are in metres, coordinate time $t$ in seconds, and initial momentum components in kilograms metres per second. Given initial position $\\mathbf x_0$ and momentum $\\mathbf p_0=(p_{01},p_{02},p_{03})$ at $t=0$, define\n\n$$S_0=\\sqrt{m^2c^2+|\\mathbf p_0|^2},\\qquad \\gamma_0=S_0/(mc),\\qquad \\Omega=\\frac{qB_0}{\\gamma_0m}.$$\n\nHere $S_0$ has momentum units, $\\gamma_0$ is dimensionless, and the signed angular frequency $\\Omega$ has units of inverse seconds; all displayed positions are in metres and $\\mathcal E$ is in joules.\n\nFor $\\Omega\\ne0$, the exact momentum and energy are\n\n$$p_1(t)=p_{01}\\cos(\\Omega t)+p_{02}\\sin(\\Omega t),\\quad p_2(t)=p_{02}\\cos(\\Omega t)-p_{01}\\sin(\\Omega t),\\quad p_3(t)=p_{03},\\quad \\mathcal E(t)=cS_0,$$\n\nand the exact position is\n\n$$x^1(t)=x^1_0+\\frac{c}{S_0\\Omega}\\bigl(p_{01}\\sin(\\Omega t)+p_{02}(1-\\cos(\\Omega t))\\bigr),$$\n$$x^2(t)=x^2_0+\\frac{c}{S_0\\Omega}\\bigl(p_{02}\\sin(\\Omega t)-p_{01}(1-\\cos(\\Omega t))\\bigr),\\qquad x^3(t)=x^3_0+\\frac{cp_{03}}{S_0}t.$$\n\nThe transverse projection is a circle of radius $|\\mathbf p_\\perp|/|qB_0|$ when $\\mathbf p_\\perp=(p_{01},p_{02})\\ne0$; it is a straight line parallel to $e_3$ when $\\mathbf p_\\perp=0$. If $p_{03}=0$ the circular orbit is planar. The field does no work. If $\\Omega=0$ (including $q=0$ or $B_0=0$), the solution is free motion $\\mathbf p(t)=\\mathbf p_0$, $\\mathcal E=cS_0$, $\\mathbf x(t)=\\mathbf x_0+c\\mathbf p_0t/S_0$. These formulas give a global future-timelike orbit and are unique on every common connected time interval; they are conditional model deductions, not empirical claims.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With $p_{02}=p_{03}=0$ and $\\Omega>0$, substitution into [F1] gives $p_1=p_*\\cos(\\Omega t)$, $p_2=-p_*\\sin(\\Omega t)$ and $p_3=0$. Substitution into the position formulas gives the displayed coordinates and $x^3=x^3_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The radius clause of [F1] gives $|\\mathbf p_\\perp|/|qB_0|=p_*/(qB_0)$, and the energy is $cS_0$. At $\\Omega t=\\pi/2$, sine is $1$ and cosine is $0$, so $\\mathbf p=(0,-p_*,0)$. The orbit is planar because $p_{03}=0$ makes $x^3$ constant.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example \u2014 A circular magnetic orbit with zero axial momentum: The conclusion concerns supplied local or finite data rather than an aggregate construction over an empty index set. The circular specialization has qB positive and transverse momentum p_* positive, so its signed angular frequency is nonzero. Axial momentum vanishes and the radius is p_*/(qB); inherited conditional magnetic-model premises remain fixed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 sets axial momentum p03=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example \u2014 A circular magnetic orbit with zero axial momentum: There is no distinct singleton aggregate assertion; the fixed-dimensional or pointwise calculation uses exactly its declared data. The circular specialization has qB positive and transverse momentum p_* positive, so its signed angular frequency is nonzero. Axial momentum vanishes and the radius is p_*/(qB); inherited conditional magnetic-model premises remain fixed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies a planar circle because x3 is constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the initial position at t=0 and step 2.1 evaluates the quarter turn."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example \u2014 A circular magnetic orbit with zero axial momentum: No additional arbitrary selection is inferred; any inherited choice hypothesis and finite constructions retain their declared scope. The circular specialization has qB positive and transverse momentum p_* positive, so its signed angular frequency is nonzero. Axial momentum vanishes and the radius is p_*/(qB); inherited conditional magnetic-model premises remain fixed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example \u2014 A circular magnetic orbit with zero axial momentum: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. The circular specialization has qB positive and transverse momentum p_* positive, so its signed angular frequency is nonzero. Axial momentum vanishes and the radius is p_*/(qB); inherited conditional magnetic-model premises remain fixed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example \u2014 A circular magnetic orbit with zero axial momentum: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. The circular specialization has qB positive and transverse momentum p_* positive, so its signed angular frequency is nonzero. Axial momentum vanishes and the radius is p_*/(qB); inherited conditional magnetic-model premises remain fixed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "At Omega t=pi/2.",
+          "result": "p1=0, p2=-p* and radius p*/(qB0).",
+          "verifies": "Steps 1.1 and 2.1."
+        }
+      ]
+    },
+    "ex-rpm-crossed-field-drift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-rpm-crossed-field-drift",
+          "source_section": "Statement",
+          "quote": "In the flat SI charged-particle model with adopted action, conditional force equation, flat massive-particle momentum model, and $\\mathrm{AC}_\\omega$ assumption required by the current local RPM carriers [[post-rpm-external-charge-action]], [[pthm-rpm-external-charge-action-equivalence]], [[pthm-rpm-charge-mass-shell]], [[post-sr-massive-particle-dynamics]], and [[def-countable-choice]], let $m>0$ be in kilograms, $q$ in coulombs, $c$ in metres per second, $E_0$ in newtons per coulomb, and $B_0$ in tesla. Use an inertial chart with $x^0=ct$ and all coordinates in metres, so $t$ is in seconds. Set $\\mathbf E=E_0e_1$, $\\mathbf B=B_0e_3$, $B_0\\ne0$, and $|E_0|<c|B_0|$. Use the smooth combined potential $\\phi=-E_0x^1$, $\\mathbf A=(-B_0x^2/2,B_0x^1/2,0)$. Define\n\n$$\\mathbf v_d=\\frac{\\mathbf E\\times\\mathbf B}{|\\mathbf B|^2}=-\\frac{E_0}{B_0}e_2,\\qquad \\gamma_d=(1-|\\mathbf v_d|^2/c^2)^{-1/2}.$$\n\nThe drift velocity has units of metres per second and $\\gamma_d$ is dimensionless.\n\nThe passive Lorentz boost of velocity $\\mathbf v_d$ transforms these fields to $\\mathbf E'=0$, $\\mathbf B'=\\mathbf B/\\gamma_d$. Consequently every flat-model solution in the laboratory frame is the inverse boost of the uniform-magnetic-field orbit of [[pthm-rpm-constant-magnetic-helix]] with the boosted initial data. The laboratory coordinate time increases strictly and ranges over all real values along that inverse-boosted orbit. In particular, the constant velocity $\\mathbf v=\\mathbf v_d$ is an exact solution because $\\mathbf E+\\mathbf v_d\\times\\mathbf B=0$. Other initial data give boosted helical orbits; the theorem does not identify every velocity with $\\mathbf v_d$. The cases $|E_0|=c|B_0|$ and $|E_0|>c|B_0|$ are outside the statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The ratio $E_0/(cB_0)=1/2$ verifies the strict subcritical hypothesis. Substituting $E_0=cB_0/2$ in [F1] gives $\\mathbf v_d=-(c/2)e_2$ and $\\gamma_d=(1-1/4)^{-1/2}=2/\\sqrt3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Directly, $\\mathbf v_d\\times\\mathbf B=-(cB_0/2)(e_2\\times e_3)=-(cB_0/2)e_1=-\\mathbf E$. Thus [F1] makes the Lorentz force zero, momentum stays constant, and the straight worldline is an exact orbit. The theorem's inverse-boost construction applies to general initial data, so this example does not assert that every orbit has this constant velocity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example \u2014 The exact constant drift solution in subcritical crossed fields: The conclusion concerns supplied local or finite data rather than an aggregate construction over an empty index set. The stipulated crossed fields have E=cB/2 and B positive, so the drift is subluminal and its Lorentz force is zero. This is a single straight drift solution, without a claim that all initial data have that velocity."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This example fixes a nonzero subcritical electric field and positive magnetic field."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example \u2014 The exact constant drift solution in subcritical crossed fields: There is no distinct singleton aggregate assertion; the fixed-dimensional or pointwise calculation uses exactly its declared data. The stipulated crossed fields have E=cB/2 and B positive, so the drift is subluminal and its Lorentz force is zero. This is a single straight drift solution, without a claim that all initial data have that velocity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the strict subcritical field ratio, away from the null boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement defines the exact straight model solution for every real coordinate time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example \u2014 The exact constant drift solution in subcritical crossed fields: No additional arbitrary selection is inferred; any inherited choice hypothesis and finite constructions retain their declared scope. The stipulated crossed fields have E=cB/2 and B positive, so the drift is subluminal and its Lorentz force is zero. This is a single straight drift solution, without a claim that all initial data have that velocity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example \u2014 The exact constant drift solution in subcritical crossed fields: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. The stipulated crossed fields have E=cB/2 and B positive, so the drift is subluminal and its Lorentz force is zero. This is a single straight drift solution, without a claim that all initial data have that velocity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example \u2014 The exact constant drift solution in subcritical crossed fields: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. The stipulated crossed fields have E=cB/2 and B positive, so the drift is subluminal and its Lorentz force is zero. This is a single straight drift solution, without a claim that all initial data have that velocity."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "For E0=cB0/2, compute vd cross B.",
+          "result": "(-c e2/2) cross (B0 e3)=-(cB0/2)e1=-E.",
+          "verifies": "Step 2.1."
+        }
+      ]
+    },
+    "post-rpm-ideal-rindler-phase-reception": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Defines stationary smooth right-wedge observer, open proper-time interval, U=dz/d\u03c4 and \u03b7(U,U)=-c\u00b2; affine dimensionless phase with constant nonzero future null k; additional instantaneous receiver reading -k(U), distinguished from its proved phase derivative."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "Restricted to stationary Rindler congruence and one affine vacuum plane wave. Exact ideal pointwise reading only; finite-apparatus interpretation requires short observation duration, small detector relative to acceleration length and local wavelength/acceleration-length separation. No finite-time Fourier identity, measured tolerance, photon-energy assumption, gravity or empirical validation."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Complete primary Mashhoon arXiv:gr-qc/0303029v1 14-page manuscript retrieved and extracted text fully read; \u00a71 pp1\u20132 supplies locality hypothesis and frequency-observation limitations; \u00a74 p12 gives ray-limit caveat. Exact PDF/text bytes retained in ../sources and bound in cycle1 proposal-index.json. This is actual source review, not a mechanical source-fetch stamp or independent native acceptance."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "Physical identification is explicitly adopted. Existing mathematical phase-rate lemma supplies derivative/positivity only; new postulate does not fabricate a deductive or empirical proof of the receiver model."
+        }
+      }
+    }
+  }
+}

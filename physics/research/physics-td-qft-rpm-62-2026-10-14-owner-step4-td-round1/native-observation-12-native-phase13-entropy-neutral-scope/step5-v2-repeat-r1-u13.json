@@ -1,0 +1,163 @@
+{
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "13",
+  "input_sha256": "aba240f57e51ec5f6d8384509f57660ada7ed8d033fdd08d44b54447b4ae7505",
+  "decisions": [
+    {
+      "id": "pthm-td-regular-gibbs-phase-rule",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "b932f9c8cb2d3fdca51d009f62319239190516dac25dd56eb8f1387d75982d98",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original reaction-feasibility clause fixed phase coordinates but not auxiliary states. The current isolated-compound Definition and entropy-maximum Postulate explicitly retain variable auxiliary entropy. Along a feasible reaction curve, stationarity therefore gives 0=-(nu^r)^T mu^alpha/T+(d/dt)S_aux, not zero affinity. Pairwise fixed-auxiliary feasibility does not supply a reaction curve with this extra derivative zero. This is a missing hypothesis in the physical deduction, hence a fatal logic defect. The repair explicitly requires complete bilateral reaction curves with every auxiliary state fixed, and the proof now differentiates one C2 phase entropy plus constant contributions. The full-rank dimension conclusion is preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "pthm-td-regular-gibbs-phase-rule",
+      "disposition": "repaired",
+      "post_sha256": "b0ecf46f5c923ca4e782edec8bf00a27ee6dca3a1fe2b99d93c6aa6e87665713",
+      "review_context_sha256": "4dae91f7fd165c96078302b439df534a903f0f2186149f5cf90259de21ad0069",
+      "reason": "Reviewed the actual intensive-branch and derivative definitions, exact feasible endpoint space, additive complete-compound entropy postulate, pairwise stationarity supplier and local implicit-rank proof. Fixed auxiliary states make every auxiliary entropy constant even without auxiliary differentiability. C2 phase entropy and bilateral affine species variation give zero affinity; common chemical potentials make all phase affinity equations duplicates of phase 1. The combined C1 map has C(P-1)+R rows; the assumed nonsingular minor gives dimension C-P+2-R, with the zero-equation case handled separately. This is the repair author review, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-td-phase-rule-single-component",
+    "ex-td-reactive-phase-rule-three-component",
+    "rem-td-nonsmooth-phase-scope"
+  ],
+  "downstream_uses": {
+    "rem-td-nonsmooth-phase-scope": "Remarks paragraph 1 refers without an item link to the branch theorems and their coexistence-and-affinity Jacobian. It retains their stipulated smoothness, exchange and nonsingular-minor conditions, and makes no independent zero-affinity assertion."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "id": "pthm-td-regular-gibbs-phase-rule",
+      "defect_id": "physics-td-qft-rpm-62-2026-10-14-repeat-r1-u13-reaction-auxiliary-entropy",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "FIXED",
+      "finding": "Reaction-feasibility hypothesis omitted fixed auxiliary states while Proof 1.2 omitted their possibly variable entropy derivatives.",
+      "resolution": "Statement and physical_scope now require fixed auxiliary states along complete bilateral reaction curves; Given, F2 and Proof 1.2 use the complete additive entropy with constant auxiliary contributions. Owning contract corrected under the shared metadata lock.",
+      "evidence": "research/physics-td-qft-rpm-62-2026-10-14-step5-v2/step5-v2-repeat-r1-u13.json"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "id": "pthm-td-regular-gibbs-phase-rule",
+      "reason": "No published carrier was edited or found defective in this assigned reaction-stationarity review. The three affected item uses are draft frontier carriers and remain sound; no published maintenance finding is asserted."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "Positive finite temperature; C2 phase entropies in physical SI coordinates; C1 intensive chemical potentials independent of phase amount; dimensionless stoichiometric vectors and mole extents. Affinities and chemical potentials use J/mol. The conclusion is a conditional local equation-set graph dimension, not physical stability or empirical evidence.",
+    "public_interface_changes": [
+      {
+        "section": "Statement",
+        "before": "Reaction directions were feasible with energy, volume, other extents and other phase coordinates fixed, without specifying auxiliary states.",
+        "after": "For each phase and reaction, the complete curve n^alpha(t)=n^{alpha,*}+t nu^r is feasible bilaterally with all other reaction extents, other phases and every auxiliary state fixed.",
+        "minimality": "This supplies exactly the constant-auxiliary-entropy condition needed by the existing zero-affinity deduction; the phase-rule formula, regularity, rank hypothesis and stable-set caveat are retained."
+      },
+      {
+        "section": "physical_scope",
+        "before": "Internal reactions allowed in every phase.",
+        "after": "Auxiliaries remain fixed along stipulated transfer and reaction curves."
+      }
+    ],
+    "prerequisites_examined": [
+      "def-td-phase-and-coexistence-domain",
+      "def-td-equilibrium-state-domain",
+      "def-td-temperature-pressure-chemical-potential",
+      "pthm-td-intensive-coexistence-conditions",
+      "post-td-bulk-additivity",
+      "post-td-entropy-maximum",
+      "def-td-isolated-compound-feasible-set",
+      "thm-tdmath-local-implicit-rank"
+    ],
+    "source_reading": "Consulted Tong Chapter 5, complete relevant Phase Equilibrium discussion at section 5.1.1, for the intensive coexistence conditions. It does not certify the reacting auxiliary model. The missing-term diagnosis and repair are direct local deductions from the inspected current endpoint and entropy suppliers. The support index and its supplement grant no review or write authority; the earlier TD proposal noted the pairwise fixed-coordinate restriction, not this reaction repair. No source retrieval by another worker is claimed as this review.",
+    "consumer_dispositions": [
+      {
+        "id": "ex-td-phase-rule-single-component",
+        "path": "items/ex-td-phase-rule-single-component.md",
+        "affected_use": "Frontmatter relations.motivated_by names this physics theorem; F1 and Verification 4.1 instead invoke thm-tdmath-phase-dimension for C=1,P=2,R=0.",
+        "invalidated_claim": "None: the example asserts only a formal equation-set dimension and explicitly disclaims stable or realized coexistence. The new reaction hypothesis is vacuous for R=0.",
+        "disposition": "unchanged_sound",
+        "minimality": "No logical application of the repaired physics theorem occurs; no consumer edit or further hop is needed."
+      },
+      {
+        "id": "ex-td-reactive-phase-rule-three-component",
+        "path": "items/ex-td-reactive-phase-rule-three-component.md",
+        "affected_use": "Frontmatter relations.motivated_by names this physics theorem; F1 and Verification 4.1 use thm-tdmath-phase-dimension after directly verifying the formal phase and affinity equations and rank.",
+        "invalidated_claim": "None: no entropy-maximizing endpoint or zero affinity inferred from a reaction with variable auxiliaries is claimed.",
+        "disposition": "unchanged_sound",
+        "minimality": "The constructed equation-map calculation has no logical dependence on the changed physical reaction-feasibility hypothesis; no edit or further hop is needed."
+      },
+      {
+        "id": "rem-td-nonsmooth-phase-scope",
+        "path": "items/rem-td-nonsmooth-phase-scope.md",
+        "affected_use": "Remarks paragraph 1: branch theorems require the stated smooth local charts and supply no conclusion where the specified coexistence-and-affinity Jacobian lacks its required nonsingular minor.",
+        "invalidated_claim": "None: this is a qualified scope summary, not a deduction of reaction equilibrium from a feasible thermodynamic projection.",
+        "disposition": "unchanged_sound",
+        "minimality": "Its explicit reference to the branch theorems with their stated hypotheses carries the fixed-auxiliary requirement. No statement change or additional hop is needed."
+      }
+    ],
+    "page_disposition": {
+      "path": "library/thermodynamics/td-phases-and-limits.md",
+      "affected_use": "Paragraph 2 says the regular Gibbs phase rule counts the local dimension of the specified full-rank equation set, with all exchange and reaction constraints retained.",
+      "disposition": "unchanged_sound",
+      "reason": "The summary preserves the theorem constraints and does not infer unqualified physical affinity or stable-set dimension."
+    },
+    "metadata_repair": "Under step5-shared-write-lock run --owner step5-v2-repeat-r1-u13, reread the owning contract and surgically changed only this item entry: F2 citation now uses the exact complete feasible-set Definition instead of attributing entropy additivity to the bulk coordinate postulate; updated proof derivations, current supplier excerpts, Statement boundary excerpts and step references, and author risk note. No shared ledger was edited.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/pthm-td-regular-gibbs-phase-rule.md",
+        "exit_code": 0,
+        "output": "PASS items/pthm-td-regular-gibbs-phase-rule.md (direct); 1 checked, 0 failing — all clean"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/pthm-td-regular-gibbs-phase-rule.md",
+        "exit_code": 0,
+        "output": "OK — 1 file; math and renderer YAML checks passed."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-td-qft-rpm-62-2026-10-14-batch-13.proof-contracts.json --strict --items pthm-td-regular-gibbs-phase-rule",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/pthm-td-regular-gibbs-phase-rule.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 4 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-v2-repeat-r1-u13-items.json --json",
+        "exit_code": 0,
+        "output": "Focused-items scope: pthm-td-regular-gibbs-phase-rule; td-phases-and-limits page; 419 prerequisite item cycle checks and 190 prerequisite page cycle checks; 0 errors, 0 warnings."
+      }
+    ],
+    "initial_contract_diagnostic": "The first scoped contract check correctly reported that the old F2 bulk-additivity citation no longer appeared in the repaired fact and the feasible-set citation was missing. Both were repaired; the subsequent strict scoped check passed.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects the native report and routes the declared direct-consumer inventory; no judgments, certificates or workflow transitions were written.",
+    "dependency_check_correction": "The initial depcheck command used --items, which this tool does not support; it ignored that selector, scanned the broader corpus including imported mathematics, and exited 1 with unrelated publication-audit diagnostics. A second explicit-PHYSICS_REPO attempt still had that unsupported selector and also exited 1. Neither broad scan supplies scoped acceptance or creates a maintenance finding. After reading item-scope.mjs, supplied a one-ID JSON file through the documented --items-file selector. That focused check exited 0 with zero errors and warnings. No corpus repairs or gate transitions were performed."
+  },
+  "supporting_evidence": {
+    "research/physics-td-qft-rpm-62-2026-10-14-batch-13-step5-context.json": "58da45758cb4cb7559bad3fae20fc792c24bcf6fc5038d2566dbba23515fedb0",
+    "research/physics-td-qft-rpm-62-2026-10-14-owner-step5-support-index.json": "6ee43e9b563d2608b6b78e5a1eac4b49f28d794efafcc0b553f33cf2906a41d7",
+    "research/physics-td-qft-rpm-62-2026-10-14-owner-step5-support-supplement-1.json": "a2a42a81a880f88ec1739180681d0bab029d7f236c27f628efc8db5f13ded72c",
+    "research/physics-td-qft-rpm-62-2026-10-14-owner-step4-td-round1/final-released-classification-and-proposals.json": "4ab4ababc6ba628fa01b4257487a49512ddacc2f8cc17a5c3fc323ab6fb77545"
+  }
+}

@@ -1,0 +1,980 @@
+[
+  {
+    "order": 282,
+    "id": "td-phases-and-limits",
+    "kind": "A",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Phases And Limits",
+    "companion": "td-phases-and-limits-examples",
+    "requires": [
+      "td-math-mixture-dynamics-and-shells",
+      "td-potentials-and-responses",
+      "td-math-continuum-pressure"
+    ],
+    "items": [
+      {
+        "id": "def-td-thermodynamic-limit-contract",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Finite-state thermodynamic-limit contract",
+        "reference": "items/def-td-thermodynamic-limit-contract.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-si-quantities",
+          "def-natural-numbers",
+          "def-tdmath-countable-canonical-model"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-natural-numbers": "mathematical-premise",
+          "def-tdmath-countable-canonical-model": "mathematical-premise"
+        },
+        "physical_scope": "A specified sequence of finite-state macroscopic models at positive temperature with a declared density, interactions, boundary conditions, and normalization; no limiting existence, ensemble equivalence, or critical singularity is asserted.",
+        "inventory_expansion_required": false,
+        "statement": "Use $\\mathbb N$ from [[def-natural-numbers]], which includes $0$, and define $\\mathbb N_{>0}:=\\mathbb N\\setminus\\{0\\}$. A **finite-state thermodynamic-limit contract** specifies a sequence $(X_k,E_k,g_k,V_k,n_k)_{k\\in\\mathbb N_{>0}}$, where each $X_k$ is a finite nonempty state set, $E_k:X_k\\to\\mathbb R$ assigns finite energies in joules, $g_k:X_k\\to(0,\\infty)$ assigns positive dimensionless weights, $V_k>0$ is physical volume in $\\mathrm{m^3}$, and, for one declared species, $n_k>0$ is its amount in moles. A fixed-density sequence has $V_k\\to\\infty$ and $n_k/V_k\\to\\rho\\in(0,\\infty)$ in $\\mathrm{mol\\,m^{-3}}$. Boundary conditions, interaction rules, and the choice of a volume or amount normalization are part of the contract and must be held fixed or explicitly tracked as $k$ varies.\n\nFor $T>0$, set $\\beta:=(k_BT)^{-1}$ in $\\mathrm{J^{-1}}$, with $k_B$ and units from [[def-td-si-quantities]]. The finite-state canonical partition sum is\n\n$$\nZ_k(\\beta):=\\sum_{x\\in X_k}g_k(x)e^{-\\beta E_k(x)},\n$$\n\nas the finite case of [[def-tdmath-countable-canonical-model]]. It is a positive finite real number. Define $F_k(\\beta):=-\\beta^{-1}\\log Z_k(\\beta)$ in joules and $f_k(\\beta):=F_k(\\beta)/V_k$ in $\\mathrm{J\\,m^{-3}}$. The specified thermodynamic-limit value is $f(\\beta,\\rho):=\\lim_{k\\to\\infty} f_k(\\beta)$ **if this limit exists**. A limit per mole or per lattice site is a different normalization and must be stated separately.\n\nThis is a contract for what a limit claim must specify, not a theorem that the limit exists. It asserts no uniformity in $\\beta$, derivative interchange, ensemble equivalence, convergence rate, or nonanalyticity. A finite model's regularity and any limiting singularity require their own arguments; neither is inferred from the word “thermodynamic limit.”",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, Chapter 5, §5.4.3",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §§4.1–4.2",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "pthm-td-fixed-tp-reaction-potential-minimum",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Fixed-temperature and fixed-pressure potential minimum with internal reactions",
+        "reference": "items/pthm-td-fixed-tp-reaction-potential-minimum.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 7,
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-si-quantities",
+          "def-td-process-and-protocol",
+          "def-td-isolated-compound-feasible-set",
+          "post-td-bulk-additivity",
+          "post-td-concave-fundamental-entropy",
+          "post-td-first-law-energy",
+          "post-td-macroscopic-second-law",
+          "post-td-entropy-maximum"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "def-td-isolated-compound-feasible-set": "formulation-prerequisite",
+          "post-td-bulk-additivity": "physical-assumption",
+          "post-td-concave-fundamental-entropy": "physical-assumption",
+          "post-td-first-law-energy": "physical-assumption",
+          "post-td-macroscopic-second-law": "physical-assumption",
+          "post-td-entropy-maximum": "physical-assumption"
+        },
+        "physical_scope": "A closed reacting system at fixed positive reservoir temperature and fixed external pressure, represented by a system process record and an admitted isolated-compound extension with the exact ideal-reservoir, pressure-store, and feasible-set data stated here; no external matter exchange, omitted work channel, nonideal reservoir, or kinetic relaxation claim is included.",
+        "inventory_expansion_required": true,
+        "statement": "Fix a closed system $s$ of constitution $c$, with equilibrium domain $D_c$ from [[def-td-equilibrium-state-domain]], and fix $T_0>0$ and $p_0>0$. Define, for $x\\in D_c$,\n$$\n\\Phi_{T_0,p_0}(x):=U_c(x)+p_0V_c(x)-T_0S_c(x),\n$$\nwhere $U_c,V_c$ are the dimensioned energy and volume maps of [[def-td-equilibrium-state-domain]] and $S_c$ is the adopted entropy of [[post-td-concave-fundamental-entropy]]. Thus $\\Phi_{T_0,p_0}$ has units joules.\n\nLet $P_s\\in\\mathcal P_{\\mathrm{cl}}(s)$ be an admitted closed system process record as defined in [[def-td-process-and-protocol]], with system endpoints $x_{P_s}^-,x_{P_s}^+\\in D_c$. Let $R$ be its ideal thermal reservoir and $B$ its ideal pressure store; both lie inside a declared isolated-compound outer boundary. Let $\\widehat P$ be an admitted process record for that isolated compound. By an extension, require that $\\widehat P$ has the same time interval, system endpoints, system configuration path, and system-side protocol and transfer records as $P_s$, together with the reservoir and store records. Write its compound endpoint association as\n$$\n\\rho_{\\widehat P}(\\pm)=(x_{P_s}^\\pm,y_R^\\pm,y_B^\\pm)\\in\\mathcal F\\subseteq D_c\\times Y_R\\times Y_B,\n$$\nwhere $Y_R,Y_B$ are the model-declared reservoir and store state sets and $\\mathcal F$ is the exact feasible endpoint set from [[def-td-isolated-compound-feasible-set]]. The system protocol assigns heat $Q[P_s]$ and work $W_{\\rm on}[P_s]$ to $P_s$; the auxiliary endpoint changes in $\\widehat P$ satisfy the reservoir and store relations in [A1]–[A2] below. No matter crosses the compound boundary, no work channel other than pressure-store work acts on the system, and no other energy-coordinate changes are omitted.\n\nThen the system endpoint difference obeys\n$$\n\\Phi_{T_0,p_0}(x_{P_s}^+)-\\Phi_{T_0,p_0}(x_{P_s}^-)\\le0.\n$$\nIf the final compound endpoint $\\rho_{\\widehat P}(+)$ is an attained global entropy maximum on $\\mathcal F$, then $x_{P_s}^+$ attains a global minimum of $\\Phi_{T_0,p_0}$ on the system projection\n$$\n\\Pi_s(\\mathcal F):=\\{x\\in D_c:\\exists y_R\\in Y_R,\\ y_B\\in Y_B\\text{ with }(x,y_R,y_B)\\in\\mathcal F\\}.\n$$\nThis is a conditional model deduction; it does not assert that arbitrary fixed-$T,p$ reactions have this preparation or that the system reaches the minimum dynamically.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §§4.3–4.4",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S4"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-td-phase-and-coexistence-domain",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Phase branches and coexistence domains",
+        "reference": "items/def-td-phase-and-coexistence-domain.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 8,
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-si-quantities",
+          "def-finite-sum",
+          "def-td-temperature-pressure-chemical-potential",
+          "def-td-response-functions",
+          "def-td-legendre-potentials",
+          "def-td-isolated-compound-feasible-set",
+          "post-td-bulk-additivity",
+          "post-td-concave-fundamental-entropy",
+          "post-td-entropy-maximum",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-finite-sum": "mathematical-premise",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "def-td-response-functions": "formulation-prerequisite",
+          "def-td-legendre-potentials": "formulation-prerequisite",
+          "def-td-isolated-compound-feasible-set": "formulation-prerequisite",
+          "post-td-bulk-additivity": "physical-assumption",
+          "post-td-concave-fundamental-entropy": "physical-assumption",
+          "post-td-entropy-maximum": "physical-assumption",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "physical_scope": "Model-specified phase branches of nonrelativistic macroscopic thermodynamic systems in positive-temperature, positive-composition, positive-amount charts; intensive scale invariance and same-tag homogeneity are separate branch assumptions, and no branch existence, stability, boundary smoothness, or universal phase rule is asserted.",
+        "inventory_expansion_required": false,
+        "statement": "Fix a constitution $c$ with $C\\ge1$ named species and its equilibrium state domain $D_c\\subseteq\\mathbb R^{C+2}$ from [[def-td-equilibrium-state-domain]]. An interior composition is represented by\n\n$$\nx=(x_1,\\ldots,x_{C-1})\\in\\Delta_{C-1}^{\\circ}:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},\n$$\n\nwith $x_C:=1-\\sum_{i<C}x_i>0$; for $C=1$, $\\mathbb R^0=\\{0\\}$ and $x_1=1$.\n\nA **phase branch** $\\alpha$ is model data consisting of an open chart $W_\\alpha\\subseteq(0,\\infty)\\times\\mathbb R\\times\\Delta_{C-1}^{\\circ}\\times(0,\\infty)$ with coordinates $(T,p,x,m)$ and a $C^1$ diffeomorphism $\\sigma_\\alpha:W_\\alpha\\to U_\\alpha$ onto an open subset $U_\\alpha\\subseteq\\mathbb R^{C+2}$ contained in the equilibrium state domain $D_c$. Here $T$ is in kelvins, $p$ is in pascals, $m$ is total amount in moles, and $C^1$ means continuous first coordinate derivatives as in [[def-ck-euclidean-maps-and-diffeomorphisms]]. The chart dimension is $C+2$, matching the ambient dimension of $D_c$. The map $\\sigma_\\alpha$ takes values in numerical state coordinates; its physical SI state map is explicitly $\\chi_\\alpha=\\Phi_c\\circ\\sigma_\\alpha$, where $\\Phi_c$ is the numerical-to-SI unit map of [[def-td-temperature-pressure-chemical-potential]]. Thus the physical amounts at this point are $n_j=m x_j$, and the numerical amount coordinates in $\\sigma_\\alpha$ are $n_j/(1\\,\\mathrm{mol})$. Derivative-defined physical state functions are evaluated on $\\chi_\\alpha(T,p,x,m)$, or equivalently pulled back along $\\Phi_c$ to $\\sigma_\\alpha(T,p,x,m)$. At $\\sigma_\\alpha(T,p,x,m)$ in this precise pullback sense, the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]] give temperature $T$, pressure $p$, and mole fractions $x_j=n_j/m$; here $n_{\\mathrm{tot}}:=\\sum_{i=1}^C n_i=m$ uses the finite-sum convention of [[def-finite-sum]]. An **intensive phase branch** additionally has each derivative-defined chemical potential $\\mu_j(T,p,x,m)$ independent of $m$ throughout $W_\\alpha$; write its value as $\\mu_j^\\alpha(T,p,x)$. This scale invariance is an explicit constitutive model property, not a consequence of [[post-td-bulk-additivity]]. A valid local response chart and its inverse are as in [[def-td-response-functions]] and [[def-td-legendre-potentials]]. Existence of $W_\\alpha$ or $\\sigma_\\alpha$ is a model premise, not a consequence of the equations of thermodynamics.\n\nOn a branch with a valid natural-variable chart, $G^\\alpha$ denotes the Gibbs potential of [[def-td-legendre-potentials]] restricted to the branch. For a one-component branch with amount $m_\\alpha>0$, define $g_\\alpha:=G^\\alpha/m_\\alpha$, $s_\\alpha:=S_\\alpha/m_\\alpha$, and $v_\\alpha:=V_\\alpha/m_\\alpha$, in $\\mathrm{J\\,mol^{-1}}$, $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\mathrm{m^3\\,mol^{-1}}$, respectively. These quotients need not be independent of amount, and $g_\\alpha=\\mu^\\alpha$ is not assumed by this definition. Such an equality requires a separate same-tag homogeneity hypothesis on the branch.\n\nA **phase mixture** of a finite list of branches is a feasible separated compound whose positive phase amounts $m_\\alpha$ have fractions $\\lambda_\\alpha:=m_\\alpha/\\sum_\\beta m_\\beta>0$ with $\\sum_\\alpha\\lambda_\\alpha=1$. Its extensive coordinates and entropy are those supplied by [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]], on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. The mixture is in **coexistence** when it is an attained global entropy-maximizing endpoint under the declared totals and permitted exchanges, as in [[post-td-entropy-maximum]]. This definition does not assert that a maximum exists, that all branches can exchange every coordinate, or that metastable states are global equilibria.\n\nThe bulk scaling postulate may send a material tag $c$ to a different tag $c^{(\\lambda)}$. It therefore does not supply same-tag degree-one homogeneity of $G^\\alpha$ or $U^\\alpha$ on a phase branch. Any result using $g_\\alpha=\\mu^\\alpha$ must state that additional hypothesis.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, Chapter 5, §§5.1.1–5.1.3",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.2 Continuous phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.02%3A_Continuous_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "pthm-td-intensive-coexistence-conditions",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Intensive equilibrium conditions for coexisting phases",
+        "reference": "items/pthm-td-intensive-coexistence-conditions.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 9,
+        "deps": [
+          "def-td-phase-and-coexistence-domain",
+          "def-td-equilibrium-state-domain",
+          "def-td-si-quantities",
+          "def-td-isolated-compound-feasible-set",
+          "def-td-temperature-pressure-chemical-potential",
+          "post-td-bulk-additivity",
+          "post-td-concave-fundamental-entropy",
+          "post-td-entropy-maximum",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_roles": {
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-isolated-compound-feasible-set": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "post-td-bulk-additivity": "physical-assumption",
+          "post-td-concave-fundamental-entropy": "physical-assumption",
+          "post-td-entropy-maximum": "physical-assumption",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise"
+        },
+        "physical_scope": "Finite coexisting phase branches in positive-temperature C2 charts at an attained global entropy maximum, and only the energy, volume, or species transfers declared pairwise feasible in both directions.",
+        "inventory_expansion_required": false,
+        "statement": "Let $P\\ge1$ named phase branches of the same finite species list occupy a separated compound at an attained global entropy-maximizing endpoint with the fixed totals and exact feasible set declared by [[def-td-phase-and-coexistence-domain]] and [[def-td-isolated-compound-feasible-set]]. Assume each phase lies in an open C2 single-phase chart with finite positive temperature. For every pair of phases, assume the following about the feasible set at this endpoint: each named exchange channel permits a sufficiently small nonzero amount of transfer in both directions, while all other state coordinates may be held fixed.\n\nThen, for every pair $\\alpha,\\beta$:\n- if energy exchange is permitted, $T_\\alpha=T_\\beta$;\n- if volume exchange is permitted, $p_\\alpha/T_\\alpha=p_\\beta/T_\\beta$, and if energy exchange is also permitted then $p_\\alpha=p_\\beta$;\n- if species $j$ is transferable, $\\mu_{\\alpha,j}/T_\\alpha=\\mu_{\\beta,j}/T_\\beta$, and if energy exchange is also permitted then $\\mu_{\\alpha,j}=\\mu_{\\beta,j}$.\n\nThe pressure and chemical potentials are the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]]. The theorem makes no equality claim for a retained coordinate, a one-sided boundary exchange, or a channel absent from the declared feasible set. It is a model deduction, not evidence that these phases or exchange channels occur in nature.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.1.1",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-td-reaction-boundary-equilibrium",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Reaction equilibrium conditions at interior and boundary amounts",
+        "reference": "items/pthm-td-reaction-boundary-equilibrium.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 9,
+        "deps": [
+          "def-td-phase-and-coexistence-domain",
+          "def-td-si-quantities",
+          "def-td-temperature-pressure-chemical-potential",
+          "def-td-legendre-potentials",
+          "def-td-process-and-protocol",
+          "pthm-td-fixed-tp-reaction-potential-minimum",
+          "pthm-td-potential-differentials",
+          "lem-tdmath-stoichiometric-tangent-cone",
+          "def-td-equilibrium-state-domain",
+          "post-td-concave-fundamental-entropy"
+        ],
+        "dependency_roles": {
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "def-td-legendre-potentials": "formulation-prerequisite",
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "pthm-td-fixed-tp-reaction-potential-minimum": "physical-result",
+          "pthm-td-potential-differentials": "physical-result",
+          "lem-tdmath-stoichiometric-tangent-cone": "mathematical-premise",
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "post-td-concave-fundamental-entropy": "physical-assumption"
+        },
+        "physical_scope": "Local C1 constrained Gibbs-potential charts for a declared internal reaction network at fixed positive reservoir temperature and pressure; interior conclusions use the admitted process-record model, while boundary conclusions require the explicit boundary-inclusive entropy and auxiliary extension stated here.",
+        "inventory_expansion_required": false,
+        "statement": "Fix $C\\ge1$ species and $R\\ge1$ declared internal reaction extents. Let $\\nu\\in\\mathbb R^{C\\times R}$ be the dimensionless stoichiometric matrix, let $n^0\\in[0,\\infty)^C$ have units mol, and let $\\xi\\in\\mathbb R^R$ have units mol. The amount vector is $n(\\xi)=n^0+\\nu\\xi$, and the nonnegative-amount feasible extent set is\n$$\n\\mathcal F_\\nu:=\\{\\xi\\in\\mathbb R^R:n^0+\\nu\\xi\\in[0,\\infty)^C\\}.\n$$\nAssume the exact local reaction-feasible extent set is $\\mathcal F_\\nu\\cap U$; no additional local constraint removes any direction in its tangent cone.\nFix $T_0>0$ and $p_0>0$ in a declared natural-variable chart. On an open neighborhood $U$ of a candidate endpoint $\\xi_*$, let $\\Phi:U\\to\\mathbb R$ be a finite $C^1$ constrained Gibbs-potential extension, in joules, satisfying\n$$\nD\\Phi(\\xi)[h]=\\sum_{j=1}^C\\mu_j(\\xi)(\\nu h)_j=(\\nu^{\\mathsf T}\\mu(\\xi))\\cdot h,\n$$\nwhere every $\\mu_j$ is in $\\mathrm{J\\,mol^{-1}}$. At positive amounts, require $\\Phi(\\xi)=U_c(x(\\xi))+p_0V_c(x(\\xi))-T_0S_c(x(\\xi))$ for the system state $x(\\xi)$, with $U_c,V_c,S_c$ from [[def-td-equilibrium-state-domain]] and [[post-td-concave-fundamental-entropy]]; its derivative is that of the local Gibbs chart supplied by [[def-td-legendre-potentials]] and [[pthm-td-potential-differentials]].\n\nIf all amounts at $\\xi_*$ are positive, assume $\\xi_*$ is the system endpoint of a closed system process record and its admitted isolated-compound extension exactly as in [[pthm-td-fixed-tp-reaction-potential-minimum]], is a global entropy-maximizing endpoint on that extension's exact feasible set, and the record's system projection contains every state $x(\\xi)$ for $\\xi\\in\\mathcal F_\\nu\\cap U$. If at least one amount is zero, it is outside [[def-td-equilibrium-state-domain]]; in that boundary case, assume instead that the model supplies a boundary-inclusive state domain with finite $C^1$ maps $\\bar U_c,\\bar V_c,\\bar S_c:U\\to\\mathbb R$ in joules, $\\mathrm{m^3}$, and $\\mathrm{J\\,K^{-1}}$, respectively, that $\\Phi(\\xi)=\\bar U_c(\\xi)+p_0\\bar V_c(\\xi)-T_0\\bar S_c(\\xi)$, and that its exact isolated-compound model has fixed total energy, an ideal reservoir with $S_R(E_R)=S_{R,0}+E_R/T_0$, a constant-entropy pressure store satisfying $E_B-p_0\\bar V_c(\\xi)=C_B$, and a feasible-set projection equal to $\\mathcal F_\\nu\\cap U$. Assume $\\xi_*$ is an attained global entropy maximum on that boundary-inclusive set. This additional boundary model premise is not supplied by the positive-mole state chart or by [[pthm-td-fixed-tp-reaction-potential-minimum]].\n\nUnder the relevant interior or boundary assumptions above, $\\xi_*$ locally minimizes $\\Phi$ on $\\mathcal F_\\nu\\cap U$. Let $J_*:=\\{j:n^0_j+(\\nu\\xi_*)_j=0\\}$ be the active species set. Then the first-order necessary condition is\n$$\n(\\nu^{\\mathsf T}\\mu(\\xi_*))\\cdot h\\ge0\\qquad\\text{for every }h\\in T_{\\mathcal F_\\nu}(\\xi_*),\n$$\nwhere\n$$\nT_{\\mathcal F_\\nu}(\\xi_*):=\\{h\\in\\mathbb R^R:(\\nu h)_j\\ge0\\text{ for every }j\\in J_*\\}.\n$$\nIf $\\xi_*$ is interior to $\\mathcal F_\\nu$, this reduces to $\\nu^{\\mathsf T}\\mu(\\xi_*)=0$. If, in addition, $\\Phi$ is convex and differentiable on a convex neighborhood containing the relevant feasible set, the same tangent inequality is sufficient for global minimization there.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §4.4",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S4"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-td-clapeyron-local",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Local Clapeyron slope on a regular pure-phase coexistence branch",
+        "reference": "items/pthm-td-clapeyron-local.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 10,
+        "deps": [
+          "def-td-phase-and-coexistence-domain",
+          "def-td-si-quantities",
+          "def-td-legendre-potentials",
+          "pthm-td-intensive-coexistence-conditions",
+          "pthm-td-potential-differentials",
+          "pthm-td-euler-and-gibbs-duhem",
+          "thm-tdmath-local-implicit-rank",
+          "thm-chain-rule-for-total-derivatives",
+          "def-td-reversible-process",
+          "post-td-macroscopic-second-law",
+          "post-td-bulk-additivity"
+        ],
+        "dependency_roles": {
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-legendre-potentials": "formulation-prerequisite",
+          "pthm-td-intensive-coexistence-conditions": "physical-result",
+          "pthm-td-potential-differentials": "physical-result",
+          "pthm-td-euler-and-gibbs-duhem": "physical-result",
+          "thm-tdmath-local-implicit-rank": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-td-reversible-process": "formulation-prerequisite",
+          "post-td-macroscopic-second-law": "physical-assumption",
+          "post-td-bulk-additivity": "physical-assumption"
+        },
+        "physical_scope": "A one-component, positive-temperature, C1 coexistence branch with bilateral energy, volume, and species exchange, nonzero molar-volume jump, and the explicit local same-tag homogeneity and reversible-heat assumptions stated here, with homogeneity either independently stipulated or supplied on each designated common-law bulk branch through the local Euler theorem; the slope formula requires nonzero molar-volume jump and C1 branch charts and is not asserted when either condition fails.",
+        "inventory_expansion_required": false,
+        "statement": "Let $\\alpha,\\beta$ be two one-component phase branches from [[def-td-phase-and-coexistence-domain]] on a common open chart $O\\subset(0,\\infty)\\times\\mathbb R$ with coordinates $(T,p)$. Assume each branch has a local $C^2$ energy representation $\\mathcal U_i(s,V,n)$, $i\\in\\{\\alpha,\\beta\\}$, and that within each fixed branch tag it satisfies the same-tag homogeneity\n$$\n\\mathcal U_i(\\lambda s,\\lambda V,\\lambda n)=\\lambda\\mathcal U_i(s,V,n)\n$$\nfor all $\\lambda$ in a neighborhood of $1$ for which the scaled state remains in the chart. This is a phase-branch hypothesis: the general tagged law of [[post-td-bulk-additivity]] does not imply it. It may be stipulated independently on each local branch, or supplied by the common-law bulk subclass of [[pthm-td-euler-and-gibbs-duhem]] when each phase's local inverse states lie in its designated entropy cone with fixed species and intensive parameters and common SI units and energy/entropy reference conventions. That supplied subclass uses local inverse uniqueness and does not require a global energy inverse.\n\nSuppose a state $(T_0,p_0)\\in O$ is an attained interior coexistence equilibrium with bilateral energy, volume, and species exchange between the two branches, and both branches admit the valid local Gibbs charts of [[def-td-legendre-potentials]]. Write $g_i=G_i/n_i$, $s_i=S_i/n_i$, and $v_i=V_i/n_i$ in the units specified by [[def-td-si-quantities]]. If\n$$\n\\Delta v(T_0,p_0):=v_\\beta(T_0,p_0)-v_\\alpha(T_0,p_0)\\ne0,\n$$\nthen, on some open interval about $T_0$, the equal-Gibbs-per-mole coexistence condition $g_\\alpha(T,p(T))=g_\\beta(T,p(T))$ defines a unique local $C^1$ curve and\n$$\n\\frac{dp}{dT}=\\frac{s_\\beta-s_\\alpha}{v_\\beta-v_\\alpha}.\n$$\nIf, in addition, conversion from $\\alpha$ to $\\beta$ is admitted as a reversible process in contact with an ideal thermal reservoir at the same fixed $T$, and the full finite isolated compound (converted phases, reservoir, work stores and all auxiliaries) has equilibrium endpoints with additive component entropy, with every component other than the converted phases and that reservoir having zero entropy change, and the admitted forward and reverse complete-compound records have nonnegative total endpoint entropy changes for that same additive split with their full endpoint tuples interchanged, then its molar latent heat absorbed by the system is $\\ell_{\\alpha\\to\\beta}=T(s_\\beta-s_\\alpha)$. These are conditional model deductions. The slope conclusion is not asserted when $\\Delta v=0$ or where the branch charts are not $C^1$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §§4.3.3–4.4 and 5.1.1–5.1.2",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S4"
+            },
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, Chapter 5, §§5.1.1–5.1.3",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-td-compact-continuous-phase-mixture",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Attained entropy-maximizing mixtures on compact phase domains",
+        "reference": "items/pthm-td-compact-continuous-phase-mixture.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 9,
+        "deps": [
+          "def-td-phase-and-coexistence-domain",
+          "post-td-concave-fundamental-entropy",
+          "def-borel-sigma-algebra",
+          "def-probability-measure",
+          "def-tdmath-measure-integral",
+          "lem-tdmath-measure-integral-agrees-with-root-lebesgue-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-integral-triangle-inequality",
+          "thm-extreme-value-metric",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-heine-borel-rn",
+          "thm-rank-nullity"
+        ],
+        "dependency_roles": {
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "post-td-concave-fundamental-entropy": "physical-assumption",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "def-tdmath-measure-integral": "mathematical-premise",
+          "lem-tdmath-measure-integral-agrees-with-root-lebesgue-integral": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-continuous-image-of-a-compact-space-is-compact": "mathematical-premise",
+          "thm-compact-subset-is-closed-and-bounded": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-rank-nullity": "mathematical-premise"
+        },
+        "physical_scope": "Mixtures of a compact set of declared phase-generator states with continuous entropy and a fixed barycenter; every feasible Borel probability mixture is included, while no attainment claim is made for noncompact domains or a different physical normalization.",
+        "inventory_expansion_required": false,
+        "statement": "Let $d\\ge1$ and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless generator coordinates. Each $x\\in K$ labels one model-specified phase-generator state; the model assigns it entropy per mole $s(x)\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, and $s:K\\to\\mathbb R$ is continuous, using the numerical entropy value in that fixed unit. Define $\\operatorname{conv}K$ to be the set of all finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$. A Borel probability mixture is a countably additive probability measure $P$ on that sigma algebra; its barycenter and entropy per mole are the coordinatewise integrals $\\int_Kx\\,dP$ and $\\int_Ks\\,dP$. For $x\\in K$, define the unit point mass $\\delta_x$ by $\\delta_x(A)=1$ if $x\\in A$ and $\\delta_x(A)=0$ otherwise, for Borel $A\\subseteq K$. Assume every Borel probability mixture with barycenter $\\bar x$ is feasible and has entropy per mole $\\int_Ks\\,dP$. Then there are $m\\le d+1$, points $x_1,\\ldots,x_m\\in K$, and weights $\\theta_i\\ge0$ with $\\sum_{i=1}^m\\theta_i=1$ such that $P_*:=\\sum_{i=1}^m\\theta_i\\delta_{x_i}$ is a feasible Borel probability mixture and $\\int_Ks\\,dP_*\\ge\\int_Ks\\,dP$ for every feasible mixture $P$.\n\nHere integrals use the measure convention of [[def-tdmath-measure-integral]]. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.1.1",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-td-regular-gibbs-phase-rule",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Local regular dimension of a reacting Gibbs phase-coexistence manifold",
+        "reference": "items/pthm-td-regular-gibbs-phase-rule.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 10,
+        "deps": [
+          "def-td-phase-and-coexistence-domain",
+          "def-td-equilibrium-state-domain",
+          "def-td-temperature-pressure-chemical-potential",
+          "pthm-td-intensive-coexistence-conditions",
+          "post-td-bulk-additivity",
+          "post-td-entropy-maximum",
+          "def-td-isolated-compound-feasible-set",
+          "thm-tdmath-local-implicit-rank"
+        ],
+        "dependency_roles": {
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "pthm-td-intensive-coexistence-conditions": "physical-result",
+          "post-td-bulk-additivity": "physical-assumption",
+          "post-td-entropy-maximum": "physical-assumption",
+          "def-td-isolated-compound-feasible-set": "formulation-prerequisite",
+          "thm-tdmath-local-implicit-rank": "mathematical-premise"
+        },
+        "physical_scope": "Interior compositions of finitely many C1 intensive phase branches with energy, volume, all listed species exchanges, and internal reactions allowed in every phase with auxiliary states fixed along the stipulated pairwise transfer curves and vanishing derivative of total auxiliary entropy along each stipulated reaction curve at the coexistence point, at a solution where the combined coexistence-and-affinity Jacobian has a nonsingular minor; phase amounts and externally fixed variables are excluded, and the conclusion is not asserted where a C1 phase chart fails, composition lies on the simplex boundary, or the nonsingular-minor hypothesis fails.",
+        "inventory_expansion_required": false,
+        "statement": "Assume the entropy of each phase is $C^2$ on its physical state chart and its derivative-defined temperature at the endpoint is finite and positive. The equation-set dimension below concerns this smooth interior state only.\n\nLet $C\\ge1$ be the number of named species, $P\\ge1$ the number of coexisting phase branches, and $R\\ge0$ the number of independent internal reaction directions. Consider an attained global entropy-maximizing endpoint on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. For each phase $\\alpha$, use an intensive phase branch from [[def-td-phase-and-coexistence-domain]] and an interior composition $x^\\alpha\\in\\Delta_{C-1}^{\\circ}$. Let each branch chemical-potential map\n$$\n\\mu^\\alpha(T,p,x^\\alpha)=(\\mu_1^\\alpha,\\ldots,\\mu_C^\\alpha)\n$$\nbe $C^1$ on a common open domain\n$$\n\\mathcal U=(0,\\infty)\\times\\mathbb R\\times(\\Delta_{C-1}^{\\circ})^P \\subseteq\\mathbb R^{\\,n},\\qquad n=2+P(C-1).\n$$\nLet $\\nu^1,\\ldots,\\nu^R\\in\\mathbb R^C$ be linearly independent, dimensionless stoichiometric vectors, with extents measured in moles. Assume that, for every phase pair and each of energy, volume, and every named species, the feasible set contains the pairwise transfer curve for all sufficiently small transfers of either sign, varying only the selected coordinate in those two phases with opposite increments and holding every other state coordinate of both phases, all other phases, and all auxiliaries fixed. For each phase $\\alpha$ and reaction $r$, assume the feasible set contains the complete endpoint curve with species amounts $n^\\alpha(t)=n^{\\alpha,*}+t\\nu^r$ for all sufficiently small extents $t$ of either sign, while that phase's energy and volume, all other reaction extents, and every other phase's state remain fixed at their coexistence values. Require the total entropy contribution of all retained auxiliaries along each such reaction curve to be differentiable at zero extent with derivative zero. Every auxiliary state may be fixed as a sufficient special case, but entropy-neutral varying auxiliary or work-device states are permitted. Phase equilibrium imposes $\\mu_i^\\alpha-\\mu_i^1=0$ for $1\\le i\\le C$, $2\\le\\alpha\\le P$; internal reaction equilibrium imposes $(\\nu^r)^{\\mathsf T}\\mu^\\alpha=0$ in every phase for $1\\le r\\le R$. On the phase-equality locus these are the same $R$ equations in each phase, so count them once using phase 1. Put $q:=C(P-1)$ and $m:=q+R$. If $m=0$ (equivalently $P=1,R=0$), no equation is imposed and the local zero set is the whole chart, of dimension $n=C+1=C-P+2-R$. If $m\\ge1$ and the combined equation map has an invertible $m\\times m$ derivative minor at the solution, with $m\\le n$, then the local zero set of these first-order coexistence-and-affinity equations is a graph of dimension\n$$\nn-q-R=C-P+2-R.\n$$\nThis is the dimension of the equation zero set in intensive coordinates only; phase amounts and their extensive conservation constraints are not counted, and the actual stable-coexistence set may be a proper subset after additional stability constraints. If the nonsingular-minor condition fails, no dimension formula is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.1.1",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-td-nonsmooth-phase-scope",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope at phase boundaries and in the thermodynamic limit",
+        "reference": "items/rem-td-nonsmooth-phase-scope.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 11,
+        "deps": [
+          "def-td-phase-and-coexistence-domain",
+          "def-td-thermodynamic-limit-contract",
+          "pthm-td-clapeyron-local",
+          "pthm-td-compact-continuous-phase-mixture"
+        ],
+        "dependency_roles": {
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "def-td-thermodynamic-limit-contract": "formulation-prerequisite",
+          "pthm-td-clapeyron-local": "physical-result",
+          "pthm-td-compact-continuous-phase-mixture": "physical-result"
+        },
+        "physical_scope": "Interpretive limits for the phase-branch, coexistence, Clapeyron, and compact-mixture statements on this page; this remark establishes no universal critical or thermodynamic-limit result.",
+        "inventory_expansion_required": false,
+        "statement": "The branch theorems on this page require the stated smooth local charts. Here coexistence means an attained global entropy-maximizing endpoint on the exact feasible set of [[def-td-phase-and-coexistence-domain]]; equality of intensive phase data follows only for the bilateral exchanges assumed in the branch theorems and does not itself imply loss of chart regularity. The smooth-branch conclusions apply only on their specified C1 charts and interior composition domains. They supply no conclusion where a branch chart fails to be C1, a species amount reaches the composition boundary, or the specified coexistence-and-affinity Jacobian lacks its required nonsingular minor. In particular, [[pthm-td-clapeyron-local]] requires a nonzero molar-volume jump; when that jump vanishes, its local graph argument and quotient formula do not apply.\n\nThe compact-mixture result [[pthm-td-compact-continuous-phase-mixture]] requires a compact phase-generator domain, a continuous entropy map, a fixed barycenter, and feasibility of all probability mixtures with that barycenter. It supplies no attainment theorem for noncompact domains. Likewise, [[def-td-thermodynamic-limit-contract]] specifies the sequence and normalization for a limiting claim but proves no limit exists and no derivatives commute with that limit.\n\nA finite-state partition sum is finite and positive at each finite system size. A singular phase behavior therefore needs a separately specified limit or another model with a separately established domain and regularity analysis. This page does not assert a universal thermodynamic-limit theorem, ensemble equivalence, critical exponent, or physical applicability of the van der Waals equation.\n\nThe local homogeneity used by [[pthm-td-clapeyron-local]] may be independently stipulated in a phase model or supplied on the separately designated common-law bulk branch under the local Euler theorem's inverse-chart and common-reference conditions. A constructed local Gibbs model need not be embedded in a global bulk cone to use the general conditional result. The added branch supplies no universal finite-size, long-range or gravitational extensivity and does not remove any smoothness, exchange or nonzero-volume-jump condition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §§5.1–5.4",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §§4.1–4.2",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 283,
+    "id": "td-phases-and-limits-examples",
+    "kind": "B",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Phases And Limits — Examples",
+    "companion": "td-phases-and-limits",
+    "requires": [
+      "td-phases-and-limits"
+    ],
+    "items": [
+      {
+        "id": "ex-td-finite-two-state-partition-smooth",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Smooth free energy for a finite two-state model",
+        "reference": "items/ex-td-finite-two-state-partition-smooth.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "thm-natural-logarithm-laws",
+          "lem-exponential-series-has-infinite-radius",
+          "thm-log-one-plus-x-power-series",
+          "thm-real-analytic-functions-closed-under-algebra-quotients-and-composition",
+          "thm-power-series-sums-are-real-analytic",
+          "def-real-analytic-function",
+          "def-td-thermodynamic-limit-contract",
+          "def-td-si-quantities",
+          "def-tdmath-countable-canonical-model",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "dependency_roles": {
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "lem-exponential-series-has-infinite-radius": "mathematical-premise",
+          "thm-log-one-plus-x-power-series": "mathematical-premise",
+          "thm-real-analytic-functions-closed-under-algebra-quotients-and-composition": "mathematical-premise",
+          "thm-power-series-sums-are-real-analytic": "mathematical-premise",
+          "def-real-analytic-function": "mathematical-premise",
+          "def-td-thermodynamic-limit-contract": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-tdmath-countable-canonical-model": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise"
+        },
+        "physical_scope": "A constructed two-state canonical model at finite positive temperature; the formulas are model predictions, not measured material properties or a thermodynamic-limit result.",
+        "inventory_expansion_required": false,
+        "statement": "Let $X=\\{0,1\\}$ have energies $E(0)=0$ J and $E(1)=\\epsilon$ J with $\\epsilon>0$, both weights $g_i=1$, and $\\beta=(k_BT)^{-1}>0$ in $\\mathrm{J^{-1}}$. This illustrates the finite-state canonical-sum clause of [[def-td-thermodynamic-limit-contract]] and [[def-tdmath-countable-canonical-model]]; it supplies no thermodynamic-limit sequence. Its partition sum and free energy are\n$$\nZ(\\beta)=1+e^{-\\beta\\epsilon},\\qquad F(\\beta)=-\\beta^{-1}\\log(1+e^{-\\beta\\epsilon}).\n$$",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.4.3",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-vdw-positive-slope",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A positive-slope segment in the reduced van der Waals model",
+        "reference": "items/ex-td-vdw-positive-slope.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 9,
+        "deps": [
+          "def-td-phase-and-coexistence-domain"
+        ],
+        "dependency_roles": {
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite"
+        },
+        "physical_scope": "An exact derivative calculation in the dimensionless reduced van der Waals model below its model critical temperature; no real-fluid measurement or universal equation of state is asserted.",
+        "inventory_expansion_required": false,
+        "statement": "Adopt the reduced van der Waals equation as a phenomenological model:\n$$\np(v,t)=\\frac{8t}{3v-1}-\\frac{3}{v^2},\\qquad v>\\frac13,\\quad t>0,\n$$\nwhere $p=P/P_c$, $v=V/V_c$, and $t=T/T_c$ use positive model scales $P_c,V_c,T_c$. Define a model critical point by the simultaneous isothermal conditions $\\partial_vp=\\partial_v^2p=0$ in this domain. The equation is a model premise; its extension to liquid-like densities is not a universal physical law.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.1.1",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-phase-fraction-lever-rule",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Phase fractions from an additive molar volume",
+        "reference": "items/ex-td-phase-fraction-lever-rule.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 9,
+        "deps": [
+          "def-td-phase-and-coexistence-domain",
+          "def-finite-sum",
+          "post-td-bulk-additivity"
+        ],
+        "dependency_roles": {
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "def-finite-sum": "mathematical-premise",
+          "post-td-bulk-additivity": "physical-assumption"
+        },
+        "physical_scope": "A constructed one-component, two-phase separated mixture with additive volume and fixed total amount; no coexistence data or measured material values are asserted.",
+        "inventory_expansion_required": false,
+        "statement": "At a stipulated common $T,p$, let one mole of a component occupy phase $\\alpha$ with molar volume $v_\\alpha=1.0\\times10^{-3}\\,\\mathrm{m^3\\,mol^{-1}}$ or phase $\\beta$ with $v_\\beta=4.0\\times10^{-3}\\,\\mathrm{m^3\\,mol^{-1}}$. Consider a separated mixture of total amount $N=2\\,\\mathrm{mol}$ and total volume $V=5.0\\times10^{-3}\\,\\mathrm{m^3}$; use the volume convention of [[def-td-phase-and-coexistence-domain]] and additivity of [[post-td-bulk-additivity]].",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.1.1",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-reaction-boundary-example",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A boundary reaction minimum with a one-sided extent",
+        "reference": "items/ex-td-reaction-boundary-example.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "lem-tdmath-stoichiometric-tangent-cone"
+        ],
+        "dependency_roles": {
+          "lem-tdmath-stoichiometric-tangent-cone": "mathematical-premise"
+        },
+        "physical_scope": "A constructed units-labelled tangent-cone optimization illustration with one zero-amount boundary; it makes no thermodynamic-equilibrium, material, or empirical claim.",
+        "inventory_expansion_required": false,
+        "statement": "Use species $A,B$, one reaction column $\\nu=(-1,1)^{\\mathsf T}$, and starting amounts $n_A^0=0$ mol, $n_B^0=1$ mol. The admissible extents are $\\xi\\in[-1,0]$ mol because $n_A(\\xi)=-\\xi$ and $n_B(\\xi)=1\\,\\mathrm{mol}+\\xi$ must both be nonnegative. Let $\\Phi_0$ have units joules and define an ambient affine potential on an open neighborhood of the nonnegative amount region by\n$$\n\\widehat\\Phi(n_A,n_B)=\\Phi_0+1\\,\\mathrm J-(1\\,\\mathrm{J\\,mol^{-1}})n_B .\n$$\nAlong $n(\\xi)=(-\\xi,1\\,\\mathrm{mol}+\\xi)$, set $\\Phi(\\xi):=\\widehat\\Phi(n(\\xi))=\\Phi_0-(1\\,\\mathrm{J\\,mol^{-1}})\\xi$. Its derivative-defined amount coefficients are $\\mu_A:=\\partial_{n_A}\\widehat\\Phi=0$ and $\\mu_B:=\\partial_{n_B}\\widehat\\Phi=-1\\,\\mathrm{J\\,mol^{-1}}$, including at $\\xi_*=0$ mol. This ambient extension is constructed optimization data only; no positive-mole thermodynamic chart at $n_A=0$ or physical realization is asserted.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-td-noncompact-phase-mixture-no-attained-maximum",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "A noncompact phase domain with no attained mixture maximum",
+        "reference": "items/cex-td-noncompact-phase-mixture-no-attained-maximum.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-probability-measure",
+          "def-tdmath-measure-integral"
+        ],
+        "dependency_roles": {
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "def-tdmath-measure-integral": "mathematical-premise"
+        },
+        "physical_scope": "A constructed continuous entropy extension that is positive and concave on a convex ambient domain but restricted to a noncompact generator set omitting its maximizing barycenter; it makes no material claim.",
+        "inventory_expansion_required": false,
+        "statement": "Let $d\\ge1$, let $K\\subseteq C\\subseteq\\mathbb R^d$ with $K$ noncompact and $C$ convex, and let $\\mathcal P$ be a nonempty family of Borel probability measures on $K$ sharing a prescribed barycenter. The statement refuted is that $\\sup_{P\\in\\mathcal P}\\int_Ks\\,dP$ is always attained whenever $s=\\widetilde s|_K$ for a bounded, positive, continuous concave function $\\widetilde s:C\\to\\mathbb R$. Here convexity of $C$ means $(1-t)x+ty\\in C$ for $x,y\\in C$ and $t\\in[0,1]$, and concavity means\n$$\n\\widetilde s((1-t)x+ty)\\ge(1-t)\\widetilde s(x)+t\\widetilde s(y)\\qquad(x,y\\in C,\\ t\\in[0,1]).\n$$",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.4.3",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-compact-continuous-phase-mixture",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A compact two-generator mixture attains the d+1 support bound",
+        "reference": "items/ex-td-compact-continuous-phase-mixture.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 10,
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-probability-measure",
+          "def-tdmath-measure-integral",
+          "pthm-td-compact-continuous-phase-mixture"
+        ],
+        "dependency_roles": {
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "def-tdmath-measure-integral": "mathematical-premise",
+          "pthm-td-compact-continuous-phase-mixture": "physical-result"
+        },
+        "physical_scope": "A constructed finite two-generator mixture with a continuous concave entropy functional; its values are illustrative and are not observations.",
+        "inventory_expansion_required": false,
+        "statement": "Let $K=\\{0,1\\}\\subset\\mathbb R$ be the compact generator domain, with dimensionless coordinate $x$. On the convex ambient domain $[0,1]$, define the affine extension $\\widetilde s(x)=s_0+a x$ and restrict it to $s=\\widetilde s|_K$, where fixed $s_0,a>0$ have units $\\mathrm{J\\,mol^{-1}K^{-1}}$. For $x,y\\in[0,1]$ and $t\\in[0,1]$, $\\widetilde s((1-t)x+ty)=(1-t)\\widetilde s(x)+t\\widetilde s(y)$, so the extension is concave. Take the barycenter to be $\\bar x=\\tfrac12$ and declare every Borel probability mixture on $K$ with that barycenter feasible.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.1.1",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-clapeyron-linear-branches",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A two-branch Gibbs model with a positive Clapeyron slope",
+        "reference": "items/ex-td-clapeyron-linear-branches.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 11,
+        "deps": [
+          "def-td-process-and-protocol",
+          "post-td-macroscopic-second-law",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "def-td-phase-and-coexistence-domain",
+          "pthm-td-clapeyron-local",
+          "thm-euclidean-inverse-function-theorem"
+        ],
+        "dependency_roles": {
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "post-td-macroscopic-second-law": "physical-assumption",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition": "mathematical-premise",
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "pthm-td-clapeyron-local": "physical-result",
+          "thm-euclidean-inverse-function-theorem": "mathematical-premise"
+        },
+        "physical_scope": "A constructed pair of one-component Gibbs charts satisfying the same-tag, exchange, and reversible-heat assumptions of the local Clapeyron theorem; the constants are illustrative and are not observations.",
+        "inventory_expansion_required": false,
+        "statement": "Fix $T_0=300\\,\\mathrm K$, $p_0=10^5\\,\\mathrm{Pa}$, $g_0=1\\,\\mathrm{J\\,mol^{-1}}$, $c>0$ in $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\kappa>0$ in $\\mathrm{m^3\\,mol^{-1}Pa^{-1}}$. On a common open chart define\n$$\ng_i(T,p)=g_0-s_i(T-T_0)-\\frac{c}{2T_0}(T-T_0)^2+v_i(p-p_0)-\\frac{\\kappa}{2}(p-p_0)^2,\n$$\nfor $i\\in\\{\\alpha,\\beta\\}$, with $s_\\alpha=2\\,\\mathrm{J\\,mol^{-1}K^{-1}}$, $s_\\beta=5\\,\\mathrm{J\\,mol^{-1}K^{-1}}$, $v_\\alpha=1.0\\times10^{-3}\\,\\mathrm{m^3\\,mol^{-1}}$, and $v_\\beta=4.0\\times10^{-3}\\,\\mathrm{m^3\\,mol^{-1}}$. Set $G_i=n_i g_i$ and use the natural Gibbs assignments $S_i=-\\partial_TG_i$, $V_i=\\partial_pG_i$, $\\mu_i=\\partial_{n_i}G_i$, and $U_i=G_i+TS_i-pV_i$. Thus same-tag homogeneity is explicit. Assume the constructed model stipulates an attained coexistence endpoint with bilateral energy, volume, and species exchange, and a reversible $\\alpha\\to\\beta$ conversion in contact with an ideal thermal reservoir at $T_0$. The reversible conversion is a record of the complete finite isolated compound comprising converted phases, the fixed-temperature reservoir, work stores and all auxiliaries, with equilibrium endpoints and additive component entropy. Every component other than the converted phases and reservoir has zero entropy change, and the reservoir change is $-Q/T_0$. These are the exact additional entropy premises of the local Clapeyron theorem. These parameters and endpoint assumptions are model inputs, not empirical claims.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §§5.1.1–5.1.2",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-td-clapeyron-zero-volume-jump",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Equal branch volumes do not give a Clapeyron graph",
+        "reference": "items/cex-td-clapeyron-zero-volume-jump.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 11,
+        "deps": [
+          "def-td-phase-and-coexistence-domain",
+          "pthm-td-clapeyron-local",
+          "thm-euclidean-inverse-function-theorem"
+        ],
+        "dependency_roles": {
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "pthm-td-clapeyron-local": "physical-result",
+          "thm-euclidean-inverse-function-theorem": "mathematical-premise"
+        },
+        "physical_scope": "A constructed pair of smooth one-component Gibbs charts with zero molar-volume jump; it shows why the local nonzero-jump hypothesis cannot be omitted and makes no material claim.",
+        "inventory_expansion_required": false,
+        "statement": "Equality of two smooth one-component molar Gibbs branches near a coexistence point always defines a unique differentiable pressure graph $p=p(T)$ on an open temperature interval, with slope $\\Delta s/\\Delta v$, even when the molar-volume jump $\\Delta v$ vanishes.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §§5.1.1–5.1.2",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-phase-rule-single-component",
+        "kind": "example",
+        "domain": "physics",
+        "title": "One component in two phases has one regular equation-set degree of freedom",
+        "reference": "items/ex-td-phase-rule-single-component.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 9,
+        "deps": [
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-real-power-continuity-and-derivatives",
+          "def-td-phase-and-coexistence-domain",
+          "def-td-temperature-pressure-chemical-potential",
+          "thm-tdmath-phase-dimension",
+          "thm-euclidean-inverse-function-theorem"
+        ],
+        "dependency_roles": {
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "thm-tdmath-phase-dimension": "mathematical-premise",
+          "thm-euclidean-inverse-function-theorem": "mathematical-premise"
+        },
+        "physical_scope": "A constructed pair of smooth one-component Gibbs charts; the example verifies the regular equation-set rank and dimension only, and does not assert a stable or realized coexistence endpoint.",
+        "inventory_expansion_required": false,
+        "statement": "Let $C=1$, $P=2$, and $R=0$. Fix $T_0=300\\,\\mathrm K$ and $p_0=10^5\\,\\mathrm{Pa}$, and take a common open chart around $(T_0,p_0)$. On it define the branch Gibbs potentials per mole\n$$\ng_1(T,p)=g_0-s_0(T-T_0)-\\frac{c}{2T_0}(T-T_0)^2+v_1(p-p_0)-\\frac{\\kappa}{2}(p-p_0)^2,\\qquad g_2(T,p)=g_0-s_0(T-T_0)-\\frac{c}{2T_0}(T-T_0)^2+v_2(p-p_0)-\\frac{\\kappa}{2}(p-p_0)^2,\n$$\nwhere $g_0$ is in $\\mathrm{J\\,mol^{-1}}$, $s_0,c>0$ are in $\\mathrm{J\\,mol^{-1}K^{-1}}$, $v_1,v_2>0$ are distinct molar volumes in $\\mathrm{m^3\\,mol^{-1}}$, and $\\kappa>0$ is in $\\mathrm{m^3\\,mol^{-1}Pa^{-1}}$. Set $G_i=n_i g_i$ with natural Gibbs assignments $S_i=-\\partial_TG_i$, $V_i=\\partial_pG_i$, and $\\mu_i=\\partial_{n_i}G_i$; define $U_i=G_i+TS_i-pV_i$. The derivative-defined chemical potentials are $\\mu_i=g_i$, and they agree at $(T_0,p_0)$. This is a candidate equation-map solution, not a claim of entropy-maximizing coexistence.\n\nThe constructed branch's local physical state map is $\\chi:(T,p,n)\\mapsto(U,V,n)$ (using the positive amount and interior composition coordinates displayed here). On the inverse patch verified below, define its numerical domain $O_c=\\Phi_c^{-1}(\\chi(\\mathcal O))$ and declare this patch to be the local model's $D_c$ patch, where $\\Phi_c(\\hat U,\\hat V,\\hat n)=(\\hat U\\,\\mathrm J,\\hat V\\,\\mathrm{m^3},\\hat n\\,\\mathrm{mol})$ is the unit map of [[def-td-temperature-pressure-chemical-potential]]. Define the numerical entropy by $S_c=S^{\\rm SI}\\circ\\Phi_c$, with $S^{\\rm SI}$ supplied by the Gibbs assignments through this inverse. Thus the displayed derivatives are derivatives in physical SI coordinates on $\\Phi_c(O_c)$; the model patch is not an empirical claim about an independently specified material domain.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.1.1",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-reactive-phase-rule-three-component",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A regular two-phase three-species reaction model",
+        "reference": "items/ex-td-reactive-phase-rule-three-component.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 9,
+        "deps": [
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-real-power-continuity-and-derivatives",
+          "def-td-phase-and-coexistence-domain",
+          "def-td-temperature-pressure-chemical-potential",
+          "thm-tdmath-phase-dimension",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-euclidean-inverse-function-theorem"
+        ],
+        "dependency_roles": {
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "thm-tdmath-phase-dimension": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-euclidean-inverse-function-theorem": "mathematical-premise"
+        },
+        "physical_scope": "A constructed smooth local two-phase Gibbs model with one formal internal reaction, used to verify the local equation-map nonsingular-minor hypothesis only; no stable or realized coexistence claim, empirical system, or chemical data are made.",
+        "inventory_expansion_required": false,
+        "statement": "Take $C=3$ species and $P=2$ phases. Write $x_3:=1-x_1-x_2$, and center the open composition charts at $x_1=x_2=x_3=1/3$. Fix $T_0>0$, $p_0>0$, $s_0,c,v_0,\\kappa,q>0$, and $\\eta=1\\,\\mathrm{J\\,mol^{-1}}$. The parameters have units $s_0,c\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, $v_0\\in\\mathrm{m^3\\,mol^{-1}}$, $\\kappa\\in\\mathrm{m^3\\,mol^{-1}Pa^{-1}}$, and $q\\in\\mathrm{m^3\\,mol^{-1}}$. For $\\gamma\\in\\{\\alpha,\\beta\\}$, set $a_\\alpha=2\\eta$, $a_\\beta=\\eta$, $q_\\alpha=0$, and $q_\\beta=q$, and define molar Gibbs potentials\n$$\ng^\\gamma(T,p,x)=-s_0(T-T_0)-\\frac{c}{2T_0}(T-T_0)^2+v_0(p-p_0)-\\frac{\\kappa}{2}(p-p_0)^2+\\frac{a_\\gamma}{2}(x_1^2+x_2^2)-\\frac{a_\\gamma}{3}(x_1+x_2)+\\frac{a_\\gamma}{9}+q_\\gamma(p-p_0)x_3.\n$$\nSet $G^\\gamma=m_\\gamma g^\\gamma$ on each fixed-tag branch and adopt the natural Gibbs assignments $S=-G_T$, $V=G_p$, and $\\mu_j=G_{n_j}$, with $U=G+TS-pV$. These smooth charts are scale-invariant in amount. Near the centered point the volumes are positive, and the $(U,V)$ chart Jacobian at fixed composition and amount is nonsingular: $U_T=m_\\gamma c$, $V_p=-m_\\gamma\\kappa$, and $V_T=0$ there, so its determinant is $-m_\\gamma^2c\\kappa\\ne0$. The reaction vector is $\\nu=(-1,-1/2,1)^{\\mathsf T}$, of rank $R=1$. At $(T_0,p_0,x_1,x_2)=(T_0,p_0,1/3,1/3)$, both phases have $\\mu^\\gamma=(0,0,0)$, so the phase-equality equations and reaction affinity vanish.\n\nThe constructed branch's local physical state map is $\\chi:(T,p,n)\\mapsto(U,V,n)$ (using the positive amount and interior composition coordinates displayed here). On the inverse patch verified below, define its numerical domain $O_c=\\Phi_c^{-1}(\\chi(\\mathcal O))$ and declare this patch to be the local model's $D_c$ patch, where $\\Phi_c(\\hat U,\\hat V,\\hat n)=(\\hat U\\,\\mathrm J,\\hat V\\,\\mathrm{m^3},\\hat n\\,\\mathrm{mol})$ is the unit map of [[def-td-temperature-pressure-chemical-potential]]. Define the numerical entropy by $S_c=S^{\\rm SI}\\circ\\Phi_c$, with $S^{\\rm SI}$ supplied by the Gibbs assignments through this inverse. Thus the displayed derivatives are derivatives in physical SI coordinates on $\\Phi_c(O_c)$; the model patch is not an empirical claim about an independently specified material domain.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.1.1",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+            },
+            {
+              "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+              "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

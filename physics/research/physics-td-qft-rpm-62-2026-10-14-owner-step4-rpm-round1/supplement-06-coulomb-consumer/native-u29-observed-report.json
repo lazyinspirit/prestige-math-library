@@ -1,0 +1,147 @@
+{
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "phase": "initial",
+  "round": 1,
+  "unit": "29",
+  "input_sha256": "c7d8a222abea8b2aeaf8ca5059b6b3a3871cdaeeeed41debed66cfc1d833fd32",
+  "decisions": [
+    {
+      "id": "def-rpm-relativistic-coulomb-phase-system",
+      "model": "gpt-6-luna",
+      "context_sha256": "f4cee9064af8d2ee5c95fb6ea16c83fdf5aeb01e8cf9bcf852f2f88257d1fc37",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The IVP supplier defines interval solutions but no extension or maximality. The Hamiltonian and smooth noncollision vector field are sound; the inaccurate locator is a nonfatal definitional defect. Defined interval extension and maximality locally without asserting existence or uniqueness.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-rpm-schwarzschild-null-geodesic-reduction",
+      "model": "gpt-6-luna",
+      "context_sha256": "8ca8f019bac5e40533f158536900df9bcc17239fad58894868d3eae2a91a5162",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "A parameter reversal sends (E,L) to (-E,-L), so it cannot make E>0 and L>=0 for a ray with L/E<0. This is a fatal logical overclaim. Kept both angular directions by retaining signed L and defining b=|L|/E; the radial first integral depends on L squared and its threshold is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-rpm-relativistic-coulomb-phase-system",
+      "disposition": "repaired",
+      "post_sha256": "795789ffd92881f33b81b8f34ef71fd3d8d01dd84ea0437538de67e25e605cd7",
+      "review_context_sha256": "a673333048311fc3ccca84f6902a61130e544c1ecfde2d38518bc361e7783065",
+      "reason": "The IVP supplier defines interval solutions but no extension or maximality. The Hamiltonian and smooth noncollision vector field are sound; the inaccurate locator is a nonfatal definitional defect. Defined interval extension and maximality locally without asserting existence or uniqueness.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-rpm-schwarzschild-null-geodesic-reduction",
+      "disposition": "repaired",
+      "post_sha256": "24fd3a141ce5e6d55daee6e311ebb0eaa6a4ecb6f3d495faa3647b8b038c1323",
+      "review_context_sha256": "0a81e54216499d60183475cdbb28eaba9ad041238ec41adc6ba3098b55cf677d",
+      "reason": "A parameter reversal sends (E,L) to (-E,-L), so it cannot make E>0 and L>=0 for a ray with L/E<0. This is a fatal logical overclaim. Kept both angular directions by retaining signed L and defining b=|L|/E; the radial first integral depends on L squared and its threshold is unchanged. Checked Killing conservation, nonvanishing time component, null reduction and the derivative/sign of H directly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "prop-rpm-relativistic-coulomb-scattering-branch",
+    "pthm-rpm-relativistic-coulomb-scattering",
+    "pthm-rpm-schwarzschild-null-scattering",
+    "ex-rpm-schwarzschild-null-critical-impact"
+  ],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-td-qft-rpm-62-2026-10-14-batch-29-step5-context.json": "7f1522c1a7442a28a27f28287cf6bb522eff5ece413a87e988c8b12ed5f96149"
+  },
+  "repair_notes": [
+    {
+      "id": "def-rpm-relativistic-coulomb-phase-system",
+      "status": "review and native hash capture complete",
+      "claim": "m,c,kappa>0; z:I->D is C1, maximal iff no proper interval extension solving the same ODE",
+      "source_paths": [
+        "items/def-first-order-ode-initial-value-problem-and-solution.md:Definition"
+      ],
+      "dependencies": [
+        "def-euclidean-inner-product",
+        "def-cross-product-in-r3",
+        "def-first-order-ode-initial-value-problem-and-solution"
+      ],
+      "validation": "not yet run; final batched checks pending",
+      "next_action": "capture review hashes, then repair null-geodesic orientation",
+      "unresolved_obligations": []
+    },
+    {
+      "supplier": "def-rpm-relativistic-coulomb-phase-system",
+      "interface_change": "Definition now states interval extension/maximality locally; vector field, parameters, and solution class unchanged.",
+      "consumer_uses": [
+        {
+          "id": "prop-rpm-relativistic-coulomb-scattering-branch",
+          "path": "items/prop-rpm-relativistic-coulomb-scattering-branch.md",
+          "affected_use": "Statement and F1 invoke the Coulomb phase system; proof 3.1 extends solutions past finite endpoints inside D.",
+          "disposition": "unchanged use remains sound",
+          "evidence": "The local maximality definition is exactly nonextendibility of solutions used by compact continuation. A separate pre-existing nonfatal defect in step 7.1 says J>kappa/c is essential to a positive root; for C=0 the positive simple root is A/(2d). That unrelated defect is referred to its frontier owner, without editing."
+        },
+        {
+          "id": "pthm-rpm-relativistic-coulomb-scattering",
+          "path": "items/pthm-rpm-relativistic-coulomb-scattering.md",
+          "affected_use": "Statement, F3 and proof 3.1 identify coordinate-time physical trajectories with the defined Coulomb ODE; step 4.1 invokes its branch proposition.",
+          "disposition": "unchanged use remains sound",
+          "evidence": "The ODE and Hamiltonian did not change; the local physical C2 worldline remains a C1 solution. No new existence premise is introduced."
+        }
+      ],
+      "page_use": {
+        "path": "library/relativistic-particle-mechanics/rpm-curved-orbits-scattering.md",
+        "affected_use": "The page describes the same pure mathematical relativistic Coulomb system and proved repulsive scattering branch.",
+        "disposition": "unchanged page summary remains sound"
+      }
+    },
+    {
+      "id": "lem-rpm-schwarzschild-null-geodesic-reduction",
+      "status": "mathematical review and repair complete; native hash command pending",
+      "claim": "Nonzero smooth affine null geodesic on interval J in r>s, theta=pi/2; orient toward future E>0; L signed, b=abs(L)/E. H maximum 4/(27s^2), bc=3sqrt(3)s/2. Countable choice retained from geometric suppliers.",
+      "source_paths": [
+        "items/def-gr-schwarzschild-exterior-model.md:Definition (c)-(d)",
+        "items/lem-gr-schwarzschild-metric-properties.md:Statement (a)-(c)",
+        "items/thm-gr-killing-and-on-shell-matter-identities.md:Statement (b)",
+        "items/def-geodesic-of-an-affine-connection.md:Definition"
+      ],
+      "validation": "final scoped checks pending",
+      "unresolved_obligations": [],
+      "next_action": "record native hashes before editing circular stability"
+    },
+    {
+      "supplier": "lem-rpm-schwarzschild-null-geodesic-reduction",
+      "interface_change": "The unsupported joint orientation convention is replaced by future E>0, signed L and b=abs(L)/E, without losing either angular direction.",
+      "consumer_uses": [
+        {
+          "id": "pthm-rpm-schwarzschild-null-scattering",
+          "path": "items/pthm-rpm-schwarzschild-null-scattering.md",
+          "affected_use": "Statement and F1 use the radial first integral and H maximum; proof 1.1 constructs rays with L=bE>=0 and 2.1-4.1 use that first integral.",
+          "disposition": "unchanged use remains sound",
+          "evidence": "This consumer explicitly restricts to L>=0 and constructs that branch. On it abs(L)/E=L/E, so its signed positive azimuthal quadratures and all radial classification steps remain valid."
+        },
+        {
+          "id": "ex-rpm-schwarzschild-null-critical-impact",
+          "path": "items/ex-rpm-schwarzschild-null-critical-impact.md",
+          "affected_use": "F1 and verification 1.1-1.2 use bc, H monotonicity and the radial first integral for its nonnegative-L incoming-ray example.",
+          "disposition": "use remains sound; assigned example review follows",
+          "evidence": "The values bc and H, and b squared in both factorizations, are unchanged. The example uses the L>=0 branch of its scattering supplier."
+        }
+      ],
+      "page_use": {
+        "path": "library/relativistic-particle-mechanics/rpm-curved-orbits-scattering.md",
+        "affected_use": "The page promises the null-geodesic radial first integral and exact impact parameter regimes.",
+        "disposition": "unchanged page summary remains sound"
+      },
+      "status": "review and native hash capture complete"
+    }
+  ]
+}

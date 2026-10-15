@@ -1,0 +1,770 @@
+[
+  {
+    "order": 413,
+    "id": "rpm-geometry-actions",
+    "kind": "A",
+    "category": "relativistic-particle-mechanics",
+    "library": "physics",
+    "title": "Particle spacetime, observers and worldlines",
+    "companion": "rpm-geometry-actions-examples",
+    "requires": [
+      "euclidean-ordinary-differential-equations-with-smooth-dependence",
+      "gr-causal-and-initial-value-boundaries",
+      "picard-lindelof-and-first-order-odes",
+      "sr-energy-momentum"
+    ],
+    "items": [
+      {
+        "id": "def-rpm-spacetime-observer-and-worldline",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Particle spacetime, observers and worldlines",
+        "statement": "Use the signature $(-,+,+,+)$ throughout. In the flat case, **Minkowski spacetime** means the affine model $(A,V,\\eta,C^+)$ of [[def-sr-affine-minkowski-model]]: $A$ is an affine space, $\\eta$ is a nondegenerate Lorentz form on its four-dimensional displacement space, and $C^+$ selects the future cone. In the curved case, a **background spacetime** means a prescribed smooth time-oriented Lorentzian four-manifold $(M,g,N)$ of [[def-gr-smooth-lorentzian-objects]]; the metric and time orientation are fixed data, not dynamical unknowns here. No field equation or completeness assumption is included.\n\nA **massive worldline** on an open interval $I\\subseteq\\mathbb R$ is a $C^2$ curve $x:I\\to M$ with future-directed timelike tangent $T=dx/ds$ at every parameter value. This is the smooth subclass of [[def-gr-timelike-worldline-and-proper-time]]. A **null worldline** is a $C^2$ curve with nonzero future-directed null tangent everywhere. Its tangent has no proper-time normalization: $g(T,T)=0$, so the massive proper-time formula does not apply. In the flat model these are affine curves into $A$ with tangent in the selected future timelike or null cone from [[def-sr-affine-minkowski-model]].\n\nAn **observer at an event** $p\\in M$ is a future unit timelike vector $n\\in T_pM$ with $g_p(n,n)=-1$, as in [[def-gr-observer-and-rest-space]]. Its instantaneous rest space is $n^\\perp=\\{v:g_p(v,n)=0\\}$. This is a pointwise vector-space construction; the definition does not assign a clock reading or a moving frame to a lone observer.\n\nAn **observer congruence** on an open set $U\\subseteq M$ is a smooth field of future unit timelike vectors on $U$, as in [[def-gr-observer-congruence-and-adapted-charts]]; its observer curves are its integral curves. A **tetrad** is a chosen orthonormal frame field, as in [[def-gr-local-frame-and-tetrad-fields]]. A **chart** is a coordinate map; an adapted chart is a chart whose spatial coordinates are constant along the congruence's integral curves. These objects are distinct: a chart need not be inertial, a tetrad need not be coordinate induced, and a congruence is a field of observers rather than a chart or a frame. This distinction agrees with [[def-sr-chart-tetrad-and-congruence-distinction]].\n\nThe coordinates and units used later are SI: in an inertial chart $x^0=ct$ and $x^i$ are metres, $t$ is seconds, $c>0$ is metres per second, and proper time is measured in seconds. In a general chart, coordinate components inherit their coordinate units; invariant equations are tensorial. No global inertial chart, global tetrad, or global observer congruence is asserted to exist.",
+        "deps": [
+          "def-sr-affine-minkowski-model",
+          "def-gr-smooth-lorentzian-objects",
+          "def-gr-timelike-worldline-and-proper-time",
+          "def-gr-observer-and-rest-space",
+          "def-gr-observer-congruence-and-adapted-charts",
+          "def-gr-local-frame-and-tetrad-fields",
+          "def-sr-chart-tetrad-and-congruence-distinction"
+        ],
+        "dependency_roles": {
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-gr-timelike-worldline-and-proper-time": "mathematical-premise",
+          "def-gr-observer-and-rest-space": "mathematical-premise",
+          "def-gr-observer-congruence-and-adapted-charts": "mathematical-premise",
+          "def-gr-local-frame-and-tetrad-fields": "mathematical-premise",
+          "def-sr-chart-tetrad-and-congruence-distinction": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, author-hosted Chapter 1 lecture-note excerpt, §§1.1–1.2",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            },
+            {
+              "title": "David Tong, General Relativity, author-hosted Chapter 3 lecture-note excerpt on Lorentzian geometry and connections",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr3.pdf"
+            },
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 1 and Ch. 3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-rpm-shell-tangent-force-ivp",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Smooth shell-tangent force initial-value problem",
+        "statement": "Let $(M,g,N)$ be a smooth time-oriented Lorentzian four-manifold and let $m,c>0$. Let $\\mathcal V\\subset TM$ be an open set of future timelike vectors and let $f$ be a smooth vector field along the bundle projection $\\mathcal V\\to M$, with $f(p,V)\\in T_pM$ and $g_p(V,f(p,V))=0$ for every $(p,V)\\in\\mathcal V$. Fix an initial parameter $s_0\\in\\mathbb R$. For every initial datum $(p_0,U_0)\\in\\mathcal V$ satisfying $g_{p_0}(U_0,U_0)=-c^2$, there is an open interval $J\\ni s_0$ and a unique local solution consisting of a $C^2$ curve $x:J\\to M$ and its $C^1$ tangent field $U=dx/ds$, with $x(s_0)=p_0$, $U(s_0)=U_0$, $D_sx=U$, and $D_sU=f(x,U)/m$. The solution depends smoothly on its initial data and on any finite-dimensional parameters on which $f$ depends smoothly, on a common sufficiently short compact interval containing $s_0$ near the base datum. It remains on the future unit timelike shell. There is a unique maximal solution on an open interval containing $s_0$, but this interval need not be all of $\\mathbb R$.",
+        "deps": [
+          "def-rpm-spacetime-observer-and-worldline",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "lem-gr-parallel-transport-and-geodesic-speed",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "lem-gr-future-causal-classification-by-a-timelike-field",
+          "def-covariant-derivative-along-a-curve",
+          "def-christoffel-symbols-of-an-affine-connection"
+        ],
+        "dependency_roles": {
+          "def-rpm-spacetime-observer-and-worldline": "mathematical-premise",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative": "mathematical-premise",
+          "lem-gr-parallel-transport-and-geodesic-speed": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "lem-gr-future-causal-classification-by-a-timelike-field": "mathematical-premise",
+          "def-covariant-derivative-along-a-curve": "mathematical-premise",
+          "def-christoffel-symbols-of-an-affine-connection": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, author-hosted Chapter 3 lecture-note excerpt",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr3.pdf"
+            },
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-rpm-proper-time-parametrization",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Proper-time parameter and normalized tangent",
+        "statement": "Let $x:I\\to M$ be a $C^2$ future timelike curve on a nonempty open interval $I$, with parameter $s$ and tangent $T=dx/ds$. Fix $c>0$, $s_0\\in I$, and $\\tau_0\\in\\mathbb R$, and define $\\ell(s)=\\sqrt{-g(T,T)}$ and $\\tau(s)=\\tau_0+c^{-1}\\int_{s_0}^s\\ell(r)\\,dr$. Then $\\tau'(s)=\\ell(s)/c>0$, so $\\tau$ is an increasing $C^2$ coordinate on its open image $J=\\tau(I)$. The tangent with respect to this parameter is $U=dx/d\\tau=cT/\\ell$ and satisfies $g(U,U)=-c^2$. This is a mathematical reparametrization result; by itself it does not identify $\\tau$ with a physical clock reading.",
+        "deps": [
+          "def-rpm-spacetime-observer-and-worldline",
+          "def-gr-timelike-worldline-and-proper-time",
+          "thm-ftc-first-part",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-euclidean-inverse-function-theorem",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_roles": {
+          "def-rpm-spacetime-observer-and-worldline": "mathematical-premise",
+          "def-gr-timelike-worldline-and-proper-time": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-euclidean-inverse-function-theorem": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 1, proper time and four-velocity",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §§1.1–1.2",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "post-rpm-test-clock-and-background",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Ideal clocks on a prescribed Lorentzian background",
+        "statement": "**Adopted convention.** On a prescribed background $(M,g,N)$ from [[def-rpm-spacetime-observer-and-worldline]], let $x:[a,b]\\to M$, $a<b$, be a continuous piecewise-$C^1$ future timelike curve in the sense of [[def-gr-timelike-worldline-and-proper-time]]: it has a finite partition $a=s_0<\\cdots<s_k=b$, each segment is $C^1$ up to its endpoints with future timelike one-sided tangents there, and the two tangents at a corner need not agree. If $s$ denotes its parameter and $T_i=dx/ds$ on the $i$th segment, an ideal clock carried along it records the increment\n\n$$\\Delta\\tau=\\frac1c\\sum_{i=1}^k\\int_{s_{i-1}}^{s_i}\\sqrt{-g(T_i,T_i)}\\,ds.$$\n\nThe increment is independent of the admissible finite partition, by additivity of the integral, and is additive across corners. On each smooth segment this is the proper-time parameter with $d\\tau=c^{-1}\\sqrt{-g(dx/ds,dx/ds)}\\,ds$. The flat-spacetime specialization is inherited from [[post-sr-ideal-clocks-and-light]]; extending that convention to the curved prescribed background is a separate adoption of this framework.\n\nWhen the parameter $s$ is measured in seconds, $x^0=ct$ is in metres, $c$ is in metres per second, and $\\tau$ is in seconds. This is a model postulate, not a theorem or a reported measurement. It does not assert that a physical clock realizes the idealization exactly, that the background solves gravitational field equations, or that the test body affects the background.",
+        "deps": [
+          "def-rpm-spacetime-observer-and-worldline",
+          "def-gr-timelike-worldline-and-proper-time",
+          "post-sr-ideal-clocks-and-light"
+        ],
+        "dependency_roles": {
+          "def-rpm-spacetime-observer-and-worldline": "formulation-prerequisite",
+          "def-gr-timelike-worldline-and-proper-time": "formulation-prerequisite",
+          "post-sr-ideal-clocks-and-light": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §1.1.1 particle worldline action and §1.2 proper time",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            },
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "physical_scope": "Adopted classical test-particle framework on a prescribed smooth time-oriented Lorentzian four-manifold; the curved-background clock reading convention extends the flat ideal-clock postulate and is not an empirical accuracy claim.",
+        "library": "physics"
+      },
+      {
+        "id": "lem-rpm-length-action-first-variation",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Timelike length action: arbitrary-parameter first variation",
+        "statement": "Let $(M,g,N)$ be a prescribed smooth time-oriented Lorentzian four-manifold, $a<b$, and $x:[a,b]\\to M$ a $C^2$ future timelike curve. Put $T=dx/ds$, $\\ell=\\sqrt{-g(T,T)}>0$, and for a constant $m>0$ and $c>0$ define the length action $S[x]=-mc\\int_a^b\\ell(s)\\,ds$. Let $H(\\epsilon,s)$ be a $C^2$ fixed-endpoint variation through future timelike curves for $\\epsilon$ near $0$, with $H(0,s)=x(s)$, $H(\\epsilon,a)=x(a)$, $H(\\epsilon,b)=x(b)$, and variation field $J=\\partial_\\epsilon H|_0$. Then\n\n$$\\delta S=\\left.\\frac{d}{d\\epsilon}S[H(\\epsilon,\\cdot)]\\right|_{0}=-mc\\int_a^b g\\!\\left(J,D_s\\!\\left(\\frac{T}{\\ell}\\right)\\right)ds.$$\n\nConsequently $x$ is stationary under all such variations exactly when $D_s(T/\\ell)=0$, equivalently $D_\\tau U=0$ for the proper-time parameter of [[thm-rpm-proper-time-parametrization]]. The length integral has the same value under every orientation-preserving $C^1$ change of variable $s=\\phi(r)$ with $\\phi:[a',b']\\to[a,b]$ a diffeomorphism and $\\phi'>0$, namely $\\int_{a'}^{b'}\\ell_r(r)\\,dr=\\int_a^b\\ell(s)\\,ds$ for $T_r(r)=\\phi'(r)T(\\phi(r))$ and $\\ell_r(r)=\\sqrt{-g(T_r(r),T_r(r))}$. As a transformation of the stated $C^2$ curve and variation class, require instead that $\\phi$ be an orientation-preserving $C^2$ diffeomorphism; then the stationarity equation is covariant, since $D_r(T_r/\\ell_r)(r)=\\phi'(r)(D_s(T/\\ell))(\\phi(r))$. This is a local variational statement; it makes no claim about global proper-time maximality, and the square-root action is not defined for a nonzero null tangent.",
+        "deps": [
+          "def-rpm-spacetime-observer-and-worldline",
+          "thm-rpm-proper-time-parametrization",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "lem-gr-connection-conditions-in-chart-components",
+          "def-covariant-derivative-along-a-curve",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "thm-integration-by-parts",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-gr-inverse-metric-and-musical-isomorphisms",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-monotone-change-of-variable-for-riemann-integrals",
+          "thm-monotonicity-of-the-integral"
+        ],
+        "dependency_roles": {
+          "def-rpm-spacetime-observer-and-worldline": "mathematical-premise",
+          "thm-rpm-proper-time-parametrization": "mathematical-premise",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative": "mathematical-premise",
+          "lem-gr-connection-conditions-in-chart-components": "mathematical-premise",
+          "def-covariant-derivative-along-a-curve": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle": "mathematical-premise",
+          "thm-integration-by-parts": "mathematical-premise",
+          "lem-smooth-bump-between-concentric-euclidean-balls": "mathematical-premise",
+          "def-gr-inverse-metric-and-musical-isomorphisms": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-monotone-change-of-variable-for-riemann-integrals": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §1.1.1 and §1.1.2",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            },
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 3 §3.3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "post-rpm-massive-test-particle-action",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Massive spinless test-particle action",
+        "statement": "Let $a,b\\in\\mathbb R$ with $a<b$, and let $x:[a,b]\\to M$ be a $C^2$ future timelike curve on the prescribed background of [[post-rpm-test-clock-and-background]]. Let $H:(-\\epsilon_0,\\epsilon_0)\\times[a,b]\\to M$ be a $C^2$ variation, for some $\\epsilon_0>0$, such that each $H(\\epsilon,\\cdot)$ is future timelike, $H(0,s)=x(s)$, and $H(\\epsilon,a)=x(a)$ and $H(\\epsilon,b)=x(b)$. For a spinless, structureless massive test body of constant primitive mass $m>0$, measured in kilograms, and the SI conversion constant $c>0$ metres per second, adopt the action on this finite segment\n\n$$S_m[x]=-mc\\int_a^b\\sqrt{-g(dx/ds,dx/ds)}\\,ds=-mc^2\\Delta\\tau,$$\n\nwhere $\\Delta\\tau:=c^{-1}\\int_a^b\\sqrt{-g(dx/ds,dx/ds)}\\,ds$ is the ideal-clock increment specified by [[post-rpm-test-clock-and-background]] on this smooth segment. The model's free trajectories are precisely the curves stationary under the fixed-endpoint $C^2$ variations just specified; this is the local variation class in [[lem-rpm-length-action-first-variation]]. When $s$ is measured in seconds, $T$ has units metres per second, and the action has units joule-seconds. This is an adopted model premise, not a consequence of the metric or clock postulate. It excludes self-gravity, radiation reaction, spin, finite-size structure, particle creation, and quantum effects; it does not assert empirical adequacy for any particular body.",
+        "deps": [
+          "post-rpm-test-clock-and-background",
+          "thm-rpm-proper-time-parametrization",
+          "lem-rpm-length-action-first-variation"
+        ],
+        "dependency_roles": {
+          "post-rpm-test-clock-and-background": "formulation-prerequisite",
+          "thm-rpm-proper-time-parametrization": "formulation-prerequisite",
+          "lem-rpm-length-action-first-variation": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §1.1.1 particle action",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            },
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 3 §3.3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "physical_scope": "Classical spinless structureless point test body of constant primitive mass m>0 on a prescribed smooth background; no self-field, radiation reaction, finite-size, quantum, or global-completeness claim.",
+        "library": "physics"
+      },
+      {
+        "id": "lem-rpm-einbein-variation-and-equivalence",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Positive-einbein variation and massive/null sector equations",
+        "statement": "Let $a<b$, let $x:[a,b]\\to M$ be a $C^2$ curve with parameter $s$ and $T=dx/ds$, fix $c>0$, let $e(s)>0$ be smooth, and let $m\\ge0$ be constant. Take independent $C^2$ fixed-endpoint variations of $x$ and smooth interior variations of $e$. For the action\n\n$$S_e[x,e]=\\frac12\\int_a^b\\!\\left(e^{-1}g(T,T)-em^2c^2\\right)ds,$$\n\nindependent fixed-endpoint variations in $x$ and interior variations in $e$ give\n\n$$g(T,T)+e^2m^2c^2=0,\\qquad D_s(T/e)=0.$$\n\nOn the future timelike massive branch $m>0$, this constraint uniquely gives $e=\\ell/(mc)$, $T/e=mU$, and the action reduces to $-mc\\int\\ell ds$; in proper-time gauge $s=\\tau$, $e=1/m$. On the nonzero future null branch $m=0$, $P:=T/e$ is nonzero future null and $D_sP=0$; if $d\\lambda=e\\,ds$, then $dx/d\\lambda=P$ and $D_\\lambda P=0$. There is no null proper-time gauge, and the scale of $P$ remains initial data. For finite intervals $[a',b']$ and $[a,b]$, an orientation-preserving $C^\\infty$ diffeomorphism $s=\\phi(r):[a',b']\\to[a,b]$ with $\\phi'(r)>0$ gives $T_r(r)=\\phi'(r)T(\\phi(r))$ and $e_r(r)=\\phi'(r)e(\\phi(r))$; the einbein action is invariant, and this transformation preserves the stated $C^2$ curve and smooth-einbein configuration class.",
+        "deps": [
+          "def-rpm-spacetime-observer-and-worldline",
+          "thm-rpm-proper-time-parametrization",
+          "lem-rpm-length-action-first-variation",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "lem-gr-connection-conditions-in-chart-components",
+          "def-covariant-derivative-along-a-curve",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "thm-integration-by-parts",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-monotonicity-of-the-integral",
+          "thm-monotone-change-of-variable-for-riemann-integrals",
+          "thm-clairaut-schwarz-mixed-partials"
+        ],
+        "dependency_roles": {
+          "def-rpm-spacetime-observer-and-worldline": "mathematical-premise",
+          "thm-rpm-proper-time-parametrization": "mathematical-premise",
+          "lem-rpm-length-action-first-variation": "mathematical-premise",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative": "mathematical-premise",
+          "lem-gr-connection-conditions-in-chart-components": "mathematical-premise",
+          "def-covariant-derivative-along-a-curve": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle": "mathematical-premise",
+          "thm-integration-by-parts": "mathematical-premise",
+          "lem-smooth-bump-between-concentric-euclidean-balls": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-monotone-change-of-variable-for-riemann-integrals": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, String Theory, complete lecture notes, §1.1.2 relativistic particle and einbein",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/string/string1.pdf"
+            },
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 3 §3.3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "post-rpm-null-test-particle-action",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Massless test-particle action and momentum scale",
+        "statement": "Let $a,b\\in\\mathbb R$ with $a<b$. A configuration on $[a,b]$ consists of a $C^2$ curve $x:[a,b]\\to M$ and a smooth positive function $e:[a,b]\\to(0,\\infty)$ on the prescribed background of [[post-rpm-test-clock-and-background]]. Vary $x$ and $e$ independently: $x$ through $C^2$ variations $H:(-\\epsilon_0,\\epsilon_0)\\times[a,b]\\to M$ for some $\\epsilon_0>0$, with $H(0,s)=x(s)$ and $H(\\epsilon,a)=x(a)$, $H(\\epsilon,b)=x(b)$, and no causal restriction on the varied curves; and $e$ through jointly smooth positive variations $e_\\epsilon:[a,b]\\to(0,\\infty)$ whose variation field $\\delta e:=\\partial_\\epsilon e_\\epsilon|_{\\epsilon=0}$ is compactly supported in $(a,b)$. Adopt a distinct massless test-particle sector with primitive action\n\n$$S_0[x,e]=\\frac12\\int_a^b e(s)^{-1}g_{x(s)}(T(s),T(s))\\,ds,\\qquad T(s)=dx/ds,$$\n\nand stationary under all such independent variations. The variational equations and their null branch follow from [[lem-rpm-einbein-variation-and-equivalence]]: the constraint is $g(T,T)=0$, and the physical branch requires $T$ to be nonzero and future-directed. The associated momentum $P=T/e$ is nonzero future null; its positive scale is primitive initial data, not $mU$ for any $m=0$ substitution. Null curves have no proper-time parameter. With $s$ in seconds, $T$ in metres per second, and $e$ in kg$^{-1}$, the integral has units joule-seconds. For finite intervals $[a',b']$ and $[a,b]$, an orientation-preserving $C^\\infty$ diffeomorphism $s=\\phi(r):[a',b']\\to[a,b]$ with $\\phi'>0$ transforms $T_r(r)=\\phi'(r)T(\\phi(r))$ and $e_r(r)=\\phi'(r)e(\\phi(r))$; this leaves the functional invariant by [[lem-rpm-einbein-variation-and-equivalence]] and preserves the stated configuration class. Neither the scale nor a clock reading is inferred from the ray image alone.\n\nThis is an adopted classical model formulation, not an empirical observation or a theorem. Its scope excludes mass generation, interactions, and quantum field effects.",
+        "deps": [
+          "post-rpm-test-clock-and-background",
+          "lem-rpm-einbein-variation-and-equivalence"
+        ],
+        "dependency_roles": {
+          "post-rpm-test-clock-and-background": "formulation-prerequisite",
+          "lem-rpm-einbein-variation-and-equivalence": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, String Theory, complete lecture notes, §1.1.2 relativistic particle and einbein",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/string/string1.pdf"
+            },
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 3 §3.3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "physical_scope": "Separate classical massless test-particle sector with nonzero future-null momentum; no proper-time parameter, no P=mU identification, and no claim of empirical realization.",
+        "library": "physics"
+      },
+      {
+        "id": "def-rpm-mechanical-momentum-and-observer-energy",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Mechanical momentum and observer energy",
+        "statement": "Use the massive and null sectors as separately adopted in [[post-rpm-massive-test-particle-action]] and [[post-rpm-null-test-particle-action]]. For a massive body of constant mass $m>0$, its **mechanical four-momentum** is $P=mU$, where $U$ is its future unit tangent with $g(U,U)=-c^2$. In the null sector, the mechanical four-momentum is the separately specified nonzero future-null vector $P$ from the einbein formulation; no null proper time or $P=mU$ is defined.\n\nAt an event, for any observer $n$ of [[def-gr-observer-and-rest-space]], define the spatial momentum and observer energy by\n\n$$q_n(P):=P+g(P,n)n\\in n^\\perp,\\qquad E_n(P):=-c\\,g(P,n).$$\n\nThe projection identity and positive-definiteness of $n^\\perp$ are supplied by [[lem-gr-observer-projection-decomposition]]. With SI units, $P$ has units kg m s$^{-1}$, $q_n$ has the same units, and $E_n$ has units joules. This definition is pointwise and does not assert conservation, positivity, or an energy interpretation for an arbitrary vector field that is not an observer.",
+        "deps": [
+          "post-rpm-massive-test-particle-action",
+          "post-rpm-null-test-particle-action",
+          "def-gr-observer-and-rest-space",
+          "lem-gr-observer-projection-decomposition"
+        ],
+        "dependency_roles": {
+          "post-rpm-massive-test-particle-action": "physical-assumption",
+          "post-rpm-null-test-particle-action": "physical-assumption",
+          "def-gr-observer-and-rest-space": "formulation-prerequisite",
+          "lem-gr-observer-projection-decomposition": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 1 four-momentum and Ch. 3 particle action",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §§1.1–1.2",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            }
+          ]
+        },
+        "physical_scope": "Definitions of point-particle momentum and observer-relative energy in the adopted massive and null test sectors; no conservation or empirical claim.",
+        "library": "physics"
+      },
+      {
+        "id": "pthm-rpm-free-massive-and-null-geodesics",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Free massive and null particle geodesics",
+        "statement": "On a prescribed smooth time-oriented Lorentzian background, stationarity for the massive action of [[post-rpm-massive-test-particle-action]] is defined on a finite segment $[a,b]$ with the stated fixed-endpoint $C^2$ variations. A stationary massive path on that segment satisfies $D_\\tau U=0$ in proper-time parameter, with $P=mU$ and $m>0$ constant. In the separately adopted null sector of [[post-rpm-null-test-particle-action]], stationarity for the einbein action is likewise defined on a finite segment, using independent fixed-endpoint $C^2$ variations of the curve and smooth interior variations of the einbein. Its nonzero future-null branch has momentum $P$ satisfying $D_\\lambda P=0$ in an affine parameter $\\lambda$ with $dx/d\\lambda=P$. These equations hold locally on the interiors of the finite segments; their ODE solutions extend uniquely to maximal solutions on open intervals, with no action integrated over an infinite interval. For any $\\tau_0\\in\\mathbb R$ and $p_0\\in M$, an initial vector $U_0\\in T_{p_0}M$ that is future timelike and satisfies $g_{p_0}(U_0,U_0)=-c^2$ determines a unique local massive solution with $x(\\tau_0)=p_0$, $U(\\tau_0)=U_0$, and a unique maximal solution on an open interval containing $\\tau_0$. For any $\\lambda_0\\in\\mathbb R$ and $p_0\\in M$, a nonzero future-null vector $P_0\\in T_{p_0}M$ determines a unique local null solution with $x(\\lambda_0)=p_0$, $P(\\lambda_0)=P_0$, and a unique maximal solution on an open interval containing $\\lambda_0$. Neither maximal interval is asserted to be all of $\\mathbb R$.\n\nMore explicitly, there are open intervals $J\\ni\\tau_0$ and $J'\\ni\\lambda_0$ such that the massive local solution is a $C^2$ curve $x:J\\to M$ with $U=dx/d\\tau$, and the null local solution is a $C^2$ curve $x:J'\\to M$ with $P=dx/d\\lambda$; their stated initial values are imposed at the indicated parameter values.",
+        "deps": [
+          "post-rpm-massive-test-particle-action",
+          "post-rpm-null-test-particle-action",
+          "def-rpm-mechanical-momentum-and-observer-energy",
+          "lem-rpm-length-action-first-variation",
+          "lem-rpm-einbein-variation-and-equivalence",
+          "thm-rpm-proper-time-parametrization",
+          "thm-gr-local-geodesics-and-exponential-map"
+        ],
+        "dependency_roles": {
+          "post-rpm-massive-test-particle-action": "physical-assumption",
+          "post-rpm-null-test-particle-action": "physical-assumption",
+          "def-rpm-mechanical-momentum-and-observer-energy": "formulation-prerequisite",
+          "lem-rpm-length-action-first-variation": "mathematical-premise",
+          "lem-rpm-einbein-variation-and-equivalence": "mathematical-premise",
+          "thm-rpm-proper-time-parametrization": "mathematical-premise",
+          "thm-gr-local-geodesics-and-exponential-map": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §§1.1.1–1.1.2",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            },
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 3 §3.3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "David Tong, String Theory, complete lecture notes, §1.1.2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/string/string1.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Conditional model deduction for free spinless test bodies on a prescribed smooth background; local initial-value solutions only, with no geodesic completeness or empirical universality claim.",
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "post-rpm-prescribed-force-law",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Prescribed constant-mass force law",
+        "statement": "For a named massive test body with constant primitive mass $m>0$ measured in kilograms, SI conversion constant $c>0$ in metres per second, and momentum $P=mU$ as defined in [[def-rpm-mechanical-momentum-and-observer-energy]], define the future unit timelike shell by\n\n$$\\Sigma_c^+:=\\{(p,V)\\in TM:V\\text{ future timelike},\\ g_p(V,V)=-c^2\\}.$$\n\nLet $\\mathcal V\\subset TM$ be an open neighborhood of $\\Sigma_c^+$ contained in the future timelike velocity cone. For a massive body trajectory $x:I\\to M$ that is $C^2$ and parameterized by proper time $\\tau$, with $I\\subseteq\\mathbb R$ a nonempty open interval, put $U=dx/d\\tau$ and require $(x(\\tau),U(\\tau))\\in\\Sigma_c^+\\subseteq\\mathcal V$ for every $\\tau\\in I$. Specify a smooth map $f:\\mathcal V\\to TM$ over the bundle projection $\\pi:TM\\to M$, meaning $\\pi(f(p,V))=p$ (equivalently, $f(p,V)\\in T_pM$), and require $g_p(V,f(p,V))=0$ for every $(p,V)\\in\\mathcal V$. One may adopt this force map and the equation\n\n$$D_\\tau P=f(x,U).$$\n\nThe orthogonality condition is part of this model's compatibility assumptions, imposed throughout $\\mathcal V$; it preserves $g(U,U)=-c^2$ for constant $m$. Since $P=mU$, this equation is equivalent to $D_\\tau U=f(x,U)/m$ on the stated domain. It is not a law selecting a force for every particle or interaction. A local IVP follows only for data in $\\mathcal V$, as in [[lem-rpm-shell-tangent-force-ivp]]. The force has SI units newtons when $\\tau$ is in seconds and $P$ has units kg m s$^{-1}$. No empirical force measurements, universal coupling, or global existence are asserted.",
+        "deps": [
+          "def-rpm-mechanical-momentum-and-observer-energy",
+          "lem-rpm-shell-tangent-force-ivp"
+        ],
+        "dependency_roles": {
+          "def-rpm-mechanical-momentum-and-observer-energy": "formulation-prerequisite",
+          "lem-rpm-shell-tangent-force-ivp": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 1 four-force",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §1.1.1 particle motion",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A selected smooth external force law for a named massive test body of constant mass on a prescribed background; orthogonality is a compatibility condition preserving the mass shell, not a universal force principle.",
+        "library": "physics"
+      },
+      {
+        "id": "pthm-rpm-killing-particle-charge",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Killing particle charge and force balance",
+        "statement": "Let $K$ be a smooth Killing field on a region of the prescribed background. For a massive test body obeying the force postulate, with constant $m>0$, $P=mU$ and $D_\\tau P=f$, the scalar $g(K,P)$ obeys\n\n$$\\frac{d}{d\\tau}g(K,P)=g(K,f).$$\n\nThus it is constant when the body is free ($f=0$). For a free null geodesic with affine tangent momentum $P$, $g(K,P)$ is constant along its affine parameter as well. If $K$ is a future unit timelike observer field along the curve, then $-c\\,g(K,P)$ has energy units and is the energy defined by that observer; for a general Killing field it is only a conserved scalar, not automatically an energy.",
+        "deps": [
+          "def-gr-killing-field",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "lem-gr-connection-conditions-in-chart-components",
+          "lem-gr-parallel-transport-and-geodesic-speed",
+          "cor-zero-derivative-implies-constant",
+          "def-rpm-mechanical-momentum-and-observer-energy",
+          "post-rpm-prescribed-force-law",
+          "post-rpm-null-test-particle-action",
+          "lem-rpm-einbein-variation-and-equivalence"
+        ],
+        "dependency_roles": {
+          "def-gr-killing-field": "mathematical-premise",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative": "mathematical-premise",
+          "lem-gr-connection-conditions-in-chart-components": "mathematical-premise",
+          "lem-gr-parallel-transport-and-geodesic-speed": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "def-rpm-mechanical-momentum-and-observer-energy": "formulation-prerequisite",
+          "post-rpm-prescribed-force-law": "physical-assumption",
+          "post-rpm-null-test-particle-action": "physical-assumption",
+          "lem-rpm-einbein-variation-and-equivalence": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 5 Killing vectors and conserved quantities",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §5.3 Killing vectors",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr4.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Conditional scalar balance for a test particle and a specified Killing field; energy interpretation only for a future unit time-translation field, with no global symmetry assumption.",
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-rpm-mass-shell-and-force-work",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Mass shell, observer energy and inertial work",
+        "statement": "For a massive body with constant $m>0$, $P=mU$, $g(U,U)=-c^2$, and the force law of [[post-rpm-prescribed-force-law]],\n\n$$g(P,P)=-m^2c^2.$$\n\nFor every observer $n$ at the event, the energy and spatial momentum defined in [[def-rpm-mechanical-momentum-and-observer-energy]] satisfy\n\n$$E_n(P)^2=m^2c^4+c^2g(q_n(P),q_n(P)),\\qquad E_n(P)>0.$$\n\nFor a nonzero future-null $P$, $E_n(P)=c\\sqrt{g(q_n(P),q_n(P))}$. In a flat inertial frame $(o;e_0,e_1,e_2,e_3)$ with $n=e_0$ and inertial chart $x^0=ct$ from [[def-inertial-frame-and-inertial-chart]], let $E=E_n(P)$, let $\\mathbf p$ be the spatial coordinates of $q_n(P)$ in $(e_1,e_2,e_3)$, set $\\mathbf v=d\\mathbf x/dt$, and define $\\mathbf F=d\\mathbf p/dt$. Then $dE/dt=\\mathbf F\\cdot\\mathbf v$ under the constant-mass force hypotheses. If $m(\\tau)>0$ is $C^1$, $U$ is $C^1$ with $g(U,U)=-c^2$, and $P=m(\\tau)U$, then the kinematic identity $g(U,D_\\tau P)=-c^2\\dot m$ holds; it specifies no variable-mass law.",
+        "deps": [
+          "post-rpm-prescribed-force-law",
+          "lem-rpm-shell-tangent-force-ivp",
+          "def-rpm-mechanical-momentum-and-observer-energy",
+          "def-gr-observer-and-rest-space",
+          "lem-gr-observer-projection-decomposition",
+          "lem-gr-observer-pairing-with-future-causal-vectors",
+          "lem-sr-four-force-and-work-energy-identities",
+          "lem-gr-parallel-transport-and-geodesic-speed",
+          "def-inertial-frame-and-inertial-chart"
+        ],
+        "dependency_roles": {
+          "post-rpm-prescribed-force-law": "physical-assumption",
+          "lem-rpm-shell-tangent-force-ivp": "mathematical-premise",
+          "def-rpm-mechanical-momentum-and-observer-energy": "formulation-prerequisite",
+          "def-gr-observer-and-rest-space": "mathematical-premise",
+          "lem-gr-observer-projection-decomposition": "mathematical-premise",
+          "lem-gr-observer-pairing-with-future-causal-vectors": "mathematical-premise",
+          "lem-sr-four-force-and-work-energy-identities": "mathematical-premise",
+          "lem-gr-parallel-transport-and-geodesic-speed": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 1 four-momentum and Ch. 3 covariant derivative",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §1.1.1 and observer-frame discussion",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Conditional constant-mass mass-shell and observer-decomposition identities; coordinate work relation only in flat inertial charts; variable-mass formula is kinematic only.",
+        "library": "physics",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 414,
+    "id": "rpm-geometry-actions-examples",
+    "kind": "B",
+    "category": "relativistic-particle-mechanics",
+    "library": "physics",
+    "title": "Particle spacetime, observers and worldlines — Examples",
+    "companion": "rpm-geometry-actions",
+    "requires": [
+      "rpm-geometry-actions"
+    ],
+    "items": [
+      {
+        "id": "ex-rpm-incomplete",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Flat local geometry without completeness",
+        "statement": "For $L,\\ell>0$, consider the flat Lorentzian cylinder $M_L=(\\mathbb R/L\\mathbb Z)\\times\\mathbb R^3$ and the open slab $S_\\ell=(0,\\ell)\\times\\mathbb R^3$, each with metric $-d\\theta^2+\\sum_{i=1}^3d(x^i)^2$ and future direction $\\partial_\\theta$, where $d\\theta$ is induced by the covering coordinate on $\\mathbb R/L\\mathbb Z$. The cylinder curve $\\gamma:\\mathbb R\\to M_L$, $\\gamma(s)=([s]_L,0,0,0)$, is a closed future timelike geodesic. The slab contains a timelike geodesic defined on a finite affine interval that cannot be extended inside the slab. Thus a locally Minkowski metric alone supplies neither chronology nor geodesic completeness.",
+        "deps": [
+          "def-rpm-spacetime-observer-and-worldline"
+        ],
+        "dependency_roles": {
+          "def-rpm-spacetime-observer-and-worldline": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 3 geodesics",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §§1.2–1.3",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Explicit Lorentzian model manifolds illustrating that local flatness does not imply global causal regularity or geodesic completeness; these are mathematical countermodels, not claims about nature.",
+        "generation": {
+          "role": "example"
+        },
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-rpm-clock-reunion",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Ideal-clock readings for a flat reunion path",
+        "statement": "Choose an inertial frame $(o;e_0,e_1,e_2,e_3)$ and its inertial chart $\\chi$ from [[def-inertial-frame-and-inertial-chart]], with coordinates $(x^0,x^1,x^2,x^3)=(ct,x,y,z)$. Let $T>0$ seconds and $0<v<c$. A lab clock has chart path $\\chi\\circ x_L(t)=(ct,0,0,0)$ for $0\\le t\\le2T$. A traveler has chart path $\\chi\\circ x_R(t)=(ct,vt,0,0)$ on $[0,T]$ and $\\chi\\circ x_R(t)=(ct,v(2T-t),0,0)$ on $[T,2T]$. The traveler reverses direction at $t=T$ and reunites with the lab at $t=2T$.",
+        "deps": [
+          "post-rpm-test-clock-and-background",
+          "thm-rpm-proper-time-parametrization",
+          "def-gr-timelike-worldline-and-proper-time",
+          "def-inertial-frame-and-inertial-chart"
+        ],
+        "dependency_roles": {
+          "post-rpm-test-clock-and-background": "physical-assumption",
+          "thm-rpm-proper-time-parametrization": "mathematical-premise",
+          "def-gr-timelike-worldline-and-proper-time": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 1 proper time",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §1.2 proper time",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Conditional ideal-clock calculation for two specified piecewise-inertial flat worldlines that reunite; it is a model prediction, not an experimental report.",
+        "generation": {
+          "role": "example"
+        },
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-rpm-null-scale",
+        "kind": "example",
+        "domain": "physics",
+        "title": "One null ray with distinct momentum scales",
+        "statement": "In a prescribed background, let $I\\subseteq\\mathbb R$ be a nonempty open interval and let $x:I\\to M$ be an affinely parametrized nonzero future-null free geodesic with momentum $P=dx/d\\lambda$. For any constant $a>0$, on the rescaled open interval $I/a:=\\{\\lambda/a:\\lambda\\in I\\}$ the same ray image admits momentum $P_a=aP$ using the affine parameter $\\lambda_a=\\lambda/a$.",
+        "deps": [
+          "pthm-rpm-free-massive-and-null-geodesics",
+          "def-rpm-mechanical-momentum-and-observer-energy"
+        ],
+        "dependency_roles": {
+          "pthm-rpm-free-massive-and-null-geodesics": "physical-result",
+          "def-rpm-mechanical-momentum-and-observer-energy": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, String Theory, complete lecture notes, §1.1.2 einbein and reparametrization",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/string/string1.pdf"
+            },
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 3 null geodesics",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Algebraic illustration of affine-parameter and momentum-scale freedom for a null test-particle ray; no scale is inferred from the unparameterized image.",
+        "generation": {
+          "role": "example"
+        },
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-rpm-straight",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Straight timelike free particle",
+        "statement": "In the affine Minkowski model $(A,V,\\eta,C^+)$, let $p\\in A$, let $U_0\\in V$ be future timelike with $\\eta(U_0,U_0)=-c^2$, and let $m>0$. The curve $x:\\mathbb R\\to A$, $x(\\tau)=p+\\tau U_0$, is a straight free massive trajectory.",
+        "deps": [
+          "pthm-rpm-free-massive-and-null-geodesics",
+          "def-rpm-mechanical-momentum-and-observer-energy",
+          "def-sr-affine-minkowski-model"
+        ],
+        "dependency_roles": {
+          "pthm-rpm-free-massive-and-null-geodesics": "physical-result",
+          "def-rpm-mechanical-momentum-and-observer-energy": "formulation-prerequisite",
+          "def-sr-affine-minkowski-model": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 1 four-velocity and Ch. 3 geodesics",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §1.1 particle motion",
+              "url": "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Direct flat-space solution of the adopted free massive test-particle equation; the displayed trajectory and conserved quantities are model deductions, not reported observations.",
+        "generation": {
+          "role": "example"
+        },
+        "library": "physics",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

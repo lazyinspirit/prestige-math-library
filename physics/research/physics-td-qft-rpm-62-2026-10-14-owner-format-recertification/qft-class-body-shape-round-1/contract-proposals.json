@@ -1,0 +1,953 @@
+{
+  "version": 1,
+  "round": 1,
+  "proposals": [
+    {
+      "target": "research/physics-td-qft-rpm-62-2026-10-14-batch-59.proof-contracts.json",
+      "contracts": {
+        "ex-qft-quartic-ground-energy-bound": {
+          "citations": [
+            {
+              "fact": "A1",
+              "source": "def-countable-choice",
+              "source_section": "Definition",
+              "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+              "uses": [
+                "1.1",
+                "1.2",
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F1",
+              "source": "def-qft-regulated-polynomial-hamiltonian",
+              "source_section": "Definition",
+              "quote": "Assume Countable Choice ([[def-countable-choice]]). A **finite-mode regulator** in this item is a fixed\nfinite nonempty label set $J$ with $N:=|J|\\ge1$, a fixed enumeration of $J$ by\n$\\{1,\\ldots,N\\}$, and the real coordinate vector\n$q=(q_1,\\ldots,q_N)\\in\\mathbb R^N$. The labels may name sites of a finite\nlattice or finitely many modes; their geometry enters only through the chosen\npolynomial below. No limit in $N$ is part of this definition.\n\nChoose real coefficients $a_1,\\ldots,a_N>0$, constants $c>0$ and $C_0\\ge0$,\nand a real polynomial $V\\in\\mathbb R[q_1,\\ldots,q_N]$ such that\n$$V(q)\\ge c|q|^2-C_0\\qquad(q\\in\\mathbb R^N).$$\nLet $H_N:=L^2(\\mathbb R^N,dq;\\mathbb C)$, with vectors identified up to almost\neverywhere equality and inner product\n$$\\langle u,v\\rangle:=\\int_{\\mathbb R^N}u(q)\\overline{v(q)}\\,dq,$$\nlinear in the first variable. Under Countable Choice this is a complex Hilbert\nspace by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Let\n$D_0:=C_c^\\infty(\\mathbb R^N;\\mathbb C)$, the smooth compactly supported\ncomplex-valued functions. The associated **polynomial differential expression**\nis the map\n$$h_0:D_0\\to H_N,\\qquad h_0u:=-\\sum_{j=1}^Na_j\\partial_j^2u+Vu.$$\nIt is well defined because each derivative of $u$ and the product $Vu$ are\nsmooth and compactly supported. Set $W:=V+C_0+1$, so\n$W(q)\\ge1+c|q|^2$. This definition specifies finite mathematical data and a\ndifferential expression; it does not choose a self-adjoint operator domain or\nassert a continuum or infinite-volume limit.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F2",
+              "source": "lem-qft-hermite-oscillator-research-supplier",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice. Let $N\\ge1$, $a_1,\\ldots,a_N>0$ and $c>0$. Let\n$Q_{\\mathrm{osc}}$ be the completion of $C_c^\\infty(\\mathbb R^N;\\mathbb C)$\nfor the form inner product\n$$a_{\\mathrm{osc}}(u,v):=\\sum_{j=1}^N a_j\\int (\\partial_j u)\\overline{\\partial_jv} +\\int (c|q|^2+2)u\\overline v.$$\nThis is the space $Q$ of\n[[lem-qft-coercive-polynomial-form-domain]] for $V(q)=c|q|^2$ and $C_0=0$.\nFor $\\mathbf n=(n_1,\\ldots,n_N)\\in\\mathbb N_0^N$, there is a smooth product\nHermite function $\\psi_{\\mathbf n}$ such that\n$$\\langle\\psi_{\\mathbf n},\\psi_{\\mathbf m}\\rangle_{L^2}=\\delta_{\\mathbf n\\mathbf m},\\qquad \\overline{\\operatorname{span}}\\{\\psi_{\\mathbf n}\\}=L^2(\\mathbb R^N),$$\nand\n$$\\left(-\\sum_{j=1}^Na_j\\partial_j^2+c|q|^2\\right)\\psi_{\\mathbf n} =\\epsilon_{\\mathbf n}\\psi_{\\mathbf n},\\qquad \\epsilon_{\\mathbf n}:=\\sum_{j=1}^N(2n_j+1)\\sqrt{a_jc}.$$\nFor the ground multi-index $\\mathbf0$, the smooth representative is\n$$\\psi_{\\mathbf0}(q)=\\prod_{j=1}^N(b_j/\\pi)^{1/4}e^{-b_jq_j^2/2}, \\qquad b_j:=\\sqrt{c/a_j}.$$\nEach $\\psi_{\\mathbf n}$ belongs to $Q_{\\mathrm{osc}}$, and every $u\\in\nQ_{\\mathrm{osc}}$ satisfies the exact form expansion\n$$\\sum_{j=1}^N a_j\\|\\partial_j u\\|_2^2+ c\\||q|u\\|_2^2 =\\sum_{\\mathbf n\\in\\mathbb N_0^N}\\epsilon_{\\mathbf n} |\\langle u,\\psi_{\\mathbf n}\\rangle|^2.$$\nAll parameters are positive real mathematical parameters; this lemma makes no\nphysical identification.",
+              "uses": [
+                "1.2",
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F3",
+              "source": "lem-qft-regulated-ground-variational-bound",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice and use $Q$, $q_h$, and the operator $h$ from\n[[thm-qft-self-adjoint-regulated-interaction]]. Let $\\lambda_1$ be the least\neigenvalue of $h$. Then\n$$\\inf\\{q_h(u):u\\in Q,\\ \\|u\\|_2=1\\}=\\lambda_1.$$\nThe infimum is attained by every normalized vector in the lowest eigenspace;\nno simplicity or nondegeneracy is assumed.",
+              "uses": [
+                "1.1",
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F4",
+              "source": "lem-qft-coercive-polynomial-form-domain",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice. Use the finite data and notation of\n[[def-qft-regulated-polynomial-hamiltonian]]: $N\\ge1$,\n$H_N=L^2(\\mathbb R^N,dq;\\mathbb C)$, $D_0=C_c^\\infty(\\mathbb R^N;\\mathbb C)$,\nand $W=V+C_0+1\\ge1+c|q|^2$. For $u,v\\in D_0$ define\n$$a(u,v):=\\sum_{j=1}^N a_j\\int_{\\mathbb R^N}(\\partial_j u)\\overline{\\partial_jv}\\,dq+\\int_{\\mathbb R^N}(W+1)u\\overline v\\,dq,$$\nand $\\|u\\|_Q:=a(u,u)^{1/2}$. Let $Q$ be the completion of this inner-product\nspace, constructed as equivalence classes of $\\|\\cdot\\|_Q$-Cauchy sequences.\nThen $Q$ is a complex Hilbert space and the map sending a Cauchy class to its\n$L^2$ limit is a continuous injective linear map $Q\\hookrightarrow H_N$ with\ndense image. Each $u\\in Q$ has weak derivatives $\\partial_j u\\in L^2$ and a\nweighted function $\\sqrt{W+1}\\,u\\in L^2$, and\n$$\\|u\\|_Q^2=\\sum_{j=1}^N a_j\\|\\partial_j u\\|_2^2+\\|\\sqrt{W+1}\\,u\\|_2^2.$$\nHere $g_j=\\partial_j u$ means explicitly that\n$\\int u\\,\\overline{\\partial_j\\varphi}=-\\int g_j\\overline\\varphi$ for every\n$\\varphi\\in D_0$.",
+              "uses": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "fact": "F5",
+              "source": "thm-dominated-convergence",
+              "source_section": "Statement",
+              "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+              "uses": [
+                "2.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "D1",
+              "claim": "Write $a_\\lambda=q_\\lambda+2\\|\\cdot\\|_2^2$ for the shifted form inner product of the $\\lambda$ completion. On $C_c^\\infty$, $V_\\lambda\\ge V_0$ gives $a_\\lambda(u,u)\\ge a_0(u,u)$, so a $Q_\\lambda$-Cauchy sequence is $Q_0$-Cauchy and the identity extends continuously to $Q_\\lambda\\to Q_0$ with the same $L^2$ representative. The unshifted forms $q_\\lambda=a_\\lambda-2\\|\\cdot\\|_2^2$ and $q_0=a_0-2\\|\\cdot\\|_2^2$ are continuous on their respective form spaces. For any $u\\in Q_\\lambda$, approximate it in $Q_\\lambda$ by $u_r\\in C_c^\\infty$; then $q_\\lambda(u_r)\\ge q_0(u_r)$ for every $r$, and continuity of both forms gives $q_\\lambda(u)\\ge q_0(u)$ in the limit. For normalized $u\\in Q_\\lambda$, [F3] then gives $q_\\lambda(u)\\ge q_0(u)\\ge E_g(0)$. Taking the infimum yields $E_g(\\lambda)\\ge E_g(0)$.",
+              "step": "1.1",
+              "inputs": [
+                "A1",
+                "F1",
+                "F3",
+                "F4",
+                "algebra"
+              ]
+            },
+            {
+              "id": "D2",
+              "claim": "The Gaussian $\\phi_b$ from [F2] and its derivative are polynomial times a Gaussian. For cutoffs $\\chi_R$ as in the cutoff construction of\n[[lem-qft-hermite-oscillator-research-supplier]], $\\chi_R\\phi_b\\in C_c^\\infty$\nconverges to $\\phi_b$ in the $\\lambda$ form norm: the derivative error is\n$(1-\\chi_R)\\phi_b'-(\\chi_R')\\phi_b$, whose first term has vanishing Gaussian\ntail and whose second has norm at most $C\\|\\phi_b\\|_2/R$; the weighted error\nhas squared magnitude bounded by $(m^2q^2/2+\\lambda q^4+2)|\\phi_b|^2$, an\nintegrable polynomial-Gaussian tail. Thus $\\phi_b\\in Q_\\lambda$.",
+              "step": "1.2",
+              "inputs": [
+                "A1",
+                "F2",
+                "F4",
+                "algebra"
+              ]
+            },
+            {
+              "id": "D3",
+              "claim": "Let $\\mathbb E_b[g]:=\\int g(q)\\sqrt{b/\\pi}e^{-bq^2}\\,dq$. The Hermite\nground function in [F2] is normalized, so $\\mathbb E_b[1]=1$. On any compact\ninterval of positive $b$ values, the derivatives of the integrands through\norder two are bounded by a constant times $(1+|q|^4)e^{-b_*q^2}$ for some\n$b_*>0$, which is integrable; [F5] therefore permits differentiation under the\nintegral. Differentiating $\\mathbb E_b[1]=1$ gives\n$$0=\\mathbb E_b\\!\\left[\\frac1{2b}-q^2\\right],\\qquad \\mathbb E_b[q^2]=\\frac1{2b}.$$\nDifferentiating the second identity and using\n$\\partial_b(\\sqrt{b/\\pi}e^{-bq^2})=(\\frac1{2b}-q^2)\\sqrt{b/\\pi}e^{-bq^2}$ gives\n$$-\\frac1{2b^2}=\\mathbb E_b\\!\\left[q^2\\left(\\frac1{2b}-q^2\\right)\\right] =\\frac1{4b^2}-\\mathbb E_b[q^4],$$\nso $\\mathbb E_b[q^4]=3/(4b^2)$. Since $\\phi_b'=-bq\\phi_b$, this gives\n$\\|\\phi_b'\\|_2^2=b/2$. Hence\n$$\\|\\phi_b\\|_2^2=1,\\quad \\|\\phi_b'\\|_2^2=b/2,\\quad \\int q^2|\\phi_b|^2=1/(2b),\\quad\\int q^4|\\phi_b|^2=3/(4b^2).$$\nThe unperturbed form value\nis $ab/2+m^2/(4b)=m\\sqrt{a/2}=E_g(0)$, using $b=m/\\sqrt{2a}$, and the quartic\ncontribution is $3\\lambda/(4b^2)=3a\\lambda/(2m^2)$. The variational bound\n[F3] applied to this normalized vector yields\n$$E_g(\\lambda)\\le E_g(0)+\\frac{3a\\lambda}{2m^2}.$$\nCombining with step 1.1 proves both inequalities, including $\\lambda=0$.",
+              "step": "2.1",
+              "inputs": [
+                "A1",
+                "F2",
+                "F3",
+                "F5",
+                "step 1.1",
+                "step 1.2",
+                "algebra"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "not_applicable",
+              "reason": "This item has no empty-space or empty-coordinate-set case."
+            },
+            {
+              "case": "zero",
+              "status": "checked",
+              "evidence": "Step 2.1 gives the upper bound with lambda=0 exactly, and step 1.1 supplies the lower bound."
+            },
+            {
+              "case": "one",
+              "status": "checked",
+              "evidence": "Example is the explicitly declared N=1 one-mode case."
+            },
+            {
+              "case": "degenerate",
+              "status": "not_applicable",
+              "reason": "The statement only names the least eigenvalue; the proof uses a trial vector and makes no claim about ground-space dimension."
+            },
+            {
+              "case": "endpoints",
+              "status": "not_applicable",
+              "reason": "The statement contains no interval or endpoint condition."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "checked",
+              "evidence": "Step 1.1 applies the variational theorem under Countable Choice."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The statement contains no biconditional."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The statement contains no biconditional."
+            }
+          ],
+          "finite_checks": [
+            {
+              "check": "With b=m/sqrt(2a), ab/2 + m^2/(4b) = m sqrt(a/2), and 3 lambda/(4b^2) = 3a lambda/(2m^2).",
+              "result": "Both equalities follow by substitution of b^2=m^2/(2a).",
+              "verifies": "The exact Gaussian trial-state arithmetic in step 2.2."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "research/physics-td-qft-rpm-62-2026-10-14-batch-37.proof-contracts.json",
+      "contracts": {
+        "ex-qftmath-mode-domain": {
+          "citations": [
+            {
+              "fact": "F1",
+              "source": "lem-qft-fock-ccr-car",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a separable complex Hilbert space with the second-variable-linear convention of [[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F2",
+              "source": "lem-qft-fock-ccr-car",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a separable complex Hilbert space with the second-variable-linear convention of [[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm",
+              "uses": [
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F3",
+              "source": "lem-qft-second-quantized-spectrum",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice [[def-countable-choice]]. Let $(X,\\mathcal A,\\mu)$ be a sigma-finite measure space and let $\\boldsymbol\\omega=(\\omega_1,\\ldots,\\omega_d):X\\to\\mathbb R^d$ be a finite-valued measurable map, where",
+              "uses": [
+                "1.2"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "step-1-1",
+              "claim": "For bosons, the ladder formulas [F1] give $a(e)a^\\dagger(e)|n\\rangle=(n+1)|n\\rangle$ and $a^\\dagger(e)a(e)|n\\rangle=n|n\\rangle$ for every $n\\ge0$, where the second identity at $n=0$ uses $a(e)\\Omega=0$. Their difference is $|n\\rangle$; linear extension proves $[a(e),a^\\dagger(e)]=I$ on the finite-particle core. For fermions, $c(e)\\Omega=0$, $c^\\dagger(e)\\Omega=|1\\rangle$, $c(e)|1\\rangle=\\Omega$, and $c^\\dagger(e)|1\\rangle=0$. Hence $\\{c(e),c^\\dagger(e)\\}$ fixes both basis vectors, while $c(e)^2=(c^\\dagger(e))^2=0$; these identities hold on the whole two-dimensional fermionic Fock space.",
+              "step": "1.1",
+              "inputs": [
+                "F1",
+                "given",
+                "algebra"
+              ]
+            },
+            {
+              "id": "step-1-2",
+              "claim": "The squared norm of $\\Psi$ is $\\sum_{n\\ge0}(n+1)^{-3}$, which is finite: on each block $2^k\\le n+1<2^{k+1}$ there are $2^k$ terms, each at most $2^{-3k}$, so the block sum is at most $2^{-2k}$ and the geometric series of these bounds converges. By [F3], $\\Psi\\in D(N)$ would require $\\sum_{n\\ge1}n^2/(n+1)^3<\\infty$. Since $n+1\\le2n$ for $n\\ge1$, $n^2/(n+1)^3\\ge1/(8n)$. The harmonic series diverges because each block $2^k\\le n<2^{k+1}$ has $2^k$ terms at least $2^{-(k+1)}$, so every block sum is at least $1/2$. Therefore $\\Psi\\notin D(N)$.",
+              "step": "1.2",
+              "inputs": [
+                "F3",
+                "given",
+                "algebra"
+              ]
+            },
+            {
+              "id": "step-2-1",
+              "claim": "By [F2], the annihilation-domain sum for $\\Psi$ is $\\sum_{n\\ge1}n/(n+1)^3\\le\\sum_{n\\ge1}n^{-2}$, and the creation-domain sum is $\\sum_{n\\ge0}(n+1)^{-2}$. Each is finite: the $k$th dyadic block of $\\sum_{n\\ge1}n^{-2}$ has at most $2^k$ terms each at most $2^{-2k}$, so its block sum is at most $2^{-k}$; the shifted series has the same convergence. Thus $\\Psi\\in D(a(e))\\cap D(a^\\dagger(e))$ while step 1.2 proves $\\Psi\\notin D(N)$. This is a domain distinction for the stated operators, not a physical or empirical claim.",
+              "step": "2.1",
+              "inputs": [
+                "F2",
+                "step 1.2",
+                "algebra"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "checked",
+              "evidence": "step 1.1 includes the vacuum coefficient at n=0."
+            },
+            {
+              "case": "zero",
+              "status": "checked",
+              "evidence": "step 1.1 computes the zero number eigenvalue on the vacuum."
+            },
+            {
+              "case": "one",
+              "status": "checked",
+              "evidence": "step 1.1 verifies the ladder identities on the one-particle basis vector."
+            },
+            {
+              "case": "degenerate",
+              "status": "checked",
+              "evidence": "step 1.2 checks the exact coefficient sequence including its finite initial term."
+            },
+            {
+              "case": "endpoints",
+              "status": "checked",
+              "evidence": "step 2.1 includes n=0 in the creation-domain sum and starts annihilation at n=1."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "not_applicable",
+              "reason": "This boundary is outside the statement."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "This boundary is outside the statement."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "This boundary is outside the statement."
+            }
+          ],
+          "risk_review": {
+            "status": "complete",
+            "reviewer": "beta-batch-37-author-self-check",
+            "notes": "Mapped every numbered step to its final input tags and every labeled fact link to an exact supplier section excerpt. Checked boundary behavior against the item statement and proof. This is authoring evidence, not independent approval."
+          }
+        }
+      }
+    },
+    {
+      "target": "research/physics-td-qft-rpm-62-2026-10-14-batch-44.proof-contracts.json",
+      "contracts": {
+        "cex-qft-qed-coulomb-potential-locality": {
+          "citations": [
+            {
+              "fact": "A1",
+              "source": "def-countable-choice",
+              "source_section": "Definition",
+              "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F1",
+              "source": "lem-qft-photon-smeared-potential",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice. Let $j=(j_1,j_2,j_3)\\in C_c^\\infty(\\mathbb R^4;\\mathbb R^3)$ and use $\\mathcal H_T$ and $P_T$ from [[def-qft-photon-transverse-space]]. For $\\omega=|\\mathbf k|$ and $\\mathbf k\\ne0$, define\n$$g_j(\\mathbf k)=\\frac{1}{(2\\pi)^{3/2}(2\\omega)^{1/2}}\\, P_T(\\mathbf k)\\int_{\\mathbb R^4}j(x)e^{i\\omega x^0-i\\mathbf k\\cdot\\mathbf x}\\,d^4x.$$\nThen $g_j\\in\\mathcal H_T$. On the finite-particle domain $\\mathcal D_{\\rm fin}$ of the bosonic Fock space $\\mathcal F_s(\\mathcal H_T)$, the smeared transverse potential is\n$$A_T(j)=a(g_j)+a^\\dagger(g_j).$$\nIts matrix elements are continuous in the test-function topology; it is an operator-valued distribution and does not assign a pointwise operator to $A_i(x)$. With $E_i=-\\partial_0A_i$, the equal-time canonical commutator is the distribution\n$$[A_i(0,\\mathbf x),E_j(0,\\mathbf y)] =-i\\,P_{T,ij}(-i\\nabla_{\\mathbf x})\\delta^3(\\mathbf x-\\mathbf y).$$",
+              "uses": [
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F2",
+              "source": "lem-qft-photon-transverse-projector-kernel",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice. Let $G(\\mathbf x)=1/(4\\pi|\\mathbf x|)$ on $\\mathbb R^3\\setminus\\{0\\}$, interpreted as its locally integrable distribution, and use the Fourier convention\n$$\\widehat f(\\mathbf k)=\\int_{\\mathbb R^3}e^{-i\\mathbf k\\cdot\\mathbf x}f(\\mathbf x)\\,d^3\\mathbf x,\\qquad f(\\mathbf x)=(2\\pi)^{-3}\\int_{\\mathbb R^3}e^{i\\mathbf k\\cdot\\mathbf x}\\widehat f(\\mathbf k)\\,d^3\\mathbf k.$$\nThen $\\mathcal F^{-1}(|\\mathbf k|^{-2})=G$ distributionally. Consequently, for $P_{T,ij}(\\mathbf k)=\\delta_{ij}-k_i k_j/|\\mathbf k|^2$,\n$$P_{T,ij}(-i\\nabla)\\delta^3 =\\delta_{ij}\\delta^3+\\partial_i\\partial_jG.$$\nFor $\\mathbf x\\ne0$,\n$$\\partial_i\\partial_jG(\\mathbf x) =-\\frac{\\delta_{ij}}{4\\pi|\\mathbf x|^3} +\\frac{3x_ix_j}{4\\pi|\\mathbf x|^5}.$$\nThus the equal-time transverse-potential commutator of [[lem-qft-photon-smeared-potential]] has this off-diagonal Newtonian kernel (with its stated factor $-i$). The identity is distributional at the origin; the displayed classical derivative formula is only asserted away from it.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F3",
+              "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+              "source_section": "Statement",
+              "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+              "uses": [
+                "2.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "step-1-1",
+              "claim": "Choose a nonzero point $z_0$ on the $x_1$ axis. By [F2], the $11$ commutator kernel is continuous and strictly positive on a sufficiently small neighborhood of $z_0$.",
+              "step": "1.1",
+              "inputs": [
+                "A1",
+                "F2",
+                "given"
+              ]
+            },
+            {
+              "id": "step-1-2",
+              "claim": "Choose nonnegative smooth tests $f,g$ from [F3], supported in small disjoint balls centered at points whose difference is $z_0$, with the difference of their supports contained in that neighborhood. The delta term in [F1] pairs to zero because the supports are disjoint, while the integral against the strictly positive off-diagonal kernel from step 1.1 is positive. Hence the commutator pairing is nonzero for disjoint supports, so its kernel is not supported on the diagonal. The potential is nonlocal; the separate field-strength locality result is unaffected.",
+              "step": "2.1",
+              "inputs": [
+                "F1",
+                "F3",
+                "step 1.1",
+                "given"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "not_applicable",
+              "reason": "The statement does not assert a case about an empty set or empty region; its objects and quantifiers are stated explicitly."
+            },
+            {
+              "case": "zero",
+              "status": "not_applicable",
+              "reason": "The counterexample is explicitly off the diagonal, where the kernel is finite."
+            },
+            {
+              "case": "one",
+              "status": "not_applicable",
+              "reason": "No one-element classification is asserted in this item."
+            },
+            {
+              "case": "degenerate",
+              "status": "checked",
+              "evidence": "steps 1.1 and 2.1 exclude the diagonal and establish a positive off-diagonal kernel pairing."
+            },
+            {
+              "case": "endpoints",
+              "status": "not_applicable",
+              "reason": "No interval endpoint or boundary-value case is asserted in this item."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "checked",
+              "evidence": "Construction explicitly carries Countable Choice; no family is selected silently in the local argument."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The item does not assert an if-and-only-if statement, so there is no separate forward direction."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The item does not assert an if-and-only-if statement, so there is no separate reverse direction."
+            }
+          ]
+        },
+        "cex-qft-qed-torus-charge": {
+          "citations": [
+            {
+              "fact": "A1",
+              "source": "def-countable-choice",
+              "source_section": "Definition",
+              "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+              "uses": [
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F1",
+              "source": "lem-qft-qed-coulomb-constraint",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice and the conventions of [[def-qft-qed-gauge-data]]. On the periodic box $T_L^3=(\\mathbb R/L\\mathbb Z)^3$, take smooth real periodic charge and current densities $\\rho,\\mathbf J$, smooth periodic $\\mathbf A,\\dot{\\mathbf A},\\phi$, and $L,\\epsilon_0,\\mu_0>0$. Define the formal classical density\n$$\\mathcal L=\\frac{\\epsilon_0}{2}|\\dot{\\mathbf A}+\\nabla\\phi|^2-\\frac1{2\\mu_0}|\\nabla\\times\\mathbf A|^2-\\rho\\phi+\\mathbf J\\cdot\\mathbf A.$$\nThe canonical momenta are $\\boldsymbol\\pi_A=\\epsilon_0(\\dot{\\mathbf A}+\\nabla\\phi)$ and $\\pi_\\phi=0$. Periodic integration by parts gives\n$$H=\\int_{T_L^3}\\left(\\frac{|\\boldsymbol\\pi_A|^2}{2\\epsilon_0}+\\frac{|\\nabla\\times\\mathbf A|^2}{2\\mu_0} +\\phi(\\nabla\\cdot\\boldsymbol\\pi_A+\\rho)-\\mathbf J\\cdot\\mathbf A\\right)d^3x.$$\nVariation of the multiplier $\\phi$ imposes $\\nabla\\cdot\\boldsymbol\\pi_A+\\rho=0$. In Coulomb gauge $\\nabla\\cdot\\mathbf A=0$, this becomes $-\\Delta\\phi=\\rho/\\epsilon_0$. Such a smooth periodic solution exists only if $\\int_{T_L^3}\\rho\\,d^3x=0$. If this neutrality condition holds, there is a unique zero-mean solution, with Fourier coefficients\n$$\\widehat\\phi_0=0,\\qquad \\widehat\\phi_k=\\frac{\\widehat\\rho_k}{\\epsilon_0|2\\pi k/L|^2}\\quad(k\\ne0),\\qquad \\widehat\\rho_k=L^{-3}\\int_{[0,L]^3}\\rho(x)e^{-2\\pi i k\\cdot x/L}\\,d^3x.$$\nIt is smooth and satisfies\n$$\\frac{\\epsilon_0}{2}\\int|\\nabla\\phi|^2\\,d^3x =\\frac12\\int\\rho\\phi\\,d^3x =\\frac{L^3}{2\\epsilon_0}\\sum_{k\\ne0}\\frac{|\\widehat\\rho_k|^2}{|2\\pi k/L|^2}\\ge0.$$\nThis is a classical conditional solver for smooth periodic neutral data; it makes no claim about quantum density products or nonperiodic boundary conditions.",
+              "uses": [
+                "1.1",
+                "2.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "step-1-1",
+              "claim": "Integrating [F1] over $[0,L]^3$ gives\n$$\\int_{[0,L]^3}-\\Delta\\phi\\,d^3x =-\\sum_{j=1}^3\\int_0^{L}\\!\\int_{[0,L]^2}\\partial_j^2\\phi\\,d^2x_{\\widehat j}\\,dx_j=0,$$\nbecause for each $j$ the integral in $x_j$ is the difference of the periodic values of $\\partial_j\\phi$ at $L$ and $0$.",
+              "step": "1.1",
+              "inputs": [
+                "F1",
+                "given",
+                "algebra"
+              ]
+            },
+            {
+              "id": "step-1-2",
+              "claim": "The right side of the same integrated equation is\n$$\\epsilon_0^{-1}\\int_{[0,L]^3}\\rho_0\\,d^3x=\\epsilon_0^{-1}\\rho_0L^3\\ne0,$$\ncontradicting step 1.1. Thus no smooth periodic solution exists for this nonzero total charge; the same integration proves neutrality is necessary for any periodic solution.",
+              "step": "2.1",
+              "inputs": [
+                "A1",
+                "F1",
+                "step 1.1",
+                "given"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "not_applicable",
+              "reason": "The statement does not assert a case about an empty set or empty region; its objects and quantifiers are stated explicitly."
+            },
+            {
+              "case": "zero",
+              "status": "not_applicable",
+              "reason": "This counterexample assumes rho_0 is nonzero; the zero-charge case belongs to the solver."
+            },
+            {
+              "case": "one",
+              "status": "not_applicable",
+              "reason": "No one-element classification is asserted in this item."
+            },
+            {
+              "case": "degenerate",
+              "status": "not_applicable",
+              "reason": "No additional degenerate parameter or rank case is included beyond the stated nondegeneracy hypotheses."
+            },
+            {
+              "case": "endpoints",
+              "status": "checked",
+              "evidence": "step 1.1 evaluates the periodic derivative at opposite faces and obtains zero flux."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "checked",
+              "evidence": "Construction explicitly carries Countable Choice; no family is selected silently in the local argument."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The item does not assert an if-and-only-if statement, so there is no separate forward direction."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The item does not assert an if-and-only-if statement, so there is no separate reverse direction."
+            }
+          ]
+        },
+        "cex-qft-qed-negative-auxiliary": {
+          "citations": [
+            {
+              "fact": "A1",
+              "source": "def-countable-choice",
+              "source_section": "Definition",
+              "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F1",
+              "source": "lem-qft-photon-null-quotient",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice and use $\\mathcal H_T$ from [[def-qft-photon-transverse-space]]. On $\\mathcal K=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^4)$ define\n$$[\\epsilon,\\delta]_\\eta=\\int_{\\mathbb R^3}\\epsilon(\\mathbf k)^\\dagger\\eta\\,\\delta(\\mathbf k)\\,d^3\\mathbf k,\\qquad \\eta=\\operatorname{diag}(-1,1,1,1).$$\nFor $\\mathbf k\\ne0$, let $n=\\mathbf k/|\\mathbf k|$ and set\n$$\\mathcal K_0=\\{\\epsilon\\in\\mathcal K:-\\epsilon^0+n\\cdot\\boldsymbol\\epsilon=0\\text{ a.e.}\\},\\qquad T\\epsilon=\\boldsymbol\\epsilon-n\\epsilon^0.$$\nThen $\\mathcal K_0$ is closed, $T:\\mathcal K_0\\to\\mathcal H_T$ is bounded and onto, and\n$$[\\epsilon,\\delta]_\\eta=\\langle T\\epsilon,T\\delta\\rangle_2\\quad(\\epsilon,\\delta\\in\\mathcal K_0).$$\nIts radical (the vectors pairing to zero with all of $\\mathcal K_0$) is\n$$\\mathcal N=\\ker T=\\{b(\\mathbf k)(1,n(\\mathbf k)):b\\in L^2(\\mathbb R^3)\\}.$$\nConsequently $\\mathcal K_0/\\mathcal N$ with the induced form is a positive Hilbert space isometric to $\\mathcal H_T$. The form on the four-component auxiliary space is indefinite; only the subsidiary quotient is the positive physical one-particle space.",
+              "uses": [
+                "2.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "step-1-1",
+              "claim": "The annulus has finite positive Lebesgue measure, so $\\epsilon\\in L^2(\\mathbb R^3;\\mathbb C^4)$. Its spatial components vanish and its time component equals one on $E$, hence\n$$[\\epsilon,\\epsilon]_\\eta=\\int_E(-1)\\,d^3\\mathbf k=-|E|<0.$$",
+              "step": "1.1",
+              "inputs": [
+                "A1",
+                "given",
+                "algebra"
+              ]
+            },
+            {
+              "id": "step-1-2",
+              "claim": "On $E$, $-\\epsilon^0+n\\cdot\\boldsymbol\\epsilon=-1$, so the subsidiary condition in [F1] fails on a positive-measure set. The quotient in [F1] is formed only from $\\mathcal K_0$; this vector is outside that space and cannot represent a negative-norm physical quotient class.",
+              "step": "2.1",
+              "inputs": [
+                "F1",
+                "step 1.1",
+                "given"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "not_applicable",
+              "reason": "The statement does not assert a case about an empty set or empty region; its objects and quantifiers are stated explicitly."
+            },
+            {
+              "case": "zero",
+              "status": "not_applicable",
+              "reason": "The zero auxiliary vector has zero form and is not the negative-form witness."
+            },
+            {
+              "case": "one",
+              "status": "not_applicable",
+              "reason": "No one-element classification is asserted in this item."
+            },
+            {
+              "case": "degenerate",
+              "status": "checked",
+              "evidence": "step 1.1 selects a finite positive-measure annulus so the auxiliary witness lies in L2."
+            },
+            {
+              "case": "endpoints",
+              "status": "not_applicable",
+              "reason": "No interval endpoint or boundary-value case is asserted in this item."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "checked",
+              "evidence": "Construction explicitly carries Countable Choice; no family is selected silently in the local argument."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The item does not assert an if-and-only-if statement, so there is no separate forward direction."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The item does not assert an if-and-only-if statement, so there is no separate reverse direction."
+            }
+          ]
+        },
+        "ex-qft-qed-two-polarizations": {
+          "citations": [
+            {
+              "fact": "A1",
+              "source": "def-countable-choice",
+              "source_section": "Definition",
+              "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F1",
+              "source": "def-qft-photon-transverse-space",
+              "source_section": "Definition",
+              "quote": "Assume Countable Choice [[def-countable-choice]]. Let\n$$\\mathcal H=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3),\\qquad \\langle u,v\\rangle_2=\\int_{\\mathbb R^3}\\overline{u(\\mathbf k)}\\cdot v(\\mathbf k)\\,d^3\\mathbf k,$$\nwith the second-variable-linear convention of [[def-qft-fock-and-test-spaces]]; the dot product and norm on each $\\mathbb R^3$ fiber are those of [[def-euclidean-inner-product]], and Hilbert completeness follows from [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. For $\\mathbf k\\ne0$, write $n(\\mathbf k)=\\mathbf k/|\\mathbf k|$ and\n$$P_T(\\mathbf k)=I_3-n(\\mathbf k)n(\\mathbf k)^T.$$\nAssign any value at $\\mathbf k=0$, which is a Lebesgue-null set. Let $M_{P_T}$ be multiplication by this measurable matrix field and define the positive transverse photon space\n$$\\mathcal H_T=\\operatorname{Ran}M_{P_T} =\\{u\\in\\mathcal H:\\mathbf k\\cdot u(\\mathbf k)=0\\text{ for almost every }\\mathbf k\\ne0\\}.$$\nThe inner product on $\\mathcal H_T$ is the restriction of that on $\\mathcal H$. Each nonzero momentum fiber is the two-dimensional plane perpendicular to $\\mathbf k$; no global continuous polarization frame is part of the definition.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F2",
+              "source": "lem-qft-photon-null-quotient",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice and use $\\mathcal H_T$ from [[def-qft-photon-transverse-space]]. On $\\mathcal K=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^4)$ define\n$$[\\epsilon,\\delta]_\\eta=\\int_{\\mathbb R^3}\\epsilon(\\mathbf k)^\\dagger\\eta\\,\\delta(\\mathbf k)\\,d^3\\mathbf k,\\qquad \\eta=\\operatorname{diag}(-1,1,1,1).$$\nFor $\\mathbf k\\ne0$, let $n=\\mathbf k/|\\mathbf k|$ and set\n$$\\mathcal K_0=\\{\\epsilon\\in\\mathcal K:-\\epsilon^0+n\\cdot\\boldsymbol\\epsilon=0\\text{ a.e.}\\},\\qquad T\\epsilon=\\boldsymbol\\epsilon-n\\epsilon^0.$$\nThen $\\mathcal K_0$ is closed, $T:\\mathcal K_0\\to\\mathcal H_T$ is bounded and onto, and\n$$[\\epsilon,\\delta]_\\eta=\\langle T\\epsilon,T\\delta\\rangle_2\\quad(\\epsilon,\\delta\\in\\mathcal K_0).$$\nIts radical (the vectors pairing to zero with all of $\\mathcal K_0$) is\n$$\\mathcal N=\\ker T=\\{b(\\mathbf k)(1,n(\\mathbf k)):b\\in L^2(\\mathbb R^3)\\}.$$\nConsequently $\\mathcal K_0/\\mathcal N$ with the induced form is a positive Hilbert space isometric to $\\mathcal H_T$. The form on the four-component auxiliary space is indefinite; only the subsidiary quotient is the positive physical one-particle space.",
+              "uses": [
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F3",
+              "source": "lem-qft-photon-no-global-polarization-frame",
+              "source_section": "Statement",
+              "quote": "Assume Countable Choice. For $n\\in S^2\\subset\\mathbb R^3$, let $E_n=n^\\perp=\\operatorname{Ran}(I-nn^T)$ be the real transverse plane. There do not exist continuous maps $e_1,e_2:S^2\\to\\mathbb R^3$ such that, for every $n$, $(e_1(n),e_2(n))$ is an orthonormal basis of $E_n$. A continuous real orthonormal polarization frame would in particular give a continuous nowhere-zero tangent vector field on $S^2$.",
+              "uses": [
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F4",
+              "source": "def-cross-product-in-r3",
+              "source_section": "Definition",
+              "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.\n\nThis is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F4",
+              "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+              "source_section": "Statement",
+              "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F4",
+              "source": "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+              "source_section": "Statement",
+              "quote": "For $u,v\\in\\mathbb R^3$, $\\|u\\times v\\|_2^2=\\det G(u,v)$, and this value is positive exactly when $u$ and $v$ are linearly independent.\n\nEquivalently,\n$$\\|u\\times v\\|_2^2=\\|u\\|_2^2\\|v\\|_2^2-\\langle u,v\\rangle^2.$$",
+              "uses": [
+                "1.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "step-1-1",
+              "claim": "Since $n$ is unit, $P_T(n)=I-nn^T$ has kernel $\\mathbb R n$ and range $n^\\perp$, of dimension $3-1=2$, by [F1]. For any fixed unit vector $u$ not parallel to $n_0$, $P_T(n)u$ is nonzero on a neighborhood of $n_0$; there define $e_1(n)=P_T(n)u/|P_T(n)u|$ and $e_2(n)=n\\times e_1(n)$. By [F4], $e_2$ is orthogonal to both unit vectors and $|e_2|^2=1-0=1$. It is therefore a continuous unit vector in $n^\\perp$, orthogonal to $e_1$, so the two vectors form a local frame.",
+              "step": "1.1",
+              "inputs": [
+                "A1",
+                "F1",
+                "F4",
+                "given",
+                "construct"
+              ]
+            },
+            {
+              "id": "step-1-2",
+              "claim": "The quotient in [F2] is positive and isometric to the range in step 1.1, so it has exactly two physical directions in each nonzero momentum fiber. A global continuous real frame would contradict [F3]. Thus the local construction cannot be made into a single continuous frame over the whole sphere.",
+              "step": "2.1",
+              "inputs": [
+                "F2",
+                "F3",
+                "step 1.1"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "not_applicable",
+              "reason": "The statement does not assert a case about an empty set or empty region; its objects and quantifiers are stated explicitly."
+            },
+            {
+              "case": "zero",
+              "status": "not_applicable",
+              "reason": "The polarization vectors in the local frame are required to have unit norm."
+            },
+            {
+              "case": "one",
+              "status": "checked",
+              "evidence": "step 1.1 constructs exactly two local unit orthogonal vectors e_1 and e_2."
+            },
+            {
+              "case": "degenerate",
+              "status": "not_applicable",
+              "reason": "No additional degenerate parameter or rank case is included beyond the stated nondegeneracy hypotheses."
+            },
+            {
+              "case": "endpoints",
+              "status": "not_applicable",
+              "reason": "No interval endpoint or boundary-value case is asserted in this item."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "checked",
+              "evidence": "Example explicitly carries Countable Choice; no family is selected silently in the local argument."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The item does not assert an if-and-only-if statement, so there is no separate forward direction."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The item does not assert an if-and-only-if statement, so there is no separate reverse direction."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "research/physics-td-qft-rpm-62-2026-10-14-batch-45.proof-contracts.json",
+      "contracts": {
+        "cex-qft-qed-energy-fock-limit": {
+          "citations": [
+            {
+              "fact": "F1",
+              "source": "lem-qft-qed-coherent-ir-obstruction",
+              "source_section": "Statement",
+              "quote": "Use the transverse one-particle space $\\mathcal H_T$ and multiplier $\\omega(\\mathbf k)$ of [[def-qft-qed-photon-energy-multiplier]], and form its symmetric Fock space $\\mathcal F_s(\\mathcal H_T)$. Let $H_{\\rm ph}:=\\hbar c\\,d\\Gamma(\\omega)$, with $\\hbar,c>0$ and $d\\Gamma(\\omega)$ acting on the $n$-particle sector as multiplication by $\\sum_{j=1}^n|\\mathbf k_j|$, as in [[lem-qft-second-quantized-spectrum]]. For a coherent vector use\n$$ \\epsilon(f):=\\bigoplus_{n=0}^{\\infty}\\frac{f^{\\otimes n}}{\\sqrt{n!}},\\qquad C(f):=e^{-\\|f\\|^2/2}\\epsilon(f), $$\nusing the tensor and direct-sum conventions of [[def-qft-fock-and-test-spaces]].\n\nLet $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathbb C^3)$, $\\mathbf n\\cdot b(\\mathbf n)=0$ for a.e. $\\mathbf n$, and\n$$ C_b:=\\int_{S^2}|b(\\mathbf n)|^2\\,d\\Omega>0. $$\nTake $\\mathbf k,\\kappa,\\epsilon$ in inverse metres and $b$ dimensionless; then $f_\\epsilon$ has momentum-wavefunction units $\\mathrm m^{3/2}$, $C_b$ is dimensionless, and $\\hbar c(\\kappa-\\epsilon)$ has energy units.\nFor $0<\\epsilon<\\kappa$, define $f_\\epsilon(0)=0$ and\n$$ f_\\epsilon(\\mathbf k):=\\mathbf1_{\\{\\epsilon<|\\mathbf k|<\\kappa\\}}|\\mathbf k|^{-3/2}b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right). $$\nThen\n$$ \\|f_\\epsilon\\|^2=C_b\\log\\frac{\\kappa}{\\epsilon},\\qquad \\langle C(f_\\epsilon),H_{\\rm ph}C(f_\\epsilon)\\rangle =\\hbar c\\,C_b(\\kappa-\\epsilon). $$\nEach $C(f_\\epsilon)$ is a unit vector in $D(H_{\\rm ph})$. As $\\epsilon\\downarrow0$, $C(f_\\epsilon)\\rightharpoonup0$ weakly, but the family has no strong Fock-space limit. The statement is an exact free transverse-mode construction; it asserts no interacting charged sector, continuum QED limit, or empirical observation.",
+              "uses": [
+                "1.1",
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F2",
+              "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+              "source_section": "Statement",
+              "quote": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F3",
+              "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+              "source_section": "Definition",
+              "quote": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "A2",
+              "source": "def-countable-choice",
+              "source_section": "Definition",
+              "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+              "uses": [
+                "1.1",
+                "2.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "cex-qft-qed-energy-fock-limit-step-1-1",
+              "claim": "For $b(n)=P_T(n)e$, $|b(n)|^2=1-(n\\cdot e)^2$. By [F2], rotate $e$ to the third coordinate axis. The regular sphere chart $X(y,z)=(\\sqrt{1-y^2-z^2},y,z)$ on $|y|,|z|<1/4$ lies in the belt $|n\\cdot e|<1/2$ and has area density $(1-y^2-z^2)^{-1/2}\\ge1$ by [F3]. Its parameter rectangle has area $1/4$, so this belt has positive surface measure. On the belt $|b(n)|^2\\ge3/4$, hence $C_b>0$; also $b$ is continuous, square-integrable on the finite sphere measure, and transverse.",
+              "step": "1.1",
+              "inputs": [
+                "A1",
+                "A2",
+                "F1",
+                "F2",
+                "F3",
+                "algebra"
+              ]
+            },
+            {
+              "id": "cex-qft-qed-energy-fock-limit-step-2-1",
+              "claim": "Apply [F1] to this $b$. It gives unit vectors with $0\\le\\langle C(f_\\epsilon),H_{\\rm ph}C(f_\\epsilon)\\rangle\\le\\hbar c\\,C_b\\kappa<\\infty$, yet no strong Fock-space limit. This contradicts the asserted implication and is the required counterexample.",
+              "step": "2.1",
+              "inputs": [
+                "A1",
+                "A2",
+                "F1",
+                "step 1.1",
+                "algebra"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "checked",
+              "evidence": "Step 1.1 proves C_b>0, excluding the zero profile."
+            },
+            {
+              "case": "zero",
+              "status": "checked",
+              "evidence": "The free-photon profile is defined to vanish at k=0; step 2.1 treats \u03b5 decreasing to zero."
+            },
+            {
+              "case": "one",
+              "status": "not_applicable",
+              "reason": "The cex-qft-qed-energy-fock-limit claim makes no one boundary assertion."
+            },
+            {
+              "case": "degenerate",
+              "status": "not_applicable",
+              "reason": "The cex-qft-qed-energy-fock-limit claim makes no degenerate boundary assertion."
+            },
+            {
+              "case": "endpoints",
+              "status": "checked",
+              "evidence": "Step 2.1 gives a uniform finite energy bound for 0<\u03b5<\u03ba and its limit as \u03b5 decreases to zero."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "checked",
+              "evidence": "Counterexample steps 1.1 and2.1 cite [A2], the same original Countable Choice inherited from the coherent-tail and published surface-measure suppliers; no stronger choice or new indexed selection is used."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The cex-qft-qed-energy-fock-limit claim makes no iff-forward boundary assertion."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The cex-qft-qed-energy-fock-limit claim makes no iff-reverse boundary assertion."
+            }
+          ],
+          "finite_checks": [
+            {
+              "name": "positive angular measure",
+              "inputs": [
+                "A1",
+                "F1",
+                "algebra",
+                "step 1.1"
+              ],
+              "expected": "On |n\u00b7e|\u22641/2, |P_T(n)e|\u00b2\u22653/4, so C_b>0 and the family has finite uniform energy but no strong limit."
+            }
+          ],
+          "supplier_excerpts": [
+            {
+              "supplier": "lem-qft-qed-coherent-ir-obstruction",
+              "carrier": "items/lem-qft-qed-coherent-ir-obstruction.md",
+              "source_section": "Statement",
+              "exact_statement": "Let $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathbb C^3)$, $\\mathbf n\\cdot b(\\mathbf n)=0$ for a.e. $\\mathbf n$, and\n$$\nC_b:=\\int_{S^2}|b(\\mathbf n)|^2\\,d\\Omega>0.\n$$\nTake $\\mathbf k,\\kappa,\\epsilon$ in inverse metres and $b$ dimensionless; then $f_\\epsilon$ has momentum-wavefunction units $\\mathrm m^{3/2}$, $C_b$ is dimensionless, and $\\hbar c(\\kappa-\\epsilon)$ has energy units.\nFor $0<\\epsilon<\\kappa$, define $f_\\epsilon(0)=0$ and\n$$\nf_\\epsilon(\\mathbf k):=\\mathbf1_{\\{\\epsilon<|\\mathbf k|<\\kappa\\}}|\\mathbf k|^{-3/2}b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right).\n$$\nThen\n$$\n\\|f_\\epsilon\\|^2=C_b\\log\\frac{\\kappa}{\\epsilon},\\qquad\n\\langle C(f_\\epsilon),H_{\\rm ph}C(f_\\epsilon)\\rangle\n=\\hbar c\\,C_b(\\kappa-\\epsilon).\n$$\nEach $C(f_\\epsilon)$ is a unit vector in $D(H_{\\rm ph})$. As $\\epsilon\\downarrow0$, $C(f_\\epsilon)\\rightharpoonup0$ weakly, but the family has no strong Fock-space limit. The statement is an exact free transverse-mode construction; it asserts no interacting charged sector, continuum QED limit, or empirical observation.",
+              "consumer_use": "F1 in step 1.1, step 2.1",
+              "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+            },
+            {
+              "supplier": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+              "carrier": "items/lem-euclidean-chart-measure-agrees-with-polar-surface-measure.md",
+              "source_section": "Statement",
+              "exact_statement": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+              "consumer_use": "F2 in step 1.1",
+              "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+            },
+            {
+              "supplier": "def-surface-integral-on-a-compact-c-one-hypersurface",
+              "carrier": "items/def-surface-integral-on-a-compact-c-one-hypersurface.md",
+              "source_section": "Definition",
+              "exact_statement": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+              "consumer_use": "F3 in step 1.1",
+              "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+            },
+            {
+              "supplier": "def-countable-choice",
+              "carrier": "items/def-countable-choice.md",
+              "source_section": "Definition",
+              "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+              "consumer_use": "A2 in step 1.1, step 2.1",
+              "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+            }
+          ],
+          "risk_review": {
+            "status": "authoring-self-check",
+            "reviewer": "beta-batch-45-authoring",
+            "notes": "Checked the exact conditional supplier interfaces against the cited uses. This record is not independent proof approval."
+          }
+        }
+      }
+    },
+    {
+      "target": "research/physics-td-qft-rpm-62-2026-10-14-batch-50.proof-contracts.json",
+      "contracts": {
+        "cex-qft-qed-compact-charge-sector": {
+          "citations": [
+            {
+              "fact": "F1",
+              "source": "lem-qft-lattice-local-gauss-flux",
+              "source_section": "Statement",
+              "quote": "every physical vector has total occupation",
+              "uses": [
+                "1.1",
+                "2.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "d-1.1",
+              "claim": "Here $G_{v_1}=E_e-n_{v_1}$ and $G_{v_2}=-E_e-n_{v_2}$, so $G_{v_1}+G_{v_2}=-(n_{v_1}+n_{v_2})$ on their common domain; the link flux cancels.",
+              "step": "1.1",
+              "inputs": [
+                "given",
+                "F1",
+                "algebra"
+              ]
+            },
+            {
+              "id": "d-2.1",
+              "claim": "The zero-background identity from [F1] requires $n_{v_1}+n_{v_2}=0$ on every physical vector. The normalized occupation vector with $n_{v_1}=1,n_{v_2}=0$ has total number one, so it is not physical and the asserted every-sector property fails.",
+              "step": "2.1",
+              "inputs": [
+                "F1",
+                "step 1.1",
+                "algebra"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "not_applicable",
+              "reason": "The counterexample graph has two vertices and one link."
+            },
+            {
+              "case": "zero",
+              "status": "checked",
+              "evidence": "steps 1.1 and 2.1: with zero background, the Gauss sum retains the zero-occupation sector and excludes the one-particle sector."
+            },
+            {
+              "case": "one",
+              "status": "checked",
+              "evidence": "step 2.1: the explicit one-particle vector violates the fixed-background total-number constraint."
+            },
+            {
+              "case": "degenerate",
+              "status": "not_applicable",
+              "reason": "The counterexample uses one fixed graph."
+            },
+            {
+              "case": "endpoints",
+              "status": "not_applicable",
+              "reason": "There is no interval endpoint."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "not_applicable",
+              "reason": "No choice principle is used in the finite occupation vector."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The counterexample refutes a universal every-sector assertion."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The counterexample refutes a universal every-sector assertion."
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "changes": "Section anchors only; all step IDs, claims, inputs, citations and risk records retained."
+}

@@ -1,0 +1,1601 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "batch": 38,
+  "level": 1,
+  "scope": [
+    "def-qft-scalar-mass-shell",
+    "lem-qft-mass-shell-measure-invariant",
+    "lem-qft-mass-shell-test-range-dense",
+    "lem-qft-mass-shell-test-restriction-continuity",
+    "lem-qft-fock-unitary-lift",
+    "lem-qft-scalar-poincare-action",
+    "lem-qft-smeared-free-scalar",
+    "lem-qft-scalar-causal-commutator",
+    "lem-qft-scalar-local-weyl-algebra",
+    "ex-qftmath-spacelike-vacuum-correlation"
+  ],
+  "contracts": {
+    "def-qft-scalar-mass-shell": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain or empty-object alternative is a separate hypothesis of this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition explicitly treats mu=0 and omits the apex; see Definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one parameter is a separate hypothesis of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The massless apex is omitted in Definition and has measure zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is a separate hypothesis beyond any boundary case explicitly listed above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No unlisted choice from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-qft-mass-shell-measure-invariant": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sr-affine-minkowski-model",
+          "source_section": "Definition",
+          "quote": "An **oriented time-oriented affine Minkowski space** is a quadruple\n$(A,V,\\eta,C^+)$ with the following data. In this notation $V$ includes its\nspecified orientation; forgetting that orientation gives only the underlying\nreal vector space, not the full datum $V$ of the model.\n\n1. A nonempty affine space $A$ over a $4$-dimensional real vector space $V$,\n   with action $(p,v)\\mapsto p+v$ and displacement $q-p\\in V$\n   ([[def-affine-space-and-displacement]]). In particular $V$ is a real vector\n   space of dimension $4$.\n2. A Lorentz form $\\eta$ on $V$, i.e. a nondegenerate symmetric bilinear form of\n   inertia $(3,1,0)$ ([[def-lorentz-form-and-inertia]]). Its associated quadratic\n   form is $q(v)=\\eta(v,v)$.\n3. An **orientation** of $V$: a positive ray of the determinant line\n   $\\Lambda^4V$, fixed once and for all\n   ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]]).\n4. A **time orientation** $C^+$ of $(V,\\eta)$: one of the two connected\n   components of the timelike set $T=\\{v\\in V:\\eta(v,v)<0\\}$, the other being\n   $C^-:=T\\setminus C^+$ ([[def-time-orientation-and-future-causal-sets]]).\n\nThe following terminology is attached to such a quadruple.\n\n- The elements $p$ of $A$ are the **events**; for events $p,q$ the vector\n  $q-p\\in V$ is the **displacement from $p$ to $q$**.\n- The **interval** of $p,q\\in A$ is the real number\n  $I(p,q):=\\eta(q-p,q-p)=q(q-p)$.\n- Events $p,q$ are **timelike**, **null**, **spacelike** or **causally\n  related** when the displacement $q-p$ is timelike, null, spacelike or causal\n  in the sense of [[def-causal-classification-of-lorentz-vectors]]; they are\n  **future-related** when $q-p$ is future causal and **past-related** when\n  $q-p$ is past causal in the sense of\n  [[def-time-orientation-and-future-causal-sets]].\n\n**No point of $A$ is distinguished.** For every $v\\in V$ the translation\n$\\tau_v:A\\to A$, $\\tau_v(p):=p+v$, is a bijection, since it is inverse to\n$\\tau_{-v}$: $\\tau_{-v}(\\tau_v(p))=(p+v)+(-v)=p+(v-v)=p$ and symmetrically, by\nthe affine action axioms ([[def-affine-space-and-displacement]]). Displacements\nare translation invariant, $\\tau_v(q)-\\tau_v(p)=q-p$, so every $\\tau_v$ preserves\nthe interval, the causal classification of every ordered pair, and the sets\n$C^+$, $C^-$ (which are subsets of $V$, independent of the point of $A$); it\nchanges only the labelling of points. The mathematical structure of the model is\nexactly the quadruple $(A,V,\\eta,C^+)$; no derived physical quantity (proper\ntime, four-velocity, momentum, energy, charge or any field) is part of this\ndefinition, and all later structure of the framework (frames, charts, tensor\nfields, worldlines) is built on this model.\n\n**Well-definedness.** The affine-space definition supplies the action and the\nunique displacements; the Lorentz-form definition supplies $\\eta$ and its\ninertia; the determinant-line definition supplies orientations; and the two\ncomponents of $T$ between which the time-orientation definition chooses exist by\nthe components lemma recorded in the well-definedness clause of\n[[def-time-orientation-and-future-causal-sets]], which is also what makes the\nnames future and past causal in item 4 well defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lorentz-form-and-inertia",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a $4$-dimensional real vector space ([[def-vector-space]],\n[[def-dimension]]). A **Lorentz form** on $V$ is a symmetric bilinear form\n$\\eta:V\\times V\\to\\mathbb R$ ([[def-bilinear-symmetric-skew-and-alternating-forms]])\nsuch that\n\n1. $\\eta$ is nondegenerate: both radicals\n   $\\operatorname{rad}_L(\\eta)=\\{u:\\eta(u,v)=0\\text{ for every }v\\}$ and\n   $\\operatorname{rad}_R(\\eta)=\\{v:\\eta(u,v)=0\\text{ for every }u\\}$ are\n   $\\{0\\}$ ([[def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form]]);\n   and\n2. $\\eta$ has **inertia** $(3,1,0)$: in some (equivalently, in every) basis of\n   $V$ in which the matrix of $\\eta$ is diagonal, exactly three diagonal\n   entries are positive, exactly one is negative, and none is zero\n   ([[def-definiteness-inertia-and-signature-data-over-the-reals]]).\n\nThe inertia of a symmetric bilinear form is the triple $(p,q,r)$ of numbers of\npositive, negative and zero diagonal entries of any diagonalizing basis, and it\nis independent of the diagonalizing basis by Sylvester's law of inertia\n([[def-definiteness-inertia-and-signature-data-over-the-reals]]); hence clause 2\nis a property of $\\eta$ itself and not of a chosen basis. The **associated\nquadratic form** of $\\eta$ is\n\n$$q(v):=\\eta(v,v),\\qquad v\\in V .$$\n\nA **Lorentz vector space of signature $(-,+,+,+)$** is a pair $(V,\\eta)$\nconsisting of a $4$-dimensional real vector space $V$ and a Lorentz form $\\eta$\non $V$; the name records that the diagonal normal form of $\\eta$ has one\nnegative entry followed by three positive entries. No positive-definite\nstructure on $V$ is assumed or implied by this definition, and $q$ takes both\nnegative and positive values on nonzero vectors: a basis in which\n$\\eta$ is diagonal with diagonal entries $-1,1,1,1$ exists by clause 2, and on\nits first vector $q$ is $-1$, while on each of the other three it is $+1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-time-orientation-and-future-causal-sets",
+          "source_section": "Definition",
+          "quote": "Let $(V,\\eta)$ be a Lorentz vector space of signature $(-,+,+,+)$\n([[def-lorentz-form-and-inertia]]), with causal terminology as in\n[[def-causal-classification-of-lorentz-vectors]], and let\n\n$$T:=\\{v\\in V:\\eta(v,v)<0\\}$$\n\nbe its **timelike set**. Components and closures refer to the topology obtained\nby using any ordered basis to identify $V$ with Euclidean $\\mathbb R^4$;\n[[lem-timelike-cone-has-two-convex-components]], step 5.1, proves that the\nresulting open sets are independent of the basis. By that lemma the\nset $T$ has exactly two connected components, and each of them is nonempty,\nopen, convex and path-connected. A **time orientation** of $(V,\\eta)$ is a\nchoice of one of these two components. Fixing such a choice, write $C^+$ for the\nchosen component and\n\n$$C^-:=T\\setminus C^+$$\n\nfor the other component; thus $T=C^+\\sqcup C^-$ is a disjoint union and\n$C^+$, $C^-$ are exactly the two components supplied by the lemma. Relative to\nthis choice a vector $v\\in V$ is\n\n- **future timelike** when $v\\in C^+$;\n- **past timelike** when $v\\in C^-$;\n- **future null** when $v\\neq 0$, $\\eta(v,v)=0$ and $v\\in\\operatorname{cl}(C^+)$;\n- **past null** when $v\\neq 0$, $\\eta(v,v)=0$ and $v\\in\\operatorname{cl}(C^-)$;\n- **future causal** when it is future timelike or future null;\n- **past causal** when it is past timelike or past null.\n\nThe sets $\\operatorname{cl}(C^+)$ and $\\operatorname{cl}(C^-)$ are the\n**future closed cone** and the **past closed cone** of the time-oriented space\n$(V,\\eta,C^+)$. By [[lem-timelike-cone-has-two-convex-components]] each of them\nis a convex cone, their intersection is $\\{0\\}$, and a vector is causal exactly\nwhen it is future causal or past causal, in which case exactly one of these two\nalternatives holds: no nonzero vector is both future causal and past causal.\nThe timelike vectors are exactly the points of $T=C^+\\cup C^-$, and\n$0\\notin T$ because $\\eta(0,0)=0$; since a null vector is nonzero with\n$\\eta(v,v)=0$, no vector is both timelike and null, so the classes above are\nmutually exclusive where the definitions say they are: no vector is both future\nand past causal, and no timelike vector is null.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-causal-classification-of-lorentz-vectors",
+          "source_section": "Definition",
+          "quote": "Let $(V,\\eta)$ be a Lorentz vector space of signature $(-,+,+,+)$\n([[def-lorentz-form-and-inertia]]), with associated quadratic form\n$q(v)=\\eta(v,v)$. A vector $v\\in V$ is\n\n- **timelike** when $q(v)<0$;\n- **null**, or **lightlike**, when $v\\neq 0$ and $q(v)=0$;\n- **spacelike** when $q(v)>0$;\n- **causal** when it is timelike or null.\n\nThe zero vector $0\\in V$ satisfies $q(0)=0$ and is consequently **none** of\ntimelike, null or spacelike: the null case explicitly excludes it, and the\ntimelike and spacelike cases exclude it by $q(0)=0$ together with the strict\ninequalities. The **causal character** of a nonzero vector $v$ is the sign of\nthe real number $q(v)$, and the three names are attached to the three signs as\nabove. When no confusion arises, the pairing $\\eta$ itself is written\n$\\langle v,w\\rangle:=\\eta(v,w)$.\n\n**Each nonzero vector has exactly one causal character.** For a nonzero\n$v\\in V$ the real number $q(v)$ satisfies exactly one of $q(v)<0$, $q(v)=0$,\n$q(v)>0$ by trichotomy of the order on $\\mathbb R$, so $v$ is timelike, null or\nspacelike, and no two of the three alternatives can hold at once. The causal\nvectors are therefore exactly the nonzero vectors that are timelike or null,\nand the zero vector is causal in no sense introduced here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "On $\\mathbf k\\ne0$ if $\\mu=0$, and on all $\\mathbf k$ if $\\mu>0$,\n$F_\\mu$ is a smooth chart of the shell. On every compact subset of this chart\nthe density $[(2\\pi)^3 2\\omega_\\mu]^{-1}$ is bounded; for $\\mu=0$ near the\nomitted apex it is proportional to $|\\mathbf k|^{-1}$, whose integral over a\nradius-$r$ ball is proportional to $\\int_0^r s\\,ds<\\infty$. Compact annuli,\nand for $\\mu>0$ compact balls, give a countable cover by finite-measure sets;\nhence $d\\nu_\\mu$ is locally finite and sigma-finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Fix $\\Lambda$ and write $F=F_\\mu$, $F(\\mathbf k')=\\Lambda F(\\mathbf k)$.\nBecause $\\Lambda$ preserves the future shell, this defines a smooth\ndiffeomorphism $\\mathbf k\\mapsto\\mathbf k'$ on the chart; let\n$J=D\\mathbf k'/D\\mathbf k$. Put $q_0=(1,0,0,0)$. The columns of\n$[q_0,DF(\\mathbf k)]$ have determinant $1$. Differentiating\n$\\Lambda F(\\mathbf k)=F(\\mathbf k')$ gives\n$\\Lambda DF(\\mathbf k)=DF(\\mathbf k')J$, and therefore\n$$1=\\det[\\Lambda q_0,DF(\\mathbf k')]\\det J.$$\nFor any $u\\in\\mathbb R^4$, direct expansion of the determinant gives\n$\\det[u,DF(\\mathbf k')]=-\\eta(u,F(\\mathbf k'))/\\omega_\\mu(\\mathbf k')$.\nTake $u=\\Lambda q_0$. Metric preservation and\n$F(\\mathbf k')=\\Lambda F(\\mathbf k)$ imply\n$-\\eta(\\Lambda q_0,F(\\mathbf k'))=-\\eta(q_0,F(\\mathbf k))\n=\\omega_\\mu(\\mathbf k)$. Thus $\\det J=\\omega_\\mu(\\mathbf k')/\n\\omega_\\mu(\\mathbf k)>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The change-of-variables theorem [F3] and the Jacobian from 2.1 give\n$$\\frac{d^3\\mathbf k'}{\\omega_\\mu(\\mathbf k')} =\\frac{\\det J\\,d^3\\mathbf k}{\\omega_\\mu(\\mathbf k')} =\\frac{d^3\\mathbf k}{\\omega_\\mu(\\mathbf k)}.$$\nMultiplication by the constant $[2(2\\pi)^3]^{-1}$ proves invariance for\nnonnegative Borel functions. The massless apex is a\nsingle omitted point and was never in the chart; the locally finite density\nhas no extra point mass there.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For g=0 both integrals in the statement are zero; step 3.1 applies to this nonnegative Borel function."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the mu=0 density near the omitted apex."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one parameter is a separate hypothesis of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 handle the massless apex and show no point mass is added."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is a separate hypothesis beyond any boundary case explicitly listed above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No unlisted choice from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-qft-mass-shell-test-range-dense": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$. The finite linear combinations of indicator functions of\nhalf-open boxes with rational endpoints and rational coefficients form a\ncountable dense subset of $L^p(\\mathbb{R}^n)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with $n\\ge1$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then $C_c^\\infty(\\Omega;\\mathbb K)$ is dense in $L^2(\\Omega;\\mathbb K)$: for every $f\\in L^2(\\Omega;\\mathbb K)$ and every $\\delta>0$ there is $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with $\\|\\varphi-f\\|_{L^2(\\Omega)}<\\delta$. Consequently $H^1_0(\\Omega)$ is dense in $L^2(\\Omega)$, and if a class $h\\in L^2(\\Omega)$ satisfies $(h,v)_{L^2}=0$ for all $v\\in H^1_0(\\Omega)$, then $h=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The Fourier transform is a topological automorphism of $\\mathcal S(\\mathbb R^n)$, with $\\mathcal F^2=R$ and $\\mathcal F^{-1}=R\\mathcal F$, where $Rf(x)=f(-x)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In the chart $\\mathbf k\\mapsto p_\\mu(\\mathbf k)$, write\n$w_\\mu(\\mathbf k)=[2(2\\pi)^3\\omega_\\mu(\\mathbf k)]^{-1}$. Multiplication by\n$\\sqrt{w_\\mu}$ is an isometry from $H_\\mu$ onto\n$L^2(\\mathbb R^3\\setminus\\{0\\},d^3\\mathbf k)$ (for $\\mu=0$) or\n$L^2(\\mathbb R^3,d^3\\mathbf k)$ (for $\\mu>0$), with inverse division by\n$\\sqrt{w_\\mu}$; the omitted point is Lebesgue-null. The full $L^2(\\mathbb\nR^3)$ is separable by [F1]. In the massless case extend any function on the\npunctured space by zero at the null point, approximate it by the countable\ndense family from [F1], and restrict those approximants back to the punctured\nspace; restriction does not increase the norm. Thus both chart spaces, and\ntherefore $H_\\mu$, are separable.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $\\Omega=\\mathbb R^3$ for $\\mu>0$ and\n$\\Omega=\\mathbb R^3\\setminus\\{0\\}$ for $\\mu=0$. For\n$\\Omega_n=\\{1/n<|\\mathbf k|<n\\}$, these sets increase to $\\Omega\\setminus\\{0\\}$; its complement in $\\Omega$ is null for the shell measure.\nFor $h\\in L^2(\\Omega,w_\\mu d^3\\mathbf k)$, monotone convergence [F5]\nshows $\\|h\\mathbf1_{\\Omega\\setminus\\Omega_n}\\|_{L^2(w_\\mu)}\\to0$.\nOn each $\\Omega_n$, $w_\\mu$ is smooth and bounded above and below by\npositive constants. Approximate $h|_{\\Omega_n}$ in ordinary $L^2(\\Omega_n)$\nby a function in $C_c^\\infty(\\Omega_n)$ using [F2]; equivalence of the\nweighted and ordinary norms on $\\Omega_n$ gives weighted approximation.\nThus $C_c^\\infty(\\Omega)$ is dense in the shell space.",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Fix $\\psi\\in C_c^\\infty(\\Omega)$. Choose $\\rho\\in C_c^\\infty(\\mathbb R)$\nwith $\\rho(0)=1$, using [F4], and put\n$$G(q^0,\\mathbf q)= \\psi(\\mathbf q)\\rho(q^0-\\omega_\\mu(\\mathbf q)).$$\nBecause $\\psi$ has compact support away from the massless apex, $\\omega_\\mu$\nis smooth on a neighborhood of its support, so this is a smooth compactly\nsupported function on $\\mathbb R^4$. By the Fourier automorphism [F3] there\nis $f\\in\\mathscr S(\\mathbb R^4)$ with\n$\\mathcal F_+f(q^0,\\mathbf q)=G(q^0,\\mathbf q)$ in the convention of\n[[def-qft-scalar-mass-shell]]. On the shell,\n$K_\\mu f(p_\\mu(\\mathbf k))=G(\\omega_\\mu(\\mathbf k),\\mathbf k)\n=\\psi(\\mathbf k)$. Hence the test restriction range contains\n$C_c^\\infty(\\Omega)$, which is dense by 2.1.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain or empty-object alternative is a separate hypothesis of this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero test maps to the zero vector by the defining integral in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one parameter is a separate hypothesis of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 explicitly use the punctured chart when mu=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 exhausts the full open chart by increasing annuli; no shell endpoint is lost."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is stated and used to select the countable dense family in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-qft-mass-shell-test-restriction-continuity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].\n\nPointwise differentiation is linear; thus $p_{\\alpha\\beta}(f+g)\\le p_{\\alpha\\beta}(f)+p_{\\alpha\\beta}(g)$ and $p_{\\alpha\\beta}(cf)=|c|p_{\\alpha\\beta}(f)$. In particular this set is a complex vector space and each $p_{\\alpha\\beta}$ is a seminorm. The zero function belongs to it. Since $p_{00}(f)=0$ forces $f(x)=0$ for every $x$, the family separates functions. No choice principle is needed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The Fourier transform is a topological automorphism of $\\mathcal S(\\mathbb R^n)$, with $\\mathcal F^2=R$ and $\\mathcal F^{-1}=R\\mathcal F$, where $Rf(x)=f(-x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The negative-sign, $2\\pi$-normalized Fourier transform is continuous $\\mathcal F:\\mathcal S\\to\\mathcal S$, and\n$$\\mathcal F(\\partial^\\alpha f)(\\xi)=(2\\pi i\\xi)^\\alpha\\widehat f(\\xi),\\qquad \\partial^\\beta\\widehat f=\\mathcal F((-2\\pi ix)^\\beta f).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Define the continuous Schwartz seminorm\n$$q_2(f)=\\sup_{p\\in\\mathbb R^4}(1+|p|)^2|\\mathcal F_+f(p)|.$$\nContinuity follows from [F3,F4] and [F2]. On shell,\n$|\\mathcal F_+f(p_\\mu(\\mathbf k))|\n\\le q_2(f)(1+|\\mathbf k|)^{-2}$ because\n$|p_\\mu(\\mathbf k)|\\ge|\\mathbf k|$. Hence\n$$\\|K_\\mu f\\|_{H_\\mu}^2 \\le\\frac{q_2(f)^2}{2(2\\pi)^3} \\int_{\\mathbb R^3} \\frac{(1+|\\mathbf k|)^{-4}}{\\omega_\\mu(\\mathbf k)}\\,d^3\\mathbf k.$$\nThe integral is finite: in polar coordinates its radial integrand is\n$r^2(1+r)^{-4}/\\sqrt{r^2+\\mu^2}$, which is $O(r)$ near $0$ when $\\mu=0$,\nis $O(r^2)$ near $0$ when $\\mu>0$, and is $O(r^{-3})$ at infinity.\nTherefore $K_\\mu f\\in H_\\mu$, and the displayed seminorm bound proves\ncontinuity and linearity.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [F4], applying $\\partial_0^2-\\Delta+\\mu^2$ before $\\mathcal F_+$\nmultiplies by $-(p^0)^2+|\\mathbf p|^2+\\mu^2$. On the shell this multiplier\nis $-\\omega_\\mu(\\mathbf k)^2+|\\mathbf k|^2+\\mu^2=0$. Restriction to the\nshell therefore gives the asserted Klein–Gordon identity.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain or empty-object alternative is a separate hypothesis of this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For f=0 the restriction and Klein–Gordon image in steps 1.1 and 2.1 are zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one parameter is a separate hypothesis of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly checks local integrability at the massless apex."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is a separate hypothesis beyond any boundary case explicitly listed above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is the stated Fourier-supplier hypothesis used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-qft-fock-unitary-lift": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h(v)=\\langle h,v\\rangle_2$ and its tensor extension is the bounded map of\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqm-composites-hilbert-tensor-construction",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H,K$ be complex Hilbert spaces with the pairing linear in the first argument ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]). Regard $H$ as a right $\\mathbb C$-module by $u\\cdot c:=cu$ and $K$ as a left $\\mathbb C$-module by $c\\cdot v:=cv$. Write $H\\odot K$ for the complex vector space of [[def-tensor-product-of-modules-by-generators-and-relations]] applied to these modules: its underlying abelian group is the quotient $F/H_0$ of that definition, the class of $e_{(u,v)}$ is written $u\\otimes v$, every element of $H\\odot K$ is a finite sum of elementary tensors $u\\otimes v$, and the defining relations make $(u,v)\\mapsto u\\otimes v$ $\\mathbb C$-bilinear. Define, for finite sums,\n\n$$\\Bigl\\langle\\sum_i u_i\\otimes v_i,\\ \\sum_j u'_j\\otimes v'_j\\Bigr\\rangle:=\\sum_{i,j}\\langle u_i,u'_j\\rangle_H\\,\\langle v_i,v'_j\\rangle_K .$$\n\nThen:\n\n(a) *well-definedness and sesquilinearity*: the displayed value is independent of the representatives of its two arguments and defines a Hermitian sesquilinear form on $H\\odot K$, linear in the first argument and conjugate-linear in the second;\n\n(b) *positive definiteness and orthonormal coordinates*: $\\langle z,z\\rangle\\ge0$ for every $z\\in H\\odot K$, with $\\langle z,z\\rangle=0$ exactly for $z=0$; more precisely, if $U_0\\subseteq H$ and $V_0\\subseteq K$ are finite-dimensional subspaces with orthonormal bases $e_1,\\dots,e_p$ and $f_1,\\dots,f_q$, then every $z$ in the span of the elementary tensors from $U_0\\times V_0$ has a unique expansion $z=\\sum_{a,b}c_{ab}\\,e_a\\otimes f_b$ and $\\langle z,z\\rangle=\\sum_{a,b}|c_{ab}|^2$; in particular the assignment is an inner product on $H\\odot K$;\n\n(c) *completion*: the norm completion $(\\widehat{H\\odot K},\\kappa)$ of $H\\odot K$ ([[def-completion-of-a-normed-space]]) exists and, with the unique inner product extending the given one, is a complex Hilbert space; $\\kappa$ is a linear isometry with dense image, $\\|\\kappa(u\\otimes v)\\|=\\|u\\|\\,\\|v\\|$, and any two completions of $H\\odot K$ are identified by a unique surjective linear isometry fixing $H\\odot K$ pointwise;\n\n(d) *product bases*: if $(e_a)_{a\\in A}$ and $(f_b)_{b\\in B}$ are orthonormal families in $H$ and $K$ whose closed linear spans are $H$ and $K$, then $(\\kappa(e_a\\otimes f_b))_{(a,b)\\in A\\times B}$ is an orthonormal family in $\\widehat{H\\odot K}$ whose closed linear span is $\\widehat{H\\odot K}$; if $A$ and $B$ are countable then $\\widehat{H\\odot K}$ is separable.\n\nThe notation $H\\widehat{\\otimes}K:=\\widehat{H\\odot K}$ is used in the rest of this pair. More precisely, if $(Y,\\iota)$ and $(Z,j)$ are any two norm completions of $H\\odot K$, there is a unique surjective linear isometry $U:Y\\to Z$ with $U\\circ\\iota=j$. No assertion is made about unbounded operators or algebraic sums of non-completed tensor products.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqm-composites-permutation-sector-projections",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a complex Hilbert space, $n\\ge1$, and $H^{\\otimes n}$ the $n$-fold completed tensor power ($H^{\\otimes1}:=H$, $H^{\\otimes(k+1)}:=H^{\\otimes k}\\widehat\\otimes H$ as in [[lem-nrqm-composites-hilbert-tensor-construction]]). For $v_0,\\dots,v_{n-1}\\in H$ write $v_0\\otimes\\cdots\\otimes v_{n-1}\\in H^{\\otimes n}$ for the iterated elementary tensor.\n\n(a) For every $\\pi$ in the symmetric group $S_n$ ([[def-finite-symmetric-group-and-permutation-notation]]) there is a unique unitary $U_\\pi\\in\\mathcal B(H^{\\otimes n})$ with\n\n$$U_\\pi(v_0\\otimes\\cdots\\otimes v_{n-1})=v_{\\pi^{-1}(0)}\\otimes\\cdots\\otimes v_{\\pi^{-1}(n-1)},$$\n\nand $U_\\pi U_\\sigma=U_{\\pi\\sigma}$, $U_{\\pi}^*=U_{\\pi^{-1}}$.\n\n(b) The operators\n\n$$P_+:=\\frac1{n!}\\sum_{\\pi\\in S_n}U_\\pi,\\qquad P_-:=\\frac1{n!}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$$\n\n(with $\\operatorname{sgn}$ the sign homomorphism, [[thm-sign-is-a-homomorphism]]) are orthogonal projections.\n\n(c) $U_\\pi P_+=P_+U_\\pi=P_+$ and $U_\\pi P_-=P_-U_\\pi=\\operatorname{sgn}(\\pi)P_-$ for every $\\pi$; consequently the range of $P_+$ is the subspace of vectors fixed by every $U_\\pi$, and the range of $P_-$ is the subspace of vectors transforming by $\\operatorname{sgn}$.\n\n(d) If $v_0,\\dots,v_{n-1}$ have a repeated factor, that is, $v_i=v_j$ for some distinct $i,j\\in\\{0,\\dots,n-1\\}$, then $P_-(v_0\\otimes\\cdots\\otimes v_{n-1})=0$.\n\nSelecting the symmetric or antisymmetric sector for a particle species is a physical postulate, not a theorem of this construction; no spin-statistics statement is proved here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $U$ is unitary, $U^{\\otimes n}$ is unitary on the completed tensor\npower by its isometric action on elementary tensors and its inverse\n$(U^{-1})^{\\otimes n}$. It commutes with every tensor-factor permutation,\nbecause both compositions send an elementary tensor to\n$Uh_{\\pi(1)}\\otimes\\cdots\\otimes Uh_{\\pi(n)}$. It therefore commutes with the\nsymmetric averaging projection of [F2] and restricts to a unitary\n$U_s^{(n)}$ on its range. The zeroth sector is the identity on $\\mathbb C$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The direct sum of the sector unitaries preserves the sum of squared\nsector norms and has inverse $\\bigoplus_n(U^{-1})_s^{(n)}$, so it is unitary.\nIt fixes the zeroth-sector vacuum and preserves finite sums of sectors in\nboth directions. On an elementary symmetric tensor, applying the Fock\ncreation formula before or after this direct sum gives the symmetrization of\n$Uh$ together with the images of the original tensor factors; hence the two\ncreation maps intertwine. The annihilation formula is its adjoint contraction\nand the same tensor calculation replaces each contracted vector $h$ by $Uh$.\nLinearity, boundedness on each fixed sector, and density of elementary\ntensors extend both identities to $\\mathcal D_{\\rm fin}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Fix $n$. For an elementary tensor,\n$$\\|U_g^{\\otimes n}(h_1\\otimes\\cdots\\otimes h_n) -U_{g_0}^{\\otimes n}(h_1\\otimes\\cdots\\otimes h_n)\\| \\le\\sum_{r=1}^n\\prod_{s\\ne r}\\|h_s\\|\\, \\|(U_g-U_{g_0})h_r\\|,$$\nby the telescoping expansion of the tensor difference and unitary norm\npreservation. Strong continuity of $U_g$ makes the right side tend to zero.\nDensity of elementary tensors and the uniform norm bound $1$ extend\ncontinuity to the completed sector and its closed symmetric subspace. Finite\nsector sums are dense by [F1]; approximating an arbitrary Fock vector by\nsuch a sum and using $\\|\\Gamma_s(U_g)\\|=1$ proves strong continuity on the\nwhole direct sum.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zeroth tensor power is the identity on the vacuum sector in steps 1.1 and 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zeroth sector and vacuum are explicit in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the sector map is U itself, covered by step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate geometry or quotient case occurs beyond any case explicitly listed above."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is a separate hypothesis beyond any boundary case explicitly listed above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No unlisted choice from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-qft-scalar-poincare-action": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-mass-shell-measure-invariant",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every $\\mu\\ge0$, the measure $d\\nu_\\mu$ of\n[[def-qft-scalar-mass-shell]] is locally finite and sigma-finite on $H_\\mu^+$.\nFor every proper orthochronous Lorentz transformation $\\Lambda$ and every\nnonnegative Borel function $g$ on $H_\\mu^+$,\n$$\\int_{H_\\mu^+}g(\\Lambda^{-1}p)\\,d\\nu_\\mu(p) =\\int_{H_\\mu^+}g(p)\\,d\\nu_\\mu(p).$$\nThe claim applies off the omitted apex when $\\mu=0$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-mass-shell-test-range-dense",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. For every $\\mu\\ge0$, the\nspace $H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu)$ of\n[[def-qft-scalar-mass-shell]] is separable, and\n$$\\{K_\\mu f:f\\in\\mathscr S(\\mathbb R^4)\\}$$\nis dense in $H_\\mu$. If $\\mu>0$, the range contains every function in\n$C_c^\\infty(\\mathbb R^3)$; if $\\mu=0$, it contains every function in\n$C_c^\\infty(\\mathbb R^3\\setminus\\{0\\})$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qft-mass-shell-test-restriction-continuity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. For every $\\mu\\ge0$, the\npointwise restriction\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x$$\nof [[def-qft-scalar-mass-shell]] maps $\\mathscr S(\\mathbb R^4)$ continuously\nand linearly into $H_\\mu$. It also annihilates the Klein–Gordon test operator:\n$$K_\\mu\\bigl((\\partial_0^2-\\Delta+\\mu^2)f\\bigr)=0 \\qquad(f\\in\\mathscr S(\\mathbb R^4)).$$\nThe coordinates are the fixed length coordinates of that definition and\n$\\mu$ has inverse-length units.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sr-affine-minkowski-model",
+          "source_section": "Definition",
+          "quote": "An **oriented time-oriented affine Minkowski space** is a quadruple\n$(A,V,\\eta,C^+)$ with the following data. In this notation $V$ includes its\nspecified orientation; forgetting that orientation gives only the underlying\nreal vector space, not the full datum $V$ of the model.\n\n1. A nonempty affine space $A$ over a $4$-dimensional real vector space $V$,\n   with action $(p,v)\\mapsto p+v$ and displacement $q-p\\in V$\n   ([[def-affine-space-and-displacement]]). In particular $V$ is a real vector\n   space of dimension $4$.\n2. A Lorentz form $\\eta$ on $V$, i.e. a nondegenerate symmetric bilinear form of\n   inertia $(3,1,0)$ ([[def-lorentz-form-and-inertia]]). Its associated quadratic\n   form is $q(v)=\\eta(v,v)$.\n3. An **orientation** of $V$: a positive ray of the determinant line\n   $\\Lambda^4V$, fixed once and for all\n   ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]]).\n4. A **time orientation** $C^+$ of $(V,\\eta)$: one of the two connected\n   components of the timelike set $T=\\{v\\in V:\\eta(v,v)<0\\}$, the other being\n   $C^-:=T\\setminus C^+$ ([[def-time-orientation-and-future-causal-sets]]).\n\nThe following terminology is attached to such a quadruple.\n\n- The elements $p$ of $A$ are the **events**; for events $p,q$ the vector\n  $q-p\\in V$ is the **displacement from $p$ to $q$**.\n- The **interval** of $p,q\\in A$ is the real number\n  $I(p,q):=\\eta(q-p,q-p)=q(q-p)$.\n- Events $p,q$ are **timelike**, **null**, **spacelike** or **causally\n  related** when the displacement $q-p$ is timelike, null, spacelike or causal\n  in the sense of [[def-causal-classification-of-lorentz-vectors]]; they are\n  **future-related** when $q-p$ is future causal and **past-related** when\n  $q-p$ is past causal in the sense of\n  [[def-time-orientation-and-future-causal-sets]].\n\n**No point of $A$ is distinguished.** For every $v\\in V$ the translation\n$\\tau_v:A\\to A$, $\\tau_v(p):=p+v$, is a bijection, since it is inverse to\n$\\tau_{-v}$: $\\tau_{-v}(\\tau_v(p))=(p+v)+(-v)=p+(v-v)=p$ and symmetrically, by\nthe affine action axioms ([[def-affine-space-and-displacement]]). Displacements\nare translation invariant, $\\tau_v(q)-\\tau_v(p)=q-p$, so every $\\tau_v$ preserves\nthe interval, the causal classification of every ordered pair, and the sets\n$C^+$, $C^-$ (which are subsets of $V$, independent of the point of $A$); it\nchanges only the labelling of points. The mathematical structure of the model is\nexactly the quadruple $(A,V,\\eta,C^+)$; no derived physical quantity (proper\ntime, four-velocity, momentum, energy, charge or any field) is part of this\ndefinition, and all later structure of the framework (frames, charts, tensor\nfields, worldlines) is built on this model.\n\n**Well-definedness.** The affine-space definition supplies the action and the\nunique displacements; the Lorentz-form definition supplies $\\eta$ and its\ninertia; the determinant-line definition supplies orientations; and the two\ncomponents of $T$ between which the time-orientation definition chooses exist by\nthe components lemma recorded in the well-definedness clause of\n[[def-time-orientation-and-future-causal-sets]], which is also what makes the\nnames future and past causal in item 4 well defined.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-lorentz-form-and-inertia",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a $4$-dimensional real vector space ([[def-vector-space]],\n[[def-dimension]]). A **Lorentz form** on $V$ is a symmetric bilinear form\n$\\eta:V\\times V\\to\\mathbb R$ ([[def-bilinear-symmetric-skew-and-alternating-forms]])\nsuch that\n\n1. $\\eta$ is nondegenerate: both radicals\n   $\\operatorname{rad}_L(\\eta)=\\{u:\\eta(u,v)=0\\text{ for every }v\\}$ and\n   $\\operatorname{rad}_R(\\eta)=\\{v:\\eta(u,v)=0\\text{ for every }u\\}$ are\n   $\\{0\\}$ ([[def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form]]);\n   and\n2. $\\eta$ has **inertia** $(3,1,0)$: in some (equivalently, in every) basis of\n   $V$ in which the matrix of $\\eta$ is diagonal, exactly three diagonal\n   entries are positive, exactly one is negative, and none is zero\n   ([[def-definiteness-inertia-and-signature-data-over-the-reals]]).\n\nThe inertia of a symmetric bilinear form is the triple $(p,q,r)$ of numbers of\npositive, negative and zero diagonal entries of any diagonalizing basis, and it\nis independent of the diagonalizing basis by Sylvester's law of inertia\n([[def-definiteness-inertia-and-signature-data-over-the-reals]]); hence clause 2\nis a property of $\\eta$ itself and not of a chosen basis. The **associated\nquadratic form** of $\\eta$ is\n\n$$q(v):=\\eta(v,v),\\qquad v\\in V .$$\n\nA **Lorentz vector space of signature $(-,+,+,+)$** is a pair $(V,\\eta)$\nconsisting of a $4$-dimensional real vector space $V$ and a Lorentz form $\\eta$\non $V$; the name records that the diagonal normal form of $\\eta$ has one\nnegative entry followed by three positive entries. No positive-definite\nstructure on $V$ is assumed or implied by this definition, and $q$ takes both\nnegative and positive values on nonzero vectors: a basis in which\n$\\eta$ is diagonal with diagonal entries $-1,1,1,1$ exists by clause 2, and on\nits first vector $q$ is $-1$, while on each of the other three it is $+1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-time-orientation-and-future-causal-sets",
+          "source_section": "Definition",
+          "quote": "Let $(V,\\eta)$ be a Lorentz vector space of signature $(-,+,+,+)$\n([[def-lorentz-form-and-inertia]]), with causal terminology as in\n[[def-causal-classification-of-lorentz-vectors]], and let\n\n$$T:=\\{v\\in V:\\eta(v,v)<0\\}$$\n\nbe its **timelike set**. Components and closures refer to the topology obtained\nby using any ordered basis to identify $V$ with Euclidean $\\mathbb R^4$;\n[[lem-timelike-cone-has-two-convex-components]], step 5.1, proves that the\nresulting open sets are independent of the basis. By that lemma the\nset $T$ has exactly two connected components, and each of them is nonempty,\nopen, convex and path-connected. A **time orientation** of $(V,\\eta)$ is a\nchoice of one of these two components. Fixing such a choice, write $C^+$ for the\nchosen component and\n\n$$C^-:=T\\setminus C^+$$\n\nfor the other component; thus $T=C^+\\sqcup C^-$ is a disjoint union and\n$C^+$, $C^-$ are exactly the two components supplied by the lemma. Relative to\nthis choice a vector $v\\in V$ is\n\n- **future timelike** when $v\\in C^+$;\n- **past timelike** when $v\\in C^-$;\n- **future null** when $v\\neq 0$, $\\eta(v,v)=0$ and $v\\in\\operatorname{cl}(C^+)$;\n- **past null** when $v\\neq 0$, $\\eta(v,v)=0$ and $v\\in\\operatorname{cl}(C^-)$;\n- **future causal** when it is future timelike or future null;\n- **past causal** when it is past timelike or past null.\n\nThe sets $\\operatorname{cl}(C^+)$ and $\\operatorname{cl}(C^-)$ are the\n**future closed cone** and the **past closed cone** of the time-oriented space\n$(V,\\eta,C^+)$. By [[lem-timelike-cone-has-two-convex-components]] each of them\nis a convex cone, their intersection is $\\{0\\}$, and a vector is causal exactly\nwhen it is future causal or past causal, in which case exactly one of these two\nalternatives holds: no nonzero vector is both future causal and past causal.\nThe timelike vectors are exactly the points of $T=C^+\\cup C^-$, and\n$0\\notin T$ because $\\eta(0,0)=0$; since a null vector is nonzero with\n$\\eta(v,v)=0$, no vector is both timelike and null, so the classes above are\nmutually exclusive where the definitions say they are: no vector is both future\nand past causal, and no timelike vector is null.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The affine pullback $f_g(x)=f(\\Lambda^{-1}(x-a))$ preserves Schwartz\nspace. Repeated chain rule [F6] expresses each derivative as a finite linear\ncombination of derivatives of $f$ at $\\Lambda^{-1}(x-a)$. Also\n$1+|x|\\le C(1+|\\Lambda^{-1}(x-a)|)$ for a finite constant $C$ depending on\n$a,\\Lambda$. Thus every polynomially weighted derivative remains bounded by\nthe corresponding finite sum of Schwartz seminorms.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Multiplication by $e^{ip\\circ a}$ preserves the $H_\\mu$ norm.\nComposition with $\\Lambda^{-1}$ also preserves that norm by [F2]; it\npreserves null-equivalence classes for the same reason. Therefore $U_\\mu(g)$\nis a well-defined isometry. Its inverse is the corresponding formula for\n$g^{-1}$, so it is unitary. Direct substitution and Lorentz invariance of\n$p\\circ x$ give\n$U_\\mu(a,\\Lambda)U_\\mu(b,\\Gamma)\n=U_\\mu(a+\\Lambda b,\\Lambda\\Gamma)$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "In the Fourier integral for $K_\\mu f_g$, change variables\n$x=a+\\Lambda y$; [F5] gives $|\\det\\Lambda|=1$ and [F7] justifies the\nchange of variables. Lorentz invariance of the phase then gives\n$$K_\\mu f_g(p)=e^{ip\\circ a}K_\\mu f(\\Lambda^{-1}p).$$\nBoth sides belong to $H_\\mu$ by [F4], so this equality is also equality of\nHilbert-space vectors. This is the action formula used in step 1.2.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Let $h\\in C_c^\\infty$ in the shell chart, with support away from the\nmassless apex. If $g\\to g_0$ in the Poincare group, $U_\\mu(g)h$ converges\npointwise to $U_\\mu(g_0)h$. In a compact neighborhood of $g_0$, the supports\nlie in one compact chart subset $C$ away from the apex; $\\nu_\\mu(C)<\\infty$\nby [F2]. The squared pointwise difference is bounded by\n$4\\|h\\|_\\infty^2\\mathbf1_C$, so [F8] gives norm continuity for this dense\nfamily. Density follows from [F3]. For arbitrary $v\\in H_\\mu$, choose such\n$h$ with $\\|v-h\\|<\\epsilon$; unitarity gives\n$$\\|U_\\mu(g)v-U_\\mu(g_0)v\\| \\le2\\epsilon+\\|U_\\mu(g)h-U_\\mu(g_0)h\\|.$$\nFirst take $g\\to g_0$ and then $\\epsilon\\downarrow0$. This proves strong\ncontinuity on all of $H_\\mu$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F8",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero translation and identity Lorentz map give the identity element by the group law in step 1.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 covers the identity transformation a=0, Lambda=I."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one parameter is a separate hypothesis of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The massless chart excludes the apex and step 3.1 uses its dense punctured chart."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is a separate hypothesis beyond any boundary case explicitly listed above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is stated for the change-of-variables input used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-qft-smeared-free-scalar": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h(v)=\\langle h,v\\rangle_2$ and its tensor extension is the bounded map of\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a separable\ncomplex Hilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm fin}$ define the bosonic\ncreation and annihilation maps $a^\\dagger(h)$ and $a(h)$ and the fermionic maps\n$c^\\dagger(h)$ and $c(h)$ as in\n[[def-qft-fock-and-test-spaces]]. Write $a_n(h)$ and $a_n^\\dagger(h)$ for\ntheir restrictions to the $n$th bosonic sector. For bosons set\n\n$$D(a(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge1}\\|a_n(h)\\Psi_n\\|^2<\\infty\\},\\qquad D(a^\\dagger(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge0}\\|a_n^\\dagger(h)\\Psi_n\\|^2<\\infty\\}.$$\n\nThen $\\mathcal F_s(H)$ and $\\mathcal F_a(H)$ are Hilbert spaces,\n$\\mathcal D_{\\rm fin}$ is dense, and it is a graph core for both maximal\nbosonic sector maps. The bosonic operators on their displayed domains are\nclosed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy\n\n$$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$\n\nThe fermionic $c(h)$ and $c^\\dagger(h)$ extend to bounded operators on the\nwhole Fock space, with norms $\\|h\\|$, and satisfy on the whole space\n\n$$\\{c(h),c^\\dagger(k)\\}=\\langle h,k\\rangle_2I,\\qquad \\{c(h),c(k)\\}=\\{c^\\dagger(h),c^\\dagger(k)\\}=0.$$\n\nThis is a mathematical construction of the two Fock representations; it does\nnot assign particle statistics to a physical species.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-segal-weyl-domain",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let $H$ be a separable\ncomplex Hilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]], and let $\\mathcal F_s(H)$ and\n$\\mathcal D_{\\rm fin}$ be its bosonic Fock space and finite-particle domain.\nFor $h\\in H$ define on $\\mathcal D_{\\rm fin}$ the Segal field\n$$\\phi_0(h):=2^{-1/2}\\bigl(a^\\dagger(h)+a(h)\\bigr).$$\nFor $h\\ne0$, this symmetric operator is essentially self-adjoint; write\n$\\Phi(h)=\\overline{\\phi_0(h)}$. If $r=\\|h\\|$, $e=h/r$, $K=e^\\perp$,\n$G=\\mathcal F_s(K)$, choose a countable orthonormal basis $(u_j)$ of $G$\nwhose vectors are finite-particle, and use the one-mode splitting of\n[[lem-qft-fock-one-mode-splitting]] followed by the Hermite unitary\n$|n\\rangle\\mapsto g_n$ into $L^2(\\mathbb R,dx;\\mathbb C)$ with pairing\n$\\langle f,g\\rangle_2=\\int\\overline f g$ to write a vector as\n$(f_j)_{j\\in J}\\in\\ell^2(J;L^2(\\mathbb R,dx;\\mathbb C))$. Then the exact domain and\naction are\n$$D(\\Phi(h))=\\left\\{(f_j):\\sum_{j\\in J}\\int_{\\mathbb R}(1+r^2x^2)|f_j(x)|^2\\,dx<\\infty\\right\\},\\qquad (\\Phi(h)f)_j(x)=rx f_j(x).$$\nFor $h=0$, $\\phi_0(0)$ closes to the zero operator on all of $\\mathcal F_s(H)$.\n\nDefine $\\epsilon(z)=\\bigoplus_{n\\ge0}z^{\\otimes n}/\\sqrt{n!}$ for $z\\in H$.\nThere are unitaries $W(h)$ determined on these total exponential vectors by\n$$W(h)\\epsilon(z)=\\exp\\!\\left(-\\frac{\\|h\\|^2}{4} +\\frac{i}{\\sqrt2}\\langle h,z\\rangle_2\\right) \\epsilon\\!\\left(z+\\frac{i h}{\\sqrt2}\\right).$$\nThey obey\n$$W(h)W(k)=\\exp\\!\\left(-\\frac{i}{2}\\operatorname{Im}\\langle h,k\\rangle_2\\right)W(h+k),\\qquad \\langle\\Omega,W(h)\\Omega\\rangle_2=e^{-\\|h\\|^2/4},$$\nand $h\\mapsto W(h)$ is strongly continuous. For every $h$, the one-parameter\ngroup $t\\mapsto W(th)$ has norm derivative at zero exactly on\n$D(\\Phi(h))$, with derivative $i\\Phi(h)$ (for $h=0$ this is the zero\ngenerator). Thus the displayed bounded Weyl operators have precisely the\nclosed Segal fields as their generators; no point-field or measurement claim\nis included.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qft-mass-shell-measure-invariant",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every $\\mu\\ge0$, the measure $d\\nu_\\mu$ of\n[[def-qft-scalar-mass-shell]] is locally finite and sigma-finite on $H_\\mu^+$.\nFor every proper orthochronous Lorentz transformation $\\Lambda$ and every\nnonnegative Borel function $g$ on $H_\\mu^+$,\n$$\\int_{H_\\mu^+}g(\\Lambda^{-1}p)\\,d\\nu_\\mu(p) =\\int_{H_\\mu^+}g(p)\\,d\\nu_\\mu(p).$$\nThe claim applies off the omitted apex when $\\mu=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qft-mass-shell-test-range-dense",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. For every $\\mu\\ge0$, the\nspace $H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu)$ of\n[[def-qft-scalar-mass-shell]] is separable, and\n$$\\{K_\\mu f:f\\in\\mathscr S(\\mathbb R^4)\\}$$\nis dense in $H_\\mu$. If $\\mu>0$, the range contains every function in\n$C_c^\\infty(\\mathbb R^3)$; if $\\mu=0$, it contains every function in\n$C_c^\\infty(\\mathbb R^3\\setminus\\{0\\})$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qft-fock-unitary-lift",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let $H$ and $K$ be complex\nHilbert spaces and let $U:H\\to K$ be unitary. The sector maps\n$U^{\\otimes n}$ restrict to unitaries $U_s^{(n)}:H_s^{(n)}\\to K_s^{(n)}$;\ntheir direct sum\n$$\\Gamma_s(U)=\\bigoplus_{n=0}^\\infty U_s^{(n)}$$\nis unitary, maps vacuum to vacuum, and maps the finite-particle domain\n$\\mathcal D_{\\rm fin}(H)$ onto $\\mathcal D_{\\rm fin}(K)$. It intertwines the\ncreation and annihilation maps:\n$$\\Gamma_s(U)a_H^\\dagger(h)\\Gamma_s(U)^{-1}=a_K^\\dagger(Uh),\\qquad \\Gamma_s(U)a_H(h)\\Gamma_s(U)^{-1}=a_K(Uh)$$\non the finite-particle domain. If $g\\mapsto U_g$ is a strongly continuous\nfamily of unitaries, then $g\\mapsto\\Gamma_s(U_g)$ is strongly continuous.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qft-second-quantized-spectrum",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let\n$(X,\\mathcal A,\\mu)$ be a sigma-finite measure space and let\n$\\boldsymbol\\omega=(\\omega_1,\\ldots,\\omega_d):X\\to\\mathbb R^d$ be a\nfinite-valued measurable map, where $d\\ge1$. Put\n$H=L^2(X,\\mu;\\mathbb C)$ with the second-variable-linear pairing of\n[[def-qft-fock-and-test-spaces]], and form the bosonic Fock space\n$\\mathcal F_s(H)$. For $n\\ge1$, identify $H_s^{(n)}$ with the symmetric\nsubspace of $L^2(X^n,\\overline{\\mu^{\\times n}};\\mathbb C)$ by iterating\n[[lem-qft-l2-product-tensor-identification]]. Set $X^0=\\{\\star\\}$,\n$s_0(\\star)=0$, and for $n\\ge1$ set\n$$s_n(x_1,\\ldots,x_n)=\\sum_{r=1}^n\\boldsymbol\\omega(x_r)\\in\\mathbb R^d.$$\nFor $1\\le j\\le d$, define $H_j$ by multiplication by the $j$th coordinate\n$s_{n,j}$ on sector $n$, with exact domain\n$$D(H_j)=\\left\\{\\Psi=(\\Psi_n): \\sum_{n\\ge1}\\int_{X^n}|s_{n,j}|^2|\\Psi_n|^2\\,d\\overline{\\mu^{\\times n}}<\\infty\\right\\}.$$\nEach $H_j$ is self-adjoint, and $\\mathcal D_{\\rm fin}\\cap D(H_j)$ is a\ngraph core. The joint projection-valued measure\n[[def-projection-valued-measure]] on $\\mathbb R^d$ is\n$$(E(B)\\Psi)_n=\\mathbf1_{s_n^{-1}(B)}\\Psi_n\\quad(n\\ge1),\\qquad (E(B)\\Psi)_0=\\mathbf1_B(0)\\Psi_0.$$\nFor $\\theta\\in\\mathbb R^d$, let $H_\\theta$ be multiplication on sector $n$\nby $\\theta\\cdot s_n$, with its maximal square-integrability domain. Then\n$$U_\\theta(t)\\Psi:=\\bigl(e^{it\\theta\\cdot s_n}\\Psi_n\\bigr)_{n\\ge0}$$\nis a strongly continuous unitary group on all of Fock space, and its norm\nderivative at zero exists exactly for $\\Psi\\in D(H_\\theta)$, where it is\n$iH_\\theta\\Psi$. The zero-particle sector is the vacuum eigenvector at joint\nvalue $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-qft-mass-shell-test-restriction-continuity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. For every $\\mu\\ge0$, the\npointwise restriction\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x$$\nof [[def-qft-scalar-mass-shell]] maps $\\mathscr S(\\mathbb R^4)$ continuously\nand linearly into $H_\\mu$. It also annihilates the Klein–Gordon test operator:\n$$K_\\mu\\bigl((\\partial_0^2-\\Delta+\\mu^2)f\\bigr)=0 \\qquad(f\\in\\mathscr S(\\mathbb R^4)).$$\nThe coordinates are the fixed length coordinates of that definition and\n$\\mu$ has inverse-length units.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qft-scalar-poincare-action",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Use the proper\northochronous Poincare group\n$G=\\mathbb R^4\\rtimes SO^+(1,3)$ in the coordinates of\n[[def-qft-scalar-mass-shell]]. For $g=(a,\\Lambda)\\in G$, define\n$$f_g(x)=f(\\Lambda^{-1}(x-a)),\\qquad [U_\\mu(g)h](p)=e^{ip\\circ a}h(\\Lambda^{-1}p).$$\nThen $f_g\\in\\mathscr S(\\mathbb R^4)$, $U_\\mu(g)$ is a well-defined unitary\non $H_\\mu$, $g\\mapsto U_\\mu(g)$ is a strongly continuous representation, and\n$$K_\\mu f_g=U_\\mu(g)K_\\mu f \\qquad(f\\in\\mathscr S(\\mathbb R^4)).$$\nThe group product convention is\n$(a,\\Lambda)(b,\\Gamma)=(a+\\Lambda b,\\Lambda\\Gamma)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The Fourier transform is a topological automorphism of $\\mathcal S(\\mathbb R^n)$, with $\\mathcal F^2=R$ and $\\mathcal F^{-1}=R\\mathcal F$, where $Rf(x)=f(-x)$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].\n\nPointwise differentiation is linear; thus $p_{\\alpha\\beta}(f+g)\\le p_{\\alpha\\beta}(f)+p_{\\alpha\\beta}(g)$ and $p_{\\alpha\\beta}(cf)=|c|p_{\\alpha\\beta}(f)$. In particular this set is a complex vector space and each $p_{\\alpha\\beta}$ is a seminorm. The zero function belongs to it. Since $p_{00}(f)=0$ forces $f(x)=0$ for every $x$, the family separates functions. No choice principle is needed.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h(v)=\\langle h,v\\rangle_2$ and its tensor extension is the bounded map of\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-nrqm-composites-bounded-tensor-maps",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H,H',K,K'$ be complex Hilbert spaces and let $S\\in\\mathcal B(H,H')$, $T\\in\\mathcal B(K,K')$ be bounded linear operators ([[def-bounded-linear-operator]]). Write $H\\widehat\\otimes K$ for the completion of the algebraic tensor product constructed in [[lem-nrqm-composites-hilbert-tensor-construction]], with inclusion $\\kappa$.\n\n(a) There is a unique bounded linear operator $S\\otimes T: H\\widehat\\otimes K\\to H'\\widehat\\otimes K'$ with $(S\\otimes T)\\kappa(u\\otimes v)=\\kappa'(Su\\otimes Tv)$ for all $u\\in H$, $v\\in K$, and it satisfies $\\|S\\otimes T\\|\\le\\|S\\|\\,\\|T\\|$ ([[def-operator-norm]]).\n\n(b) For Hilbert spaces $H'',K''$ and bounded $S':H''\\to H$, $T':K''\\to K$, one has $(S\\otimes T)(S'\\otimes T')=(SS')\\otimes(TT')$. In particular, for endomorphisms $S:H\\to H$, $T:K\\to K$, the endomorphisms $S\\otimes I_K$ and $I_H\\otimes T$ commute and their composite is $S\\otimes T$.\n\n(c) The Hilbert adjoint ([[def-hilbert-space-adjoint]]) is $(S\\otimes T)^*=S^*\\otimes T^*$.\n\n(d) If $S,T$ are unitary, then so is $S\\otimes T$. No extension of unbounded maps, and no algebraic manipulation of domains of unbounded operators, is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-nrqm-composites-permutation-sector-projections",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a complex Hilbert space, $n\\ge1$, and $H^{\\otimes n}$ the $n$-fold completed tensor power ($H^{\\otimes1}:=H$, $H^{\\otimes(k+1)}:=H^{\\otimes k}\\widehat\\otimes H$ as in [[lem-nrqm-composites-hilbert-tensor-construction]]). For $v_0,\\dots,v_{n-1}\\in H$ write $v_0\\otimes\\cdots\\otimes v_{n-1}\\in H^{\\otimes n}$ for the iterated elementary tensor.\n\n(a) For every $\\pi$ in the symmetric group $S_n$ ([[def-finite-symmetric-group-and-permutation-notation]]) there is a unique unitary $U_\\pi\\in\\mathcal B(H^{\\otimes n})$ with\n\n$$U_\\pi(v_0\\otimes\\cdots\\otimes v_{n-1})=v_{\\pi^{-1}(0)}\\otimes\\cdots\\otimes v_{\\pi^{-1}(n-1)},$$\n\nand $U_\\pi U_\\sigma=U_{\\pi\\sigma}$, $U_{\\pi}^*=U_{\\pi^{-1}}$.\n\n(b) The operators\n\n$$P_+:=\\frac1{n!}\\sum_{\\pi\\in S_n}U_\\pi,\\qquad P_-:=\\frac1{n!}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$$\n\n(with $\\operatorname{sgn}$ the sign homomorphism, [[thm-sign-is-a-homomorphism]]) are orthogonal projections.\n\n(c) $U_\\pi P_+=P_+U_\\pi=P_+$ and $U_\\pi P_-=P_-U_\\pi=\\operatorname{sgn}(\\pi)P_-$ for every $\\pi$; consequently the range of $P_+$ is the subspace of vectors fixed by every $U_\\pi$, and the range of $P_-$ is the subspace of vectors transforming by $\\operatorname{sgn}$.\n\n(d) If $v_0,\\dots,v_{n-1}$ have a repeated factor, that is, $v_i=v_j$ for some distinct $i,j\\in\\{0,\\dots,n-1\\}$, then $P_-(v_0\\otimes\\cdots\\otimes v_{n-1})=0$.\n\nSelecting the symmetric or antisymmetric sector for a particle species is a physical postulate, not a theorem of this construction; no spin-statistics statement is proved here.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $K_\\mu f,K_\\mu\\overline f\\in H_\\mu$ by [F9], the field formula is\ndefined on $\\mathcal D_{\\rm fin}$. The first term $a(K_\\mu\\overline f)$ is\ncomplex-linear in $f$ because complex conjugation is followed by the\nconjugate-linear dependence of $a$; the second is linear because both\n$a^\\dagger$ and $K_\\mu$ are linear. Both terms preserve $\\mathcal D_{\\rm fin}$\nby [F1,F2]. For real $f$, the shell vectors coincide, so\n$\\Phi_\\mu(f)=a(K_\\mu f)+a^\\dagger(K_\\mu f)\n=\\sqrt2\\,\\Phi_{\\rm Segal}(K_\\mu f)|_{\\mathcal D_{\\rm fin}}$. It is symmetric on the common\nfinite-particle domain by [F2]. Substituting $h=\\sqrt2K_\\mu f$ and $k=\\sqrt2K_\\mu g$ into [F3]'s\nWeyl relation gives the stated scalar phase, and its vacuum Gaussian gives\n$\\langle\\Omega,W_\\mu(f)\\Omega\\rangle_2=e^{-\\|K_\\mu f\\|_2^2/2}$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $g=(a,\\Lambda)$, [F10] gives the one-particle representation and\n$U_\\mu(g)K_\\mu f=K_\\mu f_g$. Since the affine action is real,\n$U_\\mu(g)K_\\mu\\overline f=K_\\mu\\overline{f_g}$. The Fock lift [F7]\nintertwines creation and annihilation, so the field formula in step 1.1 gives\n$$\\Gamma_s(U_\\mu(g))\\Phi_\\mu(f)\\Gamma_s(U_\\mu(g))^{-1} =\\Phi_\\mu(f_g)$$\non $\\mathcal D_{\\rm fin}$. The explicit Segal Weyl formula [F3] and the same\nlift give bounded Weyl covariance. Strong continuity of the Fock lifts\nfollows from [F7] and [F10].",
+          "inputs": [
+            "A1",
+            "F3",
+            "F7",
+            "F10",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Since $a(K_\\mu\\overline f)\\Omega=0$ and\n$\\langle\\Omega,a^\\dagger(h)\\Psi\\rangle_2=0$, the vacuum one-point function\nvanishes. Expanding the two fields, only\n$a(K_\\mu\\overline f)a^\\dagger(K_\\mu g)\\Omega$ contributes to the vacuum\npairing; CCR [F2] makes that value\n$\\langle K_\\mu\\overline f,K_\\mu g\\rangle_2$. Taking the first test to be $\\overline f$ and the second $f$ gives $\\|K_\\mu f\\|^2\\ge0$; for real $f$ this is the ordinary diagonal. For an ordered product of $n$ real smeared fields,\nwrite the first field as creation plus annihilation. The creation part\nvanishes against the left vacuum; commute the annihilation part successively\npast each later field using [F2]. Each commutator is the corresponding\ntwo-point pairing, and the remaining annihilator kills the right vacuum.\nThis yields the recursive sum over its possible partner and proves the\nWick pairing rule by induction on $n$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Cauchy–Schwarz gives $\\|C_h\\|\\le\\|h\\|$ for $C_h(v)=\\langle h,v\\rangle_2$. The tensor-extension bound and orthogonal symmetrizer in [F11] therefore give $\\|a_n(h)\\|\\le\\sqrt n\\|h\\|$ and $\\|a_n^\\dagger(h)\\|\\le\\sqrt{n+1}\\|h\\|$, the latter also using $\\|h\\otimes v\\|=\\|h\\|\\|v\\|$ from the product tensor pairing. Let $\\Theta$ have sectors only through $N$. These bounds and orthogonality of distinct output sectors imply $\\|\\Phi_\\mu(f)\\Theta\\|\\le(\\sqrt N\\|K_\\mu\\overline f\\|+\\sqrt{N+1}\\|K_\\mu f\\|)\\|\\Theta\\|$. Continuity of $K_\\mu$ [F9] and conjugation [F12], followed by Hilbert Cauchy–Schwarz, makes every stated matrix coefficient continuous; complex linearity is step 1.1. Mutual adjoints [F2] give $\\langle\\Phi_\\mu(f)\\Psi,\\Theta\\rangle_2=\\langle\\Psi,\\Phi_\\mu(\\overline f)\\Theta\\rangle_2$ for finite-particle vectors. Thus every such $\\Theta$ lies in the adjoint domain with the asserted restricted adjoint action. Finite-particle invariance permits reversing every finite polynomial product by this identity, so for $\\omega(B)=\\langle\\Omega,B\\Omega\\rangle_2$ one has $\\omega(B^*B)=\\|B\\Omega\\|^2\\ge0$ and $\\omega(I)=1$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F9",
+            "F11",
+            "F12",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "For a Schwartz test $\\varphi(z)$, define $G_\\varphi(p)=\\int\\varphi(z)e^{-ip\\circ z}\\,d^4z$; for $F(x,y)\\in\\mathcal S(\\mathbb R^8)$ define $G_F(p)=\\int F(x,y)e^{-ip\\circ x}e^{ip\\circ y}\\,d^4x\\,d^4y$. By [F12], these are continuous Schwartz transforms, the second followed by the injective linear frequency restriction $L$ determined by the displayed phases. Injectivity in finite dimensions gives $|Lp|\\ge c|p|$ for some $c>0$; each derivative of a restricted transform is a fixed finite linear combination of its ambient derivatives at $Lp$. These bounds control every weighted restricted derivative by finitely many ambient Schwartz seminorms, proving the claimed restriction continuity and decay. In either case $|G(p)|\\le q_4(G)(1+|p|)^{-4}$, with $q_4$ a continuous Schwartz seminorm. The shell integral of $(1+|p|)^{-4}$ is finite by [F4]: its radial behavior is $O(r)$ at the massless apex, $O(r^2)$ near zero when $\\mu>0$, and $O(r^{-3})$ at infinity. Therefore the integrals of $G_\\varphi$ and $G_F$ against $d\\nu_\\mu$ define continuous complex-linear tempered distributions. On product tests $F(x,y)=f(x)g(y)$ the inner integral is $\\overline{K_\\mu\\overline f(p)}K_\\mu g(p)$; its shell integral is exactly the covariance from step 2.2. This proves the relative and bidistribution interfaces without assigning point operators.",
+          "inputs": [
+            "A1",
+            "F4",
+            "F12",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The one-particle translation phase is\n$e^{i(\\omega_\\mu(\\mathbf k)a^0-\\mathbf k\\cdot\\mathbf a)}$, so its real\ngenerator vector is $\\varpi(\\mathbf k)=(\\omega_\\mu(\\mathbf k),-\\mathbf k)$.\nIt is finite and measurable. The measure is sigma-finite by [F5], so [F8]\napplies and gives the joint PVM and vacuum at zero. On an $n$-particle\nsector the joint multiplier is $\\sum_{r=1}^n\n(\\omega_\\mu(\\mathbf k_r),-\\mathbf k_r)$. Since\n$|\\sum_r\\mathbf k_r|\\le\\sum_r|\\mathbf k_r|\\le\\sum_r\\omega_\\mu(\\mathbf k_r)$,\nevery such value lies in the closed future cone; the vacuum value does too.\nThus the joint spectral measure is supported there, as claimed.",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain or empty-object alternative is a separate hypothesis of this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step1.1 give f=0 ⇒ Kf=0 and Phi(f)=0 on D_fin; the real-field closure for Kf=0 is the zero Segal operator and W(0)=I. Step2.2 uses conjugated first test for arbitrary complex f, so positivity is ||Kf||² rather than an unsupported bilinear diagonal."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one parameter is a separate hypothesis of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits mu=0 with apex omitted. F9 continuity supplier checks its integrable shell weight; step3.2 explicitly checks radial O(r) at the massless apex, O(r²) near0 for mu>0, and O(r^-3) decay for the relative/bidistribution pairing. Step3.1 uses fixed finite-sector bounds and the common invariant D_fin for the adjoint/state identities; no point-field operator or full-domain sum is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is a separate hypothesis beyond any boundary case explicitly listed above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No unlisted choice from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-qft-scalar-causal-commutator": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qft-smeared-free-scalar",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]], let $\\mu\\ge0$, let\n$H_\\mu$ and $K_\\mu$ be as in [[def-qft-scalar-mass-shell]], and form\n$\\mathcal F_s(H_\\mu)$ with vacuum $\\Omega$ and finite-particle domain\n$\\mathcal D_{\\rm fin}$. For $f\\in\\mathscr S(\\mathbb R^4)$ define on\n$\\mathcal D_{\\rm fin}$\n$$\\Phi_\\mu(f)=a(K_\\mu\\overline f)+a^\\dagger(K_\\mu f).$$\nThis is a complex-linear map of test functions into operators\n$\\mathcal D_{\\rm fin}\\to\\mathcal D_{\\rm fin}$. For real $f$ it is symmetric\nand equals $\\sqrt2\\,\\Phi_{\\rm Segal}(K_\\mu f)|_{\\mathcal D_{\\rm fin}}$, where the Segal field of\n[[lem-qft-segal-weyl-domain]] is\n$\\Phi_{\\rm Segal}(h)=\\overline{(a^\\dagger(h)+a(h))/\\sqrt2}$.\nThus its Weyl unitary is\n$W_\\mu(f):=W_{\\rm Segal}(\\sqrt2 K_\\mu f)$ and, for real $f,g$,\n$$W_\\mu(f)W_\\mu(g)= e^{-i\\,\\operatorname{Im}\\langle K_\\mu f,K_\\mu g\\rangle_2}W_\\mu(f+g).$$\nFor every real $f$ the vacuum Weyl expectation is\n$$\\langle\\Omega,W_\\mu(f)\\Omega\\rangle_2 =e^{-\\|K_\\mu f\\|_2^2/2}.$$\nHere the inner product is second-variable-linear as fixed in\n[[def-qft-fock-and-test-spaces]]. The vacuum has zero one-point function and\ntwo-point function\n$$\\langle\\Omega,\\Phi_\\mu(f)\\Phi_\\mu(g)\\Omega\\rangle_2 =\\langle K_\\mu\\overline f,K_\\mu g\\rangle_2,$$\nwhich obeys $\\langle\\Omega,\\Phi_\\mu(\\overline f)\\Phi_\\mu(f)\\Omega\\rangle_2=\\|K_\\mu f\\|_2^2\\ge0$ for every complex test $f$ (ordinary diagonal positivity holds for real tests); higher vacuum moments of ordered real smeared\nfields obey the CCR pairing recursion and hence the free-field Wick pairing\nrule. The field is a weak operator-valued tempered distribution on $\\mathcal D_{\\rm fin}$: every matrix coefficient $f\\mapsto\\langle\\Psi,\\Phi_\\mu(f)\\Theta\\rangle_2$ for $\\Psi,\\Theta\\in\\mathcal D_{\\rm fin}$ is a continuous complex-linear functional on Schwartz space. Its adjoint satisfies $\\Phi_\\mu(f)^*|_{\\mathcal D_{\\rm fin}}=\\Phi_\\mu(\\overline f)$, and its normalized vacuum defines a positive state on the finite polynomial $*$-algebra generated by these fields.\n\nThe relative-coordinate two-point tempered distribution is\n$$W_\\mu(z)=\\int_{H_\\mu^+}e^{-ip\\circ z}\\,d\\nu_\\mu(p),$$\nunderstood by pairing with Schwartz tests. Its translation-invariant bidistribution is the shell integral of $e^{-ip\\circ x}e^{ip\\circ y}$; on product tests it is the displayed vacuum covariance.\n\nFor $g=(a,\\Lambda)$, let $f_g$ and $U_\\mu(g)$ be the affine test pullback\nand one-particle action of [[lem-qft-scalar-poincare-action]]. Their Fock\nlifts implement the same covariance for $\\Phi_\\mu$ on $\\mathcal D_{\\rm fin}$\nand for the bounded Weyl operators.\n\nFor translations, the joint spectral measure on Fock space is the\nsecond-quantized multiplier measure with one-particle vector\n$(\\omega_\\mu(\\mathbf k),-\\mathbf k)$. Its support is contained in the closed\nfuture cone $\\{(E,\\mathbf P):E\\ge|\\mathbf P|\\}$; the vacuum is an eigenvector\nat $(0,\\mathbf0)$. These are conditional mathematical model deductions.\nNo point field, empirical observation or measurement claim is made.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a separable\ncomplex Hilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm fin}$ define the bosonic\ncreation and annihilation maps $a^\\dagger(h)$ and $a(h)$ and the fermionic maps\n$c^\\dagger(h)$ and $c(h)$ as in\n[[def-qft-fock-and-test-spaces]]. Write $a_n(h)$ and $a_n^\\dagger(h)$ for\ntheir restrictions to the $n$th bosonic sector. For bosons set\n\n$$D(a(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge1}\\|a_n(h)\\Psi_n\\|^2<\\infty\\},\\qquad D(a^\\dagger(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge0}\\|a_n^\\dagger(h)\\Psi_n\\|^2<\\infty\\}.$$\n\nThen $\\mathcal F_s(H)$ and $\\mathcal F_a(H)$ are Hilbert spaces,\n$\\mathcal D_{\\rm fin}$ is dense, and it is a graph core for both maximal\nbosonic sector maps. The bosonic operators on their displayed domains are\nclosed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy\n\n$$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$\n\nThe fermionic $c(h)$ and $c^\\dagger(h)$ extend to bounded operators on the\nwhole Fock space, with norms $\\|h\\|$, and satisfy on the whole space\n\n$$\\{c(h),c^\\dagger(k)\\}=\\langle h,k\\rangle_2I,\\qquad \\{c(h),c(k)\\}=\\{c^\\dagger(h),c^\\dagger(k)\\}=0.$$\n\nThis is a mathematical construction of the two Fock representations; it does\nnot assign particle statistics to a physical species.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h(v)=\\langle h,v\\rangle_2$ and its tensor extension is the bounded map of\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\geq1$.  A **tempered distribution** on $\\mathbb R^n$ is a\ncontinuous complex-linear functional\n\n$$u:\\mathcal S(\\mathbb R^n)\\longrightarrow\\mathbb C,$$\n\nwhere Schwartz space and its locally convex topology are those of\n[[def-schwartz-space-and-its-seminorms]] and\n[[def-schwartz-topology-and-convergence]].  The space of all such functionals\nis denoted $\\mathcal S'(\\mathbb R^n)$.\n\nWe write $\\langle u,\\varphi\\rangle=u(\\varphi)$.  This pairing is bilinear:\nthe test variable is not conjugated.  Thus $u(a\\varphi+b\\psi)=\na\\langle u,\\varphi\\rangle+b\\langle u,\\psi\\rangle$ for $a,b\\in\\mathbb C$.\nThe zero functional is tempered.  Continuity is topological continuity, and,\nbecause the Schwartz topology is generated by a countable cofinal family of\nseminorms, it is equivalently continuity on every convergent sequence.  No\nchoice principle is used in this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sr-affine-minkowski-model",
+          "source_section": "Definition",
+          "quote": "An **oriented time-oriented affine Minkowski space** is a quadruple\n$(A,V,\\eta,C^+)$ with the following data. In this notation $V$ includes its\nspecified orientation; forgetting that orientation gives only the underlying\nreal vector space, not the full datum $V$ of the model.\n\n1. A nonempty affine space $A$ over a $4$-dimensional real vector space $V$,\n   with action $(p,v)\\mapsto p+v$ and displacement $q-p\\in V$\n   ([[def-affine-space-and-displacement]]). In particular $V$ is a real vector\n   space of dimension $4$.\n2. A Lorentz form $\\eta$ on $V$, i.e. a nondegenerate symmetric bilinear form of\n   inertia $(3,1,0)$ ([[def-lorentz-form-and-inertia]]). Its associated quadratic\n   form is $q(v)=\\eta(v,v)$.\n3. An **orientation** of $V$: a positive ray of the determinant line\n   $\\Lambda^4V$, fixed once and for all\n   ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]]).\n4. A **time orientation** $C^+$ of $(V,\\eta)$: one of the two connected\n   components of the timelike set $T=\\{v\\in V:\\eta(v,v)<0\\}$, the other being\n   $C^-:=T\\setminus C^+$ ([[def-time-orientation-and-future-causal-sets]]).\n\nThe following terminology is attached to such a quadruple.\n\n- The elements $p$ of $A$ are the **events**; for events $p,q$ the vector\n  $q-p\\in V$ is the **displacement from $p$ to $q$**.\n- The **interval** of $p,q\\in A$ is the real number\n  $I(p,q):=\\eta(q-p,q-p)=q(q-p)$.\n- Events $p,q$ are **timelike**, **null**, **spacelike** or **causally\n  related** when the displacement $q-p$ is timelike, null, spacelike or causal\n  in the sense of [[def-causal-classification-of-lorentz-vectors]]; they are\n  **future-related** when $q-p$ is future causal and **past-related** when\n  $q-p$ is past causal in the sense of\n  [[def-time-orientation-and-future-causal-sets]].\n\n**No point of $A$ is distinguished.** For every $v\\in V$ the translation\n$\\tau_v:A\\to A$, $\\tau_v(p):=p+v$, is a bijection, since it is inverse to\n$\\tau_{-v}$: $\\tau_{-v}(\\tau_v(p))=(p+v)+(-v)=p+(v-v)=p$ and symmetrically, by\nthe affine action axioms ([[def-affine-space-and-displacement]]). Displacements\nare translation invariant, $\\tau_v(q)-\\tau_v(p)=q-p$, so every $\\tau_v$ preserves\nthe interval, the causal classification of every ordered pair, and the sets\n$C^+$, $C^-$ (which are subsets of $V$, independent of the point of $A$); it\nchanges only the labelling of points. The mathematical structure of the model is\nexactly the quadruple $(A,V,\\eta,C^+)$; no derived physical quantity (proper\ntime, four-velocity, momentum, energy, charge or any field) is part of this\ndefinition, and all later structure of the framework (frames, charts, tensor\nfields, worldlines) is built on this model.\n\n**Well-definedness.** The affine-space definition supplies the action and the\nunique displacements; the Lorentz-form definition supplies $\\eta$ and its\ninertia; the determinant-line definition supplies orientations; and the two\ncomponents of $T$ between which the time-orientation definition chooses exist by\nthe components lemma recorded in the well-definedness clause of\n[[def-time-orientation-and-future-causal-sets]], which is also what makes the\nnames future and past causal in item 4 well defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The Fourier transform is a topological automorphism of $\\mathcal S(\\mathbb R^n)$, with $\\mathcal F^2=R$ and $\\mathcal F^{-1}=R\\mathcal F$, where $Rf(x)=f(-x)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Assume Countable Choice as required by [F4]. For fixed $t$,\n$\\sin(\\omega_\\mu t)/\\omega_\\mu$ is bounded near\n$\\mathbf k=0$ when $\\mu>0$ and is bounded by $|t|$ when $\\mu=0$; at infinity\nit is $O(|\\mathbf k|^{-1})$. Pairing with a Schwartz function is absolutely\nbounded by a Schwartz seminorm times the integral of\n$|q(\\mathbf k)|(1+|\\mathbf k|)^{-4}$, which is finite. Thus it defines a\ntempered inverse Fourier transform in $\\mathbf x$, and its massless apex\nsingularity is locally integrable. Differentiating the multiplier in $t$\ndistributionally shows\n$(\\partial_t^2-\\Delta_{\\mathbf x}+\\mu^2)\\Delta_\\mu=0$,\n$\\Delta_\\mu(0,\\cdot)=0$, and\n$\\partial_t\\Delta_\\mu(0,\\cdot)=\\delta_0$; the last identity is Fourier\ninversion [F4].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Choose a nonnegative smooth spatial mollifier $\\rho_\\epsilon$ of integral\none supported in $|\\mathbf x|<\\epsilon$, using [F7], and let\n$u_\\epsilon(t,\\cdot)=\\Delta_\\mu(t,\\cdot)*\\rho_\\epsilon$. Its Fourier\nmultiplier is $\\widehat\\rho_\\epsilon(\\mathbf k)\\sin(\\omega_\\mu t)/\\omega_\\mu$;\nthis is Schwartz in $\\mathbf k$ for every fixed $t$, including $\\mu=0$\nbecause $\\sin(|\\mathbf k|t)/|\\mathbf k|$ has a power series in\n$|\\mathbf k|^2$. Thus $u_\\epsilon$ and its derivatives are Schwartz and have\nfinite energy by [F8]. By 1.1 it is a smooth solution of the\nKlein–Gordon equation with data\n$u_\\epsilon(0)=0$, $\\partial_tu_\\epsilon(0)=\\rho_\\epsilon$. Its initial\nenergy is finite. Choose $R>\\epsilon$ and for $t\\ge0$ set\n$$E_R(t)=\\frac12\\int_{|\\mathbf x|>R+t} \\bigl(|\\partial_tu_\\epsilon|^2+|\\nabla u_\\epsilon|^2+ \\mu^2|u_\\epsilon|^2\\bigr)\\,d^3\\mathbf x.$$\nThe equation and integration by parts on the exterior region give\n$$E_R'(t)=-\\frac12\\int_{|\\mathbf x|=R+t} \\left(|\\partial_tu_\\epsilon+\\partial_ru_\\epsilon|^2+ |\\nabla_Tu_\\epsilon|^2+\\mu^2|u_\\epsilon|^2\\right)dS\\le0.$$\nFor a complex solution apply this identity to real and imaginary parts.\nCutoff at a large radius and use finite energy to pass to the exterior\nintegral. Since $E_R(0)=0$ and $E_R(t)\\ge0$, it vanishes for all $t\\ge0$.\nFor $\\mu>0$ this forces $u_\\epsilon=0$ outside $R+t$; for $\\mu=0$ it forces\nits spatial gradient and time derivative to vanish there, so it is constant\non the connected exterior and the inverse Fourier transform tends to zero at\nspatial infinity, hence the constant is zero. Reversing time gives support\ninside $|\\mathbf x|\\le R+|t|$ for both signs of $t$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Let $\\epsilon\\downarrow0$ and choose $R=2\\epsilon$. For every compact\nsmooth test $\\varphi(t,\\mathbf x)$, its spatial convolution with the\nreflected mollifier converges with all derivatives uniformly on one compact\nset to $\\varphi$; this follows by writing the difference as the average of\n$\\varphi(t,\\mathbf x-\\mathbf y)-\\varphi(t,\\mathbf x)$ for\n$|\\mathbf y|<\\epsilon$ and applying the mean-value bound to each derivative.\nContinuity of the tempered distribution [F5] therefore gives\n$\\Delta_\\mu*_{\\,\\mathbf x}\\rho_\\epsilon\\to\\Delta_\\mu$ distributionally.\nIf a compact test support lies in the spacelike open set\n$|\\mathbf x|>|t|$, its positive distance from the closed cone on that compact\nset gives a margin $\\delta>0$; choosing $3\\epsilon<\\delta$ makes its pairing\nwith $u_\\epsilon$ vanish by 2.1. Passing to the distributional limit proves\nthe support inclusion.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "For real $f,g$, expand the commutator using [F1]. The two like-type\ncommutators vanish; [F3] leaves\n$$\\langle K_\\mu\\overline f,K_\\mu g\\rangle_2 -\\langle K_\\mu\\overline g,K_\\mu f\\rangle_2.$$\nSubstitute the shell integrals [F2], use the second-variable-linear pairing,\nand combine the two exponentials. The result is\n$-i\\int f(x)g(y)\\Delta_\\mu(x-y)\\,d^4x\\,d^4y$; the sign follows from\n$e^{-ip\\circ(x-y)}-e^{ip\\circ(x-y)}=-2i\\sin(p\\circ(x-y))$ and the\ndefinition of $\\Delta_\\mu$. If every pair $(x,y)$ in the two supports is\nspacelike separated, then $x-y$ lies outside the support in 3.1, so the\ndistributional pairing vanishes.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain or empty-object alternative is a separate hypothesis of this item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives Delta(0)=0 and the initial derivative at t=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one parameter is a separate hypothesis of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the locally integrable massless apex."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The support statement is closed and the limiting argument in step 3.1 includes the lightlike boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs the mollifier from the stated bump supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-qft-scalar-local-weyl-algebra": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qft-smeared-free-scalar",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]], let $\\mu\\ge0$, let\n$H_\\mu$ and $K_\\mu$ be as in [[def-qft-scalar-mass-shell]], and form\n$\\mathcal F_s(H_\\mu)$ with vacuum $\\Omega$ and finite-particle domain\n$\\mathcal D_{\\rm fin}$. For $f\\in\\mathscr S(\\mathbb R^4)$ define on\n$\\mathcal D_{\\rm fin}$\n$$\\Phi_\\mu(f)=a(K_\\mu\\overline f)+a^\\dagger(K_\\mu f).$$\nThis is a complex-linear map of test functions into operators\n$\\mathcal D_{\\rm fin}\\to\\mathcal D_{\\rm fin}$. For real $f$ it is symmetric\nand equals $\\sqrt2\\,\\Phi_{\\rm Segal}(K_\\mu f)|_{\\mathcal D_{\\rm fin}}$, where the Segal field of\n[[lem-qft-segal-weyl-domain]] is\n$\\Phi_{\\rm Segal}(h)=\\overline{(a^\\dagger(h)+a(h))/\\sqrt2}$.\nThus its Weyl unitary is\n$W_\\mu(f):=W_{\\rm Segal}(\\sqrt2 K_\\mu f)$ and, for real $f,g$,\n$$W_\\mu(f)W_\\mu(g)= e^{-i\\,\\operatorname{Im}\\langle K_\\mu f,K_\\mu g\\rangle_2}W_\\mu(f+g).$$\nFor every real $f$ the vacuum Weyl expectation is\n$$\\langle\\Omega,W_\\mu(f)\\Omega\\rangle_2 =e^{-\\|K_\\mu f\\|_2^2/2}.$$\nHere the inner product is second-variable-linear as fixed in\n[[def-qft-fock-and-test-spaces]]. The vacuum has zero one-point function and\ntwo-point function\n$$\\langle\\Omega,\\Phi_\\mu(f)\\Phi_\\mu(g)\\Omega\\rangle_2 =\\langle K_\\mu\\overline f,K_\\mu g\\rangle_2,$$\nwhich obeys $\\langle\\Omega,\\Phi_\\mu(\\overline f)\\Phi_\\mu(f)\\Omega\\rangle_2=\\|K_\\mu f\\|_2^2\\ge0$ for every complex test $f$ (ordinary diagonal positivity holds for real tests); higher vacuum moments of ordered real smeared\nfields obey the CCR pairing recursion and hence the free-field Wick pairing\nrule. The field is a weak operator-valued tempered distribution on $\\mathcal D_{\\rm fin}$: every matrix coefficient $f\\mapsto\\langle\\Psi,\\Phi_\\mu(f)\\Theta\\rangle_2$ for $\\Psi,\\Theta\\in\\mathcal D_{\\rm fin}$ is a continuous complex-linear functional on Schwartz space. Its adjoint satisfies $\\Phi_\\mu(f)^*|_{\\mathcal D_{\\rm fin}}=\\Phi_\\mu(\\overline f)$, and its normalized vacuum defines a positive state on the finite polynomial $*$-algebra generated by these fields.\n\nThe relative-coordinate two-point tempered distribution is\n$$W_\\mu(z)=\\int_{H_\\mu^+}e^{-ip\\circ z}\\,d\\nu_\\mu(p),$$\nunderstood by pairing with Schwartz tests. Its translation-invariant bidistribution is the shell integral of $e^{-ip\\circ x}e^{ip\\circ y}$; on product tests it is the displayed vacuum covariance.\n\nFor $g=(a,\\Lambda)$, let $f_g$ and $U_\\mu(g)$ be the affine test pullback\nand one-particle action of [[lem-qft-scalar-poincare-action]]. Their Fock\nlifts implement the same covariance for $\\Phi_\\mu$ on $\\mathcal D_{\\rm fin}$\nand for the bounded Weyl operators.\n\nFor translations, the joint spectral measure on Fock space is the\nsecond-quantized multiplier measure with one-particle vector\n$(\\omega_\\mu(\\mathbf k),-\\mathbf k)$. Its support is contained in the closed\nfuture cone $\\{(E,\\mathbf P):E\\ge|\\mathbf P|\\}$; the vacuum is an eigenvector\nat $(0,\\mathbf0)$. These are conditional mathematical model deductions.\nNo point field, empirical observation or measurement claim is made.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-scalar-causal-commutator",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For $\\mu\\ge0$, define the tempered distribution\n$$\\Delta_\\mu(t,\\mathbf x)= \\int_{\\mathbb R^3}\\frac{d^3\\mathbf k}{(2\\pi)^3} \\frac{\\sin(\\omega_\\mu(\\mathbf k)t)}{\\omega_\\mu(\\mathbf k)} e^{i\\mathbf k\\cdot\\mathbf x},$$\nwith the massless integrand defined off $\\mathbf k=0$; its $1/|\\mathbf k|$\nbehavior is locally integrable in three dimensions. Then\n$$\\operatorname{supp}\\Delta_\\mu \\subseteq\\{(t,\\mathbf x):t^2-|\\mathbf x|^2\\ge0\\},$$\nthe closed causal cone for the $(-+++)$ metric. For real compactly supported\nsmooth $f,g$, put\n$$\\Delta_\\mu(f,g)= \\int_{\\mathbb R^4}\\!\\int_{\\mathbb R^4} f(x)g(y)\\Delta_\\mu(x-y)\\,d^4x\\,d^4y.$$\nOn $\\mathcal D_{\\rm fin}$ the smeared fields of\n[[lem-qft-smeared-free-scalar]] satisfy\n$$[\\Phi_\\mu(f),\\Phi_\\mu(g)]=-i\\Delta_\\mu(f,g)I.$$\nConsequently spacelike-separated supports give commuting fields.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-smeared-free-scalar",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]], let $\\mu\\ge0$, let\n$H_\\mu$ and $K_\\mu$ be as in [[def-qft-scalar-mass-shell]], and form\n$\\mathcal F_s(H_\\mu)$ with vacuum $\\Omega$ and finite-particle domain\n$\\mathcal D_{\\rm fin}$. For $f\\in\\mathscr S(\\mathbb R^4)$ define on\n$\\mathcal D_{\\rm fin}$\n$$\\Phi_\\mu(f)=a(K_\\mu\\overline f)+a^\\dagger(K_\\mu f).$$\nThis is a complex-linear map of test functions into operators\n$\\mathcal D_{\\rm fin}\\to\\mathcal D_{\\rm fin}$. For real $f$ it is symmetric\nand equals $\\sqrt2\\,\\Phi_{\\rm Segal}(K_\\mu f)|_{\\mathcal D_{\\rm fin}}$, where the Segal field of\n[[lem-qft-segal-weyl-domain]] is\n$\\Phi_{\\rm Segal}(h)=\\overline{(a^\\dagger(h)+a(h))/\\sqrt2}$.\nThus its Weyl unitary is\n$W_\\mu(f):=W_{\\rm Segal}(\\sqrt2 K_\\mu f)$ and, for real $f,g$,\n$$W_\\mu(f)W_\\mu(g)= e^{-i\\,\\operatorname{Im}\\langle K_\\mu f,K_\\mu g\\rangle_2}W_\\mu(f+g).$$\nFor every real $f$ the vacuum Weyl expectation is\n$$\\langle\\Omega,W_\\mu(f)\\Omega\\rangle_2 =e^{-\\|K_\\mu f\\|_2^2/2}.$$\nHere the inner product is second-variable-linear as fixed in\n[[def-qft-fock-and-test-spaces]]. The vacuum has zero one-point function and\ntwo-point function\n$$\\langle\\Omega,\\Phi_\\mu(f)\\Phi_\\mu(g)\\Omega\\rangle_2 =\\langle K_\\mu\\overline f,K_\\mu g\\rangle_2,$$\nwhich obeys $\\langle\\Omega,\\Phi_\\mu(\\overline f)\\Phi_\\mu(f)\\Omega\\rangle_2=\\|K_\\mu f\\|_2^2\\ge0$ for every complex test $f$ (ordinary diagonal positivity holds for real tests); higher vacuum moments of ordered real smeared\nfields obey the CCR pairing recursion and hence the free-field Wick pairing\nrule. The field is a weak operator-valued tempered distribution on $\\mathcal D_{\\rm fin}$: every matrix coefficient $f\\mapsto\\langle\\Psi,\\Phi_\\mu(f)\\Theta\\rangle_2$ for $\\Psi,\\Theta\\in\\mathcal D_{\\rm fin}$ is a continuous complex-linear functional on Schwartz space. Its adjoint satisfies $\\Phi_\\mu(f)^*|_{\\mathcal D_{\\rm fin}}=\\Phi_\\mu(\\overline f)$, and its normalized vacuum defines a positive state on the finite polynomial $*$-algebra generated by these fields.\n\nThe relative-coordinate two-point tempered distribution is\n$$W_\\mu(z)=\\int_{H_\\mu^+}e^{-ip\\circ z}\\,d\\nu_\\mu(p),$$\nunderstood by pairing with Schwartz tests. Its translation-invariant bidistribution is the shell integral of $e^{-ip\\circ x}e^{ip\\circ y}$; on product tests it is the displayed vacuum covariance.\n\nFor $g=(a,\\Lambda)$, let $f_g$ and $U_\\mu(g)$ be the affine test pullback\nand one-particle action of [[lem-qft-scalar-poincare-action]]. Their Fock\nlifts implement the same covariance for $\\Phi_\\mu$ on $\\mathcal D_{\\rm fin}$\nand for the bounded Weyl operators.\n\nFor translations, the joint spectral measure on Fock space is the\nsecond-quantized multiplier measure with one-particle vector\n$(\\omega_\\mu(\\mathbf k),-\\mathbf k)$. Its support is contained in the closed\nfuture cone $\\{(E,\\mathbf P):E\\ge|\\mathbf P|\\}$; the vacuum is an eigenvector\nat $(0,\\mathbf0)$. These are conditional mathematical model deductions.\nNo point field, empirical observation or measurement claim is made.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a separable\ncomplex Hilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm fin}$ define the bosonic\ncreation and annihilation maps $a^\\dagger(h)$ and $a(h)$ and the fermionic maps\n$c^\\dagger(h)$ and $c(h)$ as in\n[[def-qft-fock-and-test-spaces]]. Write $a_n(h)$ and $a_n^\\dagger(h)$ for\ntheir restrictions to the $n$th bosonic sector. For bosons set\n\n$$D(a(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge1}\\|a_n(h)\\Psi_n\\|^2<\\infty\\},\\qquad D(a^\\dagger(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge0}\\|a_n^\\dagger(h)\\Psi_n\\|^2<\\infty\\}.$$\n\nThen $\\mathcal F_s(H)$ and $\\mathcal F_a(H)$ are Hilbert spaces,\n$\\mathcal D_{\\rm fin}$ is dense, and it is a graph core for both maximal\nbosonic sector maps. The bosonic operators on their displayed domains are\nclosed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy\n\n$$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$\n\nThe fermionic $c(h)$ and $c^\\dagger(h)$ extend to bounded operators on the\nwhole Fock space, with norms $\\|h\\|$, and satisfy on the whole space\n\n$$\\{c(h),c^\\dagger(k)\\}=\\langle h,k\\rangle_2I,\\qquad \\{c(h),c(k)\\}=\\{c^\\dagger(h),c^\\dagger(k)\\}=0.$$\n\nThis is a mathematical construction of the two Fock representations; it does\nnot assign particle statistics to a physical species.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "If $O_1\\subseteq O_2$, each real test function supported in $O_1$ is\nalso a real test function supported in $O_2$. Thus the generators and their\nadjoints for $\\mathfrak A_\\mu(O_1)$ belong to the generating set for\n$\\mathfrak A_\\mu(O_2)$; finite sums and products do too, and norm closure\npreserves inclusion. This proves isotony.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Let $f,g$ be real tests supported in the two spacelike-separated\nregions. By [F2] their field commutator is zero. Fact [F3], obtained by\nexpanding the fields with the CCR, then gives\n$2i\\,\\operatorname{Im}\\langle K_\\mu f,K_\\mu g\\rangle_2I=0$; hence the\nimaginary part vanishes. Substituting it in [F1] gives\n$W_\\mu(f)W_\\mu(g)=W_\\mu(f+g)=W_\\mu(g)W_\\mu(f)$. Taking adjoints shows each\ngenerator from the first region commutes with each generator and adjoint\nfrom the second. Commutation is preserved under finite linear combinations\nand products; if bounded sequences $A_n\\to A$ and $B_n\\to B$ in operator\nnorm satisfy $A_nB_n=B_nA_n$, then continuity of multiplication gives\n$AB=BA$. Taking the two norm closures proves the assertion for the full\nlocal algebras.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement defines a unital algebra; the empty region has no nonzero tests and step 1.1 still proves isotony."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero test is in the generator set, and the algebra includes I by definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one parameter is a separate hypothesis of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate geometry or quotient case occurs beyond any case explicitly listed above."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is a separate hypothesis beyond any boundary case explicitly listed above."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No unlisted choice from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "ex-qftmath-spacelike-vacuum-correlation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qft-smeared-free-scalar",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]], let $\\mu\\ge0$, let\n$H_\\mu$ and $K_\\mu$ be as in [[def-qft-scalar-mass-shell]], and form\n$\\mathcal F_s(H_\\mu)$ with vacuum $\\Omega$ and finite-particle domain\n$\\mathcal D_{\\rm fin}$. For $f\\in\\mathscr S(\\mathbb R^4)$ define on\n$\\mathcal D_{\\rm fin}$\n$$\\Phi_\\mu(f)=a(K_\\mu\\overline f)+a^\\dagger(K_\\mu f).$$\nThis is a complex-linear map of test functions into operators\n$\\mathcal D_{\\rm fin}\\to\\mathcal D_{\\rm fin}$. For real $f$ it is symmetric\nand equals $\\sqrt2\\,\\Phi_{\\rm Segal}(K_\\mu f)|_{\\mathcal D_{\\rm fin}}$, where the Segal field of\n[[lem-qft-segal-weyl-domain]] is\n$\\Phi_{\\rm Segal}(h)=\\overline{(a^\\dagger(h)+a(h))/\\sqrt2}$.\nThus its Weyl unitary is\n$W_\\mu(f):=W_{\\rm Segal}(\\sqrt2 K_\\mu f)$ and, for real $f,g$,\n$$W_\\mu(f)W_\\mu(g)= e^{-i\\,\\operatorname{Im}\\langle K_\\mu f,K_\\mu g\\rangle_2}W_\\mu(f+g).$$\nFor every real $f$ the vacuum Weyl expectation is\n$$\\langle\\Omega,W_\\mu(f)\\Omega\\rangle_2 =e^{-\\|K_\\mu f\\|_2^2/2}.$$\nHere the inner product is second-variable-linear as fixed in\n[[def-qft-fock-and-test-spaces]]. The vacuum has zero one-point function and\ntwo-point function\n$$\\langle\\Omega,\\Phi_\\mu(f)\\Phi_\\mu(g)\\Omega\\rangle_2 =\\langle K_\\mu\\overline f,K_\\mu g\\rangle_2,$$\nwhich obeys $\\langle\\Omega,\\Phi_\\mu(\\overline f)\\Phi_\\mu(f)\\Omega\\rangle_2=\\|K_\\mu f\\|_2^2\\ge0$ for every complex test $f$ (ordinary diagonal positivity holds for real tests); higher vacuum moments of ordered real smeared\nfields obey the CCR pairing recursion and hence the free-field Wick pairing\nrule. The field is a weak operator-valued tempered distribution on $\\mathcal D_{\\rm fin}$: every matrix coefficient $f\\mapsto\\langle\\Psi,\\Phi_\\mu(f)\\Theta\\rangle_2$ for $\\Psi,\\Theta\\in\\mathcal D_{\\rm fin}$ is a continuous complex-linear functional on Schwartz space. Its adjoint satisfies $\\Phi_\\mu(f)^*|_{\\mathcal D_{\\rm fin}}=\\Phi_\\mu(\\overline f)$, and its normalized vacuum defines a positive state on the finite polynomial $*$-algebra generated by these fields.\n\nThe relative-coordinate two-point tempered distribution is\n$$W_\\mu(z)=\\int_{H_\\mu^+}e^{-ip\\circ z}\\,d\\nu_\\mu(p),$$\nunderstood by pairing with Schwartz tests. Its translation-invariant bidistribution is the shell integral of $e^{-ip\\circ x}e^{ip\\circ y}$; on product tests it is the displayed vacuum covariance.\n\nFor $g=(a,\\Lambda)$, let $f_g$ and $U_\\mu(g)$ be the affine test pullback\nand one-particle action of [[lem-qft-scalar-poincare-action]]. Their Fock\nlifts implement the same covariance for $\\Phi_\\mu$ on $\\mathcal D_{\\rm fin}$\nand for the bounded Weyl operators.\n\nFor translations, the joint spectral measure on Fock space is the\nsecond-quantized multiplier measure with one-particle vector\n$(\\omega_\\mu(\\mathbf k),-\\mathbf k)$. Its support is contained in the closed\nfuture cone $\\{(E,\\mathbf P):E\\ge|\\mathbf P|\\}$; the vacuum is an eigenvector\nat $(0,\\mathbf0)$. These are conditional mathematical model deductions.\nNo point field, empirical observation or measurement claim is made.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-scalar-causal-commutator",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For $\\mu\\ge0$, define the tempered distribution\n$$\\Delta_\\mu(t,\\mathbf x)= \\int_{\\mathbb R^3}\\frac{d^3\\mathbf k}{(2\\pi)^3} \\frac{\\sin(\\omega_\\mu(\\mathbf k)t)}{\\omega_\\mu(\\mathbf k)} e^{i\\mathbf k\\cdot\\mathbf x},$$\nwith the massless integrand defined off $\\mathbf k=0$; its $1/|\\mathbf k|$\nbehavior is locally integrable in three dimensions. Then\n$$\\operatorname{supp}\\Delta_\\mu \\subseteq\\{(t,\\mathbf x):t^2-|\\mathbf x|^2\\ge0\\},$$\nthe closed causal cone for the $(-+++)$ metric. For real compactly supported\nsmooth $f,g$, put\n$$\\Delta_\\mu(f,g)= \\int_{\\mathbb R^4}\\!\\int_{\\mathbb R^4} f(x)g(y)\\Delta_\\mu(x-y)\\,d^4x\\,d^4y.$$\nOn $\\mathcal D_{\\rm fin}$ the smeared fields of\n[[lem-qft-smeared-free-scalar]] satisfy\n$$[\\Phi_\\mu(f),\\Phi_\\mu(g)]=-i\\Delta_\\mu(f,g)I.$$\nConsequently spacelike-separated supports give commuting fields.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-scalar-local-weyl-algebra",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]].\nLet $O\\subseteq\\mathbb R^4$ be open. For real\n$f\\in C_c^\\infty(O)$ define\n$$W_\\mu(f):=W_{\\rm Segal}(\\sqrt2K_\\mu f),$$\nwhere the Segal normalization is exactly\n$\\Phi_{\\rm Segal}(h)=(a^\\dagger(h)+a(h))/\\sqrt2$ on the finite-particle\ndomain, as in [[lem-qft-segal-weyl-domain]]. This scale makes the generator\nof $t\\mapsto W_\\mu(tf)$ equal to the real scalar field\n$\\Phi_\\mu(f)=a(K_\\mu f)+a^\\dagger(K_\\mu f)$ of\n[[lem-qft-smeared-free-scalar]]. Define the unital norm-closed operator\nalgebra\n$$\\mathfrak A_\\mu(O)= \\overline{\\operatorname{alg}}^{\\|\\cdot\\|} \\{I,W_\\mu(f),W_\\mu(f)^*:f\\in C_c^\\infty(O;\\mathbb R)\\}.$$\nThen $O_1\\subseteq O_2$ implies\n$\\mathfrak A_\\mu(O_1)\\subseteq\\mathfrak A_\\mu(O_2)$. If every difference\n$x-y$, with $x\\in O_1$ and $y\\in O_2$, is spacelike, then every element of\n$\\mathfrak A_\\mu(O_1)$ commutes with every element of\n$\\mathfrak A_\\mu(O_2)$. These are algebraic properties of the constructed\nrepresentation; they are not empirical signaling or measurement claims.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Choose $\\delta>0$. By [F4], choose a nonnegative nonzero\n$\\chi\\in C_c^\\infty((-\\delta,\\delta))$. Choose two nonnegative nonzero\n$u,v\\in C_c^\\infty(\\mathbb R^3)$ supported in closed balls of radii\n$r_1,r_2$ whose center separation $D$ satisfies\n$D-r_1-r_2>2\\delta$. Such bumps follow by translating and rescaling [F4].\nSet $f(t,\\mathbf x)=\\chi(t)u(\\mathbf x)$ and\n$g(t,\\mathbf x)=\\chi(t)v(\\mathbf x)$. For every point in the two supports,\n$|t-s|<2\\delta$ and $|\\mathbf x-\\mathbf y|\\ge D-r_1-r_2>2\\delta$;\ntherefore all support differences are spacelike.\nFor example, $\\delta=1$, $r_1=r_2=1$ and $D=5$ give a spatial gap of $3>2$,\nso these strict inequalities are attainable.",
+          "step": "1.1",
+          "inputs": [
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Insert a radial regulator $e^{-\\epsilon|\\mathbf k|}$, $\\epsilon>0$, in\nthe massless two-point kernel. Angular integration using [F3] gives for\n$r=|\\mathbf x-\\mathbf y|>0$ and $\\tau=t-s$\n$$W_\\epsilon(\\tau,r)=\n\\frac{1}{4\\pi^2r}\\int_0^\\infty\ne^{-(\\epsilon+i\\tau)q}\\sin(qr)\\,dq\n=\\frac{1}{4\\pi^2\\bigl(r^2+(\\epsilon+i\\tau)^2\\bigr)}.$$\nThe integral identity follows by integrating the two exponentials in the\nsine and using $\\operatorname{Re}(\\epsilon+i\\tau)>0$. On the compact\nsupport product in 1.1, $r\\ge d:=D-r_1-r_2>2\\delta>|\\tau|$. Thus the\ndenominator is bounded away from zero uniformly as $\\epsilon\\downarrow0$,\nand $W_\\epsilon$ converges uniformly there to\n$[4\\pi^2(r^2-\\tau^2)]^{-1}$, which is strictly positive.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The regulated shell integrals converge to\n$\\langle K_0 f,K_0 g\\rangle_2$ by dominated convergence [F5]: the absolute\nvalue of the unregulated product is integrable by Cauchy–Schwarz [F7],\nbecause $K_0f,K_0g\\in H_0$. To identify the regulated shell integral with\nthe spacetime pairing of $W_\\epsilon$, Fubini [F6] applies because its\nabsolute integral is at most\n$\\|f\\|_1\\|g\\|_1\\int_{\\mathbb R^3}e^{-\\epsilon|\\mathbf k|}\nd^3\\mathbf k/[(2\\pi)^3 2|\\mathbf k|]<\\infty$.\nThe formula in 2.1 and uniform convergence on the compact support product give\n$$\\langle K_0 f,K_0 g\\rangle_2\n=\\int f(t,\\mathbf x)g(s,\\mathbf y)\n\\frac{d^4x\\,d^4y}{4\\pi^2(|\\mathbf x-\\mathbf y|^2-(s-t)^2)}>0,$$\nbecause both test functions are nonnegative and nonzero and the denominator\nis positive on the support product. More explicitly,\n$\\langle K_0f,K_0g\\rangle_2\\ge\n(\\int f)(\\int g)/[4\\pi^2(D+r_1+r_2)^2]>0$, since\n$|\\mathbf x-\\mathbf y|^2-(t-s)^2\\le(D+r_1+r_2)^2$ there. The zero one-point\nvalues follow from [F1]; commutation follows from [F2] and separation in\nstep 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain or empty-object alternative is a separate hypothesis of this item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No scalar or vector parameter crosses zero beyond any case explicitly listed above."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one parameter is a separate hypothesis of this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example is explicitly massless; the shell apex is omitted and locally integrable in the cited shell statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use strict spacelike inequalities, so no lightlike support pair is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses the nonnegative nonzero bumps from the bump supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    }
+  }
+}

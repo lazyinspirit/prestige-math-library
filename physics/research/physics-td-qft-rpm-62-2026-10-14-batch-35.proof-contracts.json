@@ -1,0 +1,507 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14-batch-35",
+  "scope": [
+    "lem-qft-poincare-pullback-continuity-on-schwartz",
+    "thm-qft-tempered-field-reconstruction",
+    "cex-qft-yukawa-source-power"
+  ],
+  "contracts": {
+    "lem-qft-poincare-pullback-continuity-on-schwartz": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qft-poincare-test-action",
+          "source_section": "Definition",
+          "quote": "For $f\\in S:=\\mathcal S(\\mathbb R^4;\\mathbb C)$ define the pointwise pullback\nformula, viewed initially as a smooth function,\n$$T_gf(x):=f(g^{-1}x)=f(\\Lambda^{-1}(x-a)).$$\nOn smooth functions this formula obeys $T_gT_h=T_{gh}$ and $T_ef=f$, by the\ngroup law.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-schwartz-topology-and-convergence",
+          "source_section": "Definition",
+          "quote": "For the seminorms of [[def-schwartz-space-and-its-seminorms]], a basic neighbourhood of $f_0\\in\\mathcal S$ is\n$$\\{f:p_{\\alpha_r\\beta_r}(f-f_0)<\\varepsilon_r\\ (1\\le r\\le m)\\},\\qquad m<\\infty,\\quad\\varepsilon_r>0.$$\nThe em",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qft-positive-tempered-moments",
+          "source_section": "Definition",
+          "quote": "Its multiplication\nis concatenation of tensor factors, extended bilinearly, and its unit is $1$\nin degree zero. Its conjugate-linear involution is specified on elementary\ntensors by\n$$(f_1\\otimes\\cdots\\otimes f_n)^*:=\\ov",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "fixed-affine-map",
+          "claim": "The affine chain rule and polynomial weight expansion bound each pullback seminorm by finitely many input seminorms.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "identity-continuity",
+          "claim": "The explicit mean-value formula and uniform affine weight comparison force every Schwartz seminorm of T_g f-f to tend to zero at the identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "group-action-extension",
+          "claim": "Group composition transfers parameter continuity everywhere and the tensor universal property preserves product and involution.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim is about pullbacks of Schwartz functions, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At g=e the pullback is the identity; step 2.1 proves T_g f tends to f in every Schwartz seminorm."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit or scalar-one case is asserted for this continuity lemma."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The identity group element is included; the affine mean-value estimate in step 2.1 covers it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or endpoint conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite seminorm and affine estimates use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "For g=e=(I,0), T_e f(x)=f(x).",
+          "result": "F1 gives the identity pullback; step 2.1 proves convergence to it in every Schwartz seminorm.",
+          "verifies": "The identity case of continuity."
+        },
+        {
+          "check": "For g=(Lambda,a), h=(Gamma,b), T_g T_h f(x)=f((Lambda Gamma)^-1(x-a-Lambda b)).",
+          "result": "This equals T_(gh)f for the declared semidirect-product law.",
+          "verifies": "The group-action calculation in step 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Independently read all three proof steps, F1-F4 and their current definitions, and both routed reports. Affine derivative coefficients and x=Lambda y+a bound each output seminorm by finitely many input seminorms. Near identity the uniform inverse bound and bounded affine shift compare weights, while FTC gives epsilon_g times one higher derivative/weight; norm powers are bounded by the finite coordinate multinomial. Chain coefficients converge too, yielding every seminorm limit. Fixed-map continuity and group law transfer the limit globally. Conjugation, reversal, concatenation, inverse group element and degree-zero unit establish the tensor star action. Identity, zero test, pure translation and degree zero checked; no choice or tensor-completion assertion. Confirmed duplicate nonfatal finite-check locator findings corrected to F1/2.1 and 3.1; item proof/interface unchanged."
+      }
+    },
+    "thm-qft-tempered-field-reconstruction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a fu",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-positive-tempered-moments",
+          "source_section": "Definition",
+          "quote": "positive tempered moment family** is a sequence consisting of $W_0=1$\nand $W_n\\in S_n'$ for each $n\\ge1$ such that the multilinear maps\n$$f_1,\\ldots,f_n\\longmapsto\\langle W_n,J_n(f_1\\otimes\\cdots\\otimes f_n)\\rangle$$\nextend, degree by degree and then over fini",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qft-algebraic-gns-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$: every countable family of nonempty sets has a choice function. Put $N_\\omega:=\\{a\\in A:\\omega(a^*a)=0\\}$ and $\\mathcal D_\\omega:=A/N_\\omega$, with\n\n$$([a],[b])_\\omega:=\\omega(b^*a),$$\n\nusing the first-",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-positive-state-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "Then\n\n$$|\\omega(b^*a)|^2\\le q(a)q(b)\\qquad(a,b\\in A).$$\n\nThe form $(a,b)_\\omega:=\\omega(b^*a)$ is Hermitian and positive semidefinite, $N_\\omega$ is its radical and a complex linear subspace, and $N_\\omega$ is a left ide",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qft-weak-operator-valued-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "operator-valued tempered distribution on the common domain $D$** is a\ncomplex-linear map\n$$\\Phi:S\\longrightarrow\\operatorname{Lin}(D),$$\nwhere $\\operatorname{Lin}(D)$ is the vector space of linear maps $D\\to D$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qft-poincare-test-action",
+          "source_section": "Definition",
+          "quote": "For $f\\in S:=\\mathcal S(\\mathbb R^4;\\mathbb C)$ define the pointwise pullback\nformula, viewed initially as a smooth function,\n$$T_gf(x):=f(g^{-1}x)=f(\\Lambda^{-1}(x-a)).$$\nOn smooth functions this formula obeys $T_gT_h=T_{gh}$ and $T_ef=f$, by the\ngroup law.",
+          "uses": [
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qft-poincare-pullback-continuity-on-schwartz",
+          "source_section": "Statement",
+          "quote": "For every $g\\in P^\\uparrow_+$, the pullback $T_gf(x)=f(g^{-1}x)$ of\n[[def-qft-poincare-test-action]] maps $S=\\mathcal S(\\mathbb R^4;\\mathbb C)$\ncontinuously to itself. For each fixed $f\\in S$, the map\n$g\\mapsto T_gf$ from $P^\\upar",
+          "uses": [
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qft-state-symmetry-implementer",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice $\\mathrm{AC}_\\omega$, the hypothesis of [[thm-qft-algebraic-gns-domain]]. Let $G$ be a topological group with identity $e$. Let $A$ be a unital complex star algebra with positive normalized state $\\omega$, and let $\\",
+          "uses": [
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qft-minkowski-fourier-transform",
+          "source_section": "Definition",
+          "quote": "bilinear transposition,\n$$\\langle\\widehat D_M,\\psi\\rangle:=\\langle D,\\mathcal F_M\\psi\\rangle\\qquad(\\psi\\in\\mathcal S(\\mathbb R^4)).$$\nFor a closed set $C\\subseteq\\mathbb R^4$, the statement\n$\\operatorname{supp}\\widehat D_M\\subsete",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-polynomial-growth-functions-define-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Consequently this holds if $f$ has pointwise polynomial growth\noutside a compact set, and every class in complex $L^p(\\mathbb R^n)$,\n$1\\leq p\\leq\\infty$, has a representative defining a tempered distr",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "tensor-product-continuity",
+          "claim": "The separated-variable product maps are continuous multilinear Schwartz tests, so each moment distribution is continuous in a varied test factor.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "gns-construction",
+          "claim": "Countable Choice and the positive normalized moment functional provide the common-domain GNS representation and cyclic vector.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "weak-tempered-field",
+          "claim": "Every GNS matrix coefficient of the degree-one field is a finite sum of continuous moment evaluations, hence is tempered.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "moments-and-closability",
+          "claim": "GNS left multiplication gives the adjoint/closability properties and reproduces every input vacuum moment, including degree zero.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "coefficient-continuity",
+          "claim": "Continuity of the Schwartz pullbacks and finite product tests makes every moment coefficient continuous at the group identity.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "covariant-implementation",
+          "claim": "With state invariance, the state-symmetry lemma produces the strongly continuous implementation and the smeared-field covariance.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "A2",
+            "step 1.2",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "moment-kernel",
+          "claim": "A polynomial with all zero matrix coefficients acts as zero on the common domain by density; the commutator case gives tested locality.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "A3",
+            "A4"
+          ]
+        },
+        {
+          "id": "tempered-translation-coefficient",
+          "claim": "Cauchy–Schwarz and invariance bound the translation coefficient, and continuity makes it a regular tempered distribution.",
+          "step": "3.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "F8",
+            "A5",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "translation-implementation",
+          "claim": "The symmetry lemma applies to the translation subgroup and yields its strongly continuous unitary implementation.",
+          "step": "3.3",
+          "inputs": [
+            "F6",
+            "A5",
+            "step 2.3",
+            "given"
+          ]
+        },
+        {
+          "id": "spectrum-transfer",
+          "claim": "The GNS matrix coefficient equals the moment coefficient, so the transposed Fourier transform has the same forward-cone support.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "A5",
+            "step 3.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The degree-zero tensor component is present with W0=1 and omega(1)=1; step 2.2 identifies the empty field product."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The GNS quotient uses the full null left radical under the GNS hypotheses; step 1.2 records this construction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The normalized cyclic vector has norm one and the degree-zero moment equals one in step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate positive forms are quotiented by the full null left radical in the GNS construction of step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter is present in this theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exact Countable Choice AC_omega premise and its Hilbert-completion use are explicit in A1 and step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states implications and conditional conclusions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states implications and conditional conclusions, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Degree n=0: J0(1)=1 and the empty field product is Omega.",
+          "result": "(Omega,Omega)=omega(1)=W0=1.",
+          "verifies": "The degree-zero moment case in step 2.2."
+        },
+        {
+          "check": "Degree n=1: the field product is Phi(f)Omega.",
+          "result": "(Phi(f)Omega,Omega)=omega(X(f))=W1(f).",
+          "verifies": "The one-field case of the moment identity in step 2.2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Read all ten current proof steps, each direct dependency and the local GNS, positive-state and symmetry proofs. Positive actual W_n and W0=1 supply the algebraic state; finite separated-variable seminorm products give joint multilinear continuity, including continuous evaluations in one varied slot. AC_omega is stated and spent through completion and Fourier suppliers; GNS null left ideal, first-linear pairing, adjoint restriction and closability are exact. Matrix coefficients omega(b*X(f)a) are finite sums of moment evaluations, and degree-zero normalization gives norm-one vacuum. All tested relations vanish on the domain by pairing with all dense quotient classes, including zero commutators. Pullbacks and joint product continuity verify every symmetry coefficient hypothesis before invariance yields unitary implementation. Under translation invariance CS bounds D_b,a by sqrt(q(a)q(b)), also when either is null; continuity gives local integrability, so the polynomial-growth supplier applies with degree zero. The supplied forward-cone condition transfers by equality of tempered distributions and bilinear Fourier transposition only, with no generator inference. Locality for empty support is vacuous and consistent. Mund Theorem 2.6 pp.16-17 was retrieved by curl and read, with its stronger full-space, cluster and spectrum assumptions distinguished from the local algebraic conditional statement; Fewster-Rejzner Theorem 10 and Theorem 23 and Schmudgen Lemma 4.35/Proposition 4.36/Theorem 4.38 were read as source comparisons. No empirical premise or interacting-model existence is inferred. No current mathematical defect found; audit status is not changed."
+      }
+    },
+    "cex-qft-yukawa-source-power": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "radial-laplacian",
+          "claim": "The chain rule in three Euclidean dimensions gives the radial Laplacian q second derivative plus 2q prime over r on r>0.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "nonzero-residual",
+          "claim": "Differentiating the r^-2 Yukawa term yields a strictly positive off-origin residual, including mu=0.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "correct-off-origin-power",
+          "claim": "The comparison r^-1 exponential has zero screened Laplacian away from the origin.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a pointwise function on the nonempty punctured space R^3 minus {0}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At mu=0 the residual in step 2.1 is exactly 2/r^4, still nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar unit or one-element structure occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular point r=0 is excluded; steps 1.1–3.1 calculate only for r>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint mu=0 is included and checked in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice or selection is used in this calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is an implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set mu=0 in the residual formula.",
+          "result": "The residual is 2/r^4>0 for every r>0.",
+          "verifies": "The zero endpoint in step 2.1."
+        },
+        {
+          "check": "Use v(r)=e^(-mu r)/r in the radial Laplacian formula.",
+          "result": "(Delta-mu^2)v=0 for r>0.",
+          "verifies": "The corrected off-origin comparison in step 3.1."
+        }
+      ]
+    }
+  }
+}

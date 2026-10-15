@@ -1,0 +1,74 @@
+{
+  "def-td-process-and-protocol": [
+    {
+      "old": "A record $P\\in\\mathcal P_s$ is adiabatic exactly when $Q[P]=0$.",
+      "new": "The protocol additionally supplies a predicate $a_s:\\mathcal P_s\\to\\{0,1\\}$ recording absence of thermal transfer: $a_s(P)=1$ means that no thermal energy crosses the selected outer boundary through any thermal-transfer channel throughout $I_P$. This condition concerns the full control/contact and transfer records, including all channels and both transfer directions; it is supplied and checked as part of the declared model, not inferred from the net map $Q$. Require the consistency condition $a_s(P)=1\\Rightarrow Q[P]=0$. A record is adiabatic exactly when $a_s(P)=1$. The broader class $\\{P:Q[P]=0\\}$ is the zero-net-heat class; a record that absorbs and releases equal nonzero heat belongs to that class and is not adiabatic. No continuity, differentiability, or particular heat-flux representation is required to supply this predicate."
+    }
+  ],
+  "def-td-adiabatic-accessibility": [
+    {
+      "old": "$x_P^-=x$, $x_P^+=y$, $Q[P]=0$,",
+      "new": "$x_P^-=x$, $x_P^+=y$, $a_s(P)=1$ (hence $Q[P]=0$),"
+    },
+    {
+      "old": "Thus adiabatic means zero protocol-assigned heat, not zero work, zero energy change, isolation, quasistatic evolution, or reversibility.",
+      "new": "Thus adiabatic means no thermal transfer across the selected outer boundary throughout the record, as specified by the supplier\u2019s predicate; zero net heat alone is insufficient. It does not require zero work, zero energy change, isolation, quasistatic evolution, or reversibility."
+    }
+  ],
+  "def-td-scaled-products-and-comparison": [
+    {
+      "old": "For states $A,B$ of the same compound type, write $A\\prec B$ when the declared adiabatic-accessibility relation of [[def-td-adiabatic-accessibility]] admits that endpoint comparison. This definition does not infer accessibility from coordinate addition.",
+      "new": "For each compound type $T$, retain its full tuple state domain $D_T$, including its tags and factorization data. For each ordered pair $T,T'$ of equal composition, the model supplies a whole-compound process model with configuration set $Z_{T,T'}$, equilibrium endpoint subsets $Z^-_{T,T'},Z^+_{T,T'}$, and maps $\\xi^-:Z^-_{T,T'}\\to D_T$, $\\xi^+:Z^+_{T,T'}\\to D_{T'}$. It also supplies control/contact and transfer-record sets $\\mathcal K_{T,T'}$, $\\mathcal R_{T,T'}$, a chosen outer boundary accounting for all auxiliaries and devices, and a fixed Galilean bookkeeping chart. An admitted record is a model-selected tuple $P=(I,A,B,z,\\kappa,r)$, where $I=[t_0,t_1]$ is a finite positive-duration interval, $A\\in D_T$, $B\\in D_{T'}$, $z:I\\to Z_{T,T'}$, $\\kappa\\in\\mathcal K_{T,T'}$, $r\\in\\mathcal R_{T,T'}$, $z(t_0)\\in Z^-_{T,T'}$, $z(t_1)\\in Z^+_{T,T'}$, $\\xi^-(z(t_0))=A$, and $\\xi^+(z(t_1))=B$. Supply its net heat and work maps and the full-record no-thermal-transfer predicate with the sign and consistency conventions of [[def-td-process-and-protocol]], and declare the required auxiliary/device endpoint conditions. No path regularity or first-law balance is inferred from this lift. For a single unchanged type this model agrees with the original single-system records and relation of [[def-td-adiabatic-accessibility]]. Write $A\\prec B$ exactly when an admitted lifted record has these full tuple endpoints, satisfies those auxiliary/device conditions, and has no thermal transfer throughout the outer boundary. This definition also covers equal-composition splitting or transport between different type expressions. Permutation and reassociation transports carry the entire record data and preserve admission and transfers. No accessibility witness or tuple endpoint is inferred from the aggregate coordinate-addition map, which need not be injective."
+    },
+    {
+      "old": "deps: [def-td-adiabatic-accessibility,",
+      "new": "deps: [def-td-process-and-protocol, def-td-adiabatic-accessibility,"
+    },
+    {
+      "old": "dependency_roles:\n",
+      "new": "dependency_roles:\n  def-td-process-and-protocol: formulation-prerequisite\n"
+    }
+  ],
+  "post-td-first-law-energy": [
+    {
+      "old": "If $P$ is adiabatic, its defining condition is $Q[P]=0$,",
+      "new": "If $P$ is adiabatic, its no-thermal-transfer condition implies $Q[P]=0$,"
+    }
+  ],
+  "ex-td-irreversible-adiabatic-compression": [
+    {
+      "old": "A process record is adiabatic exactly when $Q[P]=0$;",
+      "new": "An adiabatic process record has no thermal transfer throughout its outer boundary and therefore has $Q[P]=0$;"
+    },
+    {
+      "old": "Its protocol has $Q[P]=0$, a constant external load",
+      "new": "Its protocol forbids thermal transfer across the gas boundary throughout the record, so $a_s(P)=1$ and $Q[P]=0$; it has a constant external load"
+    }
+  ],
+  "rem-td-local-equilibrium-branch": [
+    {
+      "old": "Nonconstant fields $T(\\mathbf x,t)$, $\\rho(\\mathbf x,t)$, or $\\mathbf u(\\mathbf x,t)$ are permitted in this continuum model and do not describe global equilibrium.",
+      "new": "Nonconstant fields $T(\\mathbf x,t)$, $\\rho(\\mathbf x,t)$, or $\\mathbf u(\\mathbf x,t)$ are permitted in this continuum model. The pointwise comparison-cell assignment alone neither establishes nor excludes global equilibrium; that requires the declared model\u2019s full equilibrium criterion, external fields and constraints. In particular, spatially nonconstant density may occur in global equilibrium in an external potential."
+    }
+  ],
+  "ex-td-local-equilibrium-profile": [
+    {
+      "old": "[F3] [[rem-td-local-equilibrium-branch]]: nonconstant temperature fields are permitted in this continuum model and do not describe global equilibrium.",
+      "new": "[F3] [[rem-td-local-equilibrium-branch]]: nonconstant temperature fields are permitted in this continuum model; the pointwise local-equilibrium assignment alone does not assert global equilibrium."
+    }
+  ],
+  "ex-td-volume-sized-external-field": [
+    {
+      "old": "it is excluded from the fixed uniformly tempered exterior class.",
+      "new": "for nonzero shift it is excluded from the fixed uniformly tempered exterior class; the zero shift coincides with free walls."
+    },
+    {
+      "old": "This exact volume-filling external preparation is not a member of the deterministic exterior class used by [[pthm-td-qualified-van-hove-and-exterior-limit]].",
+      "new": "For $c\\neq0$, this volume-filling external energy cannot be represented by the deterministic exterior term used by [[pthm-td-qualified-van-hove-and-exterior-limit]] for this ideal potential. For $c=0$, it agrees with free walls, represented by the empty exterior configuration."
+    },
+    {
+      "old": "3.1 The perturbation is a potential on every point of $\\Lambda$, whereas [F2] and [L1] restrict the boundary result to free walls or the interaction with one fixed uniformly tempered exterior configuration. Therefore this example lies outside those hypotheses and contradicts no qualified boundary conclusion.",
+      "new": "3.1 Since $\\varphi=0$, the exterior sum in [F2] is $W_n(\\omega,\\zeta)=0$ for every allowed exterior. If $c\\neq0$, a one-particle interior configuration has the nonzero imposed energy $c$, so no such exterior term equals $cN$ for all configurations. If $c=0$, the added energy is zero and agrees with free walls, or with the empty exterior $\\varnothing\\in\\Omega(0)$. Thus only the nonzero volume-filling perturbation gives the claimed exterior-energy exclusion. Separately, the ideal potential does not satisfy [L1]\u2019s positive divergent-core hypothesis, so no exterior-limit theorem for that stronger class is contradicted in either case."
+    }
+  ]
+}

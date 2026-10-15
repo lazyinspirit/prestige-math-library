@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "batch": "15",
+  "round": 0,
+  "reviewed_items": [
+    "def-td-finite-microstate-model",
+    "def-td-regular-hamiltonian-shell-preparation",
+    "post-td-canonical-sampling",
+    "post-td-microcanonical-sampling",
+    "pthm-td-countable-canonical-identities",
+    "pthm-td-differentiable-pressure-concentration",
+    "pthm-td-finite-bath-canonical-error",
+    "pthm-td-finite-canonical-identities",
+    "pthm-td-finite-entropy-maximum",
+    "pthm-td-general-quantum-canonical-identities",
+    "pthm-td-independent-factorization",
+    "pthm-td-invariant-regular-microcanonical-shell",
+    "pthm-td-lattice-bulk-pressure",
+    "pthm-td-measurable-canonical-identities",
+    "pthm-td-finite-quantum-free-energy-minimum",
+    "pthm-td-finite-mode-occupation-and-trace-formulas",
+    "pthm-td-qualified-discrete-quantum-dephasing",
+    "rem-td-ensemble-limit-hypotheses",
+    "ex-td-finite-mode-thermal-ensemble",
+    "ex-td-two-site-thermal-ensemble",
+    "ex-td-infinite-mode-trace-divergence",
+    "ex-td-no-automatic-equilibration",
+    "ex-td-two-site-no-thermalization"
+  ],
+  "reviewed_pages": [
+    "td-finite-statistical-bridge",
+    "td-finite-statistical-bridge-examples"
+  ],
+  "decision": "repair",
+  "reason": "Request one local repair. The conditional results and their inspected mathematical suppliers are generally sound, but several assigned items omit or misapply prerequisites, including the quantum product argument, general unbounded trace notation, shell assumptions, and one microcanonical dependency attribution.",
+  "findings": [
+    {
+      "id": "def-td-regular-hamiltonian-shell-preparation",
+      "type": "prerequisite",
+      "reason": "The definition uses thm-tdmath-regular-energy-shell-measure, whose statement assumes AC, but does not state or directly depend on AC. It also uses “canonical chart” without specifying its symplectic structure or how the physical and numerical Hamiltonians define the flow used by pthm-td-invariant-regular-microcanonical-shell. State these assumptions explicitly and carry AC to shell consumers."
+    },
+    {
+      "id": "def-td-regular-hamiltonian-shell-preparation",
+      "type": "scope",
+      "reason": "physical_scope excludes incomplete global flows, although shell normalization is defined without a flow; the invariant-shell theorem separately assumes a global flow. Separate the preparation scope from the dynamical condition and update the A-page summary."
+    },
+    {
+      "id": "pthm-td-general-quantum-canonical-identities",
+      "type": "local",
+      "reason": "The theorem claims von Neumann entropy and unbounded-H mean/variance identities for potentially infinite-dimensional Hilbert spaces, but def-nrqm-many-body-framework-entropy-and-free-energy explicitly covers only finite-dimensional sectors. The mathematical supplier gives finite spectral moment and entropy sums, but the theorem does not define its general entropy, variance, or Tr(rho H) notation. Define these using the supplied spectral data and establish any operator-trace notation used."
+    },
+    {
+      "id": "pthm-td-finite-mode-occupation-and-trace-formulas",
+      "type": "prerequisite",
+      "reason": "The proof applies pthm-td-independent-factorization to bosonic Fock factors, but that supplier covers finite classical state sets, not countably infinite occupation spaces. Define the finite quantum product model and prove its trace and marginal factorization locally. Its AC and Countable Choice assumptions also need to be carried into consumers: ex-td-finite-mode-thermal-ensemble omits both, ex-td-infinite-mode-trace-divergence omits AC, and ex-td-two-site-no-thermalization omits both."
+    },
+    {
+      "id": "pthm-td-general-quantum-canonical-identities",
+      "type": "prerequisite",
+      "reason": "Its AC and Countable Choice assumptions are used by pthm-td-qualified-discrete-quantum-dephasing, which states only AC, and by rem-td-ensemble-limit-hypotheses, which carries neither choice assumption. Propagate the exact assumptions to those consumers."
+    },
+    {
+      "id": "pthm-td-finite-bath-canonical-error",
+      "type": "local",
+      "reason": "F3 attributes the induced bath-shell marginal weights to post-td-microcanonical-sampling, whose actual statement adopts only finite-window uniform sampling or the normalized regular-shell measure. The theorem’s Statement already stipulates the bath weights as an additional model assumption; correct F3 and keep that assumption distinct."
+    },
+    {
+      "id": "ex-td-two-site-no-thermalization",
+      "type": "local",
+      "reason": "The quantum example uses pthm-td-independent-factorization, which is limited to classical finite state sets, and does not define the composite Hilbert space, tensor-product basis, site number operators, or total Hamiltonian. Specify the two-factor quantum model and derive its Gibbs probabilities from the repaired quantum product result."
+    },
+    {
+      "id": "ex-td-infinite-mode-trace-divergence",
+      "type": "local",
+      "reason": "The example uses ell^2(F) without stating its Hilbert-space definition or identifying an exact supplier. Define it as the square-summable functions on the countable configuration set with its canonical inner product and basis."
+    },
+    {
+      "id": "ex-td-no-automatic-equilibration",
+      "type": "local",
+      "reason": "The stipulated evolution is parameterized by t >= 0 but gives no time unit. State seconds or explicitly declare dimensionless model time."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "post-td-microcanonical-sampling",
+      "decision": "repair",
+      "reason": "Carry AC for the regular-shell construction and keep that preparation rule independent of the separate global-flow hypothesis."
+    },
+    {
+      "id": "pthm-td-invariant-regular-microcanonical-shell",
+      "decision": "repair",
+      "reason": "Match its Hamiltonian flow to the explicitly defined symplectic chart and state the flow-time unit; it already supplies AC and the full-band flow condition."
+    },
+    {
+      "id": "pthm-td-finite-bath-canonical-error",
+      "decision": "repair",
+      "reason": "Correct F3: the weak-additive bath marginal is an explicit model premise in the theorem, not a consequence of the microcanonical postulate."
+    },
+    {
+      "id": "pthm-td-qualified-discrete-quantum-dephasing",
+      "decision": "repair",
+      "reason": "Carry Countable Choice from the quantum Gibbs and general trace suppliers; the spectral-eigenbasis use itself is compatible."
+    },
+    {
+      "id": "ex-td-finite-mode-thermal-ensemble",
+      "decision": "repair",
+      "reason": "Carry AC and Countable Choice from its quantum trace supplier; its single-mode calculation is otherwise supported."
+    },
+    {
+      "id": "ex-td-infinite-mode-trace-divergence",
+      "decision": "repair",
+      "reason": "Carry AC from the finite-mode quantum supplier and define the stated ell^2 Hilbert space."
+    },
+    {
+      "id": "ex-td-two-site-no-thermalization",
+      "decision": "repair",
+      "reason": "Carry AC and Countable Choice, define the composite tensor-product model, and replace the classical factorization premise with the quantum product result."
+    },
+    {
+      "id": "ex-td-no-automatic-equilibration",
+      "decision": "repair",
+      "reason": "State the unit of its stipulated evolution parameter."
+    },
+    {
+      "id": "rem-td-ensemble-limit-hypotheses",
+      "decision": "repair",
+      "reason": "Carry AC and Countable Choice for the cited quantum results, AC for the shell construction, and distinguish shell preparation from flow invariance in the summary."
+    }
+  ]
+}

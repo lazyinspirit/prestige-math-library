@@ -1,0 +1,60 @@
+---
+id: pthm-td-carnot-engine-bound
+kind: physics-theorem
+title: Ideal-bath heat-engine efficiency bound
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+physical_scope: Conditional efficiency bound for an admitted closed engine cycle between positive-temperature ideal baths inside an isolated compound with an ideal work store; finite reservoirs, unlisted transfers, and empirical engine performance are excluded.
+deps:
+  - def-td-reservoir-cycle
+  - post-td-first-law-energy
+  - post-td-macroscopic-second-law
+dependency_roles:
+  def-td-reservoir-cycle: formulation-prerequisite
+  post-td-first-law-energy: physical-assumption
+  post-td-macroscopic-second-law: physical-assumption
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.3.1
+      url: https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf
+    - title: Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.5.3
+      url: https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf
+dependency_level: 8
+---
+
+## Statement
+
+Let an admitted heat-engine cycle in the sense of [[def-td-reservoir-cycle]] operate between fixed ideal-bath temperatures $0<T_c<T_h$, absorb $Q_h>0$, reject $Q_c>0$, and deliver $W_{\mathrm{out}}>0$. Define its efficiency by $\eta=W_{\mathrm{out}}/Q_h$. Then
+$
+\eta\le 1-\frac{T_c}{T_h}.
+$
+Equality holds exactly when the total entropy change of the isolated compound is zero. In particular, a reversible cycle in the stated boundary model saturates the bound; zero entropy change is not here asserted to imply full reversibility.
+
+## Facts & Assumptions
+
+**Given:** A cyclic working system with $0<T_c<T_h$, $Q_h>0$, $Q_c>0$, no unlisted transfers, and the full working system, baths, and work store inside the declared isolated compound.
+
+[F1] [[def-td-reservoir-cycle]]: In engine mode $Q[P]=Q_h-Q_c$, $W_{\mathrm{on}}[P]=-W_{\mathrm{out}}$, the hot and cold bath energy changes are $-Q_h$ and $+Q_c$, their endpoint entropy changes are $-Q_h/T_h$ and $+Q_c/T_c$, the working system returns to its initial state, and the work store gains $\Delta E_w=W_{\mathrm{out}}$ with zero entropy change. The admitted total-compound endpoint tuples contain those same working-system endpoints and bath/store energy coordinates, lie in one feasible set for the second-law postulate, and use the declared additive entropy split.
+
+[F2] [[post-td-first-law-energy]]: For an admitted closed fixed-constitution process with zero endpoint changes in separately tracked center-of-mass kinetic and external-potential energies, $\Delta U=Q[P]+W_{\mathrm{on}}[P]$.
+
+[F3] [[post-td-macroscopic-second-law]]: For an admitted isolated compound process with equilibrium endpoints and the declared additive total entropy, $\Delta S_{\mathrm{tot}}\ge0$; an admitted reversible operation has $\Delta S_{\mathrm{tot}}=0$.
+
+## Proof
+
+**Given:** The fixed-bath cycle hypotheses in the Statement and the heat/work signs in [F1].
+
+1.1 The working system returns to its initial state, so $\Delta U=0$. Applying [F2] with [F1] gives $0=Q_h-Q_c-W_{\mathrm{out}}$, hence $W_{\mathrm{out}}=Q_h-Q_c$ and $\eta=1-Q_c/Q_h$. [given, F1, F2, algebra]
+
+1.2 The hot bath loses energy $Q_h$, the cold bath gains $Q_c$, and their entropy slopes are constant. Thus their entropy changes are $-Q_h/T_h$ and $Q_c/T_c$. The working system and work store have zero entropy change, so [F3] gives $ -\frac{Q_h}{T_h}+\frac{Q_c}{T_c}=\Delta S_{\mathrm{tot}}\ge0. $ [given, F1, F3, algebra]
+
+2.1 Since $Q_h,T_c,T_h>0$, step 1.2 implies $Q_c/Q_h\ge T_c/T_h$. Substituting into step 1.1 yields $\eta\le 1-T_c/T_h$. Equality in this algebraic bound holds exactly when $\Delta S_{\mathrm{tot}}=0$. [given, step 1.1, step 1.2, algebra]
+
+3.1 If the full admitted cycle is reversible, [F3] gives $\Delta S_{\mathrm{tot}}=0$, so step 2.1 is saturated. No converse about reversibility follows from the entropy calculation. [F3, step 2.1] ∎

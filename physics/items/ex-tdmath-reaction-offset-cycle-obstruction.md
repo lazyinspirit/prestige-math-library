@@ -1,0 +1,45 @@
+---
+id: ex-tdmath-reaction-offset-cycle-obstruction
+kind: example
+title: A two-channel cycle obstructs reaction offsets
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+dependency_level: 2
+deps: [thm-tdmath-finite-inequality-alternative, thm-tdmath-reaction-offset-feasibility]
+dependency_roles:
+  thm-tdmath-finite-inequality-alternative: mathematical-premise
+  thm-tdmath-reaction-offset-feasibility: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+sources:
+  references:
+    - title: "Stanford EE464, Fourier–Motzkin Elimination lecture notes"
+      url: "https://lall.stanford.edu/ee464/lectures/fourier_motzkin.pdf?download=1"
+---
+
+## Example
+
+Set $A=\{1,2\}$ and $r=2$, with independently supplied data $\nu_1=(1,-1)$, $d_1=-2$, $\nu_2=(-1,1)$, and $d_2=1$. No offset $b\in\mathbb R^2$ satisfies both $b\cdot\nu_a+d_a\ge0$.
+
+## Facts & Assumptions
+
+[A1] Channel data in the Example: $\nu_1=(1,-1)$, $d_1=-2$, $\nu_2=(-1,1)$, and $d_2=1$.
+
+[F1] [[thm-tdmath-reaction-offset-feasibility]]: for independently supplied real channel vectors and lower-bound data, feasibility requires every nonnegative zero-cycle $\lambda$ to have $\sum_a\lambda_ad_a\ge0$.
+
+[F2] [[thm-tdmath-finite-inequality-alternative]]: dot products are finite coordinate sums, vector sums are coordinatewise, and an infeasibility certificate is a nonnegative combination with zero left coefficient and positive right side.
+
+## Verification
+
+**Given:** [A1]–[F2].
+
+1.1 The multiplier $\lambda=(1,1)$ is nonnegative and satisfies $\lambda_1\nu_1+\lambda_2\nu_2=(1,-1)+(-1,1)=(0,0)$. But $\lambda_1d_1+\lambda_2d_2=-2+1=-1<0$, violating the necessary condition in [F1]; therefore no offset exists. [A1, F1, algebra]
+
+2.1 Directly, the two inequalities would require $b_1-b_2\ge2$ and $-b_1+b_2\ge-1$, equivalently $b_1-b_2\le1$. Adding the original inequalities gives $0\ge1$, a contradiction. This is the positive-right-side zero-left certificate of [F2]. [A1, F2, step 1.1, algebra] ∎
+

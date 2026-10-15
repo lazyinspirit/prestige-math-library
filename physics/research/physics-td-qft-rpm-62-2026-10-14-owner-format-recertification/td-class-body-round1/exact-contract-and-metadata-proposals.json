@@ -1,0 +1,2754 @@
+{
+  "version": 1,
+  "scope": [
+    "cex-tdmath-noncompact-mixture-nonattainment",
+    "cex-tdmath-nonconcave-ensemble-inequivalence",
+    "cex-tdmath-nonergodic-volume-flow",
+    "ex-tdmath-pure-state-versus-average-entropy",
+    "cex-td-noncompact-phase-mixture-no-attained-maximum",
+    "cex-td-clapeyron-zero-volume-jump",
+    "cex-tdmath-bulk-field-pressure",
+    "ex-tdmath-repulsive-power-tail",
+    "ex-tdmath-hard-core-attractive-power-tail",
+    "ex-tdmath-hard-core-zero-beta",
+    "ex-tdmath-close-packing-endpoint",
+    "ex-tdmath-nonunique-variational-minimizers"
+  ],
+  "contracts": {
+    "cex-tdmath-noncompact-mixture-nonattainment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-mixture-generator-space-and-energy",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a nonempty compact subset of $\\mathbb R^d$, $d\\ge1$, with its Borel sigma-algebra, and let $a:K\\to\\mathbb R$ be continuous. The **convex hull** $\\operatorname{conv}K$ is the set of finite convex combinations of points of $K$. A **phase generator** is a point $y\\in K$ with declared energy $a(y)$. A **mixture** is a Borel probability measure $P$ on $K$. Its barycenter and mean energy are the coordinatewise Lebesgue integrals\n$$\\bar y(P):=\\int_K y\\,dP(y)\\in\\mathbb R^d,\\qquad \\bar a(P):=\\int_K a(y)\\,dP(y)\\in\\mathbb R.$$\nThese integrals are finite because each coordinate and $a$ are bounded on compact $K$. For prescribed mean $x\\in\\operatorname{conv}K$, the **mixture energy** is\n$$a_{\\rm mix}(x):=\\inf\\{\\bar a(P):P\\text{ is a Borel probability on }K,\\ \\bar y(P)=x\\}.$$\nThe admissible set is nonempty since every finite convex combination of points of $K$ is the barycenter of a finite atomic probability. The definition does not assert that the infimum is attained; the theorem on this page gives a compact continuous sufficient condition.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tdmath-compact-continuous-mixture-attainment",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset\\mathbb R^d$ be nonempty compact, $d\\ge1$, and $a:K\\to\\mathbb R$ continuous. Define $a_{\\rm mix}$ as in [[def-tdmath-mixture-generator-space-and-energy]]. Then for every $x\\in\\operatorname{conv}K$ the infimum defining $a_{\\rm mix}(x)$ is attained by a Borel probability measure supported on at most $d+1$ points. The function $a_{\\rm mix}$ is lower semicontinuous and convex on $\\operatorname{conv}K$, and is the greatest convex function on $\\operatorname{conv}K$ bounded above by $a$ on $K$. Minimizing over all Borel probabilities on $K$ gives the same attained value as minimizing over finite mixtures. This is a mathematical compactness result; it makes no phase-preparation or equilibrium postulate.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each integer $n\\ge2$, the set $E_n=[1/n,1)$ is Borel, and $\\bigcup_{n\\ge2}E_n=(0,1)$. Since $P((0,1))=1$, countable subadditivity implies $P(E_n)>0$ for at least one $n$; otherwise the union would have probability zero. On $E_n$, $x\\ge1/n$, while elsewhere $x\\ge0$, so $$\\int_{(0,1)}x\\,dP\\ge \\frac1nP(E_n)>0.$$ Therefore every admissible probability has strictly positive objective. [A1, F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The point mass $\\delta_{1/n}$ at $1/n$ is a Borel probability on $(0,1)$ and has objective $1/n$. These values tend to zero, while 1.1 shows all objectives are positive. Hence the infimum is zero and is not attained. The generator set is noncompact, so this conclusion does not contradict the compact result [F2]; it shows why an attainment theorem must retain its compactness/coercivity hypotheses. [A1, F1, F2, step 1.1] ∎",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "A1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The nonempty interval (0,1) is the specified generator set in A1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: proves every probability has strictly positive objective, while gives a sequence tending to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The point masses delta_(1/n) explicitly form admissible one-point measures ."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No multiplicity or degenerate-generator case is part of this scalar example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The excluded endpoint 0 is precisely why the infimum is not attained ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The measures delta_(1/n) are explicit witnesses to the infimum ."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states an unattained infimum, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states an unattained infimum, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Point masses P=delta_x with x=1/n have energy x and tend to the unattained infimum 0.",
+          "evidence": "Exact substitution in step 1.2."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tdmath-mixture-generator-space-and-energy",
+          "carrier": "items/def-tdmath-mixture-generator-space-and-energy.md",
+          "status": "Current draft supplier carrier; exact interface inspected; independent acceptance is not asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $K$ be a nonempty compact subset of $\\mathbb R^d$, $d\\ge1$, with its Borel sigma-algebra, and let $a:K\\to\\mathbb R$ be continuous. The **convex hull** $\\operatorname{conv}K$ is the set of finite convex combinations of points of $K$. A **phase generator** is a point $y\\in K$ with declared energy $a(y)$. A **mixture** is a Borel probability measure $P$ on $K$. Its barycenter and mean energy are the coordinatewise Lebesgue integrals\n$$\\bar y(P):=\\int_K y\\,dP(y)\\in\\mathbb R^d,\\qquad \\bar a(P):=\\int_K a(y)\\,dP(y)\\in\\mathbb R.$$\nThese integrals are finite because each coordinate and $a$ are bounded on compact $K$. For prescribed mean $x\\in\\operatorname{conv}K$, the **mixture energy** is\n$$a_{\\rm mix}(x):=\\inf\\{\\bar a(P):P\\text{ is a Borel probability on }K,\\ \\bar y(P)=x\\}.$$\nThe admissible set is nonempty since every finite convex combination of points of $K$ is the barycenter of a finite atomic probability. The definition does not assert that the infimum is attained; the theorem on this page gives a compact continuous sufficient condition.\n\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Draft definition carrier is present; its interface was inspected.",
+          "consumer_use": "F1 is used in step(s) 1.1, 2.1"
+        },
+        {
+          "supplier": "thm-tdmath-compact-continuous-mixture-attainment",
+          "carrier": "items/thm-tdmath-compact-continuous-mixture-attainment.md",
+          "status": "Current draft supplier carrier; exact interface inspected; independent acceptance is not asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $K\\subset\\mathbb R^d$ be nonempty compact, $d\\ge1$, and $a:K\\to\\mathbb R$ continuous. Define $a_{\\rm mix}$ as in [[def-tdmath-mixture-generator-space-and-energy]]. Then for every $x\\in\\operatorname{conv}K$ the infimum defining $a_{\\rm mix}(x)$ is attained by a Borel probability measure supported on at most $d+1$ points. The function $a_{\\rm mix}$ is lower semicontinuous and convex on $\\operatorname{conv}K$, and is the greatest convex function on $\\operatorname{conv}K$ bounded above by $a$ on $K$. Minimizing over all Borel probabilities on $K$ gives the same attained value as minimizing over finite mixtures. This is a mathematical compactness result; it makes no phase-preparation or equilibrium postulate.\n\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Complete proof is present in the current draft carrier; it is not independently accepted.",
+          "consumer_use": "F2 is used in step(s) 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-12",
+        "notes": "Author self-check records conditional assumptions, boundary cases, and supplier status; this is not independent mathematical approval."
+      }
+    },
+    "cex-tdmath-nonconcave-ensemble-inequivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $e_{N,k}\\ge1$, $e^{Ne_{N,k}^2}\\ge e^N$. For $x\\ge e^N$, $x-1\\le\\lfloor x\\rfloor\\le x$, so $$e_{N,k}^2+\\frac1N\\log(1-e^{-N})\\le \\frac1N\\log g_{N,k}\\le e_{N,k}^2.$$ The error tends to zero uniformly in $k$. The grid mesh is $1/N$; for a continuous function on $[1,2]$, uniform continuity makes its grid maxima converge to its interval maximum. [A1, F1, F2]",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $Z_N(b)=\\sum_{k=0}^Ng_{N,k}e^{-Nb e_{N,k}}$ and $m_N=\\max_k[N^{-1}\\log g_{N,k}-b e_{N,k}]$. The largest summand is $e^{Nm_N}$ and there are $N+1$ summands, so $$m_N\\le N^{-1}\\log Z_N(b)\\le m_N+N^{-1}\\log(N+1).$$ By 1.1, $m_N\\to\\max_{e\\in[1,2]}(e^2-be)$. If $e=\\theta\\cdot1+(1-\\theta)\\cdot2$ with $0<\\theta<1$, direct expansion gives $$e^2-be=\\theta(1-b)+(1-\\theta)(4-2b)-\\theta(1-\\theta),$$ strictly below the weighted endpoint values. Thus the maximum is at an endpoint and equals $\\max(1-b,4-2b)$. [A1, A2, F1, F2, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "A2",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For compact $K\\subset(1,2)$, strict convexity gives $$\\eta:=\\min_{e\\in K}\\left[\\max(1-b,4-2b)-(e^2-be)\\right]>0$$ by [F3]. Uniform approximation in 1.1 makes every grid exponent in $K$ at most the maximum minus $\\eta/2$ for all sufficiently large $N$. On the other hand, an endpoint group has exponent tending to the maximum. Therefore the canonical probability of $K$ is at most $(N+1)e^{-N\\eta/2+o(N)}$, which tends to zero. [A1, A2, F1, F3, step 1.1, step 2.1]",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "A1",
+            "A2",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Choose integers $k_N$ with $e_{N,k_N}\\to e\\in(1,2)$. The microcanonical exact-group law has energy density exactly $e_{N,k_N}$ at every state. By 1.1 its entropy density $N^{-1}\\log g_{N,k_N}$ tends to $e^2$. Thus, for example at the crossing $b=3$, canonical mass escapes every compact neighborhood of any interior target while the microcanonical group remains there. Finally $s(3/2)=9/4<5/2=(s(1)+s(2))/2$, so $s(e)=e^2$ is not concave. The example is a constructed model, not an observation about a material. [A1, A2, step 1.1, step 3.1] ∎",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "A2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every N has the explicitly nonempty group k=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The floor and degeneracy estimates are valid for every grid energy e>=1 ."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formula includes N=1, with two finite energy groups ."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Within-group degeneracy is counted by g_(N,k); the exact-group entropy is computed ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Both endpoint groups attain the limiting canonical pressure at the crossing b=3 ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite model is explicit and no optimizer or abstract witness is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample has no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample has no iff assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "At N=1, e_0=1, e_1=2, g_0=floor(e)=2, and g_1=floor(e^4)=54; all constructed groups are finite and nonempty.",
+          "evidence": "Direct substitution into the model definition in A1."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-natural-logarithm",
+          "carrier": "items/def-natural-logarithm.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Definition",
+          "exact_statement": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.\n\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published definition; no proof is required.",
+          "consumer_use": "F1 is used in step(s) 1.1, 2.1, 3.1"
+        },
+        {
+          "supplier": "def-real-exponential-function-and-e",
+          "carrier": "items/def-real-exponential-function-and-e.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Definition",
+          "exact_statement": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published definition; no proof is required.",
+          "consumer_use": "F1 is used in step(s) 1.1, 2.1, 3.1"
+        },
+        {
+          "supplier": "thm-heine-borel-rn",
+          "carrier": "items/thm-heine-borel-rn.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Statement",
+          "exact_statement": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.\n\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published mathematical supplier proof is present in the imported read-only snapshot.",
+          "consumer_use": "F3 is used in step(s) 3.1"
+        },
+        {
+          "supplier": "thm-logarithm-derivative-and-integral",
+          "carrier": "items/thm-logarithm-derivative-and-integral.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Statement",
+          "exact_statement": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published mathematical supplier proof is present in the imported read-only snapshot.",
+          "consumer_use": "F2 is used in step(s) 1.1, 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-12",
+        "notes": "Author self-check records conditional assumptions, boundary cases, and supplier status; this is not independent mathematical approval."
+      }
+    },
+    "cex-tdmath-nonergodic-volume-flow": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-symplectic-form-and-symplectic-manifold",
+          "source_section": "Definition",
+          "quote": "A **symplectic form** on a smooth manifold $M$ is a smooth two-form $\\omega$\nsuch that\n\n1. $d\\omega=0$, and\n2. $(T_pM,\\omega_p)$ is a [[def-symplectic-vector-space|symplectic vector\n   space]] for every $p\\in M$.\n\nThe pair $(M,\\omega)$ is a **symplectic manifold**. Thus both closedness and\npointwise nondegeneracy are required. A zero-dimensional manifold with its\nzero two-form satisfies the definition.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "source_section": "Definition",
+          "quote": "For $H\\in C^\\infty(M)$, its **Hamiltonian vector field** is the vector field\n$X_H$ determined by the library sign convention\n\n$$\\iota_{X_H}\\omega=dH.$$\n\nA vector field $X$ is **Hamiltonian** if $\\iota_X\\omega=dH$ for some smooth\nfunction $H$; such an $H$ is a **Hamiltonian function for $X$**. A function and\nits vector field are distinct data, and completeness of $X_H$ is not assumed.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tdmath-hamiltonian-measure-and-recurrence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(M,\\omega)$ be a smooth $2n$-dimensional symplectic manifold and $H\\in C^\\infty(M,\\mathbb R)$, with Hamiltonian field defined by $\\iota_{X_H}\\omega=dH$. Wherever its local flow $\\phi_t$ is defined, it preserves the symplectic form and the volume measure $m$ determined by $\\omega^n/n!$. No completeness is asserted. For a region $R$ on which a nonzero-time map $T=\\phi_\\tau$ and all its iterates are defined, $T$ is a measure-preserving transformation. If $m(R)<\\infty$, then for every measurable $E\\subseteq R$, almost every point of $E$ returns to $E$ infinitely often under forward iteration.\n\nIf $m(R)=1$ and $T$ is ergodic, then for every $f\\in L^1(R,m)$ the averages $N^{-1}\\sum_{j=0}^{N-1}f(T^jx)$ converge almost everywhere and in $L^1$ to $\\int_Rf\\,dm$. Without ergodicity, the limit is the invariant conditional expectation supplied by Birkhoff's theorem, not necessarily the space mean. Finally, if each stated time map $\\phi_t$ is a diffeomorphism of a finite invariant region $R$, a density $p_0\\ge0$ with $\\int_Rp_0\\,dm=1$ and $\\int_R|p_0\\log p_0|\\,dm<\\infty$ transports by $p_t=p_0\\circ\\phi_{-t}$ with conserved fine-grained entropy $-k_B\\int_Rp_t\\log p_t\\,dm$, using $0\\log0=0$. Volume preservation alone does not imply ergodicity or a time-average/ensemble identity.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ergodic-measure-preserving-system",
+          "source_section": "Definition",
+          "quote": "A measure-preserving system is **ergodic for $\\mu$** if each $E\\in\\mathcal I$ has $\\mu(E)=0$ or $\\mu(X\\setminus E)=0$, with $\\mathcal I$ as in [[def-strict-and-mod-null-invariant-sigma-algebras]]. For a probability system this means $\\mu(E)\\in\\{0,1\\}$. The definition is relative to the invariant measure; no probability assumption is implicit in the general null/conull formulation.\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $X_H=a\\partial_q+b\\partial_p$. Then $\\iota_{X_H}(dq\\wedge dp)=a\\,dp-b\\,dq$, while $dH=-\\sin q\\,dq$. Equating coefficients gives $a=0$ and $b=\\sin q$. The explicit solution is $$\\phi_t(q,p)=(q,p+t\\sin q\\pmod{2\\pi}),$$ which is defined for every real $t$ and is a diffeomorphism with inverse $\\phi_{-t}$. [A1, F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $H\\circ\\phi_t=H$, the set $A$ is invariant under every $\\phi_t$. The torus has total area $(2\\pi)^2=4\\pi^2$. The allowed $q$ values in $A$ have total length $\\pi$, while $p$ ranges over length $2\\pi$, so $m(A)=2\\pi^2$, strictly between zero and total area. The map preserves area by [F2], and the invariant set violates the criterion [F3]; hence it is not ergodic for any nonzero sampling time. [A1, F2, F3, step 1.1, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The torus and invariant set A are nonempty by the coordinates and area calculation ."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The invariant set has positive area 2 pi squared ."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The two-dimensional symplectic torus is explicitly the minimal model in A1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Fixed points at sin q=0 are allowed and do not remove the positive-area invariant set ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Angular boundary points are identified modulo 2 pi, and the flow is complete ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The flow and invariant set are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a nonergodicity witness, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a nonergodicity witness, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "The set cos(q)>0 has q-length pi and p-length 2 pi, area 2 pi squared; the full torus has area 4 pi squared.",
+          "evidence": "Direct coordinate measure calculation in step 1.2."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-ergodic-measure-preserving-system",
+          "carrier": "items/def-ergodic-measure-preserving-system.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Definition",
+          "exact_statement": "A measure-preserving system is **ergodic for $\\mu$** if each $E\\in\\mathcal I$ has $\\mu(E)=0$ or $\\mu(X\\setminus E)=0$, with $\\mathcal I$ as in [[def-strict-and-mod-null-invariant-sigma-algebras]]. For a probability system this means $\\mu(E)\\in\\{0,1\\}$. The definition is relative to the invariant measure; no probability assumption is implicit in the general null/conull formulation.\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published definition; no proof is required.",
+          "consumer_use": "F3 is used in step(s) 2.1"
+        },
+        {
+          "supplier": "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "carrier": "items/def-hamiltonian-vector-field-and-hamiltonian-function.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Definition",
+          "exact_statement": "For $H\\in C^\\infty(M)$, its **Hamiltonian vector field** is the vector field\n$X_H$ determined by the library sign convention\n\n$$\\iota_{X_H}\\omega=dH.$$\n\nA vector field $X$ is **Hamiltonian** if $\\iota_X\\omega=dH$ for some smooth\nfunction $H$; such an $H$ is a **Hamiltonian function for $X$**. A function and\nits vector field are distinct data, and completeness of $X_H$ is not assumed.\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published definition; no proof is required.",
+          "consumer_use": "F1 is used in step(s) 1.1"
+        },
+        {
+          "supplier": "def-symplectic-form-and-symplectic-manifold",
+          "carrier": "items/def-symplectic-form-and-symplectic-manifold.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Definition",
+          "exact_statement": "A **symplectic form** on a smooth manifold $M$ is a smooth two-form $\\omega$\nsuch that\n\n1. $d\\omega=0$, and\n2. $(T_pM,\\omega_p)$ is a [[def-symplectic-vector-space|symplectic vector\n   space]] for every $p\\in M$.\n\nThe pair $(M,\\omega)$ is a **symplectic manifold**. Thus both closedness and\npointwise nondegeneracy are required. A zero-dimensional manifold with its\nzero two-form satisfies the definition.\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published definition; no proof is required.",
+          "consumer_use": "F1 is used in step(s) 1.1"
+        },
+        {
+          "supplier": "thm-tdmath-hamiltonian-measure-and-recurrence",
+          "carrier": "items/thm-tdmath-hamiltonian-measure-and-recurrence.md",
+          "status": "Current draft supplier carrier; exact interface inspected; independent acceptance is not asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $(M,\\omega)$ be a smooth $2n$-dimensional symplectic manifold and $H\\in C^\\infty(M,\\mathbb R)$, with Hamiltonian field defined by $\\iota_{X_H}\\omega=dH$. Wherever its local flow $\\phi_t$ is defined, it preserves the symplectic form and the volume measure $m$ determined by $\\omega^n/n!$. No completeness is asserted. For a region $R$ on which a nonzero-time map $T=\\phi_\\tau$ and all its iterates are defined, $T$ is a measure-preserving transformation. If $m(R)<\\infty$, then for every measurable $E\\subseteq R$, almost every point of $E$ returns to $E$ infinitely often under forward iteration.\n\nIf $m(R)=1$ and $T$ is ergodic, then for every $f\\in L^1(R,m)$ the averages $N^{-1}\\sum_{j=0}^{N-1}f(T^jx)$ converge almost everywhere and in $L^1$ to $\\int_Rf\\,dm$. Without ergodicity, the limit is the invariant conditional expectation supplied by Birkhoff's theorem, not necessarily the space mean. Finally, if each stated time map $\\phi_t$ is a diffeomorphism of a finite invariant region $R$, a density $p_0\\ge0$ with $\\int_Rp_0\\,dm=1$ and $\\int_R|p_0\\log p_0|\\,dm<\\infty$ transports by $p_t=p_0\\circ\\phi_{-t}$ with conserved fine-grained entropy $-k_B\\int_Rp_t\\log p_t\\,dm$, using $0\\log0=0$. Volume preservation alone does not imply ergodicity or a time-average/ensemble identity.\n\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Complete proof is present in the current draft carrier; it is not independently accepted.",
+          "consumer_use": "F2 is used in step(s) 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-12",
+        "notes": "Author self-check records conditional assumptions, boundary cases, and supplier status; this is not independent mathematical approval."
+      }
+    },
+    "ex-tdmath-pure-state-versus-average-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tdmath-discrete-quantum-cesaro-dephasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the exact first-clause interface of [[thm-tdmath-general-trace-gibbs-model]]: a nonzero complex Hilbert space has a finite or countable complete orthonormal energy eigenbasis $(u_j)$ for a self-adjoint semibounded $A$, with each energy eigenspace finite-dimensional. The supplier is a current draft whose statement and complete argument have been inspected; this theorem is conditional on that interface and does not claim its independent acceptance. Let $\\hbar>0$, define $U_tu_j=e^{-iE_jt/\\hbar}u_j$, and extend linearly and continuously. For any positive trace-class density operator $\\rho$ with $\\operatorname{Tr}\\rho=1$, set $\\rho_t=U_t\\rho U_t^*$. If $P_E$ denotes the projection onto the full eigenspace of energy $E$, then the trace-norm Riemann average\n$$\\bar\\rho_T:=\\frac1T\\int_0^T\\rho_t\\,dt$$\nconverges as $T\\to\\infty$ to\n$$\\rho_{\\rm diag}:=\\sum_E P_E\\rho P_E$$\nin trace norm. The full degenerate energy blocks are retained. Thus expectations of every bounded observable converge to their diagonal-ensemble values. This asserts Cesàro convergence, not convergence of $\\rho_t$ at individual late times, and is restricted to the stated discrete trace-class spectrum.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.\n\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The unitary evolution sends $\\psi$ to $(e^{-iE_1t/\\hbar}u_1+e^{-iE_2t/\\hbar}u_2)/\\sqrt2$, which remains a unit vector by [F2]. Its rank-one density has eigenvalues $1,0$, so its entropy is $-k_B(1\\log1+0\\log0)=0$ for every $t$. [A1, F2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two energy eigenspaces are one-dimensional. The dephasing theorem [F1] removes their off-diagonal matrix entries and yields $\\rho_{\\rm diag}=\\tfrac12P_1+\\tfrac12P_2$. Its eigenvalues are $(1/2,1/2)$, so $$S(\\rho_{\\rm diag})=-k_B\\left(\\tfrac12\\log\\tfrac12+\\tfrac12\\log\\tfrac12\\right)=k_B\\log2.$$ Since every $S(\\rho_t)=0$, the time average of instantaneous entropy is exactly zero. [A1, F1, F3, step 1.1]",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the basis $(u_1,u_2)$, $\\bar\\rho_T$ has diagonal entries $1/2$ and off-diagonal entry $$c_T=\\frac1{2T}\\int_0^T e^{-i(E_1-E_2)t/\\hbar}\\,dt,$$ whose magnitude is at most $\\hbar/(T|E_1-E_2|)$ by direct integration. Its eigenvalues are $1/2\\pm|c_T|$, so both tend to $1/2$. Continuity of $x\\mapsto-x\\log x$ at $1/2$ gives $S(\\bar\\rho_T)\\to k_B\\log2$. Thus entropy of the averaged state has a nonzero limit even though the averaged instantaneous entropy remains zero. [A1, F2, F3, step 2.1, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses the nonzero two-dimensional Hilbert space C^2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The pure-state zero entropy and 0 log 0 convention are evaluated ."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Each pure state has one nonzero eigenvalue, computed ."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Distinct energies are assumed; the dephasing result retains one-dimensional energy blocks ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The finite T average is explicitly defined and its T to infinity entropy limit is evaluated ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The vectors and density matrix are explicitly specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "The density eigenvalues change from (1,0) instantaneously to the dephased limit (1/2,1/2); the entropies are 0 and k_B log 2.",
+          "evidence": "Direct eigenvalue and entropy calculations in steps 1.1–1.2."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-complex-exponential",
+          "carrier": "items/def-complex-exponential.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Definition",
+          "exact_statement": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published definition; no proof is required.",
+          "consumer_use": "F2 is used in step(s) 1.1, 3.1"
+        },
+        {
+          "supplier": "def-natural-logarithm",
+          "carrier": "items/def-natural-logarithm.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Definition",
+          "exact_statement": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.\n\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published definition; no proof is required.",
+          "consumer_use": "F3 is used in step(s) 2.1, 3.1"
+        },
+        {
+          "supplier": "def-real-and-complex-inner-product-space",
+          "carrier": "items/def-real-and-complex-inner-product-space.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Definition",
+          "exact_statement": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published definition; no proof is required.",
+          "consumer_use": "F2 is used in step(s) 1.1, 3.1"
+        },
+        {
+          "supplier": "thm-logarithm-derivative-and-integral",
+          "carrier": "items/thm-logarithm-derivative-and-integral.md",
+          "status": "Current published mathematical supplier; exact interface inspected in its read-only snapshot.",
+          "source_section": "Statement",
+          "exact_statement": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Published mathematical supplier proof is present in the imported read-only snapshot.",
+          "consumer_use": "F3 is used in step(s) 2.1, 3.1"
+        },
+        {
+          "supplier": "thm-tdmath-discrete-quantum-cesaro-dephasing",
+          "carrier": "items/thm-tdmath-discrete-quantum-cesaro-dephasing.md",
+          "status": "Current draft supplier carrier; exact interface inspected; independent acceptance is not asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice and the exact first-clause interface of [[thm-tdmath-general-trace-gibbs-model]]: a nonzero complex Hilbert space has a finite or countable complete orthonormal energy eigenbasis $(u_j)$ for a self-adjoint semibounded $A$, with each energy eigenspace finite-dimensional. The supplier is a current draft whose statement and complete argument have been inspected; this theorem is conditional on that interface and does not claim its independent acceptance. Let $\\hbar>0$, define $U_tu_j=e^{-iE_jt/\\hbar}u_j$, and extend linearly and continuously. For any positive trace-class density operator $\\rho$ with $\\operatorname{Tr}\\rho=1$, set $\\rho_t=U_t\\rho U_t^*$. If $P_E$ denotes the projection onto the full eigenspace of energy $E$, then the trace-norm Riemann average\n$$\\bar\\rho_T:=\\frac1T\\int_0^T\\rho_t\\,dt$$\nconverges as $T\\to\\infty$ to\n$$\\rho_{\\rm diag}:=\\sum_E P_E\\rho P_E$$\nin trace norm. The full degenerate energy blocks are retained. Thus expectations of every bounded observable converge to their diagonal-ensemble values. This asserts Cesàro convergence, not convergence of $\\rho_t$ at individual late times, and is restricted to the stated discrete trace-class spectrum.\n\n",
+          "relevant_hypotheses_and_conventions": "The exact statement excerpt is retained above. The consumer uses precisely the hypotheses and conventions recorded in its linked Facts & Assumptions entry.",
+          "supplier_proof_status": "Complete proof is present in the current draft carrier; it is not independently accepted.",
+          "consumer_use": "F1 is used in step(s) 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-12",
+        "notes": "Author self-check records conditional assumptions, boundary cases, and supplier status; this is not independent mathematical approval."
+      }
+    },
+    "cex-td-noncompact-phase-mixture-no-attained-maximum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-td-compact-continuous-phase-mixture",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless phase-generator coordinates. A generator point $x\\in K$ encodes one model-specified homogeneous phase state, with declared entropy per mole $s(x)$ in $\\mathrm{J\\,mol^{-1}K^{-1}}$; let $s:K\\to\\mathbb R$ be continuous. Define $\\operatorname{conv}K$ as the set of finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$, and let $\\delta_x$ denote unit point mass at $x$. The vector integral $\\int_Kx\\,dP$ is taken coordinatewise. Assume every Borel probability mixture $P$ on $K$ with $\\int_Kx\\,dP(x)=\\bar x$ is feasible and has entropy per mole $\\int_Ks(x)\\,dP(x)$. Then the entropy maximum over all such mixtures is attained by a finite atomic mixture with at most $d+1$ phase-generator states.\n\nHere the integral uses the measure convention of [[def-tdmath-measure-integral]]. The entropy map includes its physical entropy units and is part of the model; this theorem does not derive the microscopic meaning of entropy or assert that a physical phase domain is compact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tdmath-measure-integral",
+          "source_section": "Definition",
+          "quote": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where the Borel sets of the extended real line are the sigma-algebra generated by its open sets. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $0< s_0-a\\le s(x)\\le s_0$, every feasible $s$ is nonnegative and bounded. For $n\\ge2$, put $A_n:=\\{x\\in K:|x|\\ge1/n\\}$. Their union is $K$; since $P(K)=1$, countable additivity implies $P(A_n)>0$ for some $n$. On $A_n$, $s\\le s_0-a/n$, and on its complement $s\\le s_0$. For any nonnegative simple function $\\varphi\\le s$, the measure integral definition [F2] therefore gives\n$$\n\\int_K\\varphi\\,dP\\le (s_0-a/n)P(A_n)+s_0P(K\\setminus A_n)=s_0-aP(A_n)/n<s_0.\n$$\nIndeed, refine the finitely many level sets of $\\varphi$ by $A_n$ and its complement; each simple-function coefficient is bounded by the corresponding pointwise bound on that piece, so the simple-integral formula [F2] gives the inequality. The common strict upper bound is independent of $\\varphi$, hence its supremum also satisfies $\\int_Ks\\,dP<s_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $0<\\epsilon<1$, the measure $P_\\epsilon=\\tfrac12\\delta_{-\\epsilon}+\\tfrac12\\delta_{\\epsilon}$ is supported on $K$, has mean zero, and satisfies $\\int s\\,dP_\\epsilon=s_0-a\\epsilon$. Letting $\\epsilon\\downarrow0$ shows that the supremum is $s_0$. Step 1.1 shows that no feasible measure attains it. This lies outside the compactness hypothesis in [F1] and exhibits a finite supremum without a maximizing mixture.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs feasible symmetric probabilities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses that 0 is excluded from K."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The one boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The degenerate boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The endpoints boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 supplies Pε for each 0<ε<1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The iff-forward boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The iff-reverse boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "symmetric measures approach the unattained supremum",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "Pε=½δ−ε+½δε has mean zero and entropy s0−aε→s0; no feasible measure attains s0."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "pthm-td-compact-continuous-phase-mixture",
+          "carrier": "items/pthm-td-compact-continuous-phase-mixture.md",
+          "status": "current draft supplier; exact interface inspected, independent acceptance not asserted",
+          "source_section": "Statement",
+          "exact_statement": "Let $d\\ge1$, and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless phase-generator coordinates. A generator point $x\\in K$ encodes one model-specified homogeneous phase state, with declared entropy per mole $s(x)$ in $\\mathrm{J\\,mol^{-1}K^{-1}}$; let $s:K\\to\\mathbb R$ be continuous. Define $\\operatorname{conv}K$ as the set of finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$, and let $\\delta_x$ denote unit point mass at $x$. The vector integral $\\int_Kx\\,dP$ is taken coordinatewise. Assume every Borel probability mixture $P$ on $K$ with $\\int_Kx\\,dP(x)=\\bar x$ is feasible and has entropy per mole $\\int_Ks(x)\\,dP(x)$. Then the entropy maximum over all such mixtures is attained by a finite atomic mixture with at most $d+1$ phase-generator states.\n\nHere the integral uses the measure convention of [[def-tdmath-measure-integral]]. The entropy map includes its physical entropy units and is part of the model; this theorem does not derive the microscopic meaning of entropy or assert that a physical phase domain is compact.",
+          "relevant_hypotheses_and_conventions": "[[pthm-td-compact-continuous-phase-mixture]]: Its attainment claim requires a compact phase-generator domain; it makes no attainment assertion for this noncompact $K$.",
+          "supplier_proof_status": "Current proof provenance is ai-altered; no independent acceptance is asserted.",
+          "consumer_use": "Used in 2.1."
+        },
+        {
+          "supplier": "def-borel-sigma-algebra",
+          "carrier": "items/def-borel-sigma-algebra.md",
+          "status": "current published supplier; exact interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "relevant_hypotheses_and_conventions": "[[def-borel-sigma-algebra]], [[def-probability-measure]], and [[def-tdmath-measure-integral]]: Mixtures are countably additive Borel probability measures of total mass one, and their integrals use the stated measure convention.",
+          "supplier_proof_status": "Current Definition/Postulate interface inspected; no proof obligation.",
+          "consumer_use": "Used in 1.1."
+        },
+        {
+          "supplier": "def-probability-measure",
+          "carrier": "items/def-probability-measure.md",
+          "status": "current published supplier; exact interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "relevant_hypotheses_and_conventions": "[[def-borel-sigma-algebra]], [[def-probability-measure]], and [[def-tdmath-measure-integral]]: Mixtures are countably additive Borel probability measures of total mass one, and their integrals use the stated measure convention.",
+          "supplier_proof_status": "Current Definition/Postulate interface inspected; no proof obligation.",
+          "consumer_use": "Used in 1.1."
+        },
+        {
+          "supplier": "def-tdmath-measure-integral",
+          "carrier": "items/def-tdmath-measure-integral.md",
+          "status": "current draft supplier; exact interface inspected, independent acceptance not asserted",
+          "source_section": "Definition",
+          "exact_statement": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where the Borel sets of the extended real line are the sigma-algebra generated by its open sets. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "relevant_hypotheses_and_conventions": "[[def-borel-sigma-algebra]], [[def-probability-measure]], and [[def-tdmath-measure-integral]]: Mixtures are countably additive Borel probability measures of total mass one, and their integrals use the stated measure convention.",
+          "supplier_proof_status": "Current Definition/Postulate interface inspected; no proof obligation.",
+          "consumer_use": "Used in 1.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-13-author self-audit",
+        "notes": "Current numbered steps, exact linked interfaces, units, physical assumptions, and applicable boundaries/finite calculations were checked by the author. This is not independent approval."
+      }
+    },
+    "cex-td-clapeyron-zero-volume-jump": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-td-clapeyron-local",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha,\\beta$ be two one-component phase branches from [[def-td-phase-and-coexistence-domain]] on a common open chart $O\\subset(0,\\infty)\\times\\mathbb R$ with coordinates $(T,p)$. Assume each branch has a local $C^2$ energy representation $\\mathcal U_i(s,V,n)$, $i\\in\\{\\alpha,\\beta\\}$, and that within each fixed branch tag it satisfies the same-tag homogeneity\n$$\n\\mathcal U_i(\\lambda s,\\lambda V,\\lambda n)=\\lambda\\mathcal U_i(s,V,n)\n$$\nfor all $\\lambda$ in a neighborhood of $1$ for which the scaled state remains in the chart. This is a phase-branch hypothesis: the general tagged law of [[post-td-bulk-additivity]] does not imply it. It may be stipulated independently on each local branch, or supplied by the common-law bulk subclass of [[pthm-td-euler-and-gibbs-duhem]] when each phase's local inverse states lie in its designated entropy cone with fixed species and intensive parameters and common SI units and energy/entropy reference conventions. That supplied subclass uses local inverse uniqueness and does not require a global energy inverse.\n\nSuppose a state $(T_0,p_0)\\in O$ is an attained interior coexistence equilibrium with bilateral energy, volume, and species exchange between the two branches, and both branches admit the valid local Gibbs charts of [[def-td-legendre-potentials]]. Write $g_i=G_i/n_i$, $s_i=S_i/n_i$, and $v_i=V_i/n_i$ in the units specified by [[def-td-si-quantities]]. If\n$$\n\\Delta v(T_0,p_0):=v_\\beta(T_0,p_0)-v_\\alpha(T_0,p_0)\\ne0,\n$$\nthen, on some open interval about $T_0$, the equal-Gibbs-per-mole coexistence condition $g_\\alpha(T,p(T))=g_\\beta(T,p(T))$ defines a unique local $C^1$ curve and\n$$\n\\frac{dp}{dT}=\\frac{s_\\beta-s_\\alpha}{v_\\beta-v_\\alpha}.\n$$\nIf, in addition, conversion from $\\alpha$ to $\\beta$ is admitted as a reversible process in contact with an ideal thermal reservoir at the same fixed $T$, then its molar latent heat absorbed by the system is $\\ell_{\\alpha\\to\\beta}=T(s_\\beta-s_\\alpha)$. These are conditional model deductions. The slope conclusion is not asserted when $\\Delta v=0$ or where the branch charts are not $C^1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $(T_0,p_0)$, differentiation gives $S_i/n_i=s_i$, $V_i/n_i=v_0$, and $\\mu_i=g_i=g_0$. Also $U_{i,T}=n_i c$, $V_{i,p}=-n_i\\kappa$, and $V_{i,T}=0$, so the derivative determinant for $(T,p)\\mapsto(U_i,V_i)$ at fixed positive amount is $-n_i^2c\\kappa\\ne0$. Thus [L1] supplies valid local state charts. The branch equality function is\n$$\nF(T,p):=g_\\beta-g_\\alpha=-(s_\\beta-s_\\alpha)(T-T_0),\n$$\nwhose zero set is $T=T_0$ with every nearby chart pressure permitted.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Here $\\Delta v=v_\\beta-v_\\alpha=0$, so the zero set is not the graph of a unique pressure as a function of temperature on an open interval about $T_0$, and the quotient $\\Delta s/\\Delta v$ is undefined. The nonzero-jump hypothesis of [F1] fails, so this model does not contradict that theorem.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The empty boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes Δv=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The one boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows ∂pF=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The endpoints boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The nonempty-choice boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The iff-forward boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The iff-reverse boundary is outside the explicitly stated hypotheses or no such case is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-jump equation set",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "F=−Δs(T−T0), Δv=0; the zero set is T=T0 with arbitrary local pressure."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "pthm-td-clapeyron-local",
+          "carrier": "items/pthm-td-clapeyron-local.md",
+          "status": "current draft supplier; exact interface inspected, independent acceptance not asserted",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\alpha,\\beta$ be two one-component phase branches from [[def-td-phase-and-coexistence-domain]] on a common open chart $O\\subset(0,\\infty)\\times\\mathbb R$ with coordinates $(T,p)$. Assume each branch has a local $C^2$ energy representation $\\mathcal U_i(s,V,n)$, $i\\in\\{\\alpha,\\beta\\}$, and that within each fixed branch tag it satisfies the same-tag homogeneity\n\\[\n\\mathcal U_i(\\lambda s,\\lambda V,\\lambda n)=\\lambda\\mathcal U_i(s,V,n)\n\\]\nfor all $\\lambda$ in a neighborhood of $1$ for which the scaled state remains in the chart. This is an additional phase-branch hypothesis: [[post-td-bulk-additivity]] permits the scaled material tag to change and does not imply this identity.\n\nSuppose a state $(T_0,p_0)\\in O$ is an attained interior coexistence equilibrium with bilateral energy, volume, and species exchange between the two branches, and both branches admit the valid local Gibbs charts of [[def-td-legendre-potentials]]. Write $g_i=G_i/n_i$, $s_i=S_i/n_i$, and $v_i=V_i/n_i$ in the units specified by [[def-td-si-quantities]]. If\n\\[\n\\Delta v(T_0,p_0):=v_\\beta(T_0,p_0)-v_\\alpha(T_0,p_0)\\ne0,\n\\]\nthen, on some open interval about $T_0$, the equal-Gibbs-per-mole coexistence condition $g_\\alpha(T,p(T))=g_\\beta(T,p(T))$ defines a unique local $C^1$ curve and\n\\[\n\\frac{dp}{dT}=\\frac{s_\\beta-s_\\alpha}{v_\\beta-v_\\alpha}.\n\\]\nIf, in addition, conversion from $\\alpha$ to $\\beta$ is admitted as a reversible process in contact with an ideal thermal reservoir at the same fixed $T$, then its molar latent heat absorbed by the system is $\\ell_{\\alpha\\to\\beta}=T(s_\\beta-s_\\alpha)$. These are conditional model deductions. The slope conclusion is not asserted when $\\Delta v=0$ or where the branch charts are not $C^1$.",
+          "relevant_hypotheses_and_conventions": "[[pthm-td-clapeyron-local]]: The local coexistence graph and slope conclusions require $\\Delta v\\ne0$.",
+          "supplier_proof_status": "Current proof provenance is ai-altered; no independent acceptance is asserted.",
+          "consumer_use": "Used in 2.1."
+        },
+        {
+          "supplier": "thm-euclidean-inverse-function-theorem",
+          "carrier": "items/thm-euclidean-inverse-function-theorem.md",
+          "status": "current published supplier; exact interface inspected",
+          "source_section": "Statement",
+          "exact_statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "relevant_hypotheses_and_conventions": "[[thm-euclidean-inverse-function-theorem]]: A C1 map between open Euclidean neighborhoods with invertible derivative at a point has a local C1 inverse.",
+          "supplier_proof_status": "Current proof provenance is ai-altered; no independent acceptance is asserted.",
+          "consumer_use": "Used in 1.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-13-author self-audit",
+        "notes": "Current numbered steps, exact linked interfaces, units, physical assumptions, and applicable boundaries/finite calculations were checked by the author. This is not independent approval."
+      }
+    },
+    "cex-tdmath-bulk-field-pressure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "This is the\n**product measure** of $\\mu$ and $\\nu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "The $N$-particle term without the field is $z^NV^N/N!$, by the product volume [F1] and the $1/N!$ convention [given]. Summing over $N\\geq0$ gives $\\Xi_0=\\sum_N(zV)^N/N!=e^{zV}$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "With the field, each term is multiplied by $e^{-\\beta cN}$, so $\\Xi_c=\\sum_N(ze^{-\\beta c}V)^N/N!=e^{ze^{-\\beta c}V}$ by [F2]. Therefore $V^{-1}\\log\\Xi_0=z$ and $V^{-1}\\log\\Xi_c=ze^{-\\beta c}$. If $c\\ne0$, these differ because $z,\\beta>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "A1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "unit-volume bulk field",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "For V=1, z=1, beta=1 and c=log(2), Xi_0=e and Xi_c=e^(1/2), so the pressures per volume are 1 and 1/2."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement has no empty-configuration branch; its claim concerns the displayed positive-volume, density, or conditional regime."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 addresses the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly qualifies the one case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement contains no degeneracy, differentiability, or uniqueness case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement contains no endpoint claim; its theorem is restricted to the displayed hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement makes no nonempty-set, existence, or attainment conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way implication or limit assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way implication or limit assertion, not an equivalence."
+        }
+      ]
+    },
+    "ex-tdmath-repulsive-power-tail": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-stable-power-tempered-particle-model",
+          "source_section": "Definition",
+          "quote": "Fix a positive integer $d$ and use the Euclidean space $\\mathbb R^d$ with norm\n$\\|x\\|_2=\\sqrt{\\langle x,x\\rangle}$ of [[def-euclidean-inner-product]]. A\npair potential is an even Borel-measurable function\n$\\phi:\\mathbb R^d\\to\\overline{\\mathbb R}$ whose image is contained in\n$\\mathbb R\\cup\\{+\\infty\\}$. Here $\\overline{\\mathbb R}$ is the extended real\nline ([[def-extended-reals]]). Borel measurability means the inverse image of\neach Borel subset of $\\overline{\\mathbb R}$ belongs to the Borel sigma-algebra\ngenerated by open sets in the Euclidean topology on $\\mathbb R^d$\n([[def-borel-sigma-algebra-on-the-extended-real-line]],\n[[def-borel-sigma-algebra]]). Even means $\\phi(-x)=\\phi(x)$. The value\n$+\\infty$ represents a forbidden pair separation. Coordinates and\npotential values are numerical values in fixed reference length and energy\nunits.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The norm is continuous, so on $\\mathbb R^d\\setminus\\{0\\}$ the function\n$x\\mapsto\\|x\\|_2^{-d-\\epsilon}$ is continuous by [F2]. The complement of\n$\\{0\\}$ is Borel and $\\{0\\}$ is closed, so the piecewise function is Borel;\nit is even because $\\|-x\\|_2=\\|x\\|_2$. For $\\|x\\|_2\\ge1$ it satisfies the\ntail bound with $C=1$ and $R=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every pair term is nonnegative or $+\\infty$. Thus every finite pair sum\nsatisfies $U_N\\ge0$, so the stability constant is $B=0$. This proves the\nclaimed model-class membership.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty family or configuration is selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The exponent ε is assumed strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives U_N≥0 for every finite configuration, including N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles x=0 separately from the continuous radial tail."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the tail bound at the inclusive radius R=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The verification is pointwise and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts membership, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts membership, not an iff characterization."
+        }
+      ],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tdmath-stable-power-tempered-particle-model",
+          "carrier": "items/def-tdmath-stable-power-tempered-particle-model.md",
+          "status": "current draft supplier; interface inspected, independent acceptance not asserted",
+          "source_section": "Definition",
+          "exact_statement": "Fix a positive integer $d$ and use the Euclidean space $\\mathbb R^d$ with norm\n$\\|x\\|_2=\\sqrt{\\langle x,x\\rangle}$ of [[def-euclidean-inner-product]]. A\npair potential is an even Borel-measurable function\n$\\phi:\\mathbb R^d\\to\\overline{\\mathbb R}$ whose image is contained in\n$\\mathbb R\\cup\\{+\\infty\\}$. Here $\\overline{\\mathbb R}$ is the extended real\nline ([[def-extended-reals]]). Borel measurability means the inverse image of\neach Borel subset of $\\overline{\\mathbb R}$ belongs to the Borel sigma-algebra\ngenerated by open sets in the Euclidean topology on $\\mathbb R^d$\n([[def-borel-sigma-algebra-on-the-extended-real-line]],\n[[def-borel-sigma-algebra]]). Even means $\\phi(-x)=\\phi(x)$. The value\n$+\\infty$ represents a forbidden pair separation. Coordinates and\npotential values are numerical values in fixed reference length and energy\nunits.",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Current draft definition carrier present; no proof obligation; interface inspected.",
+          "consumer_use": "F1 is used in step(s) 1.1, 2.1."
+        },
+        {
+          "supplier": "def-real-power",
+          "carrier": "items/def-real-power.md",
+          "status": "current published mathematical supplier; exact interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Published definition; no proof obligation.",
+          "consumer_use": "F2 is used in step(s) 1.1."
+        },
+        {
+          "supplier": "thm-real-power-continuity-and-derivatives",
+          "carrier": "items/thm-real-power-continuity-and-derivatives.md",
+          "status": "current published mathematical supplier; exact interface inspected",
+          "source_section": "Statement",
+          "exact_statement": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Published mathematical result; current statement and proof carrier inspected.",
+          "consumer_use": "F2 is used in step(s) 1.1."
+        }
+      ]
+    },
+    "ex-tdmath-hard-core-attractive-power-tail": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-stable-power-tempered-particle-model",
+          "source_section": "Definition",
+          "quote": "Fix a positive integer $d$ and use the Euclidean space $\\mathbb R^d$ with norm\n$\\|x\\|_2=\\sqrt{\\langle x,x\\rangle}$ of [[def-euclidean-inner-product]]. A\npair potential is an even Borel-measurable function\n$\\phi:\\mathbb R^d\\to\\overline{\\mathbb R}$ whose image is contained in\n$\\mathbb R\\cup\\{+\\infty\\}$. Here $\\overline{\\mathbb R}$ is the extended real\nline ([[def-extended-reals]]). Borel measurability means the inverse image of\neach Borel subset of $\\overline{\\mathbb R}$ belongs to the Borel sigma-algebra\ngenerated by open sets in the Euclidean topology on $\\mathbb R^d$\n([[def-borel-sigma-algebra-on-the-extended-real-line]],\n[[def-borel-sigma-algebra]]). Even means $\\phi(-x)=\\phi(x)$. The value\n$+\\infty$ represents a forbidden pair separation. Coordinates and\npotential values are numerical values in fixed reference length and energy\nunits.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integers",
+          "source_section": "Definition",
+          "quote": "On the set $\\mathbb{N} \\times \\mathbb{N}$ of pairs of natural numbers, define",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nonnegative-extended-series",
+          "source_section": "Definition",
+          "quote": "Let $a=(a_k)_{k\\in\\mathbb N}$ take values in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$ ([[def-extended-reals]]). Its **partial sums** are the unique sequence $(s_n)$ in $[0,+\\infty]$ satisfying",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-p-series-real-exponents",
+          "source_section": "Statement",
+          "quote": "For every real $p$,\n$$\\sum_{k\\ge1}\\frac1{k^p}\\text{ converges}\\quad\\Longleftrightarrow\\quad p>1.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The norm is continuous and $r\\mapsto r^{-p}$ is continuous on $r>0$ by\n[F2]. The regions $\\{\\|x\\|_2<1\\}$ and $\\{\\|x\\|_2\\ge1\\}$ are Borel, so the\npiecewise potential is Borel; radiality makes it even. For $\\|x\\|_2\\ge1$,\n$|\\phi_{\\mathrm{att}}(x)|=c\\|x\\|_2^{-d-\\epsilon}$, so it is power-tempered\nwith $C=c$ and $R=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $\\delta:=1/(2\\sqrt d)$. For a fixed particle $q_i$, the half-open\ncubes $D_k:=q_i+\\delta k+[0,\\delta)^d$, $k\\in\\mathbb Z^d$, partition\n$\\mathbb R^d$. Their Euclidean diameters are at most $\\sqrt d\\,\\delta=1/2<1$.\nThe example's definition makes every pair at distance less than $1$ forbidden,\nso centers in a finite-energy configuration are separated by at least $1$.\nThus each cube contains at most one center and $D_0$ contains no center other\nthan $q_i$. The cells in max-norm shell $m$ number\n$(2m+1)^d-(2m-1)^d$ by [F3]. For $m\\ge1$, factor the difference of powers:\n$$(2m+1)^d-(2m-1)^d=2\\sum_{r=0}^{d-1}(2m+1)^{d-1-r}(2m-1)^r\\le2d3^{d-1}m^{d-1},$$\nsince $2m+1\\le3m$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A neighbor of $q_i$ in shell $m=1$ has distance at least $1$ and\ncontributes at most $c$ in absolute value; there are $3^d-1$ such cells. For\n$m\\ge2$, choose a coordinate $r$ with $|k_r|=m$. If $k_r=m$, every point of\n$D_k$ differs from $q_i$ in coordinate $r$ by at least $\\delta m$; if\n$k_r=-m$, the absolute difference is greater than $\\delta(m-1)$. Hence every\npoint of $D_k$ is at Euclidean distance at least $\\delta(m-1)$ from $q_i$.\nBy [F2], each such neighbor contributes at most\n$c\\delta^{-p}(m-1)^{-p}$. The shell count in step 1.2 therefore bounds its\ntotal contribution by\n$$2d3^{d-1}m^{d-1}c\\delta^{-p}(m-1)^{-d-\\epsilon}.$$",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $m\\ge2$, $m-1\\ge m/2$, so the last bound is at most\n$2d3^{d-1}c\\delta^{-p}2^p m^{-1-\\epsilon}$. Summing over shells and using\n[F4], every fixed particle satisfies\n$$\\sum_{j\\ne i}|\\phi_{\\mathrm{att}}(q_i-q_j)|\\le C_*:=c(3^d-1)+2d3^{d-1}c\\delta^{-p}2^p\\sum_{m=2}^{\\infty}m^{-1-\\epsilon}<\\infty.$$",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For a finite-energy configuration, every pair term is negative and\n$$-U_N=\\sum_{i<j}|\\phi_{\\mathrm{att}}(q_i-q_j)|=\\frac12\\sum_i\\sum_{j\\ne i}|\\phi_{\\mathrm{att}}(q_i-q_j)|\\le\\frac{C_*}{2}N$$\nby step 3.1. A configuration containing a forbidden pair has $U_N=+\\infty$\nand also satisfies the lower bound. Hence the potential is stable with\n$B=C_*/2$. Together with step 1.1, this proves membership in the stated\nstable power-tempered class.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns finite particle configurations with N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The shell depth is assumed c>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives E_-=0 and the stability bound for N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 cover dimension d=1 and all finite-energy configurations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the shell endpoints at radii 1 and 2 in the attractive region."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite partition argument is deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one potential, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one potential, not an iff characterization."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "smallest cell-width case d=1",
+          "inputs": [
+            "step 1.2"
+          ],
+          "expected": "For d=1, δ=1/2 and the grid-cell diameter is 1/2<1, so a cell cannot contain two hard-core-separated centers."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tdmath-stable-power-tempered-particle-model",
+          "carrier": "items/def-tdmath-stable-power-tempered-particle-model.md",
+          "status": "current draft supplier; interface inspected, independent acceptance not asserted",
+          "source_section": "Definition",
+          "exact_statement": "Fix a positive integer $d$ and use the Euclidean space $\\mathbb R^d$ with norm\n$\\|x\\|_2=\\sqrt{\\langle x,x\\rangle}$ of [[def-euclidean-inner-product]]. A\npair potential is an even Borel-measurable function\n$\\phi:\\mathbb R^d\\to\\overline{\\mathbb R}$ whose image is contained in\n$\\mathbb R\\cup\\{+\\infty\\}$. Here $\\overline{\\mathbb R}$ is the extended real\nline ([[def-extended-reals]]). Borel measurability means the inverse image of\neach Borel subset of $\\overline{\\mathbb R}$ belongs to the Borel sigma-algebra\ngenerated by open sets in the Euclidean topology on $\\mathbb R^d$\n([[def-borel-sigma-algebra-on-the-extended-real-line]],\n[[def-borel-sigma-algebra]]). Even means $\\phi(-x)=\\phi(x)$. The value\n$+\\infty$ represents a forbidden pair separation. Coordinates and\npotential values are numerical values in fixed reference length and energy\nunits.",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Current draft definition carrier present; no proof obligation; interface inspected.",
+          "consumer_use": "F1 is used in step(s) 1.1, 1.2, 4.1."
+        },
+        {
+          "supplier": "def-integers",
+          "carrier": "items/def-integers.md",
+          "status": "current published mathematical supplier; exact interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "On the set $\\mathbb{N} \\times \\mathbb{N}$ of pairs of natural numbers, define",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Published definition; no proof obligation.",
+          "consumer_use": "F3 is used in step(s) 1.2, 3.1."
+        },
+        {
+          "supplier": "def-real-power",
+          "carrier": "items/def-real-power.md",
+          "status": "current published mathematical supplier; exact interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Published definition; no proof obligation.",
+          "consumer_use": "F2 is used in step(s) 1.1, 2.1."
+        },
+        {
+          "supplier": "thm-real-power-continuity-and-derivatives",
+          "carrier": "items/thm-real-power-continuity-and-derivatives.md",
+          "status": "current published mathematical supplier; exact interface inspected",
+          "source_section": "Statement",
+          "exact_statement": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Published mathematical result; current statement and proof carrier inspected.",
+          "consumer_use": "F2 is used in step(s) 1.1, 2.1."
+        },
+        {
+          "supplier": "cor-mean-value-theorem",
+          "carrier": "items/cor-mean-value-theorem.md",
+          "status": "current published mathematical supplier; exact interface inspected",
+          "source_section": "Statement",
+          "exact_statement": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Published mathematical result; current statement and proof carrier inspected.",
+          "consumer_use": "F2 is used in step(s) 1.1, 2.1."
+        },
+        {
+          "supplier": "def-nonnegative-extended-series",
+          "carrier": "items/def-nonnegative-extended-series.md",
+          "status": "current published mathematical supplier; exact interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "Let $a=(a_k)_{k\\in\\mathbb N}$ take values in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$ ([[def-extended-reals]]). Its **partial sums** are the unique sequence $(s_n)$ in $[0,+\\infty]$ satisfying",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Published definition; no proof obligation.",
+          "consumer_use": "F4 is used in step(s) 3.1."
+        },
+        {
+          "supplier": "thm-p-series-real-exponents",
+          "carrier": "items/thm-p-series-real-exponents.md",
+          "status": "current published mathematical supplier; exact interface inspected",
+          "source_section": "Statement",
+          "exact_statement": "For every real $p$,\n$$\\sum_{k\\ge1}\\frac1{k^p}\\text{ converges}\\quad\\Longleftrightarrow\\quad p>1.$$",
+          "relevant_hypotheses_and_conventions": "The exact excerpt is quoted above; the consumer Facts and proof step state the hypotheses and conventions used.",
+          "supplier_proof_status": "Published mathematical result; current statement and proof carrier inspected.",
+          "consumer_use": "F4 is used in step(s) 3.1."
+        }
+      ]
+    },
+    "ex-tdmath-hard-core-zero-beta": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-superstable-regular-interaction",
+          "source_section": "Definition",
+          "quote": "With fixed numerical length and energy units, the canonical positional partition is\n$$Z(L,N;\\beta)=\\frac1{N!}\\int_{\\Lambda_L^N}e^{-\\beta H_\\phi(q_1,\\ldots,q_N)}dq_1\\cdots dq_N,\\quad Z(L,0;\\beta)=1,$$\nwhere $\\beta>0$, and the grand partition is $\\Xi(L;a,\\beta)=\\sum_{N\\geq0}a^NZ(L,N;\\beta)$ for numerical activity $a>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tdmath-retained-hard-zero-beta-limit",
+          "source_section": "Statement",
+          "quote": "Define the zero-inverse-temperature-parameter continuation (the mathematical $\\beta=0$ branch) to be $z^{N(\\omega)}\\mathbf 1_{\\rm admissible}(\\omega)$, explicitly retaining the hard exclusion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "This is the\n**product measure** of $\\mu$ and $\\nu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "In particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "On the ordered region $x_1<x_2$, allowed pairs satisfy $x_2\\geq x_1+a$, so their volume is $\\int_0^{L-a}(L-x_1-a)\\,dx_1=(L-a)^2/2$. The coordinate-swap map preserves product Lebesgue measure, so the region $x_2<x_1$ has the same volume; the diagonal has zero product measure. Thus the full labeled allowed volume is $(L-a)^2$, and division by $2!$ gives $Z(L,2;0)=(L-a)^2/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Since $0<a<L$, $(L-a)^2/2<L^2/2$, the unrestricted ideal-gas two-particle canonical term. The strict deficit is caused by the forbidden separation band and remains at beta zero by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "two-particle hard-core deficit",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "For a=1 and L=3, Z(3,2;0)=(3-1)^2/2=2, while the unrestricted ideal-gas term is 3^2/2=4.5; the strict deficit remains at beta=0."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement has no empty-configuration branch; its claim concerns the displayed positive-volume, density, or conditional regime."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement fixes positive parameters or has no zero-parameter conclusion; the zero case is outside this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result is an asymptotic or general-law claim and makes no separate one-particle assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement contains no degeneracy, differentiability, or uniqueness case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement contains no endpoint claim; its theorem is restricted to the displayed hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement makes no nonempty-set, existence, or attainment conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way implication or limit assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way implication or limit assertion, not an equivalence."
+        }
+      ]
+    },
+    "ex-tdmath-close-packing-endpoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-superstable-regular-interaction",
+          "source_section": "Definition",
+          "quote": "With fixed numerical length and energy units, the canonical positional partition is\n$$Z(L,N;\\beta)=\\frac1{N!}\\int_{\\Lambda_L^N}e^{-\\beta H_\\phi(q_1,\\ldots,q_N)}dq_1\\cdots dq_N,\\quad Z(L,0;\\beta)=1,$$\nwhere $\\beta>0$, and the grand partition is $\\Xi(L;a,\\beta)=\\sum_{N\\geq0}a^NZ(L,N;\\beta)$ for numerical activity $a>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tdmath-canonical-interior-density-limit",
+          "source_section": "Statement",
+          "quote": "On the interior of $\\{\\rho:F(\\rho)>-\\infty\\}$, $F$ is finite and continuous.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "This is the\n**product measure** of $\\mu$ and $\\nu$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Order the coordinates $0\\leq x_1<\\cdots<x_N\\leq L$. The exclusion constraints are $x_{i+1}-x_i\\geq a$. Apply the coordinatewise translation $x_i\\mapsto y_i=x_i-(i-1)a$; each one-coordinate translation preserves Lebesgue measure [F5], so product measure is preserved. The ordered region becomes $0\\leq y_1\\leq\\cdots\\leq y_N\\leq S$, where $S=L-(N-1)a$. The cube $[0,S]^N$ splits, up to equality sets of zero product measure, into $N!$ coordinate-order regions. Product-measure uniqueness makes these permutation chambers equal in measure, so the ordered region has volume $S^N/N!$. The full labeled allowed volume is $N!$ times this, and canonical division by $N!$ gives $Z(L,N;\\beta)=S^N/N!$.",
+          "step": "1.1",
+          "inputs": [
+            "F5",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "If $L=(N-1)a$, then $S=0$ and the transformed region is a null set; its integral is zero. If $L>(N-1)a$, then $S>0$ and the ordered region has positive product volume. Thus the maximal-density endpoint does not carry a positive canonical partition at exact close packing; the interior-only theorem [F2] makes no contrary assertion.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "two-rod endpoint and interior volume",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "For a=1,N=2, L=1 gives S=0 and Z=0; L=2 gives S=1 and Z=1/2."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement has no empty-configuration branch; its claim concerns the displayed positive-volume, density, or conditional regime."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly qualifies the zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result is an asymptotic or general-law claim and makes no separate one-particle assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement contains no degeneracy, differentiability, or uniqueness case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 addresses the endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement makes no nonempty-set, existence, or attainment conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way implication or limit assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way implication or limit assertion, not an equivalence."
+        }
+      ]
+    },
+    "ex-tdmath-nonunique-variational-minimizers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tdmath-continuum-variational-pressure",
+          "source_section": "Statement",
+          "quote": "For stationary finite-intensity configuration laws, let $I(P)$ be relative entropy density with respect to the independent unit-intensity Poisson law, $\\rho(P)=E_PN_{[0,1)^d}$, and $\\Phi(P)$ the limiting positional energy density.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tdmath-specific-entropy-density",
+          "source_section": "Statement",
+          "quote": "This is an information functional relative to the specified unit-intensity Poisson law; changing the reference changes its value.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tdmath-relative-entropy-variational-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Then\n$$D(P_{XY}\\Vert Q_X\\otimes Q_Y)=D(P_X\\Vert Q_X)+\\int_X D(P_{Y|X=x}\\Vert Q_Y)\\,P_X(dx).$$\nMore generally, for nested standard-Borel observations $R$ and $S$ with $R$ a measurable function of $S$, and a fixed probability reference $Q_Y$ for a further variable $Y$, the conditional increments\n$$G(R):=E_P\\!\\left[D(P_{Y|R}\\Vert Q_Y)\\right],\\qquad G(S):=E_P\\!\\left[D(P_{Y|S}\\Vert Q_Y)\\right]$$\nsatisfy $0\\leq G(R)\\leq G(S)$ whenever the joint relative entropy is finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-tdmath-local-tame-topology",
+          "source_section": "Definition",
+          "quote": "Equivalently, a net $(P_\\alpha)$ converges to $P$ in $\\tau_L$ exactly when $E_{P_\\alpha}f\\to E_Pf$ for every measurable local $f$ with at most linear growth in the count of a bounded support.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Let $P,R$ be stationary laws of finite specific entropy and let $P_\\theta=\\theta P+(1-\\theta)R$. For a bounded cube $G$, the binary-label chain rule [F3] gives $$ \\theta D(P_G\\Vert Q_G)+(1-\\theta)D(R_G\\Vert Q_G) =D((P_\\theta)_G\\Vert Q_G)+I(S;X_G), $$ where $S$ is the mixture label and $X_G$ the observed configuration. Since $0\\leq I(S;X_G)\\leq H(S)<\\infty$, divide by $|G|$ and take the cube limit [F2]; $H(S)/|G|\\to0$, so $I(P_\\theta)=\\theta I(P)+(1-\\theta)I(R)$. The expectation defining $\\rho$ is affine. For finite energy densities, $E_{P_\\theta}H_G=\\theta E_PH_G+(1-\\theta)E_RH_G$ for every $G$; dividing by volume and taking limits gives affinity of $\\Phi$. Thus $J$ is affine on finite mixtures of finite-$J$ laws.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Applying step 1.1 to $P_0,P_1$ gives $J(P_\\theta)=\\theta J(P_0)+(1-\\theta)J(P_1)=m$, so every mixture is a minimizer. Put $P_{2n}=P_0$ and $P_{2n+1}=P_1$. The even and odd subsequences converge locally to $P_0$ and $P_1$. Since distinct laws differ on a bounded-region measurable event, its indicator is a bounded local test by [F4] with different expectations; the full sequence therefore has no $\\tau_L$ limit. Both accumulation points are minimizers.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement has no empty-configuration branch; its claim concerns the displayed positive-volume, density, or conditional regime."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement fixes positive parameters or has no zero-parameter conclusion; the zero case is outside this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result is an asymptotic or general-law claim and makes no separate one-particle assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement contains no degeneracy, differentiability, or uniqueness case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement contains no endpoint claim; its theorem is restricted to the displayed hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly qualifies the nonempty choice case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way implication or limit assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way implication or limit assertion, not an equivalence."
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "cex-tdmath-noncompact-mixture-nonattainment": {
+      "id": "cex-tdmath-noncompact-mixture-nonattainment",
+      "kind": "counterexample",
+      "title": "Noncompact mixtures can have an unattained energy infimum",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 2,
+      "deps": [
+        "def-tdmath-mixture-generator-space-and-energy",
+        "thm-tdmath-compact-continuous-mixture-attainment"
+      ],
+      "justified_by": [],
+      "dependency_roles": {
+        "def-tdmath-mixture-generator-space-and-energy": "mathematical-premise",
+        "thm-tdmath-compact-continuous-mixture-attainment": "mathematical-premise"
+      },
+      "provenance": {
+        "statement": "ai-generated",
+        "proof": "ai-generated"
+      },
+      "generation": {
+        "role": "counterexample"
+      },
+      "proof_strategy": "direct",
+      "sources": {
+        "references": [
+          {
+            "title": "David Tong, Statistical Physics, complete author-hosted lecture text",
+            "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S1",
+            "locator": "Complete author-hosted HTML chapter read; §§1.2–1.4, finite canonical and microcanonical ensemble conventions."
+          },
+          {
+            "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics",
+            "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+            "locator": "Complete 635-page lecture notes retrieved and read; §§4.2–4.6, pp.192–217, ensembles, microcanonical phase space, quantum density matrices, and traces."
+          }
+        ]
+      },
+      "statement": "For every nonempty Borel generator set $K$ and continuous energy $a:K\\to\\mathbb R$ bounded below, the unconstrained infimum of $\\int_Ka\\,dP$ over Borel probability measures on $K$ is attained whenever it is finite, without a compactness or coercivity hypothesis.",
+      "example": "Extend the objective in [[def-tdmath-mixture-generator-space-and-energy]] to the noncompact Borel generator set $K=(0,1)$ with energy $a(x)=x$, and impose no barycenter constraint. The infimum of $\\int_Kx\\,dP(x)$ over Borel probability measures is $0$, but no probability measure attains it. Thus compactness and the stated feasibility conditions in [[thm-tdmath-compact-continuous-mixture-attainment]] cannot be discarded in a general attainment claim.",
+      "proof": "**Given:** [A1] and the mixture objective [F1].\n\n1.1 For each integer $n\\ge2$, the set $E_n=[1/n,1)$ is Borel, and $\\bigcup_{n\\ge2}E_n=(0,1)$. Since $P((0,1))=1$, countable subadditivity implies $P(E_n)>0$ for at least one $n$; otherwise the union would have probability zero. On $E_n$, $x\\ge1/n$, while elsewhere $x\\ge0$, so $$\\int_{(0,1)}x\\,dP\\ge \\frac1nP(E_n)>0.$$ Therefore every admissible probability has strictly positive objective. [A1, F1, algebra]\n\n2.1 The point mass $\\delta_{1/n}$ at $1/n$ is a Borel probability on $(0,1)$ and has objective $1/n$. These values tend to zero, while 1.1 shows all objectives are positive. Hence the infimum is zero and is not attained. The generator set is noncompact, so this conclusion does not contradict the compact result [F2]; it shows why an attainment theorem must retain its compactness/coercivity hypotheses. [A1, F1, F2, step 1.1] ∎",
+      "raw_sha256": "26c0d48bbbe60b9238daf01c900b214ba88190e0f25c98806ac66ad04d4acdbf",
+      "body_sections": [
+        "Statement refuted",
+        "Example",
+        "Facts & Assumptions",
+        "Counterexample"
+      ]
+    },
+    "cex-tdmath-nonconcave-ensemble-inequivalence": {
+      "id": "cex-tdmath-nonconcave-ensemble-inequivalence",
+      "kind": "counterexample",
+      "title": "A controlled nonconcave entropy model with ensemble inequivalence",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 0,
+      "deps": [
+        "def-natural-logarithm",
+        "def-real-exponential-function-and-e",
+        "thm-heine-borel-rn",
+        "thm-logarithm-derivative-and-integral"
+      ],
+      "justified_by": [],
+      "dependency_roles": {
+        "def-natural-logarithm": "mathematical-premise",
+        "def-real-exponential-function-and-e": "mathematical-premise",
+        "thm-heine-borel-rn": "mathematical-premise",
+        "thm-logarithm-derivative-and-integral": "mathematical-premise"
+      },
+      "provenance": {
+        "statement": "ai-generated",
+        "proof": "ai-generated"
+      },
+      "generation": {
+        "role": "counterexample"
+      },
+      "proof_strategy": "direct",
+      "sources": {
+        "references": [
+          {
+            "title": "David Tong, Statistical Physics, complete author-hosted lecture text",
+            "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S1",
+            "locator": "Complete author-hosted HTML chapter read; §§1.2–1.4, finite canonical and microcanonical ensemble conventions."
+          },
+          {
+            "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics",
+            "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+            "locator": "Complete 635-page lecture notes retrieved and read; §§4.2–4.6, pp.192–217, ensembles, microcanonical phase space, quantum density matrices, and traces."
+          }
+        ]
+      },
+      "statement": "For every sequence of finite systems with admissible exact-group microcanonical energy densities tending to an interior value $e$, there is a fixed positive inverse temperature for which the canonical energy density concentrates at $e$ as system size tends to infinity, without further hypotheses such as entropy concavity.",
+      "example": "Fix an energy scale $\\varepsilon>0$. For each $N\\ge1$ and $k=0,\\ldots,N$, set $e_{N,k}=1+k/N$, $E_{N,k}=N\\varepsilon e_{N,k}$, and\n$$g_{N,k}:=\\left\\lfloor e^{N e_{N,k}^2}\\right\\rfloor.$$\nConstruct the finite state set $\\{(k,j):0\\le k\\le N,\\ 1\\le j\\le g_{N,k}\\}$ with energy $E_{N,k}$ for each state in group $k$. Its dimensionless exact-group entropy density tends uniformly on the grid to $s(e)=e^2$ on $[1,2]$, which is nonconcave. For fixed inverse temperature $\\beta>0$, put $b=\\beta\\varepsilon$ and let $p_N(b)$ be the canonical log partition sum per site. Then\n$$p_N(b)\\longrightarrow\\max_{1\\le e\\le2}(e^2-be)=\\max(1-b,4-2b).$$\nFor every compact $K\\subset(1,2)$, the canonical probability that the energy density lies in $K$ tends to zero, while an exact microcanonical group with $e_{N,k_N}\\to e\\in(1,2)$ is supported at that interior density and has entropy density tending to $e^2$. This is an explicit constructed finite sequence demonstrating that ensemble equivalence does not follow from large $N$ alone.",
+      "proof": "**Given:** [A1]–[A2] and [F1]–[F3].\n\n1.1 Since $e_{N,k}\\ge1$, $e^{Ne_{N,k}^2}\\ge e^N$. For $x\\ge e^N$, $x-1\\le\\lfloor x\\rfloor\\le x$, so $$e_{N,k}^2+\\frac1N\\log(1-e^{-N})\\le \\frac1N\\log g_{N,k}\\le e_{N,k}^2.$$ The error tends to zero uniformly in $k$. The grid mesh is $1/N$; for a continuous function on $[1,2]$, uniform continuity makes its grid maxima converge to its interval maximum. [A1, F1, F2]\n\n2.1 Let $Z_N(b)=\\sum_{k=0}^Ng_{N,k}e^{-Nb e_{N,k}}$ and $m_N=\\max_k[N^{-1}\\log g_{N,k}-b e_{N,k}]$. The largest summand is $e^{Nm_N}$ and there are $N+1$ summands, so $$m_N\\le N^{-1}\\log Z_N(b)\\le m_N+N^{-1}\\log(N+1).$$ By 1.1, $m_N\\to\\max_{e\\in[1,2]}(e^2-be)$. If $e=\\theta\\cdot1+(1-\\theta)\\cdot2$ with $0<\\theta<1$, direct expansion gives $$e^2-be=\\theta(1-b)+(1-\\theta)(4-2b)-\\theta(1-\\theta),$$ strictly below the weighted endpoint values. Thus the maximum is at an endpoint and equals $\\max(1-b,4-2b)$. [A1, A2, F1, F2, step 1.1, algebra]\n\n3.1 For compact $K\\subset(1,2)$, strict convexity gives $$\\eta:=\\min_{e\\in K}\\left[\\max(1-b,4-2b)-(e^2-be)\\right]>0$$ by [F3]. Uniform approximation in 1.1 makes every grid exponent in $K$ at most the maximum minus $\\eta/2$ for all sufficiently large $N$. On the other hand, an endpoint group has exponent tending to the maximum. Therefore the canonical probability of $K$ is at most $(N+1)e^{-N\\eta/2+o(N)}$, which tends to zero. [A1, A2, F1, F3, step 1.1, step 2.1]\n\n4.1 Choose integers $k_N$ with $e_{N,k_N}\\to e\\in(1,2)$. The microcanonical exact-group law has energy density exactly $e_{N,k_N}$ at every state. By 1.1 its entropy density $N^{-1}\\log g_{N,k_N}$ tends to $e^2$. Thus, for example at the crossing $b=3$, canonical mass escapes every compact neighborhood of any interior target while the microcanonical group remains there. Finally $s(3/2)=9/4<5/2=(s(1)+s(2))/2$, so $s(e)=e^2$ is not concave. The example is a constructed model, not an observation about a material. [A1, A2, step 1.1, step 3.1] ∎",
+      "raw_sha256": "69692a9b499748421c32820a47b7fd53552af5fb0cd18c96bfc37d7caf50c273",
+      "body_sections": [
+        "Statement refuted",
+        "Example",
+        "Facts & Assumptions",
+        "Counterexample"
+      ]
+    },
+    "cex-tdmath-nonergodic-volume-flow": {
+      "id": "cex-tdmath-nonergodic-volume-flow",
+      "kind": "counterexample",
+      "title": "A finite-volume Hamiltonian map that is not ergodic",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 1,
+      "deps": [
+        "def-ergodic-measure-preserving-system",
+        "def-hamiltonian-vector-field-and-hamiltonian-function",
+        "def-symplectic-form-and-symplectic-manifold",
+        "thm-tdmath-hamiltonian-measure-and-recurrence"
+      ],
+      "justified_by": [],
+      "dependency_roles": {
+        "def-ergodic-measure-preserving-system": "mathematical-premise",
+        "def-hamiltonian-vector-field-and-hamiltonian-function": "mathematical-premise",
+        "def-symplectic-form-and-symplectic-manifold": "mathematical-premise",
+        "thm-tdmath-hamiltonian-measure-and-recurrence": "mathematical-premise"
+      },
+      "provenance": {
+        "statement": "ai-generated",
+        "proof": "ai-generated"
+      },
+      "generation": {
+        "role": "counterexample"
+      },
+      "proof_strategy": "direct",
+      "sources": {
+        "references": [
+          {
+            "title": "David Tong, Kinetic Theory, Part 2",
+            "url": "https://www.damtp.cam.ac.uk/user/tong/kintheory/two.pdf",
+            "locator": "Complete 39-page lecture-note part retrieved and read; §2.1, pp.14–16, Liouville phase-space volume; §§2.2–2.3, pp.20–35, Boltzmann equation and H-theorem."
+          },
+          {
+            "title": "Paul Eastman, Introduction to Statistical Mechanics, Chapter 8",
+            "url": "https://web.stanford.edu/~peastman/statmech/phasespace.html",
+            "locator": "Complete author-hosted HTML chapter read; §§8.1–8.3, Hamiltonian phase-space flow, Liouville theorem, and equilibration qualifications."
+          }
+        ]
+      },
+      "statement": "Every nonzero-time map of a complete Hamiltonian flow preserving finite symplectic volume is ergodic with respect to the normalized volume measure.",
+      "example": "On the symplectic torus $\\mathbb T^2=(\\mathbb R/2\\pi\\mathbb Z)^2$ with $\\omega=dq\\wedge dp$, let $H(q,p)=\\cos q$. The Hamiltonian flow is complete and preserves finite area, but every nonzero-time map is nonergodic: the invariant set $A=\\{(q,p):\\cos q>0\\}$ has exactly half the total area. This gives a concrete reason volume preservation alone cannot identify time averages with whole-space ensemble averages.",
+      "proof": "**Given:** [A1] and the canonical convention [F1].\n\n1.1 Write $X_H=a\\partial_q+b\\partial_p$. Then $\\iota_{X_H}(dq\\wedge dp)=a\\,dp-b\\,dq$, while $dH=-\\sin q\\,dq$. Equating coefficients gives $a=0$ and $b=\\sin q$. The explicit solution is $$\\phi_t(q,p)=(q,p+t\\sin q\\pmod{2\\pi}),$$ which is defined for every real $t$ and is a diffeomorphism with inverse $\\phi_{-t}$. [A1, F1, algebra]\n\n2.1 Since $H\\circ\\phi_t=H$, the set $A$ is invariant under every $\\phi_t$. The torus has total area $(2\\pi)^2=4\\pi^2$. The allowed $q$ values in $A$ have total length $\\pi$, while $p$ ranges over length $2\\pi$, so $m(A)=2\\pi^2$, strictly between zero and total area. The map preserves area by [F2], and the invariant set violates the criterion [F3]; hence it is not ergodic for any nonzero sampling time. [A1, F2, F3, step 1.1, algebra] ∎",
+      "raw_sha256": "32f5054edc22fd535530094aee882e8a5a24dd5448d1f8a9fcd301e4db8bd083",
+      "body_sections": [
+        "Statement refuted",
+        "Example",
+        "Facts & Assumptions",
+        "Counterexample"
+      ]
+    },
+    "ex-tdmath-pure-state-versus-average-entropy": {
+      "id": "ex-tdmath-pure-state-versus-average-entropy",
+      "kind": "example",
+      "title": "Pure-state entropy and entropy of a dephased average",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 4,
+      "deps": [
+        "def-complex-exponential",
+        "def-natural-logarithm",
+        "def-real-and-complex-inner-product-space",
+        "thm-logarithm-derivative-and-integral",
+        "thm-tdmath-discrete-quantum-cesaro-dephasing"
+      ],
+      "justified_by": [],
+      "dependency_roles": {
+        "def-complex-exponential": "mathematical-premise",
+        "def-natural-logarithm": "mathematical-premise",
+        "def-real-and-complex-inner-product-space": "mathematical-premise",
+        "thm-logarithm-derivative-and-integral": "mathematical-premise",
+        "thm-tdmath-discrete-quantum-cesaro-dephasing": "mathematical-premise"
+      },
+      "provenance": {
+        "statement": "ai-generated",
+        "proof": "ai-generated"
+      },
+      "generation": {
+        "role": "example"
+      },
+      "proof_strategy": "direct",
+      "sources": {
+        "references": [
+          {
+            "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics",
+            "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+            "locator": "Complete 635-page lecture notes retrieved and read; §§4.2–4.6, pp.192–217, ensembles, microcanonical phase space, quantum density matrices, and traces."
+          },
+          {
+            "title": "David Tong, Statistical Physics, complete author-hosted lecture text",
+            "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S1",
+            "locator": "Complete author-hosted HTML chapter read; §§1.2–1.4, finite canonical and microcanonical ensemble conventions."
+          }
+        ]
+      },
+      "statement": "Let $u_1,u_2$ be orthonormal energy eigenvectors with distinct energies $E_1\\ne E_2$, and let $\\psi=(u_1+u_2)/\\sqrt2$, $\\rho=|\\psi\\rangle\\langle\\psi|$. Define the finite-dimensional entropy of a density matrix with eigenvalues $p_i$ as $S(\\rho)=-k_B\\sum_i p_i\\log p_i$, with $0\\log0=0$ and fixed $k_B>0$. Every instantaneous unitary state $\\rho_t$ is pure and has entropy zero. The Cesàro states converge to $\\rho_{\\rm diag}=(P_1+P_2)/2$, whose entropy is $k_B\\log2$. In fact $S(\\bar\\rho_T)\\to k_B\\log2$, whereas $T^{-1}\\int_0^T S(\\rho_t)\\,dt=0$ for every $T$. Entropy of the averaged state and average instantaneous entropy are distinct quantities.",
+      "example": "Let $u_1,u_2$ be orthonormal energy eigenvectors with distinct energies $E_1\\ne E_2$, and let $\\psi=(u_1+u_2)/\\sqrt2$, $\\rho=|\\psi\\rangle\\langle\\psi|$. Define the finite-dimensional entropy of a density matrix with eigenvalues $p_i$ as $S(\\rho)=-k_B\\sum_i p_i\\log p_i$, with $0\\log0=0$ and fixed $k_B>0$. Every instantaneous unitary state $\\rho_t$ is pure and has entropy zero. The Cesàro states converge to $\\rho_{\\rm diag}=(P_1+P_2)/2$, whose entropy is $k_B\\log2$. In fact $S(\\bar\\rho_T)\\to k_B\\log2$, whereas $T^{-1}\\int_0^T S(\\rho_t)\\,dt=0$ for every $T$. Entropy of the averaged state and average instantaneous entropy are distinct quantities.",
+      "proof": "**Given:** [A1] and the entropy convention.\n\n1.1 The unitary evolution sends $\\psi$ to $(e^{-iE_1t/\\hbar}u_1+e^{-iE_2t/\\hbar}u_2)/\\sqrt2$, which remains a unit vector by [F2]. Its rank-one density has eigenvalues $1,0$, so its entropy is $-k_B(1\\log1+0\\log0)=0$ for every $t$. [A1, F2, algebra]\n\n2.1 The two energy eigenspaces are one-dimensional. The dephasing theorem [F1] removes their off-diagonal matrix entries and yields $\\rho_{\\rm diag}=\\tfrac12P_1+\\tfrac12P_2$. Its eigenvalues are $(1/2,1/2)$, so $$S(\\rho_{\\rm diag})=-k_B\\left(\\tfrac12\\log\\tfrac12+\\tfrac12\\log\\tfrac12\\right)=k_B\\log2.$$ Since every $S(\\rho_t)=0$, the time average of instantaneous entropy is exactly zero. [A1, F1, F3, step 1.1]\n\n3.1 In the basis $(u_1,u_2)$, $\\bar\\rho_T$ has diagonal entries $1/2$ and off-diagonal entry $$c_T=\\frac1{2T}\\int_0^T e^{-i(E_1-E_2)t/\\hbar}\\,dt,$$ whose magnitude is at most $\\hbar/(T|E_1-E_2|)$ by direct integration. Its eigenvalues are $1/2\\pm|c_T|$, so both tend to $1/2$. Continuity of $x\\mapsto-x\\log x$ at $1/2$ gives $S(\\bar\\rho_T)\\to k_B\\log2$. Thus entropy of the averaged state has a nonzero limit even though the averaged instantaneous entropy remains zero. [A1, F2, F3, step 2.1, algebra] ∎",
+      "raw_sha256": "316748e76ca9ff79fef3deb88680151653a35cd76b000b176fc5eaa6edece1c0",
+      "body_sections": [
+        "Example",
+        "Facts & Assumptions",
+        "Verification"
+      ]
+    },
+    "cex-td-noncompact-phase-mixture-no-attained-maximum": {
+      "id": "cex-td-noncompact-phase-mixture-no-attained-maximum",
+      "kind": "counterexample",
+      "title": "A noncompact phase domain with no attained mixture maximum",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "physics",
+      "library": "physics",
+      "physical_scope": "A constructed continuous concave entropy functional on a noncompact phase-generator domain; it shows that the compactness hypothesis in the mixture-attainment result cannot simply be dropped.",
+      "dependency_level": 10,
+      "deps": [
+        "def-borel-sigma-algebra",
+        "def-probability-measure",
+        "def-tdmath-measure-integral",
+        "pthm-td-compact-continuous-phase-mixture"
+      ],
+      "dependency_roles": {
+        "def-borel-sigma-algebra": "mathematical-premise",
+        "def-probability-measure": "mathematical-premise",
+        "def-tdmath-measure-integral": "mathematical-premise",
+        "pthm-td-compact-continuous-phase-mixture": "physical-result"
+      },
+      "aliases": [],
+      "proof_strategy": "direct",
+      "provenance": {
+        "statement": "ai-generated",
+        "proof": "ai-generated"
+      },
+      "generation": {
+        "role": "counterexample"
+      },
+      "sources": {
+        "references": [
+          {
+            "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §5.4.3",
+            "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+          },
+          {
+            "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+            "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+          }
+        ]
+      },
+      "statement": "Every nonempty feasible family of Borel probability mixtures on a noncompact phase-generator domain, with a prescribed barycenter and bounded positive continuous concave generator entropy, attains its finite entropy supremum without an additional compactness or coercivity hypothesis.",
+      "example": "Let the one-dimensional phase-generator domain be $K=(-1,0)\\cup(0,1)$, which is noncompact, and let its dimensionless coordinate be $x$. Assign entropy per mole\n$$\ns(x)=s_0-a|x|,\\qquad a>0,\n$$\nwhere $s_0>a>0$ have units $\\mathrm{J\\,mol^{-1}K^{-1}}$. Consider all Borel probability mixtures on $K$ with fixed barycenter $\\bar x=0$ and declare them feasible with entropy $\\int_Ks\\,dP$. This is a constructed mixture model, not a claim that a particular material has this phase domain.",
+      "proof": "1.1 Since $0< s_0-a\\le s(x)\\le s_0$, every feasible $s$ is nonnegative and bounded. For $n\\ge2$, put $A_n:=\\{x\\in K:|x|\\ge1/n\\}$. Their union is $K$; since $P(K)=1$, countable additivity implies $P(A_n)>0$ for some $n$. On $A_n$, $s\\le s_0-a/n$, and on its complement $s\\le s_0$. For any nonnegative simple function $\\varphi\\le s$, the measure integral definition [F2] therefore gives\n$$\n\\int_K\\varphi\\,dP\\le (s_0-a/n)P(A_n)+s_0P(K\\setminus A_n)=s_0-aP(A_n)/n<s_0.\n$$\nIndeed, refine the finitely many level sets of $\\varphi$ by $A_n$ and its complement; each simple-function coefficient is bounded by the corresponding pointwise bound on that piece, so the simple-integral formula [F2] gives the inequality. The common strict upper bound is independent of $\\varphi$, hence its supremum also satisfies $\\int_Ks\\,dP<s_0$. [given, F2, algebra]\n\n2.1 For each $0<\\epsilon<1$, the measure $P_\\epsilon=\\tfrac12\\delta_{-\\epsilon}+\\tfrac12\\delta_{\\epsilon}$ is supported on $K$, has mean zero, and satisfies $\\int s\\,dP_\\epsilon=s_0-a\\epsilon$. Letting $\\epsilon\\downarrow0$ shows that the supremum is $s_0$. Step 1.1 shows that no feasible measure attains it. This lies outside the compactness hypothesis in [F1] and exhibits a finite supremum without a maximizing mixture. [given, F1, step 1.1, algebra] ∎",
+      "raw_sha256": "37f16ad2512b5a04d6fb6f621b32180d1458e0bc5abf646bceea53b020453a25",
+      "body_sections": [
+        "Statement refuted",
+        "Example",
+        "Facts & Assumptions",
+        "Counterexample"
+      ]
+    },
+    "cex-td-clapeyron-zero-volume-jump": {
+      "id": "cex-td-clapeyron-zero-volume-jump",
+      "kind": "counterexample",
+      "title": "Equal branch volumes do not give a Clapeyron graph",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "physics",
+      "library": "physics",
+      "physical_scope": "A constructed pair of smooth one-component Gibbs charts with zero molar-volume jump; it shows why the local nonzero-jump hypothesis cannot be omitted and makes no material claim.",
+      "dependency_level": 11,
+      "deps": [
+        "def-td-phase-and-coexistence-domain",
+        "pthm-td-clapeyron-local",
+        "thm-euclidean-inverse-function-theorem"
+      ],
+      "dependency_roles": {
+        "def-td-phase-and-coexistence-domain": "formulation-prerequisite",
+        "pthm-td-clapeyron-local": "physical-result",
+        "thm-euclidean-inverse-function-theorem": "mathematical-premise"
+      },
+      "aliases": [],
+      "proof_strategy": "direct",
+      "provenance": {
+        "statement": "ai-generated",
+        "proof": "ai-generated"
+      },
+      "generation": {
+        "role": "counterexample"
+      },
+      "sources": {
+        "references": [
+          {
+            "title": "David Tong, Statistical Physics, author-hosted complete lecture notes, §§5.1.1–5.1.2",
+            "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S5"
+          },
+          {
+            "title": "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions",
+            "url": "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions"
+          }
+        ]
+      },
+      "statement": "Equality of two smooth one-component molar Gibbs branches near a coexistence point always defines a unique differentiable pressure graph $p=p(T)$ on an open temperature interval, with slope $\\Delta s/\\Delta v$, even when the molar-volume jump $\\Delta v$ vanishes.",
+      "example": "Fix $T_0>0$, $p_0>0$, $g_0\\in\\mathbb R$, $v_0,c,\\kappa>0$, and distinct positive molar entropies $s_\\alpha,s_\\beta$. Use units $g_0\\in\\mathrm{J\\,mol^{-1}}$, $v_0\\in\\mathrm{m^3\\,mol^{-1}}$, $c\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\kappa\\in\\mathrm{m^3\\,mol^{-1}Pa^{-1}}$. On a common open chart define\n$$\ng_i(T,p)=g_0-s_i(T-T_0)-\\frac{c}{2T_0}(T-T_0)^2+v_0(p-p_0)-\\frac{\\kappa}{2}(p-p_0)^2,\n$$\nwith $i\\in\\{\\alpha,\\beta\\}$. Let $G_i=n_i g_i$ and adopt $S_i=-\\partial_TG_i$, $V_i=\\partial_pG_i$, $\\mu_i=\\partial_{n_i}G_i$, and $U_i=G_i+TS_i-pV_i$. This gives same-tag scaling and smooth local Gibbs charts. At $(T_0,p_0)$ the molar Gibbs values agree and the molar-volume jump is zero; the entropies differ.",
+      "proof": "1.1 At $(T_0,p_0)$, differentiation gives $S_i/n_i=s_i$, $V_i/n_i=v_0$, and $\\mu_i=g_i=g_0$. Also $U_{i,T}=n_i c$, $V_{i,p}=-n_i\\kappa$, and $V_{i,T}=0$, so the derivative determinant for $(T,p)\\mapsto(U_i,V_i)$ at fixed positive amount is $-n_i^2c\\kappa\\ne0$. Thus [L1] supplies valid local state charts. The branch equality function is\n$$\nF(T,p):=g_\\beta-g_\\alpha=-(s_\\beta-s_\\alpha)(T-T_0),\n$$\nwhose zero set is $T=T_0$ with every nearby chart pressure permitted. [given, A1, L1, algebra]\n\n2.1 Here $\\Delta v=v_\\beta-v_\\alpha=0$, so the zero set is not the graph of a unique pressure as a function of temperature on an open interval about $T_0$, and the quotient $\\Delta s/\\Delta v$ is undefined. The nonzero-jump hypothesis of [F1] fails, so this model does not contradict that theorem. [given, F1, step 1.1, algebra] ∎",
+      "raw_sha256": "42ec7ed5dadce09912f2cffe9ed0a97404769396f95fa3a754edc8d5c6deb6e9",
+      "body_sections": [
+        "Statement refuted",
+        "Example",
+        "Facts & Assumptions",
+        "Counterexample"
+      ]
+    },
+    "cex-tdmath-bulk-field-pressure": {
+      "id": "cex-tdmath-bulk-field-pressure",
+      "kind": "counterexample",
+      "title": "A volume-sized external field changes ideal-gas pressure",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 0,
+      "deps": [
+        "def-product-measure-on-sigma-finite-spaces",
+        "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "def-factorial-and-falling-factorial",
+        "def-real-exponential-function-and-e",
+        "thm-exponential-addition-formula"
+      ],
+      "dependency_roles": {
+        "def-product-measure-on-sigma-finite-spaces": "mathematical-premise",
+        "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique": "mathematical-premise",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+        "def-factorial-and-falling-factorial": "mathematical-premise",
+        "def-real-exponential-function-and-e": "mathematical-premise",
+        "thm-exponential-addition-formula": "mathematical-premise"
+      },
+      "provenance": {
+        "statement": "ai-altered",
+        "proof": "ai-altered"
+      },
+      "proof_strategy": "direct",
+      "sources": {
+        "references": [
+          {
+            "title": "D. Dereudre, Introduction to the theory of Gibbs point processes",
+            "url": "https://arxiv.org/pdf/1701.08105",
+            "locator": "Section 1.3, PDF pp.10–12: finite-volume grand-canonical normalization; the calculation is derived directly here."
+          }
+        ]
+      },
+      "statement": "At fixed activity $z>0$ and inverse temperature $\\beta>0$, adding any spatially constant one-particle external energy throughout a continuum ideal-gas region leaves the thermodynamic-limit log grand partition sum per volume unchanged, as would a negligible boundary perturbation.",
+      "example": "",
+      "proof": "**Given:** $V>0$, $z>0$, $\\beta>0$, constant $c\\in\\mathbb R$, and the $1/N!$-normalized positional grand sum.\n\nFor the continuum ideal gas in a bounded measurable region $\\Omega$ of volume $V$, use activity $z>0$, inverse temperature $\\beta>0$, and no pair interaction. Add a constant external one-particle energy $c$ throughout $\\Omega$. This volume-sized field changes the pressure per volume whenever $c\\ne0$, so it is not a negligible boundary perturbation.\n\n1.1 The $N$-particle term without the field is $z^NV^N/N!$, by the product volume [F1] and the $1/N!$ convention [given]. Summing over $N\\geq0$ gives $\\Xi_0=\\sum_N(zV)^N/N!=e^{zV}$ by [F2]. [given, A1, F1, F2, algebra]\n\n2.1 With the field, each term is multiplied by $e^{-\\beta cN}$, so $\\Xi_c=\\sum_N(ze^{-\\beta c}V)^N/N!=e^{ze^{-\\beta c}V}$ by [F2]. Therefore $V^{-1}\\log\\Xi_0=z$ and $V^{-1}\\log\\Xi_c=ze^{-\\beta c}$. If $c\\ne0$, these differ because $z,\\beta>0$. [given, A1, F2, step 1.1, algebra] ∎",
+      "raw_sha256": "6d1d4fdcb27b648b2a9daa84aee94f3080017b66049c42a885db5e44aec034a1",
+      "body_sections": [
+        "Statement refuted",
+        "Facts & Assumptions",
+        "Counterexample"
+      ]
+    },
+    "ex-tdmath-repulsive-power-tail": {
+      "id": "ex-tdmath-repulsive-power-tail",
+      "kind": "example",
+      "title": "A singular repulsive power tail is stable",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 1,
+      "deps": [
+        "def-tdmath-stable-power-tempered-particle-model",
+        "def-real-power",
+        "thm-real-power-continuity-and-derivatives"
+      ],
+      "dependency_roles": {
+        "def-tdmath-stable-power-tempered-particle-model": "mathematical-premise",
+        "def-real-power": "mathematical-premise",
+        "thm-real-power-continuity-and-derivatives": "mathematical-premise"
+      },
+      "proof_strategy": "direct",
+      "provenance": {
+        "statement": "ai-generated",
+        "proof": "ai-generated"
+      },
+      "generation": {
+        "role": "example"
+      },
+      "sources": {
+        "references": [
+          {
+            "title": "Stefan Adams, Mathematical Statistical Mechanics, MPI Lecture Note 30, §5.2",
+            "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-3006.pdf"
+          },
+          {
+            "title": "D. Ruelle, Classical Statistical Mechanics of a System of Particles",
+            "url": "https://www.e-periodica.ch/cntmng?pid=hpa-001%3A1963%3A36%3A%3A1128&bot=1"
+          }
+        ]
+      },
+      "statement": "Fix $d\\ge1$ and $\\epsilon>0$. Define\n$$\\phi_{\\mathrm{rep}}(x):=\\begin{cases}+\\infty,&x=0,\\\\\\|x\\|_2^{-d-\\epsilon},&x\\ne0.\\end{cases}$$\nThis is an even, Borel-measurable stable power-tempered pair potential. It has\nan unbounded repulsive core and a nonzero algebraic tail.",
+      "example": "Fix $d\\ge1$ and $\\epsilon>0$. Define\n$$\\phi_{\\mathrm{rep}}(x):=\\begin{cases}+\\infty,&x=0,\\\\\\|x\\|_2^{-d-\\epsilon},&x\\ne0.\\end{cases}$$\nThis is an even, Borel-measurable stable power-tempered pair potential. It has\nan unbounded repulsive core and a nonzero algebraic tail.",
+      "proof": "1.1 The norm is continuous, so on $\\mathbb R^d\\setminus\\{0\\}$ the function\n$x\\mapsto\\|x\\|_2^{-d-\\epsilon}$ is continuous by [F2]. The complement of\n$\\{0\\}$ is Borel and $\\{0\\}$ is closed, so the piecewise function is Borel;\nit is even because $\\|-x\\|_2=\\|x\\|_2$. For $\\|x\\|_2\\ge1$ it satisfies the\ntail bound with $C=1$ and $R=1$. [given, F1, F2]\n\n2.1 Every pair term is nonnegative or $+\\infty$. Thus every finite pair sum\nsatisfies $U_N\\ge0$, so the stability constant is $B=0$. This proves the\nclaimed model-class membership. [F1, given, algebra] ∎",
+      "raw_sha256": "260e6652c7b5f71462683933d8d73d0e9eba77e5bdc55a89b2b473906cf706bf",
+      "body_sections": [
+        "Example",
+        "Facts & Assumptions",
+        "Verification"
+      ]
+    },
+    "ex-tdmath-hard-core-attractive-power-tail": {
+      "id": "ex-tdmath-hard-core-attractive-power-tail",
+      "kind": "example",
+      "title": "A hard core stabilizes an attractive power tail",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 1,
+      "deps": [
+        "def-tdmath-stable-power-tempered-particle-model",
+        "def-integers",
+        "def-real-power",
+        "thm-real-power-continuity-and-derivatives",
+        "cor-mean-value-theorem",
+        "def-nonnegative-extended-series",
+        "thm-p-series-real-exponents"
+      ],
+      "dependency_roles": {
+        "def-tdmath-stable-power-tempered-particle-model": "mathematical-premise",
+        "def-integers": "mathematical-premise",
+        "def-real-power": "mathematical-premise",
+        "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+        "cor-mean-value-theorem": "mathematical-premise",
+        "def-nonnegative-extended-series": "mathematical-premise",
+        "thm-p-series-real-exponents": "mathematical-premise"
+      },
+      "proof_strategy": "direct",
+      "provenance": {
+        "statement": "ai-generated",
+        "proof": "ai-generated"
+      },
+      "generation": {
+        "role": "example"
+      },
+      "sources": {
+        "references": [
+          {
+            "title": "Stefan Adams, Mathematical Statistical Mechanics, MPI Lecture Note 30, §5.2",
+            "url": "https://files-www.mis.mpg.de/mpi-typo3/preprints/ln/lecturenote-3006.pdf"
+          },
+          {
+            "title": "M. E. Fisher and J. L. Lebowitz, Asymptotic Free Energy of a System with Periodic Boundary Conditions, §§II–III",
+            "url": "https://cmsr.rutgers.edu/images/people/lebowitz_joel/publications-archived/jll.pub_69.pdf"
+          },
+          {
+            "title": "D. Ruelle, Classical Statistical Mechanics of a System of Particles",
+            "url": "https://www.e-periodica.ch/cntmng?pid=hpa-001%3A1963%3A36%3A%3A1128&bot=1"
+          }
+        ]
+      },
+      "statement": "Fix an integer $d\\ge1$ and constants $c,\\epsilon>0$. Set $p=d+\\epsilon$ and\ndefine the even radial pair potential\n$$\\phi_{\\mathrm{att}}(x):=\\begin{cases}+\\infty,&\\|x\\|_2<1,\\\\-c\\|x\\|_2^{-p},&\\|x\\|_2\\ge1.\\end{cases}$$\nIt has a hard core and a nonzero attractive power tail.",
+      "example": "Fix an integer $d\\ge1$ and constants $c,\\epsilon>0$. Set $p=d+\\epsilon$ and\ndefine the even radial pair potential\n$$\\phi_{\\mathrm{att}}(x):=\\begin{cases}+\\infty,&\\|x\\|_2<1,\\\\-c\\|x\\|_2^{-p},&\\|x\\|_2\\ge1.\\end{cases}$$\nIt has a hard core and a nonzero attractive power tail.",
+      "proof": "1.1 The norm is continuous and $r\\mapsto r^{-p}$ is continuous on $r>0$ by\n[F2]. The regions $\\{\\|x\\|_2<1\\}$ and $\\{\\|x\\|_2\\ge1\\}$ are Borel, so the\npiecewise potential is Borel; radiality makes it even. For $\\|x\\|_2\\ge1$,\n$|\\phi_{\\mathrm{att}}(x)|=c\\|x\\|_2^{-d-\\epsilon}$, so it is power-tempered\nwith $C=c$ and $R=1$. [given, F1, F2]\n\n1.2 Put $\\delta:=1/(2\\sqrt d)$. For a fixed particle $q_i$, the half-open\ncubes $D_k:=q_i+\\delta k+[0,\\delta)^d$, $k\\in\\mathbb Z^d$, partition\n$\\mathbb R^d$. Their Euclidean diameters are at most $\\sqrt d\\,\\delta=1/2<1$.\nThe example's definition makes every pair at distance less than $1$ forbidden,\nso centers in a finite-energy configuration are separated by at least $1$.\nThus each cube contains at most one center and $D_0$ contains no center other\nthan $q_i$. The cells in max-norm shell $m$ number\n$(2m+1)^d-(2m-1)^d$ by [F3]. For $m\\ge1$, factor the difference of powers:\n$$(2m+1)^d-(2m-1)^d=2\\sum_{r=0}^{d-1}(2m+1)^{d-1-r}(2m-1)^r\\le2d3^{d-1}m^{d-1},$$\nsince $2m+1\\le3m$. [given, F1, F3, construct, algebra]\n\n2.1 A neighbor of $q_i$ in shell $m=1$ has distance at least $1$ and\ncontributes at most $c$ in absolute value; there are $3^d-1$ such cells. For\n$m\\ge2$, choose a coordinate $r$ with $|k_r|=m$. If $k_r=m$, every point of\n$D_k$ differs from $q_i$ in coordinate $r$ by at least $\\delta m$; if\n$k_r=-m$, the absolute difference is greater than $\\delta(m-1)$. Hence every\npoint of $D_k$ is at Euclidean distance at least $\\delta(m-1)$ from $q_i$.\nBy [F2], each such neighbor contributes at most\n$c\\delta^{-p}(m-1)^{-p}$. The shell count in step 1.2 therefore bounds its\ntotal contribution by\n$$2d3^{d-1}m^{d-1}c\\delta^{-p}(m-1)^{-d-\\epsilon}.$$\n[given, F2, step 1.2, algebra]\n\n3.1 For $m\\ge2$, $m-1\\ge m/2$, so the last bound is at most\n$2d3^{d-1}c\\delta^{-p}2^p m^{-1-\\epsilon}$. Summing over shells and using\n[F4], every fixed particle satisfies\n$$\\sum_{j\\ne i}|\\phi_{\\mathrm{att}}(q_i-q_j)|\\le C_*:=c(3^d-1)+2d3^{d-1}c\\delta^{-p}2^p\\sum_{m=2}^{\\infty}m^{-1-\\epsilon}<\\infty.$$\n[F3, F4, step 1.2, step 2.1, algebra]\n\n4.1 For a finite-energy configuration, every pair term is negative and\n$$-U_N=\\sum_{i<j}|\\phi_{\\mathrm{att}}(q_i-q_j)|=\\frac12\\sum_i\\sum_{j\\ne i}|\\phi_{\\mathrm{att}}(q_i-q_j)|\\le\\frac{C_*}{2}N$$\nby step 3.1. A configuration containing a forbidden pair has $U_N=+\\infty$\nand also satisfies the lower bound. Hence the potential is stable with\n$B=C_*/2$. Together with step 1.1, this proves membership in the stated\nstable power-tempered class. [F1, step 1.1, step 3.1, algebra] ∎",
+      "raw_sha256": "7cc261e2618491fb95b7d842532c91e9e934b7e6c4a5cb96b6f6473dd0edf6b7",
+      "body_sections": [
+        "Example",
+        "Facts & Assumptions",
+        "Verification",
+        "Remarks"
+      ]
+    },
+    "ex-tdmath-hard-core-zero-beta": {
+      "id": "ex-tdmath-hard-core-zero-beta",
+      "kind": "example",
+      "title": "A hard core remains at zero inverse temperature",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 8,
+      "deps": [
+        "def-tdmath-superstable-regular-interaction",
+        "thm-tdmath-retained-hard-zero-beta-limit",
+        "def-product-measure-on-sigma-finite-spaces",
+        "thm-lebesgue-measure-of-a-box-of-every-kind",
+        "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "def-factorial-and-falling-factorial"
+      ],
+      "dependency_roles": {
+        "def-tdmath-superstable-regular-interaction": "mathematical-premise",
+        "thm-tdmath-retained-hard-zero-beta-limit": "mathematical-premise",
+        "def-product-measure-on-sigma-finite-spaces": "mathematical-premise",
+        "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+        "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique": "mathematical-premise",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+        "def-factorial-and-falling-factorial": "mathematical-premise"
+      },
+      "provenance": {
+        "statement": "ai-altered",
+        "proof": "ai-altered"
+      },
+      "proof_strategy": "direct",
+      "sources": {
+        "references": [
+          {
+            "title": "H.-O. Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction",
+            "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf",
+            "locator": "Theorem 4, printed p.177 / PDF p.7: beta=0 source convention; the finite example below spells out hard admissibility."
+          }
+        ]
+      },
+      "statement": "In one spatial dimension, let $\\phi(x)=+\\infty$ for $|x|<a$ and $0$ otherwise, with $a>0$. On an interval $[0,L]$, define the beta-zero weight by retaining the forbidden-pair exclusion as in [[thm-tdmath-retained-hard-zero-beta-limit]]. If $L>a$, the two-particle canonical partition is\n$$Z(L,2;0)=\\frac{(L-a)^2}{2},$$\nwhile the unrestricted ideal-gas value is $L^2/2$. Thus the retained hard-core beta-zero ensemble is not the Poisson ideal gas.",
+      "example": "In one spatial dimension, let $\\phi(x)=+\\infty$ for $|x|<a$ and $0$ otherwise, with $a>0$. On an interval $[0,L]$, define the beta-zero weight by retaining the forbidden-pair exclusion as in [[thm-tdmath-retained-hard-zero-beta-limit]]. If $L>a$, the two-particle canonical partition is\n$$Z(L,2;0)=\\frac{(L-a)^2}{2},$$\nwhile the unrestricted ideal-gas value is $L^2/2$. Thus the retained hard-core beta-zero ensemble is not the Poisson ideal gas.",
+      "proof": "**Given:** The one-dimensional hard-rod potential and the stated interval.\n\n1.1 On the ordered region $x_1<x_2$, allowed pairs satisfy $x_2\\geq x_1+a$, so their volume is $\\int_0^{L-a}(L-x_1-a)\\,dx_1=(L-a)^2/2$. The coordinate-swap map preserves product Lebesgue measure, so the region $x_2<x_1$ has the same volume; the diagonal has zero product measure. Thus the full labeled allowed volume is $(L-a)^2$, and division by $2!$ gives $Z(L,2;0)=(L-a)^2/2$. [F1, F2, F3, F4, algebra]\n\n2.1 Since $0<a<L$, $(L-a)^2/2<L^2/2$, the unrestricted ideal-gas two-particle canonical term. The strict deficit is caused by the forbidden separation band and remains at beta zero by [F2]. [F1, F2, step 1.1, algebra] ∎",
+      "raw_sha256": "3eb8608b6447fae77e3e9df96a943ed30f9e93f5999598a5150d2b9958594c8f",
+      "body_sections": [
+        "Example",
+        "Facts & Assumptions",
+        "Verification"
+      ]
+    },
+    "ex-tdmath-close-packing-endpoint": {
+      "id": "ex-tdmath-close-packing-endpoint",
+      "kind": "example",
+      "title": "The close-packing endpoint can have zero canonical weight",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 5,
+      "deps": [
+        "def-tdmath-superstable-regular-interaction",
+        "thm-tdmath-canonical-interior-density-limit",
+        "def-product-measure-on-sigma-finite-spaces",
+        "thm-lebesgue-measure-of-a-box-of-every-kind",
+        "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+        "def-factorial-and-falling-factorial",
+        "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"
+      ],
+      "dependency_roles": {
+        "def-tdmath-superstable-regular-interaction": "mathematical-premise",
+        "thm-tdmath-canonical-interior-density-limit": "mathematical-premise",
+        "def-product-measure-on-sigma-finite-spaces": "mathematical-premise",
+        "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+        "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique": "mathematical-premise",
+        "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+        "def-factorial-and-falling-factorial": "mathematical-premise",
+        "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant": "mathematical-premise"
+      },
+      "provenance": {
+        "statement": "ai-altered",
+        "proof": "ai-altered"
+      },
+      "proof_strategy": "direct",
+      "sources": {
+        "references": [
+          {
+            "title": "D. Dereudre, Introduction to the theory of Gibbs point processes",
+            "url": "https://arxiv.org/pdf/1701.08105",
+            "locator": "Section 1.3, PDF pp.10–12: canonical positional normalization; the one-dimensional hard-rod integral is calculated here."
+          }
+        ]
+      },
+      "statement": "In one dimension, let the pair potential be infinite when the separation is less than $a>0$, and zero otherwise. For $N\\geq1$ labeled rods in $[0,L]$, with canonical positional normalization $1/N!$, write $S=L-(N-1)a$. If $S>0$, translating the ordered coordinates by $y_i=x_i-(i-1)a$ gives\n$$Z(L,N;\\beta)=\\frac{S^N}{N!}=\\frac{(L-(N-1)a)^N}{N!},\\qquad \\beta>0.$$\nIf $S=0$, the allowed configuration set has zero Lebesgue measure and $Z(L,N;\\beta)=0$. Along $N\\to\\infty$ with $L=(N-1)a$, the density $N/L\\to1/a$ while every finite-volume partition is zero. Thus the thermodynamic close-packing endpoint is approached by a sequence of zero-weight finite systems; it is not realized by a positive canonical partition. The interior canonical limit theorem makes no assertion at that endpoint.",
+      "example": "In one dimension, let the pair potential be infinite when the separation is less than $a>0$, and zero otherwise. For $N\\geq1$ labeled rods in $[0,L]$, with canonical positional normalization $1/N!$, write $S=L-(N-1)a$. If $S>0$, translating the ordered coordinates by $y_i=x_i-(i-1)a$ gives\n$$Z(L,N;\\beta)=\\frac{S^N}{N!}=\\frac{(L-(N-1)a)^N}{N!},\\qquad \\beta>0.$$\nIf $S=0$, the allowed configuration set has zero Lebesgue measure and $Z(L,N;\\beta)=0$. Along $N\\to\\infty$ with $L=(N-1)a$, the density $N/L\\to1/a$ while every finite-volume partition is zero. Thus the thermodynamic close-packing endpoint is approached by a sequence of zero-weight finite systems; it is not realized by a positive canonical partition. The interior canonical limit theorem makes no assertion at that endpoint.",
+      "proof": "**Given:** $N\\geq1$ and $L\\geq(N-1)a$.\n\n1.1 Order the coordinates $0\\leq x_1<\\cdots<x_N\\leq L$. The exclusion constraints are $x_{i+1}-x_i\\geq a$. Apply the coordinatewise translation $x_i\\mapsto y_i=x_i-(i-1)a$; each one-coordinate translation preserves Lebesgue measure [F5], so product measure is preserved. The ordered region becomes $0\\leq y_1\\leq\\cdots\\leq y_N\\leq S$, where $S=L-(N-1)a$. The cube $[0,S]^N$ splits, up to equality sets of zero product measure, into $N!$ coordinate-order regions. Product-measure uniqueness makes these permutation chambers equal in measure, so the ordered region has volume $S^N/N!$. The full labeled allowed volume is $N!$ times this, and canonical division by $N!$ gives $Z(L,N;\\beta)=S^N/N!$. [F1, F3, F4, F5, algebra]\n\n2.1 If $L=(N-1)a$, then $S=0$ and the transformed region is a null set; its integral is zero. If $L>(N-1)a$, then $S>0$ and the ordered region has positive product volume. Thus the maximal-density endpoint does not carry a positive canonical partition at exact close packing; the interior-only theorem [F2] makes no contrary assertion. [F1, F2, F3, F4, step 1.1, algebra] ∎",
+      "raw_sha256": "dfb066527f5009e72ce1681a9ab1d7a4b209605648576900be94de511a699c10",
+      "body_sections": [
+        "Example",
+        "Facts & Assumptions",
+        "Verification"
+      ]
+    },
+    "ex-tdmath-nonunique-variational-minimizers": {
+      "id": "ex-tdmath-nonunique-variational-minimizers",
+      "kind": "example",
+      "title": "Nonunique minimizers allow distinct local accumulation limits",
+      "status": "draft",
+      "origin": "pipeline",
+      "domain": "mathematics",
+      "library": "mathematics",
+      "dependency_level": 7,
+      "deps": [
+        "thm-tdmath-continuum-variational-pressure",
+        "thm-tdmath-specific-entropy-density",
+        "lem-tdmath-relative-entropy-variational-and-chain-rules",
+        "def-tdmath-local-tame-topology"
+      ],
+      "dependency_roles": {
+        "thm-tdmath-continuum-variational-pressure": "mathematical-premise",
+        "thm-tdmath-specific-entropy-density": "mathematical-premise",
+        "lem-tdmath-relative-entropy-variational-and-chain-rules": "mathematical-premise",
+        "def-tdmath-local-tame-topology": "mathematical-premise"
+      },
+      "provenance": {
+        "statement": "ai-altered",
+        "proof": "ai-altered"
+      },
+      "proof_strategy": "direct",
+      "sources": {
+        "references": [
+          {
+            "title": "H.-O. Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction",
+            "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf",
+            "locator": "Theorems 1–2, printed pp.178–181 / PDF pp.8–11: stationary variational minimizer set; this example is an abstract consequence, not an asserted phase-transition model."
+          }
+        ]
+      },
+      "statement": "Suppose $J(P)=I(P)+\\beta\\Phi(P)-\\rho(P)\\log z$ has two distinct stationary minimizers $P_0\\ne P_1$ with equal finite value $m$. Every finite mixture $P_\\theta=\\theta P_0+(1-\\theta)P_1$, $0\\leq\\theta\\leq1$, also minimizes $J$. The sequence of stationary laws alternating between $P_0$ and $P_1$ has two distinct local accumulation points and does not converge. This conditional mathematical example shows why compactness alone yields minimizer-set accumulation; it does not assert a finite-volume ensemble realizes the sequence or that a particular continuum potential exhibits coexistence.",
+      "example": "Suppose $J(P)=I(P)+\\beta\\Phi(P)-\\rho(P)\\log z$ has two distinct stationary minimizers $P_0\\ne P_1$ with equal finite value $m$. Every finite mixture $P_\\theta=\\theta P_0+(1-\\theta)P_1$, $0\\leq\\theta\\leq1$, also minimizes $J$. The sequence of stationary laws alternating between $P_0$ and $P_1$ has two distinct local accumulation points and does not converge. This conditional mathematical example shows why compactness alone yields minimizer-set accumulation; it does not assert a finite-volume ensemble realizes the sequence or that a particular continuum potential exhibits coexistence.",
+      "proof": "**Given:** The assumptions above.\n\n1.1 Let $P,R$ be stationary laws of finite specific entropy and let $P_\\theta=\\theta P+(1-\\theta)R$. For a bounded cube $G$, the binary-label chain rule [F3] gives $$ \\theta D(P_G\\Vert Q_G)+(1-\\theta)D(R_G\\Vert Q_G) =D((P_\\theta)_G\\Vert Q_G)+I(S;X_G), $$ where $S$ is the mixture label and $X_G$ the observed configuration. Since $0\\leq I(S;X_G)\\leq H(S)<\\infty$, divide by $|G|$ and take the cube limit [F2]; $H(S)/|G|\\to0$, so $I(P_\\theta)=\\theta I(P)+(1-\\theta)I(R)$. The expectation defining $\\rho$ is affine. For finite energy densities, $E_{P_\\theta}H_G=\\theta E_PH_G+(1-\\theta)E_RH_G$ for every $G$; dividing by volume and taking limits gives affinity of $\\Phi$. Thus $J$ is affine on finite mixtures of finite-$J$ laws. [F1, F2, F3, algebra]\n\n2.1 Applying step 1.1 to $P_0,P_1$ gives $J(P_\\theta)=\\theta J(P_0)+(1-\\theta)J(P_1)=m$, so every mixture is a minimizer. Put $P_{2n}=P_0$ and $P_{2n+1}=P_1$. The even and odd subsequences converge locally to $P_0$ and $P_1$. Since distinct laws differ on a bounded-region measurable event, its indicator is a bounded local test by [F4] with different expectations; the full sequence therefore has no $\\tau_L$ limit. Both accumulation points are minimizers. [given, F4, step 1.1, algebra] ∎",
+      "raw_sha256": "f48ea62a153f6568d7037ff454901b7b2d8dac2326ec63442e06a551a8322284",
+      "body_sections": [
+        "Example",
+        "Facts & Assumptions",
+        "Verification"
+      ]
+    }
+  },
+  "changes": [
+    {
+      "id": "cex-tdmath-noncompact-mixture-nonattainment",
+      "owner": {
+        "batch": "12",
+        "page": "td-math-mixture-dynamics-and-shells-examples"
+      },
+      "path": "items/cex-tdmath-noncompact-mixture-nonattainment.md",
+      "before_raw_sha256": "48e4aa3ac39ea9e267ce91049bef8797e37f6df2082557216ea1bdd384a2609f",
+      "after_raw_sha256": "26c0d48bbbe60b9238daf01c900b214ba88190e0f25c98806ac66ad04d4acdbf",
+      "positive_witness_text_verbatim": true,
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": "For every nonempty Borel generator set $K$ and continuous energy $a:K\\to\\mathbb R$ bounded below, the unconstrained infimum of $\\int_Ka\\,dP$ over Borel probability measures on $K$ is attained whenever it is finite, without a compactness or coercivity hypothesis.",
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-12.proof-contracts.json"
+    },
+    {
+      "id": "cex-tdmath-nonconcave-ensemble-inequivalence",
+      "owner": {
+        "batch": "12",
+        "page": "td-math-mixture-dynamics-and-shells-examples"
+      },
+      "path": "items/cex-tdmath-nonconcave-ensemble-inequivalence.md",
+      "before_raw_sha256": "d713ce02eb238130b6908ca13baa9b5dd0dff44f6ba57265dc22a5de4c82e947",
+      "after_raw_sha256": "69692a9b499748421c32820a47b7fd53552af5fb0cd18c96bfc37d7caf50c273",
+      "positive_witness_text_verbatim": true,
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": "For every sequence of finite systems with admissible exact-group microcanonical energy densities tending to an interior value $e$, there is a fixed positive inverse temperature for which the canonical energy density concentrates at $e$ as system size tends to infinity, without further hypotheses such as entropy concavity.",
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-12.proof-contracts.json"
+    },
+    {
+      "id": "cex-tdmath-nonergodic-volume-flow",
+      "owner": {
+        "batch": "12",
+        "page": "td-math-mixture-dynamics-and-shells-examples"
+      },
+      "path": "items/cex-tdmath-nonergodic-volume-flow.md",
+      "before_raw_sha256": "10b02d070b2f25c757502cf979522372e8990fb015b820a3bd85016d8565ce79",
+      "after_raw_sha256": "32f5054edc22fd535530094aee882e8a5a24dd5448d1f8a9fcd301e4db8bd083",
+      "positive_witness_text_verbatim": true,
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": "Every nonzero-time map of a complete Hamiltonian flow preserving finite symplectic volume is ergodic with respect to the normalized volume measure.",
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-12.proof-contracts.json"
+    },
+    {
+      "id": "ex-tdmath-pure-state-versus-average-entropy",
+      "owner": {
+        "batch": "12",
+        "page": "td-math-mixture-dynamics-and-shells-examples"
+      },
+      "path": "items/ex-tdmath-pure-state-versus-average-entropy.md",
+      "before_raw_sha256": "f6139299c31ba770ae03f302eea23ba00289390de7d1e66fdd35b0433e49f561",
+      "after_raw_sha256": "316748e76ca9ff79fef3deb88680151653a35cd76b000b176fc5eaa6edece1c0",
+      "positive_witness_text_verbatim": true,
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": null,
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-12.proof-contracts.json"
+    },
+    {
+      "id": "cex-td-noncompact-phase-mixture-no-attained-maximum",
+      "owner": {
+        "batch": "13",
+        "page": "td-phases-and-limits-examples"
+      },
+      "path": "items/cex-td-noncompact-phase-mixture-no-attained-maximum.md",
+      "before_raw_sha256": "cb7c48d4424884c15f3ce455f95d8afd41893735f12588b18e90191a7ff19a23",
+      "after_raw_sha256": "37f16ad2512b5a04d6fb6f621b32180d1458e0bc5abf646bceea53b020453a25",
+      "positive_witness_text_verbatim": "Existing Example/Counterexample text retained.",
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": "Every nonempty feasible family of Borel probability mixtures on a noncompact phase-generator domain, with a prescribed barycenter and bounded positive continuous concave generator entropy, attains its finite entropy supremum without an additional compactness or coercivity hypothesis.",
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-13.proof-contracts.json"
+    },
+    {
+      "id": "cex-td-clapeyron-zero-volume-jump",
+      "owner": {
+        "batch": "13",
+        "page": "td-phases-and-limits-examples"
+      },
+      "path": "items/cex-td-clapeyron-zero-volume-jump.md",
+      "before_raw_sha256": "ecd7b8a344db6e6585e3215799cff3c4bf0bc0a0030bc5009cd97a566aee068a",
+      "after_raw_sha256": "42ec7ed5dadce09912f2cffe9ed0a97404769396f95fa3a754edc8d5c6deb6e9",
+      "positive_witness_text_verbatim": "Existing Example/Counterexample text retained.",
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": "Equality of two smooth one-component molar Gibbs branches near a coexistence point always defines a unique differentiable pressure graph $p=p(T)$ on an open temperature interval, with slope $\\Delta s/\\Delta v$, even when the molar-volume jump $\\Delta v$ vanishes.",
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-13.proof-contracts.json"
+    },
+    {
+      "id": "cex-tdmath-bulk-field-pressure",
+      "owner": {
+        "batch": "18",
+        "page": "td-math-interacting-ensemble-geometry-examples"
+      },
+      "path": "items/cex-tdmath-bulk-field-pressure.md",
+      "before_raw_sha256": "ebb27b90f61b7bfaeec2df24b35e44dc4cdafa154697c5716f3e496f523e7ea2",
+      "after_raw_sha256": "6d1d4fdcb27b648b2a9daa84aee94f3080017b66049c42a885db5e44aec034a1",
+      "positive_witness_text_verbatim": "Existing Example/Counterexample text retained.",
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": "At fixed activity $z>0$ and inverse temperature $\\beta>0$, adding any spatially constant one-particle external energy throughout a continuum ideal-gas region leaves the thermodynamic-limit log grand partition sum per volume unchanged, as would a negligible boundary perturbation.",
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-18.proof-contracts.json"
+    },
+    {
+      "id": "ex-tdmath-repulsive-power-tail",
+      "owner": {
+        "batch": "14",
+        "page": "td-math-continuum-pressure-examples"
+      },
+      "path": "items/ex-tdmath-repulsive-power-tail.md",
+      "before_raw_sha256": "e057ce246a5586f6501ee85337662c4c55de923d3d289a5ac68c8ab4c6d22c50",
+      "after_raw_sha256": "260e6652c7b5f71462683933d8d73d0e9eba77e5bdc55a89b2b473906cf706bf",
+      "positive_witness_text_verbatim": "Existing Example/Counterexample text retained.",
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": null,
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-14.proof-contracts.json"
+    },
+    {
+      "id": "ex-tdmath-hard-core-attractive-power-tail",
+      "owner": {
+        "batch": "14",
+        "page": "td-math-continuum-pressure-examples"
+      },
+      "path": "items/ex-tdmath-hard-core-attractive-power-tail.md",
+      "before_raw_sha256": "f719374d214fd932f9527b53d149498e8a51366145b63965de5c8afc1be14c97",
+      "after_raw_sha256": "7cc261e2618491fb95b7d842532c91e9e934b7e6c4a5cb96b6f6473dd0edf6b7",
+      "positive_witness_text_verbatim": "Existing Example/Counterexample text retained.",
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": null,
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-14.proof-contracts.json"
+    },
+    {
+      "id": "ex-tdmath-hard-core-zero-beta",
+      "owner": {
+        "batch": "18",
+        "page": "td-math-interacting-ensemble-geometry-examples"
+      },
+      "path": "items/ex-tdmath-hard-core-zero-beta.md",
+      "before_raw_sha256": "5c09c2a9f7a2bb0cf3e7b661dc0ea4daaf75584f929a796f44242f157ba50817",
+      "after_raw_sha256": "3eb8608b6447fae77e3e9df96a943ed30f9e93f5999598a5150d2b9958594c8f",
+      "positive_witness_text_verbatim": "Existing Example/Counterexample text retained.",
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": null,
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-18.proof-contracts.json"
+    },
+    {
+      "id": "ex-tdmath-close-packing-endpoint",
+      "owner": {
+        "batch": "18",
+        "page": "td-math-interacting-ensemble-geometry-examples"
+      },
+      "path": "items/ex-tdmath-close-packing-endpoint.md",
+      "before_raw_sha256": "4185633757656a81478e7bd43a1ec205fb8df2488d9f8a85edc5065c079797d4",
+      "after_raw_sha256": "dfb066527f5009e72ce1681a9ab1d7a4b209605648576900be94de511a699c10",
+      "positive_witness_text_verbatim": "Existing Example/Counterexample text retained.",
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": null,
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-18.proof-contracts.json"
+    },
+    {
+      "id": "ex-tdmath-nonunique-variational-minimizers",
+      "owner": {
+        "batch": "18",
+        "page": "td-math-interacting-ensemble-geometry-examples"
+      },
+      "path": "items/ex-tdmath-nonunique-variational-minimizers.md",
+      "before_raw_sha256": "35ee3617aa6bda13cb706451ccc004bfda5bc754fe22a595da7942708b4993cc",
+      "after_raw_sha256": "f48ea62a153f6568d7037ff454901b7b2d8dac2326ec63442e06a551a8322284",
+      "positive_witness_text_verbatim": "Existing Example/Counterexample text retained.",
+      "proof_text_verbatim": true,
+      "physical_scope_verbatim": true,
+      "new_refuted_statement": null,
+      "source_kind_unchanged": true,
+      "source_deps_and_roles_unchanged": true,
+      "original_contract_source": "physics-td-qft-rpm-62-2026-10-14-batch-18.proof-contracts.json"
+    }
+  ],
+  "round": 1
+}

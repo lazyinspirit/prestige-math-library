@@ -1,0 +1,421 @@
+{
+  "version": 1,
+  "unapplied": true,
+  "native_acceptance": false,
+  "root_maintains_live_contract": true,
+  "contracts": {
+    "lem-tdmath-integrable-horizontal-orbits-have-empty-interior": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-one-form-and-horizontal-path",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, $n\\ge1$, with coordinates $(x_1,\\ldots,x_n,z)$. A $C^2$ one-form on $U$ is a field of linear functionals on tangent vectors of the form $\\omega=\\sum_{i=1}^n a_i(x,z)\\,dx_i+b(x,z)\\,dz$, where every coefficient is twice continuously differentiable. At $q\\in U$, it acts by $\\omega_q(u_1,\\ldots,u_n,w)=\\sum_i a_i(q)u_i+b(q)w$. It is nonsingular on $U$ when $\\omega_q\\ne0$ for every $q$; then $H_q:=\\ker\\omega_q$ is an $n$-dimensional subspace of $T_qU\\cong\\mathbb R^{n+1}$.\n\nFor one-forms $\\alpha,\\beta$, their exterior product is the alternating two-form $(\\alpha\\wedge\\beta)(u,v)=\\alpha(u)\\beta(v)-\\alpha(v)\\beta(u)$. For a one-form $\\alpha$ and a two-form $\\sigma$, $(\\alpha\\wedge\\sigma)(u,v,w)=\\alpha(u)\\sigma(v,w)-\\alpha(v)\\sigma(u,w)+\\alpha(w)\\sigma(u,v)$. The exterior derivative of the displayed $C^2$ form is the $C^1$ two-form\n\n$$d\\omega=\\sum_{1\\le i<j\\le n}(\\partial_i a_j-\\partial_j a_i)\\,dx_i\\wedge dx_j+\\sum_{i=1}^n(\\partial_i b-\\partial_z a_i)\\,dx_i\\wedge dz.$$\n\nA piecewise-$C^1$ path is a continuous $\\gamma:[s_0,s_1]\\to U$ with $s_0\\le s_1$ and admitting a finite partition on each closed subinterval of which it is $C^1$. It is $\\omega$-horizontal when $\\omega_{\\gamma(t)}(\\dot\\gamma(t))=0$ on the interior of each such subinterval. Endpoints where a derivative is one-sided are included by continuity. For an open $V\\subseteq U$, $p$ is horizontally reachable from $q$ within $V$ if a horizontal path in $V$ joins $q$ to $p$. Both signs of time and finite concatenations are allowed by this definition.\n\nOn a neighborhood $W$, an integrating factor for $\\omega$ is a nowhere-zero $\\mu\\in C^1(W)$ for which $\\mu\\omega=dS$ for some $S\\in C^2(W)$ with $dS$ nowhere zero. This definition is local; it asserts neither a global potential on $U$ nor a physical identification or calibration of $S$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tdmath-local-contraction-flow",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, $m\\ge1$, let $X:U\\to\\mathbb R^m$ have continuous first partial derivatives, and fix $q_0\\in U$. There are $r,\\delta>0$ and a map $\\phi:[-\\delta,\\delta]\\times\\overline B(q_0,r/2)\\to\\overline B(q_0,r)$ such that for each $p\\in\\overline B(q_0,r/2)$, $t\\mapsto\\phi(t,p)$ is $C^1$, satisfies $\\phi(0,p)=p$ and $\\partial_t\\phi(t,p)=X(\\phi(t,p))$ on $(-\\delta,\\delta)$, and is the unique such solution that stays in $\\overline B(q_0,r)$. The dependence on the initial point is locally Lipschitz, and the local flow law $\\phi(t,\\phi(s,p))=\\phi(t+s,p)$ holds whenever the displayed maps are defined in the chosen neighborhood.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tdmath-variational-flow-and-commutation",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a $C^2$ vector field on an open subset of $\\mathbb R^m$, where $C^2$ means that total derivatives through order two exist and are continuous. Its local flow $\\phi_X^t(q)$ from [[lem-tdmath-local-contraction-flow]] is $C^2$ jointly in $(t,q)$, and $J(t,q):=D_q\\phi_X^t(q)$ satisfies $\\partial_tJ=DX(\\phi_X^t(q))J$ and $J(0,q)=I$. For two such fields define their bracket by $[X,Y](q):=DY(q)X(q)-DX(q)Y(q)$. If $[X,Y]=0$ on a neighborhood and all local maps stay there, then $D_q\\phi_X^t(q)Y(q)=Y(\\phi_X^t(q))$ and their local flows commute: $\\phi_X^t\\circ\\phi_Y^s=\\phi_Y^s\\circ\\phi_X^t$ whenever both sides are defined.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-tdmath-local-implicit-rank",
+          "source_section": "Statement",
+          "quote": "Let $1\\le q\\le n$, let $U\\subseteq\\mathbb R^n$ be open, and let $F:U\\to\\mathbb R^q$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]]. Suppose $F(x_*)=0$ and some $q\\times q$ minor of the derivative matrix $DF(x_*)$ is invertible. This nonsingular-minor hypothesis is the explicit full-row-rank condition used here. If $q<n$, then after permuting coordinates $x=(u,v)\\in\\mathbb R^{n-q}\\times\\mathbb R^q$, there are open neighborhoods $P$ of $u_*$ and $Q$ of $v_*$ and a unique $C^1$ map $\\varphi:P\\to Q$ such that\n\n$$F(u,v)=0\\quad\\Longleftrightarrow\\quad v=\\varphi(u)\\qquad((u,v)\\in P\\times Q).$$\n\nIts derivative is\n\n$$D\\varphi(u)=-D_vF(u,\\varphi(u))^{-1}D_uF(u,\\varphi(u)).$$\n\nThus the local zero set is a graph over $n-q$ free coordinates. If $q=n$, the zero is locally isolated, so the local graph dimension is zero. Here \u201clocal graph dimension $k$\u201d means a local graph parameterized by an open subset of $\\mathbb R^k$, with a singleton counted as dimension zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-connected-subsets-of-r-are-intervals",
+          "source_section": "Statement",
+          "quote": "Let $E \\subseteq \\mathbb{R}$. Then $E$ is connected ([[def-connected-r]]) if and\nonly if $E$ is **order-convex** ([[def-interval]]), that is, if and only if\n\n$$x, z \\in E \\text{ and } x \\le w \\le z \\;\\Longrightarrow\\; w \\in E .$$\n\n**On the word \"interval\".** Order-convexity is exactly the defining property\nthat [[def-interval]] proves for each of its nine forms, and in that sense the\ntheorem says that the connected subsets of $\\mathbb{R}$ are the intervals. The\nconverse classification, that every order-convex subset of $\\mathbb{R}$ is empty\nor one of the nine forms, is true and is explicitly **not proved anywhere in\nthis library**; [[def-interval]] records that omission in its own remarks. So\nthe statement proved below is the equivalence with order-convexity, and the\nphrase \"is an interval\" is to be read as \"is order-convex\" throughout this page.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "Write $\\mathbb{Q}_{\\mathbb{R}}$ for the image of $\\mathbb{Q}$ in $\\mathbb{R}$\nunder the canonical embedding $q \\mapsto \\hat q$ ([[lem-rat-embeds-dense]]), the\nset usually written $\\mathbb{Q}$ once the identification is made, and put\n$X := \\mathbb{R} \\setminus \\mathbb{Q}_{\\mathbb{R}}$ for the irrationals. Then:\n\n1. $\\mathbb{Q}_{\\mathbb{R}}$ is dense in $\\mathbb{R}$, that is,\n   $\\overline{\\mathbb{Q}_{\\mathbb{R}}} = \\mathbb{R}$ ([[def-limit-point-r]]);\n2. $X$ is dense in $\\mathbb{R}$;\n3. every nonempty open subset of $\\mathbb{R}$ is uncountable\n   ([[def-countable]]).\n\nClaim 2 is not a symmetry of claim 1: the rationals are dense because they are\n*constructed* to approximate, whereas the irrationals are dense because there are\ntoo many points in any interval for a countable set to exhaust it, which is why\nclaim 3 is proved alongside and used for it.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-image-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be continuous ([[def-metric-continuity]]). Then:\n\n1. If $(X,d_X)$ is compact ([[def-metric-compactness]]), the image\n   $f[X] \\subseteq Y$ is a compact subset of $Y$.\n2. More generally, if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is\n   a compact subset of $Y$.\n\nNo choice principle is used.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-compact-subset-is-closed-and-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $K \\subseteq X$ be a\ncompact subset ([[def-metric-compactness]]). Then $K$ is closed in $X$\n([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]).\n\nNo choice principle is used: both covers below are given by a rule, and the\nindexed form of [[lem-compactness-is-intrinsic]] returns indices rather than\nsets.\n\n**The converse is false in general.** A closed and bounded subset of an arbitrary\nmetric space need not be compact\n([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]); it is exactly\nin $\\mathbb{R}^n$ that the converse holds ([[thm-heine-borel-rn]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Use the local first integrals in the Statement. Write $\\omega=\\sum_{j=1}^{n+1}\\omega_j dx_j$ in the fixed Euclidean coordinates and set $w=(\\omega_1,\\ldots,\\omega_{n+1})$ and $Z_j=e_j-(\\omega_j/|w|^2)w$. These globally defined $C^2$ vector fields are horizontal and span $\\ker\\omega$ at each point, since their matrix is the orthogonal projection onto that kernel. On every neighborhood supplied by the hypothesis, $dS=\\mu\\omega$ has nonzero derivative, and each $Z_j$-flow preserves $S$ as long as its trajectory remains there, by [F3]. Its derivative therefore preserves horizontal tangent vectors there: differentiating $S(\\phi_j^t(x))=S(x)$ gives $dS_{\\phi_j^t(x)}D\\phi_j^t(x)v=dS_xv=0$ for horizontal $v$. The compact image of any finite flow trajectory has a finite subcover by such neighborhoods; a sufficiently fine finite subdivision of its compact time interval puts each subtrajectory in one of them. This follows directly from compactness: otherwise shrinking subintervals failing the subdivision would have a limiting time whose neighborhood contains them. Composing the local derivative identities obtains preservation over the full duration. Local flow uniqueness makes these continuations consistent, and [F2] gives $C^2$ dependence on durations and initial points wherever the finite composition is defined.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $q\\in U$, and let $\\mathcal O(q)$ consist of endpoints of all finite words of the $n+1$ fields $Z_j$, with signed durations and intermediate trajectories in $U$; include the empty word. At any $r$, choose $n$ of these fields forming a basis of $\\ker\\omega_r$. In a neighborhood from the hypothesis, [L1] applied to $S(x)-S(r)$ gives a local graph plaque with $n$ free coordinates. Composing the $n$ chosen flows for small durations gives endpoints in that plaque. The derivative at zero, followed by projection to the plaque's free coordinates, is invertible, because those vectors form its tangent basis; apply [L1] to this free-coordinate endpoint map minus a target, with durations solved, to see that the endpoints contain a plaque neighborhood of $r$. All these paths stay in the chosen neighborhood. A horizontal piecewise $C^1$ path preserves the local $S$ by [F3], so near every one of its parameter values it lies in this plaque neighborhood and hence in the same finite-word orbit as that point. The finite-word orbits form equivalence classes by reversal and concatenation, and their preimages along the path are consequently relatively open in its interval domain. By [F4], connectedness of that interval forces one class. Thus every point horizontally reachable from $q$ lies in $\\mathcal O(q)$; the reverse inclusion follows because each word is a horizontal concatenation.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For a fixed finite word $\\alpha$ of length $m\\ge1$, write $F_\\alpha:O_\\alpha\\subseteq\\mathbb R^m\\to U$ for its endpoint map from $q$, on the open set of admissible duration tuples. Each duration derivative is a field vector transported by the later flows and is horizontal by step 1.1. Near any $s\\in O_\\alpha$, continuity puts the endpoint image in a neighborhood with the first integral $S$ from the hypothesis; hence $D(S\\circ F_\\alpha)=0$. On a small convex parameter ball, [F3] makes $S\\circ F_\\alpha$ constant. Choose a closed box with rational endpoints, containing $s$ in its interior and contained in that ball. Its image under $F_\\alpha$ is compact by [F6], lies in one level of $S$, and has empty interior in $U$: a nonempty open subset of that image would make $S$ constant on an open set, contradicting $dS=\\mu\\omega\\ne0$. Thus the image is a closed nowhere-dense subset of $U$. By [F5], enumerate the countable collection of all finite words and rational closed parameter boxes; for an admissible box whose compact image has empty interior record that image, and otherwise record the empty set. Include the singleton $\\{q\\}$ for the empty word. This explicitly defined sequence $(K_j)$ of closed nowhere-dense sets covers $\\mathcal O(q)$, since every duration tuple admits the small box just constructed. No countable atlas or choice of first integrals is needed for the enumeration.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Let $V$ be any nonempty open subset of $U$. Choose a rational open Euclidean ball with closure contained in $V$. Recursively choose the first ball in a fixed enumeration of rational balls whose closure is inside the preceding open ball, disjoint from $K_j$, and whose radius is below $2^{-j}$. Such a ball exists because $K_j$ is closed with empty interior. If the $j$th ball has center $c_j$ and radius $r_j<2^{-j}$, then all later centers lie in its closed ball, so $|c_k-c_j|\\le r_j$ for $k>j$. Thus the centers form a Cauchy sequence; [F7] gives a limit $p$ in all the nested closed balls, hence in $V$ and outside every $K_j$. Each selection is the least natural-number index satisfying explicit nonempty conditions, so it uses no choice axiom. Since the $K_j$ cover $\\mathcal O(q)$, step 2.1 shows $p$ is not horizontally reachable from $q$ even by a path in $U$, and therefore not by one in $V$. This proves the asserted conclusion for every nonempty open $V$, using no global first integral or choice axiom.",
+          "inputs": [
+            "given",
+            "F5",
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Conclusions quantify actual q in U; if U is empty there is no such q."
+        },
+        {
+          "case": "zero",
+          "status": "excluded",
+          "reason": "The one-form is everywhere nonzero, so projection denominator and first-integral derivative are nonzero."
+        },
+        {
+          "case": "choice",
+          "status": "not_required",
+          "reason": "Countable parameter boxes are defined by a fixed enumeration; nested balls use the least admissible index, no atlas choices."
+        }
+      ]
+    },
+    "thm-tdmath-local-caratheodory-inaccessibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-one-form-and-horizontal-path",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, $n\\ge1$, with coordinates $(x_1,\\ldots,x_n,z)$. A $C^2$ one-form on $U$ is a field of linear functionals on tangent vectors of the form $\\omega=\\sum_{i=1}^n a_i(x,z)\\,dx_i+b(x,z)\\,dz$, where every coefficient is twice continuously differentiable. At $q\\in U$, it acts by $\\omega_q(u_1,\\ldots,u_n,w)=\\sum_i a_i(q)u_i+b(q)w$. It is nonsingular on $U$ when $\\omega_q\\ne0$ for every $q$; then $H_q:=\\ker\\omega_q$ is an $n$-dimensional subspace of $T_qU\\cong\\mathbb R^{n+1}$.\n\nFor one-forms $\\alpha,\\beta$, their exterior product is the alternating two-form $(\\alpha\\wedge\\beta)(u,v)=\\alpha(u)\\beta(v)-\\alpha(v)\\beta(u)$. For a one-form $\\alpha$ and a two-form $\\sigma$, $(\\alpha\\wedge\\sigma)(u,v,w)=\\alpha(u)\\sigma(v,w)-\\alpha(v)\\sigma(u,w)+\\alpha(w)\\sigma(u,v)$. The exterior derivative of the displayed $C^2$ form is the $C^1$ two-form\n\n$$d\\omega=\\sum_{1\\le i<j\\le n}(\\partial_i a_j-\\partial_j a_i)\\,dx_i\\wedge dx_j+\\sum_{i=1}^n(\\partial_i b-\\partial_z a_i)\\,dx_i\\wedge dz.$$\n\nA piecewise-$C^1$ path is a continuous $\\gamma:[s_0,s_1]\\to U$ with $s_0\\le s_1$ and admitting a finite partition on each closed subinterval of which it is $C^1$. It is $\\omega$-horizontal when $\\omega_{\\gamma(t)}(\\dot\\gamma(t))=0$ on the interior of each such subinterval. Endpoints where a derivative is one-sided are included by continuity. For an open $V\\subseteq U$, $p$ is horizontally reachable from $q$ within $V$ if a horizontal path in $V$ joins $q$ to $p$. Both signs of time and finite concatenations are allowed by this definition.\n\nOn a neighborhood $W$, an integrating factor for $\\omega$ is a nowhere-zero $\\mu\\in C^1(W)$ for which $\\mu\\omega=dS$ for some $S\\in C^2(W)$ with $dS$ nowhere zero. This definition is local; it asserts neither a global potential on $U$ nor a physical identification or calibration of $S$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tdmath-local-contraction-flow",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, $m\\ge1$, let $X:U\\to\\mathbb R^m$ have continuous first partial derivatives, and fix $q_0\\in U$. There are $r,\\delta>0$ and a map $\\phi:[-\\delta,\\delta]\\times\\overline B(q_0,r/2)\\to\\overline B(q_0,r)$ such that for each $p\\in\\overline B(q_0,r/2)$, $t\\mapsto\\phi(t,p)$ is $C^1$, satisfies $\\phi(0,p)=p$ and $\\partial_t\\phi(t,p)=X(\\phi(t,p))$ on $(-\\delta,\\delta)$, and is the unique such solution that stays in $\\overline B(q_0,r)$. The dependence on the initial point is locally Lipschitz, and the local flow law $\\phi(t,\\phi(s,p))=\\phi(t+s,p)$ holds whenever the displayed maps are defined in the chosen neighborhood.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tdmath-variational-flow-and-commutation",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a $C^2$ vector field on an open subset of $\\mathbb R^m$, where $C^2$ means that total derivatives through order two exist and are continuous. Its local flow $\\phi_X^t(q)$ from [[lem-tdmath-local-contraction-flow]] is $C^2$ jointly in $(t,q)$, and $J(t,q):=D_q\\phi_X^t(q)$ satisfies $\\partial_tJ=DX(\\phi_X^t(q))J$ and $J(0,q)=I$. For two such fields define their bracket by $[X,Y](q):=DY(q)X(q)-DX(q)Y(q)$. If $[X,Y]=0$ on a neighborhood and all local maps stay there, then $D_q\\phi_X^t(q)Y(q)=Y(\\phi_X^t(q))$ and their local flows commute: $\\phi_X^t\\circ\\phi_Y^s=\\phi_Y^s\\circ\\phi_X^t$ whenever both sides are defined.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tdmath-codimension-one-frobenius",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$, $n\\ge1$, be open and let $\\omega=\\sum_{i=1}^n a_i dx_i+b dz$ be a $C^2$ one-form with $\\omega_q\\ne0$ near $q_0\\in U$. After shrinking to a neighborhood on which one coefficient $b$ is nonzero, the following are equivalent: (i) $\\omega\\wedge d\\omega=0$ throughout that neighborhood; (ii) on a possibly smaller neighborhood there are $\\mu\\in C^1$ nowhere zero and $S\\in C^2$ with $dS=\\mu\\omega$. The theorem is local; it gives no global exactness or thermodynamic calibration.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-tdmath-local-implicit-rank",
+          "source_section": "Statement",
+          "quote": "Let $1\\le q\\le n$, let $U\\subseteq\\mathbb R^n$ be open, and let $F:U\\to\\mathbb R^q$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]]. Suppose $F(x_*)=0$ and some $q\\times q$ minor of the derivative matrix $DF(x_*)$ is invertible. This nonsingular-minor hypothesis is the explicit full-row-rank condition used here. If $q<n$, then after permuting coordinates $x=(u,v)\\in\\mathbb R^{n-q}\\times\\mathbb R^q$, there are open neighborhoods $P$ of $u_*$ and $Q$ of $v_*$ and a unique $C^1$ map $\\varphi:P\\to Q$ such that\n\n$$F(u,v)=0\\quad\\Longleftrightarrow\\quad v=\\varphi(u)\\qquad((u,v)\\in P\\times Q).$$\n\nIts derivative is\n\n$$D\\varphi(u)=-D_vF(u,\\varphi(u))^{-1}D_uF(u,\\varphi(u)).$$\n\nThus the local zero set is a graph over $n-q$ free coordinates. If $q=n$, the zero is locally isolated, so the local graph dimension is zero. Here \u201clocal graph dimension $k$\u201d means a local graph parameterized by an open subset of $\\mathbb R^k$, with a singleton counted as dimension zero.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": []
+        },
+        {
+          "fact": "F6",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": []
+        },
+        {
+          "fact": "F7",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
+          "uses": []
+        },
+        {
+          "fact": "F8",
+          "source": "lem-tdmath-integrable-horizontal-orbits-have-empty-interior",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$, $n\\ge1$, be open, and let $\\omega$ be a nowhere-zero $C^2$ one-form, with the horizontal paths of [[def-tdmath-one-form-and-horizontal-path]]. Assume that every point has a neighborhood $W$ with $S\\in C^2(W)$ and nowhere-zero $\\mu\\in C^1(W)$ satisfying $dS=\\mu\\omega$. For every $q\\in U$, its horizontal reachability class in $U$ is contained in a countable union of compact subsets of $U$ with empty interior. Consequently every nonempty open $V\\subseteq U$ contains a point not horizontally reachable from $q$ by any horizontal path in $U$. In particular, if $q\\in V$, that point is not reachable by a path contained in $V$. No global first integral or choice axiom is assumed.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $c_i=-a_i/b$ and $X_i=\\partial_{x_i}+c_i\\partial_z$. These $C^2$ fields form a basis of $\\ker\\omega$. Their bracket has only a vertical component, $[X_i,X_j]^z=\\partial_i c_j+c_i\\partial_zc_j-\\partial_jc_i-c_j\\partial_zc_i$.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Direct coordinate expansion gives $d\\omega(X,Y)=X[\\omega(Y)]-Y[\\omega(X)]-\\omega([X,Y])$ for $[X,Y]=DY\\,X-DX\\,Y$. Suppose for contradiction that $[X_i,X_j](q)\\ne0$ at some $q$. For small $t$, let $Y_t=(\\phi_i^t)_*X_j$, so $Y_t(q)=D\\phi_i^t(\\phi_i^{-t}(q))X_j(\\phi_i^{-t}(q))$. The flow and variational equations give $\\phi_i^{-t}(q)=q-tX_i(q)+o(t)$ and $D\\phi_i^t(\\phi_i^{-t}(q))=I+tDX_i(q)+o(t)$; differentiability of $X_j$ gives $X_j(\\phi_i^{-t}(q))=X_j(q)-tDX_j(q)X_i(q)+o(t)$. Multiplying yields $Y_t(q)=X_j(q)-t[X_i,X_j](q)+o(t)$. Since $[X_i,X_j](q)=v\\partial_z$ for some $v\\ne0$ and $b(q)\\ne0$, $\\omega_q([X_i,X_j](q))=vb(q)\\ne0$; hence $\\omega_q(Y_t(q))=-tvb(q)+o(t)\\ne0$ for all sufficiently small nonzero $t$, so $Y_t(q)$ is transverse to $\\ker\\omega_q$. Thus $X_1(q),\\ldots,X_n(q),Y_t(q)$ are linearly independent.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By continuity, choose an open Euclidean ball $B$ about $q$, contained in the coordinate neighborhood, on which $b$ and the vertical coefficient of the same bracket $[X_i,X_j]$ are both nonzero. For each $r\\in B$, repeat step 2.1 at $r$ with a sufficiently small nonzero $t=t_r$. The flow of $Y_t$ is $\\phi_i^t\\circ\\phi_j^s\\circ\\phi_i^{-t}$, a finite horizontal concatenation with both time signs available. Starting at $r$, compose this flow with those of $X_1,\\ldots,X_n$ to obtain a $C^2$ endpoint map $\\Psi_r$ near the zero duration vector. Then $\\Psi_r(0)=r$ and its derivative has the independent columns $X_1(r),\\ldots,X_n(r),Y_t(r)$. Choose $|t|$ and the duration neighborhood small enough that every intermediate segment stays inside $B$, using continuity of local flows and that $r$ is interior to $B$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "At each $r\\in B$, apply [L1] to $H_r(s,p)=\\Psi_r(s)-p$ at $(0,r)$, with ambient dimension $2(n+1)$ and target dimension $n+1$, permuting the input to $(p,s)$ so $s$ is solved. Its solved derivative is invertible by step 3.1. Conditionally, some open neighborhood $O_r\\subseteq B$ of $r$ consists of endpoints $\\Psi_r(s(p))$, all reachable from $r$ by horizontal paths inside $B$. Reachability inside $B$ is an equivalence relation: constant paths give reflexivity, path reversal gives symmetry, and finite concatenation gives transitivity. Every equivalence class is open in $B$, since each of its points $r$ has $O_r$ in that same class. Two distinct classes would separate the connected Euclidean ball $B$ into one nonempty open class and its nonempty open complement, a union of other classes. Thus $B$ is one class: every point of $B$ is reachable from $q$ by a path inside $B$, contradicting (a) with $V=B$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "L1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Thus every bracket $[X_i,X_j]$ vanishes by the contradiction at step 4.1. The coordinate identity from step 2.1 gives $d\\omega(X_i,X_j)=-\\omega([X_i,X_j])=0$, hence $(\\omega\\wedge d\\omega)(\\partial_z,X_i,X_j)=0$ for every pair. These evaluations determine the three-form: modulo the $n$-plane $\\ker\\omega$, the tangent space has dimension one, so every triple reduces by multilinearity and alternation to a multiple of one $\\partial_z$ and two horizontal vectors. Therefore $\\omega\\wedge d\\omega=0$. By [F4], condition (b) follows, conditionally on [L1].",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "Conversely suppose (b) holds at every point of $U$. The exact global reachability lemma [F8] applies to these local first integrals and the declared horizontal paths. For every $q\\in U$ and every open neighborhood $V\\subseteq U$ of $q$, it gives a point $p\\in V$ not horizontally reachable from $q$ even by a path in $U$, and therefore not by a path in $V$. This proves (a), including neighborhoods larger than an individual first-integral chart, and completes the equivalence.",
+          "inputs": [
+            "given",
+            "F1",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Conclusions quantify actual q in U; if U is empty there is no such q."
+        },
+        {
+          "case": "zero",
+          "status": "excluded",
+          "reason": "The one-form is everywhere nonzero, so projection denominator and first-integral derivative are nonzero."
+        },
+        {
+          "case": "choice",
+          "status": "not_required",
+          "reason": "Countable parameter boxes are defined by a fixed enumeration; nested balls use the least admissible index, no atlas choices."
+        }
+      ]
+    }
+  },
+  "consumer_changes": {
+    "new_fact": "F8",
+    "changed_derivations": [
+      "step-3-1",
+      "step-4-1",
+      "step-6-1"
+    ],
+    "preserved_statement": true,
+    "unused_prior_citations": "Consumer F5,F6,F7 no longer used in final6.1; proposal reflects actual empty uses rather than old use stamps. Root may remove unused facts/edges in metadata pass if desired."
+  }
+}

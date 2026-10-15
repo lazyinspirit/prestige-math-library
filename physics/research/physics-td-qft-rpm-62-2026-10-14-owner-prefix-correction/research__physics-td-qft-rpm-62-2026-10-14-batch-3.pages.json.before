@@ -1,0 +1,960 @@
+[
+  {
+    "order": 267,
+    "id": "td-math-ordered-composition",
+    "kind": "A",
+    "category": "thermodynamics-mathematics",
+    "library": "mathematics",
+    "title": "Ordered Composition",
+    "companion": "td-math-ordered-composition-examples",
+    "requires": [
+      "linear-independence-bases-and-dimension",
+      "order-zorn-and-the-axiom-of-choice",
+      "the-zfc-axioms-and-basic-set-constructions",
+      "the-analytic-hahn-banach-theorem",
+      "foundations-of-the-real-numbers",
+      "vector-spaces-and-subspaces",
+      "rings-subrings-and-integral-domains",
+      "construction-of-r-via-cauchy-sequences",
+      "roots-and-rational-powers",
+      "relations-functions-and-quotients"
+    ],
+    "items": [
+      {
+        "id": "def-tdmath-tagged-scalable-compound",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Tagged scalable compounds",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 0,
+        "deps": [
+          "def-complete-ordered-field",
+          "def-finite-sum",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "justified_by": [
+          "lem-tdmath-compound-mass-well-defined"
+        ],
+        "dependency_roles": {
+          "def-complete-ordered-field": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-reindexing-and-fubini": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $X$ be a set of state labels. A **tagged scalable compound over $X$** is a function $c:X\\to\\mathbb R_{\\ge0}$ whose support $\\operatorname{supp}(c):=\\{x\\in X:c(x)\\ne0\\}$ is finite. The coefficient is a dimensionless formal amount; state labels retain their tags, so equal coefficients on different labels do not identify those labels. Compounds are equal exactly when their coefficient functions are equal.\n\nFor compounds $c,d$ and $t\\ge0$, define composition and nonnegative scaling pointwise by $(c+d)(x):=c(x)+d(x)$ and $(tc)(x):=t c(x)$. The zero function is the empty compound; in particular $0c=0$. Comparison axioms involving scaling still require a strictly positive scalar unless explicitly stated otherwise. The **mass** of $c$ is the finite sum $m(c):=\\sum_{x\\in\\operatorname{supp}(c)}c(x)$. It is dimensionless bookkeeping mass, not thermodynamic mass or energy. The compound is positive when $m(c)>0$.\n\nFor every state label $x\\in X$, the **unit-state compound** $e_x$ is the coefficient function with $e_x(y)=1$ if $y=x$ and $e_x(y)=0$ otherwise. Its support is $\\{x\\}$, so it is a tagged compound. In compound comparisons, a state label $x$ denotes $e_x$. Every compound has the canonical finite decomposition $c=\\sum_{x\\in\\operatorname{supp}(c)}c(x)e_x$, with an empty sum when $c=0$; coefficients on this support are strictly positive. The mass-one property $m(e_x)=1$ and the equivalence $m(c)=0\\Longleftrightarrow c=0$ are proved in [[lem-tdmath-compound-mass-well-defined]].\n\nThe formula for mass is independent of the chosen finite set containing the support, and composition and scaling obey $m(c+d)=m(c)+m(d)$ and $m(tc)=t m(c)$; [[lem-tdmath-compound-mass-well-defined]] proves these assertions.",
+        "strategy": "Definition; well-definedness is carried by [[lem-tdmath-compound-mass-well-defined]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§II.A.1–II.A.2",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-tdmath-compound-mass-well-defined",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Compound mass is well-defined and additive",
+        "reference": "research/physics-td-qft-rpm-62-2026-10-14-batch-3.notes.md#item-inventory",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 1,
+        "deps": [
+          "def-tdmath-tagged-scalable-compound",
+          "def-finite-sum",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_roles": {
+          "lem-finite-sum-laws": "mathematical-premise",
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-reindexing-and-fubini": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For every tagged scalable compound $c$, the mass in [[def-tdmath-tagged-scalable-compound]] is independent of the finite summation set used. For any compounds $c,d$ and $t\\ge0$, $m(c+d)=m(c)+m(d)$ and $m(tc)=t m(c)$; $m(0)=0$. For every $x\\in X$, the unit-state compound $e_x$ has $m(e_x)=1$. A compound has zero mass if and only if it is the empty compound.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [F1] and [F2].\n\n1.1 Let $E$ be any finite subset of $X$ containing $\\operatorname{supp}(c)$. On $E\\setminus\\operatorname{supp}(c)$ the function is zero, so the finite sum over $E$ equals the finite sum over $\\operatorname{supp}(c)$ by [F2]. If $E$ and $E'$ both contain the support, compare each sum to the sum over the finite union $E\\cup E'$; hence the value is independent of the chosen finite summation set. [F1, F2]\n\n2.1 The support of $c+d$ is contained in the finite union of the supports of $c$ and $d$. Sum over that union; distributivity in [F2] gives $m(c+d)=m(c)+m(d)$, since zero terms outside each individual support contribute nothing by step 1.1. The support of $tc$ equals that of $c$ for $t>0$, and scalar linearity of the finite sum gives $m(tc)=t m(c)$. The empty sum is zero, so $m(0)=0$. [F1, F2, step 1.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§II.A.1–II.A.2",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-tdmath-comparison-and-stability",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Comparison and stability for compounds",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 2,
+        "deps": [
+          "def-tdmath-tagged-scalable-compound",
+          "lem-tdmath-compound-mass-well-defined",
+          "def-natural-numbers",
+          "def-nat-order",
+          "def-real-limit"
+        ],
+        "dependency_roles": {
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "lem-tdmath-compound-mass-well-defined": "mathematical-premise",
+          "def-natural-numbers": "mathematical-premise",
+          "def-nat-order": "mathematical-premise",
+          "def-real-limit": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix a nonempty set $X$ and the compounds of [[def-tdmath-tagged-scalable-compound]]. A **comparison relation** $\\preceq$ is defined only for pairs $(A,B)$ with $m(A)=m(B)$. Write $A\\sim B$ when both $A\\preceq B$ and $B\\preceq A$; this is equivalence, not equality of coefficient functions. The following are explicit hypotheses on $\\preceq$:\n\n1. **Preorder:** $A\\preceq A$, and $A\\preceq B\\preceq C$ implies $A\\preceq C$.\n2. **Composition consistency:** $A\\preceq B$ implies $A+C\\preceq B+C$ for every compound $C$.\n3. **Positive scaling:** $A\\preceq B$ implies $tA\\preceq tB$ for every real $t>0$.\n4. **Splitting and recombination:** for $x\\in X$, $t>0$ and $0<s<t$, the one-state compound $te_x$ is equivalent to $se_x+(t-s)e_x$.\n5. **Stability:** for equal-mass $A,B$, fixed positive compounds $Z_0,Z_1$ with $m(Z_0)=m(Z_1)$, and a sequence $\\epsilon_n>0$ decreasing to $0$, if $A+\\epsilon_n Z_0\\preceq B+\\epsilon_n Z_1$ for every $n$, then $A\\preceq B$.\n6. **Comparison hypothesis (CH):** for every equal-mass pair $A,B$, either $A\\preceq B$ or $B\\preceq A$ (or both).\n\nThese are mathematical assumptions, not conclusions about a physical system. No antisymmetry, continuity, convexity, or strict comparison is included. Strict comparison means $A\\preceq B$ and not $B\\preceq A$.",
+        "strategy": "Definition; well-definedness is carried by .",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§II.C–II.D",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Campión et al., A Survey on the Mathematical Foundations of Axiomatic Entropy, §§2–5",
+              "url": "https://www.mdpi.com/2075-1680/7/2/29/pdf"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "def-tdmath-signed-comparison",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Signed comparison of finite coefficient maps",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 3,
+        "deps": [
+          "def-tdmath-tagged-scalable-compound",
+          "def-tdmath-comparison-and-stability"
+        ],
+        "justified_by": [
+          "lem-tdmath-spectator-cancellation"
+        ],
+        "dependency_roles": {
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "def-tdmath-comparison-and-stability": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $u,v:X\\to\\mathbb R$ be finite-support real coefficient maps with equal total coefficient $\\sum_xu(x)=\\sum_xv(x)$. These signed maps are formal comparison notation, not compounds. Put $d:=v-u$ and define $d^+(x):=\\max\\{d(x),0\\}$ and $d^-(x):=\\max\\{-d(x),0\\}$. Then $d^+,d^-$ are nonnegative finite-support compounds of equal mass, as verified in [[lem-tdmath-spectator-cancellation]]. Define\n\n$$u\\preceq_s v\\quad\\Longleftrightarrow\\quad d^-\\preceq d^+,$$\n\nusing the compound comparison relation of [[def-tdmath-comparison-and-stability]]. Thus positive coefficients of $v-u$ remain on the right and negative coefficients move to the left. Signed notation is never a claim that a negative amount of a physical system exists.",
+        "strategy": "Definition; well-definedness is carried by [[lem-tdmath-spectator-cancellation]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §II.D",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-tdmath-reciprocal-naturals-tend-zero",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Reciprocals of the positive integers decrease to zero",
+        "reference": "research/physics-td-qft-rpm-62-2026-10-14-batch-3.notes.md#item-inventory",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 0,
+        "deps": [
+          "def-complete-ordered-field",
+          "def-natural-numbers",
+          "def-nat-addition",
+          "lem-nat-add-commutative",
+          "lem-nat-add-identity",
+          "def-nat-order",
+          "lem-nat-order-add-compatible",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-of-q-embeds",
+          "cor-of-one-positive",
+          "lem-of-inverse-positive",
+          "lem-of-sign-rules",
+          "def-real-limit"
+        ],
+        "dependency_roles": {
+          "def-complete-ordered-field": "mathematical-premise",
+          "def-natural-numbers": "mathematical-premise",
+          "def-nat-addition": "mathematical-premise",
+          "lem-nat-add-commutative": "mathematical-premise",
+          "lem-nat-add-identity": "mathematical-premise",
+          "def-nat-order": "mathematical-premise",
+          "lem-nat-order-add-compatible": "mathematical-premise",
+          "def-canonical-natural": "mathematical-premise",
+          "lem-of-naturals-positive": "mathematical-premise",
+          "lem-of-q-embeds": "mathematical-premise",
+          "cor-of-one-positive": "mathematical-premise",
+          "lem-of-inverse-positive": "mathematical-premise",
+          "lem-of-sign-rules": "mathematical-premise",
+          "def-real-limit": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "In the complete ordered field $\\mathbb R$, the sequence $\\epsilon_n:=1/(n+1)$, $n\\in\\mathbb N$, is positive, strictly decreasing, and converges to zero.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [F1] and the ordered-field laws of $\\mathbb R$.\n\n1.1 The natural numbers are nonempty. If they had an upper bound, completeness [F1] would give $s=\\sup\\mathbb N$. The number $s-1$ cannot be an upper bound, so some $n\\in\\mathbb N$ satisfies $n>s-1$. Then $n+1>s$, while $n+1\\in\\mathbb N$, contradicting that $s$ is an upper bound. Thus the natural numbers are unbounded above. [F1, algebra]\n\n2.1 Each $n+1$ is positive, so $\\epsilon_n>0$; since $n+2>n+1$, ordered-field division by positive denominators gives $1/(n+2)<1/(n+1)$. Given $\\eta>0$, unboundedness from step 1.1 supplies $N\\in\\mathbb N$ with $N+1>1/\\eta$. For all $n\\ge N$, $0<\\epsilon_n\\le1/(N+1)<\\eta$, which is the definition of convergence to zero. [F1, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rudin, Principles of Mathematical Analysis, 3rd ed., Chapter 1",
+              "url": "https://people.math.wisc.edu/~jwrobbin/521dir/521.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-spectator-cancellation",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Spectator cancellation and signed-order algebra",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 4,
+        "deps": [
+          "def-tdmath-tagged-scalable-compound",
+          "lem-tdmath-compound-mass-well-defined",
+          "def-tdmath-comparison-and-stability",
+          "def-tdmath-signed-comparison",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-tdmath-reciprocal-naturals-tend-zero"
+        ],
+        "dependency_roles": {
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "lem-tdmath-compound-mass-well-defined": "mathematical-premise",
+          "def-tdmath-comparison-and-stability": "mathematical-premise",
+          "def-tdmath-signed-comparison": "mathematical-premise",
+          "def-canonical-natural": "mathematical-premise",
+          "lem-of-naturals-positive": "mathematical-premise",
+          "lem-tdmath-reciprocal-naturals-tend-zero": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Under [[def-tdmath-comparison-and-stability]], for equal-mass compounds $A,B,C$, $A+C\\preceq B+C$ if and only if $A\\preceq B$. The signed relation of [[def-tdmath-signed-comparison]] is well-defined; on nonnegative equal-mass maps it agrees with $\\preceq$, is invariant under adding the same finite-support signed map to both sides, and is transitive and closed under adding two comparisons.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [F1], [A1], and [F2].\n\n1.1 For equal-total $u,v$, $d=v-u$ has finite support and total sum zero. Pointwise $d=d^+-d^-$, so finite-sum linearity gives $m(d^+)-m(d^-)=0$; both maps are finite-support and nonnegative. Thus the definition in [F2] compares equal-mass compounds. If $u,v$ are nonnegative, set $k(x)=\\min\\{u(x),v(x)\\}$; then $u=k+(v-u)^-$ and $v=k+(v-u)^+$. [F1, F2]\n\n1.2 Suppose $A+C\\preceq B+C$ and $m(C)>0$. For each positive integer $n$, pointwise addition gives $A=n(A/n)$ and $B=n(B/n)$. Scaling the given comparison by $1/n$ gives $A/n+C/n\\preceq B/n+C/n$. By composition consistency, replace the $n$ copies of $A/n$ one at a time by $B/n$, keeping the already replaced copies, the remaining copies, and $C/n$ as spectators; after all replacements, $A+C/n\\preceq B+C/n$. Apply stability with $Z_0=Z_1=C$ and $\\epsilon_n=1/n$ to obtain $A\\preceq B$. If $m(C)=0$, nonnegativity implies $C=0$ and the conclusion is the premise itself. Conversely, $A\\preceq B$ gives $A+C\\preceq B+C$ by consistency. [A1, F1, algebra]\n\n2.1 For nonnegative $u,v$, step 1.1 gives $u=k+(v-u)^-$ and $v=k+(v-u)^+$. Cancellation from step 1.2 shows $u\\preceq v$ exactly when $(v-u)^-\\preceq(v-u)^+$, which is $u\\preceq_s v$. For general signed maps, adding a common map leaves $v-u$ unchanged, so it leaves signed comparison unchanged. [F2, step 1.1, step 1.2]\n\n3.1 If $u\\preceq_s v$ and $v\\preceq_s w$, then consistency combines $(v-u)^-\\preceq(v-u)^+$ and $(w-v)^-\\preceq(w-v)^+$ into a comparison between the sums of their negative and positive parts. The two sums have a common pointwise minimum; cancel it by step 1.2. The remaining maps are precisely $(w-u)^-$ and $(w-u)^+$, so $u\\preceq_s w$. The same sum-and-cancel argument applied to two independent signed comparisons proves closure under their addition; reflexivity follows from $0\\preceq0$. [A1, F2, step 1.2] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 2.1 and §II.D",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-reference-order",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Ordering the two-state reference mixtures",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-tdmath-tagged-scalable-compound",
+          "def-tdmath-comparison-and-stability",
+          "def-tdmath-signed-comparison",
+          "lem-tdmath-spectator-cancellation"
+        ],
+        "dependency_roles": {
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "def-tdmath-comparison-and-stability": "mathematical-premise",
+          "def-tdmath-signed-comparison": "mathematical-premise",
+          "lem-tdmath-spectator-cancellation": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $x_0,x_1\\in X$ satisfy $x_0\\preceq x_1$ and not $x_1\\preceq x_0$. For every real $\\lambda$, define the signed unit-mass reference map $R_\\lambda:=(1-\\lambda)e_{x_0}+\\lambda e_{x_1}$. For all $\\lambda,\\mu\\in\\mathbb R$,\n\n$$R_\\lambda\\preceq_s R_\\mu\\quad\\Longleftrightarrow\\quad\\lambda\\le\\mu.$$\n\nThe parameters need not lie in $[0,1]$; outside that interval $R_\\lambda$ is signed notation, not a compound.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1], [F1], and [F2].\n\n1.1 Put $\\delta:=\\mu-\\lambda$. The coefficient difference is $R_\\mu-R_\\lambda=\\delta(e_{x_1}-e_{x_0})$ and has total zero. If $\\delta>0$, its negative and positive parts are $\\delta e_{x_0}$ and $\\delta e_{x_1}$; if $\\delta<0$, they are $(-\\delta)e_{x_1}$ and $(-\\delta)e_{x_0}$; if $\\delta=0$, both are zero. [F1, F2, algebra]\n\n1.2 If $\\delta=0$, reflexivity gives $R_\\lambda\\preceq_sR_\\mu$. If $\\delta>0$, [F1] reduces this comparison to $\\delta e_{x_0}\\preceq\\delta e_{x_1}$, which follows by positive scaling of $x_0\\preceq x_1$ by $\\delta$. Hence $\\lambda<\\mu$ implies $R_\\lambda\\preceq_sR_\\mu$. [A1, F1, algebra]\n\n2.1 If $\\delta<0$ and $R_\\lambda\\preceq_sR_\\mu$, [F1] gives $(-\\delta)e_{x_1}\\preceq(-\\delta)e_{x_0}$. Positive scaling by $1/(-\\delta)$ would imply $x_1\\preceq x_0$, contrary to [A1]. Thus this comparison fails when $\\lambda>\\mu$. The three cases prove the equivalence. [A1, F1, step 1.1, step 1.2] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Lemma 2.2",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Campión et al., A Survey on the Mathematical Foundations of Axiomatic Entropy, §§2–5",
+              "url": "https://www.mdpi.com/2075-1680/7/2/29/pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-reference-supremum-bounds",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Reference entropy supremum is finite and attained",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 6,
+        "deps": [
+          "def-complete-ordered-field",
+          "def-tdmath-tagged-scalable-compound",
+          "lem-tdmath-compound-mass-well-defined",
+          "def-tdmath-comparison-and-stability",
+          "def-tdmath-signed-comparison",
+          "lem-tdmath-spectator-cancellation",
+          "lem-tdmath-reference-order",
+          "lem-tdmath-reciprocal-naturals-tend-zero"
+        ],
+        "dependency_roles": {
+          "def-complete-ordered-field": "mathematical-premise",
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "lem-tdmath-compound-mass-well-defined": "mathematical-premise",
+          "def-tdmath-comparison-and-stability": "mathematical-premise",
+          "def-tdmath-signed-comparison": "mathematical-premise",
+          "lem-tdmath-spectator-cancellation": "mathematical-premise",
+          "lem-tdmath-reference-order": "mathematical-premise",
+          "lem-tdmath-reciprocal-naturals-tend-zero": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume [[def-tdmath-comparison-and-stability]] on compounds over a nonempty state set $X$, a strict reference pair $x_0\\preceq x_1$ with not $x_1\\preceq x_0$, and the complete ordered field $\\mathbb R$. For $x\\in X$ define\n\n$$L_x:=\\{\\lambda\\in\\mathbb R:R_\\lambda\\preceq_s e_x\\}.$$\n\nThen $L_x$ is nonempty, bounded above, and downward closed. Its supremum $S(x):=\\sup L_x$ is a real number and satisfies $R_{S(x)}\\sim_s e_x$. Stability is used to prove attainment; no continuity of states or order is assumed.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1]–[F5], with $x\\in X$ fixed.\n\n1.1 Suppose no positive integer $n$ satisfies $(n+1)e_{x_0}\\preceq ne_{x_1}+e_x$. Both sides have mass $n+1$, so CH gives $ne_{x_1}+e_x\\preceq(n+1)e_{x_0}$. Scale by $1/n$ to obtain $e_{x_1}+n^{-1}e_x\\preceq e_{x_0}+n^{-1}e_{x_0}$. Apply stability to the sequence $\\epsilon_n=1/n$, with bases $e_{x_1},e_{x_0}$ and spectators $e_x,e_{x_0}$, each of mass one. It yields $x_1\\preceq x_0$, contradicting strictness. Thus some $n$ has $(n+1)e_{x_0}\\preceq ne_{x_1}+e_x$, which by [F2] is $R_{-n}\\preceq_s e_x$; hence $-n\\in L_x$. [A1, F1, F2, F4]\n\n1.2 Suppose $L_x$ is unbounded above. For each positive integer $n$, unboundedness supplies $\\lambda\\in L_x$ with $\\lambda>n$; [F3] gives $R_n\\preceq_sR_\\lambda$, and transitivity gives $n\\in L_x$. By [F2], $R_n\\preceq_s e_x$ is the compound comparison $e_{x_0}+n e_{x_1}\\preceq e_x+n e_{x_0}$. Scaling by $1/n$ gives $e_{x_1}+n^{-1}e_{x_0}\\preceq e_{x_0}+n^{-1}e_x$. Stability with bases $e_{x_1},e_{x_0}$ and spectators $e_{x_0},e_x$ now yields $x_1\\preceq x_0$, again a contradiction. Therefore $L_x$ is bounded above. [A1, F1, F2, F3, F4]\n\n2.1 If $\\lambda\\in L_x$ and $\\mu\\le\\lambda$, [F3] gives $R_\\mu\\preceq_sR_\\lambda$; signed transitivity and $R_\\lambda\\preceq_s e_x$ imply $\\mu\\in L_x$. Thus $L_x$ is downward closed. By steps 1.1 and 1.2 it is nonempty and bounded above, so [F5] supplies the real number $s:=\\sup L_x$. [A1, F2, F3, F5, step 1.1, step 1.2]\n\n3.1 For each $n$, $s-1/n$ is not an upper bound of $L_x$, so some $\\lambda\\in L_x$ has $\\lambda>s-1/n$. Downward closure gives $s-1/n\\in L_x$. Consistency then gives $R_s+n^{-1}e_{x_0}\\preceq_s e_x+n^{-1}e_{x_1}$, because $R_{s-1/n}+n^{-1}e_{x_1}=R_s+n^{-1}e_{x_0}$. Let $K:=R_s^-$. Adding the fixed nonnegative map $K$ to both sides converts this signed comparison into the compound comparisons $R_s^++n^{-1}e_{x_0}\\preceq e_x+K+n^{-1}e_{x_1}$. Their bases have equal mass because $m(R_s^+)-m(K)=1$. Stability with spectators $e_{x_0},e_{x_1}$ yields $R_s^+\\preceq e_x+K$, that is, $R_s\\preceq_s e_x$. [A1, F1, F2, step 2.1]\n\n4.1 Since $s$ is an upper bound, $s+1/n\\notin L_x$. CH therefore gives $e_x\\preceq_s R_{s+1/n}$. Add $n^{-1}e_{x_0}$ to both sides and use $R_{s+1/n}+n^{-1}e_{x_0}=R_s+n^{-1}e_{x_1}$. Adding $K=R_s^-$ converts the result to equal-mass compounds $e_x+K+n^{-1}e_{x_0}\\preceq R_s^++n^{-1}e_{x_1}$. Stability with the same positive unit-mass spectators yields $e_x+K\\preceq R_s^+$, or $e_x\\preceq_sR_s$. Together with step 3.1 this proves $R_s\\sim_s e_x$ and the claimed attainment. [A1, F1, F2, step 2.1, step 3.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Lemmas 2.1 and 2.3",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Campión et al., A Survey on the Mathematical Foundations of Axiomatic Entropy, §§2–5",
+              "url": "https://www.mdpi.com/2075-1680/7/2/29/pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-additive-entropy-representation",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Additive extensive representation of compound comparison",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 7,
+        "deps": [
+          "lem-tdmath-compound-mass-well-defined",
+          "def-complete-ordered-field",
+          "def-tdmath-tagged-scalable-compound",
+          "def-tdmath-comparison-and-stability",
+          "def-tdmath-signed-comparison",
+          "lem-tdmath-spectator-cancellation",
+          "lem-tdmath-reference-order",
+          "lem-tdmath-reference-supremum-bounds"
+        ],
+        "dependency_roles": {
+          "lem-tdmath-compound-mass-well-defined": "mathematical-premise",
+          "def-complete-ordered-field": "mathematical-premise",
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "def-tdmath-comparison-and-stability": "mathematical-premise",
+          "def-tdmath-signed-comparison": "mathematical-premise",
+          "lem-tdmath-spectator-cancellation": "mathematical-premise",
+          "lem-tdmath-reference-order": "mathematical-premise",
+          "lem-tdmath-reference-supremum-bounds": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $X$ be nonempty and suppose its finite-support compounds carry the comparison structure of [[def-tdmath-comparison-and-stability]] over the complete ordered field $\\mathbb R$. If there are $x_0,x_1\\in X$ with $x_0\\preceq x_1$ and not $x_1\\preceq x_0$, define $S(x):=\\sup L_x$ using [[lem-tdmath-reference-supremum-bounds]]. Then $S:X\\to\\mathbb R$ is normalized by $S(x_0)=0$, $S(x_1)=1$, and for all equal-mass compounds $A=\\sum_i a_i e_{x_i}$ and $B=\\sum_j b_j e_{y_j}$,\n\n$$A\\preceq B\\quad\\Longleftrightarrow\\quad\\sum_i a_iS(x_i)\\le\\sum_j b_jS(y_j).$$\n\nThus $S$ is an additive extensive representation on finite compounds. If no strict pair exists, CH instead makes every equal-mass pair of compounds equivalent, and any constant state function gives a (degenerate) additive representation. No concavity, continuity, or physical law follows without additional hypotheses.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1] and [F1]–[F3].\n\n1.1 In the strict-reference case, [F3] gives $R_\\lambda\\preceq_s e_{x_0}$ exactly for $\\lambda\\le0$, and $R_\\lambda\\preceq_s e_{x_1}$ exactly for $\\lambda\\le1$. Their suprema are therefore $S(x_0)=0$ and $S(x_1)=1$. [F2, F3]\n\n1.2 Let $C=\\sum_i a_i e_{x_i}$ have mass $M$ and set $q_C:=\\sum_i a_iS(x_i)$. For each constituent, [F2] gives $e_{x_i}\\sim_sR_{S(x_i)}$; positive scaling and finite repeated use of composition combine these into $C\\sim_s C_R$, where $C_R:=\\sum_i a_iR_{S(x_i)}=(M-q_C)e_{x_0}+q_Ce_{x_1}$. This calculation is valid for signed coefficients because the signed relation is additive and translation-invariant by [F1]. [A1, F1, F2, algebra]\n\n2.1 Apply step 1.2 to both $A$ and $B$, and write $q_A,q_B$ for the resulting scalar sums. Since $A\\sim_sA_R$ and $B\\sim_sB_R$, transitivity gives $A\\preceq B$ exactly when $A_R\\preceq_sB_R$. Their masses agree, and $B_R-A_R=(q_B-q_A)(e_{x_1}-e_{x_0})$; [F3] therefore gives $A_R\\preceq_sB_R$ exactly when $q_A\\le q_B$. This proves the representation formula. [A1, F1, F3, step 1.2]\n\n3.1 In the no-strict-pair case, take any $x,y\\in X$. CH gives one of $x\\preceq y$ or $y\\preceq x$; if exactly one held it would be a strict pair, so both hold. Fix $r\\in X$. For any compound $C$ of mass $M$, scaling and composition show $C\\sim M e_r$, since each constituent state is equivalent to $r$. Hence any equal-mass compounds $A,B$ are equivalent. For a constant $S(x)=c$, both compound values equal $cM$, so the representation equivalence holds. [A1, F1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 2.2",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Campión et al., A Survey on the Mathematical Foundations of Axiomatic Entropy, §§2–5",
+              "url": "https://www.mdpi.com/2075-1680/7/2/29/pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-affine-entropy-uniqueness",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Uniqueness up to a positive affine transformation",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 8,
+        "deps": [
+          "def-tdmath-tagged-scalable-compound",
+          "def-tdmath-comparison-and-stability",
+          "def-tdmath-signed-comparison",
+          "lem-tdmath-spectator-cancellation",
+          "lem-tdmath-reference-order",
+          "thm-tdmath-additive-entropy-representation"
+        ],
+        "dependency_roles": {
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "def-tdmath-comparison-and-stability": "mathematical-premise",
+          "def-tdmath-signed-comparison": "mathematical-premise",
+          "lem-tdmath-spectator-cancellation": "mathematical-premise",
+          "lem-tdmath-reference-order": "mathematical-premise",
+          "thm-tdmath-additive-entropy-representation": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the strict-reference hypotheses and let $S$ be the normalized representation from [[thm-tdmath-additive-entropy-representation]]. Let $T:X\\to\\mathbb R$ be another additive extensive representation of the same comparisons: for every finite compound $C=\\sum_i c_i e_{x_i}$ define $T(C):=\\sum_i c_iT(x_i)$, and require $C\\preceq D$ iff $T(C)\\le T(D)$ whenever $m(C)=m(D)$. Then there are unique $a>0$ and $b\\in\\mathbb R$ such that $T(x)=aS(x)+b$ for every $x\\in X$. Conversely every such positive affine change represents the same comparisons.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [F1], [F2], and [A1].\n\n1.1 Fix $x\\in X$ and put $s=S(x)$. The equivalence $x\\sim_sR_s$ in [F1] says that the positive and negative parts of their coefficient difference compare in both directions. Since $T$ represents the same order, their finite $T$-sums are equal. By its definition on finite compounds and linearity of finite sums, the signed value of $R_s$ is $(1-s)T(x_0)+sT(x_1)$, including when $s\\notin[0,1]$. Thus $T(x)=T(x_0)+[T(x_1)-T(x_0)]S(x)$. [F1, F2, algebra]\n\n2.1 Because $x_0\\preceq x_1$ but not conversely, the exact representation property of $T$ gives $T(x_0)<T(x_1)$. Hence $a:=T(x_1)-T(x_0)>0$ and $b:=T(x_0)$ give the asserted form. Conversely, multiplying both sides of any represented-value inequality by $a>0$ and adding the same $b$ times the common compound mass preserves and reflects its order; therefore $aS+b$ represents the same comparisons. The parameters are unique by evaluating at $x_0$ and $x_1$, where $S$ equals $0$ and $1$. [A1, F1, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 2.3",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Campión et al., A Survey on the Mathematical Foundations of Axiomatic Entropy, §§2–5",
+              "url": "https://www.mdpi.com/2075-1680/7/2/29/pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-common-meter-calibration",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite-family calibration by a common meter",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 8,
+        "deps": [
+          "lem-tdmath-reference-supremum-bounds",
+          "def-tdmath-tagged-scalable-compound",
+          "def-tdmath-comparison-and-stability",
+          "def-tdmath-signed-comparison",
+          "lem-tdmath-spectator-cancellation",
+          "lem-tdmath-reference-order",
+          "thm-tdmath-additive-entropy-representation",
+          "def-cartesian-product"
+        ],
+        "dependency_roles": {
+          "lem-tdmath-reference-supremum-bounds": "mathematical-premise",
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "def-tdmath-comparison-and-stability": "mathematical-premise",
+          "def-tdmath-signed-comparison": "mathematical-premise",
+          "lem-tdmath-spectator-cancellation": "mathematical-premise",
+          "lem-tdmath-reference-order": "mathematical-premise",
+          "thm-tdmath-additive-entropy-representation": "mathematical-premise",
+          "def-cartesian-product": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I$ be a finite nonempty set of system types, $X_i$ a nonempty state set with chosen reference $r_i\\in X_i$ for each $i\\in I$, and $M$ a common meter state set with distinct $z_0,z_1\\in M$. For each $i$, let $\\preceq_i$ be a comparison relation on equal-mass compounds over the Cartesian product $X_i\\times M$ ([[def-cartesian-product]]), defined as in [[def-tdmath-comparison-and-stability]] and satisfying its six hypotheses: preorder, composition consistency, positive scaling, splitting and recombination, stability, and CH. Write $\\preceq_{s,i}$ for the signed comparison supplied by [[def-tdmath-signed-comparison]], and $\\sim_{s,i}$ for mutual signed comparison. Assume $(r_i,z_0)\\preceq_i(r_i,z_1)$ and not $(r_i,z_1)\\preceq_i(r_i,z_0)$. Let $S_i$ be the normalized representation supplied by [[thm-tdmath-additive-entropy-representation]] for this product comparison, and put $\\sigma_i(x):=S_i(x,z_0)$. In the product comparison, the unit product-state point mass satisfies\n\n$$e_{(x,z_0)}\\sim_{s,i}(1-\\sigma_i(x))e_{(r_i,z_0)}+\\sigma_i(x)e_{(r_i,z_1)},$$\n\nby [[lem-tdmath-reference-supremum-bounds]]. These product-state point masses and product comparisons are separate from the shared state-and-meter compounds and comparison defined next.\n\nAssume a **common-meter compatibility interface** as follows. Let $\\mathcal Y$ be a set of raw tags containing three pairwise disjoint families $\\{a_{i,x}:i\\in I,\\ x\\in X_i\\}$, $\\{\\rho_i:i\\in I\\}$, and $\\{\\zeta_0,\\zeta_1\\}$, with $\\zeta_0\\ne\\zeta_1$. Compounds over $\\mathcal Y$ are finite-support nonnegative coefficient maps as in [[def-tdmath-tagged-scalable-compound]]. Let $\\preceq_{\\mathcal Y}$ be a relation on equal-mass compounds over $\\mathcal Y$ satisfying all six hypotheses of [[def-tdmath-comparison-and-stability]]; write $\\preceq_{s,\\mathcal Y}$ for its signed comparison from [[def-tdmath-signed-comparison]] and $\\sim_{s,\\mathcal Y}$ for mutual signed comparison. The common relation is a separate relation from each product comparison $\\preceq_i$.\n\nLet $e_{\\rho_i}$ and $e_{\\zeta_j}$ be the unit point-mass compounds on their indicated raw tags, and define $u_{i,x}:=e_{a_{i,x}}+e_{\\zeta_0}$. Thus $u_{i,x}$ is an explicit mass-two state-and-fixed-meter compound, not a unit tag. Require the exact signed substitution\n\n$$u_{i,x}\\sim_{s,\\mathcal Y} e_{\\rho_i}+(1-\\sigma_i(x))e_{\\zeta_0}+\\sigma_i(x)e_{\\zeta_1}\\qquad(i\\in I,\\ x\\in X_i),$$\n\nand require the common meter point masses to satisfy $e_{\\zeta_0}\\preceq_{\\mathcal Y}e_{\\zeta_1}$ and not $e_{\\zeta_1}\\preceq_{\\mathcal Y}e_{\\zeta_0}$. Both sides of each substitution have total coefficient two, even when $\\sigma_i(x)$ lies outside $[0,1]$. Finite substitutions compose and common terms cancel by [[lem-tdmath-spectator-cancellation]] under the stated common comparison hypotheses; neither property is inferred from the separate product comparisons or from numerical meter values.\n\nFor positive coefficients $t_{ik}$ on a finite collection of type-$i$ states $x_{ik}$, define $T_i:=\\sum_k t_{ik}$ and $T:=\\sum_iT_i$. Put $C_0:=\\sum_{i,k}t_{ik}e_{a_{i,x_{ik}}}$ and $C:=\\sum_{i,k}t_{ik}u_{i,x_{ik}}=C_0+T e_{\\zeta_0}$. Thus $C_0$ is the state compound of mass $T$ and $C$ is its fixed-meter encoding of mass $2T$. Empty collections give $T=0$ and $C_0=C=0$. Define\n\n$$\\Sigma(C):=\\sum_{i\\in I}\\sum_k t_{ik}\\sigma_i(x_{ik}).$$\n\nFor two such compounds $C,D$ with the same type-total vector $(T_i)_{i\\in I}$, the common comparison satisfies $C\\preceq_{\\mathcal Y}D$ exactly when $\\Sigma(C)\\le\\Sigma(D)$. Equivalently, the same order criterion holds for the state compounds $C_0,D_0$ after canceling their common $T e_{\\zeta_0}$. The index family is finite; no arbitrary-index choice or infinite decomposition is asserted.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1] and [F1]–[F3].\n\n1.1 For each constituent $(i,x_{ik},z_0)$ of $C$, its common-algebra token $u_{i,x_{ik}}$ is equivalent by [F1] and the exact identification in [A1] to $e_{r_i}+(1-\\sigma_i(x_{ik}))e_{z_0}+\\sigma_i(x_{ik})e_{z_1}$. Scale by $t_{ik}$ and combine the finitely many comparisons using [A1] and [F2]. The resulting reference-system part is $\\sum_iT_i e_{r_i}$, independent of the chosen states. The meter part has coefficients $T-\\Sigma(C)$ on $e_{z_0}$ and $\\Sigma(C)$ on $e_{z_1}$, where $T:=\\sum_iT_i$. Hence $C$ is equivalent to that fixed reference-system compound plus $(T-\\Sigma(C))e_{z_0}+\\Sigma(C)e_{z_1}$. [A1, F1, F2, algebra]\n\n2.1 The same substitution for $D$ gives the same reference-system compound because its type totals are the same, and the same total meter mass $T$. Cancel the common reference-system terms by [A1] and [F2]. The remaining comparison is between equal-mass meter expressions whose $e_{z_1}$ coefficients are $\\Sigma(C)$ and $\\Sigma(D)$; [F3] says it holds exactly when $\\Sigma(C)\\le\\Sigma(D)$. Reversing the same equivalences proves the converse implication as well. [A1, F2, F3, step 1.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §II.E",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-finite-inequality-alternative",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite inequality alternative by Fourier–Motzkin elimination",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 0,
+        "deps": [
+          "def-complete-ordered-field",
+          "def-vector-space",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-function-space",
+          "def-finite-sum-reindexing-and-fubini",
+          "lem-of-sign-rules",
+          "thm-induction-principle",
+          "def-natural-numbers",
+          "lem-nat-nonzero-is-successor"
+        ],
+        "dependency_roles": {
+          "def-function-space": "mathematical-premise",
+          "lem-finite-sum-reindexing-and-fubini": "mathematical-premise",
+          "def-complete-ordered-field": "mathematical-premise",
+          "def-vector-space": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "lem-of-sign-rules": "mathematical-premise",
+          "thm-induction-principle": "mathematical-premise",
+          "def-natural-numbers": "mathematical-premise",
+          "lem-nat-nonzero-is-successor": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $m,n\\in\\mathbb N$ be finite, let $c_j\\in\\mathbb R^n$ and $h_j\\in\\mathbb R$ for $0\\le j<m$, where $\\mathbb R^n$ is the function space on $\\{0,\\ldots,n-1\\}$ with coordinatewise operations as in [[def-function-space]]. For $c,b\\in\\mathbb R^n$, define the dot product by $c\\cdot b:=\\sum_{k<n}c(k)b(k)$. A finite vector sum is coordinatewise: $(\\sum_{j<m}\\lambda_jc_j)(k):=\\sum_{j<m}\\lambda_jc_j(k)$ for each $k<n$. All sums use [[def-finite-sum]].\n\nThe finite system\n\n$$c_j\\cdot b\\ge h_j\\qquad(0\\le j<m)$$\n\nhas a solution $b\\in\\mathbb R^n$ if and only if every $\\lambda\\in\\mathbb R^m$ with $\\lambda_j\\ge0$ and $\\sum_{j<m}\\lambda_jc_j=0$ satisfies $\\sum_{j<m}\\lambda_jh_j\\le0$. Dot products and sums are finite. This includes empty rows, empty variables, and an empty inequality family.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1]–[F2].\n\n1.1 If $b$ solves the system and $\\lambda_j\\ge0$ with $\\sum_j\\lambda_jc_j=0$, multiply row $j$ by $\\lambda_j$ and add the finitely many inequalities. The left side is $(\\sum_j\\lambda_jc_j)\\cdot b=0$ by [F2]; hence $0\\ge\\sum_j\\lambda_jh_j$. This proves necessity. [A1, F1, F2, algebra]\n\n1.2 For sufficiency, prove by induction on $n$ the alternative: if the finite system has no solution, there is a nonnegative combination of its rows whose coefficient vector is zero and whose right side is positive. If $n=0$, every row has zero left side; infeasibility means some $h_j>0$, and that single row is the certificate. If $m=0$, the system is feasible, so this case cannot occur under the induction claim's antecedent. [A1, F1]\n\n1.3 Let $n>0$ and assume the alternative for $n-1$ variables. Write $c_j=(a_j,\\alpha_j)$ with $a_j\\in\\mathbb R^{n-1}$ and split the row indices into $P=\\{j:\\alpha_j>0\\}$, $N=\\{j:\\alpha_j<0\\}$, and $Z=\\{j:\\alpha_j=0\\}$. Retain each row $(a_j,h_j)$ for $j\\in Z$. For every $p\\in P$ and $q\\in N$, add the reduced row $((-\\alpha_q)a_p+\\alpha_p a_q,\\;(-\\alpha_q)h_p+\\alpha_p h_q)$. Every multiplier used is positive. [A1, F1, algebra]\n\n1.4 The reduced system in $u\\in\\mathbb R^{n-1}$ is feasible exactly when the original is. Indeed, a solution $(u,t)$ implies every retained inequality; adding row $p$ multiplied by $-\\alpha_q>0$ to row $q$ multiplied by $\\alpha_p>0$ cancels $t$ and gives each pair row. Conversely, if $u$ satisfies the reduced system, rows in $P$ impose finitely many lower bounds $t\\ge(h_p-a_p\\cdot u)/\\alpha_p$, and rows in $N$ impose finitely many upper bounds $t\\le(h_q-a_q\\cdot u)/\\alpha_q$. Each pair row is exactly the inequality that its lower bound is no greater than its upper bound. If both sets are nonempty, their finite maximum lower bound is at most their finite minimum upper bound, so choose $t$ between them. If only lower bounds occur choose their maximum; if only upper bounds occur choose their minimum; if neither occurs choose $t=0$. Thus the original system has a solution. [A1, F1, F2, algebra]\n\n2.1 If the original system is infeasible, step 1.4 makes the reduced system infeasible. By induction there are nonnegative multipliers on reduced rows with zero combined first $n-1$ coordinates and positive combined right side. Lift each retained zero-row multiplier to its original row; lift each pair-row multiplier $\\mu_{pq}$ to coefficients $-\\alpha_q\\mu_{pq}$ on row $p$ and $\\alpha_p\\mu_{pq}$ on row $q$. All lifted coefficients are nonnegative. Every pair lift has last coordinate $(-\\alpha_q)\\alpha_p+\\alpha_p\\alpha_q=0$; the total first coordinates vanish by the reduced certificate, and its right side remains positive. This is the required certificate for the original system and completes the induction. [A1, step 1.2, step 1.3, step 1.4, algebra]\n\n3.1 If the stated multiplier condition holds, the certificate from step 2.1 cannot exist, because it would have zero combined left coefficient and positive combined right side. Therefore the system is feasible. Together with step 1.1 this proves both directions, including the empty-variable base case in step 1.2, the zero/positive/negative sign partition and bound reconstruction in steps 1.3–1.4, and the lifted certificate in step 2.1. [A1, step 1.1, step 1.2, step 1.3, step 1.4, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE464, Fourier–Motzkin Elimination lecture notes",
+              "url": "https://lall.stanford.edu/ee464/lectures/fourier_motzkin.pdf?download=1"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §VI.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-reaction-offset-feasibility",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Feasibility of finite reaction offsets",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 1,
+        "deps": [
+          "def-complete-ordered-field",
+          "thm-tdmath-finite-inequality-alternative",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "dependency_roles": {
+          "def-complete-ordered-field": "mathematical-premise",
+          "thm-tdmath-finite-inequality-alternative": "mathematical-premise",
+          "lem-finite-sum-reindexing-and-fubini": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $A$ be a finite set of channel labels and $r\\in\\mathbb N$. For each $a\\in A$, take $\\nu_a\\in\\mathbb R^r$ and $d_a\\in\\mathbb R$ as independently specified real input data; this theorem does not define channel input/output compounds, a calibration map, or a map producing $d_a$. In an application, separate model data may specify vectors $\\nu_a^{\\mathrm{in}},\\nu_a^{\\mathrm{out}}\\in\\mathbb R^r$ and set $\\nu_a:=\\nu_a^{\\mathrm{out}}-\\nu_a^{\\mathrm{in}}$, while a separately supplied real number $\\Delta\\sigma_a$ may be designated as a channel's calibrated entropy change and $d_a\\le\\Delta\\sigma_a$ as its lower bound. These are additional application premises, not conclusions or inputs derived here. Use the dot product and coordinatewise finite vector sums defined in [[thm-tdmath-finite-inequality-alternative]]: for $u,v\\in\\mathbb R^r$, $u\\cdot v:=\\sum_{k<r}u(k)v(k)$, and $(\\sum_{a\\in A}\\lambda_a\\nu_a)(k):=\\sum_{a\\in A}\\lambda_a\\nu_a(k)$. A multiplier $\\lambda\\in\\mathbb R^A$ is a function $A\\to\\mathbb R$. There exists an offset vector $b\\in\\mathbb R^r$ satisfying\n\n$$b\\cdot\\nu_a+d_a\\ge0\\qquad(a\\in A)$$\n\nif and only if every $\\lambda\\in\\mathbb R^A$ with $\\lambda_a\\ge0$ and $\\sum_{a\\in A}\\lambda_a\\nu_a=0$ satisfies $\\sum_{a\\in A}\\lambda_ad_a\\ge0$. If a separate model supplies for each $a$ a real number $\\Delta\\sigma_a$, designated as its transition entropy change, and assumes $\\Delta\\sigma_a\\ge d_a$, such a vector guarantees $\\Delta\\sigma_a+b\\cdot\\nu_a\\ge0$ for those channels. The criterion is exact for the finite lower-bound inequalities; it does not claim necessity for actual transitions when $d_a$ is only a loose bound.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1] and [F1].\n\n1.1 Apply [F1] to the rows $c_a=\\nu_a$ and $h_a=-d_a$. The row system $\\nu_a\\cdot b\\ge-d_a$ is exactly the required offset system. Its multiplier condition is $\\sum_a\\lambda_a\\nu_a=0\\Rightarrow\\sum_a\\lambda_a(-d_a)\\le0$, which is equivalent to $\\sum_a\\lambda_ad_a\\ge0$. This proves the if-and-only-if, including $A=\\varnothing$ where $b=0$ is feasible and the multiplier condition is vacuous. If $r=0$ and $A$ is nonempty, every $\\nu_a=0$; testing the coordinate multiplier for each channel makes the criterion equivalent to $d_a\\ge0$ for every $a$, and then the unique empty vector $b$ satisfies all rows. [A1, F1, algebra]\n\n2.1 For any channel with actual change $\\Delta\\sigma_a\\ge d_a$, add $b\\cdot\\nu_a$ to both sides of that bound and use the solved row inequality $b\\cdot\\nu_a\\ge-d_a$. Then $\\Delta\\sigma_a+b\\cdot\\nu_a\\ge d_a+b\\cdot\\nu_a\\ge0$. This is a sufficient monotonicity conclusion for the stated channels. [A1, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §VI.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Stanford EE464, Fourier–Motzkin Elimination lecture notes",
+              "url": "https://lall.stanford.edu/ee464/lectures/fourier_motzkin.pdf?download=1"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-tdmath-type-offset-vector-space",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Type-offset quotient vector space",
+        "reference": "research/physics-td-qft-rpm-62-2026-10-14-batch-3.notes.md#item-inventory",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 0,
+        "deps": [
+          "def-complete-ordered-field",
+          "def-function-space",
+          "def-vector-space",
+          "def-linear-subspace",
+          "def-cartesian-product",
+          "def-axiom-of-pairing",
+          "def-axiom-of-union",
+          "def-axiom-of-infinity",
+          "def-axiom-schema-of-separation",
+          "def-axiom-of-power-set",
+          "def-axiom-schema-of-replacement"
+        ],
+        "justified_by": [
+          "lem-tdmath-type-offset-vector-space-well-defined"
+        ],
+        "dependency_roles": {
+          "def-complete-ordered-field": "mathematical-premise",
+          "def-function-space": "mathematical-premise",
+          "def-vector-space": "mathematical-premise",
+          "def-linear-subspace": "mathematical-premise",
+          "def-cartesian-product": "mathematical-premise",
+          "def-axiom-of-pairing": "mathematical-premise",
+          "def-axiom-of-union": "mathematical-premise",
+          "def-axiom-of-infinity": "mathematical-premise",
+          "def-axiom-schema-of-separation": "mathematical-premise",
+          "def-axiom-of-power-set": "mathematical-premise",
+          "def-axiom-schema-of-replacement": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mathcal G$ be a set of formal type labels closed under the formal operations $(\\Gamma,\\Gamma')\\mapsto\\Gamma\\times\\Gamma'$ and $(t,\\Gamma)\\mapsto t\\Gamma$ for every real $t>0$. Let $F:=\\mathbb R^{(\\mathcal G)}$ be the vector space of finite-support real functions on $\\mathcal G$, and let $e_\\Gamma$ be the function equal to $1$ at $\\Gamma$ and $0$ elsewhere.\n\nForm the set of relation vectors\n\n$$\\mathcal R:=\\{e_{\\Gamma\\times\\Gamma'}-e_\\Gamma-e_{\\Gamma'}:\\Gamma,\\Gamma'\\in\\mathcal G\\}\\cup\\{e_{t\\Gamma}-t e_\\Gamma:t>0,\\Gamma\\in\\mathcal G\\}.$$\n\nLet $N$ be the set of all finite real linear combinations of members of $\\mathcal R$, and define the **type-offset vector space**\n\n$$V_{\\mathcal G}:=F/N.$$\n\nThe class of $c\\in F$ is $[c]$. The defining relations are $[e_{\\Gamma\\times\\Gamma'}]=[e_\\Gamma]+[e_{\\Gamma'}]$ and $[e_{t\\Gamma}]=t[e_\\Gamma]$. The set existence, subspace properties, quotient operations and vector-space laws are proved in [[lem-tdmath-type-offset-vector-space-well-defined]]. These are formal algebraic type labels; no actual catalyst-chain cost or physical existence claim is built into $V_{\\mathcal G}$.",
+        "strategy": "Definition; well-definedness is carried by [[lem-tdmath-type-offset-vector-space-well-defined]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §VI.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "MIT 18.102, Introduction to Functional Analysis, complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf?download=1"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-tdmath-type-offset-vector-space-well-defined",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Type-offset quotient is a real vector space",
+        "reference": "research/physics-td-qft-rpm-62-2026-10-14-batch-3.notes.md#item-inventory",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 1,
+        "deps": [
+          "def-tdmath-type-offset-vector-space",
+          "def-complete-ordered-field",
+          "def-function-space",
+          "def-vector-space",
+          "def-linear-subspace",
+          "def-cartesian-product",
+          "def-axiom-of-pairing",
+          "def-axiom-of-union",
+          "def-axiom-of-infinity",
+          "def-axiom-schema-of-separation",
+          "def-axiom-of-power-set",
+          "def-axiom-schema-of-replacement"
+        ],
+        "dependency_roles": {
+          "def-tdmath-type-offset-vector-space": "mathematical-premise",
+          "def-complete-ordered-field": "mathematical-premise",
+          "def-function-space": "mathematical-premise",
+          "def-vector-space": "mathematical-premise",
+          "def-linear-subspace": "mathematical-premise",
+          "def-cartesian-product": "mathematical-premise",
+          "def-axiom-of-pairing": "mathematical-premise",
+          "def-axiom-of-union": "mathematical-premise",
+          "def-axiom-of-infinity": "mathematical-premise",
+          "def-axiom-schema-of-separation": "mathematical-premise",
+          "def-axiom-of-power-set": "mathematical-premise",
+          "def-axiom-schema-of-replacement": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For the construction in [[def-tdmath-type-offset-vector-space]], $F$ and $N$ are sets, $F$ is a real vector space, $N$ is a linear subspace of $F$, and $F/N$ has representative-independent vector operations making it a real vector space. Its displayed product and positive-scaling relations hold in the quotient.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [F1]–[F4].\n\n1.1 The set of all functions $\\mathcal G\\to\\mathbb R$ exists and is a vector space by [F2]. Separation [F4] selects the functions whose support is finite, so $F$ is a set. It contains zero; if $c,d\\in F$, then $\\operatorname{supp}(c+d)\\subseteq\\operatorname{supp}(c)\\cup\\operatorname{supp}(d)$, a finite union, and $\\operatorname{supp}(tc)\\subseteq\\operatorname{supp}(c)$ for every scalar $t$. Thus $F$ is a linear subspace of the function space by [F3], hence a real vector space. [F1, F2, F3, F4]\n\n1.2 The index sets $\\mathcal G\\times\\mathcal G$ and $\\mathbb R_{>0}\\times\\mathcal G$ exist by [F4]. Replacement applied to the two displayed relation maps in [F1] gives the set $\\mathcal R$; each relation vector has support of size at most three and lies in $F$. The family of finite subsets of $\\mathcal R$ is a subset of its power set, and the coefficient functions on each such finite subset form sets by [F2] and [F4]. Replacement under finite summation therefore gives the set $N\\subseteq F$ of all finite linear combinations. [F1, F2, F4]\n\n2.1 The zero vector is in $N$ as the empty sum. If $u,v\\in N$, write each as a finite combination of relation vectors; their sum is the finite combination on the union of those two finite index sets, adding coefficients where an index repeats. For $t\\in\\mathbb R$, $tu$ is obtained by multiplying every coefficient by $t$. Hence $N$ is closed under addition and scalar multiplication and is a linear subspace of $F$ by [F3]. [F1, F3, step 1.2]\n\n3.1 Define $c\\sim d$ on $F$ exactly when $c-d\\in N$. Since $0\\in N$, $N$ is closed under negatives (take scalar $-1$), and under addition, this relation is reflexive, symmetric and transitive. Each class $[c]=\\{d\\in F:d-c\\in N\\}$ is a subset of $F$ by separation; replacement on the set $F$ gives the quotient set of these classes. [F1, F4, step 2.1]\n\n4.1 If $c\\sim c'$ and $d\\sim d'$, then $(c+d)-(c'+d')=(c-c')+(d-d')\\in N$; and for any scalar $t$, $tc-tc'=t(c-c')\\in N$. Therefore $[c]+[d]:=[c+d]$ and $t[c]:=[tc]$ do not depend on representatives. The quotient map $c\\mapsto[c]$ preserves zero, addition and scalar multiplication; applying it to each vector-space identity in $F$ proves all vector-space axioms in $F/N$. Every generator in $\\mathcal R$ lies in $N$, so its class is zero and the two displayed relations hold. [F1, F2, step 2.1, step 3.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 18.102, Introduction to Functional Analysis, complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf?download=1"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-infinite-no-sinks-sandwich",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Infinite-valued no-sinks Hahn–Banach sandwich and conditional offsets",
+        "reference": "research/plan-thermodynamics-track.md#L302-L336",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 2,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-complete-ordered-field",
+          "def-vector-space",
+          "def-linear-subspace",
+          "def-linear-independence",
+          "def-linear-basis",
+          "def-sublinear-functional",
+          "def-extended-reals",
+          "def-algebraic-dual-and-linear-functional",
+          "def-axiom-schema-of-separation",
+          "thm-hahn-banach-dominated-extension",
+          "cor-every-vector-space-has-a-basis",
+          "thm-every-independent-set-extends-to-a-basis",
+          "def-tdmath-type-offset-vector-space",
+          "lem-tdmath-type-offset-vector-space-well-defined"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-complete-ordered-field": "mathematical-premise",
+          "def-vector-space": "mathematical-premise",
+          "def-linear-subspace": "mathematical-premise",
+          "def-linear-independence": "mathematical-premise",
+          "def-linear-basis": "mathematical-premise",
+          "def-sublinear-functional": "mathematical-premise",
+          "def-extended-reals": "mathematical-premise",
+          "def-algebraic-dual-and-linear-functional": "mathematical-premise",
+          "def-axiom-schema-of-separation": "mathematical-premise",
+          "thm-hahn-banach-dominated-extension": "mathematical-premise",
+          "cor-every-vector-space-has-a-basis": "mathematical-premise",
+          "thm-every-independent-set-extends-to-a-basis": "mathematical-premise",
+          "def-tdmath-type-offset-vector-space": "mathematical-premise",
+          "lem-tdmath-type-offset-vector-space-well-defined": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice. Let $V$ be a real vector space and $p:V\\to\\mathbb R\\cup\\{+\\infty\\}$ satisfy $p(0)=0$, $p(tx)=tp(x)$ for every $t>0$, and $p(x+y)\\le p(x)+p(y)$ in extended-real arithmetic. Assume **no sinks**: $p(x)<+\\infty$ if and only if $p(-x)<+\\infty$. Put $W:=\\{x\\in V:p(x)<+\\infty\\}$. Then $W$ is a linear subspace and there exists a real-linear $L:V\\to\\mathbb R$ such that\n\n$$-p(-x)\\le L(x)\\le p(x)\\qquad(x\\in V),$$\n\nwith $-\\infty\\le r\\le+\\infty$ interpreted in the usual extended order. The result is valid in arbitrary dimension and allows $p=+\\infty$ outside $W$.\n\nFor the conditional offset application, let $V=V_{\\mathcal G}$ from [[def-tdmath-type-offset-vector-space]], let $F:\\mathcal G\\times\\mathcal G\\to\\mathbb R\\cup\\{+\\infty\\}$ satisfy $p([e_\\Gamma]-[e_{\\Gamma'}])=F(\\Gamma,\\Gamma')$, and define $B(\\Gamma):=L([e_\\Gamma])$. Then $B(\\Gamma\\times\\Gamma')=B(\\Gamma)+B(\\Gamma')$, $B(t\\Gamma)=tB(\\Gamma)$ for $t>0$, and\n\n$$-F(\\Gamma',\\Gamma)\\le B(\\Gamma)-B(\\Gamma')\\le F(\\Gamma,\\Gamma').$$\n\nFor each $\\Gamma\\in\\mathcal G$, let $X_\\Gamma$ be a state set and $\\sigma_\\Gamma:X_\\Gamma\\to\\mathbb R$ a baseline state function. If every admitted transition $(\\Gamma,x)\\to(\\Gamma',y)$, with $x\\in X_\\Gamma$ and $y\\in X_{\\Gamma'}$, satisfies $\\sigma_{\\Gamma'}(y)-\\sigma_\\Gamma(x)\\ge F(\\Gamma,\\Gamma')$, then $\\sigma_\\Gamma(x)+B(\\Gamma)$ is nondecreasing across those transitions. The existence or properties of such a cost $p$, including no-sinks, are hypotheses and are not proved by this theorem.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1]–[F6] and the hypotheses on $p$.\n\n1.1 The set $W$ contains $0$ because $p(0)=0$. If $x,y\\in W$, subadditivity gives $p(x+y)\\le p(x)+p(y)<+\\infty$, so $x+y\\in W$. For $t>0$, homogeneity gives $p(tx)=tp(x)<+\\infty$. If $t<0$, no-sinks gives $-x\\in W$, and positive homogeneity applied to $|t|(-x)$ puts $tx$ in $W$; $0x=0\\in W$. Thus $W$ is a linear subspace. The restriction $p|_W$ is finite-valued, positively homogeneous and subadditive, so it is a real-valued sublinear functional. [F1, F2, algebra]\n\n2.1 Let $M=\\{0\\}\\subseteq W$ and let $f_0(0)=0$. This is linear and satisfies $f_0(0)=0=p(0)$. The real ordered field is complete by [F4], as used in the one-step interval argument of the published theorem. Apply [F3] to $p|_W$ and $f_0$; it gives a linear $\\ell:W\\to\\mathbb R$ with $\\ell(x)\\le p(x)$ for every $x\\in W$. Applying this at $-x\\in W$ yields $-\\ell(x)=\\ell(-x)\\le p(-x)$, so $-p(-x)\\le\\ell(x)\\le p(x)$ on $W$. [A1, F3, F4, step 1.1]\n\n3.1 By [F5], choose a basis $B_W$ of $W$ and extend its independent set to a basis $B_V$ of $V$. Assign value $\\ell(b)$ to $b\\in B_W$ and $0$ to $b\\in B_V\\setminus B_W$. For any $v\\in V$, [F6] gives a finite basis expression; define $L(v)$ as the same finite linear combination of assigned real values. If two expressions represented $v$, subtracting and collecting equal basis vectors would give a finite zero combination; independence in [F6] forces every collected coefficient to be zero. Thus $L(v)$ is well-defined. Concatenating finite expressions proves additivity and scalar homogeneity, and the basis expression of any $w\\in W$ uses only $B_W$, so $L|_W=\\ell$. [A1, F5, F6, step 2.1]\n\n4.1 For $x\\in W$, step 3.1 and step 2.1 give $-p(-x)\\le L(x)\\le p(x)$. If $x\\notin W$, then $p(x)=+\\infty$ by the definition of $W$; no-sinks implies $p(-x)=+\\infty$ as well, so the extended bounds reduce to $-\\infty\\le L(x)\\le+\\infty$. This proves the global sandwich. [step 1.1, step 2.1, step 3.1]\n\n5.1 In the type-offset application, linearity of $L$ and the quotient relations in [F7] give $B(\\Gamma\\times\\Gamma')=B(\\Gamma)+B(\\Gamma')$ and $B(t\\Gamma)=tB(\\Gamma)$. Apply the sandwich to $e_\\Gamma-e_{\\Gamma'}$ and its negative, using the assumed values of $p$, to obtain the two displayed bounds for $B(\\Gamma)-B(\\Gamma')$. For an admitted transition, its real baseline change is at least $F(\\Gamma,\\Gamma')$, so that cost value must be finite. The corrected change equals $[\\sigma_{\\Gamma'}(y)-\\sigma_\\Gamma(x)] + B(\\Gamma')-B(\\Gamma)=[\\sigma_{\\Gamma'}(y)-\\sigma_\\Gamma(x)]-L(e_\\Gamma-e_{\\Gamma'})$. The assumed lower bound on the baseline change and the upper sandwich bound $L(e_\\Gamma-e_{\\Gamma'})\\le F(\\Gamma,\\Gamma')$ make this at least $F(\\Gamma,\\Gamma')-F(\\Gamma,\\Gamma')=0$. This proves only the stated conditional monotonicity. [F7, step 4.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §VI.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "MIT 18.102, Introduction to Functional Analysis, complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf?download=1"
+            },
+            {
+              "title": "D. Daners, Introduction to Functional Analysis (2017), Theorem 26.1 and proof",
+              "url": "https://www.maths.usyd.edu.au/u/athomas/FunctionalAnalysis/daners-functional-analysis-2017.pdf?download=1"
+            },
+            {
+              "title": "G. Teschl, Topics in Real and Functional Analysis, §4.2, Theorem 4.11 and proof",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf?download=1"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 288,
+    "id": "td-math-ordered-composition-examples",
+    "kind": "B",
+    "category": "thermodynamics-mathematics",
+    "library": "mathematics",
+    "title": "Ordered Composition — Examples",
+    "companion": "td-math-ordered-composition",
+    "requires": [
+      "td-math-ordered-composition"
+    ],
+    "items": [
+      {
+        "id": "ex-tdmath-reference-order-two-state",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Two-state reference order",
+        "reference": "research/physics-td-qft-rpm-62-2026-10-14-batch-3.notes.md#B-inventory",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 6,
+        "deps": [
+          "def-tdmath-tagged-scalable-compound",
+          "def-tdmath-comparison-and-stability",
+          "def-tdmath-signed-comparison",
+          "lem-tdmath-reference-order"
+        ],
+        "dependency_roles": {
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "def-tdmath-comparison-and-stability": "mathematical-premise",
+          "def-tdmath-signed-comparison": "mathematical-premise",
+          "lem-tdmath-reference-order": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $X=\\{a,b\\}$. For equal-mass nonnegative compounds $c,d$, define $c\\preceq d$ exactly when $c(b)\\le d(b)$. For signed unit-mass reference maps $R_\\lambda=(1-\\lambda)e_a+\\lambda e_b$, the order is strict from $a$ to $b$ and gives the full real-parameter reference ordering.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1] and $a,b$ as distinct tags.\n\n1.1 Reflexivity and transitivity follow from those properties of $\\le$ on the $b$ coefficient, and CH follows because $\\le$ is total. Adding a common compound adds the same $b$ coefficient to each side, so consistency holds. Multiplying both coefficients by $t>0$ preserves the inequality. Splitting a state coefficient into two positive parts preserves the total coefficient of $b$, so splitting/recombination gives equivalence. Finally $e_a\\preceq e_b$ because $0\\le1$, while $e_b\\npreceq e_a$ because $1\\nleq0$. [A1, F1]\n\n1.2 For stability, suppose $A+\\epsilon_n Z_0\\preceq B+\\epsilon_n Z_1$ for every $n$, with $\\epsilon_n\\to0$ and fixed positive $Z_0,Z_1$. If $A(b)>B(b)$, let $\\delta=A(b)-B(b)>0$ and $q:=|Z_0(b)-Z_1(b)|$. If $q=0$, every perturbed difference remains $\\delta>0$; if $q>0$, choose $n$ with $\\epsilon_n q<\\delta$. In either case some perturbed $b$-coefficient difference is positive, contradicting the assumed comparison. Thus $A(b)\\le B(b)$, which is $A\\preceq B$. [A1, F1]\n\n2.1 The reference pair $x_0=a,x_1=b$ is strict by step 1.1. Therefore [F2] applies and yields $R_\\lambda\\preceq_sR_\\mu$ iff $\\lambda\\le\\mu$ for all real $\\lambda,\\mu$, including parameters outside $[0,1]$. The signed parameters are handled by the signed comparison definition, not by treating $R_\\lambda$ as a nonnegative compound. [F2, step 1.1] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Lemma 2.2",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-tdmath-common-meter-two-types",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Two types on one meter scale",
+        "reference": "research/physics-td-qft-rpm-62-2026-10-14-batch-3.notes.md#B-inventory",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 9,
+        "deps": [
+          "thm-tdmath-additive-entropy-representation",
+          "thm-tdmath-common-meter-calibration"
+        ],
+        "dependency_roles": {
+          "thm-tdmath-additive-entropy-representation": "mathematical-premise",
+          "thm-tdmath-common-meter-calibration": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take two types with fixed totals $T_1=T_2=1$ and a common meter satisfying the compatibility hypotheses of [[thm-tdmath-common-meter-calibration]], including its shared equal-mass comparison $\\preceq_{\\mathcal Y}$. Let type-1 states $a_0,a_1$ have normalized values $0,1$, and type-2 states $b_0,b_1$ have normalized values $1/3,3$. Using the shared raw state tags of that theorem, let $C_0=e_{a_{1,a_1}}+e_{a_{2,b_0}}$ and $D_0=e_{a_{1,a_0}}+e_{a_{2,b_1}}$. Their fixed-meter encodings are $C=C_0+2e_{\\zeta_0}$ and $D=D_0+2e_{\\zeta_0}$, each of mass four. The calibrated values are $4/3$ for $C$ and $3$ for $D$; the common-meter comparison orders $C\\preceq_{\\mathcal Y}D$ and, after common-meter cancellation, $C_0\\preceq_{\\mathcal Y}D_0$.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1], [F1], and [F2].\n\n1.1 Both compounds have type-total vector $(1,1)$, so [F1] applies. Their calibrated values are $\\Sigma(C)=1+1/3=4/3$ and $\\Sigma(D)=0+3=3$. Since $4/3\\le3$, [F1] gives $C\\preceq D$. The value $3$ is permitted by [F2]; the representation theorem imposes no unit-interval bound on arbitrary states. [A1, F1, F2, algebra]\n\n2.1 Reversing the comparison would require $3\\le4/3$, which is false; hence this particular comparison is strict. No separate per-type numerical reading is treated as a proof of common-meter compatibility; that remains the stated hypothesis. [A1, F1, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §II.E",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-tdmath-reaction-offset-cycle-obstruction",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A two-channel cycle obstructs reaction offsets",
+        "reference": "research/physics-td-qft-rpm-62-2026-10-14-batch-3.notes.md#B-inventory",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 2,
+        "deps": [
+          "thm-tdmath-finite-inequality-alternative",
+          "thm-tdmath-reaction-offset-feasibility"
+        ],
+        "dependency_roles": {
+          "thm-tdmath-finite-inequality-alternative": "mathematical-premise",
+          "thm-tdmath-reaction-offset-feasibility": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Set $A=\\{1,2\\}$ and $r=2$, with independently supplied data $\\nu_1=(1,-1)$, $d_1=-2$, $\\nu_2=(-1,1)$, and $d_2=1$. No offset $b\\in\\mathbb R^2$ satisfies both $b\\cdot\\nu_a+d_a\\ge0$.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1]–[F2].\n\n1.1 The multiplier $\\lambda=(1,1)$ is nonnegative and satisfies $\\lambda_1\\nu_1+\\lambda_2\\nu_2=(1,-1)+(-1,1)=(0,0)$. But $\\lambda_1d_1+\\lambda_2d_2=-2+1=-1<0$, violating the necessary condition in [F1]; therefore no offset exists. [A1, F1, algebra]\n\n2.1 Directly, the two inequalities would require $b_1-b_2\\ge2$ and $-b_1+b_2\\ge-1$, equivalently $b_1-b_2\\le1$. Adding the original inequalities gives $0\\ge1$, a contradiction. This is the positive-right-side zero-left certificate of [F2]. [A1, F2, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE464, Fourier–Motzkin Elimination lecture notes",
+              "url": "https://lall.stanford.edu/ee464/lectures/fourier_motzkin.pdf?download=1"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-tdmath-no-sinks-sandwich-on-r",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A no-sinks sandwich on the real line",
+        "reference": "research/physics-td-qft-rpm-62-2026-10-14-batch-3.notes.md#B-inventory",
+        "design_state": "Draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 3,
+        "deps": [
+          "def-complete-ordered-field",
+          "thm-tdmath-infinite-no-sinks-sandwich"
+        ],
+        "dependency_roles": {
+          "def-complete-ordered-field": "mathematical-premise",
+          "thm-tdmath-infinite-no-sinks-sandwich": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "On $V=\\mathbb R$, let $p(x):=\\max\\{x,0\\}$ and $L(x):=x/2$. Then $p$ is an everywhere-finite no-sinks sublinear function and $L$ satisfies $-p(-x)\\le L(x)\\le p(x)$ for every real $x$.",
+        "strategy": "Proof strategy: direct\n\n**Given:** [A1] and [F1].\n\n1.1 For $x=0$, $p(x)=0$. For $t>0$, $p(tx)=\\max\\{tx,0\\}=t\\max\\{x,0\\}=tp(x)$. Also $p(x+y)\\le p(x)+p(y)$ because the right side is nonnegative and at least $x+y$. Every value is finite, so $p(x)<+\\infty$ iff $p(-x)<+\\infty$. Thus all assumptions in [F1] hold. [A1, F1, algebra]\n\n2.1 The map $L(x)=x/2$ is real-linear. If $x\\ge0$, then $p(x)=x$, $p(-x)=0$, and $0\\le x/2\\le x$. If $x\\le0$, then $p(x)=0$, $p(-x)=-x$, and $x\\le x/2\\le0$. These two cases include $x=0$ and give $-p(-x)\\le L(x)\\le p(x)$ for all $x$. [A1, F1, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 18.102, Introduction to Functional Analysis, complete lecture notes",
+              "url": "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf?download=1"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        },
+        "library": "mathematics",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

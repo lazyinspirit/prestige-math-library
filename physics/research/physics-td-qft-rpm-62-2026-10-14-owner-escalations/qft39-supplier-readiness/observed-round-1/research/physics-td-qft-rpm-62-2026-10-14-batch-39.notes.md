@@ -1,0 +1,37 @@
+# Batch 39 authoring notes
+
+Run: physics-td-qft-rpm-62-2026-10-14. Assigned pair: qft-mc04 only. Both pages and both draft items are authored. The A proof is complete conditional on its exact planned mathematical suppliers; readiness remains escalated while their carriers are absent. The B computation is complete conditional on the A theorem and is likewise not ready.
+
+## Plan and inventory reconciliation
+
+The complete design section reserves one A theorem, thm-qft-conformal-external-scalar, and one B example, ex-qft-constant-conformal-normalization. The prose immediately above that reservation declares both emg-c01 and qft-mf02 as earlier prerequisites, while the reservation's JSON says only qft-mf02. Current plan-spec.json and the batch-39 manifest/task require both pages, as does the binding owner direction. The two page prerequisites are preserved; the stale reservation field is recorded as the conflict and no shared plan was edited.
+
+The withdrawn owner-drift-qft alternative proposed two local conformal prerequisite IDs. Its README marks those proposals withdrawn and explicitly says not to mint them. No extra item IDs were added: the A theorem defines the external metric, scalar operator and test multiplier locally, proves the wave intertwining calculation in place, and conditionally uses the exact planned EMG curvature-transform interface. No other pair's supplier was authored or edited.
+
+## Supplier interfaces, choice, and dependency levels
+
+The A item directly depends on lem-qft-smeared-free-scalar, lem-qft-scalar-causal-commutator, and thm-emg-conformal-einstein-transformation. Its exact conditional uses are recorded in Facts & Assumptions, the proof contract, and batch-39.cross-batch-dependencies.json. The QFT suppliers are taken at the actual planned FF3/FF4 interfaces, with mass parameter mu=0, the common invariant D_fin domain, the massless Klein–Gordon test equation, the normalized Fock vacuum, and the causal commutator support. Their research proof modules are not treated as authored or accepted carriers.
+
+The current batch-33 manifest supplies the planned thm-emg-conformal-einstein-transformation statement and item level 2. Its inspected interface uses the fixed GR curvature convention and gives S_tilde=Omega^-2(S-6 theta-6s). The C2 research argument derives the conformal connection and curvature contractions, but the item and page carriers are absent. The current def-emg-lorentzian-forms and lem-emg-lorentz-hodge-calculus files are draft suppliers, not proof acceptance. C2's inspected calculation does not use Hodge or exterior-form operations although the planned theorem dependency list names lem-emg-lorentz-hodge-calculus; this apparent nonessential dependency is flagged for the EMG owner and was not changed here.
+
+The planned QFT-MF02 item levels follow their current supplier chain: def-qft-scalar-mass-shell is level 1 from def-qft-fock-and-test-spaces at level 0; lem-qft-smeared-free-scalar is level 3 from the level-1 mass-shell definition, lem-qft-fock-ccr-car at level 1, and lem-qft-segal-weyl-domain at level 2; lem-qft-scalar-causal-commutator is level 4 from the smeared-field lemma. Its exact planned transitive supplier closure was inspected. The current batch-38 page inventory is still empty, so these are planning levels to recheck when its carriers appear. The EMG theorem is level 2 in the batch-33 manifest. Therefore the authored A item is level 5 (one plus max(3,4,2)); the B example is level 6 (one plus the A item level 5). The run's batch-level record remains level 2 for batch 39 with prerequisites 33 and 38. Item levels and page/batch levels are distinct.
+
+The planned QFT and EMG supplier closures carry Countable Choice AC_omega. The original QFT item inventory omitted it as an explicit dependency of the conformal theorem; both authored items now list def-countable-choice as a mathematical premise and state the inherited assumption. No full Axiom of Choice is used. Recompute the provisional item levels and compare all supplier interfaces when batches 33 and 38 materialize; no shared batch-level file or plan was modified.
+
+## Source reading and dispositions
+
+The A page has two independent full-text lecture-note treatments. Christopher J. Fewster's complete 62-page Lecture Note 39/2008 was retrieved and inspected at §3.1, PDF pp. 11–13. L. H. Ford's complete arXiv HTML lecture text was retrieved and inspected at §§1.1–1.2. Fewster and Ford use +--- signature and their stated curvature conventions; the item does not import their sign formula. Its exact signs follow the planned EMG curvature interface and the local calculation. Fewster and Ford both give the four-dimensional 1/6 conformal-coupling value and scalar weight. Ford also explains that curved-spacetime vacuum selection is not generally unique. Source URLs, locators, per-result dispositions, and fetch hashes are in batch-39.coverage.json.
+
+The complete relevant Preskill §5.10.3–5.10.4 PDF text was also inspected. source-fetch-check could not page-count its compressed PDF because mutool is unavailable; the first fetch and all five recovery retries are preserved in the Preskill entry's source_resolution. The alternative-source search found Ford's full arXiv HTML, which was inspected and successfully stamped. Preskill is marked dropped for mechanical fetch verification only; no mathematical claim was dropped, and the active A item uses Fewster and Ford. source-fetch-check --stamp resolved all three coverage records: two full-text stamps and one documented drop.
+
+Fewster §3.1 supports the conformal-coupling value, density wave operator, and compact-test formal symmetry; Ford §§1.1–1.2 independently support the massless curvature-coupling context, conformal scalar weight in the Robertson–Walker special case, and non-uniqueness caution. The local proof supplies the arbitrary smooth positive Omega identity and all field, kernel, and locality arguments. The source discussions of quantum stress tensors and particle production are not imported as results.
+
+## Conditional scope and readiness
+
+The model is mathematical: M=R4, eta has signature (-,+,+,+), Omega is smooth, real, dimensionless and strictly positive, and g=Omega^2 eta is prescribed external data. The local multiplier estimates require only smoothness on each compact set, not boundedness or decay at infinity. The proof claims only the selected massless Fock representation pulled back from Minkowski space. It does not establish a unique curved vacuum, generic Hadamard state, renormalized stress-tensor covariance, thermal state, massive/minimally coupled theory, Einstein solution, or backreaction.
+
+Both items remain escalated. thm-qft-conformal-external-scalar has three absent direct carriers: lem-qft-smeared-free-scalar and lem-qft-scalar-causal-commutator on the unmaterialized qft-mf02 page, and thm-emg-conformal-einstein-transformation on the unmaterialized emg-c01 page. Their exact planned statements, proof status, transitive prerequisites, and current absence are recorded in the cross-batch dependency file. ex-qft-constant-conformal-normalization depends on the authored but escalated A item, so it cannot be marked ready yet. When carriers appear, compare their actual domains, signs, AC_omega assumptions, vacuum/domain and causal-support interfaces against the recorded uses.
+
+## Scoped checks
+
+Check results will be appended after final item edits.

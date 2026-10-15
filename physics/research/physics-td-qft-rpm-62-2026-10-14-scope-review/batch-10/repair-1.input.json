@@ -1,0 +1,225 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-10-1",
+  "inventory": {
+    "pages": [
+      "td-cycles-and-low-temperature",
+      "td-cycles-and-low-temperature-examples"
+    ],
+    "items": [
+      "def-td-reservoir-cycle",
+      "pthm-td-carnot-engine-bound",
+      "pthm-td-refrigerator-bound",
+      "post-td-nernst-scoped",
+      "post-td-unattainability-scoped",
+      "rem-td-residual-entropy",
+      "ex-td-carnot-engine-600-300",
+      "ex-td-refrigerator-cop-240-300",
+      "cex-td-integrable-capacity-not-integer-power",
+      "ex-td-finite-canonical-ground-state-entropy",
+      "ex-td-geometric-cooling-protocol"
+    ],
+    "pairs": [
+      "td-cycles-and-low-temperature"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-td-reservoir-cycle.md",
+    "items/pthm-td-carnot-engine-bound.md",
+    "items/pthm-td-refrigerator-bound.md",
+    "items/post-td-nernst-scoped.md",
+    "items/post-td-unattainability-scoped.md",
+    "items/rem-td-residual-entropy.md",
+    "items/ex-td-carnot-engine-600-300.md",
+    "items/ex-td-refrigerator-cop-240-300.md",
+    "items/cex-td-integrable-capacity-not-integer-power.md",
+    "items/ex-td-finite-canonical-ground-state-entropy.md",
+    "items/ex-td-geometric-cooling-protocol.md",
+    "library/thermodynamics/td-cycles-and-low-temperature.md",
+    "library/thermodynamics/td-cycles-and-low-temperature-examples.md"
+  ],
+  "write_batches": [
+    "10"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-td-carnot-engine-600-300",
+      "path": [
+        "def-td-reservoir-cycle",
+        "pthm-td-carnot-engine-bound",
+        "ex-td-carnot-engine-600-300"
+      ],
+      "paths": [
+        [
+          "def-td-reservoir-cycle",
+          "pthm-td-carnot-engine-bound",
+          "ex-td-carnot-engine-600-300"
+        ],
+        [
+          "pthm-td-carnot-engine-bound",
+          "ex-td-carnot-engine-600-300"
+        ]
+      ]
+    },
+    {
+      "id": "ex-td-refrigerator-cop-240-300",
+      "path": [
+        "def-td-reservoir-cycle",
+        "pthm-td-refrigerator-bound",
+        "ex-td-refrigerator-cop-240-300"
+      ],
+      "paths": [
+        [
+          "def-td-reservoir-cycle",
+          "pthm-td-refrigerator-bound",
+          "ex-td-refrigerator-cop-240-300"
+        ],
+        [
+          "pthm-td-refrigerator-bound",
+          "ex-td-refrigerator-cop-240-300"
+        ]
+      ]
+    },
+    {
+      "id": "pthm-td-carnot-engine-bound",
+      "path": [
+        "def-td-reservoir-cycle",
+        "pthm-td-carnot-engine-bound"
+      ],
+      "paths": [
+        [
+          "def-td-reservoir-cycle",
+          "pthm-td-carnot-engine-bound"
+        ]
+      ]
+    },
+    {
+      "id": "pthm-td-refrigerator-bound",
+      "path": [
+        "def-td-reservoir-cycle",
+        "pthm-td-refrigerator-bound"
+      ],
+      "paths": [
+        [
+          "def-td-reservoir-cycle",
+          "pthm-td-refrigerator-bound"
+        ]
+      ]
+    },
+    {
+      "id": "rem-td-residual-entropy",
+      "path": [
+        "post-td-nernst-scoped",
+        "rem-td-residual-entropy"
+      ],
+      "paths": [
+        [
+          "post-td-nernst-scoped",
+          "rem-td-residual-entropy"
+        ],
+        [
+          "ex-td-finite-canonical-ground-state-entropy",
+          "rem-td-residual-entropy"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-td-reservoir-cycle": [
+      {
+        "kind": "definition",
+        "domain": "physics",
+        "physical_scope": "Two-reservoir cycles of a fixed-constitution working system with ideal constant-temperature baths and an ideal work store, all inside a declared isolated compound; finite reservoirs and unlisted transfers are excluded.",
+        "empirical_premises": []
+      },
+      "## Definition\n\nFix a working system of constitution $c$ and a closed process record $P\\in\\mathcal P_{\\mathrm{cl}}(c)$ with equilibrium endpoints as in [[def-td-process-and-protocol]]. A cycle of the working system is such a record with $x_P^-=x_P^+$; the reservoirs and work store need not return to their initial energy states.\n\nAn ideal thermal reservoir $b$ has an energy interval $J_b\\subseteq\\mathbb R$ measured in joules and a finite entropy function $S_b:J_b\\to\\mathbb R$ measured in $\\mathrm{J\\,K^{-1}}$. On the energy interval admitted for a cycle, assume the exact affine law\n$\nS_b(E_b)=s_{b,0}+\\frac{E_b}{T_b}\n$\nfor a constant $s_{b,0}$ and fixed $T_b>0$ kelvins. Thus $S_b'(E_b)=1/T_b$ in the interior and every admitted endpoint change is exactly $\\Delta S_b=\\Delta E_b/T_b$. This constant is the absolute thermodynamic temperature under [[def-td-temperature-pressure-chemical-potential]]. The affine entropy law on the admitted interval is the ideal-bath model; a finite reservoir whose temperature changes is outside this definition.\n\nAn ideal work store is a named auxiliary with an energy coordinate $E_w$ measured in joules and an assigned entropy $S_w(E_w)=s_w$ constant on the energy interval used by the cycle. It exchanges only mechanical work and no matter or heat. Its energy may change, while its entropy change is zero by this model definition.\n\nA two-reservoir cycle contains one working-system cycle, one hot bath at $T_h$, one cold bath at $T_c$, and the ideal work store. They lie inside one isolated outer boundary in the sense of [[def-td-system-and-permitted-exchanges]], so the full compound has no external matter or energy transfer. There are no unlisted heat, work, matter, kinetic-energy, or external-potential-energy changes. The admitted process and transfer signs are those of [[def-td-process-and-protocol]]. The model declares the endpoint entropy split\n$\nS_{\\mathrm{tot}}=S_{\\mathrm{ws}}(x_{\\mathrm{ws}})+S_h(E_h)+S_{\\mathrm{cold}}(E_c)+S_w(E_w),\n$\nwhere $S_{\\mathrm{ws}}$ is the working-system entropy and the bath and work-store functions are those defined here. This additive constituent split is assumed to be one admitted by [[post-td-concave-fundamental-entropy]] and is the entropy supplied to [[post-td-macroscopic-second-law]]; $S_w$ contributes zero change. Reversibility of the full record is as in [[def-td-reversible-process]].\n\nWhen the second law is applied to the cycle, the model also supplies an admitted closed process record for the full compound. At both endpoints its constituent preparations, with the declared contact controls locked or insulated, are an equilibrium macrostate for that record; its separately tracked center-of-mass kinetic and external-field potential energies have zero endpoint change. This total-compound record is the input to the second law; the working-system record $P$ is the input to its first-law balance.\n\nIn the heat-engine mode, the positive magnitudes $Q_h,Q_c$ in joules mean respectively heat taken from the hot bath into the working system and heat rejected by the working system to the cold bath; accordingly $\\Delta E_h=-Q_h$, $\\Delta E_c=Q_c$, $Q[P]=Q_h-Q_c$, and work output is $W_{\\mathrm{out}}=-W_{\\mathrm{on}}[P]$. In the refrigerator mode, $Q_c>0$ is heat taken from the cold bath into the working system, $Q_h>0$ is heat rejected to the hot bath, so $\\Delta E_c=-Q_c$, $\\Delta E_h=Q_h$, $Q[P]=Q_c-Q_h$, and work input is $W_{\\mathrm{in}}=W_{\\mathrm{on}}[P]$. These are idealized model conventions, not claims that a particular apparatus realizes the cycle."
+    ],
+    "pthm-td-carnot-engine-bound": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "Conditional efficiency bound for an admitted closed engine cycle between positive-temperature ideal baths inside an isolated compound with an ideal work store; finite reservoirs, unlisted transfers, and empirical engine performance are excluded.",
+        "empirical_premises": []
+      },
+      "## Statement\n\nLet an admitted heat-engine cycle in the sense of [[def-td-reservoir-cycle]] operate between fixed ideal-bath temperatures $0<T_c<T_h$, absorb $Q_h>0$, reject $Q_c>0$, and deliver $W_{\\mathrm{out}}>0$. Define its efficiency by $\\eta=W_{\\mathrm{out}}/Q_h$. Then\n$\n\\eta\\le 1-\\frac{T_c}{T_h}.\n$\nEquality holds exactly when the total entropy change of the isolated compound is zero. In particular, a reversible cycle in the stated boundary model saturates the bound; zero entropy change is not here asserted to imply full reversibility."
+    ],
+    "pthm-td-refrigerator-bound": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "Conditional cooling coefficient-of-performance bound for an admitted closed refrigerator cycle between positive-temperature ideal baths inside an isolated compound with an ideal work store; finite reservoirs, unlisted transfers, and empirical appliance performance are excluded.",
+        "empirical_premises": []
+      },
+      "## Statement\n\nLet an admitted refrigerator cycle in the sense of [[def-td-reservoir-cycle]] operate between fixed ideal-bath temperatures $0<T_c<T_h$, extract $Q_c>0$ from the cold bath, reject $Q_h>0$ to the hot bath, and consume $W_{\\mathrm{in}}>0$. Define its cooling coefficient of performance by $\\mathrm{COP}_R=Q_c/W_{\\mathrm{in}}$. Then\n$\n\\mathrm{COP}_R\\le\\frac{T_c}{T_h-T_c}.\n$\nEquality holds exactly when the total entropy change of the isolated compound is zero. A reversible cycle in the stated boundary model saturates the bound; no converse about reversibility is asserted."
+    ],
+    "post-td-nernst-scoped": [
+      {
+        "kind": "postulate",
+        "domain": "physics",
+        "physical_scope": "A chosen compact family of fixed-constraint equilibrium branches at strictly positive temperatures in the adopted macroscopic thermodynamic framework; no zero-temperature state, absolute entropy normalization, or microscopic identification is supplied.",
+        "empirical_premises": []
+      },
+      "## Postulate\n\nFix a material constitution $c$, a positive temperature $T_0$ in kelvins, and a nonempty compact topological parameter space $K$ of declared external-constraint labels. Here compact means that every open cover of $K$ has a finite subcover; the label $a\\in K$ holds its listed external constraints fixed while temperature varies. Let $D_{c,+}\\subseteq D_c$ be the designated open equilibrium charts on which the finite $C^2$ entropy and positive absolute temperature $T_c=1/S_{c,U}$ are defined, as in [[post-td-concave-fundamental-entropy]] and [[def-td-temperature-pressure-chemical-potential]]. A model-specified family map\n$\n\\phi:(0,T_0)\\times K\\longrightarrow D_{c,+}\n$\nassigns an equilibrium state $\\phi(t,a)$ at temperature $t$, so $T_c(\\phi(t,a))=t$. The map need not be continuous in $a$; the postulate below itself requires the displayed supremum to be finite for all sufficiently small $t$. Define $S_K(t,a):=S_c(\\phi(t,a))$, measured in $\\mathrm{J\\,K^{-1}}$.\n\nThe model adopts the following uniform compact-family Nernst heat-theorem postulate:\n$\n\\lim_{t\\downarrow0}\\ \\sup_{a,b\\in K}\\left|S_K(t,a)-S_K(t,b)\\right|=0,\n$\nwhere the supremum is the least upper bound of the displayed real differences. This is an additional low-temperature physical postulate, not a consequence of the first or second law. It is a deliberately scoped uniform formulation; it is not asserted equivalent to every statement called the third law or Nernst's theorem.\n\nThe postulate constrains entropy differences within the declared family. It does not assert that any individual finite limit $S_K(0,a):=\\lim_{t\\downarrow0}S_K(t,a)$ exists, that such a limit is zero, or that the family includes every material or constraint. If the indicated individual limit is to be used, its existence and finiteness are an additional premise."
+    ],
+    "post-td-unattainability-scoped": [
+      {
+        "kind": "postulate",
+        "domain": "physics",
+        "physical_scope": "A model-specific full family of admitted finite-duration cooling protocols for a nonempty, explicitly represented zero-temperature boundary; no universal statement about all possible controls, dynamics, or materials is made.",
+        "empirical_premises": []
+      },
+      "## Postulate\n\nFor a declared material constitution $c$, let $D_{c,+}\\subseteq D_c$ be its designated equilibrium states with finite positive absolute temperature. Let $D_0$ be a separately declared nonempty set of zero-temperature boundary preparations, disjoint from $D_{c,+}$, and let\n$\n\\overline D_c:=D_{c,+}\\sqcup D_0,\\qquad\n\\overline T_c:\\overline D_c\\to[0,\\infty)\n$\nextend the thermodynamic temperature from [[def-td-temperature-pressure-chemical-potential]] by $\\overline T_c|_{D_{c,+}}=T_c$ and $\\overline T_c(y)=0$ for $y\\in D_0$.\n\nLet $\\mathcal C$ be the model's full declared family of admitted cooling operations and controls, not a subset defined by excluding zero-temperature endpoints. An operation record has an initial and a final preparation in $\\overline D_c$, named controls, and a duration $\\tau\\in[0,\\infty)$ seconds; its positive-temperature portions obey the process conventions of [[def-td-process-and-protocol]], while the model separately declares how a boundary endpoint in $D_0$ is represented. A finite protocol is a finite chain of compatible admitted operation records whose total duration, the sum of their durations, is finite. Define $\\operatorname{Reach}_{\\mathcal C}\\subseteq\\overline D_c\\times\\overline D_c$ to contain exactly the endpoint pairs joined by at least one such finite protocol.\n\nThe adopted operational unattainability postulate is\n$\n\\operatorname{Reach}_{\\mathcal C}\\cap(D_{c,+}\\times D_0)=\\varnothing.\n$\nThis is a separate physical assumption from the Nernst heat-theorem postulate; neither is deduced here from the first or second law. If a model has no declared $D_0$, or if its operation family is defined to stay in $D_{c,+}$ by construction, the assertion is absent or vacuous and is not evidence for unattainability."
+    ],
+    "rem-td-residual-entropy": [
+      {
+        "kind": "remark",
+        "domain": "physics",
+        "physical_scope": "Interpretive distinction between a macroscopic entropy-difference postulate and a finite microscopic canonical model; no identification of their entropies or universal zero-temperature value is asserted.",
+        "empirical_premises": []
+      }
+    ],
+    "ex-td-carnot-engine-600-300": [
+      {
+        "kind": "example",
+        "domain": "physics",
+        "physical_scope": "A hypothetical two-ideal-bath engine calculation using the preceding conditional theorem; it reports no measured engine or empirical efficiency.",
+        "empirical_premises": []
+      }
+    ],
+    "ex-td-refrigerator-cop-240-300": [
+      {
+        "kind": "example",
+        "domain": "physics",
+        "physical_scope": "A hypothetical ideal two-bath refrigerator calculation using the preceding conditional theorem; it reports no measured appliance coefficient or work.",
+        "empirical_premises": []
+      }
+    ],
+    "cex-td-integrable-capacity-not-integer-power": [
+      {
+        "kind": "counterexample",
+        "domain": "physics",
+        "physical_scope": "A formal fixed-composition positive-temperature response chart used to refute an inference from integral convergence alone; it is not a measured material or a complete global bulk-family model.",
+        "empirical_premises": []
+      }
+    ],
+    "ex-td-finite-canonical-ground-state-entropy": [
+      {
+        "kind": "example",
+        "domain": "physics",
+        "physical_scope": "A finite discrete Gibbs preparation with a specified energy gap and entropy convention; no identification with the macroscopic entropy postulate or empirical material is assumed.",
+        "empirical_premises": []
+      }
+    ],
+    "ex-td-geometric-cooling-protocol": [
+      {
+        "kind": "example",
+        "domain": "physics",
+        "physical_scope": "A constructed update-map model with one finite-duration operation repeated finitely many times; it proves only this model's reachability property and is not evidence about actual cooling devices.",
+        "empirical_premises": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+# Partial-Legendre regularity disposition
+
+Run: physics-td-qft-rpm-62-2026-10-14
+Subject: lem-tdmath-smooth-partial-legendre-transform-differential
+Owner/reviewer: /root/resolve_step4_td_math_proofs
+Cycle: 1; confirmed title accuracy defect, resolved in private proposal.
+
+I read the whole current subject, the exact imported C^k-map/diffeomorphism Definition, the exact chain-rule Statement and full Banach sum/product/composition supplier. The C^k Definition identifies smooth with C-infinity. The subject Statement assumes f in C^2 and the inverse g in C^1, and concludes precisely C^2 of the partial transform. Those are the approved rich hypotheses and conclusion; its title's smooth adjective overstates the supported regularity. The observed keep:false is correct about the title but does not invalidate the Statement or calculation.
+
+The proposal changes only the title to Differential of a $C^2$ partial Legendre transform on a local inverse chart. The stable item ID, Statement, dependencies, proof and all domain/locality qualifications are unchanged. No C-infinity hypothesis or narrower conclusion is introduced. Private before/current carriers are lem-tdmath-smooth-partial-legendre-transform-differential-before.md and lem-tdmath-smooth-partial-legendre-transform-differential-proposed.md in this directory.
+
+I read the complete proposal after writing it and independently checked every step. In 1.1, the C^1 inverse identity gives D_u f(g(x,z),z)=x, and the chain rule differentiates f(g,z) into x dot dg + D_z f(g,z) dot dz. In 2.1, each scalar multiplication is bounded bilinear, so the actual product rule gives d(x dot g)=g dot dx+x dot dg; subtraction cancels dg and proves the displayed derivative with its minus sign. In 3.1, g is C^1 by the inverse-chart hypothesis and D_z f is C^1 by f being C^2. Their composition through (g,z) is C^1; the chain-rule expression for its derivative is continuous because both factors are continuous finite-dimensional derivatives. Thus all first derivatives of the transform are C^1, proving C^2. The cancellation establishes this gain although direct composition initially gives only C^1. Source and target coordinate dimensions k,m>=1 are within the imported definitions' positive-dimensional interfaces. No inverse existence or global/boundary assertion is claimed.
+
+No further mathematical defect was found in the complete proposal. The title correction creates no changed mathematical Statement/Definition interface and no corresponding consumer seed. This is an author scientific review, not an independent native verdict or an external source-reading certification. Canonical source and shared metadata/evidence remain frozen; no checks, tests, hashes, stamps, gates or transitions were performed. Root owns application after observer drain and fresh native acceptance/metadata work.

@@ -1,0 +1,81 @@
+---
+id: lem-tdmath-canonical-empirical-field-conditioning
+kind: lemma
+title: Conditioning grand empirical fields on an exact particle number
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+dependency_level: 7
+deps:
+  - def-axiom-of-choice
+  - def-ultrafilter-extension-principle
+  - def-dependent-choice
+  - def-hahn-banach-extension-principle-relative
+  - def-tdmath-superstable-regular-interaction
+  - def-tdmath-periodized-empirical-field
+  - lem-tdmath-periodized-empirical-field-stationary-density
+  - thm-tdmath-canonical-interior-density-limit
+  - thm-tdmath-canonical-grand-duality
+  - thm-tdmath-continuum-variational-pressure
+dependency_roles:
+  def-axiom-of-choice: mathematical-premise
+  def-ultrafilter-extension-principle: mathematical-premise
+  def-dependent-choice: mathematical-premise
+  def-hahn-banach-extension-principle-relative: mathematical-premise
+  def-tdmath-superstable-regular-interaction: mathematical-premise
+  def-tdmath-periodized-empirical-field: mathematical-premise
+  lem-tdmath-periodized-empirical-field-stationary-density: mathematical-premise
+  thm-tdmath-canonical-interior-density-limit: mathematical-premise
+  thm-tdmath-canonical-grand-duality: mathematical-premise
+  thm-tdmath-continuum-variational-pressure: mathematical-premise
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+proof_strategy: direct
+sources:
+  references:
+    - title: "H.-O. Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction"
+      url: "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf"
+      locator: "Theorem 2 and Sections 3–5, printed pp.174–187 / PDF pp.4–17: good large-deviation principle for periodized empirical fields under free or periodic grand-canonical Gibbs laws; complete proof read."
+    - title: "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields"
+      url: "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf"
+      locator: "Sections 3 and 5: entropy upper bounds, empirical-field tightness, and conditional-law arguments."
+---
+
+## Statement
+
+Assume AC, the ultrafilter extension principle, DC, and HB as in [[thm-tdmath-continuum-variational-pressure]]. Let $\Lambda_L=[0,L)^d$, $\beta,z>0$, and $b\in\{\mathrm{free},\mathrm{per}\}$. On the simple labelled sector $\mathcal S_{L,N}=\{q\in\Lambda_L^N:q_i\neq q_j\ (i\neq j)\}$ use $H_{L,\mathrm{free}}(q)=\sum_{i<j}\phi(q_i-q_j)$ and the periodic energy $H_{L,\mathrm{per}}$ from [[def-tdmath-superstable-regular-interaction]]. For $N\geq1$ define
+$$Z_b(L,N;\beta)=\frac1{N!}\int_{\mathcal S_{L,N}}e^{-\beta H_{L,b}(q)}\,dq_1\cdots dq_N,\qquad Z_b(L,0;\beta)=1,$$
+with $e^{-\beta(+\infty)}=0$, and put $\Xi_b(L,z,\beta)=\sum_{N\geq0}z^NZ_b(L,N;\beta)$. The unit-intensity Poisson reference $Q_{\Lambda_L}$ has sector density $e^{-L^d}/N!$ relative to labelled Lebesgue measure, so its normalized grand partition is
+$$Z_{Q,b}(L;z,\beta)=E_{Q_{\Lambda_L}}[z^{N_{\Lambda_L}}e^{-\beta H_{L,b}}]=e^{-L^d}\Xi_b(L,z,\beta).$$
+The exact-$N$ canonical law $C^b_{L,N}$ has density $e^{-\beta H_{L,b}}/(N!Z_b(L,N;\beta))$ on $\mathcal S_{L,N}$, and the grand-canonical law $G^b_{L,z,\beta}$ has density $z^{N_{\Lambda_L}}e^{-\beta H_{L,b}}/Z_{Q,b}(L;z,\beta)$ relative to $Q_{\Lambda_L}$. Let $\rho>0$ be an interior attainable density, choose $\alpha=\log z$ supporting the free canonical rate $F_\beta$ at $\rho$, and take $N_L/L^d\to\rho$. Assume
+$$L^{-d}\log Z_b(L,N_L;\beta)\longrightarrow F_\beta(\rho).$$
+Let $R_{L,\omega}$ be the periodized empirical field of [[def-tdmath-periodized-empirical-field]], and let
+$$\mathcal M_{z,\beta}:=\operatorname*{argmin}_{P\in\mathcal P^1_{\rm stat}}\{I(P)+\beta\Phi(P)-\rho(P)\log z\}.$$
+Then for every open $\tau_L$ neighborhood $U$ of $\mathcal M_{z,\beta}$ there is $c_U>0$ such that
+$$\limsup_{L\to\infty}L^{-d}\log C^b_{L,N_L}\{\,\omega:R_{L,\omega}\notin U\,\}\leq-c_U.$$
+If $\mathcal M_{z,\beta}=\{P_*\}$, then $R_{L,\omega}\to P_*$ in probability in $\tau_L$ under $C^b_{L,N_L}$. This is a statement about spatially averaged local observables through the empirical field, not about the raw finite-box law at a fixed origin.
+
+## Facts & Assumptions
+
+**Given:** AC, the ultrafilter extension principle, DC, HB, a superstable regular interaction, $\beta,z>0$, an interior density $\rho$, exact particle numbers $N_L/L^d\to\rho$, the displayed canonical rate limit, and the same finite-volume boundary condition in the canonical and grand-canonical laws.
+
+[F1] [[def-tdmath-superstable-regular-interaction]]: the periodic image energy is absolutely defined under the stated tail convention, and the unit-intensity Poisson reference has sector density $e^{-L^d}/N!$; together with the Statement's local finite-volume definitions this gives $Z_{Q,b}=e^{-L^d}\Xi_b$ for either boundary condition.
+
+[F2] [[thm-tdmath-canonical-grand-duality]]: a supporting $\alpha=\log z$ gives physical pressure $P(\alpha,\beta)=F_\beta(\rho)+\alpha\rho$.
+
+[F3] [[thm-tdmath-continuum-variational-pressure]]: the normalized grand pressure is $p_Q(z,\beta)=P(\alpha,\beta)-1=-\min_P\{I(P)+\beta\Phi(P)-\rho(P)\log z\}$, and its minimizer set is nonempty and compact in $\tau_L$.
+
+[F4] [[def-tdmath-periodized-empirical-field]] and [[lem-tdmath-periodized-empirical-field-stationary-density]]: $R_{L,\omega}$ is the stationary empirical field used by the grand empirical-field large-deviation principle.
+
+[L1] Georgii's Theorem 2 (1994, Sections 3–5) gives, for superstable regular interactions, a good large-deviation principle in $\tau_L$ for these periodized empirical fields under both free and periodic grand-canonical Gibbs laws, with rate $I(P)+\beta\Phi(P)-\rho(P)\log z+p_Q(z,\beta)$. The complete proof was read; the chosen $b$ must be one of the two stated boundary conditions.
+
+## Proof
+**Given:** The hypotheses and suppliers in Facts & Assumptions.
+
+1.1 The canonical law is the grand law conditioned on $N=N_L$, since the grand weight on the $N_L$ sector differs from the canonical density only by the constant activity factor $z^{N_L}$. Its conditioning probability is $$G^b_{L,z,\beta}(N=N_L)=\frac{z^{N_L}e^{-L^d}Z_b(L,N_L;\beta)}{Z_{Q,b}(L;z,\beta)}.$$ Divide the logarithm by $L^d$. The numerator terms tend to $\rho\log z+F_\beta(\rho)-1$ by the assumed canonical rate and [F1]; the denominator tends to $p_Q(z,\beta)$. By [F2]–[F3], $p_Q(z,\beta)=F_\beta(\rho)+\rho\log z-1$, so $$L^{-d}\log G^b_{L,z,\beta}(N=N_L)\longrightarrow0.$$ Thus the exact-number conditioning event has subexponential, positive grand probability for all sufficiently large $L$. [given, F1, F2, F3, algebra]
+
+1.2 Let $U$ be an open $\tau_L$ neighborhood of $\mathcal M_{z,\beta}$ and set $F=U^c$. The good rate in [L1] has zero set exactly $\mathcal M_{z,\beta}$. Its infimum on the closed set $F$ is strictly positive: otherwise the nonempty closed sets $F\cap\{\mathcal I\le1/n\}$, where $\mathcal I$ is the good rate, would be nested inside the compact sublevel $\{\mathcal I\le1\}$. Compactness gives a common point in $F$ with rate zero, contradicting its zero set $\mathcal M_{z,\beta}$. The large-deviation upper bound therefore gives some $c>0$ with $$\limsup_{L\to\infty}L^{-d}\log G^b_{L,z,\beta}\{R_{L,\omega}\in F\}\leq-c.$$ [F3, F4, L1, algebra]
+
+2.1 Conditioning on $N=N_L$ yields $$C^b_{L,N_L}\{R_{L,\omega}\notin U\}\leq \frac{G^b_{L,z,\beta}\{R_{L,\omega}\in F\}}{G^b_{L,z,\beta}(N=N_L)}.$$ The numerator decays exponentially by step 1.2 and the denominator has zero exponential rate by step 1.1, so its normalized logarithmic upper limit is at most $-c$, and in particular the ratio tends to zero. This proves the asserted exponential bound and concentration on every neighborhood of $\mathcal M_{z,\beta}$. If the minimizer is unique, these neighborhood bounds are exactly convergence in probability in $\tau_L$. [step 1.1, step 1.2, algebra] ∎

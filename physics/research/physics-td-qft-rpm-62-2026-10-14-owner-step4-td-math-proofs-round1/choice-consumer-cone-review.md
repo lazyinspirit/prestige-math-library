@@ -1,0 +1,16 @@
+# Exact-number conditioning choice consumer cone
+
+Owner: /root/resolve_step4_td_math_proofs
+Run: physics-td-qft-rpm-62-2026-10-14
+Seed: lem-tdmath-canonical-empirical-field-conditioning
+Original preimages retained; current mathematical proposals explicitly carry AC, UL, DC, HB already required by the pressure supplier. This is the actual frozen pre-edit/current consumer cone, determined from current source links and all current RUN manifest relationship rows; no absent historical prose is reconstructed.
+
+Direct consumers: thm-tdmath-fixed-n-local-ensemble-equivalence and thm-tdmath-periodic-fixed-n-limit. Both were read wholly before repair and as final proposals. Free fixed-N uses its already-existing free canonical rate, supporting duality and normalized pressure equality to instantiate conditioning with free boundary, then singleton concentration. Periodic fixed-N uses grand upper bound/duality, the source empty-corridor regular-tail comparison plus cell coercivity for the lower bound, continuity of the convex beta rate, then conditioning with periodic boundary. Their only proposed source changes are explicit four-choice Statements/Given/deps; all prior conclusions and proof arguments remain sound.
+
+Their common downstream mathematical consumer is thm-tdmath-controlled-shell-three-ensemble-equivalence, which was read and repaired as an actual failed item. It carries the same four choices and uses the exact conditioning lemma for the exponential rate required to dominate the selected-shell weight factor. Its constructed width and high canonical shell probability remain unchanged in meaning.
+
+The only downstream physical item is pthm-td-interacting-three-ensemble-local-limit, whose full source was read. It already explicitly assumes all four choices in Statement/Given/deps. Its exact periodic preparation, SI/numerical energy conversion, interior density, differentiability, supporting activity and singleton hypotheses match the reviewed mathematical suppliers. The shell widths convert by E0 and its local-tame transfer uses the unchanged transfer Statement with the new prerequisite proof. No physical leaf edit is required for this choice change. Its actual separate native failure is owned by the physical reviewer, who confirmed its high-shell-probability objection is a false positive because physical[L1] explicitly cites controlled-shell proof2.1; I do not replace that owner's adjudication.
+
+Nonlogical pages read wholly: td-math-interacting-ensemble-geometry and td-interacting-equilibrium-preparations. Their conditional hypothesis/choice, periodic, interior, controlled-width and positional-only prose remains compatible. Also read ordered-composition-examples and convex-contact-and-mixing-examples for the distinct-tag Example correction; their existing two-state/coordinate-vs-C1 descriptions are compatible unchanged. The reference-order Example has no item consumers or aliases in current source/manifest search. No further indirect or nonlogical consumer is identified.
+
+No hashes, formatting checks, tests, native transitions or canonical source edits were performed. All private source/evidence requires root reconciliation and legal native deferred intake. Root owns exact final metadata, contracts, format/stamp/hash/gate handling.

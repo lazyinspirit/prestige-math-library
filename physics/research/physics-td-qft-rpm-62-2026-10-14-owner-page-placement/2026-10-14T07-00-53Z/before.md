@@ -1,0 +1,37 @@
+---
+page: td-math-convex-contact-and-mixing
+title: Convex Contact And Mixing
+status: draft
+library: mathematics
+requires:
+  - td-math-local-pfaff-geometry
+items:
+  - def-tdmath-forward-sector-hypotheses
+  - def-tdmath-thermal-contact-hypotheses
+  - lem-tdmath-relative-interior-segment
+  - lem-tdmath-relative-boundary-support
+  - lem-tdmath-unique-support-inward-ray
+  - lem-tdmath-convex-function-local-lipschitz
+  - lem-tdmath-integral-zero-uniqueness
+  - lem-tdmath-forward-spectator-cancellation
+  - def-tdmath-forward-signed-comparison
+  - lem-tdmath-thermal-scaling-invariance
+  - lem-tdmath-reference-strip-coordinate
+  - lem-tdmath-convex-sector-closedness
+  - lem-tdmath-sector-interior
+  - thm-tdmath-sector-nesting
+  - thm-tdmath-forward-boundary-graph
+  - thm-tdmath-reference-strip-gluing
+  - lem-tdmath-thermal-class-dichotomy
+  - thm-tdmath-conditional-contact-calibrator
+  - thm-tdmath-arbitrary-family-calibration
+  - def-tdmath-decorated-chain-costs
+  - lem-tdmath-decorated-cost-algebra
+  - thm-tdmath-unattained-cost-entropy-inference
+  - def-tdmath-cost-offset-difference-space
+  - lem-tdmath-cost-offset-difference-space-well-defined
+  - thm-tdmath-splitting-cost-quotient
+examples: []
+---
+
+This mathematics page develops forward sectors from A1–A7 and S1–S3, proves their convex geometry, fixed-work orientation, Lipschitz boundary graph, nesting, and comparison completeness for finite scaled copies of one simple type. Thermal strips glue the local reference coordinates. The contact calibrator and arbitrary-family entropy results are explicitly conditional on the stated thermal assumptions, including join coherence C1 and universal thermal range T5. The later finite-chain cost and no-sinks offset results prove only the stated weak monotonicity across admitted transitions; no no-gap equality is claimed. These are mathematical deductions under declared hypotheses, not empirical laws.

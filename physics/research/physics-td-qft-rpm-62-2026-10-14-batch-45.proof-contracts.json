@@ -1,0 +1,1761 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "batch": "45",
+  "level": "physics-td-qft-rpm-62-2026-10-14-batch-45",
+  "scope": [
+    "lem-qft-qed-formal-matrix-ward",
+    "lem-qft-qed-coherent-ir-obstruction",
+    "def-qft-qed-photon-energy-multiplier",
+    "lem-qft-qed-tree-ward",
+    "lem-qft-qed-grassmann-determinant",
+    "lem-qft-qed-conserved-current-gauge",
+    "ex-qft-qed-tree-matrix-example",
+    "ex-qft-qed-coherent-angular",
+    "cex-qft-qed-energy-fock-limit"
+  ],
+  "contracts": {
+    "lem-qft-qed-formal-matrix-ward": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qft-qed-formal-ring",
+          "source_section": "Definition",
+          "quote": "For a formal indeterminate $z$, let $\\mathbb C\\llbracket z\\rrbracket$ be the commutative ring of sequences $(a_0,a_1,\\ldots)$ written $\\sum_{n\\ge0}a_nz^n$, with coefficientwise addition and Cauchy-product multiplication. No convergence of a numerical series is part of this definition. For $d\\ge1$, matrices over $\\mathbb C\\llbracket z\\rrbracket$ use the usual finite matrix addition and multiplication.\n\nUse the finite graph phase data of [[def-qft-qed-finite-graph-gauge-data]] and the QED $U(1)$, Clifford, and natural-unit conventions of [[def-qft-qed-gauge-data]]. Let $K_0(\\zeta)\\in GL_d(\\mathbb C)$ be an invertible base matrix and let $V(\\zeta)\\in M_d(\\mathbb C)$ be its finite link-hopping matrix. The admissible covariant families satisfy\n$$ K_0(\\zeta^\\theta)=D_\\theta K_0(\\zeta)D_\\theta^{-1},\\qquad V(\\zeta^\\theta)=D_\\theta V(\\zeta)D_\\theta^{-1}. $$\nThe scalar base $K_0=mI_d$, $m\\in\\mathbb C\\setminus\\{0\\}$, is an explicit admissible case. Define\n$$ K(z;\\zeta):=K_0(\\zeta)+zV(\\zeta),\\qquad S(z;\\zeta):=\\sum_{n=0}^{\\infty}(-zK_0(\\zeta)^{-1}V(\\zeta))^nK_0(\\zeta)^{-1}. $$\nThe coefficient of each power $z^n$ in $S$ is one finite matrix. The item defines this formal candidate; the following lemma proves its two-sided inverse and covariance properties. Define $\\det A$ for a finite matrix $A$ over $\\mathbb C\\llbracket z\\rrbracket$ by the Leibniz formula $\\det A=\\sum_{\\sigma\\in S_d}\\operatorname{sgn}(\\sigma)\\prod_{j=1}^d A_{j,\\sigma(j)}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-qed-finite-graph-gauge-data",
+          "source_section": "Definition",
+          "quote": "For a real vertex phase $\\theta=(\\theta_x)_{x\\in X}\\in\\mathbb R^X$, define\n$$\n\\zeta_e^\\theta:=e^{i(\\theta_{s(e)}-\\theta_{t(e)})}\\zeta_e,\\qquad\nD_\\theta:=\\operatorname{diag}_{x\\in X}(e^{i\\theta_x}I_r)\\in GL_d(\\mathbb C).\n$$\nDefine the link-hopping matrix $V(\\zeta)\\in M_d(\\mathbb C)$ by its $x,y$ block indexed by $x,y\\in X$\n$$\nV(\\zeta)_{xy}:=\\sum_{\\substack{e\\in E\\\\s(e)=x,\\ t(e)=y}}T_e\\zeta_e .\n$$\nAn empty sum is the zero $r\\times r$ matrix. Additional fixed diagonal blocks belong to a separate base matrix. These data are finite-dimensional algebraic data; the phases are external parameters, not rotor multiplication operators on $L^2(\\mathbb T^E)$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-qed-gauge-data",
+          "source_section": "Definition",
+          "quote": "Use the fixed Minkowski coordinates $x=(x^0,\\mathbf x)=(ct,x^1,x^2,x^3)$, with $\\eta=\\operatorname{diag}(-1,1,1,1)$, on an open coordinate domain $U\\subseteq\\mathbb R^4$ with its standard topology. Each $x^a$ has unit metre. For a smooth scalar component $u:U\\to\\mathbb R$ or $u:U\\to\\mathbb C$, define $\\partial_a u:=\\partial u/\\partial x^a$; thus $\\partial_0=c^{-1}\\partial_t$ at fixed $\\mathbf x$, $\\partial_j=\\partial/\\partial x^j$ for $j=1,2,3$, and each $\\partial_a$ has unit $\\mathrm m^{-1}$. Raise derivative indices with $\\partial^a:=\\eta^{ab}\\partial_b$. The fields in this definition are smooth maps\n$$\\phi\\in C^\\infty(U;\\mathbb R),\\qquad \\mathbf A\\in C^\\infty(U;\\mathbb R^3),\\qquad \\psi\\in C^\\infty(U;\\mathbb C^4),\\qquad \\chi\\in C^\\infty(U;\\mathbb R).$$\nDefine the lower-potential component maps $A_a:U\\to\\mathbb R$ by $A_0=-\\phi/c$ and $A_j=\\mathbf A_j$; collectively $(A_a)$ is the real covector potential in this chart. Then $F_{ab}:=\\partial_aA_b-\\partial_bA_a$ has smooth real component maps $F_{ab}:U\\to\\mathbb R$. The spinor is an ordinary commuting $\\mathbb C^4$-valued map, not a tuple of Grassmann generators. Its Dirac adjoint is the smooth row-valued map $\\bar\\psi:=\\psi^\\dagger\\beta:U\\to(\\mathbb C^4)^*$, using the fixed matrices and adjoint of [[def-qft-dirac-projections]], so $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$. In fixed SI units, $\\phi$ is in volts, each $A_a$ is in $\\mathrm{T\\,m}$, $\\psi$ is assigned field dimension $\\mathrm m^{-3/2}$, and $\\chi$ is in webers; these unit labels accompany the maps and do not identify $q$ with a measured charge. For periodic spatial domains, the same component and unit conventions apply to smooth periodic coordinate lifts, with the quotient domain specified by the item using them.\n\nFor the SI-normalization bookkeeping, let $c>0$ (m s$^{-1}$), $\\hbar>0$ (J s), $\\mu_0>0$ (N A$^{-2}$), a real charge parameter $q$ (C), and a mass parameter $m>0$ (kg) be symbolic inputs; put $\\epsilon_0=(\\mu_0c^2)^{-1}$. In the current SI, $c$ and $h$ are defining constants while $\\mu_0$ is experimentally determined; the formula below keeps $\\mu_0$ symbolic and assigns it no numerical value. Use the lower-potential convention\n$$A_a=(-\\phi/c,\\mathbf A),$$\nwhere $A_a$ has units T m, $\\phi$ is in volts, and $\\mathbf A$ is in T m. Define\n$$S_0=\\sqrt{\\mu_0\\hbar c},\\qquad a_a=A_a/S_0,\\qquad f_{ab}=\\partial_aa_b-\\partial_ba_a,$$\n$$\\mu=mc/\\hbar,\\qquad g=q\\sqrt{\\mu_0c/\\hbar}=q/\\sqrt{\\epsilon_0\\hbar c},\\qquad D_a=\\partial_a-ig a_a.$$\nHere $D_a$ acts on $\\psi\\in C^\\infty(U;\\mathbb C^4)$ by $(D_a\\psi)(x)=\\partial_a\\psi(x)-ig a_a(x)\\psi(x)$, again a smooth map $U\\to\\mathbb C^4$. Thus $a_a$ and $\\mu$ have units m$^{-1}$, $f_{ab}$ has units m$^{-2}$, and $g$ is dimensionless. For $\\psi$ with units m$^{-3/2}$, both $-\\tfrac14 f_{ab}f^{ab}$ and $\\bar\\psi(i\\gamma^aD_a-\\mu)\\psi$ have units m$^{-4}$; their integral over $d^4x$ is dimensionless and represents the action divided by $\\hbar$ in this normalization.\n\nFor the real smooth gauge-parameter map $\\chi:U\\to\\mathbb R$ in webers, put $\\alpha:=\\chi/S_0\\in C^\\infty(U;\\mathbb R)$ (dimensionless) and use\n$$A'_a=A_a+\\partial_a\\chi,\\qquad a'_a=a_a+\\partial_a\\alpha,\\qquad \\psi'=e^{ig\\alpha}\\psi.$$\nThe induced covariant derivative is $D'_a=\\partial_a-ig a'_a$. These are formal mathematical conventions for the later conditional deductions. They do not adopt a measured value of $\\mu_0$, identify $q$ with an electron charge, impose charge quantization, or assert that interacting continuum fields exist.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Put $B:=K_0^{-1}V$. The coefficient of $z^n$ in $S$ is $(-B)^nK_0^{-1}$, a finite matrix, so the series defines an element of $M_d(\\mathbb C\\llbracket z\\rrbracket)$ without an analytic convergence assumption.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Each link block transforms as $T_e\\zeta_e^\\theta=e^{i\\theta_{s(e)}}(T_e\\zeta_e)e^{-i\\theta_{t(e)}}$; summing links in each block gives $V(\\zeta^\\theta)=D_\\theta V(\\zeta)D_\\theta^{-1}$. With [A1], the assumed covariance of $K_0$ gives the same conjugation for each coefficient of $K$; [F3] supplies the separate continuum phase convention, without identifying graph vertices with spacetime points.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Since $K=K_0(I+zB)$, multiplication gives $KS=K_0(I+zB)\\sum_{n\\ge0}(-zB)^nK_0^{-1}$. In the product $(I+zB)\\sum_{n\\ge0}(-zB)^n$, the constant coefficient is $I$ and the two contributions to every positive-degree coefficient cancel; hence $KS=I$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "Also $K_0^{-1}K=I+zB$, so $SK=\\sum_{n\\ge0}(-zB)^n(I+zB)=I$ by the same coefficientwise cancellation. Thus $S$ is the two-sided formal inverse.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-3",
+          "step": "2.3",
+          "claim": "Substituting the conjugated $K_0,V$ into the defining series for $S$ conjugates each finite coefficient by $D_\\theta$, proving $S(z;\\zeta^\\theta)=D_\\theta S(z;\\zeta)D_\\theta^{-1}$.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Use the path $\\zeta_s=\\zeta^{s\\theta}$, $D_s=D_{s\\theta}$ and the definitions of $K_s,S_s,\\delta$ in the Statement. Differentiate $K_sS_s=I$ coefficientwise at $s=0$. This gives $(\\delta K)S+K(\\delta S)=0$, hence $\\delta S=-S(\\delta K)S$ using $K^{-1}=S$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "From $D_s=e^{is\\Theta}$, direct differentiation gives $\\delta K=i[\\Theta,K]$. Therefore $-S\\,i[\\Theta,K]\\,S=-iS\\Theta KS+iSK\\Theta S=-iS\\Theta+i\\Theta S=i[\\Theta,S]$.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "For ordinary invertible finite matrices $A,B$, expand the product:\n$B^{-1}(B-A)A^{-1}=B^{-1}BA^{-1}-B^{-1}AA^{-1}=A^{-1}-B^{-1}$.\nThis is exactly the resolvent identity in the Statement.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For d=1 and V=0, S=K0^{-1}; steps 2.1–2.2 give both inverse products."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At z=0, S(0)=K0^{-1}; steps 1.1–2.2 include the constant coefficient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows d=1. Steps 2.1 and2.2 prove the scalar formal inverse by the same coefficient cancellation; invertibility of the scalar K_0 remains a hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires invertible K_0, excluding a singular base. Step 1.1 allows V=0, in which case the formal series consists of its constant inverse and all positive-degree coefficients vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement of Finite/formal gauge covariance and matrix Ward identity: Let $K(z;\\zeta)=K_0(\\zeta)+zV(\\zeta)$ and $S(z;\\zeta)$ be the finite-dimensional formal matrices of [[def-qft-qed-formal-ring]], with $d\\ge1$, $K_0(\\zeta)$ invertible, and both coefficient matrices covariant under the vertex phase angles of [[def-qft-qed-finite-graph-gauge-data]]. Then $S$ is a two-sided inverse of $K$ in $M_d(\\mathbb C\\llbracket z\\rrbracket)$, and $$ S(z;\\zeta^\\theta)=D_\\theta S(z;\\zeta)D_\\theta^{-1} $$ coefficientwise. For a differentiable phase path $D_s=e^{is\\Theta}$, where the real vertex-angle path is $s\\theta$, the variations satisfy $$ \\delta K=i[\\Theta,K],\\qquad \\delta S=i[\\Theta,S]=-S(\\delta K)S . $$ For ordinary finite matrices $A,B\\in GL_d(\\mathbb C)$, the corresponding resolvent id No additional closed-interval endpoint is quantified in this particular assertion. The given strict parameter inequalities and domain-qualified support/series identities are retained; this worksheet does not extend them across a forbidden endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement of Finite/formal gauge covariance and matrix Ward identity: Let $K(z;\\zeta)=K_0(\\zeta)+zV(\\zeta)$ and $S(z;\\zeta)$ be the finite-dimensional formal matrices of [[def-qft-qed-formal-ring]], with $d\\ge1$, $K_0(\\zeta)$ invertible, and both coefficient matrices covariant under the vertex phase angles of [[def-qft-qed-finite-graph-gauge-data]]. Then $S$ is a two-sided inverse of $K$ in $M_d(\\mathbb C\\llbracket z\\rrbracket)$, and $$ S(z;\\zeta^\\theta)=D_\\theta S(z;\\zeta)D_\\theta^{-1} $$ coefficientwise. For a differentiable phase path $D_s=e^{is\\Theta}$, where the real vertex-angle path is $s\\theta$, the variations satisfy $$ \\delta K=i[\\Theta,K],\\qquad \\delta S=i[\\Theta,S]=-S(\\delta K)S . $$ For ordinary finite matrices $A,B\\in GL_d(\\mathbb C)$, the corresponding resolvent id The displayed finite algebraic/test-contraction computation uses supplied objects rather than choosing elements of a family of nonempty sets; no nonempty-family selection is a separate conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Finite/formal gauge covariance and matrix Ward identity: Let $K(z;\\zeta)=K_0(\\zeta)+zV(\\zeta)$ and $S(z;\\zeta)$ be the finite-dimensional formal matrices of [[def-qft-qed-formal-ring]], with $d\\ge1$, $K_0(\\zeta)$ invertible, and both coefficient matrices covariant under the vertex phase angles of [[def-qft-qed-finite-graph-gauge-data]]. Then $S$ is a two-sided inverse of $K$ in $M_d(\\mathbb C\\llbracket z\\rrbracket)$, and $$ S(z;\\zeta^\\theta)=D_\\theta S(z;\\zeta)D_\\theta^{-1} $$ coefficientwise. For a differentiable phase path $D_s=e^{is\\Theta}$, where the real vertex-angle path is $s\\theta$, the variations satisfy $$ \\delta K=i[\\Theta,K],\\qquad \\delta S=i[\\Theta,S]=-S(\\delta K)S . $$ For ordinary finite matrices $A,B\\in GL_d(\\mathbb C)$, the corresponding resolvent id The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Finite/formal gauge covariance and matrix Ward identity: Let $K(z;\\zeta)=K_0(\\zeta)+zV(\\zeta)$ and $S(z;\\zeta)$ be the finite-dimensional formal matrices of [[def-qft-qed-formal-ring]], with $d\\ge1$, $K_0(\\zeta)$ invertible, and both coefficient matrices covariant under the vertex phase angles of [[def-qft-qed-finite-graph-gauge-data]]. Then $S$ is a two-sided inverse of $K$ in $M_d(\\mathbb C\\llbracket z\\rrbracket)$, and $$ S(z;\\zeta^\\theta)=D_\\theta S(z;\\zeta)D_\\theta^{-1} $$ coefficientwise. For a differentiable phase path $D_s=e^{is\\Theta}$, where the real vertex-angle path is $s\\theta$, the variations satisfy $$ \\delta K=i[\\Theta,K],\\qquad \\delta S=i[\\Theta,S]=-S(\\delta K)S . $$ For ordinary finite matrices $A,B\\in GL_d(\\mathbb C)$, the corresponding resolvent id The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-dimensional zero-hopping inverse",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "A1",
+            "step 1.1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ],
+          "expected": "For d=1, K0=m≠0 and V=0, S=m^{-1}; both products equal 1 coefficientwise and scalar conjugation is trivial."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qft-qed-formal-ring",
+          "carrier": "items/def-qft-qed-formal-ring.md",
+          "status": "current batch-45 supplier; exact current interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "Use the finite graph phase data of [[def-qft-qed-finite-graph-gauge-data]] and the planned QED $U(1)$, Clifford, and natural-unit conventions of [[def-qft-qed-gauge-data]]. Let $K_0(\\zeta)\\in GL_d(\\mathbb C)$ be an invertible base matrix and let $V(\\zeta)\\in M_d(\\mathbb C)$ be its finite link-hopping matrix. The admissible covariant families satisfy\n$$\nK_0(\\zeta^\\alpha)=D_\\alpha K_0(\\zeta)D_\\alpha^{-1},\\qquad\nV(\\zeta^\\alpha)=D_\\alpha V(\\zeta)D_\\alpha^{-1}.\n$$\nThe scalar base $K_0=mI_d$, $m\\in\\mathbb C\\setminus\\{0\\}$, is an explicit admissible case. Define\n$$\nK(z;\\zeta):=K_0(\\zeta)+zV(\\zeta),\\qquad\nS(z;\\zeta):=\\sum_{n=0}^{\\infty}(-zK_0(\\zeta)^{-1}V(\\zeta))^nK_0(\\zeta)^{-1}.\n$$\nThe coefficient of each power $z^n$ in $S$ is one finite matrix. The item defines this formal candidate; the following lemma proves its two-sided inverse and covariance properties. Define $\\det A$ for a finite matrix $A$ over $\\mathbb C\\llbracket z\\rrbracket$ by the Leibniz formula $\\det A=\\sum_{\\sigma\\in S_d}\\operatorname{sgn}(\\sigma)\\prod_{j=1}^d A_{j,\\sigma(j)}$.",
+          "relevant_hypotheses_and_conventions": "[F1] [[def-qft-qed-formal-ring]]: $K=K_0+zV$ and $S=\\sum_{n\\ge0}(-zK_0^{-1}V)^nK_0^{-1}$ are defined in the formal power-series ring $\\mathbb C\\llbracket z\\rrbracket$; each coefficient of $S$ is a finite matrix.\nConsumer uses: 1.1, 1.2, 2.1, 2.2, 2.3, 3.1.",
+          "supplier_proof_status": "Current assigned item; use only at the inspected statement and proof status.",
+          "consumer_use": "F1 is used in step 1.1, step 1.2, step 2.1, step 2.2, step 2.3, step 3.1"
+        },
+        {
+          "supplier": "def-qft-qed-finite-graph-gauge-data",
+          "carrier": "items/def-qft-qed-finite-graph-gauge-data.md",
+          "status": "current batch-45 supplier; exact current interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "For a real vertex phase $\\theta=(\\theta_x)_{x\\in X}\\in\\mathbb R^X$, define\n$$\n\\zeta_e^\\theta:=e^{i(\\theta_{s(e)}-\\theta_{t(e)})}\\zeta_e,\\qquad\nD_\\theta:=\\operatorname{diag}_{x\\in X}(e^{i\\theta_x}I_r)\\in GL_d(\\mathbb C).\n$$\nDefine the link-hopping matrix $V(\\zeta)\\in M_d(\\mathbb C)$ by its $x,y$ block indexed by $x,y\\in X$\n$$\nV(\\zeta)_{xy}:=\\sum_{\\substack{e\\in E\\\\s(e)=x,\\ t(e)=y}}T_e\\zeta_e .\n$$\nAn empty sum is the zero $r\\times r$ matrix. Additional fixed diagonal blocks belong to a separate base matrix. These data are finite-dimensional algebraic data; the phases are external parameters, not rotor multiplication operators on $L^2(\\mathbb T^E)$.",
+          "relevant_hypotheses_and_conventions": "[F2] [[def-qft-qed-finite-graph-gauge-data]]: $\\zeta_e^\\theta=e^{i(\\theta_{s(e)}-\\theta_{t(e)})}\\zeta_e$ and $D_\\theta=\\operatorname{diag}_x(e^{i\\theta_x}I_r)$; the hopping blocks are $T_e\\zeta_e$.\nConsumer uses: 1.2.",
+          "supplier_proof_status": "Current assigned item; use only at the inspected statement and proof status.",
+          "consumer_use": "F2 is used in step 1.2"
+        },
+        {
+          "supplier": "def-qft-qed-gauge-data",
+          "carrier": "items/def-qft-qed-gauge-data.md",
+          "status": "Draft supplier registered in current batch-44 manifest and qft-mg01 page; acceptance remains separate.",
+          "source_section": "Definition",
+          "exact_statement": "Use the fixed Minkowski coordinates $x=(x^0,\\mathbf x)=(ct,x^1,x^2,x^3)$, with $\\eta=\\operatorname{diag}(-1,1,1,1)$, on an open coordinate domain $U\\subseteq\\mathbb R^4$ with its standard topology. Each $x^a$ has unit metre. For a smooth scalar component $u:U\\to\\mathbb R$ or $u:U\\to\\mathbb C$, define $\\partial_a u:=\\partial u/\\partial x^a$; thus $\\partial_0=c^{-1}\\partial_t$ at fixed $\\mathbf x$, $\\partial_j=\\partial/\\partial x^j$ for $j=1,2,3$, and each $\\partial_a$ has unit $\\mathrm m^{-1}$. Raise derivative indices with $\\partial^a:=\\eta^{ab}\\partial_b$. The fields in this definition are smooth maps\n$$\\phi\\in C^\\infty(U;\\mathbb R),\\qquad \\mathbf A\\in C^\\infty(U;\\mathbb R^3),\\qquad \\psi\\in C^\\infty(U;\\mathbb C^4),\\qquad \\chi\\in C^\\infty(U;\\mathbb R).$$\nDefine the lower-potential component maps $A_a:U\\to\\mathbb R$ by $A_0=-\\phi/c$ and $A_j=\\mathbf A_j$; collectively $(A_a)$ is the real covector potential in this chart. Then $F_{ab}:=\\partial_aA_b-\\partial_bA_a$ has smooth real component maps $F_{ab}:U\\to\\mathbb R$. The spinor is an ordinary commuting $\\mathbb C^4$-valued map, not a tuple of Grassmann generators. Its Dirac adjoint is the smooth row-valued map $\\bar\\psi:=\\psi^\\dagger\\beta:U\\to(\\mathbb C^4)^*$, using the fixed matrices and adjoint of [[def-qft-dirac-projections]], so $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$. In fixed SI units, $\\phi$ is in volts, each $A_a$ is in $\\mathrm{T\\,m}$, $\\psi$ is assigned field dimension $\\mathrm m^{-3/2}$, and $\\chi$ is in webers; these unit labels accompany the maps and do not identify $q$ with a measured charge. For periodic spatial domains, the same component and unit conventions apply to smooth periodic coordinate lifts, with the quotient domain specified by the item using them.\n\nFor the SI-normalization bookkeeping, let $c>0$ (m s$^{-1}$), $\\hbar>0$ (J s), $\\mu_0>0$ (N A$^{-2}$), a real charge parameter $q$ (C), and a mass parameter $m>0$ (kg) be symbolic inputs; put $\\epsilon_0=(\\mu_0c^2)^{-1}$. In the current SI, $c$ and $h$ are defining constants while $\\mu_0$ is experimentally determined; the formula below keeps $\\mu_0$ symbolic and assigns it no numerical value. Use the lower-potential convention\n$$A_a=(-\\phi/c,\\mathbf A),$$\nwhere $A_a$ has units T m, $\\phi$ is in volts, and $\\mathbf A$ is in T m. Define\n$$S_0=\\sqrt{\\mu_0\\hbar c},\\qquad a_a=A_a/S_0,\\qquad f_{ab}=\\partial_aa_b-\\partial_ba_a,$$\n$$\\mu=mc/\\hbar,\\qquad g=q\\sqrt{\\mu_0c/\\hbar}=q/\\sqrt{\\epsilon_0\\hbar c},\\qquad D_a=\\partial_a-ig a_a.$$\nHere $D_a$ acts on $\\psi\\in C^\\infty(U;\\mathbb C^4)$ by $(D_a\\psi)(x)=\\partial_a\\psi(x)-ig a_a(x)\\psi(x)$, again a smooth map $U\\to\\mathbb C^4$. Thus $a_a$ and $\\mu$ have units m$^{-1}$, $f_{ab}$ has units m$^{-2}$, and $g$ is dimensionless. For $\\psi$ with units m$^{-3/2}$, both $-\\tfrac14 f_{ab}f^{ab}$ and $\\bar\\psi(i\\gamma^aD_a-\\mu)\\psi$ have units m$^{-4}$; their integral over $d^4x$ is dimensionless and represents the action divided by $\\hbar$ in this normalization.\n\nFor the real smooth gauge-parameter map $\\chi:U\\to\\mathbb R$ in webers, put $\\alpha:=\\chi/S_0\\in C^\\infty(U;\\mathbb R)$ (dimensionless) and use\n$$A'_a=A_a+\\partial_a\\chi,\\qquad a'_a=a_a+\\partial_a\\alpha,\\qquad \\psi'=e^{ig\\alpha}\\psi.$$\nThe induced covariant derivative is $D'_a=\\partial_a-ig a'_a$. These are formal mathematical conventions for the later conditional deductions. They do not adopt a measured value of $\\mu_0$, identify $q$ with an electron charge, impose charge quantization, or assert that interacting continuum fields exist.",
+          "relevant_hypotheses_and_conventions": "Smooth coordinate fields and dimensionless continuum phase exp(ig alpha); graph theta is an independent real vertex tuple. Numerical theta_x=g alpha_x requires a separately assigned vertex tuple and supplies no spacetime embedding.",
+          "supplier_proof_status": "Draft definition and local proof inspected; registration verified in current batch-44 manifest. No workflow acceptance is inferred.",
+          "consumer_use": "F3 is used in step 1.2"
+        }
+      ],
+      "risk_review": {
+        "status": "authoring-self-check",
+        "reviewer": "beta-batch-45-authoring",
+        "notes": "Checked the exact conditional supplier interfaces against the cited uses. This record is not independent proof approval."
+      },
+      "repair_confidence": 1
+    },
+    "lem-qft-qed-coherent-ir-obstruction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-qed-photon-energy-multiplier",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Use the transverse space $\\mathcal H_T=\\operatorname{Ran}M_{P_T}$ of [[def-qft-photon-transverse-space]], with $P_T(\\mathbf k)=I_3-\\mathbf n\\mathbf n^T$ for $\\mathbf k\\ne0$ and any assigned value at the null point $\\mathbf k=0$. In the QFT length convention, assign $\\mathbf k$ units m$^{-1}$ and define the nonnegative measurable multiplier\n$$ \\omega(\\mathbf k):=|\\mathbf k|. $$\nIts maximal multiplication operator on $\\mathcal H_T$ is\n$$ (M_\\omega f)(\\mathbf k):=\\omega(\\mathbf k)f(\\mathbf k),\\qquad D(M_\\omega):=\\{f\\in\\mathcal H_T:\\omega f\\in L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3)\\}. $$\nBecause $\\omega$ is a scalar multiplier, $\\mathbf k\\cdot f(\\mathbf k)=0$ a.e. implies $\\mathbf k\\cdot(M_\\omega f)(\\mathbf k)=0$ a.e.; thus the displayed multiplication maps its stated domain into $\\mathcal H_T$. The value $\\omega(0)=0$ is immaterial to the $L^2$ operator. For $\\hbar,c>0$, the corresponding one-particle energy convention is $E_1:=\\hbar c M_\\omega$, in joules.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-second-quantized-spectrum",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let\n$(X,\\mathcal A,\\mu)$ be a sigma-finite measure space and let\n$\\boldsymbol\\omega=(\\omega_1,\\ldots,\\omega_d):X\\to\\mathbb R^d$ be a\nfinite-valued measurable map, where $d\\ge1$. Put\n$H=L^2(X,\\mu;\\mathbb C)$ with the second-variable-linear pairing of\n[[def-qft-fock-and-test-spaces]], and form the bosonic Fock space\n$\\mathcal F_s(H)$. For $n\\ge1$, identify $H_s^{(n)}$ with the symmetric\nsubspace of $L^2(X^n,\\overline{\\mu^{\\times n}};\\mathbb C)$ by iterating\n[[lem-qft-l2-product-tensor-identification]]. Set $X^0=\\{\\star\\}$,\n$s_0(\\star)=0$, and for $n\\ge1$ set\n$$s_n(x_1,\\ldots,x_n)=\\sum_{r=1}^n\\boldsymbol\\omega(x_r)\\in\\mathbb R^d.$$\nFor $1\\le j\\le d$, define $H_j$ by multiplication by the $j$th coordinate\n$s_{n,j}$ on sector $n$, with exact domain\n$$D(H_j)=\\left\\{\\Psi=(\\Psi_n): \\sum_{n\\ge1}\\int_{X^n}|s_{n,j}|^2|\\Psi_n|^2\\,d\\overline{\\mu^{\\times n}}<\\infty\\right\\}.$$\nEach $H_j$ is self-adjoint, and $\\mathcal D_{\\rm fin}\\cap D(H_j)$ is a\ngraph core. The joint projection-valued measure\n[[def-projection-valued-measure]] on $\\mathbb R^d$ is\n$$(E(B)\\Psi)_n=\\mathbf1_{s_n^{-1}(B)}\\Psi_n\\quad(n\\ge1),\\qquad (E(B)\\Psi)_0=\\mathbf1_B(0)\\Psi_0.$$\nFor $\\theta\\in\\mathbb R^d$, let $H_\\theta$ be multiplication on sector $n$\nby $\\theta\\cdot s_n$, with its maximal square-integrability domain. Then\n$$U_\\theta(t)\\Psi:=\\bigl(e^{it\\theta\\cdot s_n}\\Psi_n\\bigr)_{n\\ge0}$$\nis a strongly continuous unitary group on all of Fock space, and its norm\nderivative at zero exists exactly for $\\Psi\\in D(H_\\theta)$, where it is\n$iH_\\theta\\Psi$. The zero-particle sector is the vacuum eigenvector at joint\nvalue $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. Identify parenthesizations by the isometry fixing\nelementary tensors: the product pairing is the same on their dense span,\nso the map and its inverse extend to the completions. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $h\\in H$, the map $C_h:H\\to\\mathbb C$, $C_h(v)=\\langle h,v\\rangle_2$, is linear and bounded:\n$|C_h(v)|=|(v,h)_1|\\le\\|h\\|\\,\\|v\\|$ by\n[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]].\nFor any Hilbert space $K$, identify $\\mathbb C\\widehat\\otimes K$ with $K$\nby $J_K(z\\otimes v)=zv$. Every algebraic tensor is $1\\otimes w$;\nthe tensor norm is then $\\|w\\|$, so $J_K$ extends to a surjective isometry\non the completion (with inverse $w\\mapsto1\\otimes w$).\nThroughout the following formulas, $C_h\\otimes I^{\\otimes(n-1)}$ means\n$J_{H^{\\widehat\\otimes(n-1)}}\\circ(C_h\\widehat\\otimes I)$, with\n$I$ the identity on $H^{\\widehat\\otimes(n-1)}$.\nThe bounded tensor-map supplier therefore applies and gives norm at most\n$\\|h\\|$. This includes $n=1$, where $H^{\\widehat\\otimes0}=\\mathbb C$.\nContraction commutes with permutations of the remaining $n-1$ factors,\nso it takes symmetric or antisymmetric tensors to the corresponding\n$(n-1)$-particle sector (and to $\\mathbb C$ for $n=1$).\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h$ is the bounded functional above, its tensor extension is supplied by\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-complex-exponential-series-converges-everywhere",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$, the series $\\sum z^n/n!$ converges absolutely.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For $\\mathbf n\\in S^2$, $P_T(\\mathbf n)=I-\\mathbf n\\mathbf n^\\top$ is an orthogonal projection and [A2] gives $\\mathbf n\\cdot b(\\mathbf n)=0$; hence $\\mathbf k\\cdot f_\\epsilon(\\mathbf k)=0$ a.e. Since $\\epsilon<|\\mathbf k|<\\kappa$ on the support, the radial norm integrals in [F4]–[F6] are finite on these strictly positive finite bounds, so both $f_\\epsilon$ and $\\omega f_\\epsilon$ are square-integrable.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "By [F4]–[F6], spherical coordinates give $d^3k=r^2dr\\,d\\Omega$. Substituting $r=\\epsilon u$ in the radial integral and using [F10] gives $\\int_\\epsilon^\\kappa dr/r=\\log(\\kappa/\\epsilon)$, so $\\|f_\\epsilon\\|^2=C_b\\int_\\epsilon^\\kappa r^{-1}dr=C_b\\log(\\kappa/\\epsilon)$, $\\langle f_\\epsilon,\\omega f_\\epsilon\\rangle=C_b(\\kappa-\\epsilon)$, and $\\|\\omega f_\\epsilon\\|^2=C_b(\\kappa^2-\\epsilon^2)/2$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For any $u,v\\in\\mathcal H_T$, [F2] gives $\\langle u^{\\otimes n},v^{\\otimes n}\\rangle=\\langle u,v\\rangle^n$ and $\\|u^{\\otimes n}\\|^2=\\|u\\|^{2n}$. By [F7]–[F8], $\\sum_{n\\ge0}\\|u\\|^{2n}/n!=e^{\\|u\\|^2}<\\infty$, so the displayed $\\epsilon(u)$ belongs to symmetric Fock space. Its direct-sum pairing with $\\epsilon(v)$ is the absolutely convergent series $\\sum_{n\\ge0}\\langle u,v\\rangle^n/n!=e^{\\langle u,v\\rangle}$, by [F7]. The addition and modulus laws [F8]–[F9] therefore give that $C(u)$ has norm one and $|\\langle C(u),C(v)\\rangle|=e^{-\\|u-v\\|^2/2}$. This direct tensor calculation requires no separability hypothesis on $\\mathcal H_T$. On the full vector space $L^2(\\mathbb R^3;\\mathbb C^3)$, multiplication by $\\omega$ commutes with the multiplier $P_T$. Its tensor-power projections therefore commute with the sector multiplier $\\sum_j|\\mathbf k_j|$; the transverse symmetric Fock space is a reducing subspace for the second-quantized multiplier of [F3]. If $r=\\|f_\\epsilon\\|^2$, $q=\\langle f_\\epsilon,\\omega f_\\epsilon\\rangle$, and $s=\\|\\omega f_\\epsilon\\|^2$, the sector formulas give\n$$ \\|d\\Gamma(\\omega)C(f_\\epsilon)\\|^2 =e^{-r}\\sum_{n\\ge1}\\frac{n s r^{n-1}+n(n-1)q^2r^{n-2}}{n!} =s+q^2<\\infty. $$\nThe same sector sum with one multiplier gives $\\langle C(f_\\epsilon),d\\Gamma(\\omega)C(f_\\epsilon)\\rangle=q$; [F2] gives $\\|C(f_\\epsilon)\\|=1$. Multiplying by $\\hbar c$ and substituting [step 1.2] proves the stated domain and energy claims.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Put $\\epsilon_j=\\kappa 2^{-j}$ for $j\\ge1$. The difference $f_{\\epsilon_{j+1}}-f_{\\epsilon_j}$ is supported on the shell $(\\epsilon_{j+1},\\epsilon_j)$, so its squared norm is $C_b\\int_{\\epsilon_{j+1}}^{\\epsilon_j}r^{-1}dr=C_b\\log2>0$, using $r=\\epsilon_{j+1}u$ and [F10]. From the pairing identity in step 2.1,\n$$ |\\langle C(f_{\\epsilon_j}),C(f_{\\epsilon_{j+1}})\\rangle| =e^{-\\|f_{\\epsilon_{j+1}}-f_{\\epsilon_j}\\|^2/2}=e^{-C_b\\log2/2}<1. $$\nThus $\\|C(f_{\\epsilon_j})-C(f_{\\epsilon_{j+1}})\\|^2\\ge2(1-e^{-C_b\\log2/2})>0$, and this sequence is not Cauchy.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F10",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Let $\\Psi$ have only sectors $0,\\ldots,N$. By sectorwise Cauchy–Schwarz [F11],\n$$ |\\langle\\Psi,C(f_\\epsilon)\\rangle| \\le e^{-\\|f_\\epsilon\\|^2/2}\\sum_{n=0}^{N}\\frac{\\|\\Psi_n\\|\\|f_\\epsilon\\|^n}{\\sqrt{n!}}\\longrightarrow0 $$\nas $\\epsilon\\downarrow0$, as follows explicitly. If $\\epsilon<\\kappa2^{-m}$, the radial integral in\nstep 1.2 contains $m$ disjoint dyadic intervals; on each $(a,2a)$,\n$\\int_a^{2a}dr/r\\ge1/2$. Thus $\\|f_\\epsilon\\|^2\\ge C_bm/2\\to\\infty$.\nWrite $a=\\|f_\\epsilon\\|$ and choose an integer $M>N/2$. The nonnegative\nreal exponential series [F7]–[F8] gives\n$e^{a^2/2}\\ge(a^2/2)^M/M!$. Hence for $0\\le n\\le N$,\n$a^ne^{-a^2/2}\\le2^MM!a^{n-2M}\\to0$, proving the displayed finite-sum limit. Finite-sector vectors are dense: for any Fock vector $\\Psi=(\\Psi_n)_{n\\ge0}$, the truncations $\\sum_{n=0}^N\\Psi_n$ converge in norm because $\\sum_n\\|\\Psi_n\\|^2<\\infty$. Since $\\|C(f_\\epsilon)\\|=1$, [F11] bounds the pairing of each truncation error by its norm, uniformly in $\\epsilon$. First taking a sufficiently accurate truncation and then the limit just proved gives weak convergence to zero for every Fock vector. A norm limit would have to equal the weak limit zero, contradicting the unit norms.",
+          "inputs": [
+            "A2",
+            "F2",
+            "F7",
+            "F8",
+            "F11",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero angular profile is excluded by C_b>0 in A2; steps 1.2 and 3.1 use strict positivity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Every cutoff is positive, and steps 3.1–4.1 prove the limit as ε decreases to zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement of Logarithmic coherent infrared tail: finite energy, no Fock limit: Use the transverse one-particle space $\\mathcal H_T$ and multiplier $\\omega(\\mathbf k)$ of [[def-qft-qed-photon-energy-multiplier]], and form its symmetric Fock space $\\mathcal F_s(\\mathcal H_T)$. Let $H_{\\rm ph}:=\\hbar c\\,d\\Gamma(\\omega)$, with $\\hbar,c>0$ and $d\\Gamma(\\omega)$ acting on the $n$-particle sector as multiplication by $\\sum_{j=1}^n|\\mathbf k_j|$, as in [[lem-qft-second-quantized-spectrum]]. For a coherent vector use $$ \\epsilon(f):=\\bigoplus_{n=0}^{\\infty}\\frac{f^{\\otimes n}}{\\sqrt{n!}},\\qquad C(f):=e^{-\\|f\\|^2/2}\\epsilon(f), $$ using the tensor and direct-sum conventions of [[def-qft-fock-and-test-spaces]]. Let $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathb The objects have the fixed fiber, test domain, witness or shell specified there. This claim does not vary a finite set cardinality through a singleton boundary; any displayed unit scalar/vector is part of the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement of Logarithmic coherent infrared tail: finite energy, no Fock limit: Use the transverse one-particle space $\\mathcal H_T$ and multiplier $\\omega(\\mathbf k)$ of [[def-qft-qed-photon-energy-multiplier]], and form its symmetric Fock space $\\mathcal F_s(\\mathcal H_T)$. Let $H_{\\rm ph}:=\\hbar c\\,d\\Gamma(\\omega)$, with $\\hbar,c>0$ and $d\\Gamma(\\omega)$ acting on the $n$-particle sector as multiplication by $\\sum_{j=1}^n|\\mathbf k_j|$, as in [[lem-qft-second-quantized-spectrum]]. For a coherent vector use $$ \\epsilon(f):=\\bigoplus_{n=0}^{\\infty}\\frac{f^{\\otimes n}}{\\sqrt{n!}},\\qquad C(f):=e^{-\\|f\\|^2/2}\\epsilon(f), $$ using the tensor and direct-sum conventions of [[def-qft-fock-and-test-spaces]]. Let $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathb A collapse outside these explicitly supplied positive/nonzero or fixed-dimensional data is not claimed. Zero inputs already admitted by the displayed linear identities remain admitted; this row introduces no degenerate extension of the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 evaluates radial endpoints ε and κ; step 3.1 takes ε to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1,1.2 and3.1 cite [A1] Countable Choice from the original Fock, polar and multiplier suppliers; no global separability or stronger choice is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Logarithmic coherent infrared tail: finite energy, no Fock limit: Use the transverse one-particle space $\\mathcal H_T$ and multiplier $\\omega(\\mathbf k)$ of [[def-qft-qed-photon-energy-multiplier]], and form its symmetric Fock space $\\mathcal F_s(\\mathcal H_T)$. Let $H_{\\rm ph}:=\\hbar c\\,d\\Gamma(\\omega)$, with $\\hbar,c>0$ and $d\\Gamma(\\omega)$ acting on the $n$-particle sector as multiplication by $\\sum_{j=1}^n|\\mathbf k_j|$, as in [[lem-qft-second-quantized-spectrum]]. For a coherent vector use $$ \\epsilon(f):=\\bigoplus_{n=0}^{\\infty}\\frac{f^{\\otimes n}}{\\sqrt{n!}},\\qquad C(f):=e^{-\\|f\\|^2/2}\\epsilon(f), $$ using the tensor and direct-sum conventions of [[def-qft-fock-and-test-spaces]]. Let $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathb The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Logarithmic coherent infrared tail: finite energy, no Fock limit: Use the transverse one-particle space $\\mathcal H_T$ and multiplier $\\omega(\\mathbf k)$ of [[def-qft-qed-photon-energy-multiplier]], and form its symmetric Fock space $\\mathcal F_s(\\mathcal H_T)$. Let $H_{\\rm ph}:=\\hbar c\\,d\\Gamma(\\omega)$, with $\\hbar,c>0$ and $d\\Gamma(\\omega)$ acting on the $n$-particle sector as multiplication by $\\sum_{j=1}^n|\\mathbf k_j|$, as in [[lem-qft-second-quantized-spectrum]]. For a coherent vector use $$ \\epsilon(f):=\\bigoplus_{n=0}^{\\infty}\\frac{f^{\\otimes n}}{\\sqrt{n!}},\\qquad C(f):=e^{-\\|f\\|^2/2}\\epsilon(f), $$ using the tensor and direct-sum conventions of [[def-qft-fock-and-test-spaces]]. Let $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathb The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "fixed transverse angular profile",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "algebra",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9"
+          ],
+          "expected": "For b(n)=P_T(n)e and unit e, C_b=8π/3; ||f_ε||²=(8π/3)log(κ/ε), energy=(8π/3)ℏc(κ−ε)."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "consumer_use": "A1 is used in step 1.1, step 1.2, step 3.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "def-qft-qed-photon-energy-multiplier",
+          "carrier": "items/def-qft-qed-photon-energy-multiplier.md",
+          "source_section": "Definition",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]]. Use the transverse space $\\mathcal H_T=\\operatorname{Ran}M_{P_T}$ of [[def-qft-photon-transverse-space]], with $P_T(\\mathbf k)=I_3-\\mathbf n\\mathbf n^T$ for $\\mathbf k\\ne0$ and any assigned value at the null point $\\mathbf k=0$. In the QFT length convention, assign $\\mathbf k$ units m$^{-1}$ and define the nonnegative measurable multiplier\n$$ \\omega(\\mathbf k):=|\\mathbf k|. $$\nIts maximal multiplication operator on $\\mathcal H_T$ is\n$$ (M_\\omega f)(\\mathbf k):=\\omega(\\mathbf k)f(\\mathbf k),\\qquad D(M_\\omega):=\\{f\\in\\mathcal H_T:\\omega f\\in L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3)\\}. $$\nBecause $\\omega$ is a scalar multiplier, $\\mathbf k\\cdot f(\\mathbf k)=0$ a.e. implies $\\mathbf k\\cdot(M_\\omega f)(\\mathbf k)=0$ a.e.; thus the displayed multiplication maps its stated domain into $\\mathcal H_T$. The value $\\omega(0)=0$ is immaterial to the $L^2$ operator. For $\\hbar,c>0$, the corresponding one-particle energy convention is $E_1:=\\hbar c M_\\omega$, in joules.",
+          "consumer_use": "F1 is used in step 1.1, step 1.2",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "lem-qft-second-quantized-spectrum",
+          "carrier": "items/lem-qft-second-quantized-spectrum.md",
+          "source_section": "Statement",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]]. Let\n$(X,\\mathcal A,\\mu)$ be a sigma-finite measure space and let\n$\\boldsymbol\\omega=(\\omega_1,\\ldots,\\omega_d):X\\to\\mathbb R^d$ be a\nfinite-valued measurable map, where $d\\ge1$. Put\n$H=L^2(X,\\mu;\\mathbb C)$ with the second-variable-linear pairing of\n[[def-qft-fock-and-test-spaces]], and form the bosonic Fock space\n$\\mathcal F_s(H)$. For $n\\ge1$, identify $H_s^{(n)}$ with the symmetric\nsubspace of $L^2(X^n,\\overline{\\mu^{\\times n}};\\mathbb C)$ by iterating\n[[lem-qft-l2-product-tensor-identification]]. Set $X^0=\\{\\star\\}$,\n$s_0(\\star)=0$, and for $n\\ge1$ set\n$$s_n(x_1,\\ldots,x_n)=\\sum_{r=1}^n\\boldsymbol\\omega(x_r)\\in\\mathbb R^d.$$\nFor $1\\le j\\le d$, define $H_j$ by multiplication by the $j$th coordinate\n$s_{n,j}$ on sector $n$, with exact domain\n$$D(H_j)=\\left\\{\\Psi=(\\Psi_n): \\sum_{n\\ge1}\\int_{X^n}|s_{n,j}|^2|\\Psi_n|^2\\,d\\overline{\\mu^{\\times n}}<\\infty\\right\\}.$$\nEach $H_j$ is self-adjoint, and $\\mathcal D_{\\rm fin}\\cap D(H_j)$ is a\ngraph core. The joint projection-valued measure\n[[def-projection-valued-measure]] on $\\mathbb R^d$ is\n$$(E(B)\\Psi)_n=\\mathbf1_{s_n^{-1}(B)}\\Psi_n\\quad(n\\ge1),\\qquad (E(B)\\Psi)_0=\\mathbf1_B(0)\\Psi_0.$$\nFor $\\theta\\in\\mathbb R^d$, let $H_\\theta$ be multiplication on sector $n$\nby $\\theta\\cdot s_n$, with its maximal square-integrability domain. Then\n$$U_\\theta(t)\\Psi:=\\bigl(e^{it\\theta\\cdot s_n}\\Psi_n\\bigr)_{n\\ge0}$$\nis a strongly continuous unitary group on all of Fock space, and its norm\nderivative at zero exists exactly for $\\Psi\\in D(H_\\theta)$, where it is\n$iH_\\theta\\Psi$. The zero-particle sector is the vacuum eigenvector at joint\nvalue $0$.",
+          "consumer_use": "F3 is used in step 2.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "def-qft-fock-and-test-spaces",
+          "carrier": "items/def-qft-fock-and-test-spaces.md",
+          "source_section": "Definition",
+          "exact_statement": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. Identify parenthesizations by the isometry fixing\nelementary tensors: the product pairing is the same on their dense span,\nso the map and its inverse extend to the completions. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $h\\in H$, the map $C_h:H\\to\\mathbb C$, $C_h(v)=\\langle h,v\\rangle_2$, is linear and bounded:\n$|C_h(v)|=|(v,h)_1|\\le\\|h\\|\\,\\|v\\|$ by\n[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]].\nFor any Hilbert space $K$, identify $\\mathbb C\\widehat\\otimes K$ with $K$\nby $J_K(z\\otimes v)=zv$. Every algebraic tensor is $1\\otimes w$;\nthe tensor norm is then $\\|w\\|$, so $J_K$ extends to a surjective isometry\non the completion (with inverse $w\\mapsto1\\otimes w$).\nThroughout the following formulas, $C_h\\otimes I^{\\otimes(n-1)}$ means\n$J_{H^{\\widehat\\otimes(n-1)}}\\circ(C_h\\widehat\\otimes I)$, with\n$I$ the identity on $H^{\\widehat\\otimes(n-1)}$.\nThe bounded tensor-map supplier therefore applies and gives norm at most\n$\\|h\\|$. This includes $n=1$, where $H^{\\widehat\\otimes0}=\\mathbb C$.\nContraction commutes with permutations of the remaining $n-1$ factors,\nso it takes symmetric or antisymmetric tensors to the corresponding\n$(n-1)$-particle sector (and to $\\mathbb C$ for $n=1$).\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h$ is the bounded functional above, its tensor extension is supplied by\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; for separable $H$ (that is, $H$ has an at most countable\nnorm-dense subset), their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "consumer_use": "F2 is used in step 2.1, step 3.1, step 4.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "carrier": "items/def-surface-integral-on-a-compact-c-one-hypersurface.md",
+          "source_section": "Definition",
+          "exact_statement": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "consumer_use": "F4 is used in step 1.1, step 1.2, step 3.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "carrier": "items/lem-euclidean-chart-measure-agrees-with-polar-surface-measure.md",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+          "consumer_use": "F5 is used in step 1.1, step 1.2, step 3.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "carrier": "items/thm-polar-coordinates-formula-for-lebesgue-measure.md",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "consumer_use": "F6 is used in step 1.1, step 1.2, step 3.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "def-complex-exponential",
+          "carrier": "items/def-complex-exponential.md",
+          "source_section": "Definition",
+          "exact_statement": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "consumer_use": "F7 is used in step 2.1, step 4.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "lem-complex-exponential-series-converges-everywhere",
+          "carrier": "items/lem-complex-exponential-series-converges-everywhere.md",
+          "source_section": "Statement",
+          "exact_statement": "For every $z\\in\\mathbb C$, the series $\\sum z^n/n!$ converges absolutely.",
+          "consumer_use": "F7 is used in step 2.1, step 4.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "thm-complex-exponential-addition-and-real-extension",
+          "carrier": "items/thm-complex-exponential-addition-and-real-extension.md",
+          "source_section": "Statement",
+          "exact_statement": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "consumer_use": "F8 is used in step 2.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "carrier": "items/cor-complex-exponential-cartesian-form-modulus-and-eulers-identity.md",
+          "source_section": "Statement",
+          "exact_statement": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "consumer_use": "F9 is used in step 2.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-45",
+        "notes": "Read all six numbered paragraphs and all 13 direct supplier interfaces. The surface/polar statements apply in dimension 3 under Countable Choice; an L2 angular representative may be taken Borel without altering its equivalence class. For 0<epsilon<kappa the radial integrals are C_b log(kappa/epsilon), C_b(kappa-epsilon), and C_b(kappa^2-epsilon^2)/2. The tensor pairing is second-variable-linear; the coherent overlap follows from the absolutely convergent exponential series. The scalar product-space multiplier restricts to the transverse symmetric sectors since its projections commute. The full operator-domain sum is s+q^2, not merely a finite form expectation. C_b>0 excludes the vacuum exception. Adjacent dyadic cutoffs stay a positive distance apart; finite-sector truncation and the explicit exponential bound prove weak convergence for every test vector. Uniform unit norms exclude a strong limit. No separability or stronger choice is assumed; no interacting QED or observed claim is asserted. Published metadata/status concerns are nonfatal and separately routed."
+      }
+    },
+    "lem-qft-qed-tree-ward": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qft-dirac-projections",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]], the mathematical scalar shell conventions of [[def-qft-scalar-mass-shell]], and the second-variable-linear Hilbert pairing of [[def-qft-fock-and-test-spaces]]. In the fixed inertial coordinates $x=(x^0,\\mathbf x)$ of [[def-inertial-frame-and-inertial-chart]] on the affine Minkowski model [[def-sr-affine-minkowski-model]], $\\eta=\\operatorname{diag}(-1,1,1,1)$; these coordinates have length units under [[def-qft-scalar-mass-shell]]. The parameter $\\mu\\ge0$ and momentum coordinate $\\mathbf k$ have inverse-length units, and $\\omega(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same units. The parameter is not identified here with a physical rest mass. Matrix $h_D$ has inverse-length units; the dimensionless spin matrices have no physical unit assignment in this mathematical item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-dirac-projections",
+          "source_section": "Definition",
+          "quote": "Use the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-qed-formal-matrix-ward",
+          "source_section": "Statement",
+          "quote": "Let $K(z;\\zeta)=K_0(\\zeta)+zV(\\zeta)$ and $S(z;\\zeta)$ be the finite-dimensional formal matrices of [[def-qft-qed-formal-ring]], with $d\\ge1$, $K_0(\\zeta)$ invertible, and both coefficient matrices covariant under the vertex phase angles of [[def-qft-qed-finite-graph-gauge-data]]. Then $S$ is a two-sided inverse of $K$ in $M_d(\\mathbb C\\llbracket z\\rrbracket)$, and\n$$ S(z;\\zeta^\\theta)=D_\\theta S(z;\\zeta)D_\\theta^{-1} $$\ncoefficientwise. For a real vertex tuple $\\theta$, put\n$\\Theta:=\\operatorname{diag}_{x\\in X}(\\theta_xI_r)$,\n$\\zeta_s:=\\zeta^{s\\theta}$, and $D_s:=D_{s\\theta}=e^{is\\Theta}$.\nWrite $K_s:=K(z;\\zeta_s)$ and $S_s:=S(z;\\zeta_s)$, and define\n$\\delta K:=\\left.\\frac{d}{ds}K_s\\right|_{s=0}$ and\n$\\delta S:=\\left.\\frac{d}{ds}S_s\\right|_{s=0}$ coefficientwise along this\ndifferentiable phase path. The variations satisfy\n$$ \\delta K=i[\\Theta,K],\\qquad \\delta S=i[\\Theta,S]=-S(\\delta K)S . $$\nFor ordinary finite matrices $A,B\\in GL_d(\\mathbb C)$, the corresponding resolvent identity is $B^{-1}(B-A)A^{-1}=A^{-1}-B^{-1}$. These are formal or finite algebraic statements; they assert no convergence of a perturbation series, continuum limit, or loop Ward identity.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qft-qed-tree-ward-step-1-1",
+          "claim": "From the displayed Pauli matrices in [F1], direct multiplication gives $\\sigma_j^\\dagger=\\sigma_j$, $\\sigma_j^2=I_2$, and $\\sigma_i\\sigma_j+\\sigma_j\\sigma_i=0$ for $i\\ne j$. The block formulas then give $\\beta^2=I_4$, $\\beta^\\dagger=\\beta$, $\\gamma^{0\\dagger}=\\gamma^0$, $\\gamma^{j\\dagger}=-\\gamma^j$, and $\\{\\gamma^a,\\gamma^b\\}=2h^{ab}I_4$. Consequently $\\Gamma(p)^2=h(p,p)I_4$ and $\\beta\\Gamma(p)^\\dagger\\beta=\\Gamma(p)$ for every real $p$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qft-qed-tree-ward-step-1-2",
+          "claim": "Multiplying $\\Gamma(p)-\\mu I_4$ and $\\Gamma(p)+\\mu I_4$ in either order gives $(h(p,p)-\\mu^2)I_4$ by [step 1.1]. Thus $K(p)$ is invertible off shell and its inverse is exactly $S_0(p)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qft-qed-tree-ward-step-1-3",
+          "claim": "Since $\\Gamma(p+k)-\\Gamma(p)=\\Gamma(k)$, the resolvent identity [F3] with $A=K(p)$, $B=K(p+k)$ gives $S_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k)$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qft-qed-tree-ward-step-1-4",
+          "claim": "For off-shell $p_0,\\ldots,p_N$, put $k_j=p_{j+1}-p_j$. Applying [step 3.1] at each adjacent pair yields $S_0(p_{j+1})\\Gamma(k_j)S_0(p_j)=S_0(p_j)-S_0(p_{j+1})$; summing $j=0,\\ldots,N-1$ cancels each interior term and leaves $S_0(p_0)-S_0(p_N)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qft-qed-tree-ward-step-2-1",
+          "claim": "If $K(p)u(p)=0$, then taking the adjoint and using $\\beta K(p)^\\dagger\\beta=K(p)$ from [step 1.1] gives $\\bar u(p)K(p)=0$. The same calculation applied to $(\\Gamma(q)+\\mu)v(q)=0$ gives $\\bar v(q)(\\Gamma(q)+\\mu)=0$.",
+          "step": "2.2",
+          "inputs": [
+            "A2",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qft-qed-tree-ward-step-2-2",
+          "claim": "For $k=p-p'$, $\\Gamma(k)=\\Gamma(p)-\\Gamma(p')$; the right equation for $u(p)$ and left equation for $\\bar u(p')$ from [step 2.2] therefore give $\\bar u(p')\\Gamma(k)u(p)=\\mu\\bar u(p')u(p)-\\mu\\bar u(p')u(p)=0$. For $k=p+q$, $\\Gamma(k)=\\Gamma(p)+\\Gamma(q)$; the right $u$ equation and left $v$ equation give $\\bar v(q)\\Gamma(k)u(p)=\\mu\\bar v(q)u(p)-\\mu\\bar v(q)u(p)=0$.",
+          "step": "5.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1 sums adjacent differences from j=0 to N-1. When N=0 this is the empty sum zero and its retained endpoints are S_0(p_0)-S_0(p_0)=0; the telescoping claim remains valid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The parameter μ is strictly positive; step 2.1 also covers p=0 when it is off shell."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement of Off-shell free Dirac Ward telescoping and tree currents: Use the $(-+++)$ coordinate convention, $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$, and the Clifford matrices of [[def-qft-dirac-projections]]; the shell parameter $\\mu>0$ has inverse-length units as in [[def-qft-scalar-mass-shell]]. For $p=(p^0,\\mathbf p)\\in\\mathbb R^4$, write $$ \\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j,\\qquad K(p):=\\Gamma(p)-\\mu I_4. $$ When $h(p,p)\\ne\\mu^2$, define the finite rational inverse $$ S_0(p):=\\frac{\\Gamma(p)+\\mu I_4}{h(p,p)-\\mu^2}. $$ For $p,p+k$ with both denominators nonzero, $$ S_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k). $$ For any finite chain of off-shell momenta, the corresponding insertion differences telescope with both endpoint terms retained. If $u(p),u(p')$ satisfy $( The objects have the fixed fiber, test domain, witness or shell specified there. This claim does not vary a finite set cardinality through a singleton boundary; any displayed unit scalar/vector is part of the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes k=0 at an off-shell p: Gamma(0)=0 and S_0(p)-S_0(p)=0. Step 5.1 likewise contracts the zero on-shell transfer to zero. The positive mu and nonzero rational denominators are unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes the mass-shell poles where the rational inverse denominator vanishes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement carries A1 Countable Choice inherited from the Dirac supplier; the finite proof makes no new choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Off-shell free Dirac Ward telescoping and tree currents: Use the $(-+++)$ coordinate convention, $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$, and the Clifford matrices of [[def-qft-dirac-projections]]; the shell parameter $\\mu>0$ has inverse-length units as in [[def-qft-scalar-mass-shell]]. For $p=(p^0,\\mathbf p)\\in\\mathbb R^4$, write $$ \\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j,\\qquad K(p):=\\Gamma(p)-\\mu I_4. $$ When $h(p,p)\\ne\\mu^2$, define the finite rational inverse $$ S_0(p):=\\frac{\\Gamma(p)+\\mu I_4}{h(p,p)-\\mu^2}. $$ For $p,p+k$ with both denominators nonzero, $$ S_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k). $$ For any finite chain of off-shell momenta, the corresponding insertion differences telescope with both endpoint terms retained. If $u(p),u(p')$ satisfy $( The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Off-shell free Dirac Ward telescoping and tree currents: Use the $(-+++)$ coordinate convention, $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$, and the Clifford matrices of [[def-qft-dirac-projections]]; the shell parameter $\\mu>0$ has inverse-length units as in [[def-qft-scalar-mass-shell]]. For $p=(p^0,\\mathbf p)\\in\\mathbb R^4$, write $$ \\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j,\\qquad K(p):=\\Gamma(p)-\\mu I_4. $$ When $h(p,p)\\ne\\mu^2$, define the finite rational inverse $$ S_0(p):=\\frac{\\Gamma(p)+\\mu I_4}{h(p,p)-\\mu^2}. $$ For $p,p+k$ with both denominators nonzero, $$ S_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k). $$ For any finite chain of off-shell momenta, the corresponding insertion differences telescope with both endpoint terms retained. If $u(p),u(p')$ satisfy $( The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Pauli Clifford calculation",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra",
+            "step 1.1",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "A2",
+            "step 2.2"
+          ],
+          "expected": "σ_j²=I₂, σ_iσ_j+σ_jσ_i=0 for i≠j, and Γ(p)²=(p₀²−|p|²)I₄."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qft-dirac-projections",
+          "carrier": "items/def-qft-dirac-projections.md",
+          "status": "current QFT-MF03 draft supplier; statement and proof inspected",
+          "source_section": "Definition",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]], the mathematical scalar shell conventions of [[def-qft-scalar-mass-shell]], and the second-variable-linear Hilbert pairing of [[def-qft-fock-and-test-spaces]]. In the fixed inertial coordinates $x=(x^0,\\mathbf x)$ of [[def-inertial-frame-and-inertial-chart]] on the affine Minkowski model [[def-sr-affine-minkowski-model]], $\\eta=\\operatorname{diag}(-1,1,1,1)$; these coordinates have length units under [[def-qft-scalar-mass-shell]]. The parameter $\\mu\\ge0$ and momentum coordinate $\\mathbf k$ have inverse-length units, and $\\omega(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same units. The parameter is not identified here with a physical rest mass. Matrix $h_D$ has inverse-length units; the dimensionless spin matrices have no physical unit assignment in this mathematical item.",
+          "relevant_hypotheses_and_conventions": "[A1] Countable Choice is included because [[def-qft-dirac-projections]] states its mathematical convention under that hypothesis; no additional choice is used in the finite matrix calculations. [[def-countable-choice]]\nConsumer uses: 1.1.",
+          "supplier_proof_status": "Draft definition and conditional argument inspected; its Step 1 record is escalated because upstream page edges remain open.",
+          "consumer_use": "A1 is used in step 1.1"
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "current published mathematical supplier; exact definition inspected",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "relevant_hypotheses_and_conventions": "[A1] Countable Choice is included because [[def-qft-dirac-projections]] states its mathematical convention under that hypothesis; no additional choice is used in the finite matrix calculations. [[def-countable-choice]]\nConsumer uses: 1.1.",
+          "supplier_proof_status": "Published definition; exact statement inspected.",
+          "consumer_use": "A1 is used in step 1.1"
+        },
+        {
+          "supplier": "def-qft-dirac-projections",
+          "carrier": "items/def-qft-dirac-projections.md",
+          "status": "current QFT-MF03 draft supplier; statement and proof inspected",
+          "source_section": "Definition",
+          "exact_statement": "Use the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.",
+          "relevant_hypotheses_and_conventions": "[F1] [[def-qft-dirac-projections]] defines $\\beta,\\gamma^0,\\gamma^j$, $\\bar z=z^\\dagger\\beta$, and $\\Gamma(p)=\\gamma^0p^0-\\sum_j\\gamma^jp_j$ with the stated $(-+++)$ convention.\nConsumer uses: 1.1, 1.2, 2.1, 2.2.",
+          "supplier_proof_status": "Draft definition and conditional argument inspected; its Step 1 record is escalated because upstream page edges remain open.",
+          "consumer_use": "F1 is used in step 1.1; step 2.1; step 2.2; step 5.1"
+        },
+        {
+          "supplier": "def-qft-scalar-mass-shell",
+          "carrier": "items/def-qft-scalar-mass-shell.md",
+          "status": "current QFT-MF02 draft supplier; statement and proof inspected",
+          "source_section": "Definition",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "relevant_hypotheses_and_conventions": "[F2] [[def-qft-scalar-mass-shell]] fixes $\\eta=\\operatorname{diag}(-1,1,1,1)$, $h=-\\eta$, $\\mu$ and momentum in inverse-length units, and the future-shell condition $p^0=\\sqrt{|\\mathbf p|^2+\\mu^2}$.\nConsumer uses: 1.1, 2.1.",
+          "supplier_proof_status": "Draft definition and proof inspected; Step 1 item record is ready, while the containing QFT-MF02 page edge remains open.",
+          "consumer_use": "F2 is used in step 1.1, step 2.1"
+        },
+        {
+          "supplier": "lem-qft-qed-formal-matrix-ward",
+          "carrier": "items/lem-qft-qed-formal-matrix-ward.md",
+          "status": "current batch-45 draft supplier; full finite/formal proof inspected",
+          "source_section": "Statement",
+          "exact_statement": "Let $K(z;\\zeta)=K_0(\\zeta)+zV(\\zeta)$ and $S(z;\\zeta)$ be the finite-dimensional formal matrices of [[def-qft-qed-formal-ring]], with $d\\ge1$, $K_0(\\zeta)$ invertible, and both coefficient matrices covariant under the vertex phase angles of [[def-qft-qed-finite-graph-gauge-data]]. Then $S$ is a two-sided inverse of $K$ in $M_d(\\mathbb C\\llbracket z\\rrbracket)$, and\n$$ S(z;\\zeta^\\theta)=D_\\theta S(z;\\zeta)D_\\theta^{-1} $$\ncoefficientwise. For a differentiable phase path $D_s=e^{is\\Theta}$, where the real vertex-angle path is $s\\theta$, the variations satisfy\n$$ \\delta K=i[\\Theta,K],\\qquad \\delta S=i[\\Theta,S]=-S(\\delta K)S . $$\nFor ordinary finite matrices $A,B\\in GL_d(\\mathbb C)$, the corresponding resolvent identity is $B^{-1}(B-A)A^{-1}=A^{-1}-B^{-1}$. These are formal or finite algebraic statements; they assert no convergence of a perturbation series, continuum limit, or loop Ward identity.",
+          "relevant_hypotheses_and_conventions": "[F3] [[lem-qft-qed-formal-matrix-ward]]: finite invertible matrices obey the resolvent identity $B^{-1}(B-A)A^{-1}=A^{-1}-B^{-1}$, and the formal inverse variation is coefficientwise.\nConsumer uses: 3.1.",
+          "supplier_proof_status": "Current assigned draft; proof is complete here, but readiness is escalated through its QFT-MG01 input.",
+          "consumer_use": "F3 is used in step 3.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-45",
+        "notes": "All six proof steps checked against the explicit Pauli/Dirac and scalar-shell Definitions and the reviewed formal-matrix resolvent Statement. Direct matrix algebra gives Gamma(p)^2=h(p,p)I and beta Gamma(p)^dagger beta=Gamma(p), with h=-eta; both inverse products require h(p,p)-mu^2 nonzero. Set A=K(p), B=K(p+k) in the resolvent identity in that order. Summing adjacent differences retains both endpoints, including the empty N=0 chain and zero transfer k. Adjoint spinor equations supply the left eigenvalue +mu for u and -mu for v, so both current contractions cancel. No division at on-shell poles occurs. mu>0, real momenta, future-shell conventions, inverse-length units and inherited Countable Choice remain explicit. No boundary-value, loop, continuum or empirical conclusion is inferred."
+      }
+    },
+    "lem-qft-qed-grassmann-determinant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qft-qed-finite-grassmann-algebra",
+          "source_section": "Definition",
+          "quote": "Order the generators as $\\bar\\psi_1,\\ldots,\\bar\\psi_d,\\psi_1,\\ldots,\\psi_d$. The corresponding ordered monomials form the $R$-basis of $\\Lambda_d(R)$. Let\n$$\nM_d:=\\bar\\psi_1\\cdots\\bar\\psi_d\\psi_1\\cdots\\psi_d\n$$\nand let $[M_d]P\\in R$ denote the coefficient of $M_d$ in $P\\in\\Lambda_d(R)$. Define the finite Grassmann integral by the $R$-linear functional\n$$\n\\mathcal I_d(P):=(-1)^{d(d+1)/2}[M_d]P .\n$$\nFor $K\\in M_d(R)$, put $B_K:=\\sum_{i,j=1}^d\\bar\\psi_iK_{ij}\\psi_j$. Since every monomial of degree greater than $2d$ vanishes, its exponential is the finite sum\n$$\n\\exp(-B_K):=\\sum_{n=0}^{d}\\frac{(-B_K)^n}{n!}.\n$$\nThe sign factor in $\\mathcal I_d$ is the chosen normalization. Its Gaussian determinant identity, including the value at $K=I_d$, is proved separately.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-qed-formal-ring",
+          "source_section": "Definition",
+          "quote": "For a formal indeterminate $z$, let $\\mathbb C\\llbracket z\\rrbracket$ be the commutative ring of sequences $(a_0,a_1,\\ldots)$ written $\\sum_{n\\ge0}a_nz^n$, with coefficientwise addition and Cauchy-product multiplication. No convergence of a numerical series is part of this definition. For $d\\ge1$, matrices over $\\mathbb C\\llbracket z\\rrbracket$ use the usual finite matrix addition and multiplication.\n\nUse the finite graph phase data of [[def-qft-qed-finite-graph-gauge-data]] and the QED $U(1)$, Clifford, and natural-unit conventions of [[def-qft-qed-gauge-data]]. Let $K_0(\\zeta)\\in GL_d(\\mathbb C)$ be an invertible base matrix and let $V(\\zeta)\\in M_d(\\mathbb C)$ be its finite link-hopping matrix. The admissible covariant families satisfy\n$$ K_0(\\zeta^\\theta)=D_\\theta K_0(\\zeta)D_\\theta^{-1},\\qquad V(\\zeta^\\theta)=D_\\theta V(\\zeta)D_\\theta^{-1}. $$\nThe scalar base $K_0=mI_d$, $m\\in\\mathbb C\\setminus\\{0\\}$, is an explicit admissible case. Define\n$$ K(z;\\zeta):=K_0(\\zeta)+zV(\\zeta),\\qquad S(z;\\zeta):=\\sum_{n=0}^{\\infty}(-zK_0(\\zeta)^{-1}V(\\zeta))^nK_0(\\zeta)^{-1}. $$\nThe coefficient of each power $z^n$ in $S$ is one finite matrix. The item defines this formal candidate; the following lemma proves its two-sided inverse and covariance properties. Define $\\det A$ for a finite matrix $A$ over $\\mathbb C\\llbracket z\\rrbracket$ by the Leibniz formula $\\det A=\\sum_{\\sigma\\in S_d}\\operatorname{sgn}(\\sigma)\\prod_{j=1}^d A_{j,\\sigma(j)}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qft-qed-grassmann-determinant-step-1-1",
+          "claim": "Put $B_K=\\sum_{i,j}\\bar\\psi_iK_{ij}\\psi_j$. Every factor has Grassmann degree two, so a product of more than $d$ such factors has degree greater than $2d$ and vanishes. Hence the exponential is the finite sum $\\sum_{n=0}^d(-B_K)^n/n!$, and only its degree-$2d$ term contributes to $[M_d]$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qft-qed-grassmann-determinant-step-1-2",
+          "claim": "In $B_K^d/d!$, any term with a repeated row or column index vanishes. The surviving terms are indexed by permutations $\\sigma\\in S_d$. Reordering $\\bar\\psi_1\\psi_{\\sigma(1)}\\cdots\\bar\\psi_d\\psi_{\\sigma(d)}$ into $M_d$ contributes $(-1)^{d(d-1)/2}\\operatorname{sgn}(\\sigma)$; the exponential contributes $(-1)^d$. Therefore\n$$ [M_d]\\exp(-B_K)=(-1)^{d(d+1)/2}\\sum_{\\sigma\\in S_d}\\operatorname{sgn}(\\sigma)\\prod_{i=1}^dK_{i,\\sigma(i)} =(-1)^{d(d+1)/2}\\det K . $$\nApplying the normalization in [F1] proves the Gaussian identity.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qft-qed-grassmann-determinant-step-2-1",
+          "claim": "For diagonal $D$, $K'_{ij}=u_iK_{ij}u_j^{-1}$. In each Leibniz term, $\\prod_i u_i\\prod_i u_{\\sigma(i)}^{-1}=1$, since $\\sigma$ permutes the indices; thus $\\det K'=\\det K$. The Gaussian identity from [step 2.1] then gives the same equality for the finite Grassmann integral.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A1 requires d≥1, so the empty-generator case is excluded; step 1.1 uses top degree 2d."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For K=0 and d≥1 the exponential is 1 and its top coefficient and determinant vanish by step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1, I₁(1−barψ₁K₁₁ψ₁)=K₁₁, the one-by-one determinant in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No invertibility is assumed; singular K is covered by the permutation formula in steps 2.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement of Finite Grassmann Gaussian and gauge-invariant determinant: Let $R=\\mathbb C\\llbracket z\\rrbracket$, let $d\\ge1$, and let $K\\in M_d(R)$ be a finite matrix as in [[def-qft-qed-formal-ring]]. With $\\mathcal I_d$ the top-coefficient functional of [[def-qft-qed-finite-grassmann-algebra]], $$ \\mathcal I_d\\!\\left(\\exp\\!\\left(-\\sum_{i,j=1}^d\\bar\\psi_iK_{ij}\\psi_j\\right)\\right)=\\det K. $$ If $D=\\operatorname{diag}(u_1,\\ldots,u_d)$ with each $u_i\\in R^\\times$ and $K'=DKD^{-1}$, then the finite Grassmann integral and determinant are gauge invariant: $\\mathcal I_d(\\exp(-\\bar\\psi K'\\psi))=\\det K'=\\det K$. No infinite-dimensional Grassmann measure, continuum limit, or anomaly claim is made. No additional closed-interval endpoint is quantified in this particular assertion. The given strict parameter inequalities and domain-qualified support/series identities are retained; this worksheet does not extend them across a forbidden endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement of Finite Grassmann Gaussian and gauge-invariant determinant: Let $R=\\mathbb C\\llbracket z\\rrbracket$, let $d\\ge1$, and let $K\\in M_d(R)$ be a finite matrix as in [[def-qft-qed-formal-ring]]. With $\\mathcal I_d$ the top-coefficient functional of [[def-qft-qed-finite-grassmann-algebra]], $$ \\mathcal I_d\\!\\left(\\exp\\!\\left(-\\sum_{i,j=1}^d\\bar\\psi_iK_{ij}\\psi_j\\right)\\right)=\\det K. $$ If $D=\\operatorname{diag}(u_1,\\ldots,u_d)$ with each $u_i\\in R^\\times$ and $K'=DKD^{-1}$, then the finite Grassmann integral and determinant are gauge invariant: $\\mathcal I_d(\\exp(-\\bar\\psi K'\\psi))=\\det K'=\\det K$. No infinite-dimensional Grassmann measure, continuum limit, or anomaly claim is made. The displayed finite algebraic/test-contraction computation uses supplied objects rather than choosing elements of a family of nonempty sets; no nonempty-family selection is a separate conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Finite Grassmann Gaussian and gauge-invariant determinant: Let $R=\\mathbb C\\llbracket z\\rrbracket$, let $d\\ge1$, and let $K\\in M_d(R)$ be a finite matrix as in [[def-qft-qed-formal-ring]]. With $\\mathcal I_d$ the top-coefficient functional of [[def-qft-qed-finite-grassmann-algebra]], $$ \\mathcal I_d\\!\\left(\\exp\\!\\left(-\\sum_{i,j=1}^d\\bar\\psi_iK_{ij}\\psi_j\\right)\\right)=\\det K. $$ If $D=\\operatorname{diag}(u_1,\\ldots,u_d)$ with each $u_i\\in R^\\times$ and $K'=DKD^{-1}$, then the finite Grassmann integral and determinant are gauge invariant: $\\mathcal I_d(\\exp(-\\bar\\psi K'\\psi))=\\det K'=\\det K$. No infinite-dimensional Grassmann measure, continuum limit, or anomaly claim is made. The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Finite Grassmann Gaussian and gauge-invariant determinant: Let $R=\\mathbb C\\llbracket z\\rrbracket$, let $d\\ge1$, and let $K\\in M_d(R)$ be a finite matrix as in [[def-qft-qed-formal-ring]]. With $\\mathcal I_d$ the top-coefficient functional of [[def-qft-qed-finite-grassmann-algebra]], $$ \\mathcal I_d\\!\\left(\\exp\\!\\left(-\\sum_{i,j=1}^d\\bar\\psi_iK_{ij}\\psi_j\\right)\\right)=\\det K. $$ If $D=\\operatorname{diag}(u_1,\\ldots,u_d)$ with each $u_i\\in R^\\times$ and $K'=DKD^{-1}$, then the finite Grassmann integral and determinant are gauge invariant: $\\mathcal I_d(\\exp(-\\bar\\psi K'\\psi))=\\det K'=\\det K$. No infinite-dimensional Grassmann measure, continuum limit, or anomaly claim is made. The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-generator Gaussian",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "For d=1, exp(−barψKψ)=1−barψKψ and I₁ returns K."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qft-qed-finite-grassmann-algebra",
+          "carrier": "items/def-qft-qed-finite-grassmann-algebra.md",
+          "status": "current batch-45 supplier; exact current interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "Order the generators as $\\bar\\psi_1,\\ldots,\\bar\\psi_d,\\psi_1,\\ldots,\\psi_d$. The corresponding ordered monomials form the $R$-basis of $\\Lambda_d(R)$. Let\n$$\nM_d:=\\bar\\psi_1\\cdots\\bar\\psi_d\\psi_1\\cdots\\psi_d\n$$\nand let $[M_d]P\\in R$ denote the coefficient of $M_d$ in $P\\in\\Lambda_d(R)$. Define the finite Grassmann integral by the $R$-linear functional\n$$\n\\mathcal I_d(P):=(-1)^{d(d+1)/2}[M_d]P .\n$$\nFor $K\\in M_d(R)$, put $B_K:=\\sum_{i,j=1}^d\\bar\\psi_iK_{ij}\\psi_j$. Since every monomial of degree greater than $2d$ vanishes, its exponential is the finite sum\n$$\n\\exp(-B_K):=\\sum_{n=0}^{d}\\frac{(-B_K)^n}{n!}.\n$$\nThe sign factor in $\\mathcal I_d$ is the chosen normalization. Its Gaussian determinant identity, including the value at $K=I_d$, is proved separately.",
+          "relevant_hypotheses_and_conventions": "[F1] [[def-qft-qed-finite-grassmann-algebra]] defines anticommuting generators, the ordered top monomial $M_d$, the coefficient functional $\\mathcal I_d(P)=(-1)^{d(d+1)/2}[M_d]P$, and the finite exponential.\nConsumer uses: 1.1, 2.1.",
+          "supplier_proof_status": "Current assigned item; use only at the inspected statement and proof status.",
+          "consumer_use": "F1 is used in step 1.1, step 2.1"
+        },
+        {
+          "supplier": "def-qft-qed-formal-ring",
+          "carrier": "items/def-qft-qed-formal-ring.md",
+          "status": "current batch-45 supplier; exact current interface inspected",
+          "source_section": "Definition",
+          "exact_statement": "Use the finite graph phase data of [[def-qft-qed-finite-graph-gauge-data]] and the planned QED $U(1)$, Clifford, and natural-unit conventions of [[def-qft-qed-gauge-data]]. Let $K_0(\\zeta)\\in GL_d(\\mathbb C)$ be an invertible base matrix and let $V(\\zeta)\\in M_d(\\mathbb C)$ be its finite link-hopping matrix. The admissible covariant families satisfy\n$$\nK_0(\\zeta^\\alpha)=D_\\alpha K_0(\\zeta)D_\\alpha^{-1},\\qquad\nV(\\zeta^\\alpha)=D_\\alpha V(\\zeta)D_\\alpha^{-1}.\n$$\nThe scalar base $K_0=mI_d$, $m\\in\\mathbb C\\setminus\\{0\\}$, is an explicit admissible case. Define\n$$\nK(z;\\zeta):=K_0(\\zeta)+zV(\\zeta),\\qquad\nS(z;\\zeta):=\\sum_{n=0}^{\\infty}(-zK_0(\\zeta)^{-1}V(\\zeta))^nK_0(\\zeta)^{-1}.\n$$\nThe coefficient of each power $z^n$ in $S$ is one finite matrix. The item defines this formal candidate; the following lemma proves its two-sided inverse and covariance properties. Define $\\det A$ for a finite matrix $A$ over $\\mathbb C\\llbracket z\\rrbracket$ by the Leibniz formula $\\det A=\\sum_{\\sigma\\in S_d}\\operatorname{sgn}(\\sigma)\\prod_{j=1}^d A_{j,\\sigma(j)}$.",
+          "relevant_hypotheses_and_conventions": "[F2] [[def-qft-qed-formal-ring]] defines $\\det K$ by the finite Leibniz sum and the diagonal vertex-phase conjugation convention.\nConsumer uses: 2.1, 3.1.",
+          "supplier_proof_status": "Current assigned item; use only at the inspected statement and proof status.",
+          "consumer_use": "F2 is used in step 2.1, step 3.1"
+        }
+      ],
+      "risk_review": {
+        "status": "authoring-self-check",
+        "reviewer": "beta-batch-45-authoring",
+        "notes": "Checked the exact conditional supplier interfaces against the cited uses. This record is not independent proof approval."
+      }
+    },
+    "lem-qft-qed-conserved-current-gauge": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qft-qed-tree-ward",
+          "source_section": "Statement",
+          "quote": "Use the $(-+++)$ coordinate convention, $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$, and the Clifford matrices of [[def-qft-dirac-projections]]; the shell parameter $\\mu>0$ has inverse-length units as in [[def-qft-scalar-mass-shell]]. For $p=(p^0,\\mathbf p)\\in\\mathbb R^4$, write\n$$ \\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j,\\qquad K(p):=\\Gamma(p)-\\mu I_4. $$\nWhen $h(p,p)\\ne\\mu^2$, define the finite rational inverse\n$$ S_0(p):=\\frac{\\Gamma(p)+\\mu I_4}{h(p,p)-\\mu^2}. $$\nFor $p,p+k$ with both denominators nonzero,\n$$ S_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k). $$\nFor any finite chain of off-shell momenta, the corresponding insertion differences telescope with both endpoint terms retained. If $u(p),u(p')$ satisfy $(\\Gamma(p)-\\mu)u(p)=0$, $(\\Gamma(p')-\\mu)u(p')=0$ and $p,p'$ lie on the future shell, then $\\bar u(p')\\Gamma(p-p')u(p)=0$, where $\\bar u=u^\\dagger\\beta$. If $v(q)$ satisfies $(\\Gamma(q)+\\mu)v(q)=0$ on the future shell, then $\\bar v(q)\\Gamma(p+q)u(p)=0$. These are finite rational/tree identities; no Feynman boundary value, singular distribution product, loop theorem, or all-diagram gauge-independence claim is included.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-qft-qed-conserved-current-gauge-step-1-1",
+          "claim": "The first line has transfer $p_1-p_1'=k$, so [F1] gives $k_\\mu J_1^\\mu=0$. The second line has transfer $p_2-p_2'=-k$, so $(-k)_\\nu J_2^\\nu=0$, hence $k_\\nu J_2^\\nu=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qft-qed-conserved-current-gauge-step-1-2",
+          "claim": "Contracting the longitudinal kernel gives\n$$ J_1^\\mu\\Delta D_{\\mu\\nu}(k)J_2^\\nu =c(k)(k_\\mu J_1^\\mu)(k_\\nu J_2^\\nu)=0 $$\nby [step 1.1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-qft-qed-conserved-current-gauge-step-2-1",
+          "claim": "For either polarization-current form in the Statement, [F1] gives $\\ell_aJ^a=0$. Since [A1] requires $k=\\ell$ or $k=-\\ell$, it follows that $k_aJ^a=0$. Lowering the shifted polarization with $h$, the change in its contraction is $\\alpha k_aJ^a=0$. This proves the polarization claim for both explicit current types, including the transfer $-k$ of the second kernel current.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If either current is zero, the contraction vanishes directly in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At k=0, step 2.1 has c(0)k_mu k_nu=0; A1 makes c(0) finite."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This lemma fixes four-component matrices and currents; it does not quantify a varying cardinality or singleton-family boundary. The two explicit current forms and their transfer-matching hypotheses are retained."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits transfer k=0 when the stated massive shell conditions hold. Step 1.1 then contracts with the zero vector and step 2.1 adds zero gauge terms; the selected scalar coefficient is still required to be finite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses A1, which requires c(k) finite at the selected k including k=0; no singular limit is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Objects and spinors are supplied as hypotheses; this finite contraction does not select elements of a family. Countable Choice remains inherited through the mathematical supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "There is no biconditional: both finite kernel decoupling and matched-transfer polarization invariance are consequences of the stated Dirac equations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: invariance of a contraction is not claimed to characterize the Dirac equations, the shell, or the current form."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-transfer longitudinal term",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra",
+            "step 1.1"
+          ],
+          "expected": "At k=0, c(0)kμkν=0 and the current contraction vanishes."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-qft-qed-tree-ward",
+          "carrier": "items/lem-qft-qed-tree-ward.md",
+          "status": "current batch-45 draft supplier; full proof inspected",
+          "source_section": "Statement",
+          "exact_statement": "Use the $(-+++)$ coordinate convention, $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$, and the Clifford matrices of [[def-qft-dirac-projections]]; the shell parameter $\\mu>0$ has inverse-length units as in [[def-qft-scalar-mass-shell]]. For $p=(p^0,\\mathbf p)\\in\\mathbb R^4$, write\n$$ \\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j,\\qquad K(p):=\\Gamma(p)-\\mu I_4. $$\nWhen $h(p,p)\\ne\\mu^2$, define the finite rational inverse\n$$ S_0(p):=\\frac{\\Gamma(p)+\\mu I_4}{h(p,p)-\\mu^2}. $$\nFor $p,p+k$ with both denominators nonzero,\n$$ S_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k). $$\nFor any finite chain of off-shell momenta, the corresponding insertion differences telescope with both endpoint terms retained. If $u(p),u(p')$ satisfy $(\\Gamma(p)-\\mu)u(p)=0$, $(\\Gamma(p')-\\mu)u(p')=0$ and $p,p'$ lie on the future shell, then $\\bar u(p')\\Gamma(p-p')u(p)=0$, where $\\bar u=u^\\dagger\\beta$. If $v(q)$ satisfies $(\\Gamma(q)+\\mu)v(q)=0$ on the future shell, then $\\bar v(q)\\Gamma(p+q)u(p)=0$. These are finite rational/tree identities; no Feynman boundary value, singular distribution product, loop theorem, or all-diagram gauge-independence claim is included.",
+          "relevant_hypotheses_and_conventions": "[F1] [[lem-qft-qed-tree-ward]]: for each stated on-shell Dirac current, contraction with its momentum transfer is zero; the proof uses the fixed $h=-\\eta$ slash convention.\nConsumer uses: 1.1, 3.1.",
+          "supplier_proof_status": "Current assigned draft; proof is complete here, but readiness is escalated through upstream draft inputs.",
+          "consumer_use": "F1 is used in step 1.1, step 3.1"
+        }
+      ],
+      "risk_review": {
+        "status": "authoring-self-check",
+        "reviewer": "beta-batch-45-authoring",
+        "notes": "Checked the exact conditional supplier interfaces against the cited uses. This record is not independent proof approval."
+      }
+    },
+    "ex-qft-qed-tree-matrix-example": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qft-qed-tree-ward",
+          "source_section": "Statement",
+          "quote": "Use the $(-+++)$ coordinate convention, $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$, and the Clifford matrices of [[def-qft-dirac-projections]]; the shell parameter $\\mu>0$ has inverse-length units as in [[def-qft-scalar-mass-shell]]. For $p=(p^0,\\mathbf p)\\in\\mathbb R^4$, write\n$$ \\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j,\\qquad K(p):=\\Gamma(p)-\\mu I_4. $$\nWhen $h(p,p)\\ne\\mu^2$, define the finite rational inverse\n$$ S_0(p):=\\frac{\\Gamma(p)+\\mu I_4}{h(p,p)-\\mu^2}. $$\nFor $p,p+k$ with both denominators nonzero,\n$$ S_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k). $$\nFor any finite chain of off-shell momenta, the corresponding insertion differences telescope with both endpoint terms retained. If $u(p),u(p')$ satisfy $(\\Gamma(p)-\\mu)u(p)=0$, $(\\Gamma(p')-\\mu)u(p')=0$ and $p,p'$ lie on the future shell, then $\\bar u(p')\\Gamma(p-p')u(p)=0$, where $\\bar u=u^\\dagger\\beta$. If $v(q)$ satisfies $(\\Gamma(q)+\\mu)v(q)=0$ on the future shell, then $\\bar v(q)\\Gamma(p+q)u(p)=0$. These are finite rational/tree identities; no Feynman boundary value, singular distribution product, loop theorem, or all-diagram gauge-independence claim is included.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-dirac-projections",
+          "source_section": "Definition",
+          "quote": "Use the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qft-qed-tree-ward",
+          "source_section": "Statement",
+          "quote": "Use the $(-+++)$ coordinate convention, $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$, and the Clifford matrices of [[def-qft-dirac-projections]]; the shell parameter $\\mu>0$ has inverse-length units as in [[def-qft-scalar-mass-shell]]. For $p=(p^0,\\mathbf p)\\in\\mathbb R^4$, write\n$$ \\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j,\\qquad K(p):=\\Gamma(p)-\\mu I_4. $$\nWhen $h(p,p)\\ne\\mu^2$, define the finite rational inverse\n$$ S_0(p):=\\frac{\\Gamma(p)+\\mu I_4}{h(p,p)-\\mu^2}. $$\nFor $p,p+k$ with both denominators nonzero,\n$$ S_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k). $$\nFor any finite chain of off-shell momenta, the corresponding insertion differences telescope with both endpoint terms retained. If $u(p),u(p')$ satisfy $(\\Gamma(p)-\\mu)u(p)=0$, $(\\Gamma(p')-\\mu)u(p')=0$ and $p,p'$ lie on the future shell, then $\\bar u(p')\\Gamma(p-p')u(p)=0$, where $\\bar u=u^\\dagger\\beta$. If $v(q)$ satisfies $(\\Gamma(q)+\\mu)v(q)=0$ on the future shell, then $\\bar v(q)\\Gamma(p+q)u(p)=0$. These are finite rational/tree identities; no Feynman boundary value, singular distribution product, loop theorem, or all-diagram gauge-independence claim is included.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-qft-qed-tree-matrix-example-step-1-1",
+          "claim": "Here $h(p,p)-\\mu^2=-\\mu^2$ and $h(p+k,p+k)-\\mu^2=3\\mu^2$, so both rational inverses are defined. Since $\\Gamma(p)=0$ and $\\Gamma(k)=2\\mu\\beta$, the inverse formula in [F1] gives the displayed $S_0(p)$ and $S_0(p+k)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-qft-qed-tree-matrix-example-step-1-2",
+          "claim": "Using $\\beta^2=I_4$ from [F2],\n$$ S_0(p+k)\\Gamma(k)S_0(p) =-\\frac{(2\\beta+I_4)2\\beta}{3\\mu} =-\\frac{4I_4+2\\beta}{3\\mu} =S_0(p)-S_0(p+k). $$\nThus this off-shell rational instance satisfies the exact matrix Ward identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example of Exact rational Dirac Ward matrix example: For any $\\mu>0$, use $h=\\operatorname{diag}(1,-1,-1,-1)$, $p=(0,0,0,0)$, and $k=(2\\mu,0,0,0)$. Both $p$ and $p+k$ are off shell. The exact rational matrices are $$ S_0(p)=-\\frac{1}{\\mu}I_4,\\qquad S_0(p+k)=\\frac{2\\beta+I_4}{3\\mu},\\qquad \\Gamma(k)=2\\mu\\beta . $$ The specified witness, fixed coordinate space or supplied Hilbert/test objects are the inputs of this assertion; it does not assert a separate existence result after replacing them by an empty underlying set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example sets p=0 and computes its off-shell denominator in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example of Exact rational Dirac Ward matrix example: For any $\\mu>0$, use $h=\\operatorname{diag}(1,-1,-1,-1)$, $p=(0,0,0,0)$, and $k=(2\\mu,0,0,0)$. Both $p$ and $p+k$ are off shell. The exact rational matrices are $$ S_0(p)=-\\frac{1}{\\mu}I_4,\\qquad S_0(p+k)=\\frac{2\\beta+I_4}{3\\mu},\\qquad \\Gamma(k)=2\\mu\\beta . $$ The objects have the fixed fiber, test domain, witness or shell specified there. This claim does not vary a finite set cardinality through a singleton boundary; any displayed unit scalar/vector is part of the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example of Exact rational Dirac Ward matrix example: For any $\\mu>0$, use $h=\\operatorname{diag}(1,-1,-1,-1)$, $p=(0,0,0,0)$, and $k=(2\\mu,0,0,0)$. Both $p$ and $p+k$ are off shell. The exact rational matrices are $$ S_0(p)=-\\frac{1}{\\mu}I_4,\\qquad S_0(p+k)=\\frac{2\\beta+I_4}{3\\mu},\\qquad \\Gamma(k)=2\\mu\\beta . $$ A collapse outside these explicitly supplied positive/nonzero or fixed-dimensional data is not claimed. Zero inputs already admitted by the displayed linear identities remain admitted; this row introduces no degenerate extension of the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example of Exact rational Dirac Ward matrix example: For any $\\mu>0$, use $h=\\operatorname{diag}(1,-1,-1,-1)$, $p=(0,0,0,0)$, and $k=(2\\mu,0,0,0)$. Both $p$ and $p+k$ are off shell. The exact rational matrices are $$ S_0(p)=-\\frac{1}{\\mu}I_4,\\qquad S_0(p+k)=\\frac{2\\beta+I_4}{3\\mu},\\qquad \\Gamma(k)=2\\mu\\beta . $$ No additional closed-interval endpoint is quantified in this particular assertion. The given strict parameter inequalities and domain-qualified support/series identities are retained; this worksheet does not extend them across a forbidden endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Example of Exact rational Dirac Ward matrix example: For any $\\mu>0$, use $h=\\operatorname{diag}(1,-1,-1,-1)$, $p=(0,0,0,0)$, and $k=(2\\mu,0,0,0)$. Both $p$ and $p+k$ are off shell. The exact rational matrices are $$ S_0(p)=-\\frac{1}{\\mu}I_4,\\qquad S_0(p+k)=\\frac{2\\beta+I_4}{3\\mu},\\qquad \\Gamma(k)=2\\mu\\beta . $$ The displayed finite algebraic/test-contraction computation uses supplied objects rather than choosing elements of a family of nonempty sets; no nonempty-family selection is a separate conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example of Exact rational Dirac Ward matrix example: For any $\\mu>0$, use $h=\\operatorname{diag}(1,-1,-1,-1)$, $p=(0,0,0,0)$, and $k=(2\\mu,0,0,0)$. Both $p$ and $p+k$ are off shell. The exact rational matrices are $$ S_0(p)=-\\frac{1}{\\mu}I_4,\\qquad S_0(p+k)=\\frac{2\\beta+I_4}{3\\mu},\\qquad \\Gamma(k)=2\\mu\\beta . $$ The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example of Exact rational Dirac Ward matrix example: For any $\\mu>0$, use $h=\\operatorname{diag}(1,-1,-1,-1)$, $p=(0,0,0,0)$, and $k=(2\\mu,0,0,0)$. Both $p$ and $p+k$ are off shell. The exact rational matrices are $$ S_0(p)=-\\frac{1}{\\mu}I_4,\\qquad S_0(p+k)=\\frac{2\\beta+I_4}{3\\mu},\\qquad \\Gamma(k)=2\\mu\\beta . $$ The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact rational matrix multiplication",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra",
+            "F2",
+            "step 1.1"
+          ],
+          "expected": "S₀(p+k)Γ(k)S₀(p)=−(4I₄+2β)/(3μ)=S₀(p)−S₀(p+k)."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-qft-qed-tree-ward",
+          "carrier": "items/lem-qft-qed-tree-ward.md",
+          "status": "current batch-45 draft supplier; full proof inspected",
+          "source_section": "Statement",
+          "exact_statement": "Use the $(-+++)$ coordinate convention, $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$, and the Clifford matrices of [[def-qft-dirac-projections]]; the shell parameter $\\mu>0$ has inverse-length units as in [[def-qft-scalar-mass-shell]]. For $p=(p^0,\\mathbf p)\\in\\mathbb R^4$, write\n$$\n\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j,\\qquad\nK(p):=\\Gamma(p)-\\mu I_4.\n$$\nWhen $h(p,p)\\ne\\mu^2$, define the finite rational inverse\n$$\nS_0(p):=\\frac{\\Gamma(p)+\\mu I_4}{h(p,p)-\\mu^2}.\n$$\nFor $p,p+k$ with both denominators nonzero,\n$$\nS_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k).\n$$\nFor any finite chain of off-shell momenta, the corresponding insertion differences telescope with both endpoint terms retained. If $u(p),u(p')$ satisfy $(\\Gamma(p)-\\mu)u(p)=0$, $(\\Gamma(p')-\\mu)u(p')=0$ and $p,p'$ lie on the future shell, then $\\bar u(p')\\Gamma(p-p')u(p)=0$, where $\\bar u=u^\\dagger\\beta$. If $v(q)$ satisfies $(\\Gamma(q)+\\mu)v(q)=0$ on the future shell, then $\\bar v(q)\\Gamma(p+q)u(p)=0$. These are finite rational/tree identities; no Feynman boundary value, singular distribution product, loop theorem, or all-diagram gauge-independence claim is included.",
+          "relevant_hypotheses_and_conventions": "[F1] [[lem-qft-qed-tree-ward]]: when both $h(p,p)-\\mu^2$ and $h(p+k,p+k)-\\mu^2$ are nonzero, $S_0(p)=(\\Gamma(p)+\\mu I_4)/(h(p,p)-\\mu^2)$ and $S_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k)$.\nConsumer uses: 1.1, 1.2.",
+          "supplier_proof_status": "Current assigned draft; proof is complete here, but readiness is escalated through upstream draft inputs.",
+          "consumer_use": "F1 is used in step 1.1; step 2.1"
+        },
+        {
+          "supplier": "def-qft-dirac-projections",
+          "carrier": "items/def-qft-dirac-projections.md",
+          "status": "current QFT-MF03 draft supplier; statement and proof inspected",
+          "source_section": "Definition",
+          "exact_statement": "Use the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.",
+          "relevant_hypotheses_and_conventions": "[F2] [[def-qft-dirac-projections]]: $\\beta=\\operatorname{diag}(I_2,-I_2)$, so $\\beta^2=I_4$; the item fixes $\\Gamma(p)$ with the effective matrix $h=-\\eta$.\nConsumer uses: 2.1.",
+          "supplier_proof_status": "Draft definition and conditional argument inspected; its Step 1 record is escalated because upstream page edges remain open.",
+          "consumer_use": "F2 is used in step 2.1"
+        },
+        {
+          "supplier": "lem-qft-qed-tree-ward",
+          "carrier": "items/lem-qft-qed-tree-ward.md",
+          "status": "current batch-45 draft supplier; full proof inspected",
+          "source_section": "Statement",
+          "exact_statement": "Use the $(-+++)$ coordinate convention, $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$, and the Clifford matrices of [[def-qft-dirac-projections]]; the shell parameter $\\mu>0$ has inverse-length units as in [[def-qft-scalar-mass-shell]]. For $p=(p^0,\\mathbf p)\\in\\mathbb R^4$, write\n$$\n\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j,\\qquad\nK(p):=\\Gamma(p)-\\mu I_4.\n$$\nWhen $h(p,p)\\ne\\mu^2$, define the finite rational inverse\n$$\nS_0(p):=\\frac{\\Gamma(p)+\\mu I_4}{h(p,p)-\\mu^2}.\n$$\nFor $p,p+k$ with both denominators nonzero,\n$$\nS_0(p+k)\\Gamma(k)S_0(p)=S_0(p)-S_0(p+k).\n$$\nFor any finite chain of off-shell momenta, the corresponding insertion differences telescope with both endpoint terms retained. If $u(p),u(p')$ satisfy $(\\Gamma(p)-\\mu)u(p)=0$, $(\\Gamma(p')-\\mu)u(p')=0$ and $p,p'$ lie on the future shell, then $\\bar u(p')\\Gamma(p-p')u(p)=0$, where $\\bar u=u^\\dagger\\beta$. If $v(q)$ satisfies $(\\Gamma(q)+\\mu)v(q)=0$ on the future shell, then $\\bar v(q)\\Gamma(p+q)u(p)=0$. These are finite rational/tree identities; no Feynman boundary value, singular distribution product, loop theorem, or all-diagram gauge-independence claim is included.",
+          "relevant_hypotheses_and_conventions": "[A1] $\\mu>0$ has inverse-length units; the momenta $p=0$ and $k=(2\\mu,0,0,0)$ use the same inverse-length coordinate convention as [[lem-qft-qed-tree-ward]].\nConsumer uses: 1.1.",
+          "supplier_proof_status": "Current assigned draft; proof is complete here, but readiness is escalated through upstream draft inputs.",
+          "consumer_use": "A1 is used in step 1.1"
+        }
+      ],
+      "risk_review": {
+        "status": "authoring-self-check",
+        "reviewer": "beta-batch-45-authoring",
+        "notes": "Checked the exact conditional supplier interfaces against the cited uses. This record is not independent proof approval."
+      }
+    },
+    "ex-qft-qed-coherent-angular": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qft-qed-coherent-ir-obstruction",
+          "source_section": "Statement",
+          "quote": "Use the transverse one-particle space $\\mathcal H_T$ and multiplier $\\omega(\\mathbf k)$ of [[def-qft-qed-photon-energy-multiplier]], and form its symmetric Fock space $\\mathcal F_s(\\mathcal H_T)$. Let $H_{\\rm ph}:=\\hbar c\\,d\\Gamma(\\omega)$, with $\\hbar,c>0$ and $d\\Gamma(\\omega)$ acting on the $n$-particle sector as multiplication by $\\sum_{j=1}^n|\\mathbf k_j|$, as in [[lem-qft-second-quantized-spectrum]]. For a coherent vector use\n$$ \\epsilon(f):=\\bigoplus_{n=0}^{\\infty}\\frac{f^{\\otimes n}}{\\sqrt{n!}},\\qquad C(f):=e^{-\\|f\\|^2/2}\\epsilon(f), $$\nusing the tensor and direct-sum conventions of [[def-qft-fock-and-test-spaces]].\n\nLet $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathbb C^3)$, $\\mathbf n\\cdot b(\\mathbf n)=0$ for a.e. $\\mathbf n$, and\n$$ C_b:=\\int_{S^2}|b(\\mathbf n)|^2\\,d\\Omega>0. $$\nTake $\\mathbf k,\\kappa,\\epsilon$ in inverse metres and $b$ dimensionless; then $f_\\epsilon$ has momentum-wavefunction units $\\mathrm m^{3/2}$, $C_b$ is dimensionless, and $\\hbar c(\\kappa-\\epsilon)$ has energy units.\nFor $0<\\epsilon<\\kappa$, define $f_\\epsilon(0)=0$ and\n$$ f_\\epsilon(\\mathbf k):=\\mathbf1_{\\{\\epsilon<|\\mathbf k|<\\kappa\\}}|\\mathbf k|^{-3/2}b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right). $$\nThen\n$$ \\|f_\\epsilon\\|^2=C_b\\log\\frac{\\kappa}{\\epsilon},\\qquad \\langle C(f_\\epsilon),H_{\\rm ph}C(f_\\epsilon)\\rangle =\\hbar c\\,C_b(\\kappa-\\epsilon). $$\nEach $C(f_\\epsilon)$ is a unit vector in $D(H_{\\rm ph})$. As $\\epsilon\\downarrow0$, $C(f_\\epsilon)\\rightharpoonup0$ weakly, but the family has no strong Fock-space limit. The statement is an exact free transverse-mode construction; it asserts no interacting charged sector, continuum QED limit, or empirical observation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. **Degenerate boxes.** If $a_i \\le b_i$ are reals with $a_{i_0} = b_{i_0}$ for\n   some $i_0 < n$, then every set $R$ between the open box\n   $\\{x : a_i < x_i < b_i\\ (i<n)\\}$ and the closed rectangle $[a,b]$ is Lebesgue\n   measurable with $\\lambda_n(R) = 0$.\n2. **Coordinate hyperplanes.** For $i_0 < n$ and a real $c$, the set\n   $$H_{i_0,c} \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : x_{i_0} = c \\,\\}$$\n   is Lebesgue measurable with $\\lambda_n(H_{i_0,c}) = 0$.\n\nAt $n = 1$ the hyperplane $H_{0,c}$ is the singleton $\\{c\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-qft-qed-coherent-angular-step-1-1",
+          "claim": "Since [A1] gives $|e|=1$ and $|n|=1$, $|P_T(n)e|^2=e^\\top(I_3-nn^\\top)e=1-(n\\cdot e)^2$. Rotational invariance in [F2] permits taking $e=(0,0,1)$. Use the chart $X(u,\\phi)=(\\sqrt{1-u^2}\\cos\\phi,\\sqrt{1-u^2}\\sin\\phi,u)$ for $-1<u<1$ and $0<\\phi<2\\pi$. Its tangent vectors are orthogonal with squared lengths $(1-u^2)^{-1}$ and $1-u^2$, so [F3] gives area density $1$. The omitted azimuthal seam is a coordinate line in sphere graph charts, and each pole is a singleton in its graph chart; these parameter sets are null by [F4], and their chart integrals vanish. Thus with $u=n_3$ the angular integral is $2\\pi\\int_{-1}^{1}(1-u^2)\\,du$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-qft-qed-coherent-angular-step-2-1",
+          "claim": "The integral equals $2\\pi[u-u^3/3]_{-1}^{1}=8\\pi/3$. Multiplying by $\\lambda^2$ yields $C_b=8\\pi\\lambda^2/3>0$, which is the coefficient required by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "λ=0 is excluded by A1, and step 2.1 proves C_b>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The integrand vanishes at n=±e but is positive on a positive-measure belt by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example of Fixed-vector transverse angular coefficient $8\\pi/3$: Let $e\\in\\mathbb R^3$ be a unit vector and $P_T(n)=I_3-nn^\\top$ for $n\\in S^2$. Then the angular coefficient in the coherent infrared family with $b(n)=\\lambda P_T(n)e$, $\\lambda\\in\\mathbb R\\setminus\\{0\\}$, is $$ \\int_{S^2}|b(n)|^2\\,d\\Omega=\\frac{8\\pi\\lambda^2}{3}. $$ The objects have the fixed fiber, test domain, witness or shell specified there. This claim does not vary a finite set cardinality through a singleton boundary; any displayed unit scalar/vector is part of the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example requires a unit e and nonzero lambda. Steps 1.1 and2.1 integrate the transverse profile, including its zero values at the two polar directions, and obtain the strictly positive8pi lambda^2/3 coefficient; lambda=0 is outside the stated witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the angular integral at u=−1 and u=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and2.1 cite [A2], the same original Countable Choice inherited from the coherent-tail and published surface-measure suppliers; no stronger choice or new indexed selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example of Fixed-vector transverse angular coefficient $8\\pi/3$: Let $e\\in\\mathbb R^3$ be a unit vector and $P_T(n)=I_3-nn^\\top$ for $n\\in S^2$. Then the angular coefficient in the coherent infrared family with $b(n)=\\lambda P_T(n)e$, $\\lambda\\in\\mathbb R\\setminus\\{0\\}$, is $$ \\int_{S^2}|b(n)|^2\\,d\\Omega=\\frac{8\\pi\\lambda^2}{3}. $$ The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example of Fixed-vector transverse angular coefficient $8\\pi/3$: Let $e\\in\\mathbb R^3$ be a unit vector and $P_T(n)=I_3-nn^\\top$ for $n\\in S^2$. Then the angular coefficient in the coherent infrared family with $b(n)=\\lambda P_T(n)e$, $\\lambda\\in\\mathbb R\\setminus\\{0\\}$, is $$ \\int_{S^2}|b(n)|^2\\,d\\Omega=\\frac{8\\pi\\lambda^2}{3}. $$ The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "spherical angular integral",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra",
+            "step 1.1"
+          ],
+          "expected": "2π∫_{−1}^{1}(1−u²)du=8π/3, hence C_b=8πλ²/3."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-qft-qed-coherent-ir-obstruction",
+          "carrier": "items/lem-qft-qed-coherent-ir-obstruction.md",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathbb C^3)$, $\\mathbf n\\cdot b(\\mathbf n)=0$ for a.e. $\\mathbf n$, and\n$$\nC_b:=\\int_{S^2}|b(\\mathbf n)|^2\\,d\\Omega>0.\n$$\nTake $\\mathbf k,\\kappa,\\epsilon$ in inverse metres and $b$ dimensionless; then $f_\\epsilon$ has momentum-wavefunction units $\\mathrm m^{3/2}$, $C_b$ is dimensionless, and $\\hbar c(\\kappa-\\epsilon)$ has energy units.\nFor $0<\\epsilon<\\kappa$, define $f_\\epsilon(0)=0$ and\n$$\nf_\\epsilon(\\mathbf k):=\\mathbf1_{\\{\\epsilon<|\\mathbf k|<\\kappa\\}}|\\mathbf k|^{-3/2}b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right).\n$$\nThen\n$$\n\\|f_\\epsilon\\|^2=C_b\\log\\frac{\\kappa}{\\epsilon},\\qquad\n\\langle C(f_\\epsilon),H_{\\rm ph}C(f_\\epsilon)\\rangle\n=\\hbar c\\,C_b(\\kappa-\\epsilon).\n$$\nEach $C(f_\\epsilon)$ is a unit vector in $D(H_{\\rm ph})$. As $\\epsilon\\downarrow0$, $C(f_\\epsilon)\\rightharpoonup0$ weakly, but the family has no strong Fock-space limit. The statement is an exact free transverse-mode construction; it asserts no interacting charged sector, continuum QED limit, or empirical observation.",
+          "consumer_use": "F1 in step 1.1, step 2.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "carrier": "items/lem-euclidean-chart-measure-agrees-with-polar-surface-measure.md",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+          "consumer_use": "F2 in step 1.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "carrier": "items/def-surface-integral-on-a-compact-c-one-hypersurface.md",
+          "source_section": "Definition",
+          "exact_statement": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "consumer_use": "F3 in step 1.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "consumer_use": "A2 in step 1.1, step 2.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "carrier": "items/prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null.md",
+          "source_section": "Statement",
+          "exact_statement": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. **Degenerate boxes.** If $a_i \\le b_i$ are reals with $a_{i_0} = b_{i_0}$ for\n   some $i_0 < n$, then every set $R$ between the open box\n   $\\{x : a_i < x_i < b_i\\ (i<n)\\}$ and the closed rectangle $[a,b]$ is Lebesgue\n   measurable with $\\lambda_n(R) = 0$.\n2. **Coordinate hyperplanes.** For $i_0 < n$ and a real $c$, the set\n   $$H_{i_0,c} \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : x_{i_0} = c \\,\\}$$\n   is Lebesgue measurable with $\\lambda_n(H_{i_0,c}) = 0$.\n\nAt $n = 1$ the hyperplane $H_{0,c}$ is the singleton $\\{c\\}$.",
+          "consumer_use": "F4 in step 1.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-45",
+        "notes": "Both verification steps and all five dependencies checked. The real unit e and real nonzero lambda give |P_T(n)e|^2=1-(n dot e)^2. Orthogonal invariance allows e=e3. The (u,phi) chart has orthogonal tangent vectors with squared lengths (1-u^2)^(-1) and 1-u^2, hence density 1. The excluded seam can be covered by graph charts in which it is a coordinate line; the poles are singleton chart sets, so the cited null-set statement removes them. 2pi times integral from -1 to 1 of (1-u^2) equals 8pi/3. Multiplication by lambda^2 gives a positive finite coefficient, including negative lambda. lambda=0 is excluded. Countable Choice is inherited and no new selection or empirical inference occurs."
+      }
+    },
+    "cex-qft-qed-energy-fock-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qft-qed-coherent-ir-obstruction",
+          "source_section": "Statement",
+          "quote": "Use the transverse one-particle space $\\mathcal H_T$ and multiplier $\\omega(\\mathbf k)$ of [[def-qft-qed-photon-energy-multiplier]], and form its symmetric Fock space $\\mathcal F_s(\\mathcal H_T)$. Let $H_{\\rm ph}:=\\hbar c\\,d\\Gamma(\\omega)$, with $\\hbar,c>0$ and $d\\Gamma(\\omega)$ acting on the $n$-particle sector as multiplication by $\\sum_{j=1}^n|\\mathbf k_j|$, as in [[lem-qft-second-quantized-spectrum]]. For a coherent vector use\n$$ \\epsilon(f):=\\bigoplus_{n=0}^{\\infty}\\frac{f^{\\otimes n}}{\\sqrt{n!}},\\qquad C(f):=e^{-\\|f\\|^2/2}\\epsilon(f), $$\nusing the tensor and direct-sum conventions of [[def-qft-fock-and-test-spaces]].\n\nLet $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathbb C^3)$, $\\mathbf n\\cdot b(\\mathbf n)=0$ for a.e. $\\mathbf n$, and\n$$ C_b:=\\int_{S^2}|b(\\mathbf n)|^2\\,d\\Omega>0. $$\nTake $\\mathbf k,\\kappa,\\epsilon$ in inverse metres and $b$ dimensionless; then $f_\\epsilon$ has momentum-wavefunction units $\\mathrm m^{3/2}$, $C_b$ is dimensionless, and $\\hbar c(\\kappa-\\epsilon)$ has energy units.\nFor $0<\\epsilon<\\kappa$, define $f_\\epsilon(0)=0$ and\n$$ f_\\epsilon(\\mathbf k):=\\mathbf1_{\\{\\epsilon<|\\mathbf k|<\\kappa\\}}|\\mathbf k|^{-3/2}b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right). $$\nThen\n$$ \\|f_\\epsilon\\|^2=C_b\\log\\frac{\\kappa}{\\epsilon},\\qquad \\langle C(f_\\epsilon),H_{\\rm ph}C(f_\\epsilon)\\rangle =\\hbar c\\,C_b(\\kappa-\\epsilon). $$\nEach $C(f_\\epsilon)$ is a unit vector in $D(H_{\\rm ph})$. As $\\epsilon\\downarrow0$, $C(f_\\epsilon)\\rightharpoonup0$ weakly, but the family has no strong Fock-space limit. The statement is an exact free transverse-mode construction; it asserts no interacting charged sector, continuum QED limit, or empirical observation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cex-qft-qed-energy-fock-limit-step-1-1",
+          "claim": "For $b(n)=P_T(n)e$, $|b(n)|^2=1-(n\\cdot e)^2$. By [F2], rotate $e$ to the third coordinate axis. The regular sphere chart $X(y,z)=(\\sqrt{1-y^2-z^2},y,z)$ on $|y|,|z|<1/4$ lies in the belt $|n\\cdot e|<1/2$ and has area density $(1-y^2-z^2)^{-1/2}\\ge1$ by [F3]. Its parameter rectangle has area $1/4$, so this belt has positive surface measure. On the belt $|b(n)|^2\\ge3/4$, hence $C_b>0$; also $b$ is continuous, square-integrable on the finite sphere measure, and transverse.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-qft-qed-energy-fock-limit-step-2-1",
+          "claim": "Apply [F1] to this $b$. It gives unit vectors with $0\\le\\langle C(f_\\epsilon),H_{\\rm ph}C(f_\\epsilon)\\rangle\\le\\hbar c\\,C_b\\kappa<\\infty$, yet no strong Fock-space limit. This contradicts the asserted implication and is the required counterexample.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 proves C_b>0, excluding the zero profile."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The free-photon profile is defined to vanish at k=0; step 2.1 treats ε decreasing to zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement refuted of Bounded free-photon energy need not yield a Fock-vector limit: Every normalized coherent family in the transverse free-photon Fock space with uniformly bounded expectation of $H_{\\rm ph}=\\hbar c\\,d\\Gamma(|\\mathbf k|)$ converges strongly in that Fock space as its infrared cutoff $\\epsilon\\downarrow0$. The objects have the fixed fiber, test domain, witness or shell specified there. This claim does not vary a finite set cardinality through a singleton boundary; any displayed unit scalar/vector is part of the stated data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement refuted of Bounded free-photon energy need not yield a Fock-vector limit: Every normalized coherent family in the transverse free-photon Fock space with uniformly bounded expectation of $H_{\\rm ph}=\\hbar c\\,d\\Gamma(|\\mathbf k|)$ converges strongly in that Fock space as its infrared cutoff $\\epsilon\\downarrow0$. A collapse outside these explicitly supplied positive/nonzero or fixed-dimensional data is not claimed. Zero inputs already admitted by the displayed linear identities remain admitted; this row introduces no degenerate extension of the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives a uniform finite energy bound for 0<ε<κ and its limit as ε decreases to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample steps 1.1 and2.1 cite [A2], the same original Countable Choice inherited from the coherent-tail and published surface-measure suppliers; no stronger choice or new indexed selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted of Bounded free-photon energy need not yield a Fock-vector limit: Every normalized coherent family in the transverse free-photon Fock space with uniformly bounded expectation of $H_{\\rm ph}=\\hbar c\\,d\\Gamma(|\\mathbf k|)$ converges strongly in that Fock space as its infrared cutoff $\\epsilon\\downarrow0$. The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted of Bounded free-photon energy need not yield a Fock-vector limit: Every normalized coherent family in the transverse free-photon Fock space with uniformly bounded expectation of $H_{\\rm ph}=\\hbar c\\,d\\Gamma(|\\mathbf k|)$ converges strongly in that Fock space as its infrared cutoff $\\epsilon\\downarrow0$. The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "positive angular measure",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra",
+            "step 1.1"
+          ],
+          "expected": "On |n·e|≤1/2, |P_T(n)e|²≥3/4, so C_b>0 and the family has finite uniform energy but no strong limit."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-qft-qed-coherent-ir-obstruction",
+          "carrier": "items/lem-qft-qed-coherent-ir-obstruction.md",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathbb C^3)$, $\\mathbf n\\cdot b(\\mathbf n)=0$ for a.e. $\\mathbf n$, and\n$$\nC_b:=\\int_{S^2}|b(\\mathbf n)|^2\\,d\\Omega>0.\n$$\nTake $\\mathbf k,\\kappa,\\epsilon$ in inverse metres and $b$ dimensionless; then $f_\\epsilon$ has momentum-wavefunction units $\\mathrm m^{3/2}$, $C_b$ is dimensionless, and $\\hbar c(\\kappa-\\epsilon)$ has energy units.\nFor $0<\\epsilon<\\kappa$, define $f_\\epsilon(0)=0$ and\n$$\nf_\\epsilon(\\mathbf k):=\\mathbf1_{\\{\\epsilon<|\\mathbf k|<\\kappa\\}}|\\mathbf k|^{-3/2}b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right).\n$$\nThen\n$$\n\\|f_\\epsilon\\|^2=C_b\\log\\frac{\\kappa}{\\epsilon},\\qquad\n\\langle C(f_\\epsilon),H_{\\rm ph}C(f_\\epsilon)\\rangle\n=\\hbar c\\,C_b(\\kappa-\\epsilon).\n$$\nEach $C(f_\\epsilon)$ is a unit vector in $D(H_{\\rm ph})$. As $\\epsilon\\downarrow0$, $C(f_\\epsilon)\\rightharpoonup0$ weakly, but the family has no strong Fock-space limit. The statement is an exact free transverse-mode construction; it asserts no interacting charged sector, continuum QED limit, or empirical observation.",
+          "consumer_use": "F1 in step 1.1, step 2.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "carrier": "items/lem-euclidean-chart-measure-agrees-with-polar-surface-measure.md",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+          "consumer_use": "F2 in step 1.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "carrier": "items/def-surface-integral-on-a-compact-c-one-hypersurface.md",
+          "source_section": "Definition",
+          "exact_statement": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "consumer_use": "F3 in step 1.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "consumer_use": "A2 in step 1.1, step 2.1",
+          "supplier_proof_status": "Actual carrier interface inspected; native workflow acceptance remains separate."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-45",
+        "notes": "Both proof steps checked against the coherent-tail Statement and the chart/polar measure Definitions/Statement under Countable Choice. The continuous b(n)=P_T(n)e is transverse and bounded on the finite-measure sphere. After rotation, the rectangle (-1/4,1/4)^2 has area 1/4, density at least 1, and lies in |n dot e|<1/2; hence C_b>=3/16>0. Positive kappa and 0<epsilon<kappa give the uniform finite energy bound. The already reviewed coherent-tail lemma supplies normalized vectors in the energy operator domain with no strong limit. This refutes the stated universal implication; no assertion about interacting states or empirical evidence is made."
+      }
+    },
+    "def-qft-qed-photon-energy-multiplier": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qft-photon-transverse-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let\n$$\\mathcal H=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3),\\qquad \\langle u,v\\rangle_2=\\int_{\\mathbb R^3}\\overline{u(\\mathbf k)}\\cdot v(\\mathbf k)\\,d^3\\mathbf k,$$\nwith the second-variable-linear convention of [[def-qft-fock-and-test-spaces]]; the real momentum dot product and norm are those of\n[[def-euclidean-inner-product]]. Explicitly extend the real dot product\ncomplex-bilinearly to $a\\cdot b=\\sum_{j=1}^3a_jb_j$ for $a,b\\in\\mathbb C^3$.\nEach complex fiber instead has the positive Hermitian pairing\n$\\langle a,b\\rangle_2=\\overline a\\cdot b=\\sum_j\\overline a_jb_j$ and\nnorm $\\|a\\|^2=\\sum_j|a_j|^2$; the displayed integral uses this pairing.\nHilbert completeness follows from [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. For $\\mathbf k\\ne0$, write $n(\\mathbf k)=\\mathbf k/|\\mathbf k|$ and\n$$P_T(\\mathbf k)=I_3-n(\\mathbf k)n(\\mathbf k)^T.$$\nAssign any value at $\\mathbf k=0$, which is a Lebesgue-null set. Let $M_{P_T}$ be multiplication by this measurable matrix field and define the positive transverse photon space\n$$\\mathcal H_T=\\operatorname{Ran}M_{P_T} =\\{u\\in\\mathcal H:\\mathbf k\\cdot u(\\mathbf k)=0\\text{ for almost every }\\mathbf k\\ne0\\}.$$\nThe inner product on $\\mathcal H_T$ is the restriction of that on $\\mathcal H$. Each nonzero momentum fiber is the two-complex-dimensional plane $\\{a\\in\\mathbb C^3:\\mathbf k\\cdot a=0\\}$ perpendicular to the real vector $\\mathbf k$ in that Hermitian pairing; no global continuous polarization frame is part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The norm map $\\mathbf k\\mapsto|\\mathbf k|$ is measurable and nonnegative. If $f\\in D(M_\\omega)$, then $\\omega f$ is square-integrable by the stated domain and $\\mathbf k\\cdot(\\omega f)=\\omega(\\mathbf k\\cdot f)=0$ a.e.; [F1] therefore places $M_\\omega f$ in $\\mathcal H_T$. Thus the maximal multiplication operator is well-defined on its stated domain.",
+          "inputs": [
+            "A2",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Since $[\\omega]=$m$^{-1}$ and $[\\hbar c]=$J m, $E_1=\\hbar cM_\\omega$ has energy units. For $f\\in D(M_\\omega)$, [F2] gives $|\\langle f,M_\\omega f\\rangle_2|\\le\\|f\\|_2\\|M_\\omega f\\|_2<\\infty$; the integral representation is $\\int |\\mathbf k||f(\\mathbf k)|^2d^3\\mathbf k\\ge0$ because $\\omega\\ge0$. Hence $E_1$ is nonnegative on its domain.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty family or empty mode space is asserted; the operator is defined on its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition sets omega(0)=0; step 1.1 proves multiplication preserves transversality."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional mode count or singleton classification is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No eigenvalue multiplicity claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The multiplier definition has no interval endpoint or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition selects no member of a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "bounded-support multiplier",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ],
+          "expected": "For transverse f supported in |k|≤R, omega f is transverse and square-integrable; omega(0)=0."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qft-photon-transverse-space",
+          "carrier": "items/def-qft-photon-transverse-space.md",
+          "status": "Draft supplier registered in current batch-44 manifest and qft-mg01 page; acceptance remains separate.",
+          "source_section": "Definition",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]]. Let\n$$\\mathcal H=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3),\\qquad \\langle u,v\\rangle_2=\\int_{\\mathbb R^3}\\overline{u(\\mathbf k)}\\cdot v(\\mathbf k)\\,d^3\\mathbf k,$$\nwith the second-variable-linear convention of [[def-qft-fock-and-test-spaces]]; the real momentum dot product and norm are those of\n[[def-euclidean-inner-product]]. Explicitly extend the real dot product\ncomplex-bilinearly to $a\\cdot b=\\sum_{j=1}^3a_jb_j$ for $a,b\\in\\mathbb C^3$.\nEach complex fiber instead has the positive Hermitian pairing\n$\\langle a,b\\rangle_2=\\overline a\\cdot b=\\sum_j\\overline a_jb_j$ and\nnorm $\\|a\\|^2=\\sum_j|a_j|^2$; the displayed integral uses this pairing.\nHilbert completeness follows from [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. For $\\mathbf k\\ne0$, write $n(\\mathbf k)=\\mathbf k/|\\mathbf k|$ and\n$$P_T(\\mathbf k)=I_3-n(\\mathbf k)n(\\mathbf k)^T.$$\nAssign any value at $\\mathbf k=0$, which is a Lebesgue-null set. Let $M_{P_T}$ be multiplication by this measurable matrix field and define the positive transverse photon space\n$$\\mathcal H_T=\\operatorname{Ran}M_{P_T} =\\{u\\in\\mathcal H:\\mathbf k\\cdot u(\\mathbf k)=0\\text{ for almost every }\\mathbf k\\ne0\\}.$$\nThe inner product on $\\mathcal H_T$ is the restriction of that on $\\mathcal H$. Each nonzero momentum fiber is the two-complex-dimensional plane $\\{a\\in\\mathbb C^3:\\mathbf k\\cdot a=0\\}$ perpendicular to the real vector $\\mathbf k$ in that Hermitian pairing; no global continuous polarization frame is part of the definition.",
+          "relevant_hypotheses_and_conventions": "Countable Choice; second-variable-linear vector L2 pairing; complex-bilinear momentum contraction, Hermitian fiber norm and a.e. transverse range. Scalar omega preserves that range.",
+          "supplier_proof_status": "Draft definition and local proof inspected; registration verified in current batch-44 manifest. No workflow acceptance is inferred.",
+          "consumer_use": "F1 is used in step 1.1"
+        },
+        {
+          "supplier": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "carrier": "items/thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces.md",
+          "status": "current published mathematical supplier; exact statement and proof inspected",
+          "source_section": "Statement",
+          "exact_statement": "For vectors $u,v$ in a real or complex inner product space,",
+          "relevant_hypotheses_and_conventions": "[F2] [[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]: $|\\langle u,v\\rangle|\\le\\|u\\|\\|v\\|$ in a real or complex inner-product space.",
+          "supplier_proof_status": "Published theorem; statement and proof inspected.",
+          "consumer_use": "F2 is used in step 2.1"
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "current published mathematical supplier; exact definition inspected",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "relevant_hypotheses_and_conventions": "[A2] Assume Countable Choice, as required by the transverse-space supplier. [[def-countable-choice]]",
+          "supplier_proof_status": "Published definition; exact statement inspected.",
+          "consumer_use": "A2 is used in step 1.1, step 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-45",
+        "notes": "Steps 1.1 and 2.1 checked against the transverse-space Definition/proof and Cauchy–Schwarz Statement. Scalar multiplication preserves k dot f=0 a.e.; the maximal domain guarantees square integrability, and Cauchy–Schwarz guarantees a finite nonnegative expectation. The null value at k=0 is irrelevant. hbar c has J m units and omega has inverse-length units. Countable Choice is inherited, with no additional selection. Reader:45:4 is a stale registration note, repaired in this contract; batch 44 registers the draft supplier. No independent acceptance or empirical claim follows from registration."
+      },
+      "repair_confidence": 1
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "batch": "36",
+  "round": 0,
+  "reviewed_items": [
+    "def-qft-finite-bounded-kraus-instrument",
+    "lem-qft-finite-instrument-normalization",
+    "cex-qft-formal-factorial-series"
+  ],
+  "reviewed_pages": [
+    "qft-mc03",
+    "qft-mc03-examples"
+  ],
+  "decision": "repair",
+  "reason": "The approved scope is met, and the normalization proof's general-H trace suppliers support its conditional mathematical claims. Two repairable adjoint-boundedness justifications and local factorial and radius conventions remain. The upstream page discrepancy does not invalidate the individually checked supplier proofs.",
+  "findings": [
+    {
+      "id": "def-qft-finite-bounded-kraus-instrument",
+      "type": "prerequisite",
+      "reason": "The boundedness claim for E_a and J_a uses M* as a bounded operator and ||M*||, but def-hilbert-space-adjoint only constructs the adjoint map. The published thm-hilbert-adjoint-properties gives M* bounded and ||M*||=||M|| under ACω. Declare and use that result here; the same fact is consumed by the normalization lemma at steps 1.2 and 2.1. This is locally repairable."
+    },
+    {
+      "id": "lem-qft-finite-instrument-normalization",
+      "type": "local",
+      "reason": "Step 1.2 applies the trace-class ideal estimate with M* as a bounded factor, and step 2.1 uses ||M*||. Facts [L1] and [F7] do not state this property. Make the bounded-adjoint result explicit when applying the ideal estimate; thm-hilbert-adjoint-properties is available in the supplier closure and has the matching ACω hypothesis."
+    },
+    {
+      "id": "cex-qft-formal-factorial-series",
+      "type": "local",
+      "reason": "Facts introduces a_n=n! without defining the factorial convention, while step 1.2 divides by t_n and uses the factorial recurrence. Define 0!=1 and (n+1)!=(n+1)n!, and establish nonvanishing before taking the ratio. Also define R in the extended nonnegative reals, with R=+∞ when the convergence-radius set is unbounded; a real supremum need not exist for every coefficient sequence. These page-local clarifications preserve the R=0 claim."
+    },
+    {
+      "id": "qm-math-composites",
+      "type": "outside-batch",
+      "reason": "The supplier page says all its items are drafts, but the page is marked published and the actual suppliers used here—including the density, rank-one, and bounded-cyclicity lemmas—are marked published. Owner reconciliation of this stale status prose is needed; the inspected supplier proofs support the consuming argument."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "qft-mc03-examples",
+      "decision": "accept",
+      "reason": "Its summary claims radius zero only for the specific n!g^n series; that remains correct under the proposed factorial and extended-radius conventions."
+    },
+    {
+      "id": "texp-qft-two-level-measurement",
+      "decision": "accept",
+      "reason": "This related nonlogical use independently defines the factorial and radius for the specific sequence and proves R=0. It has no dependency on the counterexample and needs no repair from the proposed clarification."
+    }
+  ]
+}

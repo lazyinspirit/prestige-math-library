@@ -1,0 +1,346 @@
+[
+  {
+    "order": 429,
+    "id": "rpm-radiation-models",
+    "kind": "A",
+    "category": "relativistic-particle-mechanics",
+    "library": "physics",
+    "title": "Reduced-order LL local ODE and shell",
+    "companion": "rpm-radiation-models-examples",
+    "requires": [
+      "rpm-spin-finite-size",
+      "rpm-external-charge"
+    ],
+    "items": [
+      {
+        "id": "lem-rpm-ll-reduced-ode",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Reduced-order Landau–Lifshitz local ODE and mass shell",
+        "statement": "Let $(A,V,\\eta,C^+)$ be an oriented, time-oriented affine Minkowski space of dimension four with signature $(-,+,+,+)$, and fix an inertial chart $(x^0,x^1,x^2,x^3)$ with $x^0=ct$, $c>0$. Let $O\\subseteq A$ be open and let $F$ be a $C^2$ alternating covariant two-tensor on $O$. In this chart write $F^a{}_b:=\\eta^{ac}F_{cb}$ and let $\\partial_b$ denote the coordinate partial derivative. Fix constants $\\alpha\\in\\mathbb R$ and $\\tau_e\\geq0$. For every $U\\in V$, define\n\n$$\\Pi_U{}^a{}_b:=\\delta^a_b+\\frac{U^aU_b}{c^2},\\qquad f_0^a(x,U):=\\alpha F^a{}_b(x)U^b,$$\n\n$$B^a(x,U):=\\alpha(\\partial_bF^a{}_c)(x)U^bU^c +\\alpha^2F^a{}_b(x)F^b{}_c(x)U^c, \\qquad a_{\\rm LL}^a(x,U):=f_0^a(x,U)+\\tau_e\\Pi_U{}^a{}_bB^b(x,U).$$\n\nFor the physical interpretation, $x^a$ are in metres, $\\tau$ is in seconds, $c$ is in metres per second, $U$ is in metres per second, $\\alpha=q/m$, and $\\tau_e$ is a time. Here a **proper-time parameter** means that the parameter is measured in seconds and the four-velocity is normalized by $\\eta(U,U)=-c^2$; define the future unit shell by $\\mathcal S^+:=\\{U\\in C^+:\\eta(U,U)=-c^2\\}$. For each initial datum $(x_0,U_0)\\in O\\times V$ with $U_0\\in\\mathcal S^+$, the system\n\n$$\\frac{dx^a}{d\\tau}=U^a,\\qquad \\frac{dU^a}{d\\tau}=a_{\\rm LL}^a(x,U),\\qquad (x(0),U(0))=(x_0,U_0)$$\n\nhas a unique local solution on an open proper-time interval about $0$. Along that interval $\\eta(U,U)=-c^2$ and $U$ remains future directed. This is a local ODE statement: it makes no claim of global existence for arbitrary $F$.",
+        "deps": [
+          "def-sr-affine-minkowski-model",
+          "def-inertial-frame-and-inertial-chart",
+          "def-time-orientation-and-future-causal-sets",
+          "def-directional-and-partial-derivatives",
+          "cor-mean-value-theorem",
+          "thm-intermediate-value",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-picard-lindelof-local-existence-and-uniqueness"
+        ],
+        "dependency_roles": {
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "def-inertial-frame-and-inertial-chart": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-intermediate-value": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Landau and Lifshitz, The Classical Theory of Fields, 4th revised English edition",
+              "url": "https://ru.djvu.online/file/ADnW1S0k8Ttos",
+              "locator": "Complete text inspected; §§75–76, printed pp. 222–229. The source uses Gaussian conventions; the carrier gives its own SI coefficient and tensor convention."
+            },
+            {
+              "title": "Sen Zhang, Pre-acceleration from Landau–Lifshitz Series, arXiv:1303.7120",
+              "url": "https://arxiv.org/html/1303.7120",
+              "locator": "Full HTML text inspected; §2, Eqs. (2.1)–(2.6), and Appendix A, Eqs. (A.1)–(A.4). The source motivates reduction of order; the local existence and shell proof below is independent."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "physical_scope": "Mathematical local-existence and shell-preservation result for the explicitly displayed reduced-order vector field on flat affine Minkowski space. It asserts no global existence, physical truth, or approximation accuracy.",
+        "library": "physics",
+        "empirical_premises": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-rpm-reduction-residual",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Conditional LAD-to-LL residual and finite-interval stability",
+        "statement": "Use the flat definitions $f_0$, $B$, and $\\Pi_U$ of [[lem-rpm-ll-reduced-ode]]. Let $I=[\\tau_-,\\tau_+]$ with $\\tau_-<\\tau_+$ be a common compact proper-time interval, and suppose each curve below is $C^3$ on an open neighborhood of $I$. For each $0<\\varepsilon\\leq\\varepsilon_*$, let $x_\\varepsilon:I\\to A$ be a curve in affine Minkowski space with $U_\\varepsilon=\\dot x_\\varepsilon$, $a_\\varepsilon=\\dot U_\\varepsilon$, and $\\eta(U_\\varepsilon,U_\\varepsilon)=-c^2$. Let $F$ be a fixed $C^2$ two-form on a neighborhood of the curves, fix a constant $\\alpha_\\varepsilon\\in\\mathbb R$ for each $\\varepsilon$, and set $f_{0,\\varepsilon}=\\alpha_\\varepsilon F(U_\\varepsilon)$ and $\\delta_\\varepsilon:=a_\\varepsilon-f_{0,\\varepsilon}$. Suppose every curve satisfies the flat LAD equation\n\n$$a_\\varepsilon=f_{0,\\varepsilon}+\\varepsilon\\left(\\dot a_\\varepsilon-\\frac{\\eta(a_\\varepsilon,a_\\varepsilon)}{c^2}U_\\varepsilon\\right).$$\n\nUse the Euclidean norm of inertial components and its induced operator norm. In the SI interpretation $\\varepsilon$ is a time and $\\alpha_\\varepsilon=q/m$; all constants and field norms carry the corresponding units. Assume constants $A,M,P,C_0,C_1\\geq0$, independent of $\\varepsilon$, satisfy on $I$\n\n$$|\\alpha_\\varepsilon|\\leq A,\\quad \\|F\\|_{\\rm op}\\leq M,\\quad \\|\\Pi_{U_\\varepsilon}\\|_{\\rm op}\\leq P,\\quad \\|\\delta_\\varepsilon\\|\\leq C_0\\varepsilon,\\quad \\|\\dot\\delta_\\varepsilon\\|\\leq C_1\\varepsilon.$$\n\nThen throughout $I$,\n\n$$\\left\\|a_\\varepsilon-\\left(f_{0,\\varepsilon}+\\varepsilon\\Pi_{U_\\varepsilon}B_\\varepsilon\\right)\\right\\| \\leq P\\left(C_1+AM C_0\\right)\\varepsilon^2.$$\n\nThe estimate is conditional on the displayed common-interval and uniform bounds. It does not establish that regular LAD solutions satisfying them exist, nor does it imply global-in-time convergence.\n\nFor a separate finite-interval comparison, let $d\\in\\mathbb N$ with $d\\geq1$, let $\\Omega\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be open in the topology of the usual Euclidean metric $d_2$ on $\\mathbb R^{2d}$, and let $K\\subseteq\\Omega$ be compact for that metric. Let $T>0$ and $\\tau_e,C,L\\geq0$. Fix positive coordinate scales $s_j$ for the $2d$ phase coordinates and define $\\|\\xi\\|_1:=\\sum_{j=1}^{2d}|\\xi_j|/s_j$ for $\\xi\\in\\mathbb R^{2d}$. In a dimensional application choose the position and velocity scales consistently with one fixed time unit, so the two blocks of the lifted vector fields below have the same rate units. All constants use these fixed scales; in particular $L$ has units of inverse time, $LT$ is dimensionless, and $C\\tau_e^2$ has the units of a phase-space rate. Let $A_{\\tau_e},\\widetilde A_{\\tau_e}:\\Omega\\to\\mathbb R^d$ be specified acceleration maps, and define the corresponding second-order phase vector fields\n\n$$X_{\\tau_e}(q,v):=(v,A_{\\tau_e}(q,v)),\\qquad \\widetilde X_{\\tau_e}(q,v):=(v,\\widetilde A_{\\tau_e}(q,v)).$$\n\nAll vector integrals in this comparison are taken componentwise as real Riemann integrals.\n\nAssume that for all $z,z'\\in K$,\n\n$$\\|X_{\\tau_e}(z)-X_{\\tau_e}(z')\\|_1\\leq L\\|z-z'\\|_1,\\qquad \\|\\widetilde X_{\\tau_e}(z)-\\widetilde X_{\\tau_e}(z')\\|_1\\leq L\\|z-z'\\|_1,$$\n\nand that $\\|X_{\\tau_e}(z)-\\widetilde X_{\\tau_e}(z)\\|_1\\leq C\\tau_e^2$ for every $z\\in K$. If $z_1,z_2:[0,T]\\to K$ are restrictions of $C^1$ maps on an open interval containing $[0,T]$, solve $\\dot z_1=X_{\\tau_e}(z_1)$ and $\\dot z_2=\\widetilde X_{\\tau_e}(z_2)$ pointwise on $[0,T]$, and satisfy $z_1(0)=z_2(0)$, then\n\n$$\\sup_{0\\leq t\\leq T}\\|z_1(t)-z_2(t)\\|_1\\leq C\\tau_e^2T e^{LT}.$$\n\nThis stability claim assumes both solutions exist on the full interval and remain in the stated common region. It concerns only the two specified second-order systems; it is not an existence or convergence claim for the third-order LAD equation.",
+        "deps": [
+          "lem-rpm-ll-reduced-ode",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-continuous-implies-integrable",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-ftc-first-part",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "cor-mean-value-theorem",
+          "thm-exponential-is-strictly-increasing",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-reciprocal-and-positivity",
+          "lem-metrics-on-rn",
+          "def-metric-topology",
+          "def-metric-compactness",
+          "lem-of-triangle-inequality"
+        ],
+        "dependency_roles": {
+          "lem-rpm-ll-reduced-ode": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "lem-metrics-on-rn": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-metric-compactness": "mathematical-premise",
+          "lem-of-triangle-inequality": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Landau and Lifshitz, The Classical Theory of Fields, 4th revised English edition",
+              "url": "https://ru.djvu.online/file/ADnW1S0k8Ttos",
+              "locator": "Complete text inspected; §76, printed pp. 226–229. This source motivates reduction of order; the uniform conditional estimate below is proved directly."
+            },
+            {
+              "title": "Sen Zhang, Pre-acceleration from Landau–Lifshitz Series, arXiv:1303.7120",
+              "url": "https://arxiv.org/html/1303.7120",
+              "locator": "Full HTML text inspected; §2, Eqs. (2.1)–(2.6). The source discusses perturbative order reduction and does not supply the uniform family bounds assumed here."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "physical_scope": "Conditional finite-interval residual estimate for regular flat LAD families satisfying the stated small-defect and bounded-coefficient hypotheses, together with finite-time stability for two specified Lipschitz second-order vector fields on a common compact phase region with the same initial data. It proves neither existence of such LAD families nor convergence of LAD trajectories or global-in-time accuracy.",
+        "library": "physics",
+        "empirical_premises": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "post-rpm-lad-effective-equation",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Flat Lorentz–Abraham–Dirac effective equation",
+        "statement": "Restrict [[def-rpm-charge-spin-model]] to its flat affine Minkowski branch, with signature $(-,+,+,+)$, proper time $\\tau$ in seconds, future four-velocity $U=dx/d\\tau$ satisfying $\\eta(U,U)=-c^2$, constant primitive $m>0$ in kilograms and nonzero charge $q\\in\\mathbb R$ in coulombs. Let the prescribed external electromagnetic two-form $F$ be $C^2$ on an open neighborhood of the worldline; use the component convention $F_{0i}=-E_i/c$, $F_{ij}=\\epsilon_{ijk}B_k$ of [[def-em-electromagnetic-tensor]]. Let $a:=dU/d\\tau$ and\n\n$$\\alpha:=q/m,\\qquad \\tau_e:=\\frac{q^2}{6\\pi\\epsilon_0mc^3}>0,\\qquad f_0^a:=\\alpha F^a{}_bU^b,$$\n\nwhere $\\epsilon_0=(\\mu_0c^2)^{-1}$ follows [[def-em-si-conventions]]. Adopt the flat LAD effective equation\n\n$$a^a=f_0^a+\\tau_e\\left(\\frac{da^a}{d\\tau}-\\frac{\\eta_{bc}a^ba^c}{c^2}U^a\\right).$$\n\nThe derivative is the ordinary derivative in an inertial affine chart. Its dimensions are consistent: $a$ and $f_0$ are accelerations, the parenthesized term has acceleration per second, and $\\tau_e$ is a time. This is an adopted effective model equation for sufficiently regular curves (at least $C^3$); it is not asserted to be an exact law of nature, a point-source Maxwell construction, or a globally well-posed dynamics. In particular, no existence, uniqueness, stability, or empirical claim is part of this postulate.\n\nUse of the equation as a reduced physical approximation carries the source qualification that radiation reaction be small relative to the applied Lorentz force in the particle's instantaneous rest frame (the inertial frame momentarily comoving with $U$). This postulate neither asserts that condition for arbitrary $F$ nor supplies a numerical threshold; the qualification is not used to deduce the local ODE results or the force-free counterexample.",
+        "deps": [
+          "def-rpm-charge-spin-model",
+          "def-em-electromagnetic-tensor",
+          "def-em-si-conventions"
+        ],
+        "dependency_roles": {
+          "def-rpm-charge-spin-model": "formulation-prerequisite",
+          "def-em-electromagnetic-tensor": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Landau and Lifshitz, The Classical Theory of Fields, 4th revised English edition",
+              "url": "https://ru.djvu.online/file/ADnW1S0k8Ttos",
+              "locator": "Complete text inspected; §§75–76, printed pp. 222–229. Gaussian-unit formulas are not copied as SI coefficients."
+            },
+            {
+              "title": "Sen Zhang, Pre-acceleration from Landau–Lifshitz Series, arXiv:1303.7120",
+              "url": "https://arxiv.org/html/1303.7120",
+              "locator": "Full HTML text inspected; §2, Eqs. (2.1)–(2.6), and Appendix A, Eqs. (A.1)–(A.4), discussing the LAD equation and its reduced-order use."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "physical_scope": "Adopted flat-space point-particle effective equation in a prescribed external field. It is a model postulate, not a derivation from a coupled Maxwell point source, finite-body limit, or observation; it asserts no solution existence or global accuracy.",
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "rem-rpm-self-force-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Self-force status and point-particle limits",
+        "statement": "The present pair prescribes an external field and adopts the flat LAD equation as a separate effective model. It does not construct a coupled Maxwell field sourced by a point charge or evaluate a self-field on the worldline. [[def-rpm-body-moments]] defines moments for a smooth finite body (and a local curved moment convention); its definitions do not assert a point limit or a self-force law.\n\nPoisson, Pound, and Vega's §22.1 records the formal point-charge equations and the singularity of the field on the worldline; §§22.2–22.6 develop the electromagnetic field near the worldline, singular/regular field split, tail, and equation of motion, particularly §22.6. A self-force calculation therefore requires a specified regularization or extended-body limiting argument. Gralla, Harte, and Wald's conclusions are conditional on assuming a one-parameter family $(F_{\\mu\\nu}(\\lambda),J^\\mu(\\lambda),T^M_{\\mu\\nu}(\\lambda))$ of exact solutions to Maxwell's equations, current conservation, and total stress-energy conservation, with the support/scaling hypothesis (i) of their §II and a field decomposition satisfying hypothesis (ii): a retarded self-field plus an external homogeneous Maxwell solution jointly smooth in $\\lambda$ and spacetime. In that scaling limit the body size, charge, and mass tend to zero while the charge-to-mass ratio has a finite limit; the paper does not construct such a family or a constitutive matter model. Under those assumptions, the leading motion is Lorentz-force motion and §IV derives the first-order correction, including self-force, electromagnetic-dipole, and spin terms. In §§V–VI the authors discuss and qualify a self-consistent reduction-of-order formulation; the reduced-order ALD case is tied to negligible spin and electromagnetic-dipole contributions. These conditional results do not establish an unrestricted fixed-charge point construction, arbitrary-duration global accuracy, or the physical truth of the separately adopted postulate [[post-rpm-lad-effective-equation]].",
+        "deps": [
+          "def-rpm-body-moments",
+          "post-rpm-lad-effective-equation"
+        ],
+        "dependency_roles": {
+          "def-rpm-body-moments": "formulation-prerequisite",
+          "post-rpm-lad-effective-equation": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Poisson, Adam Pound, and Ian Vega, The Motion of Point Particles in Curved Spacetime, Living Reviews in Relativity 14 (2011)",
+              "url": "https://link.springer.com/article/10.12942/lrr-2011-7",
+              "locator": "Relevant Springer article text inspected; §22.1 introduces the point-charge equations and singularity on the worldline; §§22.2–22.6 develop the electromagnetic field near the worldline, singular/regular split, tail, and equation of motion, particularly §22.6."
+            },
+            {
+              "title": "Samuel E. Gralla, Abraham I. Harte, and Robert M. Wald, A Rigorous Derivation of Electromagnetic Self-force, Physical Review D 80, 024031 (2009)",
+              "url": "https://arxiv.org/pdf/0905.2391",
+              "locator": "Relevant text inspected; §II, assumptions (i)–(ii), assumes a one-parameter family with the stated support/scaling form and a retarded self-field plus a jointly smooth homogeneous external field, satisfying Maxwell's equations, current conservation, and total-stress-energy conservation; §IV derives the first-order correction; §§V–VI discuss a qualified reduction-of-order formulation. The paper assumes rather than constructs such a family."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "physical_scope": "Scope remark separating prescribed-field LL/LAD effective equations, finite-body moments and literature results for a specific shrinking-body family. It supplies no point-charge self-field, universal fixed-charge point limit, or quantitative global accuracy claim.",
+        "library": "physics",
+        "empirical_premises": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 430,
+    "id": "rpm-radiation-models-examples",
+    "kind": "B",
+    "category": "relativistic-particle-mechanics",
+    "library": "physics",
+    "title": "Reduced-order LL local ODE and shell — Examples",
+    "companion": "rpm-radiation-models",
+    "requires": [
+      "rpm-radiation-models"
+    ],
+    "items": [
+      {
+        "id": "ex-rpm-al-future-boundary-preacceleration",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Future-boundary solution of the nonrelativistic Abraham–Lorentz equation",
+        "statement": "Let $m>0$ and $\\tau_e>0$. Let $T>0$ and let $F_{\\rm ext}\\in C_c^\\infty(\\mathbb R)$ be nonnegative, not identically zero, and supported in $[0,T]$; $C_c^\\infty$ means smooth with compact support. Here $F_{\\rm ext}$ is a scalar force history in newtons. Consider the separate nonrelativistic Abraham–Lorentz model equation for acceleration $a(t)$,\n\n$$a(t)=\\frac{F_{\\rm ext}(t)}{m}+\\tau_e\\frac{da}{dt}(t),$$\n\nwhere $\\tau_e$ has units of time. A candidate solution is a continuously differentiable map $a:\\mathbb R\\to\\mathbb R$ that satisfies this equation pointwise for every $t\\in\\mathbb R$. Impose the future boundary condition $\\lim_{t\\to+\\infty}a(t)=0$. Interpret the integral to $+\\infty$ as a finite Riemann integral after a truncation beyond the compact support, with the value independent of the truncation. The unique candidate solution satisfying that boundary condition is\n\n$$a(t)=\\frac{1}{m\\tau_e}\\int_t^{\\infty}e^{(t-s)/\\tau_e}F_{\\rm ext}(s)\\,ds.$$\n\nIt vanishes for $t\\geq T$ and is strictly positive for every $t<0$. Thus this equation with this future boundary condition has pre-acceleration before the pulse support. The example concerns the stated ODE only; it is not a measurement and does not establish the behavior of finite charges.",
+        "deps": [
+          "thm-ftc-first-part",
+          "thm-continuous-implies-integrable",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-mean-value-theorem",
+          "thm-extreme-value-metric",
+          "thm-monotonicity-of-the-integral",
+          "lem-integral-elementary-bounds",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "thm-exponential-limits-and-range"
+        ],
+        "dependency_roles": {
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "lem-integral-elementary-bounds": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "thm-exponential-limits-and-range": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Landau and Lifshitz, The Classical Theory of Fields, 4th revised English edition",
+              "url": "https://ru.djvu.online/file/ADnW1S0k8Ttos",
+              "locator": "Relevant text inspected; §75, printed pp. 222–225, discusses nonrelativistic radiation damping and its regime. The future-selected integral solution is sourced to Zhang §2, Eq. (2.6), not to this section."
+            },
+            {
+              "title": "Sen Zhang, Pre-acceleration from Landau–Lifshitz Series, arXiv:1303.7120",
+              "url": "https://arxiv.org/html/1303.7120",
+              "locator": "Relevant HTML text inspected; §2, Eqs. (2.5)–(2.6), gives the nonrelativistic future-selected integral solution. The pulse-specific positivity and uniqueness proof below is local."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "physical_scope": "Exact solution and sign check for a separately stated one-dimensional nonrelativistic Abraham–Lorentz ODE. Pre-acceleration is a property of this future-boundary model solution, not an empirical finding or a conclusion about finite-body causal dynamics.",
+        "library": "physics",
+        "empirical_premises": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-rpm-lad-force-free-runaway",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Force-free runaway solution of the LAD equation",
+        "statement": "Within the adopted flat LAD effective equation with $\\tau_e>0$ and zero prescribed external field, every smooth future-timelike proper-time solution defined for all future proper times has bounded proper acceleration toward the future. This is an assertion about the adopted ODE, not an empirical statement about a finite charge.",
+        "deps": [
+          "post-rpm-lad-effective-equation",
+          "def-rpm-charge-spin-model",
+          "lem-rpm-ll-reduced-ode",
+          "def-hyperbolic-functions",
+          "thm-hyperbolic-identities-and-derivatives",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-ftc-first-part",
+          "thm-continuous-implies-integrable"
+        ],
+        "dependency_roles": {
+          "post-rpm-lad-effective-equation": "physical-assumption",
+          "def-rpm-charge-spin-model": "formulation-prerequisite",
+          "lem-rpm-ll-reduced-ode": "mathematical-premise",
+          "def-hyperbolic-functions": "mathematical-premise",
+          "thm-hyperbolic-identities-and-derivatives": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sen Zhang, Pre-acceleration from Landau–Lifshitz Series, arXiv:1303.7120",
+              "url": "https://arxiv.org/html/1303.7120",
+              "locator": "Relevant HTML text inspected; §2, Eq. (2.5) and the following general solution give the nonrelativistic exponential runaway mode, while Appendix A, Eqs. (A.1)–(A.4), gives the one-dimensional relativistic rapidity equation. The exact force-free relativistic branch displayed here is established by this item's calculation."
+            },
+            {
+              "title": "Landau and Lifshitz, The Classical Theory of Fields, 4th revised English edition",
+              "url": "https://ru.djvu.online/file/ADnW1S0k8Ttos",
+              "locator": "Relevant text inspected; §76, printed pp. 226–229, derives the relativistic radiation-damping four-force and rewrites it using the external field. The exact force-free runaway branch below is proved locally."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "physical_scope": "Counterexample within the adopted flat LAD effective ODE: a force-free, smooth future-timelike solution with exponentially growing proper acceleration. It is an equation-level pathology, not an observation or claim about an actual finite charge.",
+        "library": "physics",
+        "empirical_premises": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

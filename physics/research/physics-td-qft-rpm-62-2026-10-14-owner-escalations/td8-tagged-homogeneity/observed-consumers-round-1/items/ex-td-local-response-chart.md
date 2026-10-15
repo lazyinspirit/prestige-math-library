@@ -1,0 +1,65 @@
+---
+id: ex-td-local-response-chart
+kind: example
+title: Response functions in a formal logarithmic entropy chart
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+physical_scope: A constructed fixed-composition smooth chart used only to evaluate the preceding definitions; it is not an empirical equation of state or a complete bulk model.
+deps:
+  - def-td-temperature-pressure-chemical-potential
+  - def-td-response-functions
+  - def-natural-logarithm
+  - thm-logarithm-derivative-and-integral
+dependency_roles:
+  def-td-temperature-pressure-chemical-potential: formulation-prerequisite
+  def-td-response-functions: formulation-prerequisite
+  def-natural-logarithm: mathematical-premise
+  thm-logarithm-derivative-and-integral: mathematical-premise
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+sources:
+  references:
+    - title: David Tong, Statistical Physics, complete lecture notes, §1.2.4
+      url: https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S1.html
+    - title: Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.10.5
+      url: https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf
+---
+
+## Example
+
+Fix the amounts and let $a,b>0$ have units $\mathrm{J\,K^{-1}}$, with reference values $U_0>0$ joules and $V_0>0$ cubic metres. On the open chart $U,V>0$, stipulate the smooth entropy function
+
+$$S(U,V)=a\ln(U/U_0)+b\ln(V/V_0).$$
+
+Applying the definitions on this chart gives
+
+$$T=U/a,\qquad p=bT/V,\qquad C_V=a,\qquad C_p=a+b,\qquad \kappa_T=1/p,\qquad \alpha_p=1/T.$$
+
+This is a formal chart calculation, not measured data and not a claim that this entropy satisfies the track's tagged bulk-scaling postulate for a fixed material type.
+
+## Facts & Assumptions
+
+**Given:** $U,V,U_0,V_0>0$ with units $\mathrm J,\mathrm{m^3},\mathrm J,\mathrm{m^3}$ respectively; $a,b>0$ in $\mathrm{J\,K^{-1}}$; fixed composition; the displayed function is stipulated on this chart.
+
+[A1] [[def-td-temperature-pressure-chemical-potential]]: $T=1/S_U$ and $p=T S_V$, with $V$ held fixed in $S_U$ and $U$ held fixed in $S_V$.
+
+[F1] [[def-td-response-functions]]: $C_V=(\partial U/\partial T)_{V,n}$, $C_p=(\partial H/\partial T)_{p,n}$ with $H=U+pV$, $\kappa_T=-V^{-1}(\partial V/\partial p)_{T,n}$, and $\alpha_p=V^{-1}(\partial V/\partial T)_{p,n}$ where the indicated local charts exist.
+
+[F2] [[def-natural-logarithm]]: $\ln$ denotes the natural logarithm on the positive real numbers.
+
+[L1] [[thm-logarithm-derivative-and-integral]]: For positive $x$, the natural logarithm is differentiable and $\frac{d}{dx}\ln x=1/x$.
+
+## Verification
+
+1.1 The positive ratios in the stipulated entropy are in the domain of [F2]. By [L1], $S_U=a/U$ and $S_V=b/V$. Substitution in [A1] gives $T=U/a>0$ and $p=bU/(aV)=bT/V$. The entropy Hessian is diagonal with entries $-a/U^2$ and $-b/V^2$, so its quadratic form is nonpositive; this chart is concave. [given, A1, F2, L1, algebra]
+
+1.2 Solving $T=U/a$ gives $U=aT$, hence $C_V=(\partial U/\partial T)_{V,n}=a$. Solving $p=bT/V$ gives $V=bT/p$, so $(\partial V/\partial p)_{T,n}=-bT/p^2$ and $(\partial V/\partial T)_{p,n}=b/p$. With $V=bT/p$, [F1] yields $\kappa_T=1/p$ and $\alpha_p=1/T$. These inverses are smooth for $T,p>0$. [given, A1, F1, step 1.1, algebra]
+
+2.1 The enthalpy in [F1] is $H=U+pV=aT+bT=(a+b)T$, so $C_p=(\partial H/\partial T)_{p,n}=a+b$. All displayed units are consistent: $C_V,C_p$ are $\mathrm{J\,K^{-1}}$, $\kappa_T$ is $\mathrm{Pa^{-1}}$, and $\alpha_p$ is $\mathrm{K^{-1}}$. [given, F1, step 1.1, step 1.2, algebra] ∎

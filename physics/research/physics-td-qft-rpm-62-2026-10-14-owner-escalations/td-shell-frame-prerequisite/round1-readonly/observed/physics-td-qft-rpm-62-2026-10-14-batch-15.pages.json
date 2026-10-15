@@ -1,0 +1,1155 @@
+[
+  {
+    "order": 284,
+    "id": "td-finite-statistical-bridge",
+    "kind": "A",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Finite Statistical Bridge",
+    "companion": "td-finite-statistical-bridge-examples",
+    "requires": [
+      "qm-many-body-and-equilibrium-models",
+      "td-math-continuum-pressure",
+      "td-math-mixture-dynamics-and-shells",
+      "td-potentials-and-responses"
+    ],
+    "items": [
+      {
+        "id": "def-td-finite-microstate-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Finite statistical microstate model",
+        "reference": "items/def-td-finite-microstate-model.md#definition",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 3,
+        "deps": [
+          "def-function",
+          "def-td-equilibrium-state-domain",
+          "def-td-galilean-rest-frame",
+          "def-td-si-quantities"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-function": "mathematical-premise",
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-galilean-rest-frame": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "A finite statistical microstate model is a pair $(\\Omega,\\epsilon)$ where $\\Omega$ is a finite nonempty set and $\\epsilon:\\Omega\\to\\mathbb R$ assigns a finite numerical energy to each microstate. The physical energy of $x\\in\\Omega$ is $E(x)=\\epsilon(x)\\,\\mathrm J$, with its zero and any retained internal offsets fixed by the declared material model. Energies are evaluated in the center-of-mass rest frame specified by [[def-td-galilean-rest-frame]], and $U$ is the corresponding macroscopic internal-energy coordinate of [[def-td-equilibrium-state-domain]]. Equal energy values at distinct elements of $\\Omega$ count as distinct microstates.\n\nWhen two such models are declared independent, their joint microstate set is the Cartesian product $\\Omega_A\\times\\Omega_B$, and additivity of the microscopic energy is the explicit condition $\\epsilon_{AB}(x,y)=\\epsilon_A(x)+\\epsilon_B(y)$. Independence and this energy equation are model data; they do not follow merely from the two systems being separated. The definition itself assigns no weights, temperature, probability law, or dynamics.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§1.2–1.3 (printed pp. 2–27)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.2–4.4 (printed pp. 192–208)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite discrete statistical models whose energies are numerical values in joules in the declared center-of-mass rest frame; no probability law or equilibration claim is part of the definition.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "def-td-regular-hamiltonian-shell-preparation",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Regular Hamiltonian shell preparation data",
+        "reference": "items/def-td-regular-hamiltonian-shell-preparation.md#definition",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 2,
+        "deps": [
+          "def-td-galilean-rest-frame",
+          "def-td-si-quantities",
+          "def-tdmath-regular-energy-shell",
+          "thm-tdmath-regular-energy-shell-measure"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-galilean-rest-frame": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-tdmath-regular-energy-shell": "mathematical-premise",
+          "thm-tdmath-regular-energy-shell-measure": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix an integer $n\\ge1$, a canonical chart with physical coordinates $q_i$ in metres and $p_i$ in $\\mathrm{kg\\,m\\,s^{-1}}$, and the corresponding dimensionless coordinates $\\hat q_i=q_i/(1\\,\\mathrm m)$ and $\\hat p_i=p_i/(1\\,\\mathrm{kg\\,m\\,s^{-1}})$. Let $O\\subseteq\\mathbb R^{2n}$ be the open domain of the numerical vector $\\hat x=(\\hat q,\\hat p)$, let $\\hat H:O\\to\\mathbb R$ be the numerical energy map with physical energy $H=(1\\,\\mathrm J)\\hat H$, and require $\\hat H$ to have continuous partial derivatives through order two. A specified open interval $J_E\\subseteq\\mathbb R$ is a regular compact-shell band when $\\hat H^{-1}(K)$ is compact in $O$ for every compact $K\\subset J_E$ and $\\nabla\\hat H$ is nonzero at every point of $\\hat H^{-1}(J_E)$.\n\nFor $\\hat E\\in J_E$, the energy shell is $\\Sigma_{\\hat E}:=\\{x\\in O:\\hat H(x)=\\hat E\\}$. The graph-chart definition of the weighted shell integral is [[def-tdmath-regular-energy-shell]]: in a local graph chart $x_i=h(z,\\hat E)$, its coarea measure is $d\\mu_{\\hat E}=dA_{\\hat E}/|\\nabla\\hat H|$, with graph-area factor and gradient in the dimensionless Euclidean coordinates. Set $D(\\hat E):=\\int_{\\Sigma_{\\hat E}}d\\mu_{\\hat E}$ and admit the preparation only when $\\Sigma_{\\hat E}\\ne\\varnothing$ and $0<D(\\hat E)<\\infty$. Its normalized shell law is $\\nu_{\\hat E}(A):=D(\\hat E)^{-1}\\mu_{\\hat E}(A\\cap\\Sigma_{\\hat E})$. The current draft theorem [[thm-tdmath-regular-energy-shell-measure]] proves the coarea identity, chart independence and positive finite shell mass under its stated $C^2$, compact-regular-band hypotheses; its statement and proof are present, while its acceptance remains unresolved. Multiplying the unnormalized shell measure by a fixed positive phase-volume normalization does not change $\\nu_{\\hat E}$.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.2 (printed pp. 2–16)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.2–4.3 (printed pp. 192–204)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Declared finite-dimensional classical Hamiltonian models in one canonical chart, restricted to nonempty compact regular energy shells in the stated energy band; critical levels and incomplete global flows are excluded.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "post-td-canonical-sampling",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Canonical sampling assumption for finite and normalized statistical models",
+        "reference": "items/post-td-canonical-sampling.md#postulate",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 4,
+        "deps": [
+          "def-td-finite-microstate-model",
+          "def-td-si-quantities",
+          "def-tdmath-countable-canonical-model",
+          "def-tdmath-measure-integral"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-tdmath-countable-canonical-model": "mathematical-premise",
+          "def-tdmath-measure-integral": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assign a positive temperature $T$ in kelvins and the exact framework constant $k_{\\mathrm B}$ in $\\mathrm{J\\,K^{-1}}$ from [[def-td-si-quantities]], and put $\\beta=(k_{\\mathrm B}T)^{-1}$ in $\\mathrm{J^{-1}}$. For a finite microstate model $(\\Omega,\\epsilon)$, adopt the canonical preparation\n$$P_\\beta(x)=\\frac{e^{-\\beta E(x)}}{Z(\\beta)},\\qquad Z(\\beta)=\\sum_{x\\in\\Omega}e^{-\\beta E(x)}.$$\nHere $Z$ is dimensionless, positive, and finite because $\\Omega$ is finite and nonempty.\n\nThe same adopted law may be assigned to a specified countable state model with its stated enumeration and energy list, or to a measurable model $(X,\\Sigma,\\mu,E)$ with a dimensionless reference measure $\\mu$ and measurable energy $E:X\\to\\mathbb R\\,\\mathrm J$, only when $0<Z(\\beta)<\\infty$ for the declared series or integral. In those cases $P_\\beta(i)=e^{-\\beta E_i}/Z$ or the probability density is $p_\\beta=e^{-\\beta E}/Z$ relative to $\\mu$. The countable and integral conventions are those of [[def-tdmath-countable-canonical-model]] and [[def-tdmath-measure-integral]] at their actual current draft statements.\n\nThis is an adopted statistical-mechanical preparation rule. It is not derived from the macroscopic thermodynamic laws, a finite bath, entropy maximization, or a time-evolution equation. It does not assert that a physical sample has this preparation; that identification is an additional model assumption to be tested against a specified preparation and apparatus.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.3 (printed pp. 17–26)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.4–4.6 (printed pp. 205–217)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Adopted canonical preparation assumptions for finite microstate models and explicitly declared countable or measurable energy models with a positive finite dimensionless partition function; the postulate asserts no dynamics, equilibration, or empirical validation.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "post-td-microcanonical-sampling",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Microcanonical sampling assumption",
+        "reference": "items/post-td-microcanonical-sampling.md#postulate",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 4,
+        "deps": [
+          "def-td-finite-microstate-model",
+          "def-td-regular-hamiltonian-shell-preparation",
+          "def-td-si-quantities"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "def-td-regular-hamiltonian-shell-preparation": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For a finite microstate model and a declared energy value $E_0$ in joules and resolution $\\delta\\ge0$ in joules, define the admitted window\n$$\\Omega_{E_0,\\delta}:=\\{x\\in\\Omega:|E(x)-E_0|\\le\\delta\\}.$$\nWhen this set is nonempty, adopt the uniform preparation $P(x)=|\\Omega_{E_0,\\delta}|^{-1}$ on it and zero outside. Its dimensionless Boltzmann entropy is $\\log|\\Omega_{E_0,\\delta}|$, and its physical entropy convention is $k_{\\mathrm B}\\log|\\Omega_{E_0,\\delta}|$ in $\\mathrm{J\\,K^{-1}}$. A zero-width window is allowed only when it contains at least one microstate.\n\nFor a continuous classical model, when the hypotheses and normalization in [[def-td-regular-hamiltonian-shell-preparation]] hold, the microcanonical preparation is the normalized shell measure $\\nu_{\\hat E}$ defined there. These finite-window and regular-shell rules are adopted model preparations. They do not assert Hamiltonian ergodicity, equality with long-time averages, canonical sampling, or equilibration.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.2 (printed pp. 2–16)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §4.2 (printed pp. 192–198)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Adopted uniform weighting for a nonempty finite energy window or the normalized coarea law on an admitted regular compact Hamiltonian energy shell; neither rule is a consequence of dynamics or a claim about measured samples.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "pthm-td-countable-canonical-identities",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Countable canonical identities under a local moment envelope",
+        "reference": "items/pthm-td-countable-canonical-identities.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-td-si-quantities",
+          "def-tdmath-countable-canonical-model",
+          "post-td-canonical-sampling",
+          "thm-tdmath-summable-canonical-differentiation"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-tdmath-countable-canonical-model": "mathematical-premise",
+          "post-td-canonical-sampling": "physical-assumption",
+          "thm-tdmath-summable-canonical-differentiation": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I$ be a specified nonempty countable microstate list with energies $E_i$ in joules, counted once, and let $J_\\beta\\subset(0,\\infty)$ be open. For $\\beta\\in J_\\beta$, define $Z(\\beta)=\\sum_i e^{-\\beta E_i}$ and, when $0<Z(\\beta)<\\infty$, $p_i(\\beta)=e^{-\\beta E_i}/Z(\\beta)$. Suppose every compact interval $K\\subset J_\\beta$ admits a summable sequence $a_i\\ge0$ with $(1+|E_i|^2)e^{-\\beta E_i}\\le a_i$ for all $i$ and $\\beta\\in K$. Then $Z$ is $C^2$, $-\\partial_\\beta\\log Z=\\bar E_\\beta$, $\\partial_\\beta^2\\log Z=\\operatorname{Var}_\\beta(E)$, and the dimensionless Gibbs entropy is finite with\n$$-\\sum_i p_i\\log p_i=\\log Z+\\beta\\bar E_\\beta.$$\nThus $F_{\\mathrm{stat}}=-k_{\\mathrm B}T\\log Z=\\bar E_\\beta-TS_\\beta$ for $\\beta=(k_{\\mathrm B}T)^{-1}$. A lower bound on the energies alone does not supply the summable envelope or finite partition function.\n\n## Facts & Assumptions\n\n**Given:** A specified countable energy list, a positive finite canonical partition sum on $J_\\beta$, and the local summable second-moment envelope.\n\n[F1] [[def-tdmath-countable-canonical-model]]: $I$ has a specified enumeration, $Z=\\sum_i e^{-\\beta E_i}$ uses the nonnegative series convention, and $p_i$ and expectations are defined only when $0<Z<\\infty$.\n\n[F2] [[post-td-canonical-sampling]]: for this normalized countable model, $p_i=e^{-\\beta E_i}/Z$ is the adopted preparation law.\n\n[L1] [[thm-tdmath-summable-canonical-differentiation]] (current batch 11 draft): under the local envelope $(1+|E_i|^2)e^{-\\beta E_i}\\le a_i$ on each compact interval, the normalized series has the stated $C^2$, mean, variance, and entropy identities. Its full current proof was inspected; its draft status remains conditional.\n\n[F3] [[def-td-si-quantities]]: $E_i$ and $\\bar E_\\beta$ are in joules, $T$ is in kelvins, and $k_{\\mathrm B}$ is in $\\mathrm{J\\,K^{-1}}$, so $\\beta$ is in $\\mathrm{J^{-1}}$.\n\n[A1] The energy list and degeneracy convention are fixed while $\\beta$ varies; every compact interval in $J_\\beta$ has the stated summable envelope.\n\n## Proof\n\n**Given:** The countable model and its local envelope on the open interval $J_\\beta$.\n\n1.1 The assumptions in the Statement are exactly the countable model and envelope required by [L1]; the weights are counting weights, so each listed state contributes one factor $e^{-\\beta E_i}$. By [F2], their normalized law is the adopted canonical preparation, and [F3] gives the SI dimensions. [F1, F2, F3, L1, A1]\n\n2.1 Apply [L1] to this model: $Z\\in C^2$, its logarithmic derivatives give the mean and variance, and the absolutely convergent entropy sum equals $\\log Z+\\beta\\bar E_\\beta$. Multiplying the entropy identity by $k_{\\mathrm B}$ and using $\\beta k_{\\mathrm B}=1/T$ yields $F_{\\mathrm{stat}}=\\bar E_\\beta-TS_\\beta=-k_{\\mathrm B}T\\log Z$. The claim remains conditional on the draft supplier's proof and the envelope. [F2, F3, L1, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§1.3.1–1.3.4 (printed pp. 18–26)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.2–4.4 (printed pp. 192–208)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Discrete countable energy lists with a specified enumeration and a uniform local summable second-moment envelope on an open positive inverse-temperature interval; no lower-energy-bound-only or arbitrary trace claim is made.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-differentiable-pressure-concentration",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Energy-density concentration at differentiable lattice pressure",
+        "reference": "items/pthm-td-differentiable-pressure-concentration.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 6,
+        "deps": [
+          "def-td-finite-microstate-model",
+          "def-td-si-quantities",
+          "post-td-canonical-sampling",
+          "pthm-td-lattice-bulk-pressure",
+          "thm-tdmath-limiting-derivative-and-concentration"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-td-canonical-sampling": "physical-assumption",
+          "pthm-td-lattice-bulk-pressure": "physical-result",
+          "thm-tdmath-limiting-derivative-and-concentration": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For the lattice model and canonical law of [[pthm-td-lattice-bulk-pressure]], let $p_L(\\gamma)=L^{-d}\\log Z_L(\\gamma)$ converge pointwise on an open interval $J_\\beta\\subset(0,\\infty)$ to $p(\\gamma)$. If $p$ is differentiable at $\\beta\\in J_\\beta$, set $e=-p'(\\beta)$ in joules per site. Then the canonical mean energy density satisfies $\\mathbb E_{\\beta,L}[H_L]/L^d\\to e$, and for every $\\varepsilon>0$ there exist $c>0$ and $L_0$ such that\n$$\\mathbb P_{\\beta,L}\\!\\left(\\left|H_L/L^d-e\\right|\\ge\\varepsilon\\right)\\le2e^{-cL^d}\\qquad(L\\ge L_0).$$\nThe probability is the model's finite-volume canonical probability, not an observed frequency. No conclusion is asserted when $p$ is nondifferentiable.\n\n## Facts & Assumptions\n\n**Given:** The bounded finite-range lattice models, their canonical probabilities, pointwise convergence of $p_L$ on an open positive interval, and differentiability of the limit at $\\beta$.\n\n[F1] [[pthm-td-lattice-bulk-pressure]]: $p_L=L^{-d}\\log Z_L$ is the reduced lattice log-partition density and its canonical law is the finite-volume model law.\n\n[L1] [[thm-tdmath-limiting-derivative-and-concentration]] (current batch 11 draft): if the finite-volume lattice pressures converge pointwise on an open positive interval and the limiting pressure is differentiable at $\\beta$, then the finite-volume mean energy density converges to $-p'(\\beta)$ and both tails have an exponential bound. Its full current proof was inspected; its draft status remains conditional.\n\n[F2] [[post-td-canonical-sampling]]: the finite-volume probabilities are $e^{-\\beta H_L}/Z_L$.\n\n[F3] [[def-td-si-quantities]]: $H_L$ and $e$ are in joules per site, $\\beta$ in $\\mathrm{J^{-1}}$, and the probability bound is dimensionless.\n\n[A1] $\\beta$ lies in an open interval $J_\\beta\\subset(0,\\infty)$, $p_L\\to p$ on that interval, and $p$ is differentiable at the specified $\\beta$.\n\n## Proof\n\n**Given:** The lattice model, its finite canonical law, the pointwise limiting pressure, and differentiability at $\\beta$.\n\n1.1 The finite-volume energy law and $p_L$ in [F1]–[F2] match the model and probability hypotheses of [L1]. The condition $\\beta>0$ and differentiability at $\\beta$ are exactly those in [A1]. [F1, F2, F3, L1, A1]\n\n2.1 Applying [L1] yields $\\mathbb E_{\\beta,L}[H_L]/L^d\\to -p'(\\beta)=e$ and, for each fixed $\\varepsilon>0$, a constant $c>0$ and threshold $L_0$ with the stated two-tail exponential estimate. The result is a model probability statement and is silent at pressure nondifferentiability. [F1, L1, step 1.1] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§1.3.2 and 5.3.1 (printed pp. 19–20 and 156–157)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.4.6 and 6.2.2 (printed pp. 207–208 and 330–333)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Conditional model probabilities for bounded finite-range lattice systems at a differentiability point of the limiting log-partition density; no concentration claim is made at a nondifferentiable point or for arbitrary observables.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-finite-bath-canonical-error",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Finite-bath canonical error under a smooth shell-entropy model",
+        "reference": "items/pthm-td-finite-bath-canonical-error.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-td-finite-microstate-model",
+          "def-td-si-quantities",
+          "post-td-canonical-sampling",
+          "post-td-microcanonical-sampling",
+          "thm-tdmath-finite-bath-error-bound"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-td-canonical-sampling": "physical-assumption",
+          "post-td-microcanonical-sampling": "physical-assumption",
+          "thm-tdmath-finite-bath-error-bound": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let the subsystem have a finite nonempty state set $\\Omega$ and internal energies $E_x$ in joules with $|E_x|\\le L$. A bath has a dimensionless shell entropy $s_B(u)$, defined on an open interval containing $[u_0-L,u_0+L]$ in joules, with $s_B\\in C^2$ and $|s_B''(u)|\\le M$ there; the model adopts $\\beta=s'_B(u_0)>0$ in $\\mathrm{J^{-1}}$ and $T=(k_{\\mathrm B}\\beta)^{-1}$. Assume weak additive coupling and microcanonical shell sampling induce subsystem weights $P_B(x)\\propto e^{s_B(u_0-E_x)}$. Let $P_C(x)=e^{-\\beta E_x}/Z$ be the corresponding canonical law. With $\\delta=ML^2/2$ (dimensionless), the shell log-weight remainder obeys\n$$|s_B(u_0-E_x)-s_B(u_0)+\\beta E_x|\\le\\delta,$$\nand the normalized laws satisfy\n$$\\sum_{x\\in\\Omega}|P_B(x)-P_C(x)|\\le e^{2\\delta}-1.$$\nThis is an $\\ell^1$ probability-vector bound; it does not assert a universal error or a thermodynamic limit.\n\n## Facts & Assumptions\n\n**Given:** The finite subsystem, the bath entropy and curvature bound, the adopted energy-additive shell model, and the two normalized laws.\n\n[F1] [[def-td-finite-microstate-model]]: $\\Omega$ is finite and nonempty and each $E_x$ is a fixed internal energy in joules.\n\n[F2] [[post-td-canonical-sampling]]: the canonical comparison law has weights $e^{-\\beta E_x}/Z$ when $Z>0$ is finite.\n\n[F3] [[post-td-microcanonical-sampling]]: the microcanonical joint-shell model assigns the subsystem marginal induced by the bath shell weights when the weak-additive-coupling and shell hypotheses are imposed.\n\n[L1] [[thm-tdmath-finite-bath-error-bound]] (current batch 11 draft): for finite energies $|E_x|\\le L$, $s_B\\in C^2$ on the stated interval, $|s_B''|\\le M$, $\\beta=s'_B(u_0)$, and normalized weights proportional to $e^{s_B(u_0-E_x)}$, the Taylor remainder is at most $\\delta=ML^2/2$ and the canonical comparison law has $\\ell^1$ error at most $e^{2\\delta}-1$. Its full current proof was inspected; its draft status remains conditional.\n\n[A1] $L,M\\ge0$, $\\beta>0$, the bath interval contains every $u_0-E_x$, and the physical energy unit is joules, so $\\beta E_x$, $s_B$, and $\\delta$ are dimensionless.\n\n## Proof\n\n**Given:** The finite-system energies, the smooth bath shell-entropy model, and the weak-additive microcanonical marginal stipulated in the Statement.\n\n1.1 With $|E_x|\\le L$, every bath argument $u_0-E_x$ lies in the stated interval. The curvature bound and $\\beta=s'_B(u_0)$ therefore match the hypotheses of [L1], including the dimensionless remainder scale $\\delta=ML^2/2$. The shell weights in [F3] are exactly the weights required by [L1], and the finite canonical comparison is [F2]. [F1, F2, F3, L1, A1]\n\n2.1 Applying [L1] to these matched inputs gives $|s_B(u_0-E_x)-s_B(u_0)+\\beta E_x|\\le\\delta$ for each state and $\\sum_x|P_B(x)-P_C(x)|\\le e^{2\\delta}-1$. The claim is conditional on the actual shell-weight rule and the draft mathematical supplier, not on bath size alone. [F2, F3, L1, step 1.1] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.3 (printed pp. 17–20)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.2 and 4.4 (printed pp. 192–198 and 205–208)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A finite subsystem weakly coupled additively to a bath whose dimensionless shell entropy is twice continuously differentiable with bounded curvature on the full exchanged-energy interval; this is a conditional model bound, not a universal finite-size estimate.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-finite-canonical-identities",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Finite canonical partition, energy, variance, entropy and free-energy identities",
+        "reference": "items/pthm-td-finite-canonical-identities.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-natural-logarithm",
+          "def-td-finite-microstate-model",
+          "post-td-canonical-sampling",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-natural-logarithm": "mathematical-premise",
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "post-td-canonical-sampling": "physical-assumption",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $(\\Omega,\\epsilon)$ be a finite microstate model with energies $E_x=\\epsilon(x)\\,\\mathrm J$ from [[def-td-finite-microstate-model]]. Let $T>0$, $\\beta=(k_{\\mathrm B}T)^{-1}$, and $P_\\beta(x)=e^{-\\beta E_x}/Z(\\beta)$ be the adopted preparation of [[post-td-canonical-sampling]]. With $\\bar E_\\beta=\\sum_xP_\\beta(x)E_x$, $\\operatorname{Var}_\\beta(E)=\\sum_xP_\\beta(x)(E_x-\\bar E_\\beta)^2$, and $S_\\beta=-k_{\\mathrm B}\\sum_xP_\\beta(x)\\log P_\\beta(x)$, the finite partition sum is positive and\n$$-\\partial_\\beta\\log Z=\\bar E_\\beta,\\qquad \\partial_\\beta^2\\log Z=\\operatorname{Var}_\\beta(E),\\qquad S_\\beta=k_{\\mathrm B}(\\log Z+\\beta\\bar E_\\beta).$$\nConsequently the statistical free-energy value $F_{\\mathrm{stat}}:=-k_{\\mathrm B}T\\log Z$ satisfies $F_{\\mathrm{stat}}=\\bar E_\\beta-TS_\\beta$. The derivatives hold the finite state set and its energy list fixed. No equivalence with a macroscopic entropy or Helmholtz potential is asserted.\n\n## Facts & Assumptions\n\n**Given:** A finite nonempty state set, a fixed energy list in joules, $T>0$, the fixed SI value of $k_{\\mathrm B}$, and the adopted canonical weights.\n\n[F1] [[def-td-finite-microstate-model]]: $\\Omega$ is finite and nonempty and each $E_x$ is a fixed energy in joules.\n\n[F2] [[post-td-canonical-sampling]]: $P_\\beta(x)=e^{-\\beta E_x}/Z$ with $Z=\\sum_xe^{-\\beta E_x}$ and $\\beta=1/(k_{\\mathrm B}T)>0$ in $\\mathrm{J^{-1}}$.\n\n[F3] [[thm-derivative-of-exponential]]: $\\frac{d}{d\\beta}e^{-\\beta E_x}=-E_xe^{-\\beta E_x}$ for each fixed $E_x$.\n\n[F4] [[thm-logarithm-derivative-and-integral]] and [[def-natural-logarithm]]: for differentiable positive $Z$, $(\\log Z)'=Z'/Z$.\n\n## Proof\n\n**Given:** The finite canonical model and its fixed energy values.\n\n1.1 Since $\\Omega$ is finite and nonempty and every $e^{-\\beta E_x}>0$, the finite sum $Z=\\sum_xe^{-\\beta E_x}$ is strictly positive and finite. The weights $P_\\beta(x)$ therefore sum to one by their definition. [F1, F2, algebra]\n\n2.1 Differentiating the finite sum term by term using [F3] gives $Z'=-\\sum_xE_xe^{-\\beta E_x}$ and $Z''=\\sum_xE_x^2e^{-\\beta E_x}$. Applying [F4] yields $-\\partial_\\beta\\log Z=-(Z'/Z)=\\bar E_\\beta$ and $\\partial_\\beta^2\\log Z=Z''/Z-(Z'/Z)^2=\\sum_xP_\\beta(x)E_x^2-\\bar E_\\beta^2=\\operatorname{Var}_\\beta(E)$. [F2, F3, F4, step 1.1]\n\n3.1 For each $x$, $\\log P_\\beta(x)=-\\beta E_x-\\log Z$. Substituting this into the finite entropy sum gives $S_\\beta=-k_{\\mathrm B}\\sum_xP_\\beta(x)\\log P_\\beta(x)=k_{\\mathrm B}(\\beta\\bar E_\\beta+\\log Z)$. Since $\\beta k_{\\mathrm B}=1/T$, rearrangement gives $\\bar E_\\beta-TS_\\beta=-k_{\\mathrm B}T\\log Z=F_{\\mathrm{stat}}$. [F2, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§1.3.1–1.3.4 (printed pp. 18–26)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.4–4.6 (printed pp. 205–217)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Exact finite-sum predictions for the adopted canonical law on a fixed finite microstate list with fixed internal energies; the statistical free-energy value is not automatically identified with a macroscopic Legendre potential or an empirical thermodynamic measurement.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-finite-entropy-maximum",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Canonical weights uniquely maximize finite-state entropy at their mean energy",
+        "reference": "items/pthm-td-finite-entropy-maximum.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 6,
+        "deps": [
+          "def-natural-logarithm",
+          "def-td-finite-microstate-model",
+          "post-td-canonical-sampling",
+          "pthm-td-finite-canonical-identities",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-natural-logarithm": "mathematical-premise",
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "post-td-canonical-sampling": "physical-assumption",
+          "pthm-td-finite-canonical-identities": "physical-result",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $(\\Omega,\\epsilon)$ be a finite nonempty microstate model, let $T>0$, and let $q_x=e^{-\\beta E_x}/Z$ be its canonical probabilities at $\\beta=(k_{\\mathrm B}T)^{-1}$. Set $\\bar E=\\sum_xq_xE_x$. Among all probability vectors $r=(r_x)_{x\\in\\Omega}$ with $\\sum_xr_x=1$ and $\\sum_xr_xE_x=\\bar E$, the Shannon entropy $S(r):=-k_{\\mathrm B}\\sum_{x:r_x>0}r_x\\log r_x$ is uniquely maximized by $r=q$. This is a finite-model variational theorem; it does not establish that a physical sample is prepared canonically.\n\n## Facts & Assumptions\n\n**Given:** A finite nonempty state set with fixed energies $E_x$ in joules, $T>0$, $\\beta=(k_{\\mathrm B}T)^{-1}$, the canonical law $q$, and a competing probability vector $r$ with the same mean energy.\n\n[F1] [[def-td-finite-microstate-model]]: $\\Omega$ is finite and nonempty and $E_x$ is fixed.\n\n[F2] [[post-td-canonical-sampling]]: $q_x=e^{-\\beta E_x}/Z$ with $q_x>0$ and $\\sum_xq_x=1$.\n\n[F3] [[pthm-td-finite-canonical-identities]]: $\\bar E=\\sum_xq_xE_x$ and $\\log q_x=-\\beta E_x-\\log Z$.\n\n[F4] [[thm-logarithm-derivative-and-integral]] and [[def-natural-logarithm]]: $\\log t=\\int_1^tdu/u$ for $t>0$.\n\n[A1] The competitor has $r_x\\ge0$, $\\sum_xr_x=1$, and $\\sum_xr_xE_x=\\bar E$.\n\n## Proof\n\n**Given:** The finite model, its canonical weights, and a competing probability vector with the same mean.\n\n1.1 For every $t>0$, [F4] gives $\\log t\\le t-1$, with equality only at $t=1$: for $t>1$, integrate $1/u<1$ on $(1,t)$; for $0<t<1$, integrate $1/u>1$ on $(t,1)$ and reverse the endpoints. For every $x$ with $r_x>0$, apply this to $t=q_x/r_x$ to obtain $r_x\\log(r_x/q_x)\\ge r_x-q_x$. Summing over the support of $r$ gives $D:=\\sum_{x:r_x>0}r_x\\log(r_x/q_x)\\ge1-\\sum_{x:r_x>0}q_x\\ge0$. Equality forces full support and $r_x=q_x$ for every state. [F2, F4, A1, algebra]\n\n2.1 Using [F3] and the fixed-mean condition [A1], $D=\\sum_{x:r_x>0}r_x\\log r_x+\\beta\\bar E+\\log Z$. Therefore $S(r)=k_{\\mathrm B}(\\beta\\bar E+\\log Z-D)\\le k_{\\mathrm B}(\\beta\\bar E+\\log Z)=S(q)$ by the finite identity in [F3]. Equality holds only when $D=0$, which by step 1.1 is equivalent to $r=q$. This proves the unique maximum. [F1, F2, F3, A1, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.3.3 (printed pp. 22–25)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §4.6.2 (printed pp. 216–217)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite probability distributions on the declared microstate set at a fixed positive temperature; the result is a conditional variational property of the model and does not derive the physical canonical-preparation postulate.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-general-quantum-canonical-identities",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "General quantum Gibbs normalization and canonical identities",
+        "reference": "items/pthm-td-general-quantum-canonical-identities.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 3,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-many-body-framework-entropy-and-free-energy",
+          "def-td-si-quantities",
+          "post-nrqm-many-body-canonical-equilibrium-ensemble",
+          "thm-tdmath-general-trace-gibbs-model"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-many-body-framework-entropy-and-free-energy": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-nrqm-many-body-canonical-equilibrium-ensemble": "physical-assumption",
+          "thm-tdmath-general-trace-gibbs-model": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice and Countable Choice and the canonical Gibbs-preparation assumption [[post-nrqm-many-body-canonical-equilibrium-ensemble]]. Restrict to its $G=H$ branch: the declared energy operator $H$ is self-adjoint, bounded below, and measured in joules; $T>0$ is in kelvins, $\\beta=(k_{\\mathrm B}T)^{-1}$ is in $\\mathrm{J^{-1}}$, and $K_\\beta=e^{-\\beta H}$ has $0<Z_\\beta=\\operatorname{Tr}K_\\beta<\\infty$. Suppose also that on an open interval $J_\\beta\\subset(0,\\infty)$ containing $\\beta$, every compact $C\\subset J_\\beta$ admits a summable family $a_j\\ge0$ with $(1+|E_j|^2)e^{-\\gamma E_j}\\le a_j$ for all energy eigenvalues $E_j$ and $\\gamma\\in C$. For the adopted density $\\rho_\\beta=K_\\beta/Z_\\beta$, the mean and variance of $H$ are finite and\n$$-\\partial_\\beta\\log Z_\\beta=\\operatorname{Tr}(\\rho_\\beta H),\\qquad \\partial_\\beta^2\\log Z_\\beta=\\operatorname{Var}_{\\rho_\\beta}(H),\\qquad S_{\\mathrm{vN}}(\\rho_\\beta)=k_{\\mathrm B}\\bigl(\\log Z_\\beta+\\beta\\operatorname{Tr}(\\rho_\\beta H)\\bigr).$$\nThus $F_{\\mathrm{stat}}=-k_{\\mathrm B}T\\log Z_\\beta=\\operatorname{Tr}(\\rho_\\beta H)-T S_{\\mathrm{vN}}(\\rho_\\beta)$. This statement does not extend the Helmholtz interpretation to an effective generator $H-\\mu\\mathcal N$.\n\n## Facts & Assumptions\n\n**Given:** A nonzero quantum Hilbert space, a self-adjoint energy operator $H$ bounded below, a positive assigned temperature, the adopted Gibbs preparation, a finite positive trace, and the local summable moment envelope.\n\n[F1] [[post-nrqm-many-body-canonical-equilibrium-ensemble]]: for a declared $G=H$ model with self-adjoint semibounded generator and $0<\\operatorname{Tr}e^{-\\beta H}<\\infty$, the adopted preparation is $\\rho_\\beta=e^{-\\beta H}/Z_\\beta$; the postulate explicitly assumes AC and Countable Choice and does not assert equilibration.\n\n[F2] [[def-nrqm-many-body-framework-entropy-and-free-energy]] and [[def-nrqm-framework-quantities-and-units]]: in the finite-sector class, $S=k_{\\mathrm B}s$ and $\\beta=1/(k_{\\mathrm B}T)$; the general quantum model assigns energy and temperature units but does not by itself identify a trace functional with a macroscopic state function.\n\n[L1] [[thm-tdmath-general-trace-gibbs-model]] (current batch 11 draft): for a semibounded self-adjoint operator with trace-class Gibbs exponential and the stated local moment envelope, the Gibbs weight has a countable energy eigenfamily and the normalized eigenvalue law satisfies the summable canonical mean, variance, and entropy identities. Its full current proof was inspected; its draft status remains conditional.\n\n[F3] [[def-td-si-quantities]]: $k_{\\mathrm B}$ is in $\\mathrm{J\\,K^{-1}}$, $T$ in kelvins, and energy in joules; hence $\\beta$ is in $\\mathrm{J^{-1}}$ and $\\beta E_j$ is dimensionless.\n\n[A1] The full Axiom of Choice and Countable Choice are assumed at the exact strengths required by [F1] and [L1].\n\n## Proof\n\n**Given:** The $G=H$ reading of the adopted quantum Gibbs preparation, trace finiteness, and the local moment envelope.\n\n1.1 By [F1], $K_\\beta=e^{-\\beta H}$ is the declared positive Gibbs weight and $\\rho_\\beta=K_\\beta/Z_\\beta$ is the model's adopted preparation. The semiboundedness, positive finite trace, AC assumptions and moment envelope in the Statement match the hypotheses of [L1]. [F1, F3, L1, A1]\n\n2.1 Applying [L1] to this operator yields the finite mean and variance identities and the dimensionless spectral entropy identity $\\frac{S_{\\mathrm{vN}}}{k_{\\mathrm B}}=\\log Z_\\beta+\\beta\\operatorname{Tr}(\\rho_\\beta H)$. Multiplying by $k_{\\mathrm B}$ and using $\\beta k_{\\mathrm B}=1/T$ gives $F_{\\mathrm{stat}}=\\operatorname{Tr}(\\rho_\\beta H)-T S_{\\mathrm{vN}}=-k_{\\mathrm B}T\\log Z_\\beta$. The deduction is conditional on [L1] and the adopted preparation; it asserts no dynamics. [F1, F2, F3, L1, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§1.3.1–1.3.4 (printed pp. 18–26)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.3–4.4 (printed pp. 199–208)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A declared quantum model with a semibounded self-adjoint energy operator, trace-class Gibbs exponential, and local first-and-second-moment envelope; the result concerns the adopted Gibbs preparation and does not derive thermalization or a continuum spectrum.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-independent-factorization",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Partition, Gibbs-entropy and free-energy factorization for independent finite systems",
+        "reference": "items/pthm-td-independent-factorization.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 6,
+        "deps": [
+          "def-td-finite-microstate-model",
+          "post-td-canonical-sampling",
+          "pthm-td-finite-canonical-identities"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "post-td-canonical-sampling": "physical-assumption",
+          "pthm-td-finite-canonical-identities": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let two finite microstate models from [[def-td-finite-microstate-model]] have nonempty state sets $\\Omega_A,\\Omega_B$, energies $E_A,E_B$ in joules, and the same $T>0$. Assume their declared composite model has state set $\\Omega_A\\times\\Omega_B$ and energy $E_{AB}(x,y)=E_A(x)+E_B(y)$, with no interaction term. Under the canonical sampling assumption [[post-td-canonical-sampling]], the partition function factorizes as $Z_{AB}=Z_AZ_B$, the joint canonical law is $P_{AB}=P_AP_B$, the Gibbs entropy satisfies $S_{AB}=S_A+S_B$, and the statistical free-energy value satisfies $F_{AB}=F_A+F_B$.\n\n## Facts & Assumptions\n\n**Given:** Two finite nonempty state sets, additive composite energy, fixed $T>0$, and the canonical preparations of both subsystems and their composite.\n\n[F1] [[def-td-finite-microstate-model]]: each state set is finite and nonempty and the composite state set and additive energy are declared model data.\n\n[F2] [[post-td-canonical-sampling]]: for each model, $P(x)=e^{-\\beta E(x)}/Z$ with $\\beta=(k_{\\mathrm B}T)^{-1}$.\n\n[F3] [[pthm-td-finite-canonical-identities]]: $S=-k_{\\mathrm B}\\sum_xP(x)\\log P(x)$ and $F=\\bar E-TS=-k_{\\mathrm B}T\\log Z$ for each finite model.\n\n## Proof\n\n**Given:** The finite product state set, additive energy, and the three canonical laws.\n\n1.1 For every $(x,y)\\in\\Omega_A\\times\\Omega_B$, $e^{-\\beta E_{AB}(x,y)}=e^{-\\beta E_A(x)}e^{-\\beta E_B(y)}$. Reindexing the finite sum over the Cartesian product therefore gives $Z_{AB}=(\\sum_xe^{-\\beta E_A(x)})(\\sum_ye^{-\\beta E_B(y)})=Z_AZ_B$. Dividing the product weight by $Z_AZ_B$ gives $P_{AB}(x,y)=P_A(x)P_B(y)$. [F1, F2, algebra]\n\n2.1 Since each probability is positive, $\\log P_{AB}(x,y)=\\log P_A(x)+\\log P_B(y)$. Summing against $P_A(x)P_B(y)$ and using the finite normalizations yields $S_{AB}=S_A+S_B$. The mean energy is $\\bar E_{AB}=\\bar E_A+\\bar E_B$ by the same finite factorization, so $F_{AB}=\\bar E_{AB}-TS_{AB}=F_A+F_B$. [F1, F2, F3, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.3.1 (printed pp. 18–19)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.4.1 and 4.6 (printed pp. 205–217)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite composite models whose state set is explicitly the Cartesian product and whose microscopic energy is additive; no claim is made for interacting systems, interface terms, or experimental independence.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-invariant-regular-microcanonical-shell",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Invariance of a regular-shell microcanonical preparation",
+        "reference": "items/pthm-td-invariant-regular-microcanonical-shell.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-td-regular-hamiltonian-shell-preparation",
+          "def-td-si-quantities",
+          "post-td-microcanonical-sampling",
+          "thm-tdmath-hamiltonian-measure-and-recurrence",
+          "thm-tdmath-regular-energy-shell-measure"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-td-regular-hamiltonian-shell-preparation": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-td-microcanonical-sampling": "physical-assumption",
+          "thm-tdmath-hamiltonian-measure-and-recurrence": "mathematical-premise",
+          "thm-tdmath-regular-energy-shell-measure": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let a physical Hamiltonian model satisfy [[def-td-regular-hamiltonian-shell-preparation]] on a nonempty compact regular energy band, and adopt its normalized shell law by [[post-td-microcanonical-sampling]]. In addition to the definition's $C^2$ regularity, assume its numerical Hamiltonian $\\hat H$ is $C^\\infty$ and its Hamiltonian flow $\\phi_t$ is an invertible smooth map of the whole band for every $t\\in\\mathbb R$. Then, conditional on the current batch-12 draft mathematical interfaces [[thm-tdmath-hamiltonian-measure-and-recurrence]] and [[thm-tdmath-regular-energy-shell-measure]], every shell probability $\\nu_{\\hat E}$ is invariant:\n$$\\nu_{\\hat E}(\\phi_t^{-1}(A))=\\nu_{\\hat E}(A)$$\nfor every Borel set $A\\subseteq\\Sigma_{\\hat E}$ and every $t\\in\\mathbb R$. This result asserts no ergodicity, time-average equality, or thermalization.\n\n## Facts & Assumptions\n\n**Given:** A canonical Hamiltonian chart, a nonempty compact regular energy shell, its normalized coarea preparation, and a globally defined invertible flow on the band.\n\n[F1] [[def-td-regular-hamiltonian-shell-preparation]]: the dimensionless energy level is regular and compact and the normalized coarea probability $\\nu_{\\hat E}$ is defined.\n\n[F2] [[post-td-microcanonical-sampling]]: on this admitted regular shell the assigned microcanonical preparation is $\\nu_{\\hat E}$.\n\n[L1] [[thm-tdmath-hamiltonian-measure-and-recurrence]] (current batch 12 draft): under AC, a smooth Hamiltonian on a symplectic manifold has a local flow preserving symplectic volume wherever defined; completeness or global existence is not inferred. The current Statement and full proof are present and were inspected; Step 1 readiness is missing, so this premise remains conditionally used.\n\n[L2] [[thm-tdmath-regular-energy-shell-measure]] (current batch 12 draft): for $C^2$ energy on an open Euclidean domain with compact regular energy bands, the coarea construction has finite positive mass on each nonempty shell; a Hamiltonian flow that is a diffeomorphism of a full compact band and preserves that band preserves each normalized shell measure. The current Statement and full proof are present and were inspected; Step 1 readiness is missing, so this premise remains conditionally used.\n\n[A1] AC is included as the exact set-theoretic assumption of [L1]; no ergodicity hypothesis is assumed.\n\n[A2] The numerical Hamiltonian is $C^\\infty$, strengthening the shell definition's $C^2$ assumption to match [L1]; the flow is assumed to be a smooth invertible map of the whole band for every real $t$. This global-flow condition is not inferred from the local Hamiltonian equations.\n\n## Proof\n\n**Given:** The regular-shell model, its adopted shell probability, AC, and an invertible smooth Hamiltonian flow defined on the full band.\n\n1.1 By [F1] and [A2], the canonical Hamiltonian data, smoothness, and full-band invertible flow match the hypotheses of [L1]–[L2]. Energy is conserved along each flow line because $\\frac{d}{dt}\\hat H(\\phi_t(x))=d\\hat H(X_{\\hat H})=\\hat\\omega(X_{\\hat H},X_{\\hat H})=0$; the global-flow condition is an assumption, not a consequence of local equations. [F1, L1, L2, A1, A2, given, algebra]\n\n2.1 The draft suppliers [L1] and [L2] give volume preservation and shell-measure invariance for the matched model in step 1.1. Normalization by the positive finite shell mass preserves invariance, and [F2] assigns that normalized measure as the preparation. Hence $\\nu_{\\hat E}(\\phi_t^{-1}(A))=\\nu_{\\hat E}(A)$. This deduction remains conditional while both suppliers lack current Step 1 readiness. [F2, L1, L2, step 1.1] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.2 (printed pp. 2–16)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §4.2 (printed pp. 192–198)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A classical Hamiltonian flow that is globally defined and invertible on a compact regular energy band with the stated coarea measure; invariance is not ergodicity, mixing, equilibration, or equality of time and ensemble averages.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-lattice-bulk-pressure",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Bulk log-partition pressure for a bounded finite-range lattice model",
+        "reference": "items/pthm-td-lattice-bulk-pressure.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-td-finite-microstate-model",
+          "def-td-si-quantities",
+          "def-tdmath-bounded-finite-range-lattice",
+          "post-td-canonical-sampling",
+          "thm-tdmath-finite-range-lattice-pressure-limit"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-tdmath-bounded-finite-range-lattice": "mathematical-premise",
+          "post-td-canonical-sampling": "physical-assumption",
+          "thm-tdmath-finite-range-lattice-pressure-limit": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use the finite-alphabet, bounded, translation-invariant finite-range lattice model of [[def-tdmath-bounded-finite-range-lattice]], with physical interaction energies in joules, inverse temperature $\\beta=(k_{\\mathrm B}T)^{-1}>0$, and partition sum $Z_L(\\beta)$. Suppose each site represents a fixed cell of volume $v_0>0$ in $\\mathrm{m^3}$. Define the reduced log-partition density $p_L=L^{-d}\\log Z_L$ and the lattice pressure convention $P_L=(k_{\\mathrm B}T/v_0)p_L$ in pascals. Then $p_L$ and $P_L$ have finite limits as $L\\to\\infty$. If a second boundary-energy model on the same configuration sets differs pointwise by at most $C_bL^{d-1}$ joules for fixed $C_b$, it has the same limit.\n\nThe pressure convention in this statement is assigned to this lattice model. Equating it with a derivative-based macroscopic pressure or a measured mechanical pressure requires a separate model identification.\n\n## Facts & Assumptions\n\n**Given:** A finite alphabet, finite-range bounded lattice interactions, positive $T$, the canonical partition sum, and a fixed physical cell volume.\n\n[F1] [[def-tdmath-bounded-finite-range-lattice]]: for integer $d,L\\ge1$, finite alphabet $\\mathcal A$, bounded finite-range translation-invariant interactions, and $\\beta>0$, $H_L$ and $Z_L=\\sum_s e^{-\\beta H_L(s)}$ are defined with free boundary.\n\n[F2] [[thm-tdmath-finite-range-lattice-pressure-limit]] (current batch 11 draft): the sequence $p_L=L^{-d}\\log Z_L$ has a finite limit for every fixed $\\beta>0$, and a boundary-energy perturbation bounded by $C_bL^{d-1}$ has the same limit. Its full current proof was inspected; its draft status remains conditional.\n\n[F3] [[def-td-si-quantities]]: $k_{\\mathrm B}$ has units $\\mathrm{J\\,K^{-1}}$, $T$ is in kelvins, $v_0$ is in $\\mathrm{m^3}$, and $k_{\\mathrm B}T/v_0$ is in pascals.\n\n[F4] [[post-td-canonical-sampling]]: the positive finite lattice partition sum defines the adopted finite-volume canonical law.\n\n[A1] $v_0$ is fixed as $L$ varies, and the physical interaction parameters are held fixed in the sequence of cubic boxes.\n\n## Proof\n\n**Given:** The bounded finite-range lattice data, $\\beta>0$, a fixed cell volume, and the stated boundary perturbation bound.\n\n1.1 The finite lattice data in [F1] and $\\beta>0$ match the model hypotheses of [F2]. Thus $p_L=L^{-d}\\log Z_L$ converges to a finite $p_\\infty$; the same supplier gives the identical limit for the stated boundary perturbation. By [F4], these finite partition sums give the adopted lattice canonical law. [F1, F2, F4, A1]\n\n2.1 Since $v_0$ and $T$ are fixed along the volume sequence, multiplying by the constant $k_{\\mathrm B}T/v_0$ preserves convergence: $P_L=(k_{\\mathrm B}T/v_0)p_L\\to(k_{\\mathrm B}T/v_0)p_\\infty$. The factor has units of pressure by [F3]. This proves only the declared lattice pressure convention. [F3, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §5.3.1 (printed pp. 156–157)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §6.2.2 (printed pp. 330–333)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite-alphabet, bounded, translation-invariant finite-range interactions on free cubic lattices with a declared cell volume; the pressure convention is specific to this lattice model and implies no continuum-particle or long-range pressure law.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-measurable-canonical-identities",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Measurable canonical identities for a dimensionless reference measure",
+        "reference": "items/pthm-td-measurable-canonical-identities.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-td-si-quantities",
+          "def-tdmath-measure-integral",
+          "post-td-canonical-sampling",
+          "thm-tdmath-measurable-canonical-identities"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-tdmath-measure-integral": "mathematical-premise",
+          "post-td-canonical-sampling": "physical-assumption",
+          "thm-tdmath-measurable-canonical-identities": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $(X,\\Sigma,\\mu)$ be a measure space with dimensionless reference measure, let $E:X\\to\\mathbb R\\,\\mathrm J$ be measurable, and let $J_\\beta\\subset(0,\\infty)$ be open. Suppose $Z(\\beta)=\\int_Xe^{-\\beta E}\\,d\\mu$ is positive and finite on $J_\\beta$, and for each compact $K\\subset J_\\beta$ there is an integrable $G_K\\ge0$ with $(1+|E|^2)e^{-\\beta E}\\le G_K$ for every $\\beta\\in K$. Under the canonical sampling assumption [[post-td-canonical-sampling]], define $p_\\beta=e^{-\\beta E}/Z$, $\\langle E\\rangle_\\beta=\\int E p_\\beta\\,d\\mu$, and $\\operatorname{Var}_\\beta(E)=\\int(E-\\langle E\\rangle_\\beta)^2p_\\beta\\,d\\mu$. Then $Z\\in C^2$, $-\\partial_\\beta\\log Z=\\langle E\\rangle_\\beta$, $\\partial_\\beta^2\\log Z=\\operatorname{Var}_\\beta(E)$, and the relative Gibbs entropy is finite with $S_\\beta=-k_{\\mathrm B}\\int p_\\beta\\log p_\\beta\\,d\\mu=k_{\\mathrm B}(\\log Z+\\beta\\langle E\\rangle_\\beta)$. Hence $F_{\\mathrm{stat}}=-k_{\\mathrm B}T\\log Z=\\langle E\\rangle_\\beta-TS_\\beta$ for $\\beta=(k_{\\mathrm B}T)^{-1}$.\n\n## Facts & Assumptions\n\n**Given:** A dimensionless measure space, a measurable energy, positive finite partition integrals, the canonical density, and the stated local integrable envelope.\n\n[F1] [[def-tdmath-measure-integral]]: measurable nonnegative energies and their nonnegative integrals are interpreted on the specified measure space; signed integrals require absolute integrability.\n\n[F2] [[post-td-canonical-sampling]]: with $0<Z(\\beta)<\\infty$, the density $p_\\beta=e^{-\\beta E}/Z$ is the adopted canonical preparation relative to $\\mu$.\n\n[L1] [[thm-tdmath-measurable-canonical-identities]] (current batch 11 draft): under the stated $Z$ and compact-interval domination hypotheses, $Z$ is $C^2$, the mean and variance are its log derivatives, and the relative entropy is finite with value $\\log Z+\\beta\\langle E\\rangle$. Its full current proof was inspected; its draft status remains conditional.\n\n[F3] [[def-td-si-quantities]]: $E$ and $\\langle E\\rangle$ are in joules, $T$ is in kelvins, and $k_{\\mathrm B}$ is in $\\mathrm{J\\,K^{-1}}$, so $\\beta$ is in $\\mathrm{J^{-1}}$.\n\n[A1] The reference measure is dimensionless, $Z$ is positive finite on the open interval, and $(1+|E|^2)e^{-\\beta E}$ has the local integrable envelope stated in the Statement.\n\n## Proof\n\n**Given:** The dimensionless reference measure, the measurable energy, the normalized canonical density, and the local envelope.\n\n1.1 The hypotheses in the Statement match [L1], including positive finite $Z$ and the integrable envelope on each compact parameter interval. The density in [F2] is therefore normalized and has finite first and second energy moments. [F1, F2, F3, L1, A1]\n\n2.1 Applying [L1] yields the $C^2$ partition integral, logarithmic mean and variance identities, and the finite relative entropy formula. Multiplying the dimensionless entropy by $k_{\\mathrm B}$ gives $S_\\beta=k_{\\mathrm B}(\\log Z+\\beta\\langle E\\rangle_\\beta)$; since $\\beta k_{\\mathrm B}=1/T$, rearranging gives $F_{\\mathrm{stat}}=\\langle E\\rangle_\\beta-TS_\\beta=-k_{\\mathrm B}T\\log Z$. This conclusion is conditional on the draft mathematical supplier. [F2, F3, L1, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§1.3–1.4 (printed pp. 18–30)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.2–4.4 (printed pp. 192–208)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Measurable energy models with a dimensionless reference measure, positive finite partition integral, and compact-parameter local integrable second-moment envelope; no claim is made for an arbitrary phase-space measure or unbounded energy without these hypotheses.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-finite-quantum-free-energy-minimum",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Finite-sector quantum Gibbs preparation minimizes the declared free-energy functional",
+        "reference": "items/pthm-td-finite-quantum-free-energy-minimum.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 1,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nrqm-many-body-framework-entropy-and-free-energy",
+          "def-nrqm-framework-quantities-and-units",
+          "def-td-si-quantities",
+          "post-nrqm-many-body-canonical-equilibrium-ensemble",
+          "pthm-nrqm-many-body-thermal-equilibrium-characterization"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-many-body-framework-entropy-and-free-energy": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-nrqm-many-body-canonical-equilibrium-ensemble": "physical-assumption",
+          "pthm-nrqm-many-body-thermal-equilibrium-characterization": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Work in the nonzero finite-dimensional fixed-$N$ sector of [[def-nrqm-many-body-framework-entropy-and-free-energy]], with self-adjoint energy $H_N^\\sigma$ in joules and assigned $T>0$ in kelvins. Adopt the Gibbs preparation of [[post-nrqm-many-body-canonical-equilibrium-ensemble]] and its unit convention $\\beta=(k_{\\mathrm B}T)^{-1}$. For $F(\\rho)=\\operatorname{tr}(\\rho H_N^\\sigma)-T S(\\rho)$ over the declared sector density operators, the canonical preparation is the unique minimizer and\n$$\\min_\\rho F(\\rho)=F_{\\mathrm{eq}}=-k_{\\mathrm B}T\\log\\operatorname{tr}(e^{-\\beta H_N^\\sigma}).$$\nThis quantum statistical functional is not identified here with a macroscopic Helmholtz potential without an additional model bridge; its minimum does not establish equilibration.\n\n## Facts & Assumptions\n\n**Given:** A nonzero finite-dimensional fixed-$N$ sector, its self-adjoint energy, an assigned $T>0$, and the adopted canonical preparation.\n\n[F1] [[def-nrqm-many-body-framework-entropy-and-free-energy]]: on the finite-dimensional sector, $S(\\rho)=k_{\\mathrm B}s(\\rho)$ and $F(\\rho)=\\operatorname{tr}(\\rho H_N^\\sigma)-k_{\\mathrm B}T s(\\rho)$, with $\\beta=(k_{\\mathrm B}T)^{-1}$.\n\n[F2] [[post-nrqm-many-body-canonical-equilibrium-ensemble]] and [[pthm-nrqm-many-body-thermal-equilibrium-characterization]] (both current carrier statuses say published): the former adopts the finite-sector Gibbs preparation under its exact AC/Countable Choice and finite positive-trace hypotheses; the latter proves that this preparation uniquely minimizes the declared finite-sector functional with minimum $-k_{\\mathrm B}T\\log Z_N$. Their current statements and the theorem proof were inspected, but their published records lack the required audit/source-review evidence, so this use remains escalated.\n\n[F3] [[def-nrqm-framework-quantities-and-units]] and [[def-td-si-quantities]]: $H_N^\\sigma$ and $F$ are in joules, $T$ in kelvins, and $k_{\\mathrm B}$ in $\\mathrm{J\\,K^{-1}}$.\n\n[A1] The Axiom of Choice and Countable Choice are assumed as required by [F2]; the sector dimension is finite and at least one.\n\n## Proof\n\n**Given:** The declared finite-sector quantum model, the entropy/free-energy functional, and the canonical Gibbs assignment.\n\n1.1 The finite-sector class, assigned positive temperature, canonical preparation, and entropy functional in the Statement are exactly the hypotheses and definitions of [F1]–[F2]. Countable Choice is stated explicitly in [A1], as required by [F2]. [F1, F2, F3, A1]\n\n2.1 By [F2], every declared sector preparation obeys $F(\\rho)\\ge-k_{\\mathrm B}T\\log Z_N$, with equality only for the canonical preparation. Replacing $\\beta^{-1}$ by $k_{\\mathrm B}T$ using [F1]–[F3] gives the displayed minimum and units. This is a conditional preparation-model deduction, not a claim that dynamics reaches the minimizer. [F1, F2, F3, step 1.1] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§1.3.3–1.3.4 (printed pp. 22–27)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.4–4.6 (printed pp. 205–217)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "The finite-dimensional fixed-particle-number quantum sector at assigned positive temperature, conditional on the adopted Gibbs-preparation assumption and the exact NRQM entropy/free-energy definitions; no equilibration or macroscopic thermodynamic-limit claim is made.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-finite-mode-occupation-and-trace-formulas",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Finite bosonic and fermionic mode partition and occupation formulas",
+        "reference": "items/pthm-td-finite-mode-occupation-and-trace-formulas.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 7,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nrqm-many-body-framework-entropy-and-free-energy",
+          "def-nrqm-framework-quantities-and-units",
+          "def-td-si-quantities",
+          "post-nrqm-many-body-canonical-equilibrium-ensemble",
+          "pthm-nrqm-many-body-thermal-occupation-predictions",
+          "pthm-td-independent-factorization",
+          "thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace",
+          "lem-nrqm-many-body-two-level-thermal-formulas"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-many-body-framework-entropy-and-free-energy": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-nrqm-many-body-canonical-equilibrium-ensemble": "physical-assumption",
+          "pthm-nrqm-many-body-thermal-occupation-predictions": "physical-result",
+          "pthm-td-independent-factorization": "physical-result",
+          "thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace": "mathematical-premise",
+          "lem-nrqm-many-body-two-level-thermal-formulas": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Adopt the quantum Gibbs preparation of [[post-nrqm-many-body-canonical-equilibrium-ensemble]] for a finite list of independent modes at $T>0$. For a bosonic mode with excitation energy $\\varepsilon>0$ joules, let $q=e^{-\\beta\\varepsilon}$, $\\beta=(k_{\\mathrm B}T)^{-1}$, and let $N$ be its dimensionless occupation number. Its partition trace and mean occupation are\n$$Z_B=(1-q)^{-1},\\qquad \\langle N\\rangle_B=\\frac{q}{1-q}=\\frac1{e^{\\beta\\varepsilon}-1}.$$\nFor a fermionic two-level occupation system with energies $0,\\varepsilon$, the partition sum and excited-state occupation are\n$$Z_F=1+q,\\qquad \\langle N\\rangle_F=\\frac{q}{1+q}=\\frac1{e^{\\beta\\varepsilon}+1}.$$\nFor a finite independent collection, the corresponding partition traces multiply and each mode's marginal mean is the displayed one. These are exact model identities under the adopted preparation.\n\n## Facts & Assumptions\n\n**Given:** The finite independent mode models, positive mode energies, assigned $T>0$, and the adopted Gibbs preparation.\n\n[F1] [[post-nrqm-many-body-canonical-equilibrium-ensemble]]: the declared mode model is assigned $\\rho_\\beta=e^{-\\beta G}/Z$ only under its stated self-adjoint-generator and finite-positive-trace conditions; this postulate assumes AC and Countable Choice.\n\n[F2] [[thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace]] (current carrier status says published): for $\\omega>0$ and $\\beta>0$, the one-mode bosonic trace is $(1-e^{-\\beta\\omega})^{-1}$ and the number mean is $1/(e^{\\beta\\omega}-1)$. The full proof was inspected; its published carrier lacks the required audit marker, so this use remains escalated.\n\n[F3] [[lem-nrqm-many-body-two-level-thermal-formulas]] (current carrier status says published): for energies $0,\\varepsilon$ with $\\varepsilon,\\beta>0$, $Z=1+e^{-\\beta\\varepsilon}$ and the upper-level probability is $1/(e^{\\beta\\varepsilon}+1)$. Its full proof was inspected; the published carrier lacks the required audit marker, so this use remains escalated.\n\n[F4] [[pthm-nrqm-many-body-thermal-occupation-predictions]] (current carrier status says published): the single-mode occupation readings are the stated Bose and Fermi means, under the postulate and assigned observable rules. Its full proof was inspected; the published carrier lacks the required audit marker, so this use remains escalated.\n\n[F5] [[pthm-td-independent-factorization]]: for an explicitly independent finite product model, partition functions factor and the product canonical law has the subsystem marginals.\n\n[F6] [[def-td-si-quantities]] and [[def-nrqm-framework-quantities-and-units]]: $\\varepsilon$ is in joules, $T$ in kelvins, $\\beta$ in $\\mathrm{J^{-1}}$, and the occupation number is dimensionless.\n\n[A1] Countable Choice and the Axiom of Choice are assumed because the cited one-mode and mode-occupation supplier statements explicitly assume them.\n\n## Proof\n\n**Given:** The mode energies, the independent finite mode list, $T>0$, and the quantum canonical preparation.\n\n1.1 For one bosonic mode, [F2] gives $Z_B=(1-q)^{-1}$ and $\\langle N\\rangle_B=q/(1-q)$; for $q=e^{-\\beta\\varepsilon}$, multiplication of numerator and denominator by $e^{\\beta\\varepsilon}$ gives $q/(1-q)=1/(e^{\\beta\\varepsilon}-1)$. The unit convention in [F6] makes the exponent dimensionless. [F1, F2, F4, F6, A1, algebra]\n\n1.2 For one fermionic occupation, [F3] gives $Z_F=1+q$ and upper-level probability $q/(1+q)$; multiplying numerator and denominator by $e^{\\beta\\varepsilon}$ gives $q/(1+q)=1/(e^{\\beta\\varepsilon}+1)$. [F1, F3, F4, F6, A1, algebra]\n\n2.1 For a finite independent collection, apply [F5] repeatedly to factor the full partition trace into the product of its one-mode factors. Summing the product law over all other mode labels leaves each single-mode marginal unchanged, so the means in steps 1.1–1.2 apply componentwise. [F5, step 1.1, step 1.2] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§3.5–3.6 (printed pp. 77–106)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§5.6–5.7 (printed pp. 277–303)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Declared finite lists of independent bosonic one-mode Fock systems or fermionic two-level occupation systems at assigned positive temperature; no interacting, infinite-mode, continuum, condensation, measured-occupation, or thermalization conclusion is asserted.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-td-qualified-discrete-quantum-dephasing",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Cesaro dephasing for a discrete trace-class quantum model",
+        "reference": "items/pthm-td-qualified-discrete-quantum-dephasing.md#statement",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 4,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-many-body-canonical-equilibrium-ensemble",
+          "pthm-td-general-quantum-canonical-identities",
+          "thm-tdmath-discrete-quantum-cesaro-dephasing"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-many-body-canonical-equilibrium-ensemble": "physical-assumption",
+          "pthm-td-general-quantum-canonical-identities": "physical-result",
+          "thm-tdmath-discrete-quantum-cesaro-dephasing": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume AC. Let $H$ be a self-adjoint quantum Hamiltonian bounded below with a complete discrete energy eigenfamily of finite multiplicity, and let $\\rho_0$ be any positive trace-class density operator of trace one. Let $\\hbar>0$ be the assigned action constant in $\\mathrm{J\\,s}$, adopt the unitary dynamics $U_t=e^{-itH/\\hbar}$ of [[post-nrqm-framework-autonomous-dynamics]], and assume the trace-class Gibbs and local moment conditions of [[pthm-td-general-quantum-canonical-identities]] that supply this discrete eigenfamily. Then, conditional on the current batch-12 draft theorem [[thm-tdmath-discrete-quantum-cesaro-dephasing]], the Cesaro state\n$$\\bar\\rho_\\tau:=\\frac1{\\tau}\\int_0^\\tau U_t\\rho_0U_t^*\\,dt$$\nconverges in trace norm as $\\tau\\to\\infty$ to $\\rho_{\\mathrm{diag}}=\\sum_E P_E\\rho_0P_E$, where $P_E$ is the spectral projection onto the full eigenspace of energy $E$. Coherences inside degenerate energy blocks remain. The limit need not be Gibbs, and no pointwise-in-time convergence or thermalization is asserted.\n\n## Facts & Assumptions\n\n**Given:** A discrete self-adjoint Hamiltonian with finite-multiplicity energy eigenspaces, a trace-class density $\\rho_0$, the declared unitary dynamics, and $\\hbar$ in $\\mathrm{J\\,s}$.\n\n[F1] [[post-nrqm-framework-autonomous-dynamics]] and [[def-nrqm-autonomous-dynamics-framework-evolution]]: the declared closed-system state evolves by $\\rho(t)=U_t\\rho_0U_t^*$ with $U_t=e^{-itH/\\hbar}$ and unitary group law.\n\n[F2] [[pthm-td-general-quantum-canonical-identities]]: under the semibounded self-adjoint and trace-class Gibbs hypotheses with the stated local moment envelope, the Gibbs operator has a complete countable energy eigenfamily with finite multiplicity for each energy; this conclusion remains conditional on its current draft mathematical supplier.\n\n[L1] [[thm-tdmath-discrete-quantum-cesaro-dephasing]] (current batch 12 draft): under AC, a complete finite-or-countable orthonormal eigenbasis of a semibounded self-adjoint operator, finite-dimensional energy eigenspaces, $\\hbar>0$, and a positive trace-one trace-class density, the trace-norm Cesaro average converges to $\\sum_E P_E\\rho_0P_E$. The complete current proof was inspected; its Step 1 readiness is missing, so this premise remains conditional.\n\n[A1] AC is assumed through [F2] and [L1]; $\\tau>0$ is elapsed time in seconds and every phase $(E_i-E_j)t/\\hbar$ is dimensionless.\n\n[A2] $\\rho_0$ is positive trace class with trace one, and $\\hbar>0$ is the fixed action constant in $\\mathrm{J\\,s}$.\n\n## Proof\n\n**Given:** The trace-class state, the discrete energy basis, the unitary dynamics, and the current draft trace-norm Cesaro theorem.\n\n1.1 By [F2], the trace-class Gibbs and local moment assumptions supply a complete countable energy eigenbasis with finite-dimensional eigenspaces; [A1] supplies AC and [A2] supplies the positive trace-one initial density and action-unit convention. Together with the semibounded self-adjoint Hamiltonian in the Statement, these are the hypotheses of [L1], and [F1] specifies the same unitary orbit. [F1, F2, L1, A1, A2]\n\n2.1 Apply the current draft result [L1] to the matched inputs in step 1.1. It yields $\\bar\\rho_\\tau\\to\\sum_E P_E\\rho_0P_E$ in trace norm with the entire degenerate blocks retained. The limit depends on $\\rho_0$, so no Gibbs or pointwise-time conclusion follows. This use remains conditional until [L1] has current Step 1 readiness. [F1, F2, L1, step 1.1] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.3.1 (printed pp. 18–19)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.3.1 and 4.4.1 (printed pp. 199–206)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A trace-class initial density and a self-adjoint quantum Hamiltonian with a complete discrete energy eigenfamily of finite multiplicity under the declared unitary dynamics; the result is a time-averaged state limit, not Gibbs preparation or pointwise relaxation.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "rem-td-ensemble-limit-hypotheses",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope limits for finite ensembles, shells, pressure and dephasing",
+        "reference": "items/rem-td-ensemble-limit-hypotheses.md#remarks",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 8,
+        "deps": [
+          "def-td-finite-microstate-model",
+          "def-td-regular-hamiltonian-shell-preparation",
+          "pthm-td-countable-canonical-identities",
+          "pthm-td-differentiable-pressure-concentration",
+          "pthm-td-finite-bath-canonical-error",
+          "pthm-td-finite-canonical-identities",
+          "pthm-td-finite-entropy-maximum",
+          "pthm-td-finite-mode-occupation-and-trace-formulas",
+          "pthm-td-finite-quantum-free-energy-minimum",
+          "pthm-td-general-quantum-canonical-identities",
+          "pthm-td-independent-factorization",
+          "pthm-td-invariant-regular-microcanonical-shell",
+          "pthm-td-lattice-bulk-pressure",
+          "pthm-td-measurable-canonical-identities",
+          "pthm-td-qualified-discrete-quantum-dephasing",
+          "post-td-canonical-sampling",
+          "post-td-microcanonical-sampling"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "def-td-regular-hamiltonian-shell-preparation": "formulation-prerequisite",
+          "pthm-td-countable-canonical-identities": "physical-result",
+          "pthm-td-differentiable-pressure-concentration": "physical-result",
+          "pthm-td-finite-bath-canonical-error": "physical-result",
+          "pthm-td-finite-canonical-identities": "physical-result",
+          "pthm-td-finite-entropy-maximum": "physical-result",
+          "pthm-td-finite-mode-occupation-and-trace-formulas": "physical-result",
+          "pthm-td-finite-quantum-free-energy-minimum": "physical-result",
+          "pthm-td-general-quantum-canonical-identities": "physical-result",
+          "pthm-td-independent-factorization": "physical-result",
+          "pthm-td-invariant-regular-microcanonical-shell": "physical-result",
+          "pthm-td-lattice-bulk-pressure": "physical-result",
+          "pthm-td-measurable-canonical-identities": "physical-result",
+          "pthm-td-qualified-discrete-quantum-dephasing": "physical-result",
+          "post-td-canonical-sampling": "physical-assumption",
+          "post-td-microcanonical-sampling": "physical-assumption"
+        },
+        "inventory_expansion_required": false,
+        "statement": "The finite canonical, maximum-entropy, independent-factorization and finite-bath claims concern the exact finite state spaces and shell-weight assumptions stated in their items. Countable and measurable derivative identities require their local summable or integrable moment envelopes; a lower energy bound alone does not normalize the partition function. The lattice bulk-pressure and concentration claims apply only to the bounded finite-range lattice model and, for concentration, a differentiability point of the limiting log-partition density. The page-level continuum-pressure prerequisite is a distinct interaction model; no stable-tempered continuum limit is inferred from the lattice theorem.\n\nThe classical shell result applies only to a nonempty compact regular level with the coarea normalization and a globally defined invertible flow on the stated band. It does not imply ergodicity or equality of long-time averages with the shell law. The quantum trace identities require a semibounded self-adjoint generator, a positive finite Gibbs trace and the stated moment envelope; discrete dephasing is a trace-norm Cesaro limit with degenerate eigenspaces retained, not pointwise relaxation or a Gibbs limit.\n\nBoltzmann microstate entropy, finite Gibbs entropy, von Neumann entropy and the macroscopic entropy function are distinct objects until a model supplies an explicit identification. The statistical value $-k_{\\mathrm B}T\\log Z$ is not silently identified with a macroscopic Helmholtz or grand potential. Canonical and microcanonical sampling are adopted preparation assumptions. None of the finite probability identities, continuum or lattice pressure limits, shell-invariance results or quantum trace calculations reports an experiment or establishes that nature follows the model.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§1.2–1.3 (printed pp. 2–27)",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.2–4.6 (printed pp. 192–217)",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A scope and hypothesis ledger for the preceding finite, countable, measurable, lattice, regular-shell and discrete-quantum branches; it supplies no additional ensemble-equivalence, ergodicity, thermalization, or empirical claim.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      }
+    ]
+  },
+  {
+    "order": 285,
+    "id": "td-finite-statistical-bridge-examples",
+    "kind": "B",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Finite Statistical Bridge — Examples",
+    "companion": "td-finite-statistical-bridge",
+    "requires": [
+      "td-finite-statistical-bridge"
+    ],
+    "items": [
+      {
+        "id": "ex-td-finite-mode-thermal-ensemble",
+        "kind": "example",
+        "domain": "physics",
+        "title": "One bosonic and one fermionic mode at a specified temperature",
+        "reference": "items/ex-td-finite-mode-thermal-ensemble.md#example",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 8,
+        "deps": [
+          "def-td-si-quantities",
+          "pthm-td-finite-mode-occupation-and-trace-formulas"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-si-quantities": "formulation-prerequisite",
+          "pthm-td-finite-mode-occupation-and-trace-formulas": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Choose $T>0$ and excitation energy $\\varepsilon=k_{\\mathrm B}T\\log 2$ joules, so $q=e^{-\\beta\\varepsilon}=1/2$. Consider separately one bosonic mode with occupations $n=0,1,2,\\ldots$ and one fermionic mode with occupations $n=0,1$.\n\n## Facts & Assumptions\n\n**Given:** The declared one-mode systems, their positive excitation energy, and the adopted Gibbs preparation.\n\n[F1] [[pthm-td-finite-mode-occupation-and-trace-formulas]]: for $q=e^{-\\beta\\varepsilon}$, the bosonic partition trace is $(1-q)^{-1}$ with mean $q/(1-q)$, and the fermionic partition sum is $1+q$ with excited occupation $q/(1+q)$; these are conditional on its stated quantum preparation and suppliers.\n\n[F2] [[def-td-si-quantities]]: $T$ is in kelvins, $k_{\\mathrm B}$ in $\\mathrm{J\\,K^{-1}}$, and $\\beta=(k_{\\mathrm B}T)^{-1}$ in $\\mathrm{J^{-1}}$.\n\n[A1] The selected energy is $\\varepsilon=k_{\\mathrm B}T\\log 2>0$ joules, and $q=e^{-\\beta\\varepsilon}=1/2$.\n\n## Verification\n\n**Given:** $q=1/2$ and the finite-mode identities in [F1].\n\n1.1 The bosonic trace is $Z_B=(1-1/2)^{-1}=2$, and the probability of occupation $n$ is $2^{-(n+1)}$. Its mean occupation is $(1/2)/(1-1/2)=1$. [given, F1, F2, A1, algebra]\n\n2.1 The fermionic partition sum is $Z_F=1+1/2=3/2$, so the ground and excited probabilities are $2/3$ and $1/3$, respectively, and the mean occupation is $1/3$. The bosonic and fermionic values belong to distinct declared models. [F1, F2, A1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§3.5–3.6",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§5.6–5.7",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An exact hypothetical canonical calculation for one bosonic oscillator mode and one fermionic two-level mode with beta times excitation energy equal to log 2; it is not a measurement or a thermalization claim.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-td-two-site-thermal-ensemble",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Two independent two-level sites give a product thermal law",
+        "reference": "items/ex-td-two-site-thermal-ensemble.md#example",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 7,
+        "deps": [
+          "def-td-finite-microstate-model",
+          "pthm-td-finite-canonical-identities",
+          "pthm-td-independent-factorization"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "pthm-td-finite-canonical-identities": "physical-result",
+          "pthm-td-independent-factorization": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let each site have states $0,1$ with energies $0,\\varepsilon$, and take $T>0$ with $\\varepsilon=k_{\\mathrm B}T\\log 2$. The composite has states $(n_1,n_2)\\in\\{0,1\\}^2$ and additive energy $E=\\varepsilon(n_1+n_2)$.\n\n## Facts & Assumptions\n\n**Given:** Two finite sites, additive energy, common positive temperature, and canonical sampling.\n\n[F1] [[def-td-finite-microstate-model]]: the composite state set is the Cartesian product and additivity of energy is explicit model data.\n\n[F2] [[pthm-td-finite-canonical-identities]]: each finite canonical law has probabilities proportional to $e^{-\\beta E}$.\n\n[F3] [[pthm-td-independent-factorization]]: under the explicit product and additive-energy assumptions, partition sums factor and the joint canonical law is the product of the two subsystem laws.\n\n[A1] Set $\\beta\\varepsilon=\\log 2$, hence the single-site excited-state weight is $q=1/2$.\n\n## Verification\n\n**Given:** The model data and $q=1/2$.\n\n1.1 Each site has $Z_1=1+q=3/2$ and probabilities $(2/3,1/3)$. By [F3], $Z_{12}=Z_1^2=9/4$ and the joint probabilities of $(00,01,10,11)$ are $(4/9,2/9,2/9,1/9)$. [F1, F2, F3, A1, algebra]\n\n2.1 The expected total occupation is the sum of the two marginal means, $1/3+1/3=2/3$, so the mean energy is $2\\varepsilon/3$. This conclusion follows for the declared noninteracting product model only. [F2, F3, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.3.1",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.4.1 and 4.6",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A calculated two-site finite product model with additive energy and no interaction; it is not an observation or a claim about interacting sites.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-td-infinite-mode-trace-divergence",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Identical bosonic modes do not have a finite infinite-mode Gibbs trace",
+        "reference": "items/ex-td-infinite-mode-trace-divergence.md#example",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 8,
+        "deps": [
+          "def-countable-choice",
+          "def-td-si-quantities",
+          "def-tdmath-countable-canonical-model",
+          "def-trace-class-operator",
+          "pthm-td-finite-mode-occupation-and-trace-formulas",
+          "post-td-canonical-sampling",
+          "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-tdmath-countable-canonical-model": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "pthm-td-finite-mode-occupation-and-trace-formulas": "physical-result",
+          "post-td-canonical-sampling": "physical-assumption",
+          "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take modes indexed by $j\\in\\mathbb N$, each with excitation energy $\\varepsilon>0$, and let $q=e^{-\\beta\\varepsilon}\\in(0,1)$. Let $\\mathcal F$ be the set of finite-support occupation sequences $n=(n_j)_{j\\ge1}$ with $n_j\\in\\mathbb N_0$. Fix its enumeration by increasing $R(n)=\\sum_{j:n_j>0}(j+n_j)$, breaking ties lexicographically by the finite list of nonzero pairs $(j,n_j)$; for each bound on $R$, only finitely many configurations occur. On $\\ell^2(\\mathcal F)$ with its occupation basis $|n\\rangle$, define the bounded positive diagonal Gibbs weight $K_\\beta|n\\rangle=q^{\\sum_jn_j}|n\\rangle$. On the subspace with $n_j=0$ for every $j>M$, the corresponding finite-mode partition sum is the trace of that restriction.\n\n## Facts & Assumptions\n\n**Given:** The independent identical-mode Fock model, positive $\\beta\\varepsilon$, and the canonical trace convention.\n\n[F1] [[pthm-td-finite-mode-occupation-and-trace-formulas]]: for each finite collection of independent bosonic modes the Gibbs trace is the product of the one-mode traces $(1-q)^{-1}$.\n\n[F2] [[post-td-canonical-sampling]]: the A-page countable canonical law is adopted only for a specified countable model with a positive finite partition sum.\n\n[F3] [[def-countable-choice]], [[def-trace-class-operator]], and [[thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues]]: under Countable Choice, a positive trace-class operator has finite trace equal to the sum of its nonnegative eigenvalues with multiplicity.\n\n[F4] [[def-tdmath-countable-canonical-model]]: the nonnegative countable partition sum is the supremum of its finite subsums, so a finite normalizer bounds the sum over every subset of the listed states.\n\n[F5] [[def-td-si-quantities]]: $\\varepsilon$ is in joules and $\\beta$ in $\\mathrm{J^{-1}}$, so $\\beta\\varepsilon$ is dimensionless.\n\n[A1] The basis indices are all finite-support occupation sequences with physical energy $E_n=\\varepsilon\\sum_jn_j$ joules, so their Gibbs eigenvalues are $e^{-\\beta E_n}=q^{\\sum_jn_j}$; every finite-mode subset is a subset of this full basis.\n\n## Verification\n\n**Given:** $0<q<1$ and the finite-mode subspaces described above.\n\n1.1 The trace contribution from states supported on the first $M$ modes is the finite product $Z_M=(1-q)^{-M}$ by [F1]. Since $c=(1-q)^{-1}>1$, $Z_M=c^M$ is unbounded: writing $c=1+r$ with $r>0$, induction gives $(1+r)^M\\ge1+Mr$. The unit convention [F5] makes $\\beta\\varepsilon$ dimensionless. [F1, A1, F5, algebra]\n\n2.1 If $K_\\beta$ were trace class, [F3] would make its positive eigenvalue sum finite and equal to its trace. For each $M$, the configurations with $n_j=0$ for $j>M$ form a subset of the enumerated states [A1]; [F4] therefore makes their finite-mode partition sum $Z_M$ no larger than the full normalizer. [F1] identifies that subset sum as $Z_M$, and step 1.1 makes $Z_M$ unbounded, a contradiction. Hence $K_\\beta$ is not trace class and the countable partition sum has no finite value. The preparation condition [F2] fails, so this model has no normalized countable canonical law of the stated form. [A1, F1, F2, F3, F4, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§3.5–3.6",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§5.6–5.7",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A countable family of independent identical bosonic modes at fixed positive excitation energy; the divergent positive trace rules out this particular normalized Gibbs density and says nothing about finite mode sets or renormalized models.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-td-no-automatic-equilibration",
+        "kind": "example",
+        "domain": "physics",
+        "title": "An identity dynamics leaves a noncanonical finite preparation unchanged",
+        "reference": "items/ex-td-no-automatic-equilibration.md#example",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-td-finite-microstate-model",
+          "post-td-canonical-sampling"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite",
+          "post-td-canonical-sampling": "physical-assumption"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\Omega=\\{a,b\\}$ with energies $E_a=0$, $E_b=\\varepsilon>0$, and fix $T>0$. The separately adopted canonical law has probabilities proportional to $(1,e^{-\\beta\\varepsilon})$. For the dynamical comparison, stipulate the identity transition map $\\Phi_t(a)=a$, $\\Phi_t(b)=b$ for all $t\\ge0$ and start with the point mass $\\delta_a$.\n\n## Facts & Assumptions\n\n**Given:** A two-state energy model, positive temperature, the canonical preparation rule, and the explicitly stipulated identity dynamics.\n\n[F1] [[def-td-finite-microstate-model]]: the two microstates and their fixed finite energies define an admissible finite statistical model.\n\n[F2] [[post-td-canonical-sampling]]: the canonical probabilities are the normalized weights $e^{-\\beta E_x}$; this is an adopted preparation rule and includes no time-evolution equation.\n\n[A1] The comparison dynamics is the deterministic identity map $\\Phi_t$ for every $t\\ge0$, and the initial law for that comparison is $\\delta_a$.\n\n## Verification\n\n**Given:** $\\varepsilon>0$, $T>0$, and the stipulated dynamics.\n\n1.1 Put $q=e^{-\\beta\\varepsilon}$, so $0<q<1$. The canonical law is $P_\\beta(a)=1/(1+q)$ and $P_\\beta(b)=q/(1+q)$; in particular it is not $\\delta_a$. [F1, F2, algebra]\n\n2.1 The identity map preserves the initial point mass at every time: $(\\Phi_t)_*\\delta_a=\\delta_a$. Hence the time-evolved law does not converge to the canonical law, whose probability of $b$ is strictly positive. This is a counterexample to deriving equilibration from the sampling rule alone. [A1, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §1.3",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.4–4.6",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A two-state finite model with explicitly frozen identity dynamics; it shows that a canonical preparation rule alone supplies no relaxation dynamics and is not an empirical statement.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-td-two-site-no-thermalization",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Two isolated two-level sites do not relax an energy eigenstate to Gibbs form",
+        "reference": "items/ex-td-two-site-no-thermalization.md#example",
+        "design_state": "Complete draft carrier authored; scoped checks and prerequisite acceptance remain pending.",
+        "dependency_level": 8,
+        "deps": [
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "def-nrqm-framework-quantities-and-units",
+          "def-td-si-quantities",
+          "pthm-td-finite-mode-occupation-and-trace-formulas",
+          "pthm-td-independent-factorization",
+          "post-nrqm-framework-autonomous-dynamics"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "pthm-td-finite-mode-occupation-and-trace-formulas": "physical-result",
+          "pthm-td-independent-factorization": "physical-result",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take two noninteracting two-level sites with states $|0\\rangle,|1\\rangle$, single-site energies $0,\\varepsilon$, and total Hamiltonian $H=\\varepsilon(n_1+n_2)$. Fix $T>0$ and $\\varepsilon=k_{\\mathrm B}T\\log2$. Start in $\\rho_0=|00\\rangle\\langle00|$ and adopt the closed-system unitary evolution generated by $H$.\n\n## Facts & Assumptions\n\n**Given:** The finite product energy model, the assigned positive temperature, the unitary evolution postulate, and the stated initial state.\n\n[F1] [[pthm-td-independent-factorization]]: for two explicitly independent finite systems with additive energy, the canonical joint law is the product of the single-site canonical laws.\n\n[F2] [[pthm-td-finite-mode-occupation-and-trace-formulas]]: a fermionic two-level site with $q=e^{-\\beta\\varepsilon}$ has excited probability $q/(1+q)$ under the adopted quantum Gibbs preparation.\n\n[F3] [[post-nrqm-framework-autonomous-dynamics]] and [[def-nrqm-autonomous-dynamics-framework-evolution]]: closed-system evolution is $\\rho(t)=U_t\\rho_0U_t^*$ with $U_t=e^{-itH/\\hbar}$.\n\n[A1] Each site has $q=1/2$, and the initial vector is the ground energy eigenvector $|00\\rangle$ of $H$.\n\n## Verification\n\n**Given:** $q=1/2$, the product model, and the closed-system evolution.\n\n1.1 By [F1]–[F2], the finite-temperature Gibbs probabilities on $(00,01,10,11)$ are $(4/9,2/9,2/9,1/9)$. In particular the Gibbs probability of $|11\\rangle$ is $1/9>0$. [F1, F2, A1, algebra]\n\n2.1 Since $H|00\\rangle=0$, $U_t|00\\rangle=|00\\rangle$ for every $t$; thus $\\rho(t)=|00\\rangle\\langle00|$. Its probability for the projector $|11\\rangle\\langle11|$ is zero at every time, unlike the Gibbs value $1/9$. The state therefore never reaches this Gibbs density under the declared unitary evolution. [F3, A1, step 1.1, algebra] ∎",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete lecture notes, §§1.3.1 and 3.6",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.3–4.4 and §5.7",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A hypothetical closed two-site quantum model initialized in a product energy eigenstate; unitary evolution preserves that state and does not produce its finite-temperature Gibbs mixture. This is not an experiment.",
+        "verification": {
+          "precheck": "pass"
+        }
+      }
+    ]
+  }
+]

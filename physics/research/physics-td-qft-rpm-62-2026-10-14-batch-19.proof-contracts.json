@@ -1,0 +1,2271 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "level": "physics-td-qft-rpm-62-2026-10-14",
+  "scope": [
+    "def-td-driven-finite-path-model",
+    "def-td-detailed-balance-rate-model",
+    "post-td-canonical-protocol-preparation",
+    "post-td-stationary-bath-kernel",
+    "post-td-linear-ornstein-uhlenbeck-bath",
+    "def-td-finite-memory-reset-model",
+    "pthm-td-finite-pathwise-first-law",
+    "pthm-td-markov-relative-entropy-and-convergence",
+    "pthm-td-finite-jarzynski",
+    "pthm-td-finite-crooks",
+    "pthm-td-ornstein-uhlenbeck-thermal-fluctuations",
+    "pthm-td-qualified-landauer-reset",
+    "pthm-td-mean-dissipation",
+    "ex-td-finite-quench-work-fluctuation",
+    "ex-td-disconnected-markov-relaxation",
+    "ex-td-biased-bath-shannon-entropy-decreases",
+    "ex-td-ornstein-uhlenbeck-spectrum",
+    "ex-td-biased-memory-reset-bound",
+    "ex-td-correlated-memory-zero-conditional-reset-cost"
+  ],
+  "contracts": {
+    "def-td-driven-finite-path-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition restricts the microstate set to finite nonempty Ω."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: General kernels may have zero entries; thermal-subclass detailed balance requires reciprocal zero support, and transition ratios are used only on positive pairs. Work and fixed-stage energy increments need no division by kernel entries."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: One stage m=1 and a singleton microstate set are permitted; on a singleton, K=1 and canonical detailed balance holds, with zero fixed-stage energy increment."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition remains valid when successive stage energies agree, in which case the quench-work term is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition fixes E_0,E_m and the path beginning law μ_0, and defines both endpoint energy and total path work."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Take $\\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: def-td-driven-finite-path-model.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Take $\\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. For the physical internal-energy interpretation, use one declared fixed Galilean chart for every stage, with the bulk center-of-mass and separately tracked external-energy sectors suppressed from this finite protocol. The companion mechanical model supplies the center-of-mass data required by the microstate supplier; when the common chart is called a center-of-mass rest chart throughout the protocol, its center-of-mass velocity is constant over the modeled interval, and one constant boost selects that chart. This fixed-chart idealization does not infer a rest chart from the finite set or transition kernels, and does not describe an accelerating bulk body. Fix an integer $m\\ge1$ and stage energy functions $E_k:\\Omega\\to\\mathbb R\\,\\mathrm J$ for $k=0,\\ldots,m$, with the energy offsets fixed by the declared protocol model. Fix inverse temperature $\\beta>0$ in joules$^{-1}$. The finite partition sum and canonical probability vector at stage $k$ are $Z_k=\\sum_{i\\in\\Omega}e^{-\\beta E_k(i)}$ and $\\pi_k(i)=e^{-\\beta E_k(i)}/Z_k$. Since $\\Omega$ is nonempty and finite and each energy is finite, $0<Z_k<\\infty$ and $\\pi_k$ is a strictly positive probability vector.\n\nA transition kernel at stage $k$ is a matrix $K_k(i,j)\\ge0$ with $\\sum_{j\\in\\Omega}K_k(i,j)=1$. The general class permits every such row-stochastic kernel; normalization alone imposes no thermal consistency. For the subclass interpreted as transitions due only to one equilibrium reservoir at inverse temperature $\\beta$, adopt the discrete detailed-balance condition $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Since $\\pi_k$ is strictly positive, $K_k(i,j)>0$ if and only if $K_k(j,i)>0$; on positive pairs this gives $K_k(i,j)/K_k(j,i)=e^{-\\beta(E_k(j)-E_k(i))}$. In this physical subclass, also adopt that the fixed-stage energy change is entirely reservoir heat, with no untracked work, particle exchange, or intrinsic state-entropy contribution. These are model assumptions, not a deduction that an apparatus realizes this reservoir. Arbitrary row-stochastic kernels remain admissible for the formal path formulas; any other physical transfer interpretation requires a separately specified model. In the forward stage order, the energy changes instantaneously from $E_{k-1}$ to $E_k$ while the state is still $i_{k-1}$; the subsequent transition samples $i_k$ using $K_k(i_{k-1},i_k)$ at fixed energy $E_k$. A path is $\\omega=(i_0,\\ldots,i_m)\\in\\Omega^{m+1}$. The initial law is a probability vector $\\mu_0:\\Omega\\to[0,1]$ with $\\sum_{i\\in\\Omega}\\mu_0(i)=1$. Its path probability is $P_F(\\omega)=\\mu_0(i_0)\\prod_{k=1}^mK_k(i_{k-1},i_k)$; summing over all paths gives $1$ by the normalization of $\\mu_0$ and the row sums of the kernels.\n\nThe quench-work sign is positive when the quench raises the energy. The fixed-stage energy increment $Q_{\\mathrm{in}}$ is positive when the subsequent transition raises the energy; it is interpreted as heat into the system under the single-reservoir subclass assumptions just stated. On the general formal class it denotes only this energy increment. Define $W(\\omega)=\\sum_{k=1}^m[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$ and $Q_{\\mathrm{in}}(\\omega)=\\sum_{k=1}^m[E_k(i_k)-E_k(i_{k-1})]$, both in joules. Define $F_k=-\\beta^{-1}\\log Z_k$ and $\\Delta F=F_m-F_0=-\\beta^{-1}\\log(Z_m/Z_0)$. These are finite-model quantities; their physical interpretation is conditional on the adopted preparation and transition assumptions.",
+            "current_raw_sha256": "2d4a8312b4f021f5f9af1960f7451d15e65874c5fe2017e333a47badfff17661",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Take $\\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. For the physical internal-energy interpretation, use one declared fixed Galilean chart for every stage, with the bulk center-of-mass and separately tracked external-energy sectors suppressed from this finite protocol. The companion mechanical model supplies the center-of-mass data required by the microstate supplier; when the common chart is called a center-of-mass rest chart throughout the protocol, its center-of-mass velocity is constant over the modeled interval, and one constant boost selects that chart. This fixed-chart idealization does not infer a rest chart from the finite set or transition kernels, and does not describe an accelerating bulk body. Fix an integer $m\\ge1$ and stage energy functions $E_k:\\Omega\\to\\mathbb R\\,\\mathrm J$ for $k=0,\\ldots,m$, with the energy offsets fixed by the declared protocol model. Fix inverse temperature $\\beta>0$ in joules$^{-1}$. The finite partition sum and canonical probability vector at stage $k$ are $Z_k=\\sum_{i\\in\\Omega}e^{-\\beta E_k(i)}$ and $\\pi_k(i)=e^{-\\beta E_k(i)}/Z_k$. Since $\\Omega$ is nonempty and finite and each energy is finite, $0<Z_k<\\infty$ and $\\pi_k$ is a strictly positive probability vector.\n\nA transition kernel at stage $k$ is a matrix $K_k(i,j)\\ge0$ with $\\sum_{j\\in\\Omega}K_k(i,j)=1$. The general class permits every such row-stochastic kernel; normalization alone imposes no thermal consistency. For the subclass interpreted as transitions due only to one equilibrium reservoir at inverse temperature $\\beta$, adopt the discrete detailed-balance condition $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Since $\\pi_k$ is strictly positive, $K_k(i,j)>0$ if and only if $K_k(j,i)>0$; on positive pairs this gives $K_k(i,j)/K_k(j,i)=e^{-\\beta(E_k(j)-E_k(i))}$. In this physical subclass, also adopt that the fixed-stage energy change is entirely reservoir heat, with no untracked work, particle exchange, or intrinsic state-entropy contribution. These are model assumptions, not a deduction that an apparatus realizes this reservoir. Arbitrary row-stochastic kernels remain admissible for the formal path formulas; any other physical transfer interpretation requires a separately specified model. In the forward stage order, the energy changes instantaneously from $E_{k-1}$ to $E_k$ while the state is still $i_{k-1}$; the subsequent transition samples $i_k$ using $K_k(i_{k-1},i_k)$ at fixed energy $E_k$. A path is $\\omega=(i_0,\\ldots,i_m)\\in\\Omega^{m+1}$. The initial law is a probability vector $\\mu_0:\\Omega\\to[0,1]$ with $\\sum_{i\\in\\Omega}\\mu_0(i)=1$. Its path probability is $P_F(\\omega)=\\mu_0(i_0)\\prod_{k=1}^mK_k(i_{k-1},i_k)$; summing over all paths gives $1$ by the normalization of $\\mu_0$ and the row sums of the kernels.\n\nThe quench-work sign is positive when the quench raises the energy. The fixed-stage energy increment $Q_{\\mathrm{in}}$ is positive when the subsequent transition raises the energy; it is interpreted as heat into the system under the single-reservoir subclass assumptions just stated. On the general formal class it denotes only this energy increment. Define $W(\\omega)=\\sum_{k=1}^m[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$ and $Q_{\\mathrm{in}}(\\omega)=\\sum_{k=1}^m[E_k(i_k)-E_k(i_{k-1})]$, both in joules. Define $F_k=-\\beta^{-1}\\log Z_k$ and $\\Delta F=F_m-F_0=-\\beta^{-1}\\log(Z_m/Z_0)$. These are finite-model quantities; their physical interpretation is conditional on the adopted preparation and transition assumptions.",
+            "current_raw_sha256": "2d4a8312b4f021f5f9af1960f7451d15e65874c5fe2017e333a47badfff17661",
+            "scope_only_not_proof_acceptance": true
+          },
+          "evidence": "Definition: In the detailed-balanced subclass, pi_k(i)>0 and pi_k(j)>0. If K_k(i,j)>0, detailed balance pi_k(i)K_k(i,j)=pi_k(j)K_k(j,i) forces K_k(j,i)>0. This implication uses the adopted detailed-balance condition; it is not a property of an arbitrary row-stochastic kernel."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Take $\\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. For the physical internal-energy interpretation, use one declared fixed Galilean chart for every stage, with the bulk center-of-mass and separately tracked external-energy sectors suppressed from this finite protocol. The companion mechanical model supplies the center-of-mass data required by the microstate supplier; when the common chart is called a center-of-mass rest chart throughout the protocol, its center-of-mass velocity is constant over the modeled interval, and one constant boost selects that chart. This fixed-chart idealization does not infer a rest chart from the finite set or transition kernels, and does not describe an accelerating bulk body. Fix an integer $m\\ge1$ and stage energy functions $E_k:\\Omega\\to\\mathbb R\\,\\mathrm J$ for $k=0,\\ldots,m$, with the energy offsets fixed by the declared protocol model. Fix inverse temperature $\\beta>0$ in joules$^{-1}$. The finite partition sum and canonical probability vector at stage $k$ are $Z_k=\\sum_{i\\in\\Omega}e^{-\\beta E_k(i)}$ and $\\pi_k(i)=e^{-\\beta E_k(i)}/Z_k$. Since $\\Omega$ is nonempty and finite and each energy is finite, $0<Z_k<\\infty$ and $\\pi_k$ is a strictly positive probability vector.\n\nA transition kernel at stage $k$ is a matrix $K_k(i,j)\\ge0$ with $\\sum_{j\\in\\Omega}K_k(i,j)=1$. The general class permits every such row-stochastic kernel; normalization alone imposes no thermal consistency. For the subclass interpreted as transitions due only to one equilibrium reservoir at inverse temperature $\\beta$, adopt the discrete detailed-balance condition $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Since $\\pi_k$ is strictly positive, $K_k(i,j)>0$ if and only if $K_k(j,i)>0$; on positive pairs this gives $K_k(i,j)/K_k(j,i)=e^{-\\beta(E_k(j)-E_k(i))}$. In this physical subclass, also adopt that the fixed-stage energy change is entirely reservoir heat, with no untracked work, particle exchange, or intrinsic state-entropy contribution. These are model assumptions, not a deduction that an apparatus realizes this reservoir. Arbitrary row-stochastic kernels remain admissible for the formal path formulas; any other physical transfer interpretation requires a separately specified model. In the forward stage order, the energy changes instantaneously from $E_{k-1}$ to $E_k$ while the state is still $i_{k-1}$; the subsequent transition samples $i_k$ using $K_k(i_{k-1},i_k)$ at fixed energy $E_k$. A path is $\\omega=(i_0,\\ldots,i_m)\\in\\Omega^{m+1}$. The initial law is a probability vector $\\mu_0:\\Omega\\to[0,1]$ with $\\sum_{i\\in\\Omega}\\mu_0(i)=1$. Its path probability is $P_F(\\omega)=\\mu_0(i_0)\\prod_{k=1}^mK_k(i_{k-1},i_k)$; summing over all paths gives $1$ by the normalization of $\\mu_0$ and the row sums of the kernels.\n\nThe quench-work sign is positive when the quench raises the energy. The fixed-stage energy increment $Q_{\\mathrm{in}}$ is positive when the subsequent transition raises the energy; it is interpreted as heat into the system under the single-reservoir subclass assumptions just stated. On the general formal class it denotes only this energy increment. Define $W(\\omega)=\\sum_{k=1}^m[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$ and $Q_{\\mathrm{in}}(\\omega)=\\sum_{k=1}^m[E_k(i_k)-E_k(i_{k-1})]$, both in joules. Define $F_k=-\\beta^{-1}\\log Z_k$ and $\\Delta F=F_m-F_0=-\\beta^{-1}\\log(Z_m/Z_0)$. These are finite-model quantities; their physical interpretation is conditional on the adopted preparation and transition assumptions.",
+            "current_raw_sha256": "2d4a8312b4f021f5f9af1960f7451d15e65874c5fe2017e333a47badfff17661",
+            "scope_only_not_proof_acceptance": true
+          },
+          "evidence": "Definition: In the same detailed-balanced subclass, K_k(j,i)>0 implies K_k(i,j)>0 by the same equality and strictly positive canonical weights. The rate ratio is defined only on positive pairs; simultaneous zero entries are admitted, and no heat-only apparatus interpretation follows from support equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-author",
+        "notes": "The unrestricted row-stochastic formal path class is retained. A single-equilibrium-reservoir interpretation separately adopts canonical detailed balance and a pure-heat fixed-stage energy assignment; neither row normalization nor stationarity alone establishes that physical interpretation."
+      },
+      "historical_boundary_worksheets": [
+        {
+          "origin": "native generic proof-case metadata",
+          "displaced_rows": [
+            {
+              "case": "nonempty-choice",
+              "status": "not_applicable",
+              "reason": "No choice principle is used; the finite data are fixed and all sums are finite. Item: def-td-driven-finite-path-model."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The item statement contains no biconditional; neither direction is asserted."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The item statement contains no biconditional; neither direction is asserted."
+            }
+          ],
+          "reason": "The diagnosed generic proof-case rows are preserved historically and replaced by actual Definition/Scope applicability rows because native contract shape requires all eight cases even for definitions/remarks. No numbered argument is invented."
+        }
+      ]
+    },
+    "def-td-detailed-balance-rate-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires a finite nonempty state set and a normalized reference vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero rates off the positive-rate graph and defines graph edges exactly by positive detailed-balance flow."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits a singleton state set; its generator has q_ii=0 and detailed balance is vacuous."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Boundary degenerate: No additional equal-energy, stationary, or deterministic degeneration is claimed beyond the exact case stated in this item. Item: def-td-detailed-balance-rate-model.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition.",
+            "current_raw_sha256": "76fc197e6edf29a48cab891271c59eef52368df52877607e34836e009abff2ef",
+            "scope_only_not_proof_acceptance": true,
+            "interface_review_only": true,
+            "case_interpretation": "No extra equal-energy/stationary/deterministic degeneration conclusion is claimed; zero rates and singleton cases remain handled by their own Definition conventions. Discrete K typing does not alter this scope disposition."
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This definition does not prescribe an initial/final preparation or endpoint evolution. Item: def-td-detailed-balance-rate-model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: def-td-detailed-balance-rate-model.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition.",
+            "current_raw_sha256": "76fc197e6edf29a48cab891271c59eef52368df52877607e34836e009abff2ef",
+            "scope_only_not_proof_acceptance": true,
+            "interface_review_only": true,
+            "case_interpretation": "Finite model set, rates/kernel and positive normalized reference vector are supplied; no selection from a nonempty family or stochastic existence proof is made by this Definition."
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition a forward rate edge has pi_i q_ij>0. The declared detailed-balance identity gives the equal reverse product pi_j q_ji>0.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition.",
+            "current_raw_sha256": "76fc197e6edf29a48cab891271c59eef52368df52877607e34836e009abff2ef",
+            "scope_only_not_proof_acceptance": true,
+            "interface_review_only": true,
+            "case_interpretation": "For distinct state indices the positive forward product pi_i q_ij equals pi_j q_ji by the declared rate detailed-balance equation, hence reverse flow is positive. The strictly positive pi convention is retained; the same discrete detailed-balance identity pairs positive kernel supports."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition a positive reverse rate product equals the forward product by detailed balance, so it meets the stated forward edge criterion. Strictly positive pi is retained.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition.",
+            "current_raw_sha256": "76fc197e6edf29a48cab891271c59eef52368df52877607e34836e009abff2ef",
+            "scope_only_not_proof_acceptance": true,
+            "interface_review_only": true,
+            "case_interpretation": "Conversely a positive reverse product equals the forward product under the declared balance equation; it meets the defined forward edge criterion. These are exact interface conventions, not a claimed numbered proof."
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-author",
+        "notes": "The definition specifies finite rates, the master-equation convention, units, positive reference law, finite row-stochastic kernels, and both rate and kernel reversibility."
+      },
+      "historical_boundary_worksheets": [
+        {
+          "origin": "native generic proof-case metadata",
+          "displaced_rows": [
+            {
+              "case": "degenerate",
+              "status": "not_applicable",
+              "reason": "No additional equal-energy, stationary, or deterministic degeneration is claimed beyond the exact case stated in this item. Item: def-td-detailed-balance-rate-model."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "not_applicable",
+              "reason": "No choice principle is used; the finite data are fixed and all sums are finite. Item: def-td-detailed-balance-rate-model."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The item statement contains no biconditional; neither direction is asserted."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The item statement contains no biconditional; neither direction is asserted."
+            }
+          ],
+          "reason": "The diagnosed generic proof-case rows are preserved historically and replaced by actual Definition/Scope applicability rows because native contract shape requires all eight cases even for definitions/remarks. No numbered argument is invented."
+        }
+      ]
+    },
+    "post-td-canonical-protocol-preparation": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section states the adopted finite preparation or bath equation with its symbols and conventions."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The physical_scope field limits the postulate to the stated finite protocol or one-dimensional harmonic bath regime."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item contains direct full-text source URLs and section locators in sources.references."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The carrier labels this premise as adopted and does not present it as a theorem, measurement, or empirical validation."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "post-td-stationary-bath-kernel": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section states the adopted finite preparation or bath equation with its symbols and conventions."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The physical_scope field limits the postulate to the stated finite protocol or one-dimensional harmonic bath regime."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item contains direct full-text source URLs and section locators in sources.references."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The carrier labels this premise as adopted and does not present it as a theorem, measurement, or empirical validation."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "post-td-linear-ornstein-uhlenbeck-bath": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section states the adopted finite preparation or bath equation with its symbols and conventions."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The physical_scope field limits the postulate to the stated finite protocol or one-dimensional harmonic bath regime."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item contains direct full-text source URLs and section locators in sources.references."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The carrier labels this premise as adopted and does not present it as a theorem, measurement, or empirical validation."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": []
+    },
+    "def-td-finite-memory-reset-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition includes a normalized joint law on finite M×R, which rules out an empty support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition uses the finite conditional-entropy interface, including its convention that zero marginal terms contribute nothing."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition remains meaningful when M or R is a singleton; the corresponding conditional entropy is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition includes the case already concentrated at m_0, where the stated reset map leaves the law unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition gives the initial law p and exact reset endpoint p'."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Let $M$ be a finite memory-state set and $R$ a finite retained-register set. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: def-td-finite-memory-reset-model.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $M$ be a finite memory-state set and $R$ a finite retained-register set. A joint preparation is a probability law $p(m,r)\\ge0$ with $\\sum_{m,r}p(m,r)=1$. Write $a_r=\\sum_m p(m,r)$ and, for $a_r>0$, $q(m|r)=p(m,r)/a_r$. Use the finite Shannon entropy in nats and the conditional entropy $H(M|R)$ exactly as defined by [[lem-tdmath-conditional-memory-entropy]]. For a fixed target memory state $m_0$, a reset is the endpoint map $p'(m,r)=\\mathbf 1_{\\{m=m_0\\}}a_r$: it places the memory at $m_0$ while leaving the register marginal unchanged. The definition alone assigns no physical entropy, work cost, heat transfer, or implementation.",
+            "current_raw_sha256": "2e5dfc0addbaddadc87c7e64efb136378abfee6c058ea6865c37b16bffd29f0d",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Let $M$ be a finite memory-state set and $R$ a finite retained-register set. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $M$ be a finite memory-state set and $R$ a finite retained-register set. A joint preparation is a probability law $p(m,r)\\ge0$ with $\\sum_{m,r}p(m,r)=1$. Write $a_r=\\sum_m p(m,r)$ and, for $a_r>0$, $q(m|r)=p(m,r)/a_r$. Use the finite Shannon entropy in nats and the conditional entropy $H(M|R)$ exactly as defined by [[lem-tdmath-conditional-memory-entropy]]. For a fixed target memory state $m_0$, a reset is the endpoint map $p'(m,r)=\\mathbf 1_{\\{m=m_0\\}}a_r$: it places the memory at $m_0$ while leaving the register marginal unchanged. The definition alone assigns no physical entropy, work cost, heat transfer, or implementation.",
+            "current_raw_sha256": "2e5dfc0addbaddadc87c7e64efb136378abfee6c058ea6865c37b16bffd29f0d",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Let $M$ be a finite memory-state set and $R$ a finite retained-register set. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Definition",
+            "source_excerpt": "Let $M$ be a finite memory-state set and $R$ a finite retained-register set. A joint preparation is a probability law $p(m,r)\\ge0$ with $\\sum_{m,r}p(m,r)=1$. Write $a_r=\\sum_m p(m,r)$ and, for $a_r>0$, $q(m|r)=p(m,r)/a_r$. Use the finite Shannon entropy in nats and the conditional entropy $H(M|R)$ exactly as defined by [[lem-tdmath-conditional-memory-entropy]]. For a fixed target memory state $m_0$, a reset is the endpoint map $p'(m,r)=\\mathbf 1_{\\{m=m_0\\}}a_r$: it places the memory at $m_0$ while leaving the register marginal unchanged. The definition alone assigns no physical entropy, work cost, heat transfer, or implementation.",
+            "current_raw_sha256": "2e5dfc0addbaddadc87c7e64efb136378abfee6c058ea6865c37b16bffd29f0d",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-author",
+        "notes": "The mathematical probability interface is supplied by the inspected conditional-entropy lemma; the definition itself makes no thermodynamic cost claim."
+      },
+      "historical_boundary_worksheets": [
+        {
+          "origin": "native generic proof-case metadata",
+          "displaced_rows": [
+            {
+              "case": "nonempty-choice",
+              "status": "not_applicable",
+              "reason": "No choice principle is used; the finite data are fixed and all sums are finite. Item: def-td-finite-memory-reset-model."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The item statement contains no biconditional; neither direction is asserted."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The item statement contains no biconditional; neither direction is asserted."
+            }
+          ],
+          "reason": "The diagnosed generic proof-case rows are preserved historically and replaced by actual Definition/Scope applicability rows because native contract shape requires all eight cases even for definitions/remarks. No numbered argument is invented."
+        }
+      ]
+    },
+    "pthm-td-finite-pathwise-first-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-driven-finite-path-model",
+          "source_section": "Definition",
+          "quote": "Take $\\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. For the physical internal-energy interpretation, use one declared fixed Galilean chart for every stage, with the bulk center-of-mass and separately tracked external-energy sectors suppressed from this finite protocol. The companion mechanical model supplies the center-of-mass data required by the microstate supplier; when the common chart is called a center-of-mass rest chart throughout the protocol, its center-of-mass velocity is constant over the modeled interval, and one constant boost selects that chart. This fixed-chart idealization does not infer a rest chart from the finite set or transition kernels, and does not describe an accelerating bulk body. Fix an integer $m\\ge1$ and stage energy functions $E_k:\\Omega\\to\\mathbb R\\,\\mathrm J$ for $k=0,\\ldots,m$, with the energy offsets fixed by the declared protocol model. Fix inverse temperature $\\beta>0$ in joules$^{-1}$. The finite partition sum and canonical probability vector at stage $k$ are $Z_k=\\sum_{i\\in\\Omega}e^{-\\beta E_k(i)}$ and $\\pi_k(i)=e^{-\\beta E_k(i)}/Z_k$. Since $\\Omega$ is nonempty and finite and each energy is finite, $0<Z_k<\\infty$ and $\\pi_k$ is a strictly positive probability vector.\n\nA transition kernel at stage $k$ is a matrix $K_k(i,j)\\ge0$ with $\\sum_{j\\in\\Omega}K_k(i,j)=1$. The general class permits every such row-stochastic kernel; normalization alone imposes no thermal consistency. For the subclass interpreted as transitions due only to one equilibrium reservoir at inverse temperature $\\beta$, adopt the discrete detailed-balance condition $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Since $\\pi_k$ is strictly positive, $K_k(i,j)>0$ if and only if $K_k(j,i)>0$; on positive pairs this gives $K_k(i,j)/K_k(j,i)=e^{-\\beta(E_k(j)-E_k(i))}$. In this physical subclass, also adopt that the fixed-stage energy change is entirely reservoir heat, with no untracked work, particle exchange, or intrinsic state-entropy contribution. These are model assumptions, not a deduction that an apparatus realizes this reservoir. Arbitrary row-stochastic kernels remain admissible for the formal path formulas; any other physical transfer interpretation requires a separately specified model. In the forward stage order, the energy changes instantaneously from $E_{k-1}$ to $E_k$ while the state is still $i_{k-1}$; the subsequent transition samples $i_k$ using $K_k(i_{k-1},i_k)$ at fixed energy $E_k$. A path is $\\omega=(i_0,\\ldots,i_m)\\in\\Omega^{m+1}$. The initial law is a probability vector $\\mu_0:\\Omega\\to[0,1]$ with $\\sum_{i\\in\\Omega}\\mu_0(i)=1$. Its path probability is $P_F(\\omega)=\\mu_0(i_0)\\prod_{k=1}^mK_k(i_{k-1},i_k)$; summing over all paths gives $1$ by the normalization of $\\mu_0$ and the row sums of the kernels.\n\nThe quench-work sign is positive when the quench raises the energy. The fixed-stage energy increment $Q_{\\mathrm{in}}$ is positive when the subsequent transition raises the energy; it is interpreted as heat into the system under the single-reservoir subclass assumptions just stated. On the general formal class it denotes only this energy increment. Define $W(\\omega)=\\sum_{k=1}^m[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$ and $Q_{\\mathrm{in}}(\\omega)=\\sum_{k=1}^m[E_k(i_k)-E_k(i_{k-1})]$, both in joules. Define $F_k=-\\beta^{-1}\\log Z_k$ and $\\Delta F=F_m-F_0=-\\beta^{-1}\\log(Z_m/Z_0)$. These are finite-model quantities; their physical interpretation is conditional on the adopted preparation and transition assumptions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Insert the intermediate energies and telescope: $E_m(i_m)-E_0(i_0)=\\sum_{k=1}^m[E_k(i_k)-E_{k-1}(i_{k-1})]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $k$, split the summand as $E_k(i_{k-1})-E_{k-1}(i_{k-1})+E_k(i_k)-E_k(i_{k-1})$. Summing the first terms gives $W(\\omega)$ and the second terms give $Q_{\\mathrm{in}}(\\omega)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement inherits a finite nonempty microstate set and a path with m≥1 from the model definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 is a telescoping identity and permits any zero energy increment."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits m=1; the single work and heat increments telescope to the endpoint energy change."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement remains an equality when energies or state labels repeat, including zero work or heat."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement is exactly the endpoint identity from stage 0 to stage m under the declared signs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For every path $\\omega=(i_0,\\ldots,i_m)$ of [[def-td-driven-finite-path-model]], the endpoint energy change is $E_m(i_m)-E_0(i_0)=W(\\omega)+Q_{\\mathrm{in}}(\\omega)$, with the stated sign convention. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: pthm-td-finite-pathwise-first-law.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For every path $\\omega=(i_0,\\ldots,i_m)$ of [[def-td-driven-finite-path-model]], the endpoint energy change is $E_m(i_m)-E_0(i_0)=W(\\omega)+Q_{\\mathrm{in}}(\\omega)$, with the stated sign convention.",
+            "current_raw_sha256": "4f756528d15ce39f8527dd8d52f3c715d1ffbc03950fbcb5ead07c748f1b09ac",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For every path $\\omega=(i_0,\\ldots,i_m)$ of [[def-td-driven-finite-path-model]], the endpoint energy change is $E_m(i_m)-E_0(i_0)=W(\\omega)+Q_{\\mathrm{in}}(\\omega)$, with the stated sign convention. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For every path $\\omega=(i_0,\\ldots,i_m)$ of [[def-td-driven-finite-path-model]], the endpoint energy change is $E_m(i_m)-E_0(i_0)=W(\\omega)+Q_{\\mathrm{in}}(\\omega)$, with the stated sign convention.",
+            "current_raw_sha256": "4f756528d15ce39f8527dd8d52f3c715d1ffbc03950fbcb5ead07c748f1b09ac",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For every path $\\omega=(i_0,\\ldots,i_m)$ of [[def-td-driven-finite-path-model]], the endpoint energy change is $E_m(i_m)-E_0(i_0)=W(\\omega)+Q_{\\mathrm{in}}(\\omega)$, with the stated sign convention. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For every path $\\omega=(i_0,\\ldots,i_m)$ of [[def-td-driven-finite-path-model]], the endpoint energy change is $E_m(i_m)-E_0(i_0)=W(\\omega)+Q_{\\mathrm{in}}(\\omega)$, with the stated sign convention.",
+            "current_raw_sha256": "4f756528d15ce39f8527dd8d52f3c715d1ffbc03950fbcb5ead07c748f1b09ac",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-author",
+        "notes": "The path identity is a termwise telescoping equality under the declared work and heat signs."
+      }
+    },
+    "pthm-td-markov-relative-entropy-and-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-detailed-balance-rate-model",
+          "source_section": "Definition",
+          "quote": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-td-detailed-balance-rate-model",
+          "source_section": "Definition",
+          "quote": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition.\n",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $c=1+\\max_i\\sum_{j\\ne i}q_{ij}$ and $P=I+Q/c$, where $Q=(q_{ij})$. Then $P$ has nonnegative entries and row sums one. The series $p(t)=e^{-ct}\\sum_{n=0}^\\infty (ct)^n p(0)P^n/n!$ and its differentiated series converge uniformly on bounded time intervals; its coefficients are nonnegative and sum to one, so it is a probability vector, starts at $p(0)$, and differentiates to $\\dot p=pQ$. Its $n=0$ term gives $p_i(t)\\ge e^{-ct}p_i(0)>0$. For uniqueness, the difference $z$ of two solutions satisfies $z'=zQ$; with $C=\\max_i\\sum_j|q_{ij}|$ and $U(t)=\\int_0^t\\|z(s)\\|_1ds$, one has $U'(t)=\\|z(t)\\|_1\\le C U(t)$. Thus $(e^{-Ct}U(t))'\\le0$ and $U(0)=0\\le U(t)$ force $U=0$, hence $z=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With $r_i=p_i/\\pi_i$, detailed balance gives $\\dot p_i=\\sum_{j\\ne i}a_{ij}(r_j-r_i)$. By [F4], differentiating the finite entropy sum gives $D'=\\sum_i\\dot p_i(\\log r_i+1)=\\sum_i\\dot p_i\\log r_i$, since $\\sum_i\\dot p_i=0$. Pairing the $i,j$ terms gives $D'=-\\sum_{\\{i,j\\}\\in E}a_{ij}(r_i-r_j)(\\log r_i-\\log r_j)\\le0$: if $r_i\\ge r_j$, then $\\log r_i-\\log r_j=-\\log(r_j/r_i)\\ge0$ by [F3], and the reversed order gives the same product sign. The mean value theorem [F5] on each compact time interval makes $D$ nonincreasing.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Set $u_i=r_i-1$, so $\\sum_i\\pi_i u_i=0$, and $V(t)=\\sum_i\\pi_i u_i^2$. Since $\\dot u_i=\\pi_i^{-1}\\sum_{j\\ne i}a_{ij}(u_j-u_i)$, differentiating and pairing the two orientations of each edge gives $V'=2\\sum_i u_i\\sum_{j\\ne i}a_{ij}(u_j-u_i)=-2\\sum_{\\{i,j\\}\\in E}a_{ij}(u_i-u_j)^2$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $a_*=\\min_{\\{i,j\\}\\in E}a_{ij}>0$. Fix a root state and choose one simple path from it to each state; this is only a finite family of choices, obtainable successively, and each path has length at most $N-1$. Telescoping and [F6] give $(u_i-u_r)^2\\le(N-1)\\sum_{\\{j,k\\}\\in E}(u_j-u_k)^2$. The zero-mean identity gives $u_r=-\\sum_i\\pi_i(u_i-u_r)$; expanding $\\sum_i\\pi_i[(u_i-u_r)-\\sum_j\\pi_j(u_j-u_r)]^2\\ge0$ yields $u_r^2\\le\\sum_i\\pi_i(u_i-u_r)^2$. Since $(x+y)^2\\le2x^2+2y^2$ and $\\sum_i\\pi_i=1$, it follows that $V\\le4(N-1)\\sum_E(u_i-u_j)^2\\le4(N-1)a_*^{-1}\\sum_Ea_{ij}(u_i-u_j)^2$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 2.2",
+            "algebra",
+            "2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus $V'\\le-2\\lambda V$ with $\\lambda=a_*/[4(N-1)]>0$. By [F5], the derivative of $e^{2\\lambda t}V(t)$ is nonpositive and that function is nonincreasing, so $V(t)\\le e^{-2\\lambda t}V(0)$. Since $\\pi_i u_i(t)^2\\le V(t)$ and $p_i-\\pi_i=\\pi_i u_i$, each $p_i(t)\\to\\pi_i$.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 2.2",
+            "step 3.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes N≥2 and a normalized positive reference probability vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits zero rates on nonedges; detailed balance and connectedness refer only to positive edges."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement explicitly assumes N≥2, so the one-state case is outside its claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement allows p(0)=π; detailed balance makes π stationary, so u=0 and V=0 and the exponential estimate still holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement fixes the strictly positive initial law at t=0 and asserts existence and convergence for all t≥0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses one simple path for each of finitely many vertices by successive finite choices; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Let $S$ have $N\\ge2$ states, positive detailed-balance law $\\pi$, and connected undirected rate graph as in [[def-td-detailed-balance-rate-model]]. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $S$ have $N\\ge2$ states, positive detailed-balance law $\\pi$, and connected undirected rate graph as in [[def-td-detailed-balance-rate-model]]. For every strictly positive initial probability vector $p(0)$, the master equation has a unique strictly positive probability solution $p(t)$ for all $t\\ge0$. The relative entropy $D(p(t)\\Vert\\pi)=\\sum_i p_i(t)\\log(p_i(t)/\\pi_i)$ is nonincreasing, and $p_i(t)\\to\\pi_i$ for every state. No monotonicity of Shannon entropy $-\\sum_i p_i\\log p_i$ is asserted.",
+            "current_raw_sha256": "81b1eca60b0507ac7a046f1012c3007e2bdf7dd347b5da70295855e52efeabdd",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Let $S$ have $N\\ge2$ states, positive detailed-balance law $\\pi$, and connected undirected rate graph as in [[def-td-detailed-balance-rate-model]]. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $S$ have $N\\ge2$ states, positive detailed-balance law $\\pi$, and connected undirected rate graph as in [[def-td-detailed-balance-rate-model]]. For every strictly positive initial probability vector $p(0)$, the master equation has a unique strictly positive probability solution $p(t)$ for all $t\\ge0$. The relative entropy $D(p(t)\\Vert\\pi)=\\sum_i p_i(t)\\log(p_i(t)/\\pi_i)$ is nonincreasing, and $p_i(t)\\to\\pi_i$ for every state. No monotonicity of Shannon entropy $-\\sum_i p_i\\log p_i$ is asserted.",
+            "current_raw_sha256": "81b1eca60b0507ac7a046f1012c3007e2bdf7dd347b5da70295855e52efeabdd",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Independently checked steps 1.1–4.1: finite stochastic P gives uniformly convergent Poisson series and positive n=0 term; integrating the difference gives uniqueness without an ODE assumption. Positive ratios make logarithmic derivatives valid, paired edges give Dprime <=0. Finite root paths and Cauchy–Schwarz give V <=4(N-1)/a_* times edge energy; Vprime=-2 energy gives exponential convergence. N>=2 and connectedness ensure a_*>0; p(0)>0 excludes log-zero. Fixed finite paths require no AC. This is a conditional rate-model deduction, with no data premise."
+      }
+    },
+    "pthm-td-finite-jarzynski": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-driven-finite-path-model",
+          "source_section": "Definition",
+          "quote": "Take $\\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. For the physical internal-energy interpretation, use one declared fixed Galilean chart for every stage, with the bulk center-of-mass and separately tracked external-energy sectors suppressed from this finite protocol. The companion mechanical model supplies the center-of-mass data required by the microstate supplier; when the common chart is called a center-of-mass rest chart throughout the protocol, its center-of-mass velocity is constant over the modeled interval, and one constant boost selects that chart. This fixed-chart idealization does not infer a rest chart from the finite set or transition kernels, and does not describe an accelerating bulk body. Fix an integer $m\\ge1$ and stage energy functions $E_k:\\Omega\\to\\mathbb R\\,\\mathrm J$ for $k=0,\\ldots,m$, with the energy offsets fixed by the declared protocol model. Fix inverse temperature $\\beta>0$ in joules$^{-1}$. The finite partition sum and canonical probability vector at stage $k$ are $Z_k=\\sum_{i\\in\\Omega}e^{-\\beta E_k(i)}$ and $\\pi_k(i)=e^{-\\beta E_k(i)}/Z_k$. Since $\\Omega$ is nonempty and finite and each energy is finite, $0<Z_k<\\infty$ and $\\pi_k$ is a strictly positive probability vector.\n\nA transition kernel at stage $k$ is a matrix $K_k(i,j)\\ge0$ with $\\sum_{j\\in\\Omega}K_k(i,j)=1$. The general class permits every such row-stochastic kernel; normalization alone imposes no thermal consistency. For the subclass interpreted as transitions due only to one equilibrium reservoir at inverse temperature $\\beta$, adopt the discrete detailed-balance condition $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Since $\\pi_k$ is strictly positive, $K_k(i,j)>0$ if and only if $K_k(j,i)>0$; on positive pairs this gives $K_k(i,j)/K_k(j,i)=e^{-\\beta(E_k(j)-E_k(i))}$. In this physical subclass, also adopt that the fixed-stage energy change is entirely reservoir heat, with no untracked work, particle exchange, or intrinsic state-entropy contribution. These are model assumptions, not a deduction that an apparatus realizes this reservoir. Arbitrary row-stochastic kernels remain admissible for the formal path formulas; any other physical transfer interpretation requires a separately specified model. In the forward stage order, the energy changes instantaneously from $E_{k-1}$ to $E_k$ while the state is still $i_{k-1}$; the subsequent transition samples $i_k$ using $K_k(i_{k-1},i_k)$ at fixed energy $E_k$. A path is $\\omega=(i_0,\\ldots,i_m)\\in\\Omega^{m+1}$. The initial law is a probability vector $\\mu_0:\\Omega\\to[0,1]$ with $\\sum_{i\\in\\Omega}\\mu_0(i)=1$. Its path probability is $P_F(\\omega)=\\mu_0(i_0)\\prod_{k=1}^mK_k(i_{k-1},i_k)$; summing over all paths gives $1$ by the normalization of $\\mu_0$ and the row sums of the kernels.\n\nThe quench-work sign is positive when the quench raises the energy. The fixed-stage energy increment $Q_{\\mathrm{in}}$ is positive when the subsequent transition raises the energy; it is interpreted as heat into the system under the single-reservoir subclass assumptions just stated. On the general formal class it denotes only this energy increment. Define $W(\\omega)=\\sum_{k=1}^m[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$ and $Q_{\\mathrm{in}}(\\omega)=\\sum_{k=1}^m[E_k(i_k)-E_k(i_{k-1})]$, both in joules. Define $F_k=-\\beta^{-1}\\log Z_k$ and $\\Delta F=F_m-F_0=-\\beta^{-1}\\log(Z_m/Z_0)$. These are finite-model quantities; their physical interpretation is conditional on the adopted preparation and transition assumptions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-td-canonical-protocol-preparation",
+          "source_section": "Postulate",
+          "quote": "For a protocol of [[def-td-driven-finite-path-model]], fix a bath temperature $T_b>0$ kelvin and set $\\beta=(k_{\\mathrm B}T_b)^{-1}$ in joules$^{-1}$, using the exact constant and SI conventions of [[def-td-si-quantities]]. The finite-state clause of the adopted [[post-td-canonical-sampling]] then gives the stage-zero law $\\pi_0(i)=e^{-\\beta E_0(i)}/Z_0$; adopt that the initial microstate is drawn from this law, so $\\mu_0=\\pi_0$. Here $\\Omega$ is finite and nonempty and $E_0(i)$ is finite, so $0<Z_0<\\infty$ as required by that clause. This is a model premise about the preparation distribution. It does not follow from the finite partition-sum definition, does not assert that an arbitrary system equilibrates in finite time, and does not report a measured preparation. The countable-state and measure-integral branches of [[post-td-canonical-sampling]] are not used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-td-stationary-bath-kernel",
+          "source_section": "Postulate",
+          "quote": "For the protocol in [[def-td-driven-finite-path-model]], adopt, at each stage $k=1,\\ldots,m$, the stationarity condition $\\sum_{i\\in\\Omega}\\pi_k(i)K_k(i,j)=\\pi_k(j)$ for every $j\\in\\Omega$. This says that if the bath transition begins with law $\\pi_k$ at fixed energy $E_k$, it ends with the same law. It is a physical modeling assumption for this protocol family, not a consequence of the transition-kernel definition and not an assertion that the kernel mixes every initial law to $\\pi_k$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-td-canonical-sampling",
+          "source_section": "Postulate",
+          "quote": "Assign a positive temperature $T$ in kelvins and the exact framework constant $k_{\\mathrm B}$ in $\\mathrm{J\\,K^{-1}}$ from [[def-td-si-quantities]], and put $\\beta=(k_{\\mathrm B}T)^{-1}$ in $\\mathrm{J^{-1}}$. For a finite microstate model $(\\Omega,\\epsilon)$, adopt the canonical preparation\n$$P_\\beta(x)=\\frac{e^{-\\beta E(x)}}{Z(\\beta)},\\qquad Z(\\beta)=\\sum_{x\\in\\Omega}e^{-\\beta E(x)}.$$\nHere $Z$ is dimensionless, positive, and finite because $\\Omega$ is finite and nonempty.\n\nFor a specified nonempty finite or countably infinite state list $I$ with a stated enumeration and finite physical energies $E_i$ in joules, the counted-once branch takes reference weights $g_i=1$. More generally, the model may explicitly assign fixed positive dimensionless reference weights $g_i>0$ and adopts\n$$Z(\\beta)=\\sum_{i\\in I}g_i e^{-\\beta E_i},\\qquad P_\\beta(i)=\\frac{g_i e^{-\\beta E_i}}{Z(\\beta)},$$\nonly at parameters with $0<Z(\\beta)<\\infty$. Thus the counted-once law is exactly $P_\\beta(i)=e^{-\\beta E_i}/Z$. To match [[def-tdmath-countable-canonical-model]], set $E_*=1\\,\\mathrm J$, $e_i=E_i/E_*\\in\\mathbb R$ and $b=E_*\\beta$; its real-valued energy and parameter coordinates are $e_i,b$, and its admissible set is $J_Z$ for the declared parameter interval. Its nonnegative sums are suprema of finite subsums. The weights $g_i$ are declared model data, not inferred degeneracies or measurements.\n\nFor a measurable model $(X,\\Sigma,\\mu,E)$ with a dimensionless reference measure $\\mu$ and measurable finite physical energy $E:X\\to\\mathbb R\\,\\mathrm J$, adopt the probability density $p_\\beta=e^{-\\beta E}/Z$ relative to $\\mu$, with $Z(\\beta)=\\int_X e^{-\\beta E}\\,d\\mu$, only when $0<Z(\\beta)<\\infty$. Measurability of $E$ means measurability of its numerical coordinate $E/E_*$. The integral convention is [[def-tdmath-measure-integral]] at its current draft definition.\n\nThis is an adopted statistical-mechanical preparation rule. It is not derived from the macroscopic thermodynamic laws, a finite bath, entropy maximization, or a time-evolution equation. It does not assert that a physical sample has this preparation; that identification is an additional model assumption to be tested against a specified preparation and apparatus.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $k\\ge1$ and $j\\in\\Omega$, define $S_k(j)$ by the finite sum over $i_0,\\ldots,i_{k-1}\\in\\Omega$ of $\\pi_0(i_0)\\prod_{\\ell=1}^kK_\\ell(i_{\\ell-1},i_\\ell)e^{-\\beta W_k}$, with $i_k=j$ and $W_k=\\sum_{\\ell=1}^k[E_\\ell(i_{\\ell-1})-E_{\\ell-1}(i_{\\ell-1})]$; put $S_0(j)=\\pi_0(j)$. Partitioning this finite sum by the state $i=i_{k-1}$ gives $S_k(j)=\\sum_iS_{k-1}(i)e^{-\\beta(E_k(i)-E_{k-1}(i))}K_k(i,j)$. The canonical preparation gives the base $S_0(j)=\\pi_0(j)=(Z_0/Z_0)\\pi_0(j)$ by [A1] and the finite branch of [L1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "L1",
+            "given",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the induction step fix $k\\in\\{1,\\ldots,m\\}$ and suppose $S_{k-1}(i)=(Z_{k-1}/Z_0)\\pi_{k-1}(i)$ for every $i$.",
+          "step": "2.1",
+          "inputs": [
+            "ih",
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute this hypothesis in the recurrence from step 1.1. Since $\\pi_{k-1}(i)=e^{-\\beta E_{k-1}(i)}/Z_{k-1}$, the previous-stage Boltzmann factor cancels against the quench factor, giving $S_k(j)=(Z_k/Z_0)\\sum_i\\pi_k(i)K_k(i,j)=(Z_k/Z_0)\\pi_k(j)$ by [A2]. This proves the induction step at each stage.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "A2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The base and induction step establish $S_k(j)=(Z_k/Z_0)\\pi_k(j)$ for all stages. At $k=m$, summing over terminal states and using normalization of $\\pi_m$ gives $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0$. By $\\Delta F=-\\beta^{-1}\\log(Z_m/Z_0)$, this equals $e^{-\\beta\\Delta F}$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement inherits a finite nonempty Ω and normalized canonical laws from the protocol model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines the finite recurrence using kernel entries without division, so zero entries contribute zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes m=1 and |Ω|=1; the finite identity reduces to its one-stage or one-path form."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement includes equal stage energies E_k=E_0, making W=0 and Z_m=Z_0 so both sides equal one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement uses canonical preparation at stage 0 and the terminal partition sum Z_m at stage m."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the forward path law of [[def-td-driven-finite-path-model]], under [[post-td-canonical-protocol-preparation]] and [[post-td-stationary-bath-kernel]], the finite expectation satisfies $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0=e^{-\\beta\\Delta F}$. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: pthm-td-finite-jarzynski.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For the forward path law of [[def-td-driven-finite-path-model]], under [[post-td-canonical-protocol-preparation]] and [[post-td-stationary-bath-kernel]], the finite expectation satisfies $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0=e^{-\\beta\\Delta F}$. This is an ensemble identity; it does not say $W=\\Delta F$ on each path.",
+            "current_raw_sha256": "2802cceded134d05fdf217b814f4851da670388f824404c92bf0f26669aa516d",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the forward path law of [[def-td-driven-finite-path-model]], under [[post-td-canonical-protocol-preparation]] and [[post-td-stationary-bath-kernel]], the finite expectation satisfies $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0=e^{-\\beta\\Delta F}$. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For the forward path law of [[def-td-driven-finite-path-model]], under [[post-td-canonical-protocol-preparation]] and [[post-td-stationary-bath-kernel]], the finite expectation satisfies $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0=e^{-\\beta\\Delta F}$. This is an ensemble identity; it does not say $W=\\Delta F$ on each path.",
+            "current_raw_sha256": "2802cceded134d05fdf217b814f4851da670388f824404c92bf0f26669aa516d",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the forward path law of [[def-td-driven-finite-path-model]], under [[post-td-canonical-protocol-preparation]] and [[post-td-stationary-bath-kernel]], the finite expectation satisfies $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0=e^{-\\beta\\Delta F}$. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For the forward path law of [[def-td-driven-finite-path-model]], under [[post-td-canonical-protocol-preparation]] and [[post-td-stationary-bath-kernel]], the finite expectation satisfies $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0=e^{-\\beta\\Delta F}$. This is an ensemble identity; it does not say $W=\\Delta F$ on each path.",
+            "current_raw_sha256": "2802cceded134d05fdf217b814f4851da670388f824404c92bf0f26669aa516d",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked base S0=pi0 and finite stage recurrence at k=1,...,m. Boltzmann quench factor converts (Z_(k-1)/Z0)pi_(k-1) into (Zk/Z0)pi_k before stationarity; summing terminal pi_m yields Zm/Z0. Positive finite Z and beta>0 justify divisions/log. Singleton, unchanged-energy and zero-entry kernels remain covered; stationarity, not mixing/reversibility, is used. Only finite canonical-sampling branch is imported; no individual-path bound or empirical certainty asserted."
+      }
+    },
+    "pthm-td-finite-crooks": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-driven-finite-path-model",
+          "source_section": "Definition",
+          "quote": "Take $\\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. For the physical internal-energy interpretation, use one declared fixed Galilean chart for every stage, with the bulk center-of-mass and separately tracked external-energy sectors suppressed from this finite protocol. The companion mechanical model supplies the center-of-mass data required by the microstate supplier; when the common chart is called a center-of-mass rest chart throughout the protocol, its center-of-mass velocity is constant over the modeled interval, and one constant boost selects that chart. This fixed-chart idealization does not infer a rest chart from the finite set or transition kernels, and does not describe an accelerating bulk body. Fix an integer $m\\ge1$ and stage energy functions $E_k:\\Omega\\to\\mathbb R\\,\\mathrm J$ for $k=0,\\ldots,m$, with the energy offsets fixed by the declared protocol model. Fix inverse temperature $\\beta>0$ in joules$^{-1}$. The finite partition sum and canonical probability vector at stage $k$ are $Z_k=\\sum_{i\\in\\Omega}e^{-\\beta E_k(i)}$ and $\\pi_k(i)=e^{-\\beta E_k(i)}/Z_k$. Since $\\Omega$ is nonempty and finite and each energy is finite, $0<Z_k<\\infty$ and $\\pi_k$ is a strictly positive probability vector.\n\nA transition kernel at stage $k$ is a matrix $K_k(i,j)\\ge0$ with $\\sum_{j\\in\\Omega}K_k(i,j)=1$. The general class permits every such row-stochastic kernel; normalization alone imposes no thermal consistency. For the subclass interpreted as transitions due only to one equilibrium reservoir at inverse temperature $\\beta$, adopt the discrete detailed-balance condition $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Since $\\pi_k$ is strictly positive, $K_k(i,j)>0$ if and only if $K_k(j,i)>0$; on positive pairs this gives $K_k(i,j)/K_k(j,i)=e^{-\\beta(E_k(j)-E_k(i))}$. In this physical subclass, also adopt that the fixed-stage energy change is entirely reservoir heat, with no untracked work, particle exchange, or intrinsic state-entropy contribution. These are model assumptions, not a deduction that an apparatus realizes this reservoir. Arbitrary row-stochastic kernels remain admissible for the formal path formulas; any other physical transfer interpretation requires a separately specified model. In the forward stage order, the energy changes instantaneously from $E_{k-1}$ to $E_k$ while the state is still $i_{k-1}$; the subsequent transition samples $i_k$ using $K_k(i_{k-1},i_k)$ at fixed energy $E_k$. A path is $\\omega=(i_0,\\ldots,i_m)\\in\\Omega^{m+1}$. The initial law is a probability vector $\\mu_0:\\Omega\\to[0,1]$ with $\\sum_{i\\in\\Omega}\\mu_0(i)=1$. Its path probability is $P_F(\\omega)=\\mu_0(i_0)\\prod_{k=1}^mK_k(i_{k-1},i_k)$; summing over all paths gives $1$ by the normalization of $\\mu_0$ and the row sums of the kernels.\n\nThe quench-work sign is positive when the quench raises the energy. The fixed-stage energy increment $Q_{\\mathrm{in}}$ is positive when the subsequent transition raises the energy; it is interpreted as heat into the system under the single-reservoir subclass assumptions just stated. On the general formal class it denotes only this energy increment. Define $W(\\omega)=\\sum_{k=1}^m[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$ and $Q_{\\mathrm{in}}(\\omega)=\\sum_{k=1}^m[E_k(i_k)-E_k(i_{k-1})]$, both in joules. Define $F_k=-\\beta^{-1}\\log Z_k$ and $\\Delta F=F_m-F_0=-\\beta^{-1}\\log(Z_m/Z_0)$. These are finite-model quantities; their physical interpretation is conditional on the adopted preparation and transition assumptions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-td-detailed-balance-rate-model",
+          "source_section": "Definition",
+          "quote": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-td-canonical-protocol-preparation",
+          "source_section": "Postulate",
+          "quote": "For a protocol of [[def-td-driven-finite-path-model]], fix a bath temperature $T_b>0$ kelvin and set $\\beta=(k_{\\mathrm B}T_b)^{-1}$ in joules$^{-1}$, using the exact constant and SI conventions of [[def-td-si-quantities]]. The finite-state clause of the adopted [[post-td-canonical-sampling]] then gives the stage-zero law $\\pi_0(i)=e^{-\\beta E_0(i)}/Z_0$; adopt that the initial microstate is drawn from this law, so $\\mu_0=\\pi_0$. Here $\\Omega$ is finite and nonempty and $E_0(i)$ is finite, so $0<Z_0<\\infty$ as required by that clause. This is a model premise about the preparation distribution. It does not follow from the finite partition-sum definition, does not assert that an arbitrary system equilibrates in finite time, and does not report a measured preparation. The countable-state and measure-integral branches of [[post-td-canonical-sampling]] are not used.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-td-stationary-bath-kernel",
+          "source_section": "Postulate",
+          "quote": "For the protocol in [[def-td-driven-finite-path-model]], adopt, at each stage $k=1,\\ldots,m$, the stationarity condition $\\sum_{i\\in\\Omega}\\pi_k(i)K_k(i,j)=\\pi_k(j)$ for every $j\\in\\Omega$. This says that if the bath transition begins with law $\\pi_k$ at fixed energy $E_k$, it ends with the same law. It is a physical modeling assumption for this protocol family, not a consequence of the transition-kernel definition and not an assertion that the kernel mixes every initial law to $\\pi_k$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-td-finite-pathwise-first-law",
+          "source_section": "Statement",
+          "quote": "For every path $\\omega=(i_0,\\ldots,i_m)$ of [[def-td-driven-finite-path-model]], the endpoint energy change is $E_m(i_m)-E_0(i_0)=W(\\omega)+Q_{\\mathrm{in}}(\\omega)$, with the stated sign convention.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the reverse path law by starting with $\\pi_m(i_m)$ and, in reverse order, using $K_k(i_k,i_{k-1})$ at fixed energy $E_k$ before undoing that quench. By detailed balance, if $K_k(i_{k-1},i_k)>0$ then $K_k(i_k,i_{k-1})>0$, because $\\pi_k$ is strictly positive. Thus positive forward paths pair with positive reverse paths.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a paired path, divide the endpoint Gibbs weights and use detailed balance for each transition: $P_F(\\omega)/P_R(\\omega^R)=[\\pi_0(i_0)/\\pi_m(i_m)]\\prod_{k=1}^m[\\pi_k(i_k)/\\pi_k(i_{k-1})]$. Substituting $\\pi_k(i)=e^{-\\beta E_k(i)}/Z_k$ and collecting terms gives $\\log(P_F/P_R)=\\beta[E_m(i_m)-E_0(i_0)-Q_{\\mathrm{in}}]+\\log(Z_m/Z_0)=\\beta(W-\\Delta F)$ by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The reversed quench at stage $k$ occurs at state $i_{k-1}$, so its work term is $E_{k-1}(i_{k-1})-E_k(i_{k-1})=-[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$; summing proves $W_R(\\omega^R)=-W(\\omega)$. Summing the path ratio over the finite set of paths with $W=w$ proves the stated distribution identity.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement inherits a finite nonempty state set and positive canonical endpoint laws."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 pairs zero forward and reverse transition support by strict positivity and detailed balance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits one stage or one microstate; the forward and reverse path laws then pair directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement includes equal stage energies E_k=E_0, giving zero work and ΔF=0; the path ratio remains one on paired paths."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement explicitly compares the forward π_0 preparation with the reverse π_m preparation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Assume the setup of [[def-td-driven-finite-path-model]], the canonical initial law of [[post-td-canonical-protocol-preparation]], the stationarity model of [[post-td-stationary-bath-kernel]], and, additionally, $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: pthm-td-finite-crooks.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the setup of [[def-td-driven-finite-path-model]], the canonical initial law of [[post-td-canonical-protocol-preparation]], the stationarity model of [[post-td-stationary-bath-kernel]], and, additionally, $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. For every forward path with positive probability, define its reverse probability by $P_R(\\omega^R)=\\pi_m(i_m)\\prod_{k=1}^mK_k(i_k,i_{k-1})$. Then $P_R(\\omega^R)>0$ and $P_F(\\omega)/P_R(\\omega^R)=e^{\\beta(W(\\omega)-\\Delta F)}$. Consequently, at each work value $w$, $P_F(W=w)=e^{\\beta(w-\\Delta F)}P_R(W_R=-w)$. The reverse protocol first applies the stage-$k$ reverse transition at fixed $E_k$, then reverses the quench $E_k\\to E_{k-1}$; its work is $W_R(\\omega^R)=-W(\\omega)$.",
+            "current_raw_sha256": "db84058c07c9c10fe0593e63b1727ca6fb6638aab05d46efdff09a1c31d807b5",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Assume the setup of [[def-td-driven-finite-path-model]], the canonical initial law of [[post-td-canonical-protocol-preparation]], the stationarity model of [[post-td-stationary-bath-kernel]], and, additionally, $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the setup of [[def-td-driven-finite-path-model]], the canonical initial law of [[post-td-canonical-protocol-preparation]], the stationarity model of [[post-td-stationary-bath-kernel]], and, additionally, $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. For every forward path with positive probability, define its reverse probability by $P_R(\\omega^R)=\\pi_m(i_m)\\prod_{k=1}^mK_k(i_k,i_{k-1})$. Then $P_R(\\omega^R)>0$ and $P_F(\\omega)/P_R(\\omega^R)=e^{\\beta(W(\\omega)-\\Delta F)}$. Consequently, at each work value $w$, $P_F(W=w)=e^{\\beta(w-\\Delta F)}P_R(W_R=-w)$. The reverse protocol first applies the stage-$k$ reverse transition at fixed $E_k$, then reverses the quench $E_k\\to E_{k-1}$; its work is $W_R(\\omega^R)=-W(\\omega)$.",
+            "current_raw_sha256": "db84058c07c9c10fe0593e63b1727ca6fb6638aab05d46efdff09a1c31d807b5",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Assume the setup of [[def-td-driven-finite-path-model]], the canonical initial law of [[post-td-canonical-protocol-preparation]], the stationarity model of [[post-td-stationary-bath-kernel]], and, additionally, $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the setup of [[def-td-driven-finite-path-model]], the canonical initial law of [[post-td-canonical-protocol-preparation]], the stationarity model of [[post-td-stationary-bath-kernel]], and, additionally, $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. For every forward path with positive probability, define its reverse probability by $P_R(\\omega^R)=\\pi_m(i_m)\\prod_{k=1}^mK_k(i_k,i_{k-1})$. Then $P_R(\\omega^R)>0$ and $P_F(\\omega)/P_R(\\omega^R)=e^{\\beta(W(\\omega)-\\Delta F)}$. Consequently, at each work value $w$, $P_F(W=w)=e^{\\beta(w-\\Delta F)}P_R(W_R=-w)$. The reverse protocol first applies the stage-$k$ reverse transition at fixed $E_k$, then reverses the quench $E_k\\to E_{k-1}$; its work is $W_R(\\omega^R)=-W(\\omega)$.",
+            "current_raw_sha256": "db84058c07c9c10fe0593e63b1727ca6fb6638aab05d46efdff09a1c31d807b5",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked reverse product defines a normalized law by row-stochastic kernels in reverse stage order. Positive canonical weights and detailed balance pair supports in both directions, including zero transitions; hence zero forward paths also have zero reversed mass. Endpoint Gibbs ratio and kernel ratios telescope with heat-in sign to beta(W-Delta F). Reverse transition precedes quench at i_(k-1), so reversed work is -W. Finite summation proves identity for all real w, including unattained values where both masses vanish. No convergence, AC or empirical input is used. Clarified kernel definition is used exactly as specified."
+      }
+    },
+    "pthm-td-ornstein-uhlenbeck-thermal-fluctuations": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-td-linear-ornstein-uhlenbeck-bath",
+          "source_section": "Postulate",
+          "quote": "Choose a Galilean inertial chart $\\mathcal F$ as defined in [[def-td-galilean-rest-frame]] for the specified fixed closed trap-and-bath body, assumed to have positive total mass and the center-of-mass map required there, and supply its componentwise differentiable center-of-mass trajectory on the whole modeled time interval. Assume that its center-of-mass velocity is one constant vector on that interval, so the single constant boost of that supplier selects $\\mathcal F$ with zero center-of-mass velocity throughout. Take $\\mathcal F$ to be this common rest chart. The trap-and-bath background is held fixed in this idealization; center-of-mass recoil or accelerating-frame dynamics are not part of the scalar process. In this chart let $\\mathbf r_c\\in\\mathbb R^3$ be the fixed trap-center position and let $\\mathbf e\\in\\mathbb R^3$ be a fixed unit vector along the modeled trap axis. For a particle position $\\mathbf r\\in\\mathbb R^3$, define the signed displacement $x=\\langle\\mathbf r-\\mathbf r_c,\\mathbf e\\rangle$ in metres; the process $X_t$ in [[def-tdmath-ornstein-uhlenbeck-equation]] is this coordinate of the particle position at time $t$. Thus $U(x)=kx^2/2$ is the harmonic potential relative to the trap center, not an absolute spatial coordinate. Using the SI conventions and exact $k_{\\mathrm B}$ of [[def-td-si-quantities]], take stiffness $k>0$ in joules per square metre, constant mobility $\\mu>0$ in square metres per joule-second, and bath temperature $T_b>0$ kelvin. Adopt the one-dimensional overdamped model $dX_t=-\\gamma X_t\\,dt+\\sigma\\,dB_t$, interpreted through the integral equation of [[def-tdmath-ornstein-uhlenbeck-equation]], with $\\gamma=\\mu k$ in seconds$^{-1}$ and $\\sigma^2=2\\mu k_{\\mathrm B}T_b$ in square metres per second. Here $B$ is standard Brownian motion with its stated filtration and increment hypotheses, and the bath noise is independent of the initial preparation. This Einstein noise relation and the linear Markov model are physical assumptions. They do not follow from equilibrium thermodynamics alone and do not report a measured spectrum or calibration.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-tdmath-ornstein-uhlenbeck-model",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Assume the filtered probability space, Brownian increment hypothesis, and initial data of [[def-tdmath-ornstein-uhlenbeck-equation]], including $\\mathbb E X_0^2<\\infty$ and future increments independent of $\\mathcal F_0$. For $\\gamma,\\sigma>0$, on every finite time interval the process\n$$X_t=e^{-\\gamma t}X_0+\\sigma e^{-\\gamma t}\\int_0^t e^{\\gamma s}\\,dB_s$$\nhas a continuous adapted version, solves the stated Ornstein–Uhlenbeck integral equation, and is the unique continuous solution driven by the same $(X_0,B)$. Put $V=\\sigma^2/(2\\gamma)$. For $0\\le s<t$, its transition law conditional on $\\mathcal F_s$ is normal with mean $e^{-\\gamma(t-s)}X_s$ and variance $V(1-e^{-2\\gamma(t-s)})$. Consequently\n$$\\mathbb E X_t=e^{-\\gamma t}\\mathbb E X_0,\\qquad\\operatorname{Var}(X_t)=e^{-2\\gamma t}\\operatorname{Var}(X_0)+V(1-e^{-2\\gamma t}).$$\nFrom any such initial law, $X_t$ converges in distribution to $N(0,V)$. If $X_0\\sim N(0,V)$ and is independent of future Brownian increments, the process is stationary Gaussian with covariance $C(\\tau)=Ve^{-\\gamma|\\tau|}$, and its transition kernel satisfies detailed balance with the $N(0,V)$ density. Its transition density solves the Fokker–Planck equation for positive time. Under the convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$, the stationary spectrum and time-average bound are\n$$S(\\omega)=\\frac{V\\gamma}{\\pi(\\gamma^2+\\omega^2)},\\qquad\\operatorname{Var}\\!\\left(\\frac1T\\int_0^T X_t\\,dt\\right)\\le\\frac{2V}{\\gamma T}.$$\nAll these statements concern the specified linear stochastic model. An Einstein relation between $\\sigma$ and a physical bath temperature would be an additional physical postulate.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tdmath-ornstein-uhlenbeck-equation",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge0},P)$ carry a standard Brownian motion $B$ adapted to the filtration, with future increments independent of the present sigma-algebra. Fix constants $\\gamma>0$ and $\\sigma>0$, and an $\\mathcal F_0$-measurable real random variable $X_0$ with finite second moment. A **continuous adapted solution of the Ornstein–Uhlenbeck equation** on $[0,T]$ is a continuous adapted process $X$ satisfying, almost surely for every $t\\in[0,T]$,\n$$X_t=X_0-\\gamma\\int_0^tX_s\\,ds+\\sigma B_t,$$\nwhere the time integral is the ordinary Lebesgue integral along the continuous path. In differential notation this is $dX_t=-\\gamma X_t\\,dt+\\sigma\\,dB_t$, with the stochastic differential interpreted through the displayed integral equation.\n\nThe definition asserts neither existence nor uniqueness. The Itô integral in the explicit representation is the square-integrable predictable-process integral of [[def-ito-integral-for-square-integrable-predictable-processes]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The physical postulate gives $V=\\sigma^2/(2\\gamma)=(2\\mu k_{\\mathrm B}T_b)/(2\\mu k)=k_{\\mathrm B}T_b/k$. This has units of square metres because $k_{\\mathrm B}T_b$ is joules and $k$ is joules per square metre.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inspected mathematical supplier's stationary clause applies with this $V$ and $\\gamma=\\mu k$, so $C(\\tau)=Ve^{-\\mu k|\\tau|}$ and $S(\\omega)=V\\mu k/[\\pi((\\mu k)^2+\\omega^2)]=\\mu k_{\\mathrm B}T_b/[\\pi((\\mu k)^2+\\omega^2)]$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The same supplier's time-average bound becomes $2V/(\\gamma T)=2k_{\\mathrm B}T_b/(\\mu k^2T)$. All three formulas are conditional deductions of the adopted model; no apparatus, observed value, or measured uncertainty is asserted.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item has no empty-object boundary beyond the stated nonempty or normalized model inputs; no empty-model extension is claimed. Item: pthm-td-ornstein-uhlenbeck-thermal-fluctuations.",
+          "reviewed": {
+            "upheld": true,
+            "by": "same TD scientific owner; actual native battery 1f350534 round1",
+            "reason": "The word family occurs in the expressly assumed Axiom of Choice, every family of nonempty sets has a choice function. It does not parameterize an optional family of baths or processes. The Statement fixes one stationary scalar Gaussian preparation, with positive mu,k,T_b and averaging time T>0; no empty aggregate assertion is made."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Under [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Boundary zero: This item does not assert a zero-valued limit beyond its stated hypotheses; that boundary is outside its scoped claim. Item: pthm-td-ornstein-uhlenbeck-thermal-fluctuations.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUnder [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Then the conditional linear model has stationary covariance $C(\\tau)=Ve^{-\\mu k|\\tau|}$. With angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$, its spectrum is $S(\\omega)=\\mu k_{\\mathrm B}T_b/(\\pi[(\\mu k)^2+\\omega^2])$. For every averaging time $T>0$, $\\operatorname{Var}(T^{-1}\\int_0^T X_t\\,dt)\\le 2k_{\\mathrm B}T_b/(\\mu k^2T)$. These are model predictions, not reported observations.",
+            "current_raw_sha256": "0bec25168f15be077a4a3412adab04c620d13147ef144e226c444dceed8797b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Under [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Boundary one: This item is about a scalar continuous process or the explicitly fixed multistate example; no one-state or one-stage extension is claimed. Item: pthm-td-ornstein-uhlenbeck-thermal-fluctuations.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUnder [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Then the conditional linear model has stationary covariance $C(\\tau)=Ve^{-\\mu k|\\tau|}$. With angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$, its spectrum is $S(\\omega)=\\mu k_{\\mathrm B}T_b/(\\pi[(\\mu k)^2+\\omega^2])$. For every averaging time $T>0$, $\\operatorname{Var}(T^{-1}\\int_0^T X_t\\,dt)\\le 2k_{\\mathrm B}T_b/(\\mu k^2T)$. These are model predictions, not reported observations.",
+            "current_raw_sha256": "0bec25168f15be077a4a3412adab04c620d13147ef144e226c444dceed8797b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Under [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Boundary degenerate: No additional equal-energy, stationary, or deterministic degeneration is claimed beyond the exact case stated in this item. Item: pthm-td-ornstein-uhlenbeck-thermal-fluctuations.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUnder [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Then the conditional linear model has stationary covariance $C(\\tau)=Ve^{-\\mu k|\\tau|}$. With angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$, its spectrum is $S(\\omega)=\\mu k_{\\mathrm B}T_b/(\\pi[(\\mu k)^2+\\omega^2])$. For every averaging time $T>0$, $\\operatorname{Var}(T^{-1}\\int_0^T X_t\\,dt)\\le 2k_{\\mathrm B}T_b/(\\mu k^2T)$. These are model predictions, not reported observations.",
+            "current_raw_sha256": "0bec25168f15be077a4a3412adab04c620d13147ef144e226c444dceed8797b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement fixes the stationary Gaussian initial law and gives the variance bound for every averaging time T>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Example and Given explicitly assume AC and declare it as a mathematical prerequisite. Steps 2.1–3.1 inherit AC through the OU Gaussian, Itô construction/isometry and continuous-version interfaces; no new choice is made in parameter substitution."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Under [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUnder [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Then the conditional linear model has stationary covariance $C(\\tau)=Ve^{-\\mu k|\\tau|}$. With angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$, its spectrum is $S(\\omega)=\\mu k_{\\mathrm B}T_b/(\\pi[(\\mu k)^2+\\omega^2])$. For every averaging time $T>0$, $\\operatorname{Var}(T^{-1}\\int_0^T X_t\\,dt)\\le 2k_{\\mathrm B}T_b/(\\mu k^2T)$. These are model predictions, not reported observations.",
+            "current_raw_sha256": "0bec25168f15be077a4a3412adab04c620d13147ef144e226c444dceed8797b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Under [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUnder [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Then the conditional linear model has stationary covariance $C(\\tau)=Ve^{-\\mu k|\\tau|}$. With angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$, its spectrum is $S(\\omega)=\\mu k_{\\mathrm B}T_b/(\\pi[(\\mu k)^2+\\omega^2])$. For every averaging time $T>0$, $\\operatorname{Var}(T^{-1}\\int_0^T X_t\\,dt)\\le 2k_{\\mathrm B}T_b/(\\mu k^2T)$. These are model predictions, not reported observations.",
+            "current_raw_sha256": "0bec25168f15be077a4a3412adab04c620d13147ef144e226c444dceed8797b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "same TD scientific owner; existing released supplier/consumer review",
+        "notes": "Current OU producer native Fourier repair supplies entire derivative, Euler modulus and finite-R FTC followed by absolute convergence; the original owner separately added its explicit inherited AC premise. The completed OU producer/physical consumer review confirms the stated positive-parameter substitution, stationary independent Gaussian preparation, fixed rest chart, spectrum and finite-T bound. Physical adoption remains conditional and no observation is asserted.",
+        "historical_prior_review": {
+          "status": "open",
+          "reviewer": "alpha-batch-19",
+          "notes": "All local substitutions checked: positive mu,k,T_b give gamma=mu*k, sigma^2=2mu*k_B*T_b, V=k_B*T_b/k; spectrum has m^2*s units and variance bound m^2. Stationary independent Gaussian preparation and finite T>0 are carried. AC omission repaired locally. Current producer batch 12 still omits Fourier derivative/modulus premises and explicit inherited AC. Its step 4.1 cannot presently supply the spectrum; reader:19:1 and refuter:19:1–2 escalated. This risk remains open pending owner resolution and independent current producer review."
+        }
+      },
+      "assumptions": [
+        "Axiom of Choice: inherited Brownian and Itô/Gaussian suppliers."
+      ]
+    },
+    "pthm-td-qualified-landauer-reset": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-finite-memory-reset-model",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a finite memory-state set and $R$ a finite retained-register set. A joint preparation is a probability law $p(m,r)\\ge0$ with $\\sum_{m,r}p(m,r)=1$. Write $a_r=\\sum_m p(m,r)$ and, for $a_r>0$, $q(m|r)=p(m,r)/a_r$. Use the finite Shannon entropy in nats and the conditional entropy $H(M|R)$ exactly as defined by [[lem-tdmath-conditional-memory-entropy]]. For a fixed target memory state $m_0$, a reset is the endpoint map $p'(m,r)=\\mathbf 1_{\\{m=m_0\\}}a_r$: it places the memory at $m_0$ while leaving the register marginal unchanged. The definition alone assigns no physical entropy, work cost, heat transfer, or implementation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tdmath-conditional-memory-entropy",
+          "source_section": "Statement",
+          "quote": "Let $M$ and $R$ take values in finite sets under a joint probability law $p(m,r)\\ge0$ with $\\sum_{m,r}p(m,r)=1$. For any finite random variable $Y$ with law $p_Y$, define its Shannon entropy by $H(Y):=-\\sum_{y:p_Y(y)>0}p_Y(y)\\log p_Y(y)$; for a pair, $H(M,R)$ means this definition applied to its joint law. Put $a_r:=\\sum_m p(m,r)$ and, when $a_r>0$, $q(m|r):=p(m,r)/a_r$. Thus $H(R)=-\\sum_{r:a_r>0}a_r\\log a_r$. Define $H(M|R):=\\sum_{r:a_r>0}a_r[-\\sum_{m:q(m|r)>0}q(m|r)\\log q(m|r)]$. Then $H(M,R)=H(R)+H(M|R)$ and $H(M|R)\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Initially the memory-register entropy is $k_{\\mathrm B}[H(R)+H(M|R)]$ by [F2] and [A1]. After reset, the memory is deterministic conditional on each register value, so $H(M'|R)=0$; applying the same finite entropy chain rule gives final entropy $k_{\\mathrm B}H(R)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $\\Delta S_{\\mathrm{memory+register}}=-k_{\\mathrm B}H(M|R)$. Substitution into [A4] gives $Q_b\\ge k_{\\mathrm B}T_bH(M|R)$ because $T_b>0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the adopted endpoint first-law convention [A3], $W=Q_b$, so $W\\ge k_{\\mathrm B}T_bH(M|R)$. The conclusion is conditional on [A1]--[A4]; the entropy bound alone does not assert that the reset can be implemented reversibly or that every bit erasure costs $k_{\\mathrm B}T_b\\log2$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes a normalized finite joint memory-register law, so an empty support cannot occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows H(M|R)=0; the resulting conclusion is W≥0 under the same physical assumptions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows a singleton memory or register; the conditional entropy contribution is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement includes the case where the memory is already at m_0 conditional on R; the reset map is unchanged and the bound reduces to W≥0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement identifies entropy, energy, heat, and work at both reset endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For the reset model of [[def-td-finite-memory-reset-model]], assume (i) the memory-register thermodynamic entropy is $k_{\\mathrm B}H(M,R)$ at both endpoints, (ii) a single ideal reservoir remains at fixed $T_b>0$ kelvin and receives heat $Q_b$, (iii) the memory-register endpoint energy is unchanged so the adopted first-law convention gives work on the system $W=Q_b$, and (iv) the total entropy change obeys $\\Delta S_{\\mathrm{memory+register}}+Q_b/T_b\\ge0$. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: pthm-td-qualified-landauer-reset.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For the reset model of [[def-td-finite-memory-reset-model]], assume (i) the memory-register thermodynamic entropy is $k_{\\mathrm B}H(M,R)$ at both endpoints, (ii) a single ideal reservoir remains at fixed $T_b>0$ kelvin and receives heat $Q_b$, (iii) the memory-register endpoint energy is unchanged so the adopted first-law convention gives work on the system $W=Q_b$, and (iv) the total entropy change obeys $\\Delta S_{\\mathrm{memory+register}}+Q_b/T_b\\ge0$. Then $W\\ge k_{\\mathrm B}T_bH(M|R)$. Equality is not asserted without a separately specified reversible implementation.",
+            "current_raw_sha256": "e5821f05d0fc2c76e7a38a4be77a12a7639dba1d9fba0562094a82b02bae4334",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the reset model of [[def-td-finite-memory-reset-model]], assume (i) the memory-register thermodynamic entropy is $k_{\\mathrm B}H(M,R)$ at both endpoints, (ii) a single ideal reservoir remains at fixed $T_b>0$ kelvin and receives heat $Q_b$, (iii) the memory-register endpoint energy is unchanged so the adopted first-law convention gives work on the system $W=Q_b$, and (iv) the total entropy change obeys $\\Delta S_{\\mathrm{memory+register}}+Q_b/T_b\\ge0$. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For the reset model of [[def-td-finite-memory-reset-model]], assume (i) the memory-register thermodynamic entropy is $k_{\\mathrm B}H(M,R)$ at both endpoints, (ii) a single ideal reservoir remains at fixed $T_b>0$ kelvin and receives heat $Q_b$, (iii) the memory-register endpoint energy is unchanged so the adopted first-law convention gives work on the system $W=Q_b$, and (iv) the total entropy change obeys $\\Delta S_{\\mathrm{memory+register}}+Q_b/T_b\\ge0$. Then $W\\ge k_{\\mathrm B}T_bH(M|R)$. Equality is not asserted without a separately specified reversible implementation.",
+            "current_raw_sha256": "e5821f05d0fc2c76e7a38a4be77a12a7639dba1d9fba0562094a82b02bae4334",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the reset model of [[def-td-finite-memory-reset-model]], assume (i) the memory-register thermodynamic entropy is $k_{\\mathrm B}H(M,R)$ at both endpoints, (ii) a single ideal reservoir remains at fixed $T_b>0$ kelvin and receives heat $Q_b$, (iii) the memory-register endpoint energy is unchanged so the adopted first-law convention gives work on the system $W=Q_b$, and (iv) the total entropy change obeys $\\Delta S_{\\mathrm{memory+register}}+Q_b/T_b\\ge0$. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "For the reset model of [[def-td-finite-memory-reset-model]], assume (i) the memory-register thermodynamic entropy is $k_{\\mathrm B}H(M,R)$ at both endpoints, (ii) a single ideal reservoir remains at fixed $T_b>0$ kelvin and receives heat $Q_b$, (iii) the memory-register endpoint energy is unchanged so the adopted first-law convention gives work on the system $W=Q_b$, and (iv) the total entropy change obeys $\\Delta S_{\\mathrm{memory+register}}+Q_b/T_b\\ge0$. Then $W\\ge k_{\\mathrm B}T_bH(M|R)$. Equality is not asserted without a separately specified reversible implementation.",
+            "current_raw_sha256": "e5821f05d0fc2c76e7a38a4be77a12a7639dba1d9fba0562094a82b02bae4334",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-author",
+        "notes": "The bound is conditional on the finite entropy identification, ideal bath, unchanged endpoint energy, and total-entropy premise; equality and a universal per-bit bound are not asserted."
+      }
+    },
+    "pthm-td-mean-dissipation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-td-finite-jarzynski",
+          "source_section": "Statement",
+          "quote": "For the forward path law of [[def-td-driven-finite-path-model]], under [[post-td-canonical-protocol-preparation]] and [[post-td-stationary-bath-kernel]], the finite expectation satisfies $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0=e^{-\\beta\\Delta F}$. This is an ensemble identity; it does not say $W=\\Delta F$ on each path.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-two-point-convexity",
+          "source_section": "Statement",
+          "quote": "For all $x,y\\in\\mathbb R$ and $0\\le t\\le1$,\n$$\\exp((1-t)x+ty)\\le(1-t)\\exp x+t\\exp y.$$\nIf $0<t<1$, equality holds exactly when $x=y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-jensen-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:I\\to\\mathbb R$ be convex. If $N\\ge1$, $x_1,\\ldots,x_N\\in I$, and $\\lambda_1,\\ldots,\\lambda_N\\ge0$ satisfy $\\sum_{i=1}^N\\lambda_i=1$, then\n\n$$f\\left(\\sum_{i=1}^N\\lambda_i x_i\\right)\\le\\sum_{i=1}^N\\lambda_i f(x_i).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply finite Jensen to the finitely many forward paths with $x_\\omega=-\\beta W(\\omega)$ and weights $P_F(\\omega)$. Then $e^{-\\beta\\mathbb E_F W}\\le\\mathbb E_F e^{-\\beta W}=e^{-\\beta\\Delta F}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Strict increase of the exponential yields $-\\beta\\mathbb E_F W\\le-\\beta\\Delta F$. Since $\\beta>0$, multiplying by $-1/\\beta$ reverses the order and gives $\\mathbb E_F W\\ge\\Delta F$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes a normalized finite forward path law, which requires at least one admissible path."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and Jensen allow zero work values; no division by work is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies finite Jensen to a one-point path distribution, where equality holds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement includes equal stage energies, giving W=ΔF=0 and equality in the claimed average bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement compares the initial and final protocol free energies through ΔF=F_m−F_0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Under the hypotheses of [[pthm-td-finite-jarzynski]], the mean work obeys $\\mathbb E_F W\\ge\\Delta F$. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: pthm-td-mean-dissipation.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Under the hypotheses of [[pthm-td-finite-jarzynski]], the mean work obeys $\\mathbb E_F W\\ge\\Delta F$. The conclusion concerns the path ensemble only; individual paths may have $W<\\Delta F$.",
+            "current_raw_sha256": "5c83ddc0d589a21a3cb1b0388fbcecc3777f9f92494c9b47ba82b1ddf5b16b3e",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Under the hypotheses of [[pthm-td-finite-jarzynski]], the mean work obeys $\\mathbb E_F W\\ge\\Delta F$. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Under the hypotheses of [[pthm-td-finite-jarzynski]], the mean work obeys $\\mathbb E_F W\\ge\\Delta F$. The conclusion concerns the path ensemble only; individual paths may have $W<\\Delta F$.",
+            "current_raw_sha256": "5c83ddc0d589a21a3cb1b0388fbcecc3777f9f92494c9b47ba82b1ddf5b16b3e",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Under the hypotheses of [[pthm-td-finite-jarzynski]], the mean work obeys $\\mathbb E_F W\\ge\\Delta F$. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Under the hypotheses of [[pthm-td-finite-jarzynski]], the mean work obeys $\\mathbb E_F W\\ge\\Delta F$. The conclusion concerns the path ensemble only; individual paths may have $W<\\Delta F$.",
+            "current_raw_sha256": "5c83ddc0d589a21a3cb1b0388fbcecc3777f9f92494c9b47ba82b1ddf5b16b3e",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-author",
+        "notes": "Finite Jensen and strict monotonicity are used with beta>0; the conclusion is an average, not a pathwise bound."
+      }
+    },
+    "ex-td-finite-quench-work-fluctuation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-driven-finite-path-model",
+          "source_section": "Definition",
+          "quote": "Take $\\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. For the physical internal-energy interpretation, use one declared fixed Galilean chart for every stage, with the bulk center-of-mass and separately tracked external-energy sectors suppressed from this finite protocol. The companion mechanical model supplies the center-of-mass data required by the microstate supplier; when the common chart is called a center-of-mass rest chart throughout the protocol, its center-of-mass velocity is constant over the modeled interval, and one constant boost selects that chart. This fixed-chart idealization does not infer a rest chart from the finite set or transition kernels, and does not describe an accelerating bulk body. Fix an integer $m\\ge1$ and stage energy functions $E_k:\\Omega\\to\\mathbb R\\,\\mathrm J$ for $k=0,\\ldots,m$, with the energy offsets fixed by the declared protocol model. Fix inverse temperature $\\beta>0$ in joules$^{-1}$. The finite partition sum and canonical probability vector at stage $k$ are $Z_k=\\sum_{i\\in\\Omega}e^{-\\beta E_k(i)}$ and $\\pi_k(i)=e^{-\\beta E_k(i)}/Z_k$. Since $\\Omega$ is nonempty and finite and each energy is finite, $0<Z_k<\\infty$ and $\\pi_k$ is a strictly positive probability vector.\n\nA transition kernel at stage $k$ is a matrix $K_k(i,j)\\ge0$ with $\\sum_{j\\in\\Omega}K_k(i,j)=1$. The general class permits every such row-stochastic kernel; normalization alone imposes no thermal consistency. For the subclass interpreted as transitions due only to one equilibrium reservoir at inverse temperature $\\beta$, adopt the discrete detailed-balance condition $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. Since $\\pi_k$ is strictly positive, $K_k(i,j)>0$ if and only if $K_k(j,i)>0$; on positive pairs this gives $K_k(i,j)/K_k(j,i)=e^{-\\beta(E_k(j)-E_k(i))}$. In this physical subclass, also adopt that the fixed-stage energy change is entirely reservoir heat, with no untracked work, particle exchange, or intrinsic state-entropy contribution. These are model assumptions, not a deduction that an apparatus realizes this reservoir. Arbitrary row-stochastic kernels remain admissible for the formal path formulas; any other physical transfer interpretation requires a separately specified model. In the forward stage order, the energy changes instantaneously from $E_{k-1}$ to $E_k$ while the state is still $i_{k-1}$; the subsequent transition samples $i_k$ using $K_k(i_{k-1},i_k)$ at fixed energy $E_k$. A path is $\\omega=(i_0,\\ldots,i_m)\\in\\Omega^{m+1}$. The initial law is a probability vector $\\mu_0:\\Omega\\to[0,1]$ with $\\sum_{i\\in\\Omega}\\mu_0(i)=1$. Its path probability is $P_F(\\omega)=\\mu_0(i_0)\\prod_{k=1}^mK_k(i_{k-1},i_k)$; summing over all paths gives $1$ by the normalization of $\\mu_0$ and the row sums of the kernels.\n\nThe quench-work sign is positive when the quench raises the energy. The fixed-stage energy increment $Q_{\\mathrm{in}}$ is positive when the subsequent transition raises the energy; it is interpreted as heat into the system under the single-reservoir subclass assumptions just stated. On the general formal class it denotes only this energy increment. Define $W(\\omega)=\\sum_{k=1}^m[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$ and $Q_{\\mathrm{in}}(\\omega)=\\sum_{k=1}^m[E_k(i_k)-E_k(i_{k-1})]$, both in joules. Define $F_k=-\\beta^{-1}\\log Z_k$ and $\\Delta F=F_m-F_0=-\\beta^{-1}\\log(Z_m/Z_0)$. These are finite-model quantities; their physical interpretation is conditional on the adopted preparation and transition assumptions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-td-canonical-protocol-preparation",
+          "source_section": "Postulate",
+          "quote": "For a protocol of [[def-td-driven-finite-path-model]], fix a bath temperature $T_b>0$ kelvin and set $\\beta=(k_{\\mathrm B}T_b)^{-1}$ in joules$^{-1}$, using the exact constant and SI conventions of [[def-td-si-quantities]]. The finite-state clause of the adopted [[post-td-canonical-sampling]] then gives the stage-zero law $\\pi_0(i)=e^{-\\beta E_0(i)}/Z_0$; adopt that the initial microstate is drawn from this law, so $\\mu_0=\\pi_0$. Here $\\Omega$ is finite and nonempty and $E_0(i)$ is finite, so $0<Z_0<\\infty$ as required by that clause. This is a model premise about the preparation distribution. It does not follow from the finite partition-sum definition, does not assert that an arbitrary system equilibrates in finite time, and does not report a measured preparation. The countable-state and measure-integral branches of [[post-td-canonical-sampling]] are not used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-td-finite-jarzynski",
+          "source_section": "Statement",
+          "quote": "For the forward path law of [[def-td-driven-finite-path-model]], under [[post-td-canonical-protocol-preparation]] and [[post-td-stationary-bath-kernel]], the finite expectation satisfies $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0=e^{-\\beta\\Delta F}$. This is an ensemble identity; it does not say $W=\\Delta F$ on each path.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The partition sums are $Z_0=2$ and $Z_1=1+e^{-\\beta\\epsilon}$, so $\\Delta F=-\\beta^{-1}\\log[(1+e^{-\\beta\\epsilon})/2]$. Since $e^{-\\beta\\epsilon}<1$, the ratio lies strictly between $e^{-\\beta\\epsilon}$ and $1$, hence $0<\\Delta F<\\epsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The identity kernel leaves the state unchanged, so the two work values are $0$ and $\\epsilon$, each with probability $1/2$. Therefore $\\mathbb P_F(W<\\Delta F)=1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Directly, $\\mathbb E_F e^{-\\beta W}=(1+e^{-\\beta\\epsilon})/2=e^{-\\beta\\Delta F}$, while the event in step 2.1 has positive probability. Thus the equality is an ensemble statement and does not impose $W\\ge\\Delta F$ on every path.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes a two-state nonempty system and a normalized initial law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 explicitly include the zero-work path."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Boundary one: This item is about a scalar continuous process or the explicitly fixed multistate example; no one-state or one-stage extension is claimed. Item: ex-td-finite-quench-work-fluctuation.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Prepare canonically at stage zero and use the identity transition kernel after the quench.",
+            "current_raw_sha256": "1db4c98b7a06239c77aa93dc6f572080166b48b7a10d530145c92d134ef174c3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Boundary degenerate: No additional equal-energy, stationary, or deterministic degeneration is claimed beyond the exact case stated in this item. Item: ex-td-finite-quench-work-fluctuation.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Prepare canonically at stage zero and use the identity transition kernel after the quench.",
+            "current_raw_sha256": "1db4c98b7a06239c77aa93dc6f572080166b48b7a10d530145c92d134ef174c3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes E_0 and E_1 and computes the final free-energy difference from both stages."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: ex-td-finite-quench-work-fluctuation.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Prepare canonically at stage zero and use the identity transition kernel after the quench.",
+            "current_raw_sha256": "1db4c98b7a06239c77aa93dc6f572080166b48b7a10d530145c92d134ef174c3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Prepare canonically at stage zero and use the identity transition kernel after the quench.",
+            "current_raw_sha256": "1db4c98b7a06239c77aa93dc6f572080166b48b7a10d530145c92d134ef174c3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Prepare canonically at stage zero and use the identity transition kernel after the quench.",
+            "current_raw_sha256": "1db4c98b7a06239c77aa93dc6f572080166b48b7a10d530145c92d134ef174c3",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Direct substitution of the stated finite probabilities, rates, or OU parameters into the linked A-page formulas.",
+          "result": "The displayed finite calculation is exact within its model; no empirical data are used."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked epsilon,beta>0 imply r=exp(-beta epsilon) in (0,1) and r<(1+r)/2<1, giving 0<Delta F<epsilon. Identity kernel is row stochastic and preserves pi1 without mixing. Canonical zero energies give probability 1/2 to each work value; exactly W=0 is below Delta F. Explicit exponential expectation matches the finite Jarzynski theorem. No synthetic value is presented as measured and no pathwise second-law claim follows."
+      }
+    },
+    "ex-td-disconnected-markov-relaxation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-detailed-balance-rate-model",
+          "source_section": "Definition",
+          "quote": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-td-markov-relative-entropy-and-convergence",
+          "source_section": "Statement",
+          "quote": "Let $S$ have $N\\ge2$ states, positive detailed-balance law $\\pi$, and connected undirected rate graph as in [[def-td-detailed-balance-rate-model]]. For every strictly positive initial probability vector $p(0)$, the master equation has a unique strictly positive probability solution $p(t)$ for all $t\\ge0$. The relative entropy $D(p(t)\\Vert\\pi)=\\sum_i p_i(t)\\log(p_i(t)/\\pi_i)$ is nonincreasing, and $p_i(t)\\to\\pi_i$ for every state. No monotonicity of Shannon entropy $-\\sum_i p_i\\log p_i$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The third probability is constant and $p_1+p_2=1/2$. The difference $d=p_1-p_2$ satisfies $\\dot d=-2d$ with $d(0)=1/4$, so $d(t)=e^{-2t}/4$, $p_1(t)=1/4+e^{-2t}/8$, and $p_2(t)=1/4-e^{-2t}/8$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Hence $p(t)\\to(1/4,1/4,1/2)\\ne\\pi$. The relative entropy tends to $\\frac12\\log(9/8)>0$, confirming that detailed balance without connectedness does not force convergence to the full reference law.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes the explicit three-state probability vector and nonempty rate graph."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the isolated state with zero incident rates and computes its constant probability."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Boundary one: This item is about a scalar continuous process or the explicitly fixed multistate example; no one-state or one-stage extension is claimed. Item: ex-td-disconnected-markov-relaxation.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Let $\\pi=(1/3,1/3,1/3)$ and $p(0)=(3/8,1/8,1/2)$.",
+            "current_raw_sha256": "0391f4f3f199623b9265802e2a254f4ef2ee1f623281fdf258baad5e63a248b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Boundary degenerate: No additional equal-energy, stationary, or deterministic degeneration is claimed beyond the exact case stated in this item. Item: ex-td-disconnected-markov-relaxation.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Let $\\pi=(1/3,1/3,1/3)$ and $p(0)=(3/8,1/8,1/2)$.",
+            "current_raw_sha256": "0391f4f3f199623b9265802e2a254f4ef2ee1f623281fdf258baad5e63a248b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example specifies p(0) and computes its t→∞ limiting distribution and relative entropy."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: ex-td-disconnected-markov-relaxation.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Let $\\pi=(1/3,1/3,1/3)$ and $p(0)=(3/8,1/8,1/2)$.",
+            "current_raw_sha256": "0391f4f3f199623b9265802e2a254f4ef2ee1f623281fdf258baad5e63a248b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Let $\\pi=(1/3,1/3,1/3)$ and $p(0)=(3/8,1/8,1/2)$.",
+            "current_raw_sha256": "0391f4f3f199623b9265802e2a254f4ef2ee1f623281fdf258baad5e63a248b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Let $\\pi=(1/3,1/3,1/3)$ and $p(0)=(3/8,1/8,1/2)$.",
+            "current_raw_sha256": "0391f4f3f199623b9265802e2a254f4ef2ee1f623281fdf258baad5e63a248b3",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Direct substitution of the stated finite probabilities, rates, or OU parameters into the linked A-page formulas.",
+          "result": "The displayed finite calculation is exact within its model; no empirical data are used."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked isolated state retains probability 1/2, edge difference decays exp(-2t)/4, both other components stay positive and total mass is one. Limit is (1/4,1/4,1/2), and Dlimit=1/2 log(9/8)>0. The example does not apply the connected convergence theorem to a disconnected graph; it displays its missing hypothesis. No empirical premise or AC is used."
+      }
+    },
+    "ex-td-biased-bath-shannon-entropy-decreases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-detailed-balance-rate-model",
+          "source_section": "Definition",
+          "quote": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition.\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-td-markov-relative-entropy-and-convergence",
+          "source_section": "Statement",
+          "quote": "Let $S$ have $N\\ge2$ states, positive detailed-balance law $\\pi$, and connected undirected rate graph as in [[def-td-detailed-balance-rate-model]]. For every strictly positive initial probability vector $p(0)$, the master equation has a unique strictly positive probability solution $p(t)$ for all $t\\ge0$. The relative entropy $D(p(t)\\Vert\\pi)=\\sum_i p_i(t)\\log(p_i(t)/\\pi_i)$ is nonincreasing, and $p_i(t)\\to\\pi_i$ for every state. No monotonicity of Shannon entropy $-\\sum_i p_i\\log p_i$ is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Solving $\\dot p_1=1-10p_1$ gives $p_1(t)=0.1+0.4e^{-10t}$, which lies in $(0.1,0.5)$ and strictly decreases for every $t>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<p<1/2$, $H'(p)=\\log((1-p)/p)>0$ by [F3]. Therefore $dH(p_1(t))/dt=H'(p_1(t))p_1'(t)<0$ for every $t>0$. The Shannon entropy decreases while detailed balance holds.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two-state rate graph is connected, both components of $p(0)$ and $\\pi$ are positive, and detailed balance holds. Thus [F2] applies to the relative entropy $D(p(t)\\Vert\\pi)$ at the same time that step 2.1 shows the Shannon entropy decreases.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "2.1",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement uses an explicit two-state law with positive components."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. Boundary zero: This item does not assert a zero-valued limit beyond its stated hypotheses; that boundary is outside its scoped claim. Item: ex-td-biased-bath-shannon-entropy-decreases.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. The positive detailed-balance law is $\\pi=(0.9,0.1)$, and take initial law $p_1(0)=1/2$.",
+            "current_raw_sha256": "3f7e73db259fca0b92a5533c85eea7d5aeced27437875d4f4a7274cac458e3fa",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. Boundary one: This item is about a scalar continuous process or the explicitly fixed multistate example; no one-state or one-stage extension is claimed. Item: ex-td-biased-bath-shannon-entropy-decreases.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. The positive detailed-balance law is $\\pi=(0.9,0.1)$, and take initial law $p_1(0)=1/2$.",
+            "current_raw_sha256": "3f7e73db259fca0b92a5533c85eea7d5aeced27437875d4f4a7274cac458e3fa",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. Boundary degenerate: No additional equal-energy, stationary, or deterministic degeneration is claimed beyond the exact case stated in this item. Item: ex-td-biased-bath-shannon-entropy-decreases.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. The positive detailed-balance law is $\\pi=(0.9,0.1)$, and take initial law $p_1(0)=1/2$.",
+            "current_raw_sha256": "3f7e73db259fca0b92a5533c85eea7d5aeced27437875d4f4a7274cac458e3fa",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement specifies p_1(0)=1/2 and the proof gives the entropy derivative for every t>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: ex-td-biased-bath-shannon-entropy-decreases.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. The positive detailed-balance law is $\\pi=(0.9,0.1)$, and take initial law $p_1(0)=1/2$.",
+            "current_raw_sha256": "3f7e73db259fca0b92a5533c85eea7d5aeced27437875d4f4a7274cac458e3fa",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. The positive detailed-balance law is $\\pi=(0.9,0.1)$, and take initial law $p_1(0)=1/2$.",
+            "current_raw_sha256": "3f7e73db259fca0b92a5533c85eea7d5aeced27437875d4f4a7274cac458e3fa",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. The positive detailed-balance law is $\\pi=(0.9,0.1)$, and take initial law $p_1(0)=1/2$.",
+            "current_raw_sha256": "3f7e73db259fca0b92a5533c85eea7d5aeced27437875d4f4a7274cac458e3fa",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Direct substitution of the stated finite probabilities, rates, or OU parameters into the linked A-page formulas.",
+          "result": "The displayed finite calculation is exact within its model; no empirical data are used."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked q01=1, q10=9, pi=(.9,.1) gives equal flux .9. Solution p1=.1+.4 exp(-10t) lies strictly between .1 and .5 for t>0; Hprime=log((1-p)/p)>0 and pprime<0. At t=0 the entropy derivative is zero, consistent with stated t>0. Connectedness and positivity meet the relative-entropy theorem; no observation or universal Shannon monotonicity is asserted."
+      }
+    },
+    "ex-td-ornstein-uhlenbeck-spectrum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-td-linear-ornstein-uhlenbeck-bath",
+          "source_section": "Postulate",
+          "quote": "Choose a Galilean inertial chart $\\mathcal F$ as defined in [[def-td-galilean-rest-frame]] for the specified fixed closed trap-and-bath body, assumed to have positive total mass and the center-of-mass map required there, and supply its componentwise differentiable center-of-mass trajectory on the whole modeled time interval. Assume that its center-of-mass velocity is one constant vector on that interval, so the single constant boost of that supplier selects $\\mathcal F$ with zero center-of-mass velocity throughout. Take $\\mathcal F$ to be this common rest chart. The trap-and-bath background is held fixed in this idealization; center-of-mass recoil or accelerating-frame dynamics are not part of the scalar process. In this chart let $\\mathbf r_c\\in\\mathbb R^3$ be the fixed trap-center position and let $\\mathbf e\\in\\mathbb R^3$ be a fixed unit vector along the modeled trap axis. For a particle position $\\mathbf r\\in\\mathbb R^3$, define the signed displacement $x=\\langle\\mathbf r-\\mathbf r_c,\\mathbf e\\rangle$ in metres; the process $X_t$ in [[def-tdmath-ornstein-uhlenbeck-equation]] is this coordinate of the particle position at time $t$. Thus $U(x)=kx^2/2$ is the harmonic potential relative to the trap center, not an absolute spatial coordinate. Using the SI conventions and exact $k_{\\mathrm B}$ of [[def-td-si-quantities]], take stiffness $k>0$ in joules per square metre, constant mobility $\\mu>0$ in square metres per joule-second, and bath temperature $T_b>0$ kelvin. Adopt the one-dimensional overdamped model $dX_t=-\\gamma X_t\\,dt+\\sigma\\,dB_t$, interpreted through the integral equation of [[def-tdmath-ornstein-uhlenbeck-equation]], with $\\gamma=\\mu k$ in seconds$^{-1}$ and $\\sigma^2=2\\mu k_{\\mathrm B}T_b$ in square metres per second. Here $B$ is standard Brownian motion with its stated filtration and increment hypotheses, and the bath noise is independent of the initial preparation. This Einstein noise relation and the linear Markov model are physical assumptions. They do not follow from equilibrium thermodynamics alone and do not report a measured spectrum or calibration.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-td-ornstein-uhlenbeck-thermal-fluctuations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUnder [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Then the conditional linear model has stationary covariance $C(\\tau)=Ve^{-\\mu k|\\tau|}$. With angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$, its spectrum is $S(\\omega)=\\mu k_{\\mathrm B}T_b/(\\pi[(\\mu k)^2+\\omega^2])$. For every averaging time $T>0$, $\\operatorname{Var}(T^{-1}\\int_0^T X_t\\,dt)\\le 2k_{\\mathrm B}T_b/(\\mu k^2T)$. These are model predictions, not reported observations.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting $V=k_{\\mathrm B}T_b/k$ and $\\gamma=\\mu k$ into the exact spectrum supplied by [F2] gives $S(\\omega)=\\mu k_{\\mathrm B}T_b/(\\pi[(\\mu k)^2+\\omega^2])$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same supplier bound becomes $\\operatorname{Var}(T^{-1}\\int_0^T X_tdt)\\le2k_{\\mathrm B}T_b/(\\mu k^2T)$, which tends to zero as $T\\to\\infty$. Both formulas are conditional model predictions, not measurements.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item has no empty-object boundary beyond the stated nonempty or normalized model inputs; no empty-model extension is claimed. Item: ex-td-ornstein-uhlenbeck-spectrum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement covers ω=0; positive μk makes the Lorentzian denominator nonzero and the formula finite."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Use mobility $\\mu>0$, stiffness $k>0$, and fixed bath temperature $T_b>0$. Boundary one: This item is about a scalar continuous process or the explicitly fixed multistate example; no one-state or one-stage extension is claimed. Item: ex-td-ornstein-uhlenbeck-spectrum.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUse mobility $\\mu>0$, stiffness $k>0$, and fixed bath temperature $T_b>0$. Under the adopted linear bath model, the stationary position spectrum has angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$.",
+            "current_raw_sha256": "c44b502e01a769bba388e89622e3f4ea1bca49e5c6e086b229ffae0403f4441f",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Use mobility $\\mu>0$, stiffness $k>0$, and fixed bath temperature $T_b>0$. Boundary degenerate: No additional equal-energy, stationary, or deterministic degeneration is claimed beyond the exact case stated in this item. Item: ex-td-ornstein-uhlenbeck-spectrum.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUse mobility $\\mu>0$, stiffness $k>0$, and fixed bath temperature $T_b>0$. Under the adopted linear bath model, the stationary position spectrum has angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$.",
+            "current_raw_sha256": "c44b502e01a769bba388e89622e3f4ea1bca49e5c6e086b229ffae0403f4441f",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example assumes the stationary Gaussian preparation and states the finite-time averaging bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement/Example and Given explicitly assume AC and declare it as a mathematical prerequisite. Steps 1.1–2.1 inherit AC through the OU Gaussian, Itô construction/isometry and continuous-version interfaces; no new choice is made in parameter substitution."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Use mobility $\\mu>0$, stiffness $k>0$, and fixed bath temperature $T_b>0$. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUse mobility $\\mu>0$, stiffness $k>0$, and fixed bath temperature $T_b>0$. Under the adopted linear bath model, the stationary position spectrum has angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$.",
+            "current_raw_sha256": "c44b502e01a769bba388e89622e3f4ea1bca49e5c6e086b229ffae0403f4441f",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Use mobility $\\mu>0$, stiffness $k>0$, and fixed bath temperature $T_b>0$. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and Itô-integral suppliers used for the stationary Gaussian model.\n\nUse mobility $\\mu>0$, stiffness $k>0$, and fixed bath temperature $T_b>0$. Under the adopted linear bath model, the stationary position spectrum has angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$.",
+            "current_raw_sha256": "c44b502e01a769bba388e89622e3f4ea1bca49e5c6e086b229ffae0403f4441f",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Direct substitution of the stated finite probabilities, rates, or OU parameters into the linked A-page formulas.",
+          "result": "The displayed finite calculation is exact within its model; no empirical data are used."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "same TD scientific owner; existing released supplier/consumer review",
+        "notes": "The completed original-owner OU review confirms the native producer Fourier repair and separately explicit inherited AC premise. The current example retains AC, conditional stationary preparation and positive parameters. Its formula substitution and T>0 variance bound use exactly the repaired producer and qualified physical theorem; no empirical or negative-time solution claim is introduced.",
+        "historical_prior_review": {
+          "status": "open",
+          "reviewer": "alpha-batch-19",
+          "notes": "Checked exact substitutions V=k_B*T_b/k, gamma=mu*k, positive denominator for every real omega including zero, T>0 averaging bound and T->infinity limit. Stationary independent Gaussian preparation, common fixed Galilean chart, model-only interpretation and explicit AC now retained. It has become HIGH after the explicit Choice interface. Producer batch 12 spectrum prerequisite remains unresolved; theorem supplier risk is open. This example cannot receive a complete risk disposition before that owner resolution."
+        }
+      },
+      "assumptions": [
+        "Axiom of Choice: inherited Brownian and Itô/Gaussian suppliers."
+      ]
+    },
+    "ex-td-biased-memory-reset-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-finite-memory-reset-model",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a finite memory-state set and $R$ a finite retained-register set. A joint preparation is a probability law $p(m,r)\\ge0$ with $\\sum_{m,r}p(m,r)=1$. Write $a_r=\\sum_m p(m,r)$ and, for $a_r>0$, $q(m|r)=p(m,r)/a_r$. Use the finite Shannon entropy in nats and the conditional entropy $H(M|R)$ exactly as defined by [[lem-tdmath-conditional-memory-entropy]]. For a fixed target memory state $m_0$, a reset is the endpoint map $p'(m,r)=\\mathbf 1_{\\{m=m_0\\}}a_r$: it places the memory at $m_0$ while leaving the register marginal unchanged. The definition alone assigns no physical entropy, work cost, heat transfer, or implementation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-td-qualified-landauer-reset",
+          "source_section": "Statement",
+          "quote": "For the reset model of [[def-td-finite-memory-reset-model]], use the exact SI value and conventions of [[def-td-si-quantities]]. Assume (i) the dimensionless Shannon entropies in nats from [[lem-tdmath-conditional-memory-entropy]] give memory-register thermodynamic entropy $S_{\\mathrm{memory+register}}=k_{\\mathrm B}H(M,R)$ in joules per kelvin at both endpoints, with $k_{\\mathrm B}$ in joules per kelvin, (ii) a single ideal reservoir remains at fixed temperature $T_b>0$ kelvin and receives heat $Q_b$ in joules, (iii) the memory-register endpoint energy is unchanged so the adopted first-law convention gives work on the system $W=Q_b$ in joules, and (iv) the total entropy change obeys $\\Delta S_{\\mathrm{memory+register}}+Q_b/T_b\\ge0$ in joules per kelvin. Then $W\\ge k_{\\mathrm B}T_bH(M|R)$, with both sides in joules. Equality is not asserted without a separately specified reversible implementation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $R=\\{r_0\\}$, its marginal is $a_{r_0}=1$, and the conditional law is $q(1|r_0)=p$, $q(0|r_0)=1-p$. The entropy definition therefore gives $H(M|R)=H(M)=-p\\log p-(1-p)\\log(1-p)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the theorem gives $W\\ge k_{\\mathrm B}T_b[-p\\log p-(1-p)\\log(1-p)]$ for this preparation. It reports no work measurement and makes no claim about an apparatus.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes a binary memory law with 0<p<1 and a positive bath temperature."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Let the retained-register set be the singleton $R=\\{r_0\\}$ and let the memory be a bit with probability $p\\in(0,1)$ of state 1. Boundary zero: This item does not assert a zero-valued limit beyond its stated hypotheses; that boundary is outside its scoped claim. Item: ex-td-biased-memory-reset-bound.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let the retained-register set be the singleton $R=\\{r_0\\}$ and let the memory be a bit with probability $p\\in(0,1)$ of state 1. The register carries no information.",
+            "current_raw_sha256": "98b56080865ccd5bce9ba164994c2f84ba06a96b6c7294120638a231fa72034b",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and Verification step 1.1: The retained-register set is a singleton: a_r0=1 and q(1|r0)=p, q(0|r0)=1-p, so conditional entropy equals binary memory entropy. The deterministic memory boundaries p=0 or p=1 are excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and Verification step 1.1: The unbiased case p=1/2 lies in (0,1) and gives H(M|R)=log 2; no equality in the work bound or reversible implementation is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example applies the reset theorem to the specified initial law and its reset endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Let the retained-register set be the singleton $R=\\{r_0\\}$ and let the memory be a bit with probability $p\\in(0,1)$ of state 1. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: ex-td-biased-memory-reset-bound.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let the retained-register set be the singleton $R=\\{r_0\\}$ and let the memory be a bit with probability $p\\in(0,1)$ of state 1. The register carries no information.",
+            "current_raw_sha256": "98b56080865ccd5bce9ba164994c2f84ba06a96b6c7294120638a231fa72034b",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Let the retained-register set be the singleton $R=\\{r_0\\}$ and let the memory be a bit with probability $p\\in(0,1)$ of state 1. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let the retained-register set be the singleton $R=\\{r_0\\}$ and let the memory be a bit with probability $p\\in(0,1)$ of state 1. The register carries no information.",
+            "current_raw_sha256": "98b56080865ccd5bce9ba164994c2f84ba06a96b6c7294120638a231fa72034b",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Let the retained-register set be the singleton $R=\\{r_0\\}$ and let the memory be a bit with probability $p\\in(0,1)$ of state 1. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let the retained-register set be the singleton $R=\\{r_0\\}$ and let the memory be a bit with probability $p\\in(0,1)$ of state 1. The register carries no information.",
+            "current_raw_sha256": "98b56080865ccd5bce9ba164994c2f84ba06a96b6c7294120638a231fa72034b",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Direct substitution of the stated finite probabilities, rates, or OU parameters into the linked A-page formulas.",
+          "result": "The displayed finite calculation is exact within its model; no empirical data are used."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-author",
+        "notes": "The bound is applied to a symbolic two-state law under the Landauer theorem premises; no work is measured."
+      }
+    },
+    "ex-td-correlated-memory-zero-conditional-reset-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-tdmath-conditional-memory-entropy",
+          "source_section": "Statement",
+          "quote": "Let $M$ and $R$ take values in finite sets under a joint probability law $p(m,r)\\ge0$ with $\\sum_{m,r}p(m,r)=1$. For any finite random variable $Y$ with law $p_Y$, define its Shannon entropy by $H(Y):=-\\sum_{y:p_Y(y)>0}p_Y(y)\\log p_Y(y)$; for a pair, $H(M,R)$ means this definition applied to its joint law. Put $a_r:=\\sum_m p(m,r)$ and, when $a_r>0$, $q(m|r):=p(m,r)/a_r$. Thus $H(R)=-\\sum_{r:a_r>0}a_r\\log a_r$. Define $H(M|R):=\\sum_{r:a_r>0}a_r[-\\sum_{m:q(m|r)>0}q(m|r)\\log q(m|r)]$. Then $H(M,R)=H(R)+H(M|R)$ and $H(M|R)\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-td-qualified-landauer-reset",
+          "source_section": "Statement",
+          "quote": "For the reset model of [[def-td-finite-memory-reset-model]], use the exact SI value and conventions of [[def-td-si-quantities]]. Assume (i) the dimensionless Shannon entropies in nats from [[lem-tdmath-conditional-memory-entropy]] give memory-register thermodynamic entropy $S_{\\mathrm{memory+register}}=k_{\\mathrm B}H(M,R)$ in joules per kelvin at both endpoints, with $k_{\\mathrm B}$ in joules per kelvin, (ii) a single ideal reservoir remains at fixed temperature $T_b>0$ kelvin and receives heat $Q_b$ in joules, (iii) the memory-register endpoint energy is unchanged so the adopted first-law convention gives work on the system $W=Q_b$ in joules, and (iv) the total entropy change obeys $\\Delta S_{\\mathrm{memory+register}}+Q_b/T_b\\ge0$ in joules per kelvin. Then $W\\ge k_{\\mathrm B}T_bH(M|R)$, with both sides in joules. Equality is not asserted without a separately specified reversible implementation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The memory marginal is uniform, so $H(M)=\\log2$. Given either value of $R$, the conditional law of $M$ is a point mass; hence each conditional entropy is zero and $H(M|R)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the theorem yields only $W\\ge0$ for this reset under its stated thermodynamic assumptions, while the unconditioned memory entropy is $\\log2$. It does not imply a $k_{\\mathrm B}T_b\\log2$ lower bound for this correlated preparation.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes a normalized two-outcome joint law for the binary memory and register."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes H(M|R)=0 exactly, and step 2.1 records the resulting W≥0 bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Take memory and register bits $M,R\\in\\{0,1\\}$ with joint law $p(0,0)=p(1,1)=1/2$ and all other probabilities zero. Boundary one: This item is about a scalar continuous process or the explicitly fixed multistate example; no one-state or one-stage extension is claimed. Item: ex-td-correlated-memory-zero-conditional-reset-cost.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take memory and register bits $M,R\\in\\{0,1\\}$ with joint law $p(0,0)=p(1,1)=1/2$ and all other probabilities zero. Retain $R$ and reset $M$ to 0.",
+            "current_raw_sha256": "744a6b8a22f1a7bf1b2af6122f7d3a8e0633c03807e18735d04e4dfa1a771fbc",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The perfectly correlated law is the zero-conditional-entropy boundary treated explicitly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives the initial joint law, which is evaluated under the reset endpoint and conditional work theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Take memory and register bits $M,R\\in\\{0,1\\}$ with joint law $p(0,0)=p(1,1)=1/2$ and all other probabilities zero. Boundary nonempty-choice: No choice principle is used; the finite data are fixed and all sums are finite. Item: ex-td-correlated-memory-zero-conditional-reset-cost.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take memory and register bits $M,R\\in\\{0,1\\}$ with joint law $p(0,0)=p(1,1)=1/2$ and all other probabilities zero. Retain $R$ and reset $M$ to 0.",
+            "current_raw_sha256": "744a6b8a22f1a7bf1b2af6122f7d3a8e0633c03807e18735d04e4dfa1a771fbc",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Take memory and register bits $M,R\\in\\{0,1\\}$ with joint law $p(0,0)=p(1,1)=1/2$ and all other probabilities zero. Boundary iff-forward: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take memory and register bits $M,R\\in\\{0,1\\}$ with joint law $p(0,0)=p(1,1)=1/2$ and all other probabilities zero. Retain $R$ and reset $M$ to 0.",
+            "current_raw_sha256": "744a6b8a22f1a7bf1b2af6122f7d3a8e0633c03807e18735d04e4dfa1a771fbc",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Take memory and register bits $M,R\\in\\{0,1\\}$ with joint law $p(0,0)=p(1,1)=1/2$ and all other probabilities zero. Boundary iff-reverse: The item statement contains no biconditional; neither direction is asserted.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take memory and register bits $M,R\\in\\{0,1\\}$ with joint law $p(0,0)=p(1,1)=1/2$ and all other probabilities zero. Retain $R$ and reset $M$ to 0.",
+            "current_raw_sha256": "744a6b8a22f1a7bf1b2af6122f7d3a8e0633c03807e18735d04e4dfa1a771fbc",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Direct substitution of the stated finite probabilities, rates, or OU parameters into the linked A-page formulas.",
+          "result": "The displayed finite calculation is exact within its model; no empirical data are used."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step-1-author",
+        "notes": "The calculation distinguishes H(M) from H(M|R) under perfect correlation and keeps the thermodynamic assumptions conditional."
+      }
+    }
+  }
+}

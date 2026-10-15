@@ -1,0 +1,35 @@
+--- items/lem-rpm-charge-multipole-remainder.md
++++ items/lem-rpm-charge-multipole-remainder.md
+@@ -8,6 +8,7 @@
+ library: mathematics
+ dependency_level: 0
+ deps:
++  - thm-monotonicity-of-the-integral
+   - def-euclidean-inner-product
+   - def-integrable-real-and-complex-functions-and-their-integrals
+   - def-l-one-of-a-measure
+@@ -20,6 +21,7 @@
+   - thm-integral-triangle-inequality
+   - thm-linearity-of-the-lebesgue-integral-on-l-one
+ dependency_roles:
++  thm-monotonicity-of-the-integral: mathematical-premise
+   def-euclidean-inner-product: mathematical-premise
+   def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
+   def-l-one-of-a-measure: mathematical-premise
+@@ -70,13 +72,15 @@
+ 
+ [F5] The Euclidean inner product and norm are the usual positive-definite ones. [[def-euclidean-inner-product]]
+ 
++[F6] [[thm-monotonicity-of-the-integral]]: Riemann integrable real functions on a nondegenerate compact interval preserve pointwise order under their integrals.
++
+ ## Proof
+ 
+ **Proof technique:** direct.
+ 
+ 1.1 For each component $k$, write $D^2b_k(x)[u,v]=\sum_{i,j=1}^3 a_{ij}(x)u_iv_j$. The coefficients $a_{ij}$ are continuous because $b$ is $C^2$. The ball is compact by [F3], so the finitely many coefficients have a common bound $C_k<\infty$ there. Since $|u_i|\le|u|$ and $|v_j|\le|v|$, the sum has magnitude at most $9C_k|u||v|$, hence the displayed bilinear supremum and $M_k$ are finite. For nonzero $u,v$, apply that supremum to $u/|u|,v/|v|$ and multiply by $|u||v|$; when either vector is zero the bilinear expression is zero. This proves the homogeneous bound used below. Since $|y-z|\le\ell$ on the support, monotonicity and homogeneity in [F2] show that each moment is absolutely integrable: $|Q|\le\|\rho\|_1$ and $|d_i|\le\ell\|\rho\|_1$. By compactness of the ball and continuity of each $b_k$, [F3] bounds $b_k$ there, so $\rho b_k$ is integrable as well. [given, A1, F1, F2, F3, F5]
+ 
+-1.2 Fix a support point $y$ and component $k$, and set $\phi(t)=b_k(z+t(y-z))$ on $[0,1]$. The segment stays in the closed ball, and the chain rule [F4] gives $\phi'(0)=Db_k(z)(y-z)$ and $\phi''(t)=D^2b_k(z+t(y-z))[y-z,y-z]$, hence $|\phi''(t)|\le M_k|y-z|^2$. The function $H(t)=(1-t)\phi'(t)+\phi(t)$ has derivative $H'(t)=(1-t)\phi''(t)$; $\phi''$ is continuous, so it is integrable by [F3], and [F4] yields $$b_k(y)=b_k(z)+Db_k(z)(y-z)+r_k(y),\qquad |r_k(y)|\le\frac12M_k|y-z|^2.$$ The bound follows from $\int_0^1(1-t)\,dt=\tfrac12$ and the integral triangle inequality [F2]. [given, A1, F2, F3, F4, F5, algebra]
++1.2 Fix a support point $y$ and component $k$, and set $\phi(t)=b_k(z+t(y-z))$ on $[0,1]$. The segment stays in the closed ball, and the chain rule [F4] gives $\phi'(0)=Db_k(z)(y-z)$ and $\phi''(t)=D^2b_k(z+t(y-z))[y-z,y-z]$, hence $|\phi''(t)|\le M_k|y-z|^2$. The function $H(t)=(1-t)\phi'(t)+\phi(t)$ has derivative $H'(t)=(1-t)\phi''(t)$; $\phi''$ is continuous, so it is integrable by [F3], and [F4] yields $$b_k(y)=b_k(z)+Db_k(z)(y-z)+r_k(y),\qquad |r_k(y)|\le\frac12M_k|y-z|^2.$$ For $A:=M_k|y-z|^2$, the continuous Riemann integrand obeys $-A(1-t)\le(1-t)\phi^{\prime\prime}(t)\le A(1-t)$. Riemann monotonicity [F6] and $\int_0^1(1-t)\,dt=\tfrac12$ therefore bound its integral between $-A/2$ and $A/2$. The Lebesgue inequality [F2] is reserved for the outer density integral in step 2.1. [given, A1, F3, F4, F5, F6, algebra]
+ 
+ 2.1 Multiply the component expansion of step 1.2 by $\rho(y)$ and integrate. Linearity [F1] gives $\mathcal B_k=Qb_k(z)+Db_k(z)d+R_k$, with $R_k=\int\rho(y)r_k(y)\,d^3y$. By the integral triangle inequality [F2] and $|y-z|\le\ell$, $|R_k|\le\tfrac12M_k\ell^2\|\rho\|_1$. [given, A1, F1, F2, step 1.2, algebra] ∎
+ 

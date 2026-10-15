@@ -1,0 +1,45 @@
+{
+  "batch": "54",
+  "findings": [
+    {
+      "id": "cor-qft-example-scalar-tree-coefficients",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "ex-qft-x05",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "0503345c81dd3c26b1e0dd4408f2503b1a98dc27994bf65ae34a31b4afc33635"
+      },
+      "location": "Statement; Proof, Step 1.1 using [F1]",
+      "defect": "missing-hypothesis",
+      "evidence": "The corollary states the scalar scattering and decay coefficients without an AC_omega hypothesis. Its Step 1.1 invokes [F1] from lem-qft-example-two-body-phase-space, whose Statement explicitly assumes Countable Choice; the corollary supplies no choice-free derivation of the phase-space coefficient map. Add and carry AC_omega, or prove the needed coefficient formulas locally without that premise.",
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-qft-example-dirac-pauli-square",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "pthm-qft-example-dirac-magnetic-benchmark",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "a75447659a3fb2d2e22a1ed46654f859fc41b0bfcb8b4151e9f934e076c3cb63"
+      },
+      "location": "Statement; Proof, Step 2.1 using [F1]",
+      "defect": "missing-hypothesis",
+      "evidence": "The Statement assumes m>0, q in R, and smooth A but omits AC_omega. Proof Step 2.1 uses [F1] from lem-qft-example-spin-trace-completeness for alpha_i alpha_j = delta_ij I + i epsilon_ijk Sigma_k; that supplier Statement explicitly retains AC_omega. Step 2.1 does not derive the needed Pauli-block identity locally. Add and carry the hypothesis or supply a choice-free derivation from the explicit matrices.",
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-qft-example-dirac-pauli-square",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "pthm-qft-example-dirac-magnetic-benchmark",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "a75447659a3fb2d2e22a1ed46654f859fc41b0bfcb8b4151e9f934e076c3cb63"
+      },
+      "location": "Statement, after the definitions of boldsymbol pi squared and boldsymbol Sigma dot boldsymbol B",
+      "defect": "ill-formed",
+      "evidence": "The current Statement ends the fragment “Then, on C,” and immediately starts “Here [pi_i, pi_j] := ...”, followed by “The identities are”. The intervening text does not complete the “Then” clause. The displayed identities remain identifiable, but the Statement needs the fragment repaired.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Opened both assigned pages, all six assigned items, and the direct suppliers needed for the reviewed calculations, including the probability and measure definitions added for ex-qft-x05. I did not read every item in the focused 2,159-item / 396-page transitive dependency closure. The Fan et al. report was checked for context only; no empirical number or result is used as a premise. The Pauli-square dependency changed during this review; findings bind the reopened current bytes only."
+}

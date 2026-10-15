@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "batch": "3",
+  "round": 0,
+  "reviewed_items": [
+    "def-tdmath-tagged-scalable-compound",
+    "lem-tdmath-compound-mass-well-defined",
+    "def-tdmath-comparison-and-stability",
+    "def-tdmath-signed-comparison",
+    "lem-tdmath-spectator-cancellation",
+    "lem-tdmath-reference-order",
+    "lem-tdmath-reciprocal-naturals-tend-zero",
+    "lem-tdmath-reference-supremum-bounds",
+    "thm-tdmath-additive-entropy-representation",
+    "thm-tdmath-affine-entropy-uniqueness",
+    "thm-tdmath-common-meter-calibration",
+    "thm-tdmath-finite-inequality-alternative",
+    "thm-tdmath-reaction-offset-feasibility",
+    "def-tdmath-type-offset-vector-space",
+    "lem-tdmath-type-offset-vector-space-well-defined",
+    "thm-tdmath-infinite-no-sinks-sandwich",
+    "ex-tdmath-reference-order-two-state",
+    "ex-tdmath-common-meter-two-types",
+    "ex-tdmath-reaction-offset-cycle-obstruction",
+    "ex-tdmath-no-sinks-sandwich-on-r"
+  ],
+  "reviewed_pages": [
+    "td-math-ordered-composition",
+    "td-math-ordered-composition-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch and its approved inventory were reviewed. Several local definitions, proof steps, and prerequisite uses need clarification; each can be repaired within the assigned pages.",
+  "findings": [
+    {
+      "id": "lem-tdmath-reciprocal-naturals-tend-zero",
+      "type": "prerequisite",
+      "reason": "Steps 1.1 and 2.1 use the natural numbers as an ordered subset of R, their successor, and the convergence definition, but the only dependency is def-complete-ordered-field, which supplies none of these. Add the exact natural-number/canonical-embedding suppliers (for example def-natural-numbers, def-nat-addition, def-canonical-natural, and lem-of-naturals-positive) and def-real-limit, or define the needed conventions locally."
+    },
+    {
+      "id": "lem-tdmath-reference-supremum-bounds",
+      "type": "local",
+      "reason": "Step 4.1 applies CH to e_x and the signed map R_{s+1/n}; CH is stated only for nonnegative compounds. Translate both sides by a common finite nonnegative map making them compounds, apply CH there, and use signed translation invariance to obtain the required reverse comparison."
+    },
+    {
+      "id": "thm-tdmath-common-meter-calibration",
+      "type": "prerequisite",
+      "reason": "The common-meter interface uses preceq and preceq_s on compounds over Y but never specifies that relation on Y. Separate product comparisons do not supply a relation on the shared tags. Explicitly introduce the common equal-mass comparison relation and the comparison hypotheses needed for signed cancellation and reference ordering."
+    },
+    {
+      "id": "thm-tdmath-finite-inequality-alternative",
+      "type": "local",
+      "reason": "The proof uses dot products and vector sums without defining them; def-function-space supplies only coordinatewise operations. Define c·b as the finite coordinate sum and vector sums coordinatewise. Step 1.4 also invokes finite maxima and minima without proving their existence; supply a finite induction argument or an exact supplier."
+    },
+    {
+      "id": "thm-tdmath-reaction-offset-feasibility",
+      "type": "prerequisite",
+      "reason": "The dependency on thm-tdmath-common-meter-calibration is described as supplying d_a, but no channel input/output compounds or map from them to calibrated entropy changes is specified. Define how the common-meter values determine the change and lower bound, or state d_a as independent real input data and clarify the conditional transition premise."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-tdmath-common-meter-two-types",
+      "decision": "accept",
+      "reason": "Its finite values, equal type totals, and comparison calculation are sound under an explicitly defined common relation satisfying the repaired theorem interface."
+    },
+    {
+      "id": "thm-tdmath-reaction-offset-feasibility",
+      "decision": "repair",
+      "reason": "As a consumer of the common-meter result, it needs the calibrated-change interface specified in the theorem or must treat d_a as abstract input data."
+    },
+    {
+      "id": "ex-tdmath-reaction-offset-cycle-obstruction",
+      "decision": "accept",
+      "reason": "Its zero-cycle certificate and arithmetic are correct for the stated finite inequality data; it makes no claim about an observed or actual transition."
+    }
+  ]
+}

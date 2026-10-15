@@ -1,0 +1,56 @@
+---
+id: def-tdmath-poisson-configuration-reference
+kind: definition
+title: Poisson Configuration Reference
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+dependency_level: 1
+deps: [def-axiom-of-choice, def-factorial-and-falling-factorial, def-real-exponential-function-and-e, thm-exponential-addition-formula, lem-integer-part, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-lebesgue-measure-of-a-box-of-every-kind, def-standard-borel-space, def-separable-space, def-polish-space, thm-euclidean-space-complete, thm-complete-subspace-iff-closed, lem-rat-embeds-dense, cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish, lem-standard-complete-metric-on-a-countable-product, lem-borel-subspaces-admit-polish-presentations, lem-finite-products-of-standard-borel-spaces-are-standard-borel, def-product-measure-on-sigma-finite-spaces, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, thm-tonelli-theorem-for-sigma-finite-product-spaces, lem-tdmath-counts-generate-configuration-sigma, thm-kolmogorov-extension-for-standard-borel-coordinate-spaces, def-natural-numbers, def-integers, def-integer-power, def-borel-sigma-algebra, def-product-sigma-algebra-and-finite-product-sigma-algebras]
+justified_by: []
+dependency_roles:
+  def-natural-numbers: mathematical-premise
+  def-integers: mathematical-premise
+  def-integer-power: mathematical-premise
+  def-borel-sigma-algebra: mathematical-premise
+  def-product-sigma-algebra-and-finite-product-sigma-algebras: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
+  def-factorial-and-falling-factorial: mathematical-premise
+  def-real-exponential-function-and-e: mathematical-premise
+  thm-exponential-addition-formula: mathematical-premise
+  lem-integer-part: mathematical-premise
+  def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
+  thm-lebesgue-measure-of-a-box-of-every-kind: mathematical-premise
+  def-standard-borel-space: mathematical-premise
+  def-separable-space: mathematical-premise
+  def-polish-space: mathematical-premise
+  thm-euclidean-space-complete: mathematical-premise
+  thm-complete-subspace-iff-closed: mathematical-premise
+  lem-rat-embeds-dense: mathematical-premise
+  cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish: mathematical-premise
+  lem-standard-complete-metric-on-a-countable-product: mathematical-premise
+  lem-borel-subspaces-admit-polish-presentations: mathematical-premise
+  lem-finite-products-of-standard-borel-spaces-are-standard-borel: mathematical-premise
+  def-product-measure-on-sigma-finite-spaces: mathematical-premise
+  thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique: mathematical-premise
+  thm-tonelli-theorem-for-sigma-finite-product-spaces: mathematical-premise
+  lem-tdmath-counts-generate-configuration-sigma: mathematical-premise
+  thm-kolmogorov-extension-for-standard-borel-coordinate-spaces: mathematical-premise
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields"
+      url: "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf"
+      locator: "Section 2.3, printed p.184 / PDF p.7, Poisson reference and specific entropy"
+---
+
+## Definition
+
+Assume the Axiom of Choice and fix an integer dimension $d\geq1$. For $i\in\mathbb Z^d$, let $C_i=i+[0,1)^d$. These are left-closed, right-open cells. For every $x\in\mathbb R^d$, [[lem-integer-part]] supplies the unique integers $i_j$ with $i_j\le x_j<i_j+1$, so $x$ belongs to exactly one $C_i$. The cells are Borel products of closed/open ray intersections and have volume one by [[thm-lebesgue-measure-of-a-box-of-every-kind]], whose statement covers this face convention. A finite configuration in $C_i$ is a finite subset of distinct points. Encode it by its cardinality $n\in\mathbb N_0$ and its uniquely lexicographically increasing list of local coordinates $(x_1-i,\ldots,x_n-i)\in([0,1)^d)^n$. Pad the code after its first $n$ coordinates with the zero vector. For fixed $n$, the strictly increasing lists form a Borel subset of $([0,1]^d)^n$, since lexicographic strict order is a finite union of coordinate-equality and coordinate-inequality conditions. Thus all codes form a Borel subset of $\mathbb N_0\times([0,1]^d)^{\mathbb N}$. Each factor $[0,1]^d$ is Polish as a closed subspace of complete $\mathbb R^d$ with a countable dense rational grid; $\mathbb N_0$ with its discrete metric is Polish. The ambient space is Polish by [[cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish]] (and is completely metrized by [[lem-standard-complete-metric-on-a-countable-product]]), so [[lem-borel-subspaces-admit-polish-presentations]] makes the cell space $E_i$ standard Borel. By [[lem-tdmath-counts-generate-configuration-sigma]], its sigma-algebra is generated by the counts $N_B$ for Borel $B\subseteq C_i$.
+
+Use $e^t:=\exp(t)$ for real $t$, with $\exp$ defined by [[def-real-exponential-function-and-e]]; for a real measurable function $f$, $e^f$ means the pointwise composition $\exp\circ f$. For $\lambda>0$, give a cell configuration with $n$ points probability $\exp(-\lambda)\lambda^n/n!$ for its count. The probabilities sum to $\exp(-\lambda)\exp(\lambda)=\exp(0)=1$ by the exponential power series and [[thm-exponential-addition-formula]]. Conditional on count $n$, take the $n$-fold product of normalized Lebesgue measure on $C_i$, restrict it to the complement of the collision diagonals, and push it forward by lexicographic sorting. The product exists by the finite product-measure theorem; each collision diagonal is null by Tonelli and the fact that Lebesgue measure gives every singleton measure zero, so the restricted measure still has mass one. Sorting is Borel on the finitely many permutation regions of the no-collision set. This defines a law $\pi_{i,\lambda}$ on $E_i$; for $n=0$, use the empty product and the empty configuration. Let $\Omega=\prod_{i\in\mathbb Z^d}E_i$ with its product cylinder sigma-algebra. The product sigma-algebra is generated by the cell-coordinate sigma-algebras, each generated by counts on Borel subsets of its bounded cell by [[lem-tdmath-counts-generate-configuration-sigma]]. Conversely every bounded-region count is a finite sum of these cell counts, since a bounded set meets finitely many cells. Thus the product cylinder sigma-algebra is exactly the sigma-algebra generated by all bounded-Borel count maps. For each $\lambda>0$, $Q_\lambda$ denotes the unique probability on $\Omega$ whose finite cell marginals are the products of the corresponding $\pi_{i,\lambda}$. Existence and uniqueness follow from [[thm-kolmogorov-extension-for-standard-borel-coordinate-spaces]]. In particular every translation $T_x$ is measurable since $N_A(T_x\omega)=N_{A-x}(\omega)$. The unit-intensity reference is $Q:=Q_1$.
+
+Identify each $\omega\in\Omega$ with the simple locally finite counting measure obtained by uniting its finite cell configurations. For a bounded Borel set $A\subseteq\mathbb R^d$, write $N_A(\omega)=\omega(A)$ and $|A|$ for its Lebesgue measure. Define translation by $T_x\omega(A)=\omega(A-x)$ for $x\in\mathbb R^d$. The next item proves that under $Q_\lambda$, counts in disjoint bounded Borel sets are independent Poisson random variables with means $\lambda|A|$ and that $Q_\lambda$ is translation invariant. This item is a mathematical reference construction and makes no physical claim.

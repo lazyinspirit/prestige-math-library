@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+const run='physics-td-qft-rpm-62-2026-10-14',label='step5-v2-impact-initial-r1-u2';
+const reportPath=`research/${run}-step5-v2/${label}.json`,report=JSON.parse(fs.readFileSync(reportPath));
+const ids=new Set(report.repair_notes.ledger_updates.appended);
+const path='research/defect-ledger.jsonl';const original=fs.readFileSync(path,'utf8');let changed=0;
+const lines=original.split('\n').map(line=>{if(!line.trim())return line;const row=JSON.parse(line);if(!ids.has(row.defect_id))return line;
+ row.dispatch_label=label;row.native_phase='impact-initial';row.caught_at_stage='owner';row.caught_by_role='owner';
+ row.location=row.subject==='ex-td-local-equilibrium-profile'?'definition':row.subject==='ex-td-first-law-sign-convention'?'facts-block':'proof-step';
+ row.location_detail=row.subject==='ex-td-local-equilibrium-profile'?'Example comparison-cell setup; F2/A1; Verification 2.1':row.subject==='ex-td-first-law-sign-convention'?'Verification Given':'Proof 1.1';
+ row.subclass=row.subject==='ex-td-local-equilibrium-profile'?'ill-typed-construction':row.subject==='ex-td-first-law-sign-convention'?'missing-hypothesis':'unlicensed-inference';
+ changed++;return JSON.stringify(row);
+});if(changed!==3)throw Error('exact three owned ledger rows required');fs.writeFileSync(path,lines.join('\n'));
+report.repair_notes.ledger_updates.closed_taxonomy_checked=true;
+report.repair_notes.ledger_updates.taxonomy_basis='Read tools/physics-support/defect-ledger.mjs closed enums; use canonical owner stage/role with exact native dispatch and detailed locations in separate fields. Only these three newly created owner rows were normalized; every unrelated line is preserved verbatim.';
+fs.writeFileSync(reportPath,JSON.stringify(report,null,2)+'\n');console.log('Normalized and checked the closed taxonomy of exactly three current owner rows.');

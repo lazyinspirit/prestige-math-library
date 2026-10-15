@@ -1,0 +1,107 @@
+{
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "def-qft-quartic-graph-power-counting",
+      "source_section": "Definition",
+      "quote": "A **finite quartic graph** is a finite connected multigraph $\\Gamma$ with $V\\ge1$ vertices, each having exactly four incidence slots. An internal edge uses two slots, including a self-loop at one vertex; parallel internal edges are allowed. An **external half-edge** uses one slot and has no paired endpoint. Let $I$ be the number of internal edges and $E$ the number of external half-edges. Define the **loop count** (the graph's cycle rank) by $$L:=I-V+1.$$ For this mathematical power-counting convention, assign degree $D$ to each independent loop-momentum integration over $\\mathbb R^D$, degree $-2$ to each internal scalar propagator, and degree $0$ to each quartic vertex. The propagator assignment is its leading ultraviolet degree under a common dilation of loop momenta; for example, a Euclidean scalar factor $(|q|^2+m^2)^{-1}$ with $m\\ge0$ is assigned degree $-2$. The **superficial degree** of $\\Gamma$ is $$\\omega_D(\\Gamma):=DL-2I.$$ By convention, $\\omega_D(\\Gamma)=0$ is called a **logarithmic superficial degree**. This is finite graph bookkeeping under the stated assignment. It does not by itself establish convergence or divergence of an actual graph integral; proper subgraphs, numerator cancellations, exceptional infrared data, and distributional singularities require separate hypotheses and analysis.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "2.1",
+        "3.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "quartic-slot-incidence",
+      "claim": "Count the four incidence slots at each of V vertices, with each internal edge consuming two slots and each external half-edge one, to obtain 4V=2I+E.",
+      "step": "1.1",
+      "inputs": [
+        "given",
+        "F1",
+        "algebra"
+      ]
+    },
+    {
+      "id": "connected-loop-rank",
+      "claim": "Construct a spanning tree by adding one new vertex per edge, then count every remaining internal edge, including self-loops and parallel edges, as one independent cycle to obtain L=I−V+1.",
+      "step": "1.2",
+      "inputs": [
+        "given",
+        "F1",
+        "construct"
+      ]
+    },
+    {
+      "id": "degree-substitution",
+      "claim": "Substitute L=I−V+1 and I=2V−E/2 into the defining degree DL−2I and simplify to D+(D−4)V−(D−2)E/2.",
+      "step": "2.1",
+      "inputs": [
+        "F1",
+        "step 1.1",
+        "step 1.2",
+        "algebra"
+      ]
+    },
+    {
+      "id": "four-dimensional-specialization",
+      "claim": "Set D=4 in the general formula to obtain ω4=4−E and retain the definition’s superficial-only interpretation.",
+      "step": "3.1",
+      "inputs": [
+        "F1",
+        "step 2.1",
+        "algebra"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "not_applicable",
+      "reason": "The graph domain requires V≥1; no empty graph is quantified."
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "Step 1.2 explicitly handles V=1 with an empty spanning tree and L=0."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "Step 1.2 verifies the V=1 case directly; a self-loop is counted as a non-tree cycle edge."
+    },
+    {
+      "case": "degenerate",
+      "status": "checked",
+      "evidence": "Step 1.1 counts a self-loop twice at its vertex, and step 1.2 covers self-loops and parallel edges."
+    },
+    {
+      "case": "endpoints",
+      "status": "not_applicable",
+      "reason": "No interval or limiting endpoint occurs in the finite counting argument."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "not_applicable",
+      "reason": "Step 1.2 constructs a finite spanning tree and uses no arbitrary-family choice principle."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "The statement asserts identities and a specialization, not a biconditional."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "The statement asserts identities and a specialization, not a biconditional."
+    }
+  ],
+  "risk_review": {
+    "status": "complete",
+    "reviewer": "beta-batch-63 author",
+    "notes": "Finite checks: V=1,I=0,E=4 gives L=0 and ωD=0; the planned B graph V=2,I=2,E=4 gives L=1 and ω4=0; for D=4 the general formula reduces to 4−E. These verify arithmetic only. The proof makes no claim about convergence, subgraphs, infrared behavior, or physical amplitudes."
+  }
+}

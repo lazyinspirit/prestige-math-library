@@ -1,0 +1,5 @@
+# QFT missing shared-prerequisite resolution
+
+Current disposition: **build the shared EMG-MG01 and EMG-C01 A/B pairs through the native engine**, following the expanded user authorization. `shared-prerequisite-expansion.json` contains exact canonical page records, full 13-item pair inventories, closure evidence, source hashes and restoration checks. `drift-report-replacement.md` is the current proposed report section. All QFT shared canonical edits from the earlier local alternative have been restored to exact preimages.
+
+`conformal-prerequisite.md`, `withdrawn-local-alternative.patch`, `.withdrawn` snapshots and `integration-proposal.json` are retained as **withdrawn alternative evidence only**. Do not mint their two proposed QFT prerequisite IDs or apply their edges. `evidence.json` records the checks performed on that earlier proposal, not the current expanded run or native acceptance. The curvature/wave identity derivation remains useful author context. This folder makes no production acceptance, readiness or gate claim.

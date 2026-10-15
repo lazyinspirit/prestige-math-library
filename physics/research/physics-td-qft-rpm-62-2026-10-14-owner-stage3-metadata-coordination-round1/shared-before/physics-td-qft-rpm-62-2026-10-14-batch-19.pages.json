@@ -1,0 +1,765 @@
+[
+  {
+    "order": 299,
+    "id": "td-stochastic-protocols",
+    "kind": "A",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Stochastic Protocols",
+    "companion": "td-stochastic-protocols-examples",
+    "requires": [
+      "convexity",
+      "td-finite-statistical-bridge"
+    ],
+    "items": [
+      {
+        "id": "def-td-driven-finite-path-model",
+        "kind": "definition",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Finite driven protocol and path work",
+        "deps": [
+          "def-td-finite-microstate-model"
+        ],
+        "dependency_roles": {
+          "def-td-finite-microstate-model": "formulation-prerequisite"
+        },
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Nonequilibrium Work Relations",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Nonequilibrium%20Work%20Relations.pdf",
+              "locator": "Complete 21-page lecture PDF; slides on forward/reverse work distributions and the Jarzynski and Crooks relations."
+            },
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Sections 2.3, 3.2.1, and 3.2.3."
+            }
+          ]
+        },
+        "physical_scope": "A finite-microstate, finite-stage, single-reservoir protocol model with externally changed energies and discrete bath transitions; the internal-energy reading uses a common fixed chart with bulk center-of-mass dynamics suppressed, and a common rest chart requires constant center-of-mass velocity over the modeled interval; it does not assert that a material apparatus has this dynamics.",
+        "statement": "Take $\\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. For the physical internal-energy interpretation, use one declared fixed Galilean chart for every stage, with the bulk center-of-mass and separately tracked external-energy sectors suppressed from this finite protocol. The companion mechanical model supplies the center-of-mass data required by the microstate supplier; when the common chart is called a center-of-mass rest chart throughout the protocol, its center-of-mass velocity is constant over the modeled interval, and one constant boost selects that chart. This fixed-chart idealization does not infer a rest chart from the finite set or transition kernels, and does not describe an accelerating bulk body. Fix an integer $m\\ge1$ and stage energy functions $E_k:\\Omega\\to\\mathbb R\\,\\mathrm J$ for $k=0,\\ldots,m$, with the energy offsets fixed by the declared protocol model. Fix inverse temperature $\\beta>0$ in joules$^{-1}$. The finite partition sum and canonical probability vector at stage $k$ are $Z_k=\\sum_{i\\in\\Omega}e^{-\\beta E_k(i)}$ and $\\pi_k(i)=e^{-\\beta E_k(i)}/Z_k$. Since $\\Omega$ is nonempty and finite and each energy is finite, $0<Z_k<\\infty$ and $\\pi_k$ is a strictly positive probability vector.\n\nA transition kernel at stage $k$ is a matrix $K_k(i,j)\\ge0$ with $\\sum_{j\\in\\Omega}K_k(i,j)=1$. In the forward stage order, the energy changes instantaneously from $E_{k-1}$ to $E_k$ while the state is still $i_{k-1}$; the subsequent bath transition samples $i_k$ using $K_k(i_{k-1},i_k)$ at fixed energy $E_k$. A path is $\\omega=(i_0,\\ldots,i_m)\\in\\Omega^{m+1}$. The initial law is a probability vector $\\mu_0:\\Omega\\to[0,1]$ with $\\sum_{i\\in\\Omega}\\mu_0(i)=1$. Its path probability is $P_F(\\omega)=\\mu_0(i_0)\\prod_{k=1}^mK_k(i_{k-1},i_k)$; summing over all paths gives $1$ by the normalization of $\\mu_0$ and the row sums of the kernels.\n\nWork on the system is positive when energy is supplied to it, and heat into the system is positive when a bath transition raises its energy. Define $W(\\omega)=\\sum_{k=1}^m[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$ and $Q_{\\mathrm{in}}(\\omega)=\\sum_{k=1}^m[E_k(i_k)-E_k(i_{k-1})]$, both in joules. Define $F_k=-\\beta^{-1}\\log Z_k$ and $\\Delta F=F_m-F_0=-\\beta^{-1}\\log(Z_m/Z_0)$. These are finite-model quantities; their physical interpretation is conditional on the adopted preparation and transition assumptions."
+      },
+      {
+        "id": "def-td-detailed-balance-rate-model",
+        "kind": "definition",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Finite detailed-balance rate and transition models",
+        "deps": [],
+        "dependency_roles": {},
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Section 6.1 on finite-state master equations, rates, and probability currents."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Detailed Balance",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Detailed%20Balance.pdf",
+              "locator": "Complete 11-page lecture PDF; finite rate matrices and detailed-balance examples."
+            }
+          ]
+        },
+        "physical_scope": "Finite-state, time-homogeneous continuous-time rate models and their reversible discrete transition-kernel analogue; the definition does not assert that a physical system follows either model.",
+        "statement": "A finite rate model consists of a finite nonempty state set $S$ and rates $q_{ij}\\ge0$ in seconds$^{-1}$ for $i\\ne j$. Set $q_{ii}=-\\sum_{j\\ne i}q_{ij}$. A row probability vector is $p=(p_i)_{i\\in S}$ with $p_i\\ge0$ and $\\sum_i p_i=1$; write $\\Delta(S)=\\{p\\in[0,1]^S:\\sum_i p_i=1\\}$. A time-dependent law is a coordinatewise continuously differentiable map $p:[0,\\infty)\\to\\Delta(S)$, with a right derivative at $t=0$, that satisfies the continuous-time master equation $\\dot p_i(t)=\\sum_{j\\ne i}[p_j(t)q_{ji}-p_i(t)q_{ij}]$ for every $t\\ge0$. A strictly positive normalized vector $\\pi$ is a detailed-balance law when $\\pi_iq_{ij}=\\pi_jq_{ji}$ for every distinct pair. Its undirected rate graph has an edge $\\{i,j\\}$ exactly when $\\pi_iq_{ij}>0$; detailed balance makes this equivalent to $\\pi_jq_{ji}>0$.\n\nOn a finite nonempty state set $S$, a discrete transition kernel is a matrix $K:S\\times S\\to[0,1]$ satisfying $\\sum_{j\\in S}K(i,j)=1$ for every $i\\in S$. For a strictly positive row probability vector $\\pi\\in\\Delta(S)$, the kernel satisfies $\\pi$-detailed balance when $\\pi_iK(i,j)=\\pi_jK(j,i)$ for every $i,j\\in S$. This identity pairs the supports of forward and reversed transitions. A rate model or a reversible kernel is a mathematical/physical model class; no observed trajectory is asserted by the definition."
+      },
+      {
+        "id": "post-td-canonical-protocol-preparation",
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Canonical initial preparation for a finite protocol",
+        "deps": [
+          "def-td-driven-finite-path-model",
+          "post-td-canonical-sampling",
+          "def-td-si-quantities"
+        ],
+        "dependency_roles": {
+          "def-td-driven-finite-path-model": "formulation-prerequisite",
+          "post-td-canonical-sampling": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite"
+        },
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Jarzynski, Nonequilibrium Equality for Free Energy Differences",
+              "url": "https://www.physics.uci.edu/~tritz/BP/Jarz97.pdf",
+              "locator": "Complete four-page paper; canonical initial ensemble and finite-time protocol."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Nonequilibrium Work Relations",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Nonequilibrium%20Work%20Relations.pdf",
+              "locator": "Complete 21-page lecture PDF; initial equilibrium preparation and work-relation derivations."
+            }
+          ]
+        },
+        "physical_scope": "The start of the specified finite-state protocol is modeled as a canonical preparation at one positive reservoir temperature; preparation success and equilibration are not derived.",
+        "statement": "For a protocol of [[def-td-driven-finite-path-model]], fix a bath temperature $T_b>0$ kelvin and set $\\beta=(k_{\\mathrm B}T_b)^{-1}$ in joules$^{-1}$, using the exact constant and SI conventions of [[def-td-si-quantities]]. The finite-state clause of the adopted [[post-td-canonical-sampling]] then gives the stage-zero law $\\pi_0(i)=e^{-\\beta E_0(i)}/Z_0$; adopt that the initial microstate is drawn from this law, so $\\mu_0=\\pi_0$. Here $\\Omega$ is finite and nonempty and $E_0(i)$ is finite, so $0<Z_0<\\infty$ as required by that clause. This is a model premise about the preparation distribution. It does not follow from the finite partition-sum definition, does not assert that an arbitrary system equilibrates in finite time, and does not report a measured preparation. The countable-state and measure-integral branches of [[post-td-canonical-sampling]] are not used."
+      },
+      {
+        "id": "post-td-stationary-bath-kernel",
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Finite bath kernels preserve the stage canonical law",
+        "deps": [
+          "def-td-driven-finite-path-model"
+        ],
+        "dependency_roles": {
+          "def-td-driven-finite-path-model": "operational-prerequisite"
+        },
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Sections 6.1 and 6.2 on finite-state master-equation dynamics and stationary distributions."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Detailed Balance",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Detailed%20Balance.pdf",
+              "locator": "Complete 11-page lecture PDF; finite rate matrices, stationary laws, and detailed balance."
+            }
+          ]
+        },
+        "physical_scope": "The transition matrices of the specified finite-state model preserve each stage's canonical probability vector; no universal Markov approximation or physical thermalization theorem is asserted.",
+        "statement": "For the protocol in [[def-td-driven-finite-path-model]], adopt, at each stage $k=1,\\ldots,m$, the stationarity condition $\\sum_{i\\in\\Omega}\\pi_k(i)K_k(i,j)=\\pi_k(j)$ for every $j\\in\\Omega$. This says that if the bath transition begins with law $\\pi_k$ at fixed energy $E_k$, it ends with the same law. It is a physical modeling assumption for this protocol family, not a consequence of the transition-kernel definition and not an assertion that the kernel mixes every initial law to $\\pi_k$."
+      },
+      {
+        "id": "post-td-linear-ornstein-uhlenbeck-bath",
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Linear Ornstein-Uhlenbeck bath model",
+        "deps": [
+          "def-tdmath-ornstein-uhlenbeck-equation",
+          "def-td-si-quantities",
+          "def-td-galilean-rest-frame"
+        ],
+        "dependency_roles": {
+          "def-tdmath-ornstein-uhlenbeck-equation": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-galilean-rest-frame": "formulation-prerequisite"
+        },
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Sections 2.1, 2.3, and 5.2 on overdamped Langevin dynamics, stochastic energetics, and harmonic traps."
+            }
+          ]
+        },
+        "physical_scope": "One-dimensional overdamped motion in a harmonic potential, with constant positive mobility and stiffness, one fixed positive bath temperature, additive Gaussian white-noise modeling, and no inertia or memory, in one fixed Galilean center-of-mass rest chart of the declared trap-and-bath body with constant center-of-mass velocity throughout the modeled interval.",
+        "statement": "Choose a Galilean inertial chart $\\mathcal F$ as defined in [[def-td-galilean-rest-frame]] for the specified fixed closed trap-and-bath body, assumed to have positive total mass and the center-of-mass map required there, and supply its componentwise differentiable center-of-mass trajectory on the whole modeled time interval. Assume that its center-of-mass velocity is one constant vector on that interval, so the single constant boost of that supplier selects $\\mathcal F$ with zero center-of-mass velocity throughout. Take $\\mathcal F$ to be this common rest chart. The trap-and-bath background is held fixed in this idealization; center-of-mass recoil or accelerating-frame dynamics are not part of the scalar process. In this chart let $\\mathbf r_c\\in\\mathbb R^3$ be the fixed trap-center position and let $\\mathbf e\\in\\mathbb R^3$ be a fixed unit vector along the modeled trap axis. For a particle position $\\mathbf r\\in\\mathbb R^3$, define the signed displacement $x=\\langle\\mathbf r-\\mathbf r_c,\\mathbf e\\rangle$ in metres; the process $X_t$ in [[def-tdmath-ornstein-uhlenbeck-equation]] is this coordinate of the particle position at time $t$. Thus $U(x)=kx^2/2$ is the harmonic potential relative to the trap center, not an absolute spatial coordinate. Using the SI conventions and exact $k_{\\mathrm B}$ of [[def-td-si-quantities]], take stiffness $k>0$ in joules per square metre, constant mobility $\\mu>0$ in square metres per joule-second, and bath temperature $T_b>0$ kelvin. Adopt the one-dimensional overdamped model $dX_t=-\\gamma X_t\\,dt+\\sigma\\,dB_t$, interpreted through the integral equation of [[def-tdmath-ornstein-uhlenbeck-equation]], with $\\gamma=\\mu k$ in seconds$^{-1}$ and $\\sigma^2=2\\mu k_{\\mathrm B}T_b$ in square metres per second. Here $B$ is standard Brownian motion with its stated filtration and increment hypotheses, and the bath noise is independent of the initial preparation. This Einstein noise relation and the linear Markov model are physical assumptions. They do not follow from equilibrium thermodynamics alone and do not report a measured spectrum or calibration."
+      },
+      {
+        "id": "def-td-finite-memory-reset-model",
+        "kind": "definition",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Finite memory and retained-register reset model",
+        "deps": [
+          "lem-tdmath-conditional-memory-entropy"
+        ],
+        "dependency_roles": {
+          "lem-tdmath-conditional-memory-entropy": "formulation-prerequisite"
+        },
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Section 7.3 on measurement, information, and feedback."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Maxwell's Demon",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Maxwells%20Demon.pdf",
+              "locator": "Complete 16-page lecture PDF; memory registers, erasure, and the scope of Landauer's principle."
+            }
+          ]
+        },
+        "physical_scope": "A finite-state memory and retained register with a specified probabilistic reset map; the definition does not assert a particular apparatus, reset dynamics, or measured work.",
+        "statement": "Let $M$ be a finite memory-state set and $R$ a finite retained-register set. A joint preparation is a probability law $p(m,r)\\ge0$ with $\\sum_{m,r}p(m,r)=1$. Write $a_r=\\sum_m p(m,r)$ and, for $a_r>0$, $q(m|r)=p(m,r)/a_r$. Use the finite Shannon entropy in nats and the conditional entropy $H(M|R)$ exactly as defined by [[lem-tdmath-conditional-memory-entropy]]. For a fixed target memory state $m_0$, a reset is the endpoint map $p'(m,r)=\\mathbf 1_{\\{m=m_0\\}}a_r$: it places the memory at $m_0$ while leaving the register marginal unchanged. The definition alone assigns no physical entropy, work cost, heat transfer, or implementation."
+      },
+      {
+        "id": "pthm-td-finite-pathwise-first-law",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Pathwise energy balance for a finite driven protocol",
+        "deps": [
+          "def-td-driven-finite-path-model"
+        ],
+        "dependency_roles": {
+          "def-td-driven-finite-path-model": "formulation-prerequisite"
+        },
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Section 2.3.1 on the first law along stochastic trajectories."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Nonequilibrium Work Relations",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Nonequilibrium%20Work%20Relations.pdf",
+              "locator": "Complete 21-page lecture PDF; definition of work during a driven protocol."
+            }
+          ]
+        },
+        "physical_scope": "An exact energy bookkeeping identity for every path of the stated finite-state, finite-stage model; it is not a claim that all heat or work processes are represented by this model.",
+        "proof_strategy": "direct",
+        "statement": "For every path $\\omega=(i_0,\\ldots,i_m)$ of [[def-td-driven-finite-path-model]], the endpoint energy change is $E_m(i_m)-E_0(i_0)=W(\\omega)+Q_{\\mathrm{in}}(\\omega)$, with the stated sign convention."
+      },
+      {
+        "id": "pthm-td-markov-relative-entropy-and-convergence",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Relative-entropy decrease and convergence for a finite detailed-balance chain",
+        "deps": [
+          "def-td-detailed-balance-rate-model",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-derivative-of-exponential",
+          "cor-mean-value-theorem",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_roles": {
+          "def-td-detailed-balance-rate-model": "formulation-prerequisite",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise"
+        },
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Relative Entropy and Relaxation to Equilibrium",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Relative%20Entropy%20And%20Relaxation%20To%20Equilibrium.pdf",
+              "locator": "Complete 11-page lecture PDF; relative entropy and relaxation in finite-state rate models."
+            },
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Sections 6.1 and 6.2 on finite-state master equations and entropy production."
+            }
+          ]
+        },
+        "physical_scope": "A finite, time-homogeneous continuous-time rate model satisfying detailed balance; convergence is asserted only when its positive-rate graph is connected, and no general continuum or non-Markovian relaxation theorem is claimed.",
+        "proof_strategy": "direct",
+        "statement": "Let $S$ have $N\\ge2$ states, positive detailed-balance law $\\pi$, and connected undirected rate graph as in [[def-td-detailed-balance-rate-model]]. For every strictly positive initial probability vector $p(0)$, the master equation has a unique strictly positive probability solution $p(t)$ for all $t\\ge0$. The relative entropy $D(p(t)\\Vert\\pi)=\\sum_i p_i(t)\\log(p_i(t)/\\pi_i)$ is nonincreasing, and $p_i(t)\\to\\pi_i$ for every state. No monotonicity of Shannon entropy $-\\sum_i p_i\\log p_i$ is asserted."
+      },
+      {
+        "id": "pthm-td-finite-jarzynski",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Jarzynski equality for a finite protocol with stationary kernels",
+        "deps": [
+          "def-td-driven-finite-path-model",
+          "post-td-canonical-protocol-preparation",
+          "post-td-stationary-bath-kernel",
+          "post-td-canonical-sampling"
+        ],
+        "dependency_roles": {
+          "def-td-driven-finite-path-model": "formulation-prerequisite",
+          "post-td-canonical-protocol-preparation": "physical-assumption",
+          "post-td-stationary-bath-kernel": "physical-assumption",
+          "post-td-canonical-sampling": "physical-assumption"
+        },
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Jarzynski, Nonequilibrium Equality for Free Energy Differences",
+              "url": "https://www.physics.uci.edu/~tritz/BP/Jarz97.pdf",
+              "locator": "Complete four-page paper; finite-time work average from canonical initial conditions."
+            },
+            {
+              "title": "C. Crooks, Entropy production fluctuation theorem and the nonequilibrium work relation for free energy differences",
+              "url": "https://journals.aps.org/pre/pdf/10.1103/PhysRevE.60.2721",
+              "locator": "Complete six-page paper; canonical endpoint ensembles and work relation."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Nonequilibrium Work Relations",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Nonequilibrium%20Work%20Relations.pdf",
+              "locator": "Complete 21-page lecture PDF; work relation and average work consequences."
+            }
+          ]
+        },
+        "physical_scope": "An exact ensemble identity for a finite state space, finite protocol, canonical initial law, and kernels preserving each stage's canonical law; no claim is made for general stochastic processes or for any individual path.",
+        "proof_strategy": "induction",
+        "statement": "For the forward path law of [[def-td-driven-finite-path-model]], under [[post-td-canonical-protocol-preparation]] and [[post-td-stationary-bath-kernel]], the finite expectation satisfies $\\mathbb E_F[e^{-\\beta W}]=Z_m/Z_0=e^{-\\beta\\Delta F}$. This is an ensemble identity; it does not say $W=\\Delta F$ on each path."
+      },
+      {
+        "id": "pthm-td-finite-crooks",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Crooks path and work-distribution relation for a finite protocol",
+        "deps": [
+          "def-td-driven-finite-path-model",
+          "def-td-detailed-balance-rate-model",
+          "post-td-canonical-protocol-preparation",
+          "post-td-stationary-bath-kernel",
+          "pthm-td-finite-pathwise-first-law"
+        ],
+        "dependency_roles": {
+          "def-td-driven-finite-path-model": "formulation-prerequisite",
+          "def-td-detailed-balance-rate-model": "formulation-prerequisite",
+          "post-td-canonical-protocol-preparation": "physical-assumption",
+          "post-td-stationary-bath-kernel": "physical-assumption",
+          "pthm-td-finite-pathwise-first-law": "physical-result"
+        },
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Crooks, Entropy production fluctuation theorem and the nonequilibrium work relation for free energy differences",
+              "url": "https://journals.aps.org/pre/pdf/10.1103/PhysRevE.60.2721",
+              "locator": "Complete six-page paper; microscopic reversibility and canonical endpoint work relation."
+            },
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Sections 3.2.3 and 4.4.1 on forward/reverse work distributions and reversed dynamics."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Nonequilibrium Work Relations",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Nonequilibrium%20Work%20Relations.pdf",
+              "locator": "Complete 21-page lecture PDF; comparison of forward and reverse work densities."
+            }
+          ]
+        },
+        "physical_scope": "A path-reversal identity for a finite-state protocol whose stage kernels are reversible with respect to their positive canonical laws; it does not extend to arbitrary driven systems without matching support and reversal assumptions.",
+        "proof_strategy": "direct",
+        "statement": "Assume the setup of [[def-td-driven-finite-path-model]], the canonical initial law of [[post-td-canonical-protocol-preparation]], the stationarity model of [[post-td-stationary-bath-kernel]], and, additionally, $\\pi_k(i)K_k(i,j)=\\pi_k(j)K_k(j,i)$ for every $k,i,j$. For every forward path with positive probability, define its reverse probability by $P_R(\\omega^R)=\\pi_m(i_m)\\prod_{k=1}^mK_k(i_k,i_{k-1})$. Then $P_R(\\omega^R)>0$ and $P_F(\\omega)/P_R(\\omega^R)=e^{\\beta(W(\\omega)-\\Delta F)}$. Consequently, at each work value $w$, $P_F(W=w)=e^{\\beta(w-\\Delta F)}P_R(W_R=-w)$. The reverse protocol first applies the stage-$k$ reverse transition at fixed $E_k$, then reverses the quench $E_k\\to E_{k-1}$; its work is $W_R(\\omega^R)=-W(\\omega)$."
+      },
+      {
+        "id": "pthm-td-ornstein-uhlenbeck-thermal-fluctuations",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Thermal fluctuations in the specified linear harmonic bath model",
+        "deps": [
+          "def-axiom-of-choice",
+          "post-td-linear-ornstein-uhlenbeck-bath",
+          "thm-tdmath-ornstein-uhlenbeck-model",
+          "def-tdmath-ornstein-uhlenbeck-equation"
+        ],
+        "dependency_roles": {
+          "post-td-linear-ornstein-uhlenbeck-bath": "physical-assumption",
+          "thm-tdmath-ornstein-uhlenbeck-model": "mathematical-premise",
+          "def-tdmath-ornstein-uhlenbeck-equation": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Sections 2.1 and 5.2.2 on the overdamped Brownian model and driven harmonic traps."
+            }
+          ]
+        },
+        "physical_scope": "Conditional predictions of the specified one-dimensional linear Ornstein-Uhlenbeck model after stationary Gaussian preparation; in the postulate\u2019s common fixed Galilean rest chart with constant trap-and-bath center-of-mass velocity throughout the modeled interval; not empirical claims and not general laws for arbitrary baths.",
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and It\u00f4-integral suppliers used for the stationary Gaussian model.\n\nUnder [[post-td-linear-ornstein-uhlenbeck-bath]], prepare $X_0\\sim N(0,V)$ independently of future Brownian increments, where $V=k_{\\mathrm B}T_b/k$. Then the conditional linear model has stationary covariance $C(\\tau)=Ve^{-\\mu k|\\tau|}$. With angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$, its spectrum is $S(\\omega)=\\mu k_{\\mathrm B}T_b/(\\pi[(\\mu k)^2+\\omega^2])$. For every averaging time $T>0$, $\\operatorname{Var}(T^{-1}\\int_0^T X_t\\,dt)\\le 2k_{\\mathrm B}T_b/(\\mu k^2T)$. These are model predictions, not reported observations."
+      },
+      {
+        "id": "pthm-td-qualified-landauer-reset",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Conditional work bound for finite memory reset",
+        "deps": [
+          "def-td-finite-memory-reset-model",
+          "lem-tdmath-conditional-memory-entropy",
+          "def-td-si-quantities"
+        ],
+        "dependency_roles": {
+          "def-td-finite-memory-reset-model": "formulation-prerequisite",
+          "lem-tdmath-conditional-memory-entropy": "mathematical-premise",
+          "def-td-si-quantities": "formulation-prerequisite"
+        },
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Section 7.3 on measurement, information, feedback, and thermodynamic work bounds."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Maxwell's Demon",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Maxwells%20Demon.pdf",
+              "locator": "Complete 16-page lecture PDF; memory erasure and its thermodynamic qualifications."
+            }
+          ]
+        },
+        "physical_scope": "A conditional endpoint work bound for a finite memory reset with fixed retained-register marginal, a positive-temperature ideal bath, the stated entropy identification, and no endpoint energy change; no universal cost per bit or measured work is asserted.",
+        "proof_strategy": "direct",
+        "statement": "For the reset model of [[def-td-finite-memory-reset-model]], use the exact SI value and conventions of [[def-td-si-quantities]]. Assume (i) the dimensionless Shannon entropies in nats from [[lem-tdmath-conditional-memory-entropy]] give memory-register thermodynamic entropy $S_{\\mathrm{memory+register}}=k_{\\mathrm B}H(M,R)$ in joules per kelvin at both endpoints, with $k_{\\mathrm B}$ in joules per kelvin, (ii) a single ideal reservoir remains at fixed temperature $T_b>0$ kelvin and receives heat $Q_b$ in joules, (iii) the memory-register endpoint energy is unchanged so the adopted first-law convention gives work on the system $W=Q_b$ in joules, and (iv) the total entropy change obeys $\\Delta S_{\\mathrm{memory+register}}+Q_b/T_b\\ge0$ in joules per kelvin. Then $W\\ge k_{\\mathrm B}T_bH(M|R)$, with both sides in joules. Equality is not asserted without a separately specified reversible implementation."
+      },
+      {
+        "id": "pthm-td-mean-dissipation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Mean work is at least the finite free-energy difference",
+        "deps": [
+          "pthm-td-finite-jarzynski",
+          "thm-finite-jensen-inequality",
+          "thm-exponential-two-point-convexity",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "dependency_roles": {
+          "pthm-td-finite-jarzynski": "physical-result",
+          "thm-finite-jensen-inequality": "mathematical-premise",
+          "thm-exponential-two-point-convexity": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise"
+        },
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Jarzynski, Nonequilibrium Equality for Free Energy Differences",
+              "url": "https://www.physics.uci.edu/~tritz/BP/Jarz97.pdf",
+              "locator": "Complete four-page paper; work average and nonequilibrium equality."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Nonequilibrium Work Relations",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Nonequilibrium%20Work%20Relations.pdf",
+              "locator": "Complete 21-page lecture PDF; average work inequality and fluctuating trajectories."
+            },
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Sections 3.2.1 and 4.6."
+            }
+          ]
+        },
+        "physical_scope": "An inequality for the ensemble-mean work in the finite protocol under the Jarzynski model assumptions; it is not a per-path second-law inequality and is not an empirical statement.",
+        "proof_strategy": "direct",
+        "statement": "Under the hypotheses of [[pthm-td-finite-jarzynski]], the mean work obeys $\\mathbb E_F W\\ge\\Delta F$. The conclusion concerns the path ensemble only; individual paths may have $W<\\Delta F$."
+      }
+    ]
+  },
+  {
+    "order": 300,
+    "id": "td-stochastic-protocols-examples",
+    "kind": "B",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Stochastic Protocols \u2014 Examples",
+    "companion": "td-stochastic-protocols",
+    "requires": [
+      "td-stochastic-protocols"
+    ],
+    "items": [
+      {
+        "id": "ex-td-finite-quench-work-fluctuation",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "A finite quench has a positive probability of work below delta F",
+        "deps": [
+          "def-td-driven-finite-path-model",
+          "post-td-canonical-protocol-preparation",
+          "post-td-stationary-bath-kernel",
+          "pthm-td-finite-jarzynski"
+        ],
+        "dependency_roles": {
+          "def-td-driven-finite-path-model": "formulation-prerequisite",
+          "post-td-canonical-protocol-preparation": "physical-assumption",
+          "post-td-stationary-bath-kernel": "physical-assumption",
+          "pthm-td-finite-jarzynski": "physical-result"
+        },
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Nonequilibrium Work Relations",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Nonequilibrium%20Work%20Relations.pdf",
+              "locator": "Complete 21-page lecture PDF; finite work fluctuations and the ensemble equality."
+            }
+          ]
+        },
+        "physical_scope": "A calculated two-state hypothetical protocol example; it is not an experiment and makes no claim about a measured system.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Take $\\Omega=\\{a,b\\}$, $\\beta>0$, $E_0(a)=E_0(b)=0$, and $E_1(a)=0$, $E_1(b)=\\epsilon$ for $\\epsilon>0$. Prepare canonically at stage zero and use the identity transition kernel after the quench."
+      },
+      {
+        "id": "ex-td-disconnected-markov-relaxation",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "A disconnected detailed-balance chain does not converge to the full reference law",
+        "deps": [
+          "def-td-detailed-balance-rate-model",
+          "pthm-td-markov-relative-entropy-and-convergence"
+        ],
+        "dependency_roles": {
+          "def-td-detailed-balance-rate-model": "formulation-prerequisite",
+          "pthm-td-markov-relative-entropy-and-convergence": "physical-result"
+        },
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Relative Entropy and Relaxation to Equilibrium",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Relative%20Entropy%20And%20Relaxation%20To%20Equilibrium.pdf",
+              "locator": "Complete 11-page lecture PDF; relative entropy and convergence hypotheses."
+            }
+          ]
+        },
+        "physical_scope": "An exact three-state finite-rate calculation showing why the connectedness condition in the convergence theorem is needed; not empirical data.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $S=\\{1,2,3\\}$, with $q_{12}=q_{21}=1$ second$^{-1}$ and all other off-diagonal rates zero. Let $\\pi=(1/3,1/3,1/3)$ and $p(0)=(3/8,1/8,1/2)$."
+      },
+      {
+        "id": "ex-td-biased-bath-shannon-entropy-decreases",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Shannon entropy decreases in a biased detailed-balance bath",
+        "deps": [
+          "def-td-detailed-balance-rate-model",
+          "pthm-td-markov-relative-entropy-and-convergence",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_roles": {
+          "def-td-detailed-balance-rate-model": "formulation-prerequisite",
+          "pthm-td-markov-relative-entropy-and-convergence": "physical-result",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Sections 2.4, 2.5, 6.1, and 6.2 on stochastic entropy and ensemble entropy production."
+            }
+          ]
+        },
+        "physical_scope": "An exact two-state finite-rate calculation distinguishing Shannon entropy from relative entropy to a biased stationary law; no empirical claim.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let $S=\\{0,1\\}$, with rates $q_{01}=1$ and $q_{10}=9$ seconds$^{-1}$. The positive detailed-balance law is $\\pi=(0.9,0.1)$, and take initial law $p_1(0)=1/2$."
+      },
+      {
+        "id": "ex-td-ornstein-uhlenbeck-spectrum",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "The stationary harmonic bath has a Lorentzian position spectrum",
+        "deps": [
+          "def-axiom-of-choice",
+          "post-td-linear-ornstein-uhlenbeck-bath",
+          "pthm-td-ornstein-uhlenbeck-thermal-fluctuations"
+        ],
+        "dependency_roles": {
+          "post-td-linear-ornstein-uhlenbeck-bath": "physical-assumption",
+          "pthm-td-ornstein-uhlenbeck-thermal-fluctuations": "physical-result",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Sections 2.1 and 5.2.2."
+            }
+          ]
+        },
+        "physical_scope": "A calculated stationary spectrum and averaging bound in the adopted scalar harmonic Ornstein-Uhlenbeck model; in the specified common fixed Galilean rest chart with constant trap-and-bath center-of-mass velocity throughout the modeled interval; no measured spectrum is asserted.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Assume the Axiom of Choice [[def-axiom-of-choice]]: every family of nonempty sets has a choice function. It is inherited from the Brownian and It\u00f4-integral suppliers used for the stationary Gaussian model.\n\nUse mobility $\\mu>0$, stiffness $k>0$, and fixed bath temperature $T_b>0$. Under the adopted linear bath model, the stationary position spectrum has angular-frequency convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$."
+      },
+      {
+        "id": "ex-td-biased-memory-reset-bound",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Reset bound for a biased two-state memory",
+        "deps": [
+          "def-td-finite-memory-reset-model",
+          "pthm-td-qualified-landauer-reset"
+        ],
+        "dependency_roles": {
+          "def-td-finite-memory-reset-model": "formulation-prerequisite",
+          "pthm-td-qualified-landauer-reset": "physical-result"
+        },
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Maxwell's Demon",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Maxwells%20Demon.pdf",
+              "locator": "Complete 16-page lecture PDF; memory entropy and erasure."
+            },
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Section 7.3 on information and feedback."
+            }
+          ]
+        },
+        "physical_scope": "A symbolic finite-memory calculation under the reset theorem's physical assumptions; it is not a measured reset process.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Let the retained-register set be the singleton $R=\\{r_0\\}$ and let the memory be a bit with probability $p\\in(0,1)$ of state 1. The register carries no information."
+      },
+      {
+        "id": "ex-td-correlated-memory-zero-conditional-reset-cost",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "A perfectly retained bit gives zero conditional entropy reset bound",
+        "deps": [
+          "def-td-finite-memory-reset-model",
+          "pthm-td-qualified-landauer-reset",
+          "lem-tdmath-conditional-memory-entropy"
+        ],
+        "dependency_roles": {
+          "def-td-finite-memory-reset-model": "formulation-prerequisite",
+          "pthm-td-qualified-landauer-reset": "physical-result",
+          "lem-tdmath-conditional-memory-entropy": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/html/1205.4176v1",
+              "locator": "Section 7.3 on information, feedback, and memory reset."
+            },
+            {
+              "title": "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Maxwell's Demon",
+              "url": "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Maxwells%20Demon.pdf",
+              "locator": "Complete 16-page lecture PDF; memory registers and erasure."
+            }
+          ]
+        },
+        "physical_scope": "A calculated finite correlated-memory model illustrating the theorem's retained-register condition; no measurement or reset apparatus is described.",
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "statement": "Take memory and register bits $M,R\\in\\{0,1\\}$ with joint law $p(0,0)=p(1,1)=1/2$ and all other probabilities zero. Retain $R$ and reset $M$ to 0."
+      }
+    ]
+  }
+]

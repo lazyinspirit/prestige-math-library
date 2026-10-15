@@ -6,6 +6,8 @@ Be unbiased: assess actual arguments, not the identity of their author or earlie
 
 Resolve the consolidated escalation with the smallest sound source repairs under the owner's assigned scope. Preserve Statements and Definitions whenever possible and retain the richest sound approved claims. Repair actual suppliers before their consumers.
 
+Closely inspect all cross-batch and cross-frontier dependency edges used by the assigned items and pages for logical gaps and unmet prerequisites. Check each actual supplier claim, its hypotheses and proof status against the consuming argument. Repair locally where possible within the assigned scope; otherwise escalate to the owner for reconciliation, identifying the exact edge, consuming steps and missing prerequisite.
+
 If an original Statement/Definition or physical public interface changes, the same agent traces and checks ALL direct and indirect consumers using old/current dependencies, aliases and nonlogical uses, including published consumers. Check actual supplier uses and assumptions. Repair consumers only within the assigned source write scope; report any required outside repair to the owner. Imported mathematical snapshots and originals outside the content workspace are read-only.
 
 Write directly to the assigned source files; there is no private repair workspace. Keep pair/page identities and approved inventory promises. Prove necessary intermediate results rather than deleting difficult claims. Use exact source passages and proof-step references where needed. Do not edit native history, engine counters, global plans or CLAUDE.md.

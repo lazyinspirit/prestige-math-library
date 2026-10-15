@@ -1,0 +1,909 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14",
+  "scope": [
+    "def-emg-lorentzian-forms",
+    "lem-emg-lorentz-hodge-calculus",
+    "lem-emg-conformal-hodge-multiplier",
+    "lem-emg-observer-field-decomposition",
+    "ex-emgmath-lorentz-star"
+  ],
+  "contracts": {
+    "def-emg-lorentzian-forms": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature $(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every $p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature $(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has inertia $(3,1,0)$, so that some — equivalently every — basis of $T_pM$ in which the matrix of $g_p$ is diagonal has exactly one negative and three positive diagonal entries.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-oriented-smooth-manifold-and-oriented-chart",
+          "source_section": "Definition",
+          "quote": "An orientation of an $n$-manifold is a smooth choice of a ray in $\\det T_pM$ for every $p$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-observer-and-rest-space",
+          "source_section": "Definition",
+          "quote": "**(a) Observers.** An **observer at $p$** is a tangent vector $n\\in T_pM$ such that $g_p(n,n)=-1$ and $n$ is future-directed in the sense of [[def-gr-smooth-lorentzian-objects]], that is, $g_p(n,N_p)<0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gr-observer-projection-decomposition",
+          "source_section": "Statement",
+          "quote": "$\\dim n^{\\perp}=3$ and the restriction of $g_p$ to $n^{\\perp}$ is positive definite.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-observer-congruence-and-adapted-charts",
+          "source_section": "Definition",
+          "quote": "**(a) Congruences.** An **observer congruence** on $U$ is a smooth vector field $n$ on $U$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]) such that $n_q$ is an observer at $q$ for every $q\\in U$ ([[def-gr-observer-and-rest-space]]); explicitly, $$g_q(n_q,n_q)=-1\\quad\\text{and}\\quad g_q(n_q,N_q)<0\\qquad\\text{for every }q\\in U .$$ Since $g_q(n_q,n_q)=-1$, the field $n$ is nowhere vanishing.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-local-frame-and-tetrad-fields",
+          "source_section": "Definition",
+          "quote": "**(c) Tetrad fields.** A **tetrad field** (or **$g$-orthonormal frame field**) on $U$ is a local frame field $(E_0,E_1,E_2,E_3)$ on $U$ such that $$g_q(E_A(q),E_B(q))=\\eta_{AB}\\qquad\\text{for all }A,B\\text{ and all }q\\in U .$$ A tetrad field is **future-directed** when in addition $E_0(q)$ is future-directed for every $q\\in U$ ([[def-gr-smooth-lorentzian-objects]]); then each $E_0(q)$ is an observer at $q$ ([[def-gr-observer-and-rest-space]]), so $E_0$ is an observer congruence on $U$ ([[def-gr-observer-congruence-and-adapted-charts]]), while $E_1,E_2,E_3$ are pointwise an orthonormal basis of the rest space of that observer.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-metric-selected-connection",
+          "source_section": "Definition",
+          "quote": "**(c) Metric-selected connections.** A **metric-selected connection** for $(M,g)$ is an affine connection on $M$ that is both torsion-free and $g$-compatible.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-curvature-tensoriality-and-coordinate-formula",
+          "source_section": "Statement",
+          "quote": "**(b) Coordinate formula.** In every smooth chart $(U,x)$ with Christoffel symbols $\\Gamma^a{}_{bc}$ of $\\nabla$ ([[def-christoffel-symbols-of-an-affine-connection]]), $$R^a{}_{bcd}=\\partial_c\\Gamma^a{}_{db}-\\partial_d\\Gamma^a{}_{cb} +\\sum_e\\bigl(\\Gamma^a{}_{ce}\\Gamma^e{}_{db}-\\Gamma^a{}_{de}\\Gamma^e{}_{cb}\\bigr)$$ on $U$, for all $a,b,c,d\\in\\{0,1,2,3\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and $$(a^x)'=a^x\\log a.$$ For $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with $$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The normalization $n:=N/\\sqrt{-g(N,N)}$ is smooth because $-g(N,N)$ is a smooth positive function and [F5] makes its positive square root smooth. Bilinearity gives $g(n,n)=-1$ and $g(n,N)=-\\sqrt{-g(N,N)}<0$, so [F2] makes $n$ an observer at every point and hence a smooth observer congruence. This supplies an observer field without identifying it with a chart or tetrad.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Fix $p\\in U$ and a connected chart around $p$. The four coordinate vectors form a basis at $p$. By [F2], the linear map $h_{n_p}$ has image the three-dimensional space $n_p^\\perp$, so three projected coordinate vectors form a basis of $n_p^\\perp$. Extend the chosen coordinate fields over the chart and project them by $h_n$; after shrinking the chart, their projections remain independent by continuity. They lie in the positive-definite rest spaces by [F2]. Apply the three finite Gram-Schmidt operations in these rest spaces; every denominator is the positive square root of a positive smooth squared norm, so [F5] makes the resulting fields smooth. Together with $E_0=n$, the three fields form a local tetrad. If needed, reverse one spatial member so the tetrad has the supplied orientation from [F1]; the sign remains fixed on the connected chart. This is a local tetrad field as in [F3], not a coordinate frame or an assertion of an adapted coordinate chart. Thus an $n$-adapted tetrad exists locally, with no global tetrad or hypersurface-orthogonality conclusion.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "A1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "In a length-coordinate chart, each first coordinate derivative of $g_{ab}$ has dimension $\\mathrm m^{-1}$, so the Christoffel formula in [F4] has dimension $\\mathrm m^{-1}$. Each term in the curvature formula in [F4] has dimension $\\mathrm m^{-2}$; contraction with dimensionless $g^{ab}$ preserves that dimension for Ricci and scalar curvature. This is coordinate-unit bookkeeping, not a physical field equation.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty base has no point or fiber at which this pointwise identity can be evaluated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 shows a zero timelike field cannot satisfy g(n,n)=−1; the input N is timelike by the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No algebraic unit or normalized one-object assertion occurs in this statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nondegeneracy is an explicit manifold hypothesis and the inverse metric is used in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint, limit or interval conclusion is asserted by this proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses only the inherited ACω background for local smooth-bundle construction; it claims no full Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-32",
+        "notes": "Checked local tetrad construction against the actual observer projection and frame interfaces. Orientation, time orientation, curve, coordinate and frame data stay distinct; length units are coordinate bookkeeping, not field equations."
+      },
+      "finite_checks": [
+        {
+          "check": "Put s=√(−g(N,N))>0. For n=N/s, compute g(n,n)=−1 and g(n,N)=−s<0.",
+          "result": "n is unit timelike and future-directed.",
+          "verifies": "The normalization and observer conditions in step 1.1."
+        },
+        {
+          "check": "In a length-coordinate chart, one derivative of dimensionless g_ab has unit m⁻¹; hence Γ has m⁻¹ and both ∂Γ and ΓΓ have m⁻².",
+          "result": "Connection components have m⁻¹ and curvature, Ricci and scalar components have m⁻².",
+          "verifies": "The coordinate-unit calculation in step 2.1."
+        }
+      ]
+    },
+    "lem-emg-lorentz-hodge-calculus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-lorentzian-forms",
+          "source_section": "Definition",
+          "quote": "For every observer congruence $n$, each point has a neighborhood carrying an $n$-adapted tetrad; this is a local assertion only.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-local-frame-and-tetrad-fields",
+          "source_section": "Definition",
+          "quote": "**(c) Tetrad fields.** A **tetrad field** (or **$g$-orthonormal frame field**) on $U$ is a local frame field $(E_0,E_1,E_2,E_3)$ on $U$ such that $$g_q(E_A(q),E_B(q))=\\eta_{AB}\\qquad\\text{for all }A,B\\text{ and all }q\\in U .$$ A tetrad field is **future-directed** when in addition $E_0(q)$ is future-directed for every $q\\in U$ ([[def-gr-smooth-lorentzian-objects]]); then each $E_0(q)$ is an observer at $q$ ([[def-gr-observer-and-rest-space]]), so $E_0$ is an observer congruence on $U$ ([[def-gr-observer-congruence-and-adapted-charts]]), while $E_1,E_2,E_3$ are pointwise an orthonormal basis of the rest space of that observer.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-metric-volume-form-and-current-flux",
+          "source_section": "Definition",
+          "quote": "That these local forms agree on chart overlaps and therefore define one smooth nowhere-vanishing $4$-form $\\mathrm{vol}_g$ on $M$ — the **metric volume form** — is proved in [[lem-gr-metric-volume-form-patching-and-face-normal]] clause (a), together with the reading statement of clause (b) there: in every oriented chart $\\mathrm{vol}_g=w\\,dx^0\\wedge\\cdots\\wedge dx^3$, and on every positively oriented $g_p$-orthonormal basis $(e_0,e_1,e_2,e_3)$ of $T_pM$ one has $\\mathrm{vol}_{g,p}(e_0,e_1,e_2,e_3)=1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gr-metric-volume-form-patching-and-face-normal",
+          "source_section": "Statement",
+          "quote": "Then $$\\det(g'_{ab})=\\bigl(\\det D\\varphi\\bigr)^{2}\\det\\bigl(g_{ab}\\circ\\varphi\\bigr),\\qquad w'=\\bigl(\\det D\\varphi\\bigr)\\,(w\\circ\\varphi),$$ and the local forms agree on the overlap, $$\\varphi^{*}\\bigl(w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3\\bigr)=w'\\,dy^0\\wedge dy^1\\wedge dy^2\\wedge dy^3 .$$ Consequently there is a unique smooth nowhere-vanishing $4$-form $\\mathrm{vol}_g$ on $M$ — the **metric volume form** — whose restriction to the domain of every oriented chart $(U,x)$ is $w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$; it is a smooth section with nowhere-zero values and positive on the given orientation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smooth-differential-k-form",
+          "source_section": "Definition",
+          "quote": "A **smooth differential $k$-form** on $M$ is a smooth section of $\\bigwedge^kT^*M\\to M$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-local-coordinate-expression-for-a-differential-form",
+          "source_section": "Statement",
+          "quote": "On a chart $(U,x^1,\\ldots,x^n)$, every smooth differential $k$-form $\\omega$ has a unique expression $$ \\omega=\\sum_{1\\le i_1<\\cdots<i_k\\le n}\\omega_{i_1\\cdots i_k}\\,dx^{i_1}\\wedge\\cdots\\wedge dx^{i_k} $$ with smooth coefficient functions $\\omega_{i_1\\cdots i_k}$ on $U$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-wedge-product-of-differential-forms",
+          "source_section": "Definition",
+          "quote": "Their **wedge product** is the differential form defined pointwise by $$ (\\alpha\\wedge\\beta)_p:=\\alpha_p\\wedge\\beta_p\\in\\operatorname{Alt}^{k+\\ell}(T_pM).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-differential-forms-form-a-graded-commutative-algebra",
+          "source_section": "Statement",
+          "quote": "The graded vector space $$ \\Omega^*(M):=\\bigoplus_{k\\ge 0}\\Omega^k(M) $$ with the wedge product is an associative graded-commutative algebra.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "source_section": "Definition",
+          "quote": "For $\\omega\\in\\Omega^k(M)$, define the candidate $d\\omega$ on smooth vector fields by $$d\\omega(X_0,\\ldots,X_k)=\\sum_i(-1)^iX_i\\omega(X_0,\\widehat X_i,\\ldots,X_k)+\\sum_{i<j}(-1)^{i+j}\\omega([X_i,X_j],X_0,\\widehat X_i,\\widehat X_j,\\ldots,X_k).$$ The next lemma proves that this candidate is a form.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-the-invariant-exterior-derivative-formula-is-c-infinity-multilinear",
+          "source_section": "Statement",
+          "quote": "The invariant formula defining $d\\omega$ is alternating and $C^\\infty(M)$-multilinear in $X_0,\\ldots,X_k$; hence it defines a smooth $(k+1)$-form.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-local-coordinate-formula-for-the-exterior-derivative",
+          "source_section": "Statement",
+          "quote": "Summing over increasing $k$-tuples $I$, and writing $dx^I=dx^{i_1}\\wedge\\cdots\\wedge dx^{i_k}$, if $\\omega=\\sum_I\\omega_I\\,dx^I$, then $$d\\omega=\\sum_I d\\omega_I\\wedge dx^I.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-the-exterior-derivative-is-a-graded-derivation",
+          "source_section": "Statement",
+          "quote": "For homogeneous smooth forms $\\alpha\\in\\Omega^p(M)$ and $\\beta\\in\\Omega^q(M)$, $$d(\\alpha\\wedge\\beta)=d\\alpha\\wedge\\beta+(-1)^{\\deg\\alpha}\\alpha\\wedge d\\beta.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-gr-inverse-metric-and-musical-isomorphisms",
+          "source_section": "Definition",
+          "quote": "**Inverse metric.** The **inverse metric** at $p$ is the symmetric bilinear form $$g_p^{-1}:T_p^*M\\times T_p^*M\\longrightarrow\\mathbb R,\\qquad g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta).$$ It is symmetric because $g_p$ is, and it is nondegenerate: if $g_p^{-1}(\\alpha,\\beta)=0$ for all $\\beta$, then $g_p(\\sharp_p\\alpha,\\cdot)=0$, so $\\sharp_p\\alpha=0$ and hence $\\alpha=0$.",
+          "uses": [
+            "1.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The determinant is alternating multilinear in each list, so it defines a bilinear pairing on exterior powers. In a positively oriented orthonormal coframe, it makes the basis wedges $e^I$ orthogonal with squared norm $\\epsilon_I$; in the full component contraction this same diagonal value occurs $k!$ times, canceled by the factor $1/k!$. Define $\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}$ and extend linearly. If $J\\ne I$ has the same size as $I$, then $e^J\\wedge e^{I^c}=0$ because an index repeats. If $J=I$, then $e^I\\wedge e^{I^c}=s(I,I^c)\\mathrm{vol}_g$, so $e^I\\wedge\\star_g e^I=\\epsilon_I\\mathrm{vol}_g$. Bilinearity proves the characterizing identity for all forms in the coframe. The complement wedges pair each basis vector with exactly one basis vector, so this wedge pairing is nondegenerate and the characterization determines $\\star_g$ uniquely.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "A1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "The characterizing identity uses only $g$, the orientation, and $\\mathrm{vol}_g$. Any other positively oriented orthonormal coframe therefore defines the same map by uniqueness. In each smooth tetrad neighborhood the displayed matrix of $\\star_g$ is constant in the smooth coframe, so its coordinate coefficients are smooth; the locally defined maps agree on overlaps and give a global smooth bundle map on the inherited smooth background [A1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Applying the basis formula twice gives $\\star_g^2e^I=\\epsilon_I\\epsilon_{I^c}s(I,I^c)s(I^c,I)e^I$. The product $\\epsilon_I\\epsilon_{I^c}$ equals $-1$ because exactly one of the four $\\epsilon_i$ is negative. Reversing the two blocks of sizes $k$ and $4-k$ takes $k(4-k)$ transpositions, so $s(I,I^c)s(I^c,I)=(-1)^{k(4-k)}$. Their product is $(-1)^{k(4-k)+1}$, proving the square formula for each basis element and hence for every $k$-form.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "For a two-form $F=\\frac12F_{cd}e^c\\wedge e^d$, the basis formula sends each $e^c\\wedge e^d$ to its oriented complementary wedge with the product of its metric signs. In components this is $({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}$: the factor $1/2$ counts each antisymmetric pair once, and raising both indices includes the negative sign in the timelike slot.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "In a chart, [F4] gives $(d\\alpha)_{a_0\\cdots a_k}=(k+1)\\partial_{[a_0}\\alpha_{a_1\\cdots a_k]}$. Applying it twice expresses each coefficient of $d^2\\alpha$ as an alternating sum of second partial derivatives; terms paired by exchanging the first two derivative indices cancel because those mixed partials agree by [F5]. Thus $d^2\\alpha=0$ in every chart and hence globally. The graded product rule is exactly the established identity in [F5].",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty base has no point or fiber at which this pointwise identity can be evaluated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs star linearly on the basis, including the zero form."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 includes k=0; for the empty index set ε∅=1, yielding the stated star-square sign −1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the exterior wedge pairing nondegenerate and uses the nondegenerate Lorentz metric."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint, limit or interval conclusion is asserted by this proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use local smooth tetrads on the inherited ACω background; no full Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-32",
+        "notes": "Checked determinant normalization, the Lorentzian sign from one negative direction, the component factor 1/2 and d-squared cancellation. The positive-definite star-square formula is not imported."
+      },
+      "finite_checks": [
+        {
+          "check": "For the six two-form basis wedges: ⋆e⁰¹=−e²³, ⋆e²³=e⁰¹, ⋆e⁰²=e¹³, ⋆e¹³=−e⁰², ⋆e⁰³=−e¹², and ⋆e¹²=e⁰³.",
+          "result": "Applying ⋆ twice gives −1 on each of the six basis vectors of Λ².",
+          "verifies": "The basis formula and two-form sign consequence in steps 1.1 and 2.2."
+        },
+        {
+          "check": "For k=0,1,2,3,4, the exponent k(4−k)+1 is respectively 1,4,5,4,1.",
+          "result": "The star-square signs by degree are −,+,−,+,−.",
+          "verifies": "The all-degree formula in step 2.2."
+        }
+      ]
+    },
+    "lem-emg-conformal-hodge-multiplier": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by $$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$ at every point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "On the inherited smooth manifold background [A1], since $\\widetilde g=\\Omega^2g$ and $\\Omega>0$, its inverse is $\\widetilde g^{-1}=\\Omega^{-2}g^{-1}$. The exterior pairing of two $k$-forms contains exactly $k$ inverse-metric factors, so $\\langle\\alpha,\\beta\\rangle_{\\widetilde g}=\\Omega^{-2k}\\langle\\alpha,\\beta\\rangle_g$. In a positively oriented chart, $\\det(\\widetilde g_{ab})=\\Omega^8\\det(g_{ab})$; therefore the metric volume form scales as $\\mathrm{vol}_{\\widetilde g}=\\Omega^4\\mathrm{vol}_g$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Applying [F1] to $\\widetilde g$ and substituting step 1.1 gives $\\alpha\\wedge\\star_{\\widetilde g}\\beta=\\Omega^{-2k}\\langle\\alpha,\\beta\\rangle_g\\,\\Omega^4\\mathrm{vol}_g=\\alpha\\wedge\\bigl(\\Omega^{4-2k}\\star_g\\beta\\bigr)$. The pointwise wedge pairing is nondegenerate, so the form paired with every $\\alpha$ is unique; hence $\\star_{\\widetilde g}\\beta=\\Omega^{4-2k}\\star_g\\beta$. For $k=0,1,2,3,4$ the multipliers are respectively $\\Omega^4,\\Omega^2,1,\\Omega^{-2},\\Omega^{-4}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty base has no point or fiber at which this pointwise identity can be evaluated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 scales the bilinear pairing for every k, including a zero form."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the unit multiplier Ω⁰=1 in degree k=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the inverse metric and Ω>0 preserves nondegeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint, limit or interval conclusion is asserted by this proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a nonempty family is made in the finite pointwise calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-32",
+        "notes": "Checked every degree 0 through 4, positivity and dimensionless status of Ω, inverse-metric powers and oriented-volume power. No curvature or field-equation invariance is inferred."
+      },
+      "finite_checks": [
+        {
+          "check": "Evaluate 4−2k at k=0,1,2,3,4 to get 4,2,0,−2,−4.",
+          "result": "The respective multipliers are Ω⁴, Ω², 1, Ω⁻², Ω⁻⁴.",
+          "verifies": "The all-degree multiplier list in step 2.1."
+        }
+      ]
+    },
+    "lem-emg-observer-field-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-lorentzian-forms",
+          "source_section": "Definition",
+          "quote": "For every observer congruence $n$, each point has a neighborhood carrying an $n$-adapted tetrad; this is a local assertion only.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-observer-and-rest-space",
+          "source_section": "Definition",
+          "quote": "**(a) Observers.** An **observer at $p$** is a tangent vector $n\\in T_pM$ such that $g_p(n,n)=-1$ and $n$ is future-directed in the sense of [[def-gr-smooth-lorentzian-objects]], that is, $g_p(n,N_p)<0$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gr-observer-projection-decomposition",
+          "source_section": "Statement",
+          "quote": "$\\dim n^{\\perp}=3$ and the restriction of $g_p$ to $n^{\\perp}$ is positive definite.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by $$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$ at every point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-inverse-metric-and-musical-isomorphisms",
+          "source_section": "Definition",
+          "quote": "**Inverse metric.** The **inverse metric** at $p$ is the symmetric bilinear form $$g_p^{-1}:T_p^*M\\times T_p^*M\\longrightarrow\\mathbb R,\\qquad g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta).$$ It is symmetric because $g_p$ is, and it is nondegenerate: if $g_p^{-1}(\\alpha,\\beta)=0$ for all $\\beta$, then $g_p(\\sharp_p\\alpha,\\cdot)=0$, so $\\sharp_p\\alpha=0$ and hence $\\alpha=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-differential-forms-form-a-graded-commutative-algebra",
+          "source_section": "Statement",
+          "quote": "The graded vector space $$ \\Omega^*(M):=\\bigoplus_{k\\ge 0}\\Omega^k(M) $$ with the wedge product is an associative graded-commutative algebra.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Antisymmetry of $F$ gives $E_an^a=cF_{ab}n^an^b=0$. The Hodge dual is also a two-form, so $B_an^a=-({\\star_gF})_{ab}n^an^b=0$. Thus both covectors restrict to the positive rest covector space.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Fix a point and use [F1], on the inherited background [A1], to choose a positively oriented orthonormal coframe $(e^0,e^1,e^2,e^3)$ with $n^\\flat=-e^0$. The definition gives $F_{0i}=-E_i/c$. For $i=1,2,3$, the component formula in [F2] gives $({\\star_gF})_{10}=-F_{23}$, $({\\star_gF})_{20}=-F_{31}$, and $({\\star_gF})_{30}=-F_{12}$; therefore $B_1=F_{23}$, $B_2=F_{31}$, and $B_3=F_{12}$, equivalently $F_{ij}=\\epsilon_{ijk}B_k$. The basis formula in [F2] gives $\\star_g(-e^0\\wedge B)=B_1e^2\\wedge e^3+B_2e^3\\wedge e^1+B_3e^1\\wedge e^2$. Together with $n^\\flat\\wedge E/c=-\\sum_i(E_i/c)e^0\\wedge e^i$, this matches all six independent components of $F$ and proves $F=n^\\flat\\wedge E/c+\\star_g(n^\\flat\\wedge B)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "In this coframe, $F^{0i}=-F_{0i}=E_i/c$ and $F^{ij}=F_{ij}$. Antisymmetry counts each independent pair twice, so $F_{ab}F^{ab}=2\\sum_{i<j}F_{ij}^2+2\\sum_iF_{0i}F^{0i}=2\\sum_iB_i^2-\\frac{2}{c^2}\\sum_iE_i^2$. The spatial sums are precisely the squared norms on the positive rest space, proving the first invariant.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Write $F=-\\sum_i(E_i/c)e^0\\wedge e^i+B_1e^{23}+B_2e^{31}+B_3e^{12}$. The pure electric and pure magnetic terms wedge to zero. By [F4], each matching electric/magnetic pair occurs twice and contributes $-2E_iB_i\\,\\mathrm{vol}_g/c$. Therefore $F\\wedge F=-(2/c)\\langle E,B\\rangle_n\\mathrm{vol}_g$. Both invariant identities are tensorial, so the local calculation holds at every point of $U$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty base has no point or fiber at which this pointwise identity can be evaluated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 3.1 and 4.1 remain valid when F, E or B vanishes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No algebraic unit or normalized one-object assertion occurs in this tensor decomposition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rest metric is positive definite and the Lorentz metric nondegenerate, as used in steps 1.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint, limit or interval conclusion is asserted by this proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a local tetrad inherited under ACω; no global frame or full Choice is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-32",
+        "notes": "Checked all independent spatial dual components, reconstruction signs, timelike index raising and the wedge invariant. The claim is pointwise for arbitrary smooth F and has no empirical premise."
+      },
+      "finite_checks": [
+        {
+          "check": "In an adapted tetrad, the three dual time-space entries are (⋆F)₁₀=−F₂₃, (⋆F)₂₀=−F₃₁, and (⋆F)₃₀=−F₁₂.",
+          "result": "B₁=F₂₃, B₂=F₃₁ and B₃=F₁₂, giving Fᵢⱼ=εᵢⱼₖBₖ.",
+          "verifies": "The finite spatial component reconstruction in step 2.1."
+        },
+        {
+          "check": "The six independent entries are F₀ᵢ=−Eᵢ/c for i=1,2,3 and F₂₃=B₁, F₃₁=B₂, F₁₂=B₃.",
+          "result": "The reconstruction formula matches every independent component of the antisymmetric two-form.",
+          "verifies": "The six-component comparison in step 2.1."
+        },
+        {
+          "check": "Sum the three time-space contractions and three spatial contractions, and the three oriented electric-magnetic wedge cross terms.",
+          "result": "F_abF^ab=2(|B|²−|E|²/c²) and F∧F=−(2/c)⟨E,B⟩ₙ vol_g.",
+          "verifies": "The contractions in steps 3.1 and 4.1."
+        }
+      ]
+    },
+    "ex-emgmath-lorentz-star": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by $$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$ at every point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "source_section": "Definition",
+          "quote": "For $\\omega\\in\\Omega^k(M)$, define the candidate $d\\omega$ on smooth vector fields by $$d\\omega(X_0,\\ldots,X_k)=\\sum_i(-1)^iX_i\\omega(X_0,\\widehat X_i,\\ldots,X_k)+\\sum_{i<j}(-1)^{i+j}\\omega([X_i,X_j],X_0,\\widehat X_i,\\widehat X_j,\\ldots,X_k).$$ The next lemma proves that this candidate is a form.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-coordinate-formula-for-the-exterior-derivative",
+          "source_section": "Statement",
+          "quote": "Summing over increasing $k$-tuples $I$, and writing $dx^I=dx^{i_1}\\wedge\\cdots\\wedge dx^{i_k}$, if $\\omega=\\sum_I\\omega_I\\,dx^I$, then $$d\\omega=\\sum_I d\\omega_I\\wedge dx^I.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-differential-forms-form-a-graded-commutative-algebra",
+          "source_section": "Statement",
+          "quote": "The graded vector space $$ \\Omega^*(M):=\\bigoplus_{k\\ge 0}\\Omega^k(M) $$ with the wedge product is an associative graded-commutative algebra.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-inverse-metric-and-musical-isomorphisms",
+          "source_section": "Definition",
+          "quote": "**Inverse metric.** The **inverse metric** at $p$ is the symmetric bilinear form $$g_p^{-1}:T_p^*M\\times T_p^*M\\longrightarrow\\mathbb R,\\qquad g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta).$$ It is symmetric because $g_p$ is, and it is nondegenerate: if $g_p^{-1}(\\alpha,\\beta)=0$ for all $\\beta$, then $g_p(\\sharp_p\\alpha,\\cdot)=0$, so $\\sharp_p\\alpha=0$ and hence $\\alpha=0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Under the formal-parameter assumption [A1], apply [F1] to $dx^0\\wedge dx^1$ and $dx^2\\wedge dx^3$. Linearity gives $\\star_gF=(E_0/c)dx^2\\wedge dx^3+B_0dx^0\\wedge dx^1$. Applying [F1] again gives $\\star_g^2F=(E_0/c)dx^0\\wedge dx^1-B_0dx^2\\wedge dx^3=-F$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "By [F4] and the diagonal metric, $F^{01}=E_0/c$ and $F^{23}=B_0$. Antisymmetry counts the $01$ and $23$ pairs twice, so $F_{ab}F^{ab}=2(-E_0^2/c^2+B_0^2)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "The only nonzero wedge contribution is the cross term between $-(E_0/c)dx^0\\wedge dx^1$ and $B_0dx^2\\wedge dx^3$. By [F3] it occurs twice and equals $-2E_0B_0\\,\\mathrm{vol}_g/c$. The coefficients of $F$ are constant, so [F2] also gives $dF=0$. These are mathematical identities, with no Maxwell or empirical premise.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty base has no point or fiber at which this pointwise identity can be evaluated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 remain valid when E₀=0, B₀=0 or F=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no algebraic unit or normalized one-object assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example fixes the nondegenerate Minkowski metric diag(−1,1,1,1), used in steps 1.1 and 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint, limit or interval conclusion is asserted by this proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional calculation makes no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-32",
+        "notes": "Recomputed the star, star-square, raised components, scalar contraction, wedge sign and dF=0 from constant coefficients. Parameters are formal and no Maxwell law is asserted."
+      },
+      "finite_checks": [
+        {
+          "check": "For F=−(E₀/c)e⁰¹+B₀e²³, use ⋆e⁰¹=−e²³ and ⋆e²³=e⁰¹.",
+          "result": "⋆F=(E₀/c)e²³+B₀e⁰¹ and ⋆²F=−F.",
+          "verifies": "The basis substitution in step 1.1."
+        },
+        {
+          "check": "Raise the 01 pair with g⁰⁰=−1 and the 23 pair with g²²=g³³=1.",
+          "result": "F_abF^ab=2(B₀²−E₀²/c²).",
+          "verifies": "The contraction in step 1.2."
+        },
+        {
+          "check": "Wedge the two distinct basis terms in both orders; constant coefficients have zero coordinate derivatives.",
+          "result": "F∧F=−(2E₀B₀/c)vol_g and dF=0.",
+          "verifies": "The wedge and derivative calculation in step 2.1."
+        }
+      ]
+    }
+  }
+}

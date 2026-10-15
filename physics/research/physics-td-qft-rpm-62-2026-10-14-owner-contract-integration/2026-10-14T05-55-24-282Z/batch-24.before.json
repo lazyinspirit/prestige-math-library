@@ -1,0 +1,1184 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14",
+  "scope": [
+    "lem-rpm-curved-charge-action-variation",
+    "lem-rpm-external-charge-local-ivp",
+    "lem-rpm-charge-gauge-boundary",
+    "def-rpm-charge-spin-model",
+    "post-rpm-external-charge-action",
+    "post-rpm-bmt-dipole-model",
+    "pthm-rpm-external-charge-action-equivalence",
+    "pthm-rpm-charge-mass-shell",
+    "ex-rpm-pure-gauge-free-charge"
+  ],
+  "contracts": {
+    "lem-rpm-curved-charge-action-variation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some — equivalently every — basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi–Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-compact-metric-and-timelike-curve-variation",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with\nmetric-selected connection $\\nabla$, curvature tensors\n$R^{a}{}_{bcd}$, $\\operatorname{Ric}_{ab}$, scalar curvature $S$ and Einstein\ntensor $G_{ab}$ ([[def-gr-curvature-tensor-and-derived-tensors]],\n[[def-gr-smooth-lorentzian-objects]],\n[[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]). Let $(U,x)$ be a\nsmooth chart, let $K\\subseteq U$ be compact, let $I\\subseteq\\mathbb R$ be an\nopen interval with $0\\in I$, and let $s\\mapsto g(s)$, $s\\in I$, be a family of\nsmooth Lorentzian metrics of signature $(-,+,+,+)$ on $M$ such that\n\n- $g(0)=g$ and $g(s)=g$ on $M\\setminus K$ for every $s\\in I$; and\n- the components $g(s)_{ab}$ in the chart are smooth functions of $(s,x)$ on\n  $I\\times x(U)$ ([[def-gr-tensor-fields-and-components]]).\n\nWrite $h_{ab}:=\\partial_sg(s)_{ab}|_{s=0}$, a smooth symmetric covariant\n$2$-tensor field with support in $K$, and\n$q^{ab}:=\\partial_sg(s)^{ab}|_{s=0}$\n([[def-gr-inverse-metric-and-musical-isomorphisms]]).\n\n**(a) Variation of the inverse metric; realizability.** $q^{ab}\n=-g^{ac}g^{bd}h_{cd}$; conversely, for every smooth symmetric covariant\n$2$-tensor field $h_0$ with compact support in $U$ there is $\\lambda_0>0$ such\nthat for every $|\\lambda|<\\lambda_0$ the family $s\\mapsto g+s\\lambda h_0$\nsatisfies the hypotheses above on the parameter interval $(-1,1)$ (with\n$K=\\operatorname{supp}h_0$). In particular any prescribed smooth compactly\nsupported inverse-metric direction $q$ is realized by $g+s h$ on a\nsufficiently small interval, with $h_{ab}=-g_{ac}g_{bd}q^{cd}$.\n\n**(b) Variation of the Christoffel symbols.** The field\n$\\delta\\Gamma^{a}{}_{bc}:=\\partial_s\\Gamma(s)^{a}{}_{bc}|_{s=0}$ is a smooth\ntensor field on $U$ and\n\n$$\\delta\\Gamma^{a}{}_{bc}=\\tfrac12g^{ad}\\bigl(\\nabla_bh_{cd}+\\nabla_ch_{bd}-\\nabla_dh_{bc}\\bigr).$$\n\n**(c) Variation of the Ricci tensor (Palatini identity).**\n$\\delta\\operatorname{Ric}_{bd}:=\\partial_s\\operatorname{Ric}(s)_{bd}|_{s=0}$\nsatisfies\n\n$$\\delta\\operatorname{Ric}_{bd}=\\nabla_a\\delta\\Gamma^{a}{}_{db}-\\nabla_d\\delta\\Gamma^{a}{}_{ab}.$$\n\n**(d) Variation of the curvature density.** With\n$V^{a}:=g^{bd}\\delta\\Gamma^{a}{}_{db}-g^{ab}\\delta\\Gamma^{d}{}_{db}$ and\n$w(s):=\\sqrt{|\\det(g(s)_{ab})|}$ the metric density of\n[[def-gr-metric-volume-form-and-current-flux]],\n\n$$\\partial_s\\bigl(w(s)S(s)\\bigr)\\big|_{s=0}=w\\,G_{ab}q^{ab}+\\partial_a\\bigl(wV^{a}\\bigr).$$\n\n**(e) Variation of the chart action integral.** For every constant\n$\\Lambda\\in\\mathbb R$, the function\n$F(s):=\\int_U\\bigl[(S(s)-2\\Lambda)w(s)-(S(0)-2\\Lambda)w(0)\\bigr]\\,d^4x$ is the compactly supported chart action difference, differentiable at $0$, and\n\n$$F'(0)=\\int_U\\bigl(G_{ab}+\\Lambda g_{ab}\\bigr)q^{ab}\\,w\\,d^4x,$$\n\nwhere the integrand is compactly supported in $K$ and the integral is an\nordinary Riemann integral in the chart coordinates\n([[def-multidimensional-darboux-integral]]).\n\n**(f) Variation of the timelike length and particle action.** Let\n$\\gamma:[a,b]\\to U$ and $H$ be as in\n[[lem-gr-first-variation-of-proper-time]], so that $\\gamma$ is $C^2$, future\ntimelike, parametrized with $g(\\gamma',\\gamma')=-c^2$, the variation is $C^2$\nwith fixed endpoints and future timelike fibres, and $L(s)$ is the length\nfunctional of that lemma. Then the first-variation formulas (1)-(3) of that\nlemma hold verbatim. Consequently for every $m>0$ the particle action\n$S_p(\\gamma):=-mc\\int_a^b\\sqrt{-g(\\gamma'(t),\\gamma'(t))}\\,dt$ satisfies\n$\\partial_sS_p(H(s,\\cdot))|_{s=0}=-mc\\,L'(0)$, so within this class of curves\nand variations $\\gamma$ is stationary for $S_p$ if and only if\n$D_t\\gamma'=0$, i.e. if and only if $\\gamma$ is a geodesic in its proper-time\nparameter ([[def-geodesic-of-an-affine-connection]],\n[[def-covariant-derivative-along-a-curve]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-em-particle-curve-variation",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space ([[def-sr-affine-minkowski-model]]) and fix a conversion constant $c>0$, let $[a,b]$ be a nondegenerate compact interval, let $X:[a,b]\\to A$ be a $C^2$ future timelike curve ([[def-sr-regular-causal-curve-and-worldline]]), and let $\\mathcal A$ be a $C^2$ covector field on a neighbourhood of the image of $X$. An inertial frame is $(o;e_0,e_1,e_2,e_3)$ with future positively oriented $\\eta$-orthonormal basis, and its chart sends $p$ to the unique coordinates of $p-o$ in that basis; in these coordinates $\\eta_{\\mu\\nu}=\\operatorname{diag}(-1,1,1,1)_{\\mu\\nu}$ ([[def-inertial-frame-and-inertial-chart]]). In any such chart write the covector components as $A_\\mu$ and define the antisymmetric covariant field $F$ by $F_{\\nu\\mu}=\\partial_\\nu A_\\mu-\\partial_\\mu A_\\nu$; this coordinate formula defines the notation $F=d\\mathcal A$ used below. Indices run from $0$ to $3$, repeated indices are summed, and $U_\\nu=\\eta_{\\nu\\mu}U^\\mu$. All integrals in this particle lemma are finite-interval Riemann integrals. On $[a,b]$, $C^2$ means continuous components and continuous first and second derivatives with their one-sided endpoint values; equations at endpoints use those same one-sided derivatives. For fixed-endpoint $C^2$ variations $h:[a,b]\\to V$ with $h(a)=h(b)=0$ and for $m,c>0$ and real $q$ consider\n\n$$S[X]=-mc\\int_a^b\\sqrt{-\\eta(\\dot X,\\dot X)}\\,ds+q\\int_a^bA_\\mu(X)\\dot X^\\mu\\,ds .$$\n\nThen for each such $h$ the curve $X+\\varepsilon h$ remains future timelike for all sufficiently small $|\\varepsilon|$, and stationarity of $S$ under all such variations is equivalent to\n\n$$m\\frac{dU_\\nu}{d\\tau}=qF_{\\nu\\mu}U^\\mu,\\qquad\\frac{d\\tau}{ds}=\\frac{\\sqrt{-\\eta(\\dot X,\\dot X)}}c,\\qquad F=d\\mathcal A,$$\n\nwhere $\\tau(s)=\\tau_0+c^{-1}\\int_a^s\\sqrt{-\\eta(\\dot X,\\dot X)}\\,dr$ with arbitrary $\\tau_0\\in\\mathbb R$, and $U(s)=\\dot X(s)/\\tau\\prime(s)$ are the proper-time function and four-velocity ([[def-sr-proper-time]], [[def-sr-four-velocity-and-four-acceleration]]); $dU/d\\tau=U\\prime/\\tau\\prime$ and $\\eta(U,U)=-c^2$ ([[thm-sr-proper-time-and-observer-decomposition]]). This is a calculation about the chosen functional; adopting it as a physical particle action is an additional model assumption, and it makes no existence claim for coupled singular particles and fields. The coefficient-localization proof below is one-dimensional and choice-free; it does not invoke an AC-qualified Lebesgue fundamental lemma.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$. Every open cover of $\\Omega$ admits an at most countable locally finite smooth partition of unity with compact supports, each support contained in some cover member. Subordination here asserts existence of such a member for each support; it does not select cover labels.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and $c<d$. Suppose $g,h:[a,b]\\times[c,d]\\to\\mathbb R$ are continuous and, for every fixed $t\\in[c,d]$, the function $x\\mapsto g(x,t)$ is differentiable on $(a,b)$ with derivative $h(x,t)$. Define\n\n$$G(x):=\\int_c^d g(x,t)\\,dt.$$\n\nThen $G$ is differentiable on $[a,b]$ as a function on that interval and\n\n$$G'(x)=\\int_c^d h(x,t)\\,dt\\qquad(x\\in[a,b]).$$\n\nAt $a$ and $b$ the derivative is relative and one-sided. The derivative hypothesis is imposed only for interior parameter values; continuity of $h$ supplies its endpoint values.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ ([[def-darboux-integral]]). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n([[thm-continuous-implies-integrable]]).",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-gr-future-causal-classification-by-a-timelike-field",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$p\\in M$ ([[def-gr-smooth-lorentzian-objects]]). Write\n$N_p^{\\perp}=\\{v\\in T_pM:g_p(v,N_p)=0\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]) and let $T_p$ be the\ntimelike set, with components $C_p^+$ (the one containing $N_p$) and $C_p^-$,\nand with future and past causality as fixed in\n[[def-time-orientation-and-future-causal-sets]] and\n[[def-gr-smooth-lorentzian-objects]]. Then:\n\n1. $N_p^{\\perp}$ is a $3$-dimensional linear subspace of $T_pM$, and $g_p$ is\n   positive definite on it; equivalently, every nonzero $v\\in T_pM$ with\n   $g_p(v,N_p)=0$ is spacelike.\n2. $g_p(v,N_p)\\neq0$ for every nonzero causal $v\\in T_pM$.\n3. $C_p^+=\\{v\\in T_pM:g_p(v,v)<0\\text{ and }g_p(v,N_p)<0\\}$, and\n   $C_p^-=\\{v\\in T_pM:g_p(v,v)<0\\text{ and }g_p(v,N_p)>0\\}$.\n4. A nonzero $v\\in T_pM$ is causal and future-directed if and only if\n   $v\\in\\operatorname{cl}(C_p^+)$, and causal and past-directed if and only if\n   $v\\in\\operatorname{cl}(C_p^-)$. Consequently\n   $\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$ is exactly the set of\n   future-directed causal vectors and $\\operatorname{cl}(C_p^-)\\setminus\\{0\\}$\n   exactly the set of past-directed causal vectors,\n   $\\operatorname{cl}(C_p^+)\\cap\\operatorname{cl}(C_p^-)=\\{0\\}$, and every\n   nonzero causal vector is exactly one of future-directed and past-directed.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-bolzano-weierstrass",
+          "source_section": "Statement",
+          "quote": "Every bounded sequence of reals has a convergent subsequence: if $(x_k)$ is a\nsequence of reals and there is $M \\in \\mathbb{R}$ with $|x_k| \\le M$ for every\n$k \\in \\mathbb{N}$ ([[def-sequence]]), then there is a strictly increasing\n$n : \\mathbb{N} \\to \\mathbb{N}$ and a real $L$ with $x_{n_j} \\to L$.\n\nEquivalently: the subsequential limit set of a bounded sequence is nonempty\n([[def-subsequential-limit]]).\n\nThe theorem is the exact repair of the false claim that a bounded sequence\nconverges. A bounded\nsequence need not converge, and the alternating sequence is the standing witness;\nwhat boundedness does force is that *some* subsequence converges. The converse of\nthe theorem is false, and badly so: a sequence with a convergent subsequence need\nnot be bounded.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "def-real-numbers",
+          "source_section": "Definition",
+          "quote": "The **real numbers** are the quotient ring\n\n$$\\mathbb{R} := \\mathcal{C} / \\mathcal{N}$$\n\nof the ring of Cauchy sequences ([[thm-cauchy-ring]]) by the ideal of null\nsequences ([[lem-null-ideal]]). The class of $(a_n)$ is written\n$[(a_n)]$. Each rational $q$ maps to the class $\\hat q$ of the constant\nsequence $(q, q, q, \\dots)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b \\in F$.\n\n1. If $a > 0$ then $a^{-1} > 0$.\n2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sets $z^{-1}(W)$, over chart domains $W$, form an open cover of $[a,b]$; by [F11] choose a finite subcover $V_1,\\dots,V_r$. There is $\\delta>0$ such that every closed subinterval of length $<\\delta$ lies in one $V_j$: otherwise [A1] selects closed intervals $I_n$ of length $<1/n$ for each natural $n\\ge1$, none contained in any $V_j$, and their midpoints form a bounded sequence in $[a,b]$; [F17] gives a convergent subsequence with limit $t\\in[a,b]$ and strictly increasing indices $n_s$. Some $V_j$ contains $t$ and, being relatively open, contains $(t-\\eta,t+\\eta)\\cap[a,b]$ for some $\\eta>0$. Choose $N$ with $1/N<\\eta/2$ by [F18]. Since $n_s$ is strictly increasing, it eventually exceeds $N$, so [F19] gives $|I_{n_s}|<1/n_s<1/N<\\eta/2$; also the midpoint is eventually within $\\eta/2$ of $t$. Thus $I_{n_s}\\subset V_j$, a contradiction. Since $b-a>0$, [F18] applied to $\\delta/(b-a)$ gives $k\\ge1$ with $1/k<\\delta/(b-a)$; hence $(b-a)/k<\\delta$. Divide $[a,b]$ into $k$ equal closed subintervals; each is contained in a $V_j$, so each curve subsegment lies in one chart. For each such subsegment and its chart, the inverse image of that chart under the continuous variation map is open and contains $[t_j,t_{j+1}]\\times\\{0\\}$; a finite subcover of this compact segment by product neighborhoods supplies $\\epsilon_j>0$ keeping the whole subsegment in the chart for $|\\epsilon|<\\epsilon_j$. The minimum over finitely many segments gives a common parameter interval.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F11",
+            "F17",
+            "F18",
+            "F19",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On each chart subsegment, write $x_\\epsilon^a(\\tau)$ for the coordinates, $J^a=\\partial_\\epsilon x_\\epsilon^a|_0$, and $U^a=\\partial_\\tau x_0^a$. Differentiating the free-action integrand under the integral by [F6], and applying [F7]–[F9] to $Q=g_{ab}(x_\\epsilon)\\partial_\\tau x_\\epsilon^a\\partial_\\tau x_\\epsilon^b$ at $Q=-c^2$, gives $\\delta S_{\\rm free}=m\\int\\left(g_{ab}(\\partial_\\tau J^a)U^b+\\tfrac12(\\partial_cg_{ab})J^cU^aU^b\\right)d\\tau$. The integrand is continuous, hence Riemann integrable by [F15].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F15",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The factors $J^a$ and $g_{ab}U^b$ are $C^1$, so their derivatives are continuous and integrable by [F15]. Integrating the $\\partial_\\tau J^a$ term of step 2.1 by parts with [F10], and using the Christoffel formula and metric compatibility of [F2], gives on each subsegment $\\delta S_{\\rm free}=m[g(J,U)]_{t_j}^{t_{j+1}}-m\\int_{t_j}^{t_{j+1}}g(J,\\nabla_UU)\\,d\\tau$. When the subsegment endpoints are fixed, the boundary term vanishes and this is the chart-local specialization of [F3]; at internal subdivision points we retain the displayed term.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "A1",
+            "F2",
+            "F3",
+            "F10",
+            "F15",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "On each chart subsegment, $A_a(z(\\tau))$ and $J^a$ are $C^1$, so their derivatives are continuous and integrable by [F15]. Differentiating the interaction integrand by [F6]–[F8] gives $q\\bigl((\\partial_cA_a)J^cU^a+A_a\\partial_\\tau J^a\\bigr)$. Integration by parts [F10] yields $\\delta S_{\\rm int}=q[A(J)]_{t_j}^{t_{j+1}}+q\\int_{t_j}^{t_{j+1}}(\\partial_cA_a-\\partial_aA_c)J^cU^a\\,d\\tau=q[A(J)]_{t_j}^{t_{j+1}}+q\\int_{t_j}^{t_{j+1}}F_{ca}J^cU^a\\,d\\tau$, with the component ordering fixed by [F4] and the notation from step 2.1.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "F15"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Sum steps 3.1 and 3.2 over the finite subdivision. At each internal cut, the free boundary scalar $g(J,U)$ and interaction boundary scalar $A(J)$ agree in the adjacent charts, so their endpoint terms cancel. At $a,b$ they vanish because $J(a)=J(b)=0$. Repeated use of [F16] sums the remaining integrals to the stated first-variation formula.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "given",
+            "F16",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $C_a:=-m(\\nabla_UU)_a+qF_{ab}U^b$ be the continuous coefficient from step 4.1. If $C_{a_0}(\\tau_0)\\ne0$ at an interior point, continuity gives a chart subinterval $I$ on which it has constant sign and magnitude at least $d>0$; choose a nondegenerate compact interval $K=[\\tau_-,\\tau_+]\\subset I$. Define $\\sigma=1$ when $C_{a_0}(\\tau_0)>0$ and $\\sigma=-1$ when $C_{a_0}(\\tau_0)<0$. Use [F5] to choose a cutoff $0\\le\\chi\\le1$ equal to $1$ on $K$ and supported in $I$, and set the $a_0$ coordinate of a variation field to $\\sigma\\chi$ and its other components to zero. Since $K\\cup\\operatorname{supp}\\chi$ is compact in $I$, [F13] applied to the identity function gives a compact interval $H\\subset I$ containing it. On the compact support, $-g(U,U)=c^2$ and $-g(U,N)>0$ have positive minima by [F13] and [F14]. For each support point, continuity of the variation map and openness of the chart give an $\\epsilon$-neighbourhood whose displacements stay in $O$; compactness gives one uniform neighbourhood. The perturbed norm and time-orientation pairing vary continuously on this compact support and equal $-c^2$ and a strictly negative value at $\\epsilon=0$, respectively; the positive minima and compactness let us shrink that neighbourhood so every varied tangent stays timelike and future directed. Extending by $z_\\epsilon=z$ outside the support gives an admissible fixed-endpoint variation.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "given",
+            "F5",
+            "F11",
+            "F13",
+            "F14",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "On $H$, $f(\\tau)=\\sigma C_{a_0}(\\tau)\\chi(\\tau)$ is nonnegative, and on $K$ it is at least $d$. It is continuous and hence integrable by [F15]; [F12] gives $\\int_{\\tau_-}^{\\tau_+} f\\,d\\tau\\ge d(\\tau_+-\\tau_-)>0$. Splitting $H$ at the endpoints of $K$ and applying [F16], nonnegativity on $H\\setminus K$ yields $\\int_H f\\,d\\tau\\ge\\int_K f\\,d\\tau$; since $\\chi$ vanishes outside $H$, [F16] makes the first-variation integral over $[a,b]$ equal to the integral over $H$. Thus step 4.1 gives $\\delta S>0$, contradicting stationarity. Therefore stationarity for every local chart-supported variation forces $C_a=0$ in the interior and, by continuity, at the endpoints. Conversely, $C_a=0$ makes step 4.1 vanish for every admissible variation; raising the covector index with the nondegenerate metric gives $m\\nabla_UU=qF^\\sharp(U)$.",
+          "step": "6.1",
+          "inputs": [
+            "step 4.1",
+            "step 5.1",
+            "A1",
+            "F1",
+            "F2",
+            "F12",
+            "F15",
+            "F16",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nondegenerate interval a<b and a timelike curve."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: setting q=0 removes the two-form term and leaves the free-particle first variation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton parameter or one-object branch in this variational statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The curve is strictly timelike with g(U,U)=-c^2 for c>0; null and zero tangents are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1, 3.2 and 4.1 retain chart-cut boundary terms, cancel internal cuts, and remove the global endpoint terms using J(a)=J(b)=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 uses one explicit compact cutoff supported in the chart interval."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 6.1 proves stationarity forces C_a to vanish by a localized variation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 6.1 shows C_a=0 makes the first variation vanish for every admissible variation."
+        }
+      ]
+    },
+    "lem-rpm-external-charge-local-ivp": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some — equivalently every — basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi–Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-gr-future-causal-classification-by-a-timelike-field",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$p\\in M$ ([[def-gr-smooth-lorentzian-objects]]). Write\n$N_p^{\\perp}=\\{v\\in T_pM:g_p(v,N_p)=0\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]) and let $T_p$ be the\ntimelike set, with components $C_p^+$ (the one containing $N_p$) and $C_p^-$,\nand with future and past causality as fixed in\n[[def-time-orientation-and-future-causal-sets]] and\n[[def-gr-smooth-lorentzian-objects]]. Then:\n\n1. $N_p^{\\perp}$ is a $3$-dimensional linear subspace of $T_pM$, and $g_p$ is\n   positive definite on it; equivalently, every nonzero $v\\in T_pM$ with\n   $g_p(v,N_p)=0$ is spacelike.\n2. $g_p(v,N_p)\\neq0$ for every nonzero causal $v\\in T_pM$.\n3. $C_p^+=\\{v\\in T_pM:g_p(v,v)<0\\text{ and }g_p(v,N_p)<0\\}$, and\n   $C_p^-=\\{v\\in T_pM:g_p(v,v)<0\\text{ and }g_p(v,N_p)>0\\}$.\n4. A nonzero $v\\in T_pM$ is causal and future-directed if and only if\n   $v\\in\\operatorname{cl}(C_p^+)$, and causal and past-directed if and only if\n   $v\\in\\operatorname{cl}(C_p^-)$. Consequently\n   $\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$ is exactly the set of\n   future-directed causal vectors and $\\operatorname{cl}(C_p^-)\\setminus\\{0\\}$\n   exactly the set of past-directed causal vectors,\n   $\\operatorname{cl}(C_p^+)\\cap\\operatorname{cl}(C_p^-)=\\{0\\}$, and every\n   nonzero causal vector is exactly one of future-directed and past-directed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a chart $(U,\\varphi)$ with $x_0\\in U\\subseteq O$ and write its coordinates as $y^a=\\varphi^a(x)$. The state domain $\\varphi(U)\\times\\mathbb R^4$ is open and the equation is $\\dot y^a=U^a$, $\\dot U^a=-\\Gamma^a{}_{bc}(y)U^bU^c+(q/m)F^a{}_b(y)U^b$, where $F^a{}_b:=g^{ac}F_{cb}$ by the definition of $F^\\sharp$. Its right-hand side is $C^1$ because $g$ and $\\Gamma$ are smooth and $F$ is $C^1$, using the sum, product and composition rules [F5, F6]. Choose a closed convex coordinate box about $(\\varphi(x_0),U_0^a)$ contained in that state domain. It is compact by [F9], so each continuous first partial derivative of the vector field is bounded by [F8]. Along the segment between any two states, the one-variable mean value theorem [F4], applied to each component, bounds the difference of vector-field values by a constant times the state difference. Thus the field is locally Lipschitz.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] to this locally Lipschitz coordinate vector field to obtain a unique local solution. Because the vector field is $C^1$, composing it with the $C^1$ solution and applying [F6] shows its derivative is $C^1$, so the curve is $C^2$. The coordinate equation is equivalent to the covariant equation by the Christoffel coefficients of [F2], so coordinate changes carry solutions to solutions. For any two geometric solutions with the same initial data on a connected common interval, their equality set is nonempty and closed by continuity; it is relatively open because at each equality point a common chart and [F3] give local uniqueness. Connectedness makes the equality set the whole interval.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Metric compatibility and antisymmetry give $\\frac{d}{d\\tau}g(U,U)=2g(U,\\nabla_UU)=2(q/m)g(U,F^\\sharp(U))=2(q/m)F(U,U)=0$. Thus the initial norm $-c^2$ is preserved, so $U$ stays timelike. Let $N$ be the smooth timelike field defining the time orientation. By [F7], $g(U,N)$ is nonzero throughout the solution and the initial future direction means it is initially negative; continuity therefore keeps it negative on the connected local interval. Again by [F7], $U$ remains future-directed.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "A1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A point x0 in the open region O and a normalized future-timelike U0 are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 preserves the shell for every q, including q=0, when the force term vanishes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem has no one-state or one-component branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The initial tangent is strictly timelike with norm -c^2; null and zero data are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The conclusion is local on an open proper-time interval, not a finite-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use a chart box and Picard–Lindelöf uniqueness; the solution is unique."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts local existence and uniqueness, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts local existence and uniqueness, not an iff."
+        }
+      ]
+    },
+    "lem-rpm-charge-gauge-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In any chart, $F^\\chi_{ab}=\\partial_a(A_b+\\partial_b\\chi)-\\partial_b(A_a+\\partial_a\\chi)=F_{ab}+\\partial_a\\partial_b\\chi-\\partial_b\\partial_a\\chi=F_{ab}$ by [F1]; hence $dA^\\chi=dA$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By the chain rule [F2], $d\\chi(U)=\\frac{d}{d\\tau}\\chi(z(\\tau))$. Applying [F3] gives $q\\int_a^b d\\chi(U)\\,d\\tau=q[\\chi(z(b))-\\chi(z(a))]$, which is the stated action difference.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a fixed-endpoint variation, $z_\\epsilon(a)$ and $z_\\epsilon(b)$ are constant in $\\epsilon$, so the action difference in step 1.2 has zero $\\epsilon$-derivative; hence the first variations agree and stationarity is unchanged. The free kinetic covector $p=mU^\\flat$ is unchanged, while $\\pi_{A^\\chi}=p+q(A+d\\chi)=\\pi_A+q\\,d\\chi$. No step assumes that a closed two-form has a global potential.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The interval is explicitly nondegenerate with a<b."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives zero action shift at q=0, and the canonical covector shift in step 2.1 is then zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton or one-object branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The curve is future timelike and normalized by g(U,U)=-c^2, excluding null and zero tangents."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 evaluates the gauge term exactly at z(a) and z(b); step 2.1 uses fixed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no iff claim."
+        }
+      ]
+    },
+    "def-rpm-charge-spin-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A definition introduces model quantities and makes no proof claim; this proof-boundary case is inapplicable."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A definition introduces model quantities and makes no proof claim; this proof-boundary case is inapplicable."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A definition introduces model quantities and makes no proof claim; this proof-boundary case is inapplicable."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A definition introduces model quantities and makes no proof claim; this proof-boundary case is inapplicable."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A definition introduces model quantities and makes no proof claim; this proof-boundary case is inapplicable."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A definition introduces model quantities and makes no proof claim; this proof-boundary case is inapplicable."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A definition introduces model quantities and makes no proof claim; this proof-boundary case is inapplicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A definition introduces model quantities and makes no proof claim; this proof-boundary case is inapplicable."
+        }
+      ]
+    },
+    "post-rpm-external-charge-action": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate fixes the finite fixed-endpoint external-potential action, parameter, constants and local potential domain."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "It adopts one massive charged test body on a fixed background with prescribed external fields and excludes self-field, self-gravity, radiation reaction, variable mass or charge, and global-potential/global-solution claims."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong Chapter 1 and the complete Poisson–Pound–Vega arXiv manuscript were inspected at the action/variation sections and are active fetch-stamped sources in batch coverage."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The action is explicitly adopted as a model principle, not deduced from Maxwell equations or asserted as a universal empirical law."
+        }
+      }
+    },
+    "post-rpm-bmt-dipole-model": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate defines G=g_s/2 and K=F(s,U), then states the covariant spin-transport equation for a C1 vector constrained by g(s,U)=0."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "It confines the curved and variable-field transport law to a separately adopted classical model and excludes EDM, gradients, spin backreaction, radiation reaction, collisions and higher multipoles."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The original BMT paper was read in full (both pages) for its homogeneous flat-field scope; the complete PSI notes were read for curved TBMT context. Both active source records are fetch-stamped in batch coverage."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The curved, variable-field formula is explicitly an independent model assumption; no value of g_s or experimental validation is asserted."
+        }
+      }
+    },
+    "pthm-rpm-external-charge-action-equivalence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-rpm-external-charge-action",
+          "source_section": "Remark",
+          "quote": "For dependent deductions, the adopted premise is that on a finite fixed-endpoint timelike segment in a local potential domain, the model trajectory is stationary for the displayed action. The potential and metric are fixed inputs, $m>0$ and $q$ are constant, and this premise asserts neither a global potential nor global trajectory existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-rpm-charge-spin-model",
+          "source_section": "Definition",
+          "quote": "Use the smooth, time-oriented Lorentzian background $(M,g,N)$, signature $(-,+,+,+)$, and the distinct chart, observer, congruence, tetrad and worldline meanings of [[def-rpm-spacetime-observer-and-worldline]]. The metric and time orientation are prescribed data, not dynamical variables. A **charged spinning test body** in this definition consists of the following model quantities along a massive worldline $z:I\\to M$:\n\n- $I\\subseteq\\mathbb R$ is an open interval whose parameter is proper time $\\tau$ in seconds; $z$ is $C^2$, future-directed and timelike, and $U:=dz/d\\tau$ obeys $g(U,U)=-c^2$. The SI conversion constant is $c>0$ metres per second; in a flat specialization use the affine Minkowski model and the proper-time decomposition of [[def-sr-affine-minkowski-model]] and [[thm-sr-proper-time-and-observer-decomposition]].\n- The constant rest-mass parameter $m>0$ has unit kilogram, and the constant charge parameter $q\\in\\mathbb R$ has unit coulomb. They are primitive model parameters; this definition does not derive them from the background field or from another framework.\n- The **kinetic four-momentum** is the derived vector $P:=mU$ along $z$, with unit kilogram metre per second. It is distinct from the potential-dependent covector defined in [[lem-rpm-charge-gauge-boundary]].\n- The **spin or polarization vector** is a $C^1$ tangent vector field $s(\\tau)\\in T_{z(\\tau)}M$ constrained by $g(s,U)=0$, so it lies in the positive-definite instantaneous rest space $U^\\perp$. Its unit is angular momentum, kilogram metre squared per second. This is a classical model vector; no quantization or quantum spin state is defined here.\n- The gyromagnetic ratio $g_s\\in\\mathbb R$ is a dimensionless primitive species parameter. In the instantaneous rest space the model defines the magnetic-moment vector by $\\mu=(g_s q/2m)s$, with unit ampere metre squared. No value $g_s=2$ is assumed, and this constitutive relation is not deduced from Lorentz covariance or classical electromagnetism.\n- The prescribed external electromagnetic field is a $C^1$ alternating covariant two-tensor $F$ on an open region of $M$, independent of the unknown curve. Define $F^\\sharp:T M\\to T M$ by $g(F^\\sharp(v),w)=F(w,v)$. In the flat specialization, a named inertial chart with $x^0=ct$ and $x^i$ in metres uses $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$, matching [[def-em-electromagnetic-tensor]]. On the curved background, $F$ is only a two-form; at an event its components in a chosen orthonormal tetrad use the same algebraic convention. Such a tetrad is a basis field, not a coordinate chart or an observer congruence, as distinguished in [[def-rpm-spacetime-observer-and-worldline]]. The components in an orthonormal tetrad have tesla units. This is an explicit curved-background model input. The cited EM supplier is a flat Minkowski definition and does not derive a curved field or curved Maxwell system.\n- On any open potential domain where a $C^2$ covector field $A$ exists, $F=dA$ with components $F_{ab}=\\partial_aA_b-\\partial_bA_a$ and $A$ has tesla metre components in the stated coordinates. No global potential is assumed, and no Maxwell equation or constitutive law is imposed here.\n\nThis is a test-body model on a fixed background: self-gravity, gravitational backreaction, self-field evaluation, radiation reaction, collisions, electric dipole moments, field-gradient translational forces and higher multipoles are outside this definition. Units follow the framework-local SI conventions of [[def-em-si-conventions]] and do not identify quantities across frameworks.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rpm-curved-charge-action-variation",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a smooth, time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$ ([[def-gr-smooth-lorentzian-objects]]). Assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure, as required for the metric-selected Levi–Civita connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Let $O\\subseteq M$ be open and let $A$ be a $C^2$ covector field on $O$; define the $C^1$ two-form $F=dA$ by $F_{ab}=\\partial_aA_b-\\partial_bA_a$ in each chart. Fix constants $c>0$, $m>0$ and $q\\in\\mathbb R$. Let $z:[a,b]\\to O$ be a $C^2$ future-directed timelike curve, where $a<b$ are proper-time values in seconds and $U=dz/d\\tau$ satisfies $g(U,U)=-c^2$. For every $C^2$ fixed-endpoint variation $z_\\epsilon$ through timelike curves in $O$, with variation field $J=\\partial_\\epsilon z_\\epsilon|_{\\epsilon=0}$ and $J(a)=J(b)=0$, define\n\n$$S[z_\\epsilon]=-mc\\int_a^b\\sqrt{-g(\\partial_\\tau z_\\epsilon,\\partial_\\tau z_\\epsilon)}\\,d\\tau+q\\int_a^b A(\\partial_\\tau z_\\epsilon)\\,d\\tau.$$\n\nThen the first variation is\n\n$$\\delta S=\\int_a^b\\left[-m\\,g(J,\\nabla_UU)+qF(J,U)\\right]d\\tau.$$\n\nConsequently, $z$ is stationary under all local chart-supported fixed-endpoint variations if and only if\n\n$$m(\\nabla_UU)_a=qF_{ab}U^b,$$\n\nequivalently $m\\nabla_UU=qF^\\sharp(U)$, where $F^\\sharp(v)$ is defined by $g(F^\\sharp(v),w)=F(w,v)$. The statement is local to a potential domain; no global potential is assumed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], [A2] and [F1], choose $\\lambda=\\tau$ in the orientation-preserving parameter of the postulate; the functional and the local curve, potential and endpoint hypotheses then match the mathematical variation statement [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F2] under [A2], stationarity for every local fixed-endpoint variation is equivalent to $m(\\nabla_UU)_a=qF_{ab}U^b$. Raising the covector index with the nondegenerate metric and using the definition of $F^\\sharp$ in [F1] gives the equivalent vector equation $m\\nabla_UU=qF^\\sharp(U)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a finite nondegenerate timelike segment with a<b and fixed-endpoint variations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: at q=0 the equation reduces to zero covariant acceleration, the free-action specialization."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton or one-object branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The curve is strictly future timelike; null and zero tangents are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 match the model postulate and mathematical lemma under fixed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No family or witness is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 derives the force equation from stationarity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the force equation makes every first variation vanish."
+        }
+      ]
+    },
+    "pthm-rpm-charge-mass-shell": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rpm-charge-spin-model",
+          "source_section": "Definition",
+          "quote": "Use the smooth, time-oriented Lorentzian background $(M,g,N)$, signature $(-,+,+,+)$, and the distinct chart, observer, congruence, tetrad and worldline meanings of [[def-rpm-spacetime-observer-and-worldline]]. The metric and time orientation are prescribed data, not dynamical variables. A **charged spinning test body** in this definition consists of the following model quantities along a massive worldline $z:I\\to M$:\n\n- $I\\subseteq\\mathbb R$ is an open interval whose parameter is proper time $\\tau$ in seconds; $z$ is $C^2$, future-directed and timelike, and $U:=dz/d\\tau$ obeys $g(U,U)=-c^2$. The SI conversion constant is $c>0$ metres per second; in a flat specialization use the affine Minkowski model and the proper-time decomposition of [[def-sr-affine-minkowski-model]] and [[thm-sr-proper-time-and-observer-decomposition]].\n- The constant rest-mass parameter $m>0$ has unit kilogram, and the constant charge parameter $q\\in\\mathbb R$ has unit coulomb. They are primitive model parameters; this definition does not derive them from the background field or from another framework.\n- The **kinetic four-momentum** is the derived vector $P:=mU$ along $z$, with unit kilogram metre per second. It is distinct from the potential-dependent covector defined in [[lem-rpm-charge-gauge-boundary]].\n- The **spin or polarization vector** is a $C^1$ tangent vector field $s(\\tau)\\in T_{z(\\tau)}M$ constrained by $g(s,U)=0$, so it lies in the positive-definite instantaneous rest space $U^\\perp$. Its unit is angular momentum, kilogram metre squared per second. This is a classical model vector; no quantization or quantum spin state is defined here.\n- The gyromagnetic ratio $g_s\\in\\mathbb R$ is a dimensionless primitive species parameter. In the instantaneous rest space the model defines the magnetic-moment vector by $\\mu=(g_s q/2m)s$, with unit ampere metre squared. No value $g_s=2$ is assumed, and this constitutive relation is not deduced from Lorentz covariance or classical electromagnetism.\n- The prescribed external electromagnetic field is a $C^1$ alternating covariant two-tensor $F$ on an open region of $M$, independent of the unknown curve. Define $F^\\sharp:T M\\to T M$ by $g(F^\\sharp(v),w)=F(w,v)$. In the flat specialization, a named inertial chart with $x^0=ct$ and $x^i$ in metres uses $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$, matching [[def-em-electromagnetic-tensor]]. On the curved background, $F$ is only a two-form; at an event its components in a chosen orthonormal tetrad use the same algebraic convention. Such a tetrad is a basis field, not a coordinate chart or an observer congruence, as distinguished in [[def-rpm-spacetime-observer-and-worldline]]. The components in an orthonormal tetrad have tesla units. This is an explicit curved-background model input. The cited EM supplier is a flat Minkowski definition and does not derive a curved field or curved Maxwell system.\n- On any open potential domain where a $C^2$ covector field $A$ exists, $F=dA$ with components $F_{ab}=\\partial_aA_b-\\partial_bA_a$ and $A$ has tesla metre components in the stated coordinates. No global potential is assumed, and no Maxwell equation or constitutive law is imposed here.\n\nThis is a test-body model on a fixed background: self-gravity, gravitational backreaction, self-field evaluation, radiation reaction, collisions, electric dipole moments, field-gradient translational forces and higher multipoles are outside this definition. Units follow the framework-local SI conventions of [[def-em-si-conventions]] and do not identify quantities across frameworks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-rpm-external-charge-action-equivalence",
+          "source_section": "Statement",
+          "quote": "Assume the charged test-body quantities and local potential domain of [[def-rpm-charge-spin-model]], the flat-space sign convention of [[def-em-electromagnetic-tensor]], and the adopted fixed-endpoint action postulate [[post-rpm-external-charge-action]], and assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure. For a finite $C^2$ future-timelike curve segment $z:[a,b]\\to O$ in that domain, where $a<b$ are proper-time endpoints, and the local $C^2$ fixed-endpoint variations of the postulate, choose the orientation-preserving parameter $\\lambda=\\tau$; the segment is stationary for the adopted action if and only if\n\n$$m\\nabla_UU=qF^\\sharp(U),\\qquad (\\nabla_UU)_a=\\frac qm F_{ab}U^b.$$\n\nThis is a model deduction: it establishes the equation equivalent to stationarity of the postulated functional, not the physical truth of the postulate.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-rpm-external-charge-local-ivp",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a smooth, time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$; assume $\\mathrm{AC}_\\omega$ for its canonical tangent-bundle smooth structure, so the metric-selected Levi–Civita connection $\\nabla$ exists by [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Let $O\\subseteq M$ be open and let $F$ be a $C^1$ alternating covariant two-tensor field on $O$ (a two-form); define $F^\\sharp$ by $g(F^\\sharp(v),w)=F(w,v)$. Fix $m,c>0$, $q\\in\\mathbb R$, an event $x_0\\in O$, and $U_0\\in T_{x_0}M$ with $g(U_0,U_0)=-c^2$ future directed. Then the initial-value problem\n\n$$\\dot x=U,\\qquad \\nabla_UU=(q/m)F^\\sharp(U),\\qquad (x(\\tau_0),U(\\tau_0))=(x_0,U_0)$$\n\nhas a unique local $C^2$ solution on an open proper-time interval containing $\\tau_0$. Any two solutions with these initial data agree on every connected part of their common domain containing $\\tau_0$. Along the solution, $g(U,U)=-c^2$ and $U$ remains future directed. The result is local; it asserts no completeness or global existence for arbitrary external fields.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-sr-momentum-and-four-force",
+          "source_section": "Statement",
+          "quote": "Adopt [[post-sr-massive-particle-dynamics]] and\n[[post-sr-ideal-massless-particle-momentum]]. Then the following conditional\nphysical claims hold in the flat classical model, with the units of\n[[def-sr-si-units-and-coordinate-conventions]].\n\n**(a) Massive particle.** Let a massive particle have constant mass $m>0$,\nfour-momentum $P=mU$ and a future unit observer $n$. Its measured energy\n$E_n(P)=-c\\,\\eta(P,n)$, spatial momentum $q_n(P)=h(P)$ and kinetic energy\n$T_n(P)=E_n(P)-mc^2$ satisfy $E_n(P)>0$, $T_n(P)\\ge0$ and the mass-shell\nidentity $E_n(P)^2=m^2c^4+c^2|q_n(P)|^2$; $T_n(P)=0$ if and only if the\nparticle is at rest in the observer's frame ($U=cn$). In an inertial frame\nwhose stationary observer is $n=e_0$, the components are $P=(E/c,\\mathbf p)$\nwith $E=E_{e_0}(P)=m\\gamma_wc^2$ and $\\mathbf p=m\\gamma_w\\mathbf w\\in\\mathbb R^3$\nthe coordinates of $q_{e_0}(P)=\\sum_{i=1}^3p^ie_i$\nfor the coordinate velocity $\\mathbf w$, and under a passive boost the\ncomponents transform as the components of the vector $P$; the combination\n$E^2-c^2|\\mathbf p|^2=m^2c^4$ is frame-independent.\n\n**(b) Four-force.** Along a $C^2$ worldline with four-acceleration $A$, the\nfour-force $F=\\dot P$ satisfies $\\eta(P,F)=0$ and $F=mA$; in an inertial frame\n$F=\\gamma\\,(\\mathbf f\\cdot\\mathbf w/c,\\ \\mathbf f)$ and\n$dE/dt=\\mathbf f\\cdot\\mathbf w$, where $\\mathbf f=d\\mathbf p/dt$ is the\ncoordinate three-force. The constancy of $m$ is used; if instead $m$ is a\n$C^1$ function $m:I\\to(0,\\infty)$ along the same worldline, define $P:=mU$\nand $F:=\\dot P$ by the general derivative construction. As a mathematical identity, $\\eta(P,F)=-mc^2\\,dm/d\\tau$, and the\nconstant-mass identities are not transferred to variable-mass systems.\n\n**(c) System mass.** For a finite nonempty system of particles all of whose\nfour-momenta are nonzero future causal, let $Q:=\\sum_iP_i$. If $Q$ is\nfuture timelike, its invariant mass $M=\\sqrt{-\\eta(Q,Q)}/c$ satisfies: in the\ncenter-of-momentum frame with $e_0=Q/(Mc)$ one has\n$Mc^2=\\sum_iE_{e_0}(P_i)$; every massive constituent has\n$E_{e_0}(P_i)\\ge m_ic^2$, with equality exactly when it is at rest in that\nframe, and every massless constituent has $E_{e_0}(P_i)>0$. Hence\n$M\\ge\\sum_im_i$ over the massive constituents, with equality if and only if\nthe system is massive-only and all its constituents are at rest in the\ncenter-of-momentum frame. If $Q$ is future null, then $M=0$, all constituents\nare massless with parallel momenta, and no center-of-momentum frame exists.\n\n**(d) Massless particle.** An ideal massless particle has\n$E_n(P)=c\\,|q_n(P)|>0$, has no rest frame and is not $mU$ for any $m>0$; it is\nnot obtained from the massive formula by setting $m=0$.\n\n**(e) Necessary collision thresholds.** Suppose that, under the adopted\nisolated-collision balance, an isolated collision occurs whose incoming legs\nare massive particles of constant masses $m_1,\\dots,m_N$ and whose outgoing\nlegs are massive particles of masses $\\mu_1,\\dots,\\mu_K$ and possibly ideal\nmassless particles. Let $M$ be the invariant mass of the common total\nfour-momentum $Q$. Then the necessary inequalities $M\\ge\\sum_im_i$ and\n$M\\ge\\sum_j\\mu_j$ hold; if the incoming side is a projectile of mass $m_1$\nand a target of mass $m_2$ at rest in the observer frame of the target, with\nprojectile energy $E$ and kinetic energy $T=E-m_1c^2$ in that frame, then\n\n$$E\\ \\ge\\ \\frac{c^2}{2m_2}\\Bigl[\\Bigl(\\sum_{j=1}^K\\mu_j\\Bigr)^2-m_1^2-m_2^2\\Bigr],\\qquad T\\ \\ge\\ \\frac{c^2}{2m_2}\\Bigl[\\Bigl(\\sum_{j=1}^K\\mu_j\\Bigr)^2-(m_1+m_2)^2\\Bigr],$$\n\nSeparately, under the same adopted balance, a single incoming massless particle\ncannot produce an outgoing state containing a massive particle. These are kinematic necessity statements under\nthe adopted conservation: they do not assert that any collision occurs, do\nnot fix probabilities, amplitudes or cross sections, and are not empirical\nfindings.\n\n**(f) Scope.** All clauses are conditional on the two postulates and on the\nstated idealisations; the conclusions carry the same idealisations. No\nmeasurement, precision, statistical or empirical claim is made.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-em-electromagnetic-tensor",
+          "source_section": "Definition",
+          "quote": "Let the laboratory region, its inertial chart and the fields and sources be those\nof [[def-em-lab-geometry]], [[def-em-fields]] and [[def-em-sources]], with the\nunits of [[def-em-si-conventions]]; fix the ordered basis\n$(e_0,e_1,e_2,e_3)$ of the chart and the oriented volume form $\\varepsilon$ of\n[[def-oriented-minkowski-volume-form]], with $\\varepsilon_{0123}=+1$ and\n$\\eta=\\operatorname{diag}(-1,1,1,1)$.\n\n(a) [Components] For a field pair $(E,B)$ of class $C^k$, $k\\ge1$, define the\ncovariant components of the **electromagnetic two-form** $F$ in the chart by\n$F_{00}=0$, $F_{0i}:=-E_i/c$, $F_{ij}:=\\epsilon_{ijk}B_k$\n($i,j,k\\in\\{1,2,3\\}$) and $F_{ab}:=-F_{ba}$, the index-raised components being\n$F^{0i}=E_i/c$, $F^{i0}=-E_i/c$ and $F^{ij}=\\epsilon_{ijk}B_k$. Here\n$\\epsilon_{ijk}$ is the spatial permutation symbol of\n[[def-oriented-minkowski-volume-form]]. Then $F$ is a $C^k$ type-$(0,2)$\ntensor field on $U$ in the sense of\n[[def-ck-tensor-field-on-minkowski-space]], alternating at every event, and the\ncomponents above are exactly its component functions: at $p\\in U$ the tensor\n$F(p)$ is the bilinear form $F(p)(u,w)=F_{ab}(p)u^aw^b$ on $V$ in the\ncoordinates $u^a,w^b$ of $u,w$ in $(e_0,e_1,e_2,e_3)$. Indeed each $F_{ab}$ is\na finite sum of products of the $C^k$ functions $E_i,B_k$ of the chart\ncoordinates with the constants $c,\\epsilon_{ijk}$, hence a $C^k$ function of\n$x(p)$, and the component criterion of\n[[def-ck-tensor-field-on-minkowski-space]] applies.\n\n(b) [Observer decomposition] Let $n:=e_0$ be the future unit timelike vector of\nthe chart and let $e_a:=F_{ab}n^b$, $b_a:=(*F)_{ab}n^b$ be the observer\ncomponents of [[thm-sr-antisymmetric-observer-decomposition]]; then\n$e_i=+E_i/c$, $b_i=-B_i$ and $e_0=b_0=0$, and the invariants and square wedge\nof that theorem read\n\n$$\\tfrac12F_{ab}F^{ab}=|B|^2-|E|^2/c^2,\\qquad F_{ab}(*F)^{ab}=+4\\,(E\\cdot B)/c,\\qquad F\\wedge F=-2\\,(E\\cdot B)\\,\\varepsilon/c,$$\n\nwhere $|\\cdot|$ and $\\cdot$ are the spatial Euclidean structure of the frame.\n(For the same pair $(E,B)$, that theorem's optional clause (d) uses\n$F_{\\rm optional}^{i0}=E_i/c$ and $F_{\\rm optional}^{ij}=-\\epsilon_{ijk}B_k$, so\n$F_{\\rm optional}=-F$ in all six components, not only the magnetic block. This\nframework fixes clause (a) and uses the theorem's general algebra; its optional\nSI dictionary must be converted by negating the entire tensor.)\n\n(c) [Potentials when they exist] If $\\varphi$ and $A$ are $C^1$ with\n$E=-\\nabla\\varphi-\\partial_tA$ and $B=\\operatorname{curl}A$, and\n$A^\\mu:=(\\varphi/c,A)$, $A_\\mu:=\\eta_{\\mu\\nu}A^\\nu$, then\n$F_{\\mu\\nu}=\\partial_\\mu A_\\nu-\\partial_\\nu A_\\mu$; conversely, if a $C^1$\ncovector field $A_\\mu$ on $U$ satisfies $F_{\\mu\\nu}=\\partial_\\mu A_\\nu\n-\\partial_\\nu A_\\mu$, then $E,B$ recovered from $F$ by clause (a) obey\n$E=-\\nabla\\varphi-\\partial_tA$ and $B=\\operatorname{curl}A$ with\n$\\varphi:=-cA_0$ and the spatial potential vector $A:=(A_1,A_2,A_3)$. Here\n$\\nabla$ and $\\operatorname{curl}$ are those of\n[[def-divergence-and-curl-of-a-c1-vector-field]] in the spatial coordinates,\nand the spatial cross-product conventions of [[def-cross-product-in-r3]] are\nused. The definition does not assert that every field pair admits such a\npotential; where a $C^1$ potential represents the $C^1$-or-better field of\nclause (a), the field is closed in the explicit sense\n$\\partial_\\lambda F_{\\mu\\nu}+\\partial_\\mu F_{\\nu\\lambda}\n+\\partial_\\nu F_{\\lambda\\mu}=0$. This conclusion does not require second\nclassical derivatives of the potential: put\n$H_{\\lambda\\mu\\nu}:=\\partial_\\lambda F_{\\mu\\nu}+\\partial_\\mu F_{\\nu\\lambda}\n+\\partial_\\nu F_{\\lambda\\mu}$, which is continuous because $F$ is $C^1$; for\nevery smooth compactly supported test $\\psi$, substituting $F=dA$ and\nintegrating by parts twice, moving the derivatives first onto $\\psi$\n([[lem-sr-compact-variation-and-fundamental-lemma]] (b)) and then off the\npotential factors after commuting only the smooth test derivatives\n([[thm-clairaut-schwarz-mixed-partials]]), gives $\\int H\\psi=0$; the\nfundamental lemma (a) of [[lem-sr-compact-variation-and-fundamental-lemma]]\nthen gives $H=0$. The framework's potential theorems establish existence only\nunder their stated hypotheses; [[def-directional-and-partial-derivatives]]\nsupplies the coordinate derivatives $\\partial_\\mu$ used throughout.\n\n(d) [Four-current and index-raising operator] With the adopted four-current\n$j=(c\\rho,J)$ of [[def-em-sources]], the raised-index operator $\\Phi$ of\n[[lem-em-antisymmetric-tensor-contraction]], defined pointwise on $V$ by\n$\\eta(\\Phi(u),w)=F(w,u)$, satisfies\n$\\Phi(u)^\\mu=\\eta^{\\mu\\alpha}F_{\\alpha\\beta}u^\\beta$; the components of $F$\ncarry the tesla (T), those of $j$ carry A m$^{-2}$, and those of a\nfour-potential $A^\\mu$ carry T m.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2] and [F3], the action model's equation has a unique local solution through the given data, with $g(U,U)=-c^2$ and future direction preserved. From [F1], $P=mU$; therefore $g(P,P)=m^2g(U,U)=-m^2c^2$, and $P$ is future timelike because $m>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the flat inertial chart, [F4] gives $U^0=\\gamma c$, $U^i=\\gamma v^i$, $P^i=p^i$, and $E_{\\rm part}=cP^0$, while [F2] gives $m\\,dU^\\mu/d\\tau=qF^\\mu{}_{\\nu}U^\\nu$. Since $dt/d\\tau=\\gamma$, [F5] yields $m\\,dU^i/d\\tau=q\\gamma(E_i+(\\mathbf v\\times\\mathbf B)_i)$ and $m\\,dU^0/d\\tau=q\\gamma(\\mathbf E\\cdot\\mathbf v)/c$; multiplying by $1/\\gamma$ and, for the temporal equation, by $c/\\gamma$, gives the two displayed laboratory identities.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The curved-space shell conclusion is step 1.1, and the flat coordinate force and power conclusions are step 1.2; both inherit exactly the prescribed-field and test-body assumptions stated above. No empirical premise is used.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A future-timelike initial datum in the open field region is assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 remain valid at q=0; the shell persists and the flat force and power vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton or one-object branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The initial datum is strictly timelike with norm -c^2; null data are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The solution is local on an open interval and has no finite-endpoint conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes the unique local solution of the IVP, with no solution selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem contains no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem contains no iff claim."
+        }
+      ]
+    },
+    "ex-rpm-pure-gauge-free-charge": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-rpm-external-charge-action",
+          "source_section": "Postulate",
+          "quote": "Adopt the following motion principle for the massive charged test body of [[def-rpm-charge-spin-model]]. On any finite segment $z:[a,b]\\to O$ in a local potential domain, with $z$ a $C^2$ future-timelike curve and fixed endpoints, the physical trajectories of this idealized model are the stationary points of\n\n$$S[z]=-mc\\int_a^b\\sqrt{-g(z',z') }\\,d\\lambda+q\\int_a^b A(z')\\,d\\lambda,$$\n\nwhere $\\lambda$ is an orientation-preserving curve parameter (use seconds for SI evaluation), $A$ is the prescribed $C^2$ external potential, $F=dA$, $m>0$ is constant rest mass, $q$ is constant charge, and $c$ is the SI conversion constant. With $\\lambda=\\tau$ in seconds, coordinates in metres and $A$ in tesla metres, $S$ has units joule seconds. The potential and metric are fixed inputs, independent of the particle path. This is a local action postulate: no global potential is assumed, and a global field e",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sr-affine-minkowski-model",
+          "source_section": "Definition",
+          "quote": "An **oriented time-oriented affine Minkowski space** is a quadruple\n$(A,V,\\eta,C^+)$ with the following data. In this notation $V$ includes its\nspecified orientation; forgetting that orientation gives only the underlying\nreal vector space, not the full datum $V$ of the model.\n\n1. A nonempty affine space $A$ over a $4$-dimensional real vector space $V$,\n   with action $(p,v)\\mapsto p+v$ and displacement $q-p\\in V$\n   ([[def-affine-space-and-displacement]]). In particular $V$ is a real vector\n   space of dimension $4$.\n2. A Lorentz form $\\eta$ on $V$, i.e. a nondegenerate symmetric bilinear form of\n   inertia $(3,1,0)$ ([[def-lorentz-form-and-inertia]]). Its associated quadratic\n   form is $q(v)=\\eta(v,v)$.\n3. An **orientation** of $V$: a positive ray of the determinant line\n   $\\Lambda^4V$, fixed once and for all\n   ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-s",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-inertial-frame-and-inertial-chart",
+          "source_section": "Definition",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]]), with orientation fixed as a positive ray of\nthe determinant line $\\Lambda^4V$\n([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]])\nand with the corresponding class of positively oriented ordered bases of $V$\n([[def-orientation-of-a-finite-dimensional-real-vector-space]]); by\n[[prop-orientations-and-positive-basis-classes-agree-in-positive-dimension]] the\npositive ray selects exactly one such class for $\\dim V=4>0$.\n\nAn **inertial frame** of the model is a tuple $(o;e_0,e_1,e_2,e_3)$ consisting\nof an event $o\\in A$ and an ordered basis $(e_0,e_1,e_2,e_3)$ of $V$ that is\n\n1. **$\\eta$-orthonormal**: $\\eta(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ for all $a,b$ ([[lem-lorentz-form-has-orthonormal-basis]]);\n2. **future**: $e_0\\in C^+$, i.e. $e_0$ is futu",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nT",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rpm-charge-gauge-boundary",
+          "source_section": "Statement",
+          "quote": "Let $O$ be a potential domain with a $C^2$ metric $g$, a $C^2$ one-form $A$, and $F=dA$. Let $\\chi\\in C^3(O,\\mathbb R)$ and set $A^\\chi:=A+d\\chi$. For $a<b$, any $C^2$ future-timelike curve segment $z:[a,b]\\to O$ parameterized by proper time $\\tau$ so $g(z',z')=-c^2$ for $c>0$, constants $m>0$ and $q\\in\\mathbb R$, and the functional\n\n$$S_A[z]=-mc\\int_a^b\\sqrt{-g(z',z') }\\,d\\tau+q\\int_a^b A(z')\\,d\\tau,$$\n\nthe field strength is unchanged, $dA^\\chi=dA$, and\n\n$$S_{A^\\chi}[z]-S_A[z]=q\\bigl(\\chi(z(b))-\\chi(z(a))\\bigr).$$\n\nThus the difference is constant over every fixed-endpoint variation, so stationarity and the kinetic covector $p:=mU^\\flat$ are gauge invariant. If the local covector $\\pi_A:=p+qA$ is defined, then $\\pi_{A^\\chi}=\\pi_A+q\\,d\\chi$. These are local statements on $O$; they assert no global exactness of $F$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-rpm-external-charge-action-equivalence",
+          "source_section": "Statement",
+          "quote": "Assume the charged test-body quantities and local potential domain of [[def-rpm-charge-spin-model]], the flat-space sign convention of [[def-em-electromagnetic-tensor]], and the adopted fixed-endpoint action postulate [[post-rpm-external-charge-action]], and assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure. For a finite $C^2$ future-timelike curve segment $z:[a,b]\\to O$ in that domain, where $a<b$ are proper-time endpoints, and the local $C^2$ fixed-endpoint variations of the postulate, choose the orientation-preserving parameter $\\lambda=\\tau$; the segment is stationary for the adopted action if and only if\n\n$$m\\nabla_UU=qF^\\sharp(U),\\qquad (\\nabla_UU)_a=\\frac qm F_{ab}U^b.$$\n\nThis is a model deduction: it establishes the equation equivalent to stationarity of the postulated functional, not the physical truth of the postulate.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-rpm-charge-spin-model",
+          "source_section": "Definition",
+          "quote": "Use the smooth, time-oriented Lorentzian background $(M,g,N)$, signature $(-,+,+,+)$, and the distinct chart, observer, congruence, tetrad and worldline meanings of [[def-rpm-spacetime-observer-and-worldline]]. The metric and time orientation are prescribed data, not dynamical variables. A **charged spinning test body** in this definition consists of the following model quantities along a massive worldline $z:I\\to M$:\n\n- $I\\subseteq\\mathbb R$ is an open interval whose parameter is proper time $\\tau$ in seconds; $z$ is $C^2$, future-directed and timelike, and $U:=dz/d\\tau$ obeys $g(U,U)=-c^2$. The SI conversion constant is $c>0$ metres per second; in a flat specialization use the affine Minkowski model and the proper-time decomposition of [[def-sr-affine-minkowski-model]] and [[thm-sr-proper-time-and-observer-decomposition]].\n- The constant rest-mass parameter $m>0$ has unit kilogram, and",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ that is interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different const",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "2.1",
+          "claim": "By [A2] and [F3], stationarity is equivalent to $m\\nabla_UU=0$. Since $m>0$ and the metric matrix is constant, [F1] gives $\\Gamma^a{}_{bc}=\\tfrac12\\eta^{ad}(\\partial_b\\eta_{dc}+\\partial_c\\eta_{db}-\\partial_d\\eta_{bc})=0$; thus the equation is $dU^a/d\\tau=0$ in the inertial chart. Apply [F5] to each component on the interval to obtain constant $U=U_0$; applying it to $z^a(\\tau)-U_0^a\\tau$ gives $z(\\tau)=X_0+(\\tau-\\tau_0)U_0$. Conversely a future-timelike proper-time straight curve has $dU/d\\tau=0$ and is stationary by the reverse implication of [F3]. No compatible endpoint curve is asserted to exist for arbitrary endpoint events or arbitrary proper-time duration.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "3.1",
+          "claim": "By [F4], $P=mU_0$ is constant, and [F2] gives $\\pi_{A,1}=mU_1+qb x^1$. Differentiating along the curve from step 2.1 yields $d\\pi_{A,1}/d\\tau=qb U^1$, with $U_1=U^1$ by [F1]. Hence the canonical component may vary exactly as stated while $qF^\\sharp(U)=0$ and $dP/d\\tau=0$. The action shift has units joule-seconds and the canonical covector components have momentum units; neither is an empirical measurement.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires tau0<tau1 and future-timelike C2 segments; no empty segment or zero tangent is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step1.1 proves F=0 for every b; step3.1 records constant canonical component when q,b or U1 is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-object cardinality or unit element boundary enters this coordinate polynomial example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The massive model requires m,c>0 and timelike normalization; a null or zero-velocity spacetime tangent is excluded. Zero spatial U1 remains an allowed canonical-shift degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Fixed events X0,X1 make the gauge action difference constant; step2.1 claims no solution for incompatible arbitrary endpoint/time data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Inherited AComega is stated in Example,A2 and the action-equivalence proof use. No fullAC or extra choice construction is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step2.1 uses the exact action equivalence, F=0 and constant flat metric to obtain constant U and straight motion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step2.1 states and proves the reverse implication: an admitted future-timelike proper-time straight curve has zero covariant acceleration and is stationary."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

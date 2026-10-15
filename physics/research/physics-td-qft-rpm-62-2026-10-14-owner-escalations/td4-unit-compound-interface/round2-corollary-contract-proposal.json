@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "round": 2,
+  "item": "cor-tdmath-ordered-finite-mixture-envelope",
+  "source_raw_sha256": "6f2db2461c78d4d33ff56800d6d2a9a40710ada862d53b7ea67536055bbfe040",
+  "citations_replace": [
+    {
+      "fact": "L1",
+      "source": "thm-tdmath-additive-entropy-representation",
+      "source_section": "Statement",
+      "quote": "Let $X$ be nonempty and suppose its finite-support compounds carry the comparison structure of [[def-tdmath-comparison-and-stability]] over the complete ordered field $\\mathbb R$. If there are $x_0,x_1\\in X$ with $x_0\\preceq x_1$ and not $x_1\\preceq x_0$, define $S(x):=\\sup L_x$ using [[lem-tdmath-reference-supremum-bounds]]. Then $S:X\\to\\mathbb R$ is normalized by $S(x_0)=0$, $S(x_1)=1$, and for all equal-mass compounds $A=\\sum_i a_i e_{x_i}$ and $B=\\sum_j b_j e_{y_j}$,\n\n$$A\\preceq B\\quad\\Longleftrightarrow\\quad\\sum_i a_iS(x_i)\\le\\sum_j b_jS(y_j).$$\n\nThus $S$ is an additive extensive representation on finite compounds. If no strict pair exists, CH instead makes every equal-mass pair of compounds equivalent, and any constant state function gives a (degenerate) additive representation. No concavity, continuity, or physical law follows without additional hypotheses.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "L2",
+      "source": "def-tdmath-tagged-scalable-compound",
+      "source_section": "Definition",
+      "quote": "Let $X$ be a set of state labels. A **tagged scalable compound over $X$** is a function $c:X\\to\\mathbb R_{\\ge0}$ whose support $\\operatorname{supp}(c):=\\{x\\in X:c(x)\\ne0\\}$ is finite. The coefficient is a dimensionless formal amount; state labels retain their tags, so equal coefficients on different labels do not identify those labels. Compounds are equal exactly when their coefficient functions are equal.\n\nFor compounds $c,d$ and $t\\ge0$, define composition and nonnegative scaling pointwise by $(c+d)(x):=c(x)+d(x)$ and $(tc)(x):=t c(x)$. The zero function is the empty compound; in particular $0c=0$. Comparison axioms involving scaling still require a strictly positive scalar unless explicitly stated otherwise. The **mass** of $c$ is the finite sum $m(c):=\\sum_{x\\in\\operatorname{supp}(c)}c(x)$. It is dimensionless bookkeeping mass, not thermodynamic mass or energy. The compound is positive when $m(c)>0$.\n\nFor every state label $x\\in X$, the **unit-state compound** $e_x$ is the coefficient function with $e_x(y)=1$ if $y=x$ and $e_x(y)=0$ otherwise. Its support is $\\{x\\}$, so it is a tagged compound. In compound comparisons, a state label $x$ denotes $e_x$. Every compound has the canonical finite decomposition $c=\\sum_{x\\in\\operatorname{supp}(c)}c(x)e_x$, with an empty sum when $c=0$; coefficients on this support are strictly positive. The mass-one property $m(e_x)=1$ and the equivalence $m(c)=0\\Longleftrightarrow c=0$ are proved in [[lem-tdmath-compound-mass-well-defined]].\n\nThe formula for mass is independent of the chosen finite set containing the support, and composition and scaling obey $m(c+d)=m(c)+m(d)$ and $m(tc)=t m(c)$; [[lem-tdmath-compound-mass-well-defined]] proves these assertions.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "L2",
+      "source": "lem-tdmath-compound-mass-well-defined",
+      "source_section": "Statement",
+      "quote": "For every tagged scalable compound $c$, the mass in [[def-tdmath-tagged-scalable-compound]] is independent of the finite summation set used. For any compounds $c,d$ and $t\\ge0$, $m(c+d)=m(c)+m(d)$ and $m(tc)=t m(c)$; $m(0)=0$. For every $x\\in X$, the unit-state compound $e_x$ has $m(e_x)=1$. A compound has zero mass if and only if it is the empty compound.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "L3",
+      "source": "thm-tdmath-finite-mixture-envelope",
+      "source_section": "Statement",
+      "quote": "Let $m\\ge1$, let $q_1,\\ldots,q_m\\in\\mathbb R^d$, and let $a_1,\\ldots,a_m\\in\\mathbb R$. Put\n\n$$\\Delta_m=\\{\\theta\\in\\mathbb R^m:\\theta_i\\ge0,\\ \\sum_{i=1}^m\\theta_i=1\\},\\qquad P=\\operatorname{conv}\\{q_1,\\ldots,q_m\\}.$$\n\nFor $x\\in P$ let $\\Theta_x=\\{\\theta\\in\\Delta_m:\\sum_i\\theta_iq_i=x\\}$ and define\n\n$$f_{\\rm mix}(x)=\\min_{\\theta\\in\\Theta_x}\\sum_{i=1}^m\\theta_i a_i;$$\n\nset $f_{\\rm mix}(x)=+\\infty$ for $x\\notin P$. Then every minimum is attained; $f_{\\rm mix}$ is proper, lower semicontinuous, and convex; and it is the greatest convex extended-real function satisfying $f_{\\rm mix}(q_i)\\le a_i$ for every $i$. Consequently $f_{\\rm mix}=f_{\\rm mix}^{**}$. If $p\\in\\partial f_{\\rm mix}(x)$ and $\\theta$ is any minimizing mixture for $x$, then every $i$ with $\\theta_i>0$ satisfies\n\n$$a_i=\\langle p,q_i\\rangle-f_{\\rm mix}^*(p).$$\n\nThus all occupied data points $(q_i,a_i)$ lie on one supporting affine hyperplane. The assertion is finite-dimensional and makes no claim about infinite families.",
+      "uses": [
+        "1.1",
+        "2.1"
+      ]
+    }
+  ],
+  "derivations_replace": [
+    {
+      "id": "step-1-1",
+      "step": "1.1",
+      "claim": "By [A1] and [L1], each $a_i=S(s_i)$ is finite. For any $\\theta\\in\\Delta_m$, [L2] gives $m(M_\\theta)=\\sum_i\\theta_i m(e_{s_i})=\\sum_i\\theta_i=1$. If $\\theta_i=0$, its term is the empty compound and contributes zero; equivalently omit such terms, leaving only positive coefficients and never applying a positive-scaling comparison axiom at zero. The representation assigns $M_\\theta$ the value $V(\\theta)=\\sum_i\\theta_i a_i$. By [A3], its coordinate is $\\sum_i\\theta_i q_i$. Since the states are distinct, the coefficient of $s_i$ in $M_\\theta$ is exactly $\\theta_i$, so this parametrization is injective. Hence mixtures in this fixed family with coordinate $x$ correspond exactly to $\\theta\\in\\Theta_x$ from [L3].",
+      "inputs": [
+        "A1",
+        "A3",
+        "L1",
+        "L2",
+        "L3",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-2-1",
+      "step": "2.1",
+      "claim": "The minimum of $V(\\theta)$ over those mixtures is therefore $\\min_{\\theta\\in\\Theta_x}\\sum_i\\theta_i a_i=f_{\\rm mix}(x)$ by [L3], with $+\\infty$ when $\\Theta_x$ is empty. Every further conclusion in the Statement follows by applying the corresponding conclusion of [L3] to the same finite data. The point-mass and zero-coefficient cases are supplied by [L2]; the transfer remains conditional on [A1] and [A3] and records no independent acceptance of the draft representation.\n",
+      "inputs": [
+        "A1",
+        "A3",
+        "L3",
+        "step 1.1"
+      ]
+    }
+  ],
+  "remove_fact": "A2 missing-interface assumption supplied by L2; remove obsolete A2 inputs and references from owning contract.",
+  "boundaries_preserve_except_notes": "Maintain owner/current native contract boundaries; update zero coefficient notes to nonnegative scaling/omit zero terms and m>=1 source scope. No independent review stamp is created.",
+  "source_status": "draft",
+  "recorded_at": "2026-10-14T04:46:01.693934+00:00"
+}

@@ -1,0 +1,34 @@
+---
+id: def-td-thermal-contact-constraints
+kind: definition
+title: Thermal contact family and constraints
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+physical_scope: Admitted pair contacts between equilibrium macrostates of the nonrelativistic macroscopic thermodynamic framework; no temperature scale or contact transitivity is defined here.
+deps: [def-td-equilibrium-state-domain, def-td-system-and-permitted-exchanges, def-td-process-and-protocol]
+dependency_roles:
+  def-td-equilibrium-state-domain: formulation-prerequisite
+  def-td-system-and-permitted-exchanges: formulation-prerequisite
+  def-td-process-and-protocol: formulation-prerequisite
+aliases: []
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§II.F and IV.A
+      url: https://arxiv.org/pdf/cond-mat/9708200v2
+    - title: David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, §4.1
+      url: https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf
+    - title: Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §2.2
+      url: https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf
+dependency_level: 4
+---
+
+## Definition
+
+For each material constitution $c$, let $D_c$ be the equilibrium state domain from [[def-td-equilibrium-state-domain]]. A **thermal-contact family** is a model-declared set $\mathcal T$ of tagged pairs $(c,x)$ with $x\in D_c$. A **thermal-contact protocol** for two states $x,y\in\mathcal T$ is an admitted preparation of their compound system in which the two constituents are separated by a declared diathermal contact: matter transfer and mechanical or composition work across that contact are forbidden, while the protocol permits thermal energy transfer between the constituents. The compound's external boundary and all retained constraints are specified as in [[def-td-system-and-permitted-exchanges]] and [[def-td-process-and-protocol]].
+
+The pair is in **thermal contact equilibrium**, written $x\sim_T y$, when the admitted contact preparation leaves both constituent coordinates unchanged, is an equilibrium preparation, and permits no net heat transfer between them. The relation $\sim_T$ is defined only on the stated family $\mathcal T$ and for the declared contact protocols. This definition does not assert that $\sim_T$ is reflexive, symmetric, or transitive, and it does not assign a real-valued temperature to its equivalence classes.
