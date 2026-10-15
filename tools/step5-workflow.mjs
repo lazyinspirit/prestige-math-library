@@ -11,6 +11,7 @@ import { isPublishedItem } from './published-repair-policy.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { currentHashesMany } from './step5-terminal-resolution.mjs';
 import { MODELS } from './models.mjs';
+import { supportingQuoteHistory } from './step5-quote-history.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
 import { FATAL_TYPES } from './step5-adjudication-compat.mjs';
@@ -190,6 +191,8 @@ function repairedRun44LedgerHistory(history,path,expected) {
 // This run's recovery binds exact historical bytes to unchanged native reports;
 // it supplies no current-source review or gate coverage.
 function supportingMetadataHistory(history,path,expected) {
+  const quotes = supportingQuoteHistory(history,path,expected);
+  if (quotes) return quotes;
   if(!history||history.run!=='frontier-44-special-representation-examples-28-six-step')return null;
   const {root,run}=history,base=join(root,'research',`${run}-owner-escalation-repairs`,
     'resume-20261011','step5-evidence-handoff');

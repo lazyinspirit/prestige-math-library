@@ -85,6 +85,76 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  // Finite Gaussian fixtures: integrate the original prior/likelihood product
+  // independently of the proposed completed-square parameters.
+  'normal-normal-finite-n-posterior': () => {
+    let cases = 0;
+    for (const n of [1, 2, 5]) for (const tau of [0.5, 1, 2]) for (const barX of [-2, 0, 3]) {
+      const variance = 1 / (n + tau ** -2), mean = n * barX * variance;
+      const logKernel = theta => -n * (theta - barX) ** 2 / 2 - theta ** 2 / (2 * tau ** 2);
+      const moments = smokeGaussianKernelMoments(logKernel, mean, Math.sqrt(variance));
+      if (!(variance > 0) || !smokeClose(moments.mean, mean)
+        || !smokeClose(moments.variance, variance)
+        || !smokeClose(n * variance, n / (n + tau ** -2)))
+        return smokeResult(false, `prior/likelihood quadrature disagrees at n=${n}, tau=${tau}, barX=${barX}`);
+      cases++;
+    }
+    return smokeResult(true, `${cases} finite normal-normal models: direct prior/likelihood quadrature verifies posterior mean, variance and scaled variance; no asymptotic conclusion checked`);
+  },
+  'normal-working-model-calibration-boundary': () => {
+    let cases = 0;
+    for (const z of [1, 2]) {
+      // Choose alpha by the defining quantile relation. Directly integrate the
+      // sampling N(0,sigma^2) interval, without invoking a CDF library.
+      const nominal = smokeSimpson(smokeStandardNormalDensity, -z, z);
+      for (const sigma of [0.5, 1, 2]) {
+        const coverage = smokeSimpson(x => smokeStandardNormalDensity(x / sigma) / sigma, -z, z);
+        const formula = 2 * smokeNormalCdf(z / sigma) - 1;
+        const direction = sigma === 1 ? smokeClose(coverage, nominal)
+          : sigma > 1 ? coverage < nominal : coverage > nominal;
+        if (!direction || !smokeClose(coverage, formula))
+          return smokeResult(false, `coverage direction/formula disagrees at z=${z}, sigma=${sigma}`);
+        cases++;
+      }
+    }
+    return smokeResult(true, `${cases} finite coverage models, z=1,2 and sigma=1/2,1,2: interval integration verifies nominal equality and both miscalibration directions; no CLT checked`);
+  },
+  'boundary-posterior-support-and-tv-witness': () => {
+    let cases = 0;
+    for (const n of [1, 4, 16]) for (const delta of [-2, 0, 2]) {
+      const logKernel = h => h * delta - h * h / 2 - h / Math.sqrt(n);
+      const center = delta - 1 / Math.sqrt(n);
+      for (const h of [0, 0.5, 2]) {
+        if (!smokeClose(logKernel(h) - logKernel(0), -((h - center) ** 2 - center ** 2) / 2))
+          return smokeResult(false, `truncated posterior kernel disagrees at n=${n}, delta=${delta}, h=${h}`);
+      }
+      // The original exponential prior vanishes on the negative half-line.
+      const prior = theta => theta < 0 ? 0 : Math.exp(-theta);
+      for (const h of [-3, -1, -0.25]) if (prior(h / Math.sqrt(n)) !== 0)
+        return smokeResult(false, 'posterior support extends to negative h');
+      const negativeMass = smokeSimpson(h => smokeStandardNormalDensity(h - delta), -12, 0);
+      const bound = smokeNormalCdf(-delta);
+      if (!(negativeMass > 0) || !smokeClose(negativeMass, bound)
+        || (delta <= 0 && negativeMass < 0.5 - 1e-9))
+        return smokeResult(false, `negative-half-line TV witness disagrees at n=${n}, delta=${delta}`);
+      cases++;
+    }
+    return smokeResult(true, `${cases} finite truncated-normal models: prior support, completed-square center and negative-half-line masses verify the TV witness, including Delta=0; no convergence-in-probability claim checked`);
+  },
+  'gaussian-sequence-one-coordinate-posterior': () => {
+    for (const x of [-2, 0, 3]) {
+      // n=i=alpha=kappa_i=1: prior variance 1, noise variance 1.
+      const joint = theta => smokeStandardNormalDensity(theta) * smokeStandardNormalDensity(x - theta);
+      const moments = smokeGaussianKernelMoments(theta => -(theta * theta + (x - theta) ** 2) / 2, x / 2, Math.SQRT1_2);
+      const predictive = smokeSimpson(joint, x / 2 - 10, x / 2 + 10);
+      const claimedPredictive = smokeStandardNormalDensity(x / Math.SQRT2) / Math.SQRT2;
+      if (!smokeClose(moments.mean, x / 2) || !smokeClose(moments.variance, 0.5)
+        || !smokeClose(predictive, claimedPredictive))
+        return smokeResult(false, `one-coordinate posterior/predictive disagrees at x=${x}`);
+    }
+    return smokeResult(true, 'n=i=alpha=kappa_i=1, x=-2,0,3: prior/likelihood integration gives posterior N(x/2,1/2) and predictive N(0,2); no infinite-product or ell^2 claim checked');
+  },
+
   // Bounded rank-one models; no claim about general rank or all fields.
   'cyclotomic-rank-one-f5-inverse': ({ modulus = 5, inverse_x_coefficient = -1 } = {}) => {
     if (modulus !== 5 || !Number.isInteger(inverse_x_coefficient) || Math.abs(inverse_x_coefficient) > 2)
@@ -1516,6 +1586,28 @@ function cyclotomicQuadraticModel(modulus, a, b) {
 }
 
 function smokeResult(ok, summary) { return { ok, summary }; }
+// Composite Simpson quadrature for the fixed finite Gaussian fixtures above.
+// CDF arguments have absolute value at most 4. Witness truncation at -12
+// discards at most Phi(-10)<8e-24; moment windows span ten standard deviations
+// on each side. The 1e-8 tolerance exceeds tails and discretization error.
+function smokeSimpson(f, low, high) {
+  const panels = 4096, width = (high - low) / panels;
+  let sum = f(low) + f(high);
+  for (let i = 1; i < panels; i++) sum += (i % 2 ? 4 : 2) * f(low + width * i);
+  return sum * width / 3;
+}
+function smokeStandardNormalDensity(x) { return Math.exp(-x * x / 2) / Math.sqrt(2 * Math.PI); }
+function smokeNormalCdf(x) { return 0.5 + smokeSimpson(smokeStandardNormalDensity, 0, x); }
+function smokeClose(a, b) { return Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= 1e-8 * Math.max(1, Math.abs(b)); }
+function smokeGaussianKernelMoments(logKernel, center, scale) {
+  const kernel = theta => Math.exp(logKernel(theta) - logKernel(center));
+  const low = center - 10 * scale, high = center + 10 * scale;
+  const mass = smokeSimpson(kernel, low, high);
+  const mean = smokeSimpson(theta => theta * kernel(theta), low, high) / mass;
+  const variance = smokeSimpson(theta => (theta - mean) ** 2 * kernel(theta), low, high) / mass;
+  return { mean, variance };
+}
+
 function smokeCovariances(sample) {
   const n = sample.length, d = sample[0].length;
   const mean = Array.from({ length: d }, (_, j) => sample.reduce((s, row) => s + row[j], 0) / n);
