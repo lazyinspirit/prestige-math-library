@@ -432,3 +432,82 @@ test('derived native index names never grant physical path ownership', t => {
   assert.equal(result.status, 1);
   assert.match(result.stderr, /step6-report-tree-changed.*items#relevant-identity-claims/);
 });
+
+
+function mutableForeignPageFixture(options: { consumed?: boolean; reporterInput?: boolean; kind?: 'A' | 'B' } = {}) {
+  const f = fixture();
+  f.put('research/foreign-scope-ledger.json', { run: 'foreign', pages: [{ id: 'foreign-page', kind: options.kind ?? 'A', batch: '1' }] });
+  const plan = JSON.parse(readFileSync(join(f.root, 'research/plan-spec.json'), 'utf8'));
+  f.put('research/plan-spec.json', { ...plan, pages: [...plan.pages,
+    { id: 'foreign-page', kind: options.kind ?? 'A', category: 'algebra', items: [] }] });
+  if (options.consumed) {
+    f.put('items/thm-owned.md', '---\nid: thm-owned\nkind: theorem\nstatus: draft\ndeps: [thm-foreign]\n---\nOwned proof consuming the foreign supplier and its page.\n');
+  }
+  assert.equal(command(f.root, 'publication-ready.mjs', '--write').status, 0);
+  if (options.consumed) assert.ok(JSON.parse(readFileSync(join(f.root, 'research/demo-publication-readiness.json'), 'utf8')).protected_tree_paths.includes('library/algebra/foreign-page.md'));
+  if (options.reporterInput) f.put('research/demo-step6-evidence.json', { version: 2, run: 'demo', input_sha256: {
+    'library/algebra/foreign-page.md': createHash('sha256').update(readFileSync(join(f.root, 'library/algebra/foreign-page.md'))).digest('hex'),
+  } });
+  assert.equal(command(f.root, 'step6-report.mjs', 'snapshot').status, 0);
+  f.put('research/foreign-batch-1.pages.json', [{ id: 'foreign-page', category: 'forged-category', items: ['thm-forged'] }]);
+  f.put('library/algebra/foreign-page.md', '---\npage: foreign-page\nstatus: draft\nitems: [thm-foreign]\n---\nForeign page updated independently of its item inventory.\n');
+  return f;
+}
+
+test('sealed foreign page ownership survives item manifest growth without changing the report baseline', t => {
+  const f = mutableForeignPageFixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  const baseline = readFileSync(join(f.root, 'research/demo-step6-report-integrity.json'));
+  const result = f.check();
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(readFileSync(join(f.root, 'research/demo-step6-report-integrity.json')), baseline);
+});
+
+for (const [label, mutate] of [
+  ['changed ledger', (f: ReturnType<typeof fixture>) => f.put('research/foreign-scope-ledger.json', { run: 'foreign', pages: [{ id: 'foreign-page', kind: 'B', batch: '1' }] })],
+  ['wrong source page identity', (f: ReturnType<typeof fixture>) => f.put('library/algebra/foreign-page.md', '---\npage: forged-page\n---\nForged identity.\n')],
+  ['unknown page path', (f: ReturnType<typeof fixture>) => f.put('library/algebra/unknown-page.md', '---\npage: unknown-page\n---\nUnowned page.\n')],
+  ['new category path', (f: ReturnType<typeof fixture>) => {
+    mkdirSync(join(f.root, 'library/redirected'));
+    f.put('library/redirected/foreign-page.md', '---\npage: foreign-page\n---\nRedirected page.\n');
+  }],
+  ['canonical category mismatch', (f: ReturnType<typeof fixture>) => {
+    const plan = JSON.parse(readFileSync(join(f.root, 'research/plan-spec.json'), 'utf8'));
+    f.put('research/plan-spec.json', { ...plan, pages: plan.pages.map((page: { id: string }) => page.id === 'foreign-page' ? { ...page, kind: 'A', category: 'redirected' } : page) });
+  }],
+  ['canonical kind mismatch', (f: ReturnType<typeof fixture>) => {
+    const plan = JSON.parse(readFileSync(join(f.root, 'research/plan-spec.json'), 'utf8'));
+    f.put('research/plan-spec.json', { ...plan, pages: plan.pages.map((page: { id: string }) => page.id === 'foreign-page' ? { ...page, kind: 'B', category: 'algebra' } : page) });
+  }],
+  ['forged new item', (f: ReturnType<typeof fixture>) => f.put('items/thm-forged.md', '---\nid: thm-forged\npipeline_run: foreign\n---\nNot registered in a sealed manifest.\n')],
+  ['shared track outside exact authority', (f: ReturnType<typeof fixture>) => f.put('research/plan-foreign-track.md', 'Shared source without sealed exact ownership.\n')],
+  ['page symlink', (f: ReturnType<typeof fixture>) => {
+    unlinkSync(join(f.root, 'library/algebra/foreign-page.md'));
+    symlinkSync('owned-page.md', join(f.root, 'library/algebra/foreign-page.md'));
+  }],
+] as const) test(`independent foreign page ownership rejects ${label} despite a forged mutable manifest`, t => {
+  const f = mutableForeignPageFixture();
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  mutate(f);
+  const result = f.check();
+  assert.equal(result.status, 1, result.stdout);
+  assert.match(result.stderr, /step6-report-(?:tree-changed|foreign-scope)/);
+});
+
+for (const options of [{ consumed: true }, { reporterInput: true }])
+  test(`independently owned foreign page remains sealed as ${options.consumed ? 'native prerequisite context' : 'an exact reporter input'}`, t => {
+    const f = mutableForeignPageFixture(options);
+    t.after(() => rmSync(f.root, { recursive: true, force: true }));
+    const result = f.check();
+    assert.equal(result.status, 1, result.stdout);
+    if (options.consumed) assert.match(result.stderr, /step6-report-foreign-scope: native readiness verification failed/);
+    else assert.match(result.stderr, /step6-report-tree-changed.*library\/algebra\/foreign-page\.md/);
+  });
+
+
+test('sealed foreign B-page identity also survives mutable manifest inventory', t => {
+  const f = mutableForeignPageFixture({ kind: 'B' });
+  t.after(() => rmSync(f.root, { recursive: true, force: true }));
+  const result = f.check();
+  assert.equal(result.status, 0, result.stderr);
+});

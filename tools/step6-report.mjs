@@ -319,6 +319,38 @@ function scopedChanges(receipt, now, changed) {
   const slug = value => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
   const unchangedFile = path => Object.hasOwn(receipt.protected_tree, path)
     && now[path] === receipt.protected_tree[path] && lstatSync(join(root, path)).isFile();
+  const physicalSelectedContent = path => {
+    const parts = path.split('/');
+    for (let index = 1; index <= parts.length; index++) {
+      let stat;
+      try { stat = lstatSync(join(root, ...parts.slice(0, index))); }
+      catch (error) { if (error.code === 'ENOENT') return false; throw error; }
+      if (stat.isSymbolicLink() || (index < parts.length ? !stat.isDirectory() : !stat.isFile())) return false;
+    }
+    return true;
+  };
+  // A page ID belongs to the sealed ledger independently of its mutable item
+  // inventory. The frozen and current physical paths anchor its category; the
+  // canonical plan and parsed source must agree on that exact page identity.
+  const libraryPagePaths = entries => {
+    const byId = new Map();
+    for (const path of Object.keys(entries)) {
+      const match = /^library\/([a-z0-9]+(?:-[a-z0-9]+)*)\/([a-z0-9]+(?:-[a-z0-9]+)*)\.md$/.exec(path);
+      if (!match) continue;
+      const paths = byId.get(match[2]) ?? [];
+      paths.push({ path, category: match[1] });
+      byId.set(match[2], paths);
+    }
+    return byId;
+  };
+  const changedPaths = new Set(changed);
+  const beforePages = libraryPagePaths(receipt.protected_tree);
+  const currentPages = libraryPagePaths(now);
+  let plannedPages = [];
+  try {
+    const plan = JSON.parse(readFileSync(join(research, 'plan-spec.json'), 'utf8'));
+    if (Array.isArray(plan.pages)) plannedPages = plan.pages;
+  } catch { /* No independent page exemption without a canonical identity. */ }
   for (const [path, hash] of Object.entries(receipt.protected_tree)) {
     const owner = /^research\/([a-z0-9]+(?:-[a-z0-9]+)*)-scope-ledger\.json$/.exec(path)?.[1];
     if (!owner || owner === run || now[path] !== hash) continue;
@@ -328,6 +360,21 @@ function scopedChanges(receipt, now, changed) {
     if (ledger.run !== owner || !Array.isArray(ledger.pages) || !ledger.pages.length) continue;
     namespaces.push(`research/${owner}-`);
     const owedPages = ledger.pages.filter(row => slug(row?.id));
+    for (const owed of owedPages) {
+      if (!['A', 'B'].includes(owed.kind) || ledger.pages.filter(row => row?.id === owed.id).length !== 1) continue;
+      const before = beforePages.get(owed.id) ?? [];
+      const current = currentPages.get(owed.id) ?? [];
+      if (current.length !== 1 || !changedPaths.has(current[0].path)) continue;
+      const planned = plannedPages.filter(page => page?.id === owed.id);
+      if (before.length !== 1 || current.length !== 1 || planned.length !== 1
+        || before[0].path !== current[0].path || planned[0].category !== before[0].category
+        || planned[0].kind !== owed.kind || !physicalSelectedContent(current[0].path)) continue;
+      let metadata;
+      try { metadata = parseFrontmatter(splitFrontmatter(readFileSync(join(root, current[0].path), 'utf8')).frontmatter); }
+      catch { continue; }
+      if (metadata?.page !== owed.id) continue;
+      selectedContent.add(current[0].path);
+    }
     // A stable registered frontier, not mutable content or a filename guess,
     // establishes ownership of concurrent foreign mathematical authoring.
     for (const manifest of Object.keys(receipt.protected_tree)) {
@@ -349,16 +396,6 @@ function scopedChanges(receipt, now, changed) {
       }
     }
   }
-  const physicalSelectedContent = path => {
-    const parts = path.split('/');
-    for (let index = 1; index <= parts.length; index++) {
-      let stat;
-      try { stat = lstatSync(join(root, ...parts.slice(0, index))); }
-      catch (error) { if (error.code === 'ENOENT') return false; throw error; }
-      if (stat.isSymbolicLink() || (index < parts.length ? !stat.isDirectory() : !stat.isFile())) return false;
-    }
-    return true;
-  };
   const readiness = readJson(join(research, `${run}-publication-readiness.json`));
   // Derived index names are semantic receipts, never physical path ownership.
   const projections = new Set((Array.isArray(readiness.protected_tree_projections)

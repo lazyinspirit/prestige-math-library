@@ -369,6 +369,15 @@ administrative/source change is authorized by this bridge. All native gates
 still run. Only after those checks may native closeout write a fresh final receipt
 and commit the administrative recovery; later `--check` uses its ordinary new baseline.
 
+Step-6 report integrity recognizes an existing foreign library page independently
+of its mutable item manifest only when an unchanged sealed foreign scope ledger
+uniquely owes the exact page ID and A/B kind. Its unique frozen and current
+library paths must agree, the canonical plan category and kind must match, and
+the current regular nonsymlink carrier must declare that page ID. This grants
+no new item ownership, page creation, category relocation or shared-track
+exemption. The selected run's readiness prerequisite context and exact reporter
+inputs remain sealed, and native readiness verification is still mandatory.
+
 The mathematics Step-6 report-integrity snapshot excludes the root-relative
 `physics/` namespace owned by the independent physics workflow. Mathematics
 sources, shared tools and run evidence retain their existing protection; the
