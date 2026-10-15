@@ -520,6 +520,11 @@ performs mechanical contract closure and emits `step6-` owner-report artifacts;
 its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
+Keep fresh owner formatting/metadata check logs and supervision observations in
+`.physics-autopilot/RUN/` during Step 6. The report baseline seals the workspace,
+including research files; later pre-gate receipts must not mutate that protected
+tree. This changes only evidence storage, never scope, checks or gate authority.
+
 Step-6 terminal defect-ledger gates use the run's frozen Step-5 frontier when
 present. Outside item findings remain recorded with their actual dispositions
 and are reported as excluded, not passed; original mathematical maintenance
