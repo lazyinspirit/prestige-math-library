@@ -1,0 +1,420 @@
+{
+  "report": "audit-and-proposals.md",
+  "new_pair_count": 20,
+  "source_locator_policy": "URLs are verified known locators or stable book pages, not evidence of full-text reading. Empty URLs require source acquisition before authoring acceptance. DLMF T09 supplies Beta/Gamma prerequisites only, not a numerical fractional-method theorem.",
+  "canonical_existing_covered": [
+    {
+      "key": "euler-maruyama-methods",
+      "canonical": [
+        "alg-euler-maruyama",
+        "alg-euler-maruyama-autonomous",
+        "thm-euler-maruyama-strong-rate-for-square-integrable-initial-data",
+        "thm-euler-maruyama-strong-rate-under-higham-mao-stuart-hypotheses",
+        "thm-euler-maruyama-weak-order-one-under-backward-regularity"
+      ],
+      "action": "reuse; no duplicate pair"
+    },
+    {
+      "key": "multilevel-monte-carlo-complexity",
+      "canonical": [
+        "def-mlmc-hierarchy-and-coupled-corrections",
+        "lem-mlmc-estimator-moments-and-mse",
+        "thm-mlmc-complexity-under-rate-assumptions",
+        "thm-shared-brownian-euler-level-correction-rates",
+        "cor-mlmc-euler-finite-l2-and-weak-cost-rate",
+        "cor-mlmc-euler-hms-autonomous-cost-rate"
+      ],
+      "action": "remove duplicate original pair; new Milstein/jump/adaptive guarantees owned corresponding new T pair"
+    }
+  ],
+  "existing_scope_amendments_verbatim": "## Existing pair amendments (no duplicate generic ODE supplier)\n\n1. **NA-16 LMM:** retain complete constant-step Dahlquist equivalence. Add variable-step BDF2 coefficients from quadratic interpolation and state a separately proved zero-stability/convergence theorem under a conservative uniform ratio bound (e.g. all h_n/h_(n-1) <= r_* < 1+sqrt(2), with any additional lower-ratio/start assumptions stated). Derive the difference recurrence q_n = r_n^2/(1+2r_n) q_(n-1), then bound products and the forcing resolvent; do not equate bounded individual roots with arbitrary-product stability. Adams predictor/corrector coefficients by integration of interpolating polynomials, PECE is an algorithm; its stability differs from fully converged implicit Adams. Counterexample: unrestricted ratios/parasitic growth. Source target Hairer/N\u00f8rsett/Wanner, Solving ODE I, variable-step multistep chapter; exact edition locator to verify.\n2. **NA-17 stability:** distinguish scalar test stability, contractivity in a specified inner product, logarithmic norm/non-normal growth and stiffness-dependent accuracy. Add BDF2 scalar A-stability derivation and damping comparison with trapezoid; do not assert BDF k>=3 A-stability. T01 owns actual stiff implementations.\n3. **NA-18 adaptivity:** retain heuristic embedded controller but add dense-output polynomial as a separate method with its own defect/order and accepted-step interpolation. Add a posteriori residual theorem: for absolutely continuous reconstruction U in a proved tube, r=U'-f(t,U), and one-sided Lipschitz constant ell(t), error <= exp(integral ell)|e0| + integral exp(integral_s^t ell)||r(s)|| ds. Prove via differential norm inequality/regularization at zeros. Integrate interval bounds for r and a validated enclosure tube with strict inward/existence argument; include interpolation roundoff and solve residuals. Never certify from an embedded difference alone. T10 consumes dense output. Source targets Hairer ODE I dense output/error estimation; Estep, SIAM J Numer Anal 32 (1995), a posteriori bounds for ODE; exact full-text theorem verification required.\n4. **NA-21 nonlinear BVP:** add multiple shooting with explicit segment continuity equations, sparse block Jacobian and shooting sensitivity; add a fully proved low-order collocation case: implicit midpoint on y'=f(t,y) with boundary residual B(y0,yT)=0, smooth isolated exact branch and invertible linearized continuous BVP inverse in specified norm; derive discrete inverse via perturbation of fundamental matrix/boundary Schur complement, O(h\u00b2) residual/global error, and local Newton error budget. Higher-order Gauss collocation order requires its own uniform inverse/quadrature proof, not a label. Include unstable single shooting and singular branch failure. Consume physics-chemistry continuation interface rather than duplicating. Sources Ascher/Mattheij/Russell, Numerical Solution of Boundary Value Problems for ODEs, shooting and collocation chapters; de Boor/Swartz, SIAM J Numer Anal 10 (1973), collocation at Gaussian points. Reads pending.\n5. **NA-22 geometry \u2014 extend-existing:** reuse `def-leapfrog-step-map`, `thm-leapfrog-is-reversible-and-volume-preserving` and canonical HMC leapfrog examples (arbitrary SPD mass already covered). Do not redefine kick/drift/Verlet or reprove canonical volume/reversibility. New delta is symplectic pullback, controlled-tube local/global order and finite-order modified energy. Preserve approved proof-rich backward-error scope. Consume T04 splitting and T07 constraints; distinguish symplecticity, reversibility, exact invariants, and bounded long-time energy. Add implicit midpoint actual branch and coefficient check if not supplied T01. Do not use unconstrained backward error automatically on projected trajectories.\n6. **MLMC pair \u2014 existing-covered / remove duplicate:** `def-mlmc-hierarchy-and-coupled-corrections`, `lem-mlmc-estimator-moments-and-mse`, `thm-mlmc-complexity-under-rate-assumptions`, `thm-shared-brownian-euler-level-correction-rates`, `cor-mlmc-euler-hms-autonomous-cost-rate`, `cor-mlmc-euler-finite-l2-and-weak-cost-rate` already prove telescoping/MSE, complexity and nested-EM variance/cost/bias under both exact contracts. Reuse those IDs and the canonical `multilevel-monte-carlo` page. T13 alone owns the substantial new commutative-Milstein correction variance O(h\u00b2) and O(eps^-2) application; it consumes the existing theorem without redefining estimator or allocation. T15 owns genuinely new adaptive path-tree guarantees; T17 owns jump coupling. No generic MLMC pair is needed.\n\n",
+  "rows": [
+    {
+      "key": "implicit-stiff-time-stepping-and-algebraic-error",
+      "local_key": "T01",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Backward Euler, BDF2 implementation and a selected two-stage L-stable SDIRK (gamma=1-1/sqrt(2)); also Radau IIA as an explicit tableau/interface with concrete two-stage order3 and L-stability proved before advertised. Nonlinear stage residual equations, Newton/chord iteration and factorization reuse, consistent starts. Under f smooth/global Lipschitz on a common tube, hL small proves stage branch by contraction and order by Taylor; for dissipative f with <f(x)-f(y),x-y> <= -mu||x-y||\u00b2 prove BE resolvent Lipschitz 1/(1+hmu), branch existence separately by strong monotonicity/coercivity (same-frontier prerequisite). Residual solve error rho_n contributes <= sum propagated ||rho_n||/(1+hmu). Do not impose hL small as the only stiff existence proof. Scalar RK stability follows from actual tableau rational function and half-plane algebra; no generic nonlinear L-stability conclusion.\n\n**Proof route/prereqs.** Same-pair lemmas: finite-dimensional strongly monotone continuous onto map via coercivity/Brouwer (or minimization only for gradient f); contraction branch; SDIRK Taylor order2; two-stage Radau quadrature/stage order3 and rational-function A/L stability. Consume NA linear solves/Newton and current LMM theory. Explicit residual scaling distinguishes derivative residual from update residual. **B:** Robertson reaction equations (algorithm and measured work, no global analytical rate without bounded derivatives), stiff scalar decay with trapezoid ringing, nonlinear dissipative solve, Newton budget failure. **Cost:** Jacobian/factorization per refresh plus triangular solves per stage/Newton iteration; sparse complexity delegated actual matrix structure. **Sources:** Hairer/Wanner, Solving ODE II, Ch IV one-step stiff methods, BDF and implementation chapters; Butcher, Numerical Methods for ODEs, implicit RK/Radau. Full reads pending.",
+      "canonical_reuse": [
+        "nonlinear-equations-and-newton-methods",
+        "linear-multistep-methods-and-dahlquist-equivalence"
+      ],
+      "new_dependency_keys": [],
+      "missing_prerequisites_owner": "T01 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://www.unige.ch/~hairer/books.html"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "rosenbrock-and-linearly-implicit-methods",
+      "local_key": "T02",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Rosenbrock-Euler (I-hJ_n)k=f(y_n), y_(n+1)=y_n+hk; prove first order for C2 f on compact tube and uniformly invertible matrices with explicit bound. Add a specified published second-order two-stage Rosenbrock tableau only after checking its actual coefficients/order/stability, with separate exact-J and W-method approximate-J hypotheses. For exact scalar linear equation Rosenbrock-Euler equals BE, hence A/L stability; it does not inherit this for arbitrary approximate Jacobian. **Proof:** inverse expansion and Taylor local defect, Lipschitz step propagation; derive second-order coefficients rather than cite method name; same-pair inverse perturbation and Jacobian approximation defect lemmas. **B:** stiff linear problem, reused factorization, J approximation that destroys damping/order. **Dependency/cost:** T01 inverse/algebraic residual, NA Newton/linear kernels; one factorization and fixed stage solves. **Sources:** Hairer/Wanner ODE II, Rosenbrock methods chapter; Rang/Angermann or original Rosenbrock 1963 coefficients only after full-source verification.",
+      "canonical_reuse": [],
+      "new_dependency_keys": [
+        "T01"
+      ],
+      "missing_prerequisites_owner": "T02 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://www.unige.ch/~hairer/books.html"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "exponential-and-integrating-factor-integrators",
+      "local_key": "T03",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** y'=Ay+g(t,y), fixed finite matrix A; variation of constants; exponential Euler exp(hA)y+h phi1(hA)g(t,y), plus exponential midpoint/ETD2 with a completely specified coefficient formula and order2 proof. Assume semigroup bound ||exp(tA)||<=M exp(omega t), g C2 on controlled tube; fixed-A global order1/2, constants may depend on A. Define entire phi_k at zero. **Proof:** Duhamel identity then time Taylor/integral remainder, discrete convolution propagation; each approximate action error delta_n adds with the semigroup propagation bound. For stiffness-independent order require additional bounded commutators/derivative-domain estimates and PDE owner theorem. **B:** diagonal stiff diffusion plus reaction; nonnormal A transient growth; zero eigenvalue phi evaluation; imaginary-time finite matrix propagation and unitary skew-Hermitian evolution with explicit action errors. **Prereqs:** matrix exp/phi/Krylov action and error bounds owned linear-approx agent; same-pair Duhamel lemma. **Cost:** matrix-vector products/Krylov dimensions or dense exp cost, no exact exp oracle for free. **Sources:** Hochbruck/Ostermann, Acta Numerica 19 (2010), exponential Euler/order analysis sections; source read pending.",
+      "canonical_reuse": [
+        "matrix-exponential-and-phi-action-owner-interface"
+      ],
+      "new_dependency_keys": [],
+      "missing_prerequisites_owner": "T03 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://doi.org/10.1017/S0962492910000048"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "imex-and-operator-splitting-methods",
+      "local_key": "T04",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Additive ODE y'=a(y)+b(y). IMEX Euler (a explicit, b implicit) first order with branch and Lipschitz assumptions; specify ARS(2,2,2) or another verified order2 additive tableau, prove coupled order conditions. Lie exact subflow composition order1, Strang order2 for C3 fields and all subflows in controlled tube; approximate subflows have separate errors. Linear stability is the bivariate amplification R(z_a,z_b); derive actual admissible region rather than importing either component's region. **Proof:** Taylor composition/commutator leading error and one-step propagation; prove first-order IMEX solve residual budget; supply same-pair Lie bracket identity. For unbounded PDE operators, state no uniform result without domain/boundary commutator control. **B:** reaction-diffusion semidiscretization, noncommuting matrices, Schr\u00f6dinger potential/kinetic finite matrix split, boundary-induced order reduction, stiff explicit partition failure. **Deps/cost:** T01/03, PDE operator hypotheses; one implicit solve per stage; FFT transform cost consumed linear owner. **Sources:** Ascher/Ruuth/Spiteri, Applied Numerical Mathematics 25 (1997), IMEX RK schemes; Hairer/Lubich/Wanner, GNI II splitting/composition chapters; Strang 1968 difference scheme construction. Reads pending.",
+      "canonical_reuse": [],
+      "new_dependency_keys": [
+        "T01",
+        "T03"
+      ],
+      "missing_prerequisites_owner": "T04 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://www.unige.ch/~hairer/books.html"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "multirate-and-partitioned-time-integration",
+      "local_key": "T05",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Slow-fast partition x'=f(x,z), z'=g(x,z), macro H, m microsteps h=H/m. Concrete slow frozen extrapolation and micro Euler scheme; first-order global bound C(H+h) under jointly Lipschitz smooth fields, with C tracking fast Lipschitz constant; no stiffness-uniform claim. A symmetric exact-flow multirate composition inherits T04 order2 only if the actual coupling/interpolation is symmetric and error controlled. Describe waveform relaxation on a time window as Picard iteration on both waveforms, contraction q<1 under window-length/Lipschitz bound. **Proof:** local coupling defect, interpolation estimates, discrete two-component Gr\u00f6nwall; relaxation error q^k and finite budget. **B:** coupled electrical/mechanical scales, fast unstable mode, slow interpolation reducing order. **Prereqs:** same-pair block norm/variation estimates; T04. **Cost:** macro/micro RHS counts and coupling exchanges; no gain assumed when fast dimension equals full dimension. **Sources:** Gear/Wells, BIT 24 (1984), multirate linear multistep methods; Sandu/G\u00fcnther, SIAM J Numer Anal 53 (2015), multirate GARK framework; select only fully verified tableau claims.",
+      "canonical_reuse": [],
+      "new_dependency_keys": [
+        "T04"
+      ],
+      "missing_prerequisites_owner": "T05 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://people.cs.vt.edu/asandu/"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "differential-algebraic-equations-and-consistent-initialization",
+      "local_key": "T06",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Semi-explicit index1 x'=f(t,x,z), 0=g(t,x,z), invertible g_z uniformly on tube; IFT reduction z=psi(t,x); consistent initial states and BE/BDF2 stages on selected branch. Prove order1 BE and order2 BDF2 for x and z with consistent starts, smooth psi and controlled algebraic solve residuals. Define differentiation index on regular local systems; show index2/3 examples by explicit differentiation, not a universal index theory assertion. **Proof:** same-pair uniform IFT chart and residual-to-z bound; reduce to ODE; discrete nonlinear system equivalence; propagate solve errors through algebraic sensitivity. State high-index residual amplification and initial inconsistency failure, not index1 guarantees. **B:** simple circuit with algebraic current, pendulum index3, singular g_z and inconsistent initial data. **Deps:** IFT published, T01, NA Newton; same pair owns DAE definition/consistency/index examples. **Cost:** block Jacobian solve and consistency initialization. **Sources:** Brenan/Campbell/Petzold, Numerical Solution of Initial-Value Problems in DAEs, introductory/index/stability chapters; Hairer/Wanner ODE II Ch VII DAEs. Reads pending.",
+      "canonical_reuse": [],
+      "new_dependency_keys": [
+        "T01"
+      ],
+      "missing_prerequisites_owner": "T06 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://www.unige.ch/~hairer/books.html"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "constrained-dynamics-shake-and-rattle",
+      "local_key": "T07",
+      "disposition": "extend-existing",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Constant SPD mass M, smooth holonomic constraint c(q)=0 with full-rank Dc and uniformly invertible Dc M^-1 Dc^T in a compact chart; tangent momentum condition Dc(q)M^-1p=0. State constrained Hamilton equations, multipliers and consistent data. Give SHAKE positions and RATTLE momenta with actual implicit constraint residuals and selected local branches. Prove second-order RATTLE accuracy, exact position/tangency constraints at exact algebraic solves, reversibility and symplecticity on constrained phase manifold; finite constraint solve residuals separately quantified. **Proof:** IFT using scaled multipliers to avoid h-singular parameterization; local Taylor defect O(h\u00b3), stable chart propagation; discrete variational generating-function derivation/pullback proves symplecticity. Same pair owns regular constraint manifold/tangent cotangent identification and constrained-flow existence via reduced chart. **B:** rigid bond, pendulum, nearly dependent constraints, residual drift. **Deps:** NA-22 symplectic interface, T06/T01 and IFT; physics agent consumes MD. **Cost:** constraint Schur solve/Newton per step. **Sources:** Hairer/Lubich/Wanner GNI VII constrained mechanical systems; Leimkuhler/Reich, Simulating Hamiltonian Dynamics, constrained integration chapters. Reads pending.",
+      "canonical_reuse": [
+        "def-leapfrog-step-map",
+        "thm-leapfrog-is-reversible-and-volume-preserving"
+      ],
+      "new_dependency_keys": [
+        "T01",
+        "T06"
+      ],
+      "missing_prerequisites_owner": "T07 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://www.unige.ch/~hairer/books.html"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "delay-differential-equations-and-history-discretization",
+      "local_key": "T08",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Retarded y'=f(t,y(t),y(t-tau)), constant tau>0, Lipschitz f and continuous initial history on [-tau,0]. Method of steps gives existence/uniqueness; explicit Euler plus piecewise-linear stored-history interpolation gives order1 for Lipschitz exact trajectory with bounded piecewise derivatives, uniform step; disclose derivative jumps at k tau and align/restart if higher order. Distributed delays use a specified quadrature with separately bounded history error. Add scalar neutral y'(t)-a y'(t-tau)=f(t,y,y_delay), |a|<1, compatible C1 history and commensurate h=tau/m: prove bounded inverse of neutral difference I-a shift by geometric series and resulting first-order derivative/solution error under piecewise C2 regularity. State no transfer when |a|>=1 or state-dependent delay. **Proof/prereqs:** same-pair history Banach space, method-of-steps contraction and delay Gr\u00f6nwall; interpolation residual and geometric neutral resolvent. **B:** delayed feedback, derivative jump destroying RK4 rate, neutral instability, quadrature memory error. **Cost:** O(T/h) history memory, RHS/query costs; no constant-memory assumption. **Sources:** Bellen/Zennaro, Numerical Methods for Delay Differential Equations, method-of-steps/continuous extensions and neutral chapters. Reads pending. Biology owns age/renewal equations and consumes this history interface.",
+      "canonical_reuse": [],
+      "new_dependency_keys": [],
+      "missing_prerequisites_owner": "T08 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://global.oup.com/academic/product/numerical-methods-for-delay-differential-equations-9780198506546"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "fractional-evolution-and-convolution-quadrature",
+      "local_key": "T09",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Caputo derivative 0<alpha<1 with integrable weakly singular kernel, equivalent Volterra equation and a Lipschitz local existence theorem. Uniform-grid L1 discretization for scalar dissipative D_C^alpha u +lambda u=f, lambda>=0; explicit positive weights and monotonicity; prove stability and error O(h^(2-alpha)) if u in C2 with bounded u'', and show u~t^alpha violates that hypothesis. Supply a graded-grid implementation and error decomposition without claiming its optimal rate until a full graded-mesh theorem is proved. Add backward-Euler convolution quadrature weights from (1-zeta)^alpha, scalar resolvent stability and first-order error for a precisely compatible smooth scalar datum; a contour proof requires same-pair Laplace inversion/sector estimates, not a free citation. **Proof:** integrate kernel against piecewise-linear derivative for L1 residual, positive discrete comparison then error bound; weakly singular Gr\u00f6nwall via iterated kernels/Beta identity. Same-pair Gamma/Beta kernel identities and Caputo/Volterra equivalence are mandatory missing foundations. **B:** fractional relaxation, initial singularity/graded mesh, full-history cost and truncated-memory bias. **Cost:** naive O(N\u00b2) work/O(N) memory, accelerated convolution only with linear-owner FFT/action error bound. **Sources:** Lin/Xu, J Comput Phys 225 (2007), L1 analysis; Lubich, Numerische Mathematik 52 (1988), convolution quadrature; Stynes/O'Riordan/Gracia, SIAM J Numer Anal 55 (2017), graded-mesh singularity analysis. Reads pending.",
+      "canonical_reuse": [],
+      "new_dependency_keys": [],
+      "missing_prerequisites_owner": "T09 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://dlmf.nist.gov/5.12"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "event-location-and-hybrid-trajectory-error",
+      "local_key": "T10",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Smooth ODE modes and smooth guard gamma(t,y)=0; isolated crossing with |gamma_t+gamma_y f|>=nu>0, finite number of events separated by delta>0; smooth reset R and fixed deterministic event-priority rule. Dense trajectory error eta and guard root tolerance eps produce event-time error C(eta+eps)/nu and post-reset trajectory error propagated through DR and vector fields. Provide safeguarded bracketed locator and integration/restart algorithm, including missed-event prevention via a certified guard enclosure or explicit sampling assumption. **Proof:** quantitative IFT/mean value, dense-output residual bound, reset Lipschitz propagation and induction over finite events; same-pair saltation matrix derivation for perturbations if sensitivity claimed. **B:** bouncing ball before finite horizon with finitely many impacts, grazing failure nu=0, two simultaneous guards, Zeno accumulation. Zeno and sliding contact are not covered by isolated-event theorem. **Deps:** NA-18 reconstruction; linear owner's interval roots, T12 for sensitivities. **Cost:** guard evaluations/root iterations/reintegrations; failure status on uncertified bracket or event budget. **Sources:** Shampine/Thompson, event location numerical ODE literature; di Bernardo et al., Piecewise-smooth Dynamical Systems, saltation/crossing chapter. Exact full source verification pending.",
+      "canonical_reuse": [],
+      "new_dependency_keys": [
+        "T12"
+      ],
+      "missing_prerequisites_owner": "T10 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://www.unige.ch/~hairer/books.html",
+        "https://arxiv.org/abs/2306.06862"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted",
+      "cycle2_collision_addendum": "### T10/T11 hard-sphere addendum\n\nFor finitely many spherical particles with masses m_i>0, radii r_i>0 and smooth external forces on a compact separated configuration tube, define pair guard ||q_i-q_j||-(r_i+r_j). An isolated binary impact has unit normal n=(q_i-q_j)/||q_i-q_j|| and preimpact relative normal velocity v_n=(v_i-v_j) dot n<0. For prescribed restitution e in [0,1], impulse J=-(1+e)v_n/(1/m_i+1/m_j) gives v_i^+=v_i^-+J n/m_i, v_j^+=v_j^--J n/m_j. Prove total linear momentum conservation, normal relative velocity -e v_n and kinetic energy change -(1-e\u00b2)v_n\u00b2/[2(1/m_i+1/m_j)]. Tangential velocities are unchanged in this frictionless model. These are conditional mathematical collision laws, not a claim that restitution is constant in real materials. Event-driven integration invokes T10 transversality, dense trajectory/guard certificates, event separation, finite event count and restart residual error. Include collision search cost O(P\u00b2) naive and any spatial neighbor structure's actual assumptions. Simultaneous collisions, grazing v_n=0, dense frictional multi-contact and inelastic collapse/Zeno violate the isolated binary theorem; return explicit unresolved-event/budget status, or invoke a separately specified complementarity model. T11's scalar complementarity result is not advertised as uniqueness of arbitrary granular frictional contact. A DEM soft-contact penalty is a different ODE model; convergence of penalty to rigid impacts requires its own stiffness/restitution calibration limit and is not inferred from timestep convergence.\n\n"
+    },
+    {
+      "key": "nonsmooth-contact-time-stepping-and-projections",
+      "local_key": "T11",
+      "disposition": "extend-existing",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Two explicit models: (i) convex projected dynamics x'+N_C(x) contains f(x), fixed nonempty closed convex C and Lipschitz f, projection Euler x_(n+1)=P_C(x_n+h f(x_n)); (ii) a one-dimensional inelastic rigid impact with unilateral gap/impulse complementarity and restitution coefficient in [0,1], fully specified impulse step. Prove projection nonexpansiveness and finite-horizon convergence for model (i) under proved solution existence and stated regularity; rate at least O(sqrt h) under Lipschitz forcing/bounded variation normal reaction, or O(h) only with stronger smooth constrained branch proved. Prove discrete momentum balance, complementarity and kinetic energy nonincrease for unforced scalar contact step. Do not assert general frictional 3D uniqueness/convergence or interchange penalty limit with timestep limit. **Proof/prereqs:** same-pair normal cone/maximal monotone finite-dimensional resolvent and existence via compactness of projection interpolants; derive energy estimate, use consistency in integral variational inequality and Gr\u00f6nwall. Scalar impact solve direct. **B:** constrained overdamped particle, elastic/inelastic collision, penalty stiffness, nonconvex projection nonuniqueness. **Deps:** published projection characterization + VI, T10 isolated impact distinction; PDE owner handles spatial obstacle discretization. **Cost:** actual convex projection/complementarity solve tolerance. **Sources:** Moreau, nonsmooth mechanics time stepping; Stewart/Trinkle, Int J Numer Methods Eng 39 (1996), implicit time stepping; Brogliato, Nonsmooth Mechanics. Scope-specific full theorem reads required before any higher-dimensional claim.",
+      "canonical_reuse": [
+        "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality"
+      ],
+      "new_dependency_keys": [],
+      "missing_prerequisites_owner": "T11 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://homepage.divms.uiowa.edu/~dstewart/"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted",
+      "cycle2_collision_addendum": "### T10/T11 hard-sphere addendum\n\nFor finitely many spherical particles with masses m_i>0, radii r_i>0 and smooth external forces on a compact separated configuration tube, define pair guard ||q_i-q_j||-(r_i+r_j). An isolated binary impact has unit normal n=(q_i-q_j)/||q_i-q_j|| and preimpact relative normal velocity v_n=(v_i-v_j) dot n<0. For prescribed restitution e in [0,1], impulse J=-(1+e)v_n/(1/m_i+1/m_j) gives v_i^+=v_i^-+J n/m_i, v_j^+=v_j^--J n/m_j. Prove total linear momentum conservation, normal relative velocity -e v_n and kinetic energy change -(1-e\u00b2)v_n\u00b2/[2(1/m_i+1/m_j)]. Tangential velocities are unchanged in this frictionless model. These are conditional mathematical collision laws, not a claim that restitution is constant in real materials. Event-driven integration invokes T10 transversality, dense trajectory/guard certificates, event separation, finite event count and restart residual error. Include collision search cost O(P\u00b2) naive and any spatial neighbor structure's actual assumptions. Simultaneous collisions, grazing v_n=0, dense frictional multi-contact and inelastic collapse/Zeno violate the isolated binary theorem; return explicit unresolved-event/budget status, or invoke a separately specified complementarity model. T11's scalar complementarity result is not advertised as uniqueness of arbitrary granular frictional contact. A DEM soft-contact penalty is a different ODE model; convergence of penalty to rigid impacts requires its own stiffness/restitution calibration limit and is not inferred from timestep convergence.\n\n"
+    },
+    {
+      "key": "numerical-sensitivities-adjoints-and-shooting-jacobians",
+      "local_key": "T12",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Smooth finite-horizon parametric ODE on common tube, tangent equation S'=f_y S+f_theta, terminal/integral objective. Derive continuous adjoint and exact discrete adjoint of an explicit RK algorithm (or general differentiable step map) with actual transpose-Jacobian recursion; distinguish differentiate-then-discretize and discretize-then-differentiate. Prove O(h^p) tangent/gradient approximation under augmented smoothness and stable order-p method; reverse accumulation computes derivative of the discrete objective exactly in exact arithmetic. Checkpointing/replay is algorithmic with explicit memory/work, not new derivative mathematics. **Proof:** published smooth dependence then variational equation; differentiate finite compositions and telescope dual pairings; augmented-system local/global error; include algebraic implicit-function solve sensitivity and reset saltation only with T10 branch. **B:** parameter calibration, multiple-shooting Jacobian, chaotic finite-time sensitivity growth. Add finite-time tangent QR: factor each propagated tangent block as Q R with positive diagonal; accumulated log diagonal sums give exact finite-step volume growth by determinant telescoping. Numerical log error needs singular values bounded away from zero and stated conditioning. No infinite-time Lyapunov exponent or shadowing claim. **Prereqs:** same pair bilinear adjoint telescoping; NA-15/NA-21, T01. **Cost:** forward/reverse RHS/JVP/VJP and storage; derivative oracle counted. **Sources:** Hairer/N\u00f8rsett/Wanner ODE I variational equations; Hager, Numerische Mathematik 87 (2000), Runge-Kutta methods in optimal control; Griewank/Walther, Evaluating Derivatives, reverse/checkpointing chapters. Reads pending.",
+      "canonical_reuse": [
+        "thm-smooth-dependence-of-ode-solutions-on-parameters"
+      ],
+      "new_dependency_keys": [
+        "T01"
+      ],
+      "missing_prerequisites_owner": "T12 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted",
+      "integration_disposition": "merged into DIF3; retain guarantees, do not allocate separate pair"
+    },
+    {
+      "key": "milstein-stochastic-taylor-and-iterated-integrals",
+      "local_key": "T13",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Scalar Brownian Milstein Y_(n+1)=Y_n+b(Y_n)h+sigma(Y_n)DeltaW+0.5 sigma sigma'(Y_n)((DeltaW)^2-h). Under globally Lipschitz b,sigma and sufficient bounded/Lipschitz derivatives (state explicitly C_b^3 suffices with finite initial moments), prove grid RMS order1. Multidimensional commutative noise extension after proving L_i sigma_j=L_j sigma_i yields symmetrized iterated integrals; noncommuting noise requires Levy areas with their own sampling approximation error and cost. Also supply scalar additive-noise stochastic Heun: Z=Y+b(Y)h+sigma DeltaW, Ynew=Y+0.5h[b(Y)+b(Z)]+sigma DeltaW, constant sigma. Prove weak order2 for b in C_b^6 and payoff backward solution with the actual mixed derivatives through spatial order6/time order3 bounded, by one-step moment matching through h\u00b2 and O(h\u00b3) remainder. This specific weak2 guarantee does not extend to multiplicative noise without extra terms. New Milstein MLMC delta: nested commutative-Milstein paths have E|Yfine-Ycoarse|\u00b2=O(h\u00b2), hence Lipschitz payoff variance O(h\u00b2); with cost O(h^-1) and bias O(h) consume canonical MLMC theorem to obtain O(eps^-2). **Proof/prereqs:** same-pair iterated It\u00f4 integral identity I_11=((DeltaW)^2-h)/2, conditional moments/orthogonality, local mean O(h\u00b2), local RMS O(h^(3/2)) and stochastic stability recurrence proving global order1. General stochastic local-to-global theorem is authored here; existing deterministic theorem insufficient. **B:** geometric Brownian motion, scalar multiplicative noise, noncommuting two-noise area term. **Cost:** derivatives and Gaussian/area samples; arbitrary Levy areas not free. **Sources:** Kloeden/Platen, Numerical Solution of SDEs, It\u00f4-Taylor and strong approximation chapters; Higham, SIAM Review 43 (2001), Milstein section. Full reads pending.",
+      "canonical_reuse": [
+        "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+        "thm-mlmc-complexity-under-rate-assumptions",
+        "def-mlmc-hierarchy-and-coupled-corrections"
+      ],
+      "new_dependency_keys": [],
+      "missing_prerequisites_owner": "T13 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://doi.org/10.1137/S0036144500378302"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "stable-sde-schemes-for-superlinear-drift",
+      "local_key": "T14",
+      "disposition": "extend-existing",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** A specific tamed Euler scheme b_h=b/(1+h|b|) for autonomous globally one-sided Lipschitz polynomial-growth drift and globally Lipschitz diffusion, all required initial moments. Prove strong order1/2 with moment control; state exact differentiability/polynomial derivative assumptions needed for chosen theorem. Also drift-implicit backward Euler for monotone dissipative drift with a uniquely solvable implicit resolvent and Lipschitz diffusion, mean-square stability and finite-time rate under stated regularity. CIR dX=k(theta-X)dt+sigma sqrt(X)dW, X0>0, k,theta,sigma>0 and 2k theta>=sigma\u00b2: define Z=sqrt(X), a=(4k theta-sigma\u00b2)/8>0, and take the positive root of (1+k h/2) Znew\u00b2-(Z+sigma DeltaW/2)Znew-a h=0. Prove strict numerical positivity directly; prove strong convergence in probability on finite horizons by stopped locally Lipschitz Lamperti analysis and a same-pair nonattainment/exit-probability theorem. Do not promise an Lp rate absent inverse-moment assumptions. This is a concrete implicit square-root algorithm, not ordinary EM. **Proof:** same-pair Lyapunov moment/localization and monotone SDE existence extension beyond global Lipschitz; tamed moment domination and defect recurrence with stopping removal, resolvent inequality for implicit scheme. A source theorem's long proof is an authoring obligation, not a missing external supplier. **B:** cubic dissipative drift where EM moments diverge; positive CIR boundary; noise-induced stability. **Deps:** published It\u00f4/isometry, T01, T13 local-to-global where compatible; own all non-global-Lipschitz model existence/moments. **Cost:** drift taming vs nonlinear solve, rejected branch/failure explicitly. **Sources:** Hutzenthaler/Jentzen/Kloeden, Proc Royal Society A 467 (2011), explicit divergence; Ann Appl Probab 22 (2012), strong convergence of tamed methods; Higham/Mao/Stuart, SIAM J Numer Anal 40 (2002); Alfonsi CIR schemes (chosen full theorem must be read). Reads pending.",
+      "canonical_reuse": [
+        "thm-euler-maruyama-strong-rate-under-higham-mao-stuart-hypotheses"
+      ],
+      "new_dependency_keys": [
+        "T01",
+        "T13"
+      ],
+      "missing_prerequisites_owner": "T14 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://www.maths.ed.ac.uk/~dhigham/Publications/P44.pdf"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "adaptive-stochastic-paths-and-brownian-bridge-coupling",
+      "local_key": "T15",
+      "disposition": "extend-existing",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Dyadic Brownian tree: parent increment DeltaW on interval h, independent Z~N(0,h/4), children DeltaW/2+Z and DeltaW/2-Z. Prove exact joint independent N(0,h/2) children and sum consistency; reuse tree after rejection rather than redraw noise. Predictable-grid EM with step chosen from current filtration and bounded by h_max: prove moment/error bound under global Lipschitz/time regularity using optional-integral/isometry and mesh stopping times, including a finite expected step-count condition if claiming cost. An adaptive grid selected using a future endpoint needs separate bridge/selection analysis and does not follow predictable theorem. Barrier bridge crossing for scalar Brownian with fixed endpoints has probability exp(-2ab/h), a distinct reflection-principle prerequisite if advertised. **Proof:** Gaussian covariance calculation plus finite-tree induction; same-pair stopping-time grid integrand and optional strong error proof. **B:** rejection/resampling bias, coupled coarse-fine path, barrier missed crossing. **Deps:** EM suppliers, T13, same-pair reflection principle/bridge law if used. **Cost:** tree storage and actual random step counts; finite budget returns status. **Sources:** Gaines/Lyons, SIAM J Appl Math 57 (1997), variable-step SDE simulation; S\u00e4rkk\u00e4/Solin SDE book numerical simulation/bridges; exact theorem reads pending.",
+      "canonical_reuse": [
+        "alg-euler-maruyama"
+      ],
+      "new_dependency_keys": [
+        "T13"
+      ],
+      "missing_prerequisites_owner": "T15 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://users.aalto.fi/~asolin/sde-book/sde-book.pdf"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted",
+      "context_only_ids": [
+        "ex-brownian-bridge-from-brownian-motion"
+      ]
+    },
+    {
+      "key": "stochastic-reaction-jump-simulation-and-coupling",
+      "local_key": "T16",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Finite-state CTMC with reactions nu_j and nonnegative state propensities a_j, bounded total hazard; holding survival exp(-a0(x)t), reaction selection a_j/a0, absorbing a0=0. Exact Gillespie direct method and next-reaction clock representation; prove resulting law/generator equals the declared CTMC, not the chemical physical system. Extend to finite reaction networks on countable states only under an explicitly proved nonexplosion Lyapunov criterion. Construct Poisson random-time-change X=X0+sum nu_j Y_j(integral a_j(X)ds), and shared/minimum-intensity coupling with exact marginals for comparison/MLMC. Time-varying hazard uses integrated hazard inversion with a certified solve or dominating thinning with a proved envelope. **Proof/prereqs:** own exponential race, temporal Poisson independent increments, strong Markov/memoryless recursion or direct finite-path density construction, nonexplosion and jump martingale/isometry if later consumed. Existing spatial Poisson count theorem alone does not supply this. **B:** birth-death, absorbing extinction, explosive pure birth with rates n\u00b2, invalid hazard upper bound. **Deps:** published Poisson/exponential laws; biology agent owns master equation/uniformization/FSP and consumes these exact simulation interfaces. **Cost:** O(R) direct event selection or verified O(log R) update tree, event count expectation required; zero hazard handled. **Sources:** Gillespie, J Comput Phys 22 (1976), exact stochastic simulation; Anderson/Kurtz, Stochastic Analysis of Biochemical Systems, random-time-change/coupling chapters. Reads pending.",
+      "canonical_reuse": [
+        "def-poisson-law",
+        "def-counting-process-intensity-and-compensator-contract"
+      ],
+      "new_dependency_keys": [],
+      "missing_prerequisites_owner": "T16 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://doi.org/10.1016/0021-9991(76)90041-3"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "tau-leaping-and-reaction-diffusion-model-error",
+      "local_key": "T17",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**A scope.** Explicit Poisson tau leap Y_(n+1)=Y_n+sum nu_j P_j(a_j(Y_n)h), conditionally independent counts; prove weak order1 under bounded C^k globally extended propensities and smooth backward payoff solution with derivative bounds, or finite-state stopped model with exit error separately bounded. Couple levels by shared/minimum-intensity Poisson clocks; derive local discrepancy variance bound under explicit Lipschitz rates, propagate with jump martingale estimates before applying generic MLMC. Negative populations, unbounded rates and extinction are explicit failures of naive hypotheses. Give critical-reaction SSA/binomial guarded leap algorithm with finite budgets; do not transfer Poisson weak theorem unchanged. Chemical Langevin/diffusion scaling is a model approximation: for density X^V/V with jump nu/V and rates V a(x), generator Taylor gives O(1/V\u00b2) third-order remainder versus diffusion under smoothness and compact stopping, then a separate backward regularity argument bounds weak model error on finite T. This is not time-discretization error. **Proof/prereqs:** T16 martingale coupling and generator Dynkin identity; same-pair discrete weak telescoping, moments and stopped exit probability. **B:** death reaction negative counts, stiff reversible reactions, diffusion wrong near extinction, coupled tau-leap. **Cost:** R Poisson samples per leap vs event-count SSA; RNG cost/model and coupling work stated. **Sources:** Gillespie, J Chem Phys 115 (2001), tau leap; Anderson/Higham, Multiscale Modeling & Simulation 10 (2012), multilevel CTMC simulation; Kurtz diffusion approximation (full source selected/read before claiming functional limit). Reads pending.",
+      "canonical_reuse": [
+        "def-poisson-law"
+      ],
+      "new_dependency_keys": [
+        "T16"
+      ],
+      "missing_prerequisites_owner": "T17 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://doi.org/10.1063/1.1378322"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "langevin-splittings-and-invariant-measure-error",
+      "local_key": "T18",
+      "disposition": "extend-existing",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**Classification:** extend-existing substantial new underdamped/BAOAB guarantee; canonical `alg-unadjusted-langevin-algorithm`, `alg-metropolis-adjusted-langevin-algorithm`, `thm-ula-gaussian-target-invariant-law-and-stationary-variance`, `thm-ula-quantitative-invariant-law-weighted-tv-bias`, and `thm-langevin-diffusion-weighted-geometric-ergodicity-under-radial-drift` already cover overdamped ULA/MALA. Reuse them, including `lem-weighted-drift-minorization-gives-contraction-and-invariant-law`; do not reintroduce ULA/MALA or its Gaussian stationary variance. Those overdamped constants are not automatically an underdamped theorem.\n\n**A scope.** Underdamped Langevin dq=M^-1p dt, dp=-grad V(q)dt-gamma p dt+sqrt(2 gamma beta^-1 M)dW. Exact kick/drift/OU substeps and fully specified BAOAB ordering; OU covariance beta^-1 M(1-exp(-2 gamma h)); finite-time strong/weak order only after stochastic composition calculation under globally controlled derivatives. Invariant Gibbs density is proved stationary by integration by parts under normalizability/decay, existence/uniqueness/ergodicity not inferred from stationarity. Prove invariant bias via discrete Poisson equation or continuous Poisson solution with explicit Lyapunov/derivative and geometric ergodicity hypotheses; own proofs for a selected confining class or give a complete linear harmonic/OU theorem first. Harmonic discrete Gaussian invariant covariance follows from a discrete Lyapunov equation when spectral radius<1; calculate bias and stability limits exactly. Do not advertise general BAOAB superconvergence from a harmonic example. **Proof/prereqs:** own OU transition/invariant covariance; stochastic splitting local moments; Gaussian autoregression invariant/uniqueness via coupling; general ergodic/Poisson suppliers authored before consumed. **B:** harmonic underdamped thermostat, compare canonical overdamped OU variance example by reference, unstable step with no invariant law, nonnormalizable potential. **Deps:** T04/T13 and published It\u00f4; physics chemistry consumes thermostat interface. **Cost:** force evaluations plus Gaussian vectors; burn-in/correlation/statistical error distinct from invariant bias. **Sources:** Leimkuhler/Matthews, Molecular Dynamics, Langevin splitting chapters; Mattingly/Stuart/Higham, Stoch Proc Appl 101 (2002), ergodicity; Talay invariant-measure numerical approximation papers. Exact selected class/theorem full reads pending.",
+      "canonical_reuse": [
+        "alg-unadjusted-langevin-algorithm",
+        "alg-metropolis-adjusted-langevin-algorithm",
+        "thm-ula-quantitative-invariant-law-weighted-tv-bias",
+        "lem-weighted-drift-minorization-gives-contraction-and-invariant-law"
+      ],
+      "new_dependency_keys": [
+        "T04",
+        "T13"
+      ],
+      "missing_prerequisites_owner": "T18 owns every same-pair foundational lemma stated in design before numerical theorem; external interfaces have named frontier owners in audit report",
+      "source_urls": [
+        "https://doi.org/10.1007/978-3-319-16375-8"
+      ],
+      "source_reading_status": "Source locators are targets only; exact full theorem reading and section binding pending; no completed reading asserted"
+    },
+    {
+      "key": "parallel-in-time-parareal-and-mgrit",
+      "local_key": "T19",
+      "disposition": "genuinely-new",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**Disposition:** genuinely-new. No canonical Parareal/MGRIT carrier located by filename/content searches. **Methods:** for fine propagator F and coarse G over macro H, U0^k=u0, U_(n+1)^(k+1)=G(U_n^(k+1))+F(U_n^k)-G(U_n^k); initialize by serial G. Parallel F evaluations followed by serial coarse correction; finite sweep/time budgets. Target is the sequential fine trajectory, not the exact ODE unless F's error is added.\n\n**Proof:** consistency induction proves U_n^k=F^n(u0) for n<=k, hence exact fine solution after at most N sweeps in exact arithmetic, independent of a contraction assertion. For useful convergence, assume on a common invariant tube ||G(x)-G(y)||<=a||x-y|| and ||(F-G)(x)-(F-G)(y)||<=b||x-y||, with a<=1+CH, b<=C H^(q+1). Error recurrence e_(n+1)^(k+1)<=a e_n^(k+1)+b e_n^k yields by induction binomial(n,k)b^k max(1,a)^n times a bounded initial-error envelope, with endpoint conventions and all iterates remaining in tube; fixed T then gives iteration-dependent acceleration. Initial and fine/coarse algebraic errors are additive forcing, not hidden exactness. For oscillatory/nonnormal or unstable coarse maps, a,b may make the bound useless.\n\n**MGRIT:** define linear all-at-once bidiagonal time operator A_t for u_n-Phi u_(n-1)=r_n, F/C splitting, ideal interpolation/elimination Schur complement with exact coarse propagator Phi^m, practical coarse propagator Psi, F/FCF relaxation and coarse correction. Derive actual two-grid error matrix E=S_post(I-P A_c^-1 R A_t)S_pre in declared block norm, prove residual/error equivalence and convergence when a computed/proved ||E||<=q<1. Prove exact coarse elimination identity by block substitution. Scalar commuting diffusion example yields an explicit matrix and its bound; no mesh-independent convergence from the algorithm's name. Multilevel recursive cycle requires separately bounded level operators and recursion, not transfer of two-grid contraction.\n\n**Same-frontier prerequisites:** all-at-once block elimination, forced-binomial error lemma, norm contraction and fine-error decomposition owned T19; time propagators consume NA15/T01. **Examples:** dissipative heat modes, oscillatory coarse phase error, nonlinear tube escape. **Cost:** N fine macro solves parallel over processors plus N serial coarse solves per iteration, synchronization/communication, iterations and coarse levels included; speedup only under actual processor/work model. **Sources, unread candidates:** Lions/Maday/Turinici, C R Acad Sci Paris 332 (2001), original Parareal, https://doi.org/10.1016/S0764-4442(00)01793-6 ; Falgout et al., parallel time integration with MGRIT, author portal https://computing.llnl.gov/projects/parallel-time-integration-multigrid . Source full theorem binding still required.",
+      "canonical_reuse": [],
+      "context_only_ids": [],
+      "new_dependency_keys": [
+        "T01"
+      ],
+      "missing_prerequisites_owner": "T19 owns every typed prerequisite enumerated in design; no deferred frontier",
+      "source_urls": [
+        "https://doi.org/10.1016/S0764-4442(00",
+        "https://computing.llnl.gov/projects/parallel-time-integration-multigrid"
+      ],
+      "source_reading_status": "Unread candidate locators; exact records/full theorem sections require verification before binding"
+    },
+    {
+      "key": "deferred-correction-and-collocation-iterations",
+      "local_key": "T20",
+      "disposition": "extend-existing",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**Disposition:** extend-existing numerical guarantee; consume NA15 RK/collocation and NA21 BVP collocation where actually established; this pair concerns IVP high-order quadrature and iterative solution, not duplicate BVP definitions.\n\nOn [t,t+h] with distinct nodes c_i in [0,1], let Q_ij=integral_0^ci l_j(s)ds from Lagrange basis. Collocation stage vector satisfies U=1 tensor u+h Q F(U). Explicitly define lower-triangular Q_delta from node-subinterval Euler quadrature; SDC sweep solves U^(k+1)=1 tensor u+h Q_delta F(U^(k+1))+h(Q-Q_delta)F(U^k), component by component with selected implicit branches or explicit preconditioner. If h L||Q_delta||<1, inverse Lipschitz inequality gives contraction factor q=h L||Q-Q_delta||/(1-h L||Q_delta||)<1. Prove stage fixed point equals collocation, geometric iteration residual bound, and finite budget reports nonconvergence. With sufficiently small h and constant predictor, each sweep reduces stage error by O(h); derive the actual order-vs-sweep index rather than promise unlimited order.\n\nProve local defect O(h^(M+1)) for M nodes from interpolation remainder assuming C^M smooth integrand along the exact flow, and stable propagation gives at least global order M for a step endpoint derived from the same quadrature. Gauss nodes endpoint superconvergence order2M is a separate full proof obligation using orthogonality/defect adjoint or exact RK order conditions; it cannot be inferred from polynomial degree alone. Include one fully proved Gauss-midpoint order2 case even before general superconvergence. Chosen iteration tolerance ||U-U*||<=C h^(p+1) yields collocation order p after accounting for endpoint h F sensitivity; a residual-to-stage inverse bound must convert stopping residual. Spectral node interpolation may have large Lebesgue constants; expose M dependence. No claim of stiff convergence when h L is large; preconditioned scalar linear iteration matrix (I-h lambda Q_delta)^-1 h lambda(Q-Q_delta) is computed and its norm/radius/powers analyzed separately.\n\n**Prerequisites owned here:** node quadrature matrix identity, inverse residual bound, contraction and finite-sweep error, collocation interpolation residual, optional Gauss superconvergence proof. **Examples:** nonstiff high-order IVP, stiff SDC iteration divergence, too-few sweeps dropping order, inexact linear solves. **Cost:** M RHS/stage solves per sweep, reuse of old stage RHS explicitly counted, collocation matrix setup and precision. **Sources, unread candidates:** Dutt/Greengard/Rokhlin, BIT 40 (2000), spectral deferred corrections, https://doi.org/10.1023/A:1022338906936 ; Hairer collocation/RK source https://www.unige.ch/~hairer/poly/chap3.pdf . Exact sections must be read before source acceptance.",
+      "canonical_reuse": [
+        "runge-kutta-methods-and-order",
+        "polynomial-interpolation-and-remainder"
+      ],
+      "context_only_ids": [],
+      "new_dependency_keys": [
+        "T01"
+      ],
+      "missing_prerequisites_owner": "T20 owns every typed prerequisite enumerated in design; no deferred frontier",
+      "source_urls": [
+        "https://doi.org/10.1023/A:1022338906936",
+        "https://www.unige.ch/~hairer/poly/chap3.pdf"
+      ],
+      "source_reading_status": "Unread candidate locators; exact records/full theorem sections require verification before binding"
+    },
+    {
+      "key": "finite-bit-random-streams-and-variate-generation",
+      "local_key": "T21",
+      "disposition": "extend-existing",
+      "pair_kind": "A/B",
+      "promise_and_proof_design_verbatim": "**Disposition:** extend-existing substantial algorithm/error guarantee. `ex-quantile-coupling-on-the-real-line` already proves generalized inverse Q(U) has the target law; `lem-randomized-probability-integral-transform` treats the reverse randomized CDF transform. Do not redefine those statistical transformations as a new method. The example is contextual rather than a legal logical supplier; consume `thm-probability-law-and-distribution-function-correspondence` and promote only the needed generalized-inverse sublevel identity to a typed prerequisite with proof/source attribution, avoiding a duplicate broad quantile-coupling theorem. The new guarantee is actual bit/stream implementation and finite-distribution error plus Box-Muller sampling, absent from inspected canonical methods.\n\n**Randomness model:** independent ideal fair bits B_j on an explicitly constructed countable product probability space; U=sum B_j 2^-j has uniform law by dyadic cylinder intervals and continuity of measure. Disjoint bit blocks/streams preserve independence. A b-bit K uniform on {0,...,2^b-1} gives U_b=(K+1/2)2^-b, coupling |U-U_b|<=2^(-b-1), hence W1 at most that and Kolmogorov discrepancy at most 2^-b. Finite-support versus continuous law has total variation distance1, so no TV-small assertion. Independence of finite outputs requires disjoint independent bit blocks; recycling bits changes dependence.\n\n**Practical finite generators:** define an actual full-period LCG modulo 2^w with odd increment and multiplier a congruent1 mod4, w>=2; prove full period by induction modulo powers of2 using affine iterate arithmetic, and state finite state/period bound for every deterministic generator. With random uniform initial state each single state is uniform, but adjacent states satisfy the recurrence and are not independent. Give a counter-based stream interface as a deterministic keyed permutation of finite counters; a random permutation/key model or computational pseudorandomness assumption must be explicit, never an IID theorem. No cryptographic-quality claim or empirical-test proof of independence. Non-overlapping blocks avoid exact reuse only within certified period; do not imply probabilistic independence.\n\n**Variates:** inverse CDF already canonical; add implemented bracketed inverse with certified |F(xhat)-u|<=epsilon on a monotone continuous CDF, finite-bit U discrepancy adds to Kolmogorov error (plus any actual CDF approximation error). Spatial error requires density f>=m>0 on the inversion bracket, and tails handled separately. Discrete CDF binary search gives exact categorical law under ideal U, finite-bit count discrepancy bounded per threshold; Bernoulli rational sampling via unbiased integer rejection has geometric expected bit/block cost and budget failure; finite budget discarded separately.\n\nBox-Muller uses independent ideal U1,U2 in (0,1), Z1=sqrt(-2 log U1)cos(2pi U2), Z2=sqrt(-2 log U1)sin(2pi U2). Prove independent standard-normal density by polar change of variables and product density normalization; same-pair polar Jacobian/measure change prerequisite must be proved if not published. Finite bits imply bounded normal tails and discrete output, never exact Gaussian; couple midpoint U_b to U, restrict U1>=delta and guard angular/endpoint arithmetic, derivative bounds give explicit Wasserstein/bounded-Lipschitz output error on that event, while discarded event probability <=delta+2^-b. Tail expectations use proved Gaussian/Rayleigh moments and Cauchy-Schwarz; elementary log/sqrt/trig evaluation errors supplied by precision owner add through those derivative bounds. No Ziggurat implementation required if not fully specified/proved; rejection algorithm may be a later optional genuinely new optimization only with envelope/area proof. Gaussian samples in SDE algorithms are ideal-law or approximate-law with this additional coupling error propagated; no invisible exact-normal finite-bit oracle.\n\n**Same-frontier prerequisites:** product independent-bit construction (reuse existing countable product theorem if available, otherwise own cylinder extension), dyadic uniform law, LCG modular induction, stopping/rejection cost, finite-CDF inverse residual, polar transform identity, truncated-transform coupling and arithmetic error propagation. Root must map any newly located canonical supplier instead of creating duplicate items. **Examples:** low-bit LCG correlation/lattice, normal tail truncation, zero endpoint log failure, inverse CDF near vanishing density. **Cost:** random bits, rejection count, integer arithmetic, precision and transform calls; bit cost distinct from real-RAM sampling oracle cost. **Sources, unread candidates:** Devroye, Non-Uniform Random Variate Generation, author's full-book portal https://luc.devroye.org/rnbookindex.html ; L'Ecuyer RNG publications https://www.iro.umontreal.ca/~lecuyer/myftp/papers.html ; Box/Muller, Ann Math Stat 29 (1958), https://doi.org/10.1214/aoms/1177706645 . Canonical quantile source https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf .",
+      "canonical_reuse": [
+        "thm-probability-law-and-distribution-function-correspondence",
+        "lem-randomized-probability-integral-transform"
+      ],
+      "context_only_ids": [
+        "ex-quantile-coupling-on-the-real-line"
+      ],
+      "new_dependency_keys": [],
+      "missing_prerequisites_owner": "T21 owns every typed prerequisite enumerated in design; no deferred frontier",
+      "source_urls": [
+        "https://luc.devroye.org/rnbookindex.html",
+        "https://www.iro.umontreal.ca/~lecuyer/myftp/papers.html",
+        "https://doi.org/10.1214/aoms/1177706645",
+        "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+      ],
+      "source_reading_status": "Unread candidate locators; exact records/full theorem sections require verification before binding"
+    }
+  ],
+  "coordination": {
+    "biology": "CTMC master/uniformization/FSP and age/renewal; consumes T16/T17",
+    "physics_chemistry": "continuation/bifurcation/periodic orbit/Floquet; consumes T04/T07/T12/T18",
+    "pde": "spatial contact/VI and spatial operator stability; consumes T04/T11",
+    "linear_approx": "matrix exp/phi actions, interval arithmetic/root enclosures; consumed T03/NA18/T10"
+  },
+  "cycle2_addendum": "cycle2-addendum.md",
+  "integrated_row_count": 21,
+  "count_explanation": "21 T rows total; T12 merged into DIF3 and not a separate pair, hence 20 standalone time proposals before any further integrator merges. Original NA15/NA22 amended rather than new pairs.",
+  "cycle2_na15_amendment_verbatim": "## NA15 explicit extension \u2014 `TIME-SSP` owner and stabilized Chebyshev stepping\n\n**Classification:** extend-existing, genuinely new time guarantees. Reuse canonical `def-chebyshev-polynomials-first-and-second-kind`, `thm-chebyshev-multiple-angle-identities`, `lem-chebyshev-degree-leading-coefficients-and-extreme-values`; do not reintroduce approximation polynomials.\n\n**SSP method:** SSPRK(3,3): Y1=u+h f(u), Y2=3u/4+(Y1+h f(Y1))/4, unew=u/3+2(Y2+h f(Y2))/3. Prove third order by actual Taylor coefficients. If the forward Euler map preserves a specified convex invariant set C or satisfies a convex functional Phi(u+h f(u))<=Phi(u) for every u in C and 0<=h<=h_FE, convexity of C/Phi proves every stage and update preserve that property with coefficient1 and same timestep bound. State the premise at each stage and include boundary/time-dependent operators via augmented time or actual stage times. TVD is licensed only when the spatial forward-Euler theorem supplies Phi=TV and its CFL. No universal SSP claim for RK4. PDE PE04 consumes `TIME-SSP` = this NA15 proof interface. Missing lemma convex composition is owned NA15; no unowned key.\n\n**Stabilized explicit method:** first order R_s(z)=T_s(1+z/s\u00b2), s>=1, implemented by y0=y, y1=y+(h/s\u00b2)Ay and yj=2 y_(j-1)-y_(j-2)+(2h/s\u00b2)A y_(j-1). For the second-order linear RKC variant s>=2, use w1=3/(s\u00b2-1), b=(s\u00b2-1)/(3s\u00b2), a=1-b and R_s(z)=a+b T_s(1+w1 z). Evaluate the same three-term Chebyshev recurrence with h/s\u00b2 replaced by w1 h and output a y0+b ys. Prove T_s'(1)=s\u00b2 and T_s''(1)=s\u00b2(s\u00b2-1)/3 by differentiating the recurrence; hence R(0)=R'(0)=R''(0)=1 and actual order2 on fixed linear autonomous systems. Stability intervals are [-2s\u00b2,0] for order1 and [-2(s\u00b2-1)/3,0] for order2 because |T_s(x)|<=1 on [-1,1] and 0<b<1. For self-adjoint nonpositive A in the declared inner product, spectral theorem gives contraction when h rho(-A) is within that interval. For nonsymmetric A eigenvalue inclusion alone is insufficient; require a proved functional calculus or bounded diagonalization constants. Inhomogeneous equations use an explicitly augmented system with forcing regularity or separate Duhamel discretization.\n\nUse s~sqrt(h rho) stages and count s matrix-vector products, versus O(h rho) forward Euler substeps for the same macro h. This is a stability-work comparison, not an accuracy speedup theorem. Prove global fixed-T order from local Taylor remainder and stable propagation with explicit ||A\u00b3u|| bound; do not claim mesh-uniform order from bounded scalar R alone. Internal stage perturbations satisfy a forced Chebyshev recurrence; use U_j with |U_j(x)|<=j+1 to bound O(s\u00b2 max perturbation) on the stable segment and include roundoff/action errors. Nonlinear RKC needs an actual nonlinear stage construction and order proof; this linear variant does not supply one silently. Examples: semidiscrete self-adjoint heat, stiff reaction negative spectrum, nonnormal failure, stage-roundoff growth. Source candidates (unread): https://www.unige.ch/~hairer/books.html ; https://doi.org/10.1137/S003614450036757X (SSP review locator, exact record to verify before binding); Sommeijer/Shampine/Verwer RKC algorithm via author portal https://homepages.cwi.nl/~verwer/ .\n\n",
+  "dependency_repairs_verbatim": "## Ownership and dependency repairs\n\n- T12 is integrated into DIF3 by the inventory integrator: retain every continuous/discrete tangent, adjoint, shooting Jacobian and finite-time tangent QR guarantee; no separate duplicate A/B pair.\n- Original NA22 consumes canonical `def-leapfrog-step-map` and reversible/volume theorem and supplies its approved new symplectic/order/backward-energy core. It does NOT require T04 or T07. T07 consumes this geometry core. T04 proves its own Taylor composition lemma, so no cycle.\n- T15's `ex-brownian-bridge-from-brownian-motion` is contextual, never a logical supplier. T15 owns a typed Gaussian conditional-law/covariance lemma proved directly from independent normals, canonical Gaussian density and linear-transform laws.\n- TIME owns hard-sphere/granular event/reset trajectories; PDE owns spatial/quasistatic VI/FEM.\n\n",
+  "cycle2_na15_nonlinear_rkc_verbatim": "## NA15 nonlinear RKC construction (bind instead of stopping at linear example)\n\nPreserve the simple linear proof above as the stability model, and include this actual autonomous nonlinear second-order stabilized explicit RK recurrence. For s>=2 set w1=3/(s\u00b2-1), b0=b1=b2=1/4 and b_j=(j\u00b2-1)/(3j\u00b2) for j>=2, a_j=1-b_j. Let Y0=y, Y1=y+b1 w1 h f(y). For j=2,...,s define mu_j=2 b_j/b_(j-1), nu_j=-b_j/b_(j-2), mt_j=2 b_j w1/b_(j-1), gt_j=-a_(j-1) mt_j, and\n\nYj=(1-mu_j-nu_j)y+mu_j Y_(j-1)+nu_j Y_(j-2)+mt_j h f(Y_(j-1))+gt_j h f(y).\n\nOutput Ys. It is an explicit RK method because every stage is an affine combination of y and earlier RHS evaluations. At constant f its stage abscissae follow c1=b1 w1 and c_j=b_j w1 j\u00b2 for j>=2, hence c_s=1. Derive the coefficient of f'f by expanding the recurrence through h\u00b2, or equivalently use the one order2 rooted tree plus actual scalar stability polynomial a_s+b_s T_s(1+w1 z), to prove final coefficient1/2. This equivalence is justified only through order2; higher-order linear matching does not establish nonlinear order. For f in C2 with bounded derivatives on a controlled tube and all stages admitted, Taylor remainder plus one-step Lipschitz propagation proves global order2 for fixed s on fixed T. The long real stability interval remains a scalar linear/normal-matrix guarantee; nonlinear dissipation, positivity, SSP and stiffness-uniform accuracy do not follow. Time-dependent f is handled by augmenting t'=1 and using the actual derived c_j, not an arbitrary stage-time guess. Include an explicit finite-stage domain check and s-dependent roundoff amplification. Damped w0>1 variants are optional only with separately verified coefficients; the undamped scheme already has the proved interval and actual nonlinear method.\n"
+}
