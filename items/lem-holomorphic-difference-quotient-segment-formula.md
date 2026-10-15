@@ -7,12 +7,13 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-fundamental-theorem-for-complex-line-integrals, thm-riemann-stieltjes-and-parametric-contour-integrals-agree, cor-holomorphic-functions-are-real-analytic-and-smooth, thm-cauchy-integral-formula-higher-derivatives, def-convex-subset-of-euclidean-space, rem-plane-star-shaped-and-convex-dictionary, def-vector-valued-derivative-and-integral, def-complex-primitive, cor-complex-differentiability-implies-continuity, thm-linearity-of-the-integral, cor-piecewise-c1-paths-have-additive-speed-integral-length]
+deps: [thm-fundamental-theorem-for-complex-line-integrals, thm-riemann-stieltjes-and-parametric-contour-integrals-agree, cor-holomorphic-functions-are-real-analytic-and-smooth, thm-cauchy-integral-formula-higher-derivatives, def-convex-subset-of-euclidean-space, thm-complex-coordinate-isometry-and-topology-transport, def-vector-valued-derivative-and-integral, def-complex-primitive, cor-complex-differentiability-implies-continuity, thm-linearity-of-the-integral, cor-piecewise-c1-paths-have-additive-speed-integral-length]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-lem-holomorphic-difference-quotient-segment-formula-published-repair.json
   audited: 2026-08-26
   precheck: pass
   judge:
@@ -46,7 +47,7 @@ identity are $0$.
 
 ## Facts & Assumptions
 
-**Given:** An open convex $V\subseteq\mathbb C$, a holomorphic $f:V\to\mathbb C$ and points $z,w\in V$; segments in the plane are those of [[rem-plane-star-shaped-and-convex-dictionary]].
+**Given:** An open convex $V\subseteq\mathbb C$, a holomorphic $f:V\to\mathbb C$ and points $z,w\in V$; write $\Phi(a+bi)=(a,b)$, and read convexity as that of $\Phi[V]$ in [[def-convex-subset-of-euclidean-space]]. The bijective isometry $\Phi$ preserves affine segments by [[thm-complex-coordinate-isometry-and-topology-transport]], so $(1-t)z+tw\in V$ for $0\le t\le1$.
 
 [L1] If $F$ is a primitive of a continuous $f$ on an open set containing the trace of a rectifiable contour $\gamma:[a,b]\to\mathbb C$ and $F'=f$ is continuous, then $\int_\gamma f(z)\,dz=F(\gamma(b))-F(\gamma(a))$ ([[thm-fundamental-theorem-for-complex-line-integrals]], [[def-complex-primitive]]).
 
@@ -68,10 +69,10 @@ identity are $0$.
 
 1.1 By [L3] the derivative $f'$ is again holomorphic on $V$, hence continuous there by [L6], so $f$ is a primitive of the continuous $f'$ with continuous $F'$ in the sense of [L1]. [given, L1, L3, L6]
 
-1.2 The map $\ell(t)=z+t(w-z)$ on $[0,1]$ has values in $V$ by [L4], since $V$ is convex, and is differentiable with the constant continuous derivative $w-z$, so it is a piecewise-$C^1$, hence rectifiable, contour with trace in $V$ ([L7]); its endpoints are $\ell(0)=z$ and $\ell(1)=w$. [given, L4, L7]
+1.2 The map $\ell(t)=z+t(w-z)$ on $[0,1]$ has values in $V$ by [L4], since $V$ is convex, and is differentiable with the constant continuous derivative $w-z$, so it is a piecewise-$C^1$, hence rectifiable, contour with trace in $V$ ([L7]); its endpoints are $\ell(0)=z$ and $\ell(1)=w$. In real coordinates the path is $\Phi(\ell(t))=\Phi(z)+t\Phi(w-z)$, so this real derivative and the complex difference quotient both give the same constant velocity $w-z$. [given, L4, L7]
 
 2.1 By [L1] applied to $\ell$, $\int_\ell f'(\zeta)\,d\zeta=f(\ell(1))-f(\ell(0))=f(w)-f(z)$. [step 1.1, step 1.2, L1]
 
-2.2 By [L2] applied to $\ell$, whose derivative is the constant $w-z$, $\int_\ell f'(\zeta)\,d\zeta=\int_0^1 f'\bigl(z+t(w-z)\bigr)(w-z)\,dt$, and pulling the complex constant $w-z$ out of the componentwise integral is real linearity, so this equals $(w-z)\int_0^1 f'(z+t(w-z))\,dt$. [step 1.1, step 1.2, L2, L5, algebra]
+2.2 By [L2] applied to $\ell$, whose derivative is the constant $w-z$, $\int_\ell f'(\zeta)\,d\zeta=\int_0^1 f'\bigl(z+t(w-z)\bigr)(w-z)\,dt$, and multiplication by $w-z$ is the fixed real-linear coordinate map $(x,y)\mapsto(\operatorname{Re}(w-z)x-\operatorname{Im}(w-z)y,\operatorname{Im}(w-z)x+\operatorname{Re}(w-z)y)$; applying [L5] to its two real components therefore pulls this constant out of the integral, so this equals $(w-z)\int_0^1 f'(z+t(w-z))\,dt$. [step 1.1, step 1.2, L2, L5, algebra]
 
 3.1 Steps 2.1 and 2.2 give $f(w)-f(z)=(w-z)\int_0^1f'(z+t(w-z))\,dt$; dividing by $w-z$ when $w\ne z$ gives the difference-quotient form, and when $w=z$ the integrand is the constant $f'(z)$, whose integral over $[0,1]$ is $f'(z)$ by [L5], while both sides of the first identity are $0$. [step 2.1, step 2.2, L5, algebra] ∎

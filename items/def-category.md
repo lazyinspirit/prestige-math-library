@@ -7,11 +7,12 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-function, rem-category-theory-class-and-size-conventions]
+deps: [def-function, def-language-of-set-theory]
 justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-def-category-published-repair.json
   precheck: n/a
   audited: 2026-08-11
 sources:
@@ -25,7 +26,7 @@ pipeline_run: null
 ## Definition
 
 Under the definable-class convention of
-[[rem-category-theory-class-and-size-conventions]], every class below is a
+[[def-language-of-set-theory]], every class below is a
 formula and every function whose domain may be proper-class-sized is a
 definable class-function schema. When its domain is a set, it is an ordinary
 set-valued function.
@@ -62,3 +63,7 @@ undefined. Every concrete category below whose morphisms are described as
 structure-preserving maps is to be read with this tagging, and each hom-collection
 is then in canonical bijection with the corresponding collection of untagged
 maps, so no size or smallness claim is affected.
+
+## Remarks
+
+[[rem-category-theory-class-and-size-conventions]] gives contextual discussion of the convention used here.

@@ -7,12 +7,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-contour-parameter-integrals-are-holomorphic, lem-holomorphic-difference-quotient-is-jointly-continuous, lem-holomorphic-difference-quotient-is-holomorphic-in-each-variable, lem-cauchy-transform-of-a-cycle-is-holomorphic-off-the-trace, cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace, def-null-homologous-and-homologous-complex-cycles, def-integration-and-index-of-complex-chain, def-complex-chain-and-cycle, cor-ml-estimate-for-complex-line-integrals, prop-linearity-of-complex-line-integrals, thm-compact-subset-is-closed-and-bounded, thm-continuous-image-of-a-compact-space-is-compact, thm-closed-subspace-of-a-compact-space-is-compact, thm-heine-borel-rn, def-complex-differentiability-holomorphic-and-entire, def-metric-topology, def-metric-ball, def-metric-bounded-diameter, lem-complex-conjugation-and-modulus-laws, def-finite-sum-in-a-commutative-monoid, thm-complex-numbers-form-a-field, cor-complex-differentiability-implies-continuity, rem-complex-plane-euclidean-dictionary, thm-algebra-of-complex-derivatives]
+deps: [thm-contour-parameter-integrals-are-holomorphic, lem-holomorphic-difference-quotient-is-jointly-continuous, lem-holomorphic-difference-quotient-is-holomorphic-in-each-variable, lem-cauchy-transform-of-a-cycle-is-holomorphic-off-the-trace, cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace, def-null-homologous-and-homologous-complex-cycles, def-integration-and-index-of-complex-chain, def-complex-chain-and-cycle, cor-ml-estimate-for-complex-line-integrals, prop-linearity-of-complex-line-integrals, thm-compact-subset-is-closed-and-bounded, thm-continuous-image-of-a-compact-space-is-compact, thm-closed-subspace-of-a-compact-space-is-compact, thm-heine-borel-rn, def-complex-differentiability-holomorphic-and-entire, def-metric-topology, def-metric-ball, def-metric-bounded-diameter, lem-complex-conjugation-and-modulus-laws, def-finite-sum-in-a-commutative-monoid, thm-complex-numbers-form-a-field, cor-complex-differentiability-implies-continuity, thm-complex-coordinate-isometry-and-topology-transport, thm-algebra-of-complex-derivatives]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-lem-dixon-entire-gluing-published-repair.json
   audited: 2026-08-26
   precheck: pass
 sources:
@@ -43,7 +44,7 @@ $|z|>R$.
 
 ## Facts & Assumptions
 
-**Given:** An open $\Omega$, a holomorphic $f:\Omega\to\mathbb C$, and a cycle $\Gamma=\sum_{k<r}m_k\gamma_k$ with $\Gamma^\ast\subseteq\Omega$ which is null-homologous in $\Omega$; the plane carries the Euclidean metric of [[rem-complex-plane-euclidean-dictionary]].
+**Given:** An open $\Omega$, a holomorphic $f:\Omega\to\mathbb C$, and a cycle $\Gamma=\sum_{k<r}m_k\gamma_k$ with $\Gamma^\ast\subseteq\Omega$ which is null-homologous in $\Omega$; the plane carries the Euclidean metric of [[thm-complex-coordinate-isometry-and-topology-transport]].
 
 [L1] If $\gamma$ is a rectifiable contour, $W$ is open and $\varphi$ is continuous on $\gamma^\ast\times W$ with $\varphi(w,\cdot)$ holomorphic on $W$ for each $w\in\gamma^\ast$, then $z\mapsto\int_\gamma\varphi(\zeta,z)\,d\zeta$ is holomorphic on $W$ ([[thm-contour-parameter-integrals-are-holomorphic]]).
 

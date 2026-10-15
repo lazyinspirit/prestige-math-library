@@ -7,12 +7,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-global-cauchy-integral-formula-homology, thm-algebra-of-complex-derivatives, def-integration-and-index-of-complex-chain, def-null-homologous-and-homologous-complex-cycles, prop-linearity-of-complex-line-integrals, thm-compact-subset-is-closed-and-bounded, thm-closed-subspace-of-a-compact-space-is-compact, thm-continuous-image-of-a-compact-space-is-compact, thm-heine-borel-rn, thm-connectedness-characterisations, cor-rn-is-polygonally-connected-and-locally-path-connected, rem-complex-plane-euclidean-dictionary, def-complex-chain-and-cycle, def-metric-topology, def-metric-bounded-diameter, cor-complex-differentiability-implies-continuity]
+deps: [thm-global-cauchy-integral-formula-homology, thm-algebra-of-complex-derivatives, def-integration-and-index-of-complex-chain, def-null-homologous-and-homologous-complex-cycles, prop-linearity-of-complex-line-integrals, thm-compact-subset-is-closed-and-bounded, thm-closed-subspace-of-a-compact-space-is-compact, thm-continuous-image-of-a-compact-space-is-compact, thm-heine-borel-rn, thm-connectedness-characterisations, cor-rn-is-polygonally-connected-and-locally-path-connected, thm-complex-coordinate-isometry-and-topology-transport, def-complex-chain-and-cycle, def-metric-topology, def-metric-bounded-diameter, cor-complex-differentiability-implies-continuity]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-cor-global-cauchy-theorem-homology-published-repair.json
   audited: 2026-08-26
   precheck: pass
 sources:
@@ -37,7 +38,7 @@ $$\int_\Gamma f(z)\,dz=0.$$
 
 ## Facts & Assumptions
 
-**Given:** An open $\Omega$, a holomorphic $f:\Omega\to\mathbb C$, and a cycle $\Gamma$ with $\Gamma^\ast\subseteq\Omega$ which is null-homologous in $\Omega$; the plane is read as $\mathbb R^2$ through [[rem-complex-plane-euclidean-dictionary]].
+**Given:** An open $\Omega$, a holomorphic $f:\Omega\to\mathbb C$, and a cycle $\Gamma$ with $\Gamma^\ast\subseteq\Omega$ which is null-homologous in $\Omega$; the plane is read as $\mathbb R^2$ through [[thm-complex-coordinate-isometry-and-topology-transport]].
 
 [L1] Under the hypotheses above, $n(\Gamma,z)f(z)=(2\pi i)^{-1}\int_\Gamma f(\zeta)(\zeta-z)^{-1}\,d\zeta$ for every $z\in\Omega\setminus\Gamma^\ast$ ([[thm-global-cauchy-integral-formula-homology]]).
 

@@ -7,12 +7,13 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-winding-number-of-a-cycle-is-integer, def-complex-chain-and-cycle, def-integration-and-index-of-complex-chain, cor-ml-estimate-for-complex-line-integrals, prop-linearity-of-complex-line-integrals, thm-compact-subset-is-closed-and-bounded, thm-continuous-image-of-a-compact-space-is-compact, thm-closed-subspace-of-a-compact-space-is-compact, thm-heine-borel-rn, def-connected-component-and-quasicomponent, cor-components-of-open-subsets-of-rn-are-polygonally-connected, thm-continuous-image-of-a-connected-space, cor-connected-subsets-of-the-line, def-metric-topology, def-metric-ball, def-metric-bounded-diameter, thm-infimum-property, def-infimum, lem-complex-conjugation-and-modulus-laws, def-finite-sum-in-a-commutative-monoid, thm-complex-numbers-form-a-field, def-integers, thm-int-comm-ring, thm-int-ordered-ring, lem-integer-part, rem-complex-plane-euclidean-dictionary]
+deps: [thm-winding-number-of-a-cycle-is-integer, def-complex-chain-and-cycle, def-integration-and-index-of-complex-chain, cor-ml-estimate-for-complex-line-integrals, prop-linearity-of-complex-line-integrals, thm-compact-subset-is-closed-and-bounded, thm-continuous-image-of-a-compact-space-is-compact, thm-closed-subspace-of-a-compact-space-is-compact, thm-heine-borel-rn, def-connected-component-and-quasicomponent, cor-components-of-open-subsets-of-rn-are-polygonally-connected, thm-continuous-image-of-a-connected-space, cor-connected-subsets-of-the-line, def-metric-topology, def-metric-ball, def-metric-bounded-diameter, thm-infimum-property, def-infimum, lem-complex-conjugation-and-modulus-laws, def-finite-sum-in-a-commutative-monoid, thm-complex-numbers-form-a-field, def-integers, thm-int-comm-ring, thm-int-ordered-ring, lem-integer-part, thm-complex-coordinate-isometry-and-topology-transport]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace-published-repair.json
   audited: 2026-08-26
   precheck: pass
   judge:
@@ -51,7 +52,7 @@ clauses 2 and 3 hold with $\Omega_0=\mathbb C$.
 
 ## Facts & Assumptions
 
-**Given:** A cycle $\Gamma=\sum_{k<r}m_k\gamma_k$; the plane carries the Euclidean metric of [[rem-complex-plane-euclidean-dictionary]].
+**Given:** A cycle $\Gamma=\sum_{k<r}m_k\gamma_k$; the plane carries the Euclidean metric of [[thm-complex-coordinate-isometry-and-topology-transport]].
 
 [L1] The index of a cycle about a point off its trace is an integer ([[thm-winding-number-of-a-cycle-is-integer]]).
 

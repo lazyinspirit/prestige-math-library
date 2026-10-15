@@ -9,8 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-metric-space, def-bounded-set, lem-sup-unique, def-complete-ordered-field,
        lem-of-triangle-inequality, lem-of-abs-value, def-abs-value,
-       lem-finite-set-has-max, def-max-min, lem-of-add-order, def-ordered-field,
-       rem-sup-conventions]
+       lem-finite-set-has-max, def-max-min, lem-of-add-order, def-ordered-field]
 forward_refs: [def-pointwise-uniform-and-uniformly-cauchy-convergence,
                rem-uniform-convergence-agrees-with-the-later-uniform-topology]
 justified_by: []
@@ -19,6 +18,7 @@ landmark: true
 short: "sup metric on $\\mathcal{B}(S)$"
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-48-2026-10-16-owner-supplier-lem-sup-metric-is-a-metric-published-repair.json
   precheck: pass
   verified:
     model: claude-opus-5

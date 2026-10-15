@@ -7,9 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-half-open-interval-algebra-on-r, rem-lebesgue-stieltjes-convention-ledger]
+deps: [def-half-open-interval-algebra-on-r, def-one-sided-limits]
 justified_by: [prop-stieltjes-interval-set-function-is-finitely-additive]
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-def-lebesgue-stieltjes-interval-set-function-published-repair.json
   audited: 2026-08-27
   precheck: n/a
   judge:
@@ -25,7 +26,10 @@ sources:
 ## Definition
 
 Let $F : \mathbb{R} \to \mathbb{R}$ be nondecreasing and right-continuous, and
-adopt the $(a,b]$ convention of [[rem-lebesgue-stieltjes-convention-ledger]].
+use the h-intervals of [[def-half-open-interval-algebra-on-r]]. Here
+right continuity means $\lim_{t\downarrow x}F(t)=F(x)$ at every real $x$,
+with the one-sided-limit convention of [[def-one-sided-limits]]. The
+$(a,b]$ interval convention is defined by the formulas below.
 
 For a single h-interval $I$, define
 
@@ -48,3 +52,7 @@ The same set can have more than one disjoint h-interval presentation, so the
 value needs a well-definedness proof. That is exactly the content of
 [[prop-stieltjes-interval-set-function-is-finitely-additive]], recorded here in
 `justified_by`.
+
+## Remarks
+
+[[rem-lebesgue-stieltjes-convention-ledger]] gives contextual discussion of the convention used here.

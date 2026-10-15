@@ -8,9 +8,10 @@ landmark: true
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p, def-conjugate-exponents, def-finite-sigma-finite-and-semifinite-measures, prop-essential-supremum-is-attained-as-the-least-essential-bound, rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative]
+deps: [thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p, def-conjugate-exponents, def-finite-sigma-finite-and-semifinite-measures, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "Use Holder for the upper bound. For $1<p<\\infty$ test against the normalized extremizer with conjugate phase; for $p=1$ use a finite-measure subset of an almost-maximal level set, which is exactly where semifiniteness enters."
 verification:
+  repair: research/numerical-analysis-48-2026-10-16-owner-supplier-prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm-published-repair.json
   verified:
     model: "gpt-6-sol"
     verdict: "locally-reviewed"

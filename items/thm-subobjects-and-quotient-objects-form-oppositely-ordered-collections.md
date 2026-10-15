@@ -8,11 +8,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 deps: [thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence, def-partial-order,
-       rem-category-theory-class-and-size-conventions]
+       def-language-of-set-theory]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections-published-repair.json
   precheck: pass
   audited: 2026-08-16
 sources:
@@ -31,7 +32,7 @@ and for epimorphisms $q,r$ out of $C$ put the dual orientation
 $$[q]\le[r]\quad\Longleftrightarrow\quad r\text{ factors through }q.$$
 Each relation depends only on the mutual-factorisation classes of its two arguments, and each is reflexive, transitive, and antisymmetric in the sense that $[m]\le[n]$ together with $[n]\le[m]$ forces $[m]=[n]$, and likewise for quotients.
 
-Those four properties are the whole content, and they are what the phrase *partially ordered collection* abbreviates here. They are asserted of a relation between representatives, not of a set: a subobject is a class rather than a set under this development's convention ([[rem-category-theory-class-and-size-conventions]]), so nothing below gathers the subobjects of $C$ into a collection. Along any set of monomorphisms into $C$ carrying exactly one representative of each class, the relation descends to an ordinary partial order on that set ([[def-partial-order]]); the later size hypotheses on this page are what produce such a set.
+Those four properties are the whole content, and they are what the phrase *partially ordered collection* abbreviates here. They are asserted of a relation between representatives, not of a set: a subobject is a class rather than a set under this development's convention ([[def-language-of-set-theory]]), so nothing below gathers the subobjects of $C$ into a collection. Along any set of monomorphisms into $C$ carrying exactly one representative of each class, the relation descends to an ordinary partial order on that set ([[def-partial-order]]); the later size hypotheses on this page are what produce such a set.
 
 ## Facts & Assumptions
 
@@ -52,3 +53,7 @@ Those four properties are the whole content, and they are what the phrase *parti
 3.1 For quotient representatives the same argument is dual, but the order is reversed because $[q]\le[r]$ means that $r$ factors through $q$. Reflexivity, transitivity, and antisymmetry follow by the epic half of [L1]. [step 2.1, L1, L2]
 
 4.1 Nothing in steps 1.1--3.1 quantifies over a collection whose members are subobjects: each is a statement about monomorphisms into $C$ and about the factorisation relation between them, which is what the bracket notation abbreviates. Restricting that relation to a set of monomorphisms into $C$ carrying one representative per class therefore gives a relation on a set satisfying the three conditions of [L2], hence a partial order there. [step 1.1, step 2.1, step 3.1, L2] ∎
+
+## Remarks
+
+[[rem-category-theory-class-and-size-conventions]] gives contextual discussion of the convention used here.

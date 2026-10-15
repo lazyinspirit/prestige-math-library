@@ -7,11 +7,12 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [rem-category-theory-class-and-size-conventions, def-natural-transformation, def-vertical-composition-of-natural-transformations, lem-vertical-composition-of-natural-transformations-is-natural]
+deps: [def-category, def-small-locally-small-and-large-category, def-natural-transformation, def-vertical-composition-of-natural-transformations, lem-vertical-composition-of-natural-transformations-is-natural]
 justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-def-functor-category-published-repair.json
   precheck: n/a
   audited: 2026-08-11
 sources:
@@ -25,8 +26,8 @@ pipeline_run: null
 ## Definition
 
 Within the definable-class convention of
-[[rem-category-theory-class-and-size-conventions]], the construction below is
-formed when the source category $\mathcal C$ is **small**. Then a functor out of
+[[def-category]], the construction below is
+formed when the source category $\mathcal C$ is **small** ([[def-small-locally-small-and-large-category]]). Then a functor out of
 $\mathcal C$ and a natural transformation between two such functors are
 set-coded data, so they can be objects and morphisms of a category in ZFC.
 
@@ -46,3 +47,7 @@ are stated separately.
 For an arbitrary large source $\mathcal C$, the same notation may be used only
 as metatheoretic shorthand for functors and natural transformations; this
 definition does not form those proper-class-sized data into a category.
+
+## Remarks
+
+[[rem-category-theory-class-and-size-conventions]] gives contextual discussion of the convention used here.

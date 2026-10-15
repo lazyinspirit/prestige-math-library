@@ -7,12 +7,13 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-equinumerous, def-injection-surjection-bijection, def-axiom-of-choice, thm-well-ordering-theorem, rem-ordinal-versus-cardinal-exponentiation, def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, def-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-trichotomy]
+deps: [lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-equinumerous, def-injection-surjection-bijection, def-axiom-of-choice, thm-well-ordering-theorem, def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, def-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-trichotomy]
 justified_by: []
 aliases: [def-cardinal-sum, def-cardinal-product, def-cardinal-exponentiation]
 landmark: true
 short: "$\\oplus$, $\\otimes$, $\\kappa^{\\lambda}$"
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-def-cardinal-arithmetic-published-repair.json
   precheck: n/a
   verified:
     model: claude-fable-5

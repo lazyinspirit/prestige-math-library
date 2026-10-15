@@ -7,9 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-bounded-linear-functional-on-l-p-and-its-operator-norm, def-l-p-space-as-a-quotient-by-null-functions, thm-holder-inequality-for-integrals, thm-the-lebesgue-integral-respects-almost-everywhere-equality, rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative, thm-linearity-of-the-lebesgue-integral-on-l-one]
+deps: [def-bounded-linear-functional-on-l-p-and-its-operator-norm, def-l-p-space-as-a-quotient-by-null-functions, thm-holder-inequality-for-integrals, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: "Use Holder to make the pairing integrable, then use almost-everywhere invariance of the integral to descend from representatives to $L^p$ classes."
 verification:
+  repair: research/numerical-analysis-48-2026-10-16-owner-supplier-thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p-published-repair.json
   verified:
     model: "gpt-6-sol"
     verdict: "locally-reviewed"

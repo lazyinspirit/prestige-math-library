@@ -7,9 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-l-p-space-as-a-quotient-by-null-functions, rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative, thm-chebyshev-markov-inequality-for-the-integral, def-finite-sigma-finite-and-semifinite-measures]
+deps: [def-l-p-space-as-a-quotient-by-null-functions, thm-chebyshev-markov-inequality-for-the-integral, def-finite-sigma-finite-and-semifinite-measures]
 proof_strategy: "Take a representative $u$ and use the level sets $\\{|u|\\ge1/n\\}$. Chebyshev-Markov makes each level set finite-measure, and their union contains every point where $u\\ne0$."
 verification:
+  repair: research/numerical-analysis-48-2026-10-16-owner-supplier-lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p-published-repair.json
   audited: 2026-09-01
   precheck: pass
   judge:

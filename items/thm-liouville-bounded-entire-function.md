@@ -7,13 +7,14 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-cauchy-inequalities, thm-zero-complex-derivative-on-a-domain-implies-constant, cor-rn-is-polygonally-connected-and-locally-path-connected, rem-complex-plane-euclidean-dictionary, def-complex-domain]
+deps: [cor-cauchy-inequalities, thm-zero-complex-derivative-on-a-domain-implies-constant, cor-rn-is-polygonally-connected-and-locally-path-connected, thm-complex-coordinate-isometry-and-topology-transport, def-complex-domain]
 justified_by: []
 aliases: []
 landmark: true
 short: "bounded entire $\\Rightarrow$ constant"
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-thm-liouville-bounded-entire-function-published-repair.json
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -42,7 +43,7 @@ More explicitly, if $f:\mathbb C\to\mathbb C$ is holomorphic and there is a real
 
 ## Facts & Assumptions
 
-**Given:** An entire function $f:\mathbb C\to\mathbb C$ and a real $M\ge0$ with $|f(z)|\le M$ for every $z$; the Euclidean identification of [[rem-complex-plane-euclidean-dictionary]] and the definition of complex domain in [[def-complex-domain]].
+**Given:** An entire function $f:\mathbb C\to\mathbb C$ and a real $M\ge0$ with $|f(z)|\le M$ for every $z$; the Euclidean identification of [[thm-complex-coordinate-isometry-and-topology-transport]] and the definition of complex domain in [[def-complex-domain]].
 
 [L1] If $f$ is holomorphic on $D(a,R)$, $0<r<R$, and $|f|\le M$ on the radius-$r$ circle, then $|f^{(n)}(a)|\le n!M/r^n$ for every natural $n$ ([[cor-cauchy-inequalities]]).
 

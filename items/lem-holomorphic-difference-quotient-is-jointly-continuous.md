@@ -7,12 +7,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-holomorphic-difference-quotient-segment-formula, lem-cauchy-difference-quotient-exceptional-extension, cor-holomorphic-functions-are-real-analytic-and-smooth, thm-cauchy-integral-formula-higher-derivatives, thm-norm-inequality-for-the-vector-valued-integral, def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, lem-algebra-of-continuous-real-maps-on-a-space, thm-monotonicity-of-the-integral, rem-complex-plane-euclidean-dictionary, def-metric-ball, def-metric-topology, def-convex-subset-of-euclidean-space, cor-complex-differentiability-implies-continuity, lem-complex-conjugation-and-modulus-laws, def-complex-conjugate-real-imaginary-part-and-modulus]
+deps: [lem-holomorphic-difference-quotient-segment-formula, lem-cauchy-difference-quotient-exceptional-extension, cor-holomorphic-functions-are-real-analytic-and-smooth, thm-cauchy-integral-formula-higher-derivatives, thm-norm-inequality-for-the-vector-valued-integral, def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, lem-algebra-of-continuous-real-maps-on-a-space, thm-monotonicity-of-the-integral, thm-complex-coordinate-isometry-and-topology-transport, def-metric-ball, def-metric-topology, def-convex-subset-of-euclidean-space, cor-complex-differentiability-implies-continuity, lem-complex-conjugation-and-modulus-laws, def-complex-conjugate-real-imaginary-part-and-modulus]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-lem-holomorphic-difference-quotient-is-jointly-continuous-published-repair.json
   audited: 2026-08-26
   precheck: pass
   judge:
@@ -41,7 +42,7 @@ plane. Moreover $g(\zeta,z)=g(z,\zeta)$ for all $\zeta,z\in\Omega$.
 
 ## Facts & Assumptions
 
-**Given:** An open $\Omega\subseteq\mathbb C$ and a holomorphic $f:\Omega\to\mathbb C$; products of subsets of $\mathbb C$ are read in $\mathbb R^4$ through [[rem-complex-plane-euclidean-dictionary]].
+**Given:** An open $\Omega\subseteq\mathbb C$ and a holomorphic $f:\Omega\to\mathbb C$; write $\Phi(a+bi)=(a,b)$ and use $J(\zeta,z)=(\Phi(\zeta),\Phi(z))$ for product coordinates. The one-factor distance identity is [[thm-complex-coordinate-isometry-and-topology-transport]]; summing its two squared identities gives $\lVert J(\zeta,z)-J(\zeta_0,z_0)\rVert_2^2=|\zeta-\zeta_0|^2+|z-z_0|^2$, the product metric used here.
 
 [L1] For an open convex $V\subseteq\mathbb C$, a holomorphic $f$ on $V$ and $z,w\in V$, $f(w)-f(z)=(w-z)\int_0^1f'(z+t(w-z))\,dt$, and the displayed integral equals $f'(z)$ when $w=z$ ([[lem-holomorphic-difference-quotient-segment-formula]]).
 
@@ -67,7 +68,7 @@ plane. Moreover $g(\zeta,z)=g(z,\zeta)$ for all $\zeta,z\in\Omega$.
 
 1.1 Interchanging $\zeta$ and $z$ leaves the off-diagonal formula unchanged, both numerator and denominator changing sign, and leaves the diagonal value $f'(z)$ unchanged; so $g$ is symmetric. [given, algebra]
 
-1.2 A complex-valued map on a topological space is continuous exactly when its real and imaginary parts are, by [L6] and [L9]; the real and imaginary parts of a sum, a product and a quotient with nonvanishing denominator of complex-valued maps are the corresponding real polynomial expressions in the parts, with denominator $|\cdot|^2$, so [L7] makes such combinations of continuous complex-valued maps continuous. [L6, L7, L9]
+1.2 Each product projection is $1$-Lipschitz by the squared distance identity in the given data, since each nonnegative summand is at most their sum; thus both projections are continuous. A complex-valued map on a metric subspace is continuous exactly when its real and imaginary parts are, by [L6] and [L9]: the norm bounds each coordinate difference, and two coordinate bounds below $\varepsilon/2$ give a norm bound below $\varepsilon$; the real and imaginary parts of a sum, a product and a quotient with nonvanishing denominator of complex-valued maps are the corresponding real polynomial expressions in the parts, with denominator $|\cdot|^2$, so [L7] makes such combinations of continuous complex-valued maps continuous. [given, L6, L7, L9]
 
 1.3 Fix $a\in\Omega$ and let $\varepsilon>0$. By [L8] choose $\rho>0$ with $B(a,\rho)\subseteq\Omega$; by [L3] the derivative $f'$ is holomorphic, hence continuous, on $\Omega$, so by [L6] there is $\rho'$ with $0<\rho'\le\rho$ and $|f'(\xi)-f'(a)|\le\varepsilon$ for every $\xi\in B(a,\rho')$. [given, L3, L6, L8, choose]
 

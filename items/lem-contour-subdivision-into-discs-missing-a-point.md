@@ -7,12 +7,13 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-complex-contours-reversal-concatenation-and-closedness, thm-continuous-image-of-a-compact-space-is-compact, thm-compact-subset-is-closed-and-bounded, thm-heine-cantor-metric, thm-heine-borel-rn, def-metric-ball, def-metric-topology, def-partition-and-refinement, cor-archimedean-reciprocal, thm-infimum-property, def-infimum, rem-complex-plane-euclidean-dictionary]
+deps: [def-complex-contours-reversal-concatenation-and-closedness, thm-continuous-image-of-a-compact-space-is-compact, thm-compact-subset-is-closed-and-bounded, thm-heine-cantor-metric, thm-heine-borel-rn, def-metric-ball, def-metric-topology, def-partition-and-refinement, cor-archimedean-reciprocal, thm-infimum-property, def-infimum, thm-complex-coordinate-isometry-and-topology-transport]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-lem-contour-subdivision-into-discs-missing-a-point-published-repair.json
   audited: 2026-08-26
   precheck: pass
   judge:
@@ -47,7 +48,7 @@ involved in that case.
 
 ## Facts & Assumptions
 
-**Given:** A complex contour $\gamma:[a,b]\to\mathbb C$ and a point $p\notin\gamma^\ast$; the plane carries the Euclidean metric of [[rem-complex-plane-euclidean-dictionary]].
+**Given:** A complex contour $\gamma:[a,b]\to\mathbb C$ and a point $p\notin\gamma^\ast$; the plane carries the Euclidean metric of [[thm-complex-coordinate-isometry-and-topology-transport]].
 
 [L1] A complex contour is a rectifiable path $\gamma:[a,b]\to\mathbb C$, in particular a continuous map on a compact interval ([[def-complex-contours-reversal-concatenation-and-closedness]]).
 

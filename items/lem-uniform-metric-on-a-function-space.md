@@ -10,7 +10,7 @@ provenance:
 deps: [def-metric-space, lem-bounded-remetrisation, def-bounded-set,
        def-complete-ordered-field, lem-sup-unique, def-max-min, lem-finite-set-has-max,
        def-topology-of-pointwise-convergence, lem-metric-nonnegativity,
-       rem-sup-conventions, lem-of-add-order, def-ordered-field,
+       lem-of-add-order, def-ordered-field,
        lem-sup-metric-is-a-metric, thm-extreme-value-metric]
 justified_by: []
 aliases: [def-uniform-metric]
@@ -18,6 +18,7 @@ landmark: true
 short: "uniform metric on $Y^{X}$"
 proof_strategy: direct
 verification:
+  repair: research/numerical-analysis-48-2026-10-16-owner-supplier-lem-uniform-metric-on-a-function-space-published-repair.json
   precheck: pass
   verified:
     model: claude-sonnet-5

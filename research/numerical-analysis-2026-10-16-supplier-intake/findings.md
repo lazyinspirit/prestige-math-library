@@ -1,0 +1,71 @@
+# Numerical supplier intake, 2026-10-16
+
+This is read-only source/planning navigation, not mathematical acceptance or a native readiness verdict. No gate/test was attempted. Source can change in the concurrent quantum session; rerun navigation after maintenance.
+
+The 94 root seeds in the 2026-10-14 audit currently reach 2,832 carriers through `deps` and definition `justified_by` edges, with aliases resolved. No missing ID was reached. Eight remark targets remain; six of the original fourteen are no longer reached. `current-closure.json` records exact old-predecessor current edges; `remaining-predecessors.json` lists the 19 nonremark predecessors still carrying such edges. Remark-to-remark edges need no independent repair if actual logical incoming edges are eliminated.
+
+## Old typed holds
+
+| Proposal | Current disposition | Required maintenance |
+|---|---|---|
+| TYPE01 metric | Old target no longer reached; current norm definition uses typed metric/nonnegativity and contains induced-metric proof. | Reuse concurrent quantum repair; no independent edit. |
+| TYPE02 sup | Two sup/uniform-metric lemmas still declare remark deps; both already establish nonemptiness, upper bound, existence and uniqueness with typed completeness. | Same reviewer can remove unused remark deps while retaining explanatory body/Remarks links, after focused body/consumer review. |
+| TYPE03 rational powers | Old deferred-reading remark no longer reached. | Reuse current typed rational-power route. |
+| TYPE04 Heine | Old choice-cost remark no longer reached. | Reuse current sequential criterion proof/choice premise. |
+| TYPE05 extended product | Old zero-times-infinity remark no longer reached; `def-measurable-pointwise-extended-real-product` exists. | Reuse typed definition and current arithmetic-measurability routing. |
+| TYPE06 Lp representatives | Four old Lp predecessors still have remark deps, but bodies use typed quotient and actual integral a.e. invariance. Essential-support proof explicitly chooses one representative and level sets. Pairing theorem explicitly proves independence of both representatives. | Focused same-owner removal of unused deps, with typed quotient/invariance retained; no new supplier required merely to repeat the remark. |
+| TYPE07 complex norm | Old real/complex convention remark no longer reached. | Reuse concurrent native norm/realification work. |
+| TYPE08 characteristic/Fourier | Uniqueness theorem explicitly imports frequency conversion as F1 from remark. | Integrate elementary frequency substitution proof directly into that theorem using actual characteristic/Fourier definitions, retain AC and same uniqueness/symmetry statement. |
+| TYPE09 complex plane | Eleven old predecessors remain (including two remarks); actual mathematical consumers use it as Euclidean metric/product coordinate premise. | Already published `thm-complex-coordinate-isometry-and-topology-transport` proves isometry, homeomorphism, topology, affine segments; reroute exact uses to it, with real-product identification where needed. Do not modify the native theorem. |
+| TYPE10 Euclidean topology | Reached only inside old TYPE09 remark in the recorded old predecessor graph. | Eliminating actual incoming TYPE09 uses eliminates this inherited hold; no separate duplicate item needed. |
+| TYPE11 contours | Old contour remark no longer reached as a logical target. | Current contour definition uses actual typed coordinate/path length interfaces. |
+| TYPE12 star-shaped | Difference-quotient segment lemma still imports remark as segment definition. | Use typed real star-shaped/convex definitions and published coordinate affine-segment theorem. |
+| TYPE13 locally uniform | Two complex theorems use remark definition/equivalence as mathematical premise. | Put explicit local-uniform definition and compact-equivalence argument locally into supplier(s), or new draft typed lemma under NA11 if necessary; existing exhaustion theorem itself depends on another remark and is not a clean substitution. |
+| TYPE14 semigroup signs | Dirichlet heat corollary retains sign remark in L8; its Statement and proof 1.1 already define A=-L by weak identity. | Same reviewer can ground L8 in the existing local definition/1.1 and typed form/generator definitions; no new page. This seed was optional NA36 context, not an explicit per-pair premise. |
+
+## Published imported contracts
+
+Both SDE pairs are published under `numerical-analysis/euler-maruyama-scheme-and-conditions` and `euler-maruyama-convergence`, with published example companions. Reuse them as prerequisite context; do not schedule duplicate P-NUM-SDE pages. The local finite-L2 theorem `thm-euler-maruyama-strong-rate-for-square-integrable-initial-data` expressly states Euclidean/Frobenius norms, Brownian filtration independence, half-Hölder time modulus, finite initial second moment and continuous Euler interpolation. `thm-doob-maximal-bound-for-the-ito-integral` supplies the continuous-path maximal bound. HMS autonomous/all-moment and conditional backward-regularity weak-order-one theorems are separate published carriers. The weak theorem does not derive backward regularity from bounded payoff. The finite-L2 route no longer needs the old appendix's stronger Euler path-supremum moment premise: current proof uses pointwise moments and a stopped-error argument. Preserve the current actual theorem rather than transplanting a stronger obsolete contract.
+
+P-NA-QMC01/02 are substantially supplied by published Bayesian computational statistics pages `quasi-monte-carlo-discrepancy-and-rules` and `randomized-quasi-monte-carlo-and-replicates`. Actual items include `lem-anchored-box-summation-by-parts-hk-variation`, `thm-koksma-hlawka-integration-bound`, `lem-rqmc-scrambled-net-variance-identity`, `lem-rqmc-scrambled-net-gain-formula`, `lem-rqmc-general-net-gain-bound`, `lem-rqmc-zero-net-sharp-gain-bound`, `lem-rqmc-smooth-anova-component-bound`, and the zero-net/smooth-net variance theorems. Reuse exact hypotheses; a broader boundary-compatible discontinuous HK/Stieltjes class may still require a local NA40 interface theorem. Existing smooth-net theorem assumes continuous mixed coordinate derivatives, fixed base/dimension/t/lambda, n=lambda*b^m and Countable Choice. No missing omitted-proof hold should be copied blindly from the older audit.
+
+## Minimal missing local supplier ownership
+
+The two P-NUM-ODE pairs remain new independent suppliers, before NA15 and NA21: `one-step-ode-consistency-and-local-error` owns bounded-budget one-step procedure/defect/stability/Euler local constants; `global-ode-and-density-error` owns discrete recurrence with L=0 branch, uniform finite-time global error and separately controlled augmented density error. No ML page is a premise.
+
+| Proposal | Earliest A-page owner inside 46 NA pairs | Missing local obligation, reuse limits |
+|---|---|---|
+| ARITH01 | NA02 finite-precision-direct-factorizations | Normal-range rounded sqrt and real implementation of complex operations; computed Cholesky/reflector/LS estimates. Existing real four-operation model is insufficient by itself. |
+| JORDAN01 | NA04 stationary-iterations-and-relaxation | Prove explicit Jordan-block power bounds or reuse actual general spectral-radius theorem where enough; add unit-circle semisimple power-bounded criterion for NA16/17/25 without narrowing. Jordan canonical-form suppliers already exist. |
+| SENS01 | NA21 nonlinear-boundary-value-solvers | C1 parameter augmentation/common-tube sensitivity interface. Published `thm-c1-dependence-of-solutions-on-initial-data` already covers continuous-time/C1-state variational dependence on a common compact interval. Published parameter theorem is jointly C-infinity, so does not alone cover the planned C1 claim. A local finite-dimensional augmentation gives the missing C1 parameter case from the first theorem. |
+| CELL01, APPROX01 | NA28 finite-element-meshes-and-interpolation | Local reference simplex/parallelepiped trace/Green/scaling/inverse trace, Bramble-Hilbert/Deny-Lions, bounded functionals and point-evaluation thresholds. Published sharp C1-domain trace cannot stand in for polyhedral cells. |
+| BV01 | NA27 monotone-finite-volume-entropy-convergence | Spatial BV/Helly plus time translations to spacetime local L1 compactness and initial trace. |
+| EVOL01 | NA36 parabolic-finite-element-methods | Evolution-triple trace/IBP, measurable coercive-form existence/uniqueness and initial trace; retain choice premises. |
+| GEO01–05 | NA22 geometric-numerical-integration | Finite-regularity root phase chart, drift/kick/Verlet symplecticity, cubic local defect, quadratic global trajectory error, finite-order modified energy primitives/telescoping. Physics bodies are designs only; no root logical physics edge. Root smooth symplectic/flow suppliers remain context under literal hypotheses. |
+| QMC01–02 | NA40/41 only for genuinely stronger remaining interfaces | Reuse published HK/scramble carriers above; author only compatibility/extensions beyond their literal hypotheses. |
+
+This keeps all claims while avoiding independent prerequisite-page proliferation: 46 NA pairs + 2 ODE pairs = 48 new pairs, with the 2 SDE pairs imported. The root P-NA proposal families are local item obligations under their earliest teaching owner, not missing external-page blockers.
+
+## Concurrent ownership evidence
+
+Exact-file search of quantum `repair-integration-plan.json`, `pending-repair-guards.after-scope-repair.json`, `quantum-build-60-2026-10-15-owner/**/proposal-manifest.json`, and scope/covers JSONs found none of the 19 leftover nonremark predecessors claimed as a current repair item. This is bounded ownership evidence, not a lock guarantee. The published coordinate-isometry theorem is explicitly in quantum prerequisite/closeout scopes and must stay untouched. Concurrent dirty files include norm, complex-domain, contour, semigroup, etc.; these already repaired files were not edited. Large `.autopilot/*outside*.json` inventories are outside snapshots and were excluded as ownership evidence. No run was controlled.
+
+## Authorized six-file follow-through
+
+After the read-only intake, the root expressly authorized surgical maintenance of the six metric/Lp predecessors and registered them under `owner-supplier-intake` in `numerical-analysis-48-2026-10-16`. Exact raw preimages are in `preimages/`. The only source edits remove one unused remark ID from each of those six `deps` lists. All bodies, public mathematical interfaces and contextual body links remain identical; no verification metadata was changed. `six-source-edits.json` records all 41 direct consumer edges and the unchanged supplied contracts. Focused consumer-use inspection found the metric/supremum, quotient support, bounded pairing/norm and simple-density interfaces unchanged. No consumer body repair follows from these metadata-only edits. Root owns metadata/render checks, binding hashes and any review/certification.
+
+The post-edit navigation in `postrepair-graph.json` resolves the optional-branch question:
+
+- All 94 old seeds: 2,825 carriers, six reachable remark targets.
+- Only explicitly declared old NA seeds: 2,445 carriers, five remark targets.
+- Explicit seeds with redundant complex Runge import removed: 2,303 carriers, only characteristic/Fourier conversion remark remains.
+
+The actual NA11 Scope claims are real interval Weierstrass density, Chebyshev interpolation/Lebesgue bounds, and barycentric procedure interface; none requires complex Runge polynomial approximation. NA38 inherits NA11. Keeping the approved mathematical claims and selecting the real Weierstrass route avoids the complex optional branch without creating eleven unrelated source repairs. The old explicit Runge Requires entry should be reclassified as optional context in the new plan. The analytic approximation claims in NA38 still need their own actual local proofs and hypotheses; this routing observation does not prove them. The optional NA36 heat-semigroup seed need not become a logical premise of the variational evolution route. Consequently the remaining minimal external source repair is `thm-uniqueness-of-a-law-from-its-characteristic-function`, whose F1 actually imports the frequency conversion. The other twelve files were not changed.
+
+## Final actual blocker follow-through
+
+Root then authorized and natively claimed `thm-uniqueness-of-a-law-from-its-characteristic-function` before its edit. Its exact Statement is unchanged. The former remark premise is replaced by `thm-fourier-transform-of-a-finite-complex-measure`; F1 now states both actual integral definitions. Step1.1 proves equality of the bounded integrands at frequency -2πξ, hence equality of transforms, and explicitly verifies the finite total variation of probability measures. Existing AC covers the Fourier theorem's countable-choice premise. The uniqueness and symmetry proof endpoints remain identical. The 26 direct declared consumers' actual uses were inspected; they consume the unchanged scalar law-uniqueness interface, so no consumer repair is induced. Raw preimage and exact edit report are `preimages/thm-uniqueness-of-a-law-from-its-characteristic-function.md` and `fourier-source-edit.json`.
+
+Latest graph navigation: all old seeds reach2,824 carriers and five remaining optional complex/semigroup remarks. Explicit old seeds reach2,444 carriers and four complex remarks. Explicit seeds with the unnecessary complex Runge import omitted reach2,302 carriers and no remark/open-problem target. This is scoped dependency navigation, not mathematical acceptance, publication authority, or a complete new-frontier closure review. New local draft items still need their proofs and actual prerequisite mapping.
+
+Timing correction: the first six metadata-only source edits occurred after explicit root edit authorization but before root's native published-repair registrations; the root was told immediately when its later pause arrived. Original raw preimages were retained. The seventh Fourier edit occurred after root confirmed native registration. Do not rewrite claim chronology or infer retroactive guard binding. Root owns reconciliation and honest receipts.

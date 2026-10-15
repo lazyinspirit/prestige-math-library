@@ -38679,3 +38679,250 @@ cor-layer-cake-formulas-for-random-variables: Prove the unchanged extended-value
 Current guard: f4033f27088ac1a830206e064d366792cd29f1391d6a24fab029c86e31d52eb5. Beforeimage: research/bayesian-computational-statistics-62-owner-step4-layer-cake/cor-layer-cake-formulas-for-random-variables.before.md. Focused repair/consumer evidence: research/bayesian-computational-statistics-62-owner-step4-layer-cake/report.md. Mandatory local precheck/rendercheck passed; no whole-item audit or new judgment claimed.
 <!-- local-published-repair:bayesian-computational-statistics-62:step4-b28:cor-layer-cake-formulas-for-random-variables:end -->
 
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:lem-sup-metric-is-a-metric:begin -->
+- Item: lem-sup-metric-is-a-metric
+- Run: numerical-analysis-48-2026-10-16; owner: owner-supplier-intake.
+- Correction: Remove an unused remark dependency; retain all mathematical interfaces, proof/body bytes, typed completeness or quotient/invariance premises, and contextual links.
+- Current canonical content SHA256: d7cd475f16b283b259ed394977b4efcdf88357f9576fd294a0d24217e498a0be
+- Scientific repair evidence: research/numerical-analysis-2026-10-16-supplier-intake/findings.md
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:lem-sup-metric-is-a-metric:end -->
+
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:lem-uniform-metric-on-a-function-space:begin -->
+- Item: lem-uniform-metric-on-a-function-space
+- Run: numerical-analysis-48-2026-10-16; owner: owner-supplier-intake.
+- Correction: Remove an unused remark dependency; retain all mathematical interfaces, proof/body bytes, typed completeness or quotient/invariance premises, and contextual links.
+- Current canonical content SHA256: 6239a919ea65c0db31bc0fa8ffe6f1cb52ffea89da978c6b8f8d1230e67c4d23
+- Scientific repair evidence: research/numerical-analysis-2026-10-16-supplier-intake/findings.md
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:lem-uniform-metric-on-a-function-space:end -->
+
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p:begin -->
+- Item: lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p
+- Run: numerical-analysis-48-2026-10-16; owner: owner-supplier-intake.
+- Correction: Remove an unused remark dependency; retain all mathematical interfaces, proof/body bytes, typed completeness or quotient/invariance premises, and contextual links.
+- Current canonical content SHA256: d9f4b9d516a79c25fcf06b1a1f9661d52b7f57f6a5c4f333aa8b51affbe3dc05
+- Scientific repair evidence: research/numerical-analysis-2026-10-16-supplier-intake/findings.md
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:lem-l-p-functions-have-sigma-finite-essential-support-for-finite-p:end -->
+
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm:begin -->
+- Item: prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm
+- Run: numerical-analysis-48-2026-10-16; owner: owner-supplier-intake.
+- Correction: Remove an unused remark dependency; retain all mathematical interfaces, proof/body bytes, typed completeness or quotient/invariance premises, and contextual links.
+- Current canonical content SHA256: 7ecd4cfef141fff779f15a376f3a46e7ccf77c7b8713252b0f2c73d88a2d87a3
+- Scientific repair evidence: research/numerical-analysis-2026-10-16-supplier-intake/findings.md
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm:end -->
+
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p:begin -->
+- Item: thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p
+- Run: numerical-analysis-48-2026-10-16; owner: owner-supplier-intake.
+- Correction: Remove an unused remark dependency; retain all mathematical interfaces, proof/body bytes, typed completeness or quotient/invariance premises, and contextual links.
+- Current canonical content SHA256: de508279925fd913a8609577345a186711457a38052189fcab56e2b3f60eda39
+- Scientific repair evidence: research/numerical-analysis-2026-10-16-supplier-intake/findings.md
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p:end -->
+
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p:begin -->
+- Item: thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p
+- Run: numerical-analysis-48-2026-10-16; owner: owner-supplier-intake.
+- Correction: Remove an unused remark dependency; retain all mathematical interfaces, proof/body bytes, typed completeness or quotient/invariance premises, and contextual links.
+- Current canonical content SHA256: 2ccb0e9ffd6a5e3af7f915aebe59277799f12e755a5e4245aad85d95c4bc94f3
+- Scientific repair evidence: research/numerical-analysis-2026-10-16-supplier-intake/findings.md
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p:end -->
+
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:thm-uniqueness-of-a-law-from-its-characteristic-function:begin -->
+- Item: thm-uniqueness-of-a-law-from-its-characteristic-function
+- Run: numerical-analysis-48-2026-10-16; owner: owner-supplier-intake.
+- Correction: Replace the remark-only frequency-conversion premise with actual characteristic/Fourier integral definitions and prove the identical-integrand substitution locally; retain the complete uniqueness/symmetry statement and AC.
+- Current canonical content SHA256: ca851fdda403d6acad87ab12cc0a7ccb263fc7e8dd92ef58fe26e883da01c877
+- Scientific repair evidence: research/numerical-analysis-2026-10-16-supplier-intake/findings.md
+<!-- local-published-repair:numerical-analysis-48-2026-10-16:owner-supplier-intake:thm-uniqueness-of-a-law-from-its-characteristic-function:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:cor-global-cauchy-theorem-homology:begin -->
+
+### Local supplier repair: cor-global-cauchy-theorem-homology
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-complex-suppliers.
+
+Replace remark-only logical premises with typed published suppliers and explicit local product/local-uniform arguments as applicable; preserve mathematical contract. Original Statement unchanged byte for byte; proof/typed-premise repair requires no consumer claim or dependency change.
+
+Current canonical hash: `57367bddf99f40372a732d32e7010d1487150a3da139070d81c5fb6d754544e1`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:cor-global-cauchy-theorem-homology:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace:begin -->
+
+### Local supplier repair: cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-complex-suppliers.
+
+Replace remark-only logical premises with typed published suppliers and explicit local product/local-uniform arguments as applicable; preserve mathematical contract. Original Statement unchanged byte for byte; proof/typed-premise repair requires no consumer claim or dependency change.
+
+Current canonical hash: `8a7825046157688552e1c6aafa7110d8ed3d61c5b08d2466fa2a1aefb63f5c76`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-cardinal-arithmetic:begin -->
+
+### Local supplier repair: def-cardinal-arithmetic
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-foundation-suppliers.
+
+Remove unused ordinal-vs-cardinal remark dep. Definitions already use typed well-defined cardinal operations/cardinality. Its contextual reference remains only in existing Remarks; all body bytes unchanged.
+
+Current canonical hash: `2958c4e3f95a06c39a272422dd02f4d38715f7a60e31a013c9e7773926105c95`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-intake/supplier-closure/foundation-seven-source-edits.json.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-cardinal-arithmetic:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-category:begin -->
+
+### Local supplier repair: def-category
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-foundation-suppliers.
+
+Reroute class-abbreviation convention to typed first-order language/class-as-formula definition. Existing local formula/schema/representative prose and mathematical axioms/order conditions unchanged.
+
+Current canonical hash: `37f313fba7a61ee589207ca39b6baef06fc306c07f106428c2f4b583ce79e3f5`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-intake/supplier-closure/foundation-seven-source-edits.json.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-category:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-functor-category:begin -->
+
+### Local supplier repair: def-functor-category
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-foundation-suppliers.
+
+Use actual category definition and typed smallness. Preserve exact small-source set-coding restriction, large-source metatheoretic-only scope, functor/natural-transformation objects and component laws.
+
+Current canonical hash: `37c7bbe1796b6b42e440747bd45d130fe9a3bb05fd2d5cdc8277cbe6c8cd2ecc`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-intake/supplier-closure/foundation-seven-source-edits.json.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-functor-category:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-lebesgue-stieltjes-interval-set-function:begin -->
+
+### Local supplier repair: def-lebesgue-stieltjes-interval-set-function
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-foundation-suppliers.
+
+Ground right-continuity in typed one-sided limits and locally displayed (a,b] formula/h-interval algebra. No mass formula, admissible F, presentation convention or well-definedness discharge changed.
+
+Current canonical hash: `8c040f022c5f1f11c2da1409f18d9ca5a62e190f2fe6d66069c161c7434e5ff4`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-intake/supplier-closure/foundation-seven-source-edits.json.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-lebesgue-stieltjes-interval-set-function:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-small-locally-small-and-large-category:begin -->
+
+### Local supplier repair: def-small-locally-small-and-large-category
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-foundation-suppliers.
+
+Small/local/large definition already fully explicit; class-as-formula convention comes from existing def-category, without duplicate premise.
+
+Current canonical hash: `f89441ad4a7f40c5cbe904563a964ce57e3113a0ccd0002bac42c06485474a53`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-intake/supplier-closure/foundation-seven-source-edits.json.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-small-locally-small-and-large-category:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-subobject-and-quotient-object:begin -->
+
+### Local supplier repair: def-subobject-and-quotient-object
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-foundation-suppliers.
+
+Reroute class-abbreviation convention to typed first-order language/class-as-formula definition. Existing local formula/schema/representative prose and mathematical axioms/order conditions unchanged.
+
+Current canonical hash: `a862144db5968d961a2678e2ca44583961c96c320ed1a6d5757c4d52021c8800`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-intake/supplier-closure/foundation-seven-source-edits.json.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:def-subobject-and-quotient-object:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:lem-contour-subdivision-into-discs-missing-a-point:begin -->
+
+### Local supplier repair: lem-contour-subdivision-into-discs-missing-a-point
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-complex-suppliers.
+
+Replace remark-only logical premises with typed published suppliers and explicit local product/local-uniform arguments as applicable; preserve mathematical contract. Original Statement unchanged byte for byte; proof/typed-premise repair requires no consumer claim or dependency change.
+
+Current canonical hash: `cf7917cf02ff1133570dd0ad8c6b33374bb10e57ca39ab326aeee2d5e4db60f1`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:lem-contour-subdivision-into-discs-missing-a-point:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:lem-dixon-entire-gluing:begin -->
+
+### Local supplier repair: lem-dixon-entire-gluing
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-complex-suppliers.
+
+Replace remark-only logical premises with typed published suppliers and explicit local product/local-uniform arguments as applicable; preserve mathematical contract. Original Statement unchanged byte for byte; proof/typed-premise repair requires no consumer claim or dependency change.
+
+Current canonical hash: `d23772dca6998d7773c7a663496158177d688657ac3a2b2c4e465a5f05005f16`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:lem-dixon-entire-gluing:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:lem-holomorphic-difference-quotient-is-jointly-continuous:begin -->
+
+### Local supplier repair: lem-holomorphic-difference-quotient-is-jointly-continuous
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-complex-suppliers.
+
+Replace remark-only logical premises with typed published suppliers and explicit local product/local-uniform arguments as applicable; preserve mathematical contract. Original Statement unchanged byte for byte; proof/typed-premise repair requires no consumer claim or dependency change.
+
+Current canonical hash: `3fc83be46c444614c3e95ba381d183618a25a65a7dd6aaa5302fe3320dac7c80`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:lem-holomorphic-difference-quotient-is-jointly-continuous:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:lem-holomorphic-difference-quotient-segment-formula:begin -->
+
+### Local supplier repair: lem-holomorphic-difference-quotient-segment-formula
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-complex-suppliers.
+
+Replace remark-only logical premises with typed published suppliers and explicit local product/local-uniform arguments as applicable; preserve mathematical contract. Original Statement unchanged byte for byte; proof/typed-premise repair requires no consumer claim or dependency change.
+
+Current canonical hash: `6be2a5754e9a219f36675f91ee88bbbff02ab584f17656f8cf7f434a0fc36ff9`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:lem-holomorphic-difference-quotient-segment-formula:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:thm-contour-parameter-integrals-are-holomorphic:begin -->
+
+### Local supplier repair: thm-contour-parameter-integrals-are-holomorphic
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-complex-suppliers.
+
+Replace remark-only logical premises with typed published suppliers and explicit local product/local-uniform arguments as applicable; preserve mathematical contract. Original Statement unchanged byte for byte; proof/typed-premise repair requires no consumer claim or dependency change.
+
+Current canonical hash: `4dbe05b27f1752767b3351ebb20689b48b6aa4395bdfe599f92594fd55c81e1f`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:thm-contour-parameter-integrals-are-holomorphic:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:thm-liouville-bounded-entire-function:begin -->
+
+### Local supplier repair: thm-liouville-bounded-entire-function
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-complex-suppliers.
+
+Replace remark-only logical premises with typed published suppliers and explicit local product/local-uniform arguments as applicable; preserve mathematical contract. Original Statement unchanged byte for byte; proof/typed-premise repair requires no consumer claim or dependency change.
+
+Current canonical hash: `b8e6abf0917a724b4b48d4851ad72f8a4c54e00e002f9ee745ed30987abd7133`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:thm-liouville-bounded-entire-function:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections:begin -->
+
+### Local supplier repair: thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-foundation-suppliers.
+
+Reroute class-abbreviation convention to typed first-order language/class-as-formula definition. Existing local formula/schema/representative prose and mathematical axioms/order conditions unchanged.
+
+Current canonical hash: `d51643653382a0ebf660e388e70dfd444517cdf69a0ab1318c53a70636a719b6`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-intake/supplier-closure/foundation-seven-source-edits.json.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-foundation-suppliers:thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections:end -->
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:thm-weierstrass-convergence-holomorphic-functions:begin -->
+
+### Local supplier repair: thm-weierstrass-convergence-holomorphic-functions
+
+Run: numerical-analysis-comprehensive-2026-10-16; owner group: owner-complex-suppliers.
+
+Replace remark-only logical premises with typed published suppliers and explicit local product/local-uniform arguments as applicable; preserve mathematical contract. No mathematical contract change; Weierstrass reference clarification has26 actual-use checks and1016 individual propagated dispositions in consumer-dispositions.json.
+
+Current canonical hash: `cbf613d060124d4aa4126350993cc3726eda81265e24ace0e0261c66f18b44ca`. Focused repair only; no whole-item audit or new publication. Consumer compatibility evidence: research/numerical-analysis-comprehensive-2026-10-16-owner-complex-repair/REPORT.md.
+
+<!-- local-published-repair:numerical-analysis-comprehensive-2026-10-16:owner-complex-suppliers:thm-weierstrass-convergence-holomorphic-functions:end -->

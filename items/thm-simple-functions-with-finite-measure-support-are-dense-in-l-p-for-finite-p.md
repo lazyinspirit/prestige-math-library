@@ -7,10 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-l-p-space-as-a-quotient-by-null-functions, rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative, cor-measurable-functions-admit-dominated-simple-approximations, thm-dominated-convergence]
+deps: [def-l-p-space-as-a-quotient-by-null-functions, cor-measurable-functions-admit-dominated-simple-approximations, thm-dominated-convergence]
 landmark: true
 proof_strategy: "Choose a measurable representative, approximate it by dominated simple functions, and apply dominated convergence to $|f-s_k|^p$. The support clause is exactly the finite-measure condition for a simple function to lie in $L^p$."
 verification:
+  repair: research/numerical-analysis-48-2026-10-16-owner-supplier-thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p-published-repair.json
   audited: 2026-09-01
   precheck: pass
 sources:

@@ -7,11 +7,12 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-category, rem-category-theory-class-and-size-conventions]
+deps: [def-category]
 justified_by: []
 aliases: []
 landmark: false
 verification:
+  repair: research/numerical-analysis-comprehensive-2026-10-16-owner-supplier-def-small-locally-small-and-large-category-published-repair.json
   precheck: n/a
   audited: 2026-08-11
 sources:
@@ -25,7 +26,7 @@ pipeline_run: null
 ## Definition
 
 Let $\mathcal C$ be a category ([[def-category]]) under the class convention of
-[[rem-category-theory-class-and-size-conventions]].
+[[def-category]].
 
 - $\mathcal C$ is **small** when both
   $\operatorname{Ob}(\mathcal C)$ and $\operatorname{Mor}(\mathcal C)$ are sets.
@@ -36,3 +37,7 @@ Let $\mathcal C$ be a category ([[def-category]]) under the class convention of
 A small category is locally small because each hom-collection is a subclass of
 the set of all morphisms. A large category may or may not be locally small.
 
+
+## Remarks
+
+[[rem-category-theory-class-and-size-conventions]] gives contextual discussion of the convention used here.
