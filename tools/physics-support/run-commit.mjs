@@ -47,9 +47,16 @@ if (argv.includes('--require-proof-layout')) {
   try {
     const { verifyMathematicsImports } = await import('./physics-imports.mjs');
     const { loadPhysicsRepository, validatePhysicsContent } = await import('./physics-content.mjs');
+    const { frontierGateScope } = await import('./frontier-gate-scope.mjs');
     verifyMathematicsImports(REPO, { run });
-    const physicalErrors = validatePhysicsContent(loadPhysicsRepository(REPO));
-    if (physicalErrors.length) throw Error(`physics-content: ${physicalErrors[0].code}: ${physicalErrors[0].message}`);
+    const scope = frontierGateScope({ repo: REPO, run }, { requireItemFiles: true, allowEmptyItems: false });
+    const repository = loadPhysicsRepository(REPO, null, scope.pages);
+    for (const id of scope.pages) {
+      if (!repository.pages.some(page => (page.id ?? page.page) === id)) throw Error(`missing selected physics page ${id}`);
+    }
+    const physicalErrors = validatePhysicsContent({ ...repository, requireBodies: true,
+      selectedItems: scope.items, selectedPages: scope.pages });
+    if (physicalErrors.length) throw Error(`physics-content: ${physicalErrors[0].code} [${physicalErrors[0].id}]: ${physicalErrors[0].message}`);
     const { verifyProofLayout } = await import('./proof-layout-receipt.mjs');
     verifyProofLayout(run, REPO);
   } catch (cause) {
